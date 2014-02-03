@@ -18,10 +18,9 @@ define( function( require ) {
 
   /**
    * @param {TwoAtomsModel} model
-   * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function TwoAtomsView( model, mvt ) {
+  function TwoAtomsView( model ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );

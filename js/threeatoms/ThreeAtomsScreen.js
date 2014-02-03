@@ -11,7 +11,6 @@ define( function( require ) {
   // imports
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Screen = require( 'JOIST/Screen' );
   var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsModel' );
@@ -28,7 +27,7 @@ define( function( require ) {
       screenTitle,
       new Image( screenIcon ),
       function() { return new ThreeAtomsModel(); },
-      function( model ) { return new ThreeAtomsView( model, ModelViewTransform2.createIdentity() ); },
+      function( model ) { return new ThreeAtomsView( model ); },
       { backgroundColor: MPColors.SCREEN_BACKGROUND }
     );
   }
