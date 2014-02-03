@@ -1,3 +1,4 @@
+2/3/14 view for e-field plates
 2/3/14 flesh out 'Two Atoms' view, with placeholders for all nodes
 2/3/14 remove mvt, this sim has no mvt
 2/3/14 ported entire 2D model
