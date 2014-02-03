@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var TwoAtomsModel = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsModel' );
-  var TwoAtomsView = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Screen = require( 'JOIST/Screen' );
+  var TwoAtomsModel = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsModel' );
+  var TwoAtomsView = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsView' );
 
   // strings
   var screenTitle = require( 'string!MOLECULE_POLARITY/twoAtoms' );

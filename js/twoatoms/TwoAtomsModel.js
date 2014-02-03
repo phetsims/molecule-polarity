@@ -9,20 +9,17 @@ define( function( require ) {
   'use strict';
 
   // imports
-  //TODO
+  var DiatomicMolecule = require( 'MOLECULE_POLARITY/common/model/DiatomicMolecule' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MPModel2 = require( 'MOLECULE_POLARITY/common/model/MPModel2' );
+  var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * @constructor
+   */
   function TwoAtomsModel() {
-
-    var thisModel = this;
-   //TODO
+    MPModel2.call( this, new DiatomicMolecule( { location: new Vector2( 350, 390 ) } ) );
   }
 
-  TwoAtomsModel.prototype = {
-
-    reset: function() {
-      //TODO
-    }
-  };
-
-  return TwoAtomsModel;
+  return inherit( MPModel2, TwoAtomsModel );
 } );

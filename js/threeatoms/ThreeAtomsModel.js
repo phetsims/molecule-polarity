@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for the 'Three Atoms' screen.
+ * Model for the 'Two Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,20 +9,17 @@ define( function( require ) {
   'use strict';
 
   // imports
-  //TODO
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MPModel2 = require( 'MOLECULE_POLARITY/common/model/MPModel2' );
+  var TriatomicMolecule = require( 'MOLECULE_POLARITY/common/model/TriatomicMolecule' );
+  var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * @constructor
+   */
   function ThreeAtomsModel() {
-
-    var thisModel = this;
-   //TODO
+    MPModel2.call( this, new TriatomicMolecule( { location: new Vector2( 380, 375 ) } ) );
   }
 
-  ThreeAtomsModel.prototype = {
-
-    reset: function() {
-      //TODO
-    }
-  };
-
-  return ThreeAtomsModel;
+  return inherit( MPModel2, ThreeAtomsModel );
 } );

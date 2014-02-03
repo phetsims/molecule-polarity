@@ -4,7 +4,7 @@
  * RequireJS configuration file for the 'Molecule Polarity' sim.
  * Paths are relative to the location of this file.
  *
- * @author Chris Malley
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 require.config( {
 

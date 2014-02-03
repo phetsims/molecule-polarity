@@ -1,2 +1,3 @@
+2/3/14 ported entire 2D model
 2/3/14 port English strings only for now
 2/3/14 created GitHub repository, set up sim skeleton

@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var TwoAtomsModel = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsModel' );
-  var TwoAtomsView = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Screen = require( 'JOIST/Screen' );
+  var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsModel' );
+  var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsView' );
 
   // strings
   var screenTitle = require( 'string!MOLECULE_POLARITY/threeAtoms' );
@@ -27,8 +27,8 @@ define( function( require ) {
     Screen.call( this,
       screenTitle,
       new Image( screenIcon ),
-      function() { return new TwoAtomsModel(); },
-      function( model ) { return new TwoAtomsView( model, ModelViewTransform2.createIdentity() ); },
+      function() { return new ThreeAtomsModel(); },
+      function( model ) { return new ThreeAtomsView( model, ModelViewTransform2.createIdentity() ); },
       { backgroundColor: MPColors.SCREEN_BACKGROUND }
     );
   }
