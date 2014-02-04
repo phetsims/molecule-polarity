@@ -18,7 +18,7 @@ define( function( require ) {
   function PolarityIndicator( options ) {
 
     options = _.extend( {
-      positive: true, // true: show plus sign, false: show minus sign
+      polarity: 'positive', // 'positive' or 'negative'
       radius: 20,
       lineWidth: 4,
       stroke: 'black'
@@ -35,7 +35,7 @@ define( function( require ) {
     this.addChild( new Line( -0.5 * options.radius, 0, 0.5 * options.radius, 0, pathOptions ) );
 
     // vertical bar for plus sign
-    if ( options.positive ) {
+    if ( options.polarity === 'positive' ) {
       this.addChild( new Line( 0, -0.5 * options.radius, 0, 0.5 * options.radius, pathOptions ) );
     }
     

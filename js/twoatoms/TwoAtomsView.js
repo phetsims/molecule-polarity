@@ -16,9 +16,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var MPViewProperties = require( 'MOLECULE_POLARITY/common/view/MPViewProperties' );
-  var NegativePlateNode = require( 'MOLECULE_POLARITY/common/view/NegativePlateNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PositivePlateNode = require( 'MOLECULE_POLARITY/common/view/PositivePlateNode' );
+  var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceControls = require( 'MOLECULE_POLARITY/common/control/SurfaceControls' );
@@ -40,8 +39,8 @@ define( function( require ) {
 
     // nodes
     var moleculeNode = new DiatomicMoleculeNode( model.molecule );
-    var negativePlateNode = new NegativePlateNode( model.eField );
-    var positivePlateNode = new PositivePlateNode( model.eField );
+    var negativePlateNode = PlateNode.createNegative( model.eField );
+    var positivePlateNode = PlateNode.createPositive( model.eField );
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
     var bondTypeNode = new BondCharacterNode( model.molecule );
