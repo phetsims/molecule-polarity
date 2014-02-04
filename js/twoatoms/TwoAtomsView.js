@@ -17,7 +17,6 @@ define( function( require ) {
   var ElectrostaticPotentialColorKey = require( 'MOLECULE_POLARITY/common/view/ElectrostaticPotentialColorKey' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
   var MPViewProperties = require( 'MOLECULE_POLARITY/common/view/MPViewProperties' );
   var NegativePlateNode = require( 'MOLECULE_POLARITY/common/view/NegativePlateNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -27,6 +26,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceControls = require( 'MOLECULE_POLARITY/common/view/SurfaceControls' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  var ViewControls = require( 'MOLECULE_POLARITY/common/view/ViewControls' );
 
   /**
    * @param {TwoAtomsModel} model
@@ -55,9 +55,9 @@ define( function( require ) {
     } );
 
     // control panels
+    var viewControls = new ViewControls( viewProperties.bondDipolesVisibleProperty, viewProperties.partialChargesVisibleProperty, viewProperties.bondCharacterVisibleProperty );
     var surfaceControls = new SurfaceControls( viewProperties.surfaceTypeProperty );
     var eFieldControls = new EFieldControls( model.eField );
-    var controlPanelNode = new MPControlPanel(); //TODO flesh out
 
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
@@ -66,7 +66,7 @@ define( function( require ) {
       positivePlateNode,
       enControlA,
       enControlB,
-      controlPanelNode,
+      viewControls,
       surfaceControls,
       eFieldControls,
       bondTypeNode,
@@ -109,12 +109,12 @@ define( function( require ) {
       bondTypeNode.top = enControlA.bottom + 10;
 
       // to right of positive plate, top aligned
-      surfaceControls.left = positivePlateNode.right + 25;
-      surfaceControls.top = positivePlateNode.top;
+      viewControls.top = positivePlateNode.y;
+      viewControls.left = positivePlateNode.right + 40;
+      surfaceControls.left = viewControls.left;
+      surfaceControls.top = viewControls.bottom + 10;
       eFieldControls.left = surfaceControls.left;
       eFieldControls.top = surfaceControls.bottom + 10;
-      controlPanelNode.left = positivePlateNode.right + 25;
-      controlPanelNode.top = positivePlateNode.top;
 
       // bottom-right corner of the screen
       resetAllButton.right = this.layoutBounds.right - 40;
