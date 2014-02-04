@@ -21,7 +21,6 @@ define( function( require ) {
   var NegativePlateNode = require( 'MOLECULE_POLARITY/common/view/NegativePlateNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PositivePlateNode = require( 'MOLECULE_POLARITY/common/view/PositivePlateNode' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceControls = require( 'MOLECULE_POLARITY/common/view/SurfaceControls' );

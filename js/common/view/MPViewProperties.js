@@ -7,7 +7,8 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function(require){
+define( function( require ) {
+  'use strict';
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
@@ -35,8 +36,8 @@ define( function(require){
       bondCharacterVisible: options.bondCharacterVisible,
       atomLabelsVisible: options.atomLabelsVisible,
       electronegativityTableVisible: options.electronegativityTableVisible
-    });
+    } );
   }
 
   return inherit( PropertySet, MPViewProperties );
-});
+} );
