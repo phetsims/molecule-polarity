@@ -11,6 +11,7 @@ define( function( require ) {
   // imports
   var BondCharacterNode = require( 'MOLECULE_POLARITY/common/view/BondCharacterNode' );
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/common/view/DiatomicMoleculeNode' );
+  var EFieldControls = require( 'MOLECULE_POLARITY/common/view/EFieldControls' );
   var ElectronDensityColorKey = require( 'MOLECULE_POLARITY/common/view/ElectronDensityColorKey' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var ElectrostaticPotentialColorKey = require( 'MOLECULE_POLARITY/common/view/ElectrostaticPotentialColorKey' );
@@ -24,6 +25,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SurfaceControls = require( 'MOLECULE_POLARITY/common/view/SurfaceControls' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   /**
@@ -52,7 +54,9 @@ define( function( require ) {
       viewProperties.reset();
     } );
 
-    // control panel
+    // control panels
+    var surfaceControls = new SurfaceControls( viewProperties.surfaceTypeProperty );
+    var eFieldControls = new EFieldControls( model.eField );
     var controlPanelNode = new MPControlPanel(); //TODO flesh out
 
     // Parent for all nodes added to this screen
@@ -63,6 +67,8 @@ define( function( require ) {
       enControlA,
       enControlB,
       controlPanelNode,
+      surfaceControls,
+      eFieldControls,
       bondTypeNode,
       electrostaticPotentialColorKey,
       electronDensityColorKey,
@@ -103,6 +109,10 @@ define( function( require ) {
       bondTypeNode.top = enControlA.bottom + 10;
 
       // to right of positive plate, top aligned
+      surfaceControls.left = positivePlateNode.right + 25;
+      surfaceControls.top = positivePlateNode.top;
+      eFieldControls.left = surfaceControls.left;
+      eFieldControls.top = surfaceControls.bottom + 10;
       controlPanelNode.left = positivePlateNode.right + 25;
       controlPanelNode.top = positivePlateNode.top;
 
