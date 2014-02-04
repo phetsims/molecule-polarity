@@ -22,10 +22,10 @@ define( function( require ) {
 
     var thisBond = this;
 
-    thisBond.endPoint1Property = atom1.locationProperty;
-    thisBond.endPoint2Property = atom2.locationProperty;
+    thisBond.atom1 = atom1;
+    thisBond.atom2 = atom2;
 
-    thisBond.dipoleProperty = new DerivedProperty( [ thisBond.endPoint1Property, thisBond.endPoint2Property, atom1.electronegativityProperty, atom2.electronegativityProperty ],
+    thisBond.dipoleProperty = new DerivedProperty( [ atom1.locationProperty, atom2.locationProperty, atom1.electronegativityProperty, atom2.electronegativityProperty ],
       function( endPoint1, endPoint2, electronegativity1, electronegativity2 ) {
         var deltaEN = electronegativity2 - electronegativity1;
         var magnitude = Math.abs( deltaEN ); // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
@@ -42,18 +42,20 @@ define( function( require ) {
 
     // gets the center of the bond, using the midpoint formula
     getCenter: function() {
-      return new Vector2( ( this.endPoint1Property.get().x + this.endPoint2Property.get().x ) / 2, ( this.endPoint1Property.get().y + this.endPoint2Property.get().y ) / 2 );
+      var p1 = this.atom1.locationProperty.get();
+      var p2 = this.atom2.locationProperty.get();
+      return new Vector2( ( p1.x + p2.x ) / 2, ( p1.y + p2.y ) / 2 );
     },
 
-    // gets the angle of endpoint2 relative to the horizontal axis
+    // gets the angle of atom2 relative to the horizontal axis
     getAngle: function() {
       var center = this.getCenter();
-      return PolarCartesianConverter.getAngle( this.endPoint2Property.get().x - center.x, this.endPoint2Property.get().y - center.y );
+      return PolarCartesianConverter.getAngle( this.atom2.locationProperty.get().x - center.x, this.atom1.locationProperty.get().y - center.y );
     },
 
-    // Gets the bond length, the distance between the 2 endpoints.
+    // Gets the bond length, the distance between the 2 atoms.
     getLength: function() {
-      return this.endPoint1Property.get().distance( this.endPoint2Property.get() );
+      return this.atom1.locationProperty.get().distance( this.atom2.locationProperty.get() );
     }
   };
 
