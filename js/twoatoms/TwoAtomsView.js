@@ -98,7 +98,7 @@ define( function( require ) {
       // centered above molecule
       enControlA.right = moleculeX - 5;
       enControlB.left = moleculeX + 5;
-      enControlA.top = enControlB.top = 50;
+      enControlA.top = enControlB.top = 30;
 
       // centered below molecule
       electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
