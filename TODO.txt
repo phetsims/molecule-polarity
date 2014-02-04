@@ -7,10 +7,12 @@ IMPLEMENTATION
 HIGH
 
 MEDIUM
+- Reset All moves molecule to origin (upper left)
 - make all control panels the same width
 - custom cursor to indicate molecule rotation
 
 LOW
+- is DiatomicMolecule.getDeltaEN buggy?
 
 MIGRATE TO COMMON
 - PolarCartesianConverter (or use Vector2.angle,...)

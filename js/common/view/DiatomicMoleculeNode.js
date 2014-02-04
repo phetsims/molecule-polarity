@@ -17,6 +17,7 @@ define( function( require ) {
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   /**
@@ -34,8 +35,8 @@ define( function( require ) {
     //TODO flesh out these components
     this.electrostaticPotentialNode = new Node(); //new DiatomicElectrostaticPotentialNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.RWB_GRADIENT ); // @private
     this.electronDensityNode = new Node(); //new DiatomicElectronDensityNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.BW_GRADIENT ); // @private
-    this.partialChargeNodeA = new Node(); //new OppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
-    this.partialChargeNodeB = new Node(); //new OppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
+    this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
+    this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
     this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
 
     // rendering order
