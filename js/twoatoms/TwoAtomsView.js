@@ -12,9 +12,7 @@ define( function( require ) {
   var BondCharacterNode = require( 'MOLECULE_POLARITY/common/view/BondCharacterNode' );
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/common/view/DiatomicMoleculeNode' );
   var EFieldControls = require( 'MOLECULE_POLARITY/common/view/EFieldControls' );
-  var ElectronDensityColorKey = require( 'MOLECULE_POLARITY/common/view/ElectronDensityColorKey' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
-  var ElectrostaticPotentialColorKey = require( 'MOLECULE_POLARITY/common/view/ElectrostaticPotentialColorKey' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var MPViewProperties = require( 'MOLECULE_POLARITY/common/view/MPViewProperties' );
@@ -24,6 +22,7 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceControls = require( 'MOLECULE_POLARITY/common/view/SurfaceControls' );
+  var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var ViewControls = require( 'MOLECULE_POLARITY/common/view/ViewControls' );
 
@@ -46,8 +45,8 @@ define( function( require ) {
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
     var bondTypeNode = new BondCharacterNode( model.molecule );
-    var electrostaticPotentialColorKey = new ElectrostaticPotentialColorKey();
-    var electronDensityColorKey = new ElectronDensityColorKey();
+    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialColorKey();
+    var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var resetAllButton = new ResetAllButton( function() {
       model.reset();
       viewProperties.reset();
@@ -99,9 +98,9 @@ define( function( require ) {
       enControlB.left = moleculeX + 5;
       enControlA.bottom = enControlB.bottom = this.layoutBounds.bottom - 30;
 
-      // centered below molecule
+      // centered above molecule
       electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
-      electrostaticPotentialColorKey.top = electronDensityColorKey.top = negativePlateNode.bottom - 10;
+      electrostaticPotentialColorKey.top = electronDensityColorKey.top = negativePlateNode.top + 25;
 
       // centered above EN controls
       bondTypeNode.centerX = moleculeX;

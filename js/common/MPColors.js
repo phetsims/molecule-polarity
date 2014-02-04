@@ -25,6 +25,10 @@ define( function( require ) {
     // E-field plates
     POSITIVE_PLATE: 'rgb( 192, 192, 192 )',
     NEGATIVE_PLATE: 'rgb( 192, 192, 192 )',
-    DISABLED_PLATE: 'rgb( 192, 192, 192 )'
+    DISABLED_PLATE: 'rgb( 192, 192, 192 )',
+
+    // surfaces
+    BW_GRADIENT: [ 'black', 'white' ],
+    RWB_GRADIENT: [ 'red', 'white', 'blue' ]
   };
 } );
