@@ -11,8 +11,8 @@ define( function( require ) {
   // imports
   var BondCharacterNode = require( 'MOLECULE_POLARITY/common/view/BondCharacterNode' );
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/common/view/DiatomicMoleculeNode' );
-  var EFieldControls = require( 'MOLECULE_POLARITY/common/view/EFieldControls' );
-  var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
+  var EFieldControls = require( 'MOLECULE_POLARITY/common/control/EFieldControls' );
+  var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/control/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var MPViewProperties = require( 'MOLECULE_POLARITY/common/view/MPViewProperties' );
@@ -21,10 +21,10 @@ define( function( require ) {
   var PositivePlateNode = require( 'MOLECULE_POLARITY/common/view/PositivePlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SurfaceControls = require( 'MOLECULE_POLARITY/common/view/SurfaceControls' );
+  var SurfaceControls = require( 'MOLECULE_POLARITY/common/control/SurfaceControls' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var ViewControls = require( 'MOLECULE_POLARITY/common/view/ViewControls' );
+  var ViewControls = require( 'MOLECULE_POLARITY/common/control/ViewControls' );
 
   /**
    * @param {TwoAtomsModel} model
