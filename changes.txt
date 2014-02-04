@@ -1,3 +1,4 @@
+2/4/14 consolidate use of getDeltaEN in DiatomicMolecule, flip signs on partial charges
 2/4/14 add partial charges to view
 2/4/14 flesh out DiatomicMoleculeNode, add drag handler to rotate molecule
 2/4/14 rename Molecule2 -> Molecule, MPModel2 -> MPModel

@@ -12,7 +12,6 @@ MEDIUM
 - custom cursor to indicate molecule rotation
 
 LOW
-- is DiatomicMolecule.getDeltaEN buggy?
 
 MIGRATE TO COMMON
 - PolarCartesianConverter (or use Vector2.angle,...)

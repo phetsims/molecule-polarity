@@ -61,10 +61,10 @@ define( function( require ) {
 
     // @private updates partial charges
     updatePartialCharges: function() {
-      var deltaEN = this.atomA.electronegativityProperty.get() - this.atomB.electronegativityProperty.get(); //TODO this doesn't match getDeltaEN, bug?
+      var deltaEN = this.getDeltaEN();
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
-      this.atomA.partialChargeProperty.set( -deltaEN );
-      this.atomB.partialChargeProperty.set( deltaEN );
+      this.atomA.partialChargeProperty.set( deltaEN );
+      this.atomB.partialChargeProperty.set( -deltaEN );
     }
   } );
 } );
