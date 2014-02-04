@@ -5,6 +5,7 @@ TODO list for molecule-polarity (HTML5)
 IMPLEMENTATION
 
 HIGH
+- ElectronegativityControlNode
 
 MEDIUM
 - make all control panels the same width
