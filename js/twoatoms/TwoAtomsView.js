@@ -94,18 +94,18 @@ define( function( require ) {
       positivePlateNode.left = moleculeX + plateXOffset;
       positivePlateNode.centerY = moleculeY;
 
-      // centered above molecule
+      // centered below molecule
       enControlA.right = moleculeX - 5;
       enControlB.left = moleculeX + 5;
-      enControlA.top = enControlB.top = 30;
+      enControlA.bottom = enControlB.bottom = this.layoutBounds.bottom - 30;
 
       // centered below molecule
       electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
       electrostaticPotentialColorKey.top = electronDensityColorKey.top = negativePlateNode.bottom - 10;
 
-      // centered below EN controls
+      // centered above EN controls
       bondTypeNode.centerX = moleculeX;
-      bondTypeNode.top = enControlA.bottom + 10;
+      bondTypeNode.bottom = enControlA.top - 10;
 
       // to right of positive plate, top aligned
       viewControls.top = positivePlateNode.y;

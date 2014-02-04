@@ -1,3 +1,4 @@
+2/3/14 adjust layout for usability on tablets
 2/3/14 ported BondCharacterNode
 2/3/14 ported ElectronegativityControlNode
 2/3/14 ported BondNode, bug fix and simplifications in Bond
