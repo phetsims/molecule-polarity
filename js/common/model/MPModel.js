@@ -19,10 +19,10 @@ define( function( require ) {
   var MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
 
   /**
-   * @param {Molecule2} molecule
+   * @param {Molecule} molecule
    * @constructor
    */
-  function MPModel2( molecule ) {
+  function MPModel( molecule ) {
     this.eField = new EField();
     this.molecule = molecule;
   }
@@ -37,7 +37,7 @@ define( function( require ) {
     return normalizedAngle;
   };
 
-  MPModel2.prototype = {
+  MPModel.prototype = {
 
     reset: function() {
       this.eField.reset();
@@ -55,7 +55,7 @@ define( function( require ) {
      * Rotate the molecule one step towards alignment of the molecular dipole with the E-field.
      * Angular velocity is proportional to the dipole's magnitude.
      * @private
-     * @param {Molecule2} molecule
+     * @param {Molecule} molecule
      */
     updateMoleculeOrientation: function( molecule ) {
 
@@ -93,5 +93,5 @@ define( function( require ) {
     }
   };
 
-  return MPModel2;
+  return MPModel;
 } );

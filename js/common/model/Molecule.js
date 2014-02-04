@@ -20,7 +20,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function Molecule2( atoms, bonds, updateAtomLocations, updatePartialCharges, options ) {
+  function Molecule( atoms, bonds, updateAtomLocations, updatePartialCharges, options ) {
 
     options = _.extend( {
       location: new Vector2( 0, 0 ), // the point about which the molecule rotates, in global model coordinate frame
@@ -51,7 +51,7 @@ define( function( require ) {
     } );
   }
 
-  Molecule2.prototype = {
+  Molecule.prototype = {
 
     reset: function() {
       this.angleProperty.reset();
@@ -66,5 +66,5 @@ define( function( require ) {
     }
   };
 
-  return Molecule2;
+  return Molecule;
 } );

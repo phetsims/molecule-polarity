@@ -29,7 +29,7 @@ define( function( require ) {
 
   /**
    * @param {Atom} atom the atom whose electronegativity we're controlling
-   * @param {Molecule2} molecule molecule that the atom belongs to, for pausing animation while this control is used
+   * @param {Molecule} molecule molecule that the atom belongs to, for pausing animation while this control is used
    * @param {Range} range range of electronegativity
    * @param {Number} snapInterval thumb will snap to this increment when released, also determines the tick mark spacing
    * @constructor

@@ -13,7 +13,7 @@ define( function( require ) {
   var Atom = require( 'MOLECULE_POLARITY/common/model/Atom' );
   var Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Molecule2 = require( 'MOLECULE_POLARITY/common/model/Molecule2' );
+  var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var PolarCartesianConverter = require( 'MOLECULE_POLARITY/common/PolarCartesianConverter' );
@@ -41,7 +41,7 @@ define( function( require ) {
     this.bondAngleAProperty = new Property( 0.75 * Math.PI ); // the bond angle of atom A relative to atom B, before applying molecule rotation
     this.bondAngleCProperty = new Property( 0.25 * Math.PI ); // the bond angle of atom C relative to atom B, before applying molecule rotation
 
-    Molecule2.call( this, [ this.atomA, this.atomB, this.atomC ], [ this.bondAB, this.bondBC ], this.updateAtomLocations, this.updatePartialCharges, options );
+    Molecule.call( this, [ this.atomA, this.atomB, this.atomC ], [ this.bondAB, this.bondBC ], this.updateAtomLocations, this.updatePartialCharges, options );
 
     this.bondAngleAProperty.link( this.updateAtomLocations.bind( this ) );
     this.bondAngleCProperty.link( this.updateAtomLocations.bind( this ) );
@@ -62,11 +62,11 @@ define( function( require ) {
     atom.locationProperty.set( new Vector2( xA, yA ) );
   };
 
-  return inherit( Molecule2, TriatomicMolecule, {
+  return inherit( Molecule, TriatomicMolecule, {
 
     // @override
     reset: function() {
-      Molecule2.prototype.reset.call( this );
+      Molecule.prototype.reset.call( this );
       this.bondAngleAProperty.reset();
       this.bondAngleCProperty.reset();
     },

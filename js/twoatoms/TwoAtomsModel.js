@@ -11,15 +11,15 @@ define( function( require ) {
   // imports
   var DiatomicMolecule = require( 'MOLECULE_POLARITY/common/model/DiatomicMolecule' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPModel2 = require( 'MOLECULE_POLARITY/common/model/MPModel2' );
+  var MPModel = require( 'MOLECULE_POLARITY/common/model/MPModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @constructor
    */
   function TwoAtomsModel() {
-    MPModel2.call( this, new DiatomicMolecule( { location: new Vector2( 350, 275 ) } ) );
+    MPModel.call( this, new DiatomicMolecule( { location: new Vector2( 350, 275 ) } ) );
   }
 
-  return inherit( MPModel2, TwoAtomsModel );
+  return inherit( MPModel, TwoAtomsModel );
 } );

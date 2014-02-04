@@ -10,7 +10,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPModel2 = require( 'MOLECULE_POLARITY/common/model/MPModel2' );
+  var MPModel = require( 'MOLECULE_POLARITY/common/model/MPModel' );
   var TriatomicMolecule = require( 'MOLECULE_POLARITY/common/model/TriatomicMolecule' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -18,8 +18,8 @@ define( function( require ) {
    * @constructor
    */
   function ThreeAtomsModel() {
-    MPModel2.call( this, new TriatomicMolecule( { location: new Vector2( 380, 375 ) } ) );
+    MPModel.call( this, new TriatomicMolecule( { location: new Vector2( 380, 375 ) } ) );
   }
 
-  return inherit( MPModel2, ThreeAtomsModel );
+  return inherit( MPModel, ThreeAtomsModel );
 } );

@@ -13,7 +13,7 @@ define( function( require ) {
   var Atom = require( 'MOLECULE_POLARITY/common/model/Atom' );
   var Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Molecule2 = require( 'MOLECULE_POLARITY/common/model/Molecule2' );
+  var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var PolarCartesianConverter = require( 'MOLECULE_POLARITY/common/PolarCartesianConverter' );
@@ -36,10 +36,10 @@ define( function( require ) {
     // the bond connecting atoms A and B
     this.bond = new Bond( this.atomA, this.atomB );
 
-    Molecule2.call( this, [ this.atomA, this.atomB ], [ this.bond ], this.updateAtomLocations, this.updatePartialCharges, options );
+    Molecule.call( this, [ this.atomA, this.atomB ], [ this.bond ], this.updateAtomLocations, this.updatePartialCharges, options );
   }
 
-  return inherit( Molecule2, DiatomicMolecule, {
+  return inherit( Molecule, DiatomicMolecule, {
 
     // Gets the difference in electronegativity (EN), positive sign indicates atom B has higher EN.
     getDeltaEN: function() {
