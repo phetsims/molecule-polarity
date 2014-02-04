@@ -8,6 +8,7 @@ HIGH
 
 MEDIUM
 - make all control panels the same width
+- custom cursor to indicate molecule rotation
 
 LOW
 

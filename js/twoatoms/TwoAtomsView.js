@@ -80,10 +80,6 @@ define( function( require ) {
       var moleculeY = model.molecule.location.y;
       var plateXOffset = 250; // x offset from molecule
 
-      // molecule
-      moleculeNode.x = moleculeX;
-      moleculeNode.y = moleculeY;
-
       // to left of molecule, vertically centered
       negativePlateNode.right = moleculeX - plateXOffset;
       negativePlateNode.centerY = moleculeY;
@@ -136,13 +132,6 @@ define( function( require ) {
         electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
       } );
     }
-
-    //XXX test code, delete me
-    var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
-    var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
-    rootNode.addChild( new BondNode( model.molecule.bond ) );
-    rootNode.addChild( new AtomNode( model.molecule.atomA ) );
-    rootNode.addChild( new AtomNode( model.molecule.atomB ) );
   }
 
   return inherit( ScreenView, TwoAtomsView, { layoutBounds: MPConstants.LAYOUT_BOUNDS } );

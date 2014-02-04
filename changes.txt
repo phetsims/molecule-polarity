@@ -1,3 +1,4 @@
+2/4/14 flesh out DiatomicMoleculeNode, add drag handler to rotate molecule
 2/4/14 rename Molecule2 -> Molecule, MPModel2 -> MPModel
 2/4/14 consolidate into one type for creation of e-field plates
 2/4/14 move controls to their own directory
