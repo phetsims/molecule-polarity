@@ -13,6 +13,7 @@ define( function( require ) {
   // imports
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -36,7 +37,7 @@ define( function( require ) {
   function ElectronegativityControl( atom, molecule, range, snapInterval ) {
 
     // titles
-    var titleNode = new Text( StringUtils.format( patternAtomNameString, atom.name ), { font: new PhetFont( 20 ) } );
+    var titleNode = new Text( StringUtils.format( patternAtomNameString, atom.name ), { font: MPConstants.TITLE_FONT } );
     var subtitleNode = new Text( electronegativityString, { font: new PhetFont( 14 ) } );
 
     // slider
