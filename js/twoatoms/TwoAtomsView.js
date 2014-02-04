@@ -15,7 +15,7 @@ define( function( require ) {
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/control/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPViewProperties = require( 'MOLECULE_POLARITY/common/view/MPViewProperties' );
+  var ViewProperties = require( 'MOLECULE_POLARITY/common/view/ViewProperties' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
@@ -35,7 +35,7 @@ define( function( require ) {
     ScreenView.call( thisView, { renderer: 'svg' } );
 
     // view-specific properties
-    var viewProperties = new MPViewProperties( { bondDipolesVisible: true } );
+    var viewProperties = new ViewProperties( { bondDipolesVisible: true } );
 
     // nodes
     var moleculeNode = new DiatomicMoleculeNode( model.molecule );

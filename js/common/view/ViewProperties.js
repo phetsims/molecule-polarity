@@ -15,7 +15,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
-  function MPViewProperties( options ) {
+  function ViewProperties( options ) {
 
     // defaults
     options = _.extend( {
@@ -39,5 +39,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( PropertySet, MPViewProperties );
+  return inherit( PropertySet, ViewProperties );
 } );
