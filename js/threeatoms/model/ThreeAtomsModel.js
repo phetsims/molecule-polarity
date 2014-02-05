@@ -18,7 +18,7 @@ define( function( require ) {
    * @constructor
    */
   function ThreeAtomsModel() {
-    MPModel.call( this, new TriatomicMolecule( { location: new Vector2( 380, 275 ) } ) );
+    MPModel.call( this, new TriatomicMolecule( { location: new Vector2( 380, 290 ) } ) );
   }
 
   return inherit( MPModel, ThreeAtomsModel );

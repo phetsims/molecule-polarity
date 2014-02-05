@@ -34,6 +34,8 @@ define( function( require ) {
       plateColorDisabled: 'rgb( 192, 192, 192 )'
     }, options );
 
+    this.plateHeight = options.plateHeight; // used in view layout
+
     Node.call( this );
 
     // negative polarity indicator

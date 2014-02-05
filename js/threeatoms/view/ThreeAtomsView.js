@@ -71,11 +71,11 @@ define( function( require ) {
 
       // to left of molecule, vertically centered
       negativePlateNode.right = moleculeX - plateXOffset;
-      negativePlateNode.centerY = moleculeY;
+      negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
 
       // to right of molecule, vertically centered
       positivePlateNode.left = moleculeX + plateXOffset;
-      positivePlateNode.centerY = moleculeY;
+      positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
       // centered below molecule
       enControlB.centerX = moleculeX;
