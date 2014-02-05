@@ -61,7 +61,7 @@ define( function( require ) {
     } );
 
     thisNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    thisNode.addInputListener( new MoleculeAngleHandler( molecule ) );
+    thisNode.addInputListener( new MoleculeAngleHandler( molecule, thisNode ) );
   }
 
   return inherit( Node, ElectronDensityNode, {

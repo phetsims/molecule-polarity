@@ -53,9 +53,9 @@ define( function( require ) {
 
     // rotate molecule by dragging bonds or atom B
     bondABNode.cursor = bondBCNode.cursor = atomBNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    bondABNode.addInputListener( new MoleculeAngleHandler( molecule ) );
-    bondBCNode.addInputListener( new MoleculeAngleHandler( molecule ) );
-    atomBNode.addInputListener( new MoleculeAngleHandler( molecule ) );
+    bondABNode.addInputListener( new MoleculeAngleHandler( molecule, this ) );
+    bondBCNode.addInputListener( new MoleculeAngleHandler( molecule, this ) );
+    atomBNode.addInputListener( new MoleculeAngleHandler( molecule, this ) );
 
     // change bond angles by dragging atom A or C
     atomANode.cursor = atomCNode.cursor = 'pointer';

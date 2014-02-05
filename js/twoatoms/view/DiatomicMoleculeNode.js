@@ -46,7 +46,7 @@ define( function( require ) {
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    this.addInputListener( new MoleculeAngleHandler( molecule ) );
+    this.addInputListener( new MoleculeAngleHandler( molecule, this ) );
   }
 
   return inherit( Node, DiatomicMoleculeNode, {

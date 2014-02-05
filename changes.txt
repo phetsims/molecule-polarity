@@ -1,3 +1,5 @@
+2/5/14 add relativeNode to MoleculeAngleHandler so that rotation works correctly for triatomic molecules
+2/5/14 make bonds pickable by setting strokePickable = true
 2/5/14 fix: when you try dragging a molecule, it will jump to zero angle first
 2/4/14 override setVisible for surfaces, so they update when made visible
 2/4/14 rename MoleculeAngleHandler

@@ -6,13 +6,11 @@ IMPLEMENTATION
 
 HIGH
 - composite partial charge is on wrong side of atomB in triatomic molecule
-- triatomic molecule rotation handler doesn't work
 - BondDipoleNode
 - MolecularDipoleNode
 - BondAngleArrowsNode
 - BondAngleHandler
 - molecule doesn't line up correctly when e-field is turned on
-- need to pass dragNode to MoleculeAngleHandler?
 
 MEDIUM
 - diatomic molecule surface overlaps bond-character display

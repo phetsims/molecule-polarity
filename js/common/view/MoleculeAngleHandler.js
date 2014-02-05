@@ -14,14 +14,15 @@ define( function(require){
 
   /**
    * @param {Molecule} molecule
+   * @param {Node} relativeNode
    * @constructor
    */
-  function MoleculeAngleHandler( molecule ) {
+  function MoleculeAngleHandler( molecule, relativeNode ) {
 
     var previousAngle; // angle between the pointer and the molecule when the drag started
 
     var getAngle = function( event ) {
-      var point = event.currentTarget.globalToLocalPoint( event.pointer.point );
+      var point = relativeNode.globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();
     };
 
