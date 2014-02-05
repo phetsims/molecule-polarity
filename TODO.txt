@@ -19,7 +19,7 @@ MEDIUM
 
 LOW
 - adjust layout
-- bond isn't visible on 'electron density' surface when both EN values are the same
+- bond isn't visible on 'electron density' surface when both EN values are the same, use stroked Rectangle
 
 MIGRATE TO COMMON
 - PolarCartesianConverter (or use Vector2.angle,...)
