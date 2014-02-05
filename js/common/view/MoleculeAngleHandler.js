@@ -16,7 +16,7 @@ define( function(require){
    * @param {Molecule} molecule
    * @constructor
    */
-  function MoleculeDragHandler( molecule ) {
+  function MoleculeAngleHandler( molecule ) {
 
     var startAngle; // angle between the pointer and the molecule when the drag started
 
@@ -44,5 +44,5 @@ define( function(require){
     } );
   }
 
-  return inherit( SimpleDragHandler, MoleculeDragHandler );
+  return inherit( SimpleDragHandler, MoleculeAngleHandler );
 });

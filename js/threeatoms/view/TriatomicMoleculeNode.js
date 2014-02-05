@@ -13,7 +13,7 @@ define( function( require ) {
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeDragHandler' );
+  var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
 
@@ -53,9 +53,9 @@ define( function( require ) {
 
     // rotate molecule by dragging bonds or atom B
     bondABNode.cursor = bondBCNode.cursor = atomBNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    bondABNode.addInputListener( new MoleculeDragHandler( molecule ) );
-    bondBCNode.addInputListener( new MoleculeDragHandler( molecule ) );
-    atomBNode.addInputListener( new MoleculeDragHandler( molecule ) );
+    bondABNode.addInputListener( new MoleculeAngleHandler( molecule ) );
+    bondBCNode.addInputListener( new MoleculeAngleHandler( molecule ) );
+    atomBNode.addInputListener( new MoleculeAngleHandler( molecule ) );
 
     // change bond angles by dragging atom A or C
     atomANode.cursor = atomCNode.cursor = 'pointer';

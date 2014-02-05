@@ -1,3 +1,4 @@
+2/4/14 rename MoleculeAngleHandler
 2/4/14 flesh out TriatomicMoleculeNode
 2/4/14 electrostatic potential surface
 2/4/14 move transform creation to Molecule model element

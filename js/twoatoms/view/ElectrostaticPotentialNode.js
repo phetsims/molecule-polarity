@@ -14,7 +14,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeDragHandler' );
+  var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -61,7 +61,7 @@ define( function( require ) {
     } );
 
     thisNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    thisNode.addInputListener( new MoleculeDragHandler( molecule ) );
+    thisNode.addInputListener( new MoleculeAngleHandler( molecule ) );
   }
 
   return inherit( Node, ElectronDensityNode, {

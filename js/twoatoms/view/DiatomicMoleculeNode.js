@@ -15,7 +15,7 @@ define( function( require ) {
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
   var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeDragHandler' );
+  var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
@@ -46,7 +46,7 @@ define( function( require ) {
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    this.addInputListener( new MoleculeDragHandler( molecule ) );
+    this.addInputListener( new MoleculeAngleHandler( molecule ) );
   }
 
   return inherit( Node, DiatomicMoleculeNode, {
