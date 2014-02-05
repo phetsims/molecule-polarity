@@ -56,8 +56,8 @@ define( function( require ) {
     },
 
     setPartialChargesVisible: function( visible ) {
-      this.partialChargeNodeA.visible = visible;
-      this.partialChargeNodeB.visible = visible;
+      //TODO put all partial charges under 1 parent node
+      this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = visible;
     },
 
     setSurfaceType: function( surfaceType ) {

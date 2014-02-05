@@ -77,6 +77,7 @@ define( function( require ) {
      * @static
      * @param {Atom} atom
      * @param {Bond} bond
+     * @return {PartialChargeNode}
      */
     createOppositePartialChargeNode: function( atom, bond ) {
       return new PartialChargeNode( atom, function() {
@@ -101,6 +102,7 @@ define( function( require ) {
      * @static
      * @param {Atom} atom
      * @param {Bond} bond
+     * @return {PartialChargeNode}
      */
     createCompositePartialChargeNode: function( atom, molecule ) {
       return new PartialChargeNode( atom, function() {
