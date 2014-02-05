@@ -19,6 +19,7 @@ MEDIUM
 - add icons to 'bond dipole' and 'molecular dipole' check boxes
 
 LOW
+- adjust layout
 - bond isn't visible on 'electron density' surface when both EN values are the same
 
 MIGRATE TO COMMON
