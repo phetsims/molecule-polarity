@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {DiatomicMolecule} molecule
    * @constructor
    */
-  function DiatomicMoleculeNode( molecule  ) {
+  function DiatomicMoleculeNode( molecule ) {
 
     Node.call( this );
 
@@ -32,15 +32,15 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var bondNode = new BondNode( molecule.bond );
-    //TODO flesh out these components
-    this.electrostaticPotentialNode = new Node(); //new DiatomicElectrostaticPotentialNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.RWB_GRADIENT ); // @private
-    this.electronDensityNode = new Node(); //new DiatomicElectronDensityNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.BW_GRADIENT ); // @private
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
     this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
+    //TODO flesh out these components
     this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
+    this.electrostaticPotentialNode = new Node(); //new DiatomicElectrostaticPotentialNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.RWB_GRADIENT ); // @private
+    this.electronDensityNode = new Node(); //new DiatomicElectronDensityNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.BW_GRADIENT ); // @private
 
     // rendering order
-    this.addChild( new Node( { children: [ this.electrostaticPotentialNode, this.electronDensityNode ] }) ); // surfaces
+    this.addChild( new Node( { children: [ this.electrostaticPotentialNode, this.electronDensityNode ] } ) ); // surfaces
     this.addChild( new Node( { children: [ bondNode, atomANode, atomBNode ] } ) );  // structure, bond behind atoms
     this.addChild( new Node( { children: [ this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode ] } ) ); // decorations
 
