@@ -9,7 +9,8 @@ HIGH
 - triatomic molecule rotation handler doesn't work
 - BondDipoleNode
 - MolecularDipoleNode
-- TriatomicMoleculeNode
+- BondAngleArrowsNode
+- BondAngleHandler
 - molecule doesn't line up correctly when e-field is turned on
 
 MEDIUM
