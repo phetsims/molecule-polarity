@@ -11,6 +11,7 @@ define( function( require ) {
 
   // import
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
+  var BondAngleHandler = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleHandler' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
@@ -43,7 +44,7 @@ define( function( require ) {
     Node.call( this, { children: [
       // rendering order
       bondABNode, bondBCNode,
-      atomANode, atomBNode, atomCNode,
+      new Node( { children: [ atomANode, atomBNode, atomCNode ] } ), // because we'll be moving the dragged atom to the front
       arrowsANode, arrowsCNode,
       this.partialChargeNodeA, this.partialChargeNodeB, this.partialChargeNodeC,
       this.bondDipoleABNode, this.bondDipoleBCNode, this.molecularDipoleNode
@@ -57,9 +58,8 @@ define( function( require ) {
 
     // change bond angles by dragging atom A or C
     atomANode.cursor = atomCNode.cursor = 'pointer';
-    //TODO
-//    atomANode.addInputListener( new BondAngleHandler( molecule, molecule.bondAngleA, atomANode, arrowsANode ) );
-//    atomCNode.addInputListener( new BondAngleHandler( molecule, molecule.bondAngleC, atomCNode, arrowsCNode ) );
+    atomANode.addInputListener( new BondAngleHandler( molecule, molecule.bondAngleAProperty, atomANode, arrowsANode ) );
+    atomCNode.addInputListener( new BondAngleHandler( molecule, molecule.bondAngleCProperty, atomCNode, arrowsCNode ) );
 
     // default state
     arrowsANode.visible = arrowsCNode.visible = false;
