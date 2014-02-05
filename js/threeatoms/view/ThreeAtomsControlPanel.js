@@ -29,7 +29,7 @@ define(function(require){
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   /**
-   * @param {ViewProperties} viewProperties
+   * @param {*} viewProperties
    * @param {Property<Boolean>} eFieldEnabledProperty
    * @constructor
    */

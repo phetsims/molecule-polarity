@@ -34,19 +34,20 @@ define(function(require){
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   /**
-   * @param {ViewProperties} viewProperties
+   * @param {*} viewProperties
    * @param {Property<Boolean>} eFieldEnabledProperty
    * @constructor
    */
   function TwoAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
+    debugger;
     var controlTextOptions = { font: MPConstants.CONTROL_FONT };
 
     // 'View' title
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var bondDipoleCheckBox = new CheckBox( new Text( bondDipoleString, controlTextOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
+    var bondDipoleCheckBox = new CheckBox( new Text( bondDipoleString, controlTextOptions ), viewProperties.bondDipoleVisibleProperty ); //TODO add icon
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
     var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, controlTextOptions ), viewProperties.bondCharacterVisibleProperty );
 

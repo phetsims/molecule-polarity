@@ -12,9 +12,9 @@ define( function( require ) {
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var ViewProperties = require( 'MOLECULE_POLARITY/common/view/ViewProperties' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
+  var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeAtoms/view/ThreeAtomsControlPanel' );
@@ -30,7 +30,11 @@ define( function( require ) {
     ScreenView.call( thisView, { renderer: 'svg' } );
 
     // view-specific properties
-    var viewProperties = new ViewProperties( { molecularDipoleVisible: true } );
+    var viewProperties = new PropertySet( {
+      bondDipolesVisible: false,
+      molecularDipoleVisible: true,
+      partialChargesVisible: false
+    } );
 
     // nodes
     var moleculeNode = new TriatomicMoleculeNode( model.molecule );

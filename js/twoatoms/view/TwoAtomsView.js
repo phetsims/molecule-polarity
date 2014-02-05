@@ -14,9 +14,9 @@ define( function( require ) {
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var ViewProperties = require( 'MOLECULE_POLARITY/common/view/ViewProperties' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
+  var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
@@ -33,7 +33,12 @@ define( function( require ) {
     ScreenView.call( thisView, { renderer: 'svg' } );
 
     // view-specific properties
-    var viewProperties = new ViewProperties( { bondDipolesVisible: true } );
+    var viewProperties = new PropertySet( {
+      bondDipoleVisible: true,
+      partialChargesVisible: false,
+      bondCharacterVisible: false,
+      surfaceType: SurfaceType.NONE
+    } );
 
     // nodes
     var moleculeNode = new DiatomicMoleculeNode( model.molecule );
@@ -104,7 +109,7 @@ define( function( require ) {
 
     // synchronization with view properties
     {
-      viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
+      viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
         moleculeNode.setBondDipoleVisible( visible );
       } );
 
