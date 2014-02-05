@@ -15,7 +15,7 @@ HIGH
 
 MEDIUM
 - diatomic molecule surface overlaps bond-character display
-- Reset All moves molecule to origin (upper left)
+- Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
 - custom cursor to indicate molecule rotation
 - add icons to 'bond dipole' and 'molecular dipole' check boxes
 
