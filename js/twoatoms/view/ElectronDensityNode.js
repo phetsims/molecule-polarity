@@ -31,7 +31,7 @@ define( function( require ) {
    * @param {Molecule} molecule
    * @constructor
    */
-  function DiatomicElectronDensityNode( molecule ) {
+  function ElectronDensityNode( molecule ) {
 
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
 
@@ -64,7 +64,7 @@ define( function( require ) {
     thisNode.addInputListener( new MoleculeDragHandler( molecule ) );
   }
 
-  return inherit( Node, DiatomicElectronDensityNode, {
+  return inherit( Node, ElectronDensityNode, {
 
     //TODO this should be one Path, whose shape is 2 circles combined using constructive area geometry
     /*

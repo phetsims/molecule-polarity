@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
-  var DiatomicElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicElectronDensityNode' );
+  var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -36,7 +36,7 @@ define( function( require ) {
     //TODO flesh out these components
     this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
     this.electrostaticPotentialNode = new Node(); //new DiatomicElectrostaticPotentialNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.RWB_GRADIENT ); // @private
-    this.electronDensityNode = new DiatomicElectronDensityNode( molecule ); // @private
+    this.electronDensityNode = new ElectronDensityNode( molecule ); // @private
 
     // rendering order
     this.addChild( new Node( { children: [ this.electrostaticPotentialNode, this.electronDensityNode ] } ) ); // surfaces
