@@ -11,6 +11,7 @@ define( function( require ) {
 
   // import
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
+  var BondAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleArrowsNode' );
   var BondAngleHandler = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleHandler' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -32,8 +33,8 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var atomCNode = new AtomNode( molecule.atomC );
-    var arrowsANode = new Node();//new BondAngleArrowsNode( molecule, molecule.atomA );
-    var arrowsCNode = new Node();//new BondAngleArrowsNode( molecule, molecule.atomC );
+    var arrowsANode = new BondAngleArrowsNode( molecule, molecule.atomA );
+    var arrowsCNode = new BondAngleArrowsNode( molecule, molecule.atomC );
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
     this.partialChargeNodeB = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule );
     this.partialChargeNodeC = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC );

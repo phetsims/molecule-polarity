@@ -1,3 +1,4 @@
+2/5/14 add arrows around atoms that can be dragged to change bond angle
 2/5/14 add handler for showing arrows around atoms that can be dragged to change bond angle
 2/5/14 add drag handler for changing bond angle
 2/5/14 simplify scenegraph for molecule nodes
