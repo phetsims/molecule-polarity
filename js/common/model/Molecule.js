@@ -9,7 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Matrix3 = require( 'DOT/Matrix3' );
   var Property = require( 'AXON/Property' );
+  var Transform3 = require( 'DOT/Transform3' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -56,6 +58,11 @@ define( function( require ) {
     reset: function() {
       this.angleProperty.reset();
       this.atoms.forEach( function( atom ) { atom.reset(); } );
+    },
+
+    // Creates a transform that accounts for the molecule's location and orientation.
+    createTransform: function() {
+      return new Transform3( Matrix3.translation( this.location.x, this.location.y ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) ) )
     },
 
     // @private molecular dipole is the vector sum of the bond dipoles

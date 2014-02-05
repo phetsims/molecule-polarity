@@ -74,8 +74,9 @@ define( function( require ) {
      * @private
      */
     updateShape: function() {
-      this.pathA.shape = DiatomicElectronDensityNode.createCloudShape( this.molecule.atomA, DIAMETER_SCALE );
-      this.pathB.shape = DiatomicElectronDensityNode.createCloudShape( this.molecule.atomB, DIAMETER_SCALE );
+      var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
+      this.pathA.shape = Shape.circle( this.molecule.atomA.locationProperty.get().x, this.molecule.atomA.locationProperty.get().y, radius );
+      this.pathB.shape = Shape.circle( this.molecule.atomB.locationProperty.get().x, this.molecule.atomB.locationProperty.get().y, radius );
     },
 
     /*
@@ -103,7 +104,7 @@ define( function( require ) {
         var pointB = new Vector2( gradientWidth / 2, 0 );
 
         // transform gradient endpoints to account for molecule transform
-        var transform = DiatomicElectronDensityNode.createTransform( this.molecule );
+        var transform = this.molecule.createTransform();
         pointA = transform.transformPosition2( pointA );
         pointB = transform.transformPosition2( pointB );
 
@@ -119,31 +120,6 @@ define( function( require ) {
         this.pathA.fill = gradient;
         this.pathB.fill = gradient;
       }
-    }
-  }, {
-
-    /*
-     * Creates the shape of a "cloud" around an atom.
-     * @static
-     * @private
-     * @param {Atom} atom
-     * @param {Number} diameterScale
-     * @returns {Shape}
-     */
-    createCloudShape: function( atom, diameterScale ) {
-      var radius = ( diameterScale * atom.diameter ) / 2;
-      return Shape.ellipse( atom.locationProperty.get().x, atom.locationProperty.get().y, radius, radius, 0 );
-    },
-
-    /*
-     * Creates a transform that accounts for the molecule's location and orientation.
-     * @static
-     * @private
-     * @param {Molecule} molecule
-     * @returns {Transform3}
-     */
-    createTransform: function( molecule ) {
-      return new Transform3( Matrix3.translation( molecule.location.x, molecule.location.y ).timesMatrix( Matrix3.rotation2( molecule.angleProperty.get() ) ) );
     }
   } );
 } );
