@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Control panel for the 'Two Atoms' screen.
+ * Control panel for the 'Three Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,16 +21,12 @@ define(function(require){
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
-  var bondDipoleString = require( 'string!MOLECULE_POLARITY/bondDipole' );
+  var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
   var electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
-  var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
-  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
-  var noneString = require( 'string!MOLECULE_POLARITY/none' );
+  var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
   var offString = require( 'string!MOLECULE_POLARITY/off' );
   var onString = require( 'string!MOLECULE_POLARITY/on' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
-  var surfaceString = require( 'string!MOLECULE_POLARITY/surface' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   /**
@@ -38,25 +34,16 @@ define(function(require){
    * @param {Property<Boolean>} eFieldEnabledProperty
    * @constructor
    */
-  function TwoAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
+  function ThreeAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
     // 'View' title
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
     var textOptions = { font: MPConstants.CONTROL_FONT };
-    var bondDipoleCheckBox = new CheckBox( new Text( bondDipoleString, textOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
+    var bondDipolesCheckBox = new CheckBox( new Text( bondDipolesString, textOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
+    var molecularDipoleCheckBox = new CheckBox( new Text( molecularDipoleString, textOptions ), viewProperties.molecularDipoleVisibleProperty ); //TODO add icon
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, textOptions ), viewProperties.partialChargesVisibleProperty );
-    var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, textOptions ), viewProperties.bondCharacterVisibleProperty );
-
-    // 'Surface' title
-    var surfaceTitleNode = new Text( surfaceString, { font: MPConstants.TITLE_FONT } );
-
-    // 'Surface' radio buttons
-    var textOptions = { font: MPConstants.CONTROL_FONT };
-    var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, textOptions ) );
-    var electrostaticPotentialButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, textOptions ) );
-    var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, textOptions ) );
 
     // 'E-Field' title
     var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
@@ -73,9 +60,7 @@ define(function(require){
 
     //TODO this is brittle, what if we add a node and forget to add it here?
     // compute the horizontal separator width
-    var nodes = [ viewTitleNode, bondDipoleCheckBox, partialChargesCheckBox, bondCharacterCheckBox,
-      surfaceTitleNode, noneButton, electrostaticPotentialButton, electronDensityButton,
-      eFieldTitleNode, buttonGroup ];
+    var nodes = [ viewTitleNode, bondDipolesCheckBox, partialChargesCheckBox, eFieldTitleNode, buttonGroup ];
     var separatorWidth = 0;
     for ( var i = 0; i < nodes.length; i++ ) {
       separatorWidth = Math.max( separatorWidth, nodes[i].width );
@@ -85,15 +70,9 @@ define(function(require){
     var content = new VBox( {
       children: [
         viewTitleNode,
-        bondDipoleCheckBox,
+        bondDipolesCheckBox,
+        molecularDipoleCheckBox,
         partialChargesCheckBox,
-        bondCharacterCheckBox,
-        new Line( 0, 0, 0, 1 ), // force a vertical space
-        new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
-        surfaceTitleNode,
-        noneButton,
-        electrostaticPotentialButton,
-        electronDensityButton,
         new Line( 0, 0, 0, 1 ), // force a vertical space
         new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
         eFieldTitleNode,
@@ -111,5 +90,5 @@ define(function(require){
     } );
   }
 
-  return inherit( Panel, TwoAtomsControlPanel );
+  return inherit( Panel, ThreeAtomsControlPanel );
 });

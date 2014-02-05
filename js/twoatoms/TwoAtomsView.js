@@ -41,7 +41,7 @@ define( function( require ) {
     var positivePlateNode = PlateNode.createPositive( model.eField );
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
-    var bondTypeNode = new BondCharacterNode( model.molecule );
+    var bondCharacterNode = new BondCharacterNode( model.molecule );
     var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
@@ -58,7 +58,7 @@ define( function( require ) {
       enControlA,
       enControlB,
       controlPanel,
-      bondTypeNode,
+      bondCharacterNode,
       electrostaticPotentialColorKey,
       electronDensityColorKey,
       moleculeNode,
@@ -90,8 +90,8 @@ define( function( require ) {
       electrostaticPotentialColorKey.top = electronDensityColorKey.top = negativePlateNode.top + 25;
 
       // centered above EN controls
-      bondTypeNode.centerX = moleculeX;
-      bondTypeNode.bottom = enControlA.top - 10;
+      bondCharacterNode.centerX = moleculeX;
+      bondCharacterNode.bottom = enControlA.top - 10;
 
       // to right of positive plate, top aligned
       controlPanel.top = positivePlateNode.y;
@@ -112,7 +112,7 @@ define( function( require ) {
         moleculeNode.setPartialChargesVisible( visible );
       } );
 
-      viewProperties.bondCharacterVisibleProperty.linkAttribute( bondTypeNode, 'visible' );
+      viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
 
       viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
         moleculeNode.setSurfaceType( surfaceType );
