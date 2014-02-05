@@ -92,7 +92,7 @@ define( function( require ) {
 
       // centered above molecule
       electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
-      electrostaticPotentialColorKey.top = 25;
+      electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
 
       // centered above EN controls
       bondCharacterNode.centerX = moleculeX;
