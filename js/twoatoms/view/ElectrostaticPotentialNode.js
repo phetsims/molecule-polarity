@@ -66,6 +66,15 @@ define( function( require ) {
 
   return inherit( Node, ElectronDensityNode, {
 
+    // @override
+    setVisible: function( visible ) {
+      Node.prototype.setVisible.call( this, visible );
+      if ( visible ) {
+        this.updateShape();
+        this.updateFill();
+      }
+    },
+
     /*
      * Updates the shape of the surface.
      * @private
