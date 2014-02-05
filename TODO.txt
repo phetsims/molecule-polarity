@@ -13,7 +13,6 @@ MEDIUM
 - add icons to 'bond dipole' and 'molecular dipole' check boxes
 
 LOW
-- move nodes that are specific to one screen out of common
 
 MIGRATE TO COMMON
 - PolarCartesianConverter (or use Vector2.angle,...)

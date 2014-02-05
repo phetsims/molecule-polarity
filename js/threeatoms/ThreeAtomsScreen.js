@@ -13,8 +13,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Screen = require( 'JOIST/Screen' );
-  var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsModel' );
-  var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsView' );
+  var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/model/ThreeAtomsModel' );
+  var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsView' );
 
   // strings
   var screenTitle = require( 'string!MOLECULE_POLARITY/threeAtoms' );

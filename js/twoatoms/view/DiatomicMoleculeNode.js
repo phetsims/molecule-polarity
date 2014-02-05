@@ -13,10 +13,46 @@ define( function( require ) {
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/input/MoleculeDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * Drag handler for manipulating orientation of a diatomic molecule.
+   * @param {DiatomicMolecule} molecule
+   * @constructor
+   */
+  function DiatomicMoleculeDragHandler( molecule ) {
+
+    var startAngle; // angle between the pointer and the molecule when the drag started
+
+    var getAngle = function( event ) {
+      var point = event.currentTarget.globalToLocalPoint( event.pointer.point );
+      return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();
+    };
+
+    SimpleDragHandler.call( this, {
+
+      allowTouchSnag: true,
+
+      start: function( event ) {
+        molecule.dragging = true;
+        startAngle = getAngle( event );
+      },
+
+      drag: function( event ) {
+        molecule.angleProperty.set( getAngle( event ) - startAngle );
+      },
+
+      end: function( event ) {
+        molecule.dragging = false;
+      }
+    } );
+  }
+
+  inherit( SimpleDragHandler, DiatomicMoleculeDragHandler );
 
   /**
    * @param {DiatomicMolecule} molecule
@@ -44,7 +80,7 @@ define( function( require ) {
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
-    this.addInputListener( new MoleculeDragHandler( molecule ) );
+    this.addInputListener( new DiatomicMoleculeDragHandler( molecule ) );
   }
 
   return inherit( Node, DiatomicMoleculeNode, {
