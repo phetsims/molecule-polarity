@@ -13,6 +13,7 @@ define( function( require ) {
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
+  var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -33,10 +34,10 @@ define( function( require ) {
     var bondNode = new BondNode( molecule.bond );
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
     this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
-    //TODO flesh out these components
-    this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
-    this.electrostaticPotentialNode = new Node(); //new DiatomicElectrostaticPotentialNode( molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPColors.RWB_GRADIENT ); // @private
+    this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule ); // @private
     this.electronDensityNode = new ElectronDensityNode( molecule ); // @private
+    //TODO
+    this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
 
     // rendering order
     this.addChild( new Node( { children: [ this.electrostaticPotentialNode, this.electronDensityNode ] } ) ); // surfaces

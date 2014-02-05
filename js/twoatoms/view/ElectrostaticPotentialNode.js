@@ -1,8 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * 2D surface that represents electron density for a diatomic molecule.
- * Electron density uses a 2-color gradient, so we can use a single PPath.
+ * 2D surface that represents electrostatic potential for a diatomic molecule.
+ * Electron density uses a 3-color gradient, so we use 2 Path nodes that meet in the middle.
  * This node's look is similar to the corresponding Jmol isosurface.
  * Shapes are created in world coordinates, so this node's offset should be (0,0).
  *
@@ -40,8 +40,8 @@ define( function( require ) {
 
     thisNode.molecule = molecule;
     thisNode.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
-    thisNode.colors = MPColors.BW_GRADIENT;
-    assert && assert( thisNode.colors.length === 2 ); // this implementation only works for 2 colors
+    thisNode.colors = MPColors.RWB_GRADIENT;
+    assert && assert( thisNode.colors.length === 3 ); // this implementation only works for 3 colors
 
     thisNode.pathA = new Path();
     thisNode.pathB = new Path();
@@ -71,10 +71,21 @@ define( function( require ) {
      * @private
      */
     updateShape: function() {
+
       // surround each atom with a 'cloud'
       var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
       this.pathA.shape = Shape.circle( this.molecule.atomA.locationProperty.get().x, this.molecule.atomA.locationProperty.get().y, radius );
       this.pathB.shape = Shape.circle( this.molecule.atomB.locationProperty.get().x, this.molecule.atomB.locationProperty.get().y, radius );
+
+      // rectangles for clipping where the clouds join at the center of the bond, with overlap so we don't see seam
+      var bondLength = this.molecule.bond.getLength();
+      var radius = DIAMETER_SCALE * this.molecule.atomA.diameter / 2;
+      var overlap = 1;
+      var clipA = Shape.rectangle( -radius - ( bondLength / 2 ), -radius, radius + ( bondLength / 2 ) + overlap, 2 * radius );
+      var clipB = Shape.rectangle( -overlap, -radius, radius + ( bondLength / 2 ) + overlap, 2 * radius );
+      var transform = this.molecule.createTransform();
+      this.pathA.clipArea = transform.transformShape( clipA );
+      this.pathB.clipArea = transform.transformShape( clipB );
     },
 
     /*
@@ -85,8 +96,7 @@ define( function( require ) {
       // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
       var deltaEN = this.molecule.getDeltaEN();
       if ( deltaEN === 0 ) {
-        // no difference, use neutral color that's halfway between "more" and "less" colors
-        this.pathA.fill = this.pathB.fill = MPColors.NEUTRAL_GRAY;
+        this.pathA.fill = this.pathB.fill = this.colors[1];
       }
       else {
         var scale = Math.abs( deltaEN / this.electronegativityRange.getLength() );
@@ -98,25 +108,32 @@ define( function( require ) {
         var gradientWidth = Util.linear( 1, 0, surfaceWidth, surfaceWidth * GRADIENT_WIDTH_MULTIPLIER, scale );
 
         // gradient endpoints prior to accounting for molecule transform
+        var pointCenter = new Vector2( 0, 0 );
         var pointA = new Vector2( -gradientWidth / 2, 0 );
         var pointB = new Vector2( gradientWidth / 2, 0 );
 
         // transform gradient endpoints to account for molecule transform
         var transform = this.molecule.createTransform();
+        pointCenter = transform.transformPosition2( pointCenter );
         pointA = transform.transformPosition2( pointA );
         pointB = transform.transformPosition2( pointB );
 
         // choose colors based on polarity
-        var colorA = ( deltaEN > 0 ) ? this.colors[1] : this.colors[0];
-        var colorB = ( deltaEN > 0 ) ? this.colors[0] : this.colors[1];
+        var colorCenter = this.colors[1];
+        var colorA = ( deltaEN > 0 ) ? this.colors[2] : this.colors[0];
+        var colorB = ( deltaEN > 0 ) ? this.colors[0] : this.colors[2];
 
-        // create the gradient
-        var gradient = new LinearGradient( pointA.x, pointA.y, pointB.x, pointB.y );
-        gradient.addColorStop( 0, colorA );
-        gradient.addColorStop( 1, colorB );
+        // create the gradients
+        var gradientA = new LinearGradient( pointA.x, pointA.y, pointCenter.x, pointCenter.y );
+        gradientA.addColorStop( 0, colorA );
+        gradientA.addColorStop( 1, colorCenter );
 
-        this.pathA.fill = gradient;
-        this.pathB.fill = gradient;
+        var gradientB = new LinearGradient( pointCenter.x, pointCenter.y, pointB.x, pointB.y );
+        gradientB.addColorStop( 0, colorCenter );
+        gradientB.addColorStop( 1, colorB );
+
+        this.pathA.fill = gradientA;
+        this.pathB.fill = gradientB;
       }
     }
   } );
