@@ -6,6 +6,7 @@ IMPLEMENTATION
 
 HIGH
 - composite partial charge is on wrong side of atomB in triatomic molecule
+- composite partial charge doesn't rotate with molecule
 - BondDipoleNode
 - MolecularDipoleNode
 - BondAngleArrowsNode
