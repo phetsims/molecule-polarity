@@ -5,6 +5,9 @@ TODO list for molecule-polarity (HTML5)
 IMPLEMENTATION
 
 HIGH
+- BondDipoleNode
+- MolecularDipoleNode
+- TriatomicMoleculeNode
 - molecule doesn't line up correctly when e-field is turned on
 
 MEDIUM
