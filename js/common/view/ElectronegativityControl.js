@@ -30,36 +30,41 @@ define( function( require ) {
   /**
    * @param {Atom} atom the atom whose electronegativity we're controlling
    * @param {Molecule} molecule molecule that the atom belongs to, for pausing animation while this control is used
-   * @param {Range} range range of electronegativity
-   * @param {Number} snapInterval thumb will snap to this increment when released, also determines the tick mark spacing
+   * @param {*} options
    * @constructor
    */
-  function ElectronegativityControl( atom, molecule, range, snapInterval ) {
+  function ElectronegativityControl( atom, molecule, options ) {
+
+    options = _.extend( {
+      range: MPConstants.ELECTRONEGATIVITY_RANGE,
+      tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
+      snapToTick: false
+    } );
 
     // titles
     var titleNode = new Text( StringUtils.format( patternAtomNameString, atom.name ), { font: MPConstants.TITLE_FONT } );
     var subtitleNode = new Text( electronegativityString, { font: new PhetFont( 14 ) } );
 
     // slider
-    var sliderNode = new HSlider( atom.electronegativityProperty, range, {
+    var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
       startDrag: function() {
         molecule.dragging = true;
       },
       endDrag: function() {
         molecule.dragging = false;
-        //TODO why does this need to snap?
-        // snap to tick mark
-        atom.electronegativityProperty.set( Util.toFixedNumber( atom.electronegativityProperty.get() / snapInterval, 0 ) * snapInterval );
+        if ( options.snapToTick ) {
+          atom.electronegativityProperty.set( Util.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
+        }
       }
     } );
 
     // slider tick labels
     var tickLabelOptions = { font: new PhetFont( 12 ) };
-    sliderNode.addMajorTick( range.min, new Text( lessString, tickLabelOptions ) );
-    sliderNode.addMajorTick( range.max, new Text( moreString, tickLabelOptions ) );
-    var centerTick = range.min + ( range.getLength() / 2 );
+    sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
+    sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
+    var centerTick = options.range.min + ( options.range.getLength() / 2 );
     sliderNode.addMajorTick( centerTick );
-    for ( var i = range.min + snapInterval; i < range.max; i += snapInterval ) {
+    for ( var i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
       if ( i !== centerTick ) {
         sliderNode.addMinorTick( i );
       }

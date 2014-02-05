@@ -44,8 +44,8 @@ define( function( require ) {
     var moleculeNode = new DiatomicMoleculeNode( model.molecule );
     var negativePlateNode = PlateNode.createNegative( model.eField );
     var positivePlateNode = PlateNode.createPositive( model.eField );
-    var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
-    var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
+    var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
+    var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     var bondCharacterNode = new BondCharacterNode( model.molecule );
     var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();

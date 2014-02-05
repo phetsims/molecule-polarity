@@ -20,7 +20,7 @@ define( function( require ) {
 
     // Model
     ELECTRONEGATIVITY_RANGE: new Range( 2, 4, 2 ),
-    ELECTRONEGATIVITY_SNAP_INTERVAL: 0.2,
+    ELECTRONEGATIVITY_TICK_SPACING: 0.2,
     ATOM_DIAMETER: 100,
     BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
 

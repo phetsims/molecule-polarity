@@ -40,9 +40,9 @@ define( function( require ) {
     var moleculeNode = new TriatomicMoleculeNode( model.molecule );
     var negativePlateNode = PlateNode.createNegative( model.eField );
     var positivePlateNode = PlateNode.createPositive( model.eField );
-    var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
-    var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
-    var enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule, MPConstants.ELECTRONEGATIVITY_RANGE, MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL );
+    var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
+    var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
+    var enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
     var controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( function() {
       model.reset();
