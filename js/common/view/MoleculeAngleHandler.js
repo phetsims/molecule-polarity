@@ -18,7 +18,7 @@ define( function(require){
    */
   function MoleculeAngleHandler( molecule ) {
 
-    var startAngle; // angle between the pointer and the molecule when the drag started
+    var previousAngle; // angle between the pointer and the molecule when the drag started
 
     var getAngle = function( event ) {
       var point = event.currentTarget.globalToLocalPoint( event.pointer.point );
@@ -31,11 +31,13 @@ define( function(require){
 
       start: function( event ) {
         molecule.dragging = true;
-        startAngle = getAngle( event );
+        previousAngle = getAngle( event );
       },
 
       drag: function( event ) {
-        molecule.angleProperty.set( getAngle( event ) - startAngle );
+        var currentAngle = getAngle( event );
+        molecule.angleProperty.set( molecule.angleProperty.get() + currentAngle - previousAngle );
+        previousAngle = currentAngle;
       },
 
       end: function( event ) {

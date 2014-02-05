@@ -12,7 +12,6 @@ HIGH
 - BondAngleArrowsNode
 - BondAngleHandler
 - molecule doesn't line up correctly when e-field is turned on
-- if you try dragging a surface after it's first made visible, it will jump to some orientation
 - need to pass dragNode to MoleculeAngleHandler?
 
 MEDIUM
