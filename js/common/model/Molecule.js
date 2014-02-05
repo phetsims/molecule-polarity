@@ -62,7 +62,7 @@ define( function( require ) {
 
     // Creates a transform that accounts for the molecule's location and orientation.
     createTransform: function() {
-      return new Transform3( Matrix3.translation( this.location.x, this.location.y ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) ) );
+      return new Transform3( Matrix3.translationFromVector( this.location ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) ) );
     },
 
     // @private molecular dipole is the vector sum of the bond dipoles
