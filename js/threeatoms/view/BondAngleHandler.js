@@ -54,6 +54,17 @@ define( function( require ) {
         molecule.dragging = false;
       }
     } );
+
+    this.enter = function( event ) {
+      if ( !molecule.dragging ) {
+        arrowsNode.visible = true;
+      }
+    };
+
+    this.exit = function( event ) {
+      console.log( 'exit' );
+      arrowsNode.visible = false;
+    };
   }
 
   return inherit( SimpleDragHandler, BondAngleHandler );
