@@ -85,7 +85,7 @@ define( function( require ) {
 
       // to right of positive plate, top aligned
       controlPanel.top = positivePlateNode.y;
-      controlPanel.left = positivePlateNode.right + 50;
+      controlPanel.left = positivePlateNode.right + 70;
 
       // bottom-right corner of the screen
       resetAllButton.right = this.layoutBounds.right - 40;

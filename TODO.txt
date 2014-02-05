@@ -5,7 +5,6 @@ TODO list for molecule-polarity (HTML5)
 IMPLEMENTATION
 
 HIGH
-- molecules are not vertically centered between plates
 - composite partial charge is on wrong side of atomB in triatomic molecule
 - triatomic molecule rotation handler doesn't work
 - BondDipoleNode
