@@ -40,11 +40,11 @@ define( function( require ) {
       start: function( event ) {
         molecule.dragging = true;
         atomNode.moveToFront();
-        arrowsNode.visible = false;
         previousAngle = getAngle( event );
       },
 
       drag: function( event ) {
+        arrowsNode.visible = false;
         var currentAngle = getAngle( event );
         bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
         previousAngle = currentAngle;
