@@ -11,8 +11,7 @@ define( function( require ) {
   // imports
   var BondCharacterNode = require( 'MOLECULE_POLARITY/common/view/BondCharacterNode' );
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/common/view/DiatomicMoleculeNode' );
-  var EFieldControls = require( 'MOLECULE_POLARITY/common/control/EFieldControls' );
-  var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/control/ElectronegativityControl' );
+  var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var ViewProperties = require( 'MOLECULE_POLARITY/common/view/ViewProperties' );
@@ -20,10 +19,9 @@ define( function( require ) {
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SurfaceControls = require( 'MOLECULE_POLARITY/common/control/SurfaceControls' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var ViewControls = require( 'MOLECULE_POLARITY/common/control/ViewControls' );
+  var TwoAtomsControlPanel = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsControlPanel' );
 
   /**
    * @param {TwoAtomsModel} model
@@ -46,15 +44,11 @@ define( function( require ) {
     var bondTypeNode = new BondCharacterNode( model.molecule );
     var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+    var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( function() {
       model.reset();
       viewProperties.reset();
     } );
-
-    // control panels
-    var viewControls = new ViewControls( viewProperties.bondDipolesVisibleProperty, viewProperties.partialChargesVisibleProperty, viewProperties.bondCharacterVisibleProperty );
-    var surfaceControls = new SurfaceControls( viewProperties.surfaceTypeProperty );
-    var eFieldControls = new EFieldControls( model.eField );
 
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
@@ -63,9 +57,7 @@ define( function( require ) {
       positivePlateNode,
       enControlA,
       enControlB,
-      viewControls,
-      surfaceControls,
-      eFieldControls,
+      controlPanel,
       bondTypeNode,
       electrostaticPotentialColorKey,
       electronDensityColorKey,
@@ -102,12 +94,8 @@ define( function( require ) {
       bondTypeNode.bottom = enControlA.top - 10;
 
       // to right of positive plate, top aligned
-      viewControls.top = positivePlateNode.y;
-      viewControls.left = positivePlateNode.right + 40;
-      surfaceControls.left = viewControls.left;
-      surfaceControls.top = viewControls.bottom + 10;
-      eFieldControls.left = surfaceControls.left;
-      eFieldControls.top = surfaceControls.bottom + 10;
+      controlPanel.top = positivePlateNode.y;
+      controlPanel.left = positivePlateNode.right + 40;
 
       // bottom-right corner of the screen
       resetAllButton.right = this.layoutBounds.right - 40;
