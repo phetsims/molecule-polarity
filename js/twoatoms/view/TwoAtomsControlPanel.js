@@ -40,7 +40,6 @@ define(function(require){
    */
   function TwoAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
-    debugger;
     var controlTextOptions = { font: MPConstants.CONTROL_FONT };
 
     // 'View' title
