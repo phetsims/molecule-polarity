@@ -8,6 +8,9 @@
 define( function( require ) {
   'use strict';
 
+  // imports
+  var Color = require( 'SCENERY/util/Color' );
+
   return {
     
     SCREEN_BACKGROUND: 'rgb( 180, 205, 255)',
@@ -28,7 +31,8 @@ define( function( require ) {
     DISABLED_PLATE: 'rgb( 192, 192, 192 )',
 
     // surfaces
-    BW_GRADIENT: [ 'black', 'white' ],
-    RWB_GRADIENT: [ 'red', 'white', 'blue' ]
+    BW_GRADIENT: [ Color.BLACK, Color.WHITE ],
+    RWB_GRADIENT: [ Color.RED, Color.WHITE, Color.BLUE ],
+    NEUTRAL_GRAY: 'rgb( 128, 128, 128 )'
   };
 } );

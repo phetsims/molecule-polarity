@@ -1,3 +1,4 @@
+2/4/14 electron density surface
 2/4/14 separate out view properties for each screen, instead of using a union of all screen view properties
 2/4/14 flesh out 'Three Atoms' screen
 2/4/14 consolidate into one control panel per screen
