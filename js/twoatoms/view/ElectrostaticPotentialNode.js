@@ -79,7 +79,6 @@ define( function( require ) {
 
       // rectangles for clipping where the clouds join at the center of the bond, with overlap so we don't see seam
       var bondLength = this.molecule.bond.getLength();
-      var radius = DIAMETER_SCALE * this.molecule.atomA.diameter / 2;
       var overlap = 1;
       var clipA = Shape.rectangle( -radius - ( bondLength / 2 ), -radius, radius + ( bondLength / 2 ) + overlap, 2 * radius );
       var clipB = Shape.rectangle( -overlap, -radius, radius + ( bondLength / 2 ) + overlap, 2 * radius );
