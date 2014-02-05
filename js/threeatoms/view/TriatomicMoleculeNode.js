@@ -40,16 +40,14 @@ define( function( require ) {
     this.bondDipoleBCNode = new Node();//new BondDipoleNode( molecule.bondBC );
     this.molecularDipoleNode = new Node();//new MolecularDipoleNode( molecule );
 
-    // rendering order
-    this.addChild( new Node( { children: [
-      bondABNode, bondBCNode, // bonds behind atoms
+    Node.call( this, { children: [
+      // rendering order
+      bondABNode, bondBCNode,
+      atomANode, atomBNode, atomCNode,
       arrowsANode, arrowsCNode,
-      atomANode, atomBNode, atomCNode
-    ] } ) );
-    this.addChild( new Node( { children: [
       this.partialChargeNodeA, this.partialChargeNodeB, this.partialChargeNodeC,
       this.bondDipoleABNode, this.bondDipoleBCNode, this.molecularDipoleNode
-    ] } ) ); // decorations
+    ] } );
 
     // rotate molecule by dragging bonds or atom B
     bondABNode.cursor = bondBCNode.cursor = atomBNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
@@ -70,7 +68,6 @@ define( function( require ) {
   return inherit( Node, TriatomicMoleculeNode, {
 
     setBondDipolesVisible: function( visible ) {
-      //TODO put all bond dipoles under 1 parent node
       this.bondDipoleABNode.visible = this.bondDipoleBCNode.visible = visible;
     },
 
@@ -79,7 +76,6 @@ define( function( require ) {
     },
 
     setPartialChargesVisible: function( visible ) {
-      //TODO put all partial charges under 1 parent node
       this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = this.partialChargeNodeC.visible = visible;
     }
   } );
