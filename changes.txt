@@ -1,3 +1,4 @@
+# 1.0.0-dev.1 2/5/14
 2/5/14 disabled animation of e-field alignment until I can fix it
 2/5/14 disabled snap-to-tick for EN slider, made it easy to enable
 2/5/14 add arrows around atoms that can be dragged to change bond angle
