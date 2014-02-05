@@ -4,7 +4,7 @@
  * Base type for the visual representations of partial charge, a delta symbol followed by either + or -.
  * Controls its own position in world coordinates, so clients should not attempt to position it.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
