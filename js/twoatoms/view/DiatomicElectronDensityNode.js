@@ -35,7 +35,7 @@ define( function( require ) {
    */
   function DiatomicElectronDensityNode( molecule ) {
 
-    assert && assert( molecule.atomA.diameter == molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
+    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
 
     var thisNode = this;
     Node.call( thisNode );
@@ -85,7 +85,7 @@ define( function( require ) {
     updateFill: function() {
       // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
       var deltaEN = this.molecule.getDeltaEN();
-      if ( deltaEN == 0 ) {
+      if ( deltaEN === 0 ) {
         // no difference, use neutral color that's halfway between "more" and "less" colors
         this.pathA.fill = this.pathB.fill = MPColors.NEUTRAL_GRAY;
       }

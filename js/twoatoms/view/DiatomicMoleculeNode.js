@@ -15,8 +15,6 @@ define( function( require ) {
   var DiatomicElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicElectronDensityNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeDragHandler' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
