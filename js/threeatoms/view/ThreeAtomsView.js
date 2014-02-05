@@ -81,7 +81,7 @@ define( function( require ) {
       enControlB.centerX = moleculeX;
       enControlA.right = enControlB.left - 10;
       enControlC.left = enControlB.right + 10;
-      enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 30;
+      enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
 
       // to right of positive plate, top aligned
       controlPanel.top = positivePlateNode.y;
