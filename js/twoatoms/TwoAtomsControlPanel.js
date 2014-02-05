@@ -40,31 +40,30 @@ define(function(require){
    */
   function TwoAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
+    var controlTextOptions = { font: MPConstants.CONTROL_FONT };
+
     // 'View' title
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var textOptions = { font: MPConstants.CONTROL_FONT };
-    var bondDipoleCheckBox = new CheckBox( new Text( bondDipoleString, textOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
-    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, textOptions ), viewProperties.partialChargesVisibleProperty );
-    var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, textOptions ), viewProperties.bondCharacterVisibleProperty );
+    var bondDipoleCheckBox = new CheckBox( new Text( bondDipoleString, controlTextOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
+    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
+    var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, controlTextOptions ), viewProperties.bondCharacterVisibleProperty );
 
     // 'Surface' title
     var surfaceTitleNode = new Text( surfaceString, { font: MPConstants.TITLE_FONT } );
 
     // 'Surface' radio buttons
-    var textOptions = { font: MPConstants.CONTROL_FONT };
-    var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, textOptions ) );
-    var electrostaticPotentialButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, textOptions ) );
-    var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, textOptions ) );
+    var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ) );
+    var electrostaticPotentialButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, controlTextOptions ) );
+    var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ) );
 
     // 'E-Field' title
     var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
 
     // 'E-Field' radio buttons
-    var textOptions = { font: MPConstants.CONTROL_FONT };
-    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, textOptions ) );
-    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, textOptions ) );
+    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, controlTextOptions ) );
+    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, controlTextOptions ) );
     var buttonGroup = new HBox( {
       children: [ onButton, offButton ],
       align: 'left',

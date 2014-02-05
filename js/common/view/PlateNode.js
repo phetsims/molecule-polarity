@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PolarityIndicator = require( 'MOLECULE_POLARITY/common/view/PolarityIndicator' );

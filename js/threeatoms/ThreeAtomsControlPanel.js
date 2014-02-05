@@ -16,7 +16,6 @@ define(function(require){
   var Line = require( 'SCENERY/nodes/Line' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -36,22 +35,22 @@ define(function(require){
    */
   function ThreeAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
+    var controlTextOptions = { font: MPConstants.CONTROL_FONT };
+
     // 'View' title
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var textOptions = { font: MPConstants.CONTROL_FONT };
-    var bondDipolesCheckBox = new CheckBox( new Text( bondDipolesString, textOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
-    var molecularDipoleCheckBox = new CheckBox( new Text( molecularDipoleString, textOptions ), viewProperties.molecularDipoleVisibleProperty ); //TODO add icon
-    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, textOptions ), viewProperties.partialChargesVisibleProperty );
+    var bondDipolesCheckBox = new CheckBox( new Text( bondDipolesString, controlTextOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
+    var molecularDipoleCheckBox = new CheckBox( new Text( molecularDipoleString, controlTextOptions ), viewProperties.molecularDipoleVisibleProperty ); //TODO add icon
+    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
 
     // 'E-Field' title
     var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
 
     // 'E-Field' radio buttons
-    var textOptions = { font: MPConstants.CONTROL_FONT };
-    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, textOptions ) );
-    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, textOptions ) );
+    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, controlTextOptions ) );
+    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, controlTextOptions ) );
     var buttonGroup = new HBox( {
       children: [ onButton, offButton ],
       align: 'left',

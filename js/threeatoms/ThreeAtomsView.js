@@ -17,7 +17,6 @@ define( function( require ) {
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeAtoms/ThreeAtomsControlPanel' );
   var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/common/view/TriatomicMoleculeNode' );
 
