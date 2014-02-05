@@ -26,8 +26,6 @@ define( function( require ) {
    */
   function DiatomicMoleculeNode( molecule ) {
 
-    Node.call( this );
-
     // nodes
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
@@ -39,10 +37,12 @@ define( function( require ) {
     //TODO
     this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
 
-    // rendering order
-    this.addChild( new Node( { children: [ this.electrostaticPotentialNode, this.electronDensityNode ] } ) ); // surfaces
-    this.addChild( new Node( { children: [ bondNode, atomANode, atomBNode ] } ) );  // structure, bond behind atoms
-    this.addChild( new Node( { children: [ this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode ] } ) ); // decorations
+    Node.call( this, { children: [
+      // rendering order
+      this.electrostaticPotentialNode, this.electronDensityNode,
+      bondNode, atomANode, atomBNode,
+      this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode
+    ] } );
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
@@ -56,7 +56,6 @@ define( function( require ) {
     },
 
     setPartialChargesVisible: function( visible ) {
-      //TODO put all partial charges under 1 parent node
       this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = visible;
     },
 
