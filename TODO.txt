@@ -14,7 +14,6 @@ HIGH
 
 MEDIUM
 - Reset All moves molecule to origin (upper left)
-- make all control panels the same width
 - custom cursor to indicate molecule rotation
 - add icons to 'bond dipole' and 'molecular dipole' check boxes
 
