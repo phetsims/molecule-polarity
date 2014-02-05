@@ -15,6 +15,7 @@ HIGH
 - need to pass dragNode to MoleculeAngleHandler?
 
 MEDIUM
+- diatomic molecule surface overlaps bond-character display
 - Reset All moves molecule to origin (upper left)
 - custom cursor to indicate molecule rotation
 - add icons to 'bond dipole' and 'molecular dipole' check boxes
