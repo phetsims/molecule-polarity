@@ -1,3 +1,4 @@
+2/5/14 reduce radius of radio buttons throughout
 2/5/14 add relativeNode to MoleculeAngleHandler so that rotation works correctly for triatomic molecules
 2/5/14 make bonds pickable by setting strokePickable = true
 2/5/14 fix: when you try dragging a molecule, it will jump to zero angle first

@@ -26,6 +26,7 @@ define( function( require ) {
 
     // Controls
     TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
-    CONTROL_FONT: new PhetFont( 14 )
+    CONTROL_FONT: new PhetFont( 14 ),
+    RADIO_BUTTON_RADIUS: 12
   };
 } );

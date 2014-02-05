@@ -36,6 +36,7 @@ define(function(require){
   function ThreeAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
     var controlTextOptions = { font: MPConstants.CONTROL_FONT };
+    var radioButtonOptions = { radius: MPConstants.RADIO_BUTTON_RADIUS };
 
     // 'View' title
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
@@ -49,8 +50,8 @@ define(function(require){
     var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
 
     // 'E-Field' radio buttons
-    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, controlTextOptions ) );
-    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, controlTextOptions ) );
+    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, controlTextOptions ), radioButtonOptions );
+    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, controlTextOptions ), radioButtonOptions );
     var buttonGroup = new HBox( {
       children: [ onButton, offButton ],
       align: 'left',
