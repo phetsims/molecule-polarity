@@ -16,7 +16,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Transform3 = require( 'DOT/Transform3' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Molecule} molecule
