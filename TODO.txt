@@ -9,7 +9,7 @@ HIGH
 - composite partial charge doesn't rotate with molecule
 - BondDipoleNode
 - MolecularDipoleNode
-- molecule doesn't line up correctly when e-field is turned on
+- molecule doesn't line up correctly when e-field is turned on (disabled in model)
 
 MEDIUM
 - diatomic molecule surface overlaps bond-character display
