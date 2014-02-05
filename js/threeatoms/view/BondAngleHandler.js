@@ -62,7 +62,6 @@ define( function( require ) {
     };
 
     this.exit = function( event ) {
-      console.log( 'exit' );
       arrowsNode.visible = false;
     };
   }
