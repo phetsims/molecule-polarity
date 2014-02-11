@@ -7,14 +7,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define(function(require){
+define( function( require ) {
 
   // inherit
+  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont')
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' )
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @param {Property<RealMolecule>} moleculeProperty
@@ -26,17 +29,40 @@ define(function(require){
 
     this.moleculeProperty = moleculeProperty;
 
-    var thisNode = this;
-    Node.call( thisNode );
-
     var rectNode = new Rectangle( 0, 0, viewerSize.width, viewerSize.height, { stroke: 'black', fill: backgroundColor } );
-    var labelNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( 22 ) } );
+    var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( 22 ) } );
+    var font = new PhetFont( 16 );
+    var moleculeText = new HTMLText( '?', { font: font } );
+    this.bondDipolesText = new Text( 'bond dipoles', { font: font } );
+    this.molecularDipoleText = new Text( 'molecular dipole', { font: font } );
+    this.partialChargesText = new Text( 'partial charges', { font: font } );
+    this.atomLabelsText = new Text( 'atom labels', { font: font } );
 
-    thisNode.addChild( rectNode );
-    thisNode.addChild( labelNode );
+    titleNode.centerX = rectNode.centerX;
+    titleNode.centerY = rectNode.centerY;
 
-    labelNode.centerX = rectNode.centerX;
-    labelNode.centerY = rectNode.centerY;
+    moleculeProperty.link( function( molecule ) {
+      moleculeText.text = molecule.symbol + '(' + molecule.name + ')';
+    } );
+
+    var debugText = new VBox( {
+      align: 'left',
+      spacing: 10,
+      centerX: rectNode.centerX,
+      centerY: rectNode.centerY,
+      children: [
+        titleNode,
+        new Line( 0, 0, 0, 30 ),
+        moleculeText,
+        new Line( 0, 0, 0, 30 ),
+        this.bondDipolesText,
+        this.molecularDipoleText,
+        this.partialChargesText,
+        this.atomLabelsText
+      ]
+    } );
+
+    Node.call( this, { children: [ rectNode, debugText ] } );
   }
 
   return inherit( Node, JSmolViewerNode, {
@@ -48,22 +74,26 @@ define(function(require){
 
     setBondDipolesVisible: function( visible ) {
       //TODO
+      this.bondDipolesText.fill = visible ? 'black' : 'gray';
     },
 
     setMolecularDipoleVisible: function( visible ) {
       //TODO
+      this.molecularDipoleText.fill = visible ? 'black' : 'gray';
     },
 
     setPartialChargesVisible: function( visible ) {
       //TODO
+      this.partialChargesText.fill = visible ? 'black' : 'gray';
     },
 
     setAtomLabelsVisible: function( visible ) {
       //TODO
+      this.atomLabelsText.fill = visible ? 'black' : 'gray';
     },
 
     setSurfaceType: function( surfaceType ) {
       //TODO
     }
   } );
-});
+} );
