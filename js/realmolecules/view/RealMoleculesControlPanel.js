@@ -11,7 +11,6 @@ define( function( require ) {
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
