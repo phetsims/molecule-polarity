@@ -23,7 +23,6 @@ LOW
 
 REAL MOLECULES SCREEN
 - how to read Jmol resource files (.mol2)
-- where to put 'rainbow' option for electrostatic potential
 
 MIGRATE TO COMMON
 - PolarCartesianConverter (or use Vector2.angle,...)
