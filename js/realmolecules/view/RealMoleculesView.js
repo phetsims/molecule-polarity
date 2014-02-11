@@ -15,6 +15,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   /**
    * @param {TwoAtomsModel} model
@@ -27,7 +28,12 @@ define( function( require ) {
 
     // view-specific properties
     var viewProperties = new PropertySet( {
-      //TODO
+      bondDipolesVisible: false,
+      molecularDipoleVisible: false,
+      partialChargesVisible: false,
+      atomElectronegativitiesVisible: false,
+      atomLabelsVisible: true,
+      surfaceType: SurfaceType.NONE
     } );
 
     // nodes
@@ -52,7 +58,37 @@ define( function( require ) {
 
     // synchronization with view properties
     {
-      //TODO
+      viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
+        //TODO
+//        moleculeNode.setBondDipolesVisible( visible );
+      } );
+
+      viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+        //TODO
+//        moleculeNode.setMolecularDipoleVisible( visible );
+      } );
+
+      viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+        //TODO
+//        moleculeNode.setPartialChargesVisible( visible );
+      } );
+
+      viewProperties.atomElectronegativitiesVisibleProperty.link( function( visible ) {
+        //TODO
+//        moleculeNode.setAtomElectronegativitiesVisible( visible );
+      } );
+
+      viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
+        //TODO
+//        moleculeNode.setAtomLabelsVisible( visible );
+      } );
+
+      viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
+        //TODO
+//        moleculeNode.setSurfaceType( surfaceType );
+//        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+//        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+      } );
     }
   }
 
