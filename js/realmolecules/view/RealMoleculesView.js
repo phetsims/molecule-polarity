@@ -16,6 +16,7 @@ define( function( require ) {
   var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   /**
@@ -38,6 +39,9 @@ define( function( require ) {
     } );
 
     // nodes
+    var electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
+    var electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
+    var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var controlPanel = new RealMoleculesControlPanel( viewProperties );
     var resetAllButton = new ResetAllButton( function() {
       model.reset();
@@ -48,6 +52,9 @@ define( function( require ) {
     var rootNode = new Node( { children: [
       // nodes are rendered in this order
       controlPanel,
+      electrostaticPotentialRWBColorKey,
+      electrostaticPotentialROYGBColorKey,
+      electronDensityColorKey,
       resetAllButton
     ] } );
     thisView.addChild( rootNode );
@@ -57,6 +64,10 @@ define( function( require ) {
       // right center
       controlPanel.right = this.layoutBounds.right - 50;
       controlPanel.centerY = this.layoutBounds.centerY;
+
+      // top center
+      electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = this.layoutBounds.centerX;
+      electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = 25;
 
       // bottom-right corner of the screen
       resetAllButton.right = this.layoutBounds.right - 40;
@@ -93,8 +104,9 @@ define( function( require ) {
       viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
         //TODO
 //        moleculeNode.setSurfaceType( surfaceType );
-//        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
-//        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+        electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
+        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB );
+        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
       } );
     }
   }

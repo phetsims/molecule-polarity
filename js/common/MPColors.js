@@ -33,6 +33,46 @@ define( function( require ) {
     // surfaces
     BW_GRADIENT: [ Color.BLACK, Color.WHITE ],
     RWB_GRADIENT: [ Color.RED, Color.WHITE, Color.BLUE ],
-    NEUTRAL_GRAY: 'rgb( 128, 128, 128 )'
+    NEUTRAL_GRAY: 'rgb( 128, 128, 128 )',
+
+    /*
+     * Secondary gradient for mep, negative to positive.
+     * This is Jmol's roybg gradient, documented at http://jmol.sourceforge.net/jscolors/#gradnt.
+     * A copy of the Jmol gradients image shown at this link is at doc/Jmol_color_gradients.png.
+     * The colors below were acquired from the roygb gradient shown in that image.
+     */
+    ROYGB_GRADIENT: [
+      Color.RED,
+      new Color( 242, 30, 0 ),
+      new Color( 247, 62, 0 ),
+      new Color( 247, 93, 0 ),
+      new Color( 247, 124, 0 ),
+      new Color( 247, 155, 0 ),
+      new Color( 244, 214, 0 ),
+      new Color( 244, 230, 0 ),
+      new Color( 242, 242, 0 ),
+      new Color( 227, 227, 0 ),
+      new Color( 217, 247, 0 ),
+      new Color( 180, 242, 0 ),
+      new Color( 121, 247, 0 ),
+      new Color( 93, 247, 0 ),
+      new Color( 61, 242, 0 ),
+      new Color( 31, 247, 0 ), // neutral green
+      new Color( 0, 244, 0 ),
+      new Color( 0, 244, 31 ),
+      new Color( 0, 247, 93 ),
+      new Color( 0, 247, 124 ),
+      new Color( 0, 247, 155 ),
+      new Color( 0, 250, 188 ),
+      new Color( 0, 243, 217 ),
+      new Color( 0, 247, 247 ),
+      new Color( 0, 184, 244 ),
+      new Color( 0, 153, 244 ),
+      new Color( 0, 121, 242 ),
+      new Color( 0, 89, 236 ),
+      new Color( 0, 60, 239 ),
+      new Color( 0, 30, 242 ),
+      Color.BLUE
+    ]
   };
 } );

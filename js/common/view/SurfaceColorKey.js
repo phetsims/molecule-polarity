@@ -21,6 +21,7 @@ define( function( require ) {
   //strings
   var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
   var electrostaticPotentialRWBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialRWB' );
+  var electrostaticPotentialROYGBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialROYGB' );
   var lessString = require( 'string!MOLECULE_POLARITY/less' );
   var moreString = require( 'string!MOLECULE_POLARITY/more' );
   var negativeString = require( 'string!MOLECULE_POLARITY/negative' );
@@ -84,8 +85,13 @@ define( function( require ) {
     },
 
     // @static
-    createElectrostaticPotentialRWBColorKey: function() {
-      return new SurfaceColorKeyNode( MPColors.RWB_GRADIENT, electrostaticPotentialRWBString, positiveString, negativeString );
+    createElectrostaticPotentialRWBColorKey: function( title ) {
+      return new SurfaceColorKeyNode( MPColors.RWB_GRADIENT, title || electrostaticPotentialRWBString, positiveString, negativeString );
+    },
+
+    // @static
+    createElectrostaticPotentialROYGBColorKey: function( title ) {
+      return new SurfaceColorKeyNode( MPColors.ROYGB_GRADIENT, title || electrostaticPotentialROYGBString, positiveString, negativeString );
     }
   } );
 } );

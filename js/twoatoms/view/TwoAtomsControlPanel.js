@@ -25,7 +25,7 @@ define(function(require){
   var bondDipoleString = require( 'string!MOLECULE_POLARITY/bondDipole' );
   var electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
   var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
-  var electrostaticPotentialRWBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialRWB' );
+  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
   var noneString = require( 'string!MOLECULE_POLARITY/none' );
   var offString = require( 'string!MOLECULE_POLARITY/off' );
   var onString = require( 'string!MOLECULE_POLARITY/on' );
@@ -56,7 +56,7 @@ define(function(require){
 
     // 'Surface' radio buttons
     var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialRWBButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_RWB, new Text( electrostaticPotentialRWBString, controlTextOptions ), radioButtonOptions );
+    var electrostaticPotentialButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_RWB, new Text( electrostaticPotentialString, controlTextOptions ), radioButtonOptions );
     var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
 
     // 'E-Field' title
@@ -74,7 +74,7 @@ define(function(require){
     //TODO this is brittle, what if we add a node and forget to add it here?
     // compute the horizontal separator width
     var nodes = [ viewTitleNode, bondDipoleCheckBox, partialChargesCheckBox, bondCharacterCheckBox,
-      surfaceTitleNode, noneButton, electrostaticPotentialRWBButton, electronDensityButton,
+      surfaceTitleNode, noneButton, electrostaticPotentialButton, electronDensityButton,
       eFieldTitleNode, buttonGroup ];
     var separatorWidth = 0;
     for ( var i = 0; i < nodes.length; i++ ) {
@@ -92,7 +92,7 @@ define(function(require){
         new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
         surfaceTitleNode,
         noneButton,
-        electrostaticPotentialRWBButton,
+        electrostaticPotentialButton,
         electronDensityButton,
         new Line( 0, 0, 0, 1 ), // force a vertical space
         new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
