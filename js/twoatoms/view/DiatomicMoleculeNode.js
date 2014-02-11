@@ -60,7 +60,7 @@ define( function( require ) {
     },
 
     setSurfaceType: function( surfaceType ) {
-      this.electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      this.electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
       this.electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     }
   } );

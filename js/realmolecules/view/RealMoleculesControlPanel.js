@@ -25,7 +25,8 @@ define( function( require ) {
   var atomLabelsString = require( 'string!MOLECULE_POLARITY/atomLabels' );
   var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
   var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
-  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
+  var electrostaticPotentialRWBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialRWB' );
+  var electrostaticPotentialROYGBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialROYGB' );
   var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
   var noneString = require( 'string!MOLECULE_POLARITY/none' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
@@ -56,13 +57,14 @@ define( function( require ) {
 
     // 'Surface' radio buttons
     var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, controlTextOptions ), radioButtonOptions );
+    var electrostaticPotentialRWBButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_RWB, new Text( electrostaticPotentialRWBString, controlTextOptions ), radioButtonOptions );
+    var electrostaticPotentialROYGBButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB, new Text( electrostaticPotentialROYGBString, controlTextOptions ), radioButtonOptions );
     var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
 
     //TODO this is brittle, what if we add a node and forget to add it here?
     // compute the horizontal separator width
     var nodes = [ viewTitleNode, bondDipolesCheckBox, partialChargesCheckBox, atomElectronegativitiesCheckBox, atomLabelsCheckBox,
-      surfaceTitleNode, noneButton, electrostaticPotentialButton, electronDensityButton ];
+      surfaceTitleNode, noneButton, electrostaticPotentialRWBButton, electronDensityButton ];
     var separatorWidth = 0;
     for ( var i = 0; i < nodes.length; i++ ) {
       separatorWidth = Math.max( separatorWidth, nodes[i].width );
@@ -81,7 +83,8 @@ define( function( require ) {
         new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
         surfaceTitleNode,
         noneButton,
-        electrostaticPotentialButton,
+        electrostaticPotentialRWBButton,
+        electrostaticPotentialROYGBButton,
         electronDensityButton
       ],
       align: 'left',

@@ -12,6 +12,7 @@ define( function() {
   return Object.freeze( {
     NONE: 'none',
     ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
+    ELECTROSTATIC_POTENTIAL_ROYGB: 'electrostaticPotential',
     ELECTRON_DENSITY: 'electronDensity'
   } );
 } );

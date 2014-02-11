@@ -93,7 +93,7 @@ define( function( require ) {
       viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
         //TODO
 //        moleculeNode.setSurfaceType( surfaceType );
-//        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+//        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
 //        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
       } );
     }

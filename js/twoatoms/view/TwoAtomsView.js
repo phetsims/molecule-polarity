@@ -47,7 +47,7 @@ define( function( require ) {
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     var bondCharacterNode = new BondCharacterNode( model.molecule );
-    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialColorKey();
+    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( function() {
@@ -121,7 +121,7 @@ define( function( require ) {
 
       viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
         moleculeNode.setSurfaceType( surfaceType );
-        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
         electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
       } );
     }
