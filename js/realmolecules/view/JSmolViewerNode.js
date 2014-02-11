@@ -24,6 +24,8 @@ define(function(require){
    */
   function JSmolViewerNode( moleculeProperty, backgroundColor, viewerSize ) {
 
+    this.moleculeProperty = moleculeProperty;
+
     var thisNode = this;
     Node.call( thisNode );
 
@@ -37,5 +39,31 @@ define(function(require){
     labelNode.centerY = rectNode.centerY;
   }
 
-  return inherit( Node, JSmolViewerNode );
+  return inherit( Node, JSmolViewerNode, {
+
+    // @return {Array<Element>}
+    getElements: function() {
+      return []; //TODO
+    },
+
+    setBondDipolesVisible: function( visible ) {
+      //TODO
+    },
+
+    setMolecularDipoleVisible: function( visible ) {
+      //TODO
+    },
+
+    setPartialChargesVisible: function( visible ) {
+      //TODO
+    },
+
+    setAtomLabelsVisible: function( visible ) {
+      //TODO
+    },
+
+    setSurfaceType: function( surfaceType ) {
+      //TODO
+    }
+  } );
 });

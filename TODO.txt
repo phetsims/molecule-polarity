@@ -9,7 +9,6 @@ HIGH
 - composite partial charge doesn't rotate with molecule
 - common.view.BondDipoleNode
 - common.view.MolecularDipoleNode
-- realmolecules.view.ElectronegativityTableNode
 - molecule doesn't line up correctly when e-field is turned on (disabled in model)
 
 MEDIUM

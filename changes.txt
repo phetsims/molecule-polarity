@@ -1,3 +1,5 @@
+2/11/14 implement stubs for all JSmol functions
+2/11/14 add Electronegativity Table to 'Real Molecules' screen
 2/11/14 add placeholder for JSmol viewer
 2/11/14 Real Molecules: add molecule combo box
 2/11/14 add color key for ROYGB surface
