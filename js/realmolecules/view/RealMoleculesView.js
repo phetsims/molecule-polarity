@@ -13,6 +13,7 @@ define( function( require ) {
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
@@ -37,6 +38,7 @@ define( function( require ) {
     } );
 
     // nodes
+    var controlPanel = new RealMoleculesControlPanel( viewProperties );
     var resetAllButton = new ResetAllButton( function() {
       model.reset();
       viewProperties.reset();
@@ -45,12 +47,17 @@ define( function( require ) {
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
       // nodes are rendered in this order
+      controlPanel,
       resetAllButton
     ] } );
     thisView.addChild( rootNode );
 
     // layout
     {
+      // right center
+      controlPanel.right = this.layoutBounds.right - 50;
+      controlPanel.centerY = this.layoutBounds.centerY;
+
       // bottom-right corner of the screen
       resetAllButton.right = this.layoutBounds.right - 40;
       resetAllButton.bottom = this.layoutBounds.bottom - 20;
