@@ -11,6 +11,12 @@ define( function( require ) {
   // imports
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
 
+  /**
+   * @param {String} symbol
+   * @param {String} name
+   * @param {String} resourceFilename the data file that will be provided to Jmol
+   * @constructor
+   */
   function RealMolecule( symbol, name, resourceFilename ) {
     this.symbol = ChemUtils.toSubscript( symbol );
     this.name = name;
