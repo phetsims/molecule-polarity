@@ -1,3 +1,4 @@
+2/11/14 flesh out model for 'Real Molecules' screen
 2/11/14 add control panel for 'Real Molecules' screen
 2/11/14 add view properties for 'Real Molecules' screen
 2/11/14 add skeleton for 'Real Molecules' screen
