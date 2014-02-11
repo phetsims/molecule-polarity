@@ -1,2 +1,3 @@
 TwoAtoms-screen-icon.png source=PhET
 ThreeAtoms-screen-icon.png source=PhET
+RealMolecules-screen-icon.png source=PhET

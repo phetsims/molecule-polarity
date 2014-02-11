@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var RealMoleculesScreen = require( 'MOLECULE_POLARITY/realmolecules/RealMoleculesScreen' );
   var Sim = require( 'JOIST/Sim');
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var ThreeAtomsScreen = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsScreen' );
@@ -34,6 +35,8 @@ define( function( require ) {
       showHomeScreen: false,
       screenIndex: 1
     }, simOptions );
+
+    screens.push( new RealMoleculesScreen() );
   }
 
   SimLauncher.launch( function() {

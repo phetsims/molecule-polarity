@@ -12,6 +12,7 @@ HIGH
 - molecule doesn't line up correctly when e-field is turned on (disabled in model)
 
 MEDIUM
+- implement all features for 'Real Molecule' screen except JSmol
 - diatomic molecule surface overlaps bond-character display
 - Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
 - custom cursor to indicate molecule rotation
