@@ -1,3 +1,4 @@
+2/11/14 fix SurfaceType enum
 2/11/14 wire up controls to placeholder nodes in JSmolViewerNode
 2/11/14 implement stubs for all JSmol functions
 2/11/14 add Electronegativity Table to 'Real Molecules' screen

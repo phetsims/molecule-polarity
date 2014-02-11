@@ -37,6 +37,7 @@ define( function( require ) {
     this.molecularDipoleText = new Text( 'molecular dipole', { font: font } );
     this.partialChargesText = new Text( 'partial charges', { font: font } );
     this.atomLabelsText = new Text( 'atom labels', { font: font } );
+    this.surfaceTypeText = new Text( '?', { font: font } );
 
     titleNode.centerX = rectNode.centerX;
     titleNode.centerY = rectNode.centerY;
@@ -58,7 +59,8 @@ define( function( require ) {
         this.bondDipolesText,
         this.molecularDipoleText,
         this.partialChargesText,
-        this.atomLabelsText
+        this.atomLabelsText,
+        this.surfaceTypeText
       ]
     } );
 
@@ -93,7 +95,7 @@ define( function( require ) {
     },
 
     setSurfaceType: function( surfaceType ) {
-      //TODO
+      this.surfaceTypeText.text = ( 'surface: ' + surfaceType );
     }
   } );
 } );
