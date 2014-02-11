@@ -30,13 +30,14 @@ define( function( require ) {
 
   // Appending '?dev' to the URL will enable developer-only features.
   if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+
+    screens.push( new RealMoleculesScreen() );
+
     simOptions = _.extend( {
       // add dev-specific options here
       showHomeScreen: false,
-      screenIndex: 1
+      screenIndex: 2
     }, simOptions );
-
-    screens.push( new RealMoleculesScreen() );
   }
 
   SimLauncher.launch( function() {

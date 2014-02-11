@@ -64,12 +64,12 @@ define( function( require ) {
       new RealMolecule( 'CHCl3', chloroformString, 'mol2/chcl3.mol2' )
     ];
 
-    this.currentMolecule = new Property( this.molecules[4] );
+    this.moleculeProperty = new Property( this.molecules[4] );
   }
 
   RealMoleculesModel.prototype = {
     reset: function() {
-      this.currentMolecule.reset();
+      this.moleculeProperty.reset();
     }
   };
 

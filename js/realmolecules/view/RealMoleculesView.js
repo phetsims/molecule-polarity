@@ -9,7 +9,10 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var JSmolViewerNode = require( 'MOLECULE_POLARITY/realmolecules/view/JSmolViewerNode' );
+  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -40,8 +43,9 @@ define( function( require ) {
     } );
 
     // nodes
+    var viewerNode = new JSmolViewerNode( model.moleculeProperty, MPColors.SCREEN_BACKGROUND, new Dimension2( 450, 450 ) );
     var comboBoxListParent = new Node();
-    var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.currentMolecule, comboBoxListParent );
+    var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
     var electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
@@ -54,6 +58,7 @@ define( function( require ) {
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
       // nodes are rendered in this order
+      viewerNode,
       moleculesComboBox,
       controlPanel,
       electrostaticPotentialRWBColorKey,
@@ -66,16 +71,19 @@ define( function( require ) {
 
     // layout
     {
-      // bottom center
-      moleculesComboBox.centerX = this.layoutBounds.centerX;
+      viewerNode.left = 125;
+      viewerNode.centerY = this.layoutBounds.centerY;
+
+      // centered below viewer
+      moleculesComboBox.centerX = viewerNode.centerX;
       moleculesComboBox.bottom = this.layoutBounds.bottom - 25;
 
-      // right center
-      controlPanel.right = this.layoutBounds.right - 50;
+      // right of viewer
+      controlPanel.left = viewerNode.right + 100;
       controlPanel.centerY = this.layoutBounds.centerY;
 
-      // top center
-      electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = this.layoutBounds.centerX;
+      // centered above viewer
+      electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = viewerNode.centerX;
       electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = 25;
 
       // bottom-right corner of the screen

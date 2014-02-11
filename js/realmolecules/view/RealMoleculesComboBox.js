@@ -23,14 +23,14 @@ define( function( require ) {
 
   /**
    * @param {Array<RealMolecule>} molecules
-   * @param {Property<RealMolecule>} selectedMolecule
+   * @param {Property<RealMolecule>} moleculeProperty
    * @param {Node} listParent
    * @constructor
    */
-  function RealMoleculesComboBox( molecules, selectedMolecule, listParent ) {
+  function RealMoleculesComboBox( molecules, moleculeProperty, listParent ) {
 
     // label
-    var lableNode = new Text( StringUtils.format( pattern_0label, moleculeString ), { font: new PhetFont( 22 ) } );
+    var labelNode = new Text( StringUtils.format( pattern_0label, moleculeString ), { font: new PhetFont( 22 ) } );
     // items
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
@@ -39,8 +39,8 @@ define( function( require ) {
       items[i] = ComboBox.createItem( node, molecule );
     }
 
-    ComboBox.call( this, items, selectedMolecule, listParent, {
-      labelNode: lableNode,
+    ComboBox.call( this, items, moleculeProperty, listParent, {
+      labelNode: labelNode,
       listPosition: 'above',
       itemYMargin: 6,
       itemHighlightFill: 'rgb(218,255,255)',
