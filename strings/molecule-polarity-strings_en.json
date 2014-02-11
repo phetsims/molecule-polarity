@@ -21,6 +21,7 @@
   "ionic": "more ionic",
   "pattern.0atomName": "Atom {0}",
   "pattern.0label": "{0}:",
+  "pattern.0symbol.1name": "{0} ({1})",
   "none": "none",
   "electrostaticPotential": "Electrostatic Potential",
   "electrostaticPotentialRWB": "Electrostatic Potential (RWB)",

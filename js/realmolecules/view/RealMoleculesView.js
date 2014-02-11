@@ -13,6 +13,7 @@ define( function( require ) {
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
   var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -39,6 +40,8 @@ define( function( require ) {
     } );
 
     // nodes
+    var comboBoxListParent = new Node();
+    var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.currentMolecule, comboBoxListParent );
     var electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
@@ -51,16 +54,22 @@ define( function( require ) {
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
       // nodes are rendered in this order
+      moleculesComboBox,
       controlPanel,
       electrostaticPotentialRWBColorKey,
       electrostaticPotentialROYGBColorKey,
       electronDensityColorKey,
-      resetAllButton
+      resetAllButton,
+      comboBoxListParent // last, so that combo box list is on top
     ] } );
     thisView.addChild( rootNode );
 
     // layout
     {
+      // bottom center
+      moleculesComboBox.centerX = this.layoutBounds.centerX;
+      moleculesComboBox.bottom = this.layoutBounds.bottom - 25;
+
       // right center
       controlPanel.right = this.layoutBounds.right - 50;
       controlPanel.centerY = this.layoutBounds.centerY;
