@@ -19,7 +19,6 @@ MEDIUM
 
 LOW
 - replace HTMLText with SubSupText (scenery-phet#29)
-- adjust layout
 - bond isn't visible on 'electron density' surface when both EN values are the same, use stroked Rectangle
 - replace PolarCartesianConverter with similar Vector2 functions
 
