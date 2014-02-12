@@ -45,8 +45,23 @@ define( function( require ) {
           thisNode.shape = null;
         }
         else {
-          //TODO shape should be an arrow with a cross, ala Jmol
-          thisNode.shape = Shape.rectangle( 0, 0, dipole.magnitude() * ( REFERENCE_LENGTH / REFERENCE_MAGNITUDE ), TAIL_WIDTH );
+          var desiredLength = dipole.magnitude() * ( REFERENCE_LENGTH / REFERENCE_MAGNITUDE );
+          var adjustedLength = desiredLength;
+          var scale = 1;
+          if ( HEAD_SIZE.height > FRACTIONAL_HEAD_HEIGHT * desiredLength ) {
+            adjustedLength = HEAD_SIZE.height / FRACTIONAL_HEAD_HEIGHT;
+            scale = desiredLength/ adjustedLength;
+          }
+          thisNode.shape = new Shape()
+            .moveTo( 0, -TAIL_WIDTH / 2 )
+            .lineTo( adjustedLength - HEAD_SIZE.height, -TAIL_WIDTH / 2  )
+            .lineTo( adjustedLength - HEAD_SIZE.height, -HEAD_SIZE.width / 2 )
+            .lineTo( adjustedLength, 0 )
+            .lineTo( adjustedLength - HEAD_SIZE.height, HEAD_SIZE.width / 2 )
+            .lineTo(  adjustedLength - HEAD_SIZE.height, TAIL_WIDTH / 2  )
+            .lineTo( 0, TAIL_WIDTH / 2 )
+            .close();
+          thisNode.setScaleMagnitude( scale, scale );
           thisNode.setRotation( dipole.angle() );
         }
       }
