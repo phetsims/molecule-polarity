@@ -5,7 +5,6 @@ TODO list for molecule-polarity (HTML5)
 IMPLEMENTATION
 
 HIGH
-- create proper shape for dipoles (arrow with cross)
 - bug: diatomic molecule: bond dipole doesn't rotate with bond, isn't centered on bond
 - bug: triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
 - bug: molecular dipole is pointing 180 degrees in the wrong direction
