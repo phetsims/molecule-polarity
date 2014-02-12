@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a molecular dipole.
- * Controls its own offset in world coordinates, so clients should not call setOffset.
+ * Controls its own position in world coordinates, so clients should not attempt to position this node.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -36,5 +36,9 @@ define( function( require ) {
     } );
   }
 
-  return inherit( DipoleNode, MolecularDipoleNode );
+  return inherit( DipoleNode, MolecularDipoleNode, {}, {
+    createIcon: function() {
+      return DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE );
+    }
+  } );
 } );

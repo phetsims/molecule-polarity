@@ -7,6 +7,8 @@ IMPLEMENTATION
 HIGH
 - create proper shape for dipoles (arrow with cross)
 - molecular dipole is pointing 180 degrees in the wrong direction
+- diatomic molecule: bond dipole doesn't rotate with bond, isn't centered on bond
+- triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
 - composite partial charge is on wrong side of atomB in triatomic molecule
 - composite partial charge doesn't rotate with molecule
 - common.view.BondDipoleNode

@@ -34,8 +34,12 @@ define( function( require ) {
    * @constructor
    */
   function DipoleNode( dipoleProperty, color ) {
+
     var thisNode = this;
     Path.call( thisNode, null, { fill: color, stroke: 'black' } );
+
+    this.referenceLength = REFERENCE_LENGTH; // @protected
+
     dipoleProperty.link( function( dipole ) {
         if ( dipole.magnitude() === 0 ) {
           thisNode.shape = null;

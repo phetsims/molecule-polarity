@@ -10,12 +10,11 @@ define(function(require){
 
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
@@ -49,7 +48,7 @@ define(function(require){
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var bondDipoleLabel = new HBox( { spacing: 10, children: [ new Text( bondDipoleString, controlTextOptions ), DipoleNode.createIcon( MPColors.BOND_DIPOLE ) ] } );
+    var bondDipoleLabel = new HBox( { spacing: 10, children: [ new Text( bondDipoleString, controlTextOptions ), BondDipoleNode.createIcon() ] } );
     var bondDipoleCheckBox = new CheckBox( bondDipoleLabel, viewProperties.bondDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
     var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, controlTextOptions ), viewProperties.bondCharacterVisibleProperty );

@@ -1,4 +1,5 @@
-2/11/14 MolecularDipoleNode
+2/11/14 add BondDipoleNode
+2/11/14 add MolecularDipoleNode
 2/11/14 add dipole icons to check boxes in control panels
 2/11/14 DipoleNode base type, currently draws just a rectangle
 # 1.0.0-dev.2 2/11/14

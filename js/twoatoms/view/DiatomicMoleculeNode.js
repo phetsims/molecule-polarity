@@ -11,6 +11,7 @@ define( function( require ) {
 
   // imports
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
+  var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
   var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
@@ -34,8 +35,7 @@ define( function( require ) {
     this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
     this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule ); // @private
     this.electronDensityNode = new ElectronDensityNode( molecule ); // @private
-    //TODO
-    this.bondDipoleNode = new Node(); //new BondDipoleNode( molecule.bond ); // @private
+    this.bondDipoleNode = new BondDipoleNode( molecule.bond ); // @private
 
     Node.call( this, { children: [
       // rendering order
