@@ -40,11 +40,9 @@ define( function( require ) {
 
   Bond.prototype = {
 
-    // gets the center of the bond, using the midpoint formula
+    // gets the center of the bond, the midpoint between the 2 atom locations
     getCenter: function() {
-      var p1 = this.atom1.locationProperty.get();
-      var p2 = this.atom2.locationProperty.get();
-      return new Vector2( ( p1.x + p2.x ) / 2, ( p1.y + p2.y ) / 2 );
+      return this.atom1.locationProperty.get().average( this.atom2.locationProperty.get() );
     },
 
     // gets the angle of atom2 relative to the horizontal axis
