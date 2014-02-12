@@ -6,29 +6,27 @@ IMPLEMENTATION
 
 HIGH
 - create proper shape for dipoles (arrow with cross)
-- molecular dipole is pointing 180 degrees in the wrong direction
-- diatomic molecule: bond dipole doesn't rotate with bond, isn't centered on bond
-- triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
-- composite partial charge is on wrong side of atomB in triatomic molecule
-- composite partial charge doesn't rotate with molecule
-- common.view.BondDipoleNode
-- molecule doesn't line up correctly when e-field is turned on (disabled in model)
+- bug: molecular dipole is pointing 180 degrees in the wrong direction
+- bug: diatomic molecule: bond dipole doesn't rotate with bond, isn't centered on bond
+- bug: triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
+- bug: composite partial charge is on wrong side of atomB in triatomic molecule
+- bug: composite partial charge doesn't rotate with molecule
+- bug: molecule doesn't line up correctly when e-field is turned on (disabled in model)
 
 MEDIUM
-- diatomic molecule surface overlaps bond-character display
-- Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
+- layout: diatomic molecule surface overlaps bond-character display
+- bug: Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
 - custom cursor to indicate molecule rotation
-- add icons to 'bond dipole' and 'molecular dipole' check boxes
 
 LOW
 - adjust layout
 - bond isn't visible on 'electron density' surface when both EN values are the same, use stroked Rectangle
+- replace PolarCartesianConverter with similar Vector2 functions
 
 REAL MOLECULES SCREEN
 - how to read Jmol resource files (.mol2)
 
 MIGRATE TO COMMON
-- PolarCartesianConverter (or use Vector2.angle,...)
 
 =========================================================================================================
 
