@@ -6,9 +6,9 @@ IMPLEMENTATION
 
 HIGH
 - create proper shape for dipoles (arrow with cross)
-- bug: molecular dipole is pointing 180 degrees in the wrong direction
 - bug: diatomic molecule: bond dipole doesn't rotate with bond, isn't centered on bond
 - bug: triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
+- bug: molecular dipole is pointing 180 degrees in the wrong direction
 - bug: composite partial charge is on wrong side of atomB in triatomic molecule
 - bug: composite partial charge doesn't rotate with molecule
 - bug: molecule doesn't line up correctly when e-field is turned on
