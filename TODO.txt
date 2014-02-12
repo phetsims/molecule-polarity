@@ -14,7 +14,6 @@ HIGH
 - bug: molecule doesn't line up correctly when e-field is turned on
 
 MEDIUM
-- layout: diatomic molecule surface overlaps bond-character display
 - bug: Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
 - custom cursor to indicate molecule rotation
 

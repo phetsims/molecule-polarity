@@ -1,3 +1,4 @@
+2/11/14 adjust layout so that diatomic molecule surface doesn't overlap bond-character display
 2/11/14 enable e-field alignment animation
 2/11/14 add BondDipoleNode
 2/11/14 add MolecularDipoleNode
