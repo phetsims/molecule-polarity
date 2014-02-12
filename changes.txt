@@ -1,3 +1,4 @@
+2/12/14 adjust scaling of dipole cross to match Java version, so that cross looks good in icons and scaled dipoles
 2/12/14 use Vector2.average for computing the center of a bond
 2/12/14 fix: bond dipole isn't centered on bond
 2/12/14 use a slightly darker gray for bonds, so that they are visible on gray electron density surface

@@ -57,7 +57,7 @@ define( function( require ) {
             scale = desiredLength/ adjustedLength;
           }
           var crossOffset = scale * REFERENCE_CROSS_OFFSET * adjustedLength / REFERENCE_LENGTH;
-          var crossWidth = scale * CROSS_SIZE.width;
+          var crossWidth = scale * CROSS_SIZE.width * adjustedLength / REFERENCE_LENGTH;
 
           // Draw a dipole that points from left to right, starting at upper-left end of tail and moving clockwise.
           thisNode.shape = new Shape()
@@ -95,7 +95,7 @@ define( function( require ) {
      * @return {Node}
      */
     createIcon: function( color ) {
-      return new DipoleNode( new Property( new Vector2( 0.5, 0 ) ), color );
+      return new DipoleNode( new Property( new Vector2( 0.65, 0 ) ), color );
     }
   } );
 } );
