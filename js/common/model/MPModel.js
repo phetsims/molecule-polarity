@@ -47,8 +47,7 @@ define( function( require ) {
     step: function( deltaSeconds ) {
       // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
       if ( this.eField.enabledProperty.get() && !this.molecule.dragging ) {
-        //TODO disabled until I fix this feature
-//        this.updateMoleculeOrientation( this.molecule );
+        this.updateMoleculeOrientation( this.molecule );
       }
     },
 

@@ -11,7 +11,7 @@ HIGH
 - bug: triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
 - bug: composite partial charge is on wrong side of atomB in triatomic molecule
 - bug: composite partial charge doesn't rotate with molecule
-- bug: molecule doesn't line up correctly when e-field is turned on (disabled in model)
+- bug: molecule doesn't line up correctly when e-field is turned on
 
 MEDIUM
 - layout: diatomic molecule surface overlaps bond-character display

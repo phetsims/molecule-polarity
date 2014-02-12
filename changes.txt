@@ -1,3 +1,4 @@
+2/11/14 enable e-field alignment animation
 2/11/14 add BondDipoleNode
 2/11/14 add MolecularDipoleNode
 2/11/14 add dipole icons to check boxes in control panels
