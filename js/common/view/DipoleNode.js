@@ -26,7 +26,7 @@ define( function( require ) {
   var CROSS_SIZE = new Dimension2( 10, 10 ); // similar to Jmol
   var REFERENCE_CROSS_OFFSET = 20; // offset from the tail of the arrow when arrow length is REFERENCE_LENGTH
   var TAIL_WIDTH = 4; // similar to Jmol
-  var FRACTIONAL_HEAD_HEIGHT = 0.5; // when the head size is less than fractionalHeadHeight * arrow length, the head will be scaled.
+  var FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head size is less than fractionalHeadHeight * arrow length, a 'unit dipole' will be scaled.
 
   /**
    * @param {Property<Vector2>} dipoleProperty
@@ -45,22 +45,39 @@ define( function( require ) {
           thisNode.shape = null;
         }
         else {
+
+          // Determine parameters for the shape.
           var desiredLength = dipole.magnitude() * ( REFERENCE_LENGTH / REFERENCE_MAGNITUDE );
           var adjustedLength = desiredLength;
           var scale = 1;
           if ( HEAD_SIZE.height > FRACTIONAL_HEAD_HEIGHT * desiredLength ) {
+            // We'll be drawing a unit dipole and scaling it.
             adjustedLength = HEAD_SIZE.height / FRACTIONAL_HEAD_HEIGHT;
             scale = desiredLength/ adjustedLength;
           }
+          var crossOffset = scale * REFERENCE_CROSS_OFFSET * adjustedLength / REFERENCE_LENGTH;
+          var crossWidth = scale * CROSS_SIZE.width;
+
+          // Draw a dipole that points from left to right, starting at upper-left end of tail and moving clockwise.
           thisNode.shape = new Shape()
             .moveTo( 0, -TAIL_WIDTH / 2 )
+            .lineTo( crossOffset, -TAIL_WIDTH / 2 )
+            .lineTo( crossOffset, -CROSS_SIZE.height / 2 )
+            .lineTo( crossOffset + crossWidth, -CROSS_SIZE.height / 2 )
+            .lineTo( crossOffset + crossWidth, -TAIL_WIDTH / 2 )
             .lineTo( adjustedLength - HEAD_SIZE.height, -TAIL_WIDTH / 2  )
             .lineTo( adjustedLength - HEAD_SIZE.height, -HEAD_SIZE.width / 2 )
             .lineTo( adjustedLength, 0 )
             .lineTo( adjustedLength - HEAD_SIZE.height, HEAD_SIZE.width / 2 )
-            .lineTo(  adjustedLength - HEAD_SIZE.height, TAIL_WIDTH / 2  )
+            .lineTo( adjustedLength - HEAD_SIZE.height, TAIL_WIDTH / 2  )
+            .lineTo( crossOffset + crossWidth, TAIL_WIDTH / 2 )
+            .lineTo( crossOffset + crossWidth, CROSS_SIZE.height / 2 )
+            .lineTo( crossOffset, CROSS_SIZE.height / 2 )
+            .lineTo( crossOffset, TAIL_WIDTH / 2 )
             .lineTo( 0, TAIL_WIDTH / 2 )
             .close();
+
+          // Adjust for proper scale and orientation.
           thisNode.setScaleMagnitude( scale, scale );
           thisNode.setRotation( dipole.angle() );
         }
