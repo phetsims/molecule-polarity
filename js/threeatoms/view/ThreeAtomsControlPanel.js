@@ -11,9 +11,11 @@ define(function(require){
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var CheckBox = require( 'SUN/CheckBox' );
+  var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -42,8 +44,10 @@ define(function(require){
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var bondDipolesCheckBox = new CheckBox( new Text( bondDipolesString, controlTextOptions ), viewProperties.bondDipolesVisibleProperty ); //TODO add icon
-    var molecularDipoleCheckBox = new CheckBox( new Text( molecularDipoleString, controlTextOptions ), viewProperties.molecularDipoleVisibleProperty ); //TODO add icon
+    var bondDipolesLabel = new HBox( { spacing: 10, children: [ new Text( bondDipolesString, controlTextOptions ), DipoleNode.createIcon( MPColors.BOND_DIPOLE ) ] } );
+    var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
+    var molecularDipoleLabel = new HBox( { spacing: 10, children: [ new Text( molecularDipoleString, controlTextOptions ), DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE ) ] } );
+    var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
 
     // 'E-Field' title

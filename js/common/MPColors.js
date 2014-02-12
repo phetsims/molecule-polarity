@@ -23,7 +23,7 @@ define( function( require ) {
     
     // dipoles
     BOND_DIPOLE: 'black',
-    MOLECULE_DIPOLE: 'rgb( 255, 200, 0 )',
+    MOLECULAR_DIPOLE: 'rgb( 255, 200, 0 )',
 
     // E-field plates
     POSITIVE_PLATE: 'rgb( 192, 192, 192 )',
