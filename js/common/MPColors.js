@@ -19,7 +19,7 @@ define( function( require ) {
     ATOM_A: 'rgb( 255, 255, 90 )',
     ATOM_B: 'rgb( 0, 255, 0 )',
     ATOM_C: 'rgb( 255, 175, 175)',
-    BOND: 'rgb( 128, 128, 128)',
+    BOND: 'rgb( 90, 90, 90)',
     
     // dipoles
     BOND_DIPOLE: 'black',
