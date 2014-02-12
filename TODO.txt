@@ -15,7 +15,7 @@ HIGH
 
 MEDIUM
 - bug: Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
-- custom cursor to indicate molecule rotation
+- custom cursor to indicate molecule rotation (hide cursor and drag a node around?)
 
 LOW
 - replace HTMLText with SubSupText (scenery-phet#29)
