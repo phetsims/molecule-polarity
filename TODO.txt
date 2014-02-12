@@ -23,7 +23,7 @@ LOW
 - replace PolarCartesianConverter with similar Vector2 functions
 
 REAL MOLECULES SCREEN
-- how to read Jmol resource files (.mol2)
+- how to read Jmol resource files? (.mol2)
 
 MIGRATE TO COMMON
 
