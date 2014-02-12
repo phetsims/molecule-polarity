@@ -26,7 +26,7 @@ define( function( require ) {
   var CROSS_SIZE = new Dimension2( 10, 10 ); // similar to Jmol
   var REFERENCE_CROSS_OFFSET = 20; // offset from the tail of the arrow when arrow length is REFERENCE_LENGTH
   var TAIL_WIDTH = 4; // similar to Jmol
-  var FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head size is less than fractionalHeadHeight * arrow length, a 'unit dipole' will be scaled.
+  var FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head size is more than fractionalHeadHeight * arrow length, a 'unit dipole' will be scaled.
 
   /**
    * @param {Property<Vector2>} dipoleProperty
