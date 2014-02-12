@@ -15,6 +15,7 @@ define( function( require ) {
   var BondAngleHandler = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleHandler' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
@@ -40,7 +41,7 @@ define( function( require ) {
     this.partialChargeNodeC = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC );
     this.bondDipoleABNode = new Node();//new BondDipoleNode( molecule.bondAB );
     this.bondDipoleBCNode = new Node();//new BondDipoleNode( molecule.bondBC );
-    this.molecularDipoleNode = new Node();//new MolecularDipoleNode( molecule );
+    this.molecularDipoleNode = new MolecularDipoleNode( molecule );
 
     Node.call( this, { children: [
       // rendering order

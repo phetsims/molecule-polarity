@@ -4,7 +4,7 @@
  * Base class for visual representation of 2D dipoles.
  * The dipole is created at (0,0) with proper length and orientation, and it's up to subclasses to position the dipole.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
