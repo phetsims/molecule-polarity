@@ -44,7 +44,7 @@ define( function( require ) {
     titleNode.centerY = rectNode.centerY;
 
     moleculeProperty.link( function( molecule ) {
-      moleculeText.text = molecule.symbol + '(' + molecule.name + ')';
+      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')';
     } );
 
     var debugText = new VBox( {
