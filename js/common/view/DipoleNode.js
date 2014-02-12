@@ -38,6 +38,7 @@ define( function( require ) {
     var thisNode = this;
     Path.call( thisNode, null, { fill: color, stroke: 'black' } );
 
+    this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected
     this.referenceLength = REFERENCE_LENGTH; // @protected
 
     dipoleProperty.link( function( dipole ) {

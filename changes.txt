@@ -1,6 +1,7 @@
-2/11/14 use a slightly darker gray for bonds, so that they are visible on gray electron density surface
-2/11/14 dipole: add cross
-2/11/14 dipole: add arrow and scaling below min size
+2/12/14 fix: bond dipole isn't centered on bond
+2/12/14 use a slightly darker gray for bonds, so that they are visible on gray electron density surface
+2/12/14 dipole: add cross
+2/12/14 dipole: add arrow and scaling below min size
 2/11/14 adjust layout so that diatomic molecule surface doesn't overlap bond-character display
 2/11/14 enable e-field alignment animation
 2/11/14 add BondDipoleNode
