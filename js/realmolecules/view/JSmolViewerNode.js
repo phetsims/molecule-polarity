@@ -11,12 +11,12 @@ define( function( require ) {
   'use strict';
 
   // inherit
-  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -33,7 +33,7 @@ define( function( require ) {
     var rectNode = new Rectangle( 0, 0, viewerSize.width, viewerSize.height, { stroke: 'black', fill: backgroundColor } );
     var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( 22 ) } );
     var font = new PhetFont( 16 );
-    var moleculeText = new HTMLText( '?', { font: font } );
+    var moleculeText = new SubSupText( '?', { font: font } );
     this.bondDipolesText = new Text( 'bond dipoles', { font: font } );
     this.molecularDipoleText = new Text( 'molecular dipole', { font: font } );
     this.partialChargesText = new Text( 'partial charges', { font: font } );

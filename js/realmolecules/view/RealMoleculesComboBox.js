@@ -10,10 +10,10 @@ define( function( require ) {
 
   // imports
   var ComboBox = require( 'SUN/ComboBox' );
-  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -35,7 +35,7 @@ define( function( require ) {
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
       var molecule = molecules[i];
-      var node = new HTMLText( StringUtils.format( pattern_0symbol_1name, molecule.symbol, molecule.name ), { font: new PhetFont( 16 ) } );
+      var node = new SubSupText( StringUtils.format( pattern_0symbol_1name, molecule.symbol, molecule.name ), { font: new PhetFont( 16 ) } );
       items[i] = ComboBox.createItem( node, molecule );
     }
 
