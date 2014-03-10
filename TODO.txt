@@ -1,12 +1,8 @@
 TODO list for molecule-polarity (HTML5)
 
 HIGH
-- bug: diatomic molecule: bond dipole doesn't rotate with bond
-- bug: triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
-- bug: molecular dipole is pointing 180 degrees in the wrong direction
 - bug: composite partial charge is on wrong side of atomB in triatomic molecule
 - bug: composite partial charge doesn't rotate with molecule
-- bug: molecule doesn't line up correctly when e-field is turned on
 
 MEDIUM
 - bug: Reset All moves molecule to origin (upper left), and other issues (partial charges,...)

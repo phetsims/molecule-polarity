@@ -48,7 +48,7 @@ define( function( require ) {
     // gets the angle of atom2 relative to the horizontal axis
     getAngle: function() {
       var center = this.getCenter();
-      return PolarCartesianConverter.getAngle( this.atom2.locationProperty.get().x - center.x, this.atom1.locationProperty.get().y - center.y );
+      return Math.atan2( this.atom2.locationProperty.get().y - center.y, this.atom2.locationProperty.get().x - center.x );
     },
 
     // Gets the bond length, the distance between the 2 atoms.
