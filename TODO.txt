@@ -1,9 +1,5 @@
 TODO list for molecule-polarity (HTML5)
 
-=========================================================================================================
-
-IMPLEMENTATION
-
 HIGH
 - bug: diatomic molecule: bond dipole doesn't rotate with bond
 - bug: triatomic molecule: bond dipoles are off perpendicular instead of parallel to bond, don't rotate with bond
@@ -24,9 +20,3 @@ REAL MOLECULES SCREEN
 - how to read Jmol resource files? (.mol2)
 
 MIGRATE TO COMMON
-
-=========================================================================================================
-
-DESIGN
-
-=========================================================================================================
