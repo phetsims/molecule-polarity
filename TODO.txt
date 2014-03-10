@@ -17,6 +17,7 @@ MEDIUM
 - custom cursor to indicate molecule rotation (hide cursor and drag a node around?)
 
 LOW
+- scenery#203 leading spaces are dropped from text
 - replace PolarCartesianConverter with similar Vector2 functions
 
 REAL MOLECULES SCREEN
