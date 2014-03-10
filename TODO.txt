@@ -1,8 +1,7 @@
 TODO list for molecule-polarity (HTML5)
 
 HIGH
-- bug: composite partial charge is on wrong side of atomB in triatomic molecule
-- bug: composite partial charge doesn't rotate with molecule
+- bug: composite partial charge on atomB doesn't stay opposite molecular dipole in triatomic molecule
 
 MEDIUM
 - bug: Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
