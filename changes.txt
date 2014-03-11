@@ -1,3 +1,4 @@
+3/10/14 create arrow shapes once in BondAngleArrowsNode, then transform them to match the atom orientation
 3/10/14 reformat all code
 3/10/14 doc and whitespace throughout
 3/10/14 clean up control panels, including computation and insertion of separators

@@ -37,18 +37,15 @@ define( function( require ) {
     this.addChild( leftArrowNode );
     this.addChild( rightArrowNode );
 
+    // create "normalized" shapes at (0,0) with no rotation
     var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
+    var radius = atom.diameter / 2;
+    var spacing = 2;
+    var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
+    var rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
 
     atom.locationProperty.link( function() {
-
-      //TODO can't this be done once, at initialization?
-      // create "normalized" shapes at (0,0) with no rotation
-      var radius = atom.diameter / 2;
-      var spacing = 2;
-      var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
-      var rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
-
-      // transform the shapes to account for atom location and relationship to molecule location
+      // transform the arrow shapes to account for atom location and relationship to molecule location
       var v = molecule.location.minus( atom.locationProperty.get() );
       var angle = v.angle() - ( Math.PI / 2 );
       var transform = new Transform3( Matrix3.translationFromVector( atom.locationProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
