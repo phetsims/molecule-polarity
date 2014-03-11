@@ -8,7 +8,6 @@ MEDIUM
 
 LOW
 - scenery#203 leading spaces are dropped from text, noticeable in 'Real Molecules' combo box
-- replace PolarCartesianConverter with similar Vector2 functions
 
 REAL MOLECULES SCREEN
 - how to read Jmol resource files? (.mol2)

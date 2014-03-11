@@ -13,7 +13,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var PolarCartesianConverter = require( 'MOLECULE_POLARITY/common/PolarCartesianConverter' );
 
   // constants
   var PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond
@@ -41,8 +40,8 @@ define( function( require ) {
       var tailAngle = bondAngle - ( Math.PI / 2 ) - offsetAngle;
 
       // location of tail in Cartesian coordinates, relative to center of bond
-      var tailX = PolarCartesianConverter.getX( tailDistance, tailAngle );
-      var tailY = PolarCartesianConverter.getY( tailDistance, tailAngle );
+      var tailX = tailDistance * Math.cos( tailAngle );
+      var tailY = tailDistance * Math.sin( tailAngle );
 
       // location of tail in world coordinate frame
       thisNode.translation = bond.getCenter().plusXY( tailX, tailY );

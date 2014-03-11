@@ -16,7 +16,6 @@ define( function( require ) {
   var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var PolarCartesianConverter = require( 'MOLECULE_POLARITY/common/PolarCartesianConverter' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -57,8 +56,8 @@ define( function( require ) {
    */
   var updateAtomLocation = function( atom, bondAngle, location, angle ) {
     var thetaA = angle + bondAngle;
-    var xA = PolarCartesianConverter.getX( MPConstants.BOND_LENGTH, thetaA ) + location.x;
-    var yA = PolarCartesianConverter.getY( MPConstants.BOND_LENGTH, thetaA ) + location.y;
+    var xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + location.x;
+    var yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + location.y;
     atom.locationProperty.set( new Vector2( xA, yA ) );
   };
 

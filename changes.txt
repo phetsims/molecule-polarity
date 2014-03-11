@@ -1,3 +1,4 @@
+3/10/14 replace PolarCartesianConverter trig operations
 3/10/14 reduce length of polarity indicators and move molecules down slightly, so that polarity indicators are within screen bounds
 3/10/14 change request: make electronegativity sliders wider
 3/10/14 fix composite partial charge in triatomic molecule, so that it updates when molecular dipole changes

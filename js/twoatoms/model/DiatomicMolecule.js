@@ -16,7 +16,6 @@ define( function( require ) {
   var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var PolarCartesianConverter = require( 'MOLECULE_POLARITY/common/PolarCartesianConverter' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -50,12 +49,12 @@ define( function( require ) {
     updateAtomLocations: function() {
       var radius = MPConstants.BOND_LENGTH / 2;
       // atom A
-      var xA = PolarCartesianConverter.getX( radius, this.angleProperty.get() + Math.PI ) + this.location.x;
-      var yA = PolarCartesianConverter.getY( radius, this.angleProperty.get() + Math.PI ) + this.location.y;
+      var xA = ( radius * Math.cos( this.angleProperty.get() + Math.PI ) ) + this.location.x;
+      var yA = ( radius * Math.sin( this.angleProperty.get() + Math.PI ) ) + this.location.y;
       this.atomA.locationProperty.set( new Vector2( xA, yA ) );
       // atom B
-      var xB = PolarCartesianConverter.getX( radius, this.angleProperty.get() ) + this.location.x;
-      var yB = PolarCartesianConverter.getY( radius, this.angleProperty.get() ) + this.location.y;
+      var xB = ( radius * Math.cos( this.angleProperty.get() ) ) + this.location.x;
+      var yB = ( radius * Math.sin( this.angleProperty.get() ) ) + this.location.y;
       this.atomB.locationProperty.set( new Vector2( xB, yB ) );
     },
 
