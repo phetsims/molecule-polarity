@@ -76,7 +76,6 @@ define( function( require ) {
       separatorWidth = Math.max( separatorWidth, nodes[i].width );
     }
 
-    //TODO better handling of separators and vertical spacing
     var content = new VBox( {
       children: [
         viewTitleNode,
