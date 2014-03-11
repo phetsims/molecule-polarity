@@ -20,6 +20,7 @@ define(function(require){
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var VStrut = require( 'SUN/VStrut' );
 
   // strings
   var bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
@@ -90,13 +91,13 @@ define(function(require){
         bondDipoleCheckBox,
         partialChargesCheckBox,
         bondCharacterCheckBox,
-        new Line( 0, 0, 0, 1 ), // force a vertical space
+        new VStrut( 1 ), // force a vertical space
         new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
         surfaceTitleNode,
         noneButton,
         electrostaticPotentialButton,
         electronDensityButton,
-        new Line( 0, 0, 0, 1 ), // force a vertical space
+        new VStrut( 1 ), // force a vertical space
         new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
         eFieldTitleNode,
         buttonGroup
