@@ -13,6 +13,7 @@ define( function( require ) {
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
@@ -85,7 +86,7 @@ define( function( require ) {
         atomElectronegativitiesCheckBox,
         atomLabelsCheckBox,
         new VStrut( 1 ), // force a vertical space
-        new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
+        new HSeparator( separatorWidth ),
         surfaceTitleNode,
         noneButton,
         electrostaticPotentialRWBButton,

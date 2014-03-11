@@ -13,8 +13,8 @@ define(function(require){
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
@@ -71,7 +71,6 @@ define(function(require){
       separatorWidth = Math.max( separatorWidth, nodes[i].width );
     }
 
-    //TODO better handling of separators and vertical spacing
     var content = new VBox( {
       children: [
         viewTitleNode,
@@ -79,7 +78,7 @@ define(function(require){
         molecularDipoleCheckBox,
         partialChargesCheckBox,
         new VStrut( 1 ), // force a vertical space
-        new Line( 0, 0, separatorWidth, 0, { stroke: 'rgb(100,100,100)' } ), // horizontal separator
+        new HSeparator( separatorWidth ),
         eFieldTitleNode,
         buttonGroup
       ],
