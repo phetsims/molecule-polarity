@@ -62,7 +62,7 @@ define( function( require ) {
       this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
     },
 
-    // make the cell appear disabled
+    // makes the cell appear disabled
     disable: function() {
       this.backgroundNode.fill = BACKGROUND_COLOR;
       this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;

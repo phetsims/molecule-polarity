@@ -29,14 +29,18 @@ define( function( require ) {
 
     // position the dipole with some radial offset from the molecule's location
     molecule.dipoleProperty.link( function( dipole ) {
+
       // offset vector relative to molecule location
       var v = Vector2.createPolar( OFFSET, dipole.angle() );
+
       // offset in world coordinate frame
       thisNode.translation = molecule.location.plus( v );
     } );
   }
 
   return inherit( DipoleNode, MolecularDipoleNode, {}, {
+
+    // @static creates an icon, for use in control panels
     createIcon: function() {
       return DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE );
     }

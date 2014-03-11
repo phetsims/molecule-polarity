@@ -31,6 +31,7 @@ define( function( require ) {
 
     // label
     var labelNode = new Text( StringUtils.format( pattern_0label, moleculeString ), { font: new PhetFont( 22 ) } );
+
     // items
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {

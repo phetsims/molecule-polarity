@@ -92,6 +92,7 @@ define( function( require ) {
   return inherit( Node, PlateNode, {}, {
 
     /**
+     * Creates a positive plate.
      * @static
      * @param {EField} eField
      */
@@ -100,6 +101,7 @@ define( function( require ) {
     },
 
     /**
+     * Creates a negative plate.
      * @static
      * @param {EField} eField
      */

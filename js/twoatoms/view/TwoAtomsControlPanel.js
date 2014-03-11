@@ -103,13 +103,12 @@ define( function( require ) {
       children: children,
       align: 'left',
       spacing: 12
-    } ),
-      {
-        // panel options
-        fill: 'rgb(238,238,238)',
-        xMargin: 20,
-        yMargin: 15
-      } );
+    } ), {
+      // panel options
+      fill: 'rgb(238,238,238)',
+      xMargin: 20,
+      yMargin: 15
+    } );
   }
 
   return inherit( Panel, TwoAtomsControlPanel );

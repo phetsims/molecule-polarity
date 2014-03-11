@@ -96,6 +96,7 @@ define( function( require ) {
     },
 
     setSurfaceType: function( surfaceType ) {
+      //TODO
       this.surfaceTypeText.text = ( 'surface: ' + surfaceType );
     }
   } );

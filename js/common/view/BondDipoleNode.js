@@ -49,6 +49,8 @@ define( function( require ) {
   }
 
   return inherit( DipoleNode, BondDipoleNode, {}, {
+
+    // @static creates an icon, for use in control panels
     createIcon: function() {
       return DipoleNode.createIcon( MPColors.BOND_DIPOLE );
     }

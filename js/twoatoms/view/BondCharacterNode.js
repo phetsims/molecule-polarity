@@ -63,6 +63,7 @@ define( function( require ) {
    * @constructor
    */
   function BondCharacterNode( molecule ) {
+
     Node.call( this );
 
     // title and labels

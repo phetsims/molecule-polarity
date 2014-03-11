@@ -39,7 +39,7 @@ define( function( require ) {
   function RealMoleculesModel() {
 
     this.molecules = [
-      //TODO how to handle Jmol resource files?
+
       new RealMolecule( 'H2', hydrogenString, 'mol2/h2.mol2' ),
       new RealMolecule( 'N2', nitrogrenString, 'mol2/n2.mol2' ),
       new RealMolecule( 'O2', oxygenString, 'mol2/o2.mol2' ),

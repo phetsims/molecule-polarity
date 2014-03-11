@@ -21,7 +21,7 @@ define( function( require ) {
   function RealMolecule( symbol, name, resourceFilename ) {
     this.symbol = ChemUtils.toSubscript( symbol );
     this.name = name;
-    this.resourceFilename = resourceFilename;
+    this.resourceFilename = resourceFilename; //TODO how to handle Jmol resource file?
   }
 
   return RealMolecule;
