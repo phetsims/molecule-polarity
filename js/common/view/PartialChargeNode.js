@@ -108,7 +108,7 @@ define( function( require ) {
     createCompositePartialChargeNode: function( atom, molecule ) {
       var node = new PartialChargeNode( atom, function() {
         if ( molecule.dipoleProperty.get().magnitude() > 0 ) {
-           return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
+          return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
         }
         else {
           // can't normalize a zero-magnitude vector, so create our own with the proper angle

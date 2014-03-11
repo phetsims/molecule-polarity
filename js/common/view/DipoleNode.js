@@ -54,7 +54,7 @@ define( function( require ) {
           if ( HEAD_SIZE.height > FRACTIONAL_HEAD_HEIGHT * desiredLength ) {
             // We'll be drawing a unit dipole and scaling it.
             adjustedLength = HEAD_SIZE.height / FRACTIONAL_HEAD_HEIGHT;
-            scale = desiredLength/ adjustedLength;
+            scale = desiredLength / adjustedLength;
           }
           var crossOffset = scale * REFERENCE_CROSS_OFFSET * adjustedLength / REFERENCE_LENGTH;
           var crossWidth = scale * CROSS_SIZE.width * adjustedLength / REFERENCE_LENGTH;
@@ -66,11 +66,11 @@ define( function( require ) {
             .lineTo( crossOffset, -CROSS_SIZE.height / 2 )
             .lineTo( crossOffset + crossWidth, -CROSS_SIZE.height / 2 )
             .lineTo( crossOffset + crossWidth, -TAIL_WIDTH / 2 )
-            .lineTo( adjustedLength - HEAD_SIZE.height, -TAIL_WIDTH / 2  )
+            .lineTo( adjustedLength - HEAD_SIZE.height, -TAIL_WIDTH / 2 )
             .lineTo( adjustedLength - HEAD_SIZE.height, -HEAD_SIZE.width / 2 )
             .lineTo( adjustedLength, 0 )
             .lineTo( adjustedLength - HEAD_SIZE.height, HEAD_SIZE.width / 2 )
-            .lineTo( adjustedLength - HEAD_SIZE.height, TAIL_WIDTH / 2  )
+            .lineTo( adjustedLength - HEAD_SIZE.height, TAIL_WIDTH / 2 )
             .lineTo( crossOffset + crossWidth, TAIL_WIDTH / 2 )
             .lineTo( crossOffset + crossWidth, CROSS_SIZE.height / 2 )
             .lineTo( crossOffset, CROSS_SIZE.height / 2 )

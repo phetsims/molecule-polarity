@@ -1,3 +1,4 @@
+3/10/14 reformat all code
 3/10/14 doc and whitespace throughout
 3/10/14 clean up control panels, including computation and insertion of separators
 3/10/14 fix size of horizontal separators in control panels

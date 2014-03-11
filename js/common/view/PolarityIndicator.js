@@ -25,7 +25,7 @@ define( function( require ) {
     }, options );
 
     Node.call( this );
-    
+
     var pathOptions = { stroke: options.stroke, lineWidth: options.lineWidth };
 
     // circle
@@ -38,7 +38,7 @@ define( function( require ) {
     if ( options.polarity === 'positive' ) {
       this.addChild( new Line( 0, -0.5 * options.radius, 0, 0.5 * options.radius, pathOptions ) );
     }
-    
+
     // vertical connecting bar
     this.addChild( new Line( 0, options.radius, 0, 2 * options.radius, pathOptions ) );
 
