@@ -15,7 +15,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
