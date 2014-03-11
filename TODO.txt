@@ -6,6 +6,7 @@ MEDIUM
 - custom cursor to indicate molecule rotation (hide cursor and drag a node around?)
 
 LOW
+- screen icons
 - scenery#203 leading spaces are dropped from text, noticeable in 'Real Molecules' combo box
 
 REAL MOLECULES SCREEN
