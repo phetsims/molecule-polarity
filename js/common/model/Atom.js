@@ -33,8 +33,7 @@ define( function( require ) {
 
     reset: function() {
       this.electronegativityProperty.reset();
-      this.locationProperty.reset();
-      this.partialChargeProperty.reset();
+      // do not reset location and partial charge, they will be reset by their parent molecule
     }
   };
 
