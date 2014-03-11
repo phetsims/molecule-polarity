@@ -38,7 +38,7 @@ define( function( require ) {
     thisNode.addChild( textNode );
 
     // @private
-    this.update = function() {
+    thisNode.update = function() {
       var partialCharge = atom.partialChargeProperty.get();
 
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
@@ -65,8 +65,8 @@ define( function( require ) {
         thisNode.translation = atom.locationProperty.get().plus( relativeOffset );
       }
     };
-    atom.partialChargeProperty.link( this.update.bind( this ) );
-    atom.locationProperty.link( this.update.bind( this ) );
+    atom.partialChargeProperty.link( thisNode.update.bind( thisNode ) );
+    atom.locationProperty.link( thisNode.update.bind( thisNode ) );
   }
 
   return inherit( Node, PartialChargeNode, {}, {
