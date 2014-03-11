@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define(function(require){
+define( function( require ) {
   'use strict';
 
   // imports
@@ -74,44 +74,43 @@ define(function(require){
       spacing: 30
     } );
 
-    //TODO this is brittle, what if we add a node and forget to add it here?
-    // compute the horizontal separator width
-    var nodes = [ viewTitleNode, bondDipoleCheckBox, partialChargesCheckBox, bondCharacterCheckBox,
-      surfaceTitleNode, noneButton, electrostaticPotentialButton, electronDensityButton,
-      eFieldTitleNode, buttonGroup ];
-    var separatorWidth = 0;
-    for ( var i = 0; i < nodes.length; i++ ) {
-      separatorWidth = Math.max( separatorWidth, nodes[i].width );
-    }
+    // nodes in the control panel, in the order they will appear vertically
+    var children = [
+      viewTitleNode,
+      bondDipoleCheckBox,
+      partialChargesCheckBox,
+      bondCharacterCheckBox,
+      new VStrut( 1 ), // force a vertical space
+      surfaceTitleNode,
+      noneButton,
+      electrostaticPotentialButton,
+      electronDensityButton,
+      new VStrut( 1 ), // force a vertical space
+      eFieldTitleNode,
+      buttonGroup
+    ];
 
-    var content = new VBox( {
-      children: [
-        viewTitleNode,
-        bondDipoleCheckBox,
-        partialChargesCheckBox,
-        bondCharacterCheckBox,
-        new VStrut( 1 ), // force a vertical space
-        new HSeparator( separatorWidth ),
-        surfaceTitleNode,
-        noneButton,
-        electrostaticPotentialButton,
-        electronDensityButton,
-        new VStrut( 1 ), // force a vertical space
-        new HSeparator( separatorWidth ),
-        eFieldTitleNode,
-        buttonGroup
-      ],
-      align: 'left',
-      spacing: 12
-    } );
+    // compute the horizontal separator width, insert separators above (before) titles
+    var separatorWidth = 0;
+    for ( var i = 0; i < children.length; i++ ) {
+      separatorWidth = Math.max( separatorWidth, children[i].width );
+    }
+    children.splice( children.indexOf( surfaceTitleNode ), 0, new HSeparator( separatorWidth ) );
+    children.splice( children.indexOf( eFieldTitleNode ), 0, new HSeparator( separatorWidth ) );
 
     // vertical panel
-    Panel.call( this, content, {
-      fill: 'rgb(238,238,238)',
-      xMargin: 20,
-      yMargin: 15
-    } );
+    Panel.call( this, new VBox( {
+      children: children,
+      align: 'left',
+      spacing: 12
+    } ),
+      {
+        // panel options
+        fill: 'rgb(238,238,238)',
+        xMargin: 20,
+        yMargin: 15
+      } );
   }
 
   return inherit( Panel, TwoAtomsControlPanel );
-});
+} );

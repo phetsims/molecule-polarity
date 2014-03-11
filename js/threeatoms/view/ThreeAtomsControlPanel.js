@@ -5,7 +5,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define(function(require){
+define( function( require ) {
   'use strict';
 
   // imports
@@ -63,31 +63,31 @@ define(function(require){
       spacing: 30
     } );
 
-    //TODO this is brittle, what if we add a node and forget to add it here?
-    // compute the horizontal separator width
-    var nodes = [ viewTitleNode, bondDipolesCheckBox, molecularDipoleCheckBox, partialChargesCheckBox, eFieldTitleNode, buttonGroup ];
-    var separatorWidth = 0;
-    for ( var i = 0; i < nodes.length; i++ ) {
-      separatorWidth = Math.max( separatorWidth, nodes[i].width );
-    }
+    // nodes in the control panel, in the order they will appear vertically
+    var children = [
+      viewTitleNode,
+      bondDipolesCheckBox,
+      molecularDipoleCheckBox,
+      partialChargesCheckBox,
+      new VStrut( 1 ), // force a vertical space
+      eFieldTitleNode,
+      buttonGroup
+    ];
 
-    var content = new VBox( {
-      children: [
-        viewTitleNode,
-        bondDipolesCheckBox,
-        molecularDipoleCheckBox,
-        partialChargesCheckBox,
-        new VStrut( 1 ), // force a vertical space
-        new HSeparator( separatorWidth ),
-        eFieldTitleNode,
-        buttonGroup
-      ],
-      align: 'left',
-      spacing: 12
-    } );
+    // compute the horizontal separator width, insert separators above (before) titles
+    var separatorWidth = 0;
+    for ( var i = 0; i < children.length; i++ ) {
+      separatorWidth = Math.max( separatorWidth, children[i].width );
+    }
+    children.splice( children.indexOf( eFieldTitleNode ), 0, new HSeparator( separatorWidth ) );
 
     // vertical panel
-    Panel.call( this, content, {
+    Panel.call( this, new VBox( {
+      children: children,
+      align: 'left',
+      spacing: 12
+    } ), {
+      // panel options
       fill: 'rgb(238,238,238)',
       xMargin: 20,
       yMargin: 15
@@ -95,4 +95,4 @@ define(function(require){
   }
 
   return inherit( Panel, ThreeAtomsControlPanel );
-});
+} );

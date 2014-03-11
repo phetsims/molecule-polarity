@@ -67,41 +67,42 @@ define( function( require ) {
     var electrostaticPotentialROYGBButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB, new Text( electrostaticPotentialROYGBString, controlTextOptions ), radioButtonOptions );
     var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
 
-    //TODO this is brittle, what if we add a node and forget to add it here?
-    // compute the horizontal separator width
-    var nodes = [ viewTitleNode, bondDipolesCheckBox, molecularDipoleCheckBox, partialChargesCheckBox, atomElectronegativitiesCheckBox,
-      atomLabelsCheckBox, surfaceTitleNode, noneButton, electrostaticPotentialRWBButton, electrostaticPotentialROYGBButton, electronDensityButton ];
-    var separatorWidth = 0;
-    for ( var i = 0; i < nodes.length; i++ ) {
-      separatorWidth = Math.max( separatorWidth, nodes[i].width );
-    }
+    // nodes in the control panel, in the order they will appear vertically
+    var children = [
+      viewTitleNode,
+      bondDipolesCheckBox,
+      molecularDipoleCheckBox,
+      partialChargesCheckBox,
+      atomElectronegativitiesCheckBox,
+      atomLabelsCheckBox,
+      new VStrut( 1 ), // force a vertical space
+      surfaceTitleNode,
+      noneButton,
+      electrostaticPotentialRWBButton,
+      electrostaticPotentialROYGBButton,
+      electronDensityButton
+    ];
 
-    var content = new VBox( {
-      children: [
-        viewTitleNode,
-        bondDipolesCheckBox,
-        molecularDipoleCheckBox,
-        partialChargesCheckBox,
-        atomElectronegativitiesCheckBox,
-        atomLabelsCheckBox,
-        new VStrut( 1 ), // force a vertical space
-        new HSeparator( separatorWidth ),
-        surfaceTitleNode,
-        noneButton,
-        electrostaticPotentialRWBButton,
-        electrostaticPotentialROYGBButton,
-        electronDensityButton
-      ],
-      align: 'left',
-      spacing: 12
-    } );
+    // compute the horizontal separator width, insert separators above (before) titles
+    var separatorWidth = 0;
+    for ( var i = 0; i < children.length; i++ ) {
+      separatorWidth = Math.max( separatorWidth, children[i].width );
+    }
+    children.splice( children.indexOf( surfaceTitleNode ), 0, new HSeparator( separatorWidth ) );
 
     // vertical panel
-    Panel.call( this, content, {
-      fill: 'rgb(238,238,238)',
-      xMargin: 20,
-      yMargin: 15
-    } );
+    Panel.call( this,
+      new VBox( {
+        children: children,
+        align: 'left',
+        spacing: 12
+      } ),
+      {
+        // panel options
+        fill: 'rgb(238,238,238)',
+        xMargin: 20,
+        yMargin: 15
+      } );
   }
 
   return inherit( Panel, RealMoleculesControlPanel );
