@@ -25,8 +25,9 @@ define( function( require ) {
   var ionicString = require( 'string!MOLECULE_POLARITY/ionic' );
 
   // constants
-  var TRACK_WIDTH = 360;
-  var LABEL_X_INSET = 4;
+  var TRACK_WIDTH = 420;
+  var TRACK_CORNER_RADIUS = 5;
+  var LABEL_X_INSET = 10;
   var POINTER_X_INSET = 10;
   var Y_MARGIN = 3;
   var Y_SPACING = 3;
@@ -65,17 +66,18 @@ define( function( require ) {
     Node.call( this );
 
     // title and labels
-    var textOptions = { font: new PhetFont( 12 ), fill: 'black' };
-    var titleNode = new Text( bondCharacterString, textOptions );
-    var leftLabelNode = new Text( covalentString, textOptions );
-    var rightLabelNode = new Text( ionicString, textOptions );
+    var titleNode = new Text( bondCharacterString, { font: new PhetFont( { size: 12, weight: 'bold' } ), fill: 'black' } );
+    var labelOptions = { font: new PhetFont( 12 ), fill: 'black' };
+    var leftLabelNode = new Text( covalentString, labelOptions );
+    var rightLabelNode = new Text( ionicString, labelOptions );
 
     // pointer that moves along the track, not interactive
     var pointerNode = new PointerNode( molecule.atomA, molecule.atomB );
 
     // track
     var trackHeight = ( 2 * Y_MARGIN ) + titleNode.height + Y_SPACING + pointerNode.height;
-    var trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, { fill: 'white', stroke: 'black' } );
+    var trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, TRACK_CORNER_RADIUS, TRACK_CORNER_RADIUS,
+      { fill: 'white', stroke: 'black' } );
 
     // rendering order
     this.addChild( trackNode );
@@ -90,7 +92,7 @@ define( function( require ) {
     pointerNode.top = titleNode.bottom + Y_SPACING;
     leftLabelNode.left = trackNode.left + LABEL_X_INSET;
     leftLabelNode.top = trackNode.top + Y_MARGIN;
-    rightLabelNode.right = trackNode.right - Y_MARGIN;
+    rightLabelNode.right = trackNode.right - LABEL_X_INSET;
     rightLabelNode.top = trackNode.top + Y_MARGIN;
 
     // when difference in electronegativity changes, move the pointer

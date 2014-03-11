@@ -1,3 +1,4 @@
+3/10/13 tweak 'Bond Character' display: round corners, bold title, adjust margin
 3/10/14 fix 'Reset All' for atom locations and partial charges
 3/10/14 replace PolarCartesianConverter trig operations
 3/10/14 reduce length of polarity indicators and move molecules down slightly, so that polarity indicators are within screen bounds
