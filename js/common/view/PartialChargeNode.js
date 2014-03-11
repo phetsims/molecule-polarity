@@ -37,7 +37,8 @@ define( function( require ) {
     var textNode = new Text( '?', { font: new PhetFont( 32 ), fill: 'black' } );
     thisNode.addChild( textNode );
 
-    var update = function() {
+    // @private
+    this.update = function() {
       var partialCharge = atom.partialChargeProperty.get();
 
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
@@ -64,8 +65,8 @@ define( function( require ) {
         thisNode.translation = atom.locationProperty.get().plus( relativeOffset );
       }
     };
-    atom.partialChargeProperty.link( update.bind( this ) );
-    atom.locationProperty.link( update.bind( this ) );
+    atom.partialChargeProperty.link( this.update.bind( this ) );
+    atom.locationProperty.link( this.update.bind( this ) );
   }
 
   return inherit( Node, PartialChargeNode, {}, {
@@ -105,7 +106,7 @@ define( function( require ) {
      * @return {PartialChargeNode}
      */
     createCompositePartialChargeNode: function( atom, molecule ) {
-      return new PartialChargeNode( atom, function() {
+      var node = new PartialChargeNode( atom, function() {
         if ( molecule.dipoleProperty.get().magnitude() > 0 ) {
            return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
         }
@@ -114,6 +115,8 @@ define( function( require ) {
           return new Vector2( 1, molecule.dipoleProperty.get().angle() );
         }
       } );
+      molecule.dipoleProperty.link( node.update.bind( this ) );
+      return node;
     }
   } );
 } );

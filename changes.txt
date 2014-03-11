@@ -1,3 +1,4 @@
+3/10/14 fix composite partial charge in triatomic molecule, so that it updates when molecular dipole changes
 3/10/14 fix bug in bond angle computation which was messing up all dipoles and E-field
 3/10/14 replace HTMLText with SubSupText
 2/12/14 adjust scaling of dipole cross to match Java version, so that cross looks good in icons and scaled dipoles
