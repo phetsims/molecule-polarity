@@ -40,7 +40,7 @@ define( function( require ) {
     }
     
     // vertical connecting bar
-    this.addChild( new Line( 0, options.radius, 0, 3 * options.radius, pathOptions ) );
+    this.addChild( new Line( 0, options.radius, 0, 2 * options.radius, pathOptions ) );
 
     this.mutate( options );
   }
