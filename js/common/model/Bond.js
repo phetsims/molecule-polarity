@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var PolarCartesianConverter = require( 'MOLECULE_POLARITY/common/PolarCartesianConverter' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
