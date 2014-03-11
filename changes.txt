@@ -1,3 +1,4 @@
+3/10/14 fix size of horizontal separators in control panels
 3/10/14 use sun.HSeparator in control panels
 3/10/14 use sun.VStrut in control panels
 3/10/14 tweak 'Bond Character' display: round corners, bold title, adjust margin

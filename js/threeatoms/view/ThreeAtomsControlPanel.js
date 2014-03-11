@@ -65,7 +65,7 @@ define(function(require){
 
     //TODO this is brittle, what if we add a node and forget to add it here?
     // compute the horizontal separator width
-    var nodes = [ viewTitleNode, bondDipolesCheckBox, partialChargesCheckBox, eFieldTitleNode, buttonGroup ];
+    var nodes = [ viewTitleNode, bondDipolesCheckBox, molecularDipoleCheckBox, partialChargesCheckBox, eFieldTitleNode, buttonGroup ];
     var separatorWidth = 0;
     for ( var i = 0; i < nodes.length; i++ ) {
       separatorWidth = Math.max( separatorWidth, nodes[i].width );

@@ -69,8 +69,8 @@ define( function( require ) {
 
     //TODO this is brittle, what if we add a node and forget to add it here?
     // compute the horizontal separator width
-    var nodes = [ viewTitleNode, bondDipolesCheckBox, partialChargesCheckBox, atomElectronegativitiesCheckBox, atomLabelsCheckBox,
-      surfaceTitleNode, noneButton, electrostaticPotentialRWBButton, electronDensityButton ];
+    var nodes = [ viewTitleNode, bondDipolesCheckBox, molecularDipoleCheckBox, partialChargesCheckBox, atomElectronegativitiesCheckBox,
+      atomLabelsCheckBox, surfaceTitleNode, noneButton, electrostaticPotentialRWBButton, electrostaticPotentialROYGBButton, electronDensityButton ];
     var separatorWidth = 0;
     for ( var i = 0; i < nodes.length; i++ ) {
       separatorWidth = Math.max( separatorWidth, nodes[i].width );
