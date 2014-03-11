@@ -1,9 +1,6 @@
 TODO list for molecule-polarity (HTML5)
 
 HIGH
-- bug: composite partial charge on atomB doesn't stay opposite molecular dipole in triatomic molecule
-        replace PartialChargeNode factory methods with type hierarchy, ala Java implementation
-        missing from CompositePartialChargeNode: molecule.dipoleProperty.link( this.update.bind( this ) );
 
 MEDIUM
 - bug: Reset All moves molecule to origin (upper left), and other issues (partial charges,...)
