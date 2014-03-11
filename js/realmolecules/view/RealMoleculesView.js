@@ -72,61 +72,59 @@ define( function( require ) {
     ] } );
     thisView.addChild( rootNode );
 
-    // layout
-    {
-      viewerNode.left = 125;
-      viewerNode.centerY = this.layoutBounds.centerY + 40;
+    // layout ---------------------------------
 
-      // centered below viewer
-      moleculesComboBox.centerX = viewerNode.centerX;
-      moleculesComboBox.bottom = this.layoutBounds.bottom - 25;
+    viewerNode.left = 125;
+    viewerNode.centerY = this.layoutBounds.centerY + 40;
 
-      // right of viewer
-      controlPanel.left = viewerNode.right + 100;
-      controlPanel.centerY = this.layoutBounds.centerY;
+    // centered below viewer
+    moleculesComboBox.centerX = viewerNode.centerX;
+    moleculesComboBox.bottom = this.layoutBounds.bottom - 25;
 
-      // centered above viewer
-      electronegativityTableNode.centerX = viewerNode.centerX;
-      electronegativityTableNode.top = 20;
+    // right of viewer
+    controlPanel.left = viewerNode.right + 100;
+    controlPanel.centerY = this.layoutBounds.centerY;
 
-      // centered below electronegativity table
-      electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = viewerNode.centerX;
-      electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 10;
+    // centered above viewer
+    electronegativityTableNode.centerX = viewerNode.centerX;
+    electronegativityTableNode.top = 20;
 
-      // bottom-right corner of the screen
-      resetAllButton.right = this.layoutBounds.right - 40;
-      resetAllButton.bottom = this.layoutBounds.bottom - 20;
-    }
+    // centered below electronegativity table
+    electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = viewerNode.centerX;
+    electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 10;
 
-    // synchronization with view properties
-    {
-      viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
-        viewerNode.setBondDipolesVisible( visible );
-      } );
+    // bottom-right corner of the screen
+    resetAllButton.right = this.layoutBounds.right - 40;
+    resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
-      viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-        viewerNode.setMolecularDipoleVisible( visible );
-      } );
+    // synchronization with view properties ------------------------------
 
-      viewProperties.partialChargesVisibleProperty.link( function( visible ) {
-        viewerNode.setPartialChargesVisible( visible );
-      } );
+    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
+      viewerNode.setBondDipolesVisible( visible );
+    } );
 
-      viewProperties.atomElectronegativitiesVisibleProperty.link( function( visible ) {
-        electronegativityTableNode.visible = visible;
-      } );
+    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+      viewerNode.setMolecularDipoleVisible( visible );
+    } );
 
-      viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
-        viewerNode.setAtomLabelsVisible( visible );
-      } );
+    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+      viewerNode.setPartialChargesVisible( visible );
+    } );
 
-      viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
-        viewerNode.setSurfaceType( surfaceType );
-        electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
-        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB );
-        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
-      } );
-    }
+    viewProperties.atomElectronegativitiesVisibleProperty.link( function( visible ) {
+      electronegativityTableNode.visible = visible;
+    } );
+
+    viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
+      viewerNode.setAtomLabelsVisible( visible );
+    } );
+
+    viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
+      viewerNode.setSurfaceType( surfaceType );
+      electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
+      electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB );
+      electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+    } );
   }
 
   return inherit( ScreenView, RealMoleculesView, { layoutBounds: MPConstants.LAYOUT_BOUNDS } );

@@ -71,60 +71,58 @@ define( function( require ) {
     ] } );
     thisView.addChild( rootNode );
 
-    // layout, based on molecule location
-    {
-      var moleculeX = model.molecule.location.x;
-      var moleculeY = model.molecule.location.y;
-      var plateXOffset = 250; // x offset from molecule
+    // layout, based on molecule location ---------------------------------
 
-      // to left of molecule, vertically centered
-      negativePlateNode.right = moleculeX - plateXOffset;
-      negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
+    var moleculeX = model.molecule.location.x;
+    var moleculeY = model.molecule.location.y;
+    var plateXOffset = 250; // x offset from molecule
 
-      // to right of molecule, vertically centered
-      positivePlateNode.left = moleculeX + plateXOffset;
-      positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
+    // to left of molecule, vertically centered
+    negativePlateNode.right = moleculeX - plateXOffset;
+    negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
 
-      // centered below molecule
-      enControlA.right = moleculeX - 5;
-      enControlB.left = moleculeX + 5;
-      enControlA.bottom = enControlB.bottom = this.layoutBounds.bottom - 25;
+    // to right of molecule, vertically centered
+    positivePlateNode.left = moleculeX + plateXOffset;
+    positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
-      // centered above molecule
-      electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
-      electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
+    // centered below molecule
+    enControlA.right = moleculeX - 5;
+    enControlB.left = moleculeX + 5;
+    enControlA.bottom = enControlB.bottom = this.layoutBounds.bottom - 25;
 
-      // centered above EN controls
-      bondCharacterNode.centerX = moleculeX;
-      bondCharacterNode.bottom = enControlA.top - 10;
+    // centered above molecule
+    electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
+    electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
 
-      // to right of positive plate, top aligned
-      controlPanel.top = positivePlateNode.y;
-      controlPanel.left = positivePlateNode.right + 70;
+    // centered above EN controls
+    bondCharacterNode.centerX = moleculeX;
+    bondCharacterNode.bottom = enControlA.top - 10;
 
-      // bottom-right corner of the screen
-      resetAllButton.right = this.layoutBounds.right - 40;
-      resetAllButton.bottom = this.layoutBounds.bottom - 20;
-    }
+    // to right of positive plate, top aligned
+    controlPanel.top = positivePlateNode.y;
+    controlPanel.left = positivePlateNode.right + 70;
 
-    // synchronization with view properties
-    {
-      viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
-        moleculeNode.setBondDipoleVisible( visible );
-      } );
+    // bottom-right corner of the screen
+    resetAllButton.right = this.layoutBounds.right - 40;
+    resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
-      viewProperties.partialChargesVisibleProperty.link( function( visible ) {
-        moleculeNode.setPartialChargesVisible( visible );
-      } );
+    // synchronization with view properties ------------------------------
 
-      viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
+    viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
+      moleculeNode.setBondDipoleVisible( visible );
+    } );
 
-      viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
-        moleculeNode.setSurfaceType( surfaceType );
-        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
-        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
-      } );
-    }
+    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+      moleculeNode.setPartialChargesVisible( visible );
+    } );
+
+    viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
+
+    viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
+      moleculeNode.setSurfaceType( surfaceType );
+      electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
+      electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+    } );
   }
 
   return inherit( ScreenView, TwoAtomsView, { layoutBounds: MPConstants.LAYOUT_BOUNDS } );

@@ -63,49 +63,47 @@ define( function( require ) {
     ] } );
     thisView.addChild( rootNode );
 
-    // layout, based on molecule location
-    {
-      var moleculeX = model.molecule.location.x;
-      var moleculeY = model.molecule.location.y;
-      var plateXOffset = 250; // x offset from molecule
+    // layout, based on molecule location ---------------------------------
 
-      // to left of molecule, vertically centered
-      negativePlateNode.right = moleculeX - plateXOffset;
-      negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
+    var moleculeX = model.molecule.location.x;
+    var moleculeY = model.molecule.location.y;
+    var plateXOffset = 250; // x offset from molecule
 
-      // to right of molecule, vertically centered
-      positivePlateNode.left = moleculeX + plateXOffset;
-      positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
+    // to left of molecule, vertically centered
+    negativePlateNode.right = moleculeX - plateXOffset;
+    negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
 
-      // centered below molecule
-      enControlB.centerX = moleculeX;
-      enControlA.right = enControlB.left - 10;
-      enControlC.left = enControlB.right + 10;
-      enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
+    // to right of molecule, vertically centered
+    positivePlateNode.left = moleculeX + plateXOffset;
+    positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
-      // to right of positive plate, top aligned
-      controlPanel.top = positivePlateNode.y;
-      controlPanel.left = positivePlateNode.right + 70;
+    // centered below molecule
+    enControlB.centerX = moleculeX;
+    enControlA.right = enControlB.left - 10;
+    enControlC.left = enControlB.right + 10;
+    enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
 
-      // bottom-right corner of the screen
-      resetAllButton.right = this.layoutBounds.right - 40;
-      resetAllButton.bottom = this.layoutBounds.bottom - 20;
-    }
+    // to right of positive plate, top aligned
+    controlPanel.top = positivePlateNode.y;
+    controlPanel.left = positivePlateNode.right + 70;
 
-    // synchronization with view properties
-    {
-      viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
-        moleculeNode.setBondDipolesVisible( visible );
-      } );
+    // bottom-right corner of the screen
+    resetAllButton.right = this.layoutBounds.right - 40;
+    resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
-      viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-        moleculeNode.setMolecularDipoleVisible( visible );
-      } );
+    // synchronization with view properties ------------------------------
 
-      viewProperties.partialChargesVisibleProperty.link( function( visible ) {
-        moleculeNode.setPartialChargesVisible( visible );
-      } );
-    }
+    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
+      moleculeNode.setBondDipolesVisible( visible );
+    } );
+
+    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+      moleculeNode.setMolecularDipoleVisible( visible );
+    } );
+
+    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+      moleculeNode.setPartialChargesVisible( visible );
+    } );
   }
 
   return inherit( ScreenView, ThreeAtomsView, { layoutBounds: MPConstants.LAYOUT_BOUNDS } );
