@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
@@ -38,7 +39,8 @@ define( function( require ) {
     options = _.extend( {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
-      snapToTick: false
+      snapToTick: false,
+      trackSize: new Dimension2( 150, 5 )
     } );
 
     // titles
@@ -47,6 +49,7 @@ define( function( require ) {
 
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
+      trackSize: options.trackSize,
       startDrag: function() {
         molecule.dragging = true;
       },
@@ -70,9 +73,9 @@ define( function( require ) {
       }
     }
 
-    var content = new VBox( { children: [ titleNode, subtitleNode, sliderNode ], align: 'center', spacing: 10 } );
+    var content = new VBox( { children: [ titleNode, subtitleNode, sliderNode ], align: 'center', spacing: 6 } );
 
-    Panel.call( this, content, { resize: false, fill: atom.color, stroke: 'black', xMargin: 25, yMargin: 12 } );
+    Panel.call( this, content, { resize: false, fill: atom.color, stroke: 'black', xMargin: 15, yMargin: 10 } );
   }
 
   return inherit( Panel, ElectronegativityControl );
