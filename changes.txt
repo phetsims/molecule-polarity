@@ -1,3 +1,4 @@
+3/12/14 remove '(RWB)' from electrostatic potential color key in 'Two Atoms' screen
 3/12/14 increase size of fonts in control panels, adjust vertical spacing
 # 1.0.0-dev.3 3/10/14
 3/10/14 create arrow shapes once in BondAngleArrowsNode, then transform them to match the atom orientation

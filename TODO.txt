@@ -1,7 +1,6 @@
 TODO list for molecule-polarity (HTML5)
 
 HIGH
-- remove '(RWB)' from color key in 'Two Atoms' screen
 
 MEDIUM
 - EM: make non-bold fonts larger
