@@ -38,7 +38,7 @@ define( function( require ) {
   function SurfaceColorKeyNode( colors, title, leftLabel, rightLabel, options ) {
 
     options = _.extend( {
-      size: new Dimension2( 400, 20 ),
+      size: new Dimension2( 420, 20 ),
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       rangeFont: new PhetFont( 16 ),
       xMargin: 0,
