@@ -67,8 +67,8 @@ define( function( require ) {
     Node.call( this );
 
     // title and labels
-    var titleNode = new Text( bondCharacterString, { font: new PhetFont( { size: 12, weight: 'bold' } ), fill: 'black' } );
-    var labelOptions = { font: new PhetFont( 12 ), fill: 'black' };
+    var titleNode = new Text( bondCharacterString, { font: new PhetFont( { size: 16, weight: 'bold' } ), fill: 'black' } );
+    var labelOptions = { font: new PhetFont( 16 ), fill: 'black' };
     var leftLabelNode = new Text( covalentString, labelOptions );
     var rightLabelNode = new Text( ionicString, labelOptions );
 

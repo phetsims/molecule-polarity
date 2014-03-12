@@ -1,3 +1,4 @@
+3/12/14 increase size of fonts in 'Bond Character' display
 3/12/14 increase size of fonts in surface color keys
 3/12/14 remove '(RWB)' from electrostatic potential color key in 'Two Atoms' screen
 3/12/14 increase size of fonts in control panels, adjust vertical spacing
