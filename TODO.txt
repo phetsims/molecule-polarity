@@ -3,13 +3,11 @@ TODO list for molecule-polarity (HTML5)
 HIGH
 
 MEDIUM
-- EM: make non-bold fonts larger
-- EM: I see a small spring when I move atom C's EN slider
-- EM: I'm not in love with the design of the slider handle
 - custom cursor to indicate molecule rotation (hide cursor and drag a node around?)
 - max length of molecular dipole makes it go off screen and past center of plates
 
 LOW
+- black partial charge symbol is difficult to see against dark Electron Density surface
 - screen icons
 - scenery#203 leading spaces are dropped from text, noticeable in 'Real Molecules' combo box
 
