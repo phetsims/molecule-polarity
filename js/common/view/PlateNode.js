@@ -27,7 +27,7 @@ define( function( require ) {
       polarity: 'negative', // 'positive' or 'negative'
       perspective: 'left', // 'left' or 'right'
       plateWidth: 50,
-      plateHeight: 450,
+      plateHeight: 430,
       plateThickness: 5,
       platePerspectiveYOffset: 35, // y difference between foreground and background edges of the plate
       plateColor: 'rgb( 192, 192, 192 )',
