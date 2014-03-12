@@ -25,8 +25,8 @@ define( function( require ) {
     BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
 
     // Controls
-    TITLE_FONT: new PhetFont( { size: 18, weight: 'bold' } ),
-    CONTROL_FONT: new PhetFont( 14 ),
+    TITLE_FONT: new PhetFont( { size: 20, weight: 'bold' } ),
+    CONTROL_FONT: new PhetFont( 18 ),
     RADIO_BUTTON_RADIUS: 12
   };
 } );

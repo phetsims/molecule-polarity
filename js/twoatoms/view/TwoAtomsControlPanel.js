@@ -102,7 +102,7 @@ define( function( require ) {
     Panel.call( this, new VBox( {
       children: children,
       align: 'left',
-      spacing: 12
+      spacing: 15
     } ), {
       // panel options
       fill: 'rgb(238,238,238)',
