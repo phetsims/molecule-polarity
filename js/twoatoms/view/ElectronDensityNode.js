@@ -24,7 +24,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var DIAMETER_SCALE = 2.5; // multiply atom diameters by this scale when computing surface size
+  var DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when computing surface size
   var GRADIENT_WIDTH_MULTIPLIER = 5; // smaller values result in a more noticeable change as the EN sliders are dragged
 
   /**
