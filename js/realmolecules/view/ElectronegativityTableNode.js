@@ -78,7 +78,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    var titleNode = new Text( atomElectronegativitiesString, { font: new PhetFont( 12 ) } );
+    var titleNode = new Text( atomElectronegativitiesString, { font: new PhetFont( 16 ) } );
     thisNode.addChild( titleNode );
 
     thisNode.cells = [
@@ -115,7 +115,7 @@ define( function( require ) {
 
     // center title below cells
     titleNode.centerX = ( lastCell.right - firstCell.left ) / 2;
-    titleNode.top = firstCell.bottom + 2;
+    titleNode.top = firstCell.bottom + 4;
 
     // when the molecule changes, ask Jmol for the molecule's elements and colors, and highlight the corresponding cells
     viewerNode.moleculeProperty.link( function( molecule ) {
