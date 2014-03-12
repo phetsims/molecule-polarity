@@ -44,7 +44,7 @@ define( function( require ) {
     } );
 
     // nodes
-    var viewerNode = new JSmolViewerNode( model.moleculeProperty, MPColors.SCREEN_BACKGROUND, new Dimension2( 450, 450 ) );
+    var viewerNode = new JSmolViewerNode( model.moleculeProperty, MPColors.SCREEN_BACKGROUND, new Dimension2( 500, 500 ) );
     var electronegativityTableNode = new ElectronegativityTableNode( viewerNode );
     var comboBoxListParent = new Node();
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
@@ -74,24 +74,24 @@ define( function( require ) {
 
     // layout ---------------------------------
 
-    viewerNode.left = 125;
+    viewerNode.left = 75;
     viewerNode.centerY = this.layoutBounds.centerY;
 
     // centered below viewer
     moleculesComboBox.centerX = viewerNode.centerX;
-    moleculesComboBox.bottom = this.layoutBounds.bottom - 25;
+    moleculesComboBox.top = viewerNode.bottom + 25;
 
     // right of viewer
     controlPanel.left = viewerNode.right + 100;
     controlPanel.centerY = this.layoutBounds.centerY;
 
-    // centered above viewer
-    electronegativityTableNode.centerX = viewerNode.centerX;
-    electronegativityTableNode.top = 20;
+    // centered above control panel
+    electronegativityTableNode.centerX = controlPanel.centerX;
+    electronegativityTableNode.bottom = controlPanel.top - 10;
 
-    // centered below electronegativity table
+    // centered above viewer
     electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = viewerNode.centerX;
-    electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 10;
+    electrostaticPotentialRWBColorKey.bottom = electrostaticPotentialROYGBColorKey.bottom = electronDensityColorKey.bottom = viewerNode.top - 25;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
