@@ -36,14 +36,14 @@ define( function( require ) {
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
       var molecule = molecules[i];
-      var node = new SubSupText( StringUtils.format( pattern_0symbol_1name, molecule.symbol, molecule.name ), { font: new PhetFont( 16 ) } );
+      var node = new SubSupText( StringUtils.format( pattern_0symbol_1name, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
       items[i] = ComboBox.createItem( node, molecule );
     }
 
     ComboBox.call( this, items, moleculeProperty, listParent, {
       labelNode: labelNode,
       listPosition: 'above',
-      itemYMargin: 6,
+      itemYMargin: 4,
       itemHighlightFill: 'rgb(218,255,255)',
       buttonLineWidth: 3,
       buttonCornerRadius: 10
