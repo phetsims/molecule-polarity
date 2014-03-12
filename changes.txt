@@ -1,3 +1,4 @@
+3/12/14 removed extraneous vertical struts from control panels
 3/12/14 increase width of 'Bond Character' display
 3/12/14 increase width of surface color keys
 3/12/14 increase font size of 'Atom Electronegativities' title

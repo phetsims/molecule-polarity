@@ -69,7 +69,7 @@ define( function( require ) {
       bondDipolesCheckBox,
       molecularDipoleCheckBox,
       partialChargesCheckBox,
-      new VStrut( 1 ), // force a vertical space
+      //--------------------
       eFieldTitleNode,
       buttonGroup
     ];

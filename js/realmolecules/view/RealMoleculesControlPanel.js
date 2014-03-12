@@ -74,7 +74,7 @@ define( function( require ) {
       partialChargesCheckBox,
       atomLabelsCheckBox,
       atomElectronegativitiesCheckBox,
-      new VStrut( 1 ), // force a vertical space
+      //--------------------
       surfaceTitleNode,
       noneButton,
       electrostaticPotentialRWBButton,

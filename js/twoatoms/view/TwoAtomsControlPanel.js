@@ -80,12 +80,12 @@ define( function( require ) {
       bondDipoleCheckBox,
       partialChargesCheckBox,
       bondCharacterCheckBox,
-      new VStrut( 1 ), // force a vertical space
+      //--------------------
       surfaceTitleNode,
       noneButton,
       electrostaticPotentialButton,
       electronDensityButton,
-      new VStrut( 1 ), // force a vertical space
+      //--------------------
       eFieldTitleNode,
       buttonGroup
     ];
