@@ -1,8 +1,12 @@
 TODO list for molecule-polarity (HTML5)
 
 HIGH
+- remove '(RWB)' from control on '3 Atoms' screen
 
 MEDIUM
+- EM: make non-bold fonts larger
+- EM: I see a small spring when I move atom C's EN slider
+- EM: I'm not in love with the design of the slider handle
 - custom cursor to indicate molecule rotation (hide cursor and drag a node around?)
 - max length of molecular dipole makes it go off screen and past center of plates
 
