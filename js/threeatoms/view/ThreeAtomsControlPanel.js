@@ -20,7 +20,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var VStrut = require( 'SUN/VStrut' );
 
   // strings
   var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );

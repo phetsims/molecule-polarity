@@ -21,7 +21,6 @@ define( function( require ) {
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var VStrut = require( 'SUN/VStrut' );
 
   // strings
   var atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
