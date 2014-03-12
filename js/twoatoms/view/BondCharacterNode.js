@@ -25,7 +25,7 @@ define( function( require ) {
   var ionicString = require( 'string!MOLECULE_POLARITY/ionic' );
 
   // constants
-  var TRACK_WIDTH = 420;
+  var TRACK_WIDTH = 435;
   var TRACK_CORNER_RADIUS = 5;
   var LABEL_X_INSET = 10;
   var POINTER_X_INSET = 10;
