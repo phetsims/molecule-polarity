@@ -15,12 +15,12 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var electronegativityString = require( 'string!MOLECULE_POLARITY/electronegativity' );
@@ -44,8 +44,8 @@ define( function( require ) {
     } );
 
     // titles
-    var titleNode = new Text( StringUtils.format( patternAtomNameString, atom.name ), { font: MPConstants.TITLE_FONT } );
-    var subtitleNode = new Text( electronegativityString, { font: new PhetFont( 14 ) } );
+    var titleNode = new Text( StringUtils.format( patternAtomNameString, atom.name ), { font: new PhetFont( { size: 20, weight: 'bold' } ) } );
+    var subtitleNode = new Text( electronegativityString, { font: new PhetFont( 18 ) } );
 
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
@@ -62,7 +62,7 @@ define( function( require ) {
     } );
 
     // slider tick labels
-    var tickLabelOptions = { font: new PhetFont( 12 ) };
+    var tickLabelOptions = { font: new PhetFont( 16 ) };
     sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
     sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
     var centerTick = options.range.min + ( options.range.getLength() / 2 );
@@ -73,9 +73,12 @@ define( function( require ) {
       }
     }
 
-    var content = new VBox( { children: [ titleNode, subtitleNode, sliderNode ], align: 'center', spacing: 6 } );
+    var content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
+    subtitleNode.centerX = sliderNode.centerX = titleNode.centerX;
+    subtitleNode.top = titleNode.bottom;
+    sliderNode.top = subtitleNode.bottom + 8;
 
-    Panel.call( this, content, { resize: false, fill: atom.color, stroke: 'black', xMargin: 15, yMargin: 10 } );
+    Panel.call( this, content, { resize: false, fill: atom.color, stroke: 'black', xMargin: 15, yMargin: 6 } );
   }
 
   return inherit( Panel, ElectronegativityControl );
