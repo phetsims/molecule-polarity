@@ -30,7 +30,7 @@ define( function( require ) {
 
     this.moleculeProperty = moleculeProperty;
 
-    var rectNode = new Rectangle( 0, 0, viewerSize.width, viewerSize.height, { stroke: 'black', fill: backgroundColor } );
+    var rectNode = new Rectangle( 0, 0, viewerSize.width, viewerSize.height, { stroke: 'rgba(0,0,0,0.25)', fill: backgroundColor } );
     var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
     var font = new PhetFont( 18 );
     var moleculeText = new SubSupText( '?', { font: font } );
