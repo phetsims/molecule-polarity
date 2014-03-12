@@ -54,8 +54,8 @@ define( function( require ) {
     var molecularDipoleLabel = new HBox( { spacing: 10, children: [ new Text( molecularDipoleString, controlTextOptions ), MolecularDipoleNode.createIcon() ] } );
     var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
-    var atomElectronegativitiesCheckBox = new CheckBox( new Text( atomElectronegativitiesString, controlTextOptions ), viewProperties.atomElectronegativitiesVisibleProperty );
     var atomLabelsCheckBox = new CheckBox( new Text( atomLabelsString, controlTextOptions ), viewProperties.atomLabelsVisibleProperty );
+    var atomElectronegativitiesCheckBox = new CheckBox( new Text( atomElectronegativitiesString, controlTextOptions ), viewProperties.atomElectronegativitiesVisibleProperty );
 
     // 'Surface' title
     var surfaceTitleNode = new Text( surfaceString, { font: MPConstants.TITLE_FONT } );
@@ -72,8 +72,8 @@ define( function( require ) {
       bondDipolesCheckBox,
       molecularDipoleCheckBox,
       partialChargesCheckBox,
-      atomElectronegativitiesCheckBox,
       atomLabelsCheckBox,
+      atomElectronegativitiesCheckBox,
       new VStrut( 1 ), // force a vertical space
       surfaceTitleNode,
       noneButton,

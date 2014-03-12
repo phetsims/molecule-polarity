@@ -1,3 +1,10 @@
+3/12/14 increase width of 'Bond Character' display
+3/12/14 increase width of surface color keys
+3/12/14 increase font size of 'Atom Electronegativities' title
+3/12/14 adjust layout of 'Real Molecules' screen
+3/12/14 reduce surface size from 2.5 to 2.25 times the atom diameter
+3/12/14 reduce height of plates from 450 to 430
+3/12/14 increase font size of molecule combo box, decrease vertical space between items so that popup fits on screen
 3/12/14 vertically center JSmol viewer
 3/12/14 increase size of fonts in JSmol viewer
 3/12/14 adjust vertical positions of things to prevent overlap with surfaces
