@@ -39,8 +39,8 @@ define( function( require ) {
 
     options = _.extend( {
       size: new Dimension2( 400, 20 ),
-      titleFont: new PhetFont( 12 ),
-      rangeFont: new PhetFont( 12 ),
+      titleFont: new PhetFont( { size: 18, weight: 'bold' } ),
+      rangeFont: new PhetFont( 18 ),
       xMargin: 0,
       ySpacing: 2
     }, options );
