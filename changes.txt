@@ -1,3 +1,4 @@
+3/12/14 increase size of fonts in JSmol viewer
 3/12/14 adjust vertical positions of things to prevent overlap with surfaces
 3/12/14 increase size of fonts in EN control, adjust spacing and margins
 3/12/14 increase size of fonts in 'Bond Character' display
