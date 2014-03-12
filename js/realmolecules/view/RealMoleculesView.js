@@ -75,7 +75,7 @@ define( function( require ) {
     // layout ---------------------------------
 
     viewerNode.left = 125;
-    viewerNode.centerY = this.layoutBounds.centerY + 40;
+    viewerNode.centerY = this.layoutBounds.centerY;
 
     // centered below viewer
     moleculesComboBox.centerX = viewerNode.centerX;
