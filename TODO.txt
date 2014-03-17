@@ -3,11 +3,11 @@ TODO list for molecule-polarity (HTML5)
 HIGH
 
 MEDIUM
-- custom cursor to indicate molecule rotation (hide cursor and drag a node around?)
-- max length of molecular dipole makes it go off screen and past center of plates
+- #1 black partial charge symbol is difficult to see against dark Electron Density surface
+- #2 max length of molecular dipole makes it go off screen and past center of plates
+- #3 custom cursor to indicate molecule rotation
 
 LOW
-- black partial charge symbol is difficult to see against dark Electron Density surface
 - screen icons
 
 REAL MOLECULES SCREEN
