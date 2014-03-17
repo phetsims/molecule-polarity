@@ -9,7 +9,6 @@ MEDIUM
 LOW
 - black partial charge symbol is difficult to see against dark Electron Density surface
 - screen icons
-- scenery#203 leading spaces are dropped from text, noticeable in 'Real Molecules' combo box
 
 REAL MOLECULES SCREEN
 - how to read Jmol resource files? (.mol2)
