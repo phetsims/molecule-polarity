@@ -8,7 +8,6 @@ MEDIUM
 - #3 custom cursor to indicate molecule rotation
 
 LOW
-- screen icons
 
 REAL MOLECULES SCREEN
 - how to read Jmol resource files? (.mol2)
