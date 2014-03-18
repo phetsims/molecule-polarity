@@ -1,6 +1,7 @@
 TODO list for molecule-polarity (HTML5)
 
 HIGH
+- #1 rewrite ElectronDensityNode and ElectrostaticPotentialNode using a single path that can be filled with a linear gradient that contains alpha
 
 MEDIUM
 - #1 black partial charge symbol is difficult to see against dark Electron Density surface
