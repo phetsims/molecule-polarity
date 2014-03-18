@@ -67,7 +67,7 @@ define( function( require ) {
 
     var moleculeX = model.molecule.location.x;
     var moleculeY = model.molecule.location.y;
-    var plateXOffset = 250; // x offset from molecule
+    var plateXOffset = 300; // x offset from molecule
 
     // to left of molecule, vertically centered
     negativePlateNode.right = moleculeX - plateXOffset;
@@ -85,7 +85,7 @@ define( function( require ) {
 
     // to right of positive plate, top aligned
     controlPanel.top = positivePlateNode.y;
-    controlPanel.left = positivePlateNode.right + 70;
+    controlPanel.left = positivePlateNode.right + 25;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
