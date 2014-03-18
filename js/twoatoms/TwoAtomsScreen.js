@@ -20,12 +20,12 @@ define( function( require ) {
   var screenTitle = require( 'string!MOLECULE_POLARITY/twoAtoms' );
 
   // images
-  var screenIcon = require( 'image!MOLECULE_POLARITY/TwoAtoms-screen-icon.png' );
+  var homeIcon = require( 'image!MOLECULE_POLARITY/TwoAtoms-home-icon.png' );
 
   function TwoAtomsScreen() {
     Screen.call( this,
       screenTitle,
-      new Image( screenIcon ),
+      new Image( homeIcon ),
       function() { return new TwoAtomsModel(); },
       function( model ) { return new TwoAtomsView( model ); },
       { backgroundColor: MPColors.SCREEN_BACKGROUND }

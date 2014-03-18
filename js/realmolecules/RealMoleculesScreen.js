@@ -20,12 +20,12 @@ define( function( require ) {
   var screenTitle = require( 'string!MOLECULE_POLARITY/realMolecules' );
 
   // images
-  var screenIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-screen-icon.png' );
+  var homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
 
   function RealMoleculesScreen() {
     Screen.call( this,
       screenTitle,
-      new Image( screenIcon ),
+      new Image( homeIcon ),
       function() { return new RealMoleculesModel(); },
       function( model ) { return new RealMoleculesView( model ); },
       { backgroundColor: MPColors.SCREEN_BACKGROUND }

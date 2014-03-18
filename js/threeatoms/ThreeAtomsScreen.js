@@ -20,12 +20,12 @@ define( function( require ) {
   var screenTitle = require( 'string!MOLECULE_POLARITY/threeAtoms' );
 
   // images
-  var screenIcon = require( 'image!MOLECULE_POLARITY/ThreeAtoms-screen-icon.png' );
+  var homeIcon = require( 'image!MOLECULE_POLARITY/ThreeAtoms-home-icon.png' );
 
   function ThreeAtomsScreen() {
     Screen.call( this,
       screenTitle,
-      new Image( screenIcon ),
+      new Image( homeIcon ),
       function() { return new ThreeAtomsModel(); },
       function( model ) { return new ThreeAtomsView( model ); },
       { backgroundColor: MPColors.SCREEN_BACKGROUND }
