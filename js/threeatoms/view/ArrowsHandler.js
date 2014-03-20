@@ -19,7 +19,7 @@ define( function( require ) {
    */
   function ArrowsHandler( arrowsNode ) {
 
-    DownUpListener.call( this ); // computes this.isDown for us
+    DownUpListener.call( this ); // manages this.isDown
 
     this.enter = function( event ) {
       arrowsNode.visible = !this.isDown;
