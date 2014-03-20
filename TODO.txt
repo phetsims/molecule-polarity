@@ -12,7 +12,7 @@ MEDIUM
     - solve for plates, ignore for off-screen
 - #3 custom cursor to indicate molecule rotation
     - show example
-    - curved arrows, same color as atom, perpendicular to molecular dipole
+    - curved arrows, double-head, same color as atom, perpendicular to molecular dipole
     - triatomic molecule only?
     - input listener on bonds?
 

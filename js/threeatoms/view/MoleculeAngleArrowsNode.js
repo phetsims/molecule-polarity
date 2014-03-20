@@ -37,6 +37,7 @@ define( function( require ) {
     this.addChild( leftArrowNode );
     this.addChild( rightArrowNode );
 
+    //TODO create curved arrows, double heads
     // create "normalized" shapes at (0,0) with no rotation
     var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
     var radius = atom.diameter / 2;
