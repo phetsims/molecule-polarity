@@ -27,7 +27,7 @@ define( function( require ) {
 
     // Find the angle about the molecule's location.
     var getAngle = function( event ) {
-      var point = event.currentTarger.getParent().globalToLocalPoint( event.pointer.point );
+      var point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();
     };
 
@@ -37,7 +37,7 @@ define( function( require ) {
 
       start: function( event ) {
         molecule.dragging = true;
-        event.currentTarger.moveToFront();
+        event.currentTarget.moveToFront();
         previousAngle = getAngle( event );
       },
 
