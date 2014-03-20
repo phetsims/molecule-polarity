@@ -2,26 +2,17 @@ TODO list for molecule-polarity (HTML5)
 
 HIGH
 - #1 rewrite ElectronDensityNode and ElectrostaticPotentialNode using a single path that can be filled with a linear gradient that contains alpha
-
-MEDIUM
-- #1 black partial charge symbol is difficult to see against dark Electron Density surface
-    - use transparency in surfaces, as in Java version
-    - reimplement surface shapes
-- #2 max length of molecular dipole makes it go off screen and past center of plates
-    - show example
-    - solve for plates, ignore for off-screen
-- #3 custom cursor to indicate molecule rotation
-    - show example
-    - curved arrows, double-head, same color as atom, perpendicular to molecular dipole
-    - triatomic molecule only?
-    - input listener on bonds?
-
-- E-field on/off: leave as 2 radio buttons, or change to OnOffSwitch?
+- #2 is done, close
+- #3 rotation arrows around atom B in triatomic molecule
+- #3 remove input listener for arrows on bonds
+- E-field control, change to OnOffSwitch
+- shrink height of EN table, put above color key
 
 LOW
 - replace some node/shape creation code with transforms
 
 REAL MOLECULES SCREEN
+- investigate JSmol (10 hours)
 - how to read Jmol resource files? (.mol2)
 
 MIGRATE TO COMMON
