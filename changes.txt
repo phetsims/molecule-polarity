@@ -1,3 +1,5 @@
+3/20/14 #3 add placeholder for 'cue' arrows around atom 'B' in triatomic
+3/20/14 #3 factor out input listener for controlling visibility of arrows on atoms
 3/18/14 #2 increase spacing between plates in 'Three Atoms' screen, so that max-length dipole hits center of plates
 3/18/14 polish home-screen icons
 # 1.0.0-dev.4 3/12/14

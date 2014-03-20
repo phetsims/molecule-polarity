@@ -5,10 +5,19 @@ HIGH
 
 MEDIUM
 - #1 black partial charge symbol is difficult to see against dark Electron Density surface
+    - use transparency in surfaces, as in Java version
+    - reimplement surface shapes
 - #2 max length of molecular dipole makes it go off screen and past center of plates
+    - show example
+    - solve for plates, ignore for off-screen
 - #3 custom cursor to indicate molecule rotation
+    - show example
+    - curved arrows, same color as atom, perpendicular to molecular dipole
+    - triatomic molecule only?
+    - input listener on bonds?
 
 LOW
+- replace some node/shape creation code with transforms
 
 REAL MOLECULES SCREEN
 - how to read Jmol resource files? (.mol2)

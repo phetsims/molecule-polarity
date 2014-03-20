@@ -17,19 +17,17 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Molecule} molecule angle is relative to this molecule's location, and we pause any animation of this molecule while dragging
+   * @param {Molecule} angle is relative to this molecule's location, and we pause any animation of this molecule while dragging
    * @param {Property<Number>} bondAngleProperty property that this handler modifies
-   * @param {Node} atomNode atom that is being dragged
-   * @param {BondAngleArrowsNode} arrowsNode arrows that indicate direction of dragging
    * @constructor
    */
-  function BondAngleHandler( molecule, bondAngleProperty, atomNode, arrowsNode ) {
+  function BondAngleHandler( molecule, bondAngleProperty ) {
 
     var previousAngle = 0;
 
     // Find the angle about the molecule's location.
     var getAngle = function( event ) {
-      var point = atomNode.getParent().globalToLocalPoint( event.pointer.point );
+      var point = event.currentTarger.getParent().globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();
     };
 
@@ -39,12 +37,11 @@ define( function( require ) {
 
       start: function( event ) {
         molecule.dragging = true;
-        atomNode.moveToFront();
+        event.currentTarger.moveToFront();
         previousAngle = getAngle( event );
       },
 
       drag: function( event ) {
-        arrowsNode.visible = false;
         var currentAngle = getAngle( event );
         bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
         previousAngle = currentAngle;
@@ -54,16 +51,6 @@ define( function( require ) {
         molecule.dragging = false;
       }
     } );
-
-    this.enter = function( event ) {
-      if ( !molecule.dragging ) {
-        arrowsNode.visible = true;
-      }
-    };
-
-    this.exit = function( event ) {
-      arrowsNode.visible = false;
-    };
   }
 
   return inherit( SimpleDragHandler, BondAngleHandler );
