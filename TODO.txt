@@ -16,6 +16,8 @@ MEDIUM
     - triatomic molecule only?
     - input listener on bonds?
 
+- E-field on/off: leave as 2 radio buttons, or change to OnOffSwitch?
+
 LOW
 - replace some node/shape creation code with transforms
 
