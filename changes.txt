@@ -1,3 +1,4 @@
+3/20/14 shrink height of EN table, put above color key
 3/20/14 #3 remove input listeners for 'rotation' arrows on bonds
 3/20/14 #3 add placeholder for 'cue' arrows around atom 'B' in triatomic
 3/20/14 #3 factor out input listener for controlling visibility of arrows on atoms

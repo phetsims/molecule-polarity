@@ -21,7 +21,7 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // constants
-  var CELL_SIZE = new Dimension2( 50, 65 );
+  var CELL_SIZE = new Dimension2( 50, 50 );
   var BACKGROUND_COLOR = new Color( 210, 210, 210 );
   var NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
   var HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
@@ -43,8 +43,8 @@ define( function( require ) {
 
     // nodes
     this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, { fill: BACKGROUND_COLOR, stroke: 'black' } );
-    this.symbolNode = new Text( symbol, { font: new PhetFont( { size: 24, weight: 'bold' } ), fill: NORMAL_TEXT_COLOR } );
-    this.electronegativityNode = new Text( Util.toFixed( electronegativity, 1 ), { font: new PhetFont( 18 ), fill: NORMAL_TEXT_COLOR } );
+    this.symbolNode = new Text( symbol, { font: new PhetFont( { size: 22, weight: 'bold' } ), fill: NORMAL_TEXT_COLOR } );
+    this.electronegativityNode = new Text( Util.toFixed( electronegativity, 1 ), { font: new PhetFont( 16 ), fill: NORMAL_TEXT_COLOR } );
 
     Node.call( this, { children: [ this.backgroundNode, this.symbolNode, this.electronegativityNode ] } );
 
@@ -78,7 +78,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    var titleNode = new Text( atomElectronegativitiesString, { font: new PhetFont( 16 ) } );
+    var titleNode = new Text( atomElectronegativitiesString, { font: new PhetFont( { size: 16, weight: 'bold' } ) } );
     thisNode.addChild( titleNode );
 
     thisNode.cells = [

@@ -4,7 +4,6 @@ HIGH
 - #1 rewrite ElectronDensityNode and ElectrostaticPotentialNode using a single path that can be filled with a linear gradient that contains alpha
 - #3 rotation arrows around atom B in triatomic molecule
 - E-field control, change to OnOffSwitch
-- shrink height of EN table, put above color key
 
 LOW
 - replace some node/shape creation code with transforms

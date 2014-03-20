@@ -44,7 +44,7 @@ define( function( require ) {
     } );
 
     // nodes
-    var viewerNode = new JSmolViewerNode( model.moleculeProperty, MPColors.SCREEN_BACKGROUND, new Dimension2( 500, 500 ) );
+    var viewerNode = new JSmolViewerNode( model.moleculeProperty, MPColors.SCREEN_BACKGROUND, new Dimension2( 450, 450 ) );
     var electronegativityTableNode = new ElectronegativityTableNode( viewerNode );
     var comboBoxListParent = new Node();
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
@@ -75,23 +75,25 @@ define( function( require ) {
     // layout ---------------------------------
 
     viewerNode.left = 75;
-    viewerNode.centerY = this.layoutBounds.centerY;
+
+    // centered above viewer
+    electronegativityTableNode.centerX = viewerNode.centerX;
+    electronegativityTableNode.top = this.layoutBounds.top + 25;
+
+    // centered below electronegativity table
+    electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
+    electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
+
+    // below color keys
+    viewerNode.top = electrostaticPotentialRWBColorKey.bottom + 15;
 
     // centered below viewer
     moleculesComboBox.centerX = viewerNode.centerX;
-    moleculesComboBox.top = viewerNode.bottom + 25;
+    moleculesComboBox.top = viewerNode.bottom + 15;
 
     // right of viewer
     controlPanel.left = viewerNode.right + 100;
     controlPanel.centerY = this.layoutBounds.centerY;
-
-    // centered above control panel
-    electronegativityTableNode.centerX = controlPanel.centerX;
-    electronegativityTableNode.bottom = controlPanel.top - 10;
-
-    // centered above viewer
-    electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = viewerNode.centerX;
-    electrostaticPotentialRWBColorKey.bottom = electrostaticPotentialROYGBColorKey.bottom = electronDensityColorKey.bottom = viewerNode.top - 25;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
