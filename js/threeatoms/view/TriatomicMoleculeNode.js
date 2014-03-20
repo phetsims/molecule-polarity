@@ -71,9 +71,6 @@ define( function( require ) {
     atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
     atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
     atomCNode.addInputListener( new ArrowsHandler( arrowsCNode ) );
-    //TODO adding these to the bonds makes arrows appear to flicker as you mover pointer across bonds towards atom B
-    bondABNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
-    bondBCNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
 
     // default state
     arrowsANode.visible = arrowsCNode.visible = arrowsBNode.visible = false;

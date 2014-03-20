@@ -2,9 +2,7 @@ TODO list for molecule-polarity (HTML5)
 
 HIGH
 - #1 rewrite ElectronDensityNode and ElectrostaticPotentialNode using a single path that can be filled with a linear gradient that contains alpha
-- #2 is done, close
 - #3 rotation arrows around atom B in triatomic molecule
-- #3 remove input listener for arrows on bonds
 - E-field control, change to OnOffSwitch
 - shrink height of EN table, put above color key
 
