@@ -12,6 +12,7 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
+  var EFieldSwitch = require( 'MOLECULE_POLARITY/common/view/EFieldSwitch' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -25,8 +26,6 @@ define( function( require ) {
   var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
   var electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
   var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
-  var offString = require( 'string!MOLECULE_POLARITY/off' );
-  var onString = require( 'string!MOLECULE_POLARITY/on' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
@@ -53,14 +52,8 @@ define( function( require ) {
     // 'E-Field' title
     var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
 
-    // 'E-Field' radio buttons
-    var onButton = new AquaRadioButton( eFieldEnabledProperty, true, new Text( onString, controlTextOptions ), radioButtonOptions );
-    var offButton = new AquaRadioButton( eFieldEnabledProperty, false, new Text( offString, controlTextOptions ), radioButtonOptions );
-    var buttonGroup = new HBox( {
-      children: [ onButton, offButton ],
-      align: 'left',
-      spacing: 30
-    } );
+    // 'E-Field' control
+    var eFieldControl = new EFieldSwitch( eFieldEnabledProperty );
 
     // nodes in the control panel, in the order they will appear vertically
     var children = [
@@ -70,7 +63,7 @@ define( function( require ) {
       partialChargesCheckBox,
       //--------------------
       eFieldTitleNode,
-      buttonGroup
+      eFieldControl
     ];
 
     // compute the horizontal separator width, insert separators above (before) titles
