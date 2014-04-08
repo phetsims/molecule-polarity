@@ -21,6 +21,7 @@ define( function( require ) {
 
   // images
   var homeIcon = require( 'image!MOLECULE_POLARITY/ThreeAtoms-home-icon.png' );
+  var navigationBarIcon = require( 'image!MOLECULE_POLARITY/ThreeAtoms-navbar-icon.png' );
 
   function ThreeAtomsScreen() {
     Screen.call( this,
@@ -28,7 +29,10 @@ define( function( require ) {
       new Image( homeIcon ),
       function() { return new ThreeAtomsModel(); },
       function( model ) { return new ThreeAtomsView( model ); },
-      { backgroundColor: MPColors.SCREEN_BACKGROUND }
+      {
+        backgroundColor: MPColors.SCREEN_BACKGROUND,
+        navigationBarIcon: new Image( navigationBarIcon )
+      }
     );
   }
 

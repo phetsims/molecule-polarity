@@ -21,6 +21,7 @@ define( function( require ) {
 
   // images
   var homeIcon = require( 'image!MOLECULE_POLARITY/TwoAtoms-home-icon.png' );
+  var navigationBarIcon = require( 'image!MOLECULE_POLARITY/TwoAtoms-navbar-icon.png' );
 
   function TwoAtomsScreen() {
     Screen.call( this,
@@ -28,7 +29,10 @@ define( function( require ) {
       new Image( homeIcon ),
       function() { return new TwoAtomsModel(); },
       function( model ) { return new TwoAtomsView( model ); },
-      { backgroundColor: MPColors.SCREEN_BACKGROUND }
+      {
+        backgroundColor: MPColors.SCREEN_BACKGROUND,
+        navigationBarIcon: new Image( navigationBarIcon )
+      }
     );
   }
 

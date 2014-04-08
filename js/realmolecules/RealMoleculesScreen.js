@@ -21,6 +21,7 @@ define( function( require ) {
 
   // images
   var homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
+  var navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
 
   function RealMoleculesScreen() {
     Screen.call( this,
@@ -28,7 +29,10 @@ define( function( require ) {
       new Image( homeIcon ),
       function() { return new RealMoleculesModel(); },
       function( model ) { return new RealMoleculesView( model ); },
-      { backgroundColor: MPColors.SCREEN_BACKGROUND }
+      {
+        backgroundColor: MPColors.SCREEN_BACKGROUND,
+        navigationBarIcon: new Image( navigationBarIcon )
+      }
     );
   }
 
