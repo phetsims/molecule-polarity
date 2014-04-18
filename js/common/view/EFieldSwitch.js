@@ -9,10 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ABSwitch = require( 'SUN/ABSwitch' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var OnOffSwitch = require( 'SUN/OnOffSwitch' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -20,20 +19,12 @@ define( function( require ) {
   var onString = require( 'string!MOLECULE_POLARITY/on' );
 
   // constants
-  var TEXT_OPTIONS = { font: MPConstants.CONTROL_FONT };
+  var LABEL_OPTIONS = { font: MPConstants.CONTROL_FONT };
 
   function EFieldSwitch( eFieldEnabledProperty ) {
-
-    // 'E-Field' radio buttons
-    HBox.call( this, {
-      spacing: 12,
-      children: [
-        new Text( offString, TEXT_OPTIONS ),
-        new OnOffSwitch( eFieldEnabledProperty, { trackOnFill: 'rgb(0,180,0)', trackOffFill: 'rgb(180,180,180)' } ),
-        new Text( onString, TEXT_OPTIONS )
-      ]
-    } );
+    ABSwitch.call( this, eFieldEnabledProperty, false, new Text( offString, LABEL_OPTIONS ), true, new Text( onString, LABEL_OPTIONS ),
+      { xSpacing: 12, trackFillA: 'rgb(180,180,180)', trackFillB: 'rgb(0,180,0)' } );
   }
 
-  return inherit( HBox, EFieldSwitch );
+  return inherit( ABSwitch, EFieldSwitch );
 } );
