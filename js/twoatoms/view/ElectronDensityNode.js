@@ -43,21 +43,26 @@ define( function( require ) {
     thisNode.colors = MPColors.BW_GRADIENT;
     assert && assert( thisNode.colors.length === 2 ); // this implementation only works for 2 colors
 
-    thisNode.pathA = new Path();
-    thisNode.pathB = new Path();
-    thisNode.addChild( this.pathA );
-    thisNode.addChild( this.pathB );
+    // each atom is surrounded with a 'cloud' (circle)
+    var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
+    thisNode.path = new Path( new Shape()
+      .arc( molecule.location.x - this.molecule.atomB.locationProperty.get().x, molecule.location.y - this.molecule.atomB.locationProperty.get().y, radius, Math.PI/4, 7 * Math.PI/4 )
+      .arc( molecule.location.x - this.molecule.atomA.locationProperty.get().x, molecule.location.y - this.molecule.atomA.locationProperty.get().y, radius, 5 * Math.PI/4, 3 * Math.PI/4 )
+    );
+    thisNode.addChild( this.path );
 
     // update surface when atoms move or electronegativity changes
     var update = function() {
       if ( thisNode.visible ) {
-        thisNode.updateShape();
         thisNode.updateFill();
       }
     };
     molecule.atoms.forEach( function( atom ) {
-      atom.locationProperty.link( update );
       atom.electronegativityProperty.link( update );
+    } );
+
+    molecule.angleProperty.link( function( angle ) {
+      thisNode.transform = molecule.createTransform();
     } );
 
     thisNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
@@ -70,20 +75,8 @@ define( function( require ) {
     setVisible: function( visible ) {
       Node.prototype.setVisible.call( this, visible );
       if ( visible ) {
-        this.updateShape();
         this.updateFill();
       }
-    },
-
-    /*
-     * Updates the shape of the surface.
-     * @private
-     */
-    updateShape: function() {
-      // surround each atom with a 'cloud'
-      var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
-      this.pathA.shape = Shape.circle( this.molecule.atomA.locationProperty.get().x, this.molecule.atomA.locationProperty.get().y, radius );
-      this.pathB.shape = Shape.circle( this.molecule.atomB.locationProperty.get().x, this.molecule.atomB.locationProperty.get().y, radius );
     },
 
     /*
@@ -95,7 +88,7 @@ define( function( require ) {
       var deltaEN = this.molecule.getDeltaEN();
       if ( deltaEN === 0 ) {
         // no difference, use neutral color that's halfway between "more" and "less" colors
-        this.pathA.fill = this.pathB.fill = MPColors.NEUTRAL_GRAY;
+        this.path.fill = MPColors.NEUTRAL_GRAY;
       }
       else {
         var scale = Math.abs( deltaEN / this.electronegativityRange.getLength() );
@@ -110,11 +103,6 @@ define( function( require ) {
         var pointA = new Vector2( -gradientWidth / 2, 0 );
         var pointB = new Vector2( gradientWidth / 2, 0 );
 
-        // transform gradient endpoints to account for molecule transform
-        var transform = this.molecule.createTransform();
-        pointA = transform.transformPosition2( pointA );
-        pointB = transform.transformPosition2( pointB );
-
         // choose colors based on polarity
         var colorA = ( deltaEN > 0 ) ? this.colors[1] : this.colors[0];
         var colorB = ( deltaEN > 0 ) ? this.colors[0] : this.colors[1];
@@ -124,8 +112,7 @@ define( function( require ) {
         gradient.addColorStop( 0, colorA );
         gradient.addColorStop( 1, colorB );
 
-        this.pathA.fill = gradient;
-        this.pathB.fill = gradient;
+        this.path.fill = gradient;
       }
     }
   } );

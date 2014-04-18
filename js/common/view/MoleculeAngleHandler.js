@@ -22,7 +22,7 @@ define( function( require ) {
     var previousAngle; // angle between the pointer and the molecule when the drag started
 
     var getAngle = function( event ) {
-      var point = relativeNode.globalToLocalPoint( event.pointer.point );
+      var point = relativeNode.globalToParentPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();
     };
 
