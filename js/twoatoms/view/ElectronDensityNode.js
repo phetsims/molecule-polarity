@@ -67,7 +67,7 @@ define( function( require ) {
       }
     } );
 
-    thisNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
+    thisNode.cursor = 'pointer';
     thisNode.addInputListener( new MoleculeAngleHandler( molecule, thisNode ) );
   }
 
