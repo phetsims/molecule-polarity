@@ -3,9 +3,6 @@ TODO list for molecule-polarity (HTML5)
 HIGH
 - #3 rotation arrows around atom B in triatomic molecule (MoleculeAngleArrowsNode)
 
-LOW
-- replace some node/shape creation code with transforms
-
 REAL MOLECULES SCREEN
 - investigate JSmol (10 hours)
 - how to read Jmol resource files? (.mol2)
