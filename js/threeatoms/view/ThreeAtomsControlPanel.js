@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
   var EFieldSwitch = require( 'MOLECULE_POLARITY/common/view/EFieldSwitch' );
@@ -37,7 +36,6 @@ define( function( require ) {
   function ThreeAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
     var controlTextOptions = { font: MPConstants.CONTROL_FONT };
-    var radioButtonOptions = { radius: MPConstants.RADIO_BUTTON_RADIUS };
 
     // 'View' title
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
