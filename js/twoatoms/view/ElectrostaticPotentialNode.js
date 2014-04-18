@@ -62,7 +62,9 @@ define( function( require ) {
     } );
 
     molecule.angleProperty.link( function( angle ) {
-      thisNode.transform = molecule.createTransform();
+      if ( thisNode.visible ) {
+        thisNode.transform = molecule.createTransform();
+      }
     } );
 
     thisNode.cursor = 'pointer'; //TODO custom cursor, ala RotateCursorHandler in Java version
@@ -75,6 +77,7 @@ define( function( require ) {
     setVisible: function( visible ) {
       Node.prototype.setVisible.call( this, visible );
       if ( visible ) {
+        this.transform = this.molecule.createTransform();
         this.updateFill();
       }
     },
