@@ -31,10 +31,11 @@ define( function( require ) {
     var thisNode = this;
     Node.call( this );
 
-    var radius = 0.65 * atom.diameter;
+    var radius = 0.65 * atom.diameter; // distance of the arrows from the atom's center
+    var theta = 0.15 * Math.PI; // central angle of the arc that the arrow traces
     var arrowOptions = { fill: atom.color, stroke: 'gray' };
-    var leftArrowNode = new CurvedArrowNode( radius, 0.25 * Math.PI, 0.75 * Math.PI, arrowOptions );
-    var rightArrowNode = new CurvedArrowNode( radius, 1.25 * Math.PI, 1.75 * Math.PI, arrowOptions );
+    var leftArrowNode = new CurvedArrowNode( radius, -theta, theta, arrowOptions );
+    var rightArrowNode = new CurvedArrowNode( radius, Math.PI - theta, Math.PI + theta, arrowOptions );
 
     this.addChild( leftArrowNode );
     this.addChild( rightArrowNode );
@@ -43,7 +44,7 @@ define( function( require ) {
     var updateTransform = function() {
       thisNode.transform = new Transform3( Matrix3
         .translationFromVector( atom.locationProperty.get() )
-        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() ) )
+        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) )
       );
     };
     molecule.dipoleProperty.link( updateTransform );
