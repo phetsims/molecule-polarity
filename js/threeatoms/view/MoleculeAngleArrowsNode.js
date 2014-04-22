@@ -19,36 +19,29 @@ define( function( require ) {
   /**
    * @param {Molecule} molecule
    * @param {Atom} atom
-   * @param {*} options
    * @constructor
    */
-  function MoleculeAngleArrowsNode( molecule, atom, options ) {
+  function MoleculeAngleArrowsNode( molecule, atom ) {
 
-    options = _.extend( {
-      length: 25 // relatively short, so we don't need curved arrows
-    }, options );
-
-    var thisNode = this;
-    Node.call( this );
-
-    var radius = 0.65 * atom.diameter; // distance of the arrows from the atom's center
+    // arrow configuration
+    var arrowOptions = { headWidth: 20, headHeight: 20, tailWidth: 10, fill: atom.color, stroke: 'gray' };
+    var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     var theta = 0.15 * Math.PI; // central angle of the arc that the arrow traces
-    var arrowOptions = { fill: atom.color, stroke: 'gray' };
-    var leftArrowNode = new CurvedArrowNode( radius, -theta, theta, arrowOptions );
-    var rightArrowNode = new CurvedArrowNode( radius, Math.PI - theta, Math.PI + theta, arrowOptions );
 
-    this.addChild( leftArrowNode );
-    this.addChild( rightArrowNode );
+    Node.call( this, { children: [
+      new CurvedArrowNode( radius, -theta, theta, arrowOptions ),
+      new CurvedArrowNode( radius, Math.PI - theta, Math.PI + theta, arrowOptions )
+    ] } );
 
     // Align with atom location and molecular dipole
     var updateTransform = function() {
-      thisNode.transform = new Transform3( Matrix3
+      this.transform = new Transform3( Matrix3
         .translationFromVector( atom.locationProperty.get() )
         .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) )
       );
     };
-    molecule.dipoleProperty.link( updateTransform );
-    atom.locationProperty.link( updateTransform );
+    molecule.dipoleProperty.link( updateTransform.bind( this ) );
+    atom.locationProperty.link( updateTransform.bind( this ) );
   }
 
   return inherit( Node, MoleculeAngleArrowsNode );

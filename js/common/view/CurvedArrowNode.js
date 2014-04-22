@@ -28,8 +28,8 @@ define( function( require ) {
     }, options );
 
     var shape = new Shape()
-      .arc( 0, 0, radius + options.headWidth / 2, startAngle, endAngle, false )
-      .arc( 0, 0, radius - options.headWidth / 2, endAngle, startAngle, true )
+      .arc( 0, 0, radius + options.tailWidth / 2, startAngle, endAngle, false )
+      .arc( 0, 0, radius - options.tailWidth / 2, endAngle, startAngle, true )
       .close();
 
     Path.call( this, shape, options );
