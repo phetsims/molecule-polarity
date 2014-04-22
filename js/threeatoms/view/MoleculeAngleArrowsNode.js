@@ -10,11 +10,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ArrowShape = require( 'SCENERY_PHET/ArrowShape' );
+  var CurvedArrowNode = require( 'MOLECULE_POLARITY/common/view/CurvedArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var Transform3 = require( 'DOT/Transform3' );
 
   /**
@@ -29,29 +28,26 @@ define( function( require ) {
       length: 25 // relatively short, so we don't need curved arrows
     }, options );
 
+    var thisNode = this;
     Node.call( this );
 
-    var leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
-    var rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+    var radius = 0.65 * atom.diameter;
+    var arrowOptions = { fill: atom.color, stroke: 'gray' };
+    var leftArrowNode = new CurvedArrowNode( radius, 0.25 * Math.PI, 0.75 * Math.PI, arrowOptions );
+    var rightArrowNode = new CurvedArrowNode( radius, 1.25 * Math.PI, 1.75 * Math.PI, arrowOptions );
 
     this.addChild( leftArrowNode );
     this.addChild( rightArrowNode );
 
-    //TODO create curved arrows, double heads
-    // create "normalized" shapes at (0,0) with no rotation
-    var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
-    var radius = atom.diameter / 2;
-    var spacing = 2;
-    var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
-    var rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
-
-    molecule.dipoleProperty.link( function( dipole ) {
-      // transform the arrow shapes to account for atom location molecular dipole orientation
-      var angle = dipole.angle() + Math.PI / 2;
-      var transform = new Transform3( Matrix3.translationFromVector( atom.locationProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
-      leftArrowNode.shape = transform.transformShape( leftArrow );
-      rightArrowNode.shape = transform.transformShape( rightArrow );
-    } );
+    // Align with atom location and molecular dipole
+    var updateTransform = function() {
+      thisNode.transform = new Transform3( Matrix3
+        .translationFromVector( atom.locationProperty.get() )
+        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() ) )
+      );
+    };
+    molecule.dipoleProperty.link( updateTransform );
+    atom.locationProperty.link( updateTransform );
   }
 
   return inherit( Node, MoleculeAngleArrowsNode );
