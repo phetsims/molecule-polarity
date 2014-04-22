@@ -13,6 +13,14 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
+  //TODO for single-head, is tip at startAngle or endAngle?
+  /**
+   * @param {Number}radius radius at the center of the arrow's tail
+   * @param {Number} startAngle starting angle, in radians
+   * @param {Number} endAngle end angle, in radians
+   * @param {*} options
+   * @constructor
+   */
   function CurvedArrowNode( radius, startAngle, endAngle, options ) {
 
     // default options
@@ -24,12 +32,14 @@ define( function( require ) {
       fill: 'black',
       stroke: 'black',
       lineWidth: 1,
-      clockwise: true
+      anticlockwise: false //TODO does this work correctly?
     }, options );
 
+    //TODO verify that tail length is > 0
+
     var shape = new Shape()
-      .arc( 0, 0, radius + options.tailWidth / 2, startAngle, endAngle, false )
-      .arc( 0, 0, radius - options.tailWidth / 2, endAngle, startAngle, true )
+      .arc( 0, 0, radius + options.tailWidth / 2, startAngle, endAngle, options.anticlockwise )
+      .arc( 0, 0, radius - options.tailWidth / 2, endAngle, startAngle, !options.anticlockwise )
       .close();
 
     Path.call( this, shape, options );
