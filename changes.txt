@@ -1,5 +1,5 @@
 4/28/14 create icons for 'Two Atoms' and 'Three Atoms' screens programmatically, delete image files, phetsims/joist#108
-4/22/14 first pass at curved arrows for indicating 'rotate' (no arrow heads)
+4/22/14 #3 first pass at curved arrows for indicating 'rotate' (no arrow heads)
 4/18/14 update surfaces only if they are visible
 4/18/14 #1 rewrite ElectronDensityNode and ElectrostaticPotentialNode using a single path that can be filled with a linear gradient that contains alpha
 4/18/14 change E-field switch to sun.ABSwitch
