@@ -13,6 +13,33 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
+  var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * This is a general algorithm, used herein to compute the point for an arrow's tip.
+   * Given 2 points that define a line segment (the arrow's base), compute the point (the tip) that
+   * is a specified distance away from a perpendicular line that runs through the center point
+   * of the line segment.
+   *
+   * @param x1
+   * @param y1
+   * @param x2
+   * @param y2
+   * @param centerX
+   * @param centerY
+   * @param distance
+   * @returns {Vector2}
+   */
+  var computePerpendicularPoint = function( x1, y1, x2, y2, centerX, centerY, distance ) {
+    var dx = x1 - x2;
+    var dy = y1 - y2;
+    var dist = Math.sqrt( dx * dx + dy * dy );
+    dx /= dist;
+    dy /= dist;
+    var x = centerX + distance * dy;
+    var y = centerY - distance * dx;
+    return new Vector2( x, y );
+  };
 
   /**
    * @param {Number} radius radius at the center of the arrow's tail
@@ -51,17 +78,11 @@ define( function( require ) {
       var startArcOuterY = Math.sin( startAngle ) * ( radius + options.headWidth / 2 );
 
       // tip of the arrow head at startAngle
-      dx = startArcOuterX - startArcInnerX;
-      dy = startArcOuterY - startArcInnerY;
-      dist = Math.sqrt( dx * dx + dy * dy );
-      dx /= dist;
-      dy /= dist;
-      var startTipX = startArcCenterX + options.headHeight * dy;
-      var startTipY = startArcCenterY - options.headHeight * dx;
+      var startTip = computePerpendicularPoint( startArcOuterX, startArcOuterY, startArcInnerX, startArcInnerY, startArcCenterX, startArcCenterY, options.headHeight );
 
       // head at startAngle
       shape.moveTo( startArcInnerX, startArcInnerY )
-        .lineTo( startTipX, startTipY )
+        .lineTo( startTip.x, startTip.y )
         .lineTo( startArcOuterX, startArcOuterY );
     }
 
@@ -77,17 +98,11 @@ define( function( require ) {
     var endArcOuterY = Math.sin( endAngle ) * ( radius + options.headWidth / 2 );
 
     // tip of the arrow head at endAngle
-    dx = endArcInnerX - endArcOuterX;
-    dy = endArcInnerY - endArcOuterY;
-    dist = Math.sqrt( dx * dx + dy * dy );
-    dx /= dist;
-    dy /= dist;
-    var endTipX = endArcCenterX + options.headHeight * dy;
-    var endTipY = endArcCenterY - options.headHeight * dx;
+    var endTip = computePerpendicularPoint( endArcInnerX, endArcInnerY, endArcOuterX, endArcOuterY, endArcCenterX, endArcCenterY, options.headHeight );
 
     // arrow head at endAngle
     shape.lineTo( endArcOuterX, endArcOuterY )
-      .lineTo( endTipX, endTipY )
+      .lineTo( endTip.x, endTip.y )
       .lineTo( endArcInnerX, endArcInnerY );
 
     // inner arc from endAngle to startAngle
