@@ -25,19 +25,16 @@ define( function( require ) {
    * @param y1
    * @param x2
    * @param y2
-   * @param centerX
-   * @param centerY
    * @param distance
    * @returns {Vector2}
    */
-  var computePerpendicularPoint = function( x1, y1, x2, y2, centerX, centerY, distance ) {
+  var computePerpendicularPoint = function( x1, y1, x2, y2, distance ) {
     var dx = x1 - x2;
     var dy = y1 - y2;
-    var dist = Math.sqrt( dx * dx + dy * dy );
-    dx /= dist;
-    dy /= dist;
-    var x = centerX + distance * dy;
-    var y = centerY - distance * dx;
+    var r = Math.sqrt( dx * dx + dy * dy );
+    // midpoint + distance * unitVector
+    var x = ( x1 + x2 ) / 2 + ( distance * dy / r );
+    var y = ( y1 + y2 ) / 2 - ( distance * dx / r );
     return new Vector2( x, y );
   };
 
@@ -60,50 +57,46 @@ define( function( require ) {
       stroke: 'black',
       lineWidth: 1
     }, options );
-
-    // temporary vars for computing arrow tips
-    var dx, dy, dist;
-
+    
     var shape = new Shape();
+    
+    // Points that define the base of an arrow head. 'inner' is closer to the center of the circle, 'outer' is farther away.
+    var baseInnerX, baseInnerY, baseOuterX, baseOuterY;
 
     // optional head at startAngle
     if ( options.doubleHead ) {
 
-      // points on the base of the arrow head at startAngle
-      var startArcCenterX = Math.cos( startAngle ) * radius;
-      var startArcCenterY = Math.sin( startAngle ) * radius;
-      var startArcInnerX = Math.cos( startAngle ) * ( radius - options.headWidth / 2 );
-      var startArcInnerY = Math.sin( startAngle ) * ( radius - options.headWidth / 2 );
-      var startArcOuterX = Math.cos( startAngle ) * ( radius + options.headWidth / 2 );
-      var startArcOuterY = Math.sin( startAngle ) * ( radius + options.headWidth / 2 );
+      // base of the arrow head at startAngle
+      baseInnerX = Math.cos( startAngle ) * ( radius - options.headWidth / 2 );
+      baseInnerY = Math.sin( startAngle ) * ( radius - options.headWidth / 2 );
+      baseOuterX = Math.cos( startAngle ) * ( radius + options.headWidth / 2 );
+      baseOuterY = Math.sin( startAngle ) * ( radius + options.headWidth / 2 );
 
       // tip of the arrow head at startAngle
-      var startTip = computePerpendicularPoint( startArcOuterX, startArcOuterY, startArcInnerX, startArcInnerY, startArcCenterX, startArcCenterY, options.headHeight );
+      var startTip = computePerpendicularPoint( baseOuterX, baseOuterY, baseInnerX, baseInnerY, options.headHeight );
 
       // head at startAngle
-      shape.moveTo( startArcInnerX, startArcInnerY )
+      shape.moveTo( baseInnerX, baseInnerY )
         .lineTo( startTip.x, startTip.y )
-        .lineTo( startArcOuterX, startArcOuterY );
+        .lineTo( baseOuterX, baseOuterY );
     }
 
     // outer arc from startAngle to endAngle
     shape.arc( 0, 0, radius + options.tailWidth / 2, startAngle, endAngle, options.anticlockwise );
 
-    // points on the base of the arrow head at endAngle
-    var endArcCenterX = Math.cos( endAngle ) * radius;
-    var endArcCenterY = Math.sin( endAngle ) * radius;
-    var endArcInnerX = Math.cos( endAngle ) * ( radius - options.headWidth / 2 );
-    var endArcInnerY = Math.sin( endAngle ) * ( radius - options.headWidth / 2 );
-    var endArcOuterX = Math.cos( endAngle ) * ( radius + options.headWidth / 2 );
-    var endArcOuterY = Math.sin( endAngle ) * ( radius + options.headWidth / 2 );
+    // base of the arrow head at endAngle
+    baseInnerX = Math.cos( endAngle ) * ( radius - options.headWidth / 2 );
+    baseInnerY = Math.sin( endAngle ) * ( radius - options.headWidth / 2 );
+    baseOuterX = Math.cos( endAngle ) * ( radius + options.headWidth / 2 );
+    baseOuterY = Math.sin( endAngle ) * ( radius + options.headWidth / 2 );
 
     // tip of the arrow head at endAngle
-    var endTip = computePerpendicularPoint( endArcInnerX, endArcInnerY, endArcOuterX, endArcOuterY, endArcCenterX, endArcCenterY, options.headHeight );
+    var endTip = computePerpendicularPoint( baseInnerX, baseInnerY, baseOuterX, baseOuterY, options.headHeight );
 
     // arrow head at endAngle
-    shape.lineTo( endArcOuterX, endArcOuterY )
+    shape.lineTo( baseOuterX, baseOuterY )
       .lineTo( endTip.x, endTip.y )
-      .lineTo( endArcInnerX, endArcInnerY );
+      .lineTo( baseInnerX, baseInnerY );
 
     // inner arc from endAngle to startAngle
     shape.arc( 0, 0, radius - options.tailWidth / 2, endAngle, startAngle, !options.anticlockwise )
