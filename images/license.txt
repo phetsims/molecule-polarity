@@ -1,6 +1,2 @@
-TwoAtoms-home-icon.png source=PhET author=Bryce Gruneich
-TwoAtoms-navbar-icon.png source=PhET author=Bryce Gruneich
-ThreeAtoms-home-icon.png source=PhET author=Bryce Gruneich
-ThreeAtoms-navbar-icon.png source=PhET author=Bryce Gruneich
 RealMolecules-home-icon.png source=PhET
 RealMolecules-navbar-icon.png source=PhET
