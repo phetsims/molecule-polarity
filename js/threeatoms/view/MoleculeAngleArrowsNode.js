@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var CurvedArrowNode = require( 'MOLECULE_POLARITY/common/view/CurvedArrowNode' );
+  var CurvedArrowNode = require( 'MOLECULE_POLARITY/threeatoms/view/CurvedArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -26,7 +26,7 @@ define( function( require ) {
     // arrow configuration
     var arrowOptions = { headWidth: 20, headHeight: 20, tailWidth: 10, fill: atom.color, stroke: 'gray' };
     var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
-    var theta = 0.15 * Math.PI; // central angle of the arc that the arrow traces
+    var theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
     Node.call( this, { children: [
       new CurvedArrowNode( radius, -theta, theta, arrowOptions ),
