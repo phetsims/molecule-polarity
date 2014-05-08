@@ -15,7 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeAtoms/view/ThreeAtomsControlPanel' );
   var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeAtoms/view/TriatomicMoleculeNode' );
@@ -44,10 +44,14 @@ define( function( require ) {
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     var enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
     var controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
-    var resetAllButton = new ResetAllButtonDeprecated( function() {
-      model.reset();
-      viewProperties.reset();
+    var resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+        viewProperties.reset();
+      },
+      scale: 1.32
     } );
+
 
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
