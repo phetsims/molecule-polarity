@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var ElectronegativityTableNode = require( 'MOLECULE_POLARITY/realmolecules/view/ElectronegativityTableNode' );
   var inherit = require( 'PHET_CORE/inherit' );

@@ -1,3 +1,4 @@
+5/27/14 change 'imports' to 'modules' in require comments
 # 1.0.0-dev.5 4/28/14
 4/28/14 #3 compute midpoint of arrow head's base
 4/28/14 #3 factor out duplicate code used to compute the arrow tip

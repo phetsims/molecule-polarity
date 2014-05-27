@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Range = require( 'DOT/Range' );

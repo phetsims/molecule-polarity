@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
   var EFieldSwitch = require( 'MOLECULE_POLARITY/common/view/EFieldSwitch' );

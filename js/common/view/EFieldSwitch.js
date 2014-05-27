@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var ABSwitch = require( 'SUN/ABSwitch' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );

@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Property = require( 'AXON/Property' );
   var RealMolecule = require( 'MOLECULE_POLARITY/realmolecules/model/RealMolecule' );
 

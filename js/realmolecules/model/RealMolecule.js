@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
 
   /**

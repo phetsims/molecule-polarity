@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );

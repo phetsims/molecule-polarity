@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Vector2 = require( 'DOT/Vector2' );
 

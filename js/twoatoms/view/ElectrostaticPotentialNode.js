@@ -11,7 +11,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );

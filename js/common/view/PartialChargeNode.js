@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );

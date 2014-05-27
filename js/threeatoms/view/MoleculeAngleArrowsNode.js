@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var CurvedArrowNode = require( 'MOLECULE_POLARITY/threeatoms/view/CurvedArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );

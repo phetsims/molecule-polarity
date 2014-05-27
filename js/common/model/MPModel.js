@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var EField = require( 'MOLECULE_POLARITY/common/model/EField' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Util = require( 'DOT/Util' );

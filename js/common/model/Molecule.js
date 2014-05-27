@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Matrix3 = require( 'DOT/Matrix3' );
   var Property = require( 'AXON/Property' );
   var Transform3 = require( 'DOT/Transform3' );

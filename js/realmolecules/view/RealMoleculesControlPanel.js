@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );

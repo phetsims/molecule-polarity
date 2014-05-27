@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var DiatomicMolecule = require( 'MOLECULE_POLARITY/twoatoms/model/DiatomicMolecule' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPModel = require( 'MOLECULE_POLARITY/common/model/MPModel' );

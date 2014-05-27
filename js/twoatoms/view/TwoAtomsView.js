@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var BondCharacterNode = require( 'MOLECULE_POLARITY/twoatoms/view/BondCharacterNode' );
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicMoleculeNode' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );

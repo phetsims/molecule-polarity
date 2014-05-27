@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Atom = require( 'MOLECULE_POLARITY/common/model/Atom' );
   var Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
   var inherit = require( 'PHET_CORE/inherit' );
