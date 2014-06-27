@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
 
   function EField( options ) {
@@ -16,11 +17,10 @@ define( function( require ) {
     this.enabledProperty = new Property( options.enabled );
   }
 
-  EField.prototype = {
+  return inherit( Object, EField, {
+
     reset: function() {
       this.enabledProperty.reset();
     }
-  };
-
-  return EField;
+  } );
 } );

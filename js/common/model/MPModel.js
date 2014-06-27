@@ -12,6 +12,7 @@ define( function( require ) {
 
   // modules
   var EField = require( 'MOLECULE_POLARITY/common/model/EField' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Util = require( 'DOT/Util' );
 
@@ -37,7 +38,7 @@ define( function( require ) {
     return normalizedAngle;
   };
 
-  MPModel.prototype = {
+  return inherit( Object, MPModel, {
 
     reset: function() {
       this.eField.reset();
@@ -91,7 +92,5 @@ define( function( require ) {
       var deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
       molecule.angleProperty.set( molecule.angleProperty.get() + deltaMoleculeAngle );
     }
-  };
-
-  return MPModel;
+  } );
 } );

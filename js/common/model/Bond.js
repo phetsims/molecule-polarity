@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -37,7 +38,7 @@ define( function( require ) {
     );
   }
 
-  Bond.prototype = {
+  return inherit( Object, Bond, {
 
     // gets the center of the bond, the midpoint between the 2 atom locations
     getCenter: function() {
@@ -54,7 +55,5 @@ define( function( require ) {
     getLength: function() {
       return this.atom1.locationProperty.get().distance( this.atom2.locationProperty.get() );
     }
-  };
-
-  return Bond;
+  } );
 } );

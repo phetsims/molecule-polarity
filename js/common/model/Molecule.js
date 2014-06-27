@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Property = require( 'AXON/Property' );
   var Transform3 = require( 'DOT/Transform3' );
@@ -53,7 +54,7 @@ define( function( require ) {
     } );
   }
 
-  Molecule.prototype = {
+  return inherit( Object, Molecule, {
 
     reset: function() {
       this.angleProperty.reset();
@@ -71,7 +72,5 @@ define( function( require ) {
       this.bonds.forEach( function( bond ) { sum.add( bond.dipoleProperty.get() ); } );
       this.dipoleProperty.set( sum );
     }
-  };
-
-  return Molecule;
+  } );
 } );

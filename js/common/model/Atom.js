@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -29,13 +30,11 @@ define( function( require ) {
     this.partialChargeProperty = new Property( 0 ); // partial charge is zero until this atom participates in a bond
   }
 
-  Atom.prototype = {
+  return inherit( Object, Atom, {
 
     reset: function() {
       this.electronegativityProperty.reset();
       // do not reset location and partial charge, they will be reset by their parent molecule
     }
-  };
-
-  return Atom;
+  } );
 } );

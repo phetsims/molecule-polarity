@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var RealMolecule = require( 'MOLECULE_POLARITY/realmolecules/model/RealMolecule' );
 
@@ -67,11 +68,10 @@ define( function( require ) {
     this.moleculeProperty = new Property( this.molecules[4] );
   }
 
-  RealMoleculesModel.prototype = {
+  return inherit( Object, RealMoleculesModel, {
+
     reset: function() {
       this.moleculeProperty.reset();
     }
-  };
-
-  return RealMoleculesModel;
+  } );
 } );
