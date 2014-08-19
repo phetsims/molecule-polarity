@@ -33,7 +33,7 @@ define( function( require ) {
   function TwoAtomsView( model ) {
 
     var thisView = this;
-    ScreenView.call( thisView, { renderer: 'svg' } );
+    ScreenView.call( thisView, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
     var viewProperties = new PropertySet( {
@@ -132,5 +132,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( ScreenView, TwoAtomsView, { layoutBounds: MPConstants.LAYOUT_BOUNDS } );
+  return inherit( ScreenView, TwoAtomsView );
 } );
