@@ -1,8 +1,7 @@
 TODO list for molecule-polarity (HTML5)
 
-REAL MOLECULES SCREEN
 - #5 support IUPAC convention for bond dipole direction
-- investigate JSmol (10 hours)
+- #6 integrate JSmol
 - how to read Jmol resource files? (.mol2)
 
 MIGRATE TO COMMON
