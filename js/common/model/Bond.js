@@ -28,7 +28,7 @@ define( function( require ) {
     thisBond.dipoleProperty = new DerivedProperty( [ atom1.locationProperty, atom2.locationProperty, atom1.electronegativityProperty, atom2.electronegativityProperty ],
       function( location1, location2, electronegativity1, electronegativity2 ) {
         var deltaEN = electronegativity2 - electronegativity1;
-        var magnitude = Math.abs( deltaEN ); // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
+        var magnitude = -Math.abs( deltaEN ); // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
         var angle = thisBond.getAngle();
         if ( deltaEN < 0 ) {
           angle += Math.PI;
