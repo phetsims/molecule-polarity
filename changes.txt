@@ -1,3 +1,4 @@
+# 1.0.0-dev.7 9/2/14
 9/2/14 #5 add 'IUPAC' query parameter, which uses IUPAC convention for direction of bond dipoles
 9/2/14 show 'Real Molecules' screen only when 'dev' query parameter is provided
 8/31/14 #5 revert direction of bond dipoles
