@@ -18,7 +18,7 @@ define( function( require ) {
   // strings
   var simTitle = require( 'string!MOLECULE_POLARITY/molecule-polarity.name' );
 
-  var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen(), new RealMoleculesScreen() ];
+  var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen() ];
 
   var simOptions = {
     credits: {
@@ -30,6 +30,9 @@ define( function( require ) {
 
   // Appending '?dev' to the URL will enable developer-only features.
   if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+
+    screens.push( new RealMoleculesScreen() );
+
     simOptions = _.extend( {
       // add dev-specific options here
       showHomeScreen: false,
