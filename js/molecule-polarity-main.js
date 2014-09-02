@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var RealMoleculesScreen = require( 'MOLECULE_POLARITY/realmolecules/RealMoleculesScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
@@ -28,10 +29,10 @@ define( function( require ) {
     }
   };
 
-  // Appending '?dev' to the URL will enable developer-only features.
-  if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+  // developer-only features
+  if ( MPQueryParameters.DEV ) {
 
-    screens.push( new RealMoleculesScreen() );
+    screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
 
     simOptions = _.extend( {
       // add dev-specific options here
