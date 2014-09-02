@@ -11,10 +11,10 @@ define( function( require ) {
   var getQueryParameter = window.phetcommon.getQueryParameter;
 
   return {
-    // enable developer-only features
+    // enables developer-only features
     DEV: getQueryParameter( 'dev' ) || false,
 
-    // whether to use the IUPAC convention for dipole direction
+    // enables IUPAC convention for dipole direction, see issue #5
     IUPAC: getQueryParameter( 'IUPAC' ) || false
   };
 } );
