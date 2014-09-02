@@ -11,7 +11,7 @@ define( function( require ) {
   var getQueryParameter = window.phetcommon.getQueryParameter;
 
   return {
-    // enabled developer-only features
+    // enable developer-only features
     DEV: getQueryParameter( 'dev' ) || false,
 
     // whether to use the IUPAC convention for dipole direction
