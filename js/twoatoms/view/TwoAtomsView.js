@@ -23,9 +23,6 @@ define( function( require ) {
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var TwoAtomsControlPanel = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsControlPanel' );
 
-  // strings
-  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
-
   /**
    * @param {TwoAtomsModel} model
    * @constructor
@@ -50,7 +47,7 @@ define( function( require ) {
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     var bondCharacterNode = new BondCharacterNode( model.molecule );
-    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( electrostaticPotentialString );
+    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( {
