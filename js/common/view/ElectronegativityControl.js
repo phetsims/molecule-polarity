@@ -31,7 +31,7 @@ define( function( require ) {
   /**
    * @param {Atom} atom the atom whose electronegativity we're controlling
    * @param {Molecule} molecule molecule that the atom belongs to, for pausing animation while this control is used
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function ElectronegativityControl( atom, molecule, options ) {

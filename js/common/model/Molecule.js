@@ -20,7 +20,7 @@ define( function( require ) {
    * @param {Array<Bond>} bonds bonds between the atoms
    * @param {Function} updateAtomLocations
    * @param {Function} updatePartialCharges
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function Molecule( atoms, bonds, updateAtomLocations, updatePartialCharges, options ) {

@@ -32,7 +32,7 @@ define( function( require ) {
    * @param {String} title
    * @param {String} leftLabel
    * @param {String} rightLabel
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function SurfaceColorKeyNode( colors, title, leftLabel, rightLabel, options ) {

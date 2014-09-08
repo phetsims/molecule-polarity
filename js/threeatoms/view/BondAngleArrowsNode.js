@@ -20,7 +20,7 @@ define( function( require ) {
   /**
    * @param {Molecule} molecule
    * @param {Atom} atom
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function BondAngleArrowsNode( molecule, atom, options ) {

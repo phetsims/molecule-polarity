@@ -23,7 +23,7 @@ define( function( require ) {
   var atomBString = require( 'string!MOLECULE_POLARITY/B' );
 
   /**
-   * @param {*} options see supertype constructor
+   * @param {Object} options see supertype constructor
    * @constructor
    */
   function DiatomicMolecule( options ) {
