@@ -25,7 +25,7 @@ define( function( require ) {
   var atomCString = require( 'string!MOLECULE_POLARITY/C' );
 
   /**
-   * @param {Object} options see supertype constructor
+   * @param {Object} [options] see supertype constructor
    * @constructor
    */
   function TriatomicMolecule( options ) {

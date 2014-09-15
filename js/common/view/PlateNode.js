@@ -18,7 +18,7 @@ define( function( require ) {
 
   /**
    * @param {EField} eField
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function PlateNode( eField, options ) {
