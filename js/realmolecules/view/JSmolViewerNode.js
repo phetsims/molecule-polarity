@@ -11,15 +11,114 @@ define( function( require ) {
   'use strict';
 
   // inherit
+  var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var DOM = require( 'SCENERY/nodes/DOM' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
+  var mol2Data = require( 'MOLECULE_POLARITY/realmolecules/model/mol2Data' );//TODO delete this
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+
+  // Jmol is loaded via <script> in the .html file, this prevents lint from complaining the Jmol is undefined.
+  var Jmol = window.Jmol;
+
+  // each Jmol object instance is given a new identifier, numbered sequentially
+  var instanceNumber = 0;
+
+  // function to call when the Jmol object has been created and is ready to receive commands
+  var readyFunction = function( applet ) {
+    console.log( applet._id + ' is ready' );
+  };
+
+  // loads a molecule by URL, then sets things that must be set whenever molecule changes
+  var createLoadScript = function( mol2String ) {
+    var URL = window.URL || window.webkitURL || window;  // identify a URL object, not standardized across browsers
+    var url = URL.createObjectURL( new Blob( [mol2String], { type: 'plain/text', endings: 'native' } ) );
+    return 'load ' + url + '\n' +  // load molecule
+           'select oxygen; color [255,85,0]\n' + // colorblind red oxygen
+           'select all\n' + // be polite to other commands that assume that everything is selected
+           'wireframe 0.1\n' +
+           'spacefill 25%\n' +
+           'color bonds [128,128,128]\n' + // gray bonds
+           'hover off\n' + // don't show atom label when hovering with mouse
+           'dipole bonds on width 0.05\n' +
+           'dipole molecular on width 0.05\n' +
+           'color atoms translucent 0.2\n' +
+           'color bonds translucent 0.2\n' +
+           'label %[atomName]|\u03B4=%.2[partialCharge]\n' +
+           'set labelalignment center\n' +
+           'set labeloffset 0 0\n' +
+           'color labels black\n' +
+           'font labels 18 sanserif\n' +
+           'isosurface VDW map MEP colorscheme "RWB" translucent\n';
+  };
+
+  // Jmol actions to unbind, all except _rotate
+  var unbindActions = [
+    '_clickFrank',
+    '_depth',
+    '_dragDrawObject',
+    '_dragDrawPoint',
+    '_dragLabel',
+    '_dragSelected',
+    '_navTranslate',
+    '_pickAtom',
+    '_pickIsosurface',
+    '_pickLabel',
+    '_pickMeasure',
+    '_pickNavigate',
+    '_pickPoint',
+    '_popupMenu',
+    '_reset',
+    '_rotateSelected',
+    '_rotateZ',
+    '_rotateZorZoom',
+    '_select',
+    '_selectAndNot',
+    '_selectNone',
+    '_selectOr',
+    '_selectToggle',
+    '_selectToggleOr',
+    '_setMeasure',
+    '_slab',
+    '_slabAndDepth',
+    '_slideZoom',
+    '_spinDrawObjectCCW',
+    '_spinDrawObjectCW',
+    '_swipe',
+    '_translate',
+    '_wheelZoom'
+  ];
+
+  var createUnbindScript = function() {
+    var script = '';
+    unbindActions.forEach( function( action ) {
+      script += 'unbind ' + action + '\n';
+    } );
+    return script;
+  };
+
+  // script to run when the Jmol object has finished loading
+  var script =
+//    'set antialiasDisplay on\n' +  //TODO significant performance hit, is this necessary?
+    'set autobond off\n' +
+    'set frank off\n' +  // hide the Jmol logo
+    'set dipoleScale 0.75\n' +  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
+    createUnbindScript() +
+    createLoadScript( mol2Data.H2O );
+
+  /**
+   * @param {String|Color} colorSpec
+   * @returns {string} of the form [r,g,b]
+   */
+  var toJmolColor = function( colorSpec ) {
+      var color = Color.toColor( colorSpec );
+    return '[' + color.red + ',' + color.green + ',' + color.blue + ']';
+  };
 
   /**
    * @param {Property<RealMolecule>} moleculeProperty
@@ -29,101 +128,81 @@ define( function( require ) {
   function JSmolViewerNode( moleculeProperty, jsmolProperties, options ) {
 
     options = _.extend( {
-      backgroundColor: 'white',
+      viewerFill: 'white',
+      viewerStroke: 'black', // {String} color of the viewer's background
       viewerSize: new Dimension2( 200, 200 )
     }, options );
 
-    var thisNode = this;
     this.moleculeProperty = moleculeProperty; // @private
+    this.jsmolProperties = jsmolProperties; // @private
+    this.options = options; // @private
 
-    var rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, { stroke: 'rgba(0,0,0,0.25)', fill: options.backgroundColor } );
-    var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
-    var font = new PhetFont( 18 );
-    var moleculeText = new SubSupText( '?', { font: font } );
-    this.bondDipolesText = new Text( 'bond dipoles', { font: font } );
-    this.molecularDipoleText = new Text( 'molecular dipole', { font: font } );
-    this.partialChargesText = new Text( 'partial charges', { font: font } );
-    this.atomLabelsText = new Text( 'atom labels', { font: font } );
-    this.surfaceTypeText = new Text( '?', { font: font } );
+    // @private Put the Jmol object in a div, sized to match the Jmol object
+    this.div = document.createElement( 'div' );
+    this.div.style.width = options.viewerSize.width + 'px';
+    this.div.style.height = options.viewerSize.height + 'px';
+    this.div.style.border = '1px solid black';
 
-    titleNode.centerX = rectNode.centerX;
-    titleNode.centerY = rectNode.centerY;
+    // @public JSmol must be added to the document after the sim is running
+    this.initialized = false;
 
-    moleculeProperty.link( function( molecule ) {
-      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')';
-    } );
+    options.preventTransform = true;
+    DOM.call( this, this.div, options );
 
-    var debugText = new VBox( {
-      align: 'left',
-      spacing: 10,
-      centerX: rectNode.centerX,
-      centerY: rectNode.centerY,
-      children: [
-        titleNode,
-        new Line( 0, 0, 0, 30 ),
-        moleculeText,
-        new Line( 0, 0, 0, 30 ),
-        this.bondDipolesText,
-        this.molecularDipoleText,
-        this.partialChargesText,
-        this.atomLabelsText,
-        this.surfaceTypeText
-      ]
-    } );
-
-    Node.call( this, { children: [ rectNode, debugText ] } );
-
-    jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
-      thisNode.setBondDipolesVisible( visible );
-    } );
-
-    jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-      thisNode.setMolecularDipoleVisible( visible );
-    } );
-
-    jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
-      thisNode.setPartialChargesVisible( visible );
-    } );
-
-    jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
-      thisNode.setAtomLabelsVisible( visible );
-    } );
-
-    jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
-      thisNode.setSurfaceType( surfaceType );
-    } );
+//    jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
+//      console.log( 'bond dipoles visible: ' + visible );//TODO
+//    } );
+//
+//    jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+//      console.log( 'molecular dipole visible: ' + visible );//TODO
+//    } );
+//
+//    jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
+//      console.log( 'partial charges visible: ' + visible );//TODO
+//    } );
+//
+//    jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
+//      console.log( 'atom labels visible: ' + visible );//TODO
+//    } );
+//
+//    jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
+//      console.log( 'surface type: ' + surfaceType );//TODO
+//    } );
   }
 
-  return inherit( Node, JSmolViewerNode, {
+  return inherit( DOM, JSmolViewerNode, {
+
+    // Call this after the sim has started running
+    initialize: function() {
+
+      assert && assert( !this.initialized );
+
+      // configuration for the JSmol object, called Info by convention
+      var Info = {
+        color: toJmolColor( this.options.viewerFill ), // background color of the JSmol object
+        width: this.options.viewerSize.width, // width of the Jmol object in pixels or expressed as percent of its container width as a string in quotes: '100%'.
+        height: this.options.viewerSize.width, // height, similar format as width
+        debug: false, // Set this value to true if you are having problems getting your page to show the Jmol object
+        j2sPath: 'jsmol-14.2.4/j2s', // path to the suite of JavaScript libraries needed for JSmol
+        use: 'HTML5', // determines the various options to be tried (applet and surrogates) and the order in which to try them
+        script: script, // script to run when the Jmol object has finished loading
+        readyFunction: readyFunction, // function to call when the Jmol object has been created and is ready to receive commands
+        disableJ2SLoadMonitor: true, // disable display of messages in a single line, colored, at bottom-left of the page
+        disableInitialConsole: true // avoids the display of messages in the Jmol panel while the Jmol object is being built initially
+      };
+
+      Jmol.setDocument( false );
+      var appletId = 'jmolApplet' + instanceNumber++;
+      Jmol.getApplet( appletId, Info );
+      this.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
+      window[appletId]._cover( false ); //TODO why do we need to call this?
+
+      this.initialized = true;
+    },
 
     // @return {Array<Element>}
     getElements: function() {
       return []; //TODO
-    },
-
-    setBondDipolesVisible: function( visible ) {
-      //TODO
-      this.bondDipolesText.fill = visible ? 'black' : 'gray';
-    },
-
-    setMolecularDipoleVisible: function( visible ) {
-      //TODO
-      this.molecularDipoleText.fill = visible ? 'black' : 'gray';
-    },
-
-    setPartialChargesVisible: function( visible ) {
-      //TODO
-      this.partialChargesText.fill = visible ? 'black' : 'gray';
-    },
-
-    setAtomLabelsVisible: function( visible ) {
-      //TODO
-      this.atomLabelsText.fill = visible ? 'black' : 'gray';
-    },
-
-    setSurfaceType: function( surfaceType ) {
-      //TODO
-      this.surfaceTypeText.text = ( 'surface: ' + surfaceType );
     }
   } );
 } );

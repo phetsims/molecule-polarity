@@ -36,12 +36,13 @@ define( function( require ) {
     // view-specific properties
     var jsmolProperties = new JSmolProperties();
 
-    // nodes
-    var viewerNode = new JSmolViewerNode( model.moleculeProperty, jsmolProperties, {
-      backgroundColor: MPColors.SCREEN_BACKGROUND,
+    // @private
+    this.jsmolViewerNode = new JSmolViewerNode( model.moleculeProperty, jsmolProperties, {
+      viewerFill: MPColors.SCREEN_BACKGROUND,
       viewerSize: new Dimension2( 450, 450 )
     } );
-    var electronegativityTableNode = new ElectronegativityTableNode( viewerNode );
+
+    var electronegativityTableNode = new ElectronegativityTableNode( this.jsmolViewerNode );
     var comboBoxListParent = new Node();
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
     var electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
@@ -59,7 +60,7 @@ define( function( require ) {
     // Parent for all nodes added to this screen
     var rootNode = new Node( { children: [
       // nodes are rendered in this order
-      viewerNode,
+      this.jsmolViewerNode,
       electronegativityTableNode,
       moleculesComboBox,
       controlPanel,
@@ -73,10 +74,10 @@ define( function( require ) {
 
     // layout ---------------------------------
 
-    viewerNode.left = 75;
+    this.jsmolViewerNode.left = 75;
 
     // centered above viewer
-    electronegativityTableNode.centerX = viewerNode.centerX;
+    electronegativityTableNode.centerX = this.jsmolViewerNode.centerX;
     electronegativityTableNode.top = this.layoutBounds.top + 25;
 
     // centered below electronegativity table
@@ -84,14 +85,14 @@ define( function( require ) {
     electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
 
     // below color keys
-    viewerNode.top = electrostaticPotentialRWBColorKey.bottom + 15;
+    this.jsmolViewerNode.top = electrostaticPotentialRWBColorKey.bottom + 15;
 
     // centered below viewer
-    moleculesComboBox.centerX = viewerNode.centerX;
-    moleculesComboBox.top = viewerNode.bottom + 15;
+    moleculesComboBox.centerX = this.jsmolViewerNode.centerX;
+    moleculesComboBox.top = this.jsmolViewerNode.bottom + 15;
 
     // right of viewer
-    controlPanel.left = viewerNode.right + 100;
+    controlPanel.left = this.jsmolViewerNode.right + 100;
     controlPanel.centerY = this.layoutBounds.centerY;
 
     // bottom-right corner of the screen
@@ -111,5 +112,13 @@ define( function( require ) {
     } );
   }
 
-  return inherit( ScreenView, RealMoleculesView );
+  return inherit( ScreenView, RealMoleculesView, {
+
+    // Initialize the JSmol viewer
+    step: function() {
+      if ( !this.jsmolViewerNode.initialized ) {
+        this.jsmolViewerNode.initialize();
+      }
+    }
+  } );
 } );

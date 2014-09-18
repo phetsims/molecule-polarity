@@ -23,6 +23,7 @@ define( function( require ) {
     ATOM_B: 'rgb( 0, 255, 0 )',
     ATOM_C: 'rgb( 255, 175, 175)',
     BOND: 'rgb( 90, 90, 90)',
+    OXYGEN: 'rgb( 255,85,0 )', // colorblind red
 
     // dipoles
     BOND_DIPOLE: 'black',
