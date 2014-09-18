@@ -1,9 +1,11 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO investigate JSmol and figure out how to do this
 /**
- * Scenery node that displays a Jmol viewer.
+ * Scenery node that displays a JSmol viewer.
  * Jmol scripting language is documented at http://chemapps.stolaf.edu/jmol/docs
+ *
+ * NOTE: This implementation requires JSmol 14.2.4, which incorrectly idenifies itself
+ * as 14.2.3 when Jmol._version is inspected in the debugger.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
