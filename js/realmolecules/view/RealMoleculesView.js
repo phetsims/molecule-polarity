@@ -13,10 +13,10 @@ define( function( require ) {
   var ElectronegativityTableNode = require( 'MOLECULE_POLARITY/realmolecules/view/ElectronegativityTableNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var JSmolViewerNode = require( 'MOLECULE_POLARITY/realmolecules/view/JSmolViewerNode' );
+  var JSmolProperties = require( 'MOLECULE_POLARITY/realmolecules/view/JSmolProperties' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
   var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
@@ -34,28 +34,24 @@ define( function( require ) {
     ScreenView.call( thisView, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
-    var viewProperties = new PropertySet( {
-      bondDipolesVisible: false,
-      molecularDipoleVisible: false,
-      partialChargesVisible: false,
-      atomElectronegativitiesVisible: false,
-      atomLabelsVisible: true,
-      surfaceType: SurfaceType.NONE
-    } );
+    var jsmolProperties = new JSmolProperties();
 
     // nodes
-    var viewerNode = new JSmolViewerNode( model.moleculeProperty, MPColors.SCREEN_BACKGROUND, new Dimension2( 450, 450 ) );
+    var viewerNode = new JSmolViewerNode( model.moleculeProperty, jsmolProperties, {
+      backgroundColor: MPColors.SCREEN_BACKGROUND,
+      viewerSize: new Dimension2( 450, 450 )
+    } );
     var electronegativityTableNode = new ElectronegativityTableNode( viewerNode );
     var comboBoxListParent = new Node();
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
     var electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
-    var controlPanel = new RealMoleculesControlPanel( viewProperties );
+    var controlPanel = new RealMoleculesControlPanel( jsmolProperties );
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
-        viewProperties.reset();
+        jsmolProperties.reset();
       },
       scale: 1.32
     } );
@@ -104,28 +100,11 @@ define( function( require ) {
 
     // synchronization with view properties ------------------------------
 
-    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
-      viewerNode.setBondDipolesVisible( visible );
-    } );
-
-    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-      viewerNode.setMolecularDipoleVisible( visible );
-    } );
-
-    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
-      viewerNode.setPartialChargesVisible( visible );
-    } );
-
-    viewProperties.atomElectronegativitiesVisibleProperty.link( function( visible ) {
+    jsmolProperties.atomElectronegativitiesVisibleProperty.link( function( visible ) {
       electronegativityTableNode.visible = visible;
     } );
 
-    viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
-      viewerNode.setAtomLabelsVisible( visible );
-    } );
-
-    viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
-      viewerNode.setSurfaceType( surfaceType );
+    jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
       electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
       electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );

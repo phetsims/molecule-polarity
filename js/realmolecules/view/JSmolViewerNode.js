@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // inherit
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -22,15 +23,20 @@ define( function( require ) {
 
   /**
    * @param {Property<RealMolecule>} moleculeProperty
-   * @param {Color} backgroundColor
-   * @param {Dimension2} viewerSize
+   * @param {JSmolProperties} jsmolProperties
    * @constructor
    */
-  function JSmolViewerNode( moleculeProperty, backgroundColor, viewerSize ) {
+  function JSmolViewerNode( moleculeProperty, jsmolProperties, options ) {
 
-    this.moleculeProperty = moleculeProperty;
+    options = _.extend( {
+      backgroundColor: 'white',
+      viewerSize: new Dimension2( 200, 200 )
+    }, options );
 
-    var rectNode = new Rectangle( 0, 0, viewerSize.width, viewerSize.height, { stroke: 'rgba(0,0,0,0.25)', fill: backgroundColor } );
+    var thisNode = this;
+    this.moleculeProperty = moleculeProperty; // @private
+
+    var rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, { stroke: 'rgba(0,0,0,0.25)', fill: options.backgroundColor } );
     var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
     var font = new PhetFont( 18 );
     var moleculeText = new SubSupText( '?', { font: font } );
@@ -66,6 +72,26 @@ define( function( require ) {
     } );
 
     Node.call( this, { children: [ rectNode, debugText ] } );
+
+    jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
+      thisNode.setBondDipolesVisible( visible );
+    } );
+
+    jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+      thisNode.setMolecularDipoleVisible( visible );
+    } );
+
+    jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
+      thisNode.setPartialChargesVisible( visible );
+    } );
+
+    jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
+      thisNode.setAtomLabelsVisible( visible );
+    } );
+
+    jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
+      thisNode.setSurfaceType( surfaceType );
+    } );
   }
 
   return inherit( Node, JSmolViewerNode, {

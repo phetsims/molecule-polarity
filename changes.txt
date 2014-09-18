@@ -1,3 +1,4 @@
+9/18/14 create JSmolProperties, encapsulation of properties related to JSmol viewer options
 9/18/14 integrate mol2 data as strings
 9/8/14 change title of surface color keys in 'Real Molecule' screen
 9/8/14 use {Object} instead of {*} as type expression for options param
