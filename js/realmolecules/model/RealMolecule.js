@@ -15,13 +15,13 @@ define( function( require ) {
   /**
    * @param {String} symbol
    * @param {String} name
-   * @param {String} resourceFilename the data file that will be provided to Jmol
+   * @param {String} mol2Data molecule data description, in mol2 format
    * @constructor
    */
-  function RealMolecule( symbol, name, resourceFilename ) {
+  function RealMolecule( symbol, name, mol2Data ) {
     this.symbol = ChemUtils.toSubscript( symbol );
     this.name = name;
-    this.resourceFilename = resourceFilename; //TODO how to handle Jmol resource file?
+    this.mol2Data = mol2Data;
   }
 
   return RealMolecule;
