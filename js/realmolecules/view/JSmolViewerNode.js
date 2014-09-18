@@ -16,7 +16,6 @@ define( function( require ) {
   var DOM = require( 'SCENERY/nodes/DOM' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var mol2Data = require( 'MOLECULE_POLARITY/realmolecules/model/mol2Data' );//TODO delete this
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
@@ -34,10 +33,14 @@ define( function( require ) {
     console.log( applet._id + ' is ready' );
   };
 
-  // loads a molecule by URL, then sets things that must be set whenever molecule changes
-  var createLoadScript = function( mol2String ) {
+  /**
+   * Loads a molecule by URL, then sets things that must be set whenever molecule changes
+   * @param {RealMolecule} molecule
+   * @returns {String} JSmol script
+   */
+  var createLoadScript = function( molecule ) {
     var URL = window.URL || window.webkitURL || window;  // identify a URL object, not standardized across browsers
-    var url = URL.createObjectURL( new Blob( [mol2String], { type: 'plain/text', endings: 'native' } ) );
+    var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'plain/text', endings: 'native' } ) );
     return 'load ' + url + '\n' +  // load molecule
            'select oxygen; color [255,85,0]\n' + // colorblind red oxygen
            'select all\n' + // be polite to other commands that assume that everything is selected
@@ -94,24 +97,34 @@ define( function( require ) {
     '_wheelZoom'
   ];
 
-  var createUnbindScript = function() {
+  /**
+   * Creates a script for unbinding mouse actions from JSmol actions.
+   * @returns {String} JSmol script
+   */
+  var createUnbindScript = function( actions ) {
     var script = '';
-    unbindActions.forEach( function( action ) {
+    actions.forEach( function( action ) {
       script += 'unbind ' + action + '\n';
     } );
     return script;
   };
 
-  // script to run when the Jmol object has finished loading
-  var script =
-//    'set antialiasDisplay on\n' +  //TODO significant performance hit, is this necessary?
-    'set autobond off\n' +
-    'set frank off\n' +  // hide the Jmol logo
-    'set dipoleScale 0.75\n' +  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
-    createUnbindScript() +
-    createLoadScript( mol2Data.H2O );
+  /**
+   * Script to run when the Jmol object has finished loading
+   * @param {RealMolecule} molecule
+   * @returns {String} JSmol script
+   */
+  var createInitScript = function( molecule ) {
+    return 'set autobond off\n' +
+           'set frank off\n' +  // hide the Jmol logo
+           'set dipoleScale 0.75\n' +  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
+//           'set antialiasDisplay on\n' +  //TODO significant performance hit, is this necessary?
+           createUnbindScript( unbindActions ) +
+           createLoadScript( molecule );
+  };
 
   /**
+   * Converts a JavaScript or Scenery color to a Jmol color.
    * @param {String|Color} colorSpec
    * @returns {string} of the form [r,g,b]
    */
@@ -123,6 +136,7 @@ define( function( require ) {
   /**
    * @param {Property<RealMolecule>} moleculeProperty
    * @param {JSmolProperties} jsmolProperties
+   * @param {Object} [options]
    * @constructor
    */
   function JSmolViewerNode( moleculeProperty, jsmolProperties, options ) {
@@ -185,7 +199,7 @@ define( function( require ) {
         debug: false, // Set this value to true if you are having problems getting your page to show the Jmol object
         j2sPath: 'jsmol-14.2.4/j2s', // path to the suite of JavaScript libraries needed for JSmol
         use: 'HTML5', // determines the various options to be tried (applet and surrogates) and the order in which to try them
-        script: script, // script to run when the Jmol object has finished loading
+        script: createInitScript( this.moleculeProperty.get() ), // script to run when the Jmol object has finished loading
         readyFunction: readyFunction, // function to call when the Jmol object has been created and is ready to receive commands
         disableJ2SLoadMonitor: true, // disable display of messages in a single line, colored, at bottom-left of the page
         disableInitialConsole: true // avoids the display of messages in the Jmol panel while the Jmol object is being built initially
