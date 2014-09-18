@@ -3,5 +3,7 @@ TODO list for molecule-polarity (HTML5)
 - #5 support IUPAC convention for bond dipole direction
 - #6 integrate JSmol
 - how to read Jmol resource files? (.mol2)
+- model.txt
+- implementation-notes.txt
 
 MIGRATE TO COMMON
