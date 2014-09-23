@@ -1,9 +1,10 @@
 TODO list for molecule-polarity (HTML5)
 
 JSmol
-- fails on Safari desktop with "Unrecognized file format for file blob:http://localhost/..."
-- can't select from portion of combo box list that is above Jmol viewer
-- Jmol.getAppletHtml fails intermittently for multi-screen sim
+- fails on Mac+Safari with "Unrecognized file format for file blob:http://localhost/..."
+- can't select from portion of combo box list that is above Jmol viewer in Mac+Chrome, Mac+Safari
+- can't interact with JSmol viewer in Mac+Firefox
+- Jmol.getAppletHtml fails intermittently for multi-screen sim (Mac+Chrome, others?)
 - 'set antialiasDisplay true' results in big performance degradation, ok to omit?
 - resolve LGPL licensing issues
 - remove instruction for getting JSmol from README.md
