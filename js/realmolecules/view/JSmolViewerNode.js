@@ -35,26 +35,12 @@ define( function( require ) {
   // each Jmol object instance is given a new identifier, numbered sequentially
   var instanceNumber = 0;
 
+  // identify a URL object, not standardized across browsers
+  var URL = window.URL || window.webkitURL || window;
+
   // function to call when the Jmol object has been created and is ready to receive commands
   var readyFunction = function( applet ) {
-    console.log( applet._id + ' is ready' );
-  };
-
-  /**
-   * Loads a molecule by URL, then sets things that must be set whenever molecule changes
-   * @param {RealMolecule} molecule
-   * @returns {string} JSmol script
-   */
-  var createLoadScript = function( molecule ) {
-    var URL = window.URL || window.webkitURL || window;  // identify a URL object, not standardized across browsers
-    var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'plain/text', endings: 'native' } ) );
-    return 'load ' + url + '\n' +  // load molecule
-           'select oxygen; color [255,85,0]\n' + // colorblind red oxygen
-           'select all\n' + // be polite to other commands that assume that everything is selected
-           'wireframe 0.1\n' +
-           'spacefill 25%\n' +
-           'color bonds [128,128,128]\n' + // gray bonds
-           'hover off\n'; // don't show atom label when hovering with mouse
+    console.log( applet._id + ' is ready' ); //TODO
   };
 
   // Jmol actions to unbind, all except _rotate
@@ -116,8 +102,7 @@ define( function( require ) {
            'set frank off\n' +  // hide the Jmol logo
            'set dipoleScale 0.75\n' +  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
 //           'set antialiasDisplay on\n' +  //TODO significant performance hit, is this necessary?
-           createUnbindScript( unbindActions ) +
-           createLoadScript( molecule );
+           createUnbindScript( unbindActions );
   };
 
   /**
@@ -128,6 +113,33 @@ define( function( require ) {
   var toJmolColor = function( colorSpec ) {
       var color = Color.toColor( colorSpec );
     return '[' + color.red + ',' + color.green + ',' + color.blue + ']';
+  };
+
+  /**
+   * Loads a molecule by URL, then sets things that must be set whenever molecule changes
+   * @param applet
+   * @param {RealMolecule} molecule
+   * @returns {string} JSmol script
+   */
+  var updateMolecule = function( applet, molecule, jsmolProperties ) {
+    var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'plain/text', endings: 'native' } ) );
+
+    // load molecule
+    Jmol.script( applet, 'load ' + url + '\n' );
+
+    // reset misc settings that don't persist
+    Jmol.script( applet,
+                 'select oxygen; color [255,85,0]\n' + // colorblind red oxygen
+                 'select all\n' + // be polite to other commands that assume that everything is selected
+                 'wireframe 0.1\n' + // draw bonds as lines
+                 'spacefill 25%\n' +  // render atoms as a percentage of the van der Waals radius
+                 'color bonds [128,128,128]\n' + // gray bonds
+                 'hover off' ); // don't show atom label when hovering with mouse
+
+    // rest more settings that don't persist
+    updateDipoles( applet, jsmolProperties.bondDipolesVisibleProperty.get(), jsmolProperties.molecularDipoleVisibleProperty.get() );
+    updateAtomLabelsAndPartialCharges( applet, jsmolProperties.atomLabelsVisibleProperty.get(), jsmolProperties.partialChargesVisibleProperty.get() );
+    updateSurface( applet, jsmolProperties.surfaceTypeProperty.get() );
   };
 
   /**
@@ -274,6 +286,10 @@ define( function( require ) {
       this.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
       var applet = window[appletId];
       applet._cover( false ); //TODO why do we need to call this?
+
+      this.moleculeProperty.link( function( molecule ) {
+         updateMolecule( applet, molecule, thisNode.jsmolProperties);
+      } );
 
       this.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
         updateDipoles( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );

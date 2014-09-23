@@ -1,3 +1,4 @@
+9/23/14 updateMolecule for JSmol viewer
 9/23/14 wire up surface-type radio buttons to JSmol viewer
 9/23/14 wire up atom labels and partial charges check boxes to JSmol viewer
 9/23/14 wire up dipole check boxes to JSmol viewer
