@@ -435,6 +435,7 @@ define( function( require ) {
         height: this.options.viewerSize.width, // height, similar format as width
         debug: false, // Set this value to true if you are having problems getting your page to show the Jmol object
         j2sPath: 'jsmol-14.2.4/j2s', // path to the suite of JavaScript libraries needed for JSmol
+        serverURL: 'jsmol-14.2.4/php/jsmol.php', // URL to be used for getting file data into non-Java modalities
         use: 'HTML5', // determines the various options to be tried (applet and surrogates) and the order in which to try them
         script: SCRIPT_INIT, // script to run when the Jmol object has finished loading
         readyFunction: readyFunction, // function to call when the Jmol object has been created and is ready to receive commands
