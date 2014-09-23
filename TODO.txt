@@ -1,11 +1,18 @@
 TODO list for molecule-polarity (HTML5)
 
-- Jmol.getAppletHtml fails intermittently for multi-screen sim
+JSmol
 - fails on Safari desktop with "Unrecognized file format for file blob:http://localhost/..."
 - can't select from portion of combo box list that is above Jmol viewer
+- Jmol.getAppletHtml fails intermittently for multi-screen sim
+- 'set antialiasDisplay true' results in big performance degradation, ok to omit?
+- resolve LGPL licensing issues
 - remove instruction for getting JSmol from README.md
+
+Features
 - #5 support IUPAC convention for bond dipole direction
-- #6 integrate JSmol
+- Options dialog
+
+Documentation
 - model.txt
 - implementation-notes.txt
 
