@@ -147,9 +147,9 @@ define( function( require ) {
                  'hover off' ); // don't show atom label when hovering with mouse
 
     // reset sim-specific settings that don't persist
-    updateDipoles( applet, jsmolProperties.bondDipolesVisibleProperty.get(), jsmolProperties.molecularDipoleVisibleProperty.get() );
-    updateLabels( applet, jsmolProperties.atomLabelsVisibleProperty.get(), jsmolProperties.partialChargesVisibleProperty.get() );
-    updateSurface( applet, jsmolProperties.surfaceTypeProperty.get() );
+    updateDipoles( applet, jsmolProperties.bondDipolesVisible, jsmolProperties.molecularDipoleVisible );
+    updateLabels( applet, jsmolProperties.atomLabelsVisible, jsmolProperties.partialChargesVisible );
+    updateSurface( applet, jsmolProperties.surfaceType );
   };
 
   /**
@@ -407,20 +407,20 @@ define( function( require ) {
           updateElements( applet, thisNode.elementsProperty );
         } );
 
-        thisNode.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
-          updateDipoles( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
+        thisNode.jsmolProperties.bondDipolesVisibleProperty.link( function( bondDipolesVisible ) {
+          updateDipoles( applet, bondDipolesVisible, thisNode.jsmolProperties.molecularDipoleVisible );
         } );
 
-        thisNode.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-          updateDipoles( applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
+        thisNode.jsmolProperties.molecularDipoleVisibleProperty.link( function( molecularDipoleVisible ) {
+          updateDipoles( applet, thisNode.jsmolProperties.bondDipolesVisible, molecularDipoleVisible );
         } );
 
-        thisNode.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
-          updateLabels( applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
+        thisNode.jsmolProperties.partialChargesVisibleProperty.link( function( partialChargesVisible ) {
+          updateLabels( applet, thisNode.jsmolProperties.atomLabelsVisible, partialChargesVisible );
         } );
 
-        thisNode.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
-          updateLabels( applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
+        thisNode.jsmolProperties.atomLabelsVisibleProperty.link( function( atomLabelsVisible ) {
+          updateLabels( applet, atomLabelsVisible, thisNode.jsmolProperties.partialChargesVisible );
         } );
 
         thisNode.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
