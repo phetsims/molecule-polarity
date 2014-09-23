@@ -44,10 +44,18 @@ define( function( require ) {
   };
 
   // Script to run when the Jmol object has finished loading
-  var INIT_SCRIPT =
+  var SCRIPT_INIT =
     'set autobond off\n' +
     'set frank off\n' +  // hide the Jmol logo
     'set dipoleScale 0.75\n';  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
+
+  // Script to determine the element number and color of each atom in the current molecule.
+  var SCRIPT_GET_ELEMENT_NUMBERS_AND_COLORS =
+    'n = {*}.length\n' +
+    'for ( i = 0; i < n; i++ ) {\n' +
+    '    print {*}[i].elemno\n' +
+    '    print {*}[i].color\n' +
+    '}';
 
   // Jmol actions to unbind, all except _rotate
   var ACTIONS = [
@@ -247,6 +255,8 @@ define( function( require ) {
     // @public JSmol must be added to the document after the sim is running
     this.initialized = false;
 
+    this.applet = null; // @private
+
     options.preventTransform = true;
     DOM.call( this, this.div, options );
   }
@@ -268,7 +278,7 @@ define( function( require ) {
         debug: false, // Set this value to true if you are having problems getting your page to show the Jmol object
         j2sPath: 'jsmol-14.2.4/j2s', // path to the suite of JavaScript libraries needed for JSmol
         use: 'HTML5', // determines the various options to be tried (applet and surrogates) and the order in which to try them
-        script: INIT_SCRIPT, // script to run when the Jmol object has finished loading
+        script: SCRIPT_INIT, // script to run when the Jmol object has finished loading
         readyFunction: readyFunction, // function to call when the Jmol object has been created and is ready to receive commands
         disableJ2SLoadMonitor: true, // disable display of messages in a single line, colored, at bottom-left of the page
         disableInitialConsole: true // avoids the display of messages in the Jmol panel while the Jmol object is being built initially
@@ -277,38 +287,38 @@ define( function( require ) {
       Jmol.setDocument( false );
       var appletId = 'jmolApplet' + instanceNumber++;
       Jmol.getApplet( appletId, Info );
-      this.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
-      var applet = window[appletId];
-      applet._cover( false ); //TODO why do we need to call this?
+      thisNode.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
+      thisNode.applet = window[appletId]; // so that we don't pollute our code with window[appletId]
+      thisNode.applet._cover( false ); //TODO why do we need to call this?
 
-      unbindActions( applet, ACTIONS );
+      unbindActions( thisNode.applet, ACTIONS );
 
-      this.moleculeProperty.link( function( molecule ) {
-         updateMolecule( applet, molecule, thisNode.jsmolProperties);
+      thisNode.moleculeProperty.link( function( molecule ) {
+         updateMolecule( thisNode.applet, molecule, thisNode.jsmolProperties);
       } );
 
-      this.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
-        updateDipoles( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
+      thisNode.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
+        updateDipoles( thisNode.applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
       } );
 
-      this.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-        updateDipoles( applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
+      thisNode.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+        updateDipoles( thisNode.applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
       } );
 
-      this.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
-        updateAtomLabelsAndPartialCharges( applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
+      thisNode.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
+        updateAtomLabelsAndPartialCharges( thisNode.applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
       } );
 
-      this.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
-        updateAtomLabelsAndPartialCharges( applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
+      thisNode.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
+        updateAtomLabelsAndPartialCharges( thisNode.applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
       } );
 
-      this.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
+      thisNode.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
         console.log( 'surface type: ' + surfaceType );//TODO
-        updateSurface( applet, surfaceType );
+        updateSurface( thisNode.applet, surfaceType );
       } );
 
-      this.initialized = true;
+      thisNode.initialized = true;
     },
 
     // @return {Array<Element>}
