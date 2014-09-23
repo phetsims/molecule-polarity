@@ -36,10 +36,10 @@ define( function( require ) {
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   /**
-   * @param {*} viewProperties
+   * @param {JSmolProperties} jsmolProperties
    * @constructor
    */
-  function RealMoleculesControlPanel( viewProperties ) {
+  function RealMoleculesControlPanel( jsmolProperties ) {
 
     var controlTextOptions = { font: MPConstants.CONTROL_FONT };
     var radioButtonOptions = { radius: MPConstants.RADIO_BUTTON_RADIUS };
@@ -49,21 +49,21 @@ define( function( require ) {
 
     // 'View' check boxes
     var bondDipolesLabel = new HBox( { spacing: 10, children: [ new Text( bondDipolesString, controlTextOptions ), BondDipoleNode.createIcon() ] } );
-    var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
+    var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, jsmolProperties.bondDipolesVisibleProperty );
     var molecularDipoleLabel = new HBox( { spacing: 10, children: [ new Text( molecularDipoleString, controlTextOptions ), MolecularDipoleNode.createIcon() ] } );
-    var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
-    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
-    var atomLabelsCheckBox = new CheckBox( new Text( atomLabelsString, controlTextOptions ), viewProperties.atomLabelsVisibleProperty );
-    var atomElectronegativitiesCheckBox = new CheckBox( new Text( atomElectronegativitiesString, controlTextOptions ), viewProperties.atomElectronegativitiesVisibleProperty );
+    var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, jsmolProperties.molecularDipoleVisibleProperty );
+    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), jsmolProperties.partialChargesVisibleProperty );
+    var atomLabelsCheckBox = new CheckBox( new Text( atomLabelsString, controlTextOptions ), jsmolProperties.atomLabelsVisibleProperty );
+    var atomElectronegativitiesCheckBox = new CheckBox( new Text( atomElectronegativitiesString, controlTextOptions ), jsmolProperties.atomElectronegativitiesVisibleProperty );
 
     // 'Surface' title
     var surfaceTitleNode = new Text( surfaceString, { font: MPConstants.TITLE_FONT } );
 
     // 'Surface' radio buttons
-    var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialRWBButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_RWB, new Text( electrostaticPotentialRWBString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialROYGBButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB, new Text( electrostaticPotentialROYGBString, controlTextOptions ), radioButtonOptions );
-    var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
+    var noneButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
+    var electrostaticPotentialRWBButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_RWB, new Text( electrostaticPotentialRWBString, controlTextOptions ), radioButtonOptions );
+    var electrostaticPotentialROYGBButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB, new Text( electrostaticPotentialROYGBString, controlTextOptions ), radioButtonOptions );
+    var electronDensityButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
 
     // nodes in the control panel, in the order they will appear vertically
     var children = [

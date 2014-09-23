@@ -4,7 +4,7 @@
  * Scenery node that displays a JSmol viewer.
  * Jmol scripting language is documented at http://chemapps.stolaf.edu/jmol/docs
  *
- * NOTE: This implementation requires JSmol 14.2.4, which incorrectly idenifies itself
+ * NOTE: This implementation requires JSmol 14.2.4, which incorrectly identifies itself
  * as 14.2.3 when Jmol._version is inspected in the debugger.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -38,7 +38,7 @@ define( function( require ) {
   /**
    * Loads a molecule by URL, then sets things that must be set whenever molecule changes
    * @param {RealMolecule} molecule
-   * @returns {String} JSmol script
+   * @returns {string} JSmol script
    */
   var createLoadScript = function( molecule ) {
     var URL = window.URL || window.webkitURL || window;  // identify a URL object, not standardized across browsers
@@ -50,10 +50,6 @@ define( function( require ) {
            'spacefill 25%\n' +
            'color bonds [128,128,128]\n' + // gray bonds
            'hover off\n' + // don't show atom label when hovering with mouse
-           'dipole bonds on width 0.05\n' +
-           'dipole molecular on width 0.05\n' +
-           'color atoms translucent 0.2\n' +
-           'color bonds translucent 0.2\n' +
            'label %[atomName]|\u03B4=%.2[partialCharge]\n' +
            'set labelalignment center\n' +
            'set labeloffset 0 0\n' +
@@ -101,7 +97,7 @@ define( function( require ) {
 
   /**
    * Creates a script for unbinding mouse actions from JSmol actions.
-   * @returns {String} JSmol script
+   * @returns {string} JSmol script
    */
   var createUnbindScript = function( actions ) {
     var script = '';
@@ -114,7 +110,7 @@ define( function( require ) {
   /**
    * Script to run when the Jmol object has finished loading
    * @param {RealMolecule} molecule
-   * @returns {String} JSmol script
+   * @returns {string} JSmol script
    */
   var createInitScript = function( molecule ) {
     return 'set autobond off\n' +
@@ -127,7 +123,7 @@ define( function( require ) {
 
   /**
    * Converts a JavaScript or Scenery color to a Jmol color.
-   * @param {String|Color} colorSpec
+   * @param {string|Color} colorSpec
    * @returns {string} of the form [r,g,b]
    */
   var toJmolColor = function( colorSpec ) {
@@ -136,7 +132,37 @@ define( function( require ) {
   };
 
   /**
-   * @param {Property<RealMolecule>} moleculeProperty
+   * When any dipole is visible, make the atoms and bonds translucent, so we can see the dipoles through them.
+   * @param applet
+   * @param {boolean} bondDipolesVisible
+   * @param {boolean} molecularDipoleVisible
+   */
+  var updateTranslucency = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
+    var arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
+    Jmol.script( applet, 'color atoms translucent ' + arg );
+    Jmol.script( applet, 'color bonds translucent ' + arg );
+  };
+
+  var setDipolesVisible = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
+    if ( bondDipolesVisible ) {
+      Jmol.script( applet, 'dipole bonds on width 0.05' );
+    }
+    else {
+      Jmol.script( applet, 'dipole bonds off' );
+    }
+
+    if ( molecularDipoleVisible ) {
+      Jmol.script( applet, 'dipole molecular on width 0.05' );
+    }
+    else {
+      Jmol.script( applet, 'dipole molecular off' );
+    }
+
+    updateTranslucency( applet, bondDipolesVisible, molecularDipoleVisible );
+  };
+
+  /**
+   * @param {Property.<RealMolecule>} moleculeProperty
    * @param {JSmolProperties} jsmolProperties
    * @param {Object} [options]
    * @constructor
@@ -164,26 +190,6 @@ define( function( require ) {
 
     options.preventTransform = true;
     DOM.call( this, this.div, options );
-
-//    jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
-//      console.log( 'bond dipoles visible: ' + visible );//TODO
-//    } );
-//
-//    jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-//      console.log( 'molecular dipole visible: ' + visible );//TODO
-//    } );
-//
-//    jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
-//      console.log( 'partial charges visible: ' + visible );//TODO
-//    } );
-//
-//    jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
-//      console.log( 'atom labels visible: ' + visible );//TODO
-//    } );
-//
-//    jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
-//      console.log( 'surface type: ' + surfaceType );//TODO
-//    } );
   }
 
   return inherit( DOM, JSmolViewerNode, {
@@ -192,6 +198,8 @@ define( function( require ) {
     initialize: function() {
 
       assert && assert( !this.initialized );
+
+      var thisNode = this;
 
       // configuration for the JSmol object, called Info by convention
       var Info = {
@@ -211,7 +219,28 @@ define( function( require ) {
       var appletId = 'jmolApplet' + instanceNumber++;
       Jmol.getApplet( appletId, Info );
       this.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
-      window[appletId]._cover( false ); //TODO why do we need to call this?
+      var applet = window[appletId];
+      applet._cover( false ); //TODO why do we need to call this?
+
+      this.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
+        setDipolesVisible( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
+      } );
+
+      this.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+        setDipolesVisible( applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
+      } );
+
+      this.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
+        console.log( 'partial charges visible: ' + visible );//TODO
+      } );
+
+      this.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
+        console.log( 'atom labels visible: ' + visible );//TODO
+      } );
+
+      this.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
+        console.log( 'surface type: ' + surfaceType );//TODO
+      } );
 
       this.initialized = true;
     },
