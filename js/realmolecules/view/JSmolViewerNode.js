@@ -166,7 +166,8 @@ define( function( require ) {
   var updateElements = function( applet, elementsProperty ) {
 
     /*
-     * Returns a string where elemno and color are separated by newlines, 3 color components are surrounded by curly braces.
+     * Returns a string where elemno and color are separated by newlines.
+     * Each color is 3 components (rgb) surrounded by curly braces.
      * Eg, for HF: '1\n{255 255 255}\n9\n{144 224 80}\n'
      */
     var status = Jmol.evaluateVar( applet,
@@ -190,9 +191,9 @@ define( function( require ) {
      * Eg, for HF: ['1','255','255','255','9','144','224','80']
      */
     var tokens = status.split( ' ' );
-    assert && assert( tokens.length % 4 === 0 );
+    assert && assert( tokens.length % 4 === 0 ); // each element has 4 tokens
 
-    // Convert the tokens to an array of {Element}
+    // Convert the tokens to an array of {Element}.
     var elements = [];
     for ( var i = 0; i < tokens.length; i = i + 4 ) {
       var elementNumber = parseInt( tokens[i] );
