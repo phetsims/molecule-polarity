@@ -53,10 +53,6 @@ define( function( require ) {
            'spacefill 25%\n' +
            'color bonds [128,128,128]\n' + // gray bonds
            'hover off\n' + // don't show atom label when hovering with mouse
-           'set labelalignment center\n' +
-           'set labeloffset 0 0\n' +
-           'color labels black\n' +
-           'font labels 18 sanserif\n' +
            'isosurface VDW map MEP colorscheme "RWB" translucent\n';
   };
 
@@ -175,6 +171,7 @@ define( function( require ) {
         }
         args += DELTA + "=%.2[partialCharge]"; // show partial charges
       }
+      //TODO try combining into 1 script so that labels don't jump around
       Jmol.script( applet, 'label ' + args );
       Jmol.script( applet, 'set labelalignment center; set labeloffset 0 0' );  // center labels on atoms
       Jmol.script( applet, 'color labels black' ); // color for all labels
