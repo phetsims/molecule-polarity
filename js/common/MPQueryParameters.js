@@ -15,6 +15,9 @@ define( function( require ) {
     DEV: getQueryParameter( 'dev' ) || false,
 
     // enables IUPAC convention for dipole direction, see issue #5
-    IUPAC: getQueryParameter( 'IUPAC' ) || false
+    IUPAC: getQueryParameter( 'IUPAC' ) || false,
+
+    // enabled console debugging output for JSmol
+    JSMOL_DEBUG: getQueryParameter( 'JSmolDebug' ) || false
   };
 } );
