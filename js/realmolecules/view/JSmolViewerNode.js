@@ -132,7 +132,7 @@ define( function( require ) {
   var updateMolecule = function( applet, molecule, jsmolProperties ) {
     debug( 'updateMolecule' );
 
-    var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'plain/text', endings: 'native' } ) );
+    var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'text/plain', endings: 'native' } ) );
 
     // load molecule
     doScript( applet, 'load ' + url + '\n' );
