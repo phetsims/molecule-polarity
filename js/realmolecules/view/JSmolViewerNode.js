@@ -24,6 +24,9 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
+  // strings
+  var DELTA = '\u03B4';
+
   // Jmol is loaded via <script> in the .html file, this prevents lint from complaining the Jmol is undefined.
   var Jmol = window.Jmol;
 
@@ -50,7 +53,6 @@ define( function( require ) {
            'spacefill 25%\n' +
            'color bonds [128,128,128]\n' + // gray bonds
            'hover off\n' + // don't show atom label when hovering with mouse
-           'label %[atomName]|\u03B4=%.2[partialCharge]\n' +
            'set labelalignment center\n' +
            'set labeloffset 0 0\n' +
            'color labels black\n' +
@@ -143,7 +145,7 @@ define( function( require ) {
     Jmol.script( applet, 'color bonds translucent ' + arg );
   };
 
-  var setDipolesVisible = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
+  var updateDipoles = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
     if ( bondDipolesVisible ) {
       Jmol.script( applet, 'dipole bonds on width 0.05' );
     }
@@ -159,6 +161,28 @@ define( function( require ) {
     }
 
     updateTranslucency( applet, bondDipolesVisible, molecularDipoleVisible );
+  };
+
+  var updateAtomLabelsAndPartialCharges = function( applet, atomLabelsVisible, partialChargesVisible ) {
+    var args = '';
+    if ( atomLabelsVisible || partialChargesVisible ) {
+      if ( atomLabelsVisible ) {
+        args += ' %[atomName]'; // show element and sequential atom index
+      }
+      if ( partialChargesVisible ) {
+        if ( atomLabelsVisible ) {
+          args += '|'; // line separator
+        }
+        args += DELTA + "=%.2[partialCharge]"; // show partial charges
+      }
+      Jmol.script( applet, 'label ' + args );
+      Jmol.script( applet, 'set labelalignment center; set labeloffset 0 0' );  // center labels on atoms
+      Jmol.script( applet, 'color labels black' ); // color for all labels
+      Jmol.script( applet, 'font labels 18 sanserif' ); // font for all labels
+    }
+    else {
+      Jmol.script( applet, 'label off' );
+    }
   };
 
   /**
@@ -223,19 +247,21 @@ define( function( require ) {
       applet._cover( false ); //TODO why do we need to call this?
 
       this.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
-        setDipolesVisible( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
+        updateDipoles( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
       } );
 
       this.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-        setDipolesVisible( applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
+        updateDipoles( applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
       } );
 
       this.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
         console.log( 'partial charges visible: ' + visible );//TODO
+        updateAtomLabelsAndPartialCharges( applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
       } );
 
       this.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
         console.log( 'atom labels visible: ' + visible );//TODO
+        updateAtomLabelsAndPartialCharges( applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
       } );
 
       this.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
