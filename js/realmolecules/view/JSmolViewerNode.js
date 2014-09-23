@@ -64,24 +64,6 @@ define( function( require ) {
     'set frank off\n' +  // hide the Jmol logo
     'set dipoleScale 0.75\n';  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
 
-  // Determines if the current molecule is homogeneous diatomic (2 atoms of the same type.)
-  var SCRIPT_IS_HOMOGENEOUS_DIATOMIC =
-    "numberOfAtoms = {*}.length\n" +
-    "homogeneousDiatomic = \"" + RESULT_TRUE + "\"\n" +
-    "if ( numberOfAtoms == 2 ) {\n" +
-    "    firstElement = {*}[0].element\n" +
-    "    for ( i = 0; i < numberOfAtoms; i++ ) {\n" +
-    "        nextElement = {*}[i].element\n" +
-    "        if ( firstElement != nextElement ) {\n" +
-    "            homogeneousDiatomic = \"" + RESULT_FALSE + "\"\n" +
-    "        }\n" +
-    "    }\n" +
-    "}\n" +
-    "else {\n" +
-    "    homogeneousDiatomic = \"" + RESULT_FALSE + "\"\n" +
-    "}\n" +
-    "print homogeneousDiatomic";
-
   // Determines the element number and color of each atom in the current molecule.
   var SCRIPT_GET_ELEMENT_NUMBERS_AND_COLORS =
     'n = {*}.length\n' +
@@ -151,7 +133,7 @@ define( function( require ) {
   };
 
   /**
-   * Loads a molecule by URL, then sets things that must be set whenever molecule changes
+   * Loads a molecule by URL, then sets things that must be set whenever molecule changes.
    * @param applet
    * @param {RealMolecule} molecule
    * @returns {string} JSmol script
@@ -192,6 +174,12 @@ define( function( require ) {
     doScript( applet, 'color bonds translucent ' + arg );
   };
 
+  /**
+   * Updates visibility of dipoles
+   * @param applet
+   * @param {boolean} bondDipolesVisible
+   * @param {boolean} molecularDipoleVisible
+   */
   var updateDipoles = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
     debug( 'updateDipoles' );
     if ( bondDipolesVisible ) {
@@ -211,6 +199,12 @@ define( function( require ) {
     updateTranslucency( applet, bondDipolesVisible, molecularDipoleVisible );
   };
 
+  /**
+   * Updates visibility of atom labels and partial charges.
+   * @param applet
+   * @param {boolean} atomLabelsVisible
+   * @param {boolean} partialChargesVisible
+   */
   var updateAtomLabelsAndPartialCharges = function( applet, atomLabelsVisible, partialChargesVisible ) {
     debug( 'updateAtomLabelsAndPartialCharges' );
     var args = '';
@@ -235,6 +229,11 @@ define( function( require ) {
     }
   };
 
+  /**
+   * Updates the type of surface displayed.
+   * @param applet
+   * @param {SurfaceType} surfaceType
+   */
   var updateSurface = function( applet, surfaceType ) {
     debug( 'updateSurface' );
     var diatomic = isHomogeneousDiatomic( applet );
@@ -267,12 +266,35 @@ define( function( require ) {
     }
   };
 
+  /**
+   * Determines if the current molecule is homogeneous diatomic (2 atoms of the same type.)
+   * @param applet
+   * @returns {boolean}
+   */
   var isHomogeneousDiatomic = function( applet ) {
     debug( 'isHomogeneousDiatomic' );
-    var status = Jmol.evaluateVar( applet, "script('" + SCRIPT_IS_HOMOGENEOUS_DIATOMIC + "')" );
-    console.log( 'status=' + status );
+
+    var status = Jmol.evaluateVar( applet,
+        "script('" +
+        "numberOfAtoms = {*}.length\n" +
+        "homogeneousDiatomic = \"" + RESULT_TRUE + "\"\n" +
+        "if ( numberOfAtoms == 2 ) {\n" +
+        "    firstElement = {*}[0].element\n" +
+        "    for ( i = 0; i < numberOfAtoms; i++ ) {\n" +
+        "        nextElement = {*}[i].element\n" +
+        "        if ( firstElement != nextElement ) {\n" +
+        "            homogeneousDiatomic = \"" + RESULT_FALSE + "\"\n" +
+        "        }\n" +
+        "    }\n" +
+        "}\n" +
+        "else {\n" +
+        "    homogeneousDiatomic = \"" + RESULT_FALSE + "\"\n" +
+        "}\n" +
+        "print homogeneousDiatomic" +
+        "')" );
+
     if ( status === null || status === 'ERROR') {
-      throw new Error( "isHomogeneousDiatomic: Jmol script error" );
+      throw new Error( "JSmolViewerNode.isHomogeneousDiatomic, script error: " + status );
     }
     else {
       return ( status === 'true' ? true : false );
@@ -289,7 +311,7 @@ define( function( require ) {
 
     options = _.extend( {
       viewerFill: 'white',
-      viewerStroke: 'black', // {String} color of the viewer's background
+      viewerStroke: 'black', // {string} color of the viewer's background
       viewerSize: new Dimension2( 200, 200 )
     }, options );
 
@@ -301,7 +323,7 @@ define( function( require ) {
     this.div = document.createElement( 'div' );
     this.div.style.width = options.viewerSize.width + 'px';
     this.div.style.height = options.viewerSize.height + 'px';
-    this.div.style.border = '1px solid black';
+    this.div.style.border = '1px solid ' + options.viewerStroke;
 
     // @public JSmol must be added to the document after the sim is running
     this.initialized = false;
@@ -335,11 +357,11 @@ define( function( require ) {
         disableInitialConsole: true // avoids the display of messages in the Jmol panel while the Jmol object is being built initially
       };
 
-      Jmol.setDocument( false );
-      var appletId = 'jmolApplet' + instanceNumber++;
-      Jmol.getApplet( appletId, Info );
-      thisNode.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
+      Jmol.setDocument( false ); // tell Jmol not to add the viewer to our HTML document
+      var appletId = 'jmolApplet' + instanceNumber++; // create a unique id for this viewer
+      Jmol.getApplet( appletId, Info ); // creates window[appletId]
       thisNode.applet = window[appletId]; // so that we don't pollute our code with window[appletId]
+      thisNode.div.innerHTML = Jmol.getAppletHtml( thisNode.applet ); // add the viewer's HTML fragment to this node's HTML element
       thisNode.applet._cover( false ); //TODO why do we need to call this?
 
       unbindActions( thisNode.applet, ACTIONS );
