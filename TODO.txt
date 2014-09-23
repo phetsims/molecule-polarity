@@ -7,7 +7,7 @@ JSmol
 - Jmol initialization fails intermittently for multi-screen sim, Jmol becomes undefined (Mac+Chrome, others?)
 - 'set antialiasDisplay true' results in big performance degradation, ok to omit?
 - resolve LGPL licensing issues
-- remove instruction for getting JSmol from README.md
+- remove instructions for getting JSmol from README.md
 
 Features
 - #5 support IUPAC convention for bond dipole direction
