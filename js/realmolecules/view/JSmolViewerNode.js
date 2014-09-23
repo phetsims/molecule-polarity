@@ -178,6 +178,9 @@ define( function( require ) {
         "    print {*}[i].color\n" +
         "}" +
         "')" );
+    if ( status === null || status === 'ERROR' ) {
+      throw new Error( "JSmolViewerNode.updateElements, script error: " + status );
+    }
 
     /*
      * Replace the special chars with spaces, to make this easier to parse.
@@ -249,22 +252,29 @@ define( function( require ) {
    */
   var updateAtomLabelsAndPartialCharges = function( applet, atomLabelsVisible, partialChargesVisible ) {
     debug( 'updateAtomLabelsAndPartialCharges' );
-    var args = '';
+
     if ( atomLabelsVisible || partialChargesVisible ) {
+
+      var args = '';
       if ( atomLabelsVisible ) {
         args += ' %[atomName]'; // show element and sequential atom index
       }
+
       if ( partialChargesVisible ) {
         if ( atomLabelsVisible ) {
           args += '|'; // line separator
         }
         args += DELTA + '=%.2[partialCharge]'; // show partial charges
       }
-      //TODO try combining into 1 script so that labels don't jump around
-      doScript( applet, 'label ' + args );
-      doScript( applet, 'set labelalignment center; set labeloffset 0 0' );  // center labels on atoms
-      doScript( applet, 'color labels black' ); // color for all labels
-      doScript( applet, 'font labels 18 sanserif' ); // font for all labels
+
+      // Do this as a single script, or you'll see atom labels jump around.
+      doScript( applet,
+          'label ' + args + '\n' +
+          'set labelalignment center\n' + // center labels on atoms
+          'set labeloffset 0 0\n' +
+          'color labels black\n' +   // color for all labels
+          'font labels 18 sanserif\n'  // font for all labels
+      );
     }
     else {
       doScript( applet, 'label off' );
