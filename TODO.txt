@@ -1,6 +1,7 @@
 TODO list for molecule-polarity (HTML5)
 
 - Jmol.getAppletHtml fails intermittently for multi-screen sim
+- can't select from portion of combo box list that is above Jmol viewer
 - Jmol._version says "JSmol 14.2.3 July 23, 2014" for 14.2.4
 - remove instruction for getting JSmol from README.md
 - #5 support IUPAC convention for bond dipole direction

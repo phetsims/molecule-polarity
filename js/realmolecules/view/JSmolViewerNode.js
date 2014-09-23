@@ -28,6 +28,11 @@ define( function( require ) {
 
   // strings
   var DELTA = '\u03B4';
+  var RESULT_TRUE = 'true';
+  var RESULT_FALSE = 'false';
+
+  // constants
+  var PRINT_DEBUG = true;
 
   // Jmol is loaded via <script> in the .html file, this prevents lint from complaining the Jmol is undefined.
   var Jmol = window.Jmol;
@@ -37,6 +42,16 @@ define( function( require ) {
 
   // identify a URL object, not standardized across browsers
   var URL = window.URL || window.webkitURL || window;
+
+  var debug = function( message ) {
+      if ( PRINT_DEBUG ) {
+        console.log( message );
+      }
+  };
+
+  var doScript = function( applet, script ) {
+    Jmol.script( applet, script );
+  };
 
   // function to call when the Jmol object has been created and is ready to receive commands
   var readyFunction = function( applet ) {
@@ -49,7 +64,25 @@ define( function( require ) {
     'set frank off\n' +  // hide the Jmol logo
     'set dipoleScale 0.75\n';  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
 
-  // Script to determine the element number and color of each atom in the current molecule.
+  // Determines if the current molecule is homogeneous diatomic (2 atoms of the same type.)
+  var SCRIPT_IS_HOMOGENEOUS_DIATOMIC =
+    "numberOfAtoms = {*}.length\n" +
+    "homogeneousDiatomic = \"" + RESULT_TRUE + "\"\n" +
+    "if ( numberOfAtoms == 2 ) {\n" +
+    "    firstElement = {*}[0].element\n" +
+    "    for ( i = 0; i < numberOfAtoms; i++ ) {\n" +
+    "        nextElement = {*}[i].element\n" +
+    "        if ( firstElement != nextElement ) {\n" +
+    "            homogeneousDiatomic = \"" + RESULT_FALSE + "\"\n" +
+    "        }\n" +
+    "    }\n" +
+    "}\n" +
+    "else {\n" +
+    "    homogeneousDiatomic = \"" + RESULT_FALSE + "\"\n" +
+    "}\n" +
+    "print homogeneousDiatomic";
+
+  // Determines the element number and color of each atom in the current molecule.
   var SCRIPT_GET_ELEMENT_NUMBERS_AND_COLORS =
     'n = {*}.length\n' +
     'for ( i = 0; i < n; i++ ) {\n' +
@@ -104,7 +137,7 @@ define( function( require ) {
     actions.forEach( function( action ) {
       script += 'unbind ' + action + '\n';
     } );
-    Jmol.script( applet, script );
+    doScript( applet, script );
   };
 
   /**
@@ -124,13 +157,15 @@ define( function( require ) {
    * @returns {string} JSmol script
    */
   var updateMolecule = function( applet, molecule, jsmolProperties ) {
+    debug( 'updateMolecule' );
+
     var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'plain/text', endings: 'native' } ) );
 
     // load molecule
-    Jmol.script( applet, 'load ' + url + '\n' );
+    doScript( applet, 'load ' + url + '\n' );
 
     // reset misc settings that don't persist
-    Jmol.script( applet,
+    doScript( applet,
                  'select oxygen; color [255,85,0]\n' + // colorblind red oxygen
                  'select all\n' + // be polite to other commands that assume that everything is selected
                  'wireframe 0.1\n' + // draw bonds as lines
@@ -151,30 +186,33 @@ define( function( require ) {
    * @param {boolean} molecularDipoleVisible
    */
   var updateTranslucency = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
+    debug( 'updateTransparency' );
     var arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
-    Jmol.script( applet, 'color atoms translucent ' + arg );
-    Jmol.script( applet, 'color bonds translucent ' + arg );
+    doScript( applet, 'color atoms translucent ' + arg );
+    doScript( applet, 'color bonds translucent ' + arg );
   };
 
   var updateDipoles = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
+    debug( 'updateDipoles' );
     if ( bondDipolesVisible ) {
-      Jmol.script( applet, 'dipole bonds on width 0.05' );
+      doScript( applet, 'dipole bonds on width 0.05' );
     }
     else {
-      Jmol.script( applet, 'dipole bonds off' );
+      doScript( applet, 'dipole bonds off' );
     }
 
     if ( molecularDipoleVisible ) {
-      Jmol.script( applet, 'dipole molecular on width 0.05' );
+      doScript( applet, 'dipole molecular on width 0.05' );
     }
     else {
-      Jmol.script( applet, 'dipole molecular off' );
+      doScript( applet, 'dipole molecular off' );
     }
 
     updateTranslucency( applet, bondDipolesVisible, molecularDipoleVisible );
   };
 
   var updateAtomLabelsAndPartialCharges = function( applet, atomLabelsVisible, partialChargesVisible ) {
+    debug( 'updateAtomLabelsAndPartialCharges' );
     var args = '';
     if ( atomLabelsVisible || partialChargesVisible ) {
       if ( atomLabelsVisible ) {
@@ -187,44 +225,57 @@ define( function( require ) {
         args += DELTA + '=%.2[partialCharge]'; // show partial charges
       }
       //TODO try combining into 1 script so that labels don't jump around
-      Jmol.script( applet, 'label ' + args );
-      Jmol.script( applet, 'set labelalignment center; set labeloffset 0 0' );  // center labels on atoms
-      Jmol.script( applet, 'color labels black' ); // color for all labels
-      Jmol.script( applet, 'font labels 18 sanserif' ); // font for all labels
+      doScript( applet, 'label ' + args );
+      doScript( applet, 'set labelalignment center; set labeloffset 0 0' );  // center labels on atoms
+      doScript( applet, 'color labels black' ); // color for all labels
+      doScript( applet, 'font labels 18 sanserif' ); // font for all labels
     }
     else {
-      Jmol.script( applet, 'label off' );
+      doScript( applet, 'label off' );
     }
   };
 
   var updateSurface = function( applet, surfaceType ) {
-    var diatomic = false; //XXX isHomogeneousDiatomic();
+    debug( 'updateSurface' );
+    var diatomic = isHomogeneousDiatomic( applet );
     if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
       if ( diatomic ) {
-        Jmol.script( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_POTENTIAL ) + ' translucent' );
+        doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_POTENTIAL ) + ' translucent' );
       }
       else {
-        Jmol.script( applet, 'isosurface VDW map MEP translucent' );
+        doScript( applet, 'isosurface VDW map MEP translucent' );
       }
     }
     else if ( surfaceType == SurfaceType.ELECTROSTATIC_POTENTIAL_RWB ) {
       if ( diatomic ) {
-        Jmol.script( applet, 'isosurface VDW color white translucent' );
+        doScript( applet, 'isosurface VDW color white translucent' );
       }
       else {
-        Jmol.script( applet, 'isosurface VDW map MEP colorscheme \"RWB\" translucent' );
+        doScript( applet, 'isosurface VDW map MEP colorscheme \"RWB\" translucent' );
       }
     }
     else if ( surfaceType == SurfaceType.ELECTRON_DENSITY ) {
       if ( diatomic ) {
-        Jmol.script( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_GRAY ) + ' translucent' );
+        doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_GRAY ) + ' translucent' );
       }
       else {
-        Jmol.script( applet, 'isosurface VDW map MEP colorscheme \"BW\" translucent' );
+        doScript( applet, 'isosurface VDW map MEP colorscheme \"BW\" translucent' );
       }
     }
     else {
-      Jmol.script( applet, 'isosurface off' );
+      doScript( applet, 'isosurface off' );
+    }
+  };
+
+  var isHomogeneousDiatomic = function( applet ) {
+    debug( 'isHomogeneousDiatomic' );
+    var status = Jmol.evaluateVar( applet, "script('" + SCRIPT_IS_HOMOGENEOUS_DIATOMIC + "')" );
+    console.log( 'status=' + status );
+    if ( status === null || status === 'ERROR') {
+      throw new Error( "isHomogeneousDiatomic: Jmol script error" );
+    }
+    else {
+      return ( status === 'true' ? true : false );
     }
   };
 
@@ -314,7 +365,6 @@ define( function( require ) {
       } );
 
       thisNode.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
-        console.log( 'surface type: ' + surfaceType );//TODO
         updateSurface( thisNode.applet, surfaceType );
       } );
 

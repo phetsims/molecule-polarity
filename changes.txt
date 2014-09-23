@@ -1,3 +1,4 @@
+9/23/14 implemented isHomogeneousDiatomic script for determining surface type
 9/23/14 clean up JSmol viewer initialization
 9/23/14 updateMolecule for JSmol viewer
 9/23/14 wire up surface-type radio buttons to JSmol viewer
