@@ -43,8 +43,14 @@ define( function( require ) {
     console.log( applet._id + ' is ready' ); //TODO
   };
 
+  // Script to run when the Jmol object has finished loading
+  var INIT_SCRIPT =
+    'set autobond off\n' +
+    'set frank off\n' +  // hide the Jmol logo
+    'set dipoleScale 0.75\n';  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
+
   // Jmol actions to unbind, all except _rotate
-  var unbindActions = [
+  var ACTIONS = [
     '_clickFrank',
     '_depth',
     '_dragDrawObject',
@@ -81,28 +87,16 @@ define( function( require ) {
   ];
 
   /**
-   * Creates a script for unbinding mouse actions from JSmol actions.
-   * @returns {string} JSmol script
+   * Unbinds mouse actions from JSmol actions.
+   * @param applet
+   * @param {Array.<string>} actions
    */
-  var createUnbindScript = function( actions ) {
+  var unbindActions = function( applet, actions ) {
     var script = '';
     actions.forEach( function( action ) {
       script += 'unbind ' + action + '\n';
     } );
-    return script;
-  };
-
-  /**
-   * Script to run when the Jmol object has finished loading
-   * @param {RealMolecule} molecule
-   * @returns {string} JSmol script
-   */
-  var createInitScript = function( molecule ) {
-    return 'set autobond off\n' +
-           'set frank off\n' +  // hide the Jmol logo
-           'set dipoleScale 0.75\n' +  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
-//           'set antialiasDisplay on\n' +  //TODO significant performance hit, is this necessary?
-           createUnbindScript( unbindActions );
+    Jmol.script( applet, script );
   };
 
   /**
@@ -274,7 +268,7 @@ define( function( require ) {
         debug: false, // Set this value to true if you are having problems getting your page to show the Jmol object
         j2sPath: 'jsmol-14.2.4/j2s', // path to the suite of JavaScript libraries needed for JSmol
         use: 'HTML5', // determines the various options to be tried (applet and surrogates) and the order in which to try them
-        script: createInitScript( this.moleculeProperty.get() ), // script to run when the Jmol object has finished loading
+        script: INIT_SCRIPT, // script to run when the Jmol object has finished loading
         readyFunction: readyFunction, // function to call when the Jmol object has been created and is ready to receive commands
         disableJ2SLoadMonitor: true, // disable display of messages in a single line, colored, at bottom-left of the page
         disableInitialConsole: true // avoids the display of messages in the Jmol panel while the Jmol object is being built initially
@@ -286,6 +280,8 @@ define( function( require ) {
       this.div.innerHTML = Jmol.getAppletHtml( window[appletId] ); // creates window[appletId]
       var applet = window[appletId];
       applet._cover( false ); //TODO why do we need to call this?
+
+      unbindActions( applet, ACTIONS );
 
       this.moleculeProperty.link( function( molecule ) {
          updateMolecule( applet, molecule, thisNode.jsmolProperties);
