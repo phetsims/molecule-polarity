@@ -252,12 +252,10 @@ define( function( require ) {
       } );
 
       this.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
-        console.log( 'partial charges visible: ' + visible );//TODO
         updateAtomLabelsAndPartialCharges( applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
       } );
 
       this.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
-        console.log( 'atom labels visible: ' + visible );//TODO
         updateAtomLabelsAndPartialCharges( applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
       } );
 
