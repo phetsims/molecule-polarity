@@ -13,6 +13,7 @@ define( function( require ) {
 
   // constants
   var SURFACE_ALPHA = 0.72;
+  var NEUTRAL_GREEN = new Color( 31, 247, 0 );
 
   return {
 
@@ -38,10 +39,12 @@ define( function( require ) {
     BW_GRADIENT: [ Color.BLACK.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ) ],
     RWB_GRADIENT: [ Color.RED.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ), Color.BLUE.withAlpha( SURFACE_ALPHA ) ],
     NEUTRAL_GRAY: 'rgb( 128, 128, 128 )',
+    // Color used for 'neutral' (potential===0) by Jmol in ROYGB gradient, see http://jmol.sourceforge.net/jscolors/#gradnt
+    NEUTRAL_POTENTIAL: NEUTRAL_GREEN,
 
     /*
      * Secondary gradient for mep, negative to positive.
-     * This is Jmol's roybg gradient, documented at http://jmol.sourceforge.net/jscolors/#gradnt.
+     * This is Jmol's ROYGB gradient, documented at http://jmol.sourceforge.net/jscolors/#gradnt.
      * A copy of the Jmol gradients image shown at this link is at doc/Jmol_color_gradients.png.
      * The colors below were acquired from the roygb gradient shown in that image.
      */
@@ -61,7 +64,7 @@ define( function( require ) {
       new Color( 121, 247, 0 ),
       new Color( 93, 247, 0 ),
       new Color( 61, 242, 0 ),
-      new Color( 31, 247, 0 ), // neutral green
+      NEUTRAL_GREEN, // neutral (potential===0)
       new Color( 0, 244, 0 ),
       new Color( 0, 244, 31 ),
       new Color( 0, 247, 93 ),

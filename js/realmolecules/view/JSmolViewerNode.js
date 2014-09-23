@@ -18,9 +18,11 @@ define( function( require ) {
   var DOM = require( 'SCENERY/nodes/DOM' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -52,8 +54,7 @@ define( function( require ) {
            'wireframe 0.1\n' +
            'spacefill 25%\n' +
            'color bonds [128,128,128]\n' + // gray bonds
-           'hover off\n' + // don't show atom label when hovering with mouse
-           'isosurface VDW map MEP colorscheme "RWB" translucent\n';
+           'hover off\n'; // don't show atom label when hovering with mouse
   };
 
   // Jmol actions to unbind, all except _rotate
@@ -169,7 +170,7 @@ define( function( require ) {
         if ( atomLabelsVisible ) {
           args += '|'; // line separator
         }
-        args += DELTA + "=%.2[partialCharge]"; // show partial charges
+        args += DELTA + '=%.2[partialCharge]'; // show partial charges
       }
       //TODO try combining into 1 script so that labels don't jump around
       Jmol.script( applet, 'label ' + args );
@@ -179,6 +180,37 @@ define( function( require ) {
     }
     else {
       Jmol.script( applet, 'label off' );
+    }
+  };
+
+  var updateSurface = function( applet, surfaceType ) {
+    var diatomic = false; //XXX isHomogeneousDiatomic();
+    if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
+      if ( diatomic ) {
+        Jmol.script( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_POTENTIAL ) + ' translucent' );
+      }
+      else {
+        Jmol.script( applet, 'isosurface VDW map MEP translucent' );
+      }
+    }
+    else if ( surfaceType == SurfaceType.ELECTROSTATIC_POTENTIAL_RWB ) {
+      if ( diatomic ) {
+        Jmol.script( applet, 'isosurface VDW color white translucent' );
+      }
+      else {
+        Jmol.script( applet, 'isosurface VDW map MEP colorscheme \"RWB\" translucent' );
+      }
+    }
+    else if ( surfaceType == SurfaceType.ELECTRON_DENSITY ) {
+      if ( diatomic ) {
+        Jmol.script( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_GRAY ) + ' translucent' );
+      }
+      else {
+        Jmol.script( applet, 'isosurface VDW map MEP colorscheme \"BW\" translucent' );
+      }
+    }
+    else {
+      Jmol.script( applet, 'isosurface off' );
     }
   };
 
@@ -261,6 +293,7 @@ define( function( require ) {
 
       this.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
         console.log( 'surface type: ' + surfaceType );//TODO
+        updateSurface( applet, surfaceType );
       } );
 
       this.initialized = true;
