@@ -1,7 +1,7 @@
 TODO list for molecule-polarity (HTML5)
 
 - Jmol.getAppletHtml fails intermittently for multi-screen sim
-- fails on Safari desktop with "Error connecting to server: http://your.server.here/jsmol.php?"
+- fails on Safari desktop with "Unrecognized file format for file blob:http://localhost/..."
 - can't select from portion of combo box list that is above Jmol viewer
 - remove instruction for getting JSmol from README.md
 - #5 support IUPAC convention for bond dipole direction
