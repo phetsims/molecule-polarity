@@ -117,10 +117,9 @@ define( function( require ) {
     titleNode.centerX = ( lastCell.right - firstCell.left ) / 2;
     titleNode.top = firstCell.bottom + 4;
 
-    // when the molecule changes, ask Jmol for the molecule's elements and colors, and highlight the corresponding cells
-    viewerNode.moleculeProperty.link( function( molecule ) {
+    // highlight elements displayed by the viewer
+    viewerNode.elementsProperty.lazyLink( function( elements ) {
       thisNode.resetCells();
-      var elements = viewerNode.getElements();
       elements.forEach( function( element ) {
         thisNode.setColor( element.elementNumber, element.color );
       } );

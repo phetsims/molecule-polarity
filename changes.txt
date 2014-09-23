@@ -1,3 +1,4 @@
+9/23/14 get {Element} array for molecule displayed by JSmol, update electronegativity table
 9/23/14 move axon wiring to readyFunction, so that scripts aren't run until JSmol is ready to receive them
 9/23/14 implemented isHomogeneousDiatomic script for determining surface type
 9/23/14 clean up JSmol viewer initialization

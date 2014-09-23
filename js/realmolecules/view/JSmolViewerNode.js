@@ -16,10 +16,12 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var DOM = require( 'SCENERY/nodes/DOM' );
+  var Element = require( 'MOLECULE_POLARITY/realmolecules/model/Element' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
@@ -50,7 +52,7 @@ define( function( require ) {
   };
 
   var doScript = function( applet, script ) {
-    Jmol.script( applet, script );
+    Jmol.scriptWait( applet, script ); // use scriptWait (synchronous) so that we can also use evaluateVar
   };
 
   // Script to run when the Jmol object has finished loading
@@ -131,7 +133,7 @@ define( function( require ) {
    * Loads a molecule by URL, then sets things that must be set whenever molecule changes.
    * @param applet
    * @param {RealMolecule} molecule
-   * @returns {string} JSmol script
+   * @param {JSmolProperties} jsmolProperties
    */
   var updateMolecule = function( applet, molecule, jsmolProperties ) {
     debug( 'updateMolecule' );
@@ -154,6 +156,50 @@ define( function( require ) {
     updateDipoles( applet, jsmolProperties.bondDipolesVisibleProperty.get(), jsmolProperties.molecularDipoleVisibleProperty.get() );
     updateAtomLabelsAndPartialCharges( applet, jsmolProperties.atomLabelsVisibleProperty.get(), jsmolProperties.partialChargesVisibleProperty.get() );
     updateSurface( applet, jsmolProperties.surfaceTypeProperty.get() );
+  };
+
+  /**
+   * Determine the {Element} elements in the molecule that is currently displayed by the viewer.
+   * @param applet
+   * @param {Property.<Array.<Element>>} elementsProperty
+   */
+  var updateElements = function( applet, elementsProperty ) {
+
+    /*
+     * Returns a string where elemno and color are separated by newlines, 3 color components are surrounded by curly braces.
+     * Eg, for HF: '1\n{255 255 255}\n9\n{144 224 80}\n'
+     */
+    var status = Jmol.evaluateVar( applet,
+        "script('" +
+        "n = {*}.length\n" +
+        "for ( i = 0; i < n; i++ ) {\n" +
+        "    print {*}[i].elemno\n" +
+        "    print {*}[i].color\n" +
+        "}" +
+        "')" );
+
+    /*
+     * Replace the special chars with spaces, to make this easier to parse.
+     * Eg, for HF: '1 255 255 255 9 144 224 80 '
+     */
+    status = status.replace( /\n/g, ' ' ).replace( /{/g, '' ).replace( /}/g, '' );
+    debug( 'elements: ' + status );
+
+    /*
+     * Now that the tokens are separated by spaces, split the string into an array.
+     * Eg, for HF: ['1','255','255','255','9','144','224','80']
+     */
+    var tokens = status.split( ' ' );
+    assert && assert( tokens.length % 4 === 0 );
+
+    // Convert the tokens to an array of {Element}
+    var elements = [];
+    for ( var i = 0; i < tokens.length; i = i + 4 ) {
+      var elementNumber = parseInt( tokens[i] );
+      var color = new Color( parseInt( tokens[i + 1] ), parseInt( tokens[i + 2] ), parseInt( tokens[i + 3 ] ) );
+      elements.push( new Element( elementNumber, color ) );
+    }
+    elementsProperty.set( elements );
   };
 
   /**
@@ -323,6 +369,9 @@ define( function( require ) {
     // @private JSmol must be initialized after the sim is running
     this.applet = null;
 
+    // @public {Property.Array.<Element>} elements in the molecule displayed by the viewer
+    this.elementsProperty = new Property( null );
+
     options.preventTransform = true;
     DOM.call( this, this.div, options );
   }
@@ -348,6 +397,7 @@ define( function( require ) {
 
         thisNode.moleculeProperty.link( function( molecule ) {
           updateMolecule( applet, molecule, thisNode.jsmolProperties );
+          updateElements( applet, thisNode.elementsProperty );
         } );
 
         thisNode.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
