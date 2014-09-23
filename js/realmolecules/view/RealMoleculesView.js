@@ -116,7 +116,7 @@ define( function( require ) {
 
     // Initialize the JSmol viewer
     step: function() {
-      if ( !this.jsmolViewerNode.initialized ) {
+      if ( !this.jsmolViewerNode.isInitialized() ) {
         this.jsmolViewerNode.initialize();
       }
     }

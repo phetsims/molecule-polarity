@@ -53,11 +53,6 @@ define( function( require ) {
     Jmol.script( applet, script );
   };
 
-  // function to call when the Jmol object has been created and is ready to receive commands
-  var readyFunction = function( applet ) {
-    console.log( applet._id + ' is ready' ); //TODO
-  };
-
   // Script to run when the Jmol object has finished loading
   var SCRIPT_INIT =
     'set autobond off\n' +
@@ -325,10 +320,8 @@ define( function( require ) {
     this.div.style.height = options.viewerSize.height + 'px';
     this.div.style.border = '1px solid ' + options.viewerStroke;
 
-    // @public JSmol must be added to the document after the sim is running
-    this.initialized = false;
-
-    this.applet = null; // @private
+    // @private JSmol must be initialized after the sim is running
+    this.applet = null;
 
     options.preventTransform = true;
     DOM.call( this, this.div, options );
@@ -336,12 +329,47 @@ define( function( require ) {
 
   return inherit( DOM, JSmolViewerNode, {
 
+    isInitialized: function() {
+      return ( this.applet !== null );
+    },
+
     // Call this after the sim has started running
     initialize: function() {
 
-      assert && assert( !this.initialized );
+      assert && assert( !this.isInitialized() );
 
       var thisNode = this;
+
+      // Called when the Jmol object has been created and is ready to receive commands
+      var readyFunction = function( applet ) {
+        debug( 'readyFunction' );
+
+        unbindActions( applet, ACTIONS );
+
+        thisNode.moleculeProperty.link( function( molecule ) {
+          updateMolecule( applet, molecule, thisNode.jsmolProperties );
+        } );
+
+        thisNode.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
+          updateDipoles( applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
+        } );
+
+        thisNode.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+          updateDipoles( applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
+        } );
+
+        thisNode.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
+          updateAtomLabelsAndPartialCharges( applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
+        } );
+
+        thisNode.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
+          updateAtomLabelsAndPartialCharges( applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
+        } );
+
+        thisNode.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
+          updateSurface( applet, surfaceType );
+        } );
+      };
 
       // configuration for the JSmol object, called Info by convention
       var Info = {
@@ -363,34 +391,6 @@ define( function( require ) {
       thisNode.applet = window[appletId]; // so that we don't pollute our code with window[appletId]
       thisNode.div.innerHTML = Jmol.getAppletHtml( thisNode.applet ); // add the viewer's HTML fragment to this node's HTML element
       thisNode.applet._cover( false ); //TODO why do we need to call this?
-
-      unbindActions( thisNode.applet, ACTIONS );
-
-      thisNode.moleculeProperty.link( function( molecule ) {
-         updateMolecule( thisNode.applet, molecule, thisNode.jsmolProperties);
-      } );
-
-      thisNode.jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
-        updateDipoles( thisNode.applet, visible, thisNode.jsmolProperties.molecularDipoleVisibleProperty.get() );
-      } );
-
-      thisNode.jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-        updateDipoles( thisNode.applet, thisNode.jsmolProperties.bondDipolesVisibleProperty.get(), visible );
-      } );
-
-      thisNode.jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
-        updateAtomLabelsAndPartialCharges( thisNode.applet, thisNode.jsmolProperties.atomLabelsVisibleProperty.get(), visible );
-      } );
-
-      thisNode.jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
-        updateAtomLabelsAndPartialCharges( thisNode.applet, visible, thisNode.jsmolProperties.partialChargesVisibleProperty.get() );
-      } );
-
-      thisNode.jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
-        updateSurface( thisNode.applet, surfaceType );
-      } );
-
-      thisNode.initialized = true;
     },
 
     // @return {Array<Element>}
