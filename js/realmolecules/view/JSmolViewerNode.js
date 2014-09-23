@@ -135,7 +135,7 @@ define( function( require ) {
     var url = URL.createObjectURL( new Blob( [molecule.mol2Data], { type: 'text/plain', endings: 'native' } ) );
 
     // load molecule
-    doScript( applet, 'load ' + url + '\n' );
+    doScript( applet, 'load ' + url );
 
     // reset misc settings that don't persist
     doScript( applet,
