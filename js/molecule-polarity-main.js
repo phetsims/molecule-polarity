@@ -25,7 +25,7 @@ define( function( require ) {
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley',
-      designTeam: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins'
+      team: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins'
     }
   };
 
