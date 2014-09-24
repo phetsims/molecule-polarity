@@ -1,7 +1,7 @@
 TODO list for molecule-polarity (HTML5)
 
 JSmol
-- fails on Mac+Safari, iPad+Safari, iPad+Chrome: "Unrecognized file format for file blob:http://localhost/..."
+- fails on Mac+Safari, iPad+Safari, iPad+Chrome: "unrecognized file format for file\nblob:http://localhost/e8dadd58-7e4c-4ebc-91e9-431dc4eada53\n\n<?php\n\n\n\n// jsmol.php"
 - can't select from portion of combo box list that is above Jmol viewer in Mac+Chrome, Mac+Safari
 - can't interact with JSmol viewer in Mac+Firefox
 - Jmol initialization fails intermittently for multi-screen sim, Jmol becomes undefined (Mac+Chrome, others?)
