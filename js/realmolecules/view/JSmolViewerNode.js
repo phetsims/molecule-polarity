@@ -18,16 +18,10 @@ define( function( require ) {
   var DOM = require( 'SCENERY/nodes/DOM' );
   var Element = require( 'MOLECULE_POLARITY/realmolecules/model/Element' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var DELTA = '\u03B4';
@@ -193,8 +187,8 @@ define( function( require ) {
     // Convert the tokens to an array of {Element}.
     var elements = [];
     for ( var i = 0; i < tokens.length; i = i + 4 ) {
-      var elementNumber = parseInt( tokens[i] );
-      var color = new Color( parseInt( tokens[i + 1] ), parseInt( tokens[i + 2] ), parseInt( tokens[i + 3 ] ) );
+      var elementNumber = parseInt( tokens[i], 10 );
+      var color = new Color( parseInt( tokens[i + 1], 10 ), parseInt( tokens[i + 2], 10 ), parseInt( tokens[i + 3 ], 10 ) );
       elements.push( new Element( elementNumber, color ) );
     }
     elementsProperty.set( elements );
@@ -293,7 +287,7 @@ define( function( require ) {
         doScript( applet, 'isosurface VDW map MEP translucent' );
       }
     }
-    else if ( surfaceType == SurfaceType.ELECTROSTATIC_POTENTIAL_RWB ) {
+    else if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB ) {
       if ( diatomic ) {
         doScript( applet, 'isosurface VDW color white translucent' );
       }
@@ -301,7 +295,7 @@ define( function( require ) {
         doScript( applet, 'isosurface VDW map MEP colorscheme \"RWB\" translucent' );
       }
     }
-    else if ( surfaceType == SurfaceType.ELECTRON_DENSITY ) {
+    else if ( surfaceType === SurfaceType.ELECTRON_DENSITY ) {
       if ( diatomic ) {
         doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_GRAY ) + ' translucent' );
       }
