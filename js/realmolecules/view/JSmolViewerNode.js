@@ -442,7 +442,7 @@ define( function( require ) {
       Jmol.getApplet( appletId, Info ); // creates window[appletId]
       thisNode.applet = window[appletId]; // so that we don't pollute our code with window[appletId]
       thisNode.div.innerHTML = Jmol.getAppletHtml( thisNode.applet ); // add the viewer's HTML fragment to this node's HTML element
-      thisNode.applet._cover( false ); //TODO why do we need to call this?
+      thisNode.applet._cover( false ); //TODO issue #14, why do we need to call this?
     }
   } );
 } );
