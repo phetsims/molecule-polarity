@@ -1,8 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO issue #6, investigate JSmol integration
+//TODO This is currently a stub. Investigate JSmol integration in issue #6.
 /**
- * This is a stub for the JSmol viewer. 
+ * JSmol viewer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
