@@ -1,6 +1,5 @@
 build/
 node_modules/
-jsmol-14.2.4/
 *.iml
 .DS_Store
 .DS_Store?
