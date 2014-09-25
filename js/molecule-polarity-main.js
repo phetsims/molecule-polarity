@@ -19,22 +19,25 @@ define( function( require ) {
   // strings
   var simTitle = require( 'string!MOLECULE_POLARITY/molecule-polarity.name' );
 
-  var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen(), new RealMoleculesScreen() ];
+  var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen() ];
 
   var simOptions = {
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley',
-      team: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins'
+      designTeam: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins'
     }
   };
 
   // developer-only features
   if ( MPQueryParameters.DEV ) {
+
+    screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
+
     simOptions = _.extend( {
       // add dev-specific options here
       showHomeScreen: false,
-      screenIndex: 2
+      screenIndex: 1
     }, simOptions );
   }
 

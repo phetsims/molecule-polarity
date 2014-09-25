@@ -112,13 +112,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( ScreenView, RealMoleculesView, {
-
-    // Initialize the JSmol viewer
-    step: function() {
-      if ( !this.jsmolViewerNode.isInitialized() ) {
-        this.jsmolViewerNode.initialize();
-      }
-    }
-  } );
+  return inherit( ScreenView, RealMoleculesView );
 } );
