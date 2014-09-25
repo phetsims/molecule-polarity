@@ -1,9 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO investigate JSmol and figure out how to do this
+//TODO issue #6, investigate JSmol integration
 /**
- * Scenery node that displays a Jmol viewer.
- * Jmol scripting language is documented at http://chemapps.stolaf.edu/jmol/docs
+ * This is a stub for the JSmol viewer. 
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,10 +23,10 @@ define( function( require ) {
 
   /**
    * @param {Property<RealMolecule>} moleculeProperty
-   * @param {JSmolProperties} jsmolProperties
+   * @param {PropertySet} viewProperties
    * @constructor
    */
-  function JSmolViewerNode( moleculeProperty, jsmolProperties, options ) {
+  function JSmolViewerNode( moleculeProperty, viewProperties, options ) {
 
     options = _.extend( {
       backgroundColor: 'white',
@@ -74,23 +73,23 @@ define( function( require ) {
 
     Node.call( this, { children: [ rectNode, debugText ] } );
 
-    jsmolProperties.bondDipolesVisibleProperty.link( function( visible ) {
+    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
       thisNode.setBondDipolesVisible( visible );
     } );
 
-    jsmolProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
       thisNode.setMolecularDipoleVisible( visible );
     } );
 
-    jsmolProperties.partialChargesVisibleProperty.link( function( visible ) {
+    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
       thisNode.setPartialChargesVisible( visible );
     } );
 
-    jsmolProperties.atomLabelsVisibleProperty.link( function( visible ) {
+    viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
       thisNode.setAtomLabelsVisible( visible );
     } );
 
-    jsmolProperties.surfaceTypeProperty.link( function( surfaceType ) {
+    viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
       thisNode.setSurfaceType( surfaceType );
     } );
 
