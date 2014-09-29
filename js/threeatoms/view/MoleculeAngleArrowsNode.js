@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CurvedArrowShape = require( 'MOLECULE_POLARITY/threeatoms/view/CurvedArrowShape' );
+  var CurvedArrowShape = require( 'SCENERY_PHET/CurvedArrowShape' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
