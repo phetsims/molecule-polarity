@@ -39,12 +39,19 @@ define( function( require ) {
 
   /**
    * @param {Number} radius radius at the center of the arrow's tail
-   * @param {Number} startAngle starting angle, in radians (at tail, or base of optional arrow)
-   * @param {Number} endAngle end angle, in radians (at base of arrow)
+   * @param {Number} startAngle starting angle, in radians (at tail, or optional 2nd head)
+   * @param {Number} endAngle end angle, in radians (at head of arrow)
    * @param {Object} [options]
    * @constructor
    */
   function CurvedArrowShape( radius, startAngle, endAngle, options ) {
+
+    options = _.extend( {
+      headWidth: 10,
+      headHeight: 10,
+      tailWidth: 5,
+      doubleHead: false // true puts heads on both ends of the arrow, false puts a head at endAngle
+    }, options );
 
     Shape.call( this );
 

@@ -10,10 +10,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CurvedArrowNode = require( 'MOLECULE_POLARITY/threeatoms/view/CurvedArrowNode' );
+  var CurvedArrowShape = require( 'MOLECULE_POLARITY/threeatoms/view/CurvedArrowShape' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var Transform3 = require( 'DOT/Transform3' );
 
   /**
@@ -24,13 +25,14 @@ define( function( require ) {
   function MoleculeAngleArrowsNode( molecule, atom ) {
 
     // arrow configuration
-    var arrowOptions = { headWidth: 20, headHeight: 20, tailWidth: 10, fill: atom.color, stroke: 'gray' };
-    var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
+    var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
+    var arrowPathOptions = { fill: atom.color, stroke: 'gray' };
+    var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     var theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
     Node.call( this, { children: [
-      new CurvedArrowNode( radius, -theta, theta, arrowOptions ),
-      new CurvedArrowNode( radius, Math.PI - theta, Math.PI + theta, arrowOptions )
+      new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
+      new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
     ] } );
 
     // Align with atom location and molecular dipole
