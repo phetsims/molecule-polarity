@@ -47,10 +47,10 @@ define( function( require ) {
   function CurvedArrowShape( radius, startAngle, endAngle, options ) {
 
     options = _.extend( {
+      doubleHead: false, // false = single head at endAngle, true = heads at startAngle and endAngle
       headWidth: 10,
       headHeight: 10,
-      tailWidth: 5,
-      doubleHead: false // true puts heads on both ends of the arrow, false puts a head at endAngle
+      tailWidth: 5
     }, options );
 
     Shape.call( this );
