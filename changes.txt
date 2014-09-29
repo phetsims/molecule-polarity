@@ -1,3 +1,4 @@
+9/29/14 scenery-phet#77 factor out CurvedArrowShape
 9/23/14 fix MIME type for mol2 Blobs, should be 'text/plain'
 9/23/14 set serverURL to 'jsmol-14.2.4/php/jsmol.php' to make Safari happy
 9/23/14 add JSmolDebug query param, add more debugging output and doc
