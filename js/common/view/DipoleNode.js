@@ -29,7 +29,7 @@ define( function( require ) {
   var FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIONAL_HEAD_HEIGHT * length, a 'unit dipole' will be scaled.
 
   /**
-   * @param {Property<Vector2>} dipoleProperty
+   * @param {Property.<Vector2>} dipoleProperty
    * @param {Color|String} color
    * @constructor
    */

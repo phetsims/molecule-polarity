@@ -13,9 +13,9 @@ define( function( require ) {
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
 
   /**
-   * @param {String} symbol
-   * @param {String} name
-   * @param {String} mol2Data molecule data description, in mol2 format
+   * @param {string} symbol
+   * @param {string} name
+   * @param {string} mol2Data molecule data description, in mol2 format
    * @constructor
    */
   function RealMolecule( symbol, name, mol2Data ) {

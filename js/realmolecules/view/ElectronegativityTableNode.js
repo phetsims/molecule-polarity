@@ -32,9 +32,9 @@ define( function( require ) {
   /**
    * A cell in the table, displays element name and number, color can be set.
    *
-   * @param {String} symbol element's symbol in the periodic table
-   * @param {Number} elementNumber element's number in the periodic table
-   * @param {Number} electronegativity
+   * @param {string} symbol element's symbol in the periodic table
+   * @param {number} elementNumber element's number in the periodic table
+   * @param {number} electronegativity
    * @constructor
    */
   function Cell( symbol, elementNumber, electronegativity ) {
@@ -135,7 +135,7 @@ define( function( require ) {
       } );
     },
 
-    // @private Sets the {Color} color of a specified {Number} element
+    // @private Sets the {Color} color of a specified {number} element
     setColor: function( elementNumber, color ) {
       for ( var i = 0; i < this.cells.length; i++ ) {
         if ( this.cells[i].elementNumber === elementNumber ) {

@@ -18,7 +18,7 @@ define( function( require ) {
 
   /**
    * @param {Molecule} angle is relative to this molecule's location, and we pause any animation of this molecule while dragging
-   * @param {Property<Number>} bondAngleProperty property that this handler modifies
+   * @param {Property.<number>} bondAngleProperty property that this handler modifies
    * @constructor
    */
   function BondAngleHandler( molecule, bondAngleProperty ) {

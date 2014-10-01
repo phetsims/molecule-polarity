@@ -16,10 +16,10 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Array<Atom>} atoms that make up the molecule
-   * @param {Array<Bond>} bonds bonds between the atoms
-   * @param {Function} updateAtomLocations
-   * @param {Function} updatePartialCharges
+   * @param {Atom[]} atoms that make up the molecule
+   * @param {Bond[]} bonds bonds between the atoms
+   * @param {function} updateAtomLocations
+   * @param {function} updatePartialCharges
    * @param {Object} [options]
    * @constructor
    */

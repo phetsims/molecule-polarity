@@ -35,7 +35,7 @@ define( function( require ) {
 
   /**
    * @param {*} viewProperties
-   * @param {Property<Boolean>} eFieldEnabledProperty
+   * @param {Property.<boolean>} eFieldEnabledProperty
    * @constructor
    */
   function TwoAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {

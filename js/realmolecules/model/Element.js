@@ -9,7 +9,7 @@ define( function() {
   'use strict';
 
   /**
-   * @param {Number} elementNumber element number in the periodic table
+   * @param {number} elementNumber element number in the periodic table
    * @param {Color|String} color color used by Jmol
    * @constructor
    */

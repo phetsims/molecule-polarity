@@ -27,10 +27,10 @@ define( function( require ) {
   var positiveString = require( 'string!MOLECULE_POLARITY/positive' );
 
   /**
-   * @param {Array<Color>} colors colors used for the gradient, in left-to-right order
-   * @param {String} title
-   * @param {String} leftLabel
-   * @param {String} rightLabel
+   * @param {Color[]} colors colors used for the gradient, in left-to-right order
+   * @param {string} title
+   * @param {string} leftLabel
+   * @param {string} rightLabel
    * @param {Object} [options]
    * @constructor
    */

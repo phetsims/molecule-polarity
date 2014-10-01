@@ -22,7 +22,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
-   * @param {Property<RealMolecule>} moleculeProperty
+   * @param {Property.<RealMolecule>} moleculeProperty
    * @param {PropertySet} viewProperties
    * @constructor
    */
@@ -101,7 +101,7 @@ define( function( require ) {
 
   return inherit( Node, JSmolViewerNode, {
 
-    // @return {Array<Element>}
+    // @return {Element[]}
     getElements: function() {
       return []; //TODO
     },

@@ -26,7 +26,7 @@ define( function( require ) {
 
   /**
    * @param {Atom} atom
-   * @param {Function} unitVectorFunction has no parameters, returns {Vector}
+   * @param {function} unitVectorFunction has no parameters, returns {Vector}
    * @constructor
    */
   function PartialChargeNode( atom, unitVectorFunction ) {

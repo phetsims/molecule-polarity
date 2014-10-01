@@ -22,8 +22,8 @@ define( function( require ) {
   var pattern_0symbol_1name = require( 'string!MOLECULE_POLARITY/pattern.0symbol.1name' );
 
   /**
-   * @param {Array<RealMolecule>} molecules
-   * @param {Property<RealMolecule>} moleculeProperty
+   * @param {RealMolecule[]} molecules
+   * @param {Property.<RealMolecule>} moleculeProperty
    * @param {Node} listParent
    * @constructor
    */

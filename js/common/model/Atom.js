@@ -14,10 +14,10 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {String} name
-   * @param {Number} diameter
+   * @param {string} name
+   * @param {number} diameter
    * @param {Color|String} color
-   * @param {Number} electronegativity
+   * @param {number} electronegativity
    * @param {Vector2} location defaults to (0,0)
    * @constructor
    */

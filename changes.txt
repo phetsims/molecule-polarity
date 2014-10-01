@@ -1,3 +1,4 @@
+10/1/14 use new JSdoc conventions for @param
 10/1/14 #7 add 'surfaceColor' query parameter for determining the color scheme used for electrostatic-potential in 'Real Molecules' screen
 10/1/14 #5 replace 'IUPAC' query parameter with 'dipoleDirection', with values 'negativeToPositive' and 'positiveToNegative'
 9/29/14 scenery-phet#77 move CurvedArrowShape to scenery-phet

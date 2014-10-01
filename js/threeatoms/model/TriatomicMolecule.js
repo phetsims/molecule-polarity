@@ -50,9 +50,9 @@ define( function( require ) {
    * Repositions one atom.
    *
    * @param {Atom} atom the atom to reposition
-   * @param {Number} bondAngle the angle of the bond that the atom participates in
+   * @param {number} bondAngle the angle of the bond that the atom participates in
    * @param {Vector2 location location of the molecule
-   * @param {Number} angle orientation of the molecule
+   * @param {number} angle orientation of the molecule
    */
   var updateAtomLocation = function( atom, bondAngle, location, angle ) {
     var thetaA = angle + bondAngle;
