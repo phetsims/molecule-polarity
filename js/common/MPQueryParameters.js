@@ -18,9 +18,6 @@ define( function( require ) {
     DIPOLE_DIRECTION: getQueryParameter( 'dipoleDirection' ) || 'positiveToNegative',
 
     // color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow), see issue #7
-    SURFACE_COLOR: getQueryParameter( 'surfaceColor' ) || 'RWB',
-
-    // enable console debugging output for JSmol
-    JSMOL_DEBUG: getQueryParameter( 'JSmolDebug' ) || false
+    SURFACE_COLOR: getQueryParameter( 'surfaceColor' ) || 'RWB'
   };
 } );
