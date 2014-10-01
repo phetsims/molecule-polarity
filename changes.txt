@@ -1,3 +1,4 @@
+10/1/14 #5 replace 'IUPAC' query parameter with 'dipoleDirection', with values 'negativeToPositive' and 'positiveToNegative'
 9/29/14 scenery-phet#77 move CurvedArrowShape to scenery-phet
 9/29/14 scenery-phet#77 delete CurvedArrowNode
 9/29/14 scenery-phet#77 factor out CurvedArrowShape

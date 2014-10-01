@@ -14,8 +14,8 @@ define( function( require ) {
     // enables developer-only features
     DEV: getQueryParameter( 'dev' ) || false,
 
-    // enables IUPAC convention for dipole direction, see issue #5
-    IUPAC: getQueryParameter( 'IUPAC' ) || false,
+    // direction of dipoles: negativeToPositive or positiveToNegative (IUPAC convention), see issue #5
+    DIPOLE_DIRECTION: getQueryParameter( 'dipoleDirection' ) || 'positiveToNegative',
 
     // enabled console debugging output for JSmol
     JSMOL_DEBUG: getQueryParameter( 'JSmolDebug' ) || false
