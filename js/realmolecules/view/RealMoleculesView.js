@@ -15,6 +15,7 @@ define( function( require ) {
   var JSmolViewerNode = require( 'MOLECULE_POLARITY/realmolecules/view/JSmolViewerNode' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PropertySet = require( 'AXON/PropertySet' );
   var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
@@ -52,8 +53,7 @@ define( function( require ) {
     var electronegativityTableNode = new ElectronegativityTableNode( this.jsmolViewerNode );
     var comboBoxListParent = new Node();
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
-    var electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
-    var electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
+    var electrostaticPotentialColorKey = MPQueryParameters.SURFACE_COLOR === 'ROYGB' ? SurfaceColorKey.createElectrostaticPotentialROYGBColorKey() : SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var controlPanel = new RealMoleculesControlPanel( viewProperties );
     var resetAllButton = new ResetAllButton( {
@@ -71,8 +71,7 @@ define( function( require ) {
       electronegativityTableNode,
       moleculesComboBox,
       controlPanel,
-      electrostaticPotentialRWBColorKey,
-      electrostaticPotentialROYGBColorKey,
+      electrostaticPotentialColorKey,
       electronDensityColorKey,
       resetAllButton,
       comboBoxListParent // last, so that combo box list is on top
@@ -88,11 +87,11 @@ define( function( require ) {
     electronegativityTableNode.top = this.layoutBounds.top + 25;
 
     // centered below electronegativity table
-    electrostaticPotentialRWBColorKey.centerX = electrostaticPotentialROYGBColorKey.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
-    electrostaticPotentialRWBColorKey.top = electrostaticPotentialROYGBColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
+    electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
+    electrostaticPotentialColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
 
     // below color keys
-    this.jsmolViewerNode.top = electrostaticPotentialRWBColorKey.bottom + 15;
+    this.jsmolViewerNode.top = electrostaticPotentialColorKey.bottom + 15;
 
     // centered below viewer
     moleculesComboBox.centerX = this.jsmolViewerNode.centerX;
@@ -113,8 +112,7 @@ define( function( require ) {
     } );
 
     viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
-      electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB );
-      electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB );
+      electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
   }

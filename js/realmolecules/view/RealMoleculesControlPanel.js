@@ -27,8 +27,7 @@ define( function( require ) {
   var atomLabelsString = require( 'string!MOLECULE_POLARITY/atomLabels' );
   var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
   var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
-  var electrostaticPotentialRWBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialRWB' );
-  var electrostaticPotentialROYGBString = require( 'string!MOLECULE_POLARITY/electrostaticPotentialROYGB' );
+  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
   var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
   var noneString = require( 'string!MOLECULE_POLARITY/none' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
@@ -61,8 +60,7 @@ define( function( require ) {
 
     // 'Surface' radio buttons
     var noneButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialRWBButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_RWB, new Text( electrostaticPotentialRWBString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialROYGBButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB, new Text( electrostaticPotentialROYGBString, controlTextOptions ), radioButtonOptions );
+    var electrostaticPotentialButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, controlTextOptions ), radioButtonOptions );
     var electronDensityButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
 
     // nodes in the control panel, in the order they will appear vertically
@@ -76,8 +74,7 @@ define( function( require ) {
       //--------------------
       surfaceTitleNode,
       noneButton,
-      electrostaticPotentialRWBButton,
-      electrostaticPotentialROYGBButton,
+      electrostaticPotentialButton,
       electronDensityButton
     ];
 

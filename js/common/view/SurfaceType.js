@@ -11,8 +11,7 @@ define( function() {
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
   return Object.freeze( {
     NONE: 'none',
-    ELECTROSTATIC_POTENTIAL_RWB: 'electrostaticPotentialRWB',
-    ELECTROSTATIC_POTENTIAL_ROYGB: 'electrostaticPotentialROYGB',
+    ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
     ELECTRON_DENSITY: 'electronDensity'
   } );
 } );

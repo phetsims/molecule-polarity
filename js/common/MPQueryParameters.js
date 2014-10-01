@@ -14,10 +14,13 @@ define( function( require ) {
     // enables developer-only features
     DEV: getQueryParameter( 'dev' ) || false,
 
-    // direction of dipoles: negativeToPositive or positiveToNegative (IUPAC convention), see issue #5
+    // direction of dipoles: 'negativeToPositive' or 'positiveToNegative' (IUPAC convention), see issue #5
     DIPOLE_DIRECTION: getQueryParameter( 'dipoleDirection' ) || 'positiveToNegative',
 
-    // enabled console debugging output for JSmol
+    // color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow), see issue #7
+    SURFACE_COLOR: getQueryParameter( 'surfaceColor' ) || 'RWB',
+
+    // enable console debugging output for JSmol
     JSMOL_DEBUG: getQueryParameter( 'JSmolDebug' ) || false
   };
 } );
