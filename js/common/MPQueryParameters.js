@@ -14,7 +14,7 @@ define( function( require ) {
     // enables developer-only features
     DEV: getQueryParameter( 'dev' ) || false,
 
-    // direction of dipoles: 'negativeToPositive' or 'positiveToNegative' (IUPAC convention), see issue #5
+    // direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention), see issue #5
     DIPOLE_DIRECTION: getQueryParameter( 'dipoleDirection' ) || 'positiveToNegative',
 
     // color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow), see issue #7
