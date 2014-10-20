@@ -13,14 +13,13 @@ define( function( require ) {
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
   var EFieldSwitch = require( 'MOLECULE_POLARITY/common/view/EFieldSwitch' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var HSeparator = require( 'SUN/HSeparator' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
@@ -47,7 +46,11 @@ define( function( require ) {
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var bondDipoleLabel = new HBox( { spacing: 10, children: [ new Text( bondDipoleString, controlTextOptions ), BondDipoleNode.createIcon() ] } );
+    var bondDipoleLabel = new LayoutBox( {
+      children: [ new Text( bondDipoleString, controlTextOptions ), BondDipoleNode.createIcon() ],
+      orientation: 'horizontal',
+      spacing: 10
+    } );
     var bondDipoleCheckBox = new CheckBox( bondDipoleLabel, viewProperties.bondDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
     var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, controlTextOptions ), viewProperties.bondCharacterVisibleProperty );
@@ -91,8 +94,9 @@ define( function( require ) {
     children.splice( children.indexOf( eFieldTitleNode ), 0, new HSeparator( separatorWidth ) );
 
     // vertical panel
-    Panel.call( this, new VBox( {
+    Panel.call( this, new LayoutBox( {
       children: children,
+      orientation: 'vertical',
       align: 'left',
       spacing: 15
     } ), {

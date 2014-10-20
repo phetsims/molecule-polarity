@@ -1,3 +1,4 @@
+10/20/14 replace HBox and VBox with LayoutBox throughout
 10/10/14 #5 fix dipoleDirection option, had things backwards
 10/1/14 use new JSdoc conventions for @param
 10/1/14 #7 add 'surfaceColor' query parameter for determining the color scheme used for electrostatic-potential in 'Real Molecules' screen

@@ -12,15 +12,14 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
@@ -47,9 +46,17 @@ define( function( require ) {
     var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
 
     // 'View' check boxes
-    var bondDipolesLabel = new HBox( { spacing: 10, children: [ new Text( bondDipolesString, controlTextOptions ), BondDipoleNode.createIcon() ] } );
+    var bondDipolesLabel = new LayoutBox( {
+      children: [ new Text( bondDipolesString, controlTextOptions ), BondDipoleNode.createIcon() ],
+      orientation: 'horizontal',
+      spacing: 10
+    } );
     var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, jsmolProperties.bondDipolesVisibleProperty );
-    var molecularDipoleLabel = new HBox( { spacing: 10, children: [ new Text( molecularDipoleString, controlTextOptions ), MolecularDipoleNode.createIcon() ] } );
+    var molecularDipoleLabel = new LayoutBox( {
+      children: [ new Text( molecularDipoleString, controlTextOptions ), MolecularDipoleNode.createIcon() ],
+      orientation: 'horizontal',
+      spacing: 10
+    } );
     var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, jsmolProperties.molecularDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), jsmolProperties.partialChargesVisibleProperty );
     var atomLabelsCheckBox = new CheckBox( new Text( atomLabelsString, controlTextOptions ), jsmolProperties.atomLabelsVisibleProperty );
@@ -87,8 +94,9 @@ define( function( require ) {
 
     // vertical panel
     Panel.call( this,
-      new VBox( {
+      new LayoutBox( {
         children: children,
+        orientation: 'vertical',
         align: 'left',
         spacing: 15
       } ), {

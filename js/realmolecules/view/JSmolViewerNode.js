@@ -12,6 +12,7 @@ define( function( require ) {
   // inherit
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -19,7 +20,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @param {Property.<RealMolecule>} moleculeProperty
@@ -53,7 +53,8 @@ define( function( require ) {
       moleculeText.text = molecule.symbol + ' (' + molecule.name + ')';
     } );
 
-    var debugText = new VBox( {
+    var debugText = new LayoutBox( {
+      orientation: 'vertical',
       align: 'left',
       spacing: 10,
       centerX: rectNode.centerX,
