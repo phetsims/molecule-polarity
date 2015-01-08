@@ -30,7 +30,7 @@ define( function( require ) {
       function( location1, location2, electronegativity1, electronegativity2 ) {
         var deltaEN = electronegativity2 - electronegativity1;
         var magnitude = Math.abs( deltaEN ); // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
-        if ( MPQueryParameters.DIPOLE_DIRECTION == 'negativeToPositive' ) {
+        if ( MPQueryParameters.DIPOLE_DIRECTION === 'negativeToPositive' ) {
           // For IUPAC convention, the direction of the dipole moment is from the negative to the positive charge. See issue #5.
           magnitude *= -1;
         }
