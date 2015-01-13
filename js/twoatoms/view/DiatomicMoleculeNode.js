@@ -37,12 +37,14 @@ define( function( require ) {
     this.electronDensityNode = new ElectronDensityNode( molecule ); // @private
     this.bondDipoleNode = new BondDipoleNode( molecule.bond ); // @private
 
-    Node.call( this, { children: [
-      // rendering order
-      this.electrostaticPotentialNode, this.electronDensityNode,
-      bondNode, atomANode, atomBNode,
-      this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode
-    ] } );
+    Node.call( this, {
+      children: [
+        // rendering order
+        this.electrostaticPotentialNode, this.electronDensityNode,
+        bondNode, atomANode, atomBNode,
+        this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode
+      ]
+    } );
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer';

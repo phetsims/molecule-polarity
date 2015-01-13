@@ -12,12 +12,12 @@ define( function( require ) {
 
   return {
     // enables developer-only features
-    DEV: getQueryParameter( 'dev' ) || false,
+    DEV:              getQueryParameter( 'dev' ) || false,
 
     // direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention), see issue #5
     DIPOLE_DIRECTION: getQueryParameter( 'dipoleDirection' ) || 'positiveToNegative',
 
     // color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow), see issue #7
-    SURFACE_COLOR: getQueryParameter( 'surfaceColor' ) || 'RWB'
+    SURFACE_COLOR:    getQueryParameter( 'surfaceColor' ) || 'RWB'
   };
 } );

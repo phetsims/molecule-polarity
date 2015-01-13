@@ -88,7 +88,7 @@ define( function( require ) {
     // compute the horizontal separator width, insert separators above (before) titles
     var separatorWidth = 0;
     for ( var i = 0; i < children.length; i++ ) {
-      separatorWidth = Math.max( separatorWidth, children[i].width );
+      separatorWidth = Math.max( separatorWidth, children[ i ].width );
     }
     children.splice( children.indexOf( surfaceTitleNode ), 0, new HSeparator( separatorWidth ) );
     children.splice( children.indexOf( eFieldTitleNode ), 0, new HSeparator( separatorWidth ) );

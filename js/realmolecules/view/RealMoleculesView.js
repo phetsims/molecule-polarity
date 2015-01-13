@@ -65,17 +65,19 @@ define( function( require ) {
     } );
 
     // Parent for all nodes added to this screen
-    var rootNode = new Node( { children: [
-      // nodes are rendered in this order
-      this.jsmolViewerNode,
-      electronegativityTableNode,
-      moleculesComboBox,
-      controlPanel,
-      electrostaticPotentialColorKey,
-      electronDensityColorKey,
-      resetAllButton,
-      comboBoxListParent // last, so that combo box list is on top
-    ] } );
+    var rootNode = new Node( {
+      children: [
+        // nodes are rendered in this order
+        this.jsmolViewerNode,
+        electronegativityTableNode,
+        moleculesComboBox,
+        controlPanel,
+        electrostaticPotentialColorKey,
+        electronDensityColorKey,
+        resetAllButton,
+        comboBoxListParent // last, so that combo box list is on top
+      ]
+    } );
     thisView.addChild( rootNode );
 
     // layout ---------------------------------

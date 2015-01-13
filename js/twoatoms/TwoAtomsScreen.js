@@ -23,8 +23,8 @@ define( function( require ) {
 
   // strings
   var screenTitle = require( 'string!MOLECULE_POLARITY/twoAtoms' );
-  var aString= require( 'string!MOLECULE_POLARITY/A' );
-  var bString= require( 'string!MOLECULE_POLARITY/B' );
+  var aString = require( 'string!MOLECULE_POLARITY/A' );
+  var bString = require( 'string!MOLECULE_POLARITY/B' );
 
   // creates the icon for this screen, a diatomic molecule with atoms 'A' and 'B'
   var createScreenIcon = function() {
@@ -35,7 +35,7 @@ define( function( require ) {
     var font = new PhetFont( { size: 94, weight: 'bold' } );
 
     var background = new Rectangle( 0, 0, 548, 373, { fill: MPColors.SCREEN_BACKGROUND } );
-    var bond = new Line( 0, 0, bondLength, 0, {  stroke: MPColors.BOND, lineWidth: bondWidth, center: background.center  } );
+    var bond = new Line( 0, 0, bondLength, 0, { stroke: MPColors.BOND, lineWidth: bondWidth, center: background.center } );
     var atomA = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_A, centerX: bond.left, y: bond.centerY } );
     var atomB = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_B, centerX: bond.right, y: bond.centerY } );
     var textA = new Text( aString, { font: font, center: atomA.center } );

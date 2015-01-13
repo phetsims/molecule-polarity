@@ -95,13 +95,13 @@ define( function( require ) {
     var xGap = 12;
     var x = 0;
     var y = 0;
-    var firstCell = thisNode.cells[0];
+    var firstCell = thisNode.cells[ 0 ];
     thisNode.addChild( firstCell );
     firstCell.x = x;
     firstCell.y = y;
     x = x + firstCell.width + xGap;
     for ( var i = 1; i < thisNode.cells.length - 1; i++ ) {
-      var cell = thisNode.cells[i];
+      var cell = thisNode.cells[ i ];
       thisNode.addChild( cell );
       cell.x = x;
       cell.y = y;
@@ -138,8 +138,8 @@ define( function( require ) {
     // @private Sets the {Color} color of a specified {number} element
     setColor: function( elementNumber, color ) {
       for ( var i = 0; i < this.cells.length; i++ ) {
-        if ( this.cells[i].elementNumber === elementNumber ) {
-          this.cells[i].enable( color );
+        if ( this.cells[ i ].elementNumber === elementNumber ) {
+          this.cells[ i ].enable( color );
           break;
         }
       }

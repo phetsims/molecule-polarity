@@ -47,14 +47,16 @@ define( function( require ) {
     this.bondDipoleBCNode = new BondDipoleNode( molecule.bondBC );
     this.molecularDipoleNode = new MolecularDipoleNode( molecule );
 
-    Node.call( this, { children: [
-      // rendering order
-      bondABNode, bondBCNode,
-      new Node( { children: [ atomANode, atomBNode, atomCNode ] } ), // because we'll be moving the dragged atom to the front
-      arrowsANode, arrowsCNode, arrowsBNode,
-      this.partialChargeNodeA, this.partialChargeNodeB, this.partialChargeNodeC,
-      this.bondDipoleABNode, this.bondDipoleBCNode, this.molecularDipoleNode
-    ] } );
+    Node.call( this, {
+      children: [
+        // rendering order
+        bondABNode, bondBCNode,
+        new Node( { children: [ atomANode, atomBNode, atomCNode ] } ), // because we'll be moving the dragged atom to the front
+        arrowsANode, arrowsCNode, arrowsBNode,
+        this.partialChargeNodeA, this.partialChargeNodeB, this.partialChargeNodeC,
+        this.bondDipoleABNode, this.bondDipoleBCNode, this.molecularDipoleNode
+      ]
+    } );
 
     // rotate molecule by dragging bonds or atom B
     bondABNode.cursor = bondBCNode.cursor = atomBNode.cursor = 'pointer';

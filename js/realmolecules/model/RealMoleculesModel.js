@@ -66,7 +66,7 @@ define( function( require ) {
       new RealMolecule( 'CHCl3', chloroformString, mol2Data.CHCl3 )
     ];
 
-    this.moleculeProperty = new Property( this.molecules[4] );
+    this.moleculeProperty = new Property( this.molecules[ 4 ] );
   }
 
   return inherit( Object, RealMoleculesModel, {

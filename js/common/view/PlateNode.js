@@ -50,11 +50,11 @@ define( function( require ) {
 
       // the primary face of the plate
       faceNode = new Path( new Shape()
-        .moveTo( 0, options.platePerspectiveYOffset )
-        .lineTo( options.plateWidth, 0 )
-        .lineTo( options.plateWidth, options.plateHeight )
-        .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
-        .close(),
+          .moveTo( 0, options.platePerspectiveYOffset )
+          .lineTo( options.plateWidth, 0 )
+          .lineTo( options.plateWidth, options.plateHeight )
+          .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
+          .close(),
         plateOptions
       );
     }
@@ -64,11 +64,11 @@ define( function( require ) {
 
       // the primary face of the plate
       faceNode = new Path( new Shape()
-        .moveTo( options.plateThickness, 0 )
-        .lineTo( options.plateWidth + options.plateThickness, options.platePerspectiveYOffset )
-        .lineTo( options.plateWidth + options.plateThickness, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
-        .lineTo( options.plateThickness, options.plateHeight )
-        .close(),
+          .moveTo( options.plateThickness, 0 )
+          .lineTo( options.plateWidth + options.plateThickness, options.platePerspectiveYOffset )
+          .lineTo( options.plateWidth + options.plateThickness, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
+          .lineTo( options.plateThickness, options.plateHeight )
+          .close(),
         plateOptions
       );
     }

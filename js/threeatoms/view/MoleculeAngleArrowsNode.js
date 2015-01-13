@@ -30,16 +30,18 @@ define( function( require ) {
     var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     var theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
-    Node.call( this, { children: [
-      new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
-      new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
-    ] } );
+    Node.call( this, {
+      children: [
+        new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
+        new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
+      ]
+    } );
 
     // Align with atom location and molecular dipole
     var updateTransform = function() {
       this.transform = new Transform3( Matrix3
-        .translationFromVector( atom.locationProperty.get() )
-        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) )
+          .translationFromVector( atom.locationProperty.get() )
+          .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) )
       );
     };
     molecule.dipoleProperty.link( updateTransform.bind( this ) );

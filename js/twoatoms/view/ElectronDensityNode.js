@@ -46,8 +46,8 @@ define( function( require ) {
     // each atom is surrounded with a 'cloud' (circle)
     var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
     thisNode.path = new Path( new Shape()
-      .arc( molecule.location.x - this.molecule.atomB.locationProperty.get().x, molecule.location.y - this.molecule.atomB.locationProperty.get().y, radius, Math.PI/4, 7 * Math.PI/4 )
-      .arc( molecule.location.x - this.molecule.atomA.locationProperty.get().x, molecule.location.y - this.molecule.atomA.locationProperty.get().y, radius, 5 * Math.PI/4, 3 * Math.PI/4 )
+        .arc( molecule.location.x - this.molecule.atomB.locationProperty.get().x, molecule.location.y - this.molecule.atomB.locationProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
+        .arc( molecule.location.x - this.molecule.atomA.locationProperty.get().x, molecule.location.y - this.molecule.atomA.locationProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
     );
     thisNode.addChild( this.path );
 
@@ -107,8 +107,8 @@ define( function( require ) {
         var pointB = new Vector2( gradientWidth / 2, 0 );
 
         // choose colors based on polarity
-        var colorA = ( deltaEN > 0 ) ? this.colors[1] : this.colors[0];
-        var colorB = ( deltaEN > 0 ) ? this.colors[0] : this.colors[1];
+        var colorA = ( deltaEN > 0 ) ? this.colors[ 1 ] : this.colors[ 0 ];
+        var colorB = ( deltaEN > 0 ) ? this.colors[ 0 ] : this.colors[ 1 ];
 
         // create the gradient
         var gradient = new LinearGradient( pointA.x, pointA.y, pointB.x, pointB.y );

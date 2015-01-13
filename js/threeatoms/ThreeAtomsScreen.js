@@ -39,8 +39,18 @@ define( function( require ) {
     var yOffset = Math.sin( Math.PI / 4 ) * bondLength;
 
     var background = new Rectangle( 0, 0, 548, 373, { fill: MPColors.SCREEN_BACKGROUND } );
-    var bondAB = new Line( 0, 0, -xOffset, yOffset, {  stroke: MPColors.BOND, lineWidth: bondWidth, right: background.centerX, centerY: background.centerY  } );
-    var bondBC = new Line( 0, 0, xOffset, yOffset, {  stroke: MPColors.BOND, lineWidth: bondWidth, left: background.centerX, centerY: background.centerY  } );
+    var bondAB = new Line( 0, 0, -xOffset, yOffset, {
+      stroke: MPColors.BOND,
+      lineWidth: bondWidth,
+      right: background.centerX,
+      centerY: background.centerY
+    } );
+    var bondBC = new Line( 0, 0, xOffset, yOffset, {
+      stroke: MPColors.BOND,
+      lineWidth: bondWidth,
+      left: background.centerX,
+      centerY: background.centerY
+    } );
     var atomA = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_A, centerX: bondAB.left, centerY: bondAB.bottom } );
     var atomB = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_B, centerX: bondAB.right, centerY: bondAB.top } );
     var atomC = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_C, centerX: bondBC.right, centerY: bondBC.bottom } );

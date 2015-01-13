@@ -36,7 +36,10 @@ define( function( require ) {
     var thisNode = this;
     this.moleculeProperty = moleculeProperty; // @private
 
-    var rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, { stroke: 'rgba(0,0,0,0.25)', fill: options.backgroundColor } );
+    var rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
+      stroke: 'rgba(0,0,0,0.25)',
+      fill: options.backgroundColor
+    } );
     var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
     var font = new PhetFont( 18 );
     var moleculeText = new SubSupText( '?', { font: font } );
@@ -96,7 +99,7 @@ define( function( require ) {
 
     this.elementsProperty = new Property( [] );
     moleculeProperty.link( function( molecule ) {
-        //TODO populate elementsProperty with [Elements] for the selected molecule
+      //TODO populate elementsProperty with [Elements] for the selected molecule
     } );
   }
 

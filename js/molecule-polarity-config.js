@@ -8,7 +8,7 @@
  */
 require.config( {
 
-  deps: ['molecule-polarity-main'],
+  deps: [ 'molecule-polarity-main' ],
 
   paths: {
 

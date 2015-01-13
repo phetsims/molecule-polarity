@@ -35,9 +35,9 @@ define( function( require ) {
     // items
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
-      var molecule = molecules[i];
+      var molecule = molecules[ i ];
       var node = new SubSupText( StringUtils.format( pattern_0symbol_1name, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
-      items[i] = ComboBox.createItem( node, molecule );
+      items[ i ] = ComboBox.createItem( node, molecule );
     }
 
     ComboBox.call( this, items, moleculeProperty, listParent, {

@@ -49,7 +49,7 @@ define( function( require ) {
     // gradient rectangle
     var gradient = new LinearGradient( 0, 0, options.size.width, options.size.height );
     for ( var i = 0; i < colors.length; i++ ) {
-      gradient.addColorStop( i / ( colors.length - 1 ), colors[i] );
+      gradient.addColorStop( i / ( colors.length - 1 ), colors[ i ] );
     }
     var spectrumNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
       fill: gradient,

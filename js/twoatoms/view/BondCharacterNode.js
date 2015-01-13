@@ -42,7 +42,7 @@ define( function( require ) {
     Node.call( this );
 
     var atomRadius = 5;
-    var bondNode = new Line( 0, 0, 7, 0, { lineWidth: 3, stroke: 'rgb(128,128,128)'} );
+    var bondNode = new Line( 0, 0, 7, 0, { lineWidth: 3, stroke: 'rgb(128,128,128)' } );
     var atom1Node = new Circle( atomRadius, { fill: atom1.color, stroke: 'black' } );
     var atom2Node = new Circle( atomRadius, { fill: atom2.color, stroke: 'black' } );
 
