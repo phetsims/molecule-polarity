@@ -38,6 +38,7 @@ define( function( require ) {
 
     options = _.extend( {
       size: new Dimension2( 420, 20 ),
+      titleVisible: true,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       rangeFont: new PhetFont( 16 ),
       xMargin: 0,
@@ -65,9 +66,11 @@ define( function( require ) {
 
     // rendering order
     this.addChild( spectrumNode );
-    this.addChild( titleNode );
     this.addChild( leftLabelNode );
     this.addChild( rightLabelNode );
+    if ( options.titleVisible ) {
+      this.addChild( titleNode );
+    }
 
     // layout
     titleNode.centerX = spectrumNode.centerX;
@@ -79,18 +82,18 @@ define( function( require ) {
   return inherit( Node, SurfaceColorKeyNode, {}, {
 
     // @static
-    createElectronDensityColorKey: function() {
-      return new SurfaceColorKeyNode( MPColors.BW_GRADIENT, electronDensityString, lessString, moreString );
+    createElectronDensityColorKey: function( options ) {
+      return new SurfaceColorKeyNode( MPColors.BW_GRADIENT, electronDensityString, lessString, moreString, options );
     },
 
     // @static
-    createElectrostaticPotentialRWBColorKey: function() {
-      return new SurfaceColorKeyNode( MPColors.RWB_GRADIENT, electrostaticPotentialString, positiveString, negativeString );
+    createElectrostaticPotentialRWBColorKey: function( options ) {
+      return new SurfaceColorKeyNode( MPColors.RWB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
     },
 
     // @static
-    createElectrostaticPotentialROYGBColorKey: function( title ) {
-      return new SurfaceColorKeyNode( MPColors.ROYGB_GRADIENT, electrostaticPotentialString, positiveString, negativeString );
+    createElectrostaticPotentialROYGBColorKey: function( options ) {
+      return new SurfaceColorKeyNode( MPColors.ROYGB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
     }
   } );
 } );

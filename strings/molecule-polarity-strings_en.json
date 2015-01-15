@@ -50,5 +50,9 @@
   "ozone": "ozone",
   "tetrafluoromethane": "tetrafluoromethane",
   "trifluoromethane": "trifluoromethane",
-  "water": "water"
+  "water": "water",
+  "dipoleDirection": "Dipole direction:",
+  "positiveToNegative": "\u002B \u2192 \u2212",
+  "negativeToPositive": "\u2212 \u2192 \u002B",
+  "surfaceColor": "Surface color:"
 }

@@ -9,7 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var MPOptionsNode = require( 'MOLECULE_POLARITY/common/view/MPOptionsNode' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
+  var PropertySet = require( 'AXON/PropertySet' );
   var RealMoleculesScreen = require( 'MOLECULE_POLARITY/realmolecules/RealMoleculesScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
@@ -21,7 +23,14 @@ define( function( require ) {
 
   var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen() ];
 
+  // global options
+  var globalOptions = new PropertySet( {
+    dipoleDirection: MPQueryParameters.DIPOLE_DIRECTION,
+    surfaceColor: MPQueryParameters.SURFACE_COLOR
+  } );
+
   var simOptions = {
+    optionsNode: new MPOptionsNode( globalOptions ), // user interface for the Options dialog
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley',
