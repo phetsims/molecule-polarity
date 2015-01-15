@@ -15,7 +15,7 @@ define( function( require ) {
   var JSmolViewerNode = require( 'MOLECULE_POLARITY/realmolecules/view/JSmolViewerNode' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
+  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PropertySet = require( 'AXON/PropertySet' );
   var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
@@ -53,7 +53,18 @@ define( function( require ) {
     var electronegativityTableNode = new ElectronegativityTableNode( this.jsmolViewerNode );
     var comboBoxListParent = new Node();
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
-    var electrostaticPotentialColorKey = MPQueryParameters.SURFACE_COLOR === 'ROYGB' ? SurfaceColorKey.createElectrostaticPotentialROYGBColorKey() : SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
+
+    var electrostaticPotentialColorKey = new Node();
+    MPGlobalOptions.surfaceColorProperty.link( function( surfaceType ) {
+      electrostaticPotentialColorKey.removeAllChildren();
+      if ( surfaceType === 'RWB' ) {
+        electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );
+      }
+      else {
+        electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialROYGBColorKey() );
+      }
+    } );
+
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
     var controlPanel = new RealMoleculesControlPanel( viewProperties );
     var resetAllButton = new ResetAllButton( {

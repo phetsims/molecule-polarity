@@ -13,6 +13,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
+  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
@@ -37,14 +38,13 @@ define( function( require ) {
   };
 
   /**
-   * @param {PropertySet} propertySet with properties 'dipoleDirection' and  'surfaceColor'
    * @constructor
    */
-  function MPOptionsNode( propertySet ) {
+  function MPOptionsNode() {
 
     // dipole direction control
     var dipoleDirectionLabel = new Text( dipoleDirectionString, CONTROL_TITLE_OPTIONS );
-    var dipoleDirectionProperty = propertySet.dipoleDirectionProperty;
+    var dipoleDirectionProperty = MPGlobalOptions.dipoleDirectionProperty;
     var positiveToNegativeButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'positiveToNegative',
@@ -70,7 +70,7 @@ define( function( require ) {
 
     // surface color control
     var surfaceColorLabel = new Text( surfaceColorString, CONTROL_TITLE_OPTIONS );
-    var surfaceColorProperty = propertySet.surfaceColorProperty;
+    var surfaceColorProperty = MPGlobalOptions.surfaceColorProperty;
     var rwbButton = new AquaRadioButton(
       surfaceColorProperty,
       'RWB',

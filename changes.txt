@@ -1,3 +1,4 @@
+1/15/15 #7 wire up MPGlobalOptions.surfaceColor to color key in 'Real Molecules' screen
 1/15/15 i18n for partial charge symbol, use in Options dialog
 1/15/15 #5, #7 add properties and user interface for global options (properties are not wired up yet)
 10/20/14 replace HBox and VBox with LayoutBox throughout
