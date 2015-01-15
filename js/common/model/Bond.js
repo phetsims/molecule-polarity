@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
+  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -26,11 +26,15 @@ define( function( require ) {
     thisBond.atom1 = atom1;
     thisBond.atom2 = atom2;
 
-    thisBond.dipoleProperty = new DerivedProperty( [ atom1.locationProperty, atom2.locationProperty, atom1.electronegativityProperty, atom2.electronegativityProperty ],
-      function( location1, location2, electronegativity1, electronegativity2 ) {
+    thisBond.dipoleProperty = new DerivedProperty( [
+        atom1.locationProperty, atom2.locationProperty,
+        atom1.electronegativityProperty, atom2.electronegativityProperty,
+        MPGlobalOptions.dipoleDirectionProperty
+      ],
+      function( location1, location2, electronegativity1, electronegativity2, dipoleDirection ) {
         var deltaEN = electronegativity2 - electronegativity1;
         var magnitude = Math.abs( deltaEN ); // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
-        if ( MPQueryParameters.DIPOLE_DIRECTION === 'negativeToPositive' ) {
+        if ( dipoleDirection === 'negativeToPositive' ) {
           // For IUPAC convention, the direction of the dipole moment is from the negative to the positive charge. See issue #5.
           magnitude *= -1;
         }
