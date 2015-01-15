@@ -52,7 +52,8 @@
   "trifluoromethane": "trifluoromethane",
   "water": "water",
   "dipoleDirection": "Dipole direction:",
-  "positiveToNegative": "\u002B \u2192 \u2212",
-  "negativeToPositive": "\u2212 \u2192 \u002B",
+  "delta": "\u03B4",
+  "positiveToNegative": "\u03B4\u002B \u2192 \u03B4\u2212",
+  "negativeToPositive": "\u03B4\u2212 \u2192 \u03B4\u002B",
   "surfaceColor": "Surface color:"
 }

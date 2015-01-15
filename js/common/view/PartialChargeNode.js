@@ -18,7 +18,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var deltaString = '\u03B4'; // i18n not required
+  var deltaString = require( 'string!MOLECULE_POLARITY/delta' );
 
   // constants
   var REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
