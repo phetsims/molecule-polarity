@@ -18,7 +18,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var deltaString = require( 'string!MOLECULE_POLARITY/delta' );
+  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
+  var deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
 
   // constants
   var REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
@@ -46,7 +47,7 @@ define( function( require ) {
       if ( partialCharge !== 0 ) {
 
         // d+ or d-
-        textNode.text = deltaString + ( ( partialCharge > 0 ) ? '+' : '-' );
+        textNode.text = ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString;
 
         // size proportional to bond dipole magnitude
         var scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
