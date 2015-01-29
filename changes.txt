@@ -1,3 +1,4 @@
+1/29/15 check in dependencies.json for 1.0.0-dev.8
 # 1.0.0-dev.8 1/29/15
 1/29/15 dev version requested by KP
 1/15/15 #5 wire up MPGlobalOptions.dipoleDirection to model.Bond
