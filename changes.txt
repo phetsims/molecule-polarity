@@ -1,3 +1,5 @@
+# 1.0.0-dev.8 1/29/15
+1/29/15 dev version requested by KP
 1/15/15 #5 wire up MPGlobalOptions.dipoleDirection to model.Bond
 1/15/15 #7 wire up MPGlobalOptions.surfaceColor to color key in 'Real Molecules' screen
 1/15/15 i18n for partial charge symbol, use in Options dialog
