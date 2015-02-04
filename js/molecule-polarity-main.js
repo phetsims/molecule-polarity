@@ -37,9 +37,7 @@ define( function( require ) {
     screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
 
     simOptions = _.extend( {
-      // add dev-specific options here
-      showHomeScreen: false,
-      screenIndex: 1
+      screens: 3
     }, simOptions );
   }
 
