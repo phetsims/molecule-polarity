@@ -15,7 +15,6 @@ define( function( require ) {
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var Transform3 = require( 'DOT/Transform3' );
 
   /**
    * @param {Molecule} molecule
@@ -39,10 +38,9 @@ define( function( require ) {
 
     // Align with atom location and molecular dipole
     var updateTransform = function() {
-      this.transform = new Transform3( Matrix3
-          .translationFromVector( atom.locationProperty.get() )
-          .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) )
-      );
+      this.matrix = Matrix3
+        .translationFromVector( atom.locationProperty.get() )
+        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) );
     };
     molecule.dipoleProperty.link( updateTransform.bind( this ) );
     atom.locationProperty.link( updateTransform.bind( this ) );

@@ -63,7 +63,7 @@ define( function( require ) {
 
     molecule.angleProperty.link( function( angle ) {
       if ( thisNode.visible ) {
-        thisNode.transform = molecule.createTransform();
+        thisNode.matrix = molecule.createTransformMatrix();
       }
     } );
 
@@ -77,7 +77,7 @@ define( function( require ) {
     setVisible: function( visible ) {
       Node.prototype.setVisible.call( this, visible );
       if ( visible ) {
-        this.transform = this.molecule.createTransform();
+        this.matrix = this.molecule.createTransformMatrix();
         this.updateFill();
       }
     },

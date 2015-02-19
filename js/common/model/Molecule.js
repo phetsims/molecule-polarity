@@ -12,7 +12,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Property = require( 'AXON/Property' );
-  var Transform3 = require( 'DOT/Transform3' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -62,8 +61,8 @@ define( function( require ) {
     },
 
     // Creates a transform that accounts for the molecule's location and orientation.
-    createTransform: function() {
-      return new Transform3( Matrix3.translationFromVector( this.location ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) ) );
+    createTransformMatrix: function() {
+      return Matrix3.translationFromVector( this.location ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) );
     },
 
     // @private molecular dipole is the vector sum of the bond dipoles
