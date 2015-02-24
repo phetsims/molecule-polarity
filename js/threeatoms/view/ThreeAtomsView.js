@@ -17,8 +17,8 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeAtoms/view/ThreeAtomsControlPanel' );
-  var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeAtoms/view/TriatomicMoleculeNode' );
+  var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsControlPanel' );
+  var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
 
   /**
    * @param {ThreeAtomsModel} model
