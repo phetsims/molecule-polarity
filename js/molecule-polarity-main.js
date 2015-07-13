@@ -26,7 +26,7 @@ define( function( require ) {
     optionsNode: new MPOptionsNode(), // user interface for the Options dialog
     credits: {
       leadDesign: 'Kelly Lancaster',
-      softwareDevelopment: 'Chris Malley',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       designTeam: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins'
     }
   };
