@@ -2,6 +2,7 @@
   "name": "molecule-polarity",
   "version": "1.0.0-dev.8",
   "license": "GPLv3",
+  "requirejsNamespace": "MOLECULE_POLARITY",
   "simTitleStringKey": "MOLECULE_POLARITY/molecule-polarity.name",
   "phetLibs": [
     "molecule-polarity",
