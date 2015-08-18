@@ -17,7 +17,6 @@
     "requirejsNamespace": "MOLECULE_POLARITY",
     "simTitleStringKey": "MOLECULE_POLARITY/molecule-polarity.name",
     "phetLibs": [
-      "molecule-polarity",
       "nitroglycerin"
     ]
   }
