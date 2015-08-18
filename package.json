@@ -2,12 +2,6 @@
   "name": "molecule-polarity",
   "version": "1.0.0-dev.8",
   "license": "GPLv3",
-  "requirejsNamespace": "MOLECULE_POLARITY",
-  "simTitleStringKey": "MOLECULE_POLARITY/molecule-polarity.name",
-  "phetLibs": [
-    "molecule-polarity",
-    "nitroglycerin"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/phetsims/molecule-polarity.git"
@@ -18,5 +12,13 @@
     "grunt-contrib-jshint": "~0.6.4",
     "uglify-js": "~2.4.0",
     "requirejs": "~2.1.8"
+  },
+  "phet": {
+    "requirejsNamespace": "MOLECULE_POLARITY",
+    "simTitleStringKey": "MOLECULE_POLARITY/molecule-polarity.name",
+    "phetLibs": [
+      "molecule-polarity",
+      "nitroglycerin"
+    ]
   }
 }
