@@ -18,7 +18,7 @@ define( function( require ) {
   var TwoAtomsScreen = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsScreen' );
 
   // strings
-  var simTitle = require( 'string!MOLECULE_POLARITY/molecule-polarity.name' );
+  var simTitle = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
   var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen() ];
 
