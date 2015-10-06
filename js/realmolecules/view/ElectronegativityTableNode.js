@@ -82,13 +82,13 @@ define( function( require ) {
     thisNode.addChild( titleNode );
 
     thisNode.cells = [
-      new Cell( "H", 1, 2.1 ),
-      new Cell( "B", 5, 2.0 ),
-      new Cell( "C", 6, 2.5 ),
-      new Cell( "N", 7, 3.0 ),
-      new Cell( "O", 8, 3.5 ),
-      new Cell( "F", 9, 4.0 ),
-      new Cell( "Cl", 17, 3.0 )
+      new Cell( 'H', 1, 2.1 ),
+      new Cell( 'B', 5, 2.0 ),
+      new Cell( 'C', 6, 2.5 ),
+      new Cell( 'N', 7, 3.0 ),
+      new Cell( 'O', 8, 3.5 ),
+      new Cell( 'F', 9, 4.0 ),
+      new Cell( 'Cl', 17, 3.0 )
     ];
 
     // layout cells, first and last cells are horizontally separated from others
