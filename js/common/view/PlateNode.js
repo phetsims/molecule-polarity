@@ -43,7 +43,8 @@ define( function( require ) {
 
     var plateOptions = { fill: options.plateColor, stroke: 'black' };
 
-    var sideEdgeNode, faceNode;
+    var sideEdgeNode;
+    var faceNode;
     if ( options.polarity === 'positive' ) {
       // side edge to show thickness
       sideEdgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, plateOptions );
