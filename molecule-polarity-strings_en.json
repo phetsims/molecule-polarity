@@ -2,13 +2,13 @@
   "molecule-polarity.title": {
     "value": "Molecule Polarity"
   },
-  "twoAtoms": {
+  "screen.twoAtoms": {
     "value": "Two Atoms"
   },
-  "threeAtoms": {
+  "screen.threeAtoms": {
     "value": "Three Atoms"
   },
-  "realMolecules": {
+  "screen.realMolecules": {
     "value": "Real Molecules"
   },
   "electricField": {

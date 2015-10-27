@@ -22,7 +22,7 @@ define( function( require ) {
   var TwoAtomsView = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsView' );
 
   // strings
-  var screenTitle = require( 'string!MOLECULE_POLARITY/twoAtoms' );
+  var screenTitle = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
   var aString = require( 'string!MOLECULE_POLARITY/A' );
   var bString = require( 'string!MOLECULE_POLARITY/B' );
 

@@ -22,7 +22,7 @@ define( function( require ) {
   var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsView' );
 
   // strings
-  var screenTitle = require( 'string!MOLECULE_POLARITY/threeAtoms' );
+  var screenTitle = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
   var aString = require( 'string!MOLECULE_POLARITY/A' );
   var bString = require( 'string!MOLECULE_POLARITY/B' );
   var cString = require( 'string!MOLECULE_POLARITY/C' );

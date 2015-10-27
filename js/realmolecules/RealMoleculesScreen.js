@@ -17,7 +17,7 @@ define( function( require ) {
   var RealMoleculesView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesView' );
 
   // strings
-  var screenTitle = require( 'string!MOLECULE_POLARITY/realMolecules' );
+  var screenTitle = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
 
   // images
   var homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
