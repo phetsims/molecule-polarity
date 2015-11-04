@@ -18,8 +18,8 @@ define( function( require ) {
 
   // strings
   var moleculeString = require( 'string!MOLECULE_POLARITY/molecule' );
-  var pattern_0label = require( 'string!MOLECULE_POLARITY/pattern.0label' );
-  var pattern_0symbol_1name = require( 'string!MOLECULE_POLARITY/pattern.0symbol.1name' );
+  var pattern0LabelString = require( 'string!MOLECULE_POLARITY/pattern.0label' );
+  var pattern0Symbol1NameString = require( 'string!MOLECULE_POLARITY/pattern.0symbol.1name' );
 
   /**
    * @param {RealMolecule[]} molecules
@@ -30,13 +30,13 @@ define( function( require ) {
   function RealMoleculesComboBox( molecules, moleculeProperty, listParent ) {
 
     // label
-    var labelNode = new Text( StringUtils.format( pattern_0label, moleculeString ), { font: new PhetFont( 22 ) } );
+    var labelNode = new Text( StringUtils.format( pattern0LabelString, moleculeString ), { font: new PhetFont( 22 ) } );
 
     // items
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
       var molecule = molecules[ i ];
-      var node = new SubSupText( StringUtils.format( pattern_0symbol_1name, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
+      var node = new SubSupText( StringUtils.format( pattern0Symbol1NameString, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
       items[ i ] = ComboBox.createItem( node, molecule );
     }
 

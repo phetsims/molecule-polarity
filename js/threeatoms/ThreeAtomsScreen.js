@@ -22,10 +22,10 @@ define( function( require ) {
   var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsView' );
 
   // strings
-  var screenTitle = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
-  var aString = require( 'string!MOLECULE_POLARITY/A' );
-  var bString = require( 'string!MOLECULE_POLARITY/B' );
-  var cString = require( 'string!MOLECULE_POLARITY/C' );
+  var screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
+  var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
+  var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
+  var atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
 
   // creates the icon for this screen, a triatomic molecule with atoms 'A', 'B' and 'C'
   var createScreenIcon = function() {
@@ -54,15 +54,15 @@ define( function( require ) {
     var atomA = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_A, centerX: bondAB.left, centerY: bondAB.bottom } );
     var atomB = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_B, centerX: bondAB.right, centerY: bondAB.top } );
     var atomC = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_C, centerX: bondBC.right, centerY: bondBC.bottom } );
-    var textA = new Text( aString, { font: font, center: atomA.center } );
-    var textB = new Text( bString, { font: font, center: atomB.center } );
-    var textC = new Text( cString, { font: font, center: atomC.center } );
+    var textA = new Text( atomAString, { font: font, center: atomA.center } );
+    var textB = new Text( atomBString, { font: font, center: atomB.center } );
+    var textC = new Text( atomCString, { font: font, center: atomC.center } );
     return new Node( { children: [ background, bondAB, bondBC, atomA, atomB, atomC, textA, textB, textC ] } );
   };
 
   function ThreeAtomsScreen() {
     Screen.call( this,
-      screenTitle,
+      screenThreeAtomsString,
       createScreenIcon(),
       function() { return new ThreeAtomsModel(); },
       function( model ) { return new ThreeAtomsView( model ); },

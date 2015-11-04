@@ -17,7 +17,7 @@ define( function( require ) {
   var RealMoleculesView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesView' );
 
   // strings
-  var screenTitle = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
+  var screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
 
   // images
   var homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
@@ -25,7 +25,7 @@ define( function( require ) {
 
   function RealMoleculesScreen() {
     Screen.call( this,
-      screenTitle,
+      screenRealMoleculesString,
       new Image( homeIcon ),
       function() { return new RealMoleculesModel(); },
       function( model ) { return new RealMoleculesView( model ); },

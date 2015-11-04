@@ -20,9 +20,9 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var atomAString = require( 'string!MOLECULE_POLARITY/A' );
-  var atomBString = require( 'string!MOLECULE_POLARITY/B' );
-  var atomCString = require( 'string!MOLECULE_POLARITY/C' );
+  var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
+  var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
+  var atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
 
   /**
    * @param {Object} [options] see supertype constructor

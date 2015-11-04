@@ -22,9 +22,9 @@ define( function( require ) {
   var TwoAtomsView = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsView' );
 
   // strings
-  var screenTitle = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
-  var aString = require( 'string!MOLECULE_POLARITY/A' );
-  var bString = require( 'string!MOLECULE_POLARITY/B' );
+  var screenTwoAtomsString = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
+  var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
+  var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
 
   // creates the icon for this screen, a diatomic molecule with atoms 'A' and 'B'
   var createScreenIcon = function() {
@@ -38,15 +38,15 @@ define( function( require ) {
     var bond = new Line( 0, 0, bondLength, 0, { stroke: MPColors.BOND, lineWidth: bondWidth, center: background.center } );
     var atomA = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_A, centerX: bond.left, y: bond.centerY } );
     var atomB = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_B, centerX: bond.right, y: bond.centerY } );
-    var textA = new Text( aString, { font: font, center: atomA.center } );
-    var textB = new Text( bString, { font: font, center: atomB.center } );
+    var textA = new Text( atomAString, { font: font, center: atomA.center } );
+    var textB = new Text( atomBString, { font: font, center: atomB.center } );
 
     return new Node( { children: [ background, bond, atomA, atomB, textA, textB ] } );
   };
 
   function TwoAtomsScreen() {
     Screen.call( this,
-      screenTitle,
+      screenTwoAtomsString,
       createScreenIcon(),
       function() { return new TwoAtomsModel(); },
       function( model ) { return new TwoAtomsView( model ); },

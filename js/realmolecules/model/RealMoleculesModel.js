@@ -16,7 +16,7 @@ define( function( require ) {
 
   // string
   var hydrogenString = require( 'string!MOLECULE_POLARITY/hydrogen' );
-  var nitrogrenString = require( 'string!MOLECULE_POLARITY/nitrogen' );
+  var nitrogenString = require( 'string!MOLECULE_POLARITY/nitrogen' );
   var oxygenString = require( 'string!MOLECULE_POLARITY/oxygen' );
   var fluorineString = require( 'string!MOLECULE_POLARITY/fluorine' );
   var hydrogenFluorideString = require( 'string!MOLECULE_POLARITY/hydrogenFluoride' );
@@ -43,7 +43,7 @@ define( function( require ) {
     this.molecules = [
 
       new RealMolecule( 'H2', hydrogenString, mol2Data.H2 ),
-      new RealMolecule( 'N2', nitrogrenString, mol2Data.N2 ),
+      new RealMolecule( 'N2', nitrogenString, mol2Data.N2 ),
       new RealMolecule( 'O2', oxygenString, mol2Data.O2 ),
       new RealMolecule( 'F2', fluorineString, mol2Data.F2 ),
       new RealMolecule( 'HF', hydrogenFluorideString, mol2Data.HF ),

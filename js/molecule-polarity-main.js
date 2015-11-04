@@ -18,7 +18,7 @@ define( function( require ) {
   var TwoAtomsScreen = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsScreen' );
 
   // strings
-  var simTitle = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
+  var moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
   var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen() ];
 
@@ -42,7 +42,7 @@ define( function( require ) {
   }
 
   SimLauncher.launch( function() {
-    var sim = new Sim( simTitle, screens, simOptions );
+    var sim = new Sim( moleculePolarityTitleString, screens, simOptions );
     sim.start();
   } );
 } );
