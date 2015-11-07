@@ -1,4 +1,4 @@
-// Copyright 2002-2014, University of Colorado Boulder
+// Copyright 2014, University of Colorado Boulder
 
 /**
  * A pair of arrows that are placed around an atom, indicating that dragging the atom will change the bond angle.
