@@ -1,6 +1,11 @@
-jsmol-14.2.4/
+.idea/
 build/
+build-phet-io/
 node_modules/
 *.iml
 .DS_Store
 .DS_Store?
+*.sublime-project
+*.sublime-workspace
+.eslintcache
+jsmol-14.2.4/
