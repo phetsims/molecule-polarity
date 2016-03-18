@@ -20,8 +20,6 @@ define( function( require ) {
   // strings
   var moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
-  var screens = [ new TwoAtomsScreen(), new ThreeAtomsScreen() ];
-
   var simOptions = {
     optionsNode: new MPOptionsNode(), // user interface for the Options dialog
     credits: {
@@ -31,17 +29,23 @@ define( function( require ) {
     }
   };
 
-  // developer-only features
-  if ( MPQueryParameters.DEV ) {
-
-    screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
-
-    simOptions = _.extend( {
-      screens: 3
-    }, simOptions );
-  }
-
   SimLauncher.launch( function() {
+
+    var screens = [
+      new TwoAtomsScreen(),
+      new ThreeAtomsScreen()
+    ];
+
+    // developer-only features
+    if ( MPQueryParameters.DEV ) {
+
+      screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
+
+      simOptions = _.extend( {
+        screens: 3
+      }, simOptions );
+    }
+
     var sim = new Sim( moleculePolarityTitleString, screens, simOptions );
     sim.start();
   } );
