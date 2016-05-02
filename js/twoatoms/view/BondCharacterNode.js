@@ -12,6 +12,7 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -33,32 +34,6 @@ define( function( require ) {
   var Y_SPACING = 3;
 
   /**
-   * Pointer looks like a horizontally aligned diatomic molecule.
-   * @param {Atom} atom1
-   * @param {Atom} atom2
-   * @constructor
-   */
-  function PointerNode( atom1, atom2 ) {
-    Node.call( this );
-
-    var atomRadius = 5;
-    var bondNode = new Line( 0, 0, 7, 0, { lineWidth: 3, stroke: 'rgb(128,128,128)' } );
-    var atom1Node = new Circle( atomRadius, { fill: atom1.color, stroke: 'black' } );
-    var atom2Node = new Circle( atomRadius, { fill: atom2.color, stroke: 'black' } );
-
-    this.addChild( bondNode );
-    this.addChild( atom1Node );
-    this.addChild( atom2Node );
-
-    bondNode.left = atom1Node.right - 1;
-    bondNode.centerY = atom1Node.centerY;
-    atom2Node.left = bondNode.right - 1;
-    atom2Node.centerY = atom1Node.centerY;
-  }
-
-  inherit( Node, PointerNode );
-
-  /**
    * @param {DiatomicMolecule} molecule
    * @constructor
    */
@@ -67,7 +42,10 @@ define( function( require ) {
     Node.call( this );
 
     // title and labels
-    var titleNode = new Text( bondCharacterString, { font: new PhetFont( { size: 16, weight: 'bold' } ), fill: 'black' } );
+    var titleNode = new Text( bondCharacterString, {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      fill: 'black'
+    } );
     var labelOptions = { font: new PhetFont( 16 ), fill: 'black' };
     var leftLabelNode = new Text( covalentString, labelOptions );
     var rightLabelNode = new Text( ionicString, labelOptions );
@@ -103,6 +81,36 @@ define( function( require ) {
         dipole.magnitude() );
     } );
   }
+
+  moleculePolarity.register( 'BondCharacterNode', BondCharacterNode );
+
+  /**
+   * Pointer looks like a horizontally aligned diatomic molecule.
+   * @param {Atom} atom1
+   * @param {Atom} atom2
+   * @constructor
+   */
+  function PointerNode( atom1, atom2 ) {
+    Node.call( this );
+
+    var atomRadius = 5;
+    var bondNode = new Line( 0, 0, 7, 0, { lineWidth: 3, stroke: 'rgb(128,128,128)' } );
+    var atom1Node = new Circle( atomRadius, { fill: atom1.color, stroke: 'black' } );
+    var atom2Node = new Circle( atomRadius, { fill: atom2.color, stroke: 'black' } );
+
+    this.addChild( bondNode );
+    this.addChild( atom1Node );
+    this.addChild( atom2Node );
+
+    bondNode.left = atom1Node.right - 1;
+    bondNode.centerY = atom1Node.centerY;
+    atom2Node.left = bondNode.right - 1;
+    atom2Node.centerY = atom1Node.centerY;
+  }
+
+  moleculePolarity.register( 'BondCharacterNode.PointerNode', PointerNode );
+
+  inherit( Node, PointerNode );
 
   return inherit( Node, BondCharacterNode );
 } );

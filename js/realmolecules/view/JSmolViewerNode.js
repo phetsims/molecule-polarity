@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
@@ -102,6 +103,8 @@ define( function( require ) {
       //TODO populate elementsProperty with [Elements] for the selected molecule
     } );
   }
+
+  moleculePolarity.register( 'JSmolViewerNode', JSmolViewerNode );
 
   return inherit( Node, JSmolViewerNode, {
 

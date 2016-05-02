@@ -10,12 +10,13 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   // constants
   var SURFACE_ALPHA = 0.72;
   var NEUTRAL_GREEN = new Color( 31, 247, 0 );
 
-  return {
+  var MPColors = {
 
     SCREEN_BACKGROUND: 'rgb( 180, 205, 255)',
 
@@ -82,4 +83,8 @@ define( function( require ) {
       Color.BLUE
     ]
   };
+
+  moleculePolarity.register( 'MPColors', MPColors );
+
+  return MPColors;
 } );

@@ -20,6 +20,7 @@ define( function( require ) {
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   var MoleculeAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/MoleculeAngleArrowsNode' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
 
@@ -77,6 +78,8 @@ define( function( require ) {
     // default state
     arrowsANode.visible = arrowsCNode.visible = arrowsBNode.visible = false;
   }
+
+  moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
 
   return inherit( Node, TriatomicMoleculeNode, {
 

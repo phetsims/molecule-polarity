@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Screen = require( 'JOIST/Screen' );
   var RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
@@ -23,6 +24,9 @@ define( function( require ) {
   var homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
   var navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
 
+  /**
+   * @constructor
+   */
   function RealMoleculesScreen() {
     Screen.call( this,
       screenRealMoleculesString,
@@ -35,6 +39,8 @@ define( function( require ) {
       }
     );
   }
+
+  moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
 
   return inherit( Screen, RealMoleculesScreen );
 } );

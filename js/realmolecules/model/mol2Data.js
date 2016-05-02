@@ -7,6 +7,9 @@
 define( function( require ) {
   'use strict';
 
+  // modules
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+
   var mol2Data = {
     BF3: '\n@<TRIPOS>MOLECULE\nM0001\n4 3\nSMALL\nUSER_CHARGES\n\n\n@<TRIPOS>ATOM\n1   B          0.000000000     0.000000000     0.000000000       B   1  M0001    0.842505\n2   F2         1.317730477     0.000000000     0.000000000       F   1  M0001   -0.281790\n3   F3        -0.658865212    -1.141188034     0.000000000       F   1  M0001   -0.280358\n4   F1        -0.658865212     1.141188034     0.000000000       F   1  M0001   -0.280358\n\n\n@<TRIPOS>BOND\n1      1      2    1\n2      1      3    1\n3      1      4    1\n',
     BH3: '\n@<TRIPOS>MOLECULE\nM0001\n4 3\nSMALL\nUSER_CHARGES\n\n\n@<TRIPOS>ATOM\n1   B          0.000000000     0.000000000     0.000000000       B   1  M0001    0.301318\n2   H2         1.194020007     0.000000000     0.000000000       H   1  M0001   -0.100484\n3   H1        -0.597010030     1.034051652     0.000000000       H   1  M0001   -0.100417\n4   H3        -0.597010030    -1.034051652     0.000000000       H   1  M0001   -0.100417\n\n\n@<TRIPOS>BOND\n1      1      2    1\n2      1      3    1\n3      1      4    1\n',
@@ -28,6 +31,8 @@ define( function( require ) {
     O2: '\n@<TRIPOS>MOLECULE\nM0001\n2 1\nSMALL\nUSER_CHARGES\n\n\n@<TRIPOS>ATOM\n1   O2         0.607254209      0.000000000     0.000000000     O.2   1  M0001    0.000000\n2   O1        -0.607254209      0.000000000     0.000000000     O.2   1  M0001   -0.000000\n\n\n@<TRIPOS>BOND\n1      1      2    2\n',
     O3: '\n@<TRIPOS>MOLECULE\nM0001\n3 2\nSMALL\nUSER_CHARGES\n\n\n@<TRIPOS>ATOM\n1   O2         0.000000000     0.434529301     0.000000000     O.3   1  M0001    0.242265\n2   O1        -1.083210079    -0.217264624     0.000000000       O   1  M0001   -0.121133\n3   O3         1.083210079    -0.217264624     0.000000000       O   1  M0001   -0.121133\n\n\n@<TRIPOS>BOND\n1      1      2    1\n2      1      3    1\n'
   };
+
+  moleculePolarity.register( 'mol2Data', mol2Data );
 
   return mol2Data;
 } );

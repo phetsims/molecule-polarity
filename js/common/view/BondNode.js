@@ -13,8 +13,13 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
 
+  /**
+   * @param {Bond} bond
+   * @constructor
+   */
   function BondNode( bond ) {
 
     var thisNode = this;
@@ -26,6 +31,8 @@ define( function( require ) {
     bond.atom1.locationProperty.link( function( location ) { thisNode.setPoint1( location ); } );
     bond.atom2.locationProperty.link( function( location ) { thisNode.setPoint2( location ); } );
   }
+
+  moleculePolarity.register( 'BondNode', BondNode );
 
   return inherit( Line, BondNode );
 } );

@@ -13,8 +13,13 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
 
+  /**
+   * @param {Object} [options]
+   * @constructor
+   */
   function PolarityIndicator( options ) {
 
     options = _.extend( {
@@ -44,6 +49,8 @@ define( function( require ) {
 
     this.mutate( options );
   }
+
+  moleculePolarity.register( 'PolarityIndicator', PolarityIndicator );
 
   return inherit( Node, PolarityIndicator );
 } );

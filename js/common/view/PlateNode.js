@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PolarityIndicator = require( 'MOLECULE_POLARITY/common/view/PolarityIndicator' );
@@ -89,6 +90,8 @@ define( function( require ) {
       indicatorNode.visible = enabled;
     } );
   }
+
+  moleculePolarity.register( 'PlateNode', PlateNode );
 
   return inherit( Node, PlateNode, {}, {
 

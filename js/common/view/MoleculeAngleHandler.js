@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -46,6 +47,8 @@ define( function( require ) {
       }
     } );
   }
+
+  moleculePolarity.register( 'MoleculeAngleHandler', MoleculeAngleHandler );
 
   return inherit( SimpleDragHandler, MoleculeAngleHandler );
 } );

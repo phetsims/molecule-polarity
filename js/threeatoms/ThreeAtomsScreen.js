@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -60,6 +61,9 @@ define( function( require ) {
     return new Node( { children: [ background, bondAB, bondBC, atomA, atomB, atomC, textA, textB, textC ] } );
   };
 
+  /**
+   * @constructor
+   */
   function ThreeAtomsScreen() {
     Screen.call( this,
       screenThreeAtomsString,
@@ -69,6 +73,8 @@ define( function( require ) {
       { backgroundColor: MPColors.SCREEN_BACKGROUND }
     );
   }
+
+  moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
 
   return inherit( Screen, ThreeAtomsScreen );
 } );

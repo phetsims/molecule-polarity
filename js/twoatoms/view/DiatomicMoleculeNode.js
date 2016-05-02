@@ -17,6 +17,7 @@ define( function( require ) {
   var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
@@ -50,6 +51,8 @@ define( function( require ) {
     this.cursor = 'pointer';
     this.addInputListener( new MoleculeAngleHandler( molecule, this ) );
   }
+
+  moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );
 
   return inherit( Node, DiatomicMoleculeNode, {
 

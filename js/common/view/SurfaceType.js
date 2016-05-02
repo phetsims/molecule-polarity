@@ -5,13 +5,20 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function() {
+define( function( require ) {
   'use strict';
 
+  // modules
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  return Object.freeze( {
+  var SurfaceType = Object.freeze( {
     NONE: 'none',
     ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
     ELECTRON_DENSITY: 'electronDensity'
   } );
+
+  moleculePolarity.register( 'SurfaceType', SurfaceType );
+
+  return SurfaceType;
 } );

@@ -12,6 +12,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -34,7 +35,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function SurfaceColorKeyNode( colors, title, leftLabel, rightLabel, options ) {
+  function SurfaceColorKey( colors, title, leftLabel, rightLabel, options ) {
 
     options = _.extend( {
       size: new Dimension2( 420, 20 ),
@@ -79,21 +80,23 @@ define( function( require ) {
     titleNode.top = leftLabelNode.top = rightLabelNode.top = spectrumNode.bottom + options.ySpacing;
   }
 
-  return inherit( Node, SurfaceColorKeyNode, {}, {
+  moleculePolarity.register( 'SurfaceColorKey', SurfaceColorKey );
+
+  return inherit( Node, SurfaceColorKey, {}, {
 
     // @static
     createElectronDensityColorKey: function( options ) {
-      return new SurfaceColorKeyNode( MPColors.BW_GRADIENT, electronDensityString, lessString, moreString, options );
+      return new SurfaceColorKey( MPColors.BW_GRADIENT, electronDensityString, lessString, moreString, options );
     },
 
     // @static
     createElectrostaticPotentialRWBColorKey: function( options ) {
-      return new SurfaceColorKeyNode( MPColors.RWB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
+      return new SurfaceColorKey( MPColors.RWB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
     },
 
     // @static
     createElectrostaticPotentialROYGBColorKey: function( options ) {
-      return new SurfaceColorKeyNode( MPColors.ROYGB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
+      return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
     }
   } );
 } );

@@ -10,12 +10,19 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Property = require( 'AXON/Property' );
 
+  /**
+   * @param {Object} [options]
+   * @constructor
+   */
   function EField( options ) {
     options = _.extend( { enabled: false }, options );
     this.enabledProperty = new Property( options.enabled );
   }
+
+  moleculePolarity.register( 'EField', EField );
 
   return inherit( Object, EField, {
 

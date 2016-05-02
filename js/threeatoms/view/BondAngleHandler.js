@@ -13,11 +13,12 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Molecule} angle is relative to this molecule's location, and we pause any animation of this molecule while dragging
+   * @param {Molecule} molecule
    * @param {Property.<number>} bondAngleProperty property that this handler modifies
    * @constructor
    */
@@ -52,6 +53,8 @@ define( function( require ) {
       }
     } );
   }
+
+  moleculePolarity.register( 'BondAngleHandler', BondAngleHandler );
 
   return inherit( SimpleDragHandler, BondAngleHandler );
 } );

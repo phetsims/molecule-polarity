@@ -13,6 +13,7 @@ define( function( require ) {
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicMoleculeNode' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
@@ -130,6 +131,8 @@ define( function( require ) {
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
   }
+
+  moleculePolarity.register( 'TwoAtomsView', TwoAtomsView );
 
   return inherit( ScreenView, TwoAtomsView );
 } );

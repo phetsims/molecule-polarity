@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -69,6 +70,8 @@ define( function( require ) {
     atom.partialChargeProperty.link( thisNode.update.bind( thisNode ) );
     atom.locationProperty.link( thisNode.update.bind( thisNode ) );
   }
+
+  moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
 
   return inherit( Node, PartialChargeNode, {}, {
 

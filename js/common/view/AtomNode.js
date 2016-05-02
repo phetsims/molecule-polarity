@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
@@ -36,6 +37,8 @@ define( function( require ) {
     // sync location with model
     atom.locationProperty.linkAttribute( thisNode, 'translation' );
   }
+
+  moleculePolarity.register( 'AtomNode', AtomNode );
 
   return inherit( Node, AtomNode );
 } );

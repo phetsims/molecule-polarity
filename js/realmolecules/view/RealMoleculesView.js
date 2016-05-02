@@ -13,6 +13,7 @@ define( function( require ) {
   var ElectronegativityTableNode = require( 'MOLECULE_POLARITY/realmolecules/view/ElectronegativityTableNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var JSmolViewerNode = require( 'MOLECULE_POLARITY/realmolecules/view/JSmolViewerNode' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
@@ -129,6 +130,8 @@ define( function( require ) {
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
   }
+
+  moleculePolarity.register( 'RealMoleculesView', RealMoleculesView );
 
   return inherit( ScreenView, RealMoleculesView );
 } );

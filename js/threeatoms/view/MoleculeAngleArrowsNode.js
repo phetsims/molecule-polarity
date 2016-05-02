@@ -13,6 +13,7 @@ define( function( require ) {
   var CurvedArrowShape = require( 'SCENERY_PHET/CurvedArrowShape' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
 
@@ -45,6 +46,8 @@ define( function( require ) {
     molecule.dipoleProperty.link( updateTransform.bind( this ) );
     atom.locationProperty.link( updateTransform.bind( this ) );
   }
+
+  moleculePolarity.register( 'MoleculeAngleArrowsNode', MoleculeAngleArrowsNode );
 
   return inherit( Node, MoleculeAngleArrowsNode );
 } );

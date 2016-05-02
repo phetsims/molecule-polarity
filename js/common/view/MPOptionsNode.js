@@ -13,6 +13,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -105,6 +106,8 @@ define( function( require ) {
       ]
     } );
   }
+
+  moleculePolarity.register( 'MPOptionsNode', MPOptionsNode );
 
   return inherit( LayoutBox, MPOptionsNode );
 } );

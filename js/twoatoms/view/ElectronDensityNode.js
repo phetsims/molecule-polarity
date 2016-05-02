@@ -15,6 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -70,6 +71,8 @@ define( function( require ) {
     thisNode.cursor = 'pointer';
     thisNode.addInputListener( new MoleculeAngleHandler( molecule, thisNode ) );
   }
+
+  moleculePolarity.register( 'ElectronDensityNode', ElectronDensityNode );
 
   return inherit( Node, ElectronDensityNode, {
 

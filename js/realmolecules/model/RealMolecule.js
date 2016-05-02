@@ -11,6 +11,8 @@ define( function( require ) {
 
   // modules
   var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   /**
    * @param {string} symbol
@@ -24,5 +26,7 @@ define( function( require ) {
     this.mol2Data = mol2Data;
   }
 
-  return RealMolecule;
+  moleculePolarity.register( 'RealMolecule', RealMolecule );
+
+  return inherit( Object, RealMolecule );
 } );

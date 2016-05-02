@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var PropertySet = require( 'AXON/PropertySet' );
 
@@ -16,6 +17,8 @@ define( function( require ) {
     dipoleDirection: MPQueryParameters.DIPOLE_DIRECTION,
     surfaceColor: MPQueryParameters.SURFACE_COLOR
   } );
+
+  moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );
 
   return MPGlobalOptions;
 } );

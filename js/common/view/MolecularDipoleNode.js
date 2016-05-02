@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -37,6 +38,8 @@ define( function( require ) {
       thisNode.translation = molecule.location.plus( v );
     } );
   }
+
+  moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
 
   return inherit( DipoleNode, MolecularDipoleNode, {}, {
 

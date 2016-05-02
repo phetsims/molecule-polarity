@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var mol2Data = require( 'MOLECULE_POLARITY/realmolecules/model/mol2Data' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Property = require( 'AXON/Property' );
   var RealMolecule = require( 'MOLECULE_POLARITY/realmolecules/model/RealMolecule' );
 
@@ -68,6 +69,8 @@ define( function( require ) {
 
     this.moleculeProperty = new Property( this.molecules[ 4 ] );
   }
+
+  moleculePolarity.register( 'RealMoleculesModel', RealMoleculesModel );
 
   return inherit( Object, RealMoleculesModel, {
 

@@ -5,8 +5,12 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function() {
+define( function( require ) {
   'use strict';
+
+  // modules
+  var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   /**
    * @param {number} elementNumber element number in the periodic table
@@ -18,5 +22,7 @@ define( function() {
     this.color = color;
   }
 
-  return Element;
+  moleculePolarity.register( 'Element', Element );
+
+  return return inherit( Object, Element );
 } );

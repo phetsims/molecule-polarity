@@ -10,10 +10,11 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Range = require( 'DOT/Range' );
 
-  return {
+  var MPConstants = {
 
     // ScreenView
     SCREEN_VIEW_OPTIONS: { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) },
@@ -29,4 +30,8 @@ define( function( require ) {
     CONTROL_FONT: new PhetFont( 18 ),
     RADIO_BUTTON_RADIUS: 12
   };
+
+  moleculePolarity.register( 'MPConstants', MPConstants );
+
+  return MPConstants;
 } );

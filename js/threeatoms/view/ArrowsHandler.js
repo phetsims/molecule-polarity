@@ -9,6 +9,9 @@
 define( function( require ) {
   'use strict';
 
+  // modules
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+
   /**
    * @param {Node} arrowsNode
    * @constructor
@@ -29,6 +32,8 @@ define( function( require ) {
       }
     };
   }
+
+  moleculePolarity.register( 'ArrowsHandler', ArrowsHandler );
 
   return ArrowsHandler;
 } );

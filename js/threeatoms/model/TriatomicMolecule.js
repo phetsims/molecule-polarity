@@ -14,6 +14,7 @@ define( function( require ) {
   var Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Property = require( 'AXON/Property' );
@@ -45,6 +46,8 @@ define( function( require ) {
     this.bondAngleAProperty.link( this.updateAtomLocations.bind( this ) );
     this.bondAngleCProperty.link( this.updateAtomLocations.bind( this ) );
   }
+
+  moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
 
   /*
    * Repositions one atom.

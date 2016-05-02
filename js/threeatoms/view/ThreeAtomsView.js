@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
@@ -111,6 +112,8 @@ define( function( require ) {
       moleculeNode.setPartialChargesVisible( visible );
     } );
   }
+
+  moleculePolarity.register( 'ThreeAtomsView', ThreeAtomsView );
 
   return inherit( ScreenView, ThreeAtomsView );
 } );

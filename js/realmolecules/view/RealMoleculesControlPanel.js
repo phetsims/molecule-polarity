@@ -16,6 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Panel = require( 'SUN/Panel' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
@@ -106,6 +107,8 @@ define( function( require ) {
         yMargin: 15
       } );
   }
+
+  moleculePolarity.register( 'RealMoleculesControlPanel', RealMoleculesControlPanel );
 
   return inherit( Panel, RealMoleculesControlPanel );
 } );

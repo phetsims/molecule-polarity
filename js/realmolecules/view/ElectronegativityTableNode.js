@@ -14,8 +14,9 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
@@ -28,46 +29,6 @@ define( function( require ) {
 
   // strings
   var atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
-
-  /**
-   * A cell in the table, displays element name and number, color can be set.
-   *
-   * @param {string} symbol element's symbol in the periodic table
-   * @param {number} elementNumber element's number in the periodic table
-   * @param {number} electronegativity
-   * @constructor
-   */
-  function Cell( symbol, elementNumber, electronegativity ) {
-
-    this.elementNumber = elementNumber;
-
-    // nodes
-    this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, { fill: BACKGROUND_COLOR, stroke: 'black' } );
-    this.symbolNode = new Text( symbol, { font: new PhetFont( { size: 22, weight: 'bold' } ), fill: NORMAL_TEXT_COLOR } );
-    this.electronegativityNode = new Text( Util.toFixed( electronegativity, 1 ), { font: new PhetFont( 16 ), fill: NORMAL_TEXT_COLOR } );
-
-    Node.call( this, { children: [ this.backgroundNode, this.symbolNode, this.electronegativityNode ] } );
-
-    // layout
-    this.symbolNode.centerX = this.electronegativityNode.centerX = this.backgroundNode.centerX;
-    this.symbolNode.top = 3;
-    this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
-  }
-
-  inherit( Node, Cell, {
-
-    // makes the cell appear enabled
-    enable: function( color ) {
-      this.backgroundNode.fill = color;
-      this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
-    },
-
-    // makes the cell appear disabled
-    disable: function() {
-      this.backgroundNode.fill = BACKGROUND_COLOR;
-      this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;
-    }
-  } );
 
   /**
    * @param {JSmolViewerNode} viewerNode
@@ -126,7 +87,9 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, ElectronegativityTableNode, {
+  moleculePolarity.register( 'ElectronegativityTableNode', ElectronegativityTableNode );
+
+  inherit( Node, ElectronegativityTableNode, {
 
     // @private
     resetCells: function() {
@@ -145,5 +108,58 @@ define( function( require ) {
       }
     }
   } );
+
+  /**
+   * A cell in the table, displays element name and number, color can be set.
+   *
+   * @param {string} symbol element's symbol in the periodic table
+   * @param {number} elementNumber element's number in the periodic table
+   * @param {number} electronegativity
+   * @constructor
+   */
+  function Cell( symbol, elementNumber, electronegativity ) {
+
+    this.elementNumber = elementNumber;
+
+    // nodes
+    this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, {
+      fill: BACKGROUND_COLOR,
+      stroke: 'black'
+    } );
+    this.symbolNode = new Text( symbol, {
+      font: new PhetFont( { size: 22, weight: 'bold' } ),
+      fill: NORMAL_TEXT_COLOR
+    } );
+    this.electronegativityNode = new Text( Util.toFixed( electronegativity, 1 ), {
+      font: new PhetFont( 16 ),
+      fill: NORMAL_TEXT_COLOR
+    } );
+
+    Node.call( this, { children: [ this.backgroundNode, this.symbolNode, this.electronegativityNode ] } );
+
+    // layout
+    this.symbolNode.centerX = this.electronegativityNode.centerX = this.backgroundNode.centerX;
+    this.symbolNode.top = 3;
+    this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
+  }
+
+  moleculePolarity.register( 'ElectronegativityTableNode.Cell', Cell );
+
+  inherit( Node, Cell, {
+
+    // makes the cell appear enabled
+    enable: function( color ) {
+      this.backgroundNode.fill = color;
+      this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
+    },
+
+    // makes the cell appear disabled
+    disable: function() {
+      this.backgroundNode.fill = BACKGROUND_COLOR;
+      this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;
+    }
+  } );
+
+  return ElectronegativityTableNode;
 } );
 

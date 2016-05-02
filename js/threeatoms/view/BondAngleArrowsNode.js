@@ -13,6 +13,7 @@ define( function( require ) {
   var ArrowShape = require( 'SCENERY_PHET/ArrowShape' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Transform3 = require( 'DOT/Transform3' );
@@ -53,6 +54,8 @@ define( function( require ) {
       rightArrowNode.shape = transform.transformShape( rightArrow );
     } );
   }
+
+  moleculePolarity.register( 'BondAngleArrowsNode', BondAngleArrowsNode );
 
   return inherit( Node, BondAngleArrowsNode );
 } );

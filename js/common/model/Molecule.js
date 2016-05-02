@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -52,6 +53,8 @@ define( function( require ) {
       atom.electronegativityProperty.link( updatePartialCharges.bind( thisMolecule ) );
     } );
   }
+
+  moleculePolarity.register( 'Molecule', Molecule );
 
   return inherit( Object, Molecule, {
 

@@ -15,6 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -31,7 +32,7 @@ define( function( require ) {
    * @param {Molecule} molecule
    * @constructor
    */
-  function ElectronDensityNode( molecule ) {
+  function ElectrostaticPotentialNode( molecule ) {
 
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
 
@@ -71,7 +72,9 @@ define( function( require ) {
     thisNode.addInputListener( new MoleculeAngleHandler( molecule, thisNode ) );
   }
 
-  return inherit( Node, ElectronDensityNode, {
+  moleculePolarity.register( 'ElectrostaticPotentialNode', ElectrostaticPotentialNode );
+
+  return inherit( Node, ElectrostaticPotentialNode, {
 
     // @override
     setVisible: function( visible ) {

@@ -14,6 +14,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
@@ -80,6 +81,8 @@ define( function( require ) {
 
     Panel.call( this, content, { resize: false, fill: atom.color, stroke: 'black', xMargin: 15, yMargin: 6 } );
   }
+
+  moleculePolarity.register( 'ElectronegativityControl', ElectronegativityControl );
 
   return inherit( Panel, ElectronegativityControl );
 } );

@@ -14,6 +14,7 @@ define( function( require ) {
   var Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -37,6 +38,8 @@ define( function( require ) {
 
     Molecule.call( this, [ this.atomA, this.atomB ], [ this.bond ], this.updateAtomLocations, this.updatePartialCharges, options );
   }
+
+  moleculePolarity.register( 'DiatomicMolecule', DiatomicMolecule );
 
   return inherit( Molecule, DiatomicMolecule, {
 

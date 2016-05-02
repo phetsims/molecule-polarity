@@ -14,6 +14,7 @@ define( function( require ) {
   var EField = require( 'MOLECULE_POLARITY/common/model/EField' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Util = require( 'DOT/Util' );
 
   // constants
@@ -27,6 +28,8 @@ define( function( require ) {
     this.eField = new EField();
     this.molecule = molecule;
   }
+
+  moleculePolarity.register( 'MPModel', MPModel );
 
   // converts an angle to range [0,2*PI) radians
   var normalizeAngle = function( angle ) {

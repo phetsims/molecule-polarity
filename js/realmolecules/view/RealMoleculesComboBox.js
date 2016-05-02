@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var ComboBox = require( 'SUN/ComboBox' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
@@ -49,6 +50,8 @@ define( function( require ) {
       buttonCornerRadius: 10
     } );
   }
+
+  moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
 
   return inherit( ComboBox, RealMoleculesComboBox );
 } );

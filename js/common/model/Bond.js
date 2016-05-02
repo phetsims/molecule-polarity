@@ -12,6 +12,7 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -46,6 +47,8 @@ define( function( require ) {
       }
     );
   }
+
+  moleculePolarity.register( 'Bond', Bond );
 
   return inherit( Object, Bond, {
 

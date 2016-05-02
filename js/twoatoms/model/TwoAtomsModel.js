@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var DiatomicMolecule = require( 'MOLECULE_POLARITY/twoatoms/model/DiatomicMolecule' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPModel = require( 'MOLECULE_POLARITY/common/model/MPModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -20,6 +21,8 @@ define( function( require ) {
   function TwoAtomsModel() {
     MPModel.call( this, new DiatomicMolecule( { location: new Vector2( 380, 280 ) } ) );
   }
+
+  moleculePolarity.register( 'TwoAtomsModel', TwoAtomsModel );
 
   return inherit( MPModel, TwoAtomsModel );
 } );

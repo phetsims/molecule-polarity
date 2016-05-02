@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -29,6 +30,8 @@ define( function( require ) {
     this.locationProperty = new Property( location || new Vector2( 0, 0 ) );
     this.partialChargeProperty = new Property( 0 ); // partial charge is zero until this atom participates in a bond
   }
+
+  moleculePolarity.register( 'Atom', Atom );
 
   return inherit( Object, Atom, {
 
