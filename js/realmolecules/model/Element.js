@@ -24,5 +24,5 @@ define( function( require ) {
 
   moleculePolarity.register( 'Element', Element );
 
-  return return inherit( Object, Element );
+  return inherit( Object, Element );
 } );
