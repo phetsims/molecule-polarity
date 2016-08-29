@@ -27,8 +27,11 @@ define( function( require ) {
    * @constructor
    */
   function EFieldSwitch( eFieldEnabledProperty ) {
-    ABSwitch.call( this, eFieldEnabledProperty, false, new Text( offString, LABEL_OPTIONS ), true, new Text( onString, LABEL_OPTIONS ),
-      { xSpacing: 12, trackFillA: 'rgb(180,180,180)', trackFillB: 'rgb(0,180,0)' } );
+    ABSwitch.call( this, eFieldEnabledProperty, false, new Text( offString, LABEL_OPTIONS ), true, new Text( onString, LABEL_OPTIONS ), {
+      xSpacing: 12,
+      trackFillA: 'rgb(180,180,180)',
+      trackFillB: 'rgb(0,180,0)'
+    } );
   }
 
   moleculePolarity.register( 'EFieldSwitch', EFieldSwitch );
