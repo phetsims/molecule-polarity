@@ -28,6 +28,26 @@ define( function( require ) {
   var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
   var atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
 
+  /**
+   * @constructor
+   */
+  function ThreeAtomsScreen() {
+
+    var options = {
+      name: screenThreeAtomsString,
+      backgroundColor: MPColors.SCREEN_BACKGROUND,
+      homeScreenIcon: createScreenIcon()
+    };
+
+    Screen.call( this,
+      function() { return new ThreeAtomsModel(); },
+      function( model ) { return new ThreeAtomsView( model ); },
+      options
+    );
+  }
+
+  moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
+
   // creates the icon for this screen, a triatomic molecule with atoms 'A', 'B' and 'C'
   var createScreenIcon = function() {
 
@@ -52,29 +72,26 @@ define( function( require ) {
       left: background.centerX,
       centerY: background.centerY
     } );
-    var atomA = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_A, centerX: bondAB.left, centerY: bondAB.bottom } );
-    var atomB = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_B, centerX: bondAB.right, centerY: bondAB.top } );
-    var atomC = new ShadedSphereNode( atomDiameter, { mainColor: MPColors.ATOM_C, centerX: bondBC.right, centerY: bondBC.bottom } );
+    var atomA = new ShadedSphereNode( atomDiameter, {
+      mainColor: MPColors.ATOM_A,
+      centerX: bondAB.left,
+      centerY: bondAB.bottom
+    } );
+    var atomB = new ShadedSphereNode( atomDiameter, {
+      mainColor: MPColors.ATOM_B,
+      centerX: bondAB.right,
+      centerY: bondAB.top
+    } );
+    var atomC = new ShadedSphereNode( atomDiameter, {
+      mainColor: MPColors.ATOM_C,
+      centerX: bondBC.right,
+      centerY: bondBC.bottom
+    } );
     var textA = new Text( atomAString, { font: font, center: atomA.center } );
     var textB = new Text( atomBString, { font: font, center: atomB.center } );
     var textC = new Text( atomCString, { font: font, center: atomC.center } );
     return new Node( { children: [ background, bondAB, bondBC, atomA, atomB, atomC, textA, textB, textC ] } );
   };
-
-  /**
-   * @constructor
-   */
-  function ThreeAtomsScreen() {
-    Screen.call( this,
-      screenThreeAtomsString,
-      createScreenIcon(),
-      function() { return new ThreeAtomsModel(); },
-      function( model ) { return new ThreeAtomsView( model ); },
-      { backgroundColor: MPColors.SCREEN_BACKGROUND }
-    );
-  }
-
-  moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
 
   return inherit( Screen, ThreeAtomsScreen );
 } );

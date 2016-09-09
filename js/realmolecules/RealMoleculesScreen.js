@@ -28,16 +28,18 @@ define( function( require ) {
    * @constructor
    */
   function RealMoleculesScreen() {
+
+    var options = {
+      name: screenRealMoleculesString,
+      backgroundColor: MPColors.SCREEN_BACKGROUND,
+      homeScreenIcon: new Image( homeIcon ),
+      navigationBarIcon: new Image( navigationBarIcon )
+    };
+
     Screen.call( this,
-      screenRealMoleculesString,
-      new Image( homeIcon ),
       function() { return new RealMoleculesModel(); },
       function( model ) { return new RealMoleculesView( model ); },
-      {
-        backgroundColor: MPColors.SCREEN_BACKGROUND,
-        navigationBarIcon: new Image( navigationBarIcon )
-      }
-    );
+      options );
   }
 
   moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
