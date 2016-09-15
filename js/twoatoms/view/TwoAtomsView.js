@@ -30,8 +30,7 @@ define( function( require ) {
    */
   function TwoAtomsView( model ) {
 
-    var thisView = this;
-    ScreenView.call( thisView, MPConstants.SCREEN_VIEW_OPTIONS );
+    ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
     var viewProperties = new PropertySet( {
@@ -76,7 +75,7 @@ define( function( require ) {
         resetAllButton
       ]
     } );
-    thisView.addChild( rootNode );
+    this.addChild( rootNode );
 
     // layout, based on molecule location ---------------------------------
 

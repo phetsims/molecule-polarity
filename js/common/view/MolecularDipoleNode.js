@@ -25,17 +25,17 @@ define( function( require ) {
    */
   function MolecularDipoleNode( molecule ) {
 
-    var thisNode = this;
-    DipoleNode.call( thisNode, molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
+    DipoleNode.call( this, molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
 
     // position the dipole with some radial offset from the molecule's location
+    var self = this;
     molecule.dipoleProperty.link( function( dipole ) {
 
       // offset vector relative to molecule location
       var v = Vector2.createPolar( OFFSET, dipole.angle() );
 
       // offset in world coordinate frame
-      thisNode.translation = molecule.location.plus( v );
+      self.translation = molecule.location.plus( v );
     } );
   }
 

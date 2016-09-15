@@ -19,7 +19,6 @@ define( function( require ) {
 
   function AtomNode( atom ) {
 
-    var thisNode = this;
     Node.call( this );
 
     // nodes
@@ -27,15 +26,15 @@ define( function( require ) {
     var textNode = new Text( atom.name, new PhetFont( { size: 32, weight: 'bold' } ) );
 
     // rendering order
-    thisNode.addChild( sphereNode );
-    thisNode.addChild( textNode );
+    this.addChild( sphereNode );
+    this.addChild( textNode );
 
     // layout
     textNode.centerX = sphereNode.centerX;
     textNode.centerY = sphereNode.centerY;
 
     // sync location with model
-    atom.locationProperty.linkAttribute( thisNode, 'translation' );
+    atom.locationProperty.linkAttribute( this, 'translation' );
   }
 
   moleculePolarity.register( 'AtomNode', AtomNode );

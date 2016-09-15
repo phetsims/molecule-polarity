@@ -22,14 +22,17 @@ define( function( require ) {
    */
   function BondNode( bond ) {
 
-    var thisNode = this;
-    Line.call( thisNode, bond.atom1.locationProperty.get(), bond.atom2.locationProperty.get(), { stroke: MPColors.BOND, lineWidth: 12 } );
+    Line.call( this, bond.atom1.locationProperty.get(), bond.atom2.locationProperty.get(), {
+      stroke: MPColors.BOND,
+      lineWidth: 12
+    } );
 
-    thisNode.strokePickable = true; // include stroke in hit-testing
+    this.strokePickable = true; // include stroke in hit-testing
 
     // adjust the bond when its endpoints change
-    bond.atom1.locationProperty.link( function( location ) { thisNode.setPoint1( location ); } );
-    bond.atom2.locationProperty.link( function( location ) { thisNode.setPoint2( location ); } );
+    var self = this;
+    bond.atom1.locationProperty.link( function( location ) { self.setPoint1( location ); } );
+    bond.atom2.locationProperty.link( function( location ) { self.setPoint2( location ); } );
   }
 
   moleculePolarity.register( 'BondNode', BondNode );

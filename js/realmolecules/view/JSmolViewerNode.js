@@ -34,7 +34,7 @@ define( function( require ) {
       viewerSize: new Dimension2( 200, 200 )
     }, options );
 
-    var thisNode = this;
+    var self = this;
     this.moleculeProperty = moleculeProperty; // @private
 
     var rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
@@ -79,23 +79,23 @@ define( function( require ) {
     Node.call( this, { children: [ rectNode, debugText ] } );
 
     viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
-      thisNode.setBondDipolesVisible( visible );
+      self.setBondDipolesVisible( visible );
     } );
 
     viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-      thisNode.setMolecularDipoleVisible( visible );
+      self.setMolecularDipoleVisible( visible );
     } );
 
     viewProperties.partialChargesVisibleProperty.link( function( visible ) {
-      thisNode.setPartialChargesVisible( visible );
+      self.setPartialChargesVisible( visible );
     } );
 
     viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
-      thisNode.setAtomLabelsVisible( visible );
+      self.setAtomLabelsVisible( visible );
     } );
 
     viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
-      thisNode.setSurfaceType( surfaceType );
+      self.setSurfaceType( surfaceType );
     } );
 
     this.elementsProperty = new Property( [] );

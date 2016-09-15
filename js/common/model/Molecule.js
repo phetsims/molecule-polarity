@@ -30,27 +30,27 @@ define( function( require ) {
       angle: 0 // angle of rotation of the entire molecule about the location, in radians
     }, options );
 
-    var thisMolecule = this;
+    var self = this;
 
-    thisMolecule.location = options.location;
-    thisMolecule.angleProperty = new Property( options.angle );
-    thisMolecule.atoms = atoms;
-    thisMolecule.bonds = bonds;
+    this.location = options.location;
+    this.angleProperty = new Property( options.angle );
+    this.atoms = atoms;
+    this.bonds = bonds;
 
-    thisMolecule.dipoleProperty = new Property( new Vector2() ); // the molecular dipole
-    thisMolecule.dragging = false; // true when the user is dragging the molecule
+    this.dipoleProperty = new Property( new Vector2() ); // the molecular dipole
+    this.dragging = false; // true when the user is dragging the molecule
 
     // update atom locations when molecule is rotated
-    thisMolecule.angleProperty.link( updateAtomLocations.bind( thisMolecule ) );
+    this.angleProperty.link( updateAtomLocations.bind( this ) );
 
     // update molecular dipole when bond dipoles change
-    thisMolecule.bonds.forEach( function( bond ) {
-      bond.dipoleProperty.link( thisMolecule.updateMolecularDipole.bind( thisMolecule ) );
+    this.bonds.forEach( function( bond ) {
+      bond.dipoleProperty.link( self.updateMolecularDipole.bind( self ) );
     } );
 
     // update partial charges when atoms' EN changes
-    thisMolecule.atoms.forEach( function( atom ) {
-      atom.electronegativityProperty.link( updatePartialCharges.bind( thisMolecule ) );
+    this.atoms.forEach( function( atom ) {
+      atom.electronegativityProperty.link( updatePartialCharges.bind( self ) );
     } );
   }
 

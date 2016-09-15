@@ -33,14 +33,15 @@ define( function( require ) {
    */
   function PartialChargeNode( atom, unitVectorFunction ) {
 
-    var thisNode = this;
-    Node.call( thisNode );
+    var self = this;
+    
+    Node.call( this );
 
     var textNode = new Text( '?', { font: new PhetFont( 32 ), fill: 'black' } );
-    thisNode.addChild( textNode );
+    this.addChild( textNode );
 
     // @private
-    thisNode.update = function() {
+    this.update = function() {
       var partialCharge = atom.partialChargeProperty.get();
 
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
@@ -62,13 +63,13 @@ define( function( require ) {
         var unitVector = unitVectorFunction.apply();
 
         // Compute the amount to move the partial charge node
-        var multiplier = ( atom.diameter / 2 ) + ( Math.max( thisNode.width, thisNode.height ) / 2 ) + 3;
+        var multiplier = ( atom.diameter / 2 ) + ( Math.max( self.width, self.height ) / 2 ) + 3;
         var relativeOffset = unitVector.timesScalar( multiplier );
-        thisNode.translation = atom.locationProperty.get().plus( relativeOffset );
+        self.translation = atom.locationProperty.get().plus( relativeOffset );
       }
     };
-    atom.partialChargeProperty.link( thisNode.update.bind( thisNode ) );
-    atom.locationProperty.link( thisNode.update.bind( thisNode ) );
+    atom.partialChargeProperty.link( this.update.bind( this ) );
+    atom.locationProperty.link( this.update.bind( this ) );
   }
 
   moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );

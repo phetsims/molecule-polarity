@@ -36,13 +36,12 @@ define( function( require ) {
    */
   function ElectronegativityTableNode( viewerNode ) {
 
-    var thisNode = this;
-    Node.call( thisNode );
+    Node.call( this );
 
     var titleNode = new Text( atomElectronegativitiesString, { font: new PhetFont( { size: 16, weight: 'bold' } ) } );
-    thisNode.addChild( titleNode );
+    this.addChild( titleNode );
 
-    thisNode.cells = [
+    this.cells = [
       new Cell( 'H', 1, 2.1 ),
       new Cell( 'B', 5, 2.0 ),
       new Cell( 'C', 6, 2.5 ),
@@ -56,21 +55,21 @@ define( function( require ) {
     var xGap = 12;
     var x = 0;
     var y = 0;
-    var firstCell = thisNode.cells[ 0 ];
-    thisNode.addChild( firstCell );
+    var firstCell = this.cells[ 0 ];
+    this.addChild( firstCell );
     firstCell.x = x;
     firstCell.y = y;
     x = x + firstCell.width + xGap;
-    for ( var i = 1; i < thisNode.cells.length - 1; i++ ) {
-      var cell = thisNode.cells[ i ];
-      thisNode.addChild( cell );
+    for ( var i = 1; i < this.cells.length - 1; i++ ) {
+      var cell = this.cells[ i ];
+      this.addChild( cell );
       cell.x = x;
       cell.y = y;
       x = cell.right;
     }
     x += xGap;
-    var lastCell = thisNode.cells[ thisNode.cells.length - 1 ];
-    thisNode.addChild( lastCell );
+    var lastCell = this.cells[ this.cells.length - 1 ];
+    this.addChild( lastCell );
     lastCell.x = x;
     lastCell.y = y;
 
@@ -79,10 +78,11 @@ define( function( require ) {
     titleNode.top = firstCell.bottom + 4;
 
     // highlight elements displayed by the viewer
+    var self = this;
     viewerNode.elementsProperty.lazyLink( function( elements ) {
-      thisNode.resetCells();
+      self.resetCells();
       elements.forEach( function( element ) {
-        thisNode.setColor( element.elementNumber, element.color );
+        self.setColor( element.elementNumber, element.color );
       } );
     } );
   }

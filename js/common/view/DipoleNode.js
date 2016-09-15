@@ -36,15 +36,16 @@ define( function( require ) {
    */
   function DipoleNode( dipoleProperty, color ) {
 
-    var thisNode = this;
-    Path.call( thisNode, null, { fill: color, stroke: 'black' } );
+    var self = this;
+    
+    Path.call( this, null, { fill: color, stroke: 'black' } );
 
     this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected
     this.referenceLength = REFERENCE_LENGTH; // @protected
 
     dipoleProperty.link( function( dipole ) {
         if ( dipole.magnitude() === 0 ) {
-          thisNode.shape = null;
+          self.shape = null;
         }
         else {
 
@@ -61,7 +62,7 @@ define( function( require ) {
           var crossWidth = scale * CROSS_SIZE.width * adjustedLength / REFERENCE_LENGTH;
 
           // Draw a dipole that points from left to right, starting at upper-left end of tail and moving clockwise.
-          thisNode.shape = new Shape()
+          self.shape = new Shape()
             .moveTo( 0, -TAIL_WIDTH / 2 )
             .lineTo( crossOffset, -TAIL_WIDTH / 2 )
             .lineTo( crossOffset, -CROSS_SIZE.height / 2 )
@@ -80,8 +81,8 @@ define( function( require ) {
             .close();
 
           // Adjust for proper scale and orientation.
-          thisNode.setScaleMagnitude( scale, scale );
-          thisNode.setRotation( dipole.angle() );
+          self.setScaleMagnitude( scale, scale );
+          self.setRotation( dipole.angle() );
         }
       }
     );

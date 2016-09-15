@@ -22,12 +22,12 @@ define( function( require ) {
    */
   function Bond( atom1, atom2 ) {
 
-    var thisBond = this;
+    var self = this;
 
-    thisBond.atom1 = atom1;
-    thisBond.atom2 = atom2;
+    this.atom1 = atom1;
+    this.atom2 = atom2;
 
-    thisBond.dipoleProperty = new DerivedProperty( [
+    this.dipoleProperty = new DerivedProperty( [
         atom1.locationProperty, atom2.locationProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
         MPGlobalOptions.dipoleDirectionProperty
@@ -39,7 +39,7 @@ define( function( require ) {
           // For IUPAC convention, the direction of the dipole moment is from the negative to the positive charge. See issue #5.
           magnitude *= -1;
         }
-        var angle = thisBond.getAngle();
+        var angle = self.getAngle();
         if ( deltaEN < 0 ) {
           angle += Math.PI;
         }

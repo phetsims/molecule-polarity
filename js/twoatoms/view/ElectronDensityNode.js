@@ -36,26 +36,27 @@ define( function( require ) {
 
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
 
-    var thisNode = this;
-    Node.call( thisNode );
+    var self = this;
+    
+    Node.call( this );
 
-    thisNode.molecule = molecule;
-    thisNode.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
-    thisNode.colors = MPColors.BW_GRADIENT;
-    assert && assert( thisNode.colors.length === 2 ); // this implementation only works for 2 colors
+    this.molecule = molecule;
+    this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
+    this.colors = MPColors.BW_GRADIENT;
+    assert && assert( this.colors.length === 2 ); // this implementation only works for 2 colors
 
     // each atom is surrounded with a 'cloud' (circle)
     var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
-    thisNode.path = new Path( new Shape()
+    this.path = new Path( new Shape()
         .arc( molecule.location.x - this.molecule.atomB.locationProperty.get().x, molecule.location.y - this.molecule.atomB.locationProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
         .arc( molecule.location.x - this.molecule.atomA.locationProperty.get().x, molecule.location.y - this.molecule.atomA.locationProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
     );
-    thisNode.addChild( this.path );
+    this.addChild( this.path );
 
     // update surface when atoms move or electronegativity changes
     var update = function() {
-      if ( thisNode.visible ) {
-        thisNode.updateFill();
+      if ( self.visible ) {
+        self.updateFill();
       }
     };
     molecule.atoms.forEach( function( atom ) {
@@ -63,13 +64,13 @@ define( function( require ) {
     } );
 
     molecule.angleProperty.link( function( angle ) {
-      if ( thisNode.visible ) {
-        thisNode.matrix = molecule.createTransformMatrix();
+      if ( self.visible ) {
+        self.matrix = molecule.createTransformMatrix();
       }
     } );
 
-    thisNode.cursor = 'pointer';
-    thisNode.addInputListener( new MoleculeAngleHandler( molecule, thisNode ) );
+    this.cursor = 'pointer';
+    this.addInputListener( new MoleculeAngleHandler( molecule, this ) );
   }
 
   moleculePolarity.register( 'ElectronDensityNode', ElectronDensityNode );

@@ -24,15 +24,16 @@ define( function( require ) {
    */
   function BondDipoleNode( bond ) {
 
-    var thisNode = this;
-    DipoleNode.call( thisNode, bond.dipoleProperty, MPColors.BOND_DIPOLE );
+    var self = this;
+    
+    DipoleNode.call( this, bond.dipoleProperty, MPColors.BOND_DIPOLE );
 
     // position the dipole to be parallel with the bond, with some perpendicular offset
     bond.dipoleProperty.link( function( dipole ) {
 
       var bondAngle = bond.getAngle();
       var isInPhase = Math.abs( bondAngle - dipole.angle() ) < ( Math.PI / 4 );
-      var dipoleViewLength = dipole.magnitude() * ( thisNode.referenceLength / thisNode.referenceMagnitude );
+      var dipoleViewLength = dipole.magnitude() * ( self.referenceLength / self.referenceMagnitude );
 
       // location of tail in polar coordinates, relative to center of bond
       var offsetX = isInPhase ? ( dipoleViewLength / 2 ) : -( dipoleViewLength / 2 );
@@ -45,7 +46,7 @@ define( function( require ) {
       var tailY = tailDistance * Math.sin( tailAngle );
 
       // location of tail in world coordinate frame
-      thisNode.translation = bond.getCenter().plusXY( tailX, tailY );
+      self.translation = bond.getCenter().plusXY( tailX, tailY );
     } );
   }
 
