@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
+  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -18,6 +19,9 @@ define( function( require ) {
 
     // ScreenView
     SCREEN_VIEW_OPTIONS: { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) },
+
+    // View
+    GLOBAL_OPTIONS: new MPGlobalOptions(),
 
     // Model
     ELECTRONEGATIVITY_RANGE: new RangeWithValue( 2, 4, 2 ),

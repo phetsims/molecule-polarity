@@ -16,11 +16,10 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
   var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
+  var RealMoleculesViewProperties = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewProperties' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
@@ -35,14 +34,7 @@ define( function( require ) {
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
-    var viewProperties = new PropertySet( {
-      bondDipolesVisible: false,
-      molecularDipoleVisible: false,
-      partialChargesVisible: false,
-      atomElectronegativitiesVisible: false,
-      atomLabelsVisible: true,
-      surfaceType: SurfaceType.NONE
-    } );
+    var viewProperties = new RealMoleculesViewProperties();
 
     // @private
     this.jsmolViewerNode = new JSmolViewerNode( model.moleculeProperty, viewProperties, {
@@ -55,7 +47,7 @@ define( function( require ) {
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
 
     var electrostaticPotentialColorKey = new Node();
-    MPGlobalOptions.surfaceColorProperty.link( function( surfaceType ) {
+    MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( function( surfaceType ) {
       electrostaticPotentialColorKey.removeAllChildren();
       if ( surfaceType === 'RWB' ) {
         electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );

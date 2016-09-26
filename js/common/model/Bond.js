@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
+  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -30,7 +30,7 @@ define( function( require ) {
     this.dipoleProperty = new DerivedProperty( [
         atom1.locationProperty, atom2.locationProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
-        MPGlobalOptions.dipoleDirectionProperty
+        MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty
       ],
       function( location1, location2, electronegativity1, electronegativity2, dipoleDirection ) {
         var deltaEN = electronegativity2 - electronegativity1;

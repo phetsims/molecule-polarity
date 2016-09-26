@@ -17,12 +17,12 @@ define( function( require ) {
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var TwoAtomsControlPanel = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsControlPanel' );
+  var TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
 
   /**
    * @param {TwoAtomsModel} model
@@ -33,12 +33,7 @@ define( function( require ) {
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
-    var viewProperties = new PropertySet( {
-      bondDipoleVisible: true,
-      partialChargesVisible: false,
-      bondCharacterVisible: false,
-      surfaceType: SurfaceType.NONE
-    } );
+    var viewProperties = new TwoAtomsViewProperties();
 
     // nodes
     var moleculeNode = new DiatomicMoleculeNode( model.molecule );

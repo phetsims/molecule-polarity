@@ -15,10 +15,10 @@ define( function( require ) {
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsControlPanel' );
+  var ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
   var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
 
   /**
@@ -30,11 +30,7 @@ define( function( require ) {
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
-    var viewProperties = new PropertySet( {
-      bondDipolesVisible: false,
-      molecularDipoleVisible: true,
-      partialChargesVisible: false
-    } );
+    var viewProperties = new ThreeAtomsViewProperties();
 
     // nodes
     var moleculeNode = new TriatomicMoleculeNode( model.molecule );

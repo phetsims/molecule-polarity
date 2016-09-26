@@ -9,16 +9,29 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
 
-  var MPGlobalOptions = new PropertySet( {
-    dipoleDirection: MPQueryParameters.DIPOLE_DIRECTION,
-    surfaceColor: MPQueryParameters.SURFACE_COLOR
-  } );
+  /**
+   * @constructor
+   */
+  function MPGlobalOptions() {
+
+    // @public
+    this.dipoleDirectionProperty = new Property( MPQueryParameters.DIPOLE_DIRECTION );
+    this.surfaceColorProperty = new Property( MPQueryParameters.SURFACE_COLOR );
+  }
 
   moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );
 
-  return MPGlobalOptions;
+  return inherit( Object, MPGlobalOptions, {
+
+    // @public
+    reset: function() {
+      this.dipoleDirectionProperty.reset();
+      this.surfaceColorProperty.reset();
+    }
+  } );
 } );
