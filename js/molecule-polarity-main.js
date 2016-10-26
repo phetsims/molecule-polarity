@@ -37,7 +37,7 @@ define( function( require ) {
     ];
 
     // developer-only features
-    if ( MPQueryParameters.DEV ) {
+    if ( MPQueryParameters.dev ) {
 
       screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
 

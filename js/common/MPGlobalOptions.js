@@ -20,8 +20,8 @@ define( function( require ) {
   function MPGlobalOptions() {
 
     // @public
-    this.dipoleDirectionProperty = new Property( MPQueryParameters.DIPOLE_DIRECTION );
-    this.surfaceColorProperty = new Property( MPQueryParameters.SURFACE_COLOR );
+    this.dipoleDirectionProperty = new Property( MPQueryParameters.dipoleDirection );
+    this.surfaceColorProperty = new Property( MPQueryParameters.surfaceColor );
   }
 
   moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );

@@ -11,18 +11,25 @@ define( function( require ) {
   // modules
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
-  var getQueryParameter = phet.chipper.getQueryParameter;
+  var MPQueryParameters = QueryStringMachine.getAll( {
 
-  var MPQueryParameters = {
     // enables developer-only features
-    DEV: getQueryParameter( 'dev' ) || false,
+    dev: { type: 'flag' },
 
     // direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention), see issue #5
-    DIPOLE_DIRECTION: getQueryParameter( 'dipoleDirection' ) || 'positiveToNegative',
+    dipoleDirection: {
+      type: 'string',
+      validValues: [ 'positiveToNegative', 'negativeToPositive' ],
+      defaultValue: 'positiveToNegative'
+    },
 
     // color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow), see issue #7
-    SURFACE_COLOR: getQueryParameter( 'surfaceColor' ) || 'RWB'
-  };
+    surfaceColor: {
+      type: 'string',
+      validValues: [ 'RWB', 'ROYGB' ],
+      defaultValue: 'RWB'
+    }
+  } );
 
   moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
 
