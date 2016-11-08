@@ -13,8 +13,8 @@ define( function( require ) {
 
   var MPQueryParameters = QueryStringMachine.getAll( {
 
-    // enables developer-only features
-    dev: { type: 'flag' },
+    // adds the 'Real Molecules' screen
+    realMolecules: { type: 'flag' },
 
     // direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention), see issue #5
     dipoleDirection: {

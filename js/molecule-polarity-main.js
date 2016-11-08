@@ -36,8 +36,8 @@ define( function( require ) {
       new ThreeAtomsScreen()
     ];
 
-    // developer-only features
-    if ( MPQueryParameters.dev ) {
+    // add the 'Real Molecules' screen, for development
+    if ( MPQueryParameters.realMolecules ) {
 
       screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
 
