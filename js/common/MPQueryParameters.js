@@ -28,7 +28,10 @@ define( function( require ) {
       type: 'string',
       validValues: [ 'RWB', 'ROYGB' ],
       defaultValue: 'RWB'
-    }
+    },
+
+    // prints debugging messages related to JSmol to the console
+    jsmolDebug: { type: 'flag' }
   } );
 
   moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
