@@ -21,6 +21,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/model/ThreeAtomsModel' );
   var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsView' );
+  var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
@@ -35,7 +37,7 @@ define( function( require ) {
 
     var options = {
       name: screenThreeAtomsString,
-      backgroundColor: MPColors.SCREEN_BACKGROUND,
+      backgroundColorProperty: new Property( Color.toColor( MPColors.SCREEN_BACKGROUND ) ),
       homeScreenIcon: createScreenIcon()
     };
 
