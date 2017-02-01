@@ -13,11 +13,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
   var RealMoleculesView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesView' );
-  var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
@@ -33,7 +32,7 @@ define( function( require ) {
 
     var options = {
       name: screenRealMoleculesString,
-      backgroundColorProperty: new Property( Color.toColor( MPColors.SCREEN_BACKGROUND ) ),
+      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: new Image( homeIcon ),
       navigationBarIcon: new Image( navigationBarIcon )
     };
