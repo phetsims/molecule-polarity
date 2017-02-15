@@ -79,7 +79,12 @@ define( function( require ) {
     subtitleNode.top = titleNode.bottom;
     sliderNode.top = subtitleNode.bottom + 8;
 
-    Panel.call( this, content, { resize: false, fill: atom.color, stroke: 'black', xMargin: 15, yMargin: 6 } );
+    Panel.call( this, content, {
+      fill: atom.color, 
+      stroke: 'black',
+      xMargin: 15,
+      yMargin: 6
+    } );
   }
 
   moleculePolarity.register( 'ElectronegativityControl', ElectronegativityControl );
