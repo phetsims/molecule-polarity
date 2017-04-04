@@ -34,42 +34,49 @@ define( function( require ) {
   var surfaceString = require( 'string!MOLECULE_POLARITY/surface' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
+  // constants
+  var TITLE_OPTIONS = {
+    font: MPConstants.TITLE_FONT,
+    maxWidth: 300
+  };
+  var CONTROL_TEXT_OPTIONS = {
+    font: MPConstants.CONTROL_FONT,
+    maxWidth: 225
+  };
+  var RADIO_BUTTON_OPTIONS = { radius: MPConstants.RADIO_BUTTON_RADIUS };
+  
   /**
    * @param {JSmolProperties} jsmolProperties
    * @constructor
    */
   function RealMoleculesControlPanel( jsmolProperties ) {
 
-    var controlTextOptions = { font: MPConstants.CONTROL_FONT };
-    var radioButtonOptions = { radius: MPConstants.RADIO_BUTTON_RADIUS };
-
-    // 'View' title
-    var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
+    var viewTitleNode = new Text( viewString, TITLE_OPTIONS );
 
     // 'View' check boxes
     var bondDipolesLabel = new LayoutBox( {
-      children: [ new Text( bondDipolesString, controlTextOptions ), BondDipoleNode.createIcon() ],
+      children: [ new Text( bondDipolesString, CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
       orientation: 'horizontal',
       spacing: 10
     } );
     var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, jsmolProperties.bondDipolesVisibleProperty );
     var molecularDipoleLabel = new LayoutBox( {
-      children: [ new Text( molecularDipoleString, controlTextOptions ), MolecularDipoleNode.createIcon() ],
+      children: [ new Text( molecularDipoleString, CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
       orientation: 'horizontal',
       spacing: 10
     } );
     var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, jsmolProperties.molecularDipoleVisibleProperty );
-    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), jsmolProperties.partialChargesVisibleProperty );
-    var atomLabelsCheckBox = new CheckBox( new Text( atomLabelsString, controlTextOptions ), jsmolProperties.atomLabelsVisibleProperty );
-    var atomElectronegativitiesCheckBox = new CheckBox( new Text( atomElectronegativitiesString, controlTextOptions ), jsmolProperties.atomElectronegativitiesVisibleProperty );
+    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, CONTROL_TEXT_OPTIONS ), jsmolProperties.partialChargesVisibleProperty );
+    var atomLabelsCheckBox = new CheckBox( new Text( atomLabelsString, CONTROL_TEXT_OPTIONS ), jsmolProperties.atomLabelsVisibleProperty );
+    var atomElectronegativitiesCheckBox = new CheckBox( new Text( atomElectronegativitiesString, CONTROL_TEXT_OPTIONS ), jsmolProperties.atomElectronegativitiesVisibleProperty );
 
     // 'Surface' title
-    var surfaceTitleNode = new Text( surfaceString, { font: MPConstants.TITLE_FONT } );
+    var surfaceTitleNode = new Text( surfaceString, TITLE_OPTIONS );
 
     // 'Surface' radio buttons
-    var noneButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
-    var electrostaticPotentialButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, controlTextOptions ), radioButtonOptions );
-    var electronDensityButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
+    var noneButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, CONTROL_TEXT_OPTIONS ), RADIO_BUTTON_OPTIONS );
+    var electrostaticPotentialButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL, new Text( electrostaticPotentialString, CONTROL_TEXT_OPTIONS ), RADIO_BUTTON_OPTIONS );
+    var electronDensityButton = new AquaRadioButton( jsmolProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, CONTROL_TEXT_OPTIONS ), RADIO_BUTTON_OPTIONS );
 
     // nodes in the control panel, in the order they will appear vertically
     var children = [
