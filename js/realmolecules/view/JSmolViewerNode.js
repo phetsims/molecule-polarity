@@ -25,6 +25,7 @@ define( function( require ) {
   /**
    * @param {Property.<RealMolecule>} moleculeProperty
    * @param {PropertySet} viewProperties
+   * @param {Object} [options]
    * @constructor
    */
   function JSmolViewerNode( moleculeProperty, viewProperties, options ) {
