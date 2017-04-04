@@ -45,8 +45,14 @@ define( function( require ) {
     } );
 
     // titles
-    var titleNode = new Text( StringUtils.format( pattern0AtomNameString, atom.name ), { font: new PhetFont( { size: 20, weight: 'bold' } ) } );
-    var subtitleNode = new Text( electronegativityString, { font: new PhetFont( 18 ) } );
+    var titleNode = new Text( StringUtils.format( pattern0AtomNameString, atom.name ), {
+      font: new PhetFont( { size: 20, weight: 'bold' } ),
+      maxWidth: options.trackSize.width
+    } );
+    var subtitleNode = new Text( electronegativityString, {
+      font: new PhetFont( 18 ),
+      maxWidth: options.trackSize.width
+    } );
 
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
@@ -63,7 +69,10 @@ define( function( require ) {
     } );
 
     // slider tick labels
-    var tickLabelOptions = { font: new PhetFont( 16 ) };
+    var tickLabelOptions = {
+      font: new PhetFont( 16 ),
+      maxWidth: 40
+    };
     sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
     sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
     var centerTick = options.range.min + ( options.range.getLength() / 2 );
