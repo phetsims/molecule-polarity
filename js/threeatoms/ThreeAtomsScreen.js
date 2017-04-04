@@ -61,36 +61,57 @@ define( function( require ) {
     var yOffset = Math.sin( Math.PI / 4 ) * bondLength;
 
     var background = new Rectangle( 0, 0, 548, 373, { fill: MPColors.SCREEN_BACKGROUND } );
+
     var bondAB = new Line( 0, 0, -xOffset, yOffset, {
       stroke: MPColors.BOND,
       lineWidth: bondWidth,
       right: background.centerX,
       centerY: background.centerY
     } );
+
     var bondBC = new Line( 0, 0, xOffset, yOffset, {
       stroke: MPColors.BOND,
       lineWidth: bondWidth,
       left: background.centerX,
       centerY: background.centerY
     } );
+
     var atomA = new ShadedSphereNode( atomDiameter, {
       mainColor: MPColors.ATOM_A,
       centerX: bondAB.left,
       centerY: bondAB.bottom
     } );
+
     var atomB = new ShadedSphereNode( atomDiameter, {
       mainColor: MPColors.ATOM_B,
       centerX: bondAB.right,
       centerY: bondAB.top
     } );
+
     var atomC = new ShadedSphereNode( atomDiameter, {
       mainColor: MPColors.ATOM_C,
       centerX: bondBC.right,
       centerY: bondBC.bottom
     } );
-    var textA = new Text( atomAString, { font: font, center: atomA.center } );
-    var textB = new Text( atomBString, { font: font, center: atomB.center } );
-    var textC = new Text( atomCString, { font: font, center: atomC.center } );
+
+    var textA = new Text( atomAString, {
+      font: font,
+      maxWidth: 0.75 * atomDiameter,
+      center: atomA.center
+    } );
+
+    var textB = new Text( atomBString, {
+      font: font,
+      maxWidth: 0.75 * atomDiameter,
+      center: atomB.center
+    } );
+
+    var textC = new Text( atomCString, {
+      font: font,
+      maxWidth: 0.75 * atomDiameter,
+      center: atomC.center
+    } );
+
     return new Node( { children: [ background, bondAB, bondBC, atomA, atomB, atomC, textA, textB, textC ] } );
   };
 
