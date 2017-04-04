@@ -41,12 +41,19 @@ define( function( require ) {
 
     Node.call( this );
 
-    // title and labels
+    // title
     var titleNode = new Text( bondCharacterString, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      fill: 'black'
+      fill: 'black',
+      maxWidth: 0.3 * TRACK_WIDTH
     } );
-    var labelOptions = { font: new PhetFont( 16 ), fill: 'black' };
+
+    // labels
+    var labelOptions = {
+      font: new PhetFont( 16 ),
+      fill: 'black',
+      maxWidth:  0.3 * TRACK_WIDTH
+    };
     var leftLabelNode = new Text( covalentString, labelOptions );
     var rightLabelNode = new Text( ionicString, labelOptions );
 
