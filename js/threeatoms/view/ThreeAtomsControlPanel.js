@@ -27,7 +27,17 @@ define( function( require ) {
   var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
-
+  
+  // constants
+  var TITLE_OPTIONS = {
+    font: MPConstants.TITLE_FONT,
+    maxWidth: 225 // i18n, set empirically
+  };
+  var CONTROL_TEXT_OPTIONS = {
+    font: MPConstants.CONTROL_FONT,
+    maxWidth: 175 // i18n, set empirically
+  };
+  
   /**
    * @param {*} viewProperties
    * @param {Property.<boolean>} eFieldEnabledProperty
@@ -35,28 +45,26 @@ define( function( require ) {
    */
   function ThreeAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
-    var controlTextOptions = { font: MPConstants.CONTROL_FONT };
-
     // 'View' title
-    var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
+    var viewTitleNode = new Text( viewString, TITLE_OPTIONS );
 
     // 'View' check boxes
     var bondDipolesLabel = new LayoutBox( {
-      children: [ new Text( bondDipolesString, controlTextOptions ), BondDipoleNode.createIcon() ],
+      children: [ new Text( bondDipolesString, CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
       orientation: 'horizontal',
       spacing: 10
     } );
     var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
     var molecularDipoleLabel = new LayoutBox( {
-      children: [ new Text( molecularDipoleString, controlTextOptions ), MolecularDipoleNode.createIcon() ],
+      children: [ new Text( molecularDipoleString, CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
       orientation: 'horizontal',
       spacing: 10
     } );
     var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
-    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, controlTextOptions ), viewProperties.partialChargesVisibleProperty );
+    var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, CONTROL_TEXT_OPTIONS ), viewProperties.partialChargesVisibleProperty );
 
     // 'E-Field' title
-    var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
+    var eFieldTitleNode = new Text( electricFieldString, TITLE_OPTIONS );
 
     // 'E-Field' control
     var eFieldControl = new EFieldSwitch( eFieldEnabledProperty );
