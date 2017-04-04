@@ -33,6 +33,9 @@ define( function( require ) {
   var surfaceString = require( 'string!MOLECULE_POLARITY/surface' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
 
+  // constants
+  var TITLE_MAX_WIDTH = 275; // i18n, set empirically
+
   /**
    * @param {*} viewProperties
    * @param {Property.<boolean>} eFieldEnabledProperty
@@ -40,11 +43,17 @@ define( function( require ) {
    */
   function TwoAtomsControlPanel( viewProperties, eFieldEnabledProperty ) {
 
-    var controlTextOptions = { font: MPConstants.CONTROL_FONT };
+    var controlTextOptions = {
+      font: MPConstants.CONTROL_FONT,
+      maxWidth: 175 // i18n, determined empirically
+    };
     var radioButtonOptions = { radius: MPConstants.RADIO_BUTTON_RADIUS };
 
     // 'View' title
-    var viewTitleNode = new Text( viewString, { font: MPConstants.TITLE_FONT } );
+    var viewTitleNode = new Text( viewString, {
+      font: MPConstants.TITLE_FONT,
+      maxWidth: TITLE_MAX_WIDTH
+    } );
 
     // 'View' check boxes
     var bondDipoleLabel = new LayoutBox( {
@@ -57,7 +66,10 @@ define( function( require ) {
     var bondCharacterCheckBox = new CheckBox( new Text( bondCharacterString, controlTextOptions ), viewProperties.bondCharacterVisibleProperty );
 
     // 'Surface' title
-    var surfaceTitleNode = new Text( surfaceString, { font: MPConstants.TITLE_FONT } );
+    var surfaceTitleNode = new Text( surfaceString, {
+      font: MPConstants.TITLE_FONT,
+      maxWidth: TITLE_MAX_WIDTH
+    } );
 
     // 'Surface' radio buttons
     var noneButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.NONE, new Text( noneString, controlTextOptions ), radioButtonOptions );
@@ -65,7 +77,10 @@ define( function( require ) {
     var electronDensityButton = new AquaRadioButton( viewProperties.surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY, new Text( electronDensityString, controlTextOptions ), radioButtonOptions );
 
     // 'E-Field' title
-    var eFieldTitleNode = new Text( electricFieldString, { font: MPConstants.TITLE_FONT } );
+    var eFieldTitleNode = new Text( electricFieldString, {
+      font: MPConstants.TITLE_FONT,
+      maxWidth: TITLE_MAX_WIDTH
+    } );
 
     // 'E-Field' control
     var eFieldControl = new EFieldSwitch( eFieldEnabledProperty );
