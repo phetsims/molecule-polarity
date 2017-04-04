@@ -38,7 +38,10 @@ define( function( require ) {
 
     Node.call( this );
 
-    var titleNode = new Text( atomElectronegativitiesString, { font: new PhetFont( { size: 16, weight: 'bold' } ) } );
+    var titleNode = new Text( atomElectronegativitiesString, {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      maxWidth: 300
+    } );
     this.addChild( titleNode );
 
     this.cells = [
