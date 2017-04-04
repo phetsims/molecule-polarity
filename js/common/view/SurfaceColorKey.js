@@ -59,11 +59,20 @@ define( function( require ) {
     } );
 
     // title
-    var titleNode = new Text( title, { fill: 'black', font: options.titleFont } );
+    var titleNode = new Text( title, {
+      fill: 'black',
+      font: options.titleFont,
+      maxWidth: 0.5 * options.size.width // i18n, determined empirically
+    } );
 
     // range labels
-    var leftLabelNode = new Text( leftLabel, { fill: 'black', font: options.rangeFont } );
-    var rightLabelNode = new Text( rightLabel, { fill: 'black', font: options.rangeFont } );
+    var labelOptions = {
+      fill: 'black',
+      font: options.rangeFont,
+      maxWidth: 0.2 * options.size.width // i18n, determined empirically
+    };
+    var leftLabelNode = new Text( leftLabel, labelOptions );
+    var rightLabelNode = new Text( rightLabel, labelOptions );
 
     // rendering order
     this.addChild( spectrumNode );
