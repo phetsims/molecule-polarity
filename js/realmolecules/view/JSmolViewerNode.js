@@ -43,7 +43,10 @@ define( function( require ) {
     } );
     var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
     var font = new PhetFont( 18 );
-    var moleculeText = new SubSupText( '?', { font: font } );
+    var moleculeText = new SubSupText( '?', {
+      font: font,
+      maxWidth: 200
+    } );
     this.bondDipolesText = new Text( 'bond dipoles', { font: font } );
     this.molecularDipoleText = new Text( 'molecular dipole', { font: font } );
     this.partialChargesText = new Text( 'partial charges', { font: font } );
