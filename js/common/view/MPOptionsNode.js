@@ -28,7 +28,14 @@ define( function( require ) {
   var surfaceColorString = require( 'string!MOLECULE_POLARITY/surfaceColor' );
 
   // constants
-  var CONTROL_TITLE_OPTIONS = { font: new PhetFont( 14 ) };
+  var CONTROL_TITLE_OPTIONS = {
+    font: new PhetFont( 14 ),
+    maxWidth: 400
+  };
+  var CONTROL_TEXT_OPTIONS = {
+    font: new PhetFont( 20 ),
+    maxWidth: 300
+  };
   var RADIO_BUTTON_OPTIONS = { radius: 8 };
   var COLOR_KEY_OPTIONS = {
     size: new Dimension2( 150, 15 ),
@@ -49,13 +56,13 @@ define( function( require ) {
     var positiveToNegativeButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'positiveToNegative',
-      new Text( StringUtils.format( pattern0To1String, deltaPlusString, deltaMinusString ), { font: new PhetFont( 20 ) } ),
+      new Text( StringUtils.format( pattern0To1String, deltaPlusString, deltaMinusString ), CONTROL_TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
     var negativeToPositiveButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'negativeToPositive',
-      new Text( StringUtils.format( pattern0To1String, deltaMinusString, deltaPlusString ), { font: new PhetFont( 20 ) } ),
+      new Text( StringUtils.format( pattern0To1String, deltaMinusString, deltaPlusString ), CONTROL_TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
     var dipoleDirectionControl = new LayoutBox( {
