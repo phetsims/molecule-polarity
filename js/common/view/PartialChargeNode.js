@@ -34,11 +34,19 @@ define( function( require ) {
   function PartialChargeNode( atom, unitVectorFunction ) {
 
     var self = this;
-    
+
     Node.call( this );
 
-    var textNode = new Text( '?', { font: new PhetFont( 32 ), fill: 'black' } );
-    this.addChild( textNode );
+    // textNode has a maxWidth for i18n. Then wrap it chargeNode, so that we can scale it.
+    var textNode = new Text( '?', {
+      font: new PhetFont( 32 ),
+      fill: 'black',
+      maxWidth: 50
+    } );
+    var chargeNode = new Node( {
+      children: [ textNode ]
+    } );
+    this.addChild( chargeNode );
 
     // @private
     this.update = function() {
@@ -54,9 +62,9 @@ define( function( require ) {
         // size proportional to bond dipole magnitude
         var scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
         if ( scale !== 0 ) {
-          textNode.setScaleMagnitude( scale );
-          textNode.centerX = 0;
-          textNode.centerY = 0;
+          chargeNode.setScaleMagnitude( scale );
+          chargeNode.centerX = 0;
+          chargeNode.centerY = 0;
         }
 
         // A vector that points in the direction we will need to move the charge node.
