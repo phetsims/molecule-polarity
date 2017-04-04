@@ -23,7 +23,7 @@ define( function( require ) {
 
     // nodes
     var sphereNode = new ShadedSphereNode( atom.diameter, { mainColor: atom.color } );
-    var textNode = new Text( atom.name, new PhetFont( { size: 32, weight: 'bold' } ) );
+    var textNode = new Text( atom.name, { font: new PhetFont( { size: 32, weight: 'bold' } ) } );
 
     // rendering order
     this.addChild( sphereNode );
