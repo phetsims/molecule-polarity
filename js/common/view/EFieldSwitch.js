@@ -20,7 +20,10 @@ define( function( require ) {
   var onString = require( 'string!MOLECULE_POLARITY/on' );
 
   // constants
-  var LABEL_OPTIONS = { font: MPConstants.CONTROL_FONT };
+  var LABEL_OPTIONS = {
+    font: MPConstants.CONTROL_FONT,
+    maxWidth: 80  // i18n, set empirically
+  };
 
   /**
    * @param {Property.<boolean>} eFieldEnabledProperty
