@@ -31,7 +31,10 @@ define( function( require ) {
   function RealMoleculesComboBox( molecules, moleculeProperty, listParent ) {
 
     // label
-    var labelNode = new Text( StringUtils.format( pattern0LabelString, moleculeString ), { font: new PhetFont( 22 ) } );
+    var labelNode = new Text( StringUtils.format( pattern0LabelString, moleculeString ), {
+      font: new PhetFont( 22 ),
+      maxWidth: 150
+    } );
 
     // items
     var items = [];
@@ -47,7 +50,8 @@ define( function( require ) {
       itemYMargin: 4,
       itemHighlightFill: 'rgb(218,255,255)',
       buttonLineWidth: 3,
-      buttonCornerRadius: 10
+      buttonCornerRadius: 10,
+      maxWidth: 450
     } );
   }
 
