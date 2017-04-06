@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Base class for visual representation of 2D dipoles.
@@ -94,9 +94,10 @@ define( function( require ) {
 
     /*
      * Creates a dipole icon, with arrow pointing to the right.
-     * @static
      * @param {Color} color
      * @return {Node}
+     * @public
+     * @static
      */
     createIcon: function( color ) {
       return new DipoleNode( new Property( new Vector2( 0.65, 0 ) ), color );

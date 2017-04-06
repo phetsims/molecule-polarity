@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Plate for E-field creation device.
@@ -35,7 +35,7 @@ define( function( require ) {
       plateColorDisabled: 'rgb( 192, 192, 192 )'
     }, options );
 
-    this.plateHeight = options.plateHeight; // used in view layout
+    this.plateHeight = options.plateHeight; // @public used in view layout
 
     Node.call( this );
 

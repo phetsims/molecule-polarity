@@ -17,24 +17,26 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   var Text = require( 'SCENERY/nodes/Text' );
 
+  /**
+   * @param {Atom} atom
+   * @constructor
+   */
   function AtomNode( atom ) {
 
-    Node.call( this );
-
-    // nodes
+    // atom
     var sphereNode = new ShadedSphereNode( atom.diameter, { mainColor: atom.color } );
+
+    // name centered on atom
     var textNode = new Text( atom.name, {
       font: new PhetFont( { size: 32, weight: 'bold' } ),
-      maxWidth: 0.75 * atom.diameter
+      maxWidth: 0.75 * atom.diameter,
+      centerX: sphereNode.centerX,
+      centerY: sphereNode.centerY
     } );
 
-    // rendering order
-    this.addChild( sphereNode );
-    this.addChild( textNode );
-
-    // layout
-    textNode.centerX = sphereNode.centerX;
-    textNode.centerY = sphereNode.centerY;
+    Node.call( this, {
+      children: [ sphereNode, textNode ]
+    } );
 
     // sync location with model
     atom.locationProperty.linkAttribute( this, 'translation' );

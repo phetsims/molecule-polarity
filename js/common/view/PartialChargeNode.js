@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Base type for the visual representations of partial charge, a delta symbol followed by either + or -.
@@ -92,11 +92,15 @@ define( function( require ) {
      * @param {Atom} atom
      * @param {Bond} bond
      * @return {PartialChargeNode}
+     * @public
+     * @static
      */
     createOppositePartialChargeNode: function( atom, bond ) {
       return new PartialChargeNode( atom, function() {
+
         // along the bond axis, in the direction of the atom
         var v = atom.locationProperty.get().minus( bond.getCenter() );
+
         /*
          * Avoid the case where pressing Reset All causes the atoms to swap locations, temporarily resulting
          * in a zero-magnitude vector when the first atom has moved but the second atom hasn't moved yet.
@@ -117,6 +121,8 @@ define( function( require ) {
      * @param {Atom} atom
      * @param {Bond} bond
      * @return {PartialChargeNode}
+     * @public
+     * @static
      */
     createCompositePartialChargeNode: function( atom, molecule ) {
       var node = new PartialChargeNode( atom, function() {

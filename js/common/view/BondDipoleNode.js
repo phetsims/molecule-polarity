@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Visual representation of a bond dipole.
@@ -54,7 +54,12 @@ define( function( require ) {
 
   return inherit( DipoleNode, BondDipoleNode, {}, {
 
-    // @static creates an icon, for use in control panels
+    /**
+     * Creates an icon, for use in control panels.
+     * @returns {DipoleNode}
+     * @public
+     * @static
+     */
     createIcon: function() {
       return DipoleNode.createIcon( MPColors.BOND_DIPOLE );
     }

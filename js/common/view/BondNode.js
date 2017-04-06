@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Visual representation of a bond between 2 atoms.
@@ -24,10 +24,9 @@ define( function( require ) {
 
     Line.call( this, bond.atom1.locationProperty.get(), bond.atom2.locationProperty.get(), {
       stroke: MPColors.BOND,
-      lineWidth: 12
+      lineWidth: 12,
+      strokePickable: true // include stroke in hit-testing
     } );
-
-    this.strokePickable = true; // include stroke in hit-testing
 
     // adjust the bond when its endpoints change
     var self = this;

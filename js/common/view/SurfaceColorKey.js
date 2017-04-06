@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Key for a surface's color scheme.
@@ -93,17 +93,35 @@ define( function( require ) {
 
   return inherit( Node, SurfaceColorKey, {}, {
 
-    // @static
+    /**
+     * Creates the color key for black-&-white gradient.
+     * @param options
+     * @returns {SurfaceColorKey}
+     * @public
+     * @static
+     */
     createElectronDensityColorKey: function( options ) {
       return new SurfaceColorKey( MPColors.BW_GRADIENT, electronDensityString, lessString, moreString, options );
     },
 
-    // @static
+    /**
+     * Creates the color key for red-white-blue gradient.
+     * @param options
+     * @returns {SurfaceColorKey}
+     * @public
+     * @static
+     */
     createElectrostaticPotentialRWBColorKey: function( options ) {
       return new SurfaceColorKey( MPColors.RWB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
     },
 
-    // @static
+    /**
+     * Creates the color key for ROYGB gradient.
+     * @param options
+     * @returns {SurfaceColorKey}
+     * @public
+     * @static
+     */
     createElectrostaticPotentialROYGBColorKey: function( options ) {
       return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
     }
