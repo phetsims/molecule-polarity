@@ -61,9 +61,10 @@ define( function( require ) {
       }
     };
     molecule.atoms.forEach( function( atom ) {
-      atom.electronegativityProperty.link( update );
+      atom.electronegativityProperty.link( update ); // unlink not needed
     } );
 
+    // unlink not needed
     molecule.angleProperty.link( function( angle ) {
       if ( self.visible ) {
         self.matrix = molecule.createTransformMatrix();

@@ -27,7 +27,7 @@ define( function( require ) {
 
     DipoleNode.call( this, molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
 
-    // position the dipole with some radial offset from the molecule's location
+    // position the dipole with some radial offset from the molecule's location, unlink not needed
     var self = this;
     molecule.dipoleProperty.link( function( dipole ) {
 

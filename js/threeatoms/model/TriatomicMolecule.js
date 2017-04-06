@@ -60,6 +60,7 @@ define( function( require ) {
       this.updatePartialCharges,
       options );
 
+    // unlinks not needed
     this.bondAngleAProperty.link( this.updateAtomLocations.bind( this ) );
     this.bondAngleCProperty.link( this.updateAtomLocations.bind( this ) );
   }

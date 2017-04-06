@@ -28,7 +28,7 @@ define( function( require ) {
       strokePickable: true // include stroke in hit-testing
     } );
 
-    // adjust the bond when its endpoints change
+    // adjust the bond when its endpoints change, unlinks not needed
     var self = this;
     bond.atom1.locationProperty.link( function( location ) { self.setPoint1( location ); } );
     bond.atom2.locationProperty.link( function( location ) { self.setPoint2( location ); } );

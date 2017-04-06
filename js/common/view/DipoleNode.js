@@ -43,6 +43,7 @@ define( function( require ) {
     this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected
     this.referenceLength = REFERENCE_LENGTH; // @protected
 
+    // unlink not needed
     dipoleProperty.link( function( dipole ) {
         if ( dipole.magnitude() === 0 ) {
           self.shape = null;

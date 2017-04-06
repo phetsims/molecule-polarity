@@ -84,7 +84,7 @@ define( function( require ) {
     indicatorNode.centerX = faceNode.centerX;
     indicatorNode.bottom = faceNode.top + ( options.platePerspectiveYOffset / 2 ) + 4;
 
-    // when the field is enabled/disabled...
+    // when the field is enabled/disabled... (unlink not needed)
     eField.enabledProperty.link( function( enabled ) {
       faceNode.fill = sideEdgeNode.file = ( enabled ? options.plateColor : options.plateColorDisabled );
       indicatorNode.visible = enabled;

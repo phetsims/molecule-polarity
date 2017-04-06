@@ -109,16 +109,20 @@ define( function( require ) {
 
     // synchronization with view properties ------------------------------
 
+    // unlink not needed
     viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
       moleculeNode.setBondDipoleVisible( visible );
     } );
 
+    // unlink not needed
     viewProperties.partialChargesVisibleProperty.link( function( visible ) {
       moleculeNode.setPartialChargesVisible( visible );
     } );
 
+    // unlink not needed
     viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
 
+    // unlink not needed
     viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
       moleculeNode.setSurfaceType( surfaceType );
       electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );

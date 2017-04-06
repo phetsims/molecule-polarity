@@ -47,6 +47,8 @@ define( function( require ) {
     var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
 
     var electrostaticPotentialColorKey = new Node();
+
+    // unlink not needed
     MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( function( surfaceType ) {
       electrostaticPotentialColorKey.removeAllChildren();
       if ( surfaceType === 'RWB' ) {
@@ -112,10 +114,12 @@ define( function( require ) {
 
     // synchronization with view properties ------------------------------
 
+    // unlink not needed
     viewProperties.atomElectronegativitiesVisibleProperty.link( function( visible ) {
       electronegativityTableNode.visible = visible;
     } );
 
+    // unlink not needed
     viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
       electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );

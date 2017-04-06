@@ -43,8 +43,8 @@ define( function( require ) {
         .translationFromVector( atom.locationProperty.get() )
         .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) );
     };
-    molecule.dipoleProperty.link( updateTransform.bind( this ) );
-    atom.locationProperty.link( updateTransform.bind( this ) );
+    molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
+    atom.locationProperty.link( updateTransform.bind( this ) ); // unlink not needed
   }
 
   moleculePolarity.register( 'MoleculeAngleArrowsNode', MoleculeAngleArrowsNode );
