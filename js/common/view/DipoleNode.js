@@ -95,7 +95,7 @@ define( function( require ) {
     /*
      * Creates a dipole icon, with arrow pointing to the right.
      * @param {Color} color
-     * @return {Node}
+     * @returns {Node}
      * @public
      * @static
      */

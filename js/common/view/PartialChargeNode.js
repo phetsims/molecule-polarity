@@ -91,7 +91,7 @@ define( function( require ) {
      * @static
      * @param {Atom} atom
      * @param {Bond} bond
-     * @return {PartialChargeNode}
+     * @returns {PartialChargeNode}
      * @public
      * @static
      */
@@ -120,7 +120,7 @@ define( function( require ) {
      * @static
      * @param {Atom} atom
      * @param {Bond} bond
-     * @return {PartialChargeNode}
+     * @returns {PartialChargeNode}
      * @public
      * @static
      */

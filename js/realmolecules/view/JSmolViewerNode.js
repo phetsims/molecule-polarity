@@ -114,7 +114,7 @@ define( function( require ) {
 
   return inherit( Node, JSmolViewerNode, {
 
-    // @return {Element[]}
+    // @returns {Element[]}
     getElements: function() {
       return []; //TODO
     },
