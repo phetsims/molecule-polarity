@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 //TODO This is currently a stub. Investigate JSmol integration in issue #6.
 /**
@@ -48,6 +48,8 @@ define( function( require ) {
       font: font,
       maxWidth: 200
     } );
+
+    // @private
     this.bondDipolesText = new Text( 'bond dipoles', { font: font } );
     this.molecularDipoleText = new Text( 'molecular dipole', { font: font } );
     this.partialChargesText = new Text( 'partial charges', { font: font } );

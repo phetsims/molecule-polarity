@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Table that shows electronegativity for a set of elements.
@@ -44,6 +44,7 @@ define( function( require ) {
     } );
     this.addChild( titleNode );
 
+    // @private
     this.cells = [
       new Cell( 'H', 1, 2.1 ),
       new Cell( 'B', 5, 2.0 ),
@@ -124,7 +125,7 @@ define( function( require ) {
 
     this.elementNumber = elementNumber;
 
-    // nodes
+    // @private nodes
     this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, {
       fill: BACKGROUND_COLOR,
       stroke: 'black'
