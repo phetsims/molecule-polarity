@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Model for the 'Real Molecules' screen.
@@ -41,6 +41,7 @@ define( function( require ) {
    */
   function RealMoleculesModel() {
 
+    // @public the set of molecules to choose from
     this.molecules = [
 
       new RealMolecule( 'H2', hydrogenString, mol2Data.H2 ),
@@ -67,6 +68,7 @@ define( function( require ) {
       new RealMolecule( 'CHCl3', chloroformString, mol2Data.CHCl3 )
     ];
 
+    // @public the selected molecule
     this.moleculeProperty = new Property( this.molecules[ 4 ] );
   }
 
@@ -74,6 +76,7 @@ define( function( require ) {
 
   return inherit( Object, RealMoleculesModel, {
 
+    // @public
     reset: function() {
       this.moleculeProperty.reset();
     }

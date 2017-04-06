@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Real molecule that is viewable in 3D using Jmol.
@@ -21,6 +21,8 @@ define( function( require ) {
    * @constructor
    */
   function RealMolecule( symbol, name, mol2Data ) {
+
+    // @public
     this.symbol = ChemUtils.toSubscript( symbol );
     this.name = name;
     this.mol2Data = mol2Data;

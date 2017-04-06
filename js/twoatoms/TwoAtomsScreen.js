@@ -48,7 +48,10 @@ define( function( require ) {
 
   moleculePolarity.register( 'TwoAtomsScreen', TwoAtomsScreen );
 
-  // creates the icon for this screen, a diatomic molecule with atoms 'A' and 'B'
+  /**
+   * Creates the icon for this screen, a diatomic molecule with atoms 'A' and 'B'.
+   * @returns {Node}
+   */
   var createScreenIcon = function() {
 
     var atomDiameter = 225;

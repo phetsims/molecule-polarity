@@ -49,7 +49,10 @@ define( function( require ) {
 
   moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
 
-  // creates the icon for this screen, a triatomic molecule with atoms 'A', 'B' and 'C'
+  /**
+   * Creates the icon for this screen, a triatomic molecule with atoms 'A', 'B' and 'C'.
+   * @returns {Node}
+   */
   var createScreenIcon = function() {
 
     var atomDiameter = 175;
