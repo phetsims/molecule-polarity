@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Visual representation of a triatomic molecule.
@@ -41,6 +41,8 @@ define( function( require ) {
     var arrowsANode = new BondAngleArrowsNode( molecule, molecule.atomA );
     var arrowsCNode = new BondAngleArrowsNode( molecule, molecule.atomC );
     var arrowsBNode = new MoleculeAngleArrowsNode( molecule, molecule.atomB );
+
+    // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
     this.partialChargeNodeB = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule );
     this.partialChargeNodeC = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC );
@@ -83,14 +85,29 @@ define( function( require ) {
 
   return inherit( Node, TriatomicMoleculeNode, {
 
+    /**
+     * Sets whether bond dipoles are visible.
+     * @param {boolean} visible
+     * @public
+     */
     setBondDipolesVisible: function( visible ) {
       this.bondDipoleABNode.visible = this.bondDipoleBCNode.visible = visible;
     },
 
+    /**
+     * Sets whether the molecular dipole is visible.
+     * @param {boolean} visible
+     * @public
+     */
     setMolecularDipoleVisible: function( visible ) {
       this.molecularDipoleNode.visible = visible;
     },
 
+    /**
+     * Sets whether partial charges are visible.
+     * @param {boolean} visible
+     * @public
+     */
     setPartialChargesVisible: function( visible ) {
       this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = this.partialChargeNodeC.visible = visible;
     }

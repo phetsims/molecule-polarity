@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * 2D surface that represents electrostatic potential for a diatomic molecule.
@@ -40,6 +40,7 @@ define( function( require ) {
     
     Node.call( this );
 
+    // @private
     this.molecule = molecule;
     this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
     this.colors = MPColors.RWB_GRADIENT;

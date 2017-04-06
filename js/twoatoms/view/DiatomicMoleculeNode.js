@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Visual representation of a diatomic molecule.
@@ -32,6 +32,8 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var bondNode = new BondNode( molecule.bond );
+
+    // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
     this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
     this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule ); // @private
@@ -56,14 +58,29 @@ define( function( require ) {
 
   return inherit( Node, DiatomicMoleculeNode, {
 
+    /**
+     * Sets whether the bond dipole is visible.
+     * @param {boolean} visible
+     * @public
+     */
     setBondDipoleVisible: function( visible ) {
       this.bondDipoleNode.visible = visible;
     },
 
+    /**
+     * Sets whether partial charges are visible.
+     * @param {boolean} visible
+     * @public
+     */
     setPartialChargesVisible: function( visible ) {
       this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = visible;
     },
 
+    /**
+     * Sets the surface type that is visible.
+     * @param {SurfaceType} surfaceType
+     * @public
+     */
     setSurfaceType: function( surfaceType ) {
       this.electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       this.electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );

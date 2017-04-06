@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * 2D surface that represents electron density for a diatomic molecule.
@@ -40,6 +40,7 @@ define( function( require ) {
     
     Node.call( this );
 
+    // @private
     this.molecule = molecule;
     this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
     this.colors = MPColors.BW_GRADIENT;
@@ -77,7 +78,12 @@ define( function( require ) {
 
   return inherit( Node, ElectronDensityNode, {
 
-    // @override
+    /**
+     * Updates the fill when this Node become visible.
+     * @param {boolean} visible
+     * @public
+     * @override
+     */
     setVisible: function( visible ) {
       Node.prototype.setVisible.call( this, visible );
       if ( visible ) {
@@ -91,9 +97,12 @@ define( function( require ) {
      * @private
      */
     updateFill: function() {
+
       // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
       var deltaEN = this.molecule.getDeltaEN();
+
       if ( deltaEN === 0 ) {
+
         // no difference, use neutral color that's halfway between "more" and "less" colors
         this.path.fill = MPColors.NEUTRAL_GRAY;
       }

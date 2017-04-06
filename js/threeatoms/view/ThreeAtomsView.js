@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * View for the 'Three Atoms' screen.
@@ -47,7 +47,6 @@ define( function( require ) {
       },
       scale: 1.32
     } );
-
 
     // Parent for all nodes added to this screen
     var rootNode = new Node( {

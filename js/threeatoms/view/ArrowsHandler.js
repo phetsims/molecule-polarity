@@ -1,8 +1,9 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Drag handler for controlling visibility of arrows that appear around atoms as interactivity cues.
  * When a drag begins, these arrows are made invisible.
+ * Conforms to scenery's input listener interface.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
