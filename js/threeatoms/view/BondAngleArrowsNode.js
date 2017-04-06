@@ -45,6 +45,7 @@ define( function( require ) {
     var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
     var rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
 
+    // unlink not needed
     atom.locationProperty.link( function() {
       // transform the arrow shapes to account for atom location and relationship to molecule location
       var v = molecule.location.minus( atom.locationProperty.get() );

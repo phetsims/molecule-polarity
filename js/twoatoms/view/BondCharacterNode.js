@@ -81,7 +81,7 @@ define( function( require ) {
     rightLabelNode.right = trackNode.right - LABEL_X_INSET;
     rightLabelNode.top = trackNode.top + Y_MARGIN;
 
-    // when difference in electronegativity changes, move the pointer
+    // when difference in electronegativity changes, move the pointer, unlink not needed
     molecule.bond.dipoleProperty.link( function( dipole ) {
       pointerNode.left = Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
         POINTER_X_INSET, TRACK_WIDTH - pointerNode.width - POINTER_X_INSET,

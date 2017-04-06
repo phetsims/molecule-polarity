@@ -94,14 +94,17 @@ define( function( require ) {
 
     // synchronization with view properties ------------------------------
 
+    // unlink not needed
     viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
       moleculeNode.setBondDipolesVisible( visible );
     } );
 
+    // unlink not needed
     viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
       moleculeNode.setMolecularDipoleVisible( visible );
     } );
 
+    // unlink not needed
     viewProperties.partialChargesVisibleProperty.link( function( visible ) {
       moleculeNode.setPartialChargesVisible( visible );
     } );

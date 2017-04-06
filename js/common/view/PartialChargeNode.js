@@ -76,8 +76,8 @@ define( function( require ) {
         self.translation = atom.locationProperty.get().plus( relativeOffset );
       }
     };
-    atom.partialChargeProperty.link( this.update.bind( this ) );
-    atom.locationProperty.link( this.update.bind( this ) );
+    atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
+    atom.locationProperty.link( this.update.bind( this ) ); // unlink not needed
   }
 
   moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
@@ -134,7 +134,7 @@ define( function( require ) {
           return new Vector2( 1, molecule.dipoleProperty.get().angle() );
         }
       } );
-      molecule.dipoleProperty.link( node.update.bind( this ) );
+      molecule.dipoleProperty.link( node.update.bind( this ) ); // unlink not needed
       return node;
     }
   } );

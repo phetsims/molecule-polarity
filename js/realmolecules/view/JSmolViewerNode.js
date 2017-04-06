@@ -59,6 +59,7 @@ define( function( require ) {
     titleNode.centerX = rectNode.centerX;
     titleNode.centerY = rectNode.centerY;
 
+    // unlink not needed
     moleculeProperty.link( function( molecule ) {
       moleculeText.text = molecule.symbol + ' (' + molecule.name + ')';
     } );
@@ -84,27 +85,26 @@ define( function( require ) {
 
     Node.call( this, { children: [ rectNode, debugText ] } );
 
+    // synchronize with view properties, unlinks not needed
     viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
       self.setBondDipolesVisible( visible );
     } );
-
     viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
       self.setMolecularDipoleVisible( visible );
     } );
-
     viewProperties.partialChargesVisibleProperty.link( function( visible ) {
       self.setPartialChargesVisible( visible );
     } );
-
     viewProperties.atomLabelsVisibleProperty.link( function( visible ) {
       self.setAtomLabelsVisible( visible );
     } );
-
     viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
       self.setSurfaceType( surfaceType );
     } );
 
     this.elementsProperty = new Property( [] );
+
+    // unlink not needed
     moleculeProperty.link( function( molecule ) {
       //TODO populate elementsProperty with [Elements] for the selected molecule
     } );

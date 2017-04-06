@@ -41,7 +41,7 @@ define( function( require ) {
     this.dragging = false; // true when the user is dragging the molecule
 
     // update atom locations when molecule is rotated
-    this.angleProperty.link( updateAtomLocations.bind( this ) );
+    this.angleProperty.link( updateAtomLocations.bind( this ) ); // unlink not needed
 
     // update molecular dipole when bond dipoles change
     this.bonds.forEach( function( bond ) {
