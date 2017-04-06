@@ -29,7 +29,7 @@ define( function( require ) {
    */
   function DiatomicMolecule( options ) {
 
-    // the atoms labeled A and B
+    // @public the atoms labeled A and B
     this.atomA = new Atom( atomAString, {
       color: MPColors.ATOM_A
     } );
@@ -38,37 +38,57 @@ define( function( require ) {
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
     } );
 
-    // the bond connecting atoms A and B
+    // @public the bond connecting atoms A and B
     this.bond = new Bond( this.atomA, this.atomB );
 
-    Molecule.call( this, [ this.atomA, this.atomB ], [ this.bond ], this.updateAtomLocations, this.updatePartialCharges, options );
+    Molecule.call( this,
+      [ this.atomA, this.atomB ],
+      [ this.bond ],
+      this.updateAtomLocations,
+      this.updatePartialCharges,
+      options );
   }
 
   moleculePolarity.register( 'DiatomicMolecule', DiatomicMolecule );
 
   return inherit( Molecule, DiatomicMolecule, {
 
-    // Gets the difference in electronegativity (EN), positive sign indicates atom B has higher EN.
+    /**
+     * Gets the difference in electronegativity (EN), positive sign indicates atom B has higher EN.
+     * @returns {number}
+     * @public
+     */
     getDeltaEN: function() {
       return this.atomB.electronegativityProperty.get() - this.atomA.electronegativityProperty.get();
     },
 
-    // @private repositions the atoms
+    /**
+     * Repositions the atoms.
+     * @private
+     */
     updateAtomLocations: function() {
+
       var radius = MPConstants.BOND_LENGTH / 2;
+
       // atom A
       var xA = ( radius * Math.cos( this.angleProperty.get() + Math.PI ) ) + this.location.x;
       var yA = ( radius * Math.sin( this.angleProperty.get() + Math.PI ) ) + this.location.y;
       this.atomA.locationProperty.set( new Vector2( xA, yA ) );
+
       // atom B
       var xB = ( radius * Math.cos( this.angleProperty.get() ) ) + this.location.x;
       var yB = ( radius * Math.sin( this.angleProperty.get() ) ) + this.location.y;
       this.atomB.locationProperty.set( new Vector2( xB, yB ) );
     },
 
-    // @private updates partial charges
+    /**
+     * Updates partial charges.
+     * @private
+     */
     updatePartialCharges: function() {
+
       var deltaEN = this.getDeltaEN();
+
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
       this.atomA.partialChargeProperty.set( deltaEN );
       this.atomB.partialChargeProperty.set( -deltaEN );

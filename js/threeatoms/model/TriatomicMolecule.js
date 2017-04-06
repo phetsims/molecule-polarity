@@ -31,7 +31,7 @@ define( function( require ) {
    */
   function TriatomicMolecule( options ) {
 
-    // the atoms labeled A, B, C
+    // @public the atoms labeled A, B, C
     this.atomA = new Atom( atomAString, {
       color: MPColors.ATOM_A
     } );
@@ -43,12 +43,22 @@ define( function( require ) {
       color: MPColors.ATOM_C
     } );
 
+    // @public
     this.bondAB = new Bond( this.atomA, this.atomB ); // the bond connecting atoms A and B
     this.bondBC = new Bond( this.atomB, this.atomC ); // the bond connecting atoms B and C
-    this.bondAngleAProperty = new Property( 0.75 * Math.PI ); // the bond angle of atom A relative to atom B, before applying molecule rotation
-    this.bondAngleCProperty = new Property( 0.25 * Math.PI ); // the bond angle of atom C relative to atom B, before applying molecule rotation
 
-    Molecule.call( this, [ this.atomA, this.atomB, this.atomC ], [ this.bondAB, this.bondBC ], this.updateAtomLocations, this.updatePartialCharges, options );
+    // @public the bond angle of atom A relative to atom B, before applying molecule rotation
+    this.bondAngleAProperty = new Property( 0.75 * Math.PI );
+
+    // @public the bond angle of atom C relative to atom B, before applying molecule rotation
+    this.bondAngleCProperty = new Property( 0.25 * Math.PI );
+
+    Molecule.call( this,
+      [ this.atomA, this.atomB, this.atomC ],
+      [ this.bondAB, this.bondBC ],
+      this.updateAtomLocations,
+      this.updatePartialCharges,
+      options );
 
     this.bondAngleAProperty.link( this.updateAtomLocations.bind( this ) );
     this.bondAngleCProperty.link( this.updateAtomLocations.bind( this ) );
@@ -73,27 +83,39 @@ define( function( require ) {
 
   return inherit( Molecule, TriatomicMolecule, {
 
-    // @override
+    /**
+     * @public
+     * @override
+     */
     reset: function() {
       Molecule.prototype.reset.call( this );
       this.bondAngleAProperty.reset();
       this.bondAngleCProperty.reset();
     },
 
-    // @private repositions the atoms
+    /**
+     * Repositions the atoms.
+     * @private
+     */
     updateAtomLocations: function() {
       this.atomB.locationProperty.set( this.location );  // atom B remains at the molecule's location
       updateAtomLocation( this.atomA, this.bondAngleAProperty.get(), this.location, this.angleProperty.get() );
       updateAtomLocation( this.atomC, this.bondAngleCProperty.get(), this.location, this.angleProperty.get() );
     },
 
-    // @private updates partial charges
+    /**
+     * Updates partial charges.
+     * @private
+     */
     updatePartialCharges: function() {
+
       var deltaAB = this.atomA.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
       var deltaCB = this.atomC.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
+
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
       this.atomA.partialChargeProperty.set( -deltaAB );
       this.atomC.partialChargeProperty.set( -deltaCB );
+
       // atom B's participates in 2 bonds, so its partial charge is the sum
       this.atomB.partialChargeProperty.set( deltaAB + deltaCB );
     }
