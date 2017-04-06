@@ -53,7 +53,6 @@ define( function( require ) {
       scale: 1.32
     } );
 
-
     // Parent for all nodes added to this screen
     var rootNode = new Node( {
       children: [
