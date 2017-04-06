@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Main entry point for the 'Molecule Polarity' sim.
@@ -20,7 +20,7 @@ define( function( require ) {
   // strings
   var moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
-  var simOptions = {
+  var options = {
     optionsNode: new MPOptionsNode(), // user interface for the Options dialog
     credits: {
       leadDesign: 'Kelly Lancaster',
@@ -38,15 +38,10 @@ define( function( require ) {
 
     // add the 'Real Molecules' screen, for development
     if ( MPQueryParameters.realMolecules ) {
-
       screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
-
-      simOptions = _.extend( {
-        screens: 3
-      }, simOptions );
     }
 
-    var sim = new Sim( moleculePolarityTitleString, screens, simOptions );
+    var sim = new Sim( moleculePolarityTitleString, screens, options );
     sim.start();
   } );
 } );

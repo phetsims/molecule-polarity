@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Model of a make-believe diatomic (2 atoms) molecule.
@@ -30,8 +30,13 @@ define( function( require ) {
   function DiatomicMolecule( options ) {
 
     // the atoms labeled A and B
-    this.atomA = new Atom( atomAString, MPConstants.ATOM_DIAMETER, MPColors.ATOM_A, MPConstants.ELECTRONEGATIVITY_RANGE.min );
-    this.atomB = new Atom( atomBString, MPConstants.ATOM_DIAMETER, MPColors.ATOM_B, MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ) );
+    this.atomA = new Atom( atomAString, {
+      color: MPColors.ATOM_A
+    } );
+    this.atomB = new Atom( atomBString, {
+      color: MPColors.ATOM_B,
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
+    } );
 
     // the bond connecting atoms A and B
     this.bond = new Bond( this.atomA, this.atomB );

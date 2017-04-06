@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * A make-believe atom whose electronegativity is mutable.
@@ -11,23 +11,33 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {string} name
-   * @param {number} diameter
-   * @param {Color|String} color
-   * @param {number} electronegativity
-   * @param {Vector2} location defaults to (0,0)
+   * @param {Object} [options]
    * @constructor
    */
-  function Atom( name, diameter, color, electronegativity, location ) {
+  function Atom( name, options ) {
+
+    options = _.extend( {
+      diameter: MPConstants.ATOM_DIAMETER, // {number}
+      color: 'white', // {Color|string} base color of the atom
+      location: new Vector2( 0, 0 ), // initial location
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min // {number}
+    }, options );
+
+    assert && assert( MPConstants.ELECTRONEGATIVITY_RANGE.contains( options.electronegativity ),
+      'invalid electronegativity: ' + options.electronegativity );
+
+    // @public (read-only)
     this.name = name;
-    this.diameter = diameter;
-    this.color = color;
-    this.electronegativityProperty = new Property( electronegativity );
-    this.locationProperty = new Property( location || new Vector2( 0, 0 ) );
+    this.diameter = options.diameter;
+    this.color = options.color;
+    this.locationProperty = new Property( options.location );
+    this.electronegativityProperty = new Property( options.electronegativity );
     this.partialChargeProperty = new Property( 0 ); // partial charge is zero until this atom participates in a bond
   }
 

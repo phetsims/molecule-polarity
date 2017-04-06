@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Model of the electric field.
@@ -18,7 +18,12 @@ define( function( require ) {
    * @constructor
    */
   function EField( options ) {
-    options = _.extend( { enabled: false }, options );
+
+    options = _.extend( {
+      enabled: false // {boolean} is the E-field initially enabled?
+    }, options );
+
+    // @public
     this.enabledProperty = new Property( options.enabled );
   }
 
@@ -26,6 +31,7 @@ define( function( require ) {
 
   return inherit( Object, EField, {
 
+    // @public
     reset: function() {
       this.enabledProperty.reset();
     }

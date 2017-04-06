@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Base type for all 2D molecules.
@@ -32,11 +32,11 @@ define( function( require ) {
 
     var self = this;
 
+    // @public
     this.location = options.location;
     this.angleProperty = new Property( options.angle );
     this.atoms = atoms;
     this.bonds = bonds;
-
     this.dipoleProperty = new Property( new Vector2() ); // the molecular dipole
     this.dragging = false; // true when the user is dragging the molecule
 
@@ -45,12 +45,12 @@ define( function( require ) {
 
     // update molecular dipole when bond dipoles change
     this.bonds.forEach( function( bond ) {
-      bond.dipoleProperty.link( self.updateMolecularDipole.bind( self ) );
+      bond.dipoleProperty.link( self.updateMolecularDipole.bind( self ) ); // unlink not needed
     } );
 
     // update partial charges when atoms' EN changes
     this.atoms.forEach( function( atom ) {
-      atom.electronegativityProperty.link( updatePartialCharges.bind( self ) );
+      atom.electronegativityProperty.link( updatePartialCharges.bind( self ) ); // unlink not needed
     } );
   }
 
@@ -58,17 +58,25 @@ define( function( require ) {
 
   return inherit( Object, Molecule, {
 
+    // @public
     reset: function() {
       this.angleProperty.reset();
       this.atoms.forEach( function( atom ) { atom.reset(); } );
     },
 
-    // Creates a transform that accounts for the molecule's location and orientation.
+    /**
+     * Creates a transform that accounts for the molecule's location and orientation.
+     * @returns {Matrix3}
+     * @public
+     */
     createTransformMatrix: function() {
       return Matrix3.translationFromVector( this.location ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) );
     },
 
-    // @private molecular dipole is the vector sum of the bond dipoles
+    /**
+     * Molecular dipole is the vector sum of the bond dipoles.
+     * @private
+     */
     updateMolecularDipole: function() {
       var sum = new Vector2();
       this.bonds.forEach( function( bond ) { sum.add( bond.dipoleProperty.get() ); } );

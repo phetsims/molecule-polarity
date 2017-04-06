@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Base type for 2D models in this sim.
@@ -25,13 +25,19 @@ define( function( require ) {
    * @constructor
    */
   function MPModel( molecule ) {
+
+    // @public
     this.eField = new EField();
     this.molecule = molecule;
   }
 
   moleculePolarity.register( 'MPModel', MPModel );
 
-  // converts an angle to range [0,2*PI) radians
+  /**
+   * Converts an angle to range [0,2*PI) radians
+   * @param {number} angle
+   * @returns {number}
+   */
   var normalizeAngle = function( angle ) {
     var normalizedAngle = angle % ( 2 * Math.PI );
     if ( normalizedAngle < 0 ) {
@@ -43,12 +49,19 @@ define( function( require ) {
 
   return inherit( Object, MPModel, {
 
+    // @public
     reset: function() {
       this.eField.reset();
       this.molecule.reset();
     },
 
+    /**
+     * Advances the model.
+     * @param {number} deltaSeconds
+     * @public
+     */
     step: function( deltaSeconds ) {
+
       // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
       if ( this.eField.enabledProperty.get() && !this.molecule.dragging ) {
         this.updateMoleculeOrientation( this.molecule );
@@ -58,8 +71,8 @@ define( function( require ) {
     /*
      * Rotate the molecule one step towards alignment of the molecular dipole with the E-field.
      * Angular velocity is proportional to the dipole's magnitude.
-     * @private
      * @param {Molecule} molecule
+     * @private
      */
     updateMoleculeOrientation: function( molecule ) {
 
