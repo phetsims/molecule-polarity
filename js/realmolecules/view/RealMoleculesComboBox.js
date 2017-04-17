@@ -14,7 +14,7 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
@@ -40,7 +40,7 @@ define( function( require ) {
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
       var molecule = molecules[ i ];
-      var node = new SubSupText( StringUtils.format( pattern0Symbol1NameString, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
+      var node = new RichText( StringUtils.format( pattern0Symbol1NameString, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
       items[ i ] = ComboBox.createItem( node, molecule );
     }
 

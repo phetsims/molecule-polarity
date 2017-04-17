@@ -19,7 +19,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
@@ -44,7 +44,7 @@ define( function( require ) {
     } );
     var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
     var font = new PhetFont( 18 );
-    var moleculeText = new SubSupText( '?', {
+    var moleculeText = new RichText( '?', {
       font: font,
       maxWidth: 200
     } );
