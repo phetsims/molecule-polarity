@@ -2,7 +2,7 @@
 
 ## 2D Model
 
-The "Two Atoms" and "Three Atoms" tabs use a 2D model implemented by PhET.
+The "Two Atoms" and "Three Atoms" screens use a 2D model.
 
 Electronegativity (EN) ranges internally from 2 to 4, but is never displayed to the user.
 The difference in EN between 2 bonded atoms is herein referred to as _delta EN_,
