@@ -40,4 +40,4 @@ is rotating the molecule or changing EN values.
 
 ## 3D Model
 
-To be determined
+TODO describe 3D model
