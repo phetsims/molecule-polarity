@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * View for the 'Three Atoms' screen.
+ * View for the 'Two Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,6 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BondCharacterNode = require( 'MOLECULE_POLARITY/twoatoms/view/BondCharacterNode' );
+  var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicMoleculeNode' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
@@ -17,29 +19,32 @@ define( function( require ) {
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsControlPanel' );
-  var ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
-  var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
+  var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
+  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  var TwoAtomsControlPanel = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsControlPanel' );
+  var TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
 
   /**
-   * @param {ThreeAtomsModel} model
+   * @param {TwoAtomsModel} model
    * @constructor
    */
-  function ThreeAtomsView( model ) {
+  function TwoAtomsScreenView( model ) {
 
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific properties
-    var viewProperties = new ThreeAtomsViewProperties();
+    var viewProperties = new TwoAtomsViewProperties();
 
     // nodes
-    var moleculeNode = new TriatomicMoleculeNode( model.molecule );
+    var moleculeNode = new DiatomicMoleculeNode( model.molecule );
     var negativePlateNode = PlateNode.createNegative( model.eField );
     var positivePlateNode = PlateNode.createPositive( model.eField );
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
-    var enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
-    var controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
+    var bondCharacterNode = new BondCharacterNode( model.molecule );
+    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
+    var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+    var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
@@ -56,8 +61,10 @@ define( function( require ) {
         positivePlateNode,
         enControlA,
         enControlB,
-        enControlC,
         controlPanel,
+        bondCharacterNode,
+        electrostaticPotentialColorKey,
+        electronDensityColorKey,
         moleculeNode,
         resetAllButton
       ]
@@ -68,7 +75,7 @@ define( function( require ) {
 
     var moleculeX = model.molecule.location.x;
     var moleculeY = model.molecule.location.y;
-    var plateXOffset = 300; // x offset from molecule
+    var plateXOffset = 250; // x offset from molecule
 
     // to left of molecule, vertically centered
     negativePlateNode.right = moleculeX - plateXOffset;
@@ -79,14 +86,21 @@ define( function( require ) {
     positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
     // centered below molecule
-    enControlB.centerX = moleculeX;
-    enControlA.right = enControlB.left - 10;
-    enControlC.left = enControlB.right + 10;
-    enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
+    enControlA.right = moleculeX - 5;
+    enControlB.left = moleculeX + 5;
+    enControlA.bottom = enControlB.bottom = this.layoutBounds.bottom - 25;
+
+    // centered above molecule
+    electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
+    electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
+
+    // centered above EN controls
+    bondCharacterNode.centerX = moleculeX;
+    bondCharacterNode.bottom = enControlA.top - 10;
 
     // to right of positive plate, top aligned
     controlPanel.top = positivePlateNode.y;
-    controlPanel.left = positivePlateNode.right + 25;
+    controlPanel.left = positivePlateNode.right + 70;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
@@ -95,22 +109,27 @@ define( function( require ) {
     // synchronization with view properties ------------------------------
 
     // unlink not needed
-    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
-      moleculeNode.setBondDipolesVisible( visible );
-    } );
-
-    // unlink not needed
-    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-      moleculeNode.setMolecularDipoleVisible( visible );
+    viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
+      moleculeNode.setBondDipoleVisible( visible );
     } );
 
     // unlink not needed
     viewProperties.partialChargesVisibleProperty.link( function( visible ) {
       moleculeNode.setPartialChargesVisible( visible );
     } );
+
+    // unlink not needed
+    viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
+
+    // unlink not needed
+    viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
+      moleculeNode.setSurfaceType( surfaceType );
+      electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+    } );
   }
 
-  moleculePolarity.register( 'ThreeAtomsView', ThreeAtomsView );
+  moleculePolarity.register( 'TwoAtomsScreenView', TwoAtomsScreenView );
 
-  return inherit( ScreenView, ThreeAtomsView );
+  return inherit( ScreenView, TwoAtomsScreenView );
 } );

@@ -16,7 +16,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
-  var RealMoleculesView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesView' );
+  var RealMoleculesScreenView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesScreenView' );
 
   // strings
   var screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
@@ -39,7 +39,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new RealMoleculesModel(); },
-      function( model ) { return new RealMoleculesView( model ); },
+      function( model ) { return new RealMoleculesScreenView( model ); },
       options );
   }
 

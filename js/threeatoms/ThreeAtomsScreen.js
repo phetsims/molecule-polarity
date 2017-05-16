@@ -21,7 +21,7 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/model/ThreeAtomsModel' );
-  var ThreeAtomsView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsView' );
+  var ThreeAtomsScreenView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsScreenView' );
 
   // strings
   var screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
@@ -42,7 +42,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new ThreeAtomsModel(); },
-      function( model ) { return new ThreeAtomsView( model ); },
+      function( model ) { return new ThreeAtomsScreenView( model ); },
       options
     );
   }

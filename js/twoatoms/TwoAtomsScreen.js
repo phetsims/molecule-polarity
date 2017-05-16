@@ -21,7 +21,7 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TwoAtomsModel = require( 'MOLECULE_POLARITY/twoatoms/model/TwoAtomsModel' );
-  var TwoAtomsView = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsView' );
+  var TwoAtomsScreenView = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsScreenView' );
 
   // strings
   var screenTwoAtomsString = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
@@ -41,7 +41,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new TwoAtomsModel(); },
-      function( model ) { return new TwoAtomsView( model ); },
+      function( model ) { return new TwoAtomsScreenView( model ); },
       options
     );
   }

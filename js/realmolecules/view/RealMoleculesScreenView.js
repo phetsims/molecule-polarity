@@ -29,7 +29,7 @@ define( function( require ) {
    * @param {TwoAtomsModel} model
    * @constructor
    */
-  function RealMoleculesView( model ) {
+  function RealMoleculesScreenView( model ) {
 
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
@@ -126,7 +126,7 @@ define( function( require ) {
     } );
   }
 
-  moleculePolarity.register( 'RealMoleculesView', RealMoleculesView );
+  moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
 
-  return inherit( ScreenView, RealMoleculesView );
+  return inherit( ScreenView, RealMoleculesScreenView );
 } );
