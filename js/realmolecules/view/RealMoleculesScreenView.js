@@ -87,7 +87,7 @@ define( function( require ) {
 
     // layout ---------------------------------
 
-    this.jsmolViewerNode.left = 75;
+    this.jsmolViewerNode.left = 100;
 
     // centered above viewer
     electronegativityTableNode.centerX = this.jsmolViewerNode.centerX;
