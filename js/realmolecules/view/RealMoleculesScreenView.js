@@ -24,6 +24,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  var UnderDevelopmentPlane = require( 'MOLECULE_POLARITY/realmolecules/view/UnderDevelopmentPlane' );
 
   /**
    * @param {TwoAtomsModel} model
@@ -72,8 +73,7 @@ define( function( require ) {
     // Parent for all nodes added to this screen
     var rootNode = new Node( {
       children: [
-        // nodes are rendered in this order
-        this.jsmolViewerNode,
+        // this.jsmolViewerNode, //TODO add 3D viewer, https://github.com/phetsims/molecule-polarity/issues/15
         electronegativityTableNode,
         moleculesComboBox,
         controlPanel,
@@ -124,6 +124,10 @@ define( function( require ) {
       electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
+
+    //TODO remove this when 3D viewer has been implemented, see https://github.com/phetsims/molecule-polarity/issues/15
+    // Add a plane that disables this screen
+    this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
   }
 
   moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
