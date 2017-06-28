@@ -41,7 +41,8 @@ define( function( require ) {
 
     Plane.call( this, {
       children: [ panel ],
-      fill: 'rgba( 0, 0, 0, 0.2 )'
+      fill: 'rgba( 0, 0, 0, 0.2 )',
+      pickable: true // blocks interaction with anything behind this Plane
     } );
   }
 
