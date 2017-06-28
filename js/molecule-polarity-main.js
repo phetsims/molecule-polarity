@@ -33,13 +33,9 @@ define( function( require ) {
 
     var screens = [
       new TwoAtomsScreen(),
-      new ThreeAtomsScreen()
+      new ThreeAtomsScreen(),
+      new RealMoleculesScreen()
     ];
-
-    // add the 'Real Molecules' screen, for development
-    if ( MPQueryParameters.realMolecules ) {
-      screens.push( new RealMoleculesScreen() ); //TODO move this to screens initialization when fully implemented
-    }
 
     var sim = new Sim( moleculePolarityTitleString, screens, options );
     sim.start();
