@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   var MPOptionsNode = require( 'MOLECULE_POLARITY/common/view/MPOptionsNode' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var RealMoleculesScreen = require( 'MOLECULE_POLARITY/realmolecules/RealMoleculesScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
