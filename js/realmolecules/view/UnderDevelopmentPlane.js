@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Panel = require( 'SUN/Panel' );
@@ -43,6 +44,8 @@ define( function( require ) {
       fill: 'rgba( 0, 0, 0, 0.2 )'
     } );
   }
+
+  moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
 
   return inherit( Plane, UnderDevelopmentPlane );
 } );
