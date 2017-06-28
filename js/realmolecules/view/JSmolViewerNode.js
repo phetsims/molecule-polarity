@@ -1,6 +1,6 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-//TODO This is currently a stub. Investigate JSmol integration in issue #6.
+//TODO This is currently a stub, see JSmol integration in https://github.com/phetsims/molecule-polarity/issues/6
 /**
  * JSmol viewer.
  *
