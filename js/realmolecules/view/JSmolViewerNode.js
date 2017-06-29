@@ -13,10 +13,10 @@
  * 4. Copy the jmol directory so that it is an immediate subdirectory of your working copy of litmus.
  * 5. Rename the directory to jmol-14.2.4
  *
- * WARNING #1: Changes to how a sim hmtl file is generated (including `litmus_en.hmtl`, the development html file)
- * made it impossible to manually add JSmol to the html file.  So before you can run this repository, you'll need
- * to figure out how to fix that.  This script needs to run after the 3rd-party libraries (jquery in particular),
- * and before any PhET-specific code:
+ * WARNING #1: Changes to how a sim hmtl file is generated (including `molecule-polarity_en.hmtl`, the development
+ * html file) made it impossible to manually add JSmol to the html file.  So before you can run this repository,
+ * you'll need to figure out how to fix that.  This script needs to run after the 3rd-party libraries
+ * (jquery in particular), and before any PhET-specific code:
  *
  * `<script type="text/javascript" src="jsmol-14.2.4/JSmol.min.nojq.js"></script>`
  *
