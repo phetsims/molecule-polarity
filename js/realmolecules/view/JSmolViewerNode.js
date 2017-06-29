@@ -1,4 +1,4 @@
-// Copyright 2014-2017, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 //TODO This was moved here from litmus repository. It can be deleted when 100% certain that we're not using JSmol.
 /**
@@ -36,7 +36,7 @@ define( function( require ) {
   var DOM = require( 'SCENERY/nodes/DOM' );
   var Element = require( 'MOLECULE_POLARITY/realmolecules/model/Element' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var litmus = require( 'LITMUS/litmus' );
+  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var Property = require( 'AXON/Property' );
@@ -136,7 +136,7 @@ define( function( require ) {
     DOM.call( this, this.div, options );
   }
 
-  litmus.register( 'JSmolViewerNode', JSmolViewerNode );
+  moleculePolarity.register( 'JSmolViewerNode', JSmolViewerNode );
 
   // executes a JSmol script
   var doScript = function( applet, script ) {
