@@ -31,10 +31,10 @@ define( function( require ) {
   var atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
 
   /**
-   * @param {JSmolViewerNode} viewerNode
+   * @param {RealMoleculeViewer} moleculeViewer
    * @constructor
    */
-  function ElectronegativityTableNode( viewerNode ) {
+  function ElectronegativityTableNode( moleculeViewer ) {
 
     Node.call( this );
 
@@ -83,7 +83,7 @@ define( function( require ) {
 
     // highlight elements displayed by the viewer
     var self = this;
-    viewerNode.elementsProperty.lazyLink( function( elements ) {
+    moleculeViewer.elementsProperty.lazyLink( function( elements ) {
       self.resetCells();
       elements.forEach( function( element ) {
         self.setColor( element.elementNumber, element.color );

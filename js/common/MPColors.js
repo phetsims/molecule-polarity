@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * Colors used throughout this sim.
@@ -46,8 +46,6 @@ define( function( require ) {
     /*
      * Secondary gradient for mep, negative to positive.
      * This is Jmol's ROYGB gradient, documented at http://jmol.sourceforge.net/jscolors/#gradnt.
-     * A copy of the Jmol gradients image shown at this link is at doc/Jmol_color_gradients.png.
-     * The colors below were acquired from the roygb gradient shown in that image.
      */
     ROYGB_GRADIENT: [
       Color.RED,

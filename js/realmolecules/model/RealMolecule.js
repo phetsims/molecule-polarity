@@ -1,8 +1,8 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Real molecule that is viewable in 3D using Jmol.
- * Specific information about the molecule must be obtained by interrogating Jmol.
+ * Real molecule that is viewable in PhET's 3D molecule viewer.
+ * The molecule is described using the mol2 standard format.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

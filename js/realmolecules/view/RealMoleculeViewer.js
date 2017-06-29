@@ -1,6 +1,6 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-//TODO This is currently a stub, see JSmol integration in https://github.com/phetsims/molecule-polarity/issues/6
+//TODO This is currently a stub, integrate with 3D viewer in https://github.com/phetsims/molecule-polarity/issues/15
 /**
  * JSmol viewer.
  *
@@ -28,7 +28,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function JSmolViewerNode( moleculeProperty, viewProperties, options ) {
+  function RealMoleculeViewer( moleculeProperty, viewProperties, options ) {
 
     options = _.extend( {
       backgroundColor: 'white',
@@ -42,7 +42,7 @@ define( function( require ) {
       stroke: 'rgba(0,0,0,0.25)',
       fill: options.backgroundColor
     } );
-    var titleNode = new Text( 'JSmol viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
+    var titleNode = new Text( '3D molecule viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
     var font = new PhetFont( 18 );
     var moleculeText = new RichText( '?', {
       font: font,
@@ -102,6 +102,7 @@ define( function( require ) {
       self.setSurfaceType( surfaceType );
     } );
 
+    // {Property.<Element[]>} @public (read-only)
     this.elementsProperty = new Property( [] );
 
     // unlink not needed
@@ -110,14 +111,9 @@ define( function( require ) {
     } );
   }
 
-  moleculePolarity.register( 'JSmolViewerNode', JSmolViewerNode );
+  moleculePolarity.register( 'RealMoleculeViewer', RealMoleculeViewer );
 
-  return inherit( Node, JSmolViewerNode, {
-
-    // @returns {Element[]}
-    getElements: function() {
-      return []; //TODO
-    },
+  return inherit( Node, RealMoleculeViewer, {
 
     setBondDipolesVisible: function( visible ) {
       //TODO

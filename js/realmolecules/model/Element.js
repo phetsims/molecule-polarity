@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Elements, as they are known by Jmol.
+ * An element in the periodic table.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,8 +13,8 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   /**
-   * @param {number} elementNumber element number in the periodic table
-   * @param {Color|String} color color used by Jmol
+   * @param {number} elementNumber
+   * @param {Color|String} color
    * @constructor
    */
   function Element( elementNumber, color ) {
