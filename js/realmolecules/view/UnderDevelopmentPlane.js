@@ -34,8 +34,8 @@ define( function( require ) {
     var line3 = new Text( underDevelopmentLine3String, { font: new PhetFont( 18 ) } );
 
     var legacyLink = new LinkText(
-      'https://phet.colorado.edu/en/simulation/molecule-polarity',
-      'https://phet.colorado.edu/en/simulation/molecule-polarity', {
+      'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity',
+      'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity', {
         font: new PhetFont( 18 )
       } );
 
