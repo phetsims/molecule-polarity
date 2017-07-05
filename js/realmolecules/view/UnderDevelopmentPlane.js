@@ -12,25 +12,50 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
+  var LinkText = require( 'JOIST/LinkText' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Panel = require( 'SUN/Panel' );
   var Plane = require( 'SCENERY/nodes/Plane' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var underDevelopmentString = require( 'string!MOLECULE_POLARITY/underDevelopment' );
+  var underDevelopmentLine1String = require( 'string!MOLECULE_POLARITY/underDevelopment.line1' );
+  var underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
+  var underDevelopmentLine3String = require( 'string!MOLECULE_POLARITY/underDevelopment.line3' );
 
   /**
    * @constructor
    */
   function UnderDevelopmentPlane( layoutBounds ) {
 
-    var textNode = new MultiLineText( underDevelopmentString, {
-      font: new PhetFont( 20 ),
-      align: 'center'
+    var line1 = new Text( underDevelopmentLine1String, { font: new PhetFont( 22 ) } );
+    var line2 = new Text( underDevelopmentLine2String, { font: new PhetFont( 18 ) } );
+    var line3 = new Text( underDevelopmentLine3String, { font: new PhetFont( 18 ) } );
+
+    var legacyLink = new LinkText(
+      'https://phet.colorado.edu/en/simulation/molecule-polarity',
+      'https://phet.colorado.edu/en/simulation/molecule-polarity', {
+        font: new PhetFont( 18 )
+      } );
+
+    var emailLink = new LinkText(
+      'phethelp@colorado.edu',
+      'mailto:phethelp@colorado.edu', {
+        font: new PhetFont( 18 )
+      } );
+
+    var vBox = new VBox( {
+      align: 'left',
+      spacing: 20,
+      children: [
+        line1,
+        new VBox( { align: 'left', children: [ line2, legacyLink ] } ),
+        new VBox( { align: 'left', children: [ line3, emailLink ] } )
+      ]
     } );
 
-    var panel = new Panel( textNode, {
+    var panel = new Panel( vBox, {
       cornerRadius: 10,
       xMargin: 25,
       yMargin: 50,

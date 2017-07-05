@@ -170,7 +170,13 @@
   "surfaceColor": {
     "value": "Surface color (Real Molecules):"
   },
-  "underDevelopment": {
-    "value": "The Real Molecules screen is currently under development.\nRegistered users will be notified when this screen becomes available.\nFor more information, contact phethelp@colorado.edu"
+  "underDevelopment.line1": {
+    "value": "Real Molecules - not available in HTML5"
+  },
+  "underDevelopment.line2": {
+    "value": "The Real Molecules screen is available in the Java version at"
+  },
+  "underDevelopment.line3": {
+    "value": "Questions? We would love to hear from you at"
   }
 }
