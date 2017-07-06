@@ -38,10 +38,18 @@ define( function( require ) {
   function ElectronegativityControl( atom, molecule, options ) {
 
     options = _.extend( {
+
+      // ElectronegativityControl
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
       snapToTick: false,
-      trackSize: new Dimension2( 150, 5 )
+      trackSize: new Dimension2( 150, 5 ),
+
+      // Panel
+      fill: atom.color,
+      stroke: 'black',
+      xMargin: 15,
+      yMargin: 6
     } );
 
     // titles
@@ -88,12 +96,7 @@ define( function( require ) {
     subtitleNode.top = titleNode.bottom;
     sliderNode.top = subtitleNode.bottom + 8;
 
-    Panel.call( this, content, {
-      fill: atom.color, 
-      stroke: 'black',
-      xMargin: 15,
-      yMargin: 6
-    } );
+    Panel.call( this, content, options );
   }
 
   moleculePolarity.register( 'ElectronegativityControl', ElectronegativityControl );
