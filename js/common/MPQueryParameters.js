@@ -13,14 +13,16 @@ define( function( require ) {
 
   var MPQueryParameters = QueryStringMachine.getAll( {
 
-    // direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention), see issue #5
+    // Default direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention).
+    // This can also be changed from the Options dialog. See issue #5
     dipoleDirection: {
       type: 'string',
       validValues: [ 'positiveToNegative', 'negativeToPositive' ],
       defaultValue: 'positiveToNegative'
     },
 
-    // color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow), see issue #7
+    // Default color of 3D electrostatic-potential surface: 'RWB' (red-white-blue) or 'ROYGB' (rainbow).
+    // This can also be changed from the Options dialog. See issue #7
     surfaceColor: {
       type: 'string',
       validValues: [ 'RWB', 'ROYGB' ],
