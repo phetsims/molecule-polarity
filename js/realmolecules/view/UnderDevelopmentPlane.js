@@ -22,7 +22,6 @@ define( function( require ) {
   // strings
   var underDevelopmentLine1String = require( 'string!MOLECULE_POLARITY/underDevelopment.line1' );
   var underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
-  var underDevelopmentLine3String = require( 'string!MOLECULE_POLARITY/underDevelopment.line3' );
 
   /**
    * @constructor
@@ -30,19 +29,12 @@ define( function( require ) {
   function UnderDevelopmentPlane( layoutBounds ) {
 
     var line1 = new Text( underDevelopmentLine1String, { font: new PhetFont( 22 ) } );
-    var line2 = new Text( underDevelopmentLine2String, { font: new PhetFont( 18 ) } );
-    var line3 = new Text( underDevelopmentLine3String, { font: new PhetFont( 18 ) } );
+    var line2 = new Text( underDevelopmentLine2String, { font: new PhetFont( 16 ) } );
 
     var legacyLink = new LinkText(
       'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity',
       'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity', {
-        font: new PhetFont( 18 )
-      } );
-
-    var emailLink = new LinkText(
-      'phethelp@colorado.edu',
-      'mailto:phethelp@colorado.edu', {
-        font: new PhetFont( 18 )
+        font: new PhetFont( 16 )
       } );
 
     var vBox = new VBox( {
@@ -50,8 +42,7 @@ define( function( require ) {
       spacing: 20,
       children: [
         line1,
-        new VBox( { align: 'left', children: [ line2, legacyLink ] } ),
-        new VBox( { align: 'left', children: [ line3, emailLink ] } )
+        new VBox( { align: 'left', children: [ line2, legacyLink ] } )
       ]
     } );
 

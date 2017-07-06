@@ -171,12 +171,9 @@
     "value": "Surface color (Real Molecules):"
   },
   "underDevelopment.line1": {
-    "value": "Real Molecules - not available in HTML5"
+    "value": "Real Molecules is not yet available in HTML5."
   },
   "underDevelopment.line2": {
-    "value": "The Real Molecules screen is available in the Java version at"
-  },
-  "underDevelopment.line3": {
-    "value": "Questions? We would love to hear from you at"
+    "value": "If your device runs Java, you can use the Java version at"
   }
 }
