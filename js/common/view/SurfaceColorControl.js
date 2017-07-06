@@ -19,7 +19,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var surfaceColorString = require( 'string!MOLECULE_POLARITY/surfaceColor' );
+  var surfaceColorRealMoleculesString = require( 'string!MOLECULE_POLARITY/surfaceColorRealMolecules' );
 
   // constants
   var RADIO_BUTTON_OPTIONS = { radius: 8 };
@@ -37,7 +37,7 @@ define( function( require ) {
    */
   function SurfaceColorControl( surfaceColorProperty ) {
 
-    var surfaceColorLabel = new Text( surfaceColorString, {
+    var surfaceColorLabel = new Text( surfaceColorRealMoleculesString, {
         font: new PhetFont( 14 ),
         maxWidth: 400
       } );

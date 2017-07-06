@@ -53,10 +53,10 @@
   "atomC": {
     "value": "C"
   },
-  "covalent": {
+  "moreCovalent": {
     "value": "more covalent"
   },
-  "ionic": {
+  "moreIonic": {
     "value": "more ionic"
   },
   "pattern.atomName": {
@@ -167,7 +167,7 @@
   "pattern.dipoleDirection": {
     "value": "{{from}} → {{to}}"
   },
-  "surfaceColor": {
+  "surfaceColorRealMolecules": {
     "value": "Surface color (Real Molecules):"
   },
   "underDevelopment.line1": {

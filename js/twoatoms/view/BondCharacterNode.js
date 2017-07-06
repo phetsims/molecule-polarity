@@ -22,8 +22,8 @@ define( function( require ) {
 
   // strings
   var bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
-  var covalentString = require( 'string!MOLECULE_POLARITY/covalent' );
-  var ionicString = require( 'string!MOLECULE_POLARITY/ionic' );
+  var moreCovalentString = require( 'string!MOLECULE_POLARITY/moreCovalent' );
+  var moreIonicString = require( 'string!MOLECULE_POLARITY/moreIonic' );
 
   // constants
   var TRACK_WIDTH = 435;
@@ -54,8 +54,8 @@ define( function( require ) {
       fill: 'black',
       maxWidth:  0.3 * TRACK_WIDTH
     };
-    var leftLabelNode = new Text( covalentString, labelOptions );
-    var rightLabelNode = new Text( ionicString, labelOptions );
+    var leftLabelNode = new Text( moreCovalentString, labelOptions );
+    var rightLabelNode = new Text( moreIonicString, labelOptions );
 
     // pointer that moves along the track, not interactive
     var pointerNode = new PointerNode( molecule.atomA, molecule.atomB );
