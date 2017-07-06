@@ -28,7 +28,10 @@ define( function( require ) {
     },
 
     // prints debugging messages related to JSmol to the console
-    jsmolDebug: { type: 'flag' }
+    jsmolDebug: { type: 'flag' },
+
+    // adds the 'Real Molecules' screen, for development
+    realMolecules: { type: 'flag' }
   } );
 
   moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );

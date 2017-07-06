@@ -15,6 +15,7 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
   var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
@@ -126,8 +127,10 @@ define( function( require ) {
     } );
 
     //TODO Hide everything and show a dialog until this screen is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/15
-    this.removeChild( rootNode );
-    this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
+    if ( !MPQueryParameters.realMolecules ) {
+      this.removeChild( rootNode );
+      this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
+    }
   }
 
   moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
