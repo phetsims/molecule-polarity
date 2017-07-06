@@ -20,7 +20,11 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RichText = require( 'SCENERY_PHET/RichText' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
+  var patternSymbolNameString = require( 'string!MOLECULE_POLARITY/pattern.symbolName' );
 
   /**
    * @param {Property.<RealMolecule>} moleculeProperty
@@ -61,7 +65,10 @@ define( function( require ) {
 
     // unlink not needed
     moleculeProperty.link( function( molecule ) {
-      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')'; //TODO i18n
+      moleculeText.text = StringUtils.fillIn( patternSymbolNameString, {
+        symbol: molecule.symbol,
+        name: molecule.name
+      } );
     } );
 
     var debugText = new LayoutBox( {
@@ -107,7 +114,7 @@ define( function( require ) {
 
     // unlink not needed
     moleculeProperty.link( function( molecule ) {
-      //TODO populate elementsProperty with [Elements] for the selected molecule
+      //TODO populate elementsProperty with [Elements] for the selected molecule, see #15
     } );
   }
 
