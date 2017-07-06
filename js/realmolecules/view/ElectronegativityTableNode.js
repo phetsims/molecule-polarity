@@ -134,7 +134,7 @@ define( function( require ) {
       font: new PhetFont( { size: 22, weight: 'bold' } ),
       fill: NORMAL_TEXT_COLOR
     } );
-    this.electronegativityNode = new Text( Util.toFixed( electronegativity, 1 ), {
+    this.electronegativityNode = new Text( Util.toFixedNumber( electronegativity, 1 ), {
       font: new PhetFont( 16 ),
       fill: NORMAL_TEXT_COLOR
     } );
