@@ -11,30 +11,22 @@ define( function( require ) {
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var DipoleDirectionControl = require( 'MOLECULE_POLARITY/common/view/DipoleDirectionControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var dipoleDirectionString = require( 'string!MOLECULE_POLARITY/dipoleDirection' );
-  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
-  var deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
-  var patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
   var surfaceColorString = require( 'string!MOLECULE_POLARITY/surfaceColor' );
 
   // constants
   var CONTROL_TITLE_OPTIONS = {
     font: new PhetFont( 14 ),
     maxWidth: 400
-  };
-  var CONTROL_TEXT_OPTIONS = {
-    font: new PhetFont( 20 ),
-    maxWidth: 300
   };
   var RADIO_BUTTON_OPTIONS = { radius: 8 };
   var COLOR_KEY_OPTIONS = {
@@ -50,34 +42,8 @@ define( function( require ) {
    */
   function MPOptionsNode() {
 
-    //TODO factor out into its own js file
     // dipole direction control
-    var dipoleDirectionLabel = new Text( dipoleDirectionString, CONTROL_TITLE_OPTIONS );
-    var dipoleDirectionProperty = MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty;
-    var positiveToNegativeButton = new AquaRadioButton(
-      dipoleDirectionProperty,
-      'positiveToNegative',
-      new Text( StringUtils.fillIn( patternDipoleDirectionString, { from: deltaPlusString, to: deltaMinusString } ),
-        CONTROL_TEXT_OPTIONS ),
-      RADIO_BUTTON_OPTIONS
-    );
-    var negativeToPositiveButton = new AquaRadioButton(
-      dipoleDirectionProperty,
-      'negativeToPositive',
-      new Text( StringUtils.fillIn( patternDipoleDirectionString, { from: deltaMinusString, to: deltaPlusString } ),
-        CONTROL_TEXT_OPTIONS ),
-      RADIO_BUTTON_OPTIONS
-    );
-    var dipoleDirectionControl = new LayoutBox( {
-      orientation: 'vertical',
-      align: 'left',
-      spacing: 10,
-      children: [
-        dipoleDirectionLabel,
-        positiveToNegativeButton,
-        negativeToPositiveButton
-      ]
-    } );
+    var dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty );
 
     //TODO factor out into its own js file
     // surface color control
