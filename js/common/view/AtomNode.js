@@ -38,7 +38,7 @@ define( function( require ) {
       children: [ sphereNode, textNode ]
     } );
 
-    // sync location with model
+    // sync location with model, unlink not needed
     atom.locationProperty.linkAttribute( this, 'translation' );
   }
 

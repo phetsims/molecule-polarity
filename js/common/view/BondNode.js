@@ -22,6 +22,8 @@ define( function( require ) {
    */
   function BondNode( bond ) {
 
+    var self = this;
+
     Line.call( this, bond.atom1.locationProperty.get(), bond.atom2.locationProperty.get(), {
       stroke: MPColors.BOND,
       lineWidth: 12,
@@ -29,7 +31,6 @@ define( function( require ) {
     } );
 
     // adjust the bond when its endpoints change, unlinks not needed
-    var self = this;
     bond.atom1.locationProperty.link( function( location ) { self.setPoint1( location ); } );
     bond.atom2.locationProperty.link( function( location ) { self.setPoint2( location ); } );
   }

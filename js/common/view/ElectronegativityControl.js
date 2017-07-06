@@ -30,8 +30,8 @@ define( function( require ) {
   var patternAtomNameString = require( 'string!MOLECULE_POLARITY/pattern.atomName' );
 
   /**
-   * @param {Atom} atom the atom whose electronegativity we're controlling
-   * @param {Molecule} molecule molecule that the atom belongs to, for pausing animation while this control is used
+   * @param {Atom} atom - the atom whose electronegativity we're controlling
+   * @param {Molecule} molecule - molecule that the atom belongs to, for pausing animation while this control is used
    * @param {Object} [options]
    * @constructor
    */
