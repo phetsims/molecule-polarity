@@ -16,7 +16,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {string} name
+   * @param {string} name - name used to label the atom
    * @param {Object} [options]
    * @constructor
    */

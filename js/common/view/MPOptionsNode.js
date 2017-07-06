@@ -1,7 +1,7 @@
 // Copyright 2015-2017, University of Colorado Boulder
 
 /**
- * User interface for setting global options in the 'Molecule Polarity' simulation.
+ * Controls for setting global options, accessed via the PhET > Options menu item.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

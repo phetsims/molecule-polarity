@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Base type for all 2D molecules.
+ * Abstract base type for all 2D molecules.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,10 +18,11 @@ define( function( require ) {
   /**
    * @param {Atom[]} atoms - atoms that make up the molecule
    * @param {Bond[]} bonds - bonds between the atoms
-   * @param {function} updateAtomLocations
-   * @param {function} updatePartialCharges
+   * @param {function} updateAtomLocations - function that repositions the atoms (no arguments, no return value)
+   * @param {function} updatePartialCharges - function that updated the partial charges (no arguments, no return value)
    * @param {Object} [options]
    * @constructor
+   * @abstract
    */
   function Molecule( atoms, bonds, updateAtomLocations, updatePartialCharges, options ) {
 
@@ -32,11 +33,13 @@ define( function( require ) {
 
     var self = this;
 
-    // @public
-    this.location = options.location;
-    this.angleProperty = new Property( options.angle );
+    // @public (read-only)
+    this.location = options.location; // the point about which the molecule rotates, in global model coordinate frame
     this.atoms = atoms;
     this.bonds = bonds;
+
+    // @public
+    this.angleProperty = new Property( options.angle ); // angle of rotation about the location, in radians
     this.dipoleProperty = new Property( new Vector2() ); // the molecular dipole
     this.dragging = false; // true when the user is dragging the molecule
 

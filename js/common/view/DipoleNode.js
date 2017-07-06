@@ -1,8 +1,9 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Base class for visual representation of 2D dipoles.
- * The dipole is created at (0,0) with proper length and orientation, and it's up to subclasses to position the dipole.
+ * Abstract base type for visual representation of 2D dipoles.
+ * The dipole is created at (0,0) with proper length and orientation, and the subtype is responsible
+ * for positioning the dipole.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -33,6 +34,7 @@ define( function( require ) {
    * @param {Property.<Vector2>} dipoleProperty
    * @param {Color|String} color
    * @constructor
+   * @abstract
    */
   function DipoleNode( dipoleProperty, color ) {
 

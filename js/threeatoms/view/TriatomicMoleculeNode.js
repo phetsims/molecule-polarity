@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a triatomic molecule.
- * Children position themselves in world coordinates, so this node's offset should be (0,0).
+ * Children position themselves in global coordinates, so this node's location should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

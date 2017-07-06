@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a molecular dipole.
- * Controls its own position in world coordinates, so clients should not attempt to position this node.
+ * Controls its own position in global coordinates, so clients should not attempt to position this node.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -34,7 +34,7 @@ define( function( require ) {
       // offset vector relative to molecule location
       var v = Vector2.createPolar( OFFSET, dipole.angle() );
 
-      // offset in world coordinate frame
+      // offset in global coordinate frame
       self.translation = molecule.location.plus( v );
     } );
   }

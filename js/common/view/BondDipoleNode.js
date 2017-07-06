@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a bond dipole.
- * Controls its own position in world coordinates, so clients should not attempt to position this node.
+ * Controls its own position, so clients should not attempt to position this node.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -45,7 +45,7 @@ define( function( require ) {
       var tailX = tailDistance * Math.cos( tailAngle );
       var tailY = tailDistance * Math.sin( tailAngle );
 
-      // location of tail in world coordinate frame
+      // location of tail in global coordinate frame
       self.translation = bond.getCenter().plusXY( tailX, tailY );
     } );
   }

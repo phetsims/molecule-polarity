@@ -23,7 +23,7 @@ define( function( require ) {
     var previousAngle; // angle between the pointer and the molecule when the drag started
 
     /*
-     * Gets the angle of the pointer location relative to relativeNode.
+     * Gets the angle of the pointer relative to relativeNode.
      * @param {Event} event
      * @returns {number} angle in radians
      */

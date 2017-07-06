@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Base type for 2D models in this sim.
+ * Abstract base type for 2D models in this sim.
  * Every 2D model has an E-field and a molecule.
  * If the E-field is enabled, the molecule rotates until its molecular dipole is aligned with the E-field.
  *
@@ -23,6 +23,7 @@ define( function( require ) {
   /**
    * @param {Molecule} molecule
    * @constructor
+   * @abstract
    */
   function MPModel( molecule ) {
 

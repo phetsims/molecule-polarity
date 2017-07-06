@@ -4,7 +4,7 @@
  * 2D surface that represents electrostatic potential for a diatomic molecule.
  * Electron density uses a 3-color gradient, so we use 2 Path nodes that meet in the middle.
  * This node's look is similar to the corresponding Jmol isosurface.
- * Shapes are created in world coordinates, so this node's offset should be (0,0).
+ * Shapes are created in global coordinates, so this node's location should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

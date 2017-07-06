@@ -92,6 +92,8 @@ define( function( require ) {
     }
 
     var content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
+
+    // layout
     subtitleNode.centerX = sliderNode.centerX = titleNode.centerX;
     subtitleNode.top = titleNode.bottom;
     sliderNode.top = subtitleNode.bottom + 8;

@@ -2,7 +2,7 @@
 
 /**
  * A pair of arrows that are placed around an atom, indicating that dragging the atom will change the molecule angle.
- * Shapes are created in world coordinates, so this node's offset should be (0,0).
+ * Shapes are created in global coordinates, so this node's location should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

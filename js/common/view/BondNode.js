@@ -3,7 +3,8 @@
 /**
  * Visual representation of a bond between 2 atoms.
  * Intended to be rendered before the 2 atoms, so that the atoms cover the portion of the bond that overlaps the atoms.
- * Shapes are created in world coordinates, so this node's offset should be (0,0).
+ * Shapes are created in global coordinates, so this node's location should be (0,0).
+ * Clients should not attempt to position this node.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
