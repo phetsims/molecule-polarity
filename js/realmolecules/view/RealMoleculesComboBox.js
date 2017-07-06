@@ -47,6 +47,7 @@ define( function( require ) {
       } );
 
       var node = new RichText( text, {
+        maxWidth: 200,
         font: new PhetFont( 18 )
       } );
 
