@@ -95,7 +95,7 @@ define( function( require ) {
 
     Node.call( this, options );
 
-    // synchronize with view properties, unlinks not needed
+    // synchronize with view Properties, unlinks not needed
     viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
       self.setBondDipolesVisible( visible );
     } );

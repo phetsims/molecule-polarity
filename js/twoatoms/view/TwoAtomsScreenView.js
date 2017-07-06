@@ -32,7 +32,7 @@ define( function( require ) {
 
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
-    // view-specific properties
+    // view-specific Properties
     var viewProperties = new TwoAtomsViewProperties();
 
     // nodes
@@ -106,7 +106,7 @@ define( function( require ) {
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
-    // synchronization with view properties ------------------------------
+    // synchronization with view Properties ------------------------------
 
     // unlink not needed
     viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
