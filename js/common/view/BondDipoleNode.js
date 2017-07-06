@@ -25,7 +25,7 @@ define( function( require ) {
   function BondDipoleNode( bond ) {
 
     var self = this;
-    
+
     DipoleNode.call( this, bond.dipoleProperty, MPColors.BOND_DIPOLE );
 
     // position the dipole to be parallel with the bond, with some perpendicular offset, unlink not needed

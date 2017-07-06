@@ -52,7 +52,7 @@ define( function( require ) {
     var labelOptions = {
       font: new PhetFont( 16 ),
       fill: 'black',
-      maxWidth:  0.3 * TRACK_WIDTH
+      maxWidth: 0.3 * TRACK_WIDTH
     };
     var leftLabelNode = new Text( moreCovalentString, labelOptions );
     var rightLabelNode = new Text( moreIonicString, labelOptions );

@@ -39,7 +39,7 @@ define( function( require ) {
   function DipoleNode( dipoleProperty, color ) {
 
     var self = this;
-    
+
     Path.call( this, null, { fill: color, stroke: 'black' } );
 
     this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected

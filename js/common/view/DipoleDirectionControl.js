@@ -37,9 +37,9 @@ define( function( require ) {
   function DipoleDirectionControl( dipoleDirectionProperty ) {
 
     var dipoleDirectionLabel = new Text( dipoleDirectionString, {
-        font: new PhetFont( 14 ),
-        maxWidth: 400
-      } );
+      font: new PhetFont( 14 ),
+      maxWidth: 400
+    } );
 
     // d+ -> d-
     var positiveToNegativeString = StringUtils.fillIn( patternDipoleDirectionString, {

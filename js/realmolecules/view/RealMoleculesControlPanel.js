@@ -44,7 +44,7 @@ define( function( require ) {
     maxWidth: 225
   };
   var RADIO_BUTTON_OPTIONS = { radius: MPConstants.RADIO_BUTTON_RADIUS };
-  
+
   /**
    * @param {RealMoleculesViewProperties} viewProperties
    * @constructor

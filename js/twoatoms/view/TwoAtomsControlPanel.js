@@ -42,10 +42,10 @@ define( function( require ) {
     font: MPConstants.CONTROL_FONT,
     maxWidth: 175 // i18n, determined empirically
   };
-  var RADIO_BUTTON_OPTIONS = { 
-    radius: MPConstants.RADIO_BUTTON_RADIUS 
+  var RADIO_BUTTON_OPTIONS = {
+    radius: MPConstants.RADIO_BUTTON_RADIUS
   };
-  
+
   /**
    * @param {TwoAtomsViewProperties} viewProperties
    * @param {Property.<boolean>} eFieldEnabledProperty

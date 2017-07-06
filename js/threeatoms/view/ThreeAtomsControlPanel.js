@@ -27,7 +27,7 @@ define( function( require ) {
   var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
-  
+
   // constants
   var TITLE_OPTIONS = {
     font: MPConstants.TITLE_FONT,
@@ -37,7 +37,7 @@ define( function( require ) {
     font: MPConstants.CONTROL_FONT,
     maxWidth: 175 // i18n, set empirically
   };
-  
+
   /**
    * @param {ThreeAtomsViewProperties} viewProperties
    * @param {Property.<boolean>} eFieldEnabledProperty

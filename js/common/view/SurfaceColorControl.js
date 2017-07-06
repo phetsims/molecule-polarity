@@ -38,9 +38,9 @@ define( function( require ) {
   function SurfaceColorControl( surfaceColorProperty ) {
 
     var surfaceColorLabel = new Text( surfaceColorRealMoleculesString, {
-        font: new PhetFont( 14 ),
-        maxWidth: 400
-      } );
+      font: new PhetFont( 14 ),
+      maxWidth: 400
+    } );
 
     var rwbButton = new AquaRadioButton(
       surfaceColorProperty,
