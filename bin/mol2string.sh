@@ -5,7 +5,7 @@
 #
 # Input files live in data/mol2/.
 # Output of this script must be pasted into js/common/model/realmolecules/mol2Data.js
-
+#
 # Usage: mol2string.sh h2o.mol2 > h2o.txt
 #
 # @author Chris Malley (PixelZoom, Inc.)
