@@ -11,28 +11,34 @@ define( function( require ) {
   // modules
   var DipoleDirectionControl = require( 'MOLECULE_POLARITY/common/view/DipoleDirectionControl' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var SurfaceColorControl = require( 'MOLECULE_POLARITY/common/view/SurfaceColorControl' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @constructor
    */
   function MPOptionsNode() {
 
-    LayoutBox.call( this, {
-      orientation: 'vertical',
+    var children = [
+      new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty )
+    ];
+
+    //TODO clean this up when Real Molecules screen is implemented, see #15
+    if ( MPQueryParameters.realMolecules ) {
+      children.push( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
+    }
+
+    VBox.call( this, {
       align: 'left',
       spacing: 25,
-      children: [
-        new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty ),
-        new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty )
-      ]
+      children: children
     } );
   }
 
   moleculePolarity.register( 'MPOptionsNode', MPOptionsNode );
 
-  return inherit( LayoutBox, MPOptionsNode );
+  return inherit( VBox, MPOptionsNode );
 } );
