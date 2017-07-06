@@ -1,6 +1,6 @@
 // Copyright 2017, University of Colorado Boulder
 
-//TODO This was moved here from litmus repository. It can be deleted when 100% certain that we're not using JSmol.
+//TODO Moved here from litmus repository. Delete when 100% certain that we're not using JSmol. See #15.
 /**
  * Scenery node that displays a JSmol viewer.
  * Jmol scripting language is documented at http://chemapps.stolaf.edu/jmol/docs
@@ -459,7 +459,7 @@ define( function( require ) {
       Jmol.getApplet( appletId, Info ); // creates window[appletId]
       self.applet = window[ appletId ]; // so that we don't pollute our code with window[appletId]
       self.div.innerHTML = Jmol.getAppletHtml( self.applet ); // add the viewer's HTML fragment to this node's HTML element
-      self.applet._cover( false ); //TODO issue #14, why do we need to call this?
+      self.applet._cover( false ); //TODO Why do we need to call this? See #14
     }
   } );
 } );

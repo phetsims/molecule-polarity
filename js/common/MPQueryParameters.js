@@ -27,7 +27,7 @@ define( function( require ) {
       defaultValue: 'RWB'
     },
 
-    //TODO delete this when Real Molecules is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/15
+    //TODO delete when Real Molecules is fully implemented, see #15
     // adds the 'Real Molecules' screen, for development
     realMolecules: { type: 'flag' }
   } );

@@ -126,7 +126,7 @@ define( function( require ) {
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
 
-    //TODO Hide everything and show a dialog until this screen is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/15
+    //TODO Hide everything and show a dialog until this screen is fully implemented, see #15
     if ( !MPQueryParameters.realMolecules ) {
       this.removeChild( rootNode );
       this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
