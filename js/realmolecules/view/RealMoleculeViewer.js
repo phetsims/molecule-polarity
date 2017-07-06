@@ -61,7 +61,7 @@ define( function( require ) {
 
     // unlink not needed
     moleculeProperty.link( function( molecule ) {
-      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')'; //TODO i18n?
+      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')'; //TODO i18n
     } );
 
     var debugText = new LayoutBox( {
@@ -116,27 +116,22 @@ define( function( require ) {
   return inherit( Node, RealMoleculeViewer, {
 
     setBondDipolesVisible: function( visible ) {
-      //TODO
       this.bondDipolesText.fill = visible ? 'black' : 'gray';
     },
 
     setMolecularDipoleVisible: function( visible ) {
-      //TODO
       this.molecularDipoleText.fill = visible ? 'black' : 'gray';
     },
 
     setPartialChargesVisible: function( visible ) {
-      //TODO
       this.partialChargesText.fill = visible ? 'black' : 'gray';
     },
 
     setAtomLabelsVisible: function( visible ) {
-      //TODO
       this.atomLabelsText.fill = visible ? 'black' : 'gray';
     },
 
     setSurfaceType: function( surfaceType ) {
-      //TODO
       this.surfaceTypeText.text = ( 'surface: ' + surfaceType );
     }
   } );
