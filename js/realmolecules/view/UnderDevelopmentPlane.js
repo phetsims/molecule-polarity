@@ -1,8 +1,8 @@
 // Copyright 2017, University of Colorado Boulder
 
+//TODO Delete when the 3D viewer is implemented, see #15
 /**
  * Used to disable the 'Real Molecules' screen and display a message indicating that it's under development.
- * This will be deleted when the 3D viewer is implemented, see https://github.com/phetsims/molecule-polarity/issues/15.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
