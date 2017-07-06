@@ -23,7 +23,7 @@ define( function( require ) {
   function Atom( name, options ) {
 
     options = _.extend( {
-      diameter: MPConstants.ATOM_DIAMETER, // {number}
+      diameter: MPConstants.ATOM_DIAMETER, // {number} the atom's diameter
       color: 'white', // {Color|string} base color of the atom
       location: new Vector2( 0, 0 ), // initial location
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min // {number}
@@ -45,6 +45,7 @@ define( function( require ) {
 
   return inherit( Object, Atom, {
 
+    // @public
     reset: function() {
       this.electronegativityProperty.reset();
       // do not reset location and partial charge, they will be reset by their parent molecule

@@ -56,12 +56,14 @@ define( function( require ) {
     var positiveToNegativeButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'positiveToNegative',
+      //TODO convert to named placeholders
       new Text( StringUtils.format( pattern0To1String, deltaPlusString, deltaMinusString ), CONTROL_TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
     var negativeToPositiveButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'negativeToPositive',
+      //TODO convert to named placeholders
       new Text( StringUtils.format( pattern0To1String, deltaMinusString, deltaPlusString ), CONTROL_TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );

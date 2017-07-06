@@ -45,6 +45,7 @@ define( function( require ) {
     } );
 
     // titles
+    //TODO convert to named placeholders
     var titleNode = new Text( StringUtils.format( pattern0AtomNameString, atom.name ), {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: options.trackSize.width

@@ -31,6 +31,7 @@ define( function( require ) {
   function RealMoleculesComboBox( molecules, moleculeProperty, listParent ) {
 
     // label
+    //TODO convert to named placeholders
     var labelNode = new Text( StringUtils.format( pattern0LabelString, moleculeString ), {
       font: new PhetFont( 22 ),
       maxWidth: 150
@@ -40,6 +41,7 @@ define( function( require ) {
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
       var molecule = molecules[ i ];
+      //TODO convert to named placeholders
       var node = new RichText( StringUtils.format( pattern0Symbol1NameString, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
       items[ i ] = ComboBox.createItem( node, molecule );
     }

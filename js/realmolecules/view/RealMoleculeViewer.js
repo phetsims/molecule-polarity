@@ -61,7 +61,7 @@ define( function( require ) {
 
     // unlink not needed
     moleculeProperty.link( function( molecule ) {
-      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')';
+      moleculeText.text = molecule.symbol + ' (' + molecule.name + ')'; //TODO i18n?
     } );
 
     var debugText = new LayoutBox( {
