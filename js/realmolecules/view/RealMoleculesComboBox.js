@@ -18,7 +18,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var moleculeColonString = require( 'string!MOLECULE_POLARITY/moleculeColon' );
+  var moleculeString = require( 'string!MOLECULE_POLARITY/molecule' );
   var patternSymbolNameString = require( 'string!MOLECULE_POLARITY/pattern.symbolName' );
 
   /**
@@ -30,7 +30,7 @@ define( function( require ) {
   function RealMoleculesComboBox( molecules, moleculeProperty, listParent ) {
 
     // label
-    var labelNode = new Text( moleculeColonString, {
+    var labelNode = new Text( moleculeString, {
       font: new PhetFont( 22 ),
       maxWidth: 150
     } );
