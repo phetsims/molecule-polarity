@@ -55,9 +55,8 @@ define( function( require ) {
   // identify a URL object, not standardized across browsers
   var URL = window.URL || window.webkitURL || window;
 
-  //TODO define debug only if a query parameter is present
-  // prints debugging messages to the console
-  var debug = function( message ) { console.log( message ); };
+  // prints debugging messages to the console?
+  var DEBUG = false;
 
   // Script to run when the Jmol object has finished loading
   var SCRIPT_INIT =
@@ -142,7 +141,7 @@ define( function( require ) {
   var doScript = function( applet, script ) {
     // use scriptWait (which is synchronous) so that we get status and can use evaluateVar elsewhere
     var status = Jmol.scriptWait( applet, script );
-    debug( 'doScript, status=' + status );
+    DEBUG && console.log( 'doScript, status=' + status );
   };
 
   /**
@@ -172,10 +171,10 @@ define( function( require ) {
    * Loads a molecule by URL, then sets things that must be reset whenever the molecule changes.
    * @param applet
    * @param {RealMolecule} molecule
-   * @param {JSmolProperties} jsmolProperties
+   * @param {RealMoleculesViewProperties} jsmolProperties
    */
   var updateMolecule = function( applet, molecule, jsmolProperties ) {
-    debug( 'updateMolecule' );
+    DEBUG && console.log( 'updateMolecule' );
 
     var url = URL.createObjectURL( new Blob( [ molecule.mol2Data ], { type: 'text/plain', endings: 'native' } ) );
 
@@ -226,7 +225,7 @@ define( function( require ) {
      * Eg, for HF: '1 255 255 255 9 144 224 80 '
      */
     status = status.replace( /\n/g, ' ' ).replace( /{/g, '' ).replace( /}/g, '' );
-    debug( 'updateElements, status=' + status );
+    DEBUG && console.log( 'updateElements, status=' + status );
 
     /*
      * Now that the tokens are separated by spaces, split the string into an array.
@@ -252,7 +251,7 @@ define( function( require ) {
    * @param {boolean} molecularDipoleVisible
    */
   var updateTranslucency = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
-    debug( 'updateTransparency' );
+    DEBUG && console.log( 'updateTransparency' );
     var arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
     doScript( applet, 'color atoms translucent ' + arg );
     doScript( applet, 'color bonds translucent ' + arg );
@@ -265,7 +264,7 @@ define( function( require ) {
    * @param {boolean} molecularDipoleVisible
    */
   var updateDipoles = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
-    debug( 'updateDipoles' );
+    DEBUG && console.log( 'updateDipoles' );
 
     if ( bondDipolesVisible ) {
       doScript( applet, 'dipole bonds on width 0.05' );
@@ -291,7 +290,7 @@ define( function( require ) {
    * @param {boolean} partialChargesVisible
    */
   var updateLabels = function( applet, atomLabelsVisible, partialChargesVisible ) {
-    debug( 'updateLabels' );
+    DEBUG && console.log( 'updateLabels' );
 
     if ( atomLabelsVisible || partialChargesVisible ) {
 
@@ -327,7 +326,7 @@ define( function( require ) {
    * @param {SurfaceType} surfaceType
    */
   var updateSurface = function( applet, surfaceType ) {
-    debug( 'updateSurface' );
+    DEBUG && console.log( 'updateSurface' );
 
     var diatomic = isHomogeneousDiatomic( applet );
     if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
@@ -384,7 +383,7 @@ define( function( require ) {
       '}\n' +
       'print homogeneousDiatomic' +
       '\')' );
-    debug( 'isHomogeneousDiatomic, status=' + status );
+    DEBUG && console.log( 'isHomogeneousDiatomic, status=' + status );
 
     if ( status === null || status === 'ERROR' ) {
       throw new Error( 'JSmolViewerNode.isHomogeneousDiatomic, script error: ' + status );
@@ -409,7 +408,7 @@ define( function( require ) {
 
       // Called when the Jmol object has been created and is ready to receive commands
       var readyFunction = function( applet ) {
-        debug( 'readyFunction' );
+        DEBUG && console.log( 'readyFunction' );
 
         unbindActions( applet, ACTIONS );
 
