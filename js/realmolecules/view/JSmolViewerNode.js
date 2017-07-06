@@ -38,7 +38,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var Property = require( 'AXON/Property' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
@@ -56,8 +55,9 @@ define( function( require ) {
   // identify a URL object, not standardized across browsers
   var URL = window.URL || window.webkitURL || window;
 
+  //TODO define debug only if a query parameter is present
   // prints debugging messages to the console
-  var debug = MPQueryParameters.jsmolDebug ? function( message ) { console.log( message ); } : function() {};
+  var debug = function( message ) { console.log( message ); };
 
   // Script to run when the Jmol object has finished loading
   var SCRIPT_INIT =

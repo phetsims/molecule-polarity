@@ -27,9 +27,7 @@ define( function( require ) {
       defaultValue: 'RWB'
     },
 
-    // prints debugging messages related to JSmol to the console
-    jsmolDebug: { type: 'flag' },
-
+    //TODO delete this when Real Molecules is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/15
     // adds the 'Real Molecules' screen, for development
     realMolecules: { type: 'flag' }
   } );
