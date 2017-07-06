@@ -50,7 +50,7 @@ define( function( require ) {
       stroke: 'black',
       xMargin: 15,
       yMargin: 6
-    } );
+    }, options );
 
     // titles
     var titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
