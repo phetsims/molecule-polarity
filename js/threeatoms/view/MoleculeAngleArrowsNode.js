@@ -1,4 +1,4 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * A pair of arrows that are placed around an atom, indicating that dragging the atom will change the molecule angle.
