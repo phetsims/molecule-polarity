@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.0-dev.10 Wed Jul 05 2017 11:51:49 GMT-0600 (MDT)",
+  "comment": "# molecule-polarity 1.0.0-dev.11 Thu Jul 06 2017 11:19:56 GMT-0600 (MDT)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "935747d9719051521234abf63623d61f30fd683a",
+    "sha": "c4c9c3ef3baad4c00543df679fed742148200736",
     "branch": "master"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecule-polarity": {
-    "sha": "8bd6a726bdd047ada5c054be21ababcf131c750b",
+    "sha": "cfdc52f8e37f82613ba443dc2f521003449a20d4",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -49,7 +49,7 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "d91b539f40873b7d4a48058e71cec7c662f5a15f",
+    "sha": "7ee4afe30bd7e4674a441f71c98be35ac6f371b5",
     "branch": "master"
   },
   "scenery-phet": {
@@ -61,7 +61,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "1ea05e92d1a8ce6a275ac75541265e1b508c9be9",
+    "sha": "baf827e33e0a56b712e8fc4c6e6ea8883e0f549d",
     "branch": "master"
   },
   "tandem": {
