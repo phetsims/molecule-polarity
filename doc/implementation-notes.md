@@ -33,8 +33,16 @@ bond.dipoleProperty.link( function( dipole ) {
 }
 ```
 
-## Two Atoms and Three Atoms screens
+## Two Atoms and Three Atoms screens (2D)
 
+The code in `js/common/model/` is a 2D model, used exclusively by these 2 screens.
+  
+Some of the view components (particularly controls and icons) in `js/common/view/` are shared by all 3 screens.
+
+The main difference between the 2D screens is the lack of "Surface" controls in the Three Atoms screen.  As noted 
+in [model.md](https://github.com/phetsims/molecule-polarity/blob/master/doc/model.md), surfaces are not provided 
+for the Three Atoms screen because the manipulation of bond angles for a triatomic molecule results in 
+undefinable surfaces.
 
 ## Real Molecules screen (3D)
 
