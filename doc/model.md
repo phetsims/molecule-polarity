@@ -1,5 +1,8 @@
 # Molecule Polarity - model description
 
+This is a high-level description of the model used in Molecule Polarity. It's intended for audiences
+that are not necessarily technical.
+
 ## 2D Model
 
 The "Two Atoms" and "Three Atoms" screens use a 2D model.
@@ -40,4 +43,4 @@ is rotating the molecule or changing EN values.
 
 ## 3D Model
 
-*TODO: describe 3D model*, see https://github.com/phetsims/molecule-polarity/issues/15
+*TODO: describe 3D model*, see https://github.com/phetsims/molecule-polarity/issues/32
