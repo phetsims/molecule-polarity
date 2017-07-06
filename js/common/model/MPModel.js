@@ -26,7 +26,7 @@ define( function( require ) {
    */
   function MPModel( molecule ) {
 
-    // @public
+    // @public (read-only)
     this.eField = new EField();
     this.molecule = molecule;
   }
@@ -57,10 +57,10 @@ define( function( require ) {
 
     /**
      * Advances the model.
-     * @param {number} deltaSeconds
+     * @param {number} dt - time step, in seconds
      * @public
      */
-    step: function( deltaSeconds ) {
+    step: function( dt ) {
 
       // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
       if ( this.eField.enabledProperty.get() && !this.molecule.dragging ) {
@@ -68,7 +68,7 @@ define( function( require ) {
       }
     },
 
-    /*
+    /**
      * Rotate the molecule one step towards alignment of the molecular dipole with the E-field.
      * Angular velocity is proportional to the dipole's magnitude.
      * @param {Molecule} molecule
