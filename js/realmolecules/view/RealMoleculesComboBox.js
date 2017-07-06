@@ -18,9 +18,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var moleculeString = require( 'string!MOLECULE_POLARITY/molecule' );
-  var pattern0LabelString = require( 'string!MOLECULE_POLARITY/pattern.0label' );
-  var pattern0Symbol1NameString = require( 'string!MOLECULE_POLARITY/pattern.0symbol.1name' );
+  var moleculeColonString = require( 'string!MOLECULE_POLARITY/moleculeColon' );
+  var patternSymbolNameString = require( 'string!MOLECULE_POLARITY/pattern.symbolName' );
 
   /**
    * @param {RealMolecule[]} molecules
@@ -31,8 +30,7 @@ define( function( require ) {
   function RealMoleculesComboBox( molecules, moleculeProperty, listParent ) {
 
     // label
-    //TODO convert to named placeholders
-    var labelNode = new Text( StringUtils.format( pattern0LabelString, moleculeString ), {
+    var labelNode = new Text( moleculeColonString, {
       font: new PhetFont( 22 ),
       maxWidth: 150
     } );
@@ -40,9 +38,18 @@ define( function( require ) {
     // items
     var items = [];
     for ( var i = 0; i < molecules.length; i++ ) {
+
       var molecule = molecules[ i ];
-      //TODO convert to named placeholders
-      var node = new RichText( StringUtils.format( pattern0Symbol1NameString, molecule.symbol, molecule.name ), { font: new PhetFont( 18 ) } );
+
+      var text = StringUtils.fillIn( patternSymbolNameString, {
+        symbol: molecule.symbol,
+        name: molecule.name
+      } );
+
+      var node = new RichText( text, {
+        font: new PhetFont( 18 )
+      } );
+
       items[ i ] = ComboBox.createItem( node, molecule );
     }
 

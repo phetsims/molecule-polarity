@@ -24,7 +24,7 @@ define( function( require ) {
   var dipoleDirectionString = require( 'string!MOLECULE_POLARITY/dipoleDirection' );
   var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
   var deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
-  var pattern0To1String = require( 'string!MOLECULE_POLARITY/pattern0to1' );
+  var patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
   var surfaceColorString = require( 'string!MOLECULE_POLARITY/surfaceColor' );
 
   // constants
@@ -56,15 +56,15 @@ define( function( require ) {
     var positiveToNegativeButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'positiveToNegative',
-      //TODO convert to named placeholders
-      new Text( StringUtils.format( pattern0To1String, deltaPlusString, deltaMinusString ), CONTROL_TEXT_OPTIONS ),
+      new Text( StringUtils.fillIn( patternDipoleDirectionString, { from: deltaPlusString, to: deltaMinusString } ),
+        CONTROL_TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
     var negativeToPositiveButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'negativeToPositive',
-      //TODO convert to named placeholders
-      new Text( StringUtils.format( pattern0To1String, deltaMinusString, deltaPlusString ), CONTROL_TEXT_OPTIONS ),
+      new Text( StringUtils.fillIn( patternDipoleDirectionString, { from: deltaMinusString, to: deltaPlusString } ),
+        CONTROL_TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
     var dipoleDirectionControl = new LayoutBox( {

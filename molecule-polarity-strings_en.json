@@ -59,14 +59,11 @@
   "ionic": {
     "value": "more ionic"
   },
-  "pattern.0atomName": {
-    "value": "Atom {0}"
+  "pattern.atomName": {
+    "value": "Atom {{name}}"
   },
-  "pattern.0label": {
-    "value": "{0}:"
-  },
-  "pattern.0symbol.1name": {
-    "value": "{0} ({1})"
+  "pattern.symbolName": {
+    "value": "{{symbol}} ({{name}})"
   },
   "none": {
     "value": "none"
@@ -88,6 +85,9 @@
   },
   "molecule": {
     "value": "Molecule"
+  },
+  "moleculeColon": {
+    "value": "Molecule:"
   },
   "atomElectronegativities": {
     "value": "Atom Electronegativities"
@@ -164,8 +164,8 @@
   "deltaMinus": {
     "value": "δ−"
   },
-  "pattern0to1": {
-    "value": "{0} → {1}"
+  "pattern.dipoleDirection": {
+    "value": "{{from}} → {{to}}"
   },
   "surfaceColor": {
     "value": "Surface color (Real Molecules):"

@@ -27,7 +27,7 @@ define( function( require ) {
   var electronegativityString = require( 'string!MOLECULE_POLARITY/electronegativity' );
   var lessString = require( 'string!MOLECULE_POLARITY/less' );
   var moreString = require( 'string!MOLECULE_POLARITY/more' );
-  var pattern0AtomNameString = require( 'string!MOLECULE_POLARITY/pattern.0atomName' );
+  var patternAtomNameString = require( 'string!MOLECULE_POLARITY/pattern.atomName' );
 
   /**
    * @param {Atom} atom the atom whose electronegativity we're controlling
@@ -45,8 +45,7 @@ define( function( require ) {
     } );
 
     // titles
-    //TODO convert to named placeholders
-    var titleNode = new Text( StringUtils.format( pattern0AtomNameString, atom.name ), {
+    var titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: options.trackSize.width
     } );
