@@ -28,7 +28,7 @@ define( function( require ) {
     },
 
     //TODO delete when Real Molecules is fully implemented, see #15
-    // adds the 'Real Molecules' screen, for development
+    // enables the 'Real Molecules' screen, for development
     realMolecules: { type: 'flag' }
   } );
 
