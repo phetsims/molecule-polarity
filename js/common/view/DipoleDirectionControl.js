@@ -24,13 +24,9 @@ define( function( require ) {
   var patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
 
   // constants
-  var CONTROL_TEXT_OPTIONS = {
+  var TEXT_OPTIONS = {
     font: new PhetFont( 20 ),
     maxWidth: 300
-  };
-  var CONTROL_TITLE_OPTIONS = {
-    font: new PhetFont( 14 ),
-    maxWidth: 400
   };
   var RADIO_BUTTON_OPTIONS = { radius: 8 };
 
@@ -40,7 +36,10 @@ define( function( require ) {
    */
   function DipoleDirectionControl( dipoleDirectionProperty ) {
 
-    var dipoleDirectionLabel = new Text( dipoleDirectionString, CONTROL_TITLE_OPTIONS );
+    var dipoleDirectionLabel = new Text( dipoleDirectionString, {
+        font: new PhetFont( 14 ),
+        maxWidth: 400
+      } );
 
     // d+ -> d-
     var positiveToNegativeString = StringUtils.fillIn( patternDipoleDirectionString, {
@@ -50,7 +49,7 @@ define( function( require ) {
     var positiveToNegativeButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'positiveToNegative',
-      new Text( positiveToNegativeString, CONTROL_TEXT_OPTIONS ),
+      new Text( positiveToNegativeString, TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
 
@@ -62,7 +61,7 @@ define( function( require ) {
     var negativeToPositiveButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'negativeToPositive',
-      new Text( negativeToPositiveString, CONTROL_TEXT_OPTIONS ),
+      new Text( negativeToPositiveString, TEXT_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
 
