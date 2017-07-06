@@ -77,7 +77,6 @@ define( function( require ) {
       }
     };
 
-    //TODO use Property.multilink
     atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
     atom.locationProperty.link( this.update.bind( this ) ); // unlink not needed
   }
