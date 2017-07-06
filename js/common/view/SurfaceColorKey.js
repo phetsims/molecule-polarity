@@ -87,6 +87,8 @@ define( function( require ) {
     leftLabelNode.left = spectrumNode.left + options.xMargin;
     rightLabelNode.right = spectrumNode.right - options.xMargin;
     titleNode.top = leftLabelNode.top = rightLabelNode.top = spectrumNode.bottom + options.ySpacing;
+
+    this.mutate( options );
   }
 
   moleculePolarity.register( 'SurfaceColorKey', SurfaceColorKey );

@@ -19,14 +19,18 @@ define( function( require ) {
 
   /**
    * @param {Molecule} molecule
-   * @param {Property.<number>} bondAngleProperty property that this handler modifies
+   * @param {Property.<number>} bondAngleProperty - Property that this handler modifies
    * @constructor
    */
   function BondAngleHandler( molecule, bondAngleProperty ) {
 
     var previousAngle = 0;
 
-    // Find the angle about the molecule's location.
+    /**
+     * Finds the angle about the molecule's location.
+     * @param {Event} event
+     * @returns {number} angle in radians
+     */
     var getAngle = function( event ) {
       var point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();

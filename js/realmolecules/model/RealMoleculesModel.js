@@ -41,7 +41,7 @@ define( function( require ) {
    */
   function RealMoleculesModel() {
 
-    // @public the set of molecules to choose from
+    // @public (read-only) the set of molecules to choose from
     this.molecules = [
 
       new RealMolecule( 'H2', hydrogenString, mol2Data.H2 ),

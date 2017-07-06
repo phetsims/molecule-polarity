@@ -22,7 +22,7 @@ define( function( require ) {
    */
   function RealMolecule( symbol, name, mol2Data ) {
 
-    // @public
+    // @public (read-only)
     this.symbol = ChemUtils.toSubscript( symbol );
     this.name = name;
     this.mol2Data = mol2Data;

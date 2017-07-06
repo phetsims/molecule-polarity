@@ -47,7 +47,7 @@ define( function( require ) {
   };
   
   /**
-   * @param {*} viewProperties
+   * @param {TwoAtomsViewProperties} viewProperties
    * @param {Property.<boolean>} eFieldEnabledProperty
    * @constructor
    */

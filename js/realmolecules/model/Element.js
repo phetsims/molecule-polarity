@@ -19,7 +19,7 @@ define( function( require ) {
    */
   function Element( elementNumber, color ) {
 
-    // @public
+    // @public (read-only)
     this.elementNumber = elementNumber;
     this.color = color;
   }

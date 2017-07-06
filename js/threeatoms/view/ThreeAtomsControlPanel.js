@@ -39,7 +39,7 @@ define( function( require ) {
   };
   
   /**
-   * @param {*} viewProperties
+   * @param {ThreeAtomsViewProperties} viewProperties
    * @param {Property.<boolean>} eFieldEnabledProperty
    * @constructor
    */

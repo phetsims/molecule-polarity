@@ -15,13 +15,18 @@ define( function( require ) {
 
   /**
    * @param {Molecule} molecule
-   * @param {Node} relativeNode
+   * @param {Node} relativeNode - angles are computed relative to this Node
    * @constructor
    */
   function MoleculeAngleHandler( molecule, relativeNode ) {
 
     var previousAngle; // angle between the pointer and the molecule when the drag started
 
+    /*
+     * Gets the angle of the pointer location relative to relativeNode.
+     * @param {Event} event
+     * @returns {number} angle in radians
+     */
     var getAngle = function( event ) {
       var point = relativeNode.globalToParentPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle();

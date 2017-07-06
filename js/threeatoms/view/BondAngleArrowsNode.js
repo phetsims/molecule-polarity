@@ -21,7 +21,7 @@ define( function( require ) {
   /**
    * @param {Molecule} molecule
    * @param {Atom} atom
-   * @param {Object} [options]
+   * @param {Object} [options] - not propagated to supertype
    * @constructor
    */
   function BondAngleArrowsNode( molecule, atom, options ) {

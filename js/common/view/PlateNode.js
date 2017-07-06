@@ -89,6 +89,8 @@ define( function( require ) {
       faceNode.fill = sideEdgeNode.file = ( enabled ? options.plateColor : options.plateColorDisabled );
       indicatorNode.visible = enabled;
     } );
+
+    this.mutate( options );
   }
 
   moleculePolarity.register( 'PlateNode', PlateNode );

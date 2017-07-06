@@ -50,6 +50,7 @@ define( function( require ) {
    */
   function MPOptionsNode() {
 
+    //TODO factor out into its own js file
     // dipole direction control
     var dipoleDirectionLabel = new Text( dipoleDirectionString, CONTROL_TITLE_OPTIONS );
     var dipoleDirectionProperty = MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty;
@@ -78,6 +79,7 @@ define( function( require ) {
       ]
     } );
 
+    //TODO factor out into its own js file
     // surface color control
     var surfaceColorLabel = new Text( surfaceColorString, CONTROL_TITLE_OPTIONS );
     var surfaceColorProperty = MPConstants.GLOBAL_OPTIONS.surfaceColorProperty;

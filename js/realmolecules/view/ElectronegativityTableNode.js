@@ -116,8 +116,8 @@ define( function( require ) {
   /**
    * A cell in the table, displays element name and number, color can be set.
    *
-   * @param {string} symbol element's symbol in the periodic table
-   * @param {number} elementNumber element's number in the periodic table
+   * @param {string} symbol - element's symbol in the periodic table
+   * @param {number} elementNumber - element's number in the periodic table
    * @param {number} electronegativity
    * @constructor
    */
@@ -151,13 +151,13 @@ define( function( require ) {
 
   inherit( Node, Cell, {
 
-    // makes the cell appear enabled
+    // @public makes the cell appear enabled
     enable: function( color ) {
       this.backgroundNode.fill = color;
       this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
     },
 
-    // makes the cell appear disabled
+    // @public makes the cell appear disabled
     disable: function() {
       this.backgroundNode.fill = BACKGROUND_COLOR;
       this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;

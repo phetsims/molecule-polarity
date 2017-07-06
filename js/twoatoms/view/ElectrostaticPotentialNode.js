@@ -79,7 +79,7 @@ define( function( require ) {
 
   return inherit( Node, ElectrostaticPotentialNode, {
 
-    // @override
+    // @public @override
     setVisible: function( visible ) {
       Node.prototype.setVisible.call( this, visible );
       if ( visible ) {

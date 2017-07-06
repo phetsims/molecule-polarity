@@ -76,6 +76,8 @@ define( function( require ) {
         self.translation = atom.locationProperty.get().plus( relativeOffset );
       }
     };
+
+    //TODO use Property.multilink
     atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
     atom.locationProperty.link( this.update.bind( this ) ); // unlink not needed
   }
