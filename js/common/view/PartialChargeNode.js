@@ -117,7 +117,7 @@ define( function( require ) {
 
     /*
      * Partial charge for an atom that participates in more than one bond.
-     * It's partial charge is the composite of charges contributed by other atoms in the bonds.
+     * Its partial charge is the composite of charges contributed by other atoms in the bonds.
      * The charge is placed along the axis of the molecular dipole, on the opposite side of the atom from the dipole.
      * @static
      * @param {Atom} atom
