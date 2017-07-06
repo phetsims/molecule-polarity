@@ -90,7 +90,10 @@ define( function( require ) {
       ]
     } );
 
-    Node.call( this, { children: [ rectNode, debugText ] } );
+    assert && assert( !options.children, 'decoration not supported' );
+    options.children =  [ rectNode, debugText ];
+
+    Node.call( this, options );
 
     // synchronize with view properties, unlinks not needed
     viewProperties.bondDipolesVisibleProperty.link( function( visible ) {

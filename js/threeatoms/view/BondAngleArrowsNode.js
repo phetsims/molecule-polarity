@@ -21,7 +21,7 @@ define( function( require ) {
   /**
    * @param {Molecule} molecule
    * @param {Atom} atom
-   * @param {Object} [options] - not propagated to supertype
+   * @param {Object} [options]
    * @constructor
    */
   function BondAngleArrowsNode( molecule, atom, options ) {
@@ -30,13 +30,8 @@ define( function( require ) {
       length: 25 // relatively short, so we don't need curved arrows
     }, options );
 
-    Node.call( this );
-
     var leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
     var rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
-
-    this.addChild( leftArrowNode );
-    this.addChild( rightArrowNode );
 
     // create "normalized" shapes at (0,0) with no rotation
     var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
@@ -44,6 +39,9 @@ define( function( require ) {
     var spacing = 2;
     var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
     var rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
+
+    assert && assert( !options.children, 'decoration not supported' );
+    options.children = [ leftArrowNode, rightArrowNode ];
 
     // unlink not needed
     atom.locationProperty.link( function() {
@@ -54,6 +52,8 @@ define( function( require ) {
       leftArrowNode.shape = transform.transformShape( leftArrow );
       rightArrowNode.shape = transform.transformShape( rightArrow );
     } );
+
+    Node.call( this, options );
   }
 
   moleculePolarity.register( 'BondAngleArrowsNode', BondAngleArrowsNode );
