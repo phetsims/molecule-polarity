@@ -84,7 +84,6 @@ define( function( require ) {
         comboBoxListParent // last, so that combo box list is on top
       ]
     } );
-    this.addChild( rootNode );
 
     // layout ---------------------------------
 
@@ -127,8 +126,10 @@ define( function( require ) {
     } );
 
     //TODO Hide everything and show a dialog until this screen is fully implemented, see #15
-    if ( !MPQueryParameters.realMolecules ) {
-      this.removeChild( rootNode );
+    if ( MPQueryParameters.realMolecules ) {
+      this.addChild( rootNode );
+    }
+    else {
       this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
     }
   }
