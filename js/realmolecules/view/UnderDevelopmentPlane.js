@@ -16,6 +16,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Plane = require( 'SCENERY/nodes/Plane' );
   var RichText = require( 'SCENERY_PHET/RichText' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -23,27 +24,34 @@ define( function( require ) {
   var underDevelopmentLine1String = require( 'string!MOLECULE_POLARITY/underDevelopment.line1' );
   var underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
 
+  // constants
+  var LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
+
   /**
    * @constructor
    */
   function UnderDevelopmentPlane( layoutBounds ) {
 
-    var line1 = new Text( underDevelopmentLine1String, { font: new PhetFont( 22 ) } );
-    var line2 = new Text( underDevelopmentLine2String, { font: new PhetFont( 16 ) } );
-
-    var legacyLink = new RichText(
-      '<a href="https://phet.colorado.edu/en/simulation/legacy/molecule-polarity">https://phet.colorado.edu/en/simulation/legacy/molecule-polarity</a>',
-      {
-        links: true, // allow links in text argument
-        font: new PhetFont( 16 )
-      } );
+    var linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
+      href: LEGACY_URL,
+      text: LEGACY_URL
+    } );
 
     var vBox = new VBox( {
       align: 'left',
       spacing: 20,
       children: [
-        line1,
-        new VBox( { align: 'left', children: [ line2, legacyLink ] } )
+        new Text( underDevelopmentLine1String, { font: new PhetFont( 22 ) } ),
+        new VBox( {
+          align: 'left',
+          children: [
+            new Text( underDevelopmentLine2String, { font: new PhetFont( 16 ) } ),
+            new RichText( linkText, {
+              links: true, // allow links in linkText
+              font: new PhetFont( 16 )
+            } )
+          ]
+        } )
       ]
     } );
 
