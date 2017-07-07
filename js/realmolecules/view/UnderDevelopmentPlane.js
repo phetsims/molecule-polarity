@@ -12,10 +12,10 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var LinkText = require( 'JOIST/LinkText' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Panel = require( 'SUN/Panel' );
   var Plane = require( 'SCENERY/nodes/Plane' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -31,9 +31,10 @@ define( function( require ) {
     var line1 = new Text( underDevelopmentLine1String, { font: new PhetFont( 22 ) } );
     var line2 = new Text( underDevelopmentLine2String, { font: new PhetFont( 16 ) } );
 
-    var legacyLink = new LinkText(
-      'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity',
-      'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity', {
+    var legacyLink = new RichText(
+      '<a href="https://phet.colorado.edu/en/simulation/legacy/molecule-polarity">https://phet.colorado.edu/en/simulation/legacy/molecule-polarity</a>',
+      {
+        links: true, // allow links in text argument
         font: new PhetFont( 16 )
       } );
 
