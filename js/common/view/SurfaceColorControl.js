@@ -66,9 +66,22 @@ define( function( require ) {
         roygbButton
       ]
     } );
+
+    // @private
+    this.disposeSurfaceColorControl = function() {
+      rwbButton.dispose();
+      roygbButton.dispose();
+    };
   }
 
   moleculePolarity.register( 'SurfaceColorControl', SurfaceColorControl );
 
-  return inherit( VBox, SurfaceColorControl );
+  return inherit( VBox, SurfaceColorControl, {
+
+    // @public
+    dispose: function() {
+      this.disposeSurfaceColorControl();
+      VBox.prototype.dispose.call( this );
+    }
+  } );
 } );

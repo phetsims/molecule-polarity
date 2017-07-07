@@ -75,9 +75,22 @@ define( function( require ) {
         negativeToPositiveButton
       ]
     } );
+
+    // @private
+    this.disposeDipoleDirectionControl = function() {
+      positiveToNegativeButton.dispose();
+      negativeToPositiveButton.dispose();
+    };
   }
 
   moleculePolarity.register( 'DipoleDirectionControl', DipoleDirectionControl );
 
-  return inherit( VBox, DipoleDirectionControl );
+  return inherit( VBox, DipoleDirectionControl, {
+
+    // @public
+    dispose: function() {
+      this.disposeDipoleDirectionControl();
+      VBox.prototype.dispose.call( this );
+    }
+  } );
 } );
