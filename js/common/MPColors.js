@@ -36,7 +36,7 @@ define( function( require ) {
     NEGATIVE_PLATE: 'rgb( 192, 192, 192 )',
     DISABLED_PLATE: 'rgb( 192, 192, 192 )',
 
-    // surfaces
+    // surfaces, colors are ordered negative to positive
     BW_GRADIENT: [ Color.BLACK.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ) ],
     RWB_GRADIENT: [ Color.RED.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ), Color.BLUE.withAlpha( SURFACE_ALPHA ) ],
     NEUTRAL_GRAY: 'rgb( 128, 128, 128 )',

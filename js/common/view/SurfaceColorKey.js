@@ -50,8 +50,12 @@ define( function( require ) {
 
     // gradient rectangle
     var gradient = new LinearGradient( 0, 0, options.size.width, options.size.height );
+
     for ( var i = 0; i < colors.length; i++ ) {
-      gradient.addColorStop( i / ( colors.length - 1 ), colors[ i ] );
+
+      // colors are ordered negative to positive, so apply in reverse order
+      var color = colors[ colors.length - i - 1 ];
+      gradient.addColorStop( i / ( colors.length - 1 ), color );
     }
     var spectrumNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
       fill: gradient,
