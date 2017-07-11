@@ -129,8 +129,8 @@ define( function( require ) {
     options = _.extend( {
       stroke: 'black',
       lineWidth: 1,
-      fill: 'rgb(50,145,184)',
-      fillHighlighted: 'rgb(71,207,255)'
+      fill: 'rgb( 50, 145, 184 )',
+      fillHighlighted: 'rgb( 71, 207, 255 )'
     }, options );
 
     // Set the radius of the arcs based on the height or width, whichever is smaller.
