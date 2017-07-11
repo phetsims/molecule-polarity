@@ -10,7 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ArrowsHandler = require( 'MOLECULE_POLARITY/threeatoms/view/ArrowsHandler' );
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
+  var BondAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleArrowsNode' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
@@ -32,6 +34,8 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var bondNode = new BondNode( molecule.bond );
+    var arrowsANode = new BondAngleArrowsNode( molecule, molecule.atomA );
+    var arrowsBNode = new BondAngleArrowsNode( molecule, molecule.atomB );
 
     // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
@@ -45,6 +49,7 @@ define( function( require ) {
         // rendering order
         this.electrostaticPotentialNode, this.electronDensityNode,
         bondNode, atomANode, atomBNode,
+        arrowsANode, arrowsBNode,
         this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode
       ]
     } );
@@ -52,6 +57,13 @@ define( function( require ) {
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer';
     this.addInputListener( new MoleculeAngleHandler( molecule, this ) );
+
+    // arrows that act as interactivity cues
+    atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
+    atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
+
+    // default state
+    arrowsANode.visible = arrowsBNode.visible = false;
   }
 
   moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );

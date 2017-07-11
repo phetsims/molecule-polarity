@@ -4,6 +4,9 @@
  * A pair of arrows that are placed around an atom, indicating that dragging the atom will change the bond angle.
  * Shapes are created in global coordinates, so this node's location should be (0,0).
  *
+ * NOTE: These arrows were repurposed to indicate molecule rotation in the 'Two Atoms' screen.
+ * See https://github.com/phetsims/molecule-polarity/issues/35.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
