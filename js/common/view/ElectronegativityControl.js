@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ButtonListener = require( 'SCENERY/input/ButtonListener' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -18,7 +19,10 @@ define( function( require ) {
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Shape = require( 'KITE/Shape' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
@@ -62,13 +66,14 @@ define( function( require ) {
       maxWidth: options.trackSize.width
     } );
 
+    // custom thumb
+    var thumbNode = new PointyThumb( 30, 35 );
+    thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
+
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
-      thumbSize: new Dimension2( 22, 45 ),
-      majorTickLength: 30,
-      majorTickLineWidth: 2,
-      minorTickLength: 25, // long enough to be visible above the thumb, see #39
-      minorTickLineWidth: 0.5,
+      thumbNode: thumbNode,
+      thumbYOffset: 10,
       trackSize: options.trackSize,
       startDrag: function() {
         molecule.dragging = true;
@@ -108,5 +113,70 @@ define( function( require ) {
 
   moleculePolarity.register( 'ElectronegativityControl', ElectronegativityControl );
 
-  return inherit( Panel, ElectronegativityControl );
+  inherit( Panel, ElectronegativityControl );
+
+  /**
+   * The slider thumb, origin at top center.
+   *
+   * @param {number} width
+   * @param {number} height
+   * @param {Object} [options]
+   * @constructor
+   */
+  function PointyThumb( width, height, options ) {
+
+    var self = this;
+
+    options = _.extend( {
+      stroke: 'black',
+      lineWidth: 1,
+      fill: 'rgb(50,145,184)',
+      fillHighlighted: 'rgb(71,207,255)'
+    }, options );
+
+    // Set the radius of the arcs based on the height or width, whichever is smaller.
+    var radiusScale = 0.15;
+    var radius = ( width < height ) ? radiusScale * width : radiusScale * height;
+
+    // Calculate some parameters of the upper triangles of the thumb for getting arc offsets.
+    var hypotenuse = Math.sqrt( Math.pow( 0.5 * width, 2 ) + Math.pow( 0.3 * height, 2 ) );
+    var angle = Math.acos( width * 0.5 / hypotenuse );
+    var heightOffset = radius * Math.sin( angle );
+
+    // Draw the thumb shape starting at the right upper corner of the pentagon below the arc,
+    // this way we can get the arc coordinates for the arc in this corner from the other side,
+    // which will be easier to calculate arcing from bottom to top.
+    var shape = new Shape()
+      .moveTo( 0.5 * width, 0.3 * height + heightOffset )
+      .lineTo( 0.5 * width, height - radius )
+      .arc( 0.5 * width - radius, height - radius, radius, 0, Math.PI / 2 )
+      .lineTo( -0.5 * width + radius, height )
+      .arc( -0.5 * width + radius, height - radius, radius, Math.PI / 2, Math.PI )
+      .lineTo( -0.5 * width, 0.3 * height + heightOffset )
+      .arc( -0.5 * width + radius, 0.3 * height + heightOffset, radius, Math.PI, Math.PI + angle );
+
+    // Save the coordinates for the point above the left side arc, for use on the other side.
+    var sideArcPoint = shape.getLastPoint();
+
+    shape.lineTo( 0, 0 )
+      .lineTo( -sideArcPoint.x, sideArcPoint.y )
+      .arc( 0.5 * width - radius, 0.3 * height + heightOffset, radius, -angle, 0 )
+      .close();
+
+    Path.call( this, shape, options );
+
+    // highlight thumb on pointer over
+    this.addInputListener( new ButtonListener( {
+      over: function( event ) {
+        self.fill = options.fillHighlighted;
+      },
+      up: function( event ) {
+        self.fill = options.fill;
+      }
+    } ) );
+  }
+
+  inherit( Path, PointyThumb );
+
+  return ElectronegativityControl;
 } );
