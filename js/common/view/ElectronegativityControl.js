@@ -64,9 +64,10 @@ define( function( require ) {
 
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
+      thumbSize: new Dimension2( 22, 45 ),
       majorTickLength: 30,
       majorTickLineWidth: 2,
-      minorTickLength: 25,
+      minorTickLength: 25, // long enough to be visible above the thumb, see #39
       minorTickLineWidth: 0.5,
       trackSize: options.trackSize,
       startDrag: function() {
