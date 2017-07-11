@@ -115,7 +115,7 @@ define( function( require ) {
   inherit( Panel, ElectronegativityControl );
 
   /**
-   * The slider thumb, origin at top center.
+   * The slider thumb that points up, rounded corners, origin at top center.
    *
    * @param {number} width
    * @param {number} height
