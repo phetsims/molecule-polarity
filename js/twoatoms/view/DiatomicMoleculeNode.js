@@ -12,12 +12,12 @@ define( function( require ) {
   // modules
   var ArrowsHandler = require( 'MOLECULE_POLARITY/threeatoms/view/ArrowsHandler' );
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
-  var BondAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleArrowsNode' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
   var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var MoleculeAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/MoleculeAngleArrowsNode' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -34,8 +34,8 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var bondNode = new BondNode( molecule.bond );
-    var arrowsANode = new BondAngleArrowsNode( molecule, molecule.atomA );
-    var arrowsBNode = new BondAngleArrowsNode( molecule, molecule.atomB );
+    var arrowsANode = new MoleculeAngleArrowsNode( molecule, molecule.atomA );
+    var arrowsBNode = new MoleculeAngleArrowsNode( molecule, molecule.atomB );
 
     // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
