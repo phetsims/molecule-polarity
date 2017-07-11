@@ -42,7 +42,7 @@ define( function( require ) {
       // ElectronegativityControl
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
-      snapToTick: false,
+      snapToTick: true,
       trackSize: new Dimension2( 150, 5 ),
 
       // Panel
