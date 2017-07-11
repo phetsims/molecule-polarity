@@ -12,7 +12,6 @@ define( function( require ) {
   // import
   var ArrowsHandler = require( 'MOLECULE_POLARITY/threeatoms/view/ArrowsHandler' );
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
-  var BondAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleArrowsNode' );
   var BondAngleHandler = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleHandler' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
@@ -38,8 +37,8 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var atomCNode = new AtomNode( molecule.atomC );
-    var arrowsANode = new BondAngleArrowsNode( molecule, molecule.atomA );
-    var arrowsCNode = new BondAngleArrowsNode( molecule, molecule.atomC );
+    var arrowsANode = new MoleculeAngleArrowsNode( molecule, molecule.atomA );
+    var arrowsCNode = new MoleculeAngleArrowsNode( molecule, molecule.atomC );
     var arrowsBNode = new MoleculeAngleArrowsNode( molecule, molecule.atomB );
 
     // @private nodes whose visibility may change
