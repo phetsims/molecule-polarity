@@ -64,6 +64,10 @@ define( function( require ) {
 
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
+      majorTickLength: 30,
+      majorTickLineWidth: 2,
+      minorTickLength: 25,
+      minorTickLineWidth: 0.5,
       trackSize: options.trackSize,
       startDrag: function() {
         molecule.dragging = true;
