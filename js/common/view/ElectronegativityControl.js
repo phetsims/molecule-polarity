@@ -19,6 +19,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PointySliderThumb = require( 'MOLECULE_POLARITY/common/view/PointySliderThumb' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
@@ -43,6 +44,7 @@ define( function( require ) {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
       snapToTick: true,
+      thumbSize: new Dimension2( 30, 35 ),
       trackSize: new Dimension2( 150, 5 ),
 
       // Panel
@@ -62,13 +64,14 @@ define( function( require ) {
       maxWidth: options.trackSize.width
     } );
 
+    // custom thumb
+    var thumbNode = new PointySliderThumb( { size: options.thumbSize } );
+    thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
+
     // slider
     var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
-      thumbSize: new Dimension2( 22, 45 ),
-      majorTickLength: 30,
-      majorTickLineWidth: 2,
-      minorTickLength: 25, // long enough to be visible above the thumb, see #39
-      minorTickLineWidth: 0.5,
+      thumbNode: thumbNode,
+      thumbYOffset: 10,
       trackSize: options.trackSize,
       startDrag: function() {
         molecule.dragging = true;
