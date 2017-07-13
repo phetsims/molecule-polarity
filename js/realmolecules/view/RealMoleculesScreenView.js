@@ -67,7 +67,7 @@ define( function( require ) {
     var controlPanel = new RealMoleculesControlPanel( viewProperties );
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        self.interruptInput();
+        self.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
       },

@@ -49,7 +49,7 @@ define( function( require ) {
     var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        self.interruptInput();
+        self.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
       },
