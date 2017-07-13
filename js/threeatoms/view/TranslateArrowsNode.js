@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * A pair of arrows that are placed around an atom, indicating that dragging the atom will change the bond angle.
+ * A pair of arrows that are placed around an atom to indicate that the atom can be translated.
  * Shapes are created in global coordinates, so this node's location should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function BondAngleArrowsNode( molecule, atom, options ) {
+  function TranslateArrowsNode( molecule, atom, options ) {
 
     options = _.extend( {
       length: 25 // relatively short, so we don't need curved arrows
@@ -56,7 +56,7 @@ define( function( require ) {
     Node.call( this, options );
   }
 
-  moleculePolarity.register( 'BondAngleArrowsNode', BondAngleArrowsNode );
+  moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );
 
-  return inherit( Node, BondAngleArrowsNode );
+  return inherit( Node, TranslateArrowsNode );
 } );
