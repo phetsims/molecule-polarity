@@ -17,12 +17,12 @@ define( function( require ) {
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
   var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeAngleArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/MoleculeAngleArrowsNode' );
   var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  var TranslateArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/TranslateArrowsNode' );
 
   /**
    * @param {DiatomicMolecule} molecule
@@ -34,8 +34,8 @@ define( function( require ) {
     var atomANode = new AtomNode( molecule.atomA );
     var atomBNode = new AtomNode( molecule.atomB );
     var bondNode = new BondNode( molecule.bond );
-    var arrowsANode = new MoleculeAngleArrowsNode( molecule, molecule.atomA );
-    var arrowsBNode = new MoleculeAngleArrowsNode( molecule, molecule.atomB );
+    var arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    var arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
 
     // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private

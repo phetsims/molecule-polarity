@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * A pair of arrows that are placed around an atom, indicating that dragging the atom will change the molecule angle.
+ * A pair of arrows used to indicate that an arrow can be rotated.
  * Shapes are created in global coordinates, so this node's location should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -22,7 +22,7 @@ define( function( require ) {
    * @param {Atom} atom
    * @constructor
    */
-  function MoleculeAngleArrowsNode( molecule, atom ) {
+  function RotateArrowsNode( molecule, atom ) {
 
     // arrow configuration
     var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
@@ -47,7 +47,7 @@ define( function( require ) {
     atom.locationProperty.link( updateTransform.bind( this ) ); // unlink not needed
   }
 
-  moleculePolarity.register( 'MoleculeAngleArrowsNode', MoleculeAngleArrowsNode );
+  moleculePolarity.register( 'RotateArrowsNode', RotateArrowsNode );
 
-  return inherit( Node, MoleculeAngleArrowsNode );
+  return inherit( Node, RotateArrowsNode );
 } );

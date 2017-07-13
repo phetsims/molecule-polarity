@@ -73,6 +73,8 @@ define( function( require ) {
       thumbNode: thumbNode,
       thumbYOffset: 10,
       trackSize: options.trackSize,
+      majorTickLength: 20,
+      minorTickLength: 10,
       startDrag: function() {
         molecule.dragging = true;
       },

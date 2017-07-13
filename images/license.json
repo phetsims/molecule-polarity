@@ -5,7 +5,7 @@
     ],
     "projectURL": "http://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": "created using a screenshot from Real Molecules screen"
+    "notes": "created using a screenshot from Real Molecules screen in Java version"
   },
   "RealMolecules-navbar-icon.png": {
     "text": [
@@ -13,6 +13,6 @@
     ],
     "projectURL": "http://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": "created using a screenshot from Real Molecules screen"
+    "notes": "created using a screenshot from Real Molecules screen in Java version"
   }
 }

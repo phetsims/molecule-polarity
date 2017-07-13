@@ -27,6 +27,8 @@ define( function( require ) {
    */
   function ThreeAtomsScreenView( model ) {
 
+    var self = this;
+
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific Properties
@@ -42,6 +44,7 @@ define( function( require ) {
     var controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
     var resetAllButton = new ResetAllButton( {
       listener: function() {
+        self.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
       },

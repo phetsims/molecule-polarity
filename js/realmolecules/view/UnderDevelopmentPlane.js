@@ -37,18 +37,27 @@ define( function( require ) {
       text: LEGACY_URL
     } );
 
+    var maxTextWidth = 0.75 * layoutBounds.width;
+
     var vBox = new VBox( {
       align: 'left',
       spacing: 20,
       children: [
-        new Text( underDevelopmentLine1String, { font: new PhetFont( 22 ) } ),
+        new Text( underDevelopmentLine1String, {
+          font: new PhetFont( 22 ),
+          maxWidth: maxTextWidth
+        } ),
         new VBox( {
           align: 'left',
           children: [
-            new Text( underDevelopmentLine2String, { font: new PhetFont( 16 ) } ),
+            new Text( underDevelopmentLine2String, {
+              font: new PhetFont( 16 ),
+              maxWidth: maxTextWidth
+            } ),
             new RichText( linkText, {
               links: true, // allow links in linkText
-              font: new PhetFont( 16 )
+              font: new PhetFont( 16 ),
+              maxWidth: maxTextWidth
             } )
           ]
         } )
