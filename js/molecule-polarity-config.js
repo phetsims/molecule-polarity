@@ -29,6 +29,7 @@ require.config( {
     KITE: '../../kite/js',
     NITROGLYCERIN: '../../nitroglycerin/js',
     PHET_CORE: '../../phet-core/js',
+    PHET_IO: '../../phet-io/js',
     PHETCOMMON: '../../phetcommon/js',
     REPOSITORY: '..',
     SCENERY: '../../scenery/js',
