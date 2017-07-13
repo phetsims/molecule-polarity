@@ -18,7 +18,7 @@ define( function( require ) {
    * @param {Node} relativeNode - angles are computed relative to this Node
    * @constructor
    */
-  function MoleculeAngleHandler( molecule, relativeNode ) {
+  function MoleculeAngleDragHandler( molecule, relativeNode ) {
 
     var previousAngle; // angle between the pointer and the molecule when the drag started
 
@@ -53,7 +53,7 @@ define( function( require ) {
     } );
   }
 
-  moleculePolarity.register( 'MoleculeAngleHandler', MoleculeAngleHandler );
+  moleculePolarity.register( 'MoleculeAngleDragHandler', MoleculeAngleDragHandler );
 
-  return inherit( SimpleDragHandler, MoleculeAngleHandler );
+  return inherit( SimpleDragHandler, MoleculeAngleDragHandler );
 } );

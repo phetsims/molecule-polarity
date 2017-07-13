@@ -14,7 +14,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var MoleculeAngleDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleDragHandler' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
@@ -72,7 +72,7 @@ define( function( require ) {
     } );
 
     this.cursor = 'pointer';
-    this.addInputListener( new MoleculeAngleHandler( molecule, this ) );
+    this.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
   }
 
   moleculePolarity.register( 'ElectrostaticPotentialNode', ElectrostaticPotentialNode );
