@@ -83,23 +83,30 @@ define( function( require ) {
       // convert angle to range [0,2*PI)
       var dipoleAngle = normalizeAngle( molecule.dipoleProperty.get().angle() );
 
+      var newDipoleAngle;
+
       // move the molecular dipole one step towards alignment with the E-field
-      var newDipoleAngle = dipoleAngle;
       if ( dipoleAngle === 0 ) {
+
         // do nothing, molecule is aligned with E-field
+        newDipoleAngle = dipoleAngle;
       }
       else if ( dipoleAngle > 0 && dipoleAngle < Math.PI ) {
+
         // rotate counterclockwise
         newDipoleAngle = dipoleAngle - deltaDipoleAngle;
         if ( newDipoleAngle < 0 ) {
+
           // new angle would overshoot, set to zero
           newDipoleAngle = 0;
         }
       }
       else {
+
         // rotate clockwise
         newDipoleAngle = dipoleAngle + deltaDipoleAngle;
         if ( newDipoleAngle > 2 * Math.PI ) {
+
           // new angle would overshoot, set to zero
           newDipoleAngle = 0;
         }

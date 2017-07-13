@@ -1,7 +1,8 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Key for a surface's color scheme.
+ * Key for a surface's color scheme. This legend is a rectangular box with a gradient fill that matches the surface
+ * in the Molecule. Each label is a unit for a color.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
