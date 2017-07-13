@@ -10,14 +10,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ArrowsHandler = require( 'MOLECULE_POLARITY/threeatoms/view/ArrowsHandler' );
+  var ArrowsHandler = require( 'MOLECULE_POLARITY/common/view/ArrowsHandler' );
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
   var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var MoleculeAngleDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleDragHandler' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
@@ -56,7 +56,7 @@ define( function( require ) {
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer';
-    this.addInputListener( new MoleculeAngleHandler( molecule, this ) );
+    this.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
 
     // arrows that act as interactivity cues
     atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );

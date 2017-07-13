@@ -22,7 +22,7 @@ define( function( require ) {
    * @param {Property.<number>} bondAngleProperty - Property that this handler modifies
    * @constructor
    */
-  function BondAngleHandler( molecule, bondAngleProperty ) {
+  function BondAngleDragHandler( molecule, bondAngleProperty ) {
 
     var previousAngle = 0;
 
@@ -58,7 +58,7 @@ define( function( require ) {
     } );
   }
 
-  moleculePolarity.register( 'BondAngleHandler', BondAngleHandler );
+  moleculePolarity.register( 'BondAngleDragHandler', BondAngleDragHandler );
 
-  return inherit( SimpleDragHandler, BondAngleHandler );
+  return inherit( SimpleDragHandler, BondAngleDragHandler );
 } );

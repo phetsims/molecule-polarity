@@ -10,15 +10,15 @@ define( function( require ) {
   'use strict';
 
   // import
-  var ArrowsHandler = require( 'MOLECULE_POLARITY/threeatoms/view/ArrowsHandler' );
+  var ArrowsHandler = require( 'MOLECULE_POLARITY/common/view/ArrowsHandler' );
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
-  var BondAngleHandler = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleHandler' );
+  var BondAngleDragHandler = require( 'MOLECULE_POLARITY/threeatoms/view/BondAngleDragHandler' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   var RotateArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/RotateArrowsNode' );
-  var MoleculeAngleHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleHandler' );
+  var MoleculeAngleDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleDragHandler' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
@@ -63,14 +63,14 @@ define( function( require ) {
 
     // rotate molecule by dragging bonds or atom B
     bondABNode.cursor = bondBCNode.cursor = atomBNode.cursor = 'pointer';
-    bondABNode.addInputListener( new MoleculeAngleHandler( molecule, this ) );
-    bondBCNode.addInputListener( new MoleculeAngleHandler( molecule, this ) );
-    atomBNode.addInputListener( new MoleculeAngleHandler( molecule, this ) );
+    bondABNode.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
+    bondBCNode.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
+    atomBNode.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
 
     // change bond angles by dragging atom A or C
     atomANode.cursor = atomCNode.cursor = 'pointer';
-    atomANode.addInputListener( new BondAngleHandler( molecule, molecule.bondAngleAProperty ) );
-    atomCNode.addInputListener( new BondAngleHandler( molecule, molecule.bondAngleCProperty ) );
+    atomANode.addInputListener( new BondAngleDragHandler( molecule, molecule.bondAngleAProperty ) );
+    atomCNode.addInputListener( new BondAngleDragHandler( molecule, molecule.bondAngleCProperty ) );
 
     // arrows that act as interactivity cues
     atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
