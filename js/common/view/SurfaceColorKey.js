@@ -3,6 +3,7 @@
 /**
  * Key for a surface's color scheme. This legend is a rectangular box with a gradient fill that matches the surface
  * in the Molecule. Each label is a unit for a color.
+ * Uses static factory methods to supply the needed instances for the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
