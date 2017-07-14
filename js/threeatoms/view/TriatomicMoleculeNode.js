@@ -22,7 +22,7 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
-  var TranslateArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/TranslateArrowsNode' );
+  var TranslateArrowsNode = require( 'MOLECULE_POLARITY/common/view/TranslateArrowsNode' );
 
   /**
    * @param {TriatomicMolecule} molecule

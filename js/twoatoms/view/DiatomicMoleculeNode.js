@@ -22,7 +22,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var TranslateArrowsNode = require( 'MOLECULE_POLARITY/threeatoms/view/TranslateArrowsNode' );
+  var TranslateArrowsNode = require( 'MOLECULE_POLARITY/common/view/TranslateArrowsNode' );
 
   /**
    * @param {DiatomicMolecule} molecule
