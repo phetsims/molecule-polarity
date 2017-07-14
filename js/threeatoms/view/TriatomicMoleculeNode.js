@@ -42,6 +42,9 @@ define( function( require ) {
     var arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC );
     var arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB );
 
+    // We'll be moving the dragged atom to the front, because A & C can overlap
+    var atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
+
     // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
     this.partialChargeNodeB = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule );
@@ -52,33 +55,74 @@ define( function( require ) {
 
     Node.call( this, {
       children: [
-        // rendering order
         bondABNode, bondBCNode,
-        new Node( { children: [ atomANode, atomBNode, atomCNode ] } ), // because we'll be moving the dragged atom to the front
+        atomsParent,
         arrowsANode, arrowsCNode, arrowsBNode,
         this.partialChargeNodeA, this.partialChargeNodeB, this.partialChargeNodeC,
         this.bondDipoleABNode, this.bondDipoleBCNode, this.molecularDipoleNode
       ]
     } );
 
-    // rotate molecule by dragging bonds or atom B
-    bondABNode.cursor = bondBCNode.cursor = atomBNode.cursor = 'pointer';
-    bondABNode.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
-    bondBCNode.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
-    atomBNode.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
+    // cursors
+    atomANode.cursor = atomBNode.cursor = atomCNode.cursor = 'pointer'; // atoms
+    bondABNode.cursor = bondBCNode.cursor = 'pointer'; // bonds
+
+    // rotate molecule by dragging atom B or bonds
+    var dragHandlerB = new MoleculeAngleDragHandler( molecule, this );
+    var dragHandlerAB = new MoleculeAngleDragHandler( molecule, this );
+    var dragHandlerBC = new MoleculeAngleDragHandler( molecule, this );
+    atomBNode.addInputListener( dragHandlerB );
+    bondABNode.addInputListener( dragHandlerAB );
+    bondBCNode.addInputListener( dragHandlerBC );
 
     // change bond angles by dragging atom A or C
-    atomANode.cursor = atomCNode.cursor = 'pointer';
-    atomANode.addInputListener( new BondAngleDragHandler( molecule, molecule.bondAngleAProperty ) );
-    atomCNode.addInputListener( new BondAngleDragHandler( molecule, molecule.bondAngleCProperty ) );
+    var dragHandlerA = new BondAngleDragHandler( molecule, molecule.bondAngleAProperty );
+    var dragHandlerC = new BondAngleDragHandler( molecule, molecule.bondAngleCProperty );
+    atomANode.addInputListener( dragHandlerA );
+    atomCNode.addInputListener( dragHandlerC );
 
-    // arrows that act as interactivity cues
-    atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
-    atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
-    atomCNode.addInputListener( new ArrowsHandler( arrowsCNode ) );
+    // 'Rotate' arrows around B are initially visible.
+    // When the molecule is rotated by the user, hide the arrows, and make them appear on mouse over.
+    // See https://github.com/phetsims/molecule-polarity/issues/50
+    var hideRotateArrows = function() {
 
-    // default state
-    arrowsANode.visible = arrowsCNode.visible = arrowsBNode.visible = false;
+      // When the molecule is rotated the user...
+      if ( dragHandlerB.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
+
+        // hide the arrows
+        arrowsBNode.visible = false;
+
+        // unlink this listener
+        molecule.angleProperty.unlink( hideRotateArrows );
+        
+        // make arrows appear on mouse over
+        atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
+      }
+    };
+    molecule.angleProperty.lazyLink( hideRotateArrows );
+
+    // 'Translate' arrows around atoms A & C are initially visible.
+    // When either atom is moved by the user, hide both arrows, and make them appear on mouse over.
+    // See https://github.com/phetsims/molecule-polarity/issues/50
+    var hideTranslateArrows = function() {
+
+      // When either atom is moved by the user...
+      if ( dragHandlerA.dragging || dragHandlerC.dragging ) {
+
+        // hide the arrows
+        arrowsANode.visible = arrowsCNode.visible = false;
+
+        // unlink this listener
+        molecule.atomA.locationProperty.unlink( hideTranslateArrows );
+        molecule.atomC.locationProperty.unlink( hideTranslateArrows );
+
+        // make arrows appear on mouse over
+        atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
+        atomBNode.addInputListener( new ArrowsHandler( arrowsCNode ) );
+      }
+    };
+    molecule.atomA.locationProperty.lazyLink( hideTranslateArrows );
+    molecule.atomC.locationProperty.lazyLink( hideTranslateArrows );
   }
 
   moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
