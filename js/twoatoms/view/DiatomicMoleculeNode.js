@@ -45,9 +45,8 @@ define( function( require ) {
     this.bondDipoleNode = new BondDipoleNode( molecule.bond );
 
     Node.call( this, {
+      cursor: 'pointer',
       children: [
-
-        // rendering order
         this.electrostaticPotentialNode, this.electronDensityNode,
         bondNode, atomANode, atomBNode,
         arrowsANode, arrowsBNode,
@@ -56,9 +55,8 @@ define( function( require ) {
     } );
 
     // rotate molecule by dragging anywhere
-    this.cursor = 'pointer';
-    var moleculeAngleDragHandler = new MoleculeAngleDragHandler( molecule, this );
-    this.addInputListener( moleculeAngleDragHandler );
+    var dragHandler = new MoleculeAngleDragHandler( molecule, this );
+    this.addInputListener( dragHandler );
 
     // Arrows around atoms A & B are initially visible.
     // When the molecule is rotated by the user, hide both arrows, and make them appear on mouse over.
@@ -66,14 +64,13 @@ define( function( require ) {
     var hideArrows = function() {
 
       // When the molecule is rotated the user...
-      if ( moleculeAngleDragHandler.dragging ) {
+      if ( dragHandler.dragging ) {
 
         // hide the arrows
         arrowsANode.visible = arrowsBNode.visible = false;
 
         // unlink this listener
-        molecule.atomA.locationProperty.unlink( hideArrows );
-        molecule.atomB.locationProperty.unlink( hideArrows );
+        molecule.angleProperty.unlink( hideArrows );
 
         // make arrows appear on mouse over
         atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
