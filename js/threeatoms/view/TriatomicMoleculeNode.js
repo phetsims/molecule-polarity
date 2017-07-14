@@ -102,7 +102,7 @@ define( function( require ) {
     molecule.angleProperty.lazyLink( hideRotateArrows );
 
     // 'Translate' arrows around atoms A & C are initially visible.
-    // When either atom is moved by the user, hide both arrows, and make them appear on mouse over.
+    // When bond angle is changed by the user, hide both arrows, and make them appear on mouse over.
     // See https://github.com/phetsims/molecule-polarity/issues/50
     var hideTranslateArrows = function() {
 
@@ -113,16 +113,16 @@ define( function( require ) {
         arrowsANode.visible = arrowsCNode.visible = false;
 
         // unlink this listener
-        molecule.atomA.locationProperty.unlink( hideTranslateArrows );
-        molecule.atomC.locationProperty.unlink( hideTranslateArrows );
+        molecule.bondAngleAProperty.unlink( hideTranslateArrows );
+        molecule.bondAngleCProperty.unlink( hideTranslateArrows );
 
         // make arrows appear on mouse over
         atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
-        atomBNode.addInputListener( new ArrowsHandler( arrowsCNode ) );
+        atomCNode.addInputListener( new ArrowsHandler( arrowsCNode ) );
       }
     };
-    molecule.atomA.locationProperty.lazyLink( hideTranslateArrows );
-    molecule.atomC.locationProperty.lazyLink( hideTranslateArrows );
+    molecule.bondAngleAProperty.lazyLink( hideTranslateArrows );
+    molecule.bondAngleCProperty.lazyLink( hideTranslateArrows );
   }
 
   moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
