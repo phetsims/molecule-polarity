@@ -57,14 +57,31 @@ define( function( require ) {
 
     // rotate molecule by dragging anywhere
     this.cursor = 'pointer';
-    this.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
+    var moleculeAngleDragHandler = new MoleculeAngleDragHandler( molecule, this );
+    this.addInputListener( moleculeAngleDragHandler );
 
-    // arrows that act as interactivity cues
-    atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
-    atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
+    // Arrows around atoms are initially visible.
+    // When either atom is moved by the user, hide both arrows, and make them appear on mouse over.
+    // See https://github.com/phetsims/molecule-polarity/issues/50
+    var hideArrows = function() {
 
-    // default state
-    arrowsANode.visible = arrowsBNode.visible = false;
+      // When an atom is moved by the user...
+      if ( moleculeAngleDragHandler.dragging ) {
+
+        // hide the arrows
+        arrowsANode.visible = arrowsBNode.visible = false;
+
+        // unlink this listener
+        molecule.atomA.locationProperty.unlink( hideArrows );
+        molecule.atomB.locationProperty.unlink( hideArrows );
+
+        // make arrows appear on mouse over
+        atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
+        atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
+      }
+    };
+    molecule.atomA.locationProperty.lazyLink( hideArrows );
+    molecule.atomB.locationProperty.lazyLink( hideArrows );
   }
 
   moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );
