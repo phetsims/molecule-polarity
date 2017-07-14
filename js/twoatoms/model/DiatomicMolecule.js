@@ -31,11 +31,11 @@ define( function( require ) {
 
     // @public the atoms labeled A and B
     this.atomA = new Atom( atomAString, {
-      color: MPColors.ATOM_A
+      color: MPColors.ATOM_A,
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
     } );
     this.atomB = new Atom( atomBString, {
-      color: MPColors.ATOM_B,
-      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
+      color: MPColors.ATOM_B
     } );
 
     // @public the bond connecting atoms A and B
