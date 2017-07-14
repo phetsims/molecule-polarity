@@ -38,11 +38,11 @@ define( function( require ) {
     var arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
 
     // @private nodes whose visibility may change
-    this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond ); // @private
-    this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond ); // @private
-    this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule ); // @private
-    this.electronDensityNode = new ElectronDensityNode( molecule ); // @private
-    this.bondDipoleNode = new BondDipoleNode( molecule.bond ); // @private
+    this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond );
+    this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond );
+    this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule );
+    this.electronDensityNode = new ElectronDensityNode( molecule );
+    this.bondDipoleNode = new BondDipoleNode( molecule.bond );
 
     Node.call( this, {
       children: [
