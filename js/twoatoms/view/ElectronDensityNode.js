@@ -34,7 +34,7 @@ define( function( require ) {
    */
   function ElectronDensityNode( molecule ) {
 
-    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
+    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter, 'creation of gradient assumes that both atoms have the same diameter' );
 
     var self = this;
 
@@ -44,7 +44,7 @@ define( function( require ) {
     this.molecule = molecule;
     this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
     this.colors = MPColors.BW_GRADIENT;
-    assert && assert( this.colors.length === 2 ); // this implementation only works for 2 colors
+    assert && assert( this.colors.length === 2, 'this implementation only works for 2 colors' );
 
     // each atom is surrounded with a 'cloud' (circle)
     var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;

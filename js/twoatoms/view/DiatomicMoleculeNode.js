@@ -46,6 +46,7 @@ define( function( require ) {
 
     Node.call( this, {
       children: [
+
         // rendering order
         this.electrostaticPotentialNode, this.electronDensityNode,
         bondNode, atomANode, atomBNode,

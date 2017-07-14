@@ -1,7 +1,9 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Displays the bond 'character', by placing a marker on a continuum whose extremes are "covalent" and "ionic".
+ * Displays the bond 'character' of the molecule, by placing a marker on a continuum whose extremes are "covalent"
+ * and "ionic". This node is derived; the marker serves as a "readout" and is updated based on the properties
+ * of the molecule.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

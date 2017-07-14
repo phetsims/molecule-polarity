@@ -34,7 +34,8 @@ define( function( require ) {
    */
   function ElectrostaticPotentialNode( molecule ) {
 
-    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter ); // creation of gradient assumes that both atoms have the same diameter
+    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
+      'creation of gradient assumes that both atoms have the same diameter' );
 
     var self = this;
 
@@ -44,7 +45,7 @@ define( function( require ) {
     this.molecule = molecule;
     this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
     this.colors = MPColors.RWB_GRADIENT;
-    assert && assert( this.colors.length === 3 ); // this implementation only works for 3 colors
+    assert && assert( this.colors.length === 3, 'this implementation only works for 3 colors' );
 
     // each atom is surrounded with a 'cloud' (circle)
     var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
@@ -79,7 +80,10 @@ define( function( require ) {
 
   return inherit( Node, ElectrostaticPotentialNode, {
 
-    // @public @override
+    /**
+     * @override
+     * @public
+     */
     setVisible: function( visible ) {
       Node.prototype.setVisible.call( this, visible );
       if ( visible ) {
@@ -88,11 +92,12 @@ define( function( require ) {
       }
     },
 
-    /*
+    /**
      * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
      * @private
      */
     updateFill: function() {
+
       // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
       var deltaEN = this.molecule.getDeltaEN();
       if ( deltaEN === 0 ) {

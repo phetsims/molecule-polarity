@@ -45,6 +45,7 @@ define( function( require ) {
 
     // unlink not needed
     atom.locationProperty.link( function() {
+
       // transform the arrow shapes to account for atom location and relationship to molecule location
       var v = molecule.location.minus( atom.locationProperty.get() );
       var angle = v.angle() - ( Math.PI / 2 );

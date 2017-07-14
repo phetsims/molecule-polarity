@@ -3,6 +3,7 @@
 /**
  * Visual representations of partial charge, a delta symbol followed by either + or -.
  * Controls its own position in global coordinates, so clients should not attempt to position it.
+ * Uses static factory methods to supply the needed instances for the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -54,6 +55,7 @@ define( function( require ) {
 
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
 
+      // Only update if there is a charge difference
       if ( partialCharge !== 0 ) {
 
         // d+ or d-
@@ -85,7 +87,7 @@ define( function( require ) {
 
   return inherit( Node, PartialChargeNode, {}, {
 
-    /*
+    /**
      * Partial charge for an atom that participates in a single bond.
      * It's partial charge is the opposite of the charge of the other atom in the bond.
      * The charge is placed along the axis of the bond, away from the atom.
@@ -114,13 +116,13 @@ define( function( require ) {
       } );
     },
 
-    /*
+    /**
      * Partial charge for an atom that participates in more than one bond.
      * Its partial charge is the composite of charges contributed by other atoms in the bonds.
      * The charge is placed along the axis of the molecular dipole, on the opposite side of the atom from the dipole.
      * @static
      * @param {Atom} atom
-     * @param {Bond} bond
+     * @param {Molecule} molecule
      * @returns {PartialChargeNode}
      * @public
      * @static

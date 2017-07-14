@@ -232,7 +232,7 @@ define( function( require ) {
      * Eg, for HF: ['1','255','255','255','9','144','224','80']
      */
     var tokens = status.split( ' ' );
-    assert && assert( tokens.length % 4 === 0 ); // each element has 4 tokens
+    assert && assert( tokens.length % 4 === 0, 'each element should have 4 tokens' );
 
     // Convert the tokens to an array of {Element}.
     var elements = [];
@@ -402,7 +402,7 @@ define( function( require ) {
     // Call this after the sim has started running
     initialize: function() {
 
-      assert && assert( !this.isInitialized() );
+      assert && assert( !this.isInitialized(), 'already initialized' );
 
       var self = this;
 

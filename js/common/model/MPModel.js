@@ -44,7 +44,7 @@ define( function( require ) {
     if ( normalizedAngle < 0 ) {
       normalizedAngle = ( 2 * Math.PI ) + angle;
     }
-    assert && assert( normalizedAngle >= 0 && normalizedAngle <= 2 * Math.PI );
+    assert && assert( normalizedAngle >= 0 && normalizedAngle <= 2 * Math.PI, 'normalizedAngle must be between 0-2pi radians' );
     return normalizedAngle;
   };
 
