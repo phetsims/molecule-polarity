@@ -37,7 +37,7 @@ define( function( require ) {
     var arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
     var arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
 
-    // @private nodes whose visibility may change
+    // @private
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond );
     this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond );
     this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule );
