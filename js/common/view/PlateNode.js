@@ -11,11 +11,18 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PolarityIndicator = require( 'MOLECULE_POLARITY/common/view/PolarityIndicator' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
+
+  // constants
+  var PLATE_OPTIONS = {
+    fill: MPColors.PLATE,
+    stroke: 'black'
+  };
 
   /**
    * @param {EField} eField
@@ -24,70 +31,61 @@ define( function( require ) {
    */
   function PlateNode( eField, options ) {
 
+    var self = this;
+
     options = _.extend( {
       polarity: 'negative', // 'positive' or 'negative'
       perspective: 'left', // 'left' or 'right'
       plateWidth: 50,
       plateHeight: 430,
       plateThickness: 5,
-      platePerspectiveYOffset: 35, // y difference between foreground and background edges of the plate
-      plateColor: 'rgb( 192, 192, 192 )',
-      plateColorDisabled: 'rgb( 192, 192, 192 )'
+      platePerspectiveYOffset: 35 // y difference between foreground and background edges of the plate
     }, options );
 
     this.plateHeight = options.plateHeight; // @public used in view layout
 
     Node.call( this );
 
-    // negative polarity indicator
-    var indicatorNode = new PolarityIndicator( { polarity: options.polarity } );
+    // polarity indicator
+    var polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
 
-    var plateOptions = { fill: options.plateColor, stroke: 'black' };
+    // face of a positive plate, drawn in perspective, starting at upper-left and going clockwise
+    var faceNode = new Path( new Shape()
+        .moveTo( 0, options.platePerspectiveYOffset )
+        .lineTo( options.plateWidth, 0 )
+        .lineTo( options.plateWidth, options.plateHeight )
+        .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
+        .close(),
+      PLATE_OPTIONS
+    );
 
-    var sideEdgeNode;
-    var faceNode;
-    if ( options.polarity === 'positive' ) {
-      // side edge to show thickness
-      sideEdgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, plateOptions );
+    // side edge of a positive plate
+    var edgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, PLATE_OPTIONS );
 
-      // the primary face of the plate
-      faceNode = new Path( new Shape()
-          .moveTo( 0, options.platePerspectiveYOffset )
-          .lineTo( options.plateWidth, 0 )
-          .lineTo( options.plateWidth, options.plateHeight )
-          .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
-          .close(),
-        plateOptions
-      );
-    }
-    else {
-      // side edge to show thickness
-      sideEdgeNode = new Rectangle( 0, 0, options.plateThickness, options.plateHeight, plateOptions );
+    var plateNode = new Node( {
+      children: [
+        edgeNode,
+        faceNode
+      ]
+    } );
 
-      // the primary face of the plate
-      faceNode = new Path( new Shape()
-          .moveTo( options.plateThickness, 0 )
-          .lineTo( options.plateWidth + options.plateThickness, options.platePerspectiveYOffset )
-          .lineTo( options.plateWidth + options.plateThickness, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
-          .lineTo( options.plateThickness, options.plateHeight )
-          .close(),
-        plateOptions
-      );
+    // The plate is drawn in perspective for positive polarity.
+    // If the polarity is negative, reflect about the y axis.
+    if ( options.polarity === 'negative' ) {
+      plateNode.setScaleMagnitude( -1, 1 );
     }
 
     // rendering order
-    this.addChild( indicatorNode );
-    this.addChild( sideEdgeNode );
-    this.addChild( faceNode );
+    this.addChild( polarityIndicatorNode );
+    this.addChild( plateNode );
 
-    // layout
-    indicatorNode.centerX = faceNode.centerX;
-    indicatorNode.bottom = faceNode.top + ( options.platePerspectiveYOffset / 2 ) + 4;
+    // put the polarity indicator at the top center of the plate's face
+    polarityIndicatorNode.centerX = plateNode.centerX;
+    polarityIndicatorNode.bottom = plateNode.top + ( options.platePerspectiveYOffset / 2 );
 
-    // when the field is enabled/disabled... (unlink not needed)
+    // show/hide when the field is enabled/disabled... (unlink not needed)
     eField.enabledProperty.link( function( enabled ) {
-      faceNode.fill = sideEdgeNode.file = ( enabled ? options.plateColor : options.plateColorDisabled );
-      indicatorNode.visible = enabled;
+      polarityIndicatorNode.visible = enabled;
     } );
 
     this.mutate( options );

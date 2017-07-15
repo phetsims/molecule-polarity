@@ -25,16 +25,14 @@ define( function( require ) {
     ATOM_B: 'rgb( 0, 255, 0 )',
     ATOM_C: 'rgb( 255, 175, 175)',
     BOND: 'rgb( 90, 90, 90)',
-    OXYGEN: 'rgb( 255,85,0 )', // colorblind red
+    OXYGEN: 'rgb( 255, 85, 0 )', // colorblind red
 
     // dipoles
     BOND_DIPOLE: 'black',
     MOLECULAR_DIPOLE: 'rgb( 255, 200, 0 )',
 
     // E-field plates
-    POSITIVE_PLATE: 'rgb( 192, 192, 192 )',
-    NEGATIVE_PLATE: 'rgb( 192, 192, 192 )',
-    DISABLED_PLATE: 'rgb( 192, 192, 192 )',
+    PLATE: 'rgb( 192, 192, 192 )',
 
     // surfaces, colors are ordered negative to positive
     BW_GRADIENT: [ Color.BLACK.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ) ],
