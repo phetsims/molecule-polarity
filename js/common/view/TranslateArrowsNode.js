@@ -34,7 +34,7 @@ define( function( require ) {
     var rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
 
     // create "normalized" shapes at (0,0) with no rotation
-    var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
+    var arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
     var radius = atom.diameter / 2;
     var spacing = 2;
     var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );

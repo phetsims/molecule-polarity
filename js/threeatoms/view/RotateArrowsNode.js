@@ -25,7 +25,7 @@ define( function( require ) {
   function RotateArrowsNode( molecule, atom ) {
 
     // arrow configuration
-    var arrowShapeOptions = { headWidth: 20, headHeight: 20, tailWidth: 10 };
+    var arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
     var arrowPathOptions = { fill: atom.color, stroke: 'gray' };
     var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     var theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
