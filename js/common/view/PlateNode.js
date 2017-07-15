@@ -31,8 +31,6 @@ define( function( require ) {
    */
   function PlateNode( eField, options ) {
 
-    var self = this;
-
     options = _.extend( {
       polarity: 'negative', // 'positive' or 'negative'
       perspective: 'left', // 'left' or 'right'
