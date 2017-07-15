@@ -31,6 +31,8 @@ define( function( require ) {
    */
   function PlateNode( eField, options ) {
 
+    var self = this;
+
     options = _.extend( {
       polarity: 'negative', // 'positive' or 'negative'
       perspective: 'left', // 'left' or 'right'
@@ -83,7 +85,7 @@ define( function( require ) {
 
     // show/hide when the field is enabled/disabled... (unlink not needed)
     eField.enabledProperty.link( function( enabled ) {
-      polarityIndicatorNode.visible = enabled;
+      self.visible = enabled;
     } );
 
     this.mutate( options );
