@@ -37,7 +37,7 @@ of the color key. These surfaces are not implemented for the triatomic molecule 
 the "Three Atoms" screen, because the manipulation of bond angles results in undefinable surfaces.
 
 When the **e-field** is turned on, the molecule rotates until its molecular dipole
-is in alignment with the e-field. The speed of rotation is linearly proportional
+is in alignment (anti-parallel) with the e-field. The speed of rotation is linearly proportional
 to the magnitude of the molecular dipole. Animation is disabled while the user
 is rotating the molecule or changing EN values.
 
