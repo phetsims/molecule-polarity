@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
@@ -40,15 +41,24 @@ define( function( require ) {
 
     // @public
     this.angleProperty = new Property( options.angle ); // angle of rotation about the location, in radians
-    this.dipoleProperty = new Property( new Vector2() ); // the molecular dipole
     this.dragging = false; // true when the user is dragging the molecule
 
     // update atom locations when molecule is rotated
     this.angleProperty.link( updateAtomLocations.bind( this ) ); // unlink not needed
 
-    // update molecular dipole when bond dipoles change
+    // bond dipoles, for deriving molecular dipole
+    var bondDipoleProperties = [];
     this.bonds.forEach( function( bond ) {
-      bond.dipoleProperty.link( self.updateMolecularDipole.bind( self ) ); // unlink not needed
+      bondDipoleProperties.push( bond.dipoleProperty );
+    } );
+
+    // @public the molecular dipole, sum of the bond dipoles, dispose not needed
+    this.dipoleProperty = new DerivedProperty( bondDipoleProperties, function() {
+      var sum = new Vector2();
+      self.bonds.forEach( function( bond ) {
+        sum.add( bond.dipoleProperty.get() ); // add to the same Vector2 instance
+      } );
+      return sum;
     } );
 
     // update partial charges when atoms' EN changes
@@ -74,16 +84,6 @@ define( function( require ) {
      */
     createTransformMatrix: function() {
       return Matrix3.translationFromVector( this.location ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) );
-    },
-
-    /**
-     * Molecular dipole is the vector sum of the bond dipoles.
-     * @private
-     */
-    updateMolecularDipole: function() {
-      var sum = new Vector2();
-      this.bonds.forEach( function( bond ) { sum.add( bond.dipoleProperty.get() ); } );
-      this.dipoleProperty.set( sum );
     }
   } );
 } );
