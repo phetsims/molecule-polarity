@@ -13,7 +13,7 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   // constants
-  var SURFACE_ALPHA = 0.72;
+  var SURFACE_ALPHA = 1;
   var NEUTRAL_GREEN = new Color( 31, 247, 0 );
 
   var MPColors = {
@@ -37,7 +37,7 @@ define( function( require ) {
     // surfaces, colors are ordered negative to positive
     BW_GRADIENT: [ Color.BLACK.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ) ],
     RWB_GRADIENT: [ Color.RED.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ), Color.BLUE.withAlpha( SURFACE_ALPHA ) ],
-    NEUTRAL_GRAY: 'rgb( 128, 128, 128 )',
+    NEUTRAL_GRAY: new Color( 128, 128, 128, SURFACE_ALPHA ),
     // Color used for 'neutral' (potential===0) by Jmol in ROYGB gradient, see http://jmol.sourceforge.net/jscolors/#gradnt
     NEUTRAL_POTENTIAL: NEUTRAL_GREEN,
 
