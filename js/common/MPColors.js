@@ -13,7 +13,7 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   // constants
-  var SURFACE_ALPHA = 1;
+  var SURFACE_ALPHA = 0.72;
   var NEUTRAL_GREEN = new Color( 31, 247, 0 );
 
   var MPColors = {
