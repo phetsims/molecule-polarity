@@ -38,12 +38,12 @@ define( function( require ) {
 
     Node.call( this );
 
-    // textNode has a maxWidth for i18n. Then wrap it chargeNode, so that we can scale it.
+    // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
     var textNode = new Text( '?', {
       font: new PhetFont( 32 ),
       fill: 'black',
       maxWidth: 50
-    } );
+    } );                                                 
     var chargeNode = new Node( {
       children: [ textNode ]
     } );
