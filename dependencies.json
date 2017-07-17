@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.0-dev.22 Sat Jul 15 2017 16:59:03 GMT-0600 (MDT)",
+  "comment": "# molecule-polarity 1.0.0-dev.23 Mon Jul 17 2017 10:30:57 GMT-0600 (MDT)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecule-polarity": {
-    "sha": "56b61b8a7cc58fe0da5c26f7e72abeb410b3bc2b",
+    "sha": "8c3e3fd87b02d59c69b74bf3d63387740df0c7e5",
     "branch": "master"
   },
   "nitroglycerin": {
