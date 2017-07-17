@@ -55,7 +55,7 @@ define( function( require ) {
 
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
 
-      // Only update if there is a charge difference
+      // Only update if the partial charge is visible
       if ( partialCharge !== 0 ) {
 
         // d+ or d-
@@ -85,7 +85,14 @@ define( function( require ) {
 
   moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
 
-  return inherit( Node, PartialChargeNode, {}, {
+  return inherit( Node, PartialChargeNode, {
+
+    // @public @override
+    setVisible: function( visible ) {
+      Node.prototype.setVisible.call( this, visible );
+      this.update();
+    }
+  }, {
 
     /**
      * Partial charge for an atom that participates in a single bond.
