@@ -19,8 +19,8 @@ define( function( require ) {
   /**
    * @param {Atom[]} atoms - atoms that make up the molecule
    * @param {Bond[]} bonds - bonds between the atoms
-   * @param {function} updateAtomLocations - function that repositions the atoms (no arguments, no return value)
-   * @param {function} updatePartialCharges - function that updates the partial charges (no arguments, no return value)
+   * @param {function} updateAtomLocations - repositions the atoms (no arguments, no return value)
+   * @param {function} updatePartialCharges - updates the partial charges (no arguments, no return value)
    * @param {Object} [options]
    * @constructor
    * @abstract
