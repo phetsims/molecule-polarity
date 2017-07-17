@@ -38,6 +38,7 @@ define( function( require ) {
     BW_GRADIENT: [ Color.BLACK.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ) ],
     RWB_GRADIENT: [ Color.RED.withAlpha( SURFACE_ALPHA ), Color.WHITE.withAlpha( SURFACE_ALPHA ), Color.BLUE.withAlpha( SURFACE_ALPHA ) ],
     NEUTRAL_GRAY: new Color( 128, 128, 128, SURFACE_ALPHA ),
+
     // Color used for 'neutral' (potential===0) by Jmol in ROYGB gradient, see http://jmol.sourceforge.net/jscolors/#gradnt
     NEUTRAL_POTENTIAL: NEUTRAL_GREEN,
 
