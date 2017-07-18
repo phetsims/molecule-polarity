@@ -77,11 +77,21 @@ define( function( require ) {
      */
     updateMoleculeOrientation: function( molecule ) {
 
+      var dipole = molecule.dipoleProperty.get();
+
+      // This algorithm is for a dipole that points from positive to negative charge, and is therefore
+      // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
+      // is from the negative to the positive charge, so rotate the dipole 180 degrees.
+      // See issue #5 and #56.
+      if ( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty.get() === 'negativeToPositive' ) {
+        dipole = dipole.rotated( Math.PI );
+      }
+
       // magnitude of angular velocity is proportional to molecular dipole magnitude
-      var deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, molecule.dipoleProperty.get().magnitude() ) );
+      var deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude() ) );
 
       // convert angle to range [0,2*PI)
-      var dipoleAngle = normalizeAngle( molecule.dipoleProperty.get().angle() );
+      var dipoleAngle = normalizeAngle( dipole.angle() );
 
       var newDipoleAngle;
 
