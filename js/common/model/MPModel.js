@@ -81,8 +81,7 @@ define( function( require ) {
 
       // This algorithm is for a dipole that points from positive to negative charge, and is therefore
       // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
-      // is from the negative to the positive charge, so rotate the dipole 180 degrees.
-      // See issue #5 and #56.
+      // is from negative to positive charge, so rotate the dipole 180 degrees. See issue #5 and #56.
       if ( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty.get() === 'negativeToPositive' ) {
         dipole = dipole.rotated( Math.PI );
       }
