@@ -1,7 +1,7 @@
-// Copyright 2014-2017, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
- * On/off switch for E-field.
+ * Control for the E-field.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,8 +14,10 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
+  var electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
   var offString = require( 'string!MOLECULE_POLARITY/off' );
   var onString = require( 'string!MOLECULE_POLARITY/on' );
 
@@ -29,17 +31,32 @@ define( function( require ) {
    * @param {Property.<boolean>} eFieldEnabledProperty
    * @constructor
    */
-  function EFieldSwitch( eFieldEnabledProperty ) {
-    ABSwitch.call( this, eFieldEnabledProperty,
+  function EFieldControl( eFieldEnabledProperty ) {
+
+    // title
+    var titleNode = new Text( electricFieldString, {
+      font: MPConstants.TITLE_FONT,
+      maxWidth: 225 // i18n, set empirically
+    } );
+
+    // on/off switch
+    var onOffSwitch = new ABSwitch( eFieldEnabledProperty,
       false, new Text( offString, LABEL_OPTIONS ),
       true, new Text( onString, LABEL_OPTIONS ), {
         xSpacing: 12,
         trackFillA: 'rgb(180,180,180)',
         trackFillB: 'rgb(0,180,0)'
       } );
+
+    // vertical panel
+    VBox.call( this, {
+      children: [ titleNode, onOffSwitch ],
+      align: 'left',
+      spacing: 15
+    } );
   }
 
-  moleculePolarity.register( 'EFieldSwitch', EFieldSwitch );
+  moleculePolarity.register( 'EFieldControl', EFieldControl );
 
-  return inherit( ABSwitch, EFieldSwitch );
+  return inherit( VBox, EFieldControl );
 } );

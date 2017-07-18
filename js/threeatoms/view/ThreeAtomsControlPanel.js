@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var EFieldSwitch = require( 'MOLECULE_POLARITY/common/view/EFieldSwitch' );
+  var EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
   var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -23,7 +23,6 @@ define( function( require ) {
 
   // strings
   var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
-  var electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
   var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
   var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
   var viewString = require( 'string!MOLECULE_POLARITY/view' );
@@ -63,11 +62,8 @@ define( function( require ) {
     var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( new Text( partialChargesString, CONTROL_TEXT_OPTIONS ), viewProperties.partialChargesVisibleProperty );
 
-    // 'E-Field' title
-    var eFieldTitleNode = new Text( electricFieldString, TITLE_OPTIONS );
-
     // 'E-Field' control
-    var eFieldControl = new EFieldSwitch( eFieldEnabledProperty );
+    var eFieldControl = new EFieldControl( eFieldEnabledProperty );
 
     // nodes in the control panel, in the order they will appear vertically
     var children = [
@@ -76,7 +72,6 @@ define( function( require ) {
       molecularDipoleCheckBox,
       partialChargesCheckBox,
       //--------------------
-      eFieldTitleNode,
       eFieldControl
     ];
 
@@ -85,7 +80,7 @@ define( function( require ) {
     for ( var i = 0; i < children.length; i++ ) {
       separatorWidth = Math.max( separatorWidth, children[ i ].width );
     }
-    children.splice( children.indexOf( eFieldTitleNode ), 0, new HSeparator( separatorWidth ) );
+    children.splice( children.indexOf( eFieldControl ), 0, new HSeparator( separatorWidth ) );
 
     // vertical panel
     Panel.call( this, new LayoutBox( {
