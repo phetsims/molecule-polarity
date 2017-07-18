@@ -1,7 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Drag handler for controlling visibility of arrows that appear around atoms as interactivity cues.
+ * Input listener for controlling visibility of arrows that appear around atoms as interactivity cues.
  * When a drag begins, these arrows are made invisible.
  * Conforms to scenery's input listener interface.
  *
@@ -17,7 +17,7 @@ define( function( require ) {
    * @param {Node} arrowsNode
    * @constructor
    */
-  function ArrowsHandler( arrowsNode ) {
+  function ArrowsInputListener( arrowsNode ) {
 
     this.enter = function( event ) {
       arrowsNode.visible = !event.pointer.isDown;
@@ -34,7 +34,7 @@ define( function( require ) {
     };
   }
 
-  moleculePolarity.register( 'ArrowsHandler', ArrowsHandler );
+  moleculePolarity.register( 'ArrowsInputListener', ArrowsInputListener );
 
-  return ArrowsHandler;
+  return ArrowsInputListener;
 } );

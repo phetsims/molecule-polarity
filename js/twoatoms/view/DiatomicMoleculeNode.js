@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ArrowsHandler = require( 'MOLECULE_POLARITY/common/view/ArrowsHandler' );
+  var ArrowsInputListener = require( 'MOLECULE_POLARITY/common/view/ArrowsInputListener' );
   var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
   var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
@@ -73,8 +73,8 @@ define( function( require ) {
         molecule.angleProperty.unlink( hideArrows );
 
         // make arrows appear on mouse over
-        atomANode.addInputListener( new ArrowsHandler( arrowsANode ) );
-        atomBNode.addInputListener( new ArrowsHandler( arrowsBNode ) );
+        atomANode.addInputListener( new ArrowsInputListener( arrowsANode ) );
+        atomBNode.addInputListener( new ArrowsInputListener( arrowsBNode ) );
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
