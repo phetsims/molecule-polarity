@@ -44,6 +44,11 @@ define( function( require ) {
 
     this.plateHeight = options.plateHeight; // @public used in view layout
 
+    assert && assert ( options.polarity === 'negative' || options.polarity === 'positive' ,
+      'polarity must be "positive" or "negative"' );
+    assert && assert ( options.perspective === 'right' || options.perspective === 'left' ,
+      'perspective must be either "left" or "right"' );
+
     Node.call( this );
 
     // polarity indicator
@@ -79,7 +84,7 @@ define( function( require ) {
     this.addChild( polarityIndicatorNode );
     this.addChild( plateNode );
 
-    // put the polarity indicator at the top center of the plate's face
+    // Put the polarity indicator at the top center of the plate's face.
     polarityIndicatorNode.centerX = plateNode.centerX;
     polarityIndicatorNode.bottom = plateNode.top + ( options.platePerspectiveYOffset / 2 );
 

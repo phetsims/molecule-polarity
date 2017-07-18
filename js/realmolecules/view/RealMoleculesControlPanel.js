@@ -108,6 +108,7 @@ define( function( require ) {
         align: 'left',
         spacing: 15
       } ), {
+
         // panel options
         fill: 'rgb(238,238,238)',
         xMargin: 20,

@@ -29,6 +29,9 @@ define( function( require ) {
       stroke: 'black'
     }, options );
 
+    assert && assert ( options.polarity === 'negative' || options.polarity === 'positive' ,
+      'polarity must be "positive" or "negative"' );
+
     Node.call( this );
 
     var pathOptions = { stroke: options.stroke, lineWidth: options.lineWidth };
