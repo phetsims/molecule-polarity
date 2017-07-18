@@ -41,18 +41,21 @@ define( function( require ) {
         // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
         var magnitude = Math.abs( deltaEN );
 
-        if ( dipoleDirection === 'negativeToPositive' ) {
-
-          // For IUPAC convention, the direction of the dipole moment is from the negative to the positive charge. See issue #5.
-          magnitude *= -1;
-        }
-
         var angle = self.getAngle();
         if ( deltaEN < 0 ) {
           angle += Math.PI;
         }
 
-        return Vector2.createPolar( magnitude, angle );
+        var dipole = Vector2.createPolar( magnitude, angle );
+
+        // The above algorithm is for a dipole that points from positive to negative charge.
+        // For IUPAC convention, the direction of the dipole is from negative to positive charge,
+        // so rotate the dipole 180 degrees. See issue #5 and #56.
+        if ( dipoleDirection === 'negativeToPositive' ) {
+          dipole.rotate( Math.PI );
+        }
+        
+        return dipole;
       }
     );
   }
