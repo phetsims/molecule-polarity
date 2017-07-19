@@ -81,36 +81,74 @@ define( function( require ) {
     atomANode.addInputListener( dragHandlerA );
     atomCNode.addInputListener( dragHandlerC );
 
-    // 'Cueing' arrows around atoms A, B and C are initially visible.
-    // When the user interacts with any atom, make the arrows disappear, and make them appear on mouse over.
-    // See https://github.com/phetsims/molecule-polarity/issues/50
+    // Input listeners that show arrows on mouse over, disabled by default.
+    var arrowsAInputListener = new ArrowsInputListener( arrowsANode );
+    var arrowsBInputListener = new ArrowsInputListener( arrowsBNode );
+    var arrowsCInputListener = new ArrowsInputListener( arrowsCNode );
+
+    // Arrows around atoms A, B and C are initially visible.
+    // When the user interacts with any atom, make all arrows disappear, and make them appear on mouse over.
     var hideArrows = function() {
 
       // When the user is dragging with any atom or bond ...
       if ( dragHandlerA.dragging || dragHandlerB.dragging || dragHandlerC.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
 
-        // hide the arrows
-        arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
+        // register mouse-over listeners
+        atomANode.addInputListener( arrowsAInputListener );
+        atomBNode.addInputListener( arrowsBInputListener );
+        atomCNode.addInputListener( arrowsCInputListener );
 
-        // unlink this listener
+        // de-register observers
+        molecule.angleProperty.unlink( hideArrows );
         molecule.bondAngleAProperty.unlink( hideArrows );
         molecule.bondAngleCProperty.unlink( hideArrows );
-        molecule.angleProperty.unlink( hideArrows );
 
-        // make arrows appear on mouse over
-        atomANode.addInputListener( new ArrowsInputListener( arrowsANode ) );
-        atomBNode.addInputListener( new ArrowsInputListener( arrowsBNode ) );
-        atomCNode.addInputListener( new ArrowsInputListener( arrowsCNode ) );
+        // hide the arrows
+        arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
       }
     };
+    molecule.angleProperty.lazyLink( hideArrows );
     molecule.bondAngleAProperty.lazyLink( hideArrows );
     molecule.bondAngleCProperty.lazyLink( hideArrows );
-    molecule.angleProperty.lazyLink( hideArrows );
+    
+    // @private Resets the initial behavior of the arrows.
+    this.resetArrows = function() {
+
+      // de-register mouse-over listeners
+      if ( atomANode.hasInputListener( arrowsAInputListener ) ) {
+        atomANode.removeInputListener( arrowsAInputListener );
+      }
+      if ( atomBNode.hasInputListener( arrowsBInputListener ) ) {
+        atomBNode.removeInputListener( arrowsBInputListener );
+      }
+      if ( atomCNode.hasInputListener( arrowsCInputListener ) ) {
+        atomCNode.removeInputListener( arrowsCInputListener );
+      }
+
+      // re-register observers for the initial behavior
+      if ( !molecule.angleProperty.hasListener( hideArrows ) ) {
+        molecule.angleProperty.lazyLink( hideArrows );
+      }
+      if ( !molecule.bondAngleAProperty.hasListener( hideArrows ) ) {
+        molecule.bondAngleAProperty.lazyLink( hideArrows );
+      }
+      if ( !molecule.bondAngleCProperty.hasListener( hideArrows ) ) {
+        molecule.bondAngleCProperty.lazyLink( hideArrows );
+      }
+
+      // make the arrows visible
+      arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = true;
+    };
   }
 
   moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
 
   return inherit( Node, TriatomicMoleculeNode, {
+
+    // @public
+    reset: function() {
+      this.resetArrows();
+    },
 
     /**
      * Sets whether bond dipoles are visible.

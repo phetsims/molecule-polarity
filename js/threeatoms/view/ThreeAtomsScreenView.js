@@ -23,6 +23,9 @@ define( function( require ) {
   var ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
   var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
 
+  // constants
+  var PLATE_X_OFFSET = 300; // x offset of E-field plates from molecule's center, determined empirically, see #66
+  
   /**
    * @param {ThreeAtomsModel} model
    * @constructor
@@ -54,6 +57,7 @@ define( function( require ) {
         self.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
+        moleculeNode.reset();
       },
       scale: 1.32
     } );
@@ -79,14 +83,13 @@ define( function( require ) {
 
     var moleculeX = model.molecule.location.x;
     var moleculeY = model.molecule.location.y;
-    var plateXOffset = 300; // x offset from molecule
 
     // to left of molecule, vertically centered
-    negativePlateNode.right = moleculeX - plateXOffset;
+    negativePlateNode.right = moleculeX - PLATE_X_OFFSET;
     negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
 
     // to right of molecule, vertically centered
-    positivePlateNode.left = moleculeX + plateXOffset;
+    positivePlateNode.left = moleculeX + PLATE_X_OFFSET;
     positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
     // centered below molecule
