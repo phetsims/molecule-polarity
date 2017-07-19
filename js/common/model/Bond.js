@@ -28,7 +28,7 @@ define( function( require ) {
     this.atom1 = atom1;
     this.atom2 = atom2;
 
-    // @public
+    // @public dispose not needed, exists for the lifetime of the sim
     this.dipoleProperty = new DerivedProperty( [
         atom1.locationProperty, atom2.locationProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
