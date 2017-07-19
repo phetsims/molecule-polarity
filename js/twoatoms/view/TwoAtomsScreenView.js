@@ -50,7 +50,7 @@ define( function( require ) {
     var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
-    var controlPanel = new MPControlPanel([
+    var controlPanel = new MPControlPanel( [
       new TwoAtomsViewControls( viewProperties ),
       new SurfaceControl( viewProperties.surfaceTypeProperty ),
       new EFieldControl( model.eField.enabledProperty )
