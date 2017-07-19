@@ -46,7 +46,6 @@ define( function( require ) {
     var partialChargesCheckBox = new CheckBox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
     var bondCharacterCheckBox = new CheckBox( bondCharacterLabel, viewProperties.bondCharacterVisibleProperty );
 
-    // Sub-panel of View controls
     VBox.call( this, {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,

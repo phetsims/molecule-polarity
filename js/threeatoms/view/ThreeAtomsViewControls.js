@@ -50,7 +50,6 @@ define( function( require ) {
     var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
     var partialChargesCheckBox = new CheckBox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
 
-    // Sub-panel of View controls
     VBox.call( this, {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,

@@ -61,7 +61,6 @@ define( function( require ) {
     var atomLabelsCheckBox = new CheckBox( atomLabelsLabel, viewProperties.atomLabelsVisibleProperty );
     var atomElectronegativitiesCheckBox = new CheckBox( atomElectronegativityLabel, viewProperties.atomElectronegativitiesVisibleProperty );
 
-    // Sub-panel of View controls
     VBox.call( this, {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
