@@ -88,7 +88,7 @@ define( function( require ) {
 
     var moleculeX = model.molecule.location.x;
     var moleculeY = model.molecule.location.y;
-    var plateXOffset = 250; // x offset from molecule
+    var plateXOffset = 250; // x offset from molecule, determined empirically
 
     // to left of molecule, vertically centered
     negativePlateNode.right = moleculeX - plateXOffset;
