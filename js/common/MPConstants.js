@@ -29,10 +29,20 @@ define( function( require ) {
     ATOM_DIAMETER: 100,
     BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
 
-    // Controls
-    TITLE_FONT: new PhetFont( { size: 20, weight: 'bold' } ),
-    CONTROL_FONT: new PhetFont( 18 ),
-    RADIO_BUTTON_RADIUS: 12
+    CONTROL_ICON_X_SPACING: 10,  // horizontal space between labels and icons
+    CONTROL_PANEL_Y_SPACING: 15, // vertical space between controls
+
+    // options for titles in control panels
+    CONTROL_PANEL_TITLE_OPTIONS: {
+      font: new PhetFont( { size: 20, weight: 'bold' } ),
+      maxWidth: 250 // i18n, determined empirically
+    },
+
+    // options for text labels on controls
+    CONTROL_TEXT_OPTIONS: {
+      font: new PhetFont( 18 ),
+      maxWidth: 175 // i18n, determined empirically
+    }
   };
 
   moleculePolarity.register( 'MPConstants', MPConstants );

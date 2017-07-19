@@ -20,6 +20,8 @@ define( function( require ) {
 
     SCREEN_BACKGROUND: 'rgb( 180, 205, 255)',
 
+    CONTROL_PANEL_BACKGROUND: 'rgb( 238, 238, 238)',
+
     // atoms
     ATOM_A: 'rgb( 255, 255, 90 )',
     ATOM_B: 'rgb( 0, 255, 0 )',

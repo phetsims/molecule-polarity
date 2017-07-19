@@ -11,17 +11,20 @@ define( function( require ) {
   // modules
   var BondCharacterNode = require( 'MOLECULE_POLARITY/twoatoms/view/BondCharacterNode' );
   var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicMoleculeNode' );
+  var EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
+  var SurfaceControl = require( 'MOLECULE_POLARITY/common/view/SurfaceControl' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var TwoAtomsControlPanel = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsControlPanel' );
+  var TwoAtomsViewControls = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewControls' );
   var TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
 
   /**
@@ -46,7 +49,13 @@ define( function( require ) {
     var bondCharacterNode = new BondCharacterNode( model.molecule );
     var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
-    var controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty );
+
+    var controlPanel = new MPControlPanel([
+      new TwoAtomsViewControls( viewProperties ),
+      new SurfaceControl( viewProperties.surfaceTypeProperty ),
+      new EFieldControl( model.eField.enabledProperty )
+    ] );
+
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         self.interruptSubtreeInput();

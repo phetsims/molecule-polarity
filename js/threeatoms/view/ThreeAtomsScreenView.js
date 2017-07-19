@@ -9,15 +9,17 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
   var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var ThreeAtomsControlPanel = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsControlPanel' );
+  var ThreeAtomsViewControls = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewControls' );
   var ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
   var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
 
@@ -41,7 +43,12 @@ define( function( require ) {
     var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
     var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     var enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
-    var controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
+
+    var controlPanel = new MPControlPanel( [
+      new ThreeAtomsViewControls( viewProperties ),
+      new EFieldControl( model.eField.enabledProperty )
+    ] );
+
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         self.interruptSubtreeInput();

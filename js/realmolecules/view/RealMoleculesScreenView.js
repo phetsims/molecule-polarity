@@ -15,15 +15,17 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
-  var RealMoleculesControlPanel = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesControlPanel' );
+  var RealMoleculesViewControls = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewControls' );
   var RealMoleculesViewProperties = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewProperties' );
   var RealMoleculeViewer = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculeViewer' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
+  var SurfaceControl = require( 'MOLECULE_POLARITY/common/view/SurfaceControl' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var UnderDevelopmentPlane = require( 'MOLECULE_POLARITY/realmolecules/view/UnderDevelopmentPlane' );
 
@@ -64,7 +66,12 @@ define( function( require ) {
     } );
 
     var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
-    var controlPanel = new RealMoleculesControlPanel( viewProperties );
+
+    var controlPanel = new MPControlPanel( [
+      new RealMoleculesViewControls( viewProperties ),
+      new SurfaceControl( viewProperties.surfaceTypeProperty )
+    ] );
+
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         self.interruptSubtreeInput();
