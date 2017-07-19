@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Property = require( 'AXON/Property' );
@@ -20,9 +21,9 @@ define( function( require ) {
   function TwoAtomsViewProperties() {
 
     // @public
-    this.bondDipoleVisibleProperty = new Property( true );
-    this.partialChargesVisibleProperty = new Property( false );
-    this.bondCharacterVisibleProperty = new Property( false );
+    this.bondDipoleVisibleProperty = new BooleanProperty( true );
+    this.partialChargesVisibleProperty = new BooleanProperty( false );
+    this.bondCharacterVisibleProperty = new BooleanProperty( false );
     this.surfaceTypeProperty = new Property( SurfaceType.NONE );
   }
 

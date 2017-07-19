@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Property = require( 'AXON/Property' );
 
   /**
    * @param {Object} [options]
@@ -24,7 +24,7 @@ define( function( require ) {
     }, options );
 
     // @public
-    this.enabledProperty = new Property( options.enabled );
+    this.enabledProperty = new BooleanProperty( options.enabled );
   }
 
   moleculePolarity.register( 'EField', EField );

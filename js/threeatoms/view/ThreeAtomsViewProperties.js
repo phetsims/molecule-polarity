@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Property = require( 'AXON/Property' );
 
   /**
    * @constructor
@@ -19,9 +19,9 @@ define( function( require ) {
   function ThreeAtomsViewProperties() {
 
     // @public
-    this.bondDipolesVisibleProperty = new Property( false );
-    this.molecularDipoleVisibleProperty = new Property( true );
-    this.partialChargesVisibleProperty = new Property( false );
+    this.bondDipolesVisibleProperty = new BooleanProperty( false );
+    this.molecularDipoleVisibleProperty = new BooleanProperty( true );
+    this.partialChargesVisibleProperty = new BooleanProperty( false );
   }
 
   moleculePolarity.register( 'ThreeAtomsViewProperties', ThreeAtomsViewProperties );

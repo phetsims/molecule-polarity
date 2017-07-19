@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var Property = require( 'AXON/Property' );
@@ -20,11 +21,11 @@ define( function( require ) {
   function RealMoleculesViewProperties() {
 
     // @public
-    this.bondDipolesVisibleProperty = new Property( false );
-    this.molecularDipoleVisibleProperty = new Property( false );
-    this.partialChargesVisibleProperty = new Property( false );
-    this.atomElectronegativitiesVisibleProperty = new Property( false );
-    this.atomLabelsVisibleProperty = new Property( false );
+    this.bondDipolesVisibleProperty = new BooleanProperty( false );
+    this.molecularDipoleVisibleProperty = new BooleanProperty( false );
+    this.partialChargesVisibleProperty = new BooleanProperty( false );
+    this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false );
+    this.atomLabelsVisibleProperty = new BooleanProperty( false );
     this.surfaceTypeProperty = new Property( SurfaceType.NONE );
   }
 
