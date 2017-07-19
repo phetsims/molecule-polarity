@@ -22,7 +22,7 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
-  var SurfaceControl = require( 'MOLECULE_POLARITY/common/view/SurfaceControl' );
+  var SurfaceTypeControl = require( 'MOLECULE_POLARITY/common/view/SurfaceTypeControl' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var TwoAtomsViewControls = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewControls' );
   var TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
@@ -52,7 +52,7 @@ define( function( require ) {
 
     var controlPanel = new MPControlPanel( [
       new TwoAtomsViewControls( viewProperties ),
-      new SurfaceControl( viewProperties.surfaceTypeProperty ),
+      new SurfaceTypeControl( viewProperties.surfaceTypeProperty ),
       new EFieldControl( model.eField.enabledProperty )
     ] );
 

@@ -25,7 +25,7 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
-  var SurfaceControl = require( 'MOLECULE_POLARITY/common/view/SurfaceControl' );
+  var SurfaceTypeControl = require( 'MOLECULE_POLARITY/common/view/SurfaceTypeControl' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
   var UnderDevelopmentPlane = require( 'MOLECULE_POLARITY/realmolecules/view/UnderDevelopmentPlane' );
 
@@ -69,7 +69,7 @@ define( function( require ) {
 
     var controlPanel = new MPControlPanel( [
       new RealMoleculesViewControls( viewProperties ),
-      new SurfaceControl( viewProperties.surfaceTypeProperty )
+      new SurfaceTypeControl( viewProperties.surfaceTypeProperty )
     ] );
 
     var resetAllButton = new ResetAllButton( {

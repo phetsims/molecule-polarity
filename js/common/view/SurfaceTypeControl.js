@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * Control panel for the molecule's surface.
+ * Control panel for the molecule's surface type.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -32,7 +32,7 @@ define( function( require ) {
    * @param {Property.<SurfaceType>} surfaceTypeProperty
    * @constructor
    */
-  function SurfaceControl( surfaceTypeProperty ) {
+  function SurfaceTypeControl( surfaceTypeProperty ) {
 
     // title
     var titleNode = new Text( surfaceString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
@@ -53,7 +53,7 @@ define( function( require ) {
     } );
   }
 
-  moleculePolarity.register( 'SurfaceControl', SurfaceControl );
+  moleculePolarity.register( 'SurfaceTypeControl', SurfaceTypeControl );
 
-  return inherit( VBox, SurfaceControl );
+  return inherit( VBox, SurfaceTypeControl );
 } );
