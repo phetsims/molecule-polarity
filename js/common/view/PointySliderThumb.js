@@ -1,6 +1,5 @@
 // Copyright 2017, University of Colorado Boulder
 
-//TODO generalize and move to common code, depending on resolution to #39
 /**
  * Slider thumb that points up, rounded corners, origin at top center.
  * See https://github.com/phetsims/molecule-polarity/issues/39
