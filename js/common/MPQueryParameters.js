@@ -29,7 +29,7 @@ define( function( require ) {
       defaultValue: 'RWB'
     },
 
-    //TODO delete when Real Molecules is fully implemented, see #15
+    //TODO delete this query parameter when Real Molecules is fully implemented, see #32
     // enables the 'Real Molecules' screen, for development
     realMolecules: { type: 'flag' }
   } );

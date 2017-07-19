@@ -27,12 +27,13 @@ define( function( require ) {
     var surfaceColorControl = ( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
 
     var children = [
-      dipoleDirectionControl
+      dipoleDirectionControl,
+      surfaceColorControl
     ];
 
-    //TODO clean this up when Real Molecules screen is implemented, see #15
-    if ( MPQueryParameters.realMolecules ) {
-      children.push( surfaceColorControl );
+    //TODO remove the Surface Color option until Real Molecules screen is implemented, see #32
+    if ( !MPQueryParameters.realMolecules ) {
+      children.splice( children.indexOf( surfaceColorControl ), 1 );
     }
 
     VBox.call( this, {
