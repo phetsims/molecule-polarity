@@ -33,7 +33,7 @@ define( function( require ) {
 
   return inherit( SurfaceNode, ElectronDensityNode, {
 
-    /*
+    /**
      * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
      * @private
      * @override

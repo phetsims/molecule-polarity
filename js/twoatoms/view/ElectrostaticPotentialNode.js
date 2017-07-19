@@ -36,6 +36,7 @@ define( function( require ) {
     /**
      * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
      * @private
+     * @override
      */
     updateFill: function() {
       assert && assert( this.colors.length === 3, 'this implementation only works for 3 colors' );
