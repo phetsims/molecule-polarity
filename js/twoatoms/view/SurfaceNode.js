@@ -31,7 +31,7 @@ define( function( require ) {
    */
   function SurfaceNode( molecule, colors ) {
 
-    assert && assert( molecule instanceof DiatomicMolecule );
+    assert && assert( molecule instanceof DiatomicMolecule, 'molecule must be a DiatomicMolecule' );
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
 
