@@ -42,7 +42,11 @@ define( function( require ) {
     CONTROL_TEXT_OPTIONS: {
       font: new PhetFont( 18 ),
       maxWidth: 175 // i18n, determined empirically
-    }
+    },
+
+    // Controls the width of the gradient used to fill the 2D surfaces.
+    // Smaller values result in a more noticeable change as the EN sliders are dragged.
+    SURFACE_GRADIENT_WIDTH_MULTIPLIER: 5
   };
 
   moleculePolarity.register( 'MPConstants', MPConstants );
