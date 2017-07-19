@@ -84,6 +84,11 @@ define( function( require ) {
 
   return inherit( Node, DiatomicMoleculeNode, {
 
+    // @public
+    reset: function() {
+      //TODO reset cueing arrows #59
+    },
+
     /**
      * Sets whether the bond dipole is visible.
      * @param {boolean} visible

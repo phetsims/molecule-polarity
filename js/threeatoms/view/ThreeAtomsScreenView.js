@@ -57,6 +57,7 @@ define( function( require ) {
         self.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
+        moleculeNode.reset();
       },
       scale: 1.32
     } );
