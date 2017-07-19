@@ -24,7 +24,7 @@ define( function( require ) {
    */
   function MPControlPanel( subPanels ) {
 
-    // compute the horizontal separator width
+    // horizontal separator width is the max width of the subPanels
     var separatorWidth = _.maxBy( subPanels, function( node ) { return node.width; } ).width;
 
     // put a horizontal separator between each sub-panel
