@@ -1,7 +1,8 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * Base type for all control panels in this Molecule Polarity.
+ * Control panel used throughout Molecule Polarity.
+ * Responsible for inserting horizontal spacers between a set of sub-panels.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
