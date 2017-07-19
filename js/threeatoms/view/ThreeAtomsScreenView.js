@@ -61,6 +61,7 @@ define( function( require ) {
     // Parent for all nodes added to this screen
     var rootNode = new Node( {
       children: [
+
         // nodes are rendered in this order
         negativePlateNode,
         positivePlateNode,
