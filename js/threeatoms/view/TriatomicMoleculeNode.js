@@ -86,8 +86,8 @@ define( function( require ) {
     // See https://github.com/phetsims/molecule-polarity/issues/50
     var hideArrows = function() {
 
-      // When any atom is moved or rotated by the user
-      if ( dragHandlerA.dragging || dragHandlerC.dragging || dragHandlerB.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
+      // When the user is dragging with any atom or bond ...
+      if ( dragHandlerA.dragging || dragHandlerB.dragging || dragHandlerC.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
 
         // hide the arrows
         arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
