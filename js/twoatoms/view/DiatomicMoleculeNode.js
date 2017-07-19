@@ -86,10 +86,10 @@ define( function( require ) {
     this.resetArrows = function() {
 
       // de-register mouse-over listeners
-      if ( _.includes( atomANode.inputListeners, arrowsAInputListener ) ) {
+      if ( atomANode.hasInputListener( arrowsAInputListener ) ) {
         atomANode.removeInputListener( arrowsAInputListener );
       }
-      if ( _.includes( atomBNode.inputListeners, arrowsBInputListener ) ) {
+      if ( atomBNode.hasInputListener( arrowsBInputListener ) ) {
         atomBNode.removeInputListener( arrowsBInputListener );
       }
 
