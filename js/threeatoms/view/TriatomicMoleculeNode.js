@@ -81,48 +81,31 @@ define( function( require ) {
     atomANode.addInputListener( dragHandlerA );
     atomCNode.addInputListener( dragHandlerC );
 
-    // 'Rotate' arrows around B are initially visible.
-    // When the molecule is rotated by the user, hide the arrows, and make them appear on mouse over.
+    // 'Cueing' arrows around atoms A, B and C are initially visible.
+    // When the user interacts with any atom, make the arrows disappear, and make them appear on mouse over.
     // See https://github.com/phetsims/molecule-polarity/issues/50
-    var hideRotateArrows = function() {
+    var hideArrows = function() {
 
-      // When the molecule is rotated the user...
-      if ( dragHandlerB.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
+      // When any atom is moved or rotated by the user
+      if ( dragHandlerA.dragging || dragHandlerC.dragging || dragHandlerB.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
 
         // hide the arrows
-        arrowsBNode.visible = false;
+        arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
 
         // unlink this listener
-        molecule.angleProperty.unlink( hideRotateArrows );
-        
-        // make arrows appear on mouse over
-        atomBNode.addInputListener( new ArrowsInputListener( arrowsBNode ) );
-      }
-    };
-    molecule.angleProperty.lazyLink( hideRotateArrows );
-
-    // 'Translate' arrows around atoms A & C are initially visible.
-    // When bond angle is changed by the user, hide both arrows, and make them appear on mouse over.
-    // See https://github.com/phetsims/molecule-polarity/issues/50
-    var hideTranslateArrows = function() {
-
-      // When either atom is moved by the user...
-      if ( dragHandlerA.dragging || dragHandlerC.dragging ) {
-
-        // hide the arrows
-        arrowsANode.visible = arrowsCNode.visible = false;
-
-        // unlink this listener
-        molecule.bondAngleAProperty.unlink( hideTranslateArrows );
-        molecule.bondAngleCProperty.unlink( hideTranslateArrows );
+        molecule.bondAngleAProperty.unlink( hideArrows );
+        molecule.bondAngleCProperty.unlink( hideArrows );
+        molecule.angleProperty.unlink( hideArrows );
 
         // make arrows appear on mouse over
         atomANode.addInputListener( new ArrowsInputListener( arrowsANode ) );
+        atomBNode.addInputListener( new ArrowsInputListener( arrowsBNode ) );
         atomCNode.addInputListener( new ArrowsInputListener( arrowsCNode ) );
       }
     };
-    molecule.bondAngleAProperty.lazyLink( hideTranslateArrows );
-    molecule.bondAngleCProperty.lazyLink( hideTranslateArrows );
+    molecule.bondAngleAProperty.lazyLink( hideArrows );
+    molecule.bondAngleCProperty.lazyLink( hideArrows );
+    molecule.angleProperty.lazyLink( hideArrows );
   }
 
   moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
