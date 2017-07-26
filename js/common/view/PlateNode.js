@@ -45,9 +45,9 @@ define( function( require ) {
     this.plateHeight = options.plateHeight; // @public used in view layout
 
     assert && assert ( options.polarity === 'negative' || options.polarity === 'positive' ,
-      'polarity must be "positive" or "negative"' );
+      'invalid polarity: ' + options.polarity );
     assert && assert ( options.perspective === 'right' || options.perspective === 'left' ,
-      'perspective must be either "left" or "right"' );
+      'invalid perspective: ' + options.perspective );
 
     Node.call( this );
 

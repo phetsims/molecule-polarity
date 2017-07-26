@@ -30,7 +30,7 @@ define( function( require ) {
     }, options );
 
     assert && assert( MPConstants.ELECTRONEGATIVITY_RANGE.contains( options.electronegativity ),
-      'invalid electronegativity: ' + options.electronegativity );
+      'electronegativity out of range: ' + options.electronegativity );
 
     // @public (read-only)
     this.name = name;

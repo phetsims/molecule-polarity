@@ -30,7 +30,7 @@ define( function( require ) {
     }, options );
 
     assert && assert ( options.polarity === 'negative' || options.polarity === 'positive' ,
-      'polarity must be "positive" or "negative"' );
+      'invalid polarity: ' + options.polarity );
 
     Node.call( this );
 
