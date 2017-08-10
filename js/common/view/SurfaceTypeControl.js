@@ -25,7 +25,7 @@ define( function( require ) {
 
   // constants
   var RADIO_BUTTON_OPTIONS = {
-    radius: 12
+    radius: 10
   };
 
   /**
