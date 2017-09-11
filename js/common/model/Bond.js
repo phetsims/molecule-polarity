@@ -11,8 +11,8 @@ define( function( require ) {
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**

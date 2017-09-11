@@ -24,9 +24,9 @@ define( function( require ) {
   var TwoAtomsScreenView = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsScreenView' );
 
   // strings
-  var screenTwoAtomsString = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
   var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
   var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
+  var screenTwoAtomsString = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
 
   /**
    * @constructor

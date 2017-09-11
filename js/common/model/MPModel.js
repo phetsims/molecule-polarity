@@ -13,8 +13,8 @@ define( function( require ) {
   // modules
   var EField = require( 'MOLECULE_POLARITY/common/model/EField' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Util = require( 'DOT/Util' );
 
   // constants

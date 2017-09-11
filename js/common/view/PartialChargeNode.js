@@ -20,8 +20,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
   var deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
+  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
 
   // constants
   var REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();

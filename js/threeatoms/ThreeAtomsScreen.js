@@ -11,8 +11,8 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
@@ -24,10 +24,10 @@ define( function( require ) {
   var ThreeAtomsScreenView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsScreenView' );
 
   // strings
-  var screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
   var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
   var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
   var atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
+  var screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
 
   /**
    * @constructor

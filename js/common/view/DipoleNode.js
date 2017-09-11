@@ -13,8 +13,8 @@ define( function( require ) {
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );

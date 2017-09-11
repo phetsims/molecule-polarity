@@ -10,8 +10,8 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
-  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 

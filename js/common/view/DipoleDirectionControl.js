@@ -18,9 +18,9 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var dipoleDirectionString = require( 'string!MOLECULE_POLARITY/dipoleDirection' );
-  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
   var deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
+  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
+  var dipoleDirectionString = require( 'string!MOLECULE_POLARITY/dipoleDirection' );
   var patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
 
   // constants

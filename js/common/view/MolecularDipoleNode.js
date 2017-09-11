@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
   var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Vector2 = require( 'DOT/Vector2' );

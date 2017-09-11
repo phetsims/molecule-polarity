@@ -14,9 +14,9 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
   var RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
   var RealMoleculesScreenView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesScreenView' );
+  var Screen = require( 'JOIST/Screen' );
 
   // strings
   var screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
