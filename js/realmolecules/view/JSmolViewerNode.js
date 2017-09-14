@@ -103,7 +103,7 @@ define( function( require ) {
 
   /**
    * @param {Property.<RealMolecule>} moleculeProperty
-   * @param {PropertySet} viewProperties
+   * @param {RealMoleculesViewProperties} viewProperties
    * @param {Object} [options]
    * @constructor
    */
