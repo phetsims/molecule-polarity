@@ -37,13 +37,7 @@ define( function( require ) {
   moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
 
   // log the values of all sim-specific query parameters
-  if ( phet.log ) {
-    for ( var property in MPQueryParameters ) {
-      if ( MPQueryParameters.hasOwnProperty( property ) ) {
-        phet.log( property + '=' + MPQueryParameters[ property ] );
-      }
-    }
-  }
+  phet.log && phet.log( 'query parameters: ' + JSON.stringify( MPQueryParameters, null, 2 ) );
 
   return MPQueryParameters;
 } );
