@@ -55,9 +55,6 @@ define( function( require ) {
   // identify a URL object, not standardized across browsers
   var URL = window.URL || window.webkitURL || window;
 
-  // prints debugging messages to the console?
-  var DEBUG = false;
-
   // Script to run when the Jmol object has finished loading
   var SCRIPT_INIT =
     'set autobond off\n' +
