@@ -141,7 +141,7 @@ define( function( require ) {
   var doScript = function( applet, script ) {
     // use scriptWait (which is synchronous) so that we get status and can use evaluateVar elsewhere
     var status = Jmol.scriptWait( applet, script );
-    DEBUG && console.log( 'doScript, status=' + status );
+    phet.log && phet.log( 'doScript, status=' + status );
   };
 
   /**
@@ -174,7 +174,7 @@ define( function( require ) {
    * @param {RealMoleculesViewProperties} jsmolProperties
    */
   var updateMolecule = function( applet, molecule, jsmolProperties ) {
-    DEBUG && console.log( 'updateMolecule' );
+    phet.log && phet.log( 'updateMolecule' );
 
     var url = URL.createObjectURL( new Blob( [ molecule.mol2Data ], { type: 'text/plain', endings: 'native' } ) );
 
@@ -225,7 +225,7 @@ define( function( require ) {
      * Eg, for HF: '1 255 255 255 9 144 224 80 '
      */
     status = status.replace( /\n/g, ' ' ).replace( /{/g, '' ).replace( /}/g, '' );
-    DEBUG && console.log( 'updateElements, status=' + status );
+    phet.log && phet.log( 'updateElements, status=' + status );
 
     /*
      * Now that the tokens are separated by spaces, split the string into an array.
@@ -251,7 +251,7 @@ define( function( require ) {
    * @param {boolean} molecularDipoleVisible
    */
   var updateTranslucency = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
-    DEBUG && console.log( 'updateTransparency' );
+    phet.log && phet.log( 'updateTransparency' );
     var arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
     doScript( applet, 'color atoms translucent ' + arg );
     doScript( applet, 'color bonds translucent ' + arg );
@@ -264,7 +264,7 @@ define( function( require ) {
    * @param {boolean} molecularDipoleVisible
    */
   var updateDipoles = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
-    DEBUG && console.log( 'updateDipoles' );
+    phet.log && phet.log( 'updateDipoles' );
 
     if ( bondDipolesVisible ) {
       doScript( applet, 'dipole bonds on width 0.05' );
@@ -290,7 +290,7 @@ define( function( require ) {
    * @param {boolean} partialChargesVisible
    */
   var updateLabels = function( applet, atomLabelsVisible, partialChargesVisible ) {
-    DEBUG && console.log( 'updateLabels' );
+    phet.log && phet.log( 'updateLabels' );
 
     if ( atomLabelsVisible || partialChargesVisible ) {
 
@@ -326,7 +326,7 @@ define( function( require ) {
    * @param {SurfaceType} surfaceType
    */
   var updateSurface = function( applet, surfaceType ) {
-    DEBUG && console.log( 'updateSurface' );
+    phet.log && phet.log( 'updateSurface' );
 
     var diatomic = isHomogeneousDiatomic( applet );
     if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
@@ -383,7 +383,7 @@ define( function( require ) {
       '}\n' +
       'print homogeneousDiatomic' +
       '\')' );
-    DEBUG && console.log( 'isHomogeneousDiatomic, status=' + status );
+    phet.log && phet.log( 'isHomogeneousDiatomic, status=' + status );
 
     if ( status === null || status === 'ERROR' ) {
       throw new Error( 'JSmolViewerNode.isHomogeneousDiatomic, script error: ' + status );
@@ -408,7 +408,7 @@ define( function( require ) {
 
       // Called when the Jmol object has been created and is ready to receive commands
       var readyFunction = function( applet ) {
-        DEBUG && console.log( 'readyFunction' );
+        phet.log && phet.log( 'readyFunction' );
 
         unbindActions( applet, ACTIONS );
 
