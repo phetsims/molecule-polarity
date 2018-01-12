@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
-  var CheckBox = require( 'SUN/CheckBox' );
+  var Checkbox = require( 'SUN/Checkbox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
@@ -46,18 +46,18 @@ define( function( require ) {
     var partialChargesLabel = new Text( partialChargesString, MPConstants.CONTROL_TEXT_OPTIONS );
 
     // Check boxes
-    var bondDipolesCheckBox = new CheckBox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
-    var molecularDipoleCheckBox = new CheckBox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
-    var partialChargesCheckBox = new CheckBox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
+    var bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
+    var molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
+    var partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
 
     VBox.call( this, {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       children: [
         titleNode,
-        bondDipolesCheckBox,
-        molecularDipoleCheckBox,
-        partialChargesCheckBox
+        bondDipolesCheckbox,
+        molecularDipoleCheckbox,
+        partialChargesCheckbox
       ]
     } );
   }
