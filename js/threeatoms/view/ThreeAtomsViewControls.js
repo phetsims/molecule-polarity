@@ -34,7 +34,7 @@ define( function( require ) {
     // title
     var titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
-    // Check box labels
+    // Checkbox labels
     var bondDipolesLabel = new HBox( {
       children: [ new Text( bondDipolesString, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
@@ -45,7 +45,7 @@ define( function( require ) {
     } );
     var partialChargesLabel = new Text( partialChargesString, MPConstants.CONTROL_TEXT_OPTIONS );
 
-    // Check boxes
+    // Checkboxes
     var bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
     var molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
     var partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
