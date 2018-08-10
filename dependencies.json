@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.4 Thu Aug 09 2018 20:30:12 GMT-0600 (MDT)",
+  "comment": "# molecule-polarity 1.0.4 Thu Aug 09 2018 23:42:10 GMT-0600 (MDT)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "HEAD"
@@ -13,8 +13,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "96b035603dcc212cac8f2be71a75b680ed261f43",
-    "branch": "HEAD"
+    "sha": "0ede3a36114f2bcd7d3706606635ab0c56e97e2e",
+    "branch": "molecule-polarity-1.0"
   },
   "dot": {
     "sha": "f7d9de8b5650a10126d3f8755a98cf64a0acc93c",
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "129a71db05cc2b92b0d2daaf5ea3eabd177eb519",
+    "sha": "69b017f17a4dbb70336bdd7136504bcb1b41cef9",
     "branch": "1.0"
   },
   "nitroglycerin": {
@@ -41,8 +41,8 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "7ec5d29971d7faf69f31e028c45b17df040b721b",
-    "branch": "HEAD"
+    "sha": "08c4432821efdc4194d806bfa3a5aa9f3b5a2583",
+    "branch": "molecule-polarity-1.0"
   },
   "query-string-machine": {
     "sha": "c74e454ec68033a9546b8181d4d962eb8ceef81f",
@@ -50,7 +50,7 @@
   },
   "scenery": {
     "sha": "c1fde5cc7949e64b14e17c01a94f4df4641c38eb",
-    "branch": "molecule-polarity-1.0"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "6b27f596a98f204a127e618d9427824dc997fb41",
