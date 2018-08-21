@@ -57,7 +57,6 @@ define( function( require ) {
     );
 
     VBox.call( this, {
-      orientation: 'vertical',
       align: 'left',
       spacing: 10,
       children: [
