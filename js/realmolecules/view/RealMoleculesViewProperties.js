@@ -3,7 +3,7 @@
 /**
  * View-specific Properties for the 'Real Molecules' screen.
  *
- * @author Chris Malley (PixelZoom, Inc,)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
