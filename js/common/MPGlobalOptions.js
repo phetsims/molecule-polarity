@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  var Property = require( 'AXON/Property' );
+  var StringProperty = require( 'AXON/StringProperty' );
 
   /**
    * @constructor
@@ -20,8 +20,8 @@ define( function( require ) {
   function MPGlobalOptions() {
 
     // @public
-    this.dipoleDirectionProperty = new Property( MPQueryParameters.dipoleDirection );
-    this.surfaceColorProperty = new Property( MPQueryParameters.surfaceColor );
+    this.dipoleDirectionProperty = new StringProperty( MPQueryParameters.dipoleDirection );
+    this.surfaceColorProperty = new StringProperty( MPQueryParameters.surfaceColor );
   }
 
   moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );

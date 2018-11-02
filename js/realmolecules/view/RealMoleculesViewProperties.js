@@ -12,7 +12,7 @@ define( function( require ) {
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Property = require( 'AXON/Property' );
+  var StringProperty = require( 'AXON/StringProperty' );
   var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   /**
@@ -26,7 +26,7 @@ define( function( require ) {
     this.partialChargesVisibleProperty = new BooleanProperty( false );
     this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false );
     this.atomLabelsVisibleProperty = new BooleanProperty( false );
-    this.surfaceTypeProperty = new Property( SurfaceType.NONE );
+    this.surfaceTypeProperty = new StringProperty( SurfaceType.NONE );
   }
 
   moleculePolarity.register( 'RealMoleculesViewProperties', RealMoleculesViewProperties );

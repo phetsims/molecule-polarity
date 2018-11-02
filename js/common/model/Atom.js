@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -37,8 +38,8 @@ define( function( require ) {
     this.diameter = options.diameter;
     this.color = options.color;
     this.locationProperty = new Property( options.location );
-    this.electronegativityProperty = new Property( options.electronegativity );
-    this.partialChargeProperty = new Property( 0 ); // partial charge is zero until this atom participates in a bond
+    this.electronegativityProperty = new NumberProperty( options.electronegativity );
+    this.partialChargeProperty = new NumberProperty( 0 ); // partial charge is zero until this atom participates in a bond
   }
 
   moleculePolarity.register( 'Atom', Atom );

@@ -17,7 +17,7 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -48,10 +48,10 @@ define( function( require ) {
     this.bondBC = new Bond( this.atomB, this.atomC ); // the bond connecting atoms B and C
 
     // @public the bond angle of atom A relative to atom B, before applying molecule rotation
-    this.bondAngleAProperty = new Property( 0.75 * Math.PI );
+    this.bondAngleAProperty = new NumberProperty( 0.75 * Math.PI );
 
     // @public the bond angle of atom C relative to atom B, before applying molecule rotation
-    this.bondAngleCProperty = new Property( 0.25 * Math.PI );
+    this.bondAngleCProperty = new NumberProperty( 0.25 * Math.PI );
 
     Molecule.call( this,
       [ this.atomA, this.atomB, this.atomC ],

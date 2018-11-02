@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -40,7 +40,7 @@ define( function( require ) {
     this.bonds = bonds;
 
     // @public
-    this.angleProperty = new Property( options.angle ); // angle of rotation about the location, in radians
+    this.angleProperty = new NumberProperty( options.angle ); // angle of rotation about the location, in radians
     this.dragging = false; // true when the user is dragging the molecule
 
     // update atom locations when molecule is rotated
