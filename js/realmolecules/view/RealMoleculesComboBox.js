@@ -57,10 +57,7 @@ define( function( require ) {
     ComboBox.call( this, items, moleculeProperty, listParent, {
       labelNode: labelNode,
       listPosition: 'above',
-      itemYMargin: 4,
-      itemHighlightFill: 'rgb(218,255,255)',
-      buttonLineWidth: 3,
-      buttonCornerRadius: 10,
+      highlightFill: 'rgb(218,255,255)',
       maxWidth: 450
     } );
   }
