@@ -58,6 +58,7 @@ define( function( require ) {
       labelNode: labelNode,
       listPosition: 'above',
       highlightFill: 'rgb(218,255,255)',
+      cornerRadius: 8,
       maxWidth: 450
     } );
   }
