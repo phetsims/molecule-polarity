@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var ComboBox = require( 'SUN/ComboBox' );
+  var ComboBoxItem = require( 'SUN/ComboBoxItem' );
   var inherit = require( 'PHET_CORE/inherit' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -51,7 +52,7 @@ define( function( require ) {
         font: new PhetFont( 18 )
       } );
 
-      items[ i ] = ComboBox.createItem( node, molecule );
+      items[ i ] = new ComboBoxItem( node, molecule );
     }
 
     ComboBox.call( this, items, moleculeProperty, listParent, {
