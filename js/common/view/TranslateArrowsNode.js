@@ -48,7 +48,7 @@ define( function( require ) {
 
       // transform the arrow shapes to account for atom location and relationship to molecule location
       var v = molecule.location.minus( atom.locationProperty.get() );
-      var angle = v.angle() - ( Math.PI / 2 );
+      var angle = v.angle - ( Math.PI / 2 );
       var transform = new Transform3( Matrix3.translationFromVector( atom.locationProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
       leftArrowNode.shape = transform.transformShape( leftArrow );
       rightArrowNode.shape = transform.transformShape( rightArrow );

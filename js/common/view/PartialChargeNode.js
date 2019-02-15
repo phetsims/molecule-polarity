@@ -141,7 +141,7 @@ define( function( require ) {
         }
         else {
           // can't normalize a zero-magnitude vector, so create our own with the proper angle
-          return new Vector2( 1, molecule.dipoleProperty.get().angle() );
+          return new Vector2( 1, molecule.dipoleProperty.get().angle );
         }
       } );
       molecule.dipoleProperty.link( node.update.bind( this ) ); // unlink not needed

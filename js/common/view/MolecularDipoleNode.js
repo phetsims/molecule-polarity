@@ -32,7 +32,7 @@ define( function( require ) {
     molecule.dipoleProperty.link( function( dipole ) {
 
       // offset vector relative to molecule location
-      var v = Vector2.createPolar( OFFSET, dipole.angle() );
+      var v = Vector2.createPolar( OFFSET, dipole.angle );
 
       // offset in global coordinate frame
       self.translation = molecule.location.plus( v );

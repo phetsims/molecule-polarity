@@ -85,7 +85,7 @@ define( function( require ) {
 
           // Adjust for proper scale and orientation.
           self.setScaleMagnitude( scale, scale );
-          self.setRotation( dipole.angle() );
+          self.setRotation( dipole.angle );
         }
       }
     );

@@ -41,7 +41,7 @@ define( function( require ) {
     var updateTransform = function() {
       this.matrix = Matrix3
         .translationFromVector( atom.locationProperty.get() )
-        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle() + Math.PI / 2 ) );
+        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle + Math.PI / 2 ) );
     };
     molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
     atom.locationProperty.link( updateTransform.bind( this ) ); // unlink not needed
