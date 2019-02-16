@@ -54,7 +54,7 @@ define( function( require ) {
 
     // @public the molecular dipole, sum of the bond dipoles, dispose not needed
     this.dipoleProperty = new DerivedProperty( bondDipoleProperties, function() {
-      var sum = new Vector2();
+      var sum = new Vector2( 0, 0 );
       self.bonds.forEach( function( bond ) {
         sum.add( bond.dipoleProperty.get() ); // add to the same Vector2 instance
       } );
