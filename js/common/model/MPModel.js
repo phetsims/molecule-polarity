@@ -87,7 +87,7 @@ define( function( require ) {
       }
 
       // magnitude of angular velocity is proportional to molecular dipole magnitude
-      var deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude() ) );
+      var deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
 
       // convert angle to range [0,2*PI)
       var dipoleAngle = normalizeAngle( dipole.angle );

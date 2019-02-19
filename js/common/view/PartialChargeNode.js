@@ -116,7 +116,7 @@ define( function( require ) {
          * in a zero-magnitude vector when the first atom has moved but the second atom hasn't moved yet.
          * This sorts itself out when both atoms have moved.
          */
-        if ( v.magnitude() > 0 ) {
+        if ( v.magnitude > 0 ) {
           v = v.normalize();
         }
         return v;
@@ -136,7 +136,7 @@ define( function( require ) {
      */
     createCompositePartialChargeNode: function( atom, molecule ) {
       var node = new PartialChargeNode( atom, function() {
-        if ( molecule.dipoleProperty.get().magnitude() > 0 ) {
+        if ( molecule.dipoleProperty.get().magnitude > 0 ) {
           return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
         }
         else {

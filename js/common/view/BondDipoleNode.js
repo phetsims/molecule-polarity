@@ -33,7 +33,7 @@ define( function( require ) {
 
       var bondAngle = bond.getAngle();
       var isInPhase = Math.abs( bondAngle - dipole.angle ) < ( Math.PI / 4 );
-      var dipoleViewLength = dipole.magnitude() * ( self.referenceLength / self.referenceMagnitude );
+      var dipoleViewLength = dipole.magnitude * ( self.referenceLength / self.referenceMagnitude );
 
       // location of tail in polar coordinates, relative to center of bond
       var offsetX = isInPhase ? ( dipoleViewLength / 2 ) : -( dipoleViewLength / 2 );

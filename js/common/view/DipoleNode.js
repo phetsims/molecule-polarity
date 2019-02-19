@@ -47,13 +47,13 @@ define( function( require ) {
 
     // unlink not needed
     dipoleProperty.link( function( dipole ) {
-        if ( dipole.magnitude() === 0 ) {
+      if ( dipole.magnitude === 0 ) {
           self.shape = null;
         }
         else {
 
           // Determine parameters for the shape.
-          var desiredLength = dipole.magnitude() * ( REFERENCE_LENGTH / REFERENCE_MAGNITUDE );
+        var desiredLength = dipole.magnitude * ( REFERENCE_LENGTH / REFERENCE_MAGNITUDE );
           var adjustedLength = desiredLength;
           var scale = 1;
           if ( HEAD_SIZE.height > FRACTIONAL_HEAD_HEIGHT * desiredLength ) {

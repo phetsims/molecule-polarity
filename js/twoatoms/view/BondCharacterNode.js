@@ -87,7 +87,7 @@ define( function( require ) {
     molecule.bond.dipoleProperty.link( function( dipole ) {
       pointerNode.left = Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
         POINTER_X_INSET, TRACK_WIDTH - pointerNode.width - POINTER_X_INSET,
-        dipole.magnitude() );
+        dipole.magnitude );
     } );
   }
 
