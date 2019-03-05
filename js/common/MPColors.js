@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var Color = require( 'SCENERY/util/Color' );
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
   var SURFACE_ALPHA = 0.72;
@@ -27,7 +28,7 @@ define( function( require ) {
     ATOM_B: 'rgb( 0, 255, 0 )',
     ATOM_C: 'rgb( 255, 175, 175)',
     BOND: 'rgb( 90, 90, 90)',
-    OXYGEN: 'rgb( 255, 85, 0 )', // colorblind red
+    OXYGEN: PhetColorScheme.RED_COLORBLIND,
 
     // dipoles
     BOND_DIPOLE: 'black',
