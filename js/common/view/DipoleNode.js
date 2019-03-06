@@ -16,9 +16,9 @@ define( function( require ) {
   var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
   // Note: heights are parallel to dipole axis, widths are perpendicular.
@@ -31,7 +31,7 @@ define( function( require ) {
   var FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIONAL_HEAD_HEIGHT * length, a 'unit dipole' will be scaled.
 
   /**
-   * @param {Property.<Vector2>} dipoleProperty
+   * @param {Vector2Property} dipoleProperty
    * @param {Color|String} color
    * @constructor
    * @abstract
@@ -103,7 +103,7 @@ define( function( require ) {
      * @static
      */
     createIcon: function( color ) {
-      return new DipoleNode( new Property( new Vector2( 0.65, 0 ) ), color );
+      return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), color );
     }
   } );
 } );
