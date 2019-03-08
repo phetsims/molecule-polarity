@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.6 Tue Nov 06 2018 14:14:28 GMT-0700 (MST)",
+  "comment": "# molecule-polarity 1.0.6 Fri Mar 08 2019 13:49:48 GMT-0500 (EST)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "HEAD"
@@ -9,8 +9,8 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "b630f897deb7a4ff95029176dbf5b48a9713d31d",
-    "branch": "HEAD"
+    "sha": "95beb55cc2551aa95011d7dc9982dc5ad5492967",
+    "branch": "molecule-polarity-1.0"
   },
   "chipper": {
     "sha": "0ede3a36114f2bcd7d3706606635ab0c56e97e2e",
@@ -21,15 +21,15 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "340e0dca1dd42c1ecf86829f2b97672dd34e9c20",
-    "branch": "HEAD"
+    "sha": "ad20c486d0fdfe5938c49a8f2ab137985ed187c2",
+    "branch": "molecule-polarity-1.0"
   },
   "kite": {
     "sha": "41ac3b7a27f0313bcafb9eb0fde1c1860a5c2cc6",
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "eb7fe35bd9bec1643a1f8f5db2ffaf7c8a596850",
+    "sha": "8c923a03248db01811eeb5dcb3cbb014ef6ae92e",
     "branch": "1.0"
   },
   "nitroglycerin": {
