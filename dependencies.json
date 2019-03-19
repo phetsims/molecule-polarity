@@ -67,5 +67,9 @@
   "tandem": {
     "sha": "29cd4f635cd74ace76ffabc575ab92bef491b680",
     "branch": "HEAD"
+  },
+  "phetmarks": {
+    "branch": "master",
+    "sha": "46a0921b96e13b9aaaca35425bf18b49b269d329"
   }
 }
