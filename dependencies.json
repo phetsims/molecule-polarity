@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.7-rc.1 Thu Mar 28 2019 23:14:42 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecule-polarity 1.0.7-rc.2 Fri Mar 29 2019 14:28:39 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "HEAD"
@@ -10,7 +10,7 @@
   },
   "brand": {
     "sha": "409383d1faf7c8f40d9947b3692eb97838f3c779",
-    "branch": "molecule-polarity-1.0"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "2ec47d8b01dfce2bb7afd6f89f9344b82aae9835",
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "dbb4f3f6ca027f4df43ff21bd980a58ff42f6085",
+    "sha": "06068fb455734c3c421aee621db03982093dc466",
     "branch": "1.0"
   },
   "nitroglycerin": {
