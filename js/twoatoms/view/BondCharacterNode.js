@@ -117,8 +117,6 @@ define( function( require ) {
     atom2Node.centerY = atom1Node.centerY;
   }
 
-  moleculePolarity.register( 'BondCharacterNode.PointerNode', PointerNode );
-
   inherit( Node, PointerNode );
 
   return inherit( Node, BondCharacterNode );
