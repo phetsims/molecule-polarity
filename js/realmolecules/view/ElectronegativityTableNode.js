@@ -147,8 +147,6 @@ define( function( require ) {
     this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
   }
 
-  moleculePolarity.register( 'ElectronegativityTableNode.Cell', Cell );
-
   inherit( Node, Cell, {
 
     // @public makes the cell appear enabled
