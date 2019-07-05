@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.9 Mon Jun 10 2019 11:09:21 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecule-polarity 1.0.9 Fri Jul 05 2019 16:02:36 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "0b6c65749de1ac36f33c2d1b43788716ae533d9d",
+    "sha": "9dd8e2781e8ba68f0e25473661573e9474224f9e",
     "branch": "1.0"
   },
   "nitroglycerin": {
@@ -41,8 +41,8 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "08c4432821efdc4194d806bfa3a5aa9f3b5a2583",
-    "branch": "HEAD"
+    "sha": "c7cf505c442e98699b5cc504c187fde1866ced8d",
+    "branch": "molecule-polarity-1.0"
   },
   "phetmarks": {
     "sha": "623c5b92f6b04629d0c28085adf5356dce45069d",
