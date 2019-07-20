@@ -20,7 +20,10 @@ define( function( require ) {
   var moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
   var options = {
-    optionsNode: new MPOptionsNode(), // user interface for the Options dialog
+
+    // Creates content for the Options dialog
+    createOptionsDialogContent: () => new MPOptionsNode(),
+
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
