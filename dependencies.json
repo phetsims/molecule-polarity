@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.0.11 Mon Aug 05 2019 16:15:11 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# molecule-polarity 1.0.11 Mon Aug 19 2019 14:19:23 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "HEAD"
@@ -21,15 +21,15 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "ad20c486d0fdfe5938c49a8f2ab137985ed187c2",
-    "branch": "HEAD"
+    "sha": "a824be64b98e31c168cca17d1c64b2f844d0e986",
+    "branch": "molecule-polarity-1.0"
   },
   "kite": {
     "sha": "41ac3b7a27f0313bcafb9eb0fde1c1860a5c2cc6",
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "d24ef096a160fa5b1991d76c6d3ddd0bfc4e4683",
+    "sha": "307a72d1cd2fc6736c1457a850f8de9de1b35dec",
     "branch": "1.0"
   },
   "nitroglycerin": {
@@ -57,8 +57,8 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "6b27f596a98f204a127e618d9427824dc997fb41",
-    "branch": "HEAD"
+    "sha": "82f61274e9d50c8c6efb46dd20d3386cd36f182e",
+    "branch": "molecule-polarity-1.0"
   },
   "sherpa": {
     "sha": "f1937ecb1c2fd45be748815eddeb89ff6a7ad537",
