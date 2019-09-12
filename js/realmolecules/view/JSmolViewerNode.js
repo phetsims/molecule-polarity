@@ -339,7 +339,7 @@ define( function( require ) {
         doScript( applet, 'isosurface VDW color white translucent' );
       }
       else {
-        doScript( applet, 'isosurface VDW map MEP colorscheme \"RWB\" translucent' );
+        doScript( applet, 'isosurface VDW map MEP colorscheme "RWB" translucent' );
       }
     }
     else if ( surfaceType === SurfaceType.ELECTRON_DENSITY ) {
@@ -347,7 +347,7 @@ define( function( require ) {
         doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_GRAY ) + ' translucent' );
       }
       else {
-        doScript( applet, 'isosurface VDW map MEP colorscheme \"BW\" translucent' );
+        doScript( applet, 'isosurface VDW map MEP colorscheme "BW" translucent' );
       }
     }
     else {
