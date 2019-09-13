@@ -1,4 +1,4 @@
-// Copyright 2017, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 //TODO Moved here from litmus repository. Delete when 100% certain that we're not using JSmol. See #15.
 /**
