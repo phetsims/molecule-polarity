@@ -56,7 +56,7 @@ define( function( require ) {
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
 
       // Only update if the partial charge is visible
-      if ( partialCharge !== 0 ) {
+      if ( textNode.visible ) {
 
         // d+ or d-
         textNode.text = ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString;
