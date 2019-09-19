@@ -22,7 +22,7 @@ define( require => {
    */
   function Bond( atom1, atom2 ) {
 
-    var self = this;
+    const self = this;
 
     // @public (read-only)
     this.atom1 = atom1;
@@ -36,17 +36,17 @@ define( require => {
       ],
       function( location1, location2, electronegativity1, electronegativity2, dipoleDirection ) {
 
-        var deltaEN = electronegativity2 - electronegativity1;
+        const deltaEN = electronegativity2 - electronegativity1;
 
         // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
-        var magnitude = Math.abs( deltaEN );
+        const magnitude = Math.abs( deltaEN );
 
-        var angle = self.getAngle();
+        let angle = self.getAngle();
         if ( deltaEN < 0 ) {
           angle += Math.PI;
         }
 
-        var dipole = Vector2.createPolar( magnitude, angle );
+        const dipole = Vector2.createPolar( magnitude, angle );
 
         // The above algorithm is for a dipole that points from positive to negative charge.
         // For IUPAC convention, the direction of the dipole is from negative to positive charge,
@@ -79,7 +79,7 @@ define( require => {
      * @public
      */
     getAngle: function() {
-      var center = this.getCenter();
+      const center = this.getCenter();
       return Math.atan2( this.atom2.locationProperty.get().y - center.y, this.atom2.locationProperty.get().x - center.x );
     },
 

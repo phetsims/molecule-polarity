@@ -19,7 +19,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var PLATE_OPTIONS = {
+  const PLATE_OPTIONS = {
     fill: MPColors.PLATE,
     stroke: 'black'
   };
@@ -31,7 +31,7 @@ define( require => {
    */
   function PlateNode( eField, options ) {
 
-    var self = this;
+    const self = this;
 
     options = _.extend( {
       polarity: 'negative', // 'positive' or 'negative'
@@ -52,10 +52,10 @@ define( require => {
     Node.call( this );
 
     // polarity indicator
-    var polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
+    const polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
 
     // face of a positive plate, drawn in perspective, starting at upper-left and going clockwise
-    var faceNode = new Path( new Shape()
+    const faceNode = new Path( new Shape()
         .moveTo( 0, options.platePerspectiveYOffset )
         .lineTo( options.plateWidth, 0 )
         .lineTo( options.plateWidth, options.plateHeight )
@@ -65,9 +65,9 @@ define( require => {
     );
 
     // side edge of a positive plate
-    var edgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, PLATE_OPTIONS );
+    const edgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, PLATE_OPTIONS );
 
-    var plateNode = new Node( {
+    const plateNode = new Node( {
       children: [
         edgeNode,
         faceNode

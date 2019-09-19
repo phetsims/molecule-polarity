@@ -39,16 +39,16 @@ define( require => {
       viewerSize: new Dimension2( 200, 200 )
     }, options );
 
-    var self = this;
+    const self = this;
     this.moleculeProperty = moleculeProperty; // @private
 
-    var rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
+    const rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
       stroke: 'rgba(0,0,0,0.25)',
       fill: options.backgroundColor
     } );
-    var titleNode = new Text( '3D molecule viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
-    var font = new PhetFont( 18 );
-    var moleculeText = new RichText( '?', {
+    const titleNode = new Text( '3D molecule viewer goes here', { font: new PhetFont( { size: 22, weight: 'bold' } ) } );
+    const font = new PhetFont( 18 );
+    const moleculeText = new RichText( '?', {
       font: font,
       maxWidth: 200
     } );
@@ -71,7 +71,7 @@ define( require => {
       } );
     } );
 
-    var debugText = new LayoutBox( {
+    const debugText = new LayoutBox( {
       orientation: 'vertical',
       align: 'left',
       spacing: 10,

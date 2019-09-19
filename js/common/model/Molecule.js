@@ -32,7 +32,7 @@ define( require => {
       angle: 0 // angle of rotation of the entire molecule about the location, in radians
     }, options );
 
-    var self = this;
+    const self = this;
 
     // @public (read-only)
     this.location = options.location; // the point about which the molecule rotates, in global model coordinate frame
@@ -47,14 +47,14 @@ define( require => {
     this.angleProperty.link( updateAtomLocations.bind( this ) ); // unlink not needed
 
     // bond dipoles, for deriving molecular dipole
-    var bondDipoleProperties = [];
+    const bondDipoleProperties = [];
     this.bonds.forEach( function( bond ) {
       bondDipoleProperties.push( bond.dipoleProperty );
     } );
 
     // @public the molecular dipole, sum of the bond dipoles, dispose not needed
     this.dipoleProperty = new DerivedProperty( bondDipoleProperties, function() {
-      var sum = new Vector2( 0, 0 );
+      const sum = new Vector2( 0, 0 );
       self.bonds.forEach( function( bond ) {
         sum.add( bond.dipoleProperty.get() ); // add to the same Vector2 instance
       } );

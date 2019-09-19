@@ -24,7 +24,7 @@ define( require => {
   const TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
 
   // constants
-  var PLATE_X_OFFSET = 300; // x offset of E-field plates from molecule's center, determined empirically, see #66
+  const PLATE_X_OFFSET = 300; // x offset of E-field plates from molecule's center, determined empirically, see #66
   
   /**
    * @param {ThreeAtomsModel} model
@@ -32,27 +32,27 @@ define( require => {
    */
   function ThreeAtomsScreenView( model ) {
 
-    var self = this;
+    const self = this;
 
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific Properties
-    var viewProperties = new ThreeAtomsViewProperties();
+    const viewProperties = new ThreeAtomsViewProperties();
 
     // nodes
-    var moleculeNode = new TriatomicMoleculeNode( model.molecule );
-    var negativePlateNode = PlateNode.createNegative( model.eField );
-    var positivePlateNode = PlateNode.createPositive( model.eField );
-    var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
-    var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
-    var enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
+    const moleculeNode = new TriatomicMoleculeNode( model.molecule );
+    const negativePlateNode = PlateNode.createNegative( model.eField );
+    const positivePlateNode = PlateNode.createPositive( model.eField );
+    const enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
+    const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
+    const enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
 
-    var controlPanel = new MPControlPanel( [
+    const controlPanel = new MPControlPanel( [
       new ThreeAtomsViewControls( viewProperties ),
       new EFieldControl( model.eField.enabledProperty )
     ] );
 
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() {
         self.interruptSubtreeInput();
         model.reset();
@@ -63,7 +63,7 @@ define( require => {
     } );
 
     // Parent for all nodes added to this screen
-    var rootNode = new Node( {
+    const rootNode = new Node( {
       children: [
 
         // nodes are rendered in this order
@@ -81,8 +81,8 @@ define( require => {
 
     // layout, based on molecule location ---------------------------------
 
-    var moleculeX = model.molecule.location.x;
-    var moleculeY = model.molecule.location.y;
+    const moleculeX = model.molecule.location.x;
+    const moleculeY = model.molecule.location.y;
 
     // to left of molecule, vertically centered
     negativePlateNode.right = moleculeX - PLATE_X_OFFSET;

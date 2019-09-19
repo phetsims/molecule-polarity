@@ -24,8 +24,8 @@ define( require => {
   const deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
 
   // constants
-  var REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
-  var REFERENCE_SCALE = 1;
+  const REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
+  const REFERENCE_SCALE = 1;
 
   /**
    * @param {Atom} atom
@@ -34,24 +34,24 @@ define( require => {
    */
   function PartialChargeNode( atom, unitVectorFunction ) {
 
-    var self = this;
+    const self = this;
 
     Node.call( this );
 
     // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
-    var textNode = new Text( '?', {
+    const textNode = new Text( '?', {
       font: new PhetFont( 32 ),
       fill: 'black',
       maxWidth: 50
     } );                                                 
-    var chargeNode = new Node( {
+    const chargeNode = new Node( {
       children: [ textNode ]
     } );
     this.addChild( chargeNode );
 
     // @private
     this.update = function() {
-      var partialCharge = atom.partialChargeProperty.get();
+      const partialCharge = atom.partialChargeProperty.get();
 
       textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
 
@@ -62,7 +62,7 @@ define( require => {
         textNode.text = ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString;
 
         // size proportional to bond dipole magnitude
-        var scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
+        const scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
         if ( scale !== 0 ) {
           chargeNode.setScaleMagnitude( scale );
           chargeNode.centerX = 0;
@@ -70,11 +70,11 @@ define( require => {
         }
 
         // A vector that points in the direction we will need to move the charge node.
-        var unitVector = unitVectorFunction.apply();
+        const unitVector = unitVectorFunction.apply();
 
         // Compute the amount to move the partial charge node
-        var multiplier = ( atom.diameter / 2 ) + ( Math.max( self.width, self.height ) / 2 ) + 3;
-        var relativeOffset = unitVector.timesScalar( multiplier );
+        const multiplier = ( atom.diameter / 2 ) + ( Math.max( self.width, self.height ) / 2 ) + 3;
+        const relativeOffset = unitVector.timesScalar( multiplier );
         self.translation = atom.locationProperty.get().plus( relativeOffset );
       }
     };
@@ -109,7 +109,7 @@ define( require => {
       return new PartialChargeNode( atom, function() {
 
         // along the bond axis, in the direction of the atom
-        var v = atom.locationProperty.get().minus( bond.getCenter() );
+        let v = atom.locationProperty.get().minus( bond.getCenter() );
 
         /*
          * Avoid the case where pressing Reset All causes the atoms to swap locations, temporarily resulting
@@ -135,7 +135,7 @@ define( require => {
      * @static
      */
     createCompositePartialChargeNode: function( atom, molecule ) {
-      var node = new PartialChargeNode( atom, function() {
+      const node = new PartialChargeNode( atom, function() {
         if ( molecule.dipoleProperty.get().magnitude > 0 ) {
           return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
         }

@@ -33,7 +33,7 @@ define( require => {
    */
   function TwoAtomsScreen() {
 
-    var options = {
+    const options = {
       name: screenTwoAtomsString,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon()
@@ -54,38 +54,38 @@ define( require => {
    */
   var createScreenIcon = function() {
 
-    var atomDiameter = 225;
-    var bondLength = 1.15 * atomDiameter;
-    var bondWidth = 0.15 * atomDiameter;
-    var font = new PhetFont( { size: 94, weight: 'bold' } );
+    const atomDiameter = 225;
+    const bondLength = 1.15 * atomDiameter;
+    const bondWidth = 0.15 * atomDiameter;
+    const font = new PhetFont( { size: 94, weight: 'bold' } );
 
-    var background = new Rectangle( 0, 0, 548, 373, { fill: MPColors.SCREEN_BACKGROUND } );
+    const background = new Rectangle( 0, 0, 548, 373, { fill: MPColors.SCREEN_BACKGROUND } );
 
-    var bond = new Line( 0, 0, bondLength, 0, {
+    const bond = new Line( 0, 0, bondLength, 0, {
       stroke: MPColors.BOND,
       lineWidth: bondWidth,
       center: background.center
     } );
 
-    var atomA = new ShadedSphereNode( atomDiameter, {
+    const atomA = new ShadedSphereNode( atomDiameter, {
       mainColor: MPColors.ATOM_A,
       centerX: bond.left,
       y: bond.centerY
     } );
 
-    var atomB = new ShadedSphereNode( atomDiameter, {
+    const atomB = new ShadedSphereNode( atomDiameter, {
       mainColor: MPColors.ATOM_B,
       centerX: bond.right,
       y: bond.centerY
     } );
 
-    var textA = new Text( atomAString, {
+    const textA = new Text( atomAString, {
       font: font,
       maxWidth: 0.75 * atomDiameter,
       center: atomA.center
     } );
 
-    var textB = new Text( atomBString, {
+    const textB = new Text( atomBString, {
       font: font,
       maxWidth: 0.75 * atomDiameter,
       center: atomB.center

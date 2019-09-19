@@ -16,7 +16,7 @@ define( require => {
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
 
   // constants
-  var PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond
+  const PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond
 
   /**
    * @param {Bond} bond
@@ -24,26 +24,26 @@ define( require => {
    */
   function BondDipoleNode( bond ) {
 
-    var self = this;
+    const self = this;
 
     DipoleNode.call( this, bond.dipoleProperty, MPColors.BOND_DIPOLE );
 
     // position the dipole to be parallel with the bond, with some perpendicular offset, unlink not needed
     bond.dipoleProperty.link( function( dipole ) {
 
-      var bondAngle = bond.getAngle();
-      var isInPhase = Math.abs( bondAngle - dipole.angle ) < ( Math.PI / 4 );
-      var dipoleViewLength = dipole.magnitude * ( self.referenceLength / self.referenceMagnitude );
+      const bondAngle = bond.getAngle();
+      const isInPhase = Math.abs( bondAngle - dipole.angle ) < ( Math.PI / 4 );
+      const dipoleViewLength = dipole.magnitude * ( self.referenceLength / self.referenceMagnitude );
 
       // location of tail in polar coordinates, relative to center of bond
-      var offsetX = isInPhase ? ( dipoleViewLength / 2 ) : -( dipoleViewLength / 2 );
-      var offsetAngle = Math.atan( offsetX / PERPENDICULAR_OFFSET );
-      var tailDistance = PERPENDICULAR_OFFSET / Math.cos( offsetAngle );
-      var tailAngle = bondAngle - ( Math.PI / 2 ) - offsetAngle;
+      const offsetX = isInPhase ? ( dipoleViewLength / 2 ) : -( dipoleViewLength / 2 );
+      const offsetAngle = Math.atan( offsetX / PERPENDICULAR_OFFSET );
+      const tailDistance = PERPENDICULAR_OFFSET / Math.cos( offsetAngle );
+      const tailAngle = bondAngle - ( Math.PI / 2 ) - offsetAngle;
 
       // location of tail in Cartesian coordinates, relative to center of bond
-      var tailX = tailDistance * Math.cos( tailAngle );
-      var tailY = tailDistance * Math.sin( tailAngle );
+      const tailX = tailDistance * Math.cos( tailAngle );
+      const tailY = tailDistance * Math.sin( tailAngle );
 
       // location of tail in global coordinate frame
       self.translation = bond.getCenter().plusXY( tailX, tailY );

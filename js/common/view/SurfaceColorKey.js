@@ -51,34 +51,34 @@ define( require => {
     Node.call( this );
 
     // gradient rectangle
-    var gradient = new LinearGradient( 0, 0, options.size.width, options.size.height );
+    const gradient = new LinearGradient( 0, 0, options.size.width, options.size.height );
 
-    for ( var i = 0; i < colors.length; i++ ) {
+    for ( let i = 0; i < colors.length; i++ ) {
 
       // colors are ordered negative to positive, so apply in reverse order
-      var color = colors[ colors.length - i - 1 ];
+      const color = colors[ colors.length - i - 1 ];
       gradient.addColorStop( i / ( colors.length - 1 ), color );
     }
-    var spectrumNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
+    const spectrumNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
       fill: gradient,
       stroke: 'black'
     } );
 
     // title
-    var titleNode = new Text( title, {
+    const titleNode = new Text( title, {
       fill: 'black',
       font: options.titleFont,
       maxWidth: 0.5 * options.size.width // i18n, determined empirically
     } );
 
     // range labels
-    var labelOptions = {
+    const labelOptions = {
       fill: 'black',
       font: options.rangeFont,
       maxWidth: 0.2 * options.size.width // i18n, determined empirically
     };
-    var leftLabelNode = new Text( leftLabel, labelOptions );
-    var rightLabelNode = new Text( rightLabel, labelOptions );
+    const leftLabelNode = new Text( leftLabel, labelOptions );
+    const rightLabelNode = new Text( rightLabel, labelOptions );
 
     // rendering order
     this.addChild( spectrumNode );

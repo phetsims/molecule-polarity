@@ -19,7 +19,7 @@ define( require => {
   // strings
   const moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
-  var options = {
+  const options = {
 
     // Creates content for the Options dialog
     createOptionsDialogContent: () => new MPOptionsNode(),
@@ -34,13 +34,13 @@ define( require => {
 
   SimLauncher.launch( function() {
 
-    var screens = [
+    const screens = [
       new TwoAtomsScreen(),
       new ThreeAtomsScreen(),
       new RealMoleculesScreen()
     ];
 
-    var sim = new Sim( moleculePolarityTitleString, screens, options );
+    const sim = new Sim( moleculePolarityTitleString, screens, options );
     sim.start();
   } );
 } );

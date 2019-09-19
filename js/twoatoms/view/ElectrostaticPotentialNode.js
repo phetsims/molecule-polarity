@@ -42,29 +42,29 @@ define( require => {
       assert && assert( this.colors.length === 3, 'this implementation only works for 3 colors' );
 
       // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
-      var deltaEN = this.molecule.getDeltaEN();
+      const deltaEN = this.molecule.getDeltaEN();
       if ( deltaEN === 0 ) {
         this.path.fill = this.colors[ 1 ];
       }
       else {
-        var scale = Math.abs( deltaEN / this.electronegativityRange.getLength() );
+        const scale = Math.abs( deltaEN / this.electronegativityRange.getLength() );
 
-        var surfaceWidth = this.getSurfaceWidth();
+        const surfaceWidth = this.getSurfaceWidth();
 
         // compute the gradient width
-        var gradientWidth = Util.linear( 1, 0, surfaceWidth / 2, surfaceWidth * MPConstants.SURFACE_GRADIENT_WIDTH_MULTIPLIER, scale );
+        const gradientWidth = Util.linear( 1, 0, surfaceWidth / 2, surfaceWidth * MPConstants.SURFACE_GRADIENT_WIDTH_MULTIPLIER, scale );
 
         // gradient endpoints prior to accounting for molecule transform
-        var pointA = new Vector2( -gradientWidth / 2, 0 );
-        var pointB = new Vector2( gradientWidth / 2, 0 );
+        const pointA = new Vector2( -gradientWidth / 2, 0 );
+        const pointB = new Vector2( gradientWidth / 2, 0 );
 
         // choose colors based on polarity
-        var colorCenter = this.colors[ 1 ];
-        var colorA = ( deltaEN > 0 ) ? this.colors[ 2 ] : this.colors[ 0 ];
-        var colorB = ( deltaEN > 0 ) ? this.colors[ 0 ] : this.colors[ 2 ];
+        const colorCenter = this.colors[ 1 ];
+        const colorA = ( deltaEN > 0 ) ? this.colors[ 2 ] : this.colors[ 0 ];
+        const colorB = ( deltaEN > 0 ) ? this.colors[ 0 ] : this.colors[ 2 ];
 
         // create the gradients
-        var gradient = new LinearGradient( pointA.x, pointA.y, pointB.x, pointB.y );
+        const gradient = new LinearGradient( pointA.x, pointA.y, pointB.x, pointB.y );
         gradient.addColorStop( 0, colorA );
         gradient.addColorStop( 0.5, colorCenter );
         gradient.addColorStop( 1, colorB );

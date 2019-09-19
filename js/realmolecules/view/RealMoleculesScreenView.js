@@ -43,10 +43,10 @@ define( require => {
     }
     else {
 
-      var self = this;
+      const self = this;
 
       // view-specific Properties
-      var viewProperties = new RealMoleculesViewProperties();
+      const viewProperties = new RealMoleculesViewProperties();
 
       // @private
       this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
@@ -54,11 +54,11 @@ define( require => {
         viewerSize: new Dimension2( 450, 450 )
       } );
 
-      var electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer );
-      var comboBoxListParent = new Node();
-      var moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
+      const electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer );
+      const comboBoxListParent = new Node();
+      const moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
 
-      var electrostaticPotentialColorKey = new Node();
+      const electrostaticPotentialColorKey = new Node();
 
       // unlink not needed
       MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( function( surfaceType ) {
@@ -71,14 +71,14 @@ define( require => {
         }
       } );
 
-      var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+      const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
-      var controlPanel = new MPControlPanel( [
+      const controlPanel = new MPControlPanel( [
         new RealMoleculesViewControls( viewProperties ),
         new SurfaceTypeControl( viewProperties.surfaceTypeProperty )
       ] );
 
-      var resetAllButton = new ResetAllButton( {
+      const resetAllButton = new ResetAllButton( {
         listener: function() {
           self.interruptSubtreeInput();
           model.reset();
@@ -88,7 +88,7 @@ define( require => {
       } );
 
       // Parent for all nodes added to this screen
-      var rootNode = new Node( {
+      const rootNode = new Node( {
         children: [
           this.moleculeViewer,
           electronegativityTableNode,

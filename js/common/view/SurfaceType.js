@@ -12,7 +12,7 @@ define( require => {
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  var SurfaceType = Object.freeze( {
+  const SurfaceType = Object.freeze( {
     NONE: 'none',
     ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
     ELECTRON_DENSITY: 'electronDensity'

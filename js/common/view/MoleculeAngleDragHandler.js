@@ -20,15 +20,15 @@ define( require => {
    */
   function MoleculeAngleDragHandler( molecule, relativeNode ) {
 
-    var previousAngle; // angle between the pointer and the molecule when the drag started
+    let previousAngle; // angle between the pointer and the molecule when the drag started
 
     /**
      * Gets the angle of the pointer relative to relativeNode.
      * @param {Event} event
      * @returns {number} angle in radians
      */
-    var getAngle = function( event ) {
-      var point = relativeNode.globalToParentPoint( event.pointer.point );
+    const getAngle = function( event ) {
+      const point = relativeNode.globalToParentPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle;
     };
 
@@ -42,7 +42,7 @@ define( require => {
       },
 
       drag: function( event ) {
-        var currentAngle = getAngle( event );
+        const currentAngle = getAngle( event );
         molecule.angleProperty.set( molecule.angleProperty.get() + currentAngle - previousAngle );
         previousAngle = currentAngle;
       },

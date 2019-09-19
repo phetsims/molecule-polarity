@@ -32,17 +32,17 @@ define( require => {
     Node.call( this );
 
     // nodes
-    var bondABNode = new BondNode( molecule.bondAB );
-    var bondBCNode = new BondNode( molecule.bondBC );
-    var atomANode = new AtomNode( molecule.atomA );
-    var atomBNode = new AtomNode( molecule.atomB );
-    var atomCNode = new AtomNode( molecule.atomC );
-    var arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
-    var arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC );
-    var arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB );
+    const bondABNode = new BondNode( molecule.bondAB );
+    const bondBCNode = new BondNode( molecule.bondBC );
+    const atomANode = new AtomNode( molecule.atomA );
+    const atomBNode = new AtomNode( molecule.atomB );
+    const atomCNode = new AtomNode( molecule.atomC );
+    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    const arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC );
+    const arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB );
 
     // We'll be moving the dragged atom to the front, because A & C can overlap
-    var atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
+    const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
 
     // @private nodes whose visibility may change
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
@@ -67,21 +67,21 @@ define( require => {
     bondABNode.cursor = bondBCNode.cursor = 'pointer'; // bonds
 
     // rotate molecule by dragging atom B or bonds
-    var dragHandlerB = new MoleculeAngleDragHandler( molecule, this );
-    var dragHandlerAB = new MoleculeAngleDragHandler( molecule, this );
-    var dragHandlerBC = new MoleculeAngleDragHandler( molecule, this );
+    const dragHandlerB = new MoleculeAngleDragHandler( molecule, this );
+    const dragHandlerAB = new MoleculeAngleDragHandler( molecule, this );
+    const dragHandlerBC = new MoleculeAngleDragHandler( molecule, this );
     atomBNode.addInputListener( dragHandlerB );
     bondABNode.addInputListener( dragHandlerAB );
     bondBCNode.addInputListener( dragHandlerBC );
 
     // change bond angles by dragging atom A or C
-    var dragHandlerA = new BondAngleDragHandler( molecule, molecule.bondAngleAProperty );
-    var dragHandlerC = new BondAngleDragHandler( molecule, molecule.bondAngleCProperty );
+    const dragHandlerA = new BondAngleDragHandler( molecule, molecule.bondAngleAProperty );
+    const dragHandlerC = new BondAngleDragHandler( molecule, molecule.bondAngleCProperty );
     atomANode.addInputListener( dragHandlerA );
     atomCNode.addInputListener( dragHandlerC );
 
     // When the user drags any atom or bond, hide the cueing arrows.
-    var hideArrows = function() {
+    const hideArrows = function() {
       if ( dragHandlerA.dragging || dragHandlerB.dragging || dragHandlerC.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
         arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
       }

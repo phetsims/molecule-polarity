@@ -28,7 +28,7 @@ define( require => {
   const viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   // constants
-  var CONTROL_TEXT_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
+  const CONTROL_TEXT_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
     maxWidth: 225 // a bit wider in for this Screen
   } );
 
@@ -39,27 +39,27 @@ define( require => {
   function RealMoleculesViewControls( viewProperties ) {
 
     // title
-    var titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // Checkbox labels
-    var bondDipolesLabel = new HBox( {
+    const bondDipolesLabel = new HBox( {
       children: [ new Text( bondDipolesString, CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
-    var molecularDipoleLabel = new HBox( {
+    const molecularDipoleLabel = new HBox( {
       children: [ new Text( molecularDipoleString, CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
-    var partialChargesLabel = new Text( partialChargesString, CONTROL_TEXT_OPTIONS );
-    var atomLabelsLabel = new Text( atomLabelsString, CONTROL_TEXT_OPTIONS );
-    var atomElectronegativityLabel = new Text( atomElectronegativitiesString, CONTROL_TEXT_OPTIONS );
+    const partialChargesLabel = new Text( partialChargesString, CONTROL_TEXT_OPTIONS );
+    const atomLabelsLabel = new Text( atomLabelsString, CONTROL_TEXT_OPTIONS );
+    const atomElectronegativityLabel = new Text( atomElectronegativitiesString, CONTROL_TEXT_OPTIONS );
 
     // Checkboxes
-    var bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
-    var molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
-    var partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
-    var atomLabelsCheckbox = new Checkbox( atomLabelsLabel, viewProperties.atomLabelsVisibleProperty );
-    var atomElectronegativitiesCheckbox = new Checkbox( atomElectronegativityLabel, viewProperties.atomElectronegativitiesVisibleProperty );
+    const bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
+    const molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
+    const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
+    const atomLabelsCheckbox = new Checkbox( atomLabelsLabel, viewProperties.atomLabelsVisibleProperty );
+    const atomElectronegativitiesCheckbox = new Checkbox( atomElectronegativityLabel, viewProperties.atomElectronegativitiesVisibleProperty );
 
     VBox.call( this, {
       align: 'left',

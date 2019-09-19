@@ -23,7 +23,7 @@ define( require => {
    */
   function BondNode( bond ) {
 
-    var self = this;
+    const self = this;
 
     Line.call( this, bond.atom1.locationProperty.get(), bond.atom2.locationProperty.get(), {
       stroke: MPColors.BOND,

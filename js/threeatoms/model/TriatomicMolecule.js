@@ -75,10 +75,10 @@ define( require => {
    * @param {Vector2 location location of the molecule
    * @param {number} angle orientation of the molecule
    */
-  var updateAtomLocation = function( atom, bondAngle, location, angle ) {
-    var thetaA = angle + bondAngle;
-    var xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + location.x;
-    var yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + location.y;
+  const updateAtomLocation = function( atom, bondAngle, location, angle ) {
+    const thetaA = angle + bondAngle;
+    const xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + location.x;
+    const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + location.y;
     atom.locationProperty.set( new Vector2( xA, yA ) );
   };
 
@@ -110,8 +110,8 @@ define( require => {
      */
     updatePartialCharges: function() {
 
-      var deltaAB = this.atomA.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
-      var deltaCB = this.atomC.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
+      const deltaAB = this.atomA.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
+      const deltaCB = this.atomC.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
 
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
       this.atomA.partialChargeProperty.set( -deltaAB );

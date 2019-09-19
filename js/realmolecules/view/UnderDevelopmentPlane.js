@@ -25,21 +25,21 @@ define( require => {
   const underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
 
   // constants
-  var LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
+  const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
 
   /**
    * @constructor
    */
   function UnderDevelopmentPlane( layoutBounds ) {
 
-    var linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
+    const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
       href: LEGACY_URL,
       text: LEGACY_URL
     } );
 
-    var maxTextWidth = 0.75 * layoutBounds.width;
+    const maxTextWidth = 0.75 * layoutBounds.width;
 
-    var vBox = new VBox( {
+    const vBox = new VBox( {
       align: 'left',
       spacing: 20,
       children: [
@@ -64,7 +64,7 @@ define( require => {
       ]
     } );
 
-    var panel = new Panel( vBox, {
+    const panel = new Panel( vBox, {
       cornerRadius: 10,
       xMargin: 25,
       yMargin: 50,

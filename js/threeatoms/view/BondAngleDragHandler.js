@@ -24,15 +24,15 @@ define( require => {
    */
   function BondAngleDragHandler( molecule, bondAngleProperty ) {
 
-    var previousAngle = 0;
+    let previousAngle = 0;
 
     /**
      * Finds the angle about the molecule's location.
      * @param {Event} event
      * @returns {number} angle in radians
      */
-    var getAngle = function( event ) {
-      var point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
+    const getAngle = function( event ) {
+      const point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle;
     };
 
@@ -47,7 +47,7 @@ define( require => {
       },
 
       drag: function( event ) {
-        var currentAngle = getAngle( event );
+        const currentAngle = getAngle( event );
         bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
         previousAngle = currentAngle;
       },

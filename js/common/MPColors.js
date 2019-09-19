@@ -14,10 +14,10 @@ define( require => {
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
-  var SURFACE_ALPHA = 0.72;
-  var NEUTRAL_GREEN = new Color( 31, 247, 0 );
+  const SURFACE_ALPHA = 0.72;
+  const NEUTRAL_GREEN = new Color( 31, 247, 0 );
 
-  var MPColors = {
+  const MPColors = {
 
     SCREEN_BACKGROUND: 'rgb( 180, 205, 255)',
 

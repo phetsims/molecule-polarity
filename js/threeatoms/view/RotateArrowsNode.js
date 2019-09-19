@@ -25,10 +25,10 @@ define( require => {
   function RotateArrowsNode( molecule, atom ) {
 
     // arrow configuration
-    var arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
-    var arrowPathOptions = { fill: atom.color, stroke: 'gray' };
-    var radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
-    var theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
+    const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
+    const arrowPathOptions = { fill: atom.color, stroke: 'gray' };
+    const radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
+    const theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
     Node.call( this, {
       children: [
@@ -38,7 +38,7 @@ define( require => {
     } );
 
     // Align with atom location and molecular dipole
-    var updateTransform = function() {
+    const updateTransform = function() {
       this.matrix = Matrix3
         .translationFromVector( atom.locationProperty.get() )
         .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle + Math.PI / 2 ) );

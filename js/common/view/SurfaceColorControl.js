@@ -22,8 +22,8 @@ define( require => {
   const surfaceColorRealMoleculesString = require( 'string!MOLECULE_POLARITY/surfaceColorRealMolecules' );
 
   // constants
-  var RADIO_BUTTON_OPTIONS = { radius: 8 };
-  var COLOR_KEY_OPTIONS = {
+  const RADIO_BUTTON_OPTIONS = { radius: 8 };
+  const COLOR_KEY_OPTIONS = {
     size: new Dimension2( 150, 15 ),
     titleVisible: false,
     rangeFont: new PhetFont( 8 ),
@@ -37,19 +37,19 @@ define( require => {
    */
   function SurfaceColorControl( surfaceColorProperty ) {
 
-    var surfaceColorLabel = new Text( surfaceColorRealMoleculesString, {
+    const surfaceColorLabel = new Text( surfaceColorRealMoleculesString, {
       font: new PhetFont( 14 ),
       maxWidth: 400
     } );
 
-    var rwbButton = new AquaRadioButton(
+    const rwbButton = new AquaRadioButton(
       surfaceColorProperty,
       'RWB',
       SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
       RADIO_BUTTON_OPTIONS
     );
 
-    var roygbButton = new AquaRadioButton(
+    const roygbButton = new AquaRadioButton(
       surfaceColorProperty,
       'ROYGB',
       SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),

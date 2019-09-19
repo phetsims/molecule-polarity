@@ -30,7 +30,7 @@ define( require => {
    */
   function RealMoleculesScreen() {
 
-    var options = {
+    const options = {
       name: screenRealMoleculesString,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: new Image( homeIcon ),

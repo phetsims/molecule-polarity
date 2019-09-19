@@ -68,16 +68,16 @@ define( require => {
      */
     updateAtomLocations: function() {
 
-      var radius = MPConstants.BOND_LENGTH / 2;
+      const radius = MPConstants.BOND_LENGTH / 2;
 
       // atom A
-      var xA = ( radius * Math.cos( this.angleProperty.get() + Math.PI ) ) + this.location.x;
-      var yA = ( radius * Math.sin( this.angleProperty.get() + Math.PI ) ) + this.location.y;
+      const xA = ( radius * Math.cos( this.angleProperty.get() + Math.PI ) ) + this.location.x;
+      const yA = ( radius * Math.sin( this.angleProperty.get() + Math.PI ) ) + this.location.y;
       this.atomA.locationProperty.set( new Vector2( xA, yA ) );
 
       // atom B
-      var xB = ( radius * Math.cos( this.angleProperty.get() ) ) + this.location.x;
-      var yB = ( radius * Math.sin( this.angleProperty.get() ) ) + this.location.y;
+      const xB = ( radius * Math.cos( this.angleProperty.get() ) ) + this.location.x;
+      const yB = ( radius * Math.sin( this.angleProperty.get() ) ) + this.location.y;
       this.atomB.locationProperty.set( new Vector2( xB, yB ) );
     },
 
@@ -87,7 +87,7 @@ define( require => {
      */
     updatePartialCharges: function() {
 
-      var deltaEN = this.getDeltaEN();
+      const deltaEN = this.getDeltaEN();
 
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
       this.atomA.partialChargeProperty.set( deltaEN );

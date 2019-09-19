@@ -24,7 +24,7 @@ define( require => {
   const surfaceString = require( 'string!MOLECULE_POLARITY/surface' );
 
   // constants
-  var RADIO_BUTTON_OPTIONS = {
+  const RADIO_BUTTON_OPTIONS = {
     radius: 10
   };
 
@@ -35,14 +35,14 @@ define( require => {
   function SurfaceTypeControl( surfaceTypeProperty ) {
 
     // title
-    var titleNode = new Text( surfaceString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleNode = new Text( surfaceString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // radio buttons
-    var noneButton = new AquaRadioButton( surfaceTypeProperty, SurfaceType.NONE,
+    const noneButton = new AquaRadioButton( surfaceTypeProperty, SurfaceType.NONE,
       new Text( noneString, MPConstants.CONTROL_TEXT_OPTIONS ), RADIO_BUTTON_OPTIONS );
-    var electrostaticPotentialButton = new AquaRadioButton( surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL,
+    const electrostaticPotentialButton = new AquaRadioButton( surfaceTypeProperty, SurfaceType.ELECTROSTATIC_POTENTIAL,
       new Text( electrostaticPotentialString, MPConstants.CONTROL_TEXT_OPTIONS ), RADIO_BUTTON_OPTIONS );
-    var electronDensityButton = new AquaRadioButton( surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY,
+    const electronDensityButton = new AquaRadioButton( surfaceTypeProperty, SurfaceType.ELECTRON_DENSITY,
       new Text( electronDensityString, MPConstants.CONTROL_TEXT_OPTIONS ), RADIO_BUTTON_OPTIONS );
 
     // vertical panel

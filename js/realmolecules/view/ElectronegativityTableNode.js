@@ -22,10 +22,10 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  var CELL_SIZE = new Dimension2( 50, 50 );
-  var BACKGROUND_COLOR = new Color( 210, 210, 210 );
-  var NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
-  var HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
+  const CELL_SIZE = new Dimension2( 50, 50 );
+  const BACKGROUND_COLOR = new Color( 210, 210, 210 );
+  const NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
+  const HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
 
   // strings
   const atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
@@ -38,7 +38,7 @@ define( require => {
 
     Node.call( this );
 
-    var titleNode = new Text( atomElectronegativitiesString, {
+    const titleNode = new Text( atomElectronegativitiesString, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       maxWidth: 300
     } );
@@ -56,23 +56,23 @@ define( require => {
     ];
 
     // layout cells, first and last cells are horizontally separated from others
-    var xGap = 12;
-    var x = 0;
-    var y = 0;
-    var firstCell = this.cells[ 0 ];
+    const xGap = 12;
+    let x = 0;
+    const y = 0;
+    const firstCell = this.cells[ 0 ];
     this.addChild( firstCell );
     firstCell.x = x;
     firstCell.y = y;
     x = x + firstCell.width + xGap;
-    for ( var i = 1; i < this.cells.length - 1; i++ ) {
-      var cell = this.cells[ i ];
+    for ( let i = 1; i < this.cells.length - 1; i++ ) {
+      const cell = this.cells[ i ];
       this.addChild( cell );
       cell.x = x;
       cell.y = y;
       x = cell.right;
     }
     x += xGap;
-    var lastCell = this.cells[ this.cells.length - 1 ];
+    const lastCell = this.cells[ this.cells.length - 1 ];
     this.addChild( lastCell );
     lastCell.x = x;
     lastCell.y = y;
@@ -82,7 +82,7 @@ define( require => {
     titleNode.top = firstCell.bottom + 4;
 
     // highlight elements displayed by the viewer
-    var self = this;
+    const self = this;
     moleculeViewer.elementsProperty.lazyLink( function( elements ) {
       self.resetCells();
       elements.forEach( function( element ) {
@@ -104,7 +104,7 @@ define( require => {
 
     // @private Sets the {Color} color of a specified {number} element
     setColor: function( elementNumber, color ) {
-      for ( var i = 0; i < this.cells.length; i++ ) {
+      for ( let i = 0; i < this.cells.length; i++ ) {
         if ( this.cells[ i ].elementNumber === elementNumber ) {
           this.cells[ i ].enable( color );
           break;

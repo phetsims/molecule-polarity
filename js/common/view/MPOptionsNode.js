@@ -23,10 +23,10 @@ define( require => {
    */
   function MPOptionsNode() {
 
-    var dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty );
-    var surfaceColorControl = ( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
+    const dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty );
+    const surfaceColorControl = ( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
 
-    var children = [
+    const children = [
       dipoleDirectionControl,
       surfaceColorControl
     ];

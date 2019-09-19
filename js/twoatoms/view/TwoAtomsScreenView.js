@@ -28,7 +28,7 @@ define( require => {
   const TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
   
   // constants
-  var PLATE_X_OFFSET = 250; // x offset of E-field plates from molecule's center, determined empirically, see #66
+  const PLATE_X_OFFSET = 250; // x offset of E-field plates from molecule's center, determined empirically, see #66
 
   /**
    * @param {TwoAtomsModel} model
@@ -36,30 +36,30 @@ define( require => {
    */
   function TwoAtomsScreenView( model ) {
 
-    var self = this;
+    const self = this;
 
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
     // view-specific Properties
-    var viewProperties = new TwoAtomsViewProperties();
+    const viewProperties = new TwoAtomsViewProperties();
 
     // nodes
-    var moleculeNode = new DiatomicMoleculeNode( model.molecule );
-    var negativePlateNode = PlateNode.createNegative( model.eField );
-    var positivePlateNode = PlateNode.createPositive( model.eField );
-    var enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
-    var enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
-    var bondCharacterNode = new BondCharacterNode( model.molecule );
-    var electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
-    var electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+    const moleculeNode = new DiatomicMoleculeNode( model.molecule );
+    const negativePlateNode = PlateNode.createNegative( model.eField );
+    const positivePlateNode = PlateNode.createPositive( model.eField );
+    const enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
+    const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
+    const bondCharacterNode = new BondCharacterNode( model.molecule );
+    const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
+    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
-    var controlPanel = new MPControlPanel( [
+    const controlPanel = new MPControlPanel( [
       new TwoAtomsViewControls( viewProperties ),
       new SurfaceTypeControl( viewProperties.surfaceTypeProperty ),
       new EFieldControl( model.eField.enabledProperty )
     ] );
 
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() {
         self.interruptSubtreeInput();
         model.reset();
@@ -70,7 +70,7 @@ define( require => {
     } );
 
     // Parent for all nodes added to this screen
-    var rootNode = new Node( {
+    const rootNode = new Node( {
       children: [
 
         // nodes are rendered in this order
@@ -90,8 +90,8 @@ define( require => {
 
     // layout, based on molecule location ---------------------------------
 
-    var moleculeX = model.molecule.location.x;
-    var moleculeY = model.molecule.location.y;
+    const moleculeX = model.molecule.location.x;
+    const moleculeY = model.molecule.location.y;
 
     // to left of molecule, vertically centered
     negativePlateNode.right = moleculeX - PLATE_X_OFFSET;

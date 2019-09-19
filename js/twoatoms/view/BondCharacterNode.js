@@ -28,12 +28,12 @@ define( require => {
   const moreIonicString = require( 'string!MOLECULE_POLARITY/moreIonic' );
 
   // constants
-  var TRACK_WIDTH = 435;
-  var TRACK_CORNER_RADIUS = 5;
-  var LABEL_X_INSET = 10;
-  var POINTER_X_INSET = 10;
-  var Y_MARGIN = 3;
-  var Y_SPACING = 3;
+  const TRACK_WIDTH = 435;
+  const TRACK_CORNER_RADIUS = 5;
+  const LABEL_X_INSET = 10;
+  const POINTER_X_INSET = 10;
+  const Y_MARGIN = 3;
+  const Y_SPACING = 3;
 
   /**
    * @param {DiatomicMolecule} molecule
@@ -44,27 +44,27 @@ define( require => {
     Node.call( this );
 
     // title
-    var titleNode = new Text( bondCharacterString, {
+    const titleNode = new Text( bondCharacterString, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     } );
 
     // labels
-    var labelOptions = {
+    const labelOptions = {
       font: new PhetFont( 16 ),
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     };
-    var leftLabelNode = new Text( moreCovalentString, labelOptions );
-    var rightLabelNode = new Text( moreIonicString, labelOptions );
+    const leftLabelNode = new Text( moreCovalentString, labelOptions );
+    const rightLabelNode = new Text( moreIonicString, labelOptions );
 
     // pointer that moves along the track, not interactive
-    var pointerNode = new PointerNode( molecule.atomA, molecule.atomB );
+    const pointerNode = new PointerNode( molecule.atomA, molecule.atomB );
 
     // track
-    var trackHeight = ( 2 * Y_MARGIN ) + titleNode.height + Y_SPACING + pointerNode.height;
-    var trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, TRACK_CORNER_RADIUS, TRACK_CORNER_RADIUS,
+    const trackHeight = ( 2 * Y_MARGIN ) + titleNode.height + Y_SPACING + pointerNode.height;
+    const trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, TRACK_CORNER_RADIUS, TRACK_CORNER_RADIUS,
       { fill: 'white', stroke: 'black' } );
 
     // rendering order
@@ -102,10 +102,10 @@ define( require => {
   function PointerNode( atom1, atom2 ) {
     Node.call( this );
 
-    var atomRadius = 5;
-    var bondNode = new Line( 0, 0, 7, 0, { lineWidth: 3, stroke: 'rgb(128,128,128)' } );
-    var atom1Node = new Circle( atomRadius, { fill: atom1.color, stroke: 'black' } );
-    var atom2Node = new Circle( atomRadius, { fill: atom2.color, stroke: 'black' } );
+    const atomRadius = 5;
+    const bondNode = new Line( 0, 0, 7, 0, { lineWidth: 3, stroke: 'rgb(128,128,128)' } );
+    const atom1Node = new Circle( atomRadius, { fill: atom1.color, stroke: 'black' } );
+    const atom2Node = new Circle( atomRadius, { fill: atom2.color, stroke: 'black' } );
 
     this.addChild( bondNode );
     this.addChild( atom1Node );

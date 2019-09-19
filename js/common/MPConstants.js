@@ -15,7 +15,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
-  var MPConstants = {
+  const MPConstants = {
 
     // ScreenView
     SCREEN_VIEW_OPTIONS: { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) },

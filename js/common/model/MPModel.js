@@ -18,7 +18,7 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  var MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
+  const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
 
   /**
    * @param {Molecule} molecule
@@ -39,8 +39,8 @@ define( require => {
    * @param {number} angle
    * @returns {number}
    */
-  var normalizeAngle = function( angle ) {
-    var normalizedAngle = angle % ( 2 * Math.PI );
+  const normalizeAngle = function( angle ) {
+    let normalizedAngle = angle % ( 2 * Math.PI );
     if ( normalizedAngle < 0 ) {
       normalizedAngle = ( 2 * Math.PI ) + angle;
     }
@@ -77,7 +77,7 @@ define( require => {
      */
     updateMoleculeOrientation: function( molecule ) {
 
-      var dipole = molecule.dipoleProperty.get();
+      let dipole = molecule.dipoleProperty.get();
 
       // This algorithm is for a dipole that points from positive to negative charge, and is therefore
       // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
@@ -87,12 +87,12 @@ define( require => {
       }
 
       // magnitude of angular velocity is proportional to molecular dipole magnitude
-      var deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
+      const deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
 
       // convert angle to range [0,2*PI)
-      var dipoleAngle = normalizeAngle( dipole.angle );
+      const dipoleAngle = normalizeAngle( dipole.angle );
 
-      var newDipoleAngle;
+      let newDipoleAngle;
 
       // move the molecular dipole one step towards alignment with the E-field
       if ( dipoleAngle === 0 ) {
@@ -122,7 +122,7 @@ define( require => {
       }
 
       // convert dipole rotation to molecule rotation
-      var deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
+      const deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
       molecule.angleProperty.set( molecule.angleProperty.get() + deltaMoleculeAngle );
     }
   } );

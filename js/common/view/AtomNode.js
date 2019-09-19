@@ -24,10 +24,10 @@ define( require => {
   function AtomNode( atom ) {
 
     // atom
-    var sphereNode = new ShadedSphereNode( atom.diameter, { mainColor: atom.color } );
+    const sphereNode = new ShadedSphereNode( atom.diameter, { mainColor: atom.color } );
 
     // name centered on atom
-    var textNode = new Text( atom.name, {
+    const textNode = new Text( atom.name, {
       font: new PhetFont( { size: 32, weight: 'bold' } ),
       maxWidth: 0.75 * atom.diameter,
       centerX: sphereNode.centerX,

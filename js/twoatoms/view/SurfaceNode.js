@@ -21,7 +21,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when computing surface size
+  const DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when computing surface size
 
   /**
    * @param {DiatomicMolecule} molecule
@@ -35,7 +35,7 @@ define( require => {
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
 
-    var self = this;
+    const self = this;
 
     Node.call( this );
 
@@ -45,7 +45,7 @@ define( require => {
     this.colors = colors;
 
     // each atom is surrounded with a 'cloud' (circle)
-    var radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
+    const radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
     this.path = new Path( new Shape()
       .arc( molecule.location.x - this.molecule.atomB.locationProperty.get().x, molecule.location.y - this.molecule.atomB.locationProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
       .arc( molecule.location.x - this.molecule.atomA.locationProperty.get().x, molecule.location.y - this.molecule.atomA.locationProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
@@ -53,7 +53,7 @@ define( require => {
     this.addChild( this.path );
 
     // update surface when atoms move or electronegativity changes
-    var update = function() {
+    const update = function() {
       if ( self.visible ) {
         self.updateFill();
       }

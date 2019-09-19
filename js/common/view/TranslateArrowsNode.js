@@ -30,15 +30,15 @@ define( require => {
       length: 25 // relatively short, so we don't need curved arrows
     }, options );
 
-    var leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
-    var rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+    const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+    const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
 
     // create "normalized" shapes at (0,0) with no rotation
-    var arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
-    var radius = atom.diameter / 2;
-    var spacing = 2;
-    var leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
-    var rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
+    const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
+    const radius = atom.diameter / 2;
+    const spacing = 2;
+    const leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
+    const rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
 
     assert && assert( !options.children, 'decoration not supported' );
     options.children = [ leftArrowNode, rightArrowNode ];
@@ -47,9 +47,9 @@ define( require => {
     atom.locationProperty.link( function() {
 
       // transform the arrow shapes to account for atom location and relationship to molecule location
-      var v = molecule.location.minus( atom.locationProperty.get() );
-      var angle = v.angle - ( Math.PI / 2 );
-      var transform = new Transform3( Matrix3.translationFromVector( atom.locationProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
+      const v = molecule.location.minus( atom.locationProperty.get() );
+      const angle = v.angle - ( Math.PI / 2 );
+      const transform = new Transform3( Matrix3.translationFromVector( atom.locationProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
       leftArrowNode.shape = transform.transformShape( leftArrow );
       rightArrowNode.shape = transform.transformShape( rightArrow );
     } );

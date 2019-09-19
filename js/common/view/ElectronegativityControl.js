@@ -55,21 +55,21 @@ define( require => {
     }, options );
 
     // titles
-    var titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
+    const titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: options.trackSize.width
     } );
-    var subtitleNode = new Text( electronegativityString, {
+    const subtitleNode = new Text( electronegativityString, {
       font: new PhetFont( 18 ),
       maxWidth: options.trackSize.width
     } );
 
     // custom thumb
-    var thumbNode = new PointySliderThumb( { size: options.thumbSize } );
+    const thumbNode = new PointySliderThumb( { size: options.thumbSize } );
     thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
 
     // slider
-    var sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
+    const sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
       thumbNode: thumbNode,
       thumbYOffset: 10,
       trackSize: options.trackSize,
@@ -87,21 +87,21 @@ define( require => {
     } );
 
     // slider tick labels
-    var tickLabelOptions = {
+    const tickLabelOptions = {
       font: new PhetFont( 16 ),
       maxWidth: 40
     };
     sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
     sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
-    var centerTick = options.range.min + ( options.range.getLength() / 2 );
+    const centerTick = options.range.min + ( options.range.getLength() / 2 );
     sliderNode.addMajorTick( centerTick );
-    for ( var i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
+    for ( let i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
       if ( i !== centerTick ) {
         sliderNode.addMinorTick( i );
       }
     }
 
-    var content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
+    const content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
 
     // layout
     subtitleNode.centerX = sliderNode.centerX = titleNode.centerX;

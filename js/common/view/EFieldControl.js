@@ -22,7 +22,7 @@ define( require => {
   const onString = require( 'string!MOLECULE_POLARITY/on' );
 
   // constants
-  var SWITCH_LABEL_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
+  const SWITCH_LABEL_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
     maxWidth: 80  // i18n, set empirically
   } );
 
@@ -33,10 +33,10 @@ define( require => {
   function EFieldControl( eFieldEnabledProperty ) {
 
     // title
-    var titleNode = new Text( electricFieldString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleNode = new Text( electricFieldString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // on/off switch
-    var onOffSwitch = new ABSwitch( eFieldEnabledProperty,
+    const onOffSwitch = new ABSwitch( eFieldEnabledProperty,
       false, new Text( offString, SWITCH_LABEL_OPTIONS ),
       true, new Text( onString, SWITCH_LABEL_OPTIONS ), {
         xSpacing: 12,

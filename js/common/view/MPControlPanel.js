@@ -25,16 +25,16 @@ define( require => {
   function MPControlPanel( subPanels ) {
 
     // horizontal separator width is the max width of the subPanels
-    var separatorWidth = _.maxBy( subPanels, function( node ) { return node.width; } ).width;
+    const separatorWidth = _.maxBy( subPanels, function( node ) { return node.width; } ).width;
 
     // put a horizontal separator between each sub-panel
-    var children = [ subPanels[ 0 ] ];
-    for ( var i = 1; i < subPanels.length; i++ ) {
+    const children = [ subPanels[ 0 ] ];
+    for ( let i = 1; i < subPanels.length; i++ ) {
       children.push( new HSeparator( separatorWidth ) );
       children.push( subPanels[ i ] );
     }
 
-    var content = new VBox( {
+    const content = new VBox( {
       children: children,
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING

@@ -11,7 +11,7 @@ define( require => {
   // modules
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
-  var MPQueryParameters = QueryStringMachine.getAll( {
+  const MPQueryParameters = QueryStringMachine.getAll( {
 
     // Default direction of dipoles: 'positiveToNegative' or 'negativeToPositive' (IUPAC convention).
     // This can also be changed from the Options dialog. See issue #5

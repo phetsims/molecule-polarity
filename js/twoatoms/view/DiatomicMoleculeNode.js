@@ -30,11 +30,11 @@ define( require => {
   function DiatomicMoleculeNode( molecule ) {
 
     // nodes
-    var atomANode = new AtomNode( molecule.atomA );
-    var atomBNode = new AtomNode( molecule.atomB );
-    var bondNode = new BondNode( molecule.bond );
-    var arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
-    var arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
+    const atomANode = new AtomNode( molecule.atomA );
+    const atomBNode = new AtomNode( molecule.atomB );
+    const bondNode = new BondNode( molecule.bond );
+    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    const arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
 
     // @private
     this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond );
@@ -54,11 +54,11 @@ define( require => {
     } );
 
     // rotate molecule by dragging anywhere
-    var dragHandler = new MoleculeAngleDragHandler( molecule, this );
+    const dragHandler = new MoleculeAngleDragHandler( molecule, this );
     this.addInputListener( dragHandler );
 
     // When the user drags any atom or bond, hide the cueing arrows.
-    var hideArrows = function() {
+    const hideArrows = function() {
       if ( dragHandler.dragging ) {
         arrowsANode.visible = arrowsBNode.visible = false;
       }

@@ -24,11 +24,11 @@ define( require => {
   const patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
 
   // constants
-  var TEXT_OPTIONS = {
+  const TEXT_OPTIONS = {
     font: new PhetFont( 20 ),
     maxWidth: 300
   };
-  var RADIO_BUTTON_OPTIONS = { radius: 8 };
+  const RADIO_BUTTON_OPTIONS = { radius: 8 };
 
   /**
    * @param {Property.<string>} dipoleDirectionProperty
@@ -36,17 +36,17 @@ define( require => {
    */
   function DipoleDirectionControl( dipoleDirectionProperty ) {
 
-    var dipoleDirectionLabel = new Text( dipoleDirectionString, {
+    const dipoleDirectionLabel = new Text( dipoleDirectionString, {
       font: new PhetFont( 14 ),
       maxWidth: 400
     } );
 
     // d+ -> d-
-    var positiveToNegativeString = StringUtils.fillIn( patternDipoleDirectionString, {
+    const positiveToNegativeString = StringUtils.fillIn( patternDipoleDirectionString, {
       from: deltaPlusString,
       to: deltaMinusString
     } );
-    var positiveToNegativeButton = new AquaRadioButton(
+    const positiveToNegativeButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'positiveToNegative',
       new Text( positiveToNegativeString, TEXT_OPTIONS ),
@@ -54,11 +54,11 @@ define( require => {
     );
 
     // d- -> d+
-    var negativeToPositiveString = StringUtils.fillIn( patternDipoleDirectionString, {
+    const negativeToPositiveString = StringUtils.fillIn( patternDipoleDirectionString, {
       from: deltaMinusString,
       to: deltaPlusString
     } );
-    var negativeToPositiveButton = new AquaRadioButton(
+    const negativeToPositiveButton = new AquaRadioButton(
       dipoleDirectionProperty,
       'negativeToPositive',
       new Text( negativeToPositiveString, TEXT_OPTIONS ),

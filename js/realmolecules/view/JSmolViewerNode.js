@@ -42,27 +42,27 @@ define( require => {
   const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   // strings
-  var DELTA = '\u03B4';
-  var RESULT_TRUE = 'true';
-  var RESULT_FALSE = 'false';
+  const DELTA = '\u03B4';
+  const RESULT_TRUE = 'true';
+  const RESULT_FALSE = 'false';
 
   // Jmol is loaded via <script> in the .html file, this prevents lint from complaining the Jmol is undefined.
-  var Jmol = window.Jmol;
+  const Jmol = window.Jmol;
 
   // each Jmol object instance is given a new identifier, numbered sequentially
-  var instanceNumber = 0;
+  let instanceNumber = 0;
 
   // identify a URL object, not standardized across browsers
-  var URL = window.URL || window.webkitURL || window;
+  const URL = window.URL || window.webkitURL || window;
 
   // Script to run when the Jmol object has finished loading
-  var SCRIPT_INIT =
+  const SCRIPT_INIT =
     'set autobond off\n' +
     'set frank off\n' +  // hide the Jmol logo
     'set dipoleScale 0.75\n';  // so that molecular dipole isn't clipped by viewer or extend beyond isosurface
 
   // Jmol actions to unbind, all except _rotate
-  var ACTIONS = [
+  const ACTIONS = [
     '_clickFrank',
     '_depth',
     '_dragDrawObject',
@@ -135,9 +135,9 @@ define( require => {
   moleculePolarity.register( 'JSmolViewerNode', JSmolViewerNode );
 
   // executes a JSmol script
-  var doScript = function( applet, script ) {
+  const doScript = function( applet, script ) {
     // use scriptWait (which is synchronous) so that we get status and can use evaluateVar elsewhere
-    var status = Jmol.scriptWait( applet, script );
+    const status = Jmol.scriptWait( applet, script );
     phet.log && phet.log( 'doScript, status=' + status );
   };
 
@@ -146,8 +146,8 @@ define( require => {
    * @param applet
    * @param {string[]} actions
    */
-  var unbindActions = function( applet, actions ) {
-    var script = '';
+  const unbindActions = function( applet, actions ) {
+    let script = '';
     actions.forEach( function( action ) {
       script += 'unbind ' + action + '\n';
     } );
@@ -159,8 +159,8 @@ define( require => {
    * @param {string|Color} colorSpec
    * @returns {string} of the form [r,g,b]
    */
-  var toJmolColor = function( colorSpec ) {
-    var color = Color.toColor( colorSpec );
+  const toJmolColor = function( colorSpec ) {
+    const color = Color.toColor( colorSpec );
     return '[' + color.red + ',' + color.green + ',' + color.blue + ']';
   };
 
@@ -170,10 +170,10 @@ define( require => {
    * @param {RealMolecule} molecule
    * @param {RealMoleculesViewProperties} jsmolProperties
    */
-  var updateMolecule = function( applet, molecule, jsmolProperties ) {
+  const updateMolecule = function( applet, molecule, jsmolProperties ) {
     phet.log && phet.log( 'updateMolecule' );
 
-    var url = URL.createObjectURL( new Blob( [ molecule.mol2Data ], { type: 'text/plain', endings: 'native' } ) );
+    const url = URL.createObjectURL( new Blob( [ molecule.mol2Data ], { type: 'text/plain', endings: 'native' } ) );
 
     // load molecule
     doScript( applet, 'load ' + url );
@@ -198,14 +198,14 @@ define( require => {
    * @param applet
    * @param {Property.<Element[]>} elementsProperty
    */
-  var updateElements = function( applet, elementsProperty ) {
+  const updateElements = function( applet, elementsProperty ) {
 
     /*
      * Returns a string where elemno and color are separated by newlines.
      * Each color is 3 components (rgb) surrounded by curly braces.
      * Eg, for HF: '1\n{255 255 255}\n9\n{144 224 80}\n'
      */
-    var status = Jmol.evaluateVar( applet,
+    let status = Jmol.evaluateVar( applet,
       'script(\'' +
       'n = {*}.length\n' +
       'for ( i = 0; i < n; i++ ) {\n' +
@@ -228,14 +228,14 @@ define( require => {
      * Now that the tokens are separated by spaces, split the string into an array.
      * Eg, for HF: ['1','255','255','255','9','144','224','80']
      */
-    var tokens = status.split( ' ' );
+    const tokens = status.split( ' ' );
     assert && assert( tokens.length % 4 === 0, 'each element should have 4 tokens' );
 
     // Convert the tokens to an array of {Element}.
-    var elements = [];
-    for ( var i = 0; i < tokens.length; i = i + 4 ) {
-      var elementNumber = parseInt( tokens[ i ], 10 );
-      var color = new Color( parseInt( tokens[ i + 1 ], 10 ), parseInt( tokens[ i + 2 ], 10 ), parseInt( tokens[ i + 3 ], 10 ) );
+    const elements = [];
+    for ( let i = 0; i < tokens.length; i = i + 4 ) {
+      const elementNumber = parseInt( tokens[ i ], 10 );
+      const color = new Color( parseInt( tokens[ i + 1 ], 10 ), parseInt( tokens[ i + 2 ], 10 ), parseInt( tokens[ i + 3 ], 10 ) );
       elements.push( new Element( elementNumber, color ) );
     }
     elementsProperty.set( elements );
@@ -247,9 +247,9 @@ define( require => {
    * @param {boolean} bondDipolesVisible
    * @param {boolean} molecularDipoleVisible
    */
-  var updateTranslucency = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
+  const updateTranslucency = function( applet, bondDipolesVisible, molecularDipoleVisible ) {
     phet.log && phet.log( 'updateTransparency' );
-    var arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
+    const arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
     doScript( applet, 'color atoms translucent ' + arg );
     doScript( applet, 'color bonds translucent ' + arg );
   };
@@ -291,7 +291,7 @@ define( require => {
 
     if ( atomLabelsVisible || partialChargesVisible ) {
 
-      var args = '';
+      let args = '';
       if ( atomLabelsVisible ) {
         args += ' %[atomName]'; // show element and sequential atom index
       }
@@ -325,7 +325,7 @@ define( require => {
   var updateSurface = function( applet, surfaceType ) {
     phet.log && phet.log( 'updateSurface' );
 
-    var diatomic = isHomogeneousDiatomic( applet );
+    const diatomic = isHomogeneousDiatomic( applet );
     if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
       if ( diatomic ) {
         doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_POTENTIAL ) + ' translucent' );
@@ -362,7 +362,7 @@ define( require => {
    */
   var isHomogeneousDiatomic = function( applet ) {
 
-    var status = Jmol.evaluateVar( applet,
+    const status = Jmol.evaluateVar( applet,
       'script(\'' +
       'numberOfAtoms = {*}.length\n' +
       'homogeneousDiatomic = "' + RESULT_TRUE + '"\n' +
@@ -401,10 +401,10 @@ define( require => {
 
       assert && assert( !this.isInitialized(), 'already initialized' );
 
-      var self = this;
+      const self = this;
 
       // Called when the Jmol object has been created and is ready to receive commands
-      var readyFunction = function( applet ) {
+      const readyFunction = function( applet ) {
         phet.log && phet.log( 'readyFunction' );
 
         unbindActions( applet, ACTIONS );
@@ -436,7 +436,7 @@ define( require => {
       };
 
       // configuration for the JSmol object, called Info by convention
-      var Info = {
+      const Info = {
         color: toJmolColor( this.options.viewerFill ), // background color of the JSmol object
         width: this.options.viewerSize.width, // width of the Jmol object in pixels or expressed as percent of its container width as a string in quotes: '100%'.
         height: this.options.viewerSize.height, // height, similar format as width
@@ -451,7 +451,7 @@ define( require => {
       };
 
       Jmol.setDocument( false ); // tell Jmol not to add the viewer to our HTML document
-      var appletId = 'jmolApplet' + instanceNumber++; // create a unique id for this viewer
+      const appletId = 'jmolApplet' + instanceNumber++; // create a unique id for this viewer
       Jmol.getApplet( appletId, Info ); // creates window[appletId]
       self.applet = window[ appletId ]; // so that we don't pollute our code with window[appletId]
       self.div.innerHTML = Jmol.getAppletHtml( self.applet ); // add the viewer's HTML fragment to this node's HTML element

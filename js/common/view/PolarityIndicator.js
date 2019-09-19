@@ -34,7 +34,7 @@ define( require => {
 
     Node.call( this );
 
-    var pathOptions = { stroke: options.stroke, lineWidth: options.lineWidth };
+    const pathOptions = { stroke: options.stroke, lineWidth: options.lineWidth };
 
     // circle
     this.addChild( new Circle( options.radius, pathOptions ) );
