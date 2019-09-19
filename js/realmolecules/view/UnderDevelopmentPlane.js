@@ -6,23 +6,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Plane = require( 'SCENERY/nodes/Plane' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Plane = require( 'SCENERY/nodes/Plane' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var underDevelopmentLine1String = require( 'string!MOLECULE_POLARITY/underDevelopment.line1' );
-  var underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
+  const underDevelopmentLine1String = require( 'string!MOLECULE_POLARITY/underDevelopment.line1' );
+  const underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
 
   // constants
   var LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';

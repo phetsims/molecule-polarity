@@ -5,23 +5,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
-  var deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
-  var dipoleDirectionString = require( 'string!MOLECULE_POLARITY/dipoleDirection' );
-  var patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
+  const deltaMinusString = require( 'string!MOLECULE_POLARITY/deltaMinus' );
+  const deltaPlusString = require( 'string!MOLECULE_POLARITY/deltaPlus' );
+  const dipoleDirectionString = require( 'string!MOLECULE_POLARITY/dipoleDirection' );
+  const patternDipoleDirectionString = require( 'string!MOLECULE_POLARITY/pattern.dipoleDirection' );
 
   // constants
   var TEXT_OPTIONS = {

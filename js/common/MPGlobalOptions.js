@@ -5,14 +5,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  var StringProperty = require( 'AXON/StringProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
+  const StringProperty = require( 'AXON/StringProperty' );
 
   /**
    * @constructor

@@ -5,36 +5,36 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var mol2Data = require( 'MOLECULE_POLARITY/realmolecules/model/mol2Data' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Property = require( 'AXON/Property' );
-  var RealMolecule = require( 'MOLECULE_POLARITY/realmolecules/model/RealMolecule' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const mol2Data = require( 'MOLECULE_POLARITY/realmolecules/model/mol2Data' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const Property = require( 'AXON/Property' );
+  const RealMolecule = require( 'MOLECULE_POLARITY/realmolecules/model/RealMolecule' );
 
   // string
-  var ammoniaString = require( 'string!MOLECULE_POLARITY/ammonia' );
-  var boraneString = require( 'string!MOLECULE_POLARITY/borane' );
-  var boronTrifluorideString = require( 'string!MOLECULE_POLARITY/boronTrifluoride' );
-  var carbonDioxideString = require( 'string!MOLECULE_POLARITY/carbonDioxide' );
-  var chloroformString = require( 'string!MOLECULE_POLARITY/chloroform' );
-  var difluoromethaneString = require( 'string!MOLECULE_POLARITY/difluoromethane' );
-  var fluorineString = require( 'string!MOLECULE_POLARITY/fluorine' );
-  var fluoromethaneString = require( 'string!MOLECULE_POLARITY/fluoromethane' );
-  var formaldehydeString = require( 'string!MOLECULE_POLARITY/formaldehyde' );
-  var hydrogenCyanideString = require( 'string!MOLECULE_POLARITY/hydrogenCyanide' );
-  var hydrogenFluorideString = require( 'string!MOLECULE_POLARITY/hydrogenFluoride' );
-  var hydrogenString = require( 'string!MOLECULE_POLARITY/hydrogen' );
-  var methaneString = require( 'string!MOLECULE_POLARITY/methane' );
-  var nitrogenString = require( 'string!MOLECULE_POLARITY/nitrogen' );
-  var oxygenString = require( 'string!MOLECULE_POLARITY/oxygen' );
-  var ozoneString = require( 'string!MOLECULE_POLARITY/ozone' );
-  var tetrafluoromethaneString = require( 'string!MOLECULE_POLARITY/tetrafluoromethane' );
-  var trifluoromethaneString = require( 'string!MOLECULE_POLARITY/trifluoromethane' );
-  var waterString = require( 'string!MOLECULE_POLARITY/water' );
+  const ammoniaString = require( 'string!MOLECULE_POLARITY/ammonia' );
+  const boraneString = require( 'string!MOLECULE_POLARITY/borane' );
+  const boronTrifluorideString = require( 'string!MOLECULE_POLARITY/boronTrifluoride' );
+  const carbonDioxideString = require( 'string!MOLECULE_POLARITY/carbonDioxide' );
+  const chloroformString = require( 'string!MOLECULE_POLARITY/chloroform' );
+  const difluoromethaneString = require( 'string!MOLECULE_POLARITY/difluoromethane' );
+  const fluorineString = require( 'string!MOLECULE_POLARITY/fluorine' );
+  const fluoromethaneString = require( 'string!MOLECULE_POLARITY/fluoromethane' );
+  const formaldehydeString = require( 'string!MOLECULE_POLARITY/formaldehyde' );
+  const hydrogenCyanideString = require( 'string!MOLECULE_POLARITY/hydrogenCyanide' );
+  const hydrogenFluorideString = require( 'string!MOLECULE_POLARITY/hydrogenFluoride' );
+  const hydrogenString = require( 'string!MOLECULE_POLARITY/hydrogen' );
+  const methaneString = require( 'string!MOLECULE_POLARITY/methane' );
+  const nitrogenString = require( 'string!MOLECULE_POLARITY/nitrogen' );
+  const oxygenString = require( 'string!MOLECULE_POLARITY/oxygen' );
+  const ozoneString = require( 'string!MOLECULE_POLARITY/ozone' );
+  const tetrafluoromethaneString = require( 'string!MOLECULE_POLARITY/tetrafluoromethane' );
+  const trifluoromethaneString = require( 'string!MOLECULE_POLARITY/trifluoromethane' );
+  const waterString = require( 'string!MOLECULE_POLARITY/water' );
 
   /**
    * @constructor

@@ -7,19 +7,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
+  const Color = require( 'SCENERY/util/Color' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
 
   // constants
   var CELL_SIZE = new Dimension2( 50, 50 );
@@ -28,7 +28,7 @@ define( function( require ) {
   var HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
 
   // strings
-  var atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
+  const atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
 
   /**
    * @param {RealMoleculeViewer} moleculeViewer

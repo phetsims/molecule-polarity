@@ -4,11 +4,11 @@
  * Mol2 data for Molecule Polarity molecules.
  * These strings were created by processing files in data/mol2/ with bin/mol2string.sh
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   var mol2Data = {
     BF3: '\n@<TRIPOS>MOLECULE\nM0001\n4 3\nSMALL\nUSER_CHARGES\n\n\n@<TRIPOS>ATOM\n1   B          0.000000000     0.000000000     0.000000000       B   1  M0001    0.842505\n2   F2         1.317730477     0.000000000     0.000000000       F   1  M0001   -0.281790\n3   F3        -0.658865212    -1.141188034     0.000000000       F   1  M0001   -0.280358\n4   F1        -0.658865212     1.141188034     0.000000000       F   1  M0001   -0.280358\n\n\n@<TRIPOS>BOND\n1      1      2    1\n2      1      3    1\n3      1      4    1\n',

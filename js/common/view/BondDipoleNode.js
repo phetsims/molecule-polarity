@@ -6,14 +6,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
 
   // constants
   var PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond

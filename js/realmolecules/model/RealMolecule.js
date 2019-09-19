@@ -6,13 +6,13 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const ChemUtils = require( 'NITROGLYCERIN/ChemUtils' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   /**
    * @param {string} symbol

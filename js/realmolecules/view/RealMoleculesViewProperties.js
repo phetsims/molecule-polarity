@@ -5,15 +5,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var StringProperty = require( 'AXON/StringProperty' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const StringProperty = require( 'AXON/StringProperty' );
+  const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   /**
    * @constructor

@@ -6,15 +6,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var OFFSET = 55; // offset in the direction that the dipole points

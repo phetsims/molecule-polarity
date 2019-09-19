@@ -5,29 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Screen = require( 'JOIST/Screen' );
-  var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/model/ThreeAtomsModel' );
-  var ThreeAtomsScreenView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsScreenView' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Property = require( 'AXON/Property' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Screen = require( 'JOIST/Screen' );
+  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const ThreeAtomsModel = require( 'MOLECULE_POLARITY/threeatoms/model/ThreeAtomsModel' );
+  const ThreeAtomsScreenView = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsScreenView' );
 
   // strings
-  var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
-  var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
-  var atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
-  var screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
+  const atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
+  const atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
+  const atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
+  const screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
 
   /**
    * @constructor

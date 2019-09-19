@@ -5,13 +5,13 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  const Color = require( 'SCENERY/util/Color' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
   var SURFACE_ALPHA = 0.72;

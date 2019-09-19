@@ -7,27 +7,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   //strings
-  var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
-  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
-  var lessString = require( 'string!MOLECULE_POLARITY/less' );
-  var moreString = require( 'string!MOLECULE_POLARITY/more' );
-  var negativeString = require( 'string!MOLECULE_POLARITY/negative' );
-  var positiveString = require( 'string!MOLECULE_POLARITY/positive' );
+  const electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
+  const electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
+  const lessString = require( 'string!MOLECULE_POLARITY/less' );
+  const moreString = require( 'string!MOLECULE_POLARITY/more' );
+  const negativeString = require( 'string!MOLECULE_POLARITY/negative' );
+  const positiveString = require( 'string!MOLECULE_POLARITY/positive' );
 
   /**
    * @param {Color[]} colors colors used for the gradient, in left-to-right order

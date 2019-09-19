@@ -6,22 +6,22 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
-  var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
-  var BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
-  var ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
-  var ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MoleculeAngleDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleDragHandler' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var TranslateArrowsNode = require( 'MOLECULE_POLARITY/common/view/TranslateArrowsNode' );
+  const AtomNode = require( 'MOLECULE_POLARITY/common/view/AtomNode' );
+  const BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
+  const BondNode = require( 'MOLECULE_POLARITY/common/view/BondNode' );
+  const ElectronDensityNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectronDensityNode' );
+  const ElectrostaticPotentialNode = require( 'MOLECULE_POLARITY/twoatoms/view/ElectrostaticPotentialNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MoleculeAngleDragHandler = require( 'MOLECULE_POLARITY/common/view/MoleculeAngleDragHandler' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PartialChargeNode = require( 'MOLECULE_POLARITY/common/view/PartialChargeNode' );
+  const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  const TranslateArrowsNode = require( 'MOLECULE_POLARITY/common/view/TranslateArrowsNode' );
 
   /**
    * @param {DiatomicMolecule} molecule

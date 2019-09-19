@@ -6,15 +6,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Node = require( 'SCENERY/nodes/Node' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const Node = require( 'SCENERY/nodes/Node' );
 
   /**
    * @param {Object} [options]

@@ -5,29 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var ElectronegativityTableNode = require( 'MOLECULE_POLARITY/realmolecules/view/ElectronegativityTableNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
-  var RealMoleculesViewControls = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewControls' );
-  var RealMoleculesViewProperties = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewProperties' );
-  var RealMoleculeViewer = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculeViewer' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var SurfaceTypeControl = require( 'MOLECULE_POLARITY/common/view/SurfaceTypeControl' );
-  var UnderDevelopmentPlane = require( 'MOLECULE_POLARITY/realmolecules/view/UnderDevelopmentPlane' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const ElectronegativityTableNode = require( 'MOLECULE_POLARITY/realmolecules/view/ElectronegativityTableNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
+  const MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const RealMoleculesComboBox = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesComboBox' );
+  const RealMoleculesViewControls = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewControls' );
+  const RealMoleculesViewProperties = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesViewProperties' );
+  const RealMoleculeViewer = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculeViewer' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
+  const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  const SurfaceTypeControl = require( 'MOLECULE_POLARITY/common/view/SurfaceTypeControl' );
+  const UnderDevelopmentPlane = require( 'MOLECULE_POLARITY/realmolecules/view/UnderDevelopmentPlane' );
 
   /**
    * @param {TwoAtomsModel} model

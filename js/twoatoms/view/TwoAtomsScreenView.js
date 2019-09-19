@@ -5,27 +5,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BondCharacterNode = require( 'MOLECULE_POLARITY/twoatoms/view/BondCharacterNode' );
-  var DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicMoleculeNode' );
-  var EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
-  var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var SurfaceTypeControl = require( 'MOLECULE_POLARITY/common/view/SurfaceTypeControl' );
-  var TwoAtomsViewControls = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewControls' );
-  var TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
+  const BondCharacterNode = require( 'MOLECULE_POLARITY/twoatoms/view/BondCharacterNode' );
+  const DiatomicMoleculeNode = require( 'MOLECULE_POLARITY/twoatoms/view/DiatomicMoleculeNode' );
+  const EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
+  const ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
+  const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  const SurfaceTypeControl = require( 'MOLECULE_POLARITY/common/view/SurfaceTypeControl' );
+  const TwoAtomsViewControls = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewControls' );
+  const TwoAtomsViewProperties = require( 'MOLECULE_POLARITY/twoatoms/view/TwoAtomsViewProperties' );
   
   // constants
   var PLATE_X_OFFSET = 250; // x offset of E-field plates from molecule's center, determined empirically, see #66

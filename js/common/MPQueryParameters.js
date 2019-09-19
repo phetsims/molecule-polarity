@@ -5,11 +5,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   var MPQueryParameters = QueryStringMachine.getAll( {
 

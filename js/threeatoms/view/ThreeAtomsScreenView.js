@@ -5,23 +5,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
-  var ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var ThreeAtomsViewControls = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewControls' );
-  var ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
-  var TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
+  const EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
+  const ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const ThreeAtomsViewControls = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewControls' );
+  const ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
+  const TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
 
   // constants
   var PLATE_X_OFFSET = 300; // x offset of E-field plates from molecule's center, determined empirically, see #66

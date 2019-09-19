@@ -6,17 +6,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DipoleDirectionControl = require( 'MOLECULE_POLARITY/common/view/DipoleDirectionControl' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  var SurfaceColorControl = require( 'MOLECULE_POLARITY/common/view/SurfaceColorControl' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const DipoleDirectionControl = require( 'MOLECULE_POLARITY/common/view/DipoleDirectionControl' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
+  const SurfaceColorControl = require( 'MOLECULE_POLARITY/common/view/SurfaceColorControl' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @constructor

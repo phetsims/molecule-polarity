@@ -5,16 +5,16 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Matrix3 = require( 'DOT/Matrix3' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Matrix3 = require( 'DOT/Matrix3' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Atom[]} atoms - atoms that make up the molecule

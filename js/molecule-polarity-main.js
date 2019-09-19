@@ -5,19 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var MPOptionsNode = require( 'MOLECULE_POLARITY/common/view/MPOptionsNode' );
-  var RealMoleculesScreen = require( 'MOLECULE_POLARITY/realmolecules/RealMoleculesScreen' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
-  var ThreeAtomsScreen = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsScreen' );
-  var TwoAtomsScreen = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsScreen' );
+  const MPOptionsNode = require( 'MOLECULE_POLARITY/common/view/MPOptionsNode' );
+  const RealMoleculesScreen = require( 'MOLECULE_POLARITY/realmolecules/RealMoleculesScreen' );
+  const Sim = require( 'JOIST/Sim' );
+  const SimLauncher = require( 'JOIST/SimLauncher' );
+  const ThreeAtomsScreen = require( 'MOLECULE_POLARITY/threeatoms/ThreeAtomsScreen' );
+  const TwoAtomsScreen = require( 'MOLECULE_POLARITY/twoatoms/TwoAtomsScreen' );
 
   // strings
-  var moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
+  const moleculePolarityTitleString = require( 'string!MOLECULE_POLARITY/molecule-polarity.title' );
 
   var options = {
 

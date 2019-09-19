@@ -7,15 +7,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var EField = require( 'MOLECULE_POLARITY/common/model/EField' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Util = require( 'DOT/Util' );
+  const EField = require( 'MOLECULE_POLARITY/common/model/EField' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Util = require( 'DOT/Util' );
 
   // constants
   var MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment

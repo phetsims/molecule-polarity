@@ -5,27 +5,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
-  var Checkbox = require( 'SUN/Checkbox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
+  const Checkbox = require( 'SUN/Checkbox' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
-  var atomLabelsString = require( 'string!MOLECULE_POLARITY/atomLabels' );
-  var bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
-  var molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
-  var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
-  var viewString = require( 'string!MOLECULE_POLARITY/view' );
+  const atomElectronegativitiesString = require( 'string!MOLECULE_POLARITY/atomElectronegativities' );
+  const atomLabelsString = require( 'string!MOLECULE_POLARITY/atomLabels' );
+  const bondDipolesString = require( 'string!MOLECULE_POLARITY/bondDipoles' );
+  const molecularDipoleString = require( 'string!MOLECULE_POLARITY/molecularDipole' );
+  const partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
+  const viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   // constants
   var CONTROL_TEXT_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {

@@ -5,25 +5,25 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var Property = require( 'AXON/Property' );
-  var RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
-  var RealMoleculesScreenView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesScreenView' );
-  var Screen = require( 'JOIST/Screen' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const Property = require( 'AXON/Property' );
+  const RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
+  const RealMoleculesScreenView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesScreenView' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
+  const screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
 
   // images
-  var homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
-  var navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
+  const homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
+  const navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
 
   /**
    * @constructor

@@ -7,28 +7,28 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HSlider = require( 'SUN/HSlider' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PointySliderThumb = require( 'MOLECULE_POLARITY/common/view/PointySliderThumb' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const HSlider = require( 'SUN/HSlider' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PointySliderThumb = require( 'MOLECULE_POLARITY/common/view/PointySliderThumb' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
 
   // strings
-  var electronegativityString = require( 'string!MOLECULE_POLARITY/electronegativity' );
-  var lessString = require( 'string!MOLECULE_POLARITY/less' );
-  var moreString = require( 'string!MOLECULE_POLARITY/more' );
-  var patternAtomNameString = require( 'string!MOLECULE_POLARITY/pattern.atomName' );
+  const electronegativityString = require( 'string!MOLECULE_POLARITY/electronegativity' );
+  const lessString = require( 'string!MOLECULE_POLARITY/less' );
+  const moreString = require( 'string!MOLECULE_POLARITY/more' );
+  const patternAtomNameString = require( 'string!MOLECULE_POLARITY/pattern.atomName' );
 
   /**
    * @param {Atom} atom - the atom whose electronegativity we're controlling

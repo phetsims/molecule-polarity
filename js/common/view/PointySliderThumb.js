@@ -4,16 +4,16 @@
  * Slider thumb that points up, rounded corners, origin at top center.
  * See https://github.com/phetsims/molecule-polarity/issues/39
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ButtonListener = require( 'SCENERY/input/ButtonListener' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
+  const ButtonListener = require( 'SCENERY/input/ButtonListener' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Shape = require( 'KITE/Shape' );
 
   /**
    * @param {Object} [options]

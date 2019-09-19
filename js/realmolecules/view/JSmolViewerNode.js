@@ -27,19 +27,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // inherit
-  var Color = require( 'SCENERY/util/Color' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var DOM = require( 'SCENERY/nodes/DOM' );
-  var Element = require( 'MOLECULE_POLARITY/realmolecules/model/Element' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var Property = require( 'AXON/Property' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  const Color = require( 'SCENERY/util/Color' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const DOM = require( 'SCENERY/nodes/DOM' );
+  const Element = require( 'MOLECULE_POLARITY/realmolecules/model/Element' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const Property = require( 'AXON/Property' );
+  const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
 
   // strings
   var DELTA = '\u03B4';

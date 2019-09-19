@@ -5,23 +5,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const SurfaceType = require( 'MOLECULE_POLARITY/common/view/SurfaceType' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
-  var electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
-  var noneString = require( 'string!MOLECULE_POLARITY/none' );
-  var surfaceString = require( 'string!MOLECULE_POLARITY/surface' );
+  const electronDensityString = require( 'string!MOLECULE_POLARITY/electronDensity' );
+  const electrostaticPotentialString = require( 'string!MOLECULE_POLARITY/electrostaticPotential' );
+  const noneString = require( 'string!MOLECULE_POLARITY/none' );
+  const surfaceString = require( 'string!MOLECULE_POLARITY/surface' );
 
   // constants
   var RADIO_BUTTON_OPTIONS = {

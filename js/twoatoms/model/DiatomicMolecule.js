@@ -6,22 +6,22 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Atom = require( 'MOLECULE_POLARITY/common/model/Atom' );
-  var Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Atom = require( 'MOLECULE_POLARITY/common/model/Atom' );
+  const Bond = require( 'MOLECULE_POLARITY/common/model/Bond' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Molecule = require( 'MOLECULE_POLARITY/common/model/Molecule' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
-  var atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
+  const atomAString = require( 'string!MOLECULE_POLARITY/atomA' );
+  const atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
 
   /**
    * @param {Object} [options] - see supertype constructor

@@ -6,17 +6,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var HSeparator = require( 'SUN/HSeparator' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Panel = require( 'SUN/Panel' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const HSeparator = require( 'SUN/HSeparator' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Panel = require( 'SUN/Panel' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @param {Node[]} subPanels

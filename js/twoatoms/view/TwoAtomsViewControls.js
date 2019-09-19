@@ -5,24 +5,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
-  var Checkbox = require( 'SUN/Checkbox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
+  const Checkbox = require( 'SUN/Checkbox' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
-  var bondDipoleString = require( 'string!MOLECULE_POLARITY/bondDipole' );
-  var partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
-  var viewString = require( 'string!MOLECULE_POLARITY/view' );
+  const bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
+  const bondDipoleString = require( 'string!MOLECULE_POLARITY/bondDipole' );
+  const partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
+  const viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   /**
    * @param {TwoAtomsViewProperties} viewProperties

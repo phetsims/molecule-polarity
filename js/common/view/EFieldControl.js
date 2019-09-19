@@ -5,21 +5,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSwitch = require( 'SUN/ABSwitch' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const ABSwitch = require( 'SUN/ABSwitch' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
-  var offString = require( 'string!MOLECULE_POLARITY/off' );
-  var onString = require( 'string!MOLECULE_POLARITY/on' );
+  const electricFieldString = require( 'string!MOLECULE_POLARITY/electricField' );
+  const offString = require( 'string!MOLECULE_POLARITY/off' );
+  const onString = require( 'string!MOLECULE_POLARITY/on' );
 
   // constants
   var SWITCH_LABEL_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {

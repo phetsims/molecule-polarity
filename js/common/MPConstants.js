@@ -5,15 +5,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  var MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPGlobalOptions = require( 'MOLECULE_POLARITY/common/MPGlobalOptions' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   var MPConstants = {
 
