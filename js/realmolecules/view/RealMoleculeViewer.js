@@ -1,4 +1,4 @@
-// Copyright 2014-2017, University of Colorado Boulder
+// Copyright 2014-2019, University of Colorado Boulder
 
 //TODO This is currently a stub, integrate with 3D viewer in #15
 /**

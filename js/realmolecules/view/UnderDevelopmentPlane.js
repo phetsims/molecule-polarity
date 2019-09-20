@@ -1,4 +1,4 @@
-// Copyright 2017, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 //TODO Delete when the Real Molecules screen is completed, see #32
 /**
