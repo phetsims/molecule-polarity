@@ -43,7 +43,7 @@ define( require => {
       font: new PhetFont( 32 ),
       fill: 'black',
       maxWidth: 50
-    } );                                                 
+    } );
     const chargeNode = new Node( {
       children: [ textNode ]
     } );
