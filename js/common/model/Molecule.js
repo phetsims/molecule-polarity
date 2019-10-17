@@ -12,6 +12,7 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Matrix3 = require( 'DOT/Matrix3' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -27,7 +28,7 @@ define( require => {
    */
   function Molecule( atoms, bonds, updateAtomLocations, updatePartialCharges, options ) {
 
-    options = _.extend( {
+    options = merge( {
       location: new Vector2( 0, 0 ), // the point about which the molecule rotates, in global model coordinate frame
       angle: 0 // angle of rotation of the entire molecule about the location, in radians
     }, options );

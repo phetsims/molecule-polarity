@@ -11,6 +11,7 @@ define( require => {
   const ButtonListener = require( 'SCENERY/input/ButtonListener' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Shape = require( 'KITE/Shape' );
@@ -23,7 +24,7 @@ define( require => {
 
     const self = this;
 
-    options = _.extend( {
+    options = merge( {
       size: new Dimension2( 30, 35 ),
       stroke: 'black',
       lineWidth: 1,

@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -33,7 +34,7 @@ define( require => {
 
     const self = this;
 
-    options = _.extend( {
+    options = merge( {
       polarity: 'negative', // 'positive' or 'negative'
       perspective: 'left', // 'left' or 'right'
       plateWidth: 50,

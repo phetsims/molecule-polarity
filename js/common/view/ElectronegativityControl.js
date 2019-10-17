@@ -14,6 +14,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const HSlider = require( 'SUN/HSlider' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -38,7 +39,7 @@ define( require => {
    */
   function ElectronegativityControl( atom, molecule, options ) {
 
-    options = _.extend( {
+    options = merge( {
 
       // ElectronegativityControl
       range: MPConstants.ELECTRONEGATIVITY_RANGE,

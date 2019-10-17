@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -23,7 +24,7 @@ define( require => {
    */
   function Atom( name, options ) {
 
-    options = _.extend( {
+    options = merge( {
       diameter: MPConstants.ATOM_DIAMETER, // {number} the atom's diameter
       color: 'white', // {Color|string} base color of the atom
       location: new Vector2( 0, 0 ), // initial location

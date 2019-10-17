@@ -11,6 +11,7 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
 
   /**
@@ -19,7 +20,7 @@ define( require => {
    */
   function EField( options ) {
 
-    options = _.extend( {
+    options = merge( {
       enabled: false // {boolean} is the E-field initially enabled?
     }, options );
 

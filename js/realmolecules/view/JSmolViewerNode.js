@@ -36,6 +36,7 @@ define( require => {
   const DOM = require( 'SCENERY/nodes/DOM' );
   const Element = require( 'MOLECULE_POLARITY/realmolecules/model/Element' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   const Property = require( 'AXON/Property' );
@@ -106,7 +107,7 @@ define( require => {
    */
   function JSmolViewerNode( moleculeProperty, viewProperties, options ) {
 
-    options = _.extend( {
+    options = merge( {
       viewerFill: 'white',
       viewerStroke: 'black', // {string} color of the viewer's background
       viewerSize: new Dimension2( 200, 200 )

@@ -14,6 +14,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -39,7 +40,7 @@ define( require => {
    */
   function SurfaceColorKey( colors, title, leftLabel, rightLabel, options ) {
 
-    options = _.extend( {
+    options = merge( {
       size: new Dimension2( 420, 20 ),
       titleVisible: true,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),

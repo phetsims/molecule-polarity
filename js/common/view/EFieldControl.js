@@ -11,6 +11,7 @@ define( require => {
   // modules
   const ABSwitch = require( 'SUN/ABSwitch' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -22,7 +23,7 @@ define( require => {
   const onString = require( 'string!MOLECULE_POLARITY/on' );
 
   // constants
-  const SWITCH_LABEL_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
+  const SWITCH_LABEL_OPTIONS = merge( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
     maxWidth: 80  // i18n, set empirically
   } );
 

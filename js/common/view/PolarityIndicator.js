@@ -13,6 +13,7 @@ define( require => {
   const Circle = require( 'SCENERY/nodes/Circle' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const Node = require( 'SCENERY/nodes/Node' );
 
@@ -22,7 +23,7 @@ define( require => {
    */
   function PolarityIndicator( options ) {
 
-    options = _.extend( {
+    options = merge( {
       polarity: 'positive', // 'positive' or 'negative'
       radius: 20,
       lineWidth: 4,

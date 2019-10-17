@@ -13,6 +13,7 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const MolecularDipoleNode = require( 'MOLECULE_POLARITY/common/view/MolecularDipoleNode' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
@@ -28,7 +29,7 @@ define( require => {
   const viewString = require( 'string!MOLECULE_POLARITY/view' );
 
   // constants
-  const CONTROL_TEXT_OPTIONS = _.extend( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
+  const CONTROL_TEXT_OPTIONS = merge( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
     maxWidth: 225 // a bit wider in for this Screen
   } );
 

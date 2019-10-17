@@ -13,6 +13,7 @@ define( require => {
   const ArrowShape = require( 'SCENERY_PHET/ArrowShape' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Matrix3 = require( 'DOT/Matrix3' );
+  const merge = require( 'PHET_CORE/merge' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -26,7 +27,7 @@ define( require => {
    */
   function TranslateArrowsNode( molecule, atom, options ) {
 
-    options = _.extend( {
+    options = merge( {
       length: 25 // relatively short, so we don't need curved arrows
     }, options );
 
