@@ -37,7 +37,7 @@ define( require => {
 
     ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
-    //TODO Hide everything and show a dialog until Real Molecules screen is fully implemented, see #32
+    //TODO Hide everything and show a dialog until Real Molecules screen is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/32
     if ( !MPQueryParameters.realMolecules ) {
       this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
     }

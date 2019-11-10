@@ -1,6 +1,6 @@
 // Copyright 2017-2019, University of Colorado Boulder
 
-//TODO Moved here from litmus repository. Delete when 100% certain that we're not using JSmol. See #15.
+//TODO Moved here from litmus repository. Delete when 100% certain that we're not using JSmol. See https://github.com/phetsims/molecule-polarity/issues/15
 /**
  * Scenery node that displays a JSmol viewer.
  * Jmol scripting language is documented at http://chemapps.stolaf.edu/jmol/docs
@@ -456,7 +456,7 @@ define( require => {
       Jmol.getApplet( appletId, Info ); // creates window[appletId]
       self.applet = window[ appletId ]; // so that we don't pollute our code with window[appletId]
       self.div.innerHTML = Jmol.getAppletHtml( self.applet ); // add the viewer's HTML fragment to this node's HTML element
-      self.applet._cover( false ); //TODO Why do we need to call this? See #14
+      self.applet._cover( false ); // TODO Why do we need to call this? See https://github.com/phetsims/molecule-polarity/issues/14
     }
   } );
 } );

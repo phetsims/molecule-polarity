@@ -1,6 +1,6 @@
 // Copyright 2014-2019, University of Colorado Boulder
 
-//TODO This is currently a stub, integrate with 3D viewer in #15
+//TODO This is currently a stub, integrate with 3D viewer in https://github.com/phetsims/molecule-polarity/issues/15
 /**
  * JSmol viewer.
  *
@@ -118,7 +118,7 @@ define( require => {
 
     // unlink not needed
     moleculeProperty.link( function( molecule ) {
-      //TODO populate elementsProperty with [Elements] for the selected molecule, see #15
+      //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/15
     } );
   }
 

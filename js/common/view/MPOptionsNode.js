@@ -31,7 +31,7 @@ define( require => {
       surfaceColorControl
     ];
 
-    //TODO remove the Surface Color option until Real Molecules screen is implemented, see #32
+    //TODO https://github.com/phetsims/molecule-polarity/issues/32 remove the Surface Color option until Real Molecules screen is implemented
     if ( !MPQueryParameters.realMolecules ) {
       children.splice( children.indexOf( surfaceColorControl ), 1 );
     }

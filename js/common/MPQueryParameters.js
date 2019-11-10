@@ -29,7 +29,7 @@ define( require => {
       defaultValue: 'RWB'
     },
 
-    //TODO delete this query parameter when Real Molecules is fully implemented, see #32
+    //TODO https://github.com/phetsims/molecule-polarity/issues/32 delete when Real Molecules is fully implemented
     // enables the 'Real Molecules' screen, for development
     realMolecules: { type: 'flag' }
   } );

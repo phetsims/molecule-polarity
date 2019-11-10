@@ -1,6 +1,6 @@
 // Copyright 2017-2019, University of Colorado Boulder
 
-//TODO Delete when the Real Molecules screen is completed, see #32
+//TODO Delete when the Real Molecules screen is completed, see https://github.com/phetsims/molecule-polarity/issues/32
 /**
  * Used to disable the 'Real Molecules' screen and display a message indicating that it's under development.
  *
