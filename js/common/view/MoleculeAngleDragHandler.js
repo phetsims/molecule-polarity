@@ -24,7 +24,7 @@ define( require => {
 
     /**
      * Gets the angle of the pointer relative to relativeNode.
-     * @param {Event} event
+     * @param {SceneryEvent} event
      * @returns {number} angle in radians
      */
     const getAngle = function( event ) {

@@ -28,7 +28,7 @@ define( require => {
 
     /**
      * Finds the angle about the molecule's location.
-     * @param {Event} event
+     * @param {SceneryEvent} event
      * @returns {number} angle in radians
      */
     const getAngle = function( event ) {
