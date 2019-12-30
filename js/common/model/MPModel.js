@@ -15,7 +15,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
   const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
@@ -87,7 +87,7 @@ define( require => {
       }
 
       // magnitude of angular velocity is proportional to molecular dipole magnitude
-      const deltaDipoleAngle = Math.abs( Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
+      const deltaDipoleAngle = Math.abs( Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
 
       // convert angle to range [0,2*PI)
       const dipoleAngle = normalizeAngle( dipole.angle );

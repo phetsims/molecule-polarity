@@ -20,7 +20,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
@@ -85,7 +85,7 @@ define( require => {
 
     // when difference in electronegativity changes, move the pointer, unlink not needed
     molecule.bond.dipoleProperty.link( function( dipole ) {
-      pointerNode.left = Util.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
+      pointerNode.left = Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
         POINTER_X_INSET, TRACK_WIDTH - pointerNode.width - POINTER_X_INSET,
         dipole.magnitude );
     } );

@@ -18,7 +18,7 @@ define( require => {
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   const SurfaceNode = require( 'MOLECULE_POLARITY/twoatoms/view/SurfaceNode' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -55,7 +55,7 @@ define( require => {
         const surfaceWidth = this.getSurfaceWidth();
 
         // compute the gradient width
-        const gradientWidth = Util.linear( 1, 0, surfaceWidth, surfaceWidth * MPConstants.SURFACE_GRADIENT_WIDTH_MULTIPLIER, scale );
+        const gradientWidth = Utils.linear( 1, 0, surfaceWidth, surfaceWidth * MPConstants.SURFACE_GRADIENT_WIDTH_MULTIPLIER, scale );
 
         // gradient endpoints prior to accounting for molecule transform
         const pointA = new Vector2( -gradientWidth / 2, 0 );

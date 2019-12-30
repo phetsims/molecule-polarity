@@ -23,7 +23,7 @@ define( require => {
   const PointySliderThumb = require( 'MOLECULE_POLARITY/common/view/PointySliderThumb' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const electronegativityString = require( 'string!MOLECULE_POLARITY/electronegativity' );
@@ -82,7 +82,7 @@ define( require => {
       endDrag: function() {
         molecule.dragging = false;
         if ( options.snapToTick ) {
-          atom.electronegativityProperty.set( Util.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
+          atom.electronegativityProperty.set( Utils.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
         }
       }
     } );

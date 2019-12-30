@@ -19,7 +19,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
   const CELL_SIZE = new Dimension2( 50, 50 );
@@ -134,7 +134,7 @@ define( require => {
       font: new PhetFont( { size: 22, weight: 'bold' } ),
       fill: NORMAL_TEXT_COLOR
     } );
-    this.electronegativityNode = new Text( Util.toFixedNumber( electronegativity, 1 ), {
+    this.electronegativityNode = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
       font: new PhetFont( 16 ),
       fill: NORMAL_TEXT_COLOR
     } );
