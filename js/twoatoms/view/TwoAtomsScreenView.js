@@ -88,10 +88,10 @@ define( require => {
     } );
     this.addChild( rootNode );
 
-    // layout, based on molecule location ---------------------------------
+    // layout, based on molecule position ---------------------------------
 
-    const moleculeX = model.molecule.location.x;
-    const moleculeY = model.molecule.location.y;
+    const moleculeX = model.molecule.position.x;
+    const moleculeY = model.molecule.position.y;
 
     // to left of molecule, vertically centered
     negativePlateNode.right = moleculeX - PLATE_X_OFFSET;

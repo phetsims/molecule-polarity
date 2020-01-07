@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a diatomic molecule.
- * Children position themselves in global coordinates, so this node's location should be (0,0).
+ * Children position themselves in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -38,8 +38,8 @@ define( require => {
       children: [ sphereNode, textNode ]
     } );
 
-    // sync location with model, unlink not needed
-    atom.locationProperty.linkAttribute( this, 'translation' );
+    // sync position with model, unlink not needed
+    atom.positionProperty.linkAttribute( this, 'translation' );
   }
 
   moleculePolarity.register( 'AtomNode', AtomNode );

@@ -56,13 +56,13 @@ define( require => {
     Molecule.call( this,
       [ this.atomA, this.atomB, this.atomC ],
       [ this.bondAB, this.bondBC ],
-      this.updateAtomLocations,
+      this.updateAtomPositions,
       this.updatePartialCharges,
       options );
 
     // unlinks not needed
-    this.bondAngleAProperty.link( this.updateAtomLocations.bind( this ) );
-    this.bondAngleCProperty.link( this.updateAtomLocations.bind( this ) );
+    this.bondAngleAProperty.link( this.updateAtomPositions.bind( this ) );
+    this.bondAngleCProperty.link( this.updateAtomPositions.bind( this ) );
   }
 
   moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
@@ -72,14 +72,14 @@ define( require => {
    *
    * @param {Atom} atom the atom to reposition
    * @param {number} bondAngle the angle of the bond that the atom participates in
-   * @param {Vector2 location location of the molecule
+   * @param {Vector2 position position of the molecule
    * @param {number} angle orientation of the molecule
    */
-  const updateAtomLocation = function( atom, bondAngle, location, angle ) {
+  const updateAtomPosition = function( atom, bondAngle, position, angle ) {
     const thetaA = angle + bondAngle;
-    const xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + location.x;
-    const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + location.y;
-    atom.locationProperty.set( new Vector2( xA, yA ) );
+    const xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + position.x;
+    const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + position.y;
+    atom.positionProperty.set( new Vector2( xA, yA ) );
   };
 
   return inherit( Molecule, TriatomicMolecule, {
@@ -98,10 +98,10 @@ define( require => {
      * Repositions the atoms.
      * @private
      */
-    updateAtomLocations: function() {
-      this.atomB.locationProperty.set( this.location );  // atom B remains at the molecule's location
-      updateAtomLocation( this.atomA, this.bondAngleAProperty.get(), this.location, this.angleProperty.get() );
-      updateAtomLocation( this.atomC, this.bondAngleCProperty.get(), this.location, this.angleProperty.get() );
+    updateAtomPositions: function() {
+      this.atomB.positionProperty.set( this.position );  // atom B remains at the molecule's position
+      updateAtomPosition( this.atomA, this.bondAngleAProperty.get(), this.position, this.angleProperty.get() );
+      updateAtomPosition( this.atomC, this.bondAngleCProperty.get(), this.position, this.angleProperty.get() );
     },
 
     /**

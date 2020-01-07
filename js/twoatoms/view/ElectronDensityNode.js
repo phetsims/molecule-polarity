@@ -4,7 +4,7 @@
  * 2D surface that represents electron density for a diatomic molecule.
  * Electron density uses a 2-color gradient, so we can use a single PPath.
  * This node's look is similar to the corresponding Jmol isosurface.
- * Shapes are created in global coordinates, so this node's location should be (0,0).
+ * Shapes are created in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

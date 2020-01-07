@@ -27,13 +27,13 @@ define( require => {
     let previousAngle = 0;
 
     /**
-     * Finds the angle about the molecule's location.
+     * Finds the angle about the molecule's position.
      * @param {SceneryEvent} event
      * @returns {number} angle in radians
      */
     const getAngle = function( event ) {
       const point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
-      return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle;
+      return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
     SimpleDragHandler.call( this, {

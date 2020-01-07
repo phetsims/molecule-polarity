@@ -29,7 +29,7 @@ define( require => {
      */
     const getAngle = function( event ) {
       const point = relativeNode.globalToParentPoint( event.pointer.point );
-      return new Vector2( point.x - molecule.location.x, point.y - molecule.location.y ).angle;
+      return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
     SimpleDragHandler.call( this, {

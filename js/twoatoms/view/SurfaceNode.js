@@ -3,7 +3,7 @@
 /**
  * Abstract base type for 2D surfaces.
  * The 'look' of 2D surfaces is similar to the corresponding Jmol 3D isosurfaces, see http://jmol.sourceforge.net/docs/surface/.
- * Shapes are created in global coordinates, so this node's location should be (0,0).
+ * Shapes are created in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -47,8 +47,8 @@ define( require => {
     // each atom is surrounded with a 'cloud' (circle)
     const radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
     this.path = new Path( new Shape()
-      .arc( molecule.location.x - this.molecule.atomB.locationProperty.get().x, molecule.location.y - this.molecule.atomB.locationProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
-      .arc( molecule.location.x - this.molecule.atomA.locationProperty.get().x, molecule.location.y - this.molecule.atomA.locationProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
+      .arc( molecule.position.x - this.molecule.atomB.positionProperty.get().x, molecule.position.y - this.molecule.atomB.positionProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
+      .arc( molecule.position.x - this.molecule.atomA.positionProperty.get().x, molecule.position.y - this.molecule.atomA.positionProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
     );
     this.addChild( this.path );
 

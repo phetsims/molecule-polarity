@@ -19,7 +19,7 @@ define( require => {
    * @constructor
    */
   function ThreeAtomsModel() {
-    MPModel.call( this, new TriatomicMolecule( { location: new Vector2( 400, 280 ) } ) );
+    MPModel.call( this, new TriatomicMolecule( { position: new Vector2( 400, 280 ) } ) );
   }
 
   moleculePolarity.register( 'ThreeAtomsModel', ThreeAtomsModel );

@@ -2,7 +2,7 @@
 
 /**
  * A pair of arrows that are placed around an atom to indicate that the atom can be translated.
- * Shapes are created in global coordinates, so this node's location should be (0,0).
+ * Shapes are created in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -45,12 +45,12 @@ define( require => {
     options.children = [ leftArrowNode, rightArrowNode ];
 
     // unlink not needed
-    atom.locationProperty.link( function() {
+    atom.positionProperty.link( function() {
 
-      // transform the arrow shapes to account for atom location and relationship to molecule location
-      const v = molecule.location.minus( atom.locationProperty.get() );
+      // transform the arrow shapes to account for atom position and relationship to molecule position
+      const v = molecule.position.minus( atom.positionProperty.get() );
       const angle = v.angle - ( Math.PI / 2 );
-      const transform = new Transform3( Matrix3.translationFromVector( atom.locationProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
+      const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
       leftArrowNode.shape = transform.transformShape( leftArrow );
       rightArrowNode.shape = transform.transformShape( rightArrow );
     } );

@@ -27,7 +27,7 @@ define( require => {
     options = merge( {
       diameter: MPConstants.ATOM_DIAMETER, // {number} the atom's diameter
       color: 'white', // {Color|string} base color of the atom
-      location: new Vector2( 0, 0 ), // initial location
+      position: new Vector2( 0, 0 ), // initial position
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min // {number}
     }, options );
 
@@ -38,7 +38,7 @@ define( require => {
     this.name = name;
     this.diameter = options.diameter;
     this.color = options.color;
-    this.locationProperty = new Property( options.location );
+    this.positionProperty = new Property( options.position );
     this.electronegativityProperty = new NumberProperty( options.electronegativity );
     this.partialChargeProperty = new NumberProperty( 0 ); // partial charge is zero until this atom participates in a bond
   }
@@ -51,7 +51,7 @@ define( require => {
     reset: function() {
       this.electronegativityProperty.reset();
 
-      // Do not reset location and partial charge, they will be reset by their parent molecule.
+      // Do not reset position and partial charge, they will be reset by their parent molecule.
     }
   } );
 } );

@@ -35,17 +35,17 @@ define( require => {
       const isInPhase = Math.abs( bondAngle - dipole.angle ) < ( Math.PI / 4 );
       const dipoleViewLength = dipole.magnitude * ( self.referenceLength / self.referenceMagnitude );
 
-      // location of tail in polar coordinates, relative to center of bond
+      // position of tail in polar coordinates, relative to center of bond
       const offsetX = isInPhase ? ( dipoleViewLength / 2 ) : -( dipoleViewLength / 2 );
       const offsetAngle = Math.atan( offsetX / PERPENDICULAR_OFFSET );
       const tailDistance = PERPENDICULAR_OFFSET / Math.cos( offsetAngle );
       const tailAngle = bondAngle - ( Math.PI / 2 ) - offsetAngle;
 
-      // location of tail in Cartesian coordinates, relative to center of bond
+      // position of tail in Cartesian coordinates, relative to center of bond
       const tailX = tailDistance * Math.cos( tailAngle );
       const tailY = tailDistance * Math.sin( tailAngle );
 
-      // location of tail in global coordinate frame
+      // position of tail in global coordinate frame
       self.translation = bond.getCenter().plusXY( tailX, tailY );
     } );
   }

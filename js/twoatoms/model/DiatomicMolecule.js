@@ -44,7 +44,7 @@ define( require => {
     Molecule.call( this,
       [ this.atomA, this.atomB ],
       [ this.bond ],
-      this.updateAtomLocations,
+      this.updateAtomPositions,
       this.updatePartialCharges,
       options );
   }
@@ -66,19 +66,19 @@ define( require => {
      * Repositions the atoms.
      * @private
      */
-    updateAtomLocations: function() {
+    updateAtomPositions: function() {
 
       const radius = MPConstants.BOND_LENGTH / 2;
 
       // atom A
-      const xA = ( radius * Math.cos( this.angleProperty.get() + Math.PI ) ) + this.location.x;
-      const yA = ( radius * Math.sin( this.angleProperty.get() + Math.PI ) ) + this.location.y;
-      this.atomA.locationProperty.set( new Vector2( xA, yA ) );
+      const xA = ( radius * Math.cos( this.angleProperty.get() + Math.PI ) ) + this.position.x;
+      const yA = ( radius * Math.sin( this.angleProperty.get() + Math.PI ) ) + this.position.y;
+      this.atomA.positionProperty.set( new Vector2( xA, yA ) );
 
       // atom B
-      const xB = ( radius * Math.cos( this.angleProperty.get() ) ) + this.location.x;
-      const yB = ( radius * Math.sin( this.angleProperty.get() ) ) + this.location.y;
-      this.atomB.locationProperty.set( new Vector2( xB, yB ) );
+      const xB = ( radius * Math.cos( this.angleProperty.get() ) ) + this.position.x;
+      const yB = ( radius * Math.sin( this.angleProperty.get() ) ) + this.position.y;
+      this.atomB.positionProperty.set( new Vector2( xB, yB ) );
     },
 
     /**

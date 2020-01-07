@@ -30,11 +30,11 @@ define( require => {
 
     // @public dispose not needed, exists for the lifetime of the sim
     this.dipoleProperty = new DerivedProperty( [
-        atom1.locationProperty, atom2.locationProperty,
+        atom1.positionProperty, atom2.positionProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
         MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty
       ],
-      function( location1, location2, electronegativity1, electronegativity2, dipoleDirection ) {
+      function( position1, position2, electronegativity1, electronegativity2, dipoleDirection ) {
 
         const deltaEN = electronegativity2 - electronegativity1;
 
@@ -65,12 +65,12 @@ define( require => {
   return inherit( Object, Bond, {
 
     /**
-     * Gets the center of the bond, the midpoint between the 2 atom locations.
+     * Gets the center of the bond, the midpoint between the 2 atom positions.
      * @returns {Vector2}
      * @public
      */
     getCenter: function() {
-      return this.atom1.locationProperty.get().average( this.atom2.locationProperty.get() );
+      return this.atom1.positionProperty.get().average( this.atom2.positionProperty.get() );
     },
 
     /**
@@ -80,7 +80,7 @@ define( require => {
      */
     getAngle: function() {
       const center = this.getCenter();
-      return Math.atan2( this.atom2.locationProperty.get().y - center.y, this.atom2.locationProperty.get().x - center.x );
+      return Math.atan2( this.atom2.positionProperty.get().y - center.y, this.atom2.positionProperty.get().x - center.x );
     },
 
     /**
@@ -89,7 +89,7 @@ define( require => {
      * @public
      */
     getLength: function() {
-      return this.atom1.locationProperty.get().distance( this.atom2.locationProperty.get() );
+      return this.atom1.positionProperty.get().distance( this.atom2.positionProperty.get() );
     }
   } );
 } );

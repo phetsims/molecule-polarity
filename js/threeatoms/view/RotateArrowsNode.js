@@ -2,7 +2,7 @@
 
 /**
  * A pair of arrows used to indicate that an arrow can be rotated.
- * Shapes are created in global coordinates, so this node's location should be (0,0).
+ * Shapes are created in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -37,14 +37,14 @@ define( require => {
       ]
     } );
 
-    // Align with atom location and molecular dipole
+    // Align with atom position and molecular dipole
     const updateTransform = function() {
       this.matrix = Matrix3
-        .translationFromVector( atom.locationProperty.get() )
+        .translationFromVector( atom.positionProperty.get() )
         .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle + Math.PI / 2 ) );
     };
     molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
-    atom.locationProperty.link( updateTransform.bind( this ) ); // unlink not needed
+    atom.positionProperty.link( updateTransform.bind( this ) ); // unlink not needed
   }
 
   moleculePolarity.register( 'RotateArrowsNode', RotateArrowsNode );

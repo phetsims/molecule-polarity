@@ -75,12 +75,12 @@ define( require => {
         // Compute the amount to move the partial charge node
         const multiplier = ( atom.diameter / 2 ) + ( Math.max( self.width, self.height ) / 2 ) + 3;
         const relativeOffset = unitVector.timesScalar( multiplier );
-        self.translation = atom.locationProperty.get().plus( relativeOffset );
+        self.translation = atom.positionProperty.get().plus( relativeOffset );
       }
     };
 
     atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
-    atom.locationProperty.link( this.update.bind( this ) ); // unlink not needed
+    atom.positionProperty.link( this.update.bind( this ) ); // unlink not needed
   }
 
   moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
@@ -109,10 +109,10 @@ define( require => {
       return new PartialChargeNode( atom, function() {
 
         // along the bond axis, in the direction of the atom
-        let v = atom.locationProperty.get().minus( bond.getCenter() );
+        let v = atom.positionProperty.get().minus( bond.getCenter() );
 
         /*
-         * Avoid the case where pressing Reset All causes the atoms to swap locations, temporarily resulting
+         * Avoid the case where pressing Reset All causes the atoms to swap positions, temporarily resulting
          * in a zero-magnitude vector when the first atom has moved but the second atom hasn't moved yet.
          * This sorts itself out when both atoms have moved.
          */
