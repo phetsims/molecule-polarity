@@ -41,8 +41,10 @@ define( require => {
       false, new Text( offString, SWITCH_LABEL_OPTIONS ),
       true, new Text( onString, SWITCH_LABEL_OPTIONS ), {
         xSpacing: 12,
-        trackFillA: 'rgb(180,180,180)',
-        trackFillB: 'rgb(0,180,0)'
+        toggleSwitchOptions: {
+          trackFillLeft: 'rgb( 180, 180, 180 )',
+          trackFillRight: 'rgb( 0, 180, 0 )'
+        }
       } );
 
     // vertical panel
