@@ -44,6 +44,8 @@ define( require => {
       maxWidth: 175 // i18n, determined empirically
     },
 
+    AQUA_RADIO_BUTTON_OPTIONS: { radius: 9 },
+
     // Controls the width of the gradient used to fill the 2D surfaces.
     // Smaller values result in a more noticeable change as the EN sliders are dragged.
     SURFACE_GRADIENT_WIDTH_MULTIPLIER: 5

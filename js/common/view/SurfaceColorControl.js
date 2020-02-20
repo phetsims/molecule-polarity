@@ -9,10 +9,11 @@ define( require => {
   'use strict';
 
   // modules
-  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const AquaRadioButtonGroup = require( 'SUN/AquaRadioButtonGroup' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const SurfaceColorKey = require( 'MOLECULE_POLARITY/common/view/SurfaceColorKey' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -22,7 +23,6 @@ define( require => {
   const surfaceColorRealMoleculesString = require( 'string!MOLECULE_POLARITY/surfaceColorRealMolecules' );
 
   // constants
-  const RADIO_BUTTON_OPTIONS = { radius: 8 };
   const COLOR_KEY_OPTIONS = {
     size: new Dimension2( 150, 15 ),
     titleVisible: false,
@@ -37,39 +37,30 @@ define( require => {
    */
   function SurfaceColorControl( surfaceColorProperty ) {
 
-    const surfaceColorLabel = new Text( surfaceColorRealMoleculesString, {
+    const titleNode = new Text( surfaceColorRealMoleculesString, {
       font: new PhetFont( 14 ),
       maxWidth: 400
     } );
 
-    const rwbButton = new AquaRadioButton(
-      surfaceColorProperty,
-      'RWB',
-      SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
-      RADIO_BUTTON_OPTIONS
-    );
+    const radioButtonGroupItems = [
+      { node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ), value: 'RWB' },
+      { node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ), value: 'ROYGB' }
+    ];
 
-    const roygbButton = new AquaRadioButton(
-      surfaceColorProperty,
-      'ROYGB',
-      SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
-      RADIO_BUTTON_OPTIONS
-    );
+    const radioButtonGroup = new AquaRadioButtonGroup( surfaceColorProperty, radioButtonGroupItems, {
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    } );
 
     VBox.call( this, {
       align: 'left',
-      spacing: 10,
-      children: [
-        surfaceColorLabel,
-        rwbButton,
-        roygbButton
-      ]
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      children: [ titleNode, radioButtonGroup ]
     } );
 
     // @private
     this.disposeSurfaceColorControl = function() {
-      rwbButton.dispose();
-      roygbButton.dispose();
+      radioButtonGroup.dispose();
     };
   }
 

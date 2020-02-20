@@ -1,4 +1,4 @@
-// Copyright 2017-2019, University of Colorado Boulder
+// Copyright 2017-2020, University of Colorado Boulder
 
 /**
  * Dipole direction control that appears in the Options dialog.
@@ -9,9 +9,10 @@ define( require => {
   'use strict';
 
   // modules
-  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const AquaRadioButtonGroup = require( 'SUN/AquaRadioButtonGroup' );
   const inherit = require( 'PHET_CORE/inherit' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -28,7 +29,6 @@ define( require => {
     font: new PhetFont( 20 ),
     maxWidth: 300
   };
-  const RADIO_BUTTON_OPTIONS = { radius: 8 };
 
   /**
    * @param {Property.<string>} dipoleDirectionProperty
@@ -36,7 +36,7 @@ define( require => {
    */
   function DipoleDirectionControl( dipoleDirectionProperty ) {
 
-    const dipoleDirectionLabel = new Text( dipoleDirectionString, {
+    const titleNode = new Text( dipoleDirectionString, {
       font: new PhetFont( 14 ),
       maxWidth: 400
     } );
@@ -46,39 +46,32 @@ define( require => {
       from: deltaPlusString,
       to: deltaMinusString
     } );
-    const positiveToNegativeButton = new AquaRadioButton(
-      dipoleDirectionProperty,
-      'positiveToNegative',
-      new Text( positiveToNegativeString, TEXT_OPTIONS ),
-      RADIO_BUTTON_OPTIONS
-    );
 
     // d- -> d+
     const negativeToPositiveString = StringUtils.fillIn( patternDipoleDirectionString, {
       from: deltaMinusString,
       to: deltaPlusString
     } );
-    const negativeToPositiveButton = new AquaRadioButton(
-      dipoleDirectionProperty,
-      'negativeToPositive',
-      new Text( negativeToPositiveString, TEXT_OPTIONS ),
-      RADIO_BUTTON_OPTIONS
-    );
+
+    const radioButtonGroupItems = [
+      { node: new Text( positiveToNegativeString, TEXT_OPTIONS ), value: 'positiveToNegative' },
+      { node: new Text( negativeToPositiveString, TEXT_OPTIONS ), value: 'negativeToPositive' }
+    ];
+
+    const radioButtonGroup = new AquaRadioButtonGroup( dipoleDirectionProperty, radioButtonGroupItems, {
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    } );
 
     VBox.call( this, {
       align: 'left',
-      spacing: 10,
-      children: [
-        dipoleDirectionLabel,
-        positiveToNegativeButton,
-        negativeToPositiveButton
-      ]
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      children: [ titleNode, radioButtonGroup ]
     } );
 
     // @private
     this.disposeDipoleDirectionControl = function() {
-      positiveToNegativeButton.dispose();
-      negativeToPositiveButton.dispose();
+      radioButtonGroup.dispose();
     };
   }
 
