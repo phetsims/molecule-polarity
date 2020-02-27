@@ -5,43 +5,39 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Image = require( 'SCENERY/nodes/Image' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  const Property = require( 'AXON/Property' );
-  const RealMoleculesModel = require( 'MOLECULE_POLARITY/realmolecules/model/RealMoleculesModel' );
-  const RealMoleculesScreenView = require( 'MOLECULE_POLARITY/realmolecules/view/RealMoleculesScreenView' );
-  const Screen = require( 'JOIST/Screen' );
+import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import homeIcon from '../../images/RealMolecules-home-icon_png.js';
+import navigationBarIcon from '../../images/RealMolecules-navbar-icon_png.js';
+import MPColors from '../common/MPColors.js';
+import moleculePolarityStrings from '../molecule-polarity-strings.js';
+import moleculePolarity from '../moleculePolarity.js';
+import RealMoleculesModel from './model/RealMoleculesModel.js';
+import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
-  // strings
-  const screenRealMoleculesString = require( 'string!MOLECULE_POLARITY/screen.realMolecules' );
+const screenRealMoleculesString = moleculePolarityStrings.screen.realMolecules;
 
-  // images
-  const homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
-  const navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
 
-  class RealMoleculesScreen extends Screen {
+class RealMoleculesScreen extends Screen {
 
-    constructor() {
+  constructor() {
 
-      const options = {
-        name: screenRealMoleculesString,
-        backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-        homeScreenIcon: new Image( homeIcon ),
-        navigationBarIcon: new Image( navigationBarIcon )
-      };
+    const options = {
+      name: screenRealMoleculesString,
+      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
+      homeScreenIcon: new Image( homeIcon ),
+      navigationBarIcon: new Image( navigationBarIcon )
+    };
 
-      super(
-        () => new RealMoleculesModel(),
-        model => new RealMoleculesScreenView( model ),
-        options
-      );
-    }
+    super(
+      () => new RealMoleculesModel(),
+      model => new RealMoleculesScreenView( model ),
+      options
+    );
   }
+}
 
-  return moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
-} );
+moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
+export default RealMoleculesScreen;

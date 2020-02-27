@@ -5,36 +5,32 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function EField( options ) {
+/**
+ * @param {Object} [options]
+ * @constructor
+ */
+function EField( options ) {
 
-    options = merge( {
-      enabled: false // {boolean} is the E-field initially enabled?
-    }, options );
+  options = merge( {
+    enabled: false // {boolean} is the E-field initially enabled?
+  }, options );
 
-    // @public
-    this.enabledProperty = new BooleanProperty( options.enabled );
+  // @public
+  this.enabledProperty = new BooleanProperty( options.enabled );
+}
+
+moleculePolarity.register( 'EField', EField );
+
+export default inherit( Object, EField, {
+
+  // @public
+  reset: function() {
+    this.enabledProperty.reset();
   }
-
-  moleculePolarity.register( 'EField', EField );
-
-  return inherit( Object, EField, {
-
-    // @public
-    reset: function() {
-      this.enabledProperty.reset();
-    }
-  } );
 } );

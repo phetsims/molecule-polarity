@@ -6,51 +6,47 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DipoleNode = require( 'MOLECULE_POLARITY/common/view/DipoleNode' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Vector2 from '../../../../dot/js/Vector2.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import MPColors from '../MPColors.js';
+import DipoleNode from './DipoleNode.js';
 
-  // constants
-  const OFFSET = 55; // offset in the direction that the dipole points
+// constants
+const OFFSET = 55; // offset in the direction that the dipole points
+
+/**
+ * @param {Molecule} molecule
+ * @constructor
+ */
+function MolecularDipoleNode( molecule ) {
+
+  DipoleNode.call( this, molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
+
+  // position the dipole with some radial offset from the molecule's position, unlink not needed
+  const self = this;
+  molecule.dipoleProperty.link( function( dipole ) {
+
+    // offset vector relative to molecule position
+    const v = Vector2.createPolar( OFFSET, dipole.angle );
+
+    // offset in global coordinate frame
+    self.translation = molecule.position.plus( v );
+  } );
+}
+
+moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
+
+export default inherit( DipoleNode, MolecularDipoleNode, {}, {
 
   /**
-   * @param {Molecule} molecule
-   * @constructor
+   * Creates an icon, for use in control panels.
+   * @returns {DipoleNode}
+   * @public
+   * @static
    */
-  function MolecularDipoleNode( molecule ) {
-
-    DipoleNode.call( this, molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
-
-    // position the dipole with some radial offset from the molecule's position, unlink not needed
-    const self = this;
-    molecule.dipoleProperty.link( function( dipole ) {
-
-      // offset vector relative to molecule position
-      const v = Vector2.createPolar( OFFSET, dipole.angle );
-
-      // offset in global coordinate frame
-      self.translation = molecule.position.plus( v );
-    } );
+  createIcon: function() {
+    return DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE );
   }
-
-  moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
-
-  return inherit( DipoleNode, MolecularDipoleNode, {}, {
-
-    /**
-     * Creates an icon, for use in control panels.
-     * @returns {DipoleNode}
-     * @public
-     * @static
-     */
-    createIcon: function() {
-      return DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE );
-    }
-  } );
 } );

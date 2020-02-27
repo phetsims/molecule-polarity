@@ -5,72 +5,68 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ComboBox = require( 'SUN/ComboBox' );
-  const ComboBoxItem = require( 'SUN/ComboBoxItem' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const RichText = require( 'SCENERY/nodes/RichText' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import ComboBox from '../../../../sun/js/ComboBox.js';
+import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
+import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  // strings
-  const moleculeString = require( 'string!MOLECULE_POLARITY/molecule' );
-  const patternSymbolNameString = require( 'string!MOLECULE_POLARITY/pattern.symbolName' );
+const moleculeString = moleculePolarityStrings.molecule;
+const patternSymbolNameString = moleculePolarityStrings.pattern.symbolName;
 
-  class RealMoleculesComboBox extends ComboBox {
-
-    /**
-     * @param {RealMolecule[]} molecules
-     * @param {Property.<RealMolecule>} moleculeProperty
-     * @param {Node} listParent
-     * @constructor
-     */
-    constructor( molecules, moleculeProperty, listParent ) {
-
-      // label
-      const labelNode = new Text( moleculeString, {
-        font: new PhetFont( 22 ),
-        maxWidth: 150
-      } );
-
-      // {ComboBoxItem[]}
-      const items = molecules.map( createItem );
-
-      super( items, moleculeProperty, listParent, {
-        labelNode: labelNode,
-        listPosition: 'above',
-        highlightFill: 'rgb(218,255,255)',
-        cornerRadius: 8,
-        maxWidth: 450
-      } );
-    }
-  }
-
-  moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
+class RealMoleculesComboBox extends ComboBox {
 
   /**
-   * Creates an item for the combo box.
-   * @param {RealMolecule} molecule
-   * @returns {ComboBoxItem}
+   * @param {RealMolecule[]} molecules
+   * @param {Property.<RealMolecule>} moleculeProperty
+   * @param {Node} listParent
+   * @constructor
    */
-  function createItem( molecule ) {
+  constructor( molecules, moleculeProperty, listParent ) {
 
-    const text = StringUtils.fillIn( patternSymbolNameString, {
-      symbol: molecule.symbol,
-      name: molecule.name
+    // label
+    const labelNode = new Text( moleculeString, {
+      font: new PhetFont( 22 ),
+      maxWidth: 150
     } );
 
-    const node = new RichText( text, {
-      maxWidth: 200,
-      font: new PhetFont( 18 )
-    } );
+    // {ComboBoxItem[]}
+    const items = molecules.map( createItem );
 
-    return new ComboBoxItem( node, molecule );
+    super( items, moleculeProperty, listParent, {
+      labelNode: labelNode,
+      listPosition: 'above',
+      highlightFill: 'rgb(218,255,255)',
+      cornerRadius: 8,
+      maxWidth: 450
+    } );
   }
+}
 
-  return RealMoleculesComboBox;
-} );
+moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
+
+/**
+ * Creates an item for the combo box.
+ * @param {RealMolecule} molecule
+ * @returns {ComboBoxItem}
+ */
+function createItem( molecule ) {
+
+  const text = StringUtils.fillIn( patternSymbolNameString, {
+    symbol: molecule.symbol,
+    name: molecule.name
+  } );
+
+  const node = new RichText( text, {
+    maxWidth: 200,
+    font: new PhetFont( 18 )
+  } );
+
+  return new ComboBoxItem( node, molecule );
+}
+
+export default RealMoleculesComboBox;

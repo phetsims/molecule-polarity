@@ -5,59 +5,56 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BondDipoleNode = require( 'MOLECULE_POLARITY/common/view/BondDipoleNode' );
-  const Checkbox = require( 'SUN/Checkbox' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import MPConstants from '../../common/MPConstants.js';
+import BondDipoleNode from '../../common/view/BondDipoleNode.js';
+import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  // strings
-  const bondCharacterString = require( 'string!MOLECULE_POLARITY/bondCharacter' );
-  const bondDipoleString = require( 'string!MOLECULE_POLARITY/bondDipole' );
-  const partialChargesString = require( 'string!MOLECULE_POLARITY/partialCharges' );
-  const viewString = require( 'string!MOLECULE_POLARITY/view' );
+const bondCharacterString = moleculePolarityStrings.bondCharacter;
+const bondDipoleString = moleculePolarityStrings.bondDipole;
+const partialChargesString = moleculePolarityStrings.partialCharges;
+const viewString = moleculePolarityStrings.view;
 
-  class TwoAtomsViewControls extends VBox {
+class TwoAtomsViewControls extends VBox {
 
-    /**
-     * @param {TwoAtomsViewProperties} viewProperties
-     */
-    constructor( viewProperties ) {
+  /**
+   * @param {TwoAtomsViewProperties} viewProperties
+   */
+  constructor( viewProperties ) {
 
-      // title
-      const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    // title
+    const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
-      // Checkbox labels
-      const bondDipoleLabel = new HBox( {
-        children: [ new Text( bondDipoleString, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
-        spacing: MPConstants.CONTROL_ICON_X_SPACING
-      } );
-      const partialChargesLabel = new Text( partialChargesString, MPConstants.CONTROL_TEXT_OPTIONS );
-      const bondCharacterLabel = new Text( bondCharacterString, MPConstants.CONTROL_TEXT_OPTIONS );
+    // Checkbox labels
+    const bondDipoleLabel = new HBox( {
+      children: [ new Text( bondDipoleString, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
+      spacing: MPConstants.CONTROL_ICON_X_SPACING
+    } );
+    const partialChargesLabel = new Text( partialChargesString, MPConstants.CONTROL_TEXT_OPTIONS );
+    const bondCharacterLabel = new Text( bondCharacterString, MPConstants.CONTROL_TEXT_OPTIONS );
 
-      // Checkboxes
-      const bondDipoleCheckbox = new Checkbox( bondDipoleLabel, viewProperties.bondDipoleVisibleProperty );
-      const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
-      const bondCharacterCheckbox = new Checkbox( bondCharacterLabel, viewProperties.bondCharacterVisibleProperty );
+    // Checkboxes
+    const bondDipoleCheckbox = new Checkbox( bondDipoleLabel, viewProperties.bondDipoleVisibleProperty );
+    const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
+    const bondCharacterCheckbox = new Checkbox( bondCharacterLabel, viewProperties.bondCharacterVisibleProperty );
 
-      super( {
-        align: 'left',
-        spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-        children: [
-          titleNode,
-          bondDipoleCheckbox,
-          partialChargesCheckbox,
-          bondCharacterCheckbox
-        ]
-      } );
-    }
+    super( {
+      align: 'left',
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      children: [
+        titleNode,
+        bondDipoleCheckbox,
+        partialChargesCheckbox,
+        bondCharacterCheckbox
+      ]
+    } );
   }
+}
 
-  return moleculePolarity.register( 'TwoAtomsViewControls', TwoAtomsViewControls );
-} );
+moleculePolarity.register( 'TwoAtomsViewControls', TwoAtomsViewControls );
+export default TwoAtomsViewControls;

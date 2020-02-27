@@ -6,59 +6,56 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const ArrowShape = require( 'SCENERY_PHET/ArrowShape' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Matrix3 = require( 'DOT/Matrix3' );
-  const merge = require( 'PHET_CORE/merge' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const Transform3 = require( 'DOT/Transform3' );
+import Matrix3 from '../../../../dot/js/Matrix3.js';
+import Transform3 from '../../../../dot/js/Transform3.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  /**
-   * @param {Molecule} molecule
-   * @param {Atom} atom
-   * @param {Object} [options]
-   * @constructor
-   */
-  function TranslateArrowsNode( molecule, atom, options ) {
+/**
+ * @param {Molecule} molecule
+ * @param {Atom} atom
+ * @param {Object} [options]
+ * @constructor
+ */
+function TranslateArrowsNode( molecule, atom, options ) {
 
-    options = merge( {
-      length: 25 // relatively short, so we don't need curved arrows
-    }, options );
+  options = merge( {
+    length: 25 // relatively short, so we don't need curved arrows
+  }, options );
 
-    const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
-    const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+  const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+  const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
 
-    // create "normalized" shapes at (0,0) with no rotation
-    const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
-    const radius = atom.diameter / 2;
-    const spacing = 2;
-    const leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
-    const rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
+  // create "normalized" shapes at (0,0) with no rotation
+  const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
+  const radius = atom.diameter / 2;
+  const spacing = 2;
+  const leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
+  const rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
 
-    assert && assert( !options.children, 'decoration not supported' );
-    options.children = [ leftArrowNode, rightArrowNode ];
+  assert && assert( !options.children, 'decoration not supported' );
+  options.children = [ leftArrowNode, rightArrowNode ];
 
-    // unlink not needed
-    atom.positionProperty.link( function() {
+  // unlink not needed
+  atom.positionProperty.link( function() {
 
-      // transform the arrow shapes to account for atom position and relationship to molecule position
-      const v = molecule.position.minus( atom.positionProperty.get() );
-      const angle = v.angle - ( Math.PI / 2 );
-      const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
-      leftArrowNode.shape = transform.transformShape( leftArrow );
-      rightArrowNode.shape = transform.transformShape( rightArrow );
-    } );
+    // transform the arrow shapes to account for atom position and relationship to molecule position
+    const v = molecule.position.minus( atom.positionProperty.get() );
+    const angle = v.angle - ( Math.PI / 2 );
+    const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
+    leftArrowNode.shape = transform.transformShape( leftArrow );
+    rightArrowNode.shape = transform.transformShape( rightArrow );
+  } );
 
-    Node.call( this, options );
-  }
+  Node.call( this, options );
+}
 
-  moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );
+moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );
 
-  return inherit( Node, TranslateArrowsNode );
-} );
+inherit( Node, TranslateArrowsNode );
+export default TranslateArrowsNode;

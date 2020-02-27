@@ -5,26 +5,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  /**
-   * @param {number} elementNumber
-   * @param {Color|String} color
-   * @constructor
-   */
-  function Element( elementNumber, color ) {
+/**
+ * @param {number} elementNumber
+ * @param {Color|String} color
+ * @constructor
+ */
+function Element( elementNumber, color ) {
 
-    // @public (read-only)
-    this.elementNumber = elementNumber;
-    this.color = color;
-  }
+  // @public (read-only)
+  this.elementNumber = elementNumber;
+  this.color = color;
+}
 
-  moleculePolarity.register( 'Element', Element );
+moleculePolarity.register( 'Element', Element );
 
-  return inherit( Object, Element );
-} );
+inherit( Object, Element );
+export default Element;

@@ -6,81 +6,78 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const Panel = require( 'SUN/Panel' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Plane = require( 'SCENERY/nodes/Plane' );
-  const RichText = require( 'SCENERY/nodes/RichText' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Plane from '../../../../scenery/js/nodes/Plane.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Panel from '../../../../sun/js/Panel.js';
+import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  // strings
-  const underDevelopmentLine1String = require( 'string!MOLECULE_POLARITY/underDevelopment.line1' );
-  const underDevelopmentLine2String = require( 'string!MOLECULE_POLARITY/underDevelopment.line2' );
+const underDevelopmentLine1String = moleculePolarityStrings.underDevelopment.line1;
+const underDevelopmentLine2String = moleculePolarityStrings.underDevelopment.line2;
 
-  // constants
-  const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
+// constants
+const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
 
-  /**
-   * @constructor
-   */
-  function UnderDevelopmentPlane( layoutBounds ) {
+/**
+ * @constructor
+ */
+function UnderDevelopmentPlane( layoutBounds ) {
 
-    const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
-      href: LEGACY_URL,
-      text: LEGACY_URL
-    } );
+  const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
+    href: LEGACY_URL,
+    text: LEGACY_URL
+  } );
 
-    const maxTextWidth = 0.75 * layoutBounds.width;
+  const maxTextWidth = 0.75 * layoutBounds.width;
 
-    const vBox = new VBox( {
-      align: 'left',
-      spacing: 20,
-      children: [
-        new Text( underDevelopmentLine1String, {
-          font: new PhetFont( 22 ),
-          maxWidth: maxTextWidth
-        } ),
-        new VBox( {
-          align: 'left',
-          children: [
-            new Text( underDevelopmentLine2String, {
-              font: new PhetFont( 16 ),
-              maxWidth: maxTextWidth
-            } ),
-            new RichText( linkText, {
-              links: true, // allow links in linkText
-              font: new PhetFont( 16 ),
-              maxWidth: maxTextWidth
-            } )
-          ]
-        } )
-      ]
-    } );
+  const vBox = new VBox( {
+    align: 'left',
+    spacing: 20,
+    children: [
+      new Text( underDevelopmentLine1String, {
+        font: new PhetFont( 22 ),
+        maxWidth: maxTextWidth
+      } ),
+      new VBox( {
+        align: 'left',
+        children: [
+          new Text( underDevelopmentLine2String, {
+            font: new PhetFont( 16 ),
+            maxWidth: maxTextWidth
+          } ),
+          new RichText( linkText, {
+            links: true, // allow links in linkText
+            font: new PhetFont( 16 ),
+            maxWidth: maxTextWidth
+          } )
+        ]
+      } )
+    ]
+  } );
 
-    const panel = new Panel( vBox, {
-      cornerRadius: 10,
-      xMargin: 25,
-      yMargin: 50,
-      fill: 'white',
-      stroke: 'black',
-      center: layoutBounds.center
-    } );
+  const panel = new Panel( vBox, {
+    cornerRadius: 10,
+    xMargin: 25,
+    yMargin: 50,
+    fill: 'white',
+    stroke: 'black',
+    center: layoutBounds.center
+  } );
 
-    Plane.call( this, {
-      children: [ panel ],
-      fill: 'rgba( 0, 0, 0, 0.2 )',
-      pickable: true // blocks interaction with anything behind this Plane
-    } );
-  }
+  Plane.call( this, {
+    children: [ panel ],
+    fill: 'rgba( 0, 0, 0, 0.2 )',
+    pickable: true // blocks interaction with anything behind this Plane
+  } );
+}
 
-  moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
+moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
 
-  return inherit( Plane, UnderDevelopmentPlane );
-} );
+inherit( Plane, UnderDevelopmentPlane );
+export default UnderDevelopmentPlane;

@@ -5,126 +5,123 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EFieldControl = require( 'MOLECULE_POLARITY/common/view/EFieldControl' );
-  const ElectronegativityControl = require( 'MOLECULE_POLARITY/common/view/ElectronegativityControl' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  const MPControlPanel = require( 'MOLECULE_POLARITY/common/view/MPControlPanel' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const PlateNode = require( 'MOLECULE_POLARITY/common/view/PlateNode' );
-  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  const ScreenView = require( 'JOIST/ScreenView' );
-  const ThreeAtomsViewControls = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewControls' );
-  const ThreeAtomsViewProperties = require( 'MOLECULE_POLARITY/threeatoms/view/ThreeAtomsViewProperties' );
-  const TriatomicMoleculeNode = require( 'MOLECULE_POLARITY/threeatoms/view/TriatomicMoleculeNode' );
+import ScreenView from '../../../../joist/js/ScreenView.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import MPConstants from '../../common/MPConstants.js';
+import EFieldControl from '../../common/view/EFieldControl.js';
+import ElectronegativityControl from '../../common/view/ElectronegativityControl.js';
+import MPControlPanel from '../../common/view/MPControlPanel.js';
+import PlateNode from '../../common/view/PlateNode.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import ThreeAtomsViewControls from './ThreeAtomsViewControls.js';
+import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
+import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
-  // constants
-  const PLATE_X_OFFSET = 300; // x offset of E-field plates from molecule's center, determined empirically, see #66
-  
-  /**
-   * @param {ThreeAtomsModel} model
-   * @constructor
-   */
-  function ThreeAtomsScreenView( model ) {
+// constants
+const PLATE_X_OFFSET = 300; // x offset of E-field plates from molecule's center, determined empirically, see #66
 
-    const self = this;
+/**
+ * @param {ThreeAtomsModel} model
+ * @constructor
+ */
+function ThreeAtomsScreenView( model ) {
 
-    ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
+  const self = this;
 
-    // view-specific Properties
-    const viewProperties = new ThreeAtomsViewProperties();
+  ScreenView.call( this, MPConstants.SCREEN_VIEW_OPTIONS );
 
-    // nodes
-    const moleculeNode = new TriatomicMoleculeNode( model.molecule );
-    const negativePlateNode = PlateNode.createNegative( model.eField );
-    const positivePlateNode = PlateNode.createPositive( model.eField );
-    const enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
-    const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
-    const enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
+  // view-specific Properties
+  const viewProperties = new ThreeAtomsViewProperties();
 
-    const controlPanel = new MPControlPanel( [
-      new ThreeAtomsViewControls( viewProperties ),
-      new EFieldControl( model.eField.enabledProperty )
-    ] );
+  // nodes
+  const moleculeNode = new TriatomicMoleculeNode( model.molecule );
+  const negativePlateNode = PlateNode.createNegative( model.eField );
+  const positivePlateNode = PlateNode.createPositive( model.eField );
+  const enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
+  const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
+  const enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
 
-    const resetAllButton = new ResetAllButton( {
-      listener: function() {
-        self.interruptSubtreeInput();
-        model.reset();
-        viewProperties.reset();
-        moleculeNode.reset();
-      },
-      scale: 1.32
-    } );
+  const controlPanel = new MPControlPanel( [
+    new ThreeAtomsViewControls( viewProperties ),
+    new EFieldControl( model.eField.enabledProperty )
+  ] );
 
-    // Parent for all nodes added to this screen
-    const rootNode = new Node( {
-      children: [
+  const resetAllButton = new ResetAllButton( {
+    listener: function() {
+      self.interruptSubtreeInput();
+      model.reset();
+      viewProperties.reset();
+      moleculeNode.reset();
+    },
+    scale: 1.32
+  } );
 
-        // nodes are rendered in this order
-        negativePlateNode,
-        positivePlateNode,
-        enControlA,
-        enControlB,
-        enControlC,
-        controlPanel,
-        moleculeNode,
-        resetAllButton
-      ]
-    } );
-    this.addChild( rootNode );
+  // Parent for all nodes added to this screen
+  const rootNode = new Node( {
+    children: [
 
-    // layout, based on molecule position ---------------------------------
+      // nodes are rendered in this order
+      negativePlateNode,
+      positivePlateNode,
+      enControlA,
+      enControlB,
+      enControlC,
+      controlPanel,
+      moleculeNode,
+      resetAllButton
+    ]
+  } );
+  this.addChild( rootNode );
 
-    const moleculeX = model.molecule.position.x;
-    const moleculeY = model.molecule.position.y;
+  // layout, based on molecule position ---------------------------------
 
-    // to left of molecule, vertically centered
-    negativePlateNode.right = moleculeX - PLATE_X_OFFSET;
-    negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
+  const moleculeX = model.molecule.position.x;
+  const moleculeY = model.molecule.position.y;
 
-    // to right of molecule, vertically centered
-    positivePlateNode.left = moleculeX + PLATE_X_OFFSET;
-    positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
+  // to left of molecule, vertically centered
+  negativePlateNode.right = moleculeX - PLATE_X_OFFSET;
+  negativePlateNode.y = moleculeY - ( negativePlateNode.plateHeight / 2 );
 
-    // centered below molecule
-    enControlB.centerX = moleculeX;
-    enControlA.right = enControlB.left - 10;
-    enControlC.left = enControlB.right + 10;
-    enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
+  // to right of molecule, vertically centered
+  positivePlateNode.left = moleculeX + PLATE_X_OFFSET;
+  positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
-    // to right of positive plate, top aligned
-    controlPanel.top = positivePlateNode.y;
-    controlPanel.left = positivePlateNode.right + 25;
+  // centered below molecule
+  enControlB.centerX = moleculeX;
+  enControlA.right = enControlB.left - 10;
+  enControlC.left = enControlB.right + 10;
+  enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
 
-    // bottom-right corner of the screen
-    resetAllButton.right = this.layoutBounds.right - 40;
-    resetAllButton.bottom = this.layoutBounds.bottom - 20;
+  // to right of positive plate, top aligned
+  controlPanel.top = positivePlateNode.y;
+  controlPanel.left = positivePlateNode.right + 25;
 
-    // synchronization with view Properties ------------------------------
+  // bottom-right corner of the screen
+  resetAllButton.right = this.layoutBounds.right - 40;
+  resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
-    // unlink not needed
-    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
-      moleculeNode.setBondDipolesVisible( visible );
-    } );
+  // synchronization with view Properties ------------------------------
 
-    // unlink not needed
-    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
-      moleculeNode.setMolecularDipoleVisible( visible );
-    } );
+  // unlink not needed
+  viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
+    moleculeNode.setBondDipolesVisible( visible );
+  } );
 
-    // unlink not needed
-    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
-      moleculeNode.setPartialChargesVisible( visible );
-    } );
-  }
+  // unlink not needed
+  viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+    moleculeNode.setMolecularDipoleVisible( visible );
+  } );
 
-  moleculePolarity.register( 'ThreeAtomsScreenView', ThreeAtomsScreenView );
+  // unlink not needed
+  viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+    moleculeNode.setPartialChargesVisible( visible );
+  } );
+}
 
-  return inherit( ScreenView, ThreeAtomsScreenView );
-} );
+moleculePolarity.register( 'ThreeAtomsScreenView', ThreeAtomsScreenView );
+
+inherit( ScreenView, ThreeAtomsScreenView );
+export default ThreeAtomsScreenView;

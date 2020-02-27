@@ -8,36 +8,32 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Line = require( 'SCENERY/nodes/Line' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import MPColors from '../MPColors.js';
 
-  /**
-   * @param {Bond} bond
-   * @constructor
-   */
-  function BondNode( bond ) {
+/**
+ * @param {Bond} bond
+ * @constructor
+ */
+function BondNode( bond ) {
 
-    const self = this;
+  const self = this;
 
-    Line.call( this, bond.atom1.positionProperty.get(), bond.atom2.positionProperty.get(), {
-      stroke: MPColors.BOND,
-      lineWidth: 12,
-      strokePickable: true // include stroke in hit-testing
-    } );
+  Line.call( this, bond.atom1.positionProperty.get(), bond.atom2.positionProperty.get(), {
+    stroke: MPColors.BOND,
+    lineWidth: 12,
+    strokePickable: true // include stroke in hit-testing
+  } );
 
-    // adjust the bond when its endpoints change, unlinks not needed
-    bond.atom1.positionProperty.link( function( position ) { self.setPoint1( position ); } );
-    bond.atom2.positionProperty.link( function( position ) { self.setPoint2( position ); } );
-  }
+  // adjust the bond when its endpoints change, unlinks not needed
+  bond.atom1.positionProperty.link( function( position ) { self.setPoint1( position ); } );
+  bond.atom2.positionProperty.link( function( position ) { self.setPoint2( position ); } );
+}
 
-  moleculePolarity.register( 'BondNode', BondNode );
+moleculePolarity.register( 'BondNode', BondNode );
 
-  return inherit( Line, BondNode );
-} );
-
+inherit( Line, BondNode );
+export default BondNode;

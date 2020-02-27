@@ -5,20 +5,16 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+import moleculePolarity from '../../moleculePolarity.js';
 
-  // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  const SurfaceType = Object.freeze( {
-    NONE: 'none',
-    ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
-    ELECTRON_DENSITY: 'electronDensity'
-  } );
-
-  moleculePolarity.register( 'SurfaceType', SurfaceType );
-
-  return SurfaceType;
+// NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
+const SurfaceType = Object.freeze( {
+  NONE: 'none',
+  ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
+  ELECTRON_DENSITY: 'electronDensity'
 } );
+
+moleculePolarity.register( 'SurfaceType', SurfaceType );
+
+export default SurfaceType;

@@ -6,48 +6,45 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const HSeparator = require( 'SUN/HSeparator' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
-  const MPConstants = require( 'MOLECULE_POLARITY/common/MPConstants' );
-  const Panel = require( 'SUN/Panel' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import HSeparator from '../../../../sun/js/HSeparator.js';
+import Panel from '../../../../sun/js/Panel.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import MPColors from '../MPColors.js';
+import MPConstants from '../MPConstants.js';
 
-  /**
-   * @param {Node[]} subPanels
-   * @constructor
-   */
-  function MPControlPanel( subPanels ) {
+/**
+ * @param {Node[]} subPanels
+ * @constructor
+ */
+function MPControlPanel( subPanels ) {
 
-    // horizontal separator width is the max width of the subPanels
-    const separatorWidth = _.maxBy( subPanels, function( node ) { return node.width; } ).width;
+  // horizontal separator width is the max width of the subPanels
+  const separatorWidth = _.maxBy( subPanels, function( node ) { return node.width; } ).width;
 
-    // put a horizontal separator between each sub-panel
-    const children = [ subPanels[ 0 ] ];
-    for ( let i = 1; i < subPanels.length; i++ ) {
-      children.push( new HSeparator( separatorWidth ) );
-      children.push( subPanels[ i ] );
-    }
-
-    const content = new VBox( {
-      children: children,
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
-    } );
-
-    Panel.call( this, content, {
-      fill: MPColors.CONTROL_PANEL_BACKGROUND,
-      xMargin: 20,
-      yMargin: 15
-    } );
+  // put a horizontal separator between each sub-panel
+  const children = [ subPanels[ 0 ] ];
+  for ( let i = 1; i < subPanels.length; i++ ) {
+    children.push( new HSeparator( separatorWidth ) );
+    children.push( subPanels[ i ] );
   }
 
-  moleculePolarity.register( 'MPControlPanel', MPControlPanel );
+  const content = new VBox( {
+    children: children,
+    align: 'left',
+    spacing: MPConstants.CONTROL_PANEL_Y_SPACING
+  } );
 
-  return inherit( Panel, MPControlPanel );
-} );
+  Panel.call( this, content, {
+    fill: MPColors.CONTROL_PANEL_BACKGROUND,
+    xMargin: 20,
+    yMargin: 15
+  } );
+}
+
+moleculePolarity.register( 'MPControlPanel', MPControlPanel );
+
+inherit( Panel, MPControlPanel );
+export default MPControlPanel;

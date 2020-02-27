@@ -8,57 +8,54 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Vector2 from '../../../../dot/js/Vector2.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import moleculePolarity from '../../moleculePolarity.js';
+
+/**
+ * @param {Molecule} molecule
+ * @param {Property.<number>} bondAngleProperty - Property that this handler modifies
+ * @constructor
+ */
+function BondAngleDragHandler( molecule, bondAngleProperty ) {
+
+  let previousAngle = 0;
 
   /**
-   * @param {Molecule} molecule
-   * @param {Property.<number>} bondAngleProperty - Property that this handler modifies
-   * @constructor
+   * Finds the angle about the molecule's position.
+   * @param {SceneryEvent} event
+   * @returns {number} angle in radians
    */
-  function BondAngleDragHandler( molecule, bondAngleProperty ) {
+  const getAngle = function( event ) {
+    const point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
+    return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
+  };
 
-    let previousAngle = 0;
+  SimpleDragHandler.call( this, {
 
-    /**
-     * Finds the angle about the molecule's position.
-     * @param {SceneryEvent} event
-     * @returns {number} angle in radians
-     */
-    const getAngle = function( event ) {
-      const point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
-      return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
-    };
+    allowTouchSnag: true,
 
-    SimpleDragHandler.call( this, {
+    start: function( event ) {
+      molecule.dragging = true;
+      event.currentTarget.moveToFront();
+      previousAngle = getAngle( event );
+    },
 
-      allowTouchSnag: true,
+    drag: function( event ) {
+      const currentAngle = getAngle( event );
+      bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
+      previousAngle = currentAngle;
+    },
 
-      start: function( event ) {
-        molecule.dragging = true;
-        event.currentTarget.moveToFront();
-        previousAngle = getAngle( event );
-      },
+    end: function( event ) {
+      molecule.dragging = false;
+    }
+  } );
+}
 
-      drag: function( event ) {
-        const currentAngle = getAngle( event );
-        bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
-        previousAngle = currentAngle;
-      },
+moleculePolarity.register( 'BondAngleDragHandler', BondAngleDragHandler );
 
-      end: function( event ) {
-        molecule.dragging = false;
-      }
-    } );
-  }
-
-  moleculePolarity.register( 'BondAngleDragHandler', BondAngleDragHandler );
-
-  return inherit( SimpleDragHandler, BondAngleDragHandler );
-} );
+inherit( SimpleDragHandler, BondAngleDragHandler );
+export default BondAngleDragHandler;

@@ -5,24 +5,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPModel = require( 'MOLECULE_POLARITY/common/model/MPModel' );
-  const TriatomicMolecule = require( 'MOLECULE_POLARITY/threeatoms/model/TriatomicMolecule' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Vector2 from '../../../../dot/js/Vector2.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import MPModel from '../../common/model/MPModel.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import TriatomicMolecule from './TriatomicMolecule.js';
 
-  /**
-   * @constructor
-   */
-  function ThreeAtomsModel() {
-    MPModel.call( this, new TriatomicMolecule( { position: new Vector2( 400, 280 ) } ) );
-  }
+/**
+ * @constructor
+ */
+function ThreeAtomsModel() {
+  MPModel.call( this, new TriatomicMolecule( { position: new Vector2( 400, 280 ) } ) );
+}
 
-  moleculePolarity.register( 'ThreeAtomsModel', ThreeAtomsModel );
+moleculePolarity.register( 'ThreeAtomsModel', ThreeAtomsModel );
 
-  return inherit( MPModel, ThreeAtomsModel );
-} );
+inherit( MPModel, ThreeAtomsModel );
+export default ThreeAtomsModel;

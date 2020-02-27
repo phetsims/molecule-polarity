@@ -5,33 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPQueryParameters = require( 'MOLECULE_POLARITY/common/MPQueryParameters' );
-  const StringProperty = require( 'AXON/StringProperty' );
+import StringProperty from '../../../axon/js/StringProperty.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import moleculePolarity from '../moleculePolarity.js';
+import MPQueryParameters from './MPQueryParameters.js';
 
-  /**
-   * @constructor
-   */
-  function MPGlobalOptions() {
+/**
+ * @constructor
+ */
+function MPGlobalOptions() {
 
-    // @public
-    this.dipoleDirectionProperty = new StringProperty( MPQueryParameters.dipoleDirection );
-    this.surfaceColorProperty = new StringProperty( MPQueryParameters.surfaceColor );
+  // @public
+  this.dipoleDirectionProperty = new StringProperty( MPQueryParameters.dipoleDirection );
+  this.surfaceColorProperty = new StringProperty( MPQueryParameters.surfaceColor );
+}
+
+moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );
+
+export default inherit( Object, MPGlobalOptions, {
+
+  // @public
+  reset: function() {
+    this.dipoleDirectionProperty.reset();
+    this.surfaceColorProperty.reset();
   }
-
-  moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );
-
-  return inherit( Object, MPGlobalOptions, {
-
-    // @public
-    reset: function() {
-      this.dipoleDirectionProperty.reset();
-      this.surfaceColorProperty.reset();
-    }
-  } );
 } );

@@ -5,24 +5,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DiatomicMolecule = require( 'MOLECULE_POLARITY/twoatoms/model/DiatomicMolecule' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
-  const MPModel = require( 'MOLECULE_POLARITY/common/model/MPModel' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Vector2 from '../../../../dot/js/Vector2.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import MPModel from '../../common/model/MPModel.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import DiatomicMolecule from './DiatomicMolecule.js';
 
-  /**
-   * @constructor
-   */
-  function TwoAtomsModel() {
-    MPModel.call( this, new DiatomicMolecule( { position: new Vector2( 380, 280 ) } ) );
-  }
+/**
+ * @constructor
+ */
+function TwoAtomsModel() {
+  MPModel.call( this, new DiatomicMolecule( { position: new Vector2( 380, 280 ) } ) );
+}
 
-  moleculePolarity.register( 'TwoAtomsModel', TwoAtomsModel );
+moleculePolarity.register( 'TwoAtomsModel', TwoAtomsModel );
 
-  return inherit( MPModel, TwoAtomsModel );
-} );
+inherit( MPModel, TwoAtomsModel );
+export default TwoAtomsModel;

@@ -5,30 +5,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
-  class ThreeAtomsViewProperties {
+class ThreeAtomsViewProperties {
 
-    constructor() {
-
-      // @public
-      this.bondDipolesVisibleProperty = new BooleanProperty( false );
-      this.molecularDipoleVisibleProperty = new BooleanProperty( true );
-      this.partialChargesVisibleProperty = new BooleanProperty( false );
-    }
+  constructor() {
 
     // @public
-    reset() {
-      this.bondDipolesVisibleProperty.reset();
-      this.molecularDipoleVisibleProperty.reset();
-      this.partialChargesVisibleProperty.reset();
-    }
+    this.bondDipolesVisibleProperty = new BooleanProperty( false );
+    this.molecularDipoleVisibleProperty = new BooleanProperty( true );
+    this.partialChargesVisibleProperty = new BooleanProperty( false );
   }
 
-  return moleculePolarity.register( 'ThreeAtomsViewProperties', ThreeAtomsViewProperties );
-} );
+  // @public
+  reset() {
+    this.bondDipolesVisibleProperty.reset();
+    this.molecularDipoleVisibleProperty.reset();
+    this.partialChargesVisibleProperty.reset();
+  }
+}
+
+moleculePolarity.register( 'ThreeAtomsViewProperties', ThreeAtomsViewProperties );
+export default ThreeAtomsViewProperties;
