@@ -32,7 +32,7 @@ define( require => {
     }
   };
 
-  SimLauncher.launch( function() {
+  SimLauncher.launch( () => {
 
     const screens = [
       new TwoAtomsScreen(),
