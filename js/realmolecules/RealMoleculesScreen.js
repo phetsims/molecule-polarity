@@ -25,6 +25,7 @@ define( require => {
   const navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
 
   class RealMoleculesScreen extends Screen {
+
     constructor() {
 
       const options = {
