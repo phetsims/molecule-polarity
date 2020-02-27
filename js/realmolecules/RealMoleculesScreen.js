@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
   const Property = require( 'AXON/Property' );
@@ -25,25 +24,23 @@ define( require => {
   const homeIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-home-icon.png' );
   const navigationBarIcon = require( 'image!MOLECULE_POLARITY/RealMolecules-navbar-icon.png' );
 
-  /**
-   * @constructor
-   */
-  function RealMoleculesScreen() {
+  class RealMoleculesScreen extends Screen {
+    constructor() {
 
-    const options = {
-      name: screenRealMoleculesString,
-      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: new Image( homeIcon ),
-      navigationBarIcon: new Image( navigationBarIcon )
-    };
+      const options = {
+        name: screenRealMoleculesString,
+        backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
+        homeScreenIcon: new Image( homeIcon ),
+        navigationBarIcon: new Image( navigationBarIcon )
+      };
 
-    Screen.call( this,
-      function() { return new RealMoleculesModel(); },
-      function( model ) { return new RealMoleculesScreenView( model ); },
-      options );
+      super(
+        () => new RealMoleculesModel(),
+        model => new RealMoleculesScreenView( model ),
+        options
+      );
+    }
   }
 
-  moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
-
-  return inherit( Screen, RealMoleculesScreen );
+  return moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
 } );

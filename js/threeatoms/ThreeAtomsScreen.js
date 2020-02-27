@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
@@ -29,31 +28,29 @@ define( require => {
   const atomCString = require( 'string!MOLECULE_POLARITY/atomC' );
   const screenThreeAtomsString = require( 'string!MOLECULE_POLARITY/screen.threeAtoms' );
 
-  /**
-   * @constructor
-   */
-  function ThreeAtomsScreen() {
+  class ThreeAtomsScreen extends Screen {
 
-    const options = {
-      name: screenThreeAtomsString,
-      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    };
+    constructor() {
 
-    Screen.call( this,
-      function() { return new ThreeAtomsModel(); },
-      function( model ) { return new ThreeAtomsScreenView( model ); },
-      options
-    );
+      const options = {
+        name: screenThreeAtomsString,
+        backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
+        homeScreenIcon: createScreenIcon()
+      };
+
+      super(
+        () => new ThreeAtomsModel(),
+        model => new ThreeAtomsScreenView( model ),
+        options
+      );
+    }
   }
-
-  moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
 
   /**
    * Creates the icon for this screen, a triatomic molecule with atoms 'A', 'B' and 'C'.
    * @returns {Node}
    */
-  var createScreenIcon = function() {
+  function createScreenIcon() {
 
     const atomDiameter = 175;
     const bondLength = 1.05 * atomDiameter;
@@ -116,7 +113,7 @@ define( require => {
     } );
 
     return new Node( { children: [ background, bondAB, bondBC, atomA, atomB, atomC, textA, textB, textC ] } );
-  };
+  }
 
-  return inherit( Screen, ThreeAtomsScreen );
+  return moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
 } );

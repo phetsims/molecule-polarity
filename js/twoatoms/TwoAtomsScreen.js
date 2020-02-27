@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
   const moleculePolarity = require( 'MOLECULE_POLARITY/moleculePolarity' );
   const MPColors = require( 'MOLECULE_POLARITY/common/MPColors' );
@@ -28,31 +27,29 @@ define( require => {
   const atomBString = require( 'string!MOLECULE_POLARITY/atomB' );
   const screenTwoAtomsString = require( 'string!MOLECULE_POLARITY/screen.twoAtoms' );
 
-  /**
-   * @constructor
-   */
-  function TwoAtomsScreen() {
+  class TwoAtomsScreen extends Screen {
 
-    const options = {
-      name: screenTwoAtomsString,
-      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    };
+    constructor() {
 
-    Screen.call( this,
-      function() { return new TwoAtomsModel(); },
-      function( model ) { return new TwoAtomsScreenView( model ); },
-      options
-    );
+      const options = {
+        name: screenTwoAtomsString,
+        backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
+        homeScreenIcon: createScreenIcon()
+      };
+
+      super(
+        () => new TwoAtomsModel(),
+        model => new TwoAtomsScreenView( model ),
+        options
+      );
+    }
   }
-
-  moleculePolarity.register( 'TwoAtomsScreen', TwoAtomsScreen );
 
   /**
    * Creates the icon for this screen, a diatomic molecule with atoms 'A' and 'B'.
    * @returns {Node}
    */
-  var createScreenIcon = function() {
+  function createScreenIcon() {
 
     const atomDiameter = 225;
     const bondLength = 1.15 * atomDiameter;
@@ -92,7 +89,7 @@ define( require => {
     } );
 
     return new Node( { children: [ background, bond, atomA, atomB, textA, textB ] } );
-  };
+  }
 
-  return inherit( Screen, TwoAtomsScreen );
+  return moleculePolarity.register( 'TwoAtomsScreen', TwoAtomsScreen );
 } );
