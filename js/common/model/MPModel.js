@@ -9,7 +9,6 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import EField from './EField.js';
@@ -17,54 +16,37 @@ import EField from './EField.js';
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
 
-/**
- * @param {Molecule} molecule
- * @constructor
- * @abstract
- */
-function MPModel( molecule ) {
+class MPModel {
 
-  // @public (read-only)
-  this.eField = new EField();
-  this.molecule = molecule;
-}
+  /**
+   * @param {Molecule} molecule
+   * @abstract
+   */
+  constructor( molecule ) {
 
-moleculePolarity.register( 'MPModel', MPModel );
-
-/**
- * Converts an angle to range [0,2*PI) radians
- * @param {number} angle
- * @returns {number}
- */
-const normalizeAngle = function( angle ) {
-  let normalizedAngle = angle % ( 2 * Math.PI );
-  if ( normalizedAngle < 0 ) {
-    normalizedAngle = ( 2 * Math.PI ) + angle;
+    // @public (read-only)
+    this.eField = new EField();
+    this.molecule = molecule;
   }
-  assert && assert( normalizedAngle >= 0 && normalizedAngle <= 2 * Math.PI, 'normalizedAngle must be between 0-2pi radians' );
-  return normalizedAngle;
-};
-
-export default inherit( Object, MPModel, {
 
   // @public
-  reset: function() {
+  reset() {
     this.eField.reset();
     this.molecule.reset();
-  },
+  }
 
   /**
    * Advances the model.
    * @param {number} dt - time step, in seconds
    * @public
    */
-  step: function( dt ) {
+  step( dt ) {
 
     // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
     if ( this.eField.enabledProperty.get() && !this.molecule.dragging ) {
       this.updateMoleculeOrientation( this.molecule );
     }
-  },
+  }
 
   /**
    * Rotate the molecule one step towards alignment of the molecular dipole with the E-field.
@@ -72,7 +54,7 @@ export default inherit( Object, MPModel, {
    * @param {Molecule} molecule
    * @private
    */
-  updateMoleculeOrientation: function( molecule ) {
+  updateMoleculeOrientation( molecule ) {
 
     let dipole = molecule.dipoleProperty.get();
 
@@ -122,4 +104,22 @@ export default inherit( Object, MPModel, {
     const deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
     molecule.angleProperty.set( molecule.angleProperty.get() + deltaMoleculeAngle );
   }
-} );
+}
+
+/**
+ * Converts an angle to range [0,2*PI) radians
+ * @param {number} angle
+ * @returns {number}
+ */
+function normalizeAngle( angle ) {
+  let normalizedAngle = angle % ( 2 * Math.PI );
+  if ( normalizedAngle < 0 ) {
+    normalizedAngle = ( 2 * Math.PI ) + angle;
+  }
+  assert && assert( normalizedAngle >= 0 && normalizedAngle <= 2 * Math.PI, 'normalizedAngle must be between 0-2pi radians' );
+  return normalizedAngle;
+}
+
+moleculePolarity.register( 'MPModel', MPModel );
+
+export default MPModel;

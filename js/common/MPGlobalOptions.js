@@ -7,27 +7,25 @@
  */
 
 import StringProperty from '../../../axon/js/StringProperty.js';
-import inherit from '../../../phet-core/js/inherit.js';
 import moleculePolarity from '../moleculePolarity.js';
 import MPQueryParameters from './MPQueryParameters.js';
 
-/**
- * @constructor
- */
-function MPGlobalOptions() {
+class MPGlobalOptions {
+
+  constructor() {
+
+    // @public
+    this.dipoleDirectionProperty = new StringProperty( MPQueryParameters.dipoleDirection );
+    this.surfaceColorProperty = new StringProperty( MPQueryParameters.surfaceColor );
+  }
 
   // @public
-  this.dipoleDirectionProperty = new StringProperty( MPQueryParameters.dipoleDirection );
-  this.surfaceColorProperty = new StringProperty( MPQueryParameters.surfaceColor );
+  reset() {
+    this.dipoleDirectionProperty.reset();
+    this.surfaceColorProperty.reset();
+  }
 }
 
 moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );
 
-export default inherit( Object, MPGlobalOptions, {
-
-  // @public
-  reset: function() {
-    this.dipoleDirectionProperty.reset();
-    this.surfaceColorProperty.reset();
-  }
-} );
+export default MPGlobalOptions;

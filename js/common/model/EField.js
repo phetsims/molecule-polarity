@@ -7,30 +7,30 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function EField( options ) {
+class EField {
 
-  options = merge( {
-    enabled: false // {boolean} is the E-field initially enabled?
-  }, options );
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+
+    options = merge( {
+      enabled: false // {boolean} is the E-field initially enabled?
+    }, options );
+
+    // @public
+    this.enabledProperty = new BooleanProperty( options.enabled );
+  }
 
   // @public
-  this.enabledProperty = new BooleanProperty( options.enabled );
+  reset() {
+    this.enabledProperty.reset();
+  }
 }
 
 moleculePolarity.register( 'EField', EField );
 
-export default inherit( Object, EField, {
-
-  // @public
-  reset: function() {
-    this.enabledProperty.reset();
-  }
-} );
+export default EField;
