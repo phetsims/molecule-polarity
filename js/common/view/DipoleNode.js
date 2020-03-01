@@ -12,7 +12,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
@@ -27,25 +26,24 @@ const REFERENCE_CROSS_OFFSET = 20; // offset from the tail of the arrow when arr
 const TAIL_WIDTH = 4; // similar to Jmol
 const FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIONAL_HEAD_HEIGHT * length, a 'unit dipole' will be scaled.
 
-/**
- * @param {Vector2Property} dipoleProperty
- * @param {Color|String} color
- * @constructor
- * @abstract
- */
-function DipoleNode( dipoleProperty, color ) {
+class DipoleNode extends Path {
 
-  const self = this;
+  /**
+   * @param {Vector2Property} dipoleProperty
+   * @param {Color|String} color
+   * @abstract
+   */
+  constructor( dipoleProperty, color ) {
 
-  Path.call( this, null, { fill: color, stroke: 'black' } );
+    super( null, { fill: color, stroke: 'black' } );
 
-  this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected
-  this.referenceLength = REFERENCE_LENGTH; // @protected
+    this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected
+    this.referenceLength = REFERENCE_LENGTH; // @protected
 
-  // unlink not needed
-  dipoleProperty.link( function( dipole ) {
+    // unlink not needed
+    dipoleProperty.link( dipole => {
       if ( dipole.magnitude === 0 ) {
-        self.shape = null;
+        this.shape = null;
       }
       else {
 
@@ -62,7 +60,7 @@ function DipoleNode( dipoleProperty, color ) {
         const crossWidth = scale * CROSS_SIZE.width * adjustedLength / REFERENCE_LENGTH;
 
         // Draw a dipole that points from left to right, starting at upper-left end of tail and moving clockwise.
-        self.shape = new Shape()
+        this.shape = new Shape()
           .moveTo( 0, -TAIL_WIDTH / 2 )
           .lineTo( crossOffset, -TAIL_WIDTH / 2 )
           .lineTo( crossOffset, -CROSS_SIZE.height / 2 )
@@ -81,25 +79,24 @@ function DipoleNode( dipoleProperty, color ) {
           .close();
 
         // Adjust for proper scale and orientation.
-        self.setScaleMagnitude( scale, scale );
-        self.setRotation( dipole.angle );
+        this.setScaleMagnitude( scale, scale );
+        this.setRotation( dipole.angle );
       }
-    }
-  );
-}
+    } );
+  }
 
-moleculePolarity.register( 'DipoleNode', DipoleNode );
-
-export default inherit( Path, DipoleNode, {}, {
-
-  /*
+  /**
    * Creates a dipole icon, with arrow pointing to the right.
    * @param {Color} color
    * @returns {Node}
    * @public
    * @static
    */
-  createIcon: function( color ) {
+  static createIcon( color ) {
     return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), color );
   }
-} );
+}
+
+moleculePolarity.register( 'DipoleNode', DipoleNode );
+
+export default DipoleNode;

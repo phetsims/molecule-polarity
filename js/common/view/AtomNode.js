@@ -14,6 +14,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class AtomNode extends Node {
+
   /**
    * @param {Atom} atom
    */

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
@@ -15,50 +14,50 @@ import MPQueryParameters from '../MPQueryParameters.js';
 import DipoleDirectionControl from './DipoleDirectionControl.js';
 import SurfaceColorControl from './SurfaceColorControl.js';
 
-/**
- * @constructor
- */
-function MPOptionsNode() {
+class MPOptionsNode extends VBox {
 
-  const dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty );
-  const surfaceColorControl = ( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
+  constructor() {
 
-  const children = [
-    dipoleDirectionControl,
-    surfaceColorControl
-  ];
+    const dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty );
+    const surfaceColorControl = ( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
 
-  //TODO https://github.com/phetsims/molecule-polarity/issues/32 remove the Surface Color option until Real Molecules screen is implemented
-  if ( !MPQueryParameters.realMolecules ) {
-    children.splice( children.indexOf( surfaceColorControl ), 1 );
+    const children = [
+      dipoleDirectionControl,
+      surfaceColorControl
+    ];
+
+    //TODO https://github.com/phetsims/molecule-polarity/issues/32 remove the Surface Color option until Real Molecules screen is implemented
+    if ( !MPQueryParameters.realMolecules ) {
+      children.splice( children.indexOf( surfaceColorControl ), 1 );
+    }
+
+    super( {
+      align: 'left',
+      spacing: 25,
+      children: children
+    } );
+
+    // @private
+    this.disposeMPOptionsNode = function() {
+      dipoleDirectionControl.dispose();
+      surfaceColorControl.dispose();
+    };
   }
 
-  VBox.call( this, {
-    align: 'left',
-    spacing: 25,
-    children: children
-  } );
-
-  // @private
-  this.disposeMPOptionsNode = function() {
-    dipoleDirectionControl.dispose();
-    surfaceColorControl.dispose();
-  };
-}
-
-moleculePolarity.register( 'MPOptionsNode', MPOptionsNode );
-
-export default inherit( VBox, MPOptionsNode, {
-
   /**
-   * NOTE: In the current design of joist, a new instance of OptionsDialog is every time that
+   * NOTE: In the current design of joist, a new instance of OptionsDialog is created every time that
    * the Options menu item is selected from the PhET menu.  But one instance of the dialog's
    * content (in this case MPOptionsNode) is reused. This is (imo) a bad design, and likely to
    * change in the future. So I'm implementing dispose to future-proof this sim.
    * @public
+   * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeMPOptionsNode();
-    VBox.prototype.dispose.call( this );
+    super.dispose();
   }
-} );
+}
+
+moleculePolarity.register( 'MPOptionsNode', MPOptionsNode );
+
+export default MPOptionsNode;

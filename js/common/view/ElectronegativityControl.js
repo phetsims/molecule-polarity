@@ -10,7 +10,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -28,88 +27,89 @@ const lessString = moleculePolarityStrings.less;
 const moreString = moleculePolarityStrings.more;
 const patternAtomNameString = moleculePolarityStrings.pattern.atomName;
 
-/**
- * @param {Atom} atom - the atom whose electronegativity we're controlling
- * @param {Molecule} molecule - molecule that the atom belongs to, for pausing animation while this control is used
- * @param {Object} [options]
- * @constructor
- */
-function ElectronegativityControl( atom, molecule, options ) {
+class ElectronegativityControl extends Panel {
 
-  options = merge( {
+  /**
+   * @param {Atom} atom - the atom whose electronegativity we're controlling
+   * @param {Molecule} molecule - molecule that the atom belongs to, for pausing animation while this control is used
+   * @param {Object} [options]
+   */
+  constructor( atom, molecule, options ) {
 
-    // ElectronegativityControl
-    range: MPConstants.ELECTRONEGATIVITY_RANGE,
-    tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
-    snapToTick: true,
-    thumbSize: new Dimension2( 30, 35 ),
-    trackSize: new Dimension2( 150, 5 ),
+    options = merge( {
 
-    // Panel
-    fill: atom.color,
-    stroke: 'black',
-    xMargin: 15,
-    yMargin: 6
-  }, options );
+      // ElectronegativityControl
+      range: MPConstants.ELECTRONEGATIVITY_RANGE,
+      tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
+      snapToTick: true,
+      thumbSize: new Dimension2( 30, 35 ),
+      trackSize: new Dimension2( 150, 5 ),
 
-  // titles
-  const titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
-    font: new PhetFont( { size: 20, weight: 'bold' } ),
-    maxWidth: options.trackSize.width
-  } );
-  const subtitleNode = new Text( electronegativityString, {
-    font: new PhetFont( 18 ),
-    maxWidth: options.trackSize.width
-  } );
+      // Panel
+      fill: atom.color,
+      stroke: 'black',
+      xMargin: 15,
+      yMargin: 6
+    }, options );
 
-  // custom thumb
-  const thumbNode = new PointySliderThumb( { size: options.thumbSize } );
-  thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
+    // titles
+    const titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
+      font: new PhetFont( { size: 20, weight: 'bold' } ),
+      maxWidth: options.trackSize.width
+    } );
+    const subtitleNode = new Text( electronegativityString, {
+      font: new PhetFont( 18 ),
+      maxWidth: options.trackSize.width
+    } );
 
-  // slider
-  const sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
-    thumbNode: thumbNode,
-    thumbYOffset: 10,
-    trackSize: options.trackSize,
-    majorTickLength: 20,
-    minorTickLength: 10,
-    startDrag: function() {
-      molecule.dragging = true;
-    },
-    endDrag: function() {
-      molecule.dragging = false;
-      if ( options.snapToTick ) {
-        atom.electronegativityProperty.set( Utils.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
+    // custom thumb
+    const thumbNode = new PointySliderThumb( { size: options.thumbSize } );
+    thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
+
+    // slider
+    const sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
+      thumbNode: thumbNode,
+      thumbYOffset: 10,
+      trackSize: options.trackSize,
+      majorTickLength: 20,
+      minorTickLength: 10,
+      startDrag: function() {
+        molecule.dragging = true;
+      },
+      endDrag: function() {
+        molecule.dragging = false;
+        if ( options.snapToTick ) {
+          atom.electronegativityProperty.set( Utils.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
+        }
+      }
+    } );
+
+    // slider tick labels
+    const tickLabelOptions = {
+      font: new PhetFont( 16 ),
+      maxWidth: 40
+    };
+    sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
+    sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
+    const centerTick = options.range.min + ( options.range.getLength() / 2 );
+    sliderNode.addMajorTick( centerTick );
+    for ( let i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
+      if ( i !== centerTick ) {
+        sliderNode.addMinorTick( i );
       }
     }
-  } );
 
-  // slider tick labels
-  const tickLabelOptions = {
-    font: new PhetFont( 16 ),
-    maxWidth: 40
-  };
-  sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
-  sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
-  const centerTick = options.range.min + ( options.range.getLength() / 2 );
-  sliderNode.addMajorTick( centerTick );
-  for ( let i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
-    if ( i !== centerTick ) {
-      sliderNode.addMinorTick( i );
-    }
+    const content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
+
+    // layout
+    subtitleNode.centerX = sliderNode.centerX = titleNode.centerX;
+    subtitleNode.top = titleNode.bottom;
+    sliderNode.top = subtitleNode.bottom + 8;
+
+    super( content, options );
   }
-
-  const content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
-
-  // layout
-  subtitleNode.centerX = sliderNode.centerX = titleNode.centerX;
-  subtitleNode.top = titleNode.bottom;
-  sliderNode.top = subtitleNode.bottom + 8;
-
-  Panel.call( this, content, options );
 }
 
 moleculePolarity.register( 'ElectronegativityControl', ElectronegativityControl );
 
-inherit( Panel, ElectronegativityControl );
 export default ElectronegativityControl;

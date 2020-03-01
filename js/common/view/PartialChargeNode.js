@@ -9,7 +9,6 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -24,72 +23,66 @@ const deltaPlusString = moleculePolarityStrings.deltaPlus;
 const REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
 const REFERENCE_SCALE = 1;
 
-/**
- * @param {Atom} atom
- * @param {function} unitVectorFunction has no parameters, returns {Vector}
- * @constructor
- */
-function PartialChargeNode( atom, unitVectorFunction ) {
+class PartialChargeNode extends Node {
 
-  const self = this;
+  /**
+   * @param {Atom} atom
+   * @param {function} unitVectorFunction has no parameters, returns {Vector}
+   */
+  constructor( atom, unitVectorFunction ) {
 
-  Node.call( this );
+    super();
 
-  // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
-  const textNode = new Text( '?', {
-    font: new PhetFont( 32 ),
-    fill: 'black',
-    maxWidth: 50
-  } );
-  const chargeNode = new Node( {
-    children: [ textNode ]
-  } );
-  this.addChild( chargeNode );
+    // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
+    const textNode = new Text( '?', {
+      font: new PhetFont( 32 ),
+      fill: 'black',
+      maxWidth: 50
+    } );
+    const chargeNode = new Node( {
+      children: [ textNode ]
+    } );
+    this.addChild( chargeNode );
 
-  // @private
-  this.update = function() {
-    const partialCharge = atom.partialChargeProperty.get();
+    // @private
+    this.update = () => {
+      const partialCharge = atom.partialChargeProperty.get();
 
-    textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
+      textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
 
-    // Only update if the partial charge is visible
-    if ( partialCharge !== 0 ) {
+      // Only update if the partial charge is visible
+      if ( partialCharge !== 0 ) {
 
-      // d+ or d-
-      textNode.text = ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString;
+        // d+ or d-
+        textNode.text = ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString;
 
-      // size proportional to bond dipole magnitude
-      const scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
-      if ( scale !== 0 ) {
-        chargeNode.setScaleMagnitude( scale );
-        chargeNode.centerX = 0;
-        chargeNode.centerY = 0;
+        // size proportional to bond dipole magnitude
+        const scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
+        if ( scale !== 0 ) {
+          chargeNode.setScaleMagnitude( scale );
+          chargeNode.centerX = 0;
+          chargeNode.centerY = 0;
+        }
+
+        // A vector that points in the direction we will need to move the charge node.
+        const unitVector = unitVectorFunction.apply();
+
+        // Compute the amount to move the partial charge node
+        const multiplier = ( atom.diameter / 2 ) + ( Math.max( this.width, this.height ) / 2 ) + 3;
+        const relativeOffset = unitVector.timesScalar( multiplier );
+        this.translation = atom.positionProperty.get().plus( relativeOffset );
       }
+    };
 
-      // A vector that points in the direction we will need to move the charge node.
-      const unitVector = unitVectorFunction.apply();
-
-      // Compute the amount to move the partial charge node
-      const multiplier = ( atom.diameter / 2 ) + ( Math.max( self.width, self.height ) / 2 ) + 3;
-      const relativeOffset = unitVector.timesScalar( multiplier );
-      self.translation = atom.positionProperty.get().plus( relativeOffset );
-    }
-  };
-
-  atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
-  atom.positionProperty.link( this.update.bind( this ) ); // unlink not needed
-}
-
-moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
-
-export default inherit( Node, PartialChargeNode, {
+    atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
+    atom.positionProperty.link( this.update.bind( this ) ); // unlink not needed
+  }
 
   // @public @override
-  setVisible: function( visible ) {
-    Node.prototype.setVisible.call( this, visible );
+  setVisible( visible ) {
+    super.setVisible( visible );
     this.update();
   }
-}, {
 
   /**
    * Partial charge for an atom that participates in a single bond.
@@ -102,7 +95,7 @@ export default inherit( Node, PartialChargeNode, {
    * @public
    * @static
    */
-  createOppositePartialChargeNode: function( atom, bond ) {
+  static createOppositePartialChargeNode( atom, bond ) {
     return new PartialChargeNode( atom, function() {
 
       // along the bond axis, in the direction of the atom
@@ -111,14 +104,14 @@ export default inherit( Node, PartialChargeNode, {
       /*
        * Avoid the case where pressing Reset All causes the atoms to swap positions, temporarily resulting
        * in a zero-magnitude vector when the first atom has moved but the second atom hasn't moved yet.
-       * This sorts itself out when both atoms have moved.
+       * This sorts itthis out when both atoms have moved.
        */
       if ( v.magnitude > 0 ) {
         v = v.normalize();
       }
       return v;
     } );
-  },
+  }
 
   /**
    * Partial charge for an atom that participates in more than one bond.
@@ -131,7 +124,7 @@ export default inherit( Node, PartialChargeNode, {
    * @public
    * @static
    */
-  createCompositePartialChargeNode: function( atom, molecule ) {
+  static createCompositePartialChargeNode( atom, molecule ) {
     const node = new PartialChargeNode( atom, function() {
       if ( molecule.dipoleProperty.get().magnitude > 0 ) {
         return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
@@ -144,4 +137,8 @@ export default inherit( Node, PartialChargeNode, {
     molecule.dipoleProperty.link( node.update.bind( this ) ); // unlink not needed
     return node;
   }
-} );
+}
+
+moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
+
+export default PartialChargeNode;

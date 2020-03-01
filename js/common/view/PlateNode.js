@@ -7,7 +7,6 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
@@ -22,97 +21,100 @@ const PLATE_OPTIONS = {
   stroke: 'black'
 };
 
-/**
- * @param {EField} eField
- * @param {Object} [options]
- * @constructor
- */
-function PlateNode( eField, options ) {
+class PlateNode extends Node {
 
-  const self = this;
+  /**
+   * @param {EField} eField
+   * @param {Object} [options]
+   */
+  constructor( eField, options ) {
 
-  options = merge( {
-    polarity: 'negative', // 'positive' or 'negative'
-    perspective: 'left', // 'left' or 'right'
-    plateWidth: 50,
-    plateHeight: 430,
-    plateThickness: 5,
-    platePerspectiveYOffset: 35 // y difference between foreground and background edges of the plate
-  }, options );
+    options = merge( {
+      polarity: 'negative', // 'positive' or 'negative'
+      perspective: 'left', // 'left' or 'right'
+      plateWidth: 50,
+      plateHeight: 430,
+      plateThickness: 5,
+      platePerspectiveYOffset: 35 // y difference between foreground and background edges of the plate
+    }, options );
 
-  this.plateHeight = options.plateHeight; // @public used in view layout
+    assert && assert( options.polarity === 'negative' || options.polarity === 'positive',
+      'invalid polarity: ' + options.polarity );
+    assert && assert( options.perspective === 'right' || options.perspective === 'left',
+      'invalid perspective: ' + options.perspective );
 
-  assert && assert( options.polarity === 'negative' || options.polarity === 'positive',
-    'invalid polarity: ' + options.polarity );
-  assert && assert( options.perspective === 'right' || options.perspective === 'left',
-    'invalid perspective: ' + options.perspective );
+    super();
 
-  Node.call( this );
+    this.plateHeight = options.plateHeight; // @public used in view layout
 
-  // polarity indicator
-  const polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
+    // polarity indicator
+    const polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
 
-  // face of a positive plate, drawn in perspective, starting at upper-left and going clockwise
-  const faceNode = new Path( new Shape()
-      .moveTo( 0, options.platePerspectiveYOffset )
-      .lineTo( options.plateWidth, 0 )
-      .lineTo( options.plateWidth, options.plateHeight )
-      .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
-      .close(),
-    PLATE_OPTIONS
-  );
+    // face of a positive plate, drawn in perspective, starting at upper-left and going clockwise
+    const faceNode = new Path( new Shape()
+        .moveTo( 0, options.platePerspectiveYOffset )
+        .lineTo( options.plateWidth, 0 )
+        .lineTo( options.plateWidth, options.plateHeight )
+        .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
+        .close(),
+      PLATE_OPTIONS
+    );
 
-  // side edge of a positive plate
-  const edgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, PLATE_OPTIONS );
+    // side edge of a positive plate
+    const edgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, PLATE_OPTIONS );
 
-  const plateNode = new Node( {
-    children: [
-      edgeNode,
-      faceNode
-    ]
-  } );
+    const plateNode = new Node( {
+      children: [
+        edgeNode,
+        faceNode
+      ]
+    } );
 
-  // The plate is drawn in perspective for positive polarity.
-  // If the polarity is negative, reflect about the y axis.
-  if ( options.polarity === 'negative' ) {
-    plateNode.setScaleMagnitude( -1, 1 );
+    // The plate is drawn in perspective for positive polarity.
+    // If the polarity is negative, reflect about the y axis.
+    if ( options.polarity === 'negative' ) {
+      plateNode.setScaleMagnitude( -1, 1 );
+    }
+
+    // rendering order
+    this.addChild( polarityIndicatorNode );
+    this.addChild( plateNode );
+
+    // Put the polarity indicator at the top center of the plate's face.
+    polarityIndicatorNode.centerX = plateNode.centerX;
+    polarityIndicatorNode.bottom = plateNode.top + ( options.platePerspectiveYOffset / 2 );
+
+    // show/hide when the field is enabled/disabled... (unlink not needed)
+    eField.enabledProperty.link( enabled => {
+      this.visible = enabled;
+    } );
+
+    this.mutate( options );
   }
 
-  // rendering order
-  this.addChild( polarityIndicatorNode );
-  this.addChild( plateNode );
+  /**
+   * Creates a positive plate.
+   * @param {EField} eField
+   * @returns {PlateNode}
+   * @static
+   * @public
+   */
+  static createPositive( eField ) {
+    return new PlateNode( eField, { polarity: 'positive', perspective: 'right' } );
+  }
 
-  // Put the polarity indicator at the top center of the plate's face.
-  polarityIndicatorNode.centerX = plateNode.centerX;
-  polarityIndicatorNode.bottom = plateNode.top + ( options.platePerspectiveYOffset / 2 );
-
-  // show/hide when the field is enabled/disabled... (unlink not needed)
-  eField.enabledProperty.link( function( enabled ) {
-    self.visible = enabled;
-  } );
-
-  this.mutate( options );
+  /**
+   * Creates a negative plate.
+   * @param {EField} eField
+   * @returns {PlateNode}
+   * @static
+   * @static
+   */
+  static createNegative( eField ) {
+    return new PlateNode( eField, { polarity: 'negative', perspective: 'left' } );
+  }
 }
 
 moleculePolarity.register( 'PlateNode', PlateNode );
 
-export default inherit( Node, PlateNode, {}, {
-
-  /**
-   * Creates a positive plate.
-   * @static
-   * @param {EField} eField
-   */
-  createPositive: function( eField ) {
-    return new PlateNode( eField, { polarity: 'positive', perspective: 'right' } );
-  },
-
-  /**
-   * Creates a negative plate.
-   * @static
-   * @param {EField} eField
-   */
-  createNegative: function( eField ) {
-    return new PlateNode( eField, { polarity: 'negative', perspective: 'left' } );
-  }
-} );
+export default PlateNode;

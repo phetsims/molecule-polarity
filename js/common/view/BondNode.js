@@ -9,31 +9,29 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../MPColors.js';
 
-/**
- * @param {Bond} bond
- * @constructor
- */
-function BondNode( bond ) {
+class BondNode extends Line {
 
-  const self = this;
+  /**
+   * @param {Bond} bond
+   */
+  constructor( bond ) {
 
-  Line.call( this, bond.atom1.positionProperty.get(), bond.atom2.positionProperty.get(), {
-    stroke: MPColors.BOND,
-    lineWidth: 12,
-    strokePickable: true // include stroke in hit-testing
-  } );
+    super( bond.atom1.positionProperty.get(), bond.atom2.positionProperty.get(), {
+      stroke: MPColors.BOND,
+      lineWidth: 12,
+      strokePickable: true // include stroke in hit-testing
+    } );
 
-  // adjust the bond when its endpoints change, unlinks not needed
-  bond.atom1.positionProperty.link( function( position ) { self.setPoint1( position ); } );
-  bond.atom2.positionProperty.link( function( position ) { self.setPoint2( position ); } );
+    // adjust the bond when its endpoints change, unlinks not needed
+    bond.atom1.positionProperty.link( position => this.setPoint1( position ) );
+    bond.atom2.positionProperty.link( position => this.setPoint2( position ) );
+  }
 }
 
 moleculePolarity.register( 'BondNode', BondNode );
 
-inherit( Line, BondNode );
 export default BondNode;

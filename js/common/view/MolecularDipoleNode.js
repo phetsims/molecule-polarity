@@ -8,7 +8,6 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../MPColors.js';
 import DipoleNode from './DipoleNode.js';
@@ -16,29 +15,26 @@ import DipoleNode from './DipoleNode.js';
 // constants
 const OFFSET = 55; // offset in the direction that the dipole points
 
-/**
- * @param {Molecule} molecule
- * @constructor
- */
-function MolecularDipoleNode( molecule ) {
+class MolecularDipoleNode extends DipoleNode {
 
-  DipoleNode.call( this, molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
+  /**
+   * @param {Molecule} molecule
+   */
+  constructor( molecule ) {
 
-  // position the dipole with some radial offset from the molecule's position, unlink not needed
-  const self = this;
-  molecule.dipoleProperty.link( function( dipole ) {
+    super( molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
 
-    // offset vector relative to molecule position
-    const v = Vector2.createPolar( OFFSET, dipole.angle );
+    // position the dipole with some radial offset from the molecule's position, unlink not needed
+    const self = this;
+    molecule.dipoleProperty.link( function( dipole ) {
 
-    // offset in global coordinate frame
-    self.translation = molecule.position.plus( v );
-  } );
-}
+      // offset vector relative to molecule position
+      const v = Vector2.createPolar( OFFSET, dipole.angle );
 
-moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
-
-export default inherit( DipoleNode, MolecularDipoleNode, {}, {
+      // offset in global coordinate frame
+      self.translation = molecule.position.plus( v );
+    } );
+  }
 
   /**
    * Creates an icon, for use in control panels.
@@ -46,7 +42,11 @@ export default inherit( DipoleNode, MolecularDipoleNode, {}, {
    * @public
    * @static
    */
-  createIcon: function() {
+  static createIcon() {
     return DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE );
   }
-} );
+}
+
+moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
+
+export default MolecularDipoleNode;
