@@ -57,4 +57,5 @@ class TwoAtomsViewControls extends VBox {
 }
 
 moleculePolarity.register( 'TwoAtomsViewControls', TwoAtomsViewControls );
+
 export default TwoAtomsViewControls;

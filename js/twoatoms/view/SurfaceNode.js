@@ -9,7 +9,6 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -20,59 +19,52 @@ import DiatomicMolecule from '../model/DiatomicMolecule.js';
 // constants
 const DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when computing surface size
 
-/**
- * @param {DiatomicMolecule} molecule
- * @param {Color|string[]} colors
- * @constructor
- * @abstract
- */
-function SurfaceNode( molecule, colors ) {
+class SurfaceNode extends Node {
 
-  assert && assert( molecule instanceof DiatomicMolecule, 'molecule must be a DiatomicMolecule' );
-  assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
-    'creation of gradient assumes that both atoms have the same diameter' );
+  /**
+   * @param {DiatomicMolecule} molecule
+   * @param {Color|string[]} colors
+   * @abstract
+   */
+  constructor( molecule, colors ) {
 
-  const self = this;
+    assert && assert( molecule instanceof DiatomicMolecule, 'molecule must be a DiatomicMolecule' );
+    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
+      'creation of gradient assumes that both atoms have the same diameter' );
 
-  Node.call( this );
+    super();
 
-  // @private
-  this.molecule = molecule;
-  this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
-  this.colors = colors;
+    // @private
+    this.molecule = molecule;
+    this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
+    this.colors = colors;
 
-  // each atom is surrounded with a 'cloud' (circle)
-  const radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
-  this.path = new Path( new Shape()
-    .arc( molecule.position.x - this.molecule.atomB.positionProperty.get().x, molecule.position.y - this.molecule.atomB.positionProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
-    .arc( molecule.position.x - this.molecule.atomA.positionProperty.get().x, molecule.position.y - this.molecule.atomA.positionProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
-  );
-  this.addChild( this.path );
+    // each atom is surrounded with a 'cloud' (circle)
+    const radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
+    this.path = new Path( new Shape()
+      .arc( molecule.position.x - this.molecule.atomB.positionProperty.get().x, molecule.position.y - this.molecule.atomB.positionProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
+      .arc( molecule.position.x - this.molecule.atomA.positionProperty.get().x, molecule.position.y - this.molecule.atomA.positionProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
+    );
+    this.addChild( this.path );
 
-  // update surface when atoms move or electronegativity changes
-  const update = function() {
-    if ( self.visible ) {
-      self.updateFill();
-    }
-  };
-  molecule.atoms.forEach( function( atom ) {
-    atom.electronegativityProperty.link( update ); // unlink not needed
-  } );
+    // update surface when atoms move or electronegativity changes
+    const update = () => {
+      if ( this.visible ) {
+        this.updateFill();
+      }
+    };
+    molecule.atoms.forEach( atom => atom.electronegativityProperty.link( update ) ); // unlink not needed
 
-  // unlink not needed
-  molecule.angleProperty.link( function( angle ) {
-    if ( self.visible ) {
-      self.matrix = molecule.createTransformMatrix();
-    }
-  } );
+    // unlink not needed
+    molecule.angleProperty.link( angle => {
+      if ( this.visible ) {
+        this.matrix = molecule.createTransformMatrix();
+      }
+    } );
 
-  this.cursor = 'pointer';
-  this.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
-}
-
-moleculePolarity.register( 'SurfaceNode', SurfaceNode );
-
-export default inherit( Node, SurfaceNode, {
+    this.cursor = 'pointer';
+    this.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
+  }
 
   /**
    * Updates the fill when this Node become visible.
@@ -80,29 +72,33 @@ export default inherit( Node, SurfaceNode, {
    * @public
    * @override
    */
-  setVisible: function( visible ) {
+  setVisible( visible ) {
     Node.prototype.setVisible.call( this, visible );
     if ( visible ) {
       this.matrix = this.molecule.createTransformMatrix();
       this.updateFill();
     }
-  },
+  }
 
   /**
    * Gets the surface width.
    * @returns {number}
    * @protected
    */
-  getSurfaceWidth: function() {
+  getSurfaceWidth() {
     return this.molecule.bond.getLength() + ( DIAMETER_SCALE * this.molecule.atomA.diameter / 2 ) + ( DIAMETER_SCALE * this.molecule.atomB.diameter / 2 );
-  },
+  }
 
   /**
    * Updates the surface fill.
    * @private
    * @abstract
    */
-  updateFill: function() {
+  updateFill() {
     throw new Error( 'must be implemented by subtype' );
   }
-} );
+}
+
+moleculePolarity.register( 'SurfaceNode', SurfaceNode );
+
+export default SurfaceNode;

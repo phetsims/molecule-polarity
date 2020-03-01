@@ -8,43 +8,43 @@
  */
 
 import Matrix3 from '../../../../dot/js/Matrix3.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-/**
- * @param {Molecule} molecule
- * @param {Atom} atom
- * @constructor
- */
-function RotateArrowsNode( molecule, atom ) {
+class RotateArrowsNode extends Node {
 
-  // arrow configuration
-  const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
-  const arrowPathOptions = { fill: atom.color, stroke: 'gray' };
-  const radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
-  const theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
+  /**
+   * @param {Molecule} molecule
+   * @param {Atom} atom
+   */
+  constructor( molecule, atom ) {
 
-  Node.call( this, {
-    children: [
-      new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
-      new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
-    ]
-  } );
+    // arrow configuration
+    const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
+    const arrowPathOptions = { fill: atom.color, stroke: 'gray' };
+    const radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
+    const theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
-  // Align with atom position and molecular dipole
-  const updateTransform = function() {
-    this.matrix = Matrix3
-      .translationFromVector( atom.positionProperty.get() )
-      .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle + Math.PI / 2 ) );
-  };
-  molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
-  atom.positionProperty.link( updateTransform.bind( this ) ); // unlink not needed
+    super( {
+      children: [
+        new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
+        new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
+      ]
+    } );
+
+    // Align with atom position and molecular dipole
+    const updateTransform = () => {
+      this.matrix = Matrix3
+        .translationFromVector( atom.positionProperty.get() )
+        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle + Math.PI / 2 ) );
+    };
+    molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
+    atom.positionProperty.link( updateTransform.bind( this ) ); // unlink not needed
+  }
 }
 
 moleculePolarity.register( 'RotateArrowsNode', RotateArrowsNode );
 
-inherit( Node, RotateArrowsNode );
 export default RotateArrowsNode;

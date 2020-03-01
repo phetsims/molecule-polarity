@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -20,88 +19,95 @@ import moleculePolarity from '../../moleculePolarity.js';
 import ElectronDensityNode from './ElectronDensityNode.js';
 import ElectrostaticPotentialNode from './ElectrostaticPotentialNode.js';
 
-/**
- * @param {DiatomicMolecule} molecule
- * @constructor
- */
-function DiatomicMoleculeNode( molecule ) {
+class DiatomicMoleculeNode extends Node {
 
-  // nodes
-  const atomANode = new AtomNode( molecule.atomA );
-  const atomBNode = new AtomNode( molecule.atomB );
-  const bondNode = new BondNode( molecule.bond );
-  const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
-  const arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
+  /**
+   * @param {DiatomicMolecule} molecule
+   */
+  constructor( molecule ) {
 
-  // @private
-  this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond );
-  this.partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond );
-  this.electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule );
-  this.electronDensityNode = new ElectronDensityNode( molecule );
-  this.bondDipoleNode = new BondDipoleNode( molecule.bond );
+    // nodes
+    const atomANode = new AtomNode( molecule.atomA );
+    const atomBNode = new AtomNode( molecule.atomB );
+    const bondNode = new BondNode( molecule.bond );
+    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    const arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
 
-  Node.call( this, {
-    cursor: 'pointer',
-    children: [
-      this.electrostaticPotentialNode, this.electronDensityNode,
-      bondNode, atomANode, atomBNode,
-      arrowsANode, arrowsBNode,
-      this.partialChargeNodeA, this.partialChargeNodeB, this.bondDipoleNode
-    ]
-  } );
+    const partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond );
+    const partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond );
+    const electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule );
+    const electronDensityNode = new ElectronDensityNode( molecule );
+    const bondDipoleNode = new BondDipoleNode( molecule.bond );
 
-  // rotate molecule by dragging anywhere
-  const dragHandler = new MoleculeAngleDragHandler( molecule, this );
-  this.addInputListener( dragHandler );
+    super( {
+      cursor: 'pointer',
+      children: [
+        electrostaticPotentialNode, electronDensityNode,
+        bondNode, atomANode, atomBNode,
+        arrowsANode, arrowsBNode,
+        partialChargeNodeA, partialChargeNodeB, bondDipoleNode
+      ]
+    } );
 
-  // When the user drags any atom or bond, hide the cueing arrows.
-  const hideArrows = function() {
-    if ( dragHandler.dragging ) {
-      arrowsANode.visible = arrowsBNode.visible = false;
-    }
-  };
-  molecule.angleProperty.lazyLink( hideArrows );
+    // rotate molecule by dragging anywhere
+    const dragHandler = new MoleculeAngleDragHandler( molecule, this );
+    this.addInputListener( dragHandler );
 
-  // @private makes the cueing arrows visible
-  this.resetArrows = function() {
-    arrowsANode.visible = arrowsBNode.visible = true;
-  };
-}
+    // When the user drags any atom or bond, hide the cueing arrows.
+    const hideArrows = () => {
+      if ( dragHandler.dragging ) {
+        arrowsANode.visible = arrowsBNode.visible = false;
+      }
+    };
+    molecule.angleProperty.lazyLink( hideArrows );
 
-moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );
+    // @private makes the cueing arrows visible
+    this.resetArrows = () => {
+      arrowsANode.visible = arrowsBNode.visible = true;
+    };
 
-export default inherit( Node, DiatomicMoleculeNode, {
+    // @private
+    this.partialChargeNodeA = partialChargeNodeA;
+    this.partialChargeNodeB = partialChargeNodeB;
+    this.electrostaticPotentialNode = electrostaticPotentialNode;
+    this.electronDensityNode = electronDensityNode;
+    this.bondDipoleNode = bondDipoleNode;
+  }
 
   // @public
-  reset: function() {
+  reset() {
     this.resetArrows();
-  },
+  }
 
   /**
    * Sets whether the bond dipole is visible.
    * @param {boolean} visible
    * @public
    */
-  setBondDipoleVisible: function( visible ) {
+  setBondDipoleVisible( visible ) {
     this.bondDipoleNode.visible = visible;
-  },
+  }
 
   /**
    * Sets whether partial charges are visible.
    * @param {boolean} visible
    * @public
    */
-  setPartialChargesVisible: function( visible ) {
+  setPartialChargesVisible( visible ) {
     this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = visible;
-  },
+  }
 
   /**
    * Sets the surface type that is visible.
    * @param {SurfaceType} surfaceType
    * @public
    */
-  setSurfaceType: function( surfaceType ) {
+  setSurfaceType( surfaceType ) {
     this.electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
     this.electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
   }
-} );
+}
+
+moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );
+
+export default DiatomicMoleculeNode;

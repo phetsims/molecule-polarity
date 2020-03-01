@@ -11,31 +11,27 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import SurfaceNode from './SurfaceNode.js';
 
-/**
- * @param {Molecule} molecule
- * @constructor
- */
-function ElectrostaticPotentialNode( molecule ) {
-  SurfaceNode.call( this, molecule, MPColors.RWB_GRADIENT );
-}
+class ElectrostaticPotentialNode extends SurfaceNode {
 
-moleculePolarity.register( 'ElectrostaticPotentialNode', ElectrostaticPotentialNode );
-
-export default inherit( SurfaceNode, ElectrostaticPotentialNode, {
+  /**
+   * @param {Molecule} molecule
+   */
+  constructor( molecule ) {
+    super( molecule, MPColors.RWB_GRADIENT );
+  }
 
   /**
    * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
    * @private
    * @override
    */
-  updateFill: function() {
+  updateFill() {
     assert && assert( this.colors.length === 3, 'this implementation only works for 3 colors' );
 
     // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
@@ -69,4 +65,8 @@ export default inherit( SurfaceNode, ElectrostaticPotentialNode, {
       this.path.fill = gradient;
     }
   }
-} );
+}
+
+moleculePolarity.register( 'ElectrostaticPotentialNode', ElectrostaticPotentialNode );
+
+export default ElectrostaticPotentialNode;

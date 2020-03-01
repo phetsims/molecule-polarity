@@ -8,24 +8,24 @@
  */
 
 import ChemUtils from '../../../../nitroglycerin/js/ChemUtils.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-/**
- * @param {string} symbol
- * @param {string} name
- * @param {string} mol2Data molecule data description, in mol2 format
- * @constructor
- */
-function RealMolecule( symbol, name, mol2Data ) {
+class RealMolecule {
 
-  // @public (read-only)
-  this.symbol = ChemUtils.toSubscript( symbol );
-  this.name = name;
-  this.mol2Data = mol2Data;
+  /**
+   * @param {string} symbol
+   * @param {string} name
+   * @param {string} mol2Data molecule data description, in mol2 format
+   */
+  constructor( symbol, name, mol2Data ) {
+
+    // @public (read-only)
+    this.symbol = ChemUtils.toSubscript( symbol );
+    this.name = name;
+    this.mol2Data = mol2Data;
+  }
 }
 
 moleculePolarity.register( 'RealMolecule', RealMolecule );
 
-inherit( Object, RealMolecule );
 export default RealMolecule;

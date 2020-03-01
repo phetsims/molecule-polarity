@@ -11,31 +11,27 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import SurfaceNode from './SurfaceNode.js';
 
-/**
- * @param {Molecule} molecule
- * @constructor
- */
-function ElectronDensityNode( molecule ) {
-  SurfaceNode.call( this, molecule, MPColors.BW_GRADIENT );
-}
+class ElectronDensityNode extends SurfaceNode {
 
-moleculePolarity.register( 'ElectronDensityNode', ElectronDensityNode );
-
-export default inherit( SurfaceNode, ElectronDensityNode, {
+  /**
+   * @param {Molecule} molecule
+   */
+  constructor( molecule ) {
+    super( molecule, MPColors.BW_GRADIENT );
+  }
 
   /**
    * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
    * @private
    * @override
    */
-  updateFill: function() {
+  updateFill() {
     assert && assert( this.colors.length === 2, 'this implementation only works for 2 colors' );
 
     // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
@@ -70,4 +66,8 @@ export default inherit( SurfaceNode, ElectronDensityNode, {
       this.path.fill = gradient;
     }
   }
-} );
+}
+
+moleculePolarity.register( 'ElectronDensityNode', ElectronDensityNode );
+
+export default ElectronDensityNode;

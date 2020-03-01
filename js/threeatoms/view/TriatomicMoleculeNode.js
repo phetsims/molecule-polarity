@@ -9,7 +9,6 @@
 
 
 // import
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -22,112 +21,118 @@ import moleculePolarity from '../../moleculePolarity.js';
 import BondAngleDragHandler from './BondAngleDragHandler.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
 
-/**
- * @param {TriatomicMolecule} molecule
- * @constructor
- */
-function TriatomicMoleculeNode( molecule ) {
+class TriatomicMoleculeNode extends Node {
+  /**
+   * @param {TriatomicMolecule} molecule
+   */
+  constructor( molecule ) {
 
-  Node.call( this );
+    // nodes
+    const bondABNode = new BondNode( molecule.bondAB );
+    const bondBCNode = new BondNode( molecule.bondBC );
+    const atomANode = new AtomNode( molecule.atomA );
+    const atomBNode = new AtomNode( molecule.atomB );
+    const atomCNode = new AtomNode( molecule.atomC );
+    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    const arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC );
+    const arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB );
 
-  // nodes
-  const bondABNode = new BondNode( molecule.bondAB );
-  const bondBCNode = new BondNode( molecule.bondBC );
-  const atomANode = new AtomNode( molecule.atomA );
-  const atomBNode = new AtomNode( molecule.atomB );
-  const atomCNode = new AtomNode( molecule.atomC );
-  const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
-  const arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC );
-  const arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB );
+    // We'll be moving the dragged atom to the front, because A & C can overlap
+    const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
 
-  // We'll be moving the dragged atom to the front, because A & C can overlap
-  const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
+    // @private nodes whose visibility may change
+    const partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
+    const partialChargeNodeB = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule );
+    const partialChargeNodeC = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC );
+    const bondDipoleABNode = new BondDipoleNode( molecule.bondAB );
+    const bondDipoleBCNode = new BondDipoleNode( molecule.bondBC );
+    const molecularDipoleNode = new MolecularDipoleNode( molecule );
 
-  // @private nodes whose visibility may change
-  this.partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
-  this.partialChargeNodeB = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule );
-  this.partialChargeNodeC = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC );
-  this.bondDipoleABNode = new BondDipoleNode( molecule.bondAB );
-  this.bondDipoleBCNode = new BondDipoleNode( molecule.bondBC );
-  this.molecularDipoleNode = new MolecularDipoleNode( molecule );
+    super( {
+      children: [
+        bondABNode, bondBCNode,
+        atomsParent,
+        arrowsANode, arrowsCNode, arrowsBNode,
+        partialChargeNodeA, partialChargeNodeB, partialChargeNodeC,
+        bondDipoleABNode, bondDipoleBCNode, molecularDipoleNode
+      ]
+    } );
 
-  Node.call( this, {
-    children: [
-      bondABNode, bondBCNode,
-      atomsParent,
-      arrowsANode, arrowsCNode, arrowsBNode,
-      this.partialChargeNodeA, this.partialChargeNodeB, this.partialChargeNodeC,
-      this.bondDipoleABNode, this.bondDipoleBCNode, this.molecularDipoleNode
-    ]
-  } );
+    // @private nodes whose visibility may change
+    this.partialChargeNodeA = partialChargeNodeA;
+    this.partialChargeNodeB = partialChargeNodeB;
+    this.partialChargeNodeC = partialChargeNodeC;
+    this.bondDipoleABNode = bondDipoleABNode;
+    this.bondDipoleBCNode = bondDipoleBCNode;
+    this.molecularDipoleNode = molecularDipoleNode;
 
-  // cursors
-  atomANode.cursor = atomBNode.cursor = atomCNode.cursor = 'pointer'; // atoms
-  bondABNode.cursor = bondBCNode.cursor = 'pointer'; // bonds
+    // cursors
+    atomANode.cursor = atomBNode.cursor = atomCNode.cursor = 'pointer'; // atoms
+    bondABNode.cursor = bondBCNode.cursor = 'pointer'; // bonds
 
-  // rotate molecule by dragging atom B or bonds
-  const dragHandlerB = new MoleculeAngleDragHandler( molecule, this );
-  const dragHandlerAB = new MoleculeAngleDragHandler( molecule, this );
-  const dragHandlerBC = new MoleculeAngleDragHandler( molecule, this );
-  atomBNode.addInputListener( dragHandlerB );
-  bondABNode.addInputListener( dragHandlerAB );
-  bondBCNode.addInputListener( dragHandlerBC );
+    // rotate molecule by dragging atom B or bonds
+    const dragHandlerB = new MoleculeAngleDragHandler( molecule, this );
+    const dragHandlerAB = new MoleculeAngleDragHandler( molecule, this );
+    const dragHandlerBC = new MoleculeAngleDragHandler( molecule, this );
+    atomBNode.addInputListener( dragHandlerB );
+    bondABNode.addInputListener( dragHandlerAB );
+    bondBCNode.addInputListener( dragHandlerBC );
 
-  // change bond angles by dragging atom A or C
-  const dragHandlerA = new BondAngleDragHandler( molecule, molecule.bondAngleAProperty );
-  const dragHandlerC = new BondAngleDragHandler( molecule, molecule.bondAngleCProperty );
-  atomANode.addInputListener( dragHandlerA );
-  atomCNode.addInputListener( dragHandlerC );
+    // change bond angles by dragging atom A or C
+    const dragHandlerA = new BondAngleDragHandler( molecule, molecule.bondAngleAProperty );
+    const dragHandlerC = new BondAngleDragHandler( molecule, molecule.bondAngleCProperty );
+    atomANode.addInputListener( dragHandlerA );
+    atomCNode.addInputListener( dragHandlerC );
 
-  // When the user drags any atom or bond, hide the cueing arrows.
-  const hideArrows = function() {
-    if ( dragHandlerA.dragging || dragHandlerB.dragging || dragHandlerC.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
-      arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
-    }
-  };
-  molecule.angleProperty.lazyLink( hideArrows );
-  molecule.bondAngleAProperty.lazyLink( hideArrows );
-  molecule.bondAngleCProperty.lazyLink( hideArrows );
+    // When the user drags any atom or bond, hide the cueing arrows.
+    const hideArrows = () => {
+      if ( dragHandlerA.dragging || dragHandlerB.dragging || dragHandlerC.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
+        arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
+      }
+    };
+    molecule.angleProperty.lazyLink( hideArrows );
+    molecule.bondAngleAProperty.lazyLink( hideArrows );
+    molecule.bondAngleCProperty.lazyLink( hideArrows );
 
-  // @private makes the cueing arrows visible
-  this.resetArrows = function() {
-    arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = true;
-  };
-}
-
-moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
-
-export default inherit( Node, TriatomicMoleculeNode, {
+    // @private makes the cueing arrows visible
+    this.resetArrows = () => {
+      arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = true;
+    };
+  }
 
   // @public
-  reset: function() {
+  reset() {
     this.resetArrows();
-  },
+  }
 
   /**
    * Sets whether bond dipoles are visible.
    * @param {boolean} visible
    * @public
    */
-  setBondDipolesVisible: function( visible ) {
+  setBondDipolesVisible( visible ) {
     this.bondDipoleABNode.visible = this.bondDipoleBCNode.visible = visible;
-  },
+  }
 
   /**
    * Sets whether the molecular dipole is visible.
    * @param {boolean} visible
    * @public
    */
-  setMolecularDipoleVisible: function( visible ) {
+  setMolecularDipoleVisible( visible ) {
     this.molecularDipoleNode.visible = visible;
-  },
+  }
 
   /**
    * Sets whether partial charges are visible.
    * @param {boolean} visible
    * @public
    */
-  setPartialChargesVisible: function( visible ) {
+  setPartialChargesVisible( visible ) {
     this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = this.partialChargeNodeC.visible = visible;
   }
-} );
+}
+
+moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
+
+export default TriatomicMoleculeNode;

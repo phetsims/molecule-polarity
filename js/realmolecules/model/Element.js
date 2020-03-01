@@ -6,22 +6,22 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-/**
- * @param {number} elementNumber
- * @param {Color|String} color
- * @constructor
- */
-function Element( elementNumber, color ) {
+class Element {
 
-  // @public (read-only)
-  this.elementNumber = elementNumber;
-  this.color = color;
+  /**
+   * @param {number} elementNumber
+   * @param {Color|String} color
+   */
+  constructor( elementNumber, color ) {
+
+    // @public (read-only)
+    this.elementNumber = elementNumber;
+    this.color = color;
+  }
 }
 
 moleculePolarity.register( 'Element', Element );
 
-inherit( Object, Element );
 export default Element;
