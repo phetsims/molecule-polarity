@@ -9,7 +9,6 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Atom from '../../common/model/Atom.js';
 import Bond from '../../common/model/Bond.js';
 import Molecule from '../../common/model/Molecule.js';
@@ -23,54 +22,90 @@ const atomAString = moleculePolarityStrings.atomA;
 const atomBString = moleculePolarityStrings.atomB;
 const atomCString = moleculePolarityStrings.atomC;
 
-/**
- * @param {Object} [options] see supertype constructor
- * @constructor
- */
-function TriatomicMolecule( options ) {
+class TriatomicMolecule extends Molecule {
 
-  // @public the atoms labeled A, B, C
-  this.atomA = new Atom( atomAString, {
-    color: MPColors.ATOM_A
-  } );
-  this.atomB = new Atom( atomBString, {
-    color: MPColors.ATOM_B,
-    electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
-  } );
-  this.atomC = new Atom( atomCString, {
-    color: MPColors.ATOM_C
-  } );
+  /**
+   * @param {Object} [options] see supertype constructor
+   */
+  constructor( options ) {
 
-  // @public
-  this.bondAB = new Bond( this.atomA, this.atomB ); // the bond connecting atoms A and B
-  this.bondBC = new Bond( this.atomB, this.atomC ); // the bond connecting atoms B and C
+    // atoms labeled A, B, C
+    const atomA = new Atom( atomAString, {
+      color: MPColors.ATOM_A
+    } );
+    const atomB = new Atom( atomBString, {
+      color: MPColors.ATOM_B,
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
+    } );
+    const atomC = new Atom( atomCString, {
+      color: MPColors.ATOM_C
+    } );
 
-  // @public the bond angle of atom A relative to atom B, before applying molecule rotation
-  this.bondAngleAProperty = new NumberProperty( 0.75 * Math.PI );
+    // the bond connecting atoms A and B
+    const bondAB = new Bond( atomA, atomB );
 
-  // @public the bond angle of atom C relative to atom B, before applying molecule rotation
-  this.bondAngleCProperty = new NumberProperty( 0.25 * Math.PI );
+    // the bond connecting atoms B and C
+    const bondBC = new Bond( atomB, atomC );
 
-  Molecule.call( this,
-    [ this.atomA, this.atomB, this.atomC ],
-    [ this.bondAB, this.bondBC ],
-    this.updateAtomPositions,
-    this.updatePartialCharges,
-    options );
+    // the bond angle of atom A relative to atom B, before applying molecule rotation
+    const bondAngleAProperty = new NumberProperty( 0.75 * Math.PI );
 
-  // unlinks not needed
-  this.bondAngleAProperty.link( this.updateAtomPositions.bind( this ) );
-  this.bondAngleCProperty.link( this.updateAtomPositions.bind( this ) );
+    // the bond angle of atom C relative to atom B, before applying molecule rotation
+    const bondAngleCProperty = new NumberProperty( 0.25 * Math.PI );
+
+    const updateAtomPositions = ( position, angle ) => {
+      atomB.positionProperty.set( position );  // atom B remains at the molecule's position
+      updateAtomPosition( atomA, bondAngleAProperty.get(), position, angle );
+      updateAtomPosition( atomC, bondAngleCProperty.get(), position, angle );
+    };
+
+    const updatePartialCharges = () => {
+
+      const deltaAB = atomA.electronegativityProperty.get() - atomB.electronegativityProperty.get();
+      const deltaCB = atomC.electronegativityProperty.get() - atomB.electronegativityProperty.get();
+
+      // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
+      atomA.partialChargeProperty.set( -deltaAB );
+      atomC.partialChargeProperty.set( -deltaCB );
+
+      // atom B's participates in 2 bonds, so its partial charge is the sum
+      atomB.partialChargeProperty.set( deltaAB + deltaCB );
+    };
+
+    super( [ atomA, atomB, atomC ], [ bondAB, bondBC ], updateAtomPositions, updatePartialCharges, options );
+
+    // unlink not needed
+    const bondAngleListener = () => updateAtomPositions( this.position, this.angleProperty.value );
+    bondAngleAProperty.link( bondAngleListener  );
+    bondAngleCProperty.link( bondAngleListener );
+
+    // @public
+    this.atomA = atomA;
+    this.atomB = atomB;
+    this.atomC = atomC;
+    this.bondAB = bondAB;
+    this.bondBC = bondBC;
+    this.bondAngleAProperty = bondAngleAProperty;
+    this.bondAngleCProperty = bondAngleCProperty;
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  reset() {
+    super.reset();
+    this.bondAngleAProperty.reset();
+    this.bondAngleCProperty.reset();
+  }
 }
-
-moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
 
 /*
  * Repositions one atom.
  *
  * @param {Atom} atom the atom to reposition
  * @param {number} bondAngle the angle of the bond that the atom participates in
- * @param {Vector2 position position of the molecule
+ * @param {Vector2} position position of the molecule
  * @param {number} angle orientation of the molecule
  */
 function updateAtomPosition( atom, bondAngle, position, angle ) {
@@ -80,43 +115,6 @@ function updateAtomPosition( atom, bondAngle, position, angle ) {
   atom.positionProperty.set( new Vector2( xA, yA ) );
 }
 
-export default inherit( Molecule, TriatomicMolecule, {
+moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
 
-  /**
-   * @public
-   * @override
-   */
-  reset: function() {
-    Molecule.prototype.reset.call( this );
-    this.bondAngleAProperty.reset();
-    this.bondAngleCProperty.reset();
-  },
-
-  /**
-   * Repositions the atoms.
-   * @private
-   */
-  updateAtomPositions: function() {
-    this.atomB.positionProperty.set( this.position );  // atom B remains at the molecule's position
-    updateAtomPosition( this.atomA, this.bondAngleAProperty.get(), this.position, this.angleProperty.get() );
-    updateAtomPosition( this.atomC, this.bondAngleCProperty.get(), this.position, this.angleProperty.get() );
-  },
-
-  /**
-   * Updates partial charges.
-   * @private
-   */
-  updatePartialCharges: function() {
-
-    const deltaAB = this.atomA.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
-    const deltaCB = this.atomC.electronegativityProperty.get() - this.atomB.electronegativityProperty.get();
-
-    // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
-    this.atomA.partialChargeProperty.set( -deltaAB );
-    this.atomC.partialChargeProperty.set( -deltaCB );
-
-    // atom B's participates in 2 bonds, so its partial charge is the sum
-    this.atomB.partialChargeProperty.set( deltaAB + deltaCB );
-  }
-
-} );
+export default TriatomicMolecule;
