@@ -17,8 +17,8 @@ import moleculePolarity from '../moleculePolarity.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
+// strings
 const screenRealMoleculesString = moleculePolarityStrings.screen.realMolecules;
-
 
 class RealMoleculesScreen extends Screen {
 

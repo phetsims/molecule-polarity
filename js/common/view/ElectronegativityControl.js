@@ -22,6 +22,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import PointySliderThumb from './PointySliderThumb.js';
 
+// strings
 const electronegativityString = moleculePolarityStrings.electronegativity;
 const lessString = moleculePolarityStrings.less;
 const moreString = moleculePolarityStrings.more;
@@ -73,10 +74,10 @@ class ElectronegativityControl extends Panel {
       trackSize: options.trackSize,
       majorTickLength: 20,
       minorTickLength: 10,
-      startDrag: function() {
+      startDrag: () => {
         molecule.dragging = true;
       },
-      endDrag: function() {
+      endDrag: () => {
         molecule.dragging = false;
         if ( options.snapToTick ) {
           atom.electronegativityProperty.set( Utils.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );

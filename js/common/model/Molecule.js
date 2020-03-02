@@ -30,8 +30,6 @@ function Molecule( atoms, bonds, updateAtomPositions, updatePartialCharges, opti
     angle: 0 // angle of rotation of the entire molecule about the position, in radians
   }, options );
 
-  const self = this;
-
   // @public (read-only)
   this.position = options.position; // the point about which the molecule rotates, in global model coordinate frame
   this.atoms = atoms;
@@ -46,22 +44,20 @@ function Molecule( atoms, bonds, updateAtomPositions, updatePartialCharges, opti
 
   // bond dipoles, for deriving molecular dipole
   const bondDipoleProperties = [];
-  this.bonds.forEach( function( bond ) {
-    bondDipoleProperties.push( bond.dipoleProperty );
-  } );
+  this.bonds.forEach( bond => bondDipoleProperties.push( bond.dipoleProperty ) );
 
   // @public the molecular dipole, sum of the bond dipoles, dispose not needed
-  this.dipoleProperty = new DerivedProperty( bondDipoleProperties, function() {
+  this.dipoleProperty = new DerivedProperty( bondDipoleProperties, () => {
     const sum = new Vector2( 0, 0 );
-    self.bonds.forEach( function( bond ) {
+    this.bonds.forEach( bond => {
       sum.add( bond.dipoleProperty.get() ); // add to the same Vector2 instance
     } );
     return sum;
   } );
 
   // update partial charges when atoms' EN changes
-  this.atoms.forEach( function( atom ) {
-    atom.electronegativityProperty.link( updatePartialCharges.bind( self ) ); // unlink not needed
+  this.atoms.forEach( atom => {
+    atom.electronegativityProperty.link( updatePartialCharges.bind( this ) ); // unlink not needed
   } );
 }
 
@@ -72,7 +68,7 @@ export default inherit( Object, Molecule, {
   // @public
   reset: function() {
     this.angleProperty.reset();
-    this.atoms.forEach( function( atom ) { atom.reset(); } );
+    this.atoms.forEach( atom => atom.reset() );
   },
 
   /**

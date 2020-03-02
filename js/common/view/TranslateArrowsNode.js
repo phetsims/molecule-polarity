@@ -9,53 +9,53 @@
 
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Transform3 from '../../../../dot/js/Transform3.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-/**
- * @param {Molecule} molecule
- * @param {Atom} atom
- * @param {Object} [options]
- * @constructor
- */
-function TranslateArrowsNode( molecule, atom, options ) {
+class TranslateArrowsNode extends Node {
 
-  options = merge( {
-    length: 25 // relatively short, so we don't need curved arrows
-  }, options );
+  /**
+   * @param {Molecule} molecule
+   * @param {Atom} atom
+   * @param {Object} [options]
+   */
+  constructor( molecule, atom, options ) {
 
-  const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
-  const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+    options = merge( {
+      length: 25 // relatively short, so we don't need curved arrows
+    }, options );
 
-  // create "normalized" shapes at (0,0) with no rotation
-  const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
-  const radius = atom.diameter / 2;
-  const spacing = 2;
-  const leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
-  const rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
+    const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+    const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
 
-  assert && assert( !options.children, 'decoration not supported' );
-  options.children = [ leftArrowNode, rightArrowNode ];
+    // create "normalized" shapes at (0,0) with no rotation
+    const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
+    const radius = atom.diameter / 2;
+    const spacing = 2;
+    const leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
+    const rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
 
-  // unlink not needed
-  atom.positionProperty.link( function() {
+    assert && assert( !options.children, 'decoration not supported' );
+    options.children = [ leftArrowNode, rightArrowNode ];
 
-    // transform the arrow shapes to account for atom position and relationship to molecule position
-    const v = molecule.position.minus( atom.positionProperty.get() );
-    const angle = v.angle - ( Math.PI / 2 );
-    const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
-    leftArrowNode.shape = transform.transformShape( leftArrow );
-    rightArrowNode.shape = transform.transformShape( rightArrow );
-  } );
+    // unlink not needed
+    atom.positionProperty.link( () => {
 
-  Node.call( this, options );
+      // transform the arrow shapes to account for atom position and relationship to molecule position
+      const v = molecule.position.minus( atom.positionProperty.get() );
+      const angle = v.angle - ( Math.PI / 2 );
+      const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
+      leftArrowNode.shape = transform.transformShape( leftArrow );
+      rightArrowNode.shape = transform.transformShape( rightArrow );
+    } );
+
+    super( options );
+  }
 }
 
 moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );
 
-inherit( Node, TranslateArrowsNode );
 export default TranslateArrowsNode;

@@ -19,6 +19,7 @@ import MPConstants from '../../common/MPConstants.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const bondCharacterString = moleculePolarityStrings.bondCharacter;
 const moreCovalentString = moleculePolarityStrings.moreCovalent;
 const moreIonicString = moleculePolarityStrings.moreIonic;
@@ -83,7 +84,7 @@ class BondCharacterNode extends Node {
     rightLabelNode.top = trackNode.top + Y_MARGIN;
 
     // when difference in electronegativity changes, move the pointer, unlink not needed
-    molecule.bond.dipoleProperty.link( function( dipole ) {
+    molecule.bond.dipoleProperty.link( dipole => {
       pointerNode.left = Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
         POINTER_X_INSET, TRACK_WIDTH - pointerNode.width - POINTER_X_INSET,
         dipole.magnitude );

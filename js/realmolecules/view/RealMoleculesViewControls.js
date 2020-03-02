@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -18,6 +17,7 @@ import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const atomElectronegativitiesString = moleculePolarityStrings.atomElectronegativities;
 const atomLabelsString = moleculePolarityStrings.atomLabels;
 const bondDipolesString = moleculePolarityStrings.bondDipoles;
@@ -30,50 +30,51 @@ const CONTROL_TEXT_OPTIONS = merge( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
   maxWidth: 225 // a bit wider in for this Screen
 } );
 
-/**
- * @param {RealMoleculesViewProperties} viewProperties
- * @constructor
- */
-function RealMoleculesViewControls( viewProperties ) {
+class RealMoleculesViewControls extends VBox {
 
-  // title
-  const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+  /**
+   * @param {RealMoleculesViewProperties} viewProperties
+   */
+  constructor( viewProperties ) {
 
-  // Checkbox labels
-  const bondDipolesLabel = new HBox( {
-    children: [ new Text( bondDipolesString, CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
-    spacing: MPConstants.CONTROL_ICON_X_SPACING
-  } );
-  const molecularDipoleLabel = new HBox( {
-    children: [ new Text( molecularDipoleString, CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
-    spacing: MPConstants.CONTROL_ICON_X_SPACING
-  } );
-  const partialChargesLabel = new Text( partialChargesString, CONTROL_TEXT_OPTIONS );
-  const atomLabelsLabel = new Text( atomLabelsString, CONTROL_TEXT_OPTIONS );
-  const atomElectronegativityLabel = new Text( atomElectronegativitiesString, CONTROL_TEXT_OPTIONS );
+    // title
+    const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
-  // Checkboxes
-  const bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
-  const molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
-  const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
-  const atomLabelsCheckbox = new Checkbox( atomLabelsLabel, viewProperties.atomLabelsVisibleProperty );
-  const atomElectronegativitiesCheckbox = new Checkbox( atomElectronegativityLabel, viewProperties.atomElectronegativitiesVisibleProperty );
+    // Checkbox labels
+    const bondDipolesLabel = new HBox( {
+      children: [ new Text( bondDipolesString, CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
+      spacing: MPConstants.CONTROL_ICON_X_SPACING
+    } );
+    const molecularDipoleLabel = new HBox( {
+      children: [ new Text( molecularDipoleString, CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
+      spacing: MPConstants.CONTROL_ICON_X_SPACING
+    } );
+    const partialChargesLabel = new Text( partialChargesString, CONTROL_TEXT_OPTIONS );
+    const atomLabelsLabel = new Text( atomLabelsString, CONTROL_TEXT_OPTIONS );
+    const atomElectronegativityLabel = new Text( atomElectronegativitiesString, CONTROL_TEXT_OPTIONS );
 
-  VBox.call( this, {
-    align: 'left',
-    spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-    children: [
-      titleNode,
-      bondDipolesCheckbox,
-      molecularDipoleCheckbox,
-      partialChargesCheckbox,
-      atomLabelsCheckbox,
-      atomElectronegativitiesCheckbox
-    ]
-  } );
+    // Checkboxes
+    const bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
+    const molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
+    const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
+    const atomLabelsCheckbox = new Checkbox( atomLabelsLabel, viewProperties.atomLabelsVisibleProperty );
+    const atomElectronegativitiesCheckbox = new Checkbox( atomElectronegativityLabel, viewProperties.atomElectronegativitiesVisibleProperty );
+
+    super( {
+      align: 'left',
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      children: [
+        titleNode,
+        bondDipolesCheckbox,
+        molecularDipoleCheckbox,
+        partialChargesCheckbox,
+        atomLabelsCheckbox,
+        atomElectronegativitiesCheckbox
+      ]
+    } );
+  }
 }
 
 moleculePolarity.register( 'RealMoleculesViewControls', RealMoleculesViewControls );
 
-inherit( VBox, RealMoleculesViewControls );
 export default RealMoleculesViewControls;

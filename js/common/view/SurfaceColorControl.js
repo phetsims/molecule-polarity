@@ -7,7 +7,6 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
@@ -17,6 +16,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
 
+// strings
 const surfaceColorRealMoleculesString = moleculePolarityStrings.surfaceColorRealMolecules;
 
 // constants
@@ -28,46 +28,53 @@ const COLOR_KEY_OPTIONS = {
   ySpacing: 2
 };
 
-/**
- * @param {Property.<string>} surfaceColorProperty
- * @constructor
- */
-function SurfaceColorControl( surfaceColorProperty ) {
+class SurfaceColorControl extends VBox {
 
-  const titleNode = new Text( surfaceColorRealMoleculesString, {
-    font: new PhetFont( 14 ),
-    maxWidth: 400
-  } );
+  /**
+   * @param {Property.<string>} surfaceColorProperty
+   */
+  constructor( surfaceColorProperty ) {
 
-  const radioButtonGroupItems = [
-    { node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ), value: 'RWB' },
-    { node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ), value: 'ROYGB' }
-  ];
+    const titleNode = new Text( surfaceColorRealMoleculesString, {
+      font: new PhetFont( 14 ),
+      maxWidth: 400
+    } );
 
-  const radioButtonGroup = new AquaRadioButtonGroup( surfaceColorProperty, radioButtonGroupItems, {
-    spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-    radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
-  } );
+    const radioButtonGroupItems = [
+      {
+        value: 'RWB',
+        node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS )
+      },
+      {
+        value: 'ROYGB',
+        node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS )
+      }
+    ];
 
-  VBox.call( this, {
-    align: 'left',
-    spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-    children: [ titleNode, radioButtonGroup ]
-  } );
+    const radioButtonGroup = new AquaRadioButtonGroup( surfaceColorProperty, radioButtonGroupItems, {
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    } );
 
-  // @private
-  this.disposeSurfaceColorControl = function() {
-    radioButtonGroup.dispose();
-  };
+    super( {
+      align: 'left',
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      children: [ titleNode, radioButtonGroup ]
+    } );
+
+    // @private
+    this.disposeSurfaceColorControl = () => {
+      radioButtonGroup.dispose();
+    };
+  }
+
+  // @public @override
+  dispose() {
+    this.disposeSurfaceColorControl();
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'SurfaceColorControl', SurfaceColorControl );
 
-export default inherit( VBox, SurfaceColorControl, {
-
-  // @public
-  dispose: function() {
-    this.disposeSurfaceColorControl();
-    VBox.prototype.dispose.call( this );
-  }
-} );
+export default SurfaceColorControl;

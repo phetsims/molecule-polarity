@@ -25,14 +25,13 @@ class MolecularDipoleNode extends DipoleNode {
     super( molecule.dipoleProperty, MPColors.MOLECULAR_DIPOLE );
 
     // position the dipole with some radial offset from the molecule's position, unlink not needed
-    const self = this;
-    molecule.dipoleProperty.link( function( dipole ) {
+    molecule.dipoleProperty.link( dipole => {
 
       // offset vector relative to molecule position
       const v = Vector2.createPolar( OFFSET, dipole.angle );
 
       // offset in global coordinate frame
-      self.translation = molecule.position.plus( v );
+      this.translation = molecule.position.plus( v );
     } );
   }
 

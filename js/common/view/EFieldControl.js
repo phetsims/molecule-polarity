@@ -14,6 +14,7 @@ import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
+// strings
 const electricFieldString = moleculePolarityStrings.electricField;
 const offString = moleculePolarityStrings.off;
 const onString = moleculePolarityStrings.on;

@@ -15,6 +15,7 @@ import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const bondCharacterString = moleculePolarityStrings.bondCharacter;
 const bondDipoleString = moleculePolarityStrings.bondDipole;
 const partialChargesString = moleculePolarityStrings.partialCharges;

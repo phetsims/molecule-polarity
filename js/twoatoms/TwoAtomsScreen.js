@@ -20,6 +20,7 @@ import moleculePolarity from '../moleculePolarity.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
+// strings
 const atomAString = moleculePolarityStrings.atomA;
 const atomBString = moleculePolarityStrings.atomB;
 const screenTwoAtomsString = moleculePolarityStrings.screen.twoAtoms;

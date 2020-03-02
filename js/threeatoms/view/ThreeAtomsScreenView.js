@@ -104,17 +104,17 @@ class ThreeAtomsScreenView extends ScreenView {
     // synchronization with view Properties ------------------------------
 
     // unlink not needed
-    viewProperties.bondDipolesVisibleProperty.link( function( visible ) {
+    viewProperties.bondDipolesVisibleProperty.link( visible => {
       moleculeNode.setBondDipolesVisible( visible );
     } );
 
     // unlink not needed
-    viewProperties.molecularDipoleVisibleProperty.link( function( visible ) {
+    viewProperties.molecularDipoleVisibleProperty.link( visible => {
       moleculeNode.setMolecularDipoleVisible( visible );
     } );
 
     // unlink not needed
-    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+    viewProperties.partialChargesVisibleProperty.link( visible => {
       moleculeNode.setPartialChargesVisible( visible );
     } );
   }

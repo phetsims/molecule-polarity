@@ -14,6 +14,7 @@ import RealMoleculesScreen from './realmolecules/RealMoleculesScreen.js';
 import ThreeAtomsScreen from './threeatoms/ThreeAtomsScreen.js';
 import TwoAtomsScreen from './twoatoms/TwoAtomsScreen.js';
 
+// strings
 const moleculePolarityTitleString = moleculePolarityStrings[ 'molecule-polarity' ].title;
 
 const options = {

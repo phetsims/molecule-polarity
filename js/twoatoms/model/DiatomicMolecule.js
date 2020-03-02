@@ -17,6 +17,7 @@ import MPConstants from '../../common/MPConstants.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const atomAString = moleculePolarityStrings.atomA;
 const atomBString = moleculePolarityStrings.atomB;
 

@@ -16,6 +16,7 @@ import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
+// strings
 const deltaMinusString = moleculePolarityStrings.deltaMinus;
 const deltaPlusString = moleculePolarityStrings.deltaPlus;
 
@@ -96,7 +97,7 @@ class PartialChargeNode extends Node {
    * @static
    */
   static createOppositePartialChargeNode( atom, bond ) {
-    return new PartialChargeNode( atom, function() {
+    return new PartialChargeNode( atom, () => {
 
       // along the bond axis, in the direction of the atom
       let v = atom.positionProperty.get().minus( bond.getCenter() );
@@ -125,7 +126,7 @@ class PartialChargeNode extends Node {
    * @static
    */
   static createCompositePartialChargeNode( atom, molecule ) {
-    const node = new PartialChargeNode( atom, function() {
+    const node = new PartialChargeNode( atom, () => {
       if ( molecule.dipoleProperty.get().magnitude > 0 ) {
         return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
       }

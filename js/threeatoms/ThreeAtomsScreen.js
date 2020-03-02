@@ -20,6 +20,7 @@ import moleculePolarity from '../moleculePolarity.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
 
+// strings
 const atomAString = moleculePolarityStrings.atomA;
 const atomBString = moleculePolarityStrings.atomB;
 const atomCString = moleculePolarityStrings.atomC;

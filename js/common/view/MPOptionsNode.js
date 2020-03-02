@@ -38,7 +38,7 @@ class MPOptionsNode extends VBox {
     } );
 
     // @private
-    this.disposeMPOptionsNode = function() {
+    this.disposeMPOptionsNode = () => {
       dipoleDirectionControl.dispose();
       surfaceColorControl.dispose();
     };

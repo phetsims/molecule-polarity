@@ -22,7 +22,7 @@ class MPControlPanel extends Panel {
   constructor( subPanels ) {
 
     // horizontal separator width is the max width of the subPanels
-    const separatorWidth = _.maxBy( subPanels, function( node ) { return node.width; } ).width;
+    const separatorWidth = _.maxBy( subPanels, node => node.width ).width;
 
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];

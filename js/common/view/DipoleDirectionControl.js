@@ -15,6 +15,7 @@ import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
+// strings
 const deltaMinusString = moleculePolarityStrings.deltaMinus;
 const deltaPlusString = moleculePolarityStrings.deltaPlus;
 const dipoleDirectionString = moleculePolarityStrings.dipoleDirection;
@@ -73,7 +74,7 @@ class DipoleDirectionControl extends VBox {
     } );
 
     // @private
-    this.disposeDipoleDirectionControl = function() {
+    this.disposeDipoleDirectionControl = () => {
       radioButtonGroup.dispose();
     };
   }

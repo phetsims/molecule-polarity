@@ -15,6 +15,7 @@ import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const moleculeString = moleculePolarityStrings.molecule;
 const patternSymbolNameString = moleculePolarityStrings.pattern.symbolName;
 

@@ -19,8 +19,6 @@ class Bond {
    */
   constructor( atom1, atom2 ) {
 
-    const self = this;
-
     // @public (read-only)
     this.atom1 = atom1;
     this.atom2 = atom2;
@@ -31,14 +29,14 @@ class Bond {
         atom1.electronegativityProperty, atom2.electronegativityProperty,
         MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty
       ],
-      function( position1, position2, electronegativity1, electronegativity2, dipoleDirection ) {
+      ( position1, position2, electronegativity1, electronegativity2, dipoleDirection ) => {
 
         const deltaEN = electronegativity2 - electronegativity1;
 
         // this is a simplification. in reality, magnitude is a function of deltaEN and many other things.
         const magnitude = Math.abs( deltaEN );
 
-        let angle = self.getAngle();
+        let angle = this.getAngle();
         if ( deltaEN < 0 ) {
           angle += Math.PI;
         }

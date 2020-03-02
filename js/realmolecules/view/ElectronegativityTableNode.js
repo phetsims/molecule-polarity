@@ -10,7 +10,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -19,88 +18,83 @@ import Color from '../../../../scenery/js/util/Color.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
+const atomElectronegativitiesString = moleculePolarityStrings.atomElectronegativities;
+
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
 const BACKGROUND_COLOR = new Color( 210, 210, 210 );
 const NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
 const HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
 
-const atomElectronegativitiesString = moleculePolarityStrings.atomElectronegativities;
+class ElectronegativityTableNode extends Node {
 
-/**
- * @param {RealMoleculeViewer} moleculeViewer
- * @constructor
- */
-function ElectronegativityTableNode( moleculeViewer ) {
+  /**
+   * @param {RealMoleculeViewer} moleculeViewer
+   */
+  constructor( moleculeViewer ) {
 
-  Node.call( this );
+    super();
 
-  const titleNode = new Text( atomElectronegativitiesString, {
-    font: new PhetFont( { size: 16, weight: 'bold' } ),
-    maxWidth: 300
-  } );
-  this.addChild( titleNode );
+    const titleNode = new Text( atomElectronegativitiesString, {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      maxWidth: 300
+    } );
+    this.addChild( titleNode );
 
-  // @private
-  this.cells = [
-    new Cell( 'H', 1, 2.1 ),
-    new Cell( 'B', 5, 2.0 ),
-    new Cell( 'C', 6, 2.5 ),
-    new Cell( 'N', 7, 3.0 ),
-    new Cell( 'O', 8, 3.5 ),
-    new Cell( 'F', 9, 4.0 ),
-    new Cell( 'Cl', 17, 3.0 )
-  ];
+    // @private
+    this.cells = [
+      new Cell( 'H', 1, 2.1 ),
+      new Cell( 'B', 5, 2.0 ),
+      new Cell( 'C', 6, 2.5 ),
+      new Cell( 'N', 7, 3.0 ),
+      new Cell( 'O', 8, 3.5 ),
+      new Cell( 'F', 9, 4.0 ),
+      new Cell( 'Cl', 17, 3.0 )
+    ];
 
-  // layout cells, first and last cells are horizontally separated from others
-  const xGap = 12;
-  let x = 0;
-  const y = 0;
-  const firstCell = this.cells[ 0 ];
-  this.addChild( firstCell );
-  firstCell.x = x;
-  firstCell.y = y;
-  x = x + firstCell.width + xGap;
-  for ( let i = 1; i < this.cells.length - 1; i++ ) {
-    const cell = this.cells[ i ];
-    this.addChild( cell );
-    cell.x = x;
-    cell.y = y;
-    x = cell.right;
+    // layout cells, first and last cells are horizontally separated from others
+    const xGap = 12;
+    let x = 0;
+    const y = 0;
+    const firstCell = this.cells[ 0 ];
+    this.addChild( firstCell );
+    firstCell.x = x;
+    firstCell.y = y;
+    x = x + firstCell.width + xGap;
+    for ( let i = 1; i < this.cells.length - 1; i++ ) {
+      const cell = this.cells[ i ];
+      this.addChild( cell );
+      cell.x = x;
+      cell.y = y;
+      x = cell.right;
+    }
+    x += xGap;
+    const lastCell = this.cells[ this.cells.length - 1 ];
+    this.addChild( lastCell );
+    lastCell.x = x;
+    lastCell.y = y;
+
+    // center title below cells
+    titleNode.centerX = ( lastCell.right - firstCell.left ) / 2;
+    titleNode.top = firstCell.bottom + 4;
+
+    // highlight elements displayed by the viewer
+    moleculeViewer.elementsProperty.lazyLink( elements => {
+      this.resetCells();
+      elements.forEach( element => {
+        this.setColor( element.elementNumber, element.color );
+      } );
+    } );
   }
-  x += xGap;
-  const lastCell = this.cells[ this.cells.length - 1 ];
-  this.addChild( lastCell );
-  lastCell.x = x;
-  lastCell.y = y;
-
-  // center title below cells
-  titleNode.centerX = ( lastCell.right - firstCell.left ) / 2;
-  titleNode.top = firstCell.bottom + 4;
-
-  // highlight elements displayed by the viewer
-  const self = this;
-  moleculeViewer.elementsProperty.lazyLink( function( elements ) {
-    self.resetCells();
-    elements.forEach( function( element ) {
-      self.setColor( element.elementNumber, element.color );
-    } );
-  } );
-}
-
-moleculePolarity.register( 'ElectronegativityTableNode', ElectronegativityTableNode );
-
-inherit( Node, ElectronegativityTableNode, {
 
   // @private
-  resetCells: function() {
-    this.cells.forEach( function( cell ) {
-      cell.disable();
-    } );
-  },
+  resetCells() {
+    this.cells.forEach( cell => cell.disable() );
+  }
 
   // @private Sets the {Color} color of a specified {number} element
-  setColor: function( elementNumber, color ) {
+  setColor( elementNumber, color ) {
     for ( let i = 0; i < this.cells.length; i++ ) {
       if ( this.cells[ i ].elementNumber === elementNumber ) {
         this.cells[ i ].enable( color );
@@ -108,55 +102,57 @@ inherit( Node, ElectronegativityTableNode, {
       }
     }
   }
-} );
-
-/**
- * A cell in the table, displays element name and number, color can be set.
- *
- * @param {string} symbol - element's symbol in the periodic table
- * @param {number} elementNumber - element's number in the periodic table
- * @param {number} electronegativity
- * @constructor
- */
-function Cell( symbol, elementNumber, electronegativity ) {
-
-  this.elementNumber = elementNumber;
-
-  // @private nodes
-  this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, {
-    fill: BACKGROUND_COLOR,
-    stroke: 'black'
-  } );
-  this.symbolNode = new Text( symbol, {
-    font: new PhetFont( { size: 22, weight: 'bold' } ),
-    fill: NORMAL_TEXT_COLOR
-  } );
-  this.electronegativityNode = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
-    font: new PhetFont( 16 ),
-    fill: NORMAL_TEXT_COLOR
-  } );
-
-  Node.call( this, { children: [ this.backgroundNode, this.symbolNode, this.electronegativityNode ] } );
-
-  // layout
-  this.symbolNode.centerX = this.electronegativityNode.centerX = this.backgroundNode.centerX;
-  this.symbolNode.top = 3;
-  this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
 }
 
-inherit( Node, Cell, {
+class Cell extends Node {
+  /**
+   * A cell in the table, displays element name and number, color can be set.
+   *
+   * @param {string} symbol - element's symbol in the periodic table
+   * @param {number} elementNumber - element's number in the periodic table
+   * @param {number} electronegativity
+   */
+  constructor( symbol, elementNumber, electronegativity ) {
+
+    super();
+
+    this.elementNumber = elementNumber;
+
+    // @private nodes
+    this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, {
+      fill: BACKGROUND_COLOR,
+      stroke: 'black'
+    } );
+    this.symbolNode = new Text( symbol, {
+      font: new PhetFont( { size: 22, weight: 'bold' } ),
+      fill: NORMAL_TEXT_COLOR
+    } );
+    this.electronegativityNode = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
+      font: new PhetFont( 16 ),
+      fill: NORMAL_TEXT_COLOR
+    } );
+
+    this.children = [ this.backgroundNode, this.symbolNode, this.electronegativityNode ];
+
+    // layout
+    this.symbolNode.centerX = this.electronegativityNode.centerX = this.backgroundNode.centerX;
+    this.symbolNode.top = 3;
+    this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
+  }
 
   // @public makes the cell appear enabled
-  enable: function( color ) {
+  enable( color ) {
     this.backgroundNode.fill = color;
     this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
-  },
+  }
 
   // @public makes the cell appear disabled
-  disable: function() {
+  disable() {
     this.backgroundNode.fill = BACKGROUND_COLOR;
     this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;
   }
-} );
+}
+
+moleculePolarity.register( 'ElectronegativityTableNode', ElectronegativityTableNode );
 
 export default ElectronegativityTableNode;

@@ -18,6 +18,7 @@ import MPConstants from '../../common/MPConstants.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const atomAString = moleculePolarityStrings.atomA;
 const atomBString = moleculePolarityStrings.atomB;
 const atomCString = moleculePolarityStrings.atomC;
@@ -72,12 +73,12 @@ moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
  * @param {Vector2 position position of the molecule
  * @param {number} angle orientation of the molecule
  */
-const updateAtomPosition = function( atom, bondAngle, position, angle ) {
+function updateAtomPosition( atom, bondAngle, position, angle ) {
   const thetaA = angle + bondAngle;
   const xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + position.x;
   const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + position.y;
   atom.positionProperty.set( new Vector2( xA, yA ) );
-};
+}
 
 export default inherit( Molecule, TriatomicMolecule, {
 

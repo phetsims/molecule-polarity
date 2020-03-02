@@ -120,12 +120,12 @@ class TwoAtomsScreenView extends ScreenView {
     // synchronization with view Properties ------------------------------
 
     // unlink not needed
-    viewProperties.bondDipoleVisibleProperty.link( function( visible ) {
+    viewProperties.bondDipoleVisibleProperty.link( visible => {
       moleculeNode.setBondDipoleVisible( visible );
     } );
 
     // unlink not needed
-    viewProperties.partialChargesVisibleProperty.link( function( visible ) {
+    viewProperties.partialChargesVisibleProperty.link( visible => {
       moleculeNode.setPartialChargesVisible( visible );
     } );
 
@@ -133,7 +133,7 @@ class TwoAtomsScreenView extends ScreenView {
     viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
 
     // unlink not needed
-    viewProperties.surfaceTypeProperty.link( function( surfaceType ) {
+    viewProperties.surfaceTypeProperty.link( surfaceType => {
       moleculeNode.setSurfaceType( surfaceType );
       electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );

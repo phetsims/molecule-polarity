@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Plane from '../../../../scenery/js/nodes/Plane.js';
@@ -18,66 +17,66 @@ import Panel from '../../../../sun/js/Panel.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+// strings
 const underDevelopmentLine1String = moleculePolarityStrings.underDevelopment.line1;
 const underDevelopmentLine2String = moleculePolarityStrings.underDevelopment.line2;
 
 // constants
 const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
 
-/**
- * @constructor
- */
-function UnderDevelopmentPlane( layoutBounds ) {
+class UnderDevelopmentPlane extends Plane {
 
-  const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
-    href: LEGACY_URL,
-    text: LEGACY_URL
-  } );
+  constructor( layoutBounds ) {
 
-  const maxTextWidth = 0.75 * layoutBounds.width;
+    const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
+      href: LEGACY_URL,
+      text: LEGACY_URL
+    } );
 
-  const vBox = new VBox( {
-    align: 'left',
-    spacing: 20,
-    children: [
-      new Text( underDevelopmentLine1String, {
-        font: new PhetFont( 22 ),
-        maxWidth: maxTextWidth
-      } ),
-      new VBox( {
-        align: 'left',
-        children: [
-          new Text( underDevelopmentLine2String, {
-            font: new PhetFont( 16 ),
-            maxWidth: maxTextWidth
-          } ),
-          new RichText( linkText, {
-            links: true, // allow links in linkText
-            font: new PhetFont( 16 ),
-            maxWidth: maxTextWidth
-          } )
-        ]
-      } )
-    ]
-  } );
+    const maxTextWidth = 0.75 * layoutBounds.width;
 
-  const panel = new Panel( vBox, {
-    cornerRadius: 10,
-    xMargin: 25,
-    yMargin: 50,
-    fill: 'white',
-    stroke: 'black',
-    center: layoutBounds.center
-  } );
+    const vBox = new VBox( {
+      align: 'left',
+      spacing: 20,
+      children: [
+        new Text( underDevelopmentLine1String, {
+          font: new PhetFont( 22 ),
+          maxWidth: maxTextWidth
+        } ),
+        new VBox( {
+          align: 'left',
+          children: [
+            new Text( underDevelopmentLine2String, {
+              font: new PhetFont( 16 ),
+              maxWidth: maxTextWidth
+            } ),
+            new RichText( linkText, {
+              links: true, // allow links in linkText
+              font: new PhetFont( 16 ),
+              maxWidth: maxTextWidth
+            } )
+          ]
+        } )
+      ]
+    } );
 
-  Plane.call( this, {
-    children: [ panel ],
-    fill: 'rgba( 0, 0, 0, 0.2 )',
-    pickable: true // blocks interaction with anything behind this Plane
-  } );
+    const panel = new Panel( vBox, {
+      cornerRadius: 10,
+      xMargin: 25,
+      yMargin: 50,
+      fill: 'white',
+      stroke: 'black',
+      center: layoutBounds.center
+    } );
+
+    super( {
+      children: [ panel ],
+      fill: 'rgba( 0, 0, 0, 0.2 )',
+      pickable: true // blocks interaction with anything behind this Plane
+    } );
+  }
 }
 
 moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
 
-inherit( Plane, UnderDevelopmentPlane );
 export default UnderDevelopmentPlane;
