@@ -73,7 +73,7 @@ class SurfaceNode extends Node {
    * @override
    */
   setVisible( visible ) {
-    Node.prototype.setVisible.call( this, visible );
+    super.setVisible( visible );
     if ( visible ) {
       this.matrix = this.molecule.createTransformMatrix();
       this.updateFill();
