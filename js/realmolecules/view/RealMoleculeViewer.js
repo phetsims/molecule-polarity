@@ -134,7 +134,7 @@ class RealMoleculeViewer extends Node {
   }
 
   setSurfaceType( surfaceType ) {
-    this.surfaceTypeText.text = ( 'surface: ' + surfaceType );
+    this.surfaceTypeText.text = ( 'surface: ' + surfaceType.name );
   }
 }
 

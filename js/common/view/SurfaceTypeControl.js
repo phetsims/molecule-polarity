@@ -23,7 +23,7 @@ const surfaceString = moleculePolarityStrings.surface;
 class SurfaceTypeControl extends VBox {
 
   /**
-   * @param {Property.<SurfaceType>} surfaceTypeProperty
+   * @param {EnumerationProperty.<SurfaceType>} surfaceTypeProperty
    */
   constructor( surfaceTypeProperty ) {
 

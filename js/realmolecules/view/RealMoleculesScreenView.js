@@ -55,9 +55,9 @@ class RealMoleculesScreenView extends ScreenView {
       const electrostaticPotentialColorKey = new Node();
 
       // unlink not needed
-      MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceType => {
+      MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
         electrostaticPotentialColorKey.removeAllChildren();
-        if ( surfaceType === 'RWB' ) {
+        if ( surfaceColor === 'RWB' ) {
           electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );
         }
         else {

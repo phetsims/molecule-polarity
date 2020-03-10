@@ -6,14 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-// NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-const SurfaceType = Object.freeze( {
-  NONE: 'none',
-  ELECTROSTATIC_POTENTIAL: 'electrostaticPotential',
-  ELECTRON_DENSITY: 'electronDensity'
-} );
+const SurfaceType = Enumeration.byKeys( [ 'NONE', 'ELECTROSTATIC_POTENTIAL', 'ELECTRON_DENSITY' ] );
 
 moleculePolarity.register( 'SurfaceType', SurfaceType );
 

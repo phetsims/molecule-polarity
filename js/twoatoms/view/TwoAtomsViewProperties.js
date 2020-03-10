@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import SurfaceType from '../../common/view/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
@@ -19,7 +19,7 @@ class TwoAtomsViewProperties {
     this.bondDipoleVisibleProperty = new BooleanProperty( true );
     this.partialChargesVisibleProperty = new BooleanProperty( false );
     this.bondCharacterVisibleProperty = new BooleanProperty( false );
-    this.surfaceTypeProperty = new Property( SurfaceType.NONE );
+    this.surfaceTypeProperty = new EnumerationProperty( SurfaceType, SurfaceType.NONE );
   }
 
   // @public

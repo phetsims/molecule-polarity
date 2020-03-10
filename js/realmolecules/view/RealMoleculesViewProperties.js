@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import StringProperty from '../../../../axon/js/StringProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import SurfaceType from '../../common/view/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
@@ -21,7 +21,7 @@ class RealMoleculesViewProperties {
     this.partialChargesVisibleProperty = new BooleanProperty( false );
     this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false );
     this.atomLabelsVisibleProperty = new BooleanProperty( false );
-    this.surfaceTypeProperty = new StringProperty( SurfaceType.NONE );
+    this.surfaceTypeProperty = new EnumerationProperty( SurfaceType, SurfaceType.NONE );
   }
 
   // @public
