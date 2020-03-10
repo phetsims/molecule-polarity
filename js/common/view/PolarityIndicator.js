@@ -12,6 +12,7 @@ import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Polarity from '../model/Polarity.js';
 
 class PolarityIndicator extends Node {
 
@@ -21,14 +22,11 @@ class PolarityIndicator extends Node {
   constructor( options ) {
 
     options = merge( {
-      polarity: 'positive', // 'positive' or 'negative'
+      polarity: Polarity.POSITIVE,
       radius: 20,
       lineWidth: 4,
       stroke: 'black'
     }, options );
-
-    assert && assert( options.polarity === 'negative' || options.polarity === 'positive',
-      'invalid polarity: ' + options.polarity );
 
     super();
 
@@ -41,7 +39,7 @@ class PolarityIndicator extends Node {
     this.addChild( new Line( -0.5 * options.radius, 0, 0.5 * options.radius, 0, pathOptions ) );
 
     // vertical bar for plus sign
-    if ( options.polarity === 'positive' ) {
+    if ( options.polarity === Polarity.POSITIVE ) {
       this.addChild( new Line( 0, -0.5 * options.radius, 0, 0.5 * options.radius, pathOptions ) );
     }
 

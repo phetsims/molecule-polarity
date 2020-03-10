@@ -12,6 +12,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Polarity from '../model/Polarity.js';
 import MPColors from '../MPColors.js';
 import PolarityIndicator from './PolarityIndicator.js';
 
@@ -30,7 +31,7 @@ class PlateNode extends Node {
   constructor( eField, options ) {
 
     options = merge( {
-      polarity: 'negative', // 'positive' or 'negative'
+      polarity: Polarity.NEGATIVE,
       perspective: 'left', // 'left' or 'right'
       plateWidth: 50,
       plateHeight: 430,
@@ -38,8 +39,6 @@ class PlateNode extends Node {
       platePerspectiveYOffset: 35 // y difference between foreground and background edges of the plate
     }, options );
 
-    assert && assert( options.polarity === 'negative' || options.polarity === 'positive',
-      'invalid polarity: ' + options.polarity );
     assert && assert( options.perspective === 'right' || options.perspective === 'left',
       'invalid perspective: ' + options.perspective );
 
@@ -72,7 +71,7 @@ class PlateNode extends Node {
 
     // The plate is drawn in perspective for positive polarity.
     // If the polarity is negative, reflect about the y axis.
-    if ( options.polarity === 'negative' ) {
+    if ( options.polarity === Polarity.NEGATIVE ) {
       plateNode.setScaleMagnitude( -1, 1 );
     }
 
@@ -100,7 +99,10 @@ class PlateNode extends Node {
    * @public
    */
   static createPositive( eField ) {
-    return new PlateNode( eField, { polarity: 'positive', perspective: 'right' } );
+    return new PlateNode( eField, {
+      polarity: Polarity.POSITIVE,
+      perspective: 'right'
+    } );
   }
 
   /**
@@ -111,7 +113,10 @@ class PlateNode extends Node {
    * @static
    */
   static createNegative( eField ) {
-    return new PlateNode( eField, { polarity: 'negative', perspective: 'left' } );
+    return new PlateNode( eField, {
+      polarity: Polarity.NEGATIVE,
+      perspective: 'left'
+    } );
   }
 }
 
