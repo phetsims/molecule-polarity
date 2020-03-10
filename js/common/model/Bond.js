@@ -10,6 +10,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
+import DipoleDirection from './DipoleDirection.js';
 
 class Bond {
 
@@ -46,7 +47,7 @@ class Bond {
         // The above algorithm is for a dipole that points from positive to negative charge.
         // For IUPAC convention, the direction of the dipole is from negative to positive charge,
         // so rotate the dipole 180 degrees. See issue #5 and #56.
-        if ( dipoleDirection === 'negativeToPositive' ) {
+        if ( dipoleDirection === DipoleDirection.NEGATIVE_TO_POSITIVE ) {
           dipole.rotate( Math.PI );
         }
 

@@ -13,6 +13,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import DipoleDirection from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';
 
 // strings
@@ -30,7 +31,7 @@ const TEXT_OPTIONS = {
 class DipoleDirectionControl extends VBox {
 
   /**
-   * @param {Property.<string>} dipoleDirectionProperty
+   * @param {EnumerationProperty.<DipoleDirection>} dipoleDirectionProperty
    */
   constructor( dipoleDirectionProperty ) {
 
@@ -53,11 +54,11 @@ class DipoleDirectionControl extends VBox {
 
     const radioButtonGroupItems = [
       {
-        value: 'positiveToNegative',
+        value: DipoleDirection.POSITIVE_TO_NEGATIVE,
         node: new Text( positiveToNegativeString, TEXT_OPTIONS )
       },
       {
-        value: 'negativeToPositive',
+        value: DipoleDirection.NEGATIVE_TO_POSITIVE,
         node: new Text( negativeToPositiveString, TEXT_OPTIONS )
       }
     ];

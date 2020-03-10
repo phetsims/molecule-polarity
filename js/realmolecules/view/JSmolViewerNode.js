@@ -33,8 +33,8 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import DOM from '../../../../scenery/js/nodes/DOM.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
-import SurfaceType from '../../common/view/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Element from '../model/Element.js';
 

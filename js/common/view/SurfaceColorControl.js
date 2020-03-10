@@ -13,6 +13,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import SurfaceColor from '../model/SurfaceColor.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
 
@@ -31,7 +32,7 @@ const COLOR_KEY_OPTIONS = {
 class SurfaceColorControl extends VBox {
 
   /**
-   * @param {Property.<string>} surfaceColorProperty
+   * @param {EnumerationProperty.<SurfaceColor>} surfaceColorProperty
    */
   constructor( surfaceColorProperty ) {
 
@@ -42,11 +43,11 @@ class SurfaceColorControl extends VBox {
 
     const radioButtonGroupItems = [
       {
-        value: 'RWB',
+        value: SurfaceColor.RWB,
         node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS )
       },
       {
-        value: 'ROYGB',
+        value: SurfaceColor.ROYGB,
         node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS )
       }
     ];

@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import SurfaceType from '../../common/view/SurfaceType.js';
+import SurfaceType from '../../common/model/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class RealMoleculesViewProperties {

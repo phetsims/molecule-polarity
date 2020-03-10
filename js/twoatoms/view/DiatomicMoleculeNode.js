@@ -8,12 +8,12 @@
  */
 
 import Node from '../../../../scenery/js/nodes/Node.js';
+import SurfaceType from '../../common/model/SurfaceType.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import MoleculeAngleDragHandler from '../../common/view/MoleculeAngleDragHandler.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
-import SurfaceType from '../../common/view/SurfaceType.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ElectronDensityNode from './ElectronDensityNode.js';

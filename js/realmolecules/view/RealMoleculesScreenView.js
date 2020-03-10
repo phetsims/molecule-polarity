@@ -10,12 +10,13 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import SurfaceColor from '../../common/model/SurfaceColor.js';
+import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import MPControlPanel from '../../common/view/MPControlPanel.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import SurfaceType from '../../common/view/SurfaceType.js';
 import SurfaceTypeControl from '../../common/view/SurfaceTypeControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
@@ -26,6 +27,7 @@ import RealMoleculeViewer from './RealMoleculeViewer.js';
 import UnderDevelopmentPlane from './UnderDevelopmentPlane.js';
 
 class RealMoleculesScreenView extends ScreenView {
+
   /**
    * @param {TwoAtomsModel} model
    */
@@ -57,7 +59,7 @@ class RealMoleculesScreenView extends ScreenView {
       // unlink not needed
       MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
         electrostaticPotentialColorKey.removeAllChildren();
-        if ( surfaceColor === 'RWB' ) {
+        if ( surfaceColor === SurfaceColor.RWB ) {
           electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );
         }
         else {

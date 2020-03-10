@@ -11,8 +11,8 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import moleculePolarityStrings from '../../molecule-polarity-strings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import SurfaceType from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
-import SurfaceType from './SurfaceType.js';
 
 // strings
 const electronDensityString = moleculePolarityStrings.electronDensity;

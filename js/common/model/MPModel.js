@@ -11,6 +11,7 @@
 import Utils from '../../../../dot/js/Utils.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
+import DipoleDirection from './DipoleDirection.js';
 import EField from './EField.js';
 
 // constants
@@ -61,7 +62,7 @@ class MPModel {
     // This algorithm is for a dipole that points from positive to negative charge, and is therefore
     // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
     // is from negative to positive charge, so rotate the dipole 180 degrees. See issue #5 and #56.
-    if ( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty.get() === 'negativeToPositive' ) {
+    if ( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty.get() === DipoleDirection.NEGATIVE_TO_POSITIVE ) {
       dipole = dipole.rotated( Math.PI );
     }
 
