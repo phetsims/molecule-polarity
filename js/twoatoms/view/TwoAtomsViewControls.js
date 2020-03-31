@@ -12,7 +12,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 // strings

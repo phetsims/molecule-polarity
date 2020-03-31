@@ -14,7 +14,7 @@ import Bond from '../../common/model/Bond.js';
 import Molecule from '../../common/model/Molecule.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 // strings

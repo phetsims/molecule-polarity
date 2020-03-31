@@ -14,7 +14,7 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 // strings

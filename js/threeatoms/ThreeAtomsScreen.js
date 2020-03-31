@@ -15,7 +15,7 @@ import Node from '../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../scenery/js/nodes/Text.js';
 import MPColors from '../common/MPColors.js';
-import moleculePolarityStrings from '../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import moleculePolarity from '../moleculePolarity.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';

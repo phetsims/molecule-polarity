@@ -12,7 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 

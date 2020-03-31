@@ -13,7 +13,7 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 // strings

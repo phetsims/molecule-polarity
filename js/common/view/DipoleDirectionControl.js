@@ -11,7 +11,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import DipoleDirection from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';

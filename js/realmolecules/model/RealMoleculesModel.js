@@ -7,7 +7,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import moleculePolarityStrings from '../../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import mol2Data from './mol2Data.js';
 import RealMolecule from './RealMolecule.js';

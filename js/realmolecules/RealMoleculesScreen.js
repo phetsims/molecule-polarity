@@ -12,7 +12,7 @@ import Image from '../../../scenery/js/nodes/Image.js';
 import homeIcon from '../../images/RealMolecules-home-icon_png.js';
 import navigationBarIcon from '../../images/RealMolecules-navbar-icon_png.js';
 import MPColors from '../common/MPColors.js';
-import moleculePolarityStrings from '../molecule-polarity-strings.js';
+import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import moleculePolarity from '../moleculePolarity.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
