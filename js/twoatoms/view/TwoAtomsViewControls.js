@@ -12,14 +12,8 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const bondCharacterString = moleculePolarityStrings.bondCharacter;
-const bondDipoleString = moleculePolarityStrings.bondDipole;
-const partialChargesString = moleculePolarityStrings.partialCharges;
-const viewString = moleculePolarityStrings.view;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 class TwoAtomsViewControls extends VBox {
 
@@ -29,15 +23,15 @@ class TwoAtomsViewControls extends VBox {
   constructor( viewProperties ) {
 
     // title
-    const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleNode = new Text( moleculePolarityStrings.view, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // Checkbox labels
     const bondDipoleLabel = new HBox( {
-      children: [ new Text( bondDipoleString, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
+      children: [ new Text( moleculePolarityStrings.bondDipole, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
-    const partialChargesLabel = new Text( partialChargesString, MPConstants.CONTROL_TEXT_OPTIONS );
-    const bondCharacterLabel = new Text( bondCharacterString, MPConstants.CONTROL_TEXT_OPTIONS );
+    const partialChargesLabel = new Text( moleculePolarityStrings.partialCharges, MPConstants.CONTROL_TEXT_OPTIONS );
+    const bondCharacterLabel = new Text( moleculePolarityStrings.bondCharacter, MPConstants.CONTROL_TEXT_OPTIONS );
 
     // Checkboxes
     const bondDipoleCheckbox = new Checkbox( bondDipoleLabel, viewProperties.bondDipoleVisibleProperty );

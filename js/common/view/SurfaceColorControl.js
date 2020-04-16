@@ -11,14 +11,11 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import SurfaceColor from '../model/SurfaceColor.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
-
-// strings
-const surfaceColorRealMoleculesString = moleculePolarityStrings.surfaceColorRealMolecules;
 
 // constants
 const COLOR_KEY_OPTIONS = {
@@ -36,7 +33,7 @@ class SurfaceColorControl extends VBox {
    */
   constructor( surfaceColorProperty ) {
 
-    const titleNode = new Text( surfaceColorRealMoleculesString, {
+    const titleNode = new Text( moleculePolarityStrings.surfaceColorRealMolecules, {
       font: new PhetFont( 14 ),
       maxWidth: 400
     } );

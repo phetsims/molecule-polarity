@@ -13,12 +13,8 @@ import Bond from '../../common/model/Bond.js';
 import Molecule from '../../common/model/Molecule.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const atomAString = moleculePolarityStrings.atomA;
-const atomBString = moleculePolarityStrings.atomB;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 class DiatomicMolecule extends Molecule {
 
@@ -28,10 +24,10 @@ class DiatomicMolecule extends Molecule {
   constructor( options ) {
 
     // @public the atoms labeled A and B
-    const atomA = new Atom( atomAString, {
+    const atomA = new Atom( moleculePolarityStrings.atomA, {
       color: MPColors.ATOM_A
     } );
-    const atomB = new Atom( atomBString, {
+    const atomB = new Atom( moleculePolarityStrings.atomB, {
       color: MPColors.ATOM_B,
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
     } );

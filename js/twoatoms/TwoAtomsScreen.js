@@ -21,17 +21,12 @@ import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
-// strings
-const atomAString = moleculePolarityStrings.atomA;
-const atomBString = moleculePolarityStrings.atomB;
-const screenTwoAtomsString = moleculePolarityStrings.screen.twoAtoms;
-
 class TwoAtomsScreen extends Screen {
 
   constructor() {
 
     const options = {
-      name: screenTwoAtomsString,
+      name: moleculePolarityStrings.screen.twoAtoms,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon()
     };
@@ -77,13 +72,13 @@ function createScreenIcon() {
     y: bond.centerY
   } );
 
-  const textA = new Text( atomAString, {
+  const textA = new Text( moleculePolarityStrings.atomA, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomA.center
   } );
 
-  const textB = new Text( atomBString, {
+  const textB = new Text( moleculePolarityStrings.atomB, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomB.center

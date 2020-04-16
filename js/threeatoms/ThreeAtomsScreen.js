@@ -21,18 +21,12 @@ import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
 
-// strings
-const atomAString = moleculePolarityStrings.atomA;
-const atomBString = moleculePolarityStrings.atomB;
-const atomCString = moleculePolarityStrings.atomC;
-const screenThreeAtomsString = moleculePolarityStrings.screen.threeAtoms;
-
 class ThreeAtomsScreen extends Screen {
 
   constructor() {
 
     const options = {
-      name: screenThreeAtomsString,
+      name: moleculePolarityStrings.screen.threeAtoms,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon()
     };
@@ -95,19 +89,19 @@ function createScreenIcon() {
     centerY: bondBC.bottom
   } );
 
-  const textA = new Text( atomAString, {
+  const textA = new Text( moleculePolarityStrings.atomA, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomA.center
   } );
 
-  const textB = new Text( atomBString, {
+  const textB = new Text( moleculePolarityStrings.atomB, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomB.center
   } );
 
-  const textC = new Text( atomCString, {
+  const textC = new Text( moleculePolarityStrings.atomC, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomC.center

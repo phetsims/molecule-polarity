@@ -12,13 +12,9 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
-
-// strings
-const deltaMinusString = moleculePolarityStrings.deltaMinus;
-const deltaPlusString = moleculePolarityStrings.deltaPlus;
 
 // constants
 const REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
@@ -55,7 +51,7 @@ class PartialChargeNode extends Node {
       if ( partialCharge !== 0 ) {
 
         // d+ or d-
-        textNode.text = ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString;
+        textNode.text = ( partialCharge > 0 ) ? moleculePolarityStrings.deltaPlus : moleculePolarityStrings.deltaMinus;
 
         // size proportional to bond dipole magnitude
         const scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );

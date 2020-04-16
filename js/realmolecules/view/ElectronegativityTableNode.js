@@ -15,11 +15,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const atomElectronegativitiesString = moleculePolarityStrings.atomElectronegativities;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -36,7 +33,7 @@ class ElectronegativityTableNode extends Node {
 
     super();
 
-    const titleNode = new Text( atomElectronegativitiesString, {
+    const titleNode = new Text( moleculePolarityStrings.atomElectronegativities, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       maxWidth: 300
     } );

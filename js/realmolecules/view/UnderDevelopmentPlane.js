@@ -14,12 +14,8 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const underDevelopmentLine1String = moleculePolarityStrings.underDevelopment.line1;
-const underDevelopmentLine2String = moleculePolarityStrings.underDevelopment.line2;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 // constants
 const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
@@ -39,14 +35,14 @@ class UnderDevelopmentPlane extends Plane {
       align: 'left',
       spacing: 20,
       children: [
-        new Text( underDevelopmentLine1String, {
+        new Text( moleculePolarityStrings.underDevelopment.line1, {
           font: new PhetFont( 22 ),
           maxWidth: maxTextWidth
         } ),
         new VBox( {
           align: 'left',
           children: [
-            new Text( underDevelopmentLine2String, {
+            new Text( moleculePolarityStrings.underDevelopment.line2, {
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
             } ),

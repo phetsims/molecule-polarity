@@ -17,15 +17,12 @@ import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
-// strings
-const screenRealMoleculesString = moleculePolarityStrings.screen.realMolecules;
-
 class RealMoleculesScreen extends Screen {
 
   constructor() {
 
     const options = {
-      name: screenRealMoleculesString,
+      name: moleculePolarityStrings.screen.realMolecules,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon()
     };

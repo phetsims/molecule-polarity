@@ -16,13 +16,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const bondCharacterString = moleculePolarityStrings.bondCharacter;
-const moreCovalentString = moleculePolarityStrings.moreCovalent;
-const moreIonicString = moleculePolarityStrings.moreIonic;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 // constants
 const TRACK_WIDTH = 435;
@@ -41,7 +36,7 @@ class BondCharacterNode extends Node {
     super();
 
     // title
-    const titleNode = new Text( bondCharacterString, {
+    const titleNode = new Text( moleculePolarityStrings.bondCharacter, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
@@ -53,8 +48,8 @@ class BondCharacterNode extends Node {
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     };
-    const leftLabelNode = new Text( moreCovalentString, labelOptions );
-    const rightLabelNode = new Text( moreIonicString, labelOptions );
+    const leftLabelNode = new Text( moleculePolarityStrings.moreCovalent, labelOptions );
+    const rightLabelNode = new Text( moleculePolarityStrings.moreIonic, labelOptions );
 
     // pointer that moves along the track, not interactive
     const pointerNode = new PointerNode( molecule.atomA, molecule.atomB );

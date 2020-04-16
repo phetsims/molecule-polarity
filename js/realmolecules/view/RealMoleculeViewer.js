@@ -18,11 +18,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const patternSymbolNameString = moleculePolarityStrings.pattern.symbolName;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 // constants
 const FONT = new PhetFont( 18 );
@@ -108,7 +105,7 @@ class RealMoleculeViewer extends Node {
 
     // unlink not needed
     moleculeProperty.link( molecule => {
-      moleculeText.text = StringUtils.fillIn( patternSymbolNameString, {
+      moleculeText.text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
         symbol: molecule.symbol,
         name: molecule.name
       } );

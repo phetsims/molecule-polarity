@@ -9,16 +9,10 @@
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import SurfaceType from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
-
-// strings
-const electronDensityString = moleculePolarityStrings.electronDensity;
-const electrostaticPotentialString = moleculePolarityStrings.electrostaticPotential;
-const noneString = moleculePolarityStrings.none;
-const surfaceString = moleculePolarityStrings.surface;
 
 class SurfaceTypeControl extends VBox {
 
@@ -28,20 +22,20 @@ class SurfaceTypeControl extends VBox {
   constructor( surfaceTypeProperty ) {
 
     // title
-    const titleNode = new Text( surfaceString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleNode = new Text( moleculePolarityStrings.surface, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     const radioButtonGroupItems = [
       {
-        node: new Text( noneString, MPConstants.CONTROL_TEXT_OPTIONS ),
+        node: new Text( moleculePolarityStrings.none, MPConstants.CONTROL_TEXT_OPTIONS ),
         value: SurfaceType.NONE
       },
       {
         value: SurfaceType.ELECTROSTATIC_POTENTIAL,
-        node: new Text( electrostaticPotentialString, MPConstants.CONTROL_TEXT_OPTIONS )
+        node: new Text( moleculePolarityStrings.electrostaticPotential, MPConstants.CONTROL_TEXT_OPTIONS )
       },
       {
         value: SurfaceType.ELECTRON_DENSITY,
-        node: new Text( electronDensityString, MPConstants.CONTROL_TEXT_OPTIONS )
+        node: new Text( moleculePolarityStrings.electronDensity, MPConstants.CONTROL_TEXT_OPTIONS )
       }
     ];
 

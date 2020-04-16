@@ -15,17 +15,9 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
-
-//strings
-const electronDensityString = moleculePolarityStrings.electronDensity;
-const electrostaticPotentialString = moleculePolarityStrings.electrostaticPotential;
-const lessString = moleculePolarityStrings.less;
-const moreString = moleculePolarityStrings.more;
-const negativeString = moleculePolarityStrings.negative;
-const positiveString = moleculePolarityStrings.positive;
 
 class SurfaceColorKey extends Node {
   /**
@@ -103,7 +95,8 @@ class SurfaceColorKey extends Node {
    * @static
    */
   static createElectronDensityColorKey( options ) {
-    return new SurfaceColorKey( MPColors.BW_GRADIENT, electronDensityString, lessString, moreString, options );
+    return new SurfaceColorKey( MPColors.BW_GRADIENT, moleculePolarityStrings.electronDensity,
+      moleculePolarityStrings.less, moleculePolarityStrings.more, options );
   }
 
   /**
@@ -114,7 +107,8 @@ class SurfaceColorKey extends Node {
    * @static
    */
   static createElectrostaticPotentialRWBColorKey( options ) {
-    return new SurfaceColorKey( MPColors.RWB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
+    return new SurfaceColorKey( MPColors.RWB_GRADIENT, moleculePolarityStrings.electrostaticPotential,
+      moleculePolarityStrings.positive, moleculePolarityStrings.negative, options );
   }
 
   /**
@@ -125,7 +119,8 @@ class SurfaceColorKey extends Node {
    * @static
    */
   static createElectrostaticPotentialROYGBColorKey( options ) {
-    return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, electrostaticPotentialString, positiveString, negativeString, options );
+    return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, moleculePolarityStrings.electrostaticPotential,
+      moleculePolarityStrings.positive, moleculePolarityStrings.negative, options );
   }
 }
 

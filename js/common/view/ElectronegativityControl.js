@@ -17,16 +17,10 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import PointySliderThumb from './PointySliderThumb.js';
-
-// strings
-const electronegativityString = moleculePolarityStrings.electronegativity;
-const lessString = moleculePolarityStrings.less;
-const moreString = moleculePolarityStrings.more;
-const patternAtomNameString = moleculePolarityStrings.pattern.atomName;
 
 class ElectronegativityControl extends Panel {
 
@@ -54,11 +48,11 @@ class ElectronegativityControl extends Panel {
     }, options );
 
     // titles
-    const titleNode = new Text( StringUtils.fillIn( patternAtomNameString, { name: atom.name } ), {
+    const titleNode = new Text( StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, { name: atom.name } ), {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: options.trackSize.width
     } );
-    const subtitleNode = new Text( electronegativityString, {
+    const subtitleNode = new Text( moleculePolarityStrings.electronegativity, {
       font: new PhetFont( 18 ),
       maxWidth: options.trackSize.width
     } );
@@ -90,8 +84,8 @@ class ElectronegativityControl extends Panel {
       font: new PhetFont( 16 ),
       maxWidth: 40
     };
-    sliderNode.addMajorTick( options.range.min, new Text( lessString, tickLabelOptions ) );
-    sliderNode.addMajorTick( options.range.max, new Text( moreString, tickLabelOptions ) );
+    sliderNode.addMajorTick( options.range.min, new Text( moleculePolarityStrings.less, tickLabelOptions ) );
+    sliderNode.addMajorTick( options.range.max, new Text( moleculePolarityStrings.more, tickLabelOptions ) );
     const centerTick = options.range.min + ( options.range.getLength() / 2 );
     sliderNode.addMajorTick( centerTick );
     for ( let i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {

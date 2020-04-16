@@ -11,16 +11,10 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import DipoleDirection from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';
-
-// strings
-const deltaMinusString = moleculePolarityStrings.deltaMinus;
-const deltaPlusString = moleculePolarityStrings.deltaPlus;
-const dipoleDirectionString = moleculePolarityStrings.dipoleDirection;
-const patternDipoleDirectionString = moleculePolarityStrings.pattern.dipoleDirection;
 
 // constants
 const TEXT_OPTIONS = {
@@ -35,21 +29,21 @@ class DipoleDirectionControl extends VBox {
    */
   constructor( dipoleDirectionProperty ) {
 
-    const titleNode = new Text( dipoleDirectionString, {
+    const titleNode = new Text( moleculePolarityStrings.dipoleDirection, {
       font: new PhetFont( 14 ),
       maxWidth: 400
     } );
 
     // d+ -> d-
-    const positiveToNegativeString = StringUtils.fillIn( patternDipoleDirectionString, {
-      from: deltaPlusString,
-      to: deltaMinusString
+    const positiveToNegativeString = StringUtils.fillIn( moleculePolarityStrings.dipoleDirection, {
+      from: moleculePolarityStrings.deltaPlus,
+      to: moleculePolarityStrings.deltaMinus
     } );
 
     // d- -> d+
-    const negativeToPositiveString = StringUtils.fillIn( patternDipoleDirectionString, {
-      from: deltaMinusString,
-      to: deltaPlusString
+    const negativeToPositiveString = StringUtils.fillIn( moleculePolarityStrings.dipoleDirection, {
+      from: moleculePolarityStrings.deltaMinus,
+      to: moleculePolarityStrings.deltaPlus
     } );
 
     const radioButtonGroupItems = [

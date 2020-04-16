@@ -12,12 +12,8 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
 import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const moleculeString = moleculePolarityStrings.molecule;
-const patternSymbolNameString = moleculePolarityStrings.pattern.symbolName;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 class RealMoleculesComboBox extends ComboBox {
 
@@ -30,7 +26,7 @@ class RealMoleculesComboBox extends ComboBox {
   constructor( molecules, moleculeProperty, listParent ) {
 
     // label
-    const labelNode = new Text( moleculeString, {
+    const labelNode = new Text( moleculePolarityStrings.molecule, {
       font: new PhetFont( 22 ),
       maxWidth: 150
     } );
@@ -57,7 +53,7 @@ moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
  */
 function createItem( molecule ) {
 
-  const text = StringUtils.fillIn( patternSymbolNameString, {
+  const text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
     symbol: molecule.symbol,
     name: molecule.name
   } );

@@ -13,14 +13,8 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import moleculePolarity from '../../moleculePolarity.js';
-
-// strings
-const bondDipolesString = moleculePolarityStrings.bondDipoles;
-const molecularDipoleString = moleculePolarityStrings.molecularDipole;
-const partialChargesString = moleculePolarityStrings.partialCharges;
-const viewString = moleculePolarityStrings.view;
+import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
 class ThreeAtomsViewControls extends VBox {
 
@@ -30,18 +24,18 @@ class ThreeAtomsViewControls extends VBox {
   constructor( viewProperties ) {
 
     // title
-    const titleNode = new Text( viewString, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleNode = new Text( moleculePolarityStrings.view, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // Checkbox labels
     const bondDipolesLabel = new HBox( {
-      children: [ new Text( bondDipolesString, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
+      children: [ new Text( moleculePolarityStrings.bondDipoles, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
     const molecularDipoleLabel = new HBox( {
-      children: [ new Text( molecularDipoleString, MPConstants.CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
+      children: [ new Text( moleculePolarityStrings.molecularDipole, MPConstants.CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
-    const partialChargesLabel = new Text( partialChargesString, MPConstants.CONTROL_TEXT_OPTIONS );
+    const partialChargesLabel = new Text( moleculePolarityStrings.partialCharges, MPConstants.CONTROL_TEXT_OPTIONS );
 
     // Checkboxes
     const bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );

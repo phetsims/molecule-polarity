@@ -14,9 +14,6 @@ import RealMoleculesScreen from './realmolecules/RealMoleculesScreen.js';
 import ThreeAtomsScreen from './threeatoms/ThreeAtomsScreen.js';
 import TwoAtomsScreen from './twoatoms/TwoAtomsScreen.js';
 
-// strings
-const moleculePolarityTitleString = moleculePolarityStrings[ 'molecule-polarity' ].title;
-
 const options = {
 
   // Creates content for the Options dialog
@@ -38,6 +35,6 @@ SimLauncher.launch( () => {
     new RealMoleculesScreen()
   ];
 
-  const sim = new Sim( moleculePolarityTitleString, screens, options );
+  const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].title, screens, options );
   sim.start();
 } );
