@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import MPOptionsNode from './common/view/MPOptionsNode.js';
 import moleculePolarityStrings from './moleculePolarityStrings.js';
 import RealMoleculesScreen from './realmolecules/RealMoleculesScreen.js';
@@ -27,7 +27,7 @@ const options = {
   }
 };
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
 
   const screens = [
     new TwoAtomsScreen(),
