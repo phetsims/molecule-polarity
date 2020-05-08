@@ -95,7 +95,6 @@ class PlateNode extends Node {
    * Creates a positive plate.
    * @param {EField} eField
    * @returns {PlateNode}
-   * @static
    * @public
    */
   static createPositive( eField ) {
@@ -109,8 +108,7 @@ class PlateNode extends Node {
    * Creates a negative plate.
    * @param {EField} eField
    * @returns {PlateNode}
-   * @static
-   * @static
+   * @public
    */
   static createNegative( eField ) {
     return new PlateNode( eField, {

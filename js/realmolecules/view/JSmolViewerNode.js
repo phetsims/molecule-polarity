@@ -133,11 +133,12 @@ class JSmolViewerNode extends DOM {
     this.elementsProperty = new Property( null );
   }
 
+  // @public
   isInitialized() {
     return ( this.applet !== null );
   }
 
-  // Call this after the sim has started running
+  // @public Call this after the sim has started running
   initialize() {
 
     assert && assert( !this.isInitialized(), 'already initialized' );

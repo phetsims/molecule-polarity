@@ -114,22 +114,42 @@ class RealMoleculeViewer extends Node {
     } );
   }
 
+  /**
+   * @param {boolean} visible
+   * @public
+   */
   setBondDipolesVisible( visible ) {
     this.bondDipolesText.fill = visible ? 'black' : 'gray';
   }
 
+  /**
+   * @param {boolean} visible
+   * @public
+   */
   setMolecularDipoleVisible( visible ) {
     this.molecularDipoleText.fill = visible ? 'black' : 'gray';
   }
 
+  /**
+   * @param {boolean} visible
+   * @public
+   */
   setPartialChargesVisible( visible ) {
     this.partialChargesText.fill = visible ? 'black' : 'gray';
   }
 
+  /**
+   * @param {boolean} visible
+   * @public
+   */
   setAtomLabelsVisible( visible ) {
     this.atomLabelsText.fill = visible ? 'black' : 'gray';
   }
 
+  /**
+   * @param {SurfaceType} surfaceType
+   * @public
+   */
   setSurfaceType( surfaceType ) {
     this.surfaceTypeText.text = ( 'surface: ' + surfaceType.name );
   }
