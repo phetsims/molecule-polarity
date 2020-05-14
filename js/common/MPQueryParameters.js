@@ -11,7 +11,7 @@ import moleculePolarity from '../moleculePolarity.js';
 const MPQueryParameters = QueryStringMachine.getAll( {
 
   //TODO https://github.com/phetsims/molecule-polarity/issues/32 delete when Real Molecules is fully implemented
-  // enables the 'Real Molecules' screen, for development
+  // Enables the 'Real Molecules' screen, for internal use only.
   realMolecules: { type: 'flag' }
 } );
 
