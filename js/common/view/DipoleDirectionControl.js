@@ -18,8 +18,8 @@ import MPConstants from '../MPConstants.js';
 
 // constants
 const TEXT_OPTIONS = {
-  font: new PhetFont( 20 ),
-  maxWidth: 300
+  font: new PhetFont( 24 ),
+  maxWidth: 500
 };
 
 class DipoleDirectionControl extends VBox {
@@ -30,18 +30,18 @@ class DipoleDirectionControl extends VBox {
   constructor( dipoleDirectionProperty ) {
 
     const titleNode = new Text( moleculePolarityStrings.dipoleDirection, {
-      font: new PhetFont( 14 ),
-      maxWidth: 400
+      font: new PhetFont( 18 ),
+      maxWidth: 500
     } );
 
     // d+ -> d-
-    const positiveToNegativeString = StringUtils.fillIn( moleculePolarityStrings.dipoleDirection, {
+    const positiveToNegativeString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
       from: moleculePolarityStrings.deltaPlus,
       to: moleculePolarityStrings.deltaMinus
     } );
 
     // d- -> d+
-    const negativeToPositiveString = StringUtils.fillIn( moleculePolarityStrings.dipoleDirection, {
+    const negativeToPositiveString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
       from: moleculePolarityStrings.deltaMinus,
       to: moleculePolarityStrings.deltaPlus
     } );
