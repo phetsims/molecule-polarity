@@ -12,7 +12,7 @@ import SurfaceType from '../../common/model/SurfaceType.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
-import MoleculeAngleDragHandler from '../../common/view/MoleculeAngleDragHandler.js';
+import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -50,12 +50,12 @@ class DiatomicMoleculeNode extends Node {
     } );
 
     // rotate molecule by dragging anywhere
-    const dragHandler = new MoleculeAngleDragHandler( molecule, this );
-    this.addInputListener( dragHandler );
+    const dragListener = new MoleculeAngleDragListener( molecule, this );
+    this.addInputListener( dragListener );
 
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
-      if ( dragHandler.dragging ) {
+      if ( molecule.dragging ) {
         arrowsANode.visible = arrowsBNode.visible = false;
       }
     };

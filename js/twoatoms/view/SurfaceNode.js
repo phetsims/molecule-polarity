@@ -12,7 +12,7 @@ import Shape from '../../../../kite/js/Shape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import MPConstants from '../../common/MPConstants.js';
-import MoleculeAngleDragHandler from '../../common/view/MoleculeAngleDragHandler.js';
+import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
@@ -63,7 +63,7 @@ class SurfaceNode extends Node {
     } );
 
     this.cursor = 'pointer';
-    this.addInputListener( new MoleculeAngleDragHandler( molecule, this ) );
+    this.addInputListener( new MoleculeAngleDragListener( molecule, this ) );
   }
 
   /**

@@ -10,16 +10,17 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class BondAngleDragHandler extends SimpleDragHandler {
+class BondAngleDragListener extends DragListener {
 
   /**
    * @param {Molecule} molecule
    * @param {Property.<number>} bondAngleProperty - Property that this handler modifies
+   * @param {Node} targetNode
    */
-  constructor( molecule, bondAngleProperty ) {
+  constructor( molecule, bondAngleProperty, targetNode ) {
 
     let previousAngle = 0;
 
@@ -29,7 +30,7 @@ class BondAngleDragHandler extends SimpleDragHandler {
      * @returns {number} angle in radians
      */
     const getAngle = event => {
-      const point = event.currentTarget.getParent().globalToLocalPoint( event.pointer.point );
+      const point = targetNode.getParent().globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
@@ -39,7 +40,7 @@ class BondAngleDragHandler extends SimpleDragHandler {
 
       start: event => {
         molecule.dragging = true;
-        event.currentTarget.moveToFront();
+        targetNode.moveToFront();
         previousAngle = getAngle( event );
       },
 
@@ -56,6 +57,6 @@ class BondAngleDragHandler extends SimpleDragHandler {
   }
 }
 
-moleculePolarity.register( 'BondAngleDragHandler', BondAngleDragHandler );
+moleculePolarity.register( 'BondAngleDragListener', BondAngleDragListener );
 
-export default BondAngleDragHandler;
+export default BondAngleDragListener;

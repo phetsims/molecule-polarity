@@ -14,11 +14,11 @@ import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
-import MoleculeAngleDragHandler from '../../common/view/MoleculeAngleDragHandler.js';
+import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import BondAngleDragHandler from './BondAngleDragHandler.js';
+import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
 
 class TriatomicMoleculeNode extends Node {
@@ -71,22 +71,22 @@ class TriatomicMoleculeNode extends Node {
     bondABNode.cursor = bondBCNode.cursor = 'pointer'; // bonds
 
     // rotate molecule by dragging atom B or bonds
-    const dragHandlerB = new MoleculeAngleDragHandler( molecule, this );
-    const dragHandlerAB = new MoleculeAngleDragHandler( molecule, this );
-    const dragHandlerBC = new MoleculeAngleDragHandler( molecule, this );
-    atomBNode.addInputListener( dragHandlerB );
-    bondABNode.addInputListener( dragHandlerAB );
-    bondBCNode.addInputListener( dragHandlerBC );
+    const dragListenerB = new MoleculeAngleDragListener( molecule, this );
+    const dragListenerAB = new MoleculeAngleDragListener( molecule, this );
+    const dragListenerBC = new MoleculeAngleDragListener( molecule, this );
+    atomBNode.addInputListener( dragListenerB );
+    bondABNode.addInputListener( dragListenerAB );
+    bondBCNode.addInputListener( dragListenerBC );
 
     // change bond angles by dragging atom A or C
-    const dragHandlerA = new BondAngleDragHandler( molecule, molecule.bondAngleAProperty );
-    const dragHandlerC = new BondAngleDragHandler( molecule, molecule.bondAngleCProperty );
-    atomANode.addInputListener( dragHandlerA );
-    atomCNode.addInputListener( dragHandlerC );
+    const dragListenerA = new BondAngleDragListener( molecule, molecule.bondAngleAProperty, atomANode );
+    const dragListenerC = new BondAngleDragListener( molecule, molecule.bondAngleCProperty, atomCNode );
+    atomANode.addInputListener( dragListenerA );
+    atomCNode.addInputListener( dragListenerC );
 
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
-      if ( dragHandlerA.dragging || dragHandlerB.dragging || dragHandlerC.dragging || dragHandlerAB.dragging || dragHandlerBC.dragging ) {
+      if ( molecule.dragging ) {
         arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
       }
     };

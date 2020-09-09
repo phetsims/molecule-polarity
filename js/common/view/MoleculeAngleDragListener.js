@@ -7,10 +7,10 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class MoleculeAngleDragHandler extends SimpleDragHandler {
+class MoleculeAngleDragListener extends DragListener {
 
   /**
    * @param {Molecule} molecule
@@ -52,6 +52,6 @@ class MoleculeAngleDragHandler extends SimpleDragHandler {
   }
 }
 
-moleculePolarity.register( 'MoleculeAngleDragHandler', MoleculeAngleDragHandler );
+moleculePolarity.register( 'MoleculeAngleDragListener', MoleculeAngleDragListener );
 
-export default MoleculeAngleDragHandler;
+export default MoleculeAngleDragListener;
