@@ -8,7 +8,7 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
-import ButtonListener from '../../../../scenery/js/input/ButtonListener.js';
+import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
@@ -63,14 +63,11 @@ class PointySliderThumb extends Path {
     super( shape, options );
 
     // highlight thumb on pointer over
-    this.addInputListener( new ButtonListener( {
-      over: event => {
-        this.fill = options.fillHighlighted;
-      },
-      up: event => {
-        this.fill = options.fill;
-      }
-    } ) );
+    const pressListener = new PressListener( { attach: false } );
+    pressListener.isHighlightedProperty.link( isHighlighted => {
+      this.fill = isHighlighted ? options.fillHighlighted : options.fill;
+    } );
+    this.addInputListener( pressListener );
   }
 }
 
