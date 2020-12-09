@@ -45,10 +45,13 @@ class PartialChargeNode extends Node {
     this.update = () => {
       const partialCharge = atom.partialChargeProperty.get();
 
-      textNode.visible = ( partialCharge !== 0 ); // invisible if dipole is zero
+      // invisible if dipole is zero
+      const partialChargeVisible = ( partialCharge !== 0 );
+
+      textNode.visible = partialChargeVisible;
 
       // Only update if the partial charge is visible
-      if ( textNode.visible ) {
+      if ( partialChargeVisible ) {
 
         // d+ or d-
         textNode.text = ( partialCharge > 0 ) ? moleculePolarityStrings.deltaPlus : moleculePolarityStrings.deltaMinus;
