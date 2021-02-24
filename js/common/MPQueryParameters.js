@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import logGlobal from '../../../phet-core/js/logGlobal.js';
 import moleculePolarity from '../moleculePolarity.js';
 
 const MPQueryParameters = QueryStringMachine.getAll( {
@@ -17,7 +18,9 @@ const MPQueryParameters = QueryStringMachine.getAll( {
 
 moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
 
-// log the values of all sim-specific query parameters
-phet.log && phet.log( 'query parameters: ' + JSON.stringify( MPQueryParameters, null, 2 ) );
+// Log query parameters
+logGlobal( 'phet.chipper.queryParameters' );
+logGlobal( 'phet.preloads.phetio.queryParameters' );
+logGlobal( 'phet.moleculePolarity.MPQueryParameters' );
 
 export default MPQueryParameters;
