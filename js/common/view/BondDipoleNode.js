@@ -15,7 +15,7 @@ import DipoleNode from './DipoleNode.js';
 const PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond
 
 class BondDipoleNode extends DipoleNode {
-  
+
   /**
    * @param {Bond} bond
    */

@@ -71,7 +71,7 @@ class TriatomicMolecule extends Molecule {
 
     // unlink not needed
     const bondAngleListener = () => updateAtomPositions( this.position, this.angleProperty.value );
-    bondAngleAProperty.link( bondAngleListener  );
+    bondAngleAProperty.link( bondAngleListener );
     bondAngleCProperty.link( bondAngleListener );
 
     // @public
