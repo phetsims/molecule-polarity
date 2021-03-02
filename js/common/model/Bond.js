@@ -8,6 +8,8 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import DipoleDirection from './DipoleDirection.js';
@@ -17,14 +19,19 @@ class Bond {
   /**
    * @param {Atom} atom1
    * @param {Atom} atom2
+   * @param {Object} [options]
    */
-  constructor( atom1, atom2 ) {
+  constructor( atom1, atom2, options ) {
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // @public (read-only)
     this.atom1 = atom1;
     this.atom2 = atom2;
 
-    // @public dispose not needed, exists for the lifetime of the sim
+    // @public {DerivedProperty.<Vector2>} dispose not needed, exists for the lifetime of the sim
     this.dipoleProperty = new DerivedProperty( [
         atom1.positionProperty, atom2.positionProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
@@ -52,8 +59,10 @@ class Bond {
         }
 
         return dipole;
-      }
-    );
+      }, {
+        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
+        tandem: options.tandem.createTandem( 'dipoleProperty' )
+      } );
   }
 
   /**

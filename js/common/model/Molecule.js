@@ -11,6 +11,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class Molecule {
@@ -27,7 +28,8 @@ class Molecule {
 
     options = merge( {
       position: new Vector2( 0, 0 ), // the point about which the molecule rotates, in global model coordinate frame
-      angle: 0 // angle of rotation of the entire molecule about the position, in radians
+      angle: 0, // angle of rotation of the entire molecule about the position, in radians
+      tandem: Tandem.REQUIRED
     }, options );
 
     // @public (read-only)
@@ -36,8 +38,13 @@ class Molecule {
     this.bonds = bonds;
 
     // @public
-    this.angleProperty = new NumberProperty( options.angle ); // angle of rotation about the position, in radians
-    this.dragging = false; // true when the user is dragging the molecule
+    this.angleProperty = new NumberProperty( options.angle, {
+      phetioDocumentation: 'angle of rotation, in radians',
+      tandem: options.tandem.createTandem( 'angleProperty' )
+    } );
+
+    // @pubic true when the user is dragging the molecule
+    this.dragging = false;
 
     // update atom positions when molecule is rotated, unlink not needed
     this.angleProperty.link( angle => updateAtomPositions( this.position, angle ) );
@@ -46,13 +53,17 @@ class Molecule {
     const bondDipoleProperties = [];
     this.bonds.forEach( bond => bondDipoleProperties.push( bond.dipoleProperty ) );
 
-    // @public the molecular dipole, sum of the bond dipoles, dispose not needed
+    // @public {DerivedProperty.<Vector2>} the molecular dipole, sum of the bond dipoles, dispose not needed
     this.dipoleProperty = new DerivedProperty( bondDipoleProperties, () => {
       const sum = new Vector2( 0, 0 );
       this.bonds.forEach( bond => {
         sum.add( bond.dipoleProperty.get() ); // add to the same Vector2 instance
       } );
       return sum;
+    }, {
+      phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
+      phetioDocumentation: 'the molecular dipole, sum of the bond dipoles',
+      tandem: options.tandem.createTandem( 'dipoleProperty' )
     } );
 
     // update partial charges when atoms' EN changes

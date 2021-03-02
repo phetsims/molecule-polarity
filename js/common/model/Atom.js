@@ -7,9 +7,10 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
@@ -25,7 +26,8 @@ class Atom {
       diameter: MPConstants.ATOM_DIAMETER, // {number} the atom's diameter
       color: 'white', // {Color|string} base color of the atom
       position: new Vector2( 0, 0 ), // initial position
-      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min // {number}
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min, // {number}
+      tandem: Tandem.REQUIRED
     }, options );
 
     assert && assert( MPConstants.ELECTRONEGATIVITY_RANGE.contains( options.electronegativity ),
@@ -35,9 +37,21 @@ class Atom {
     this.name = name;
     this.diameter = options.diameter;
     this.color = options.color;
-    this.positionProperty = new Property( options.position );
-    this.electronegativityProperty = new NumberProperty( options.electronegativity );
-    this.partialChargeProperty = new NumberProperty( 0 ); // partial charge is zero until this atom participates in a bond
+
+    // @public
+    this.positionProperty = new Vector2Property( options.position, {
+      tandem: options.tandem.createTandem( 'positionProperty' )
+    } );
+
+    // @public
+    this.electronegativityProperty = new NumberProperty( options.electronegativity, {
+      tandem: options.tandem.createTandem( 'electronegativityProperty' )
+    } );
+
+    // @public partial charge is zero until this atom participates in a bond
+    this.partialChargeProperty = new NumberProperty( 0, {
+      tandem: options.tandem.createTandem( 'partialChargeProperty' )
+    } );
   }
 
   // @public

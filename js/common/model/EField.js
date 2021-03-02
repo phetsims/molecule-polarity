@@ -8,6 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class EField {
@@ -18,11 +19,14 @@ class EField {
   constructor( options ) {
 
     options = merge( {
-      enabled: false // {boolean} is the E-field initially enabled?
+      enabled: false, // {boolean} is the E-field initially enabled?
+      tandem: Tandem.REQUIRED
     }, options );
 
     // @public
-    this.enabledProperty = new BooleanProperty( options.enabled );
+    this.enabledProperty = new BooleanProperty( options.enabled, {
+      tandem: options.tandem.createTandem( 'enabledProperty' )
+    } );
   }
 
   // @public
