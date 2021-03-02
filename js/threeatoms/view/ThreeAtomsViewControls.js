@@ -6,13 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import HBox from '../../../../scenery/js/nodes/HBox.js';
+import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import BondDipoleNode from '../../common/view/BondDipoleNode.js';
-import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
+import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
+import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.js';
+import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
@@ -20,38 +21,42 @@ class ThreeAtomsViewControls extends VBox {
 
   /**
    * @param {ThreeAtomsViewProperties} viewProperties
+   * @param {Object} [options]
    */
-  constructor( viewProperties ) {
+  constructor( viewProperties, options ) {
 
-    // title
-    const titleNode = new Text( moleculePolarityStrings.view, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
-
-    // Checkbox labels
-    const bondDipolesLabel = new HBox( {
-      children: [ new Text( moleculePolarityStrings.bondDipoles, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
-      spacing: MPConstants.CONTROL_ICON_X_SPACING
-    } );
-    const molecularDipoleLabel = new HBox( {
-      children: [ new Text( moleculePolarityStrings.molecularDipole, MPConstants.CONTROL_TEXT_OPTIONS ), MolecularDipoleNode.createIcon() ],
-      spacing: MPConstants.CONTROL_ICON_X_SPACING
-    } );
-    const partialChargesLabel = new Text( moleculePolarityStrings.partialCharges, MPConstants.CONTROL_TEXT_OPTIONS );
-
-    // Checkboxes
-    const bondDipolesCheckbox = new Checkbox( bondDipolesLabel, viewProperties.bondDipolesVisibleProperty );
-    const molecularDipoleCheckbox = new Checkbox( molecularDipoleLabel, viewProperties.molecularDipoleVisibleProperty );
-    const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
-
-    super( {
+    options = merge( {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      children: [
-        titleNode,
-        bondDipolesCheckbox,
-        molecularDipoleCheckbox,
-        partialChargesCheckbox
-      ]
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    // title
+    const titleText = new Text( moleculePolarityStrings.view,
+      merge( {
+        tandem: options.tandem.createTandem( 'titleText' )
+      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
+
+    // Checkboxes
+    const bondDipolesCheckbox = new BondDipolesCheckbox( viewProperties.bondDipolesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'bondDipolesCheckbox' )
     } );
+    const molecularDipoleCheckbox = new MolecularDipoleCheckbox( viewProperties.molecularDipoleVisibleProperty, {
+      tandem: options.tandem.createTandem( 'molecularDipoleCheckbox' )
+    } );
+    const partialChargesCheckbox = new PartialChargesCheckbox( viewProperties.partialChargesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'partialChargesCheckbox' )
+    } );
+
+    assert && assert( !options.children, 'ThreeAtomsViewControls sets children' );
+    options.children = [
+      titleText,
+      bondDipolesCheckbox,
+      molecularDipoleCheckbox,
+      partialChargesCheckbox
+    ];
+
+    super( options );
   }
 }
 

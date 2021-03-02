@@ -43,7 +43,9 @@ class RealMoleculesScreenView extends ScreenView {
     super( options );
 
     // view-specific Properties
-    const viewProperties = new RealMoleculesViewProperties();
+    const viewProperties = new RealMoleculesViewProperties( {
+      tandem: options.tandem.createTandem( 'viewProperties' )
+    } );
 
     // @private
     this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
@@ -70,7 +72,9 @@ class RealMoleculesScreenView extends ScreenView {
 
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
-    const controlPanel = new RealMoleculesControlPanel( viewProperties );
+    const controlPanel = new RealMoleculesControlPanel( viewProperties, {
+      tandem: options.tandem.createTandem( 'controlPanel' )
+    } );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {

@@ -47,7 +47,9 @@ class ThreeAtomsScreenView extends ScreenView {
     const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     const enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
 
-    const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
+    const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
+      tandem: options.tandem.createTandem( 'controlPanel' )
+    } );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {

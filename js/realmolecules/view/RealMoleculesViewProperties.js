@@ -8,20 +8,41 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class RealMoleculesViewProperties {
 
-  constructor() {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // @public
-    this.bondDipolesVisibleProperty = new BooleanProperty( false );
-    this.molecularDipoleVisibleProperty = new BooleanProperty( false );
-    this.partialChargesVisibleProperty = new BooleanProperty( false );
-    this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false );
-    this.atomLabelsVisibleProperty = new BooleanProperty( false );
-    this.surfaceTypeProperty = new EnumerationProperty( SurfaceType, SurfaceType.NONE );
+    this.bondDipolesVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' )
+    } );
+    this.molecularDipoleVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' )
+    } );
+    this.partialChargesVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' )
+    } );
+    this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'atomElectronegativitiesVisibleProperty' )
+    } );
+    this.atomLabelsVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' )
+    } );
+    this.surfaceTypeProperty = new EnumerationProperty( SurfaceType, SurfaceType.NONE, {
+      tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
+    } );
   }
 
   // @public

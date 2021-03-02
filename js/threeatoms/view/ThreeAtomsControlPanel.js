@@ -27,8 +27,12 @@ class ThreeAtomsControlPanel extends MPControlPanel {
     }, options );
 
     const subPanels = [
-      new ThreeAtomsViewControls( viewProperties ),
-      new EFieldControl( eFieldEnabledProperty )
+      new ThreeAtomsViewControls( viewProperties, {
+        tandem: options.tandem.createTandem( 'viewControls' )
+      } ),
+      new EFieldControl( eFieldEnabledProperty, {
+        tandem: options.tandem.createTandem( 'eFieldControl' )
+      } )
     ];
 
     super( subPanels, options );

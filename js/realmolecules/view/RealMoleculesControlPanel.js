@@ -26,8 +26,12 @@ class RealMoleculesControlPanel extends MPControlPanel {
     }, options );
 
     const subPanels = [
-      new RealMoleculesViewControls( viewProperties ),
-      new SurfaceControl( viewProperties.surfaceTypeProperty )
+      new RealMoleculesViewControls( viewProperties, {
+        tandem: options.tandem.createTandem( 'viewControls' )
+      } ),
+      new SurfaceControl( viewProperties.surfaceTypeProperty, {
+        tandem: options.tandem.createTandem( 'surfaceControl' )
+      } )
     ];
 
     super( subPanels, options );

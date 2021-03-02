@@ -1,7 +1,7 @@
 // Copyright 2021, University of Colorado Boulder
 
 /**
- * BondDipolesCheckbox is the checkbox for controlling visibility of one or more bond dipoles.
+ * MolecularDipoleCheckbox is the checkbox for controlling visibility of the molecular dipole.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,27 +14,25 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
-import BondDipoleNode from './BondDipoleNode.js';
+import MolecularDipoleNode from './MolecularDipoleNode.js';
 
-class BondDipolesCheckbox extends Checkbox {
+class MolecularDipoleCheckbox extends Checkbox {
 
   /**
-   * @param {Property.<boolean>} bondDipolesVisibleProperty
+   * @param {Property.<boolean>} molecularDipoleVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bondDipolesVisibleProperty, options ) {
+  constructor( molecularDipoleVisibleProperty, options ) {
 
     options = merge( {
-      singular: false,
       tandem: Tandem.REQUIRED
     }, options );
 
     const labelNode = createLabelNode( {
-      singular: options.singular,
       tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
-    super( labelNode, bondDipolesVisibleProperty, options );
+    super( labelNode, molecularDipoleVisibleProperty, options );
   }
 }
 
@@ -51,16 +49,13 @@ function createLabelNode( options ) {
     tandem: Tandem.REQUIRED
   }, options );
 
-  const labelString = options.singular ? moleculePolarityStrings.bondDipole : moleculePolarityStrings.bondDipoles;
-  const labelText = new Text( labelString,
+  const labelText = new Text( moleculePolarityStrings.molecularDipole,
     merge( {
       tandem: options.tandem.createTandem( 'labelText' )
     }, MPConstants.CONTROL_TEXT_OPTIONS )
   );
 
-  const labelIcon = BondDipoleNode.createIcon( {
-    tandem: options.tandem.createTandem( 'labelIcon' )
-  } );
+  const labelIcon = MolecularDipoleNode.createIcon();
 
   assert && assert( !options.children, 'createLabelNode sets children' );
   options.children = [ labelText, labelIcon ];
@@ -68,5 +63,5 @@ function createLabelNode( options ) {
   return new HBox( options );
 }
 
-moleculePolarity.register( 'BondDipolesCheckbox', BondDipolesCheckbox );
-export default BondDipolesCheckbox;
+moleculePolarity.register( 'MolecularDipoleCheckbox', MolecularDipoleCheckbox );
+export default MolecularDipoleCheckbox;
