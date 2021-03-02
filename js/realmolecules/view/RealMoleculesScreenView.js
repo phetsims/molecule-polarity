@@ -137,7 +137,7 @@ class RealMoleculesScreenView extends ScreenView {
     } );
 
     //TODO see https://github.com/phetsims/molecule-polarity/issues/32
-    // Until Real Molecules screen is fully implemented, hide everything that was created above, and display
+    // Until the Real Molecules screen is fully implemented, hide everything that was created above, and display
     // a message. We're continuing to create everything to reduce the possibility that regressions creep in.
     if ( !MPQueryParameters.realMolecules ) {
       rootNode.visible = false;
