@@ -25,9 +25,11 @@ class DiatomicMoleculeNode extends Node {
 
   /**
    * @param {DiatomicMolecule} molecule
+   * @param {Property.<boolean>} dipoleVisibleProperty
+   * @param {Property.<boolean>} partialChargesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( molecule, options ) {
+  constructor( molecule, dipoleVisibleProperty, partialChargesVisibleProperty, options ) {
 
     options = merge( {
       cursor: 'pointer',
@@ -54,9 +56,11 @@ class DiatomicMoleculeNode extends Node {
     } );
 
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
+      visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeANode' )
     } );
     const partialChargeBNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond, {
+      visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeBNode' )
     } );
 
@@ -68,6 +72,7 @@ class DiatomicMoleculeNode extends Node {
     } );
 
     const bondDipoleNode = new BondDipoleNode( molecule.bond, {
+      visibleProperty: dipoleVisibleProperty,
       tandem: options.tandem.createTandem( 'bondDipoleNode' )
     } );
 

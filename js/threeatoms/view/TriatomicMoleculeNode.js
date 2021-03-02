@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-
 // import
 import Node from '../../../../scenery/js/nodes/Node.js';
 import AtomNode from '../../common/view/AtomNode.js';
@@ -22,6 +21,7 @@ import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
 
 class TriatomicMoleculeNode extends Node {
+
   /**
    * @param {TriatomicMolecule} molecule
    */

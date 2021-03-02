@@ -97,13 +97,13 @@ class DipoleNode extends Path {
 
   /**
    * Creates a dipole icon, with arrow pointing to the right.
-   * @param {Color} color
+   * @param {Object} [options] - options to DipoleNode
    * @returns {Node}
    * @public
    * @static
    */
-  static createIcon( color ) {
-    return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), color );
+  static createIcon( options ) {
+    return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), options );
   }
 }
 

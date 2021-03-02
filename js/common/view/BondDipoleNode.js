@@ -57,12 +57,15 @@ class BondDipoleNode extends DipoleNode {
 
   /**
    * Creates an icon, for use in control panels.
-   * @returns {DipoleNode}
+   * @param {Object} [options] - DipoleNode options
+   * @returns {Node}
    * @public
    * @static
    */
-  static createIcon() {
-    return DipoleNode.createIcon( MPColors.BOND_DIPOLE );
+  static createIcon( options ) {
+    return DipoleNode.createIcon( merge( {
+      fill: MPColors.BOND_DIPOLE
+    }, options ) );
   }
 }
 

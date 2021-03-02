@@ -7,11 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Molecule from '../../../../balancing-chemical-equations/js/common/model/Molecule.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Molecule from '../model/Molecule.js';
 import MPColors from '../MPColors.js';
 import DipoleNode from './DipoleNode.js';
 
@@ -47,12 +47,15 @@ class MolecularDipoleNode extends DipoleNode {
 
   /**
    * Creates an icon, for use in control panels.
-   * @returns {DipoleNode}
+   * @param {Object} [options] - DipoleNode options
+   * @returns {Node}
    * @public
    * @static
    */
-  static createIcon() {
-    return DipoleNode.createIcon( MPColors.MOLECULAR_DIPOLE );
+  static createIcon( options ) {
+    return DipoleNode.createIcon( merge( {
+      fill: MPColors.MOLECULAR_DIPOLE
+    }, options ) );
   }
 }
 

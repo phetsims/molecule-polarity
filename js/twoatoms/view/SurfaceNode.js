@@ -13,10 +13,10 @@ import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import Molecule from '../../common/model/Molecule.js';
 import MPConstants from '../../common/MPConstants.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
 // constants
 const DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when computing surface size
@@ -24,14 +24,14 @@ const DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when compu
 class SurfaceNode extends Node {
 
   /**
-   * @param {DiatomicMolecule} molecule
+   * @param {Molecule} molecule
    * @param {ColorDef[]} colors
    * @param {Object} [options]
    * @abstract
    */
   constructor( molecule, colors, options ) {
 
-    assert && assert( molecule instanceof DiatomicMolecule, 'molecule must be a DiatomicMolecule' );
+    assert && assert( molecule instanceof Molecule, 'molecule must be a DiatomicMolecule' );
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
 

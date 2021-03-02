@@ -30,6 +30,7 @@ class BondDipolesCheckbox extends Checkbox {
     }, options );
 
     const labelNode = createLabelNode( {
+      singular: options.singular,
       tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
