@@ -42,105 +42,106 @@ class RealMoleculesScreenView extends ScreenView {
 
     super( options );
 
-    //TODO Hide everything and show a dialog until Real Molecules screen is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/32
+    // view-specific Properties
+    const viewProperties = new RealMoleculesViewProperties();
+
+    // @private
+    this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
+      viewerFill: MPColors.SCREEN_BACKGROUND,
+      viewerSize: new Dimension2( 450, 450 )
+    } );
+
+    const electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer );
+    const comboBoxListParent = new Node();
+    const moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
+
+    const electrostaticPotentialColorKey = new Node();
+
+    // unlink not needed
+    MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
+      electrostaticPotentialColorKey.removeAllChildren();
+      if ( surfaceColor === SurfaceColor.RWB ) {
+        electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );
+      }
+      else {
+        electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialROYGBColorKey() );
+      }
+    } );
+
+    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+
+    const controlPanel = new RealMoleculesControlPanel( viewProperties );
+
+    const resetAllButton = new ResetAllButton( {
+      listener: () => {
+        this.interruptSubtreeInput();
+        model.reset();
+        viewProperties.reset();
+      },
+      scale: 1.32
+    } );
+
+    // Parent for all nodes added to this screen
+    const rootNode = new Node( {
+      children: [
+        this.moleculeViewer,
+        electronegativityTableNode,
+        moleculesComboBox,
+        controlPanel,
+        electrostaticPotentialColorKey,
+        electronDensityColorKey,
+        resetAllButton,
+        comboBoxListParent // last, so that combo box list is on top
+      ]
+    } );
+    this.addChild( rootNode );
+
+    // layout ---------------------------------
+
+    this.moleculeViewer.left = 100;
+
+    // centered above viewer
+    electronegativityTableNode.centerX = this.moleculeViewer.centerX;
+    electronegativityTableNode.top = this.layoutBounds.top + 25;
+
+    // centered below electronegativity table
+    electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
+    electrostaticPotentialColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
+
+    // below color keys
+    this.moleculeViewer.top = electrostaticPotentialColorKey.bottom + 15;
+
+    // centered below viewer
+    moleculesComboBox.centerX = this.moleculeViewer.centerX;
+    moleculesComboBox.top = this.moleculeViewer.bottom + 15;
+
+    // right of viewer
+    controlPanel.left = this.moleculeViewer.right + 100;
+    controlPanel.centerY = this.layoutBounds.centerY;
+
+    // bottom-right corner of the screen
+    resetAllButton.right = this.layoutBounds.right - 40;
+    resetAllButton.bottom = this.layoutBounds.bottom - 20;
+
+    // synchronization with view Properties ------------------------------
+
+    // unlink not needed
+    viewProperties.atomElectronegativitiesVisibleProperty.link( visible => {
+      electronegativityTableNode.visible = visible;
+    } );
+
+    // unlink not needed
+    viewProperties.surfaceTypeProperty.link( surfaceType => {
+      electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+    } );
+
+    //TODO see https://github.com/phetsims/molecule-polarity/issues/32
+    // Until Real Molecules screen is fully implemented, hide everything that was created above, and display
+    // a message. We're continuing to create everything to reduce the possibility that regressions creep in.
     if ( !MPQueryParameters.realMolecules ) {
+      rootNode.visible = false;
       this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
-    }
-    else {
-
-      // view-specific Properties
-      const viewProperties = new RealMoleculesViewProperties();
-
-      // @private
-      this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
-        viewerFill: MPColors.SCREEN_BACKGROUND,
-        viewerSize: new Dimension2( 450, 450 )
-      } );
-
-      const electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer );
-      const comboBoxListParent = new Node();
-      const moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
-
-      const electrostaticPotentialColorKey = new Node();
-
-      // unlink not needed
-      MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
-        electrostaticPotentialColorKey.removeAllChildren();
-        if ( surfaceColor === SurfaceColor.RWB ) {
-          electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );
-        }
-        else {
-          electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialROYGBColorKey() );
-        }
-      } );
-
-      const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
-
-      const controlPanel = new RealMoleculesControlPanel( viewProperties );
-
-      const resetAllButton = new ResetAllButton( {
-        listener: () => {
-          this.interruptSubtreeInput();
-          model.reset();
-          viewProperties.reset();
-        },
-        scale: 1.32
-      } );
-
-      // Parent for all nodes added to this screen
-      const rootNode = new Node( {
-        children: [
-          this.moleculeViewer,
-          electronegativityTableNode,
-          moleculesComboBox,
-          controlPanel,
-          electrostaticPotentialColorKey,
-          electronDensityColorKey,
-          resetAllButton,
-          comboBoxListParent // last, so that combo box list is on top
-        ]
-      } );
-      this.addChild( rootNode );
-
-      // layout ---------------------------------
-
-      this.moleculeViewer.left = 100;
-
-      // centered above viewer
-      electronegativityTableNode.centerX = this.moleculeViewer.centerX;
-      electronegativityTableNode.top = this.layoutBounds.top + 25;
-
-      // centered below electronegativity table
-      electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
-      electrostaticPotentialColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
-
-      // below color keys
-      this.moleculeViewer.top = electrostaticPotentialColorKey.bottom + 15;
-
-      // centered below viewer
-      moleculesComboBox.centerX = this.moleculeViewer.centerX;
-      moleculesComboBox.top = this.moleculeViewer.bottom + 15;
-
-      // right of viewer
-      controlPanel.left = this.moleculeViewer.right + 100;
-      controlPanel.centerY = this.layoutBounds.centerY;
-
-      // bottom-right corner of the screen
-      resetAllButton.right = this.layoutBounds.right - 40;
-      resetAllButton.bottom = this.layoutBounds.bottom - 20;
-
-      // synchronization with view Properties ------------------------------
-
-      // unlink not needed
-      viewProperties.atomElectronegativitiesVisibleProperty.link( visible => {
-        electronegativityTableNode.visible = visible;
-      } );
-
-      // unlink not needed
-      viewProperties.surfaceTypeProperty.link( surfaceType => {
-        electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
-        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
-      } );
     }
   }
 }
