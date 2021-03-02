@@ -7,14 +7,23 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
 import MPModel from '../../common/model/MPModel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TriatomicMolecule from './TriatomicMolecule.js';
 
 class ThreeAtomsModel extends MPModel {
 
-  constructor() {
-    super( new TriatomicMolecule( { position: new Vector2( 400, 280 ) } ) );
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+
+    const createMolecule = options => new TriatomicMolecule( merge( {
+      position: new Vector2( 400, 280 )
+    }, options ) );
+
+    super( createMolecule, options );
   }
 }
 

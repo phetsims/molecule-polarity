@@ -7,14 +7,17 @@
  */
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
 import ElectronegativityControl from '../../common/view/ElectronegativityControl.js';
 import MPControlPanel from '../../common/view/MPControlPanel.js';
 import PlateNode from '../../common/view/PlateNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsViewControls from './ThreeAtomsViewControls.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
@@ -26,10 +29,16 @@ class ThreeAtomsScreenView extends ScreenView {
 
   /**
    * @param {ThreeAtomsModel} model
+   * @param {Object} [options]
    */
-  constructor( model ) {
+  constructor( model, options ) {
+    assert && assert( model instanceof ThreeAtomsModel, 'invalid model' );
 
-    super( MPConstants.SCREEN_VIEW_OPTIONS );
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, MPConstants.SCREEN_VIEW_OPTIONS, options );
+
+    super( options );
 
     // view-specific Properties
     const viewProperties = new ThreeAtomsViewProperties();

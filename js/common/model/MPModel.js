@@ -9,6 +9,8 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import DipoleDirection from './DipoleDirection.js';
@@ -20,14 +22,26 @@ const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
 class MPModel {
 
   /**
-   * @param {Molecule} molecule
+   * @param {function(options:Object):Molecule} createMolecule - creates the molecule for this model
+   * @param {Object} [options]
    * @abstract
    */
-  constructor( molecule ) {
+  constructor( createMolecule, options ) {
+    assert && assert( typeof createMolecule === 'function', 'invalid createMolecule' );
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // @public (read-only)
-    this.eField = new EField();
-    this.molecule = molecule;
+    this.eField = new EField( {
+      tandem: options.tandem.createTandem( 'eField' )
+    } );
+
+    // @public (read-only)
+    this.molecule = createMolecule( {
+      tandem: options.tandem.createTandem( 'molecule' )
+    } );
   }
 
   // @public

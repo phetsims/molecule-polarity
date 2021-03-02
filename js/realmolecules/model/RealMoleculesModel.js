@@ -7,6 +7,8 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import mol2Data from './mol2Data.js';
@@ -14,7 +16,14 @@ import RealMolecule from './RealMolecule.js';
 
 class RealMoleculesModel {
 
-  constructor() {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // @public (read-only) the set of molecules to choose from
     this.molecules = [
@@ -44,7 +53,9 @@ class RealMoleculesModel {
     ];
 
     // @public the selected molecule
-    this.moleculeProperty = new Property( this.molecules[ 4 ] );
+    this.moleculeProperty = new Property( this.molecules[ 4 ], {
+      tandem: options.tandem.createTandem( 'moleculeProperty' )
+    } );
   }
 
   // @public

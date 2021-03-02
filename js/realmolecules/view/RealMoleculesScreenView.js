@@ -8,8 +8,10 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceColor from '../../common/model/SurfaceColor.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
@@ -19,6 +21,7 @@ import MPControlPanel from '../../common/view/MPControlPanel.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import SurfaceTypeControl from '../../common/view/SurfaceTypeControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import RealMoleculesModel from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
 import RealMoleculesComboBox from './RealMoleculesComboBox.js';
 import RealMoleculesViewControls from './RealMoleculesViewControls.js';
@@ -29,11 +32,17 @@ import UnderDevelopmentPlane from './UnderDevelopmentPlane.js';
 class RealMoleculesScreenView extends ScreenView {
 
   /**
-   * @param {TwoAtomsModel} model
+   * @param {RealMoleculesModel} model
+   * @param {Object} [options]
    */
-  constructor( model ) {
+  constructor( model, options ) {
+    assert && assert( model instanceof RealMoleculesModel, 'invalid model' );
 
-    super( MPConstants.SCREEN_VIEW_OPTIONS );
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, MPConstants.SCREEN_VIEW_OPTIONS, options );
+
+    super( options );
 
     //TODO Hide everything and show a dialog until Real Molecules screen is fully implemented, see https://github.com/phetsims/molecule-polarity/issues/32
     if ( !MPQueryParameters.realMolecules ) {

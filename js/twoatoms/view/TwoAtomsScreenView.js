@@ -7,8 +7,10 @@
  */
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPConstants from '../../common/MPConstants.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
@@ -18,6 +20,7 @@ import PlateNode from '../../common/view/PlateNode.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import SurfaceTypeControl from '../../common/view/SurfaceTypeControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterNode from './BondCharacterNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsViewControls from './TwoAtomsViewControls.js';
@@ -30,10 +33,16 @@ class TwoAtomsScreenView extends ScreenView {
 
   /**
    * @param {TwoAtomsModel} model
+   * @param {Object} [options]
    */
-  constructor( model ) {
+  constructor( model, options ) {
+    assert && assert( model instanceof TwoAtomsModel, 'invalid model' );
 
-    super( MPConstants.SCREEN_VIEW_OPTIONS );
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, MPConstants.SCREEN_VIEW_OPTIONS, options );
+
+    super( options );
 
     // view-specific Properties
     const viewProperties = new TwoAtomsViewProperties();

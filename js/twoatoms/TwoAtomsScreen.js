@@ -9,12 +9,14 @@
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import merge from '../../../phet-core/js/merge.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import Line from '../../../scenery/js/nodes/Line.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../scenery/js/nodes/Text.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
 import moleculePolarityStrings from '../moleculePolarityStrings.js';
@@ -23,17 +25,21 @@ import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
 class TwoAtomsScreen extends Screen {
 
-  constructor() {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-    const options = {
+    options = merge( {
       name: moleculePolarityStrings.screen.twoAtoms,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    };
+      homeScreenIcon: createScreenIcon(),
+      tandem: Tandem.REQUIRED
+    }, options );
 
     super(
-      () => new TwoAtomsModel(),
-      model => new TwoAtomsScreenView( model ),
+      () => new TwoAtomsModel( { tandem: options.tandem.createTandem( 'model' ) } ),
+      model => new TwoAtomsScreenView( model, { tandem: options.tandem.createTandem( 'view' ) } ),
       options
     );
   }

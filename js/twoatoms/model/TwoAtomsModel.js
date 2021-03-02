@@ -7,14 +7,23 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
 import MPModel from '../../common/model/MPModel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from './DiatomicMolecule.js';
 
 class TwoAtomsModel extends MPModel {
 
-  constructor() {
-    super( new DiatomicMolecule( { position: new Vector2( 380, 280 ) } ) );
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+
+    const createMolecule = options => new DiatomicMolecule( merge( {
+      position: new Vector2( 380, 280 )
+    }, options ) );
+
+    super( createMolecule, options );
   }
 }
 

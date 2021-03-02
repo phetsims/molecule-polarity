@@ -8,6 +8,7 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
+import Tandem from '../../tandem/js/Tandem.js';
 import MPOptionsNode from './common/view/MPOptionsNode.js';
 import moleculePolarityStrings from './moleculePolarityStrings.js';
 import RealMoleculesScreen from './realmolecules/RealMoleculesScreen.js';
@@ -30,9 +31,9 @@ const options = {
 simLauncher.launch( () => {
 
   const screens = [
-    new TwoAtomsScreen(),
-    new ThreeAtomsScreen(),
-    new RealMoleculesScreen()
+    new TwoAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'twoAtomsScreen' ) } ),
+    new ThreeAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'threeAtomsScreen' ) } ),
+    new RealMoleculesScreen( { tandem: Tandem.ROOT.createTandem( 'realMoleculesScreen' ) } )
   ];
 
   const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].title, screens, options );

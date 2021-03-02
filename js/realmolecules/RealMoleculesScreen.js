@@ -9,7 +9,9 @@
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import merge from '../../../phet-core/js/merge.js';
 import Image from '../../../scenery/js/nodes/Image.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import homeIcon from '../../images/RealMolecules-home-icon_png.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
@@ -19,17 +21,21 @@ import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
 class RealMoleculesScreen extends Screen {
 
-  constructor() {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-    const options = {
+    options = merge( {
       name: moleculePolarityStrings.screen.realMolecules,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    };
+      homeScreenIcon: createScreenIcon(),
+      tandem: Tandem.REQUIRED
+    }, options );
 
     super(
-      () => new RealMoleculesModel(),
-      model => new RealMoleculesScreenView( model ),
+      () => new RealMoleculesModel( { tandem: options.tandem.createTandem( 'model' ) } ),
+      model => new RealMoleculesScreenView( model, { tandem: options.tandem.createTandem( 'view' ) } ),
       options
     );
   }
