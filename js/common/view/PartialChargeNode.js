@@ -9,9 +9,11 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -25,10 +27,15 @@ class PartialChargeNode extends Node {
   /**
    * @param {Atom} atom
    * @param {function} unitVectorFunction has no parameters, returns {Vector}
+   * @param {Object} [options]
    */
-  constructor( atom, unitVectorFunction ) {
+  constructor( atom, unitVectorFunction, options ) {
 
-    super();
+    options = merge( {
+      tandem: Tandem.REQUIRED,
+      phetioReadOnly: true
+    }, options );
+    super( options );
 
     // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
     const textNode = new Text( '?', {
@@ -91,11 +98,12 @@ class PartialChargeNode extends Node {
    * @static
    * @param {Atom} atom
    * @param {Bond} bond
+   * @param {Object} [options] - options to PartialChargeNode
    * @returns {PartialChargeNode}
    * @public
    * @static
    */
-  static createOppositePartialChargeNode( atom, bond ) {
+  static createOppositePartialChargeNode( atom, bond, options ) {
     return new PartialChargeNode( atom, () => {
 
       // along the bond axis, in the direction of the atom
@@ -110,7 +118,7 @@ class PartialChargeNode extends Node {
         v = v.normalize();
       }
       return v;
-    } );
+    }, options );
   }
 
   /**
@@ -120,11 +128,12 @@ class PartialChargeNode extends Node {
    * @static
    * @param {Atom} atom
    * @param {Molecule} molecule
+   * @param {Object} [options]
    * @returns {PartialChargeNode}
    * @public
    * @static
    */
-  static createCompositePartialChargeNode( atom, molecule ) {
+  static createCompositePartialChargeNode( atom, molecule, options ) {
     const node = new PartialChargeNode( atom, () => {
       if ( molecule.dipoleProperty.get().magnitude > 0 ) {
         return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
@@ -133,7 +142,7 @@ class PartialChargeNode extends Node {
         // can't normalize a zero-magnitude vector, so create our own with the proper angle
         return new Vector2( 1, molecule.dipoleProperty.get().angle );
       }
-    } );
+    }, options );
     molecule.dipoleProperty.link( node.update.bind( this ) ); // unlink not needed
     return node;
   }

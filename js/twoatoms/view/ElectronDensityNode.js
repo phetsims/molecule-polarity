@@ -21,9 +21,10 @@ class ElectronDensityNode extends SurfaceNode {
 
   /**
    * @param {Molecule} molecule
+   * @param {Object} [options]
    */
-  constructor( molecule ) {
-    super( molecule, MPColors.BW_GRADIENT );
+  constructor( molecule, options ) {
+    super( molecule, MPColors.BW_GRADIENT, options );
   }
 
   /**

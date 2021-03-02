@@ -21,9 +21,10 @@ class ElectrostaticPotentialNode extends SurfaceNode {
 
   /**
    * @param {Molecule} molecule
+   * @param {Object} [options]
    */
-  constructor( molecule ) {
-    super( molecule, MPColors.RWB_GRADIENT );
+  constructor( molecule, options ) {
+    super( molecule, MPColors.RWB_GRADIENT, options );
   }
 
   /**

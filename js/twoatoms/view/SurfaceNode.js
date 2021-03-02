@@ -9,8 +9,10 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
+import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -23,16 +25,22 @@ class SurfaceNode extends Node {
 
   /**
    * @param {DiatomicMolecule} molecule
-   * @param {Color|string[]} colors
+   * @param {ColorDef[]} colors
+   * @param {Object} [options]
    * @abstract
    */
-  constructor( molecule, colors ) {
+  constructor( molecule, colors, options ) {
 
     assert && assert( molecule instanceof DiatomicMolecule, 'molecule must be a DiatomicMolecule' );
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
 
-    super();
+    options = merge( {
+      tandem: Tandem.REQUIRED,
+      phetioReadOnly: true
+    }, options );
+
+    super( options );
 
     // @private
     this.molecule = molecule;

@@ -7,7 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
 import DipoleNode from './DipoleNode.js';
 
@@ -18,10 +21,17 @@ class BondDipoleNode extends DipoleNode {
 
   /**
    * @param {Bond} bond
+   * @param {Object} [options]
    */
-  constructor( bond ) {
+  constructor( bond, options ) {
+    assert && assert( bond instanceof Bond, 'invalid bond' );
 
-    super( bond.dipoleProperty, MPColors.BOND_DIPOLE );
+    options = merge( {
+      fill: MPColors.BOND_DIPOLE,
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    super( bond.dipoleProperty, options );
 
     // position the dipole to be parallel with the bond, with some perpendicular offset, unlink not needed
     bond.dipoleProperty.link( dipole => {

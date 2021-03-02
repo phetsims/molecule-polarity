@@ -12,7 +12,10 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Shape from '../../../../kite/js/Shape.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
@@ -30,12 +33,19 @@ class DipoleNode extends Path {
 
   /**
    * @param {Vector2Property} dipoleProperty
-   * @param {Color|String} color
+   * @param {Object} [options]
    * @abstract
    */
-  constructor( dipoleProperty, color ) {
+  constructor( dipoleProperty, options ) {
+    assert && AssertUtils.assertPropertyOf( dipoleProperty, Vector2 );
 
-    super( null, { fill: color, stroke: 'black' } );
+    options = merge( {
+      fill: 'black',
+      stroke: 'black',
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    super( null, options );
 
     this.referenceMagnitude = REFERENCE_MAGNITUDE; // @protected
     this.referenceLength = REFERENCE_LENGTH; // @protected

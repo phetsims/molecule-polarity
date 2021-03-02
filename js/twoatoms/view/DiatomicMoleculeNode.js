@@ -35,24 +35,48 @@ class DiatomicMoleculeNode extends Node {
     }, options );
 
     // nodes
-    const atomANode = new AtomNode( molecule.atomA );
-    const atomBNode = new AtomNode( molecule.atomB );
-    const bondNode = new BondNode( molecule.bond );
-    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
-    const arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB );
+    const atomANode = new AtomNode( molecule.atomA, {
+      tandem: options.tandem.createTandem( 'atomANode' )
+    } );
+    const atomBNode = new AtomNode( molecule.atomB, {
+      tandem: options.tandem.createTandem( 'atomBNode' )
+    } );
 
-    const partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond );
-    const partialChargeNodeB = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond );
-    const electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule );
-    const electronDensityNode = new ElectronDensityNode( molecule );
-    const bondDipoleNode = new BondDipoleNode( molecule.bond );
+    const bondNode = new BondNode( molecule.bond, {
+      tandem: options.tandem.createTandem( 'bondNode' )
+    } );
+
+    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA, {
+      tandem: options.tandem.createTandem( 'arrowsANode' )
+    } );
+    const arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB, {
+      tandem: options.tandem.createTandem( 'arrowsBNode' )
+    } );
+
+    const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
+      tandem: options.tandem.createTandem( 'partialChargeANode' )
+    } );
+    const partialChargeBNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond, {
+      tandem: options.tandem.createTandem( 'partialChargeBNode' )
+    } );
+
+    const electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule, {
+      tandem: options.tandem.createTandem( 'electrostaticPotentialNode' )
+    } );
+    const electronDensityNode = new ElectronDensityNode( molecule, {
+      tandem: options.tandem.createTandem( 'electronDensityNode' )
+    } );
+
+    const bondDipoleNode = new BondDipoleNode( molecule.bond, {
+      tandem: options.tandem.createTandem( 'bondDipoleNode' )
+    } );
 
     assert && assert( !options.children, 'DiatomicMoleculeNode sets children' );
     options.children = [
       electrostaticPotentialNode, electronDensityNode,
       bondNode, atomANode, atomBNode,
       arrowsANode, arrowsBNode,
-      partialChargeNodeA, partialChargeNodeB, bondDipoleNode
+      partialChargeANode, partialChargeBNode, bondDipoleNode
     ];
 
     super( options );
@@ -78,8 +102,8 @@ class DiatomicMoleculeNode extends Node {
     };
 
     // @private
-    this.partialChargeNodeA = partialChargeNodeA;
-    this.partialChargeNodeB = partialChargeNodeB;
+    this.partialChargeANode = partialChargeANode;
+    this.partialChargeBNode = partialChargeBNode;
     this.electrostaticPotentialNode = electrostaticPotentialNode;
     this.electronDensityNode = electronDensityNode;
     this.bondDipoleNode = bondDipoleNode;
@@ -105,7 +129,7 @@ class DiatomicMoleculeNode extends Node {
    * @public
    */
   setPartialChargesVisible( visible ) {
-    this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = visible;
+    this.partialChargeANode.visible = this.partialChargeBNode.visible = visible;
   }
 
   /**
