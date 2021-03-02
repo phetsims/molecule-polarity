@@ -11,15 +11,15 @@
   },
   "phet": {
     "requirejsNamespace": "MOLECULE_POLARITY",
-    "phetLibs": [
-      "nitroglycerin"
-    ],
+    "simulation": true,
     "runnable": true,
     "supportedBrands": [
       "phet",
       "adapted-from-phet"
     ],
-    "simulation": true
+    "phetLibs": [
+      "nitroglycerin"
+    ]
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js"
