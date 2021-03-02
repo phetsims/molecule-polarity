@@ -12,13 +12,11 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import EFieldControl from '../../common/view/EFieldControl.js';
 import ElectronegativityControl from '../../common/view/ElectronegativityControl.js';
-import MPControlPanel from '../../common/view/MPControlPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
-import ThreeAtomsViewControls from './ThreeAtomsViewControls.js';
+import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
@@ -49,10 +47,7 @@ class ThreeAtomsScreenView extends ScreenView {
     const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
     const enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
 
-    const controlPanel = new MPControlPanel( [
-      new ThreeAtomsViewControls( viewProperties ),
-      new EFieldControl( model.eField.enabledProperty )
-    ] );
+    const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {

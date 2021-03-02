@@ -13,17 +13,14 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPConstants from '../../common/MPConstants.js';
-import EFieldControl from '../../common/view/EFieldControl.js';
 import ElectronegativityControl from '../../common/view/ElectronegativityControl.js';
-import MPControlPanel from '../../common/view/MPControlPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterNode from './BondCharacterNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
-import TwoAtomsViewControls from './TwoAtomsViewControls.js';
+import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 class TwoAtomsScreenView extends ScreenView {
@@ -77,20 +74,8 @@ class TwoAtomsScreenView extends ScreenView {
       phetioReadOnly: true
     } );
 
-    const controlPanelTandem = options.tandem.createTandem( 'controlPanel' );
-
-    const controlPanel = new MPControlPanel( [
-      new TwoAtomsViewControls( viewProperties, {
-        tandem: controlPanelTandem.createTandem( 'viewControls' )
-      } ),
-      new SurfaceControl( viewProperties.surfaceTypeProperty, {
-        tandem: controlPanelTandem.createTandem( 'surfaceControl' )
-      } ),
-      new EFieldControl( model.eField.enabledProperty, {
-        tandem: controlPanelTandem.createTandem( 'eFieldControl' )
-      } )
-    ], {
-      tandem: controlPanelTandem
+    const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
+      tandem: options.tandem.createTandem( 'controlPanel' )
     } );
 
     const resetAllButton = new ResetAllButton( {

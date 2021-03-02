@@ -17,14 +17,12 @@ import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
-import MPControlPanel from '../../common/view/MPControlPanel.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesModel from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
 import RealMoleculesComboBox from './RealMoleculesComboBox.js';
-import RealMoleculesViewControls from './RealMoleculesViewControls.js';
+import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
 import UnderDevelopmentPlane from './UnderDevelopmentPlane.js';
@@ -78,10 +76,7 @@ class RealMoleculesScreenView extends ScreenView {
 
       const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
-      const controlPanel = new MPControlPanel( [
-        new RealMoleculesViewControls( viewProperties ),
-        new SurfaceControl( viewProperties.surfaceTypeProperty )
-      ] );
+      const controlPanel = new RealMoleculesControlPanel( viewProperties );
 
       const resetAllButton = new ResetAllButton( {
         listener: () => {
