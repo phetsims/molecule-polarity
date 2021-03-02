@@ -1,28 +1,41 @@
 // Copyright 2017-2020, University of Colorado Boulder
 
 /**
- * Control panel for the molecule's surface type.
+ * Control panel for the molecule's surface.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import SurfaceType from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 
-class SurfaceTypeControl extends VBox {
+class SurfaceControl extends VBox {
 
   /**
    * @param {EnumerationProperty.<SurfaceType>} surfaceTypeProperty
+   * @param {Object} [options]
    */
-  constructor( surfaceTypeProperty ) {
+  constructor( surfaceTypeProperty, options ) {
+
+    options = merge( {
+      align: 'left',
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // title
-    const titleNode = new Text( moleculePolarityStrings.surface, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleText = new Text( moleculePolarityStrings.surface,
+      merge( {
+        tandem: options.tandem.createTandem( 'titleText' )
+      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS )
+    );
 
     const radioButtonGroupItems = [
       {
@@ -41,18 +54,17 @@ class SurfaceTypeControl extends VBox {
 
     const radioButtonGroup = new AquaRadioButtonGroup( surfaceTypeProperty, radioButtonGroupItems, {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
+      tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    // vertical panel
-    super( {
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      children: [ titleNode, radioButtonGroup ]
-    } );
+    assert && assert( !options.children, 'SurfaceControl sets children' );
+    options.children = [ titleText, radioButtonGroup ];
+
+    super( options );
   }
 }
 
-moleculePolarity.register( 'SurfaceTypeControl', SurfaceTypeControl );
+moleculePolarity.register( 'SurfaceControl', SurfaceControl );
 
-export default SurfaceTypeControl;
+export default SurfaceControl;

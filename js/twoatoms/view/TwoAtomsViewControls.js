@@ -6,43 +6,53 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import HBox from '../../../../scenery/js/nodes/HBox.js';
+import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import BondDipoleNode from '../../common/view/BondDipoleNode.js';
+import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
+import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import BondCharacterCheckbox from './BondCharacterCheckbox.js';
 
 class TwoAtomsViewControls extends VBox {
 
   /**
    * @param {TwoAtomsViewProperties} viewProperties
+   * @param {Object} [options]
    */
-  constructor( viewProperties ) {
+  constructor( viewProperties, options ) {
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // title
-    const titleNode = new Text( moleculePolarityStrings.view, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
-
-    // Checkbox labels
-    const bondDipoleLabel = new HBox( {
-      children: [ new Text( moleculePolarityStrings.bondDipole, MPConstants.CONTROL_TEXT_OPTIONS ), BondDipoleNode.createIcon() ],
-      spacing: MPConstants.CONTROL_ICON_X_SPACING
-    } );
-    const partialChargesLabel = new Text( moleculePolarityStrings.partialCharges, MPConstants.CONTROL_TEXT_OPTIONS );
-    const bondCharacterLabel = new Text( moleculePolarityStrings.bondCharacter, MPConstants.CONTROL_TEXT_OPTIONS );
+    const titleText = new Text( moleculePolarityStrings.view,
+      merge( {
+        tandem: options.tandem.createTandem( 'titleText' )
+      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS )
+    );
 
     // Checkboxes
-    const bondDipoleCheckbox = new Checkbox( bondDipoleLabel, viewProperties.bondDipoleVisibleProperty );
-    const partialChargesCheckbox = new Checkbox( partialChargesLabel, viewProperties.partialChargesVisibleProperty );
-    const bondCharacterCheckbox = new Checkbox( bondCharacterLabel, viewProperties.bondCharacterVisibleProperty );
+    const bondDipoleCheckbox = new BondDipolesCheckbox( viewProperties.bondDipoleVisibleProperty, {
+      singular: true,
+      tandem: options.tandem.createTandem( 'bondDipoleCheckbox' )
+    } );
+    const partialChargesCheckbox = new PartialChargesCheckbox( viewProperties.partialChargesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'partialChargesCheckbox' )
+    } );
+    const bondCharacterCheckbox = new BondCharacterCheckbox( viewProperties.bondCharacterVisibleProperty, {
+      tandem: options.tandem.createTandem( 'bondCharacterCheckbox' )
+    } );
 
     super( {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       children: [
-        titleNode,
+        titleText,
         bondDipoleCheckbox,
         partialChargesCheckbox,
         bondCharacterCheckbox

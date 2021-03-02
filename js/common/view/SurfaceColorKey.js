@@ -15,6 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
@@ -35,7 +36,8 @@ class SurfaceColorKey extends Node {
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       rangeFont: new PhetFont( 16 ),
       xMargin: 0,
-      ySpacing: 2
+      ySpacing: 2,
+      tandem: Tandem.REQUIRED
     }, options );
 
     super();

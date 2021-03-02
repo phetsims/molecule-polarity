@@ -7,9 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../MPColors.js';
 import MPConstants from '../MPConstants.js';
@@ -18,16 +20,25 @@ class MPControlPanel extends Panel {
 
   /**
    * @param {Node[]} subPanels
+   * @param {Object} [options]
    */
-  constructor( subPanels ) {
+  constructor( subPanels, options ) {
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // horizontal separator width is the max width of the subPanels
     const separatorWidth = _.maxBy( subPanels, node => node.width ).width;
 
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];
+    let separatorCount = 0;
     for ( let i = 1; i < subPanels.length; i++ ) {
-      children.push( new HSeparator( separatorWidth ) );
+      separatorCount++;
+      children.push( new HSeparator( separatorWidth, {
+        tandem: options.tandem.createTandem( `separator${separatorCount}` )
+      } ) );
       children.push( subPanels[ i ] );
     }
 

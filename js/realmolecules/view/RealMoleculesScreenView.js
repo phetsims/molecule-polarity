@@ -19,7 +19,7 @@ import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import MPControlPanel from '../../common/view/MPControlPanel.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import SurfaceTypeControl from '../../common/view/SurfaceTypeControl.js';
+import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesModel from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
@@ -80,7 +80,7 @@ class RealMoleculesScreenView extends ScreenView {
 
       const controlPanel = new MPControlPanel( [
         new RealMoleculesViewControls( viewProperties ),
-        new SurfaceTypeControl( viewProperties.surfaceTypeProperty )
+        new SurfaceControl( viewProperties.surfaceTypeProperty )
       ] );
 
       const resetAllButton = new ResetAllButton( {

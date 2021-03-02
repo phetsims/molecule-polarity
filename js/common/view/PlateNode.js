@@ -11,7 +11,9 @@ import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import EField from '../model/EField.js';
 import Polarity from '../model/Polarity.js';
 import MPColors from '../MPColors.js';
 import PolarityIndicator from './PolarityIndicator.js';
@@ -36,13 +38,17 @@ class PlateNode extends Node {
       plateWidth: 50,
       plateHeight: 430,
       plateThickness: 5,
-      platePerspectiveYOffset: 35 // y difference between foreground and background edges of the plate
+      platePerspectiveYOffset: 35, // y difference between foreground and background edges of the plate
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     assert && assert( options.perspective === 'right' || options.perspective === 'left',
       'invalid perspective: ' + options.perspective );
 
-    super();
+    super( options );
 
     this.plateHeight = options.plateHeight; // @public used in view layout
 
@@ -87,34 +93,42 @@ class PlateNode extends Node {
     eField.enabledProperty.link( enabled => {
       this.visible = enabled;
     } );
-
-    this.mutate( options );
   }
 
   /**
    * Creates a positive plate.
    * @param {EField} eField
+   * @param {Object} [options]
    * @returns {PlateNode}
    * @public
    */
-  static createPositive( eField ) {
-    return new PlateNode( eField, {
+  static createPositive( eField, options ) {
+    assert && assert( eField instanceof EField, 'invalid eField' );
+    assert && assert( !options || !options.polarity, 'createPositive sets polarity' );
+    assert && assert( !options || !options.perspective, 'createPositive sets perspective' );
+
+    return new PlateNode( eField, merge( {
       polarity: Polarity.POSITIVE,
       perspective: 'right'
-    } );
+    }, options ) );
   }
 
   /**
    * Creates a negative plate.
    * @param {EField} eField
+   * @param {Object} [options]
    * @returns {PlateNode}
    * @public
    */
-  static createNegative( eField ) {
-    return new PlateNode( eField, {
+  static createNegative( eField, options ) {
+    assert && assert( eField instanceof EField, 'invalid eField' );
+    assert && assert( !options || !options.polarity, 'createNegative sets polarity' );
+    assert && assert( !options || !options.perspective, 'createNegative sets perspective' );
+
+    return new PlateNode( eField, merge( {
       polarity: Polarity.NEGATIVE,
       perspective: 'left'
-    } );
+    }, options ) );
   }
 }
 

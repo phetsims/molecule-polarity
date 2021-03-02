@@ -17,6 +17,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -44,17 +45,22 @@ class ElectronegativityControl extends Panel {
       fill: atom.color,
       stroke: 'black',
       xMargin: 15,
-      yMargin: 6
+      yMargin: 6,
+
+      // phet-io
+      tandem: Tandem.REQUIRED
     }, options );
 
     // titles
-    const titleNode = new Text( StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, { name: atom.name } ), {
+    const titleText = new Text( StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, { name: atom.name } ), {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
-      maxWidth: options.trackSize.width
+      maxWidth: options.trackSize.width,
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
-    const subtitleNode = new Text( moleculePolarityStrings.electronegativity, {
+    const subtitleText = new Text( moleculePolarityStrings.electronegativity, {
       font: new PhetFont( 18 ),
-      maxWidth: options.trackSize.width
+      maxWidth: options.trackSize.width,
+      tandem: options.tandem.createTandem( 'subtitleText' )
     } );
 
     // custom thumb
@@ -62,7 +68,7 @@ class ElectronegativityControl extends Panel {
     thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
 
     // slider
-    const sliderNode = new HSlider( atom.electronegativityProperty, options.range, {
+    const slider = new HSlider( atom.electronegativityProperty, options.range, {
       thumbNode: thumbNode,
       thumbYOffset: 10,
       trackSize: options.trackSize,
@@ -76,7 +82,8 @@ class ElectronegativityControl extends Panel {
         if ( options.snapToTick ) {
           atom.electronegativityProperty.set( Utils.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
         }
-      }
+      },
+      tandem: options.tandem.createTandem( 'slider' )
     } );
 
     // slider tick labels
@@ -84,22 +91,22 @@ class ElectronegativityControl extends Panel {
       font: new PhetFont( 16 ),
       maxWidth: 40
     };
-    sliderNode.addMajorTick( options.range.min, new Text( moleculePolarityStrings.less, tickLabelOptions ) );
-    sliderNode.addMajorTick( options.range.max, new Text( moleculePolarityStrings.more, tickLabelOptions ) );
+    slider.addMajorTick( options.range.min, new Text( moleculePolarityStrings.less, tickLabelOptions ) );
+    slider.addMajorTick( options.range.max, new Text( moleculePolarityStrings.more, tickLabelOptions ) );
     const centerTick = options.range.min + ( options.range.getLength() / 2 );
-    sliderNode.addMajorTick( centerTick );
+    slider.addMajorTick( centerTick );
     for ( let i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
       if ( i !== centerTick ) {
-        sliderNode.addMinorTick( i );
+        slider.addMinorTick( i );
       }
     }
 
-    const content = new Node( { children: [ titleNode, subtitleNode, sliderNode ] } );
+    const content = new Node( { children: [ titleText, subtitleText, slider ] } );
 
     // layout
-    subtitleNode.centerX = sliderNode.centerX = titleNode.centerX;
-    subtitleNode.top = titleNode.bottom;
-    sliderNode.top = subtitleNode.bottom + 8;
+    subtitleText.centerX = slider.centerX = titleText.centerX;
+    subtitleText.top = titleText.bottom;
+    slider.top = subtitleText.bottom + 8;
 
     super( content, options );
   }

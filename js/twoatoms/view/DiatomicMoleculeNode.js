@@ -7,7 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -23,8 +25,14 @@ class DiatomicMoleculeNode extends Node {
 
   /**
    * @param {DiatomicMolecule} molecule
+   * @param {Object} [options]
    */
-  constructor( molecule ) {
+  constructor( molecule, options ) {
+
+    options = merge( {
+      cursor: 'pointer',
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // nodes
     const atomANode = new AtomNode( molecule.atomA );
@@ -39,19 +47,22 @@ class DiatomicMoleculeNode extends Node {
     const electronDensityNode = new ElectronDensityNode( molecule );
     const bondDipoleNode = new BondDipoleNode( molecule.bond );
 
-    super( {
-      cursor: 'pointer',
-      children: [
-        electrostaticPotentialNode, electronDensityNode,
-        bondNode, atomANode, atomBNode,
-        arrowsANode, arrowsBNode,
-        partialChargeNodeA, partialChargeNodeB, bondDipoleNode
-      ]
-    } );
+    assert && assert( !options.children, 'DiatomicMoleculeNode sets children' );
+    options.children = [
+      electrostaticPotentialNode, electronDensityNode,
+      bondNode, atomANode, atomBNode,
+      arrowsANode, arrowsBNode,
+      partialChargeNodeA, partialChargeNodeB, bondDipoleNode
+    ];
+
+    super( options );
 
     // rotate molecule by dragging anywhere
-    const dragListener = new MoleculeAngleDragListener( molecule, this );
-    this.addInputListener( dragListener );
+    const rotationDragListener = new MoleculeAngleDragListener( molecule, this, {
+      phetioDocumentation: 'rotates the molecule by dragging anywhere on it',
+      tandem: options.tandem.createTandem( 'rotationDragListener' )
+    } );
+    this.addInputListener( rotationDragListener );
 
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {

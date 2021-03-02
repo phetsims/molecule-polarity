@@ -18,7 +18,7 @@ import ElectronegativityControl from '../../common/view/ElectronegativityControl
 import MPControlPanel from '../../common/view/MPControlPanel.js';
 import PlateNode from '../../common/view/PlateNode.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import SurfaceTypeControl from '../../common/view/SurfaceTypeControl.js';
+import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterNode from './BondCharacterNode.js';
@@ -45,23 +45,54 @@ class TwoAtomsScreenView extends ScreenView {
     super( options );
 
     // view-specific Properties
-    const viewProperties = new TwoAtomsViewProperties();
+    const viewProperties = new TwoAtomsViewProperties( {
+      tandem: options.tandem.createTandem( 'viewProperties' )
+    } );
 
     // nodes
-    const moleculeNode = new DiatomicMoleculeNode( model.molecule );
-    const negativePlateNode = PlateNode.createNegative( model.eField );
-    const positivePlateNode = PlateNode.createPositive( model.eField );
-    const enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
-    const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
-    const bondCharacterNode = new BondCharacterNode( model.molecule );
-    const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
-    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+    const moleculeNode = new DiatomicMoleculeNode( model.molecule, {
+      tandem: options.tandem.createTandem( 'moleculeNode' )
+    } );
+    const negativePlateNode = PlateNode.createNegative( model.eField, {
+      tandem: options.tandem.createTandem( 'negativePlateNode' )
+    } );
+    const positivePlateNode = PlateNode.createPositive( model.eField, {
+      tandem: options.tandem.createTandem( 'positivePlateNode' )
+    } );
+    const atomAElectronegativityControl = new ElectronegativityControl( model.molecule.atomA, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomAElectronegativityControl' )
+    } );
+    const atomBElectronegativityControl = new ElectronegativityControl( model.molecule.atomB, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomBElectronegativityControl' )
+    } );
+    const bondCharacterNode = new BondCharacterNode( model.molecule, {
+      visibleProperty: viewProperties.bondCharacterVisibleProperty,
+      tandem: options.tandem.createTandem( 'bondCharacterNode' )
+    } );
+    const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
+      tandem: options.tandem.createTandem( 'electrostaticPotentialColorKey' ),
+      phetioReadOnly: true
+    } );
+    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
+      tandem: options.tandem.createTandem( 'electronDensityColorKey' ),
+      phetioReadOnly: true
+    } );
+
+    const controlPanelTandem = options.tandem.createTandem( 'controlPanel' );
 
     const controlPanel = new MPControlPanel( [
-      new TwoAtomsViewControls( viewProperties ),
-      new SurfaceTypeControl( viewProperties.surfaceTypeProperty ),
-      new EFieldControl( model.eField.enabledProperty )
-    ] );
+      new TwoAtomsViewControls( viewProperties, {
+        tandem: controlPanelTandem.createTandem( 'viewControls' )
+      } ),
+      new SurfaceControl( viewProperties.surfaceTypeProperty, {
+        tandem: controlPanelTandem.createTandem( 'surfaceControl' )
+      } ),
+      new EFieldControl( model.eField.enabledProperty, {
+        tandem: controlPanelTandem.createTandem( 'eFieldControl' )
+      } )
+    ], {
+      tandem: controlPanelTandem
+    } );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {
@@ -70,7 +101,8 @@ class TwoAtomsScreenView extends ScreenView {
         viewProperties.reset();
         moleculeNode.reset();
       },
-      scale: 1.32
+      scale: 1.32,
+      tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
     // Parent for all nodes added to this screen
@@ -80,8 +112,8 @@ class TwoAtomsScreenView extends ScreenView {
         // nodes are rendered in this order
         negativePlateNode,
         positivePlateNode,
-        enControlA,
-        enControlB,
+        atomAElectronegativityControl,
+        atomBElectronegativityControl,
         controlPanel,
         bondCharacterNode,
         electrostaticPotentialColorKey,
@@ -106,9 +138,9 @@ class TwoAtomsScreenView extends ScreenView {
     positivePlateNode.y = moleculeY - ( positivePlateNode.plateHeight / 2 );
 
     // centered below molecule
-    enControlA.right = moleculeX - 5;
-    enControlB.left = moleculeX + 5;
-    enControlA.bottom = enControlB.bottom = this.layoutBounds.bottom - 25;
+    atomAElectronegativityControl.right = moleculeX - 5;
+    atomBElectronegativityControl.left = moleculeX + 5;
+    atomAElectronegativityControl.bottom = atomBElectronegativityControl.bottom = this.layoutBounds.bottom - 25;
 
     // centered above molecule
     electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
@@ -116,7 +148,7 @@ class TwoAtomsScreenView extends ScreenView {
 
     // centered above EN controls
     bondCharacterNode.centerX = moleculeX;
-    bondCharacterNode.bottom = enControlA.top - 10;
+    bondCharacterNode.bottom = atomAElectronegativityControl.top - 10;
 
     // to right of positive plate, top aligned
     controlPanel.top = positivePlateNode.y;
@@ -137,9 +169,6 @@ class TwoAtomsScreenView extends ScreenView {
     viewProperties.partialChargesVisibleProperty.link( visible => {
       moleculeNode.setPartialChargesVisible( visible );
     } );
-
-    // unlink not needed
-    viewProperties.bondCharacterVisibleProperty.linkAttribute( bondCharacterNode, 'visible' );
 
     // unlink not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {

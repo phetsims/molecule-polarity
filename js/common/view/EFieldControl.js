@@ -10,6 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -23,11 +24,22 @@ class EFieldControl extends VBox {
 
   /**
    * @param {Property.<boolean>} eFieldEnabledProperty
+   * @param {Object} [options]
    */
-  constructor( eFieldEnabledProperty ) {
+  constructor( eFieldEnabledProperty, options ) {
+
+    options = merge( {
+      align: 'left',
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // title
-    const titleNode = new Text( moleculePolarityStrings.electricField, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
+    const titleText = new Text( moleculePolarityStrings.electricField,
+      merge( {
+        tandem: options.tandem.createTandem( 'titleText' )
+      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS )
+    );
 
     // on/off switch
     const onOffSwitch = new ABSwitch( eFieldEnabledProperty,
@@ -37,15 +49,14 @@ class EFieldControl extends VBox {
         toggleSwitchOptions: {
           trackFillLeft: 'rgb( 180, 180, 180 )',
           trackFillRight: 'rgb( 0, 180, 0 )'
-        }
+        },
+        tandem: options.tandem.createTandem( 'onOffSwitch' )
       } );
 
-    // vertical panel
-    super( {
-      children: [ titleNode, onOffSwitch ],
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
-    } );
+    assert && assert( !options.children, 'EFieldControl sets children' );
+    options.children = [ titleText, onOffSwitch ];
+
+    super( options );
   }
 }
 
