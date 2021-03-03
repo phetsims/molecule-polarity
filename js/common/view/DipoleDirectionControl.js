@@ -6,67 +6,46 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
-import DipoleDirection from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';
-
-// constants
-const TEXT_OPTIONS = {
-  font: new PhetFont( 24 ),
-  maxWidth: 500
-};
+import DipoleDirectionRadioButtonGroup from './DipoleDirectionRadioButtonGroup.js';
 
 class DipoleDirectionControl extends VBox {
 
   /**
    * @param {EnumerationProperty.<DipoleDirection>} dipoleDirectionProperty
+   * @param {Object} [options]
    */
-  constructor( dipoleDirectionProperty ) {
+  constructor( dipoleDirectionProperty, options ) {
 
-    const titleNode = new Text( moleculePolarityStrings.dipoleDirection, {
-      font: new PhetFont( 18 ),
-      maxWidth: 500
-    } );
-
-    // d+ -> d-
-    const positiveToNegativeString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
-      from: moleculePolarityStrings.deltaPlus,
-      to: moleculePolarityStrings.deltaMinus
-    } );
-
-    // d- -> d+
-    const negativeToPositiveString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
-      from: moleculePolarityStrings.deltaMinus,
-      to: moleculePolarityStrings.deltaPlus
-    } );
-
-    const radioButtonGroupItems = [
-      {
-        value: DipoleDirection.POSITIVE_TO_NEGATIVE,
-        node: new Text( positiveToNegativeString, TEXT_OPTIONS )
-      },
-      {
-        value: DipoleDirection.NEGATIVE_TO_POSITIVE,
-        node: new Text( negativeToPositiveString, TEXT_OPTIONS )
-      }
-    ];
-
-    const radioButtonGroup = new AquaRadioButtonGroup( dipoleDirectionProperty, radioButtonGroupItems, {
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
-    } );
-
-    super( {
+    options = merge( {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      children: [ titleNode, radioButtonGroup ]
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    // title
+    const titleText = new Text( moleculePolarityStrings.dipoleDirection, {
+      font: new PhetFont( 18 ),
+      maxWidth: 500,
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
+
+    // Radio button group
+    const radioButtonGroup = new DipoleDirectionRadioButtonGroup( dipoleDirectionProperty, {
+      tandem: options.tandem.createTandem( 'radioButtonGroup' )
+    } );
+
+    assert && assert( !options.children, 'DipoleDirectionControl sets children' );
+    options.children = [ titleText, radioButtonGroup ];
+
+    super( options );
 
     // @private
     this.disposeDipoleDirectionControl = () => {
@@ -74,7 +53,10 @@ class DipoleDirectionControl extends VBox {
     };
   }
 
-  // @public @override
+  /**
+   * @public
+   * @override
+   */
   dispose() {
     this.disposeDipoleDirectionControl();
     super.dispose();

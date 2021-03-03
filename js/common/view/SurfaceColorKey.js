@@ -21,6 +21,7 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
 
 class SurfaceColorKey extends Node {
+
   /**
    * @param {Color[]} colors colors used for the gradient, in left-to-right order
    * @param {string} title
@@ -37,7 +38,7 @@ class SurfaceColorKey extends Node {
       rangeFont: new PhetFont( 16 ),
       xMargin: 0,
       ySpacing: 2,
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.OPTIONAL
     }, options );
 
     super();

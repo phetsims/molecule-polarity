@@ -6,59 +6,44 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Dimension2 from '../../../../dot/js/Dimension2.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
-import SurfaceColor from '../model/SurfaceColor.js';
 import MPConstants from '../MPConstants.js';
-import SurfaceColorKey from './SurfaceColorKey.js';
-
-// constants
-const COLOR_KEY_OPTIONS = {
-  size: new Dimension2( 150, 15 ),
-  titleVisible: false,
-  rangeFont: new PhetFont( 8 ),
-  xMargin: 0,
-  ySpacing: 2
-};
+import SurfaceColorRadioButtonGroup from './SurfaceColorRadioButtonGroup.js';
 
 class SurfaceColorControl extends VBox {
 
   /**
    * @param {EnumerationProperty.<SurfaceColor>} surfaceColorProperty
+   * @param {Object} [options]
    */
-  constructor( surfaceColorProperty ) {
+  constructor( surfaceColorProperty, options ) {
 
-    const titleNode = new Text( moleculePolarityStrings.surfaceColorRealMolecules, {
-      font: new PhetFont( 14 ),
-      maxWidth: 400
-    } );
-
-    const radioButtonGroupItems = [
-      {
-        value: SurfaceColor.RWB,
-        node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS )
-      },
-      {
-        value: SurfaceColor.ROYGB,
-        node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS )
-      }
-    ];
-
-    const radioButtonGroup = new AquaRadioButtonGroup( surfaceColorProperty, radioButtonGroupItems, {
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
-    } );
-
-    super( {
+    options = merge( {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      children: [ titleNode, radioButtonGroup ]
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    const titleText = new Text( moleculePolarityStrings.surfaceColorRealMolecules, {
+      font: new PhetFont( 14 ),
+      maxWidth: 400,
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
+
+    const radioButtonGroup = new SurfaceColorRadioButtonGroup( surfaceColorProperty, {
+      tandem: options.tandem.createTandem( 'radioButtonGroup' )
+    } );
+
+    assert && assert( !options.children, 'SurfaceColorControl sets children' );
+    options.children = [ titleText, radioButtonGroup ];
+
+    super( options );
 
     // @private
     this.disposeSurfaceColorControl = () => {
@@ -74,5 +59,4 @@ class SurfaceColorControl extends VBox {
 }
 
 moleculePolarity.register( 'SurfaceColorControl', SurfaceColorControl );
-
 export default SurfaceColorControl;

@@ -7,7 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import MPQueryParameters from '../MPQueryParameters.js';
@@ -16,26 +18,37 @@ import SurfaceColorControl from './SurfaceColorControl.js';
 
 class MPOptionsNode extends VBox {
 
-  constructor() {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-    const dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty );
-    const surfaceColorControl = ( new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty ) );
+    options = merge( {
+      align: 'left',
+      spacing: 25,
+      tandem: Tandem.REQUIRED
+    }, options );
 
-    const children = [
+    const dipoleDirectionControl = new DipoleDirectionControl( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty, {
+      tandem: options.tandem.createTandem( 'dipoleDirectionControl' )
+    } );
+
+    const surfaceColorControl = new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty, {
+      tandem: options.tandem.createTandem( 'surfaceColorControl' )
+    } );
+
+    assert && assert( !options.children, 'MPOptionsNode sets children' );
+    options.children = [
       dipoleDirectionControl,
       surfaceColorControl
     ];
 
+    super( options );
+
     //TODO https://github.com/phetsims/molecule-polarity/issues/32 remove the Surface Color option until Real Molecules screen is implemented
     if ( !MPQueryParameters.realMolecules ) {
-      children.splice( children.indexOf( surfaceColorControl ), 1 );
+      this.removeChild( surfaceColorControl );
     }
-
-    super( {
-      align: 'left',
-      spacing: 25,
-      children: children
-    } );
 
     // @private
     this.disposeMPOptionsNode = () => {

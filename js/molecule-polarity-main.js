@@ -18,7 +18,9 @@ import TwoAtomsScreen from './twoatoms/TwoAtomsScreen.js';
 const options = {
 
   // Creates content for the Options dialog
-  createOptionsDialogContent: () => new MPOptionsNode(),
+  createOptionsDialogContent: tandem => new MPOptionsNode( {
+    tandem: tandem
+  } ),
 
   credits: {
     leadDesign: 'Kelly Lancaster',
