@@ -71,7 +71,10 @@ class SurfaceNode extends Node {
     } );
 
     this.cursor = 'pointer';
-    this.addInputListener( new MoleculeAngleDragListener( molecule, this ) );
+    this.addInputListener( new MoleculeAngleDragListener( molecule, this, {
+      phetioDocumentation: 'dragging on the surface rotates the molecule',
+      tandem: options.tandem.createTandem( 'dragListener' )
+    } ) );
   }
 
   /**

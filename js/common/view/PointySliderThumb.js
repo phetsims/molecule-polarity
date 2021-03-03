@@ -10,6 +10,7 @@ import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class PointySliderThumb extends Path {
@@ -24,7 +25,8 @@ class PointySliderThumb extends Path {
       stroke: 'black',
       lineWidth: 1,
       fill: 'rgb( 50, 145, 184 )',
-      fillHighlighted: 'rgb( 71, 207, 255 )'
+      fillHighlighted: 'rgb( 71, 207, 255 )',
+      tandem: Tandem.REQUIRED
     }, options );
 
     // To improve readability
@@ -63,7 +65,10 @@ class PointySliderThumb extends Path {
     super( shape, options );
 
     // highlight thumb on pointer over
-    const pressListener = new PressListener( { attach: false } );
+    const pressListener = new PressListener( {
+      attach: false,
+      tandem: options.tandem.createTandem( 'pressListener' )
+    } );
     pressListener.isHighlightedProperty.link( isHighlighted => {
       this.fill = isHighlighted ? options.fillHighlighted : options.fill;
     } );

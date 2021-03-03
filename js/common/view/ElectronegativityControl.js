@@ -67,7 +67,10 @@ class ElectronegativityControl extends Panel {
     } );
 
     // custom thumb
-    const thumbNode = new PointySliderThumb( { size: options.thumbSize } );
+    const thumbNode = new PointySliderThumb( {
+      size: options.thumbSize,
+      tandem: options.tandem.createTandem( 'thumbNode' )
+    } );
     thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
 
     const range = atom.electronegativityProperty.range;

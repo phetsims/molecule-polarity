@@ -103,6 +103,9 @@ class DipoleNode extends Path {
    * @static
    */
   static createIcon( options ) {
+    options = merge( {
+      tandem: Tandem.OPT_OUT
+    }, options );
     return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), options );
   }
 }
