@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -14,6 +15,7 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
 import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
@@ -24,29 +26,34 @@ class RealMoleculesComboBox extends ComboBox {
    * @param {RealMolecule[]} molecules
    * @param {Property.<RealMolecule>} moleculeProperty
    * @param {Node} listParent
+   * @param {Object} [options]
    * @constructor
    */
-  constructor( molecules, moleculeProperty, listParent ) {
+  constructor( molecules, moleculeProperty, listParent, options ) {
     assert && AssertUtils.assertArrayOf( molecules, RealMolecule );
     assert && AssertUtils.assertPropertyOf( moleculeProperty, RealMolecule );
     assert && assert( listParent instanceof Node, 'invalid listParent' );
 
+    options = merge( {
+      listPosition: 'above',
+      highlightFill: 'rgb(218,255,255)',
+      cornerRadius: 8,
+      maxWidth: 450,
+      tandem: Tandem.REQUIRED
+    }, options );
+
     // label
-    const labelNode = new Text( moleculePolarityStrings.molecule, {
+    assert && assert( !options.children, 'RealMoleculesComboBox sets labelNode' );
+    options.labelNode = new Text( moleculePolarityStrings.molecule, {
       font: new PhetFont( 22 ),
-      maxWidth: 150
+      maxWidth: 150,
+      tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
     // {ComboBoxItem[]}
     const items = molecules.map( createItem );
 
-    super( items, moleculeProperty, listParent, {
-      labelNode: labelNode,
-      listPosition: 'above',
-      highlightFill: 'rgb(218,255,255)',
-      cornerRadius: 8,
-      maxWidth: 450
-    } );
+    super( items, moleculeProperty, listParent, options );
   }
 }
 
@@ -70,7 +77,9 @@ function createItem( molecule ) {
     font: new PhetFont( 18 )
   } );
 
-  return new ComboBoxItem( node, molecule );
+  return new ComboBoxItem( node, molecule, {
+    tandemName: `${molecule.tandem.name}Item`
+  } );
 }
 
 export default RealMoleculesComboBox;
