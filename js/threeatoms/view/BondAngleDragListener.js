@@ -13,6 +13,8 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import Molecule from '../../common/model/Molecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
@@ -22,11 +24,17 @@ class BondAngleDragListener extends DragListener {
    * @param {Molecule} molecule
    * @param {Property.<number>} bondAngleProperty - Property that this listener modifies
    * @param {Node} targetNode
+   * @param {Object} [options]
    */
-  constructor( molecule, bondAngleProperty, targetNode ) {
+  constructor( molecule, bondAngleProperty, targetNode, options ) {
     assert && assert( molecule instanceof Molecule, 'invalid molecule' );
     assert && AssertUtils.assertPropertyOf( bondAngleProperty, 'number' );
     assert && assert( targetNode instanceof Node, 'invalid targetNode' );
+
+    options = merge( {
+      allowTouchSnag: true,
+      tandem: Tandem.REQUIRED
+    }, options );
 
     let previousAngle = 0;
 
@@ -40,26 +48,26 @@ class BondAngleDragListener extends DragListener {
       return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
-    super( {
+    assert && assert( !options.start, 'BondAngleDragListener sets start' );
+    options.start = event => {
+      molecule.dragging = true;
+      targetNode.moveToFront();
+      previousAngle = getAngle( event );
+    };
 
-      allowTouchSnag: true,
+    assert && assert( !options.drag, 'BondAngleDragListener sets drag' );
+    options.drag = event => {
+      const currentAngle = getAngle( event );
+      bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
+      previousAngle = currentAngle;
+    };
 
-      start: event => {
-        molecule.dragging = true;
-        targetNode.moveToFront();
-        previousAngle = getAngle( event );
-      },
+    assert && assert( !options.end, 'BondAngleDragListener sets end' );
+    options.end = event => {
+      molecule.dragging = false;
+    };
 
-      drag: event => {
-        const currentAngle = getAngle( event );
-        bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
-        previousAngle = currentAngle;
-      },
-
-      end: event => {
-        molecule.dragging = false;
-      }
-    } );
+    super( options );
   }
 }
 

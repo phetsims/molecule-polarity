@@ -43,9 +43,10 @@ class AtomNode extends Node {
       tandem: options.tandem.createTandem( 'nameText' )
     } );
 
-    super( {
-      children: [ sphereNode, nameText ]
-    } );
+    assert && assert( !options.children, 'AtomNode sets children' );
+    options.children = [ sphereNode, nameText ];
+
+    super( options );
 
     // sync position with model, unlink not needed
     atom.positionProperty.linkAttribute( this, 'translation' );

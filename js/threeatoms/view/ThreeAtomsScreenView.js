@@ -36,16 +36,27 @@ class ThreeAtomsScreenView extends ScreenView {
     super( options );
 
     // view-specific Properties
-    const viewProperties = new ThreeAtomsViewProperties();
+    const viewProperties = new ThreeAtomsViewProperties( {
+      tandem: options.tandem.createTandem( 'viewProperties' )
+    } );
 
     // nodes
-    const moleculeNode = new TriatomicMoleculeNode( model.molecule );
-    const platesNode = new PlatesNode( model.eField, {
-      spacing: 600
+    const moleculeNode = new TriatomicMoleculeNode( model.molecule, {
+      tandem: options.tandem.createTandem( 'moleculeNode' )
     } );
-    const enControlA = new ElectronegativityControl( model.molecule.atomA, model.molecule );
-    const enControlB = new ElectronegativityControl( model.molecule.atomB, model.molecule );
-    const enControlC = new ElectronegativityControl( model.molecule.atomC, model.molecule );
+    const platesNode = new PlatesNode( model.eField, {
+      spacing: 600,
+      tandem: options.tandem.createTandem( 'platesNode' )
+    } );
+    const atomAElectronegativityControl = new ElectronegativityControl( model.molecule.atomA, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomAElectronegativityControl' )
+    } );
+    const atomBElectronegativityControl = new ElectronegativityControl( model.molecule.atomB, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomBElectronegativityControl' )
+    } );
+    const atomCElectronegativityControl = new ElectronegativityControl( model.molecule.atomC, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomCElectronegativityControl' )
+    } );
 
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
       tandem: options.tandem.createTandem( 'controlPanel' )
@@ -58,7 +69,8 @@ class ThreeAtomsScreenView extends ScreenView {
         viewProperties.reset();
         moleculeNode.reset();
       },
-      scale: 1.32
+      scale: 1.32,
+      tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
     // Parent for all nodes added to this screen
@@ -67,9 +79,9 @@ class ThreeAtomsScreenView extends ScreenView {
 
         // nodes are rendered in this order
         platesNode,
-        enControlA,
-        enControlB,
-        enControlC,
+        atomAElectronegativityControl,
+        atomBElectronegativityControl,
+        atomCElectronegativityControl,
         controlPanel,
         moleculeNode,
         resetAllButton
@@ -86,10 +98,10 @@ class ThreeAtomsScreenView extends ScreenView {
     platesNode.y = moleculeY - ( platesNode.plateHeight / 2 );
 
     // centered below molecule
-    enControlB.centerX = moleculeX;
-    enControlA.right = enControlB.left - 10;
-    enControlC.left = enControlB.right + 10;
-    enControlA.bottom = enControlB.bottom = enControlC.bottom = this.layoutBounds.bottom - 25;
+    atomBElectronegativityControl.centerX = moleculeX;
+    atomAElectronegativityControl.right = atomBElectronegativityControl.left - 10;
+    atomCElectronegativityControl.left = atomBElectronegativityControl.right + 10;
+    atomAElectronegativityControl.bottom = atomBElectronegativityControl.bottom = atomCElectronegativityControl.bottom = this.layoutBounds.bottom - 25;
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 25;

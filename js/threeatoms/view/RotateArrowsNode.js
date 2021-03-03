@@ -8,9 +8,11 @@
  */
 
 import Matrix3 from '../../../../dot/js/Matrix3.js';
+import merge from '../../../../phet-core/js/merge.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import Atom from '../../common/model/Atom.js';
 import Molecule from '../../common/model/Molecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -20,10 +22,15 @@ class RotateArrowsNode extends Node {
   /**
    * @param {Molecule} molecule
    * @param {Atom} atom
+   * @param {Object} [options]
    */
-  constructor( molecule, atom ) {
+  constructor( molecule, atom, options ) {
     assert && assert( molecule instanceof Molecule, 'invalid molecule' );
     assert && assert( atom instanceof Atom, 'invalid atom' );
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // arrow configuration
     const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
@@ -31,12 +38,13 @@ class RotateArrowsNode extends Node {
     const radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     const theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
-    super( {
-      children: [
-        new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
-        new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
-      ]
-    } );
+    assert && assert( !options.children, 'RotateArrowsNode sets children' );
+    options.children = [
+      new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
+      new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
+    ];
+
+    super( options );
 
     // Align with atom position and molecular dipole
     const updateTransform = () => {

@@ -7,8 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-// import
+import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
@@ -25,45 +26,79 @@ class TriatomicMoleculeNode extends Node {
 
   /**
    * @param {TriatomicMolecule} molecule
+   * @param {Object} [options]
    */
-  constructor( molecule ) {
+  constructor( molecule, options ) {
     assert && assert( molecule instanceof TriatomicMolecule, 'invalid molecule' );
 
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
+
     // nodes
-    const bondABNode = new BondNode( molecule.bondAB );
-    const bondBCNode = new BondNode( molecule.bondBC );
-    const atomANode = new AtomNode( molecule.atomA );
-    const atomBNode = new AtomNode( molecule.atomB );
-    const atomCNode = new AtomNode( molecule.atomC );
-    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA );
-    const arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC );
-    const arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB );
+    const bondABNode = new BondNode( molecule.bondAB, {
+      tandem: options.tandem.createTandem( 'bondABNode' )
+    } );
+    const bondBCNode = new BondNode( molecule.bondBC, {
+      tandem: options.tandem.createTandem( 'bondBCNode' )
+    } );
+    const atomANode = new AtomNode( molecule.atomA, {
+      tandem: options.tandem.createTandem( 'atomANode' )
+    } );
+    const atomBNode = new AtomNode( molecule.atomB, {
+      tandem: options.tandem.createTandem( 'atomBNode' )
+    } );
+    const atomCNode = new AtomNode( molecule.atomC, {
+      tandem: options.tandem.createTandem( 'atomCNode' )
+    } );
+    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA, {
+      tandem: options.tandem.createTandem( 'arrowsANode' )
+    } );
+    const arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC, {
+      tandem: options.tandem.createTandem( 'arrowsCNode' )
+    } );
+    const arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB, {
+      tandem: options.tandem.createTandem( 'arrowsBNode' )
+    } );
 
     // We'll be moving the dragged atom to the front, because A & C can overlap
     const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
 
     // @private nodes whose visibility may change
-    const partialChargeNodeA = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB );
-    const partialChargeNodeB = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule );
-    const partialChargeNodeC = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC );
-    const bondDipoleABNode = new BondDipoleNode( molecule.bondAB );
-    const bondDipoleBCNode = new BondDipoleNode( molecule.bondBC );
-    const molecularDipoleNode = new MolecularDipoleNode( molecule );
-
-    super( {
-      children: [
-        bondABNode, bondBCNode,
-        atomsParent,
-        arrowsANode, arrowsCNode, arrowsBNode,
-        partialChargeNodeA, partialChargeNodeB, partialChargeNodeC,
-        bondDipoleABNode, bondDipoleBCNode, molecularDipoleNode
-      ]
+    const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB, {
+      tandem: options.tandem.createTandem( 'partialChargeANode' )
+    } );
+    const partialChargeBNode = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule, {
+      tandem: options.tandem.createTandem( 'partialChargeBNode' )
+    } );
+    const partialChargeCNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC, {
+      tandem: options.tandem.createTandem( 'partialChargeCNode' )
+    } );
+    const bondDipoleABNode = new BondDipoleNode( molecule.bondAB, {
+      tandem: options.tandem.createTandem( 'bondDipoleABNode' )
+    } );
+    const bondDipoleBCNode = new BondDipoleNode( molecule.bondBC, {
+      tandem: options.tandem.createTandem( 'bondDipoleBCNode' )
+    } );
+    const molecularDipoleNode = new MolecularDipoleNode( molecule, {
+      tandem: options.tandem.createTandem( 'molecularDipoleNode' )
     } );
 
+    assert && assert( !options.children, 'TriatomicMoleculeNode sets children' );
+    options.children = [
+      bondABNode, bondBCNode,
+      atomsParent,
+      arrowsANode, arrowsCNode, arrowsBNode,
+      partialChargeANode, partialChargeBNode, partialChargeCNode,
+      bondDipoleABNode, bondDipoleBCNode, molecularDipoleNode
+    ];
+
+    super( options );
+
     // @private nodes whose visibility may change
-    this.partialChargeNodeA = partialChargeNodeA;
-    this.partialChargeNodeB = partialChargeNodeB;
-    this.partialChargeNodeC = partialChargeNodeC;
+    this.partialChargeANode = partialChargeANode;
+    this.partialChargeBNode = partialChargeBNode;
+    this.partialChargeCNode = partialChargeCNode;
     this.bondDipoleABNode = bondDipoleABNode;
     this.bondDipoleBCNode = bondDipoleBCNode;
     this.molecularDipoleNode = molecularDipoleNode;
@@ -73,18 +108,33 @@ class TriatomicMoleculeNode extends Node {
     bondABNode.cursor = bondBCNode.cursor = 'pointer'; // bonds
 
     // rotate molecule by dragging atom B or bonds
-    const dragListenerB = new MoleculeAngleDragListener( molecule, this );
-    const dragListenerAB = new MoleculeAngleDragListener( molecule, this );
-    const dragListenerBC = new MoleculeAngleDragListener( molecule, this );
-    atomBNode.addInputListener( dragListenerB );
-    bondABNode.addInputListener( dragListenerAB );
-    bondBCNode.addInputListener( dragListenerBC );
+    const atomBDragListener = new MoleculeAngleDragListener( molecule, this, {
+      phetioDocumentation: 'dragging atom B rotates the molecule',
+      tandem: options.tandem.createTandem( 'atomBDragListener' )
+    } );
+    const bondABDragListener = new MoleculeAngleDragListener( molecule, this, {
+      phetioDocumentation: 'dragging the bond that connects atoms A and C rotates the molecule',
+      tandem: options.tandem.createTandem( 'bondABDragListener' )
+    } );
+    const bondBCDragListener = new MoleculeAngleDragListener( molecule, this, {
+      phetioDocumentation: 'dragging the bond that connects atoms B and C rotates the molecule',
+      tandem: options.tandem.createTandem( 'bondBCDragListener' )
+    } );
+    atomBNode.addInputListener( atomBDragListener );
+    bondABNode.addInputListener( bondABDragListener );
+    bondBCNode.addInputListener( bondBCDragListener );
 
     // change bond angles by dragging atom A or C
-    const dragListenerA = new BondAngleDragListener( molecule, molecule.bondAngleAProperty, atomANode );
-    const dragListenerC = new BondAngleDragListener( molecule, molecule.bondAngleCProperty, atomCNode );
-    atomANode.addInputListener( dragListenerA );
-    atomCNode.addInputListener( dragListenerC );
+    const atomADragListener = new BondAngleDragListener( molecule, molecule.bondAngleAProperty, atomANode, {
+      phetioDocumentation: 'dragging atom A changes the angle of the bond that connects atoms A and B',
+      tandem: options.tandem.createTandem( 'atomADragListener' )
+    } );
+    const atomCDragListener = new BondAngleDragListener( molecule, molecule.bondAngleCProperty, atomCNode, {
+      phetioDocumentation: 'dragging atom C changes the angle of the bond that connects atoms B and C',
+      tandem: options.tandem.createTandem( 'atomCDragListener' )
+    } );
+    atomANode.addInputListener( atomADragListener );
+    atomCNode.addInputListener( atomCDragListener );
 
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
@@ -131,7 +181,7 @@ class TriatomicMoleculeNode extends Node {
    * @public
    */
   setPartialChargesVisible( visible ) {
-    this.partialChargeNodeA.visible = this.partialChargeNodeB.visible = this.partialChargeNodeC.visible = visible;
+    this.partialChargeANode.visible = this.partialChargeBNode.visible = this.partialChargeCNode.visible = visible;
   }
 }
 

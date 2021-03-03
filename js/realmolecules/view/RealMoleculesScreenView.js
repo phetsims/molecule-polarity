@@ -82,7 +82,8 @@ class RealMoleculesScreenView extends ScreenView {
         model.reset();
         viewProperties.reset();
       },
-      scale: 1.32
+      scale: 1.32,
+      tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
     // Parent for all nodes added to this screen

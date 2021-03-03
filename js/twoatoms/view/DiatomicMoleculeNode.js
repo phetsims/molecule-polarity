@@ -92,11 +92,11 @@ class DiatomicMoleculeNode extends Node {
     super( options );
 
     // rotate molecule by dragging anywhere
-    const rotationDragListener = new MoleculeAngleDragListener( molecule, this, {
+    const dragListener = new MoleculeAngleDragListener( molecule, this, {
       phetioDocumentation: 'rotates the molecule by dragging anywhere on it',
-      tandem: options.tandem.createTandem( 'rotationDragListener' )
+      tandem: options.tandem.createTandem( 'dragListener' )
     } );
-    this.addInputListener( rotationDragListener );
+    this.addInputListener( dragListener );
 
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
