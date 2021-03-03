@@ -9,6 +9,7 @@
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
@@ -57,6 +58,11 @@ class TwoAtomsScreenView extends ScreenView {
     const atomBElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomB, model.molecule, {
       tandem: options.tandem.createTandem( 'atomBElectronegativityPanel' )
     } );
+    const electronegativityPanels = new HBox( {
+      spacing: 10,
+      children: [ atomAElectronegativityPanel, atomBElectronegativityPanel ],
+      tandem: options.tandem.createTandem( 'electronegativityPanels' )
+    } );
 
     const bondCharacterNode = new BondCharacterNode( model.molecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,
@@ -93,8 +99,7 @@ class TwoAtomsScreenView extends ScreenView {
 
         // nodes are rendered in this order
         platesNode,
-        atomAElectronegativityPanel,
-        atomBElectronegativityPanel,
+        electronegativityPanels,
         controlPanel,
         bondCharacterNode,
         electrostaticPotentialColorKey,
@@ -114,9 +119,8 @@ class TwoAtomsScreenView extends ScreenView {
     platesNode.y = moleculeY - ( platesNode.plateHeight / 2 );
 
     // centered below molecule
-    atomAElectronegativityPanel.right = moleculeX - 5;
-    atomBElectronegativityPanel.left = moleculeX + 5;
-    atomAElectronegativityPanel.bottom = atomBElectronegativityPanel.bottom = this.layoutBounds.bottom - 25;
+    electronegativityPanels.centerX = moleculeX;
+    electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
 
     // centered above molecule
     electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
@@ -124,7 +128,7 @@ class TwoAtomsScreenView extends ScreenView {
 
     // centered above EN controls
     bondCharacterNode.centerX = moleculeX;
-    bondCharacterNode.bottom = atomAElectronegativityPanel.top - 10;
+    bondCharacterNode.bottom = electronegativityPanels.top - 10;
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 70;

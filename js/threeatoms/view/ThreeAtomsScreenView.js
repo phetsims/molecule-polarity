@@ -9,6 +9,7 @@
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -59,6 +60,12 @@ class ThreeAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'atomCElectronegativityPanel' )
     } );
 
+    const electronegativityPanels = new HBox( {
+      spacing: 10,
+      children: [ atomAElectronegativityPanel, atomBElectronegativityPanel, atomCElectronegativityPanel ],
+      tandem: options.tandem.createTandem( 'electronegativityPanels' )
+    } );
+
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
       tandem: options.tandem.createTandem( 'controlPanel' )
     } );
@@ -80,9 +87,7 @@ class ThreeAtomsScreenView extends ScreenView {
 
         // nodes are rendered in this order
         platesNode,
-        atomAElectronegativityPanel,
-        atomBElectronegativityPanel,
-        atomCElectronegativityPanel,
+        electronegativityPanels,
         controlPanel,
         moleculeNode,
         resetAllButton
@@ -99,10 +104,8 @@ class ThreeAtomsScreenView extends ScreenView {
     platesNode.y = moleculeY - ( platesNode.plateHeight / 2 );
 
     // centered below molecule
-    atomBElectronegativityPanel.centerX = moleculeX;
-    atomAElectronegativityPanel.right = atomBElectronegativityPanel.left - 10;
-    atomCElectronegativityPanel.left = atomBElectronegativityPanel.right + 10;
-    atomAElectronegativityPanel.bottom = atomBElectronegativityPanel.bottom = atomCElectronegativityPanel.bottom = this.layoutBounds.bottom - 25;
+    electronegativityPanels.centerX = moleculeX;
+    electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 25;
