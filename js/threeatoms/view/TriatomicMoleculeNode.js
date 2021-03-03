@@ -157,7 +157,7 @@ class TriatomicMoleculeNode extends Node {
 
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
-      if ( molecule.dragging ) {
+      if ( molecule.isDraggingProperty.value ) {
         arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
       }
     };

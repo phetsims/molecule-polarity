@@ -58,7 +58,7 @@ class MPModel {
   step( dt ) {
 
     // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
-    if ( this.eField.enabledProperty.get() && !this.molecule.dragging ) {
+    if ( this.eField.enabledProperty.get() && !this.molecule.isDraggingProperty.value ) {
       this.updateMoleculeOrientation( this.molecule );
     }
   }

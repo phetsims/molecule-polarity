@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
@@ -51,7 +52,11 @@ class Molecule {
     } );
 
     // @pubic true when the user is dragging the molecule
-    this.dragging = false;
+    // This is Property only so that it appears in PhET-iO state.
+    this.isDraggingProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'isDraggingProperty' ),
+      phetioReadOnly: true
+    } );
 
     // update atom positions when molecule is rotated, unlink not needed
     this.angleProperty.link( angle => updateAtomPositions( this.position, angle ) );

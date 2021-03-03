@@ -44,7 +44,7 @@ class MoleculeAngleDragListener extends DragListener {
 
     assert && assert( !options.start, 'MoleculeAngleDragListener sets start' );
     options.start = event => {
-      molecule.dragging = true;
+      molecule.isDraggingProperty.value = true;
       previousAngle = getAngle( event );
     };
 
@@ -57,7 +57,7 @@ class MoleculeAngleDragListener extends DragListener {
 
     assert && assert( !options.end, 'MoleculeAngleDragListener sets end' );
     options.end = event => {
-      molecule.dragging = false;
+      molecule.isDraggingProperty.value = false;
     };
 
     super( options );
