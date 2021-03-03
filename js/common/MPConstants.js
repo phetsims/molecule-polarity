@@ -9,16 +9,21 @@
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import moleculePolarity from '../moleculePolarity.js';
 import MPGlobalOptions from './MPGlobalOptions.js';
 
 const MPConstants = {
 
   // ScreenView
-  SCREEN_VIEW_OPTIONS: { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) },
+  SCREEN_VIEW_OPTIONS: {
+    layoutBounds: new Bounds2( 0, 0, 1100, 700 )
+  },
 
   // View
-  GLOBAL_OPTIONS: new MPGlobalOptions(),
+  GLOBAL_OPTIONS: new MPGlobalOptions( {
+    tandem: Tandem.GLOBAL_MODEL
+  } ),
 
   // Model
   ELECTRONEGATIVITY_RANGE: new RangeWithValue( 2, 4, 2 ),
