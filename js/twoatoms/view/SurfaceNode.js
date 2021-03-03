@@ -30,10 +30,10 @@ class SurfaceNode extends Node {
    * @abstract
    */
   constructor( molecule, colors, options ) {
-
     assert && assert( molecule instanceof Molecule, 'molecule must be a DiatomicMolecule' );
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
+    assert && assert( Array.isArray( colors ), 'invalid colors' );
 
     options = merge( {
       tandem: Tandem.REQUIRED,

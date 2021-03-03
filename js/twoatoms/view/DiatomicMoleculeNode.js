@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
@@ -18,6 +19,7 @@ import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListen
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import ElectronDensityNode from './ElectronDensityNode.js';
 import ElectrostaticPotentialNode from './ElectrostaticPotentialNode.js';
 
@@ -30,6 +32,9 @@ class DiatomicMoleculeNode extends Node {
    * @param {Object} [options]
    */
   constructor( molecule, dipoleVisibleProperty, partialChargesVisibleProperty, options ) {
+    assert && assert( molecule instanceof DiatomicMolecule, 'invalid molecule' );
+    assert && AssertUtils.assertPropertyOf( dipoleVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( partialChargesVisibleProperty, 'boolean' );
 
     options = merge( {
       cursor: 'pointer',
@@ -143,6 +148,7 @@ class DiatomicMoleculeNode extends Node {
    * @public
    */
   setSurfaceType( surfaceType ) {
+    assert && assert( SurfaceType.includes( surfaceType ), 'invalid surfaceType' );
     this.electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
     this.electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
   }

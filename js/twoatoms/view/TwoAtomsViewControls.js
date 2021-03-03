@@ -16,6 +16,7 @@ import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js'
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import BondCharacterCheckbox from './BondCharacterCheckbox.js';
+import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 class TwoAtomsViewControls extends VBox {
 
@@ -24,6 +25,7 @@ class TwoAtomsViewControls extends VBox {
    * @param {Object} [options]
    */
   constructor( viewProperties, options ) {
+    assert && assert( viewProperties instanceof TwoAtomsViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       tandem: Tandem.REQUIRED

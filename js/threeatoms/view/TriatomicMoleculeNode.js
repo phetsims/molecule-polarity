@@ -17,6 +17,7 @@ import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListen
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import TriatomicMolecule from '../model/TriatomicMolecule.js';
 import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
 
@@ -26,6 +27,7 @@ class TriatomicMoleculeNode extends Node {
    * @param {TriatomicMolecule} molecule
    */
   constructor( molecule ) {
+    assert && assert( molecule instanceof TriatomicMolecule, 'invalid molecule' );
 
     // nodes
     const bondABNode = new BondNode( molecule.bondAB );

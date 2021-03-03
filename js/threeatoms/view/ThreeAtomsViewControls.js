@@ -16,6 +16,7 @@ import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.j
 import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
 class ThreeAtomsViewControls extends VBox {
 
@@ -24,6 +25,7 @@ class ThreeAtomsViewControls extends VBox {
    * @param {Object} [options]
    */
   constructor( viewProperties, options ) {
+    assert && assert( viewProperties instanceof ThreeAtomsViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       align: 'left',

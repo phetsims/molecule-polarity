@@ -11,6 +11,8 @@ import Matrix3 from '../../../../dot/js/Matrix3.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
+import Atom from '../../common/model/Atom.js';
+import Molecule from '../../common/model/Molecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class RotateArrowsNode extends Node {
@@ -20,6 +22,8 @@ class RotateArrowsNode extends Node {
    * @param {Atom} atom
    */
   constructor( molecule, atom ) {
+    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
+    assert && assert( atom instanceof Atom, 'invalid atom' );
 
     // arrow configuration
     const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };

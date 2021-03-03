@@ -10,17 +10,23 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Molecule from '../../common/model/Molecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 class BondAngleDragListener extends DragListener {
 
   /**
    * @param {Molecule} molecule
-   * @param {Property.<number>} bondAngleProperty - Property that this handler modifies
+   * @param {Property.<number>} bondAngleProperty - Property that this listener modifies
    * @param {Node} targetNode
    */
   constructor( molecule, bondAngleProperty, targetNode ) {
+    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
+    assert && AssertUtils.assertPropertyOf( bondAngleProperty, 'number' );
+    assert && assert( targetNode instanceof Node, 'invalid targetNode' );
 
     let previousAngle = 0;
 

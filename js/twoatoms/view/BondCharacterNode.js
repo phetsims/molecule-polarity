@@ -20,6 +20,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
 // constants
 const TRACK_WIDTH = 435;
@@ -35,6 +36,7 @@ class BondCharacterNode extends Node {
    * @param {Object} [options]
    */
   constructor( molecule, options ) {
+    assert && assert( molecule instanceof DiatomicMolecule, 'invalid molecule' );
 
     options = merge( {
       tandem: Tandem.REQUIRED

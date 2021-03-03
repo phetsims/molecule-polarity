@@ -7,11 +7,13 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
 import MPControlPanel from '../../common/view/MPControlPanel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ThreeAtomsViewControls from './ThreeAtomsViewControls.js';
+import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
 class ThreeAtomsControlPanel extends MPControlPanel {
 
@@ -21,6 +23,8 @@ class ThreeAtomsControlPanel extends MPControlPanel {
    * @param {Object} [options]
    */
   constructor( viewProperties, eFieldEnabledProperty, options ) {
+    assert && assert( viewProperties instanceof ThreeAtomsViewProperties, 'invalid viewProperties' );
+    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
 
     options = merge( {
       tandem: Tandem.REQUIRED
