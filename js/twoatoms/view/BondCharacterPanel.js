@@ -16,6 +16,7 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -23,13 +24,10 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
 // constants
-const TRACK_WIDTH = 435;
-const LABEL_X_INSET = 10;
-const POINTER_X_INSET = 10;
-const Y_MARGIN = 3;
+const TRACK_WIDTH = 415;
 const Y_SPACING = 3;
 
-class BondCharacterNode extends Node {
+class BondCharacterPanel extends Panel {
 
   /**
    * @param {DiatomicMolecule} molecule
@@ -39,10 +37,13 @@ class BondCharacterNode extends Node {
     assert && assert( molecule instanceof DiatomicMolecule, 'invalid molecule' );
 
     options = merge( {
+      cornerRadius: 5,
+      fill: 'white',
+      stroke: 'black',
+      xMargin: 10,
+      yMargin: 3,
       tandem: Tandem.REQUIRED
     }, options );
-
-    super( options );
 
     // title
     const titleNode = new Text( moleculePolarityStrings.bondCharacter, {
@@ -64,33 +65,32 @@ class BondCharacterNode extends Node {
     const pointerNode = new PointerNode( molecule.atomA, molecule.atomB );
 
     // track
-    const trackHeight = ( 2 * Y_MARGIN ) + titleNode.height + Y_SPACING + pointerNode.height;
+    const trackHeight = titleNode.height + Y_SPACING + pointerNode.height;
     const trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, {
       cornerRadius: 5,
-      fill: 'white',
-      stroke: 'black'
+      fill: 'transparent'
     } );
-
-    // rendering order
-    this.addChild( trackNode );
-    this.addChild( pointerNode );
-    this.addChild( titleNode );
-    this.addChild( rightLabelNode );
-    this.addChild( leftLabelNode );
 
     // layout, relative to track
     titleNode.centerX = trackNode.centerX;
-    titleNode.top = trackNode.top + Y_MARGIN;
+    titleNode.top = trackNode.top;
     pointerNode.top = titleNode.bottom + Y_SPACING;
-    leftLabelNode.left = trackNode.left + LABEL_X_INSET;
-    leftLabelNode.top = trackNode.top + Y_MARGIN;
-    rightLabelNode.right = trackNode.right - LABEL_X_INSET;
-    rightLabelNode.top = trackNode.top + Y_MARGIN;
+    leftLabelNode.left = trackNode.left;
+    leftLabelNode.top = trackNode.top;
+    rightLabelNode.right = trackNode.right;
+    rightLabelNode.top = trackNode.top;
+
+    const content = new Node( {
+      children: [ trackNode, pointerNode, titleNode, rightLabelNode, leftLabelNode ]
+    } );
+
+    super( content, options );
 
     // when difference in electronegativity changes, move the pointer, unlink not needed
     molecule.bond.dipoleProperty.link( dipole => {
-      pointerNode.left = Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
-        POINTER_X_INSET, TRACK_WIDTH - pointerNode.width - POINTER_X_INSET,
+      pointerNode.left = Utils.linear(
+        0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
+        0, TRACK_WIDTH - pointerNode.width,
         dipole.magnitude );
     } );
   }
@@ -124,6 +124,6 @@ class PointerNode extends Node {
   }
 }
 
-moleculePolarity.register( 'BondCharacterNode', BondCharacterNode );
+moleculePolarity.register( 'BondCharacterPanel', BondCharacterPanel );
 
-export default BondCharacterNode;
+export default BondCharacterPanel;

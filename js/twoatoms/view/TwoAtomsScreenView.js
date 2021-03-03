@@ -19,7 +19,7 @@ import PlatesNode from '../../common/view/PlatesNode.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
-import BondCharacterNode from './BondCharacterNode.js';
+import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
@@ -64,9 +64,9 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'electronegativityPanels' )
     } );
 
-    const bondCharacterNode = new BondCharacterNode( model.molecule, {
+    const bondCharacterPanel = new BondCharacterPanel( model.molecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,
-      tandem: options.tandem.createTandem( 'bondCharacterNode' )
+      tandem: options.tandem.createTandem( 'bondCharacterPanel' )
     } );
 
     const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
@@ -101,7 +101,7 @@ class TwoAtomsScreenView extends ScreenView {
         platesNode,
         electronegativityPanels,
         controlPanel,
-        bondCharacterNode,
+        bondCharacterPanel,
         electrostaticPotentialColorKey,
         electronDensityColorKey,
         moleculeNode,
@@ -127,8 +127,8 @@ class TwoAtomsScreenView extends ScreenView {
     electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
 
     // centered above EN controls
-    bondCharacterNode.centerX = moleculeX;
-    bondCharacterNode.bottom = electronegativityPanels.top - 10;
+    bondCharacterPanel.centerX = moleculeX;
+    bondCharacterPanel.bottom = electronegativityPanels.top - 10;
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 70;
