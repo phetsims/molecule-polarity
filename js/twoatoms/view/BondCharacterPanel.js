@@ -61,11 +61,11 @@ class BondCharacterPanel extends Panel {
     const leftLabelNode = new Text( moleculePolarityStrings.moreCovalent, labelOptions );
     const rightLabelNode = new Text( moleculePolarityStrings.moreIonic, labelOptions );
 
-    // pointer that moves along the track, not interactive
-    const pointerNode = new PointerNode( molecule.atomA, molecule.atomB );
+    // marker that moves along the track, not interactive
+    const markerNode = new PointerNode( molecule.atomA, molecule.atomB );
 
     // track
-    const trackHeight = titleNode.height + Y_SPACING + pointerNode.height;
+    const trackHeight = titleNode.height + Y_SPACING + markerNode.height;
     const trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, {
       cornerRadius: 5,
       fill: 'transparent'
@@ -74,23 +74,23 @@ class BondCharacterPanel extends Panel {
     // layout, relative to track
     titleNode.centerX = trackNode.centerX;
     titleNode.top = trackNode.top;
-    pointerNode.top = titleNode.bottom + Y_SPACING;
+    markerNode.top = titleNode.bottom + Y_SPACING;
     leftLabelNode.left = trackNode.left;
     leftLabelNode.top = trackNode.top;
     rightLabelNode.right = trackNode.right;
     rightLabelNode.top = trackNode.top;
 
     const content = new Node( {
-      children: [ trackNode, pointerNode, titleNode, rightLabelNode, leftLabelNode ]
+      children: [ trackNode, markerNode, titleNode, rightLabelNode, leftLabelNode ]
     } );
 
     super( content, options );
 
     // when difference in electronegativity changes, move the pointer, unlink not needed
     molecule.bond.dipoleProperty.link( dipole => {
-      pointerNode.left = Utils.linear(
+      markerNode.left = Utils.linear(
         0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
-        0, TRACK_WIDTH - pointerNode.width,
+        0, TRACK_WIDTH - markerNode.width,
         dipole.magnitude );
     } );
   }
