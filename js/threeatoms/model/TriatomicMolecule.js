@@ -9,6 +9,8 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import Atom from '../../common/model/Atom.js';
 import Bond from '../../common/model/Bond.js';
 import Molecule from '../../common/model/Molecule.js';
@@ -20,33 +22,48 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 class TriatomicMolecule extends Molecule {
 
   /**
-   * @param {Object} [options] see supertype constructor
+   * @param {Object} [options]
    */
   constructor( options ) {
 
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
+
     // atoms labeled A, B, C
     const atomA = new Atom( moleculePolarityStrings.atomA, {
-      color: MPColors.ATOM_A
+      color: MPColors.ATOM_A,
+      tandem: options.tandem.createTandem( 'atomA' )
     } );
     const atomB = new Atom( moleculePolarityStrings.atomB, {
       color: MPColors.ATOM_B,
-      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 )
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ),
+      tandem: options.tandem.createTandem( 'atomB' )
     } );
     const atomC = new Atom( moleculePolarityStrings.atomC, {
-      color: MPColors.ATOM_C
+      color: MPColors.ATOM_C,
+      tandem: options.tandem.createTandem( 'atomC' )
     } );
 
     // the bond connecting atoms A and B
-    const bondAB = new Bond( atomA, atomB );
+    const bondAB = new Bond( atomA, atomB, {
+      tandem: options.tandem.createTandem( 'bondAB' )
+    } );
 
     // the bond connecting atoms B and C
-    const bondBC = new Bond( atomB, atomC );
+    const bondBC = new Bond( atomB, atomC, {
+      tandem: options.tandem.createTandem( 'bondBC' )
+    } );
 
     // the bond angle of atom A relative to atom B, before applying molecule rotation
-    const bondAngleAProperty = new NumberProperty( 0.75 * Math.PI );
+    const bondAngleAProperty = new NumberProperty( 0.75 * Math.PI, {
+      tandem: options.tandem.createTandem( 'bondAngleAProperty' )
+    } );
 
     // the bond angle of atom C relative to atom B, before applying molecule rotation
-    const bondAngleCProperty = new NumberProperty( 0.25 * Math.PI );
+    const bondAngleCProperty = new NumberProperty( 0.25 * Math.PI, {
+      tandem: options.tandem.createTandem( 'bondAngleCProperty' )
+    } );
 
     const updateAtomPositions = ( position, angle ) => {
       atomB.positionProperty.set( position );  // atom B remains at the molecule's position
