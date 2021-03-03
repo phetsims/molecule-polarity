@@ -17,6 +17,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import RealMoleculeViewer from './RealMoleculeViewer.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -30,6 +31,7 @@ class ElectronegativityTableNode extends Node {
    * @param {RealMoleculeViewer} moleculeViewer
    */
   constructor( moleculeViewer ) {
+    assert && assert( moleculeViewer instanceof RealMoleculeViewer, 'invalid moleculeViewer' );
 
     super();
 

@@ -12,6 +12,7 @@ import MPControlPanel from '../../common/view/MPControlPanel.js';
 import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesViewControls from './RealMoleculesViewControls.js';
+import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 class RealMoleculesControlPanel extends MPControlPanel {
 
@@ -20,6 +21,7 @@ class RealMoleculesControlPanel extends MPControlPanel {
    * @param {Object} [options]
    */
   constructor( viewProperties, options ) {
+    assert && assert( viewProperties instanceof RealMoleculesViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       tandem: Tandem.REQUIRED

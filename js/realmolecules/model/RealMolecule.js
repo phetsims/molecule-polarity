@@ -18,6 +18,9 @@ class RealMolecule {
    * @param {string} mol2Data molecule data description, in mol2 format
    */
   constructor( symbol, name, mol2Data ) {
+    assert && assert( typeof symbol === 'string', 'invalid symbol' );
+    assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( typeof mol2Data === 'string', 'invalid mol2Data' );
 
     // @public (read-only)
     this.symbol = ChemUtils.toSubscript( symbol );

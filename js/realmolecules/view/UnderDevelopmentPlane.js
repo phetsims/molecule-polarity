@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Plane from '../../../../scenery/js/nodes/Plane.js';
@@ -22,7 +23,11 @@ const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-pola
 
 class UnderDevelopmentPlane extends Plane {
 
+  /**
+   * @param {Bounds2} layoutBounds
+   */
   constructor( layoutBounds ) {
+    assert && assert( layoutBounds instanceof Bounds2, 'invalid layoutBounds' );
 
     const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
       href: LEGACY_URL,

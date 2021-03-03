@@ -18,6 +18,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import AtomElectronegativitiesCheckbox from './AtomElectronegativitiesCheckbox.js';
 import AtomLabelsCheckbox from './AtomLabelsCheckbox.js';
+import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 class RealMoleculesViewControls extends VBox {
 
@@ -26,6 +27,7 @@ class RealMoleculesViewControls extends VBox {
    * @param {Object} [options]
    */
   constructor( viewProperties, options ) {
+    assert && assert( viewProperties instanceof RealMoleculesViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       align: 'left',

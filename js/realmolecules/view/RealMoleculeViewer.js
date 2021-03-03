@@ -10,6 +10,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import LayoutBox from '../../../../scenery/js/nodes/LayoutBox.js';
@@ -20,6 +21,8 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import RealMolecule from '../model/RealMolecule.js';
+import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 // constants
 const FONT = new PhetFont( 18 );
@@ -32,6 +35,8 @@ class RealMoleculeViewer extends Node {
    * @param {Object} [options]
    */
   constructor( moleculeProperty, viewProperties, options ) {
+    assert && AssertUtils.assertPropertyOf( moleculeProperty, RealMolecule );
+    assert && assert( viewProperties instanceof RealMoleculesViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       backgroundColor: 'white',

@@ -31,12 +31,15 @@
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import DOM from '../../../../scenery/js/nodes/DOM.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Element from '../model/Element.js';
+import RealMolecule from '../model/RealMolecule.js';
+import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 // strings
 const DELTA = '\u03B4';
@@ -103,6 +106,8 @@ class JSmolViewerNode extends DOM {
    * @param {Object} [options]
    */
   constructor( moleculeProperty, viewProperties, options ) {
+    assert && AssertUtils.assertPropertyOf( moleculeProperty, RealMolecule );
+    assert && assert( viewProperties instanceof RealMoleculesViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       viewerFill: 'white',

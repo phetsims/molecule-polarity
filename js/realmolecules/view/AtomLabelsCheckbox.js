@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -21,6 +22,7 @@ class AtomLabelsCheckbox extends Checkbox {
    * @param {Object} [options]
    */
   constructor( atomLabelsVisibleProperty, options ) {
+    assert && AssertUtils.assertPropertyOf( atomLabelsVisibleProperty, 'boolean' );
 
     options = merge( {
       tandem: Tandem.REQUIRED
