@@ -38,7 +38,8 @@ class Atom {
 
     // @public
     this.positionProperty = new Vector2Property( options.position, {
-      tandem: options.tandem.createTandem( 'positionProperty' )
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioReadOnly: true // because position is constrained by molecule structure
     } );
 
     // @public
