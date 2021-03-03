@@ -26,7 +26,8 @@ class AtomNode extends Node {
     assert && assert( atom instanceof Atom, 'invalid atom' );
 
     options = merge( {
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     // atom

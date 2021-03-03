@@ -29,7 +29,8 @@ class BondNode extends Line {
       stroke: MPColors.BOND,
       lineWidth: 12,
       strokePickable: true, // include stroke in hit-testing
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     super( bond.atom1.positionProperty.get(), bond.atom2.positionProperty.get(), options );
