@@ -2,6 +2,8 @@
 
 /**
  * ElectronegativitySlider is the slider for adjusting electronegativity of an atom.
+ * Dragging the slider continuously updates an atom's electronegativity.
+ * When the slider's thumb is released, it snaps to the closest tick mark.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

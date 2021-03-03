@@ -1,9 +1,7 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 /**
- * Slider control for electronegativity.
- * Dragging the slider continuously updates an atom's electronegativity.
- * When the slider's thumb is released, it snaps to the closest tick mark.
+ * Panel with slider control for electronegativity.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,7 +19,7 @@ import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import ElectronegativitySlider from './ElectronegativitySlider.js';
 
-class ElectronegativityControl extends Panel {
+class ElectronegativityPanel extends Panel {
 
   /**
    * @param {Atom} atom - the atom whose electronegativity we're controlling
@@ -72,6 +70,6 @@ class ElectronegativityControl extends Panel {
   }
 }
 
-moleculePolarity.register( 'ElectronegativityControl', ElectronegativityControl );
+moleculePolarity.register( 'ElectronegativityPanel', ElectronegativityPanel );
 
-export default ElectronegativityControl;
+export default ElectronegativityPanel;

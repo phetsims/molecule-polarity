@@ -13,7 +13,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPConstants from '../../common/MPConstants.js';
-import ElectronegativityControl from '../../common/view/ElectronegativityControl.js';
+import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -51,11 +51,11 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'platesNode' )
     } );
 
-    const atomAElectronegativityControl = new ElectronegativityControl( model.molecule.atomA, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomAElectronegativityControl' )
+    const atomAElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomA, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomAElectronegativityPanel' )
     } );
-    const atomBElectronegativityControl = new ElectronegativityControl( model.molecule.atomB, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomBElectronegativityControl' )
+    const atomBElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomB, model.molecule, {
+      tandem: options.tandem.createTandem( 'atomBElectronegativityPanel' )
     } );
 
     const bondCharacterNode = new BondCharacterNode( model.molecule, {
@@ -93,8 +93,8 @@ class TwoAtomsScreenView extends ScreenView {
 
         // nodes are rendered in this order
         platesNode,
-        atomAElectronegativityControl,
-        atomBElectronegativityControl,
+        atomAElectronegativityPanel,
+        atomBElectronegativityPanel,
         controlPanel,
         bondCharacterNode,
         electrostaticPotentialColorKey,
@@ -114,9 +114,9 @@ class TwoAtomsScreenView extends ScreenView {
     platesNode.y = moleculeY - ( platesNode.plateHeight / 2 );
 
     // centered below molecule
-    atomAElectronegativityControl.right = moleculeX - 5;
-    atomBElectronegativityControl.left = moleculeX + 5;
-    atomAElectronegativityControl.bottom = atomBElectronegativityControl.bottom = this.layoutBounds.bottom - 25;
+    atomAElectronegativityPanel.right = moleculeX - 5;
+    atomBElectronegativityPanel.left = moleculeX + 5;
+    atomAElectronegativityPanel.bottom = atomBElectronegativityPanel.bottom = this.layoutBounds.bottom - 25;
 
     // centered above molecule
     electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
@@ -124,7 +124,7 @@ class TwoAtomsScreenView extends ScreenView {
 
     // centered above EN controls
     bondCharacterNode.centerX = moleculeX;
-    bondCharacterNode.bottom = atomAElectronegativityControl.top - 10;
+    bondCharacterNode.bottom = atomAElectronegativityPanel.top - 10;
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 70;
