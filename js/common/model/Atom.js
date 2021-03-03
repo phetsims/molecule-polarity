@@ -21,6 +21,7 @@ class Atom {
    * @param {Object} [options]
    */
   constructor( name, options ) {
+    assert && assert( typeof name === 'string', 'invalid name' );
 
     options = merge( {
       diameter: MPConstants.ATOM_DIAMETER, // {number} the atom's diameter

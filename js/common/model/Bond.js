@@ -12,6 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
+import Atom from './Atom.js';
 import DipoleDirection from './DipoleDirection.js';
 
 class Bond {
@@ -22,6 +23,8 @@ class Bond {
    * @param {Object} [options]
    */
   constructor( atom1, atom2, options ) {
+    assert && assert( atom1 instanceof Atom, 'invalid atom1' );
+    assert && assert( atom2 instanceof Atom, 'invalid atom2' );
 
     options = merge( {
       tandem: Tandem.REQUIRED

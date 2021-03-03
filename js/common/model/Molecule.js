@@ -11,8 +11,11 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Atom from './Atom.js';
+import Bond from './Bond.js';
 
 class Molecule {
 
@@ -25,6 +28,10 @@ class Molecule {
    * @abstract
    */
   constructor( atoms, bonds, updateAtomPositions, updatePartialCharges, options ) {
+    assert && AssertUtils.assertArrayOf( atoms, Atom );
+    assert && AssertUtils.assertArrayOf( bonds, Bond );
+    assert && assert( typeof updateAtomPositions === 'function', 'invalid updateAtomPositions' );
+    assert && assert( typeof updatePartialCharges === 'function', 'invalid updatePartialCharges' );
 
     options = merge( {
       position: new Vector2( 0, 0 ), // the point about which the molecule rotates, in global model coordinate frame
