@@ -41,7 +41,7 @@ class DiatomicMoleculeNode extends Node {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // nodes
+    // atoms
     const atomANode = new AtomNode( molecule.atomA, {
       tandem: options.tandem.createTandem( 'atomANode' )
     } );
@@ -49,10 +49,12 @@ class DiatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'atomBNode' )
     } );
 
+    // bond
     const bondNode = new BondNode( molecule.bond, {
       tandem: options.tandem.createTandem( 'bondNode' )
     } );
 
+    // cueing arrows
     const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA, {
       tandem: options.tandem.createTandem( 'arrowsANode' )
     } );
@@ -60,6 +62,7 @@ class DiatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'arrowsBNode' )
     } );
 
+    // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
       visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeANode' )
@@ -69,6 +72,7 @@ class DiatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'partialChargeBNode' )
     } );
 
+    // surfaces
     const electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule, {
       tandem: options.tandem.createTandem( 'electrostaticPotentialNode' )
     } );
@@ -76,6 +80,7 @@ class DiatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'electronDensityNode' )
     } );
 
+    // dipole
     const bondDipoleNode = new BondDipoleNode( molecule.bond, {
       visibleProperty: dipoleVisibleProperty,
       tandem: options.tandem.createTandem( 'bondDipoleNode' )

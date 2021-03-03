@@ -42,13 +42,7 @@ class TriatomicMoleculeNode extends Node {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // nodes
-    const bondABNode = new BondNode( molecule.bondAB, {
-      tandem: options.tandem.createTandem( 'bondABNode' )
-    } );
-    const bondBCNode = new BondNode( molecule.bondBC, {
-      tandem: options.tandem.createTandem( 'bondBCNode' )
-    } );
+    // atoms
     const atomANode = new AtomNode( molecule.atomA, {
       tandem: options.tandem.createTandem( 'atomANode' )
     } );
@@ -58,6 +52,16 @@ class TriatomicMoleculeNode extends Node {
     const atomCNode = new AtomNode( molecule.atomC, {
       tandem: options.tandem.createTandem( 'atomCNode' )
     } );
+
+    // bonds
+    const bondABNode = new BondNode( molecule.bondAB, {
+      tandem: options.tandem.createTandem( 'bondABNode' )
+    } );
+    const bondBCNode = new BondNode( molecule.bondBC, {
+      tandem: options.tandem.createTandem( 'bondBCNode' )
+    } );
+
+    // cueing arrows
     const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA, {
       tandem: options.tandem.createTandem( 'arrowsANode' )
     } );
@@ -71,7 +75,7 @@ class TriatomicMoleculeNode extends Node {
     // We'll be moving the dragged atom to the front, because A & C can overlap
     const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
 
-    // @private nodes whose visibility may change
+    // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB, {
       visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeANode' )
@@ -84,6 +88,8 @@ class TriatomicMoleculeNode extends Node {
       visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeCNode' )
     } );
+
+    // dipoles
     const bondDipoleABNode = new BondDipoleNode( molecule.bondAB, {
       visibleProperty: bondDipolesVisibleProperty,
       tandem: options.tandem.createTandem( 'bondDipoleABNode' )
