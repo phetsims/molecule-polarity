@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -30,6 +31,7 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
    * @param {Object} [options]
    */
   constructor( dipoleDirectionProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( dipoleDirectionProperty, DipoleDirection );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,

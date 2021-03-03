@@ -23,13 +23,17 @@ import MPColors from '../MPColors.js';
 class SurfaceColorKey extends Node {
 
   /**
-   * @param {Color[]} colors colors used for the gradient, in left-to-right order
+   * @param {ColorDef[]} colors colors used for the gradient, in left-to-right order
    * @param {string} title
    * @param {string} leftLabel
    * @param {string} rightLabel
    * @param {Object} [options]
    */
   constructor( colors, title, leftLabel, rightLabel, options ) {
+    assert && assert( Array.isArray( colors ), 'invalid colors' );
+    assert && assert( typeof title === 'string', 'invalid title' );
+    assert && assert( typeof leftLabel === 'string', 'invalid leftLabel' );
+    assert && assert( typeof rightLabel === 'string', 'rightLabel title' );
 
     options = merge( {
       size: new Dimension2( 420, 20 ),

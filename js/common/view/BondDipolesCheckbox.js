@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
@@ -23,6 +24,7 @@ class BondDipolesCheckbox extends Checkbox {
    * @param {Object} [options]
    */
   constructor( bondDipolesVisibleProperty, options ) {
+    assert && AssertUtils.assertPropertyOf( bondDipolesVisibleProperty, 'boolean' );
 
     options = merge( {
       singular: false,

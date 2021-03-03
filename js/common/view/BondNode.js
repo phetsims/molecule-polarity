@@ -13,6 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
 
 class BondNode extends Line {
@@ -22,6 +23,7 @@ class BondNode extends Line {
    * @param {Object} [options]
    */
   constructor( bond, options ) {
+    assert && assert( bond instanceof Bond, 'invalid bond' );
 
     options = merge( {
       stroke: MPColors.BOND,

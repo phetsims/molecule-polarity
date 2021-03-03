@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -22,6 +23,7 @@ class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
    * @param {Object} [options]
    */
   constructor( surfaceTypeProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( surfaceTypeProperty, SurfaceType );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,

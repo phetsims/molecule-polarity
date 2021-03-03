@@ -8,6 +8,8 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -23,6 +25,7 @@ class MPControlPanel extends Panel {
    * @param {Object} [options]
    */
   constructor( subPanels, options ) {
+    assert && AssertUtils.assertArrayOf( subPanels, Node );
 
     options = merge( {
       tandem: Tandem.REQUIRED

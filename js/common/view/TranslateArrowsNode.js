@@ -15,6 +15,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Atom from '../model/Atom.js';
+import Molecule from '../model/Molecule.js';
 
 class TranslateArrowsNode extends Node {
 
@@ -24,6 +26,8 @@ class TranslateArrowsNode extends Node {
    * @param {Object} [options]
    */
   constructor( molecule, atom, options ) {
+    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
+    assert && assert( atom instanceof Atom, 'invalid atom' );
 
     options = merge( {
       length: 25, // relatively short, so we don't need curved arrows

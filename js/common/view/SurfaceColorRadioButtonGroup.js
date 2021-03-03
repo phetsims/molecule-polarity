@@ -8,6 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -32,6 +33,7 @@ class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
    * @param {Object} [options]
    */
   constructor( surfaceColorProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( surfaceColorProperty, SurfaceColor );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,

@@ -14,6 +14,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Atom from '../model/Atom.js';
 
 class AtomNode extends Node {
 
@@ -22,6 +23,7 @@ class AtomNode extends Node {
    * @param {Object} [options]
    */
   constructor( atom, options ) {
+    assert && assert( atom instanceof Atom, 'invalid atom' );
 
     options = merge( {
       tandem: Tandem.REQUIRED

@@ -7,11 +7,13 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import SurfaceType from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
 
@@ -22,6 +24,7 @@ class SurfaceControl extends VBox {
    * @param {Object} [options]
    */
   constructor( surfaceTypeProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( surfaceTypeProperty, SurfaceType );
 
     options = merge( {
       align: 'left',

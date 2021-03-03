@@ -16,6 +16,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import Atom from '../model/Atom.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
@@ -30,6 +31,8 @@ class PartialChargeNode extends Node {
    * @param {Object} [options]
    */
   constructor( atom, unitVectorFunction, options ) {
+    assert && assert( atom instanceof Atom, 'invalid atom' );
+    assert && assert( typeof unitVectorFunction === 'function', 'invalid unitVectorFunction' );
 
     options = merge( {
       tandem: Tandem.REQUIRED,

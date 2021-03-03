@@ -20,6 +20,8 @@ import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import Atom from '../model/Atom.js';
+import Molecule from '../model/Molecule.js';
 import MPConstants from '../MPConstants.js';
 import PointySliderThumb from './PointySliderThumb.js';
 
@@ -31,6 +33,8 @@ class ElectronegativityControl extends Panel {
    * @param {Object} [options]
    */
   constructor( atom, molecule, options ) {
+    assert && assert( atom instanceof Atom, 'invalid atom' );
+    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
 
     options = merge( {
 

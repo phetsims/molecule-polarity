@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
@@ -23,6 +24,7 @@ class MolecularDipoleCheckbox extends Checkbox {
    * @param {Object} [options]
    */
   constructor( molecularDipoleVisibleProperty, options ) {
+    assert && AssertUtils.assertPropertyOf( molecularDipoleVisibleProperty, 'boolean' );
 
     options = merge( {
       tandem: Tandem.REQUIRED

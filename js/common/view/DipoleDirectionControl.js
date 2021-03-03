@@ -7,12 +7,14 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import DipoleDirection from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';
 import DipoleDirectionRadioButtonGroup from './DipoleDirectionRadioButtonGroup.js';
 
@@ -23,6 +25,7 @@ class DipoleDirectionControl extends VBox {
    * @param {Object} [options]
    */
   constructor( dipoleDirectionProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( dipoleDirectionProperty, DipoleDirection );
 
     options = merge( {
       align: 'left',
