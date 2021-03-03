@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import AtomNode from '../../common/view/AtomNode.js';
@@ -26,10 +27,16 @@ class TriatomicMoleculeNode extends Node {
 
   /**
    * @param {TriatomicMolecule} molecule
+   * @param {Property.<boolean>} bondDipolesVisibleProperty
+   * @param {Property.<boolean>} molecularDipoleVisibleProperty
+   * @param {Property.<boolean>} partialChargesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( molecule, options ) {
+  constructor( molecule, bondDipolesVisibleProperty, molecularDipoleVisibleProperty, partialChargesVisibleProperty, options ) {
     assert && assert( molecule instanceof TriatomicMolecule, 'invalid molecule' );
+    assert && AssertUtils.assertPropertyOf( bondDipolesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( molecularDipoleVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( partialChargesVisibleProperty, 'boolean' );
 
     options = merge( {
       tandem: Tandem.REQUIRED
@@ -66,21 +73,27 @@ class TriatomicMoleculeNode extends Node {
 
     // @private nodes whose visibility may change
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB, {
+      visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeANode' )
     } );
     const partialChargeBNode = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule, {
+      visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeBNode' )
     } );
     const partialChargeCNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC, {
+      visibleProperty: partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeCNode' )
     } );
     const bondDipoleABNode = new BondDipoleNode( molecule.bondAB, {
+      visibleProperty: bondDipolesVisibleProperty,
       tandem: options.tandem.createTandem( 'bondDipoleABNode' )
     } );
     const bondDipoleBCNode = new BondDipoleNode( molecule.bondBC, {
+      visibleProperty: bondDipolesVisibleProperty,
       tandem: options.tandem.createTandem( 'bondDipoleBCNode' )
     } );
     const molecularDipoleNode = new MolecularDipoleNode( molecule, {
+      visibleProperty: molecularDipoleVisibleProperty,
       tandem: options.tandem.createTandem( 'molecularDipoleNode' )
     } );
 

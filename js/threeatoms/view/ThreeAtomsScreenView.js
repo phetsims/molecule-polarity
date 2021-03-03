@@ -41,9 +41,10 @@ class ThreeAtomsScreenView extends ScreenView {
     } );
 
     // nodes
-    const moleculeNode = new TriatomicMoleculeNode( model.molecule, {
-      tandem: options.tandem.createTandem( 'moleculeNode' )
-    } );
+    const moleculeNode = new TriatomicMoleculeNode( model.molecule, viewProperties.bondDipolesVisibleProperty,
+      viewProperties.molecularDipoleVisibleProperty, viewProperties.partialChargesVisibleProperty, {
+        tandem: options.tandem.createTandem( 'moleculeNode' )
+      } );
     const platesNode = new PlatesNode( model.eField, {
       spacing: 600,
       tandem: options.tandem.createTandem( 'platesNode' )
