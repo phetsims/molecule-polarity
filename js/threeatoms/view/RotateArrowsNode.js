@@ -29,7 +29,8 @@ class RotateArrowsNode extends Node {
     assert && assert( atom instanceof Atom, 'invalid atom' );
 
     options = merge( {
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioReadOnly: true
     }, options );
 
     // arrow configuration
