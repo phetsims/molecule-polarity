@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+// Copyright 2014-2021, University of Colorado Boulder
 
 /**
  * Key for a surface's color scheme. This legend is a rectangular box with a gradient fill that matches the surface

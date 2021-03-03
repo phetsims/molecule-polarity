@@ -1,4 +1,4 @@
-// Copyright 2021, University of Colorado Boulder
+// Copyright 2017-2021, University of Colorado Boulder
 
 /**
  * DipoleDirectionRadioButtonGroup is the radio button group for choosing dipole direction.
