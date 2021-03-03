@@ -19,6 +19,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
@@ -40,7 +41,8 @@ class RealMoleculeViewer extends Node {
 
     options = merge( {
       backgroundColor: 'white',
-      viewerSize: new Dimension2( 200, 200 )
+      viewerSize: new Dimension2( 200, 200 ),
+      tandem: Tandem.REQUIRED
     }, options );
 
     const rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
@@ -61,13 +63,26 @@ class RealMoleculeViewer extends Node {
       maxWidth: 200
     } );
 
-    const bondDipolesText = new Text( 'bond dipoles', { font: FONT } );
-    const molecularDipoleText = new Text( 'molecular dipole', { font: FONT } );
-    const partialChargesText = new Text( 'partial charges', { font: FONT } );
-    const atomLabelsText = new Text( 'atom labels', { font: FONT } );
+    const bondDipolesText = new Text( 'bond dipoles', {
+      font: FONT,
+      visibleProperty: viewProperties.bondDipolesVisibleProperty
+    } );
+    const molecularDipoleText = new Text( 'molecular dipole', {
+      font: FONT,
+      visibleProperty: viewProperties.molecularDipoleVisibleProperty
+    } );
+    const partialChargesText = new Text( 'partial charges', {
+      font: FONT,
+      visibleProperty: viewProperties.partialChargesVisibleProperty
+    } );
+    const atomLabelsText = new Text( 'atom labels', {
+      font: FONT,
+      visibleProperty: viewProperties.atomLabelsVisibleProperty
+    } );
     const surfaceTypeText = new Text( '?', { font: FONT } );
 
     const debugText = new LayoutBox( {
+      excludeInvisibleChildrenFromBounds: false,
       orientation: 'vertical',
       align: 'left',
       spacing: 10,
@@ -101,12 +116,10 @@ class RealMoleculeViewer extends Node {
     this.atomLabelsText = atomLabelsText;
     this.surfaceTypeText = surfaceTypeText;
 
-    // synchronize with view Properties, unlinks not needed
-    viewProperties.bondDipolesVisibleProperty.link( visible => this.setBondDipolesVisible( visible ) );
-    viewProperties.molecularDipoleVisibleProperty.link( visible => this.setMolecularDipoleVisible( visible ) );
-    viewProperties.partialChargesVisibleProperty.link( visible => this.setPartialChargesVisible( visible ) );
-    viewProperties.atomLabelsVisibleProperty.link( visible => this.setAtomLabelsVisible( visible ) );
-    viewProperties.surfaceTypeProperty.link( surfaceType => this.setSurfaceType( surfaceType ) );
+    // unlink is not needed
+    viewProperties.surfaceTypeProperty.link( surfaceType => {
+      this.surfaceTypeText.text = ( 'surface: ' + surfaceType.name );
+    } );
 
     // unlink not needed
     moleculeProperty.link( molecule => {
@@ -117,46 +130,6 @@ class RealMoleculeViewer extends Node {
 
       //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/15
     } );
-  }
-
-  /**
-   * @param {boolean} visible
-   * @public
-   */
-  setBondDipolesVisible( visible ) {
-    this.bondDipolesText.fill = visible ? 'black' : 'gray';
-  }
-
-  /**
-   * @param {boolean} visible
-   * @public
-   */
-  setMolecularDipoleVisible( visible ) {
-    this.molecularDipoleText.fill = visible ? 'black' : 'gray';
-  }
-
-  /**
-   * @param {boolean} visible
-   * @public
-   */
-  setPartialChargesVisible( visible ) {
-    this.partialChargesText.fill = visible ? 'black' : 'gray';
-  }
-
-  /**
-   * @param {boolean} visible
-   * @public
-   */
-  setAtomLabelsVisible( visible ) {
-    this.atomLabelsText.fill = visible ? 'black' : 'gray';
-  }
-
-  /**
-   * @param {SurfaceType} surfaceType
-   * @public
-   */
-  setSurfaceType( surfaceType ) {
-    this.surfaceTypeText.text = ( 'surface: ' + surfaceType.name );
   }
 }
 

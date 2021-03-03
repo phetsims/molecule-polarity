@@ -47,7 +47,6 @@ class ThreeAtomsScreenView extends ScreenView {
       } );
     const platesNode = new PlatesNode( model.eField, {
       spacing: 600,
-      visibleProperty: model.eField.enabledProperty,
       tandem: options.tandem.createTandem( 'platesNode' )
     } );
     const atomAElectronegativityControl = new ElectronegativityControl( model.molecule.atomA, model.molecule, {
@@ -112,23 +111,6 @@ class ThreeAtomsScreenView extends ScreenView {
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
-
-    // synchronization with view Properties ------------------------------
-
-    // unlink not needed
-    viewProperties.bondDipolesVisibleProperty.link( visible => {
-      moleculeNode.setBondDipolesVisible( visible );
-    } );
-
-    // unlink not needed
-    viewProperties.molecularDipoleVisibleProperty.link( visible => {
-      moleculeNode.setMolecularDipoleVisible( visible );
-    } );
-
-    // unlink not needed
-    viewProperties.partialChargesVisibleProperty.link( visible => {
-      moleculeNode.setPartialChargesVisible( visible );
-    } );
   }
 }
 

@@ -8,7 +8,6 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
@@ -22,19 +21,18 @@ import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import ElectronDensityNode from './ElectronDensityNode.js';
 import ElectrostaticPotentialNode from './ElectrostaticPotentialNode.js';
+import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 class DiatomicMoleculeNode extends Node {
 
   /**
    * @param {DiatomicMolecule} molecule
-   * @param {Property.<boolean>} dipoleVisibleProperty
-   * @param {Property.<boolean>} partialChargesVisibleProperty
+   * @param {TwoAtomsViewProperties} viewProperties
    * @param {Object} [options]
    */
-  constructor( molecule, dipoleVisibleProperty, partialChargesVisibleProperty, options ) {
+  constructor( molecule, viewProperties, options ) {
     assert && assert( molecule instanceof DiatomicMolecule, 'invalid molecule' );
-    assert && AssertUtils.assertPropertyOf( dipoleVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( partialChargesVisibleProperty, 'boolean' );
+    assert && assert( viewProperties instanceof TwoAtomsViewProperties, 'invalid viewProperties' );
 
     options = merge( {
       cursor: 'pointer',
@@ -64,11 +62,11 @@ class DiatomicMoleculeNode extends Node {
 
     // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
-      visibleProperty: partialChargesVisibleProperty,
+      visibleProperty: viewProperties.partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeANode' )
     } );
     const partialChargeBNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond, {
-      visibleProperty: partialChargesVisibleProperty,
+      visibleProperty: viewProperties.partialChargesVisibleProperty,
       tandem: options.tandem.createTandem( 'partialChargeBNode' )
     } );
 
@@ -82,7 +80,7 @@ class DiatomicMoleculeNode extends Node {
 
     // dipole
     const bondDipoleNode = new BondDipoleNode( molecule.bond, {
-      visibleProperty: dipoleVisibleProperty,
+      visibleProperty: viewProperties.bondDipoleVisibleProperty,
       tandem: options.tandem.createTandem( 'bondDipoleNode' )
     } );
 
@@ -103,6 +101,11 @@ class DiatomicMoleculeNode extends Node {
     } );
     this.addInputListener( dragListener );
 
+    viewProperties.surfaceTypeProperty.link( surfaceType => {
+      electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+    } );
+
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
       if ( molecule.dragging ) {
@@ -115,47 +118,11 @@ class DiatomicMoleculeNode extends Node {
     this.resetArrows = () => {
       arrowsANode.visible = arrowsBNode.visible = true;
     };
-
-    // @private
-    this.partialChargeANode = partialChargeANode;
-    this.partialChargeBNode = partialChargeBNode;
-    this.electrostaticPotentialNode = electrostaticPotentialNode;
-    this.electronDensityNode = electronDensityNode;
-    this.bondDipoleNode = bondDipoleNode;
   }
 
   // @public
   reset() {
     this.resetArrows();
-  }
-
-  /**
-   * Sets whether the bond dipole is visible.
-   * @param {boolean} visible
-   * @public
-   */
-  setBondDipoleVisible( visible ) {
-    this.bondDipoleNode.visible = visible;
-  }
-
-  /**
-   * Sets whether partial charges are visible.
-   * @param {boolean} visible
-   * @public
-   */
-  setPartialChargesVisible( visible ) {
-    this.partialChargeANode.visible = this.partialChargeBNode.visible = visible;
-  }
-
-  /**
-   * Sets the surface type that is visible.
-   * @param {SurfaceType} surfaceType
-   * @public
-   */
-  setSurfaceType( surfaceType ) {
-    assert && assert( SurfaceType.includes( surfaceType ), 'invalid surfaceType' );
-    this.electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
-    this.electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
   }
 }
 

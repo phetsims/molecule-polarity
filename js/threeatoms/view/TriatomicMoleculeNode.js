@@ -175,33 +175,6 @@ class TriatomicMoleculeNode extends Node {
   reset() {
     this.resetArrows();
   }
-
-  /**
-   * Sets whether bond dipoles are visible.
-   * @param {boolean} visible
-   * @public
-   */
-  setBondDipolesVisible( visible ) {
-    this.bondDipoleABNode.visible = this.bondDipoleBCNode.visible = visible;
-  }
-
-  /**
-   * Sets whether the molecular dipole is visible.
-   * @param {boolean} visible
-   * @public
-   */
-  setMolecularDipoleVisible( visible ) {
-    this.molecularDipoleNode.visible = visible;
-  }
-
-  /**
-   * Sets whether partial charges are visible.
-   * @param {boolean} visible
-   * @public
-   */
-  setPartialChargesVisible( visible ) {
-    this.partialChargeANode.visible = this.partialChargeBNode.visible = this.partialChargeCNode.visible = visible;
-  }
 }
 
 moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );

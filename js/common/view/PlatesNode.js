@@ -37,6 +37,9 @@ class PlatesNode extends Node {
       }
     }, options );
 
+    assert && assert( !options.visibleProperty, 'PlateNode sets visibleProperty' );
+    options.visibleProperty = eField.enabledProperty;
+
     const negativePlateNode = new PlateNode( eField, merge( {
       polarity: Polarity.NEGATIVE,
       perspective: 'left'

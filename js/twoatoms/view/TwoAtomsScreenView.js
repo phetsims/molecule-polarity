@@ -43,13 +43,11 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
 
-    const moleculeNode = new DiatomicMoleculeNode( model.molecule,
-      viewProperties.bondDipoleVisibleProperty, viewProperties.partialChargesVisibleProperty, {
-        tandem: options.tandem.createTandem( 'moleculeNode' )
-      } );
+    const moleculeNode = new DiatomicMoleculeNode( model.molecule, viewProperties, {
+      tandem: options.tandem.createTandem( 'moleculeNode' )
+    } );
 
     const platesNode = new PlatesNode( model.eField, {
-      visibleProperty: model.eField.enabledProperty,
       tandem: options.tandem.createTandem( 'platesNode' )
     } );
 
@@ -139,18 +137,7 @@ class TwoAtomsScreenView extends ScreenView {
     // synchronization with view Properties ------------------------------
 
     // unlink not needed
-    viewProperties.bondDipoleVisibleProperty.link( visible => {
-      moleculeNode.setBondDipoleVisible( visible );
-    } );
-
-    // unlink not needed
-    viewProperties.partialChargesVisibleProperty.link( visible => {
-      moleculeNode.setPartialChargesVisible( visible );
-    } );
-
-    // unlink not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      moleculeNode.setSurfaceType( surfaceType );
       electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );

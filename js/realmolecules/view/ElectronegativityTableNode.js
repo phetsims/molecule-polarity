@@ -10,11 +10,16 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import HSeparator from '../../../../sun/js/HSeparator.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
@@ -29,54 +34,52 @@ class ElectronegativityTableNode extends Node {
 
   /**
    * @param {RealMoleculeViewer} moleculeViewer
+   * @param {Object} [options]
    */
-  constructor( moleculeViewer ) {
+  constructor( moleculeViewer, options ) {
     assert && assert( moleculeViewer instanceof RealMoleculeViewer, 'invalid moleculeViewer' );
 
-    super();
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
 
-    const titleNode = new Text( moleculePolarityStrings.atomElectronegativities, {
+    const titleText = new Text( moleculePolarityStrings.atomElectronegativities, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      maxWidth: 300
+      maxWidth: 300,
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
-    this.addChild( titleNode );
 
-    // @private
-    this.cells = [
+    const cells = [
       new Cell( 'H', 1, 2.1 ),
+      new HSeparator( 12 ),
       new Cell( 'B', 5, 2.0 ),
       new Cell( 'C', 6, 2.5 ),
       new Cell( 'N', 7, 3.0 ),
       new Cell( 'O', 8, 3.5 ),
       new Cell( 'F', 9, 4.0 ),
+      new HSeparator( 12 ),
       new Cell( 'Cl', 17, 3.0 )
     ];
 
-    // layout cells, first and last cells are horizontally separated from others
-    const xGap = 12;
-    let x = 0;
-    const y = 0;
-    const firstCell = this.cells[ 0 ];
-    this.addChild( firstCell );
-    firstCell.x = x;
-    firstCell.y = y;
-    x = x + firstCell.width + xGap;
-    for ( let i = 1; i < this.cells.length - 1; i++ ) {
-      const cell = this.cells[ i ];
-      this.addChild( cell );
-      cell.x = x;
-      cell.y = y;
-      x = cell.right;
-    }
-    x += xGap;
-    const lastCell = this.cells[ this.cells.length - 1 ];
-    this.addChild( lastCell );
-    lastCell.x = x;
-    lastCell.y = y;
+    // Horizontal layout of cells, with title centered below the cel
+    assert && assert( !options.children, 'ElectronegativityTableNode sets children' );
+    options.children = [
+      new VBox( {
+        spacing: 4,
+        children: [
+          new HBox( {
+            spacing: 0,
+            children: cells
+          } ),
+          titleText
+        ]
+      } )
+    ];
 
-    // center title below cells
-    titleNode.centerX = ( lastCell.right - firstCell.left ) / 2;
-    titleNode.top = firstCell.bottom + 4;
+    super( options );
+
+    // @private
+    this.cells = cells;
 
     // highlight elements displayed by the viewer
     moleculeViewer.elementsProperty.lazyLink( elements => {
@@ -103,10 +106,12 @@ class ElectronegativityTableNode extends Node {
   }
 }
 
+/**
+ * A cell in the table, displays element name and number, color can be set.
+ */
 class Cell extends Node {
+
   /**
-   * A cell in the table, displays element name and number, color can be set.
-   *
    * @param {string} symbol - element's symbol in the periodic table
    * @param {number} elementNumber - element's number in the periodic table
    * @param {number} electronegativity

@@ -50,27 +50,37 @@ class RealMoleculesScreenView extends ScreenView {
     // @private
     this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
       viewerFill: MPColors.SCREEN_BACKGROUND,
-      viewerSize: new Dimension2( 450, 450 )
+      viewerSize: new Dimension2( 450, 450 ),
+      tandem: options.tandem.createTandem( 'moleculeViewer' )
     } );
 
-    const electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer );
+    const electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer, {
+      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty,
+      tandem: options.tandem.createTandem( 'electronegativityTableNode' )
+    } );
+
     const comboBoxListParent = new Node();
     const moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent );
 
-    const electrostaticPotentialColorKey = new Node();
+    const electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
+    const electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
+    const electrostaticPotentialColorKeyParent = new Node( {
+      children: [
+        electrostaticPotentialRWBColorKey,
+        electrostaticPotentialROYGBColorKey
+      ],
+      tandem: options.tandem.createTandem( 'electrostaticPotentialColorKey' )
+    } );
 
     // unlink not needed
     MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
-      electrostaticPotentialColorKey.removeAllChildren();
-      if ( surfaceColor === SurfaceColor.RWB ) {
-        electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialRWBColorKey() );
-      }
-      else {
-        electrostaticPotentialColorKey.addChild( SurfaceColorKey.createElectrostaticPotentialROYGBColorKey() );
-      }
+      electrostaticPotentialRWBColorKey.visible = ( surfaceColor === SurfaceColor.RWB );
+      electrostaticPotentialROYGBColorKey.visible = ( surfaceColor === SurfaceColor.ROYGB );
     } );
 
-    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
+    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
+      tandem: options.tandem.createTandem( 'electronDensityColorKey' )
+    } );
 
     const controlPanel = new RealMoleculesControlPanel( viewProperties, {
       tandem: options.tandem.createTandem( 'controlPanel' )
@@ -93,7 +103,7 @@ class RealMoleculesScreenView extends ScreenView {
         electronegativityTableNode,
         moleculesComboBox,
         controlPanel,
-        electrostaticPotentialColorKey,
+        electrostaticPotentialColorKeyParent,
         electronDensityColorKey,
         resetAllButton,
         comboBoxListParent // last, so that combo box list is on top
@@ -110,11 +120,11 @@ class RealMoleculesScreenView extends ScreenView {
     electronegativityTableNode.top = this.layoutBounds.top + 25;
 
     // centered below electronegativity table
-    electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
-    electrostaticPotentialColorKey.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
+    electrostaticPotentialColorKeyParent.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
+    electrostaticPotentialColorKeyParent.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
 
     // below color keys
-    this.moleculeViewer.top = electrostaticPotentialColorKey.bottom + 15;
+    this.moleculeViewer.top = electrostaticPotentialColorKeyParent.bottom + 15;
 
     // centered below viewer
     moleculesComboBox.centerX = this.moleculeViewer.centerX;
@@ -131,13 +141,8 @@ class RealMoleculesScreenView extends ScreenView {
     // synchronization with view Properties ------------------------------
 
     // unlink not needed
-    viewProperties.atomElectronegativitiesVisibleProperty.link( visible => {
-      electronegativityTableNode.visible = visible;
-    } );
-
-    // unlink not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      electrostaticPotentialColorKeyParent.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
 
