@@ -31,9 +31,6 @@ class Atom {
       tandem: Tandem.REQUIRED
     }, options );
 
-    assert && assert( MPConstants.ELECTRONEGATIVITY_RANGE.contains( options.electronegativity ),
-      'electronegativity out of range: ' + options.electronegativity );
-
     // @public (read-only)
     this.name = name;
     this.diameter = options.diameter;
@@ -46,6 +43,7 @@ class Atom {
 
     // @public
     this.electronegativityProperty = new NumberProperty( options.electronegativity, {
+      range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tandem: options.tandem.createTandem( 'electronegativityProperty' )
     } );
 

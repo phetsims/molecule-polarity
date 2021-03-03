@@ -39,7 +39,6 @@ class ElectronegativityControl extends Panel {
     options = merge( {
 
       // ElectronegativityControl
-      range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
       snapToTick: true,
       thumbSize: new Dimension2( 30, 35 ),
@@ -71,8 +70,10 @@ class ElectronegativityControl extends Panel {
     const thumbNode = new PointySliderThumb( { size: options.thumbSize } );
     thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
 
+    const range = atom.electronegativityProperty.range;
+
     // slider
-    const slider = new HSlider( atom.electronegativityProperty, options.range, {
+    const slider = new HSlider( atom.electronegativityProperty, range, {
       thumbNode: thumbNode,
       thumbYOffset: 10,
       trackSize: options.trackSize,
@@ -95,11 +96,11 @@ class ElectronegativityControl extends Panel {
       font: new PhetFont( 16 ),
       maxWidth: 40
     };
-    slider.addMajorTick( options.range.min, new Text( moleculePolarityStrings.less, tickLabelOptions ) );
-    slider.addMajorTick( options.range.max, new Text( moleculePolarityStrings.more, tickLabelOptions ) );
-    const centerTick = options.range.min + ( options.range.getLength() / 2 );
+    slider.addMajorTick( range.min, new Text( moleculePolarityStrings.less, tickLabelOptions ) );
+    slider.addMajorTick( range.max, new Text( moleculePolarityStrings.more, tickLabelOptions ) );
+    const centerTick = range.min + ( range.getLength() / 2 );
     slider.addMajorTick( centerTick );
-    for ( let i = options.range.min + options.tickInterval; i < options.range.max; i += options.tickInterval ) {
+    for ( let i = range.min + options.tickInterval; i < range.max; i += options.tickInterval ) {
       if ( i !== centerTick ) {
         slider.addMinorTick( i );
       }
