@@ -71,16 +71,13 @@ class TriatomicMoleculeNode extends Node {
 
     // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB, {
-      visibleProperty: partialChargesVisibleProperty,
-      tandem: options.tandem.createTandem( 'partialChargeANode' )
+      visibleProperty: partialChargesVisibleProperty
     } );
     const partialChargeBNode = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule, {
-      visibleProperty: partialChargesVisibleProperty,
-      tandem: options.tandem.createTandem( 'partialChargeBNode' )
+      visibleProperty: partialChargesVisibleProperty
     } );
     const partialChargeCNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC, {
-      visibleProperty: partialChargesVisibleProperty,
-      tandem: options.tandem.createTandem( 'partialChargeCNode' )
+      visibleProperty: partialChargesVisibleProperty
     } );
 
     // dipoles

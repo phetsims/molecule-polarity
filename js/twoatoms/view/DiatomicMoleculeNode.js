@@ -58,12 +58,10 @@ class DiatomicMoleculeNode extends Node {
 
     // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
-      visibleProperty: viewProperties.partialChargesVisibleProperty,
-      tandem: options.tandem.createTandem( 'partialChargeANode' )
+      visibleProperty: viewProperties.partialChargesVisibleProperty
     } );
     const partialChargeBNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomB, molecule.bond, {
-      visibleProperty: viewProperties.partialChargesVisibleProperty,
-      tandem: options.tandem.createTandem( 'partialChargeBNode' )
+      visibleProperty: viewProperties.partialChargesVisibleProperty
     } );
 
     // surfaces

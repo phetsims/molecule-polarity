@@ -9,11 +9,9 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
@@ -34,10 +32,6 @@ class PartialChargeNode extends Node {
     assert && assert( atom instanceof Atom, 'invalid atom' );
     assert && assert( typeof unitVectorFunction === 'function', 'invalid unitVectorFunction' );
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
-      phetioReadOnly: true
-    }, options );
     super( options );
 
     // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
