@@ -64,7 +64,8 @@ class Bond {
         return dipole;
       }, {
         phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
-        tandem: options.tandem.createTandem( 'dipoleProperty' )
+        tandem: options.tandem.createTandem( 'dipoleProperty' ),
+        phetioDocumentation: 'qualitative vector representation of the dipole, based on the electronegativity difference between the atoms'
       } );
   }
 
