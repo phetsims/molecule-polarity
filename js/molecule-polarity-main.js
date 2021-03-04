@@ -34,9 +34,13 @@ simLauncher.launch( () => {
 
   const screens = [
     new TwoAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'twoAtomsScreen' ) } ),
-    new ThreeAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'threeAtomsScreen' ) } ),
-    new RealMoleculesScreen( { tandem: Tandem.ROOT.createTandem( 'realMoleculesScreen' ) } )
+    new ThreeAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'threeAtomsScreen' ) } )
   ];
+
+  //TODO https://github.com/phetsims/molecule-polarity/issues/88 removed for research version, remove this in master!
+  if ( !Tandem.PHET_IO_ENABLED ) {
+    screens.push( new RealMoleculesScreen( { tandem: Tandem.ROOT.createTandem( 'realMoleculesScreen' ) } ) );
+  }
 
   const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].title, screens, options );
   sim.start();
