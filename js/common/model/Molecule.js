@@ -47,8 +47,8 @@ class Molecule {
 
     // @public
     this.angleProperty = new NumberProperty( options.angle, {
-      phetioDocumentation: 'angle of rotation, in radians',
-      tandem: options.tandem.createTandem( 'angleProperty' )
+      tandem: options.tandem.createTandem( 'angleProperty' ),
+      phetioDocumentation: 'angle of rotation, in radians, with positive rotation being clockwise'
     } );
 
     // @pubic true when the user is dragging the molecule
