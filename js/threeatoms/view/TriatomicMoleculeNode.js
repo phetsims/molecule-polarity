@@ -65,6 +65,10 @@ class TriatomicMoleculeNode extends Node {
     const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA );
     const hintArrowCNode = new TranslateArrowsNode( molecule, molecule.atomC );
     const hintArrowBNode = new RotateArrowsNode( molecule, molecule.atomB );
+    const hintArrowsNode = new Node( {
+      children: [ hintArrowANode, hintArrowCNode, hintArrowBNode ],
+      tandem: options.tandem.createTandem( 'hintArrowsNode' )
+    } );
 
     // We'll be moving the dragged atom to the front, because A & C can overlap
     const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
@@ -95,7 +99,7 @@ class TriatomicMoleculeNode extends Node {
     options.children = [
       bondABNode, bondBCNode,
       atomsParent,
-      hintArrowANode, hintArrowCNode, hintArrowBNode,
+      hintArrowsNode,
       partialChargeANode, partialChargeBNode, partialChargeCNode,
       bondDipoleABNode, bondDipoleBCNode, molecularDipoleNode
     ];
@@ -149,6 +153,8 @@ class TriatomicMoleculeNode extends Node {
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
+
+        // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
         hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = false;
       }
     };
@@ -157,14 +163,16 @@ class TriatomicMoleculeNode extends Node {
     molecule.bondAngleCProperty.lazyLink( hideArrows );
 
     // @private makes the cueing arrows visible
-    this.resetArrows = () => {
+    this.resetTriatomicMoleculeNode = () => {
+
+      // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
       hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = true;
     };
   }
 
   // @public
   reset() {
-    this.resetArrows();
+    this.resetTriatomicMoleculeNode();
   }
 }
 

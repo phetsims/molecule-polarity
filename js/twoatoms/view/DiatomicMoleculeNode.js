@@ -55,6 +55,10 @@ class DiatomicMoleculeNode extends Node {
     // arrows to provide interaction hints
     const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA );
     const hintArrowBNode = new TranslateArrowsNode( molecule, molecule.atomB );
+    const hintArrowsNode = new Node( {
+      children: [ hintArrowANode, hintArrowBNode ],
+      tandem: options.tandem.createTandem( 'hintArrowsNode' )
+    } );
 
     // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
@@ -81,7 +85,7 @@ class DiatomicMoleculeNode extends Node {
     options.children = [
       electrostaticPotentialNode, electronDensityNode,
       bondNode, atomANode, atomBNode,
-      hintArrowANode, hintArrowBNode,
+      hintArrowsNode,
       partialChargeANode, partialChargeBNode, bondDipoleNode
     ];
 
@@ -102,20 +106,24 @@ class DiatomicMoleculeNode extends Node {
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
+
+        // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
         hintArrowANode.visible = hintArrowBNode.visible = false;
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
 
-    // @private makes the cueing arrows visible
-    this.resetArrows = () => {
+    // @private
+    this.resetDiatomicMoleculeNode = () => {
+
+      // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
       hintArrowANode.visible = hintArrowBNode.visible = true;
     };
   }
 
   // @public
   reset() {
-    this.resetArrows();
+    this.resetDiatomicMoleculeNode();
   }
 }
 
