@@ -47,8 +47,7 @@ class ThreeAtomsScreenView extends ScreenView {
         tandem: options.tandem.createTandem( 'moleculeNode' )
       } );
     const platesNode = new PlatesNode( model.eField, {
-      spacing: 600,
-      tandem: options.tandem.createTandem( 'platesNode' )
+      spacing: 600
     } );
 
     const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );

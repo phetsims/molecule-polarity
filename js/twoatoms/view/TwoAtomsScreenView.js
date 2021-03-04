@@ -48,9 +48,7 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'moleculeNode' )
     } );
 
-    const platesNode = new PlatesNode( model.eField, {
-      tandem: options.tandem.createTandem( 'platesNode' )
-    } );
+    const platesNode = new PlatesNode( model.eField );
 
     const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
 
