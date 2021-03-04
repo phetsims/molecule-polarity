@@ -51,6 +51,7 @@ class Atom {
     // @public partial charge is zero until this atom participates in a bond
     this.partialChargeProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'partialChargeProperty' ),
+      phetioDocumentation: 'qualitative scalar representation of the partial charge, computed as the electronegativity difference',
       phetioReadOnly: true // because this is computed based on electronegativity of atoms in a molecule
     } );
   }
