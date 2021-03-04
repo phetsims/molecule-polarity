@@ -74,7 +74,7 @@ class Molecule {
       return sum;
     }, {
       phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
-      phetioDocumentation: 'the molecular dipole, sum of the bond dipoles',
+      phetioDocumentation: 'the molecular dipole, vector sum of the bond dipoles',
       tandem: options.tandem.createTandem( 'dipoleProperty' )
     } );
 
