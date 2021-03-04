@@ -13,7 +13,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
@@ -30,9 +29,7 @@ class TranslateArrowsNode extends Node {
     assert && assert( atom instanceof Atom, 'invalid atom' );
 
     options = merge( {
-      length: 25, // relatively short, so we don't need curved arrows
-      tandem: Tandem.REQUIRED,
-      phetioReadOnly: true
+      length: 25 // relatively short, so we don't need curved arrows
     }, options );
 
     const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );

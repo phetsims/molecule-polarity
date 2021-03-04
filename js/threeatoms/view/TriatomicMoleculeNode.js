@@ -61,16 +61,10 @@ class TriatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'bondBCNode' )
     } );
 
-    // cueing arrows
-    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA, {
-      tandem: options.tandem.createTandem( 'arrowsANode' )
-    } );
-    const arrowsCNode = new TranslateArrowsNode( molecule, molecule.atomC, {
-      tandem: options.tandem.createTandem( 'arrowsCNode' )
-    } );
-    const arrowsBNode = new RotateArrowsNode( molecule, molecule.atomB, {
-      tandem: options.tandem.createTandem( 'arrowsBNode' )
-    } );
+    // arrows to provide interaction hints
+    const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    const hintArrowCNode = new TranslateArrowsNode( molecule, molecule.atomC );
+    const hintArrowBNode = new RotateArrowsNode( molecule, molecule.atomB );
 
     // We'll be moving the dragged atom to the front, because A & C can overlap
     const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
@@ -104,7 +98,7 @@ class TriatomicMoleculeNode extends Node {
     options.children = [
       bondABNode, bondBCNode,
       atomsParent,
-      arrowsANode, arrowsCNode, arrowsBNode,
+      hintArrowANode, hintArrowCNode, hintArrowBNode,
       partialChargeANode, partialChargeBNode, partialChargeCNode,
       bondDipoleABNode, bondDipoleBCNode, molecularDipoleNode
     ];
@@ -155,7 +149,7 @@ class TriatomicMoleculeNode extends Node {
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
-        arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = false;
+        hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = false;
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
@@ -164,7 +158,7 @@ class TriatomicMoleculeNode extends Node {
 
     // @private makes the cueing arrows visible
     this.resetArrows = () => {
-      arrowsANode.visible = arrowsBNode.visible = arrowsCNode.visible = true;
+      hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = true;
     };
   }
 

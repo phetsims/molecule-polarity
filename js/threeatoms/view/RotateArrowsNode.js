@@ -8,11 +8,9 @@
  */
 
 import Matrix3 from '../../../../dot/js/Matrix3.js';
-import merge from '../../../../phet-core/js/merge.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import Atom from '../../common/model/Atom.js';
 import Molecule from '../../common/model/Molecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -28,10 +26,7 @@ class RotateArrowsNode extends Node {
     assert && assert( molecule instanceof Molecule, 'invalid molecule' );
     assert && assert( atom instanceof Atom, 'invalid atom' );
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
-      phetioReadOnly: true
-    }, options );
+    options = options || {};
 
     // arrow configuration
     const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };

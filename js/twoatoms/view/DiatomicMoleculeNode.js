@@ -52,13 +52,9 @@ class DiatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'bondNode' )
     } );
 
-    // cueing arrows
-    const arrowsANode = new TranslateArrowsNode( molecule, molecule.atomA, {
-      tandem: options.tandem.createTandem( 'arrowsANode' )
-    } );
-    const arrowsBNode = new TranslateArrowsNode( molecule, molecule.atomB, {
-      tandem: options.tandem.createTandem( 'arrowsBNode' )
-    } );
+    // arrows to provide interaction hints
+    const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA );
+    const hintArrowBNode = new TranslateArrowsNode( molecule, molecule.atomB );
 
     // partial charge
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bond, {
@@ -87,7 +83,7 @@ class DiatomicMoleculeNode extends Node {
     options.children = [
       electrostaticPotentialNode, electronDensityNode,
       bondNode, atomANode, atomBNode,
-      arrowsANode, arrowsBNode,
+      hintArrowANode, hintArrowBNode,
       partialChargeANode, partialChargeBNode, bondDipoleNode
     ];
 
@@ -108,14 +104,14 @@ class DiatomicMoleculeNode extends Node {
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
-        arrowsANode.visible = arrowsBNode.visible = false;
+        hintArrowANode.visible = hintArrowBNode.visible = false;
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
 
     // @private makes the cueing arrows visible
     this.resetArrows = () => {
-      arrowsANode.visible = arrowsBNode.visible = true;
+      hintArrowANode.visible = hintArrowBNode.visible = true;
     };
   }
 
