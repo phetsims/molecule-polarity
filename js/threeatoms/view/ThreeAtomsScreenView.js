@@ -50,20 +50,22 @@ class ThreeAtomsScreenView extends ScreenView {
       spacing: 600,
       tandem: options.tandem.createTandem( 'platesNode' )
     } );
+
+    const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
+
     const atomAElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomA, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomAElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
     } );
     const atomBElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomB, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomBElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
     } );
     const atomCElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomC, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomCElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' )
     } );
-
     const electronegativityPanels = new HBox( {
       spacing: 10,
       children: [ atomAElectronegativityPanel, atomBElectronegativityPanel, atomCElectronegativityPanel ],
-      tandem: options.tandem.createTandem( 'electronegativityPanels' )
+      tandem: electronegativityPanelsTandem
     } );
 
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
