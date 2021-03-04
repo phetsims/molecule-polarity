@@ -72,6 +72,12 @@ class TwoAtomsScreenView extends ScreenView {
     const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
+    // Group color keys under a common parent, so that PhET-iO can hide the color key.
+    const colorKeyNode = new Node( {
+      children: [ electrostaticPotentialColorKey, electronDensityColorKey ],
+      tandem: options.tandem.createTandem( 'colorKeyNode' )
+    } );
+
     const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
       tandem: options.tandem.createTandem( 'controlPanel' )
     } );
@@ -96,8 +102,7 @@ class TwoAtomsScreenView extends ScreenView {
         electronegativityPanels,
         controlPanel,
         bondCharacterPanel,
-        electrostaticPotentialColorKey,
-        electronDensityColorKey,
+        colorKeyNode,
         moleculeNode,
         resetAllButton
       ]
