@@ -125,7 +125,7 @@ class RealMoleculeViewer extends Node {
     moleculeProperty.link( molecule => {
       moleculeText.text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
         symbol: molecule.symbol,
-        name: molecule.name
+        name: molecule.fullName
       } );
 
       //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/15

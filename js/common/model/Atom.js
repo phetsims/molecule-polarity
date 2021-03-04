@@ -17,10 +17,10 @@ import MPConstants from '../MPConstants.js';
 class Atom {
 
   /**
-   * @param {string} name - name used to label the atom
+   * @param {string} label - label that appears on the atom
    * @param {Object} [options]
    */
-  constructor( name, options ) {
+  constructor( label, options ) {
     assert && assert( typeof name === 'string', 'invalid name' );
 
     options = merge( {
@@ -32,7 +32,7 @@ class Atom {
     }, options );
 
     // @public (read-only)
-    this.name = name;
+    this.label = label;
     this.diameter = options.diameter;
     this.color = options.color;
 

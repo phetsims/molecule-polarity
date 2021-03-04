@@ -17,14 +17,14 @@ import moleculePolarity from '../../moleculePolarity.js';
 class RealMolecule extends PhetioObject {
 
   /**
-   * @param {string} symbol
-   * @param {string} name
+   * @param {string} symbol - chemical symbol of the molecule
+   * @param {string} fullName - full name of the molecule
    * @param {string} mol2Data molecule data description, in mol2 format
    * @param {Tandem} tandem
    */
-  constructor( symbol, name, mol2Data, tandem ) {
+  constructor( symbol, fullName, mol2Data, tandem ) {
     assert && assert( typeof symbol === 'string', 'invalid symbol' );
-    assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( typeof fullName === 'string', 'invalid fullName' );
     assert && assert( typeof mol2Data === 'string', 'invalid mol2Data' );
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
@@ -35,7 +35,7 @@ class RealMolecule extends PhetioObject {
 
     // @public (read-only)
     this.symbol = ChemUtils.toSubscript( symbol );
-    this.name = name;
+    this.fullName = fullName;
     this.mol2Data = mol2Data;
   }
 }

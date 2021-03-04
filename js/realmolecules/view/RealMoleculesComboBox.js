@@ -69,7 +69,7 @@ function createItem( molecule ) {
 
   const text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
     symbol: molecule.symbol,
-    name: molecule.name
+    name: molecule.fullName
   } );
 
   const node = new RichText( text, {

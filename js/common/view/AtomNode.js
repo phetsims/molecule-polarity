@@ -36,21 +36,24 @@ class AtomNode extends Node {
     } );
 
     // name centered on atom
-    const nameText = new Text( atom.name, {
+    const labelText = new Text( atom.label, {
       font: new PhetFont( { size: 32, weight: 'bold' } ),
       maxWidth: 0.75 * atom.diameter,
-      centerX: sphereNode.centerX,
-      centerY: sphereNode.centerY,
-      tandem: options.tandem.createTandem( 'nameText' )
+      tandem: options.tandem.createTandem( 'labelText' )
     } );
 
     assert && assert( !options.children, 'AtomNode sets children' );
-    options.children = [ sphereNode, nameText ];
+    options.children = [ sphereNode, labelText ];
 
     super( options );
 
     // sync position with model, unlink not needed
     atom.positionProperty.linkAttribute( this, 'translation' );
+
+    // Keep the label centered in the sphere. The label can be changed via PhET-iO.
+    labelText.boundsProperty.link( () => {
+      labelText.center = sphereNode.center;
+    } );
   }
 }
 

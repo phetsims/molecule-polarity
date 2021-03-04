@@ -43,7 +43,7 @@ class ElectronegativityPanel extends Panel {
     }, options );
 
     // titles
-    const titleText = new Text( StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, { name: atom.name } ), {
+    const titleText = new Text( StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, { name: atom.label } ), {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: 150,
       tandem: options.tandem.createTandem( 'titleText' )
