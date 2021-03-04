@@ -9,7 +9,6 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import MPColors from '../MPColors.js';
@@ -28,8 +27,7 @@ class MolecularDipoleNode extends DipoleNode {
     assert && assert( molecule instanceof Molecule, 'invalid molecule' );
 
     options = merge( {
-      fill: MPColors.MOLECULAR_DIPOLE,
-      tandem: Tandem.REQUIRED
+      fill: MPColors.MOLECULAR_DIPOLE
     }, options );
 
     super( molecule.dipoleProperty, options );

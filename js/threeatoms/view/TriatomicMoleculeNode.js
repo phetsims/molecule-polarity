@@ -97,8 +97,7 @@ class TriatomicMoleculeNode extends Node {
       visibleProperty: bondDipolesVisibleProperty
     } );
     const molecularDipoleNode = new MolecularDipoleNode( molecule, {
-      visibleProperty: molecularDipoleVisibleProperty,
-      tandem: options.tandem.createTandem( 'molecularDipoleNode' )
+      visibleProperty: molecularDipoleVisibleProperty
     } );
 
     assert && assert( !options.children, 'TriatomicMoleculeNode sets children' );
