@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.1.0-dev.2 Tue Mar 02 2021 23:13:39 GMT-0700 (Mountain Standard Time)",
+  "comment": "# molecule-polarity 1.1.0-dev.3 Thu Mar 04 2021 12:28:19 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "3df8c5ff9a465b031f84195a90bbb7e1be10a14d",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "baa43cdba20fc4dc615fba971cf52d25c49dcfec",
+    "sha": "a6e24b80c4832bfb816623d3703318af98329509",
     "branch": "master"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "molecule-polarity": {
-    "sha": "970ae2e88047619414fa2928240305fea93434ed",
+    "sha": "d20aee24c3d96e41dbd2779dbb85b4653ef4f4a2",
     "branch": "master"
   },
   "nitroglycerin": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "7556d28cac9005a096ebbf32fadd54a1bd8d4219",
+    "sha": "9ea1e609bc5abaf778b81ef78aa9c47c4c3a6394",
     "branch": "master"
   },
   "scenery-phet": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "tambo": {
-    "sha": "aefdb376811565089aa8f5307e00442a921287eb",
+    "sha": "d1394050fbc6ab835de501c7a0c7da7e4506284a",
     "branch": "master"
   },
   "tandem": {
@@ -93,7 +93,7 @@
     "branch": "master"
   },
   "twixt": {
-    "sha": "94897cc893dc5154c772506590d500cc7ca279c9",
+    "sha": "4d61c40289f624038a7319e0428534cf8ee7f6ec",
     "branch": "master"
   },
   "utterance-queue": {
