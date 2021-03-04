@@ -39,6 +39,7 @@ class Atom {
     // @public
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioDocumentation: 'position of this atom in the view coordinate frame, where (0,0) is at the upper-left, +x is to the right, +y is down',
       phetioReadOnly: true // because position is constrained by molecule structure
     } );
 
