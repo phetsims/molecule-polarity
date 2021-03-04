@@ -52,16 +52,18 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'platesNode' )
     } );
 
+    const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
+
     const atomAElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomA, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomAElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
     } );
     const atomBElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomB, model.molecule, {
-      tandem: options.tandem.createTandem( 'atomBElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
     } );
     const electronegativityPanels = new HBox( {
       spacing: 10,
       children: [ atomAElectronegativityPanel, atomBElectronegativityPanel ],
-      tandem: options.tandem.createTandem( 'electronegativityPanels' )
+      tandem: electronegativityPanelsTandem
     } );
 
     const bondCharacterPanel = new BondCharacterPanel( model.molecule, {
