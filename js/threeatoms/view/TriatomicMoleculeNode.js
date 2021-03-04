@@ -91,12 +91,10 @@ class TriatomicMoleculeNode extends Node {
 
     // dipoles
     const bondDipoleABNode = new BondDipoleNode( molecule.bondAB, {
-      visibleProperty: bondDipolesVisibleProperty,
-      tandem: options.tandem.createTandem( 'bondDipoleABNode' )
+      visibleProperty: bondDipolesVisibleProperty
     } );
     const bondDipoleBCNode = new BondDipoleNode( molecule.bondBC, {
-      visibleProperty: bondDipolesVisibleProperty,
-      tandem: options.tandem.createTandem( 'bondDipoleBCNode' )
+      visibleProperty: bondDipolesVisibleProperty
     } );
     const molecularDipoleNode = new MolecularDipoleNode( molecule, {
       visibleProperty: molecularDipoleVisibleProperty,

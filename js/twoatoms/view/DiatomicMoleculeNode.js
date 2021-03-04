@@ -80,8 +80,7 @@ class DiatomicMoleculeNode extends Node {
 
     // dipole
     const bondDipoleNode = new BondDipoleNode( molecule.bond, {
-      visibleProperty: viewProperties.bondDipoleVisibleProperty,
-      tandem: options.tandem.createTandem( 'bondDipoleNode' )
+      visibleProperty: viewProperties.bondDipoleVisibleProperty
     } );
 
     assert && assert( !options.children, 'DiatomicMoleculeNode sets children' );

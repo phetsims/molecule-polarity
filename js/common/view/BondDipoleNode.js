@@ -8,7 +8,6 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
@@ -27,8 +26,7 @@ class BondDipoleNode extends DipoleNode {
     assert && assert( bond instanceof Bond, 'invalid bond' );
 
     options = merge( {
-      fill: MPColors.BOND_DIPOLE,
-      tandem: Tandem.REQUIRED
+      fill: MPColors.BOND_DIPOLE
     }, options );
 
     super( bond.dipoleProperty, options );
