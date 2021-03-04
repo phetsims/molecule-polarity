@@ -48,7 +48,7 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'moleculeNode' )
     } );
 
-    const platesNode = new PlatesNode( model.eField );
+    const platesNode = new PlatesNode( model.eFieldEnabledProperty );
 
     const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
 
@@ -72,7 +72,7 @@ class TwoAtomsScreenView extends ScreenView {
     const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
-    const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
+    const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
       tandem: options.tandem.createTandem( 'controlPanel' )
     } );
 

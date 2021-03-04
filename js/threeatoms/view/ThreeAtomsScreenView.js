@@ -46,7 +46,7 @@ class ThreeAtomsScreenView extends ScreenView {
       viewProperties.molecularDipoleVisibleProperty, viewProperties.partialChargesVisibleProperty, {
         tandem: options.tandem.createTandem( 'moleculeNode' )
       } );
-    const platesNode = new PlatesNode( model.eField, {
+    const platesNode = new PlatesNode( model.eFieldEnabledProperty, {
       spacing: 600
     } );
 
@@ -67,7 +67,7 @@ class ThreeAtomsScreenView extends ScreenView {
       tandem: electronegativityPanelsTandem
     } );
 
-    const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eField.enabledProperty, {
+    const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
       tandem: options.tandem.createTandem( 'controlPanel' )
     } );
 

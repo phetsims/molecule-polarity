@@ -8,13 +8,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import DipoleDirection from './DipoleDirection.js';
-import EField from './EField.js';
 
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
@@ -34,20 +34,20 @@ class MPModel {
     }, options );
 
     // @public (read-only)
-    this.eField = new EField( {
-      tandem: options.tandem.createTandem( 'eField' )
-    } );
-
-    // @public (read-only)
     this.molecule = createMolecule( {
       tandem: options.tandem.createTandem( 'molecule' )
+    } );
+
+    // @public
+    this.eFieldEnabledProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'eFieldEnabledProperty' )
     } );
   }
 
   // @public
   reset() {
-    this.eField.reset();
     this.molecule.reset();
+    this.eFieldEnabledProperty.reset();
   }
 
   /**
@@ -58,7 +58,7 @@ class MPModel {
   step( dt ) {
 
     // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
-    if ( this.eField.enabledProperty.get() && !this.molecule.isDraggingProperty.value ) {
+    if ( this.eFieldEnabledProperty.get() && !this.molecule.isDraggingProperty.value ) {
       this.updateMoleculeOrientation( this.molecule );
     }
   }

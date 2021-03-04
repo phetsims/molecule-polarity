@@ -8,11 +8,11 @@
 
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import EField from '../model/EField.js';
 import Polarity from '../model/Polarity.js';
 import MPColors from '../MPColors.js';
 import PolarityIndicator from './PolarityIndicator.js';
@@ -20,11 +20,11 @@ import PolarityIndicator from './PolarityIndicator.js';
 class PlatesNode extends Node {
 
   /**
-   * @param {EField} eField
+   * @param {Property.<boolean>} eFieldEnabledProperty
    * @param {Object} [options]
    */
-  constructor( eField, options ) {
-    assert && assert( eField instanceof EField, 'invalid eField' );
+  constructor( eFieldEnabledProperty, options ) {
+    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
 
     options = merge( {
       align: 'bottom',
@@ -38,14 +38,14 @@ class PlatesNode extends Node {
     }, options );
 
     assert && assert( !options.visibleProperty, 'PlateNode sets visibleProperty' );
-    options.visibleProperty = eField.enabledProperty;
+    options.visibleProperty = eFieldEnabledProperty;
 
-    const negativePlateNode = new PlateNode( eField, merge( {
+    const negativePlateNode = new PlateNode( eFieldEnabledProperty, merge( {
       polarity: Polarity.NEGATIVE,
       perspective: 'left'
     }, options.plateOptions ) );
 
-    const positivePlateNode = new PlateNode( eField, merge( {
+    const positivePlateNode = new PlateNode( eFieldEnabledProperty, merge( {
       polarity: Polarity.POSITIVE,
       perspective: 'right',
       left: negativePlateNode.right + options.spacing,
@@ -68,11 +68,11 @@ class PlatesNode extends Node {
 class PlateNode extends Node {
 
   /**
-   * @param {EField} eField
+   * @param {Property.<boolean>} eFieldEnabledProperty
    * @param {Object} [options]
    */
-  constructor( eField, options ) {
-    assert && assert( eField instanceof EField, 'invalid eField' );
+  constructor( eFieldEnabledProperty, options ) {
+    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
 
     options = merge( {
       polarity: Polarity.NEGATIVE,
@@ -131,7 +131,7 @@ class PlateNode extends Node {
     super( options );
 
     // show/hide when the field is enabled/disabled... (unlink not needed)
-    eField.enabledProperty.link( enabled => {
+    eFieldEnabledProperty.link( enabled => {
       this.visible = enabled;
     } );
   }
