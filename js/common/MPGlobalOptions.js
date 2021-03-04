@@ -28,15 +28,18 @@ class MPGlobalOptions {
     this.dipoleDirectionProperty = new EnumerationProperty( DipoleDirection, DipoleDirection.POSITIVE_TO_NEGATIVE, {
       tandem: options.tandem.createTandem( 'dipoleDirectionProperty' )
     } );
-    this.surfaceColorProperty = new EnumerationProperty( SurfaceColor, SurfaceColor.RWB, {
-      tandem: options.tandem.createTandem( 'surfaceColorProperty' )
+
+    // @public
+    this.electrostaticPotentialSurfaceColorProperty = new EnumerationProperty( SurfaceColor, SurfaceColor.RWB, {
+      tandem: options.tandem.createTandem( 'electrostaticPotentialSurfaceColorProperty' ),
+      phetioDocumentation: 'color used for Electrostatic Potential surface in the Real Molecules screen'
     } );
   }
 
   // @public
   reset() {
     this.dipoleDirectionProperty.reset();
-    this.surfaceColorProperty.reset();
+    this.electrostaticPotentialSurfaceColorProperty.reset();
   }
 }
 

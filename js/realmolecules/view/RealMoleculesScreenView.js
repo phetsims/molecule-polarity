@@ -75,7 +75,7 @@ class RealMoleculesScreenView extends ScreenView {
     } );
 
     // unlink not needed
-    MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
+    MPConstants.GLOBAL_OPTIONS.electrostaticPotentialSurfaceColorProperty.link( surfaceColor => {
       electrostaticPotentialRWBColorKey.visible = ( surfaceColor === SurfaceColor.RWB );
       electrostaticPotentialROYGBColorKey.visible = ( surfaceColor === SurfaceColor.ROYGB );
     } );

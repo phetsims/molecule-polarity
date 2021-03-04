@@ -29,11 +29,11 @@ const COLOR_KEY_OPTIONS = {
 class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<SurfaceColor>} surfaceColorProperty
+   * @param {EnumerationProperty.<SurfaceColor>} electrostaticPotentialSurfaceColorProperty
    * @param {Object} [options]
    */
-  constructor( surfaceColorProperty, options ) {
-    assert && AssertUtils.assertEnumerationPropertyOf( surfaceColorProperty, SurfaceColor );
+  constructor( electrostaticPotentialSurfaceColorProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( electrostaticPotentialSurfaceColorProperty, SurfaceColor );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -53,7 +53,7 @@ class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
       }
     ];
 
-    super( surfaceColorProperty, radioButtonGroupItems, options );
+    super( electrostaticPotentialSurfaceColorProperty, radioButtonGroupItems, options );
   }
 }
 
