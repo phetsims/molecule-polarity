@@ -12,6 +12,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import moleculePolarity from '../moleculePolarity.js';
 import DipoleDirection from './model/DipoleDirection.js';
 import SurfaceColor from './model/SurfaceColor.js';
+import MPQueryParameters from './MPQueryParameters.js';
 
 class MPGlobalOptions {
 
@@ -25,15 +26,17 @@ class MPGlobalOptions {
     }, options );
 
     // @public
-    this.dipoleDirectionProperty = new EnumerationProperty( DipoleDirection, DipoleDirection.POSITIVE_TO_NEGATIVE, {
-      tandem: options.tandem.createTandem( 'dipoleDirectionProperty' )
-    } );
+    this.dipoleDirectionProperty = new EnumerationProperty(
+      DipoleDirection, MPQueryParameters.getDipoleDirection(), {
+        tandem: options.tandem.createTandem( 'dipoleDirectionProperty' )
+      } );
 
     // @public
-    this.electrostaticPotentialSurfaceColorProperty = new EnumerationProperty( SurfaceColor, SurfaceColor.RWB, {
-      tandem: options.tandem.createTandem( 'electrostaticPotentialSurfaceColorProperty' ),
-      phetioDocumentation: 'color used for Electrostatic Potential surface in the Real Molecules screen'
-    } );
+    this.electrostaticPotentialSurfaceColorProperty = new EnumerationProperty(
+      SurfaceColor, MPQueryParameters.getSurfaceColor(), {
+        tandem: options.tandem.createTandem( 'electrostaticPotentialSurfaceColorProperty' ),
+        phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
+      } );
   }
 
   // @public
