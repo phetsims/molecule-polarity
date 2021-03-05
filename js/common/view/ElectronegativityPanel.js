@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -42,12 +43,15 @@ class ElectronegativityPanel extends Panel {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // titles
-    const titleText = new Text( StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, { name: atom.label } ), {
+    // title
+    const titleText = new Text( '', {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: 150,
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: options.tandem.createTandem( 'titleText' ),
+      textPropertyOptions: { phetioReadOnly: true }
     } );
+
+    // subtitle
     const subtitleText = new Text( moleculePolarityStrings.electronegativity, {
       font: new PhetFont( 18 ),
       maxWidth: titleText.maxWidth,
@@ -61,10 +65,19 @@ class ElectronegativityPanel extends Panel {
 
     const content = new Node( { children: [ titleText, subtitleText, slider ] } );
 
-    // layout
-    subtitleText.centerX = slider.centerX = titleText.centerX;
-    subtitleText.top = titleText.bottom;
-    slider.top = subtitleText.bottom + 8;
+    // Update the title if the atom's label is changed via PhET-iO.
+    atom.labelProperty.link( label => {
+      titleText.text = StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, {
+        name: atom.labelProperty.value
+      } );
+    } );
+
+    // layout, handled dynamically because titleText and subtitleText can be changed via PhET-iO
+    Property.multilink( [ titleText.boundsProperty, subtitleText.boundsProperty ], () => {
+      subtitleText.centerX = slider.centerX = titleText.centerX;
+      subtitleText.top = titleText.bottom;
+      slider.top = subtitleText.bottom + 8;
+    } );
 
     super( content, options );
   }

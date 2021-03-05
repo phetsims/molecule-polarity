@@ -7,6 +7,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import StringProperty from '../../../../axon/js/StringProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -32,9 +33,13 @@ class Atom {
     }, options );
 
     // @public (read-only)
-    this.label = label;
     this.diameter = options.diameter;
     this.color = options.color;
+
+    // @public (phet-io) this is a Property so that the label can be changed via PhET-iO and will update everywhere
+    this.labelProperty = new StringProperty( label, {
+      tandem: options.tandem.createTandem( 'labelProperty' )
+    } );
 
     // @public
     this.positionProperty = new Vector2Property( options.position, {
@@ -61,6 +66,7 @@ class Atom {
   reset() {
     this.electronegativityProperty.reset();
 
+    // Do not reset labelProperty, it is for use by PhET-iO only.
     // Do not reset position and partial charge, they will be reset by their parent molecule.
   }
 }
