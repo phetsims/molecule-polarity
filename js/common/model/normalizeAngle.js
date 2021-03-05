@@ -2,6 +2,7 @@
 
 /**
  * Normalizes an angle to be in a range whose length is 2 * PI.
+ * This was created for https://github.com/phetsims/molecule-polarity/issues/91.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
