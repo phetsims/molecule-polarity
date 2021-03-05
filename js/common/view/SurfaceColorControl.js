@@ -21,11 +21,11 @@ import SurfaceColorRadioButtonGroup from './SurfaceColorRadioButtonGroup.js';
 class SurfaceColorControl extends VBox {
 
   /**
-   * @param {EnumerationProperty.<SurfaceColor>} electrostaticPotentialSurfaceColorProperty
+   * @param {EnumerationProperty.<SurfaceColor>} surfaceColorProperty
    * @param {Object} [options]
    */
-  constructor( electrostaticPotentialSurfaceColorProperty, options ) {
-    assert && AssertUtils.assertEnumerationPropertyOf( electrostaticPotentialSurfaceColorProperty, SurfaceColor );
+  constructor( surfaceColorProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( surfaceColorProperty, SurfaceColor );
 
     options = merge( {
       align: 'left',
@@ -39,7 +39,7 @@ class SurfaceColorControl extends VBox {
       tandem: options.tandem.createTandem( 'titleText' )
     } );
 
-    const radioButtonGroup = new SurfaceColorRadioButtonGroup( electrostaticPotentialSurfaceColorProperty, {
+    const radioButtonGroup = new SurfaceColorRadioButtonGroup( surfaceColorProperty, {
       tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 

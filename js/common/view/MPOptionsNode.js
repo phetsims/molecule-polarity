@@ -33,7 +33,7 @@ class MPOptionsNode extends VBox {
       tandem: options.tandem.createTandem( 'dipoleDirectionControl' )
     } );
 
-    const surfaceColorControl = new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.electrostaticPotentialSurfaceColorProperty, {
+    const surfaceColorControl = new SurfaceColorControl( MPConstants.GLOBAL_OPTIONS.surfaceColorProperty, {
       tandem: options.tandem.createTandem( 'surfaceColorControl' )
     } );
 

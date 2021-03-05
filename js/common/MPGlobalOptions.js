@@ -32,9 +32,9 @@ class MPGlobalOptions {
       } );
 
     // @public
-    this.electrostaticPotentialSurfaceColorProperty = new EnumerationProperty(
+    this.surfaceColorProperty = new EnumerationProperty(
       SurfaceColor, MPQueryParameters.getSurfaceColor(), {
-        tandem: options.tandem.createTandem( 'electrostaticPotentialSurfaceColorProperty' ),
+        tandem: options.tandem.createTandem( 'surfaceColorProperty' ),
         phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
       } );
   }
@@ -42,7 +42,7 @@ class MPGlobalOptions {
   // @public
   reset() {
     this.dipoleDirectionProperty.reset();
-    this.electrostaticPotentialSurfaceColorProperty.reset();
+    this.surfaceColorProperty.reset();
   }
 }
 
