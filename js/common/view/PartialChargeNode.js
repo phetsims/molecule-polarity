@@ -45,7 +45,7 @@ class PartialChargeNode extends Node {
     } );
     this.addChild( chargeNode );
 
-    // @private
+    // @public
     this.update = () => {
       const partialCharge = atom.partialChargeProperty.value;
 
@@ -80,12 +80,9 @@ class PartialChargeNode extends Node {
 
     atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
     atom.positionProperty.link( this.update.bind( this ) ); // unlink not needed
-  }
 
-  // @public @override
-  setVisible( visible ) {
-    super.setVisible( visible );
-    this.update();
+    // Update when this Node becomes visible
+    this.visibleProperty.link( visible => visible && this.update() );
   }
 
   /**
