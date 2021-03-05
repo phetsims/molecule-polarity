@@ -66,22 +66,22 @@ class TriatomicMolecule extends Molecule {
     } );
 
     const updateAtomPositions = ( position, angle ) => {
-      atomB.positionProperty.set( position );  // atom B remains at the molecule's position
-      updateAtomPosition( atomA, bondAngleAProperty.get(), position, angle );
-      updateAtomPosition( atomC, bondAngleCProperty.get(), position, angle );
+      atomB.positionProperty.value = position;  // atom B remains at the molecule's position
+      updateAtomPosition( atomA, bondAngleAProperty.value, position, angle );
+      updateAtomPosition( atomC, bondAngleCProperty.value, position, angle );
     };
 
     const updatePartialCharges = () => {
 
-      const deltaAB = atomA.electronegativityProperty.get() - atomB.electronegativityProperty.get();
-      const deltaCB = atomC.electronegativityProperty.get() - atomB.electronegativityProperty.get();
+      const deltaAB = atomA.electronegativityProperty.value - atomB.electronegativityProperty.value;
+      const deltaCB = atomC.electronegativityProperty.value - atomB.electronegativityProperty.value;
 
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
-      atomA.partialChargeProperty.set( -deltaAB );
-      atomC.partialChargeProperty.set( -deltaCB );
+      atomA.partialChargeProperty.value = -deltaAB;
+      atomC.partialChargeProperty.value = -deltaCB;
 
       // atom B's participates in 2 bonds, so its partial charge is the sum
-      atomB.partialChargeProperty.set( deltaAB + deltaCB );
+      atomB.partialChargeProperty.value = deltaAB + deltaCB;
     };
 
     super( [ atomA, atomB, atomC ], [ bondAB, bondBC ], updateAtomPositions, updatePartialCharges, options );
@@ -124,7 +124,7 @@ function updateAtomPosition( atom, bondAngle, position, angle ) {
   const thetaA = angle + bondAngle;
   const xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + position.x;
   const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + position.y;
-  atom.positionProperty.set( new Vector2( xA, yA ) );
+  atom.positionProperty.value = new Vector2( xA, yA );
 }
 
 moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );

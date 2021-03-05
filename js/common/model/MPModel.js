@@ -58,7 +58,7 @@ class MPModel {
   step( dt ) {
 
     // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
-    if ( this.eFieldEnabledProperty.get() && !this.molecule.isDraggingProperty.value ) {
+    if ( this.eFieldEnabledProperty.value && !this.molecule.isDraggingProperty.value ) {
       this.updateMoleculeOrientation( this.molecule );
     }
   }
@@ -71,12 +71,12 @@ class MPModel {
    */
   updateMoleculeOrientation( molecule ) {
 
-    let dipole = molecule.dipoleProperty.get();
+    let dipole = molecule.dipoleProperty.value;
 
     // This algorithm is for a dipole that points from positive to negative charge, and is therefore
     // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
     // is from negative to positive charge, so rotate the dipole 180 degrees. See issue #5 and #56.
-    if ( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty.get() === DipoleDirection.NEGATIVE_TO_POSITIVE ) {
+    if ( MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty.value === DipoleDirection.NEGATIVE_TO_POSITIVE ) {
       dipole = dipole.rotated( Math.PI );
     }
 
@@ -117,7 +117,7 @@ class MPModel {
 
     // convert dipole rotation to molecule rotation
     const deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
-    molecule.angleProperty.set( molecule.angleProperty.get() + deltaMoleculeAngle );
+    molecule.angleProperty.value = molecule.angleProperty.value + deltaMoleculeAngle;
   }
 }
 

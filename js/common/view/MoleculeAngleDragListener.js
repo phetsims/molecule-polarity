@@ -51,7 +51,7 @@ class MoleculeAngleDragListener extends DragListener {
     assert && assert( !options.drag, 'MoleculeAngleDragListener sets drag' );
     options.drag = event => {
       const currentAngle = getAngle( event );
-      molecule.angleProperty.set( molecule.angleProperty.get() + currentAngle - previousAngle );
+      molecule.angleProperty.value = molecule.angleProperty.value + currentAngle - previousAngle;
       previousAngle = currentAngle;
     };
 

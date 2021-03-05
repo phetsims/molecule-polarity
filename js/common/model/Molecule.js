@@ -69,7 +69,7 @@ class Molecule {
     this.dipoleProperty = new DerivedProperty( bondDipoleProperties, () => {
       const sum = new Vector2( 0, 0 );
       this.bonds.forEach( bond => {
-        sum.add( bond.dipoleProperty.get() ); // add to the same Vector2 instance
+        sum.add( bond.dipoleProperty.value ); // add to the same Vector2 instance
       } );
       return sum;
     }, {
@@ -96,7 +96,7 @@ class Molecule {
    * @public
    */
   createTransformMatrix() {
-    return Matrix3.translationFromVector( this.position ).timesMatrix( Matrix3.rotation2( this.angleProperty.get() ) );
+    return Matrix3.translationFromVector( this.position ).timesMatrix( Matrix3.rotation2( this.angleProperty.value ) );
   }
 }
 

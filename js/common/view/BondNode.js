@@ -33,7 +33,7 @@ class BondNode extends Line {
       visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
-    super( bond.atom1.positionProperty.get(), bond.atom2.positionProperty.get(), options );
+    super( bond.atom1.positionProperty.value, bond.atom2.positionProperty.value, options );
 
     // adjust the bond when its endpoints change, unlinks not needed
     bond.atom1.positionProperty.link( position => this.setPoint1( position ) );

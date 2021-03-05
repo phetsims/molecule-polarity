@@ -45,8 +45,8 @@ class RotateArrowsNode extends Node {
     // Align with atom position and molecular dipole
     const updateTransform = () => {
       this.matrix = Matrix3
-        .translationFromVector( atom.positionProperty.get() )
-        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.get().angle + Math.PI / 2 ) );
+        .translationFromVector( atom.positionProperty.value )
+        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.value.angle + Math.PI / 2 ) );
     };
     molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
     atom.positionProperty.link( updateTransform.bind( this ) ); // unlink not needed

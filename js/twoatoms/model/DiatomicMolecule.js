@@ -52,16 +52,16 @@ class DiatomicMolecule extends Molecule {
       // atom A
       const xA = ( radius * Math.cos( angle + Math.PI ) ) + position.x;
       const yA = ( radius * Math.sin( angle + Math.PI ) ) + position.y;
-      atomA.positionProperty.set( new Vector2( xA, yA ) );
+      atomA.positionProperty.value = new Vector2( xA, yA );
 
       // atom B
       const xB = ( radius * Math.cos( angle ) ) + position.x;
       const yB = ( radius * Math.sin( angle ) ) + position.y;
-      atomB.positionProperty.set( new Vector2( xB, yB ) );
+      atomB.positionProperty.value = new Vector2( xB, yB );
     };
 
     const getDeltaEN = () => {
-      return atomB.electronegativityProperty.get() - atomA.electronegativityProperty.get();
+      return atomB.electronegativityProperty.value - atomA.electronegativityProperty.value;
     };
 
     const updatePartialCharges = () => {
@@ -69,8 +69,8 @@ class DiatomicMolecule extends Molecule {
       const deltaEN = getDeltaEN();
 
       // in our simplified model, partial charge and deltaEN are equivalent. not so in the real world.
-      atomA.partialChargeProperty.set( deltaEN );
-      atomB.partialChargeProperty.set( -deltaEN );
+      atomA.partialChargeProperty.value = deltaEN;
+      atomB.partialChargeProperty.value = -deltaEN;
     };
 
     super( [ atomA, atomB ], [ bond ], updateAtomPositions, updatePartialCharges, options );

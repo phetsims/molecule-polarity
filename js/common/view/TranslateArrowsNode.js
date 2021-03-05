@@ -49,9 +49,9 @@ class TranslateArrowsNode extends Node {
     atom.positionProperty.link( () => {
 
       // transform the arrow shapes to account for atom position and relationship to molecule position
-      const v = molecule.position.minus( atom.positionProperty.get() );
+      const v = molecule.position.minus( atom.positionProperty.value );
       const angle = v.angle - ( Math.PI / 2 );
-      const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.get() ).timesMatrix( Matrix3.rotation2( angle ) ) );
+      const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.value ).timesMatrix( Matrix3.rotation2( angle ) ) );
       leftArrowNode.shape = transform.transformShape( leftArrow );
       rightArrowNode.shape = transform.transformShape( rightArrow );
     } );

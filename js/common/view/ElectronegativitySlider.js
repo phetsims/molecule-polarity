@@ -68,7 +68,8 @@ class ElectronegativitySlider extends HSlider {
     options.endDrag = () => {
       molecule.isDraggingProperty.value = false;
       if ( options.snapToTick ) {
-        atom.electronegativityProperty.set( Utils.toFixedNumber( atom.electronegativityProperty.get() / options.tickInterval, 0 ) * options.tickInterval );
+        atom.electronegativityProperty.value =
+          Utils.toFixedNumber( atom.electronegativityProperty.value / options.tickInterval, 0 ) * options.tickInterval;
       }
     };
 

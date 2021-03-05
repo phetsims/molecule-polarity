@@ -58,7 +58,7 @@ class BondAngleDragListener extends DragListener {
     assert && assert( !options.drag, 'BondAngleDragListener sets drag' );
     options.drag = event => {
       const currentAngle = getAngle( event );
-      bondAngleProperty.set( bondAngleProperty.get() + currentAngle - previousAngle );
+      bondAngleProperty.value = bondAngleProperty.value + currentAngle - previousAngle;
       previousAngle = currentAngle;
     };
 

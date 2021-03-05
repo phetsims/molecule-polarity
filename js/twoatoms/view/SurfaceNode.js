@@ -50,8 +50,8 @@ class SurfaceNode extends Node {
     // each atom is surrounded with a 'cloud' (circle)
     const radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
     this.path = new Path( new Shape()
-      .arc( molecule.position.x - this.molecule.atomB.positionProperty.get().x, molecule.position.y - this.molecule.atomB.positionProperty.get().y, radius, Math.PI / 4, 7 * Math.PI / 4 )
-      .arc( molecule.position.x - this.molecule.atomA.positionProperty.get().x, molecule.position.y - this.molecule.atomA.positionProperty.get().y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
+      .arc( molecule.position.x - this.molecule.atomB.positionProperty.value.x, molecule.position.y - this.molecule.atomB.positionProperty.value.y, radius, Math.PI / 4, 7 * Math.PI / 4 )
+      .arc( molecule.position.x - this.molecule.atomA.positionProperty.value.x, molecule.position.y - this.molecule.atomA.positionProperty.value.y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
     );
     this.addChild( this.path );
 

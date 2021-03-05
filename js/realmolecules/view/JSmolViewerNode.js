@@ -308,7 +308,7 @@ function updateElements( applet, elementsProperty ) {
     const color = new Color( parseInt( tokens[ i + 1 ], 10 ), parseInt( tokens[ i + 2 ], 10 ), parseInt( tokens[ i + 3 ], 10 ) );
     elements.push( new Element( elementNumber, color ) );
   }
-  elementsProperty.set( elements );
+  elementsProperty.value = elements;
 }
 
 /**

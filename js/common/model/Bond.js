@@ -75,7 +75,7 @@ class Bond {
    * @public
    */
   getCenter() {
-    return this.atom1.positionProperty.get().average( this.atom2.positionProperty.get() );
+    return this.atom1.positionProperty.value.average( this.atom2.positionProperty.value );
   }
 
   /**
@@ -85,7 +85,7 @@ class Bond {
    */
   getAngle() {
     const center = this.getCenter();
-    return Math.atan2( this.atom2.positionProperty.get().y - center.y, this.atom2.positionProperty.get().x - center.x );
+    return Math.atan2( this.atom2.positionProperty.value.y - center.y, this.atom2.positionProperty.value.x - center.x );
   }
 
   /**
@@ -94,7 +94,7 @@ class Bond {
    * @public
    */
   getLength() {
-    return this.atom1.positionProperty.get().distance( this.atom2.positionProperty.get() );
+    return this.atom1.positionProperty.value.distance( this.atom2.positionProperty.value );
   }
 }
 

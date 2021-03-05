@@ -47,7 +47,7 @@ class PartialChargeNode extends Node {
 
     // @private
     this.update = () => {
-      const partialCharge = atom.partialChargeProperty.get();
+      const partialCharge = atom.partialChargeProperty.value;
 
       // invisible if dipole is zero
       const partialChargeVisible = ( partialCharge !== 0 );
@@ -74,7 +74,7 @@ class PartialChargeNode extends Node {
         // Compute the amount to move the partial charge node
         const multiplier = ( atom.diameter / 2 ) + ( Math.max( this.width, this.height ) / 2 ) + 3;
         const relativeOffset = unitVector.timesScalar( multiplier );
-        this.translation = atom.positionProperty.get().plus( relativeOffset );
+        this.translation = atom.positionProperty.value.plus( relativeOffset );
       }
     };
 
@@ -104,7 +104,7 @@ class PartialChargeNode extends Node {
     return new PartialChargeNode( atom, () => {
 
       // along the bond axis, in the direction of the atom
-      let v = atom.positionProperty.get().minus( bond.getCenter() );
+      let v = atom.positionProperty.value.minus( bond.getCenter() );
 
       /*
        * Avoid the case where pressing Reset All causes the atoms to swap positions, temporarily resulting
@@ -132,12 +132,12 @@ class PartialChargeNode extends Node {
    */
   static createCompositePartialChargeNode( atom, molecule, options ) {
     const node = new PartialChargeNode( atom, () => {
-      if ( molecule.dipoleProperty.get().magnitude > 0 ) {
-        return molecule.dipoleProperty.get().rotated( Math.PI ).normalize();
+      if ( molecule.dipoleProperty.value.magnitude > 0 ) {
+        return molecule.dipoleProperty.value.rotated( Math.PI ).normalize();
       }
       else {
         // can't normalize a zero-magnitude vector, so create our own with the proper angle
-        return new Vector2( 1, molecule.dipoleProperty.get().angle );
+        return new Vector2( 1, molecule.dipoleProperty.value.angle );
       }
     }, options );
     molecule.dipoleProperty.link( node.update.bind( this ) ); // unlink not needed
