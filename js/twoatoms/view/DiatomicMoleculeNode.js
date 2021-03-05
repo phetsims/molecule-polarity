@@ -8,9 +8,11 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
@@ -112,6 +114,16 @@ class DiatomicMoleculeNode extends Node {
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
+
+    // Show molecule angle as an arrow that points from the center to the atom in the direction of angle.
+    if ( MPQueryParameters.showMoleculeAngle ) {
+      const arrowNode = new ArrowNode( 0, 0, 100, 0, {
+        fill: 'red',
+        translation: molecule.position
+      } );
+      this.addChild( arrowNode );
+      molecule.angleProperty.link( angle => arrowNode.setRotation( angle ) );
+    }
 
     // @private
     this.resetDiatomicMoleculeNode = () => {
