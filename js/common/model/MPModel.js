@@ -84,12 +84,7 @@ class MPModel {
     const deltaDipoleAngle = Math.abs( Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
 
     // convert angle to range [0,2*PI)
-    let dipoleAngle = normalizeAngle( dipole.angle );
-
-    // Snap to zero when sufficiently close, see https://github.com/phetsims/molecule-polarity/issues/89
-    if ( Math.abs( dipoleAngle ) < 0.001 ) {
-      dipoleAngle = 0;
-    }
+    const dipoleAngle = normalizeAngle( dipole.angle );
 
     let newDipoleAngle;
 
