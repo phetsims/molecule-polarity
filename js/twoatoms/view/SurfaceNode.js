@@ -75,20 +75,14 @@ class SurfaceNode extends Node {
       phetioDocumentation: 'dragging on the surface rotates the molecule',
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
-  }
 
-  /**
-   * Updates the fill when this Node become visible.
-   * @param {boolean} visible
-   * @public
-   * @override
-   */
-  setVisible( visible ) {
-    super.setVisible( visible );
-    if ( visible ) {
-      this.matrix = this.molecule.createTransformMatrix();
-      this.updateFill();
-    }
+    // Updates the fill when this Node become visible.
+    this.visibleProperty.link( visible => {
+      if ( visible ) {
+        this.matrix = this.molecule.createTransformMatrix();
+        this.updateFill();
+      }
+    } );
   }
 
   /**
