@@ -13,6 +13,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
+import normalizeAngle from '../model/normalizeAngle.js';
 
 class MoleculeAngleDragListener extends DragListener {
 
@@ -51,7 +52,8 @@ class MoleculeAngleDragListener extends DragListener {
     assert && assert( !options.drag, 'MoleculeAngleDragListener sets drag' );
     options.drag = event => {
       const currentAngle = getAngle( event );
-      molecule.angleProperty.value = molecule.angleProperty.value + currentAngle - previousAngle;
+      molecule.angleProperty.value =
+        normalizeAngle( molecule.angleProperty.value + currentAngle - previousAngle, molecule.angleProperty.range.min );
       previousAngle = currentAngle;
     };
 

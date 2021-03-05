@@ -15,6 +15,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MPConstants from '../MPConstants.js';
 import Atom from './Atom.js';
 import Bond from './Bond.js';
 
@@ -47,6 +48,7 @@ class Molecule {
 
     // @public
     this.angleProperty = new NumberProperty( options.angle, {
+      range: MPConstants.ANGLE_RANGE,
       tandem: options.tandem.createTandem( 'angleProperty' ),
       phetioDocumentation: 'angle of rotation, in radians, with positive rotation being clockwise'
     } );

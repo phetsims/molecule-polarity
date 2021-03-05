@@ -15,6 +15,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import DipoleDirection from './DipoleDirection.js';
+import normalizeAngle from './normalizeAngle.js';
 
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
@@ -83,7 +84,7 @@ class MPModel {
     // magnitude of angular velocity is proportional to molecular dipole magnitude
     const deltaDipoleAngle = Math.abs( Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
 
-    // convert angle to range [0,2*PI)
+    // normalize to [0,2*PI), because that's what the next chunk of code expects.
     const dipoleAngle = normalizeAngle( dipole.angle );
 
     let newDipoleAngle;
@@ -117,22 +118,10 @@ class MPModel {
 
     // convert dipole rotation to molecule rotation
     const deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
-    molecule.angleProperty.value = molecule.angleProperty.value + deltaMoleculeAngle;
-  }
-}
+    const angle = molecule.angleProperty.value + deltaMoleculeAngle;
 
-/**
- * Converts an angle to range [0,2*PI) radians
- * @param {number} angle
- * @returns {number}
- */
-function normalizeAngle( angle ) {
-  let normalizedAngle = angle % ( 2 * Math.PI );
-  if ( normalizedAngle < 0 ) {
-    normalizedAngle = ( 2 * Math.PI ) + angle;
+    molecule.angleProperty.value = normalizeAngle( angle, molecule.angleProperty.range.min );
   }
-  assert && assert( normalizedAngle >= 0 && normalizedAngle <= 2 * Math.PI, 'normalizedAngle must be between 0-2pi radians' );
-  return normalizedAngle;
 }
 
 moleculePolarity.register( 'MPModel', MPModel );

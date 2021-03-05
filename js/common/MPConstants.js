@@ -7,6 +7,7 @@
  */
 
 import Bounds2 from '../../../dot/js/Bounds2.js';
+import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import Tandem from '../../../tandem/js/Tandem.js';
@@ -30,6 +31,7 @@ const MPConstants = {
   ELECTRONEGATIVITY_TICK_SPACING: 0.2,
   ATOM_DIAMETER: 100,
   BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
+  ANGLE_RANGE: new Range( -Math.PI, Math.PI ),
 
   CONTROL_ICON_X_SPACING: 10,  // horizontal space between labels and icons
   CONTROL_PANEL_Y_SPACING: 15, // vertical space between controls

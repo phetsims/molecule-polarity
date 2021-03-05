@@ -57,11 +57,13 @@ class TriatomicMolecule extends Molecule {
 
     // the bond angle of atom A relative to atom B, before applying molecule rotation
     const bondAngleAProperty = new NumberProperty( 0.75 * Math.PI, {
+      range: MPConstants.ANGLE_RANGE,
       tandem: options.tandem.createTandem( 'bondAngleAProperty' )
     } );
 
     // the bond angle of atom C relative to atom B, before applying molecule rotation
     const bondAngleCProperty = new NumberProperty( 0.25 * Math.PI, {
+      range: MPConstants.ANGLE_RANGE,
       tandem: options.tandem.createTandem( 'bondAngleCProperty' )
     } );
 
