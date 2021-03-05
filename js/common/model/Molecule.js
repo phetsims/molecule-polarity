@@ -73,6 +73,11 @@ class Molecule {
       this.bonds.forEach( bond => {
         sum.add( bond.dipoleProperty.value ); // add to the same Vector2 instance
       } );
+
+      // If y is effectively zero, snap to zero. See https://github.com/phetsims/molecule-polarity/issues/89
+      if ( Math.abs( sum.y ) < 1E-10 ) {
+        sum.y = 0;
+      }
       return sum;
     }, {
       phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
