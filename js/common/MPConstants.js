@@ -31,7 +31,7 @@ const MPConstants = {
   ELECTRONEGATIVITY_TICK_SPACING: 0.2,
   ATOM_DIAMETER: 100,
   BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
-  ANGLE_RANGE: new Range( -Math.PI, Math.PI ),
+  ANGLE_RANGE: new Range( -Math.PI, Math.PI ), // see https://github.com/phetsims/molecule-polarity/issues/91
 
   CONTROL_ICON_X_SPACING: 10,  // horizontal space between labels and icons
   CONTROL_PANEL_Y_SPACING: 15, // vertical space between controls
