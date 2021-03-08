@@ -45,26 +45,36 @@ class TriatomicMolecule extends Molecule {
       tandem: options.tandem.createTandem( 'atomC' )
     } );
 
+
+    const bondABTandem = options.tandem.createTandem( 'bondAB' );
+    const bondBCTandem = options.tandem.createTandem( 'bondBC' );
+
     // the bond connecting atoms A and B
     const bondAB = new Bond( atomA, atomB, {
-      tandem: options.tandem.createTandem( 'bondAB' )
+      tandem: bondABTandem,
+      phetioDocumentation: 'the bonds that connects atoms A and B'
     } );
 
     // the bond connecting atoms B and C
     const bondBC = new Bond( atomB, atomC, {
-      tandem: options.tandem.createTandem( 'bondBC' )
+      tandem: bondBCTandem,
+      phetioDocumentation: 'the bonds that connects atoms B and C'
     } );
 
     // the bond angle of atom A relative to atom B, before applying molecule rotation
     const bondAngleAProperty = new NumberProperty( 0.75 * Math.PI, {
       range: MPConstants.ANGLE_RANGE,
-      tandem: options.tandem.createTandem( 'bondAngleAProperty' )
+      units: 'radians',
+      tandem: bondABTandem.createTandem( 'angleProperty' ),
+      phetioDocumentation: 'rotation angle of the bond between atoms A and B, relative to molecule.angleProperty, with positive rotation being CLOCKWISE'
     } );
 
     // the bond angle of atom C relative to atom B, before applying molecule rotation
     const bondAngleCProperty = new NumberProperty( 0.25 * Math.PI, {
       range: MPConstants.ANGLE_RANGE,
-      tandem: options.tandem.createTandem( 'bondAngleCProperty' )
+      units: 'radians',
+      tandem: bondBCTandem.createTandem( 'angleProperty' ),
+      phetioDocumentation: 'rotation angle of the bond between atoms B and C, relative to molecule.angleProperty, with positive rotation being CLOCKWISE'
     } );
 
     const updateAtomPositions = ( position, angle ) => {

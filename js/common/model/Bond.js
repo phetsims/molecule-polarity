@@ -9,13 +9,14 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import Atom from './Atom.js';
 import DipoleDirection from './DipoleDirection.js';
 
-class Bond {
+class Bond extends PhetioObject {
 
   /**
    * @param {Atom} atom1
@@ -27,8 +28,11 @@ class Bond {
     assert && assert( atom2 instanceof Atom, 'invalid atom2' );
 
     options = merge( {
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioState: false // extends PhetioObject only for phetioDocumentation
     }, options );
+
+    super( options );
 
     // @public (read-only)
     this.atom1 = atom1;
