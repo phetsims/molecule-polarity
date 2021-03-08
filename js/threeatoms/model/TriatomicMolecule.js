@@ -52,13 +52,13 @@ class TriatomicMolecule extends Molecule {
     // the bond connecting atoms A and B
     const bondAB = new Bond( atomA, atomB, {
       tandem: bondABTandem,
-      phetioDocumentation: 'the bonds that connects atoms A and B'
+      phetioDocumentation: 'the bond that connects atoms A and B'
     } );
 
     // the bond connecting atoms B and C
     const bondBC = new Bond( atomB, atomC, {
       tandem: bondBCTandem,
-      phetioDocumentation: 'the bonds that connects atoms B and C'
+      phetioDocumentation: 'the bond that connects atoms B and C'
     } );
 
     // the bond angle of atom A relative to atom B, before applying molecule rotation
