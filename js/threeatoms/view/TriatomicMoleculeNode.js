@@ -129,11 +129,11 @@ class TriatomicMoleculeNode extends Node {
       tandem: dragListenersTandem.createTandem( 'atomBDragListener' )
     } );
     const bondABDragListener = new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'dragging the bond that connects atoms A and C rotates the molecule',
+      phetioDocumentation: 'dragging the bond between atoms A and C rotates the molecule',
       tandem: dragListenersTandem.createTandem( 'bondABDragListener' )
     } );
     const bondBCDragListener = new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'dragging the bond that connects atoms B and C rotates the molecule',
+      phetioDocumentation: 'dragging the bond between atoms B and C rotates the molecule',
       tandem: dragListenersTandem.createTandem( 'bondBCDragListener' )
     } );
     atomBNode.addInputListener( atomBDragListener );
@@ -142,11 +142,11 @@ class TriatomicMoleculeNode extends Node {
 
     // change bond angles by dragging atom A or C
     const atomADragListener = new BondAngleDragListener( molecule, molecule.bondAngleAProperty, atomANode, {
-      phetioDocumentation: 'dragging atom A changes the angle of the bond that connects atoms A and B',
+      phetioDocumentation: 'dragging atom A changes the angle of the bond between atoms A and B',
       tandem: dragListenersTandem.createTandem( 'atomADragListener' )
     } );
     const atomCDragListener = new BondAngleDragListener( molecule, molecule.bondAngleCProperty, atomCNode, {
-      phetioDocumentation: 'dragging atom C changes the angle of the bond that connects atoms B and C',
+      phetioDocumentation: 'dragging atom C changes the angle of the bond between atoms B and C',
       tandem: dragListenersTandem.createTandem( 'atomCDragListener' )
     } );
     atomANode.addInputListener( atomADragListener );
