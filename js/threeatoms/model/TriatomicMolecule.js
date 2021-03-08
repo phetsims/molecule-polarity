@@ -66,7 +66,7 @@ class TriatomicMolecule extends Molecule {
       range: MPConstants.ANGLE_RANGE,
       units: 'radians',
       tandem: bondABTandem.createTandem( 'angleProperty' ),
-      phetioDocumentation: 'rotation angle of the bond between atoms A and B, relative to molecule.angleProperty, with positive rotation being CLOCKWISE'
+      phetioDocumentation: 'rotation angle of the bond between atoms A and B, relative to the molecule\'s angle and position, with positive rotation being CLOCKWISE'
     } );
 
     // the bond angle of atom C relative to atom B, before applying molecule rotation
@@ -74,7 +74,7 @@ class TriatomicMolecule extends Molecule {
       range: MPConstants.ANGLE_RANGE,
       units: 'radians',
       tandem: bondBCTandem.createTandem( 'angleProperty' ),
-      phetioDocumentation: 'rotation angle of the bond between atoms B and C, relative to molecule.angleProperty, with positive rotation being CLOCKWISE'
+      phetioDocumentation: 'rotation angle of the bond between atoms B and C, relative to the molecule\'s angle and position, with positive rotation being CLOCKWISE'
     } );
 
     const updateAtomPositions = ( position, angle ) => {
