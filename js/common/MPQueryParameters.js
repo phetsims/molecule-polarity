@@ -25,8 +25,8 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   // See MPGlobalOptions.surfaceColorProperty
   surfaceColor: {
     type: 'string',
-    validValues: [ 'RGB', 'ROYGB' ],
-    defaultValue: 'RGB',
+    validValues: [ 'RWB', 'ROYGB' ],
+    defaultValue: 'RWB',
     public: true
   },
 
@@ -55,7 +55,7 @@ MPQueryParameters.getDipoleDirection = () =>
  * @public
  */
 MPQueryParameters.getSurfaceColor = () =>
-  ( MPQueryParameters.surfaceColor === 'RGB' ) ? SurfaceColor.RWB : SurfaceColor.ROYGB;
+  ( MPQueryParameters.surfaceColor === 'RWB' ) ? SurfaceColor.RWB : SurfaceColor.ROYGB;
 
 moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
 
