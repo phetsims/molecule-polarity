@@ -45,7 +45,6 @@ class TriatomicMolecule extends Molecule {
       tandem: options.tandem.createTandem( 'atomC' )
     } );
 
-
     const bondABTandem = options.tandem.createTandem( 'bondAB' );
     const bondBCTandem = options.tandem.createTandem( 'bondBC' );
 
