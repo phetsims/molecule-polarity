@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 /**
- * A pair of arrows used to indicate that an arrow can be rotated.
+ * A pair of arrows used to indicate that an atom can be rotated.
  * Shapes are created in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -44,9 +44,12 @@ class RotateArrowsNode extends Node {
 
     // Align with atom position and molecular dipole
     const updateTransform = () => {
-      this.matrix = Matrix3
-        .translationFromVector( atom.positionProperty.value )
-        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.value.angle + Math.PI / 2 ) );
+      let matrix = Matrix3.translationFromVector( atom.positionProperty.value );
+      const molecularDipoleAnge = molecule.dipoleProperty.value.angle;
+      if ( molecularDipoleAnge !== 0 ) {
+        matrix = matrix.timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.value.angle + Math.PI / 2 ) );
+      }
+      this.matrix = matrix;
     };
     molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
     atom.positionProperty.link( updateTransform.bind( this ) ); // unlink not needed
