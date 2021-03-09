@@ -28,6 +28,8 @@ class TwoAtomsViewControls extends VBox {
     assert && assert( viewProperties instanceof TwoAtomsViewProperties, 'invalid viewProperties' );
 
     options = merge( {
+      align: 'left',
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       tandem: Tandem.REQUIRED
     }, options );
 
@@ -50,16 +52,15 @@ class TwoAtomsViewControls extends VBox {
       tandem: options.tandem.createTandem( 'bondCharacterCheckbox' )
     } );
 
-    super( {
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      children: [
-        titleText,
-        bondDipoleCheckbox,
-        partialChargesCheckbox,
-        bondCharacterCheckbox
-      ]
-    } );
+    assert && assert( !options.children, 'NAME sets children' );
+    options.children = [
+      titleText,
+      bondDipoleCheckbox,
+      partialChargesCheckbox,
+      bondCharacterCheckbox
+    ];
+
+    super( options );
   }
 }
 
