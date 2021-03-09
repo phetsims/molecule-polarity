@@ -17,7 +17,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -41,8 +40,7 @@ class BondCharacterPanel extends Panel {
       fill: 'white',
       stroke: 'black',
       xMargin: 10,
-      yMargin: 3,
-      tandem: Tandem.REQUIRED
+      yMargin: 3
     }, options );
 
     // title
