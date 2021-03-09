@@ -69,5 +69,4 @@ class ElectrostaticPotentialNode extends SurfaceNode {
 }
 
 moleculePolarity.register( 'ElectrostaticPotentialNode', ElectrostaticPotentialNode );
-
 export default ElectrostaticPotentialNode;

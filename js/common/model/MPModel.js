@@ -125,5 +125,4 @@ class MPModel {
 }
 
 moleculePolarity.register( 'MPModel', MPModel );
-
 export default MPModel;

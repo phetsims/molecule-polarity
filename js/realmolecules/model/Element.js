@@ -25,5 +25,4 @@ class Element {
 }
 
 moleculePolarity.register( 'Element', Element );
-
 export default Element;

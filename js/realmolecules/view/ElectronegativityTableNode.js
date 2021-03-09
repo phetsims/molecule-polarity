@@ -158,5 +158,4 @@ class Cell extends Node {
 }
 
 moleculePolarity.register( 'ElectronegativityTableNode', ElectronegativityTableNode );
-
 export default ElectronegativityTableNode;

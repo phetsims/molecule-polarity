@@ -58,5 +58,4 @@ class MolecularDipoleNode extends DipoleNode {
 }
 
 moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
-
 export default MolecularDipoleNode;

@@ -84,5 +84,4 @@ class ElectronegativityPanel extends Panel {
 }
 
 moleculePolarity.register( 'ElectronegativityPanel', ElectronegativityPanel );
-
 export default ElectronegativityPanel;

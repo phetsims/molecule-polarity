@@ -189,5 +189,4 @@ class TriatomicMoleculeNode extends Node {
 }
 
 moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
-
 export default TriatomicMoleculeNode;

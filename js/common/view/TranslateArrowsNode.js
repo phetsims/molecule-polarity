@@ -61,5 +61,4 @@ class TranslateArrowsNode extends Node {
 }
 
 moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );
-
 export default TranslateArrowsNode;

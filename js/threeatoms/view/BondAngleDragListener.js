@@ -75,5 +75,4 @@ class BondAngleDragListener extends DragListener {
 }
 
 moleculePolarity.register( 'BondAngleDragListener', BondAngleDragListener );
-
 export default BondAngleDragListener;

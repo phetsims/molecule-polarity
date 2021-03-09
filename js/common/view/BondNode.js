@@ -42,5 +42,4 @@ class BondNode extends Line {
 }
 
 moleculePolarity.register( 'BondNode', BondNode );
-
 export default BondNode;

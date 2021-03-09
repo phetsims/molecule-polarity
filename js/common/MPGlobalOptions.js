@@ -47,5 +47,4 @@ class MPGlobalOptions {
 }
 
 moleculePolarity.register( 'MPGlobalOptions', MPGlobalOptions );
-
 export default MPGlobalOptions;

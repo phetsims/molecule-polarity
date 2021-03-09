@@ -73,5 +73,4 @@ class RealMoleculesViewControls extends VBox {
 }
 
 moleculePolarity.register( 'RealMoleculesViewControls', RealMoleculesViewControls );
-
 export default RealMoleculesViewControls;

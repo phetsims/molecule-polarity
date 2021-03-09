@@ -63,5 +63,4 @@ class ThreeAtomsViewControls extends VBox {
 }
 
 moleculePolarity.register( 'ThreeAtomsViewControls', ThreeAtomsViewControls );
-
 export default ThreeAtomsViewControls;

@@ -77,5 +77,4 @@ class PointySliderThumb extends Path {
 }
 
 moleculePolarity.register( 'PointySliderThumb', PointySliderThumb );
-
 export default PointySliderThumb;

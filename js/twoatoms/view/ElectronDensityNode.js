@@ -70,5 +70,4 @@ class ElectronDensityNode extends SurfaceNode {
 }
 
 moleculePolarity.register( 'ElectronDensityNode', ElectronDensityNode );
-
 export default ElectronDensityNode;

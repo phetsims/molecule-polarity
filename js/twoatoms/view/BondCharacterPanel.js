@@ -123,5 +123,4 @@ class PointerNode extends Node {
 }
 
 moleculePolarity.register( 'BondCharacterPanel', BondCharacterPanel );
-
 export default BondCharacterPanel;

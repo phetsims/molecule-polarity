@@ -72,5 +72,4 @@ class MPOptionsNode extends VBox {
 }
 
 moleculePolarity.register( 'MPOptionsNode', MPOptionsNode );
-
 export default MPOptionsNode;

@@ -132,5 +132,4 @@ class SurfaceColorKey extends Node {
 }
 
 moleculePolarity.register( 'SurfaceColorKey', SurfaceColorKey );
-
 export default SurfaceColorKey;

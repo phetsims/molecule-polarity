@@ -143,5 +143,4 @@ class PartialChargeNode extends Node {
 }
 
 moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
-
 export default PartialChargeNode;

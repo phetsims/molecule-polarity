@@ -85,5 +85,4 @@ class DiatomicMolecule extends Molecule {
 }
 
 moleculePolarity.register( 'DiatomicMolecule', DiatomicMolecule );
-
 export default DiatomicMolecule;

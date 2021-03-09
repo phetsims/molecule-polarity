@@ -59,5 +59,4 @@ class AtomNode extends Node {
 }
 
 moleculePolarity.register( 'AtomNode', AtomNode );
-
 export default AtomNode;

@@ -28,5 +28,4 @@ class TwoAtomsModel extends MPModel {
 }
 
 moleculePolarity.register( 'TwoAtomsModel', TwoAtomsModel );
-
 export default TwoAtomsModel;

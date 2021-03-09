@@ -106,5 +106,4 @@ class DipoleNode extends Path {
 }
 
 moleculePolarity.register( 'DipoleNode', DipoleNode );
-
 export default DipoleNode;

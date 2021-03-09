@@ -461,5 +461,4 @@ function isHomogeneousDiatomic( applet ) {
 }
 
 moleculePolarity.register( 'JSmolViewerNode', JSmolViewerNode );
-
 export default JSmolViewerNode;

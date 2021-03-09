@@ -12,6 +12,5 @@ import moleculePolarity from '../../moleculePolarity.js';
 const SurfaceColor = Enumeration.byKeys( [ 'RWB', 'ROYGB' ] );
 
 moleculePolarity.register( 'SurfaceColor', SurfaceColor );
-
 export default SurfaceColor;
 

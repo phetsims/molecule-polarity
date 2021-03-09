@@ -12,6 +12,5 @@ import moleculePolarity from '../../moleculePolarity.js';
 const DipoleDirection = Enumeration.byKeys( [ 'POSITIVE_TO_NEGATIVE', 'NEGATIVE_TO_POSITIVE' ] );
 
 moleculePolarity.register( 'DipoleDirection', DipoleDirection );
-
 export default DipoleDirection;
 

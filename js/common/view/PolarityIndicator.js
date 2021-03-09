@@ -51,5 +51,4 @@ class PolarityIndicator extends Node {
 }
 
 moleculePolarity.register( 'PolarityIndicator', PolarityIndicator );
-
 export default PolarityIndicator;

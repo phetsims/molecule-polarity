@@ -52,5 +52,4 @@ class SurfaceControl extends VBox {
 }
 
 moleculePolarity.register( 'SurfaceControl', SurfaceControl );
-
 export default SurfaceControl;

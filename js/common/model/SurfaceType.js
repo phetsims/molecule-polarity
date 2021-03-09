@@ -12,5 +12,4 @@ import moleculePolarity from '../../moleculePolarity.js';
 const SurfaceType = Enumeration.byKeys( [ 'NONE', 'ELECTROSTATIC_POTENTIAL', 'ELECTRON_DENSITY' ] );
 
 moleculePolarity.register( 'SurfaceType', SurfaceType );
-
 export default SurfaceType;

@@ -159,5 +159,4 @@ class RealMoleculesScreenView extends ScreenView {
 }
 
 moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
-
 export default RealMoleculesScreenView;

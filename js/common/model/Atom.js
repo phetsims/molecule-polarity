@@ -73,5 +73,4 @@ class Atom {
 }
 
 moleculePolarity.register( 'Atom', Atom );
-
 export default Atom;

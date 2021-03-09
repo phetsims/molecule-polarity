@@ -67,5 +67,4 @@ class DipoleDirectionControl extends VBox {
 }
 
 moleculePolarity.register( 'DipoleDirectionControl', DipoleDirectionControl );
-
 export default DipoleDirectionControl;

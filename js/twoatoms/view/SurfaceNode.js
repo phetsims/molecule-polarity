@@ -105,5 +105,4 @@ class SurfaceNode extends Node {
 }
 
 moleculePolarity.register( 'SurfaceNode', SurfaceNode );
-
 export default SurfaceNode;

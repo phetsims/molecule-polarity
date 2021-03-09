@@ -139,5 +139,4 @@ function updateAtomPosition( atom, bondAngle, position, angle ) {
 }
 
 moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
-
 export default TriatomicMolecule;

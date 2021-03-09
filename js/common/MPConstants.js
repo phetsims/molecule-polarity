@@ -58,5 +58,4 @@ const MPConstants = {
 assert && assert( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );
 
 moleculePolarity.register( 'MPConstants', MPConstants );
-
 export default MPConstants;

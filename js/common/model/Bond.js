@@ -103,5 +103,4 @@ class Bond extends PhetioObject {
 }
 
 moleculePolarity.register( 'Bond', Bond );
-
 export default Bond;

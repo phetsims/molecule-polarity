@@ -134,5 +134,4 @@ class RealMoleculeViewer extends Node {
 }
 
 moleculePolarity.register( 'RealMoleculeViewer', RealMoleculeViewer );
-
 export default RealMoleculeViewer;

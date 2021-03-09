@@ -59,5 +59,4 @@ class MPControlPanel extends Panel {
 }
 
 moleculePolarity.register( 'MPControlPanel', MPControlPanel );
-
 export default MPControlPanel;

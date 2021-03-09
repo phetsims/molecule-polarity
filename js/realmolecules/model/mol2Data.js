@@ -30,5 +30,4 @@ const mol2Data = {
 };
 
 moleculePolarity.register( 'mol2Data', mol2Data );
-
 export default mol2Data;

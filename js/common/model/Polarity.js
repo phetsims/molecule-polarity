@@ -12,5 +12,4 @@ import moleculePolarity from '../../moleculePolarity.js';
 const Polarity = Enumeration.byKeys( [ 'POSITIVE', 'NEGATIVE' ] );
 
 moleculePolarity.register( 'Polarity', Polarity );
-
 export default Polarity;

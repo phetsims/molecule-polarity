@@ -57,5 +57,4 @@ class RotateArrowsNode extends Node {
 }
 
 moleculePolarity.register( 'RotateArrowsNode', RotateArrowsNode );
-
 export default RotateArrowsNode;

@@ -69,5 +69,4 @@ class RealMoleculesModel {
 }
 
 moleculePolarity.register( 'RealMoleculesModel', RealMoleculesModel );
-
 export default RealMoleculesModel;

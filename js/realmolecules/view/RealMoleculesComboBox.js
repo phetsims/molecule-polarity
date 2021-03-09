@@ -57,8 +57,6 @@ class RealMoleculesComboBox extends ComboBox {
   }
 }
 
-moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
-
 /**
  * Creates an item for the combo box.
  * @param {RealMolecule} molecule
@@ -82,4 +80,5 @@ function createItem( molecule ) {
   } );
 }
 
+moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
 export default RealMoleculesComboBox;

@@ -109,5 +109,4 @@ class Molecule {
 }
 
 moleculePolarity.register( 'Molecule', Molecule );
-
 export default Molecule;

@@ -79,5 +79,4 @@ class UnderDevelopmentPlane extends Plane {
 }
 
 moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
-
 export default UnderDevelopmentPlane;

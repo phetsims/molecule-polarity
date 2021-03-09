@@ -82,5 +82,4 @@ const MPColors = {
 };
 
 moleculePolarity.register( 'MPColors', MPColors );
-
 export default MPColors;

@@ -63,5 +63,4 @@ class EFieldControl extends VBox {
 }
 
 moleculePolarity.register( 'EFieldControl', EFieldControl );
-
 export default EFieldControl;

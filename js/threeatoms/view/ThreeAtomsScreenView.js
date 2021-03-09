@@ -119,5 +119,4 @@ class ThreeAtomsScreenView extends ScreenView {
 }
 
 moleculePolarity.register( 'ThreeAtomsScreenView', ThreeAtomsScreenView );
-
 export default ThreeAtomsScreenView;
