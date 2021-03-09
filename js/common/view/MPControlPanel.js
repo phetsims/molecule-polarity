@@ -28,6 +28,9 @@ class MPControlPanel extends Panel {
     assert && AssertUtils.assertArrayOf( subPanels, Node );
 
     options = merge( {
+      fill: MPColors.CONTROL_PANEL_BACKGROUND,
+      xMargin: 20,
+      yMargin: 15,
       tandem: Tandem.REQUIRED
     }, options );
 
@@ -51,11 +54,7 @@ class MPControlPanel extends Panel {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING
     } );
 
-    super( content, {
-      fill: MPColors.CONTROL_PANEL_BACKGROUND,
-      xMargin: 20,
-      yMargin: 15
-    } );
+    super( content, options );
   }
 }
 
