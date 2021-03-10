@@ -54,6 +54,19 @@ class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
     ];
 
     super( surfaceColorProperty, radioButtonGroupItems, options );
+
+    this.disposeSurfaceColorRadioButtonGroup = () => {
+      radioButtonGroupItems.forEach( item => item.node.dispose() );
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeSurfaceColorRadioButtonGroup();
+    super.dispose();
   }
 }
 

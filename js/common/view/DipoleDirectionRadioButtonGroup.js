@@ -68,6 +68,20 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
     ];
 
     super( dipoleDirectionProperty, radioButtonGroupItems, options );
+
+    // @private
+    this.disposeDipoleDirectionRadioButtonGroup = () => {
+      radioButtonGroupItems.forEach( item => item.node.dispose() );
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeDipoleDirectionRadioButtonGroup();
+    super.dispose();
   }
 }
 

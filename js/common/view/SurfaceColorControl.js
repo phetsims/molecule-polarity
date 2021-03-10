@@ -50,6 +50,7 @@ class SurfaceColorControl extends VBox {
 
     // @private
     this.disposeSurfaceColorControl = () => {
+      titleText.dispose();
       radioButtonGroup.dispose();
     };
   }

@@ -52,6 +52,7 @@ class DipoleDirectionControl extends VBox {
 
     // @private
     this.disposeDipoleDirectionControl = () => {
+      titleText.dispose();
       radioButtonGroup.dispose();
     };
   }
