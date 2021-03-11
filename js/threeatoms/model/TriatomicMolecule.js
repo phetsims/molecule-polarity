@@ -7,10 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Atom from '../../common/model/Atom.js';
 import Bond from '../../common/model/Bond.js';
 import Molecule from '../../common/model/Molecule.js';
@@ -101,6 +103,16 @@ class TriatomicMolecule extends Molecule {
     const bondAngleListener = () => updateAtomPositions( this.position, this.angleProperty.value );
     bondAngleAProperty.link( bondAngleListener );
     bondAngleCProperty.link( bondAngleListener );
+
+    // @private (phet-io) {DerivedProperty.<number>} the angle between bonds AB and BC
+    // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
+    this.boundAngleABCProperty = new DerivedProperty(
+      [ bondAB.dipoleProperty, bondBC.dipoleProperty ],
+      ( dipoleAB, dipoleBC ) => dipoleBC.angle - dipoleAB.angle, {
+        tandem: options.tandem.createTandem( 'boundAngleABCProperty' ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioDocumentation: 'the angle between bonds AB and BC, with positive rotation being CLOCKWISE'
+      } );
 
     // @public
     this.atomA = atomA;
