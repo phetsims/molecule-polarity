@@ -39,7 +39,7 @@ class ElectronegativitySlider extends HSlider {
 
     options = merge( {
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
-      snapToTick: true,
+      snapInterval: MPConstants.ELECTRONEGATIVITY_SNAP_INTERVAL,
 
       // HSlider options
       thumbYOffset: 10,
@@ -67,10 +67,7 @@ class ElectronegativitySlider extends HSlider {
     assert && assert( !options.endDrag, 'ElectronegativitySlider sets endDrag' );
     options.endDrag = () => {
       molecule.isDraggingProperty.value = false;
-      if ( options.snapToTick ) {
-        atom.electronegativityProperty.value =
-          Utils.toFixedNumber( atom.electronegativityProperty.value / options.tickInterval, 0 ) * options.tickInterval;
-      }
+      atom.electronegativityProperty.value = Utils.roundToInterval( atom.electronegativityProperty.value, options.snapInterval );
     };
 
     super( electronegativityProperty, range, options );
