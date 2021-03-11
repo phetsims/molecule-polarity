@@ -141,11 +141,11 @@ class TriatomicMoleculeNode extends Node {
     bondBCNode.addInputListener( bondBCDragListener );
 
     // change bond angles by dragging atom A or C
-    const atomADragListener = new BondAngleDragListener( molecule, molecule.bondAngleAProperty, atomANode, {
+    const atomADragListener = new BondAngleDragListener( molecule, molecule.bondAngleABProperty, atomANode, {
       phetioDocumentation: 'dragging atom A changes the angle of the bond between atoms A and B',
       tandem: dragListenersTandem.createTandem( 'atomADragListener' )
     } );
-    const atomCDragListener = new BondAngleDragListener( molecule, molecule.bondAngleCProperty, atomCNode, {
+    const atomCDragListener = new BondAngleDragListener( molecule, molecule.bondAngleBCProperty, atomCNode, {
       phetioDocumentation: 'dragging atom C changes the angle of the bond between atoms B and C',
       tandem: dragListenersTandem.createTandem( 'atomCDragListener' )
     } );
@@ -161,8 +161,8 @@ class TriatomicMoleculeNode extends Node {
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
-    molecule.bondAngleAProperty.lazyLink( hideArrows );
-    molecule.bondAngleCProperty.lazyLink( hideArrows );
+    molecule.bondAngleABProperty.lazyLink( hideArrows );
+    molecule.bondAngleBCProperty.lazyLink( hideArrows );
 
     // Show molecule angle as an arrow that points from the center to the atom in the direction of angle.
     if ( MPQueryParameters.showMoleculeAngle ) {

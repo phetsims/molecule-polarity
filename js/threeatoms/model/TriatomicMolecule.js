@@ -63,7 +63,7 @@ class TriatomicMolecule extends Molecule {
     } );
 
     // the bond angle of atom A relative to atom B, before applying molecule rotation
-    const bondAngleAProperty = new NumberProperty( 0.75 * Math.PI, {
+    const bondAngleABProperty = new NumberProperty( 0.75 * Math.PI, {
       range: MPConstants.ANGLE_RANGE,
       units: 'radians',
       tandem: bondABTandem.createTandem( 'angleProperty' ),
@@ -71,7 +71,7 @@ class TriatomicMolecule extends Molecule {
     } );
 
     // the bond angle of atom C relative to atom B, before applying molecule rotation
-    const bondAngleCProperty = new NumberProperty( 0.25 * Math.PI, {
+    const bondAngleBCProperty = new NumberProperty( 0.25 * Math.PI, {
       range: MPConstants.ANGLE_RANGE,
       units: 'radians',
       tandem: bondBCTandem.createTandem( 'angleProperty' ),
@@ -80,8 +80,8 @@ class TriatomicMolecule extends Molecule {
 
     const updateAtomPositions = ( position, angle ) => {
       atomB.positionProperty.value = position;  // atom B remains at the molecule's position
-      updateAtomPosition( atomA, bondAngleAProperty.value, position, angle );
-      updateAtomPosition( atomC, bondAngleCProperty.value, position, angle );
+      updateAtomPosition( atomA, bondAngleABProperty.value, position, angle );
+      updateAtomPosition( atomC, bondAngleBCProperty.value, position, angle );
     };
 
     const updatePartialCharges = () => {
@@ -101,14 +101,14 @@ class TriatomicMolecule extends Molecule {
 
     // unlink not needed
     const bondAngleListener = () => updateAtomPositions( this.position, this.angleProperty.value );
-    bondAngleAProperty.link( bondAngleListener );
-    bondAngleCProperty.link( bondAngleListener );
+    bondAngleABProperty.link( bondAngleListener );
+    bondAngleBCProperty.link( bondAngleListener );
 
     // @private (phet-io) {DerivedProperty.<number>} the angle between bonds AB and BC
     // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
     this.boundAngleABCProperty = new DerivedProperty(
-      [ bondAB.dipoleProperty, bondBC.dipoleProperty ],
-      ( dipoleAB, dipoleBC ) => dipoleBC.angle - dipoleAB.angle, {
+      [ bondAngleABProperty, bondAngleBCProperty ],
+      ( bondAngleAB, bondAngleBC ) => bondAngleAB - bondAngleBC, {
         tandem: options.tandem.createTandem( 'boundAngleABCProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         phetioDocumentation: 'the angle between bonds AB and BC, with positive rotation being CLOCKWISE'
@@ -120,8 +120,8 @@ class TriatomicMolecule extends Molecule {
     this.atomC = atomC;
     this.bondAB = bondAB;
     this.bondBC = bondBC;
-    this.bondAngleAProperty = bondAngleAProperty;
-    this.bondAngleCProperty = bondAngleCProperty;
+    this.bondAngleABProperty = bondAngleABProperty;
+    this.bondAngleBCProperty = bondAngleBCProperty;
   }
 
   /**
@@ -130,8 +130,8 @@ class TriatomicMolecule extends Molecule {
    */
   reset() {
     super.reset();
-    this.bondAngleAProperty.reset();
-    this.bondAngleCProperty.reset();
+    this.bondAngleABProperty.reset();
+    this.bondAngleBCProperty.reset();
   }
 }
 
