@@ -16,6 +16,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Atom from '../../common/model/Atom.js';
 import Bond from '../../common/model/Bond.js';
 import Molecule from '../../common/model/Molecule.js';
+import normalizeAngle from '../../common/model/normalizeAngle.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -108,7 +109,8 @@ class TriatomicMolecule extends Molecule {
     // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
     this.boundAngleABCProperty = new DerivedProperty(
       [ bondAngleABProperty, bondAngleBCProperty ],
-      ( bondAngleAB, bondAngleBC ) => bondAngleAB - bondAngleBC, {
+      ( bondAngleAB, bondAngleBC ) => normalizeAngle( bondAngleAB - bondAngleBC, MPConstants.ANGLE_RANGE.min ), {
+        isValidValue: value => MPConstants.ANGLE_RANGE.contains( value ),
         tandem: options.tandem.createTandem( 'boundAngleABCProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         phetioDocumentation: 'the angle between bonds AB and BC, with positive rotation being CLOCKWISE'
