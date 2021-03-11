@@ -39,7 +39,7 @@ class ElectronegativitySlider extends HSlider {
 
     options = merge( {
       tickInterval: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
-      constrainValue: value => Utils.roundToInterval( value, MPConstants.ELECTRONEGATIVITY_TICK_SPACING ),
+      snapToTick: true,
 
       // HSlider options
       thumbYOffset: 10,
