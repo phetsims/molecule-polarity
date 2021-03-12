@@ -84,7 +84,7 @@ class PlateNode extends Node {
     }, options );
 
     assert && assert( options.perspective === 'right' || options.perspective === 'left',
-      'invalid perspective: ' + options.perspective );
+      `invalid perspective: ${options.perspective}` );
 
     // polarity indicator
     const polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );

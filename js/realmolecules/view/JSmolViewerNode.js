@@ -119,9 +119,9 @@ class JSmolViewerNode extends DOM {
 
     // Put the Jmol object in a div, sized to match the Jmol object
     const div = document.createElement( 'div' );
-    div.style.width = options.viewerSize.width + 'px';
-    div.style.height = options.viewerSize.height + 'px';
-    div.style.border = '1px solid ' + options.viewerStroke;
+    div.style.width = `${options.viewerSize.width}px`;
+    div.style.height = `${options.viewerSize.height}px`;
+    div.style.border = `1px solid ${options.viewerStroke}`;
 
     super( div, options );
 
@@ -196,7 +196,7 @@ class JSmolViewerNode extends DOM {
     };
 
     Jmol.setDocument( false ); // tell Jmol not to add the viewer to our HTML document
-    const appletId = 'jmolApplet' + instanceNumber++; // create a unique id for this viewer
+    const appletId = `jmolApplet${instanceNumber++}`; // create a unique id for this viewer
     Jmol.getApplet( appletId, Info ); // creates window[appletId]
     this.applet = window[ appletId ]; // so that we don't pollute our code with window[appletId]
     this.div.innerHTML = Jmol.getAppletHtml( this.applet ); // add the viewer's HTML fragment to this node's HTML element
@@ -208,7 +208,7 @@ class JSmolViewerNode extends DOM {
 function doScript( applet, script ) {
   // use scriptWait (which is synchronous) so that we get status and can use evaluateVar elsewhere
   const status = Jmol.scriptWait( applet, script );
-  phet.log && phet.log( 'doScript, status=' + status );
+  phet.log && phet.log( `doScript, status=${status}` );
 }
 
 /**
@@ -219,7 +219,7 @@ function doScript( applet, script ) {
 function unbindActions( applet, actions ) {
   let script = '';
   actions.forEach( action => {
-    script += 'unbind ' + action + '\n';
+    script += `unbind ${action}\n`;
   } );
   doScript( applet, script );
 }
@@ -231,7 +231,7 @@ function unbindActions( applet, actions ) {
  */
 function toJmolColor( colorSpec ) {
   const color = Color.toColor( colorSpec );
-  return '[' + color.red + ',' + color.green + ',' + color.blue + ']';
+  return `[${color.red},${color.green},${color.blue}]`;
 }
 
 /**
@@ -246,7 +246,7 @@ function updateMolecule( applet, molecule, jsmolProperties ) {
   const url = URL.createObjectURL( new Blob( [ molecule.mol2Data ], { type: 'text/plain', endings: 'native' } ) );
 
   // load molecule
-  doScript( applet, 'load ' + url );
+  doScript( applet, `load ${url}` );
 
   // reset misc settings that don't persist
   doScript( applet,
@@ -284,7 +284,7 @@ function updateElements( applet, elementsProperty ) {
     '}' +
     '\')' );
   if ( status === null || status === 'ERROR' ) {
-    throw new Error( 'JSmolViewerNode.updateElements, script error: ' + status );
+    throw new Error( `JSmolViewerNode.updateElements, script error: ${status}` );
   }
 
   /*
@@ -292,7 +292,7 @@ function updateElements( applet, elementsProperty ) {
    * Eg, for HF: '1 255 255 255 9 144 224 80 '
    */
   status = status.replace( /\n/g, ' ' ).replace( /{/g, '' ).replace( /}/g, '' );
-  phet.log && phet.log( 'updateElements, status=' + status );
+  phet.log && phet.log( `updateElements, status=${status}` );
 
   /*
    * Now that the tokens are separated by spaces, split the string into an array.
@@ -320,8 +320,8 @@ function updateElements( applet, elementsProperty ) {
 function updateTranslucency( applet, bondDipolesVisible, molecularDipoleVisible ) {
   phet.log && phet.log( 'updateTransparency' );
   const arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
-  doScript( applet, 'color atoms translucent ' + arg );
-  doScript( applet, 'color bonds translucent ' + arg );
+  doScript( applet, `color atoms translucent ${arg}` );
+  doScript( applet, `color bonds translucent ${arg}` );
 }
 
 /**
@@ -370,12 +370,12 @@ function updateLabels( applet, atomLabelsVisible, partialChargesVisible ) {
       if ( atomLabelsVisible ) {
         args += '|'; // line separator
       }
-      args += DELTA + '=%.2[partialCharge]'; // show partial charges
+      args += `${DELTA}=%.2[partialCharge]`; // show partial charges
     }
 
     // Do this as a single script, or you'll see atom labels jump around.
     doScript( applet,
-      'label ' + args + '\n' +
+      `label ${args}\n` +
       'set labelalignment center\n' + // center labels on atoms
       'set labeloffset 0 0\n' +
       'color labels black\n' +   // color for all labels
@@ -398,7 +398,7 @@ function updateSurface( applet, surfaceType ) {
   const diatomic = isHomogeneousDiatomic( applet );
   if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
     if ( diatomic ) {
-      doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_POTENTIAL ) + ' translucent' );
+      doScript( applet, `isosurface VDW color ${toJmolColor( MPColors.NEUTRAL_POTENTIAL )} translucent` );
     }
     else {
       doScript( applet, 'isosurface VDW map MEP translucent' );
@@ -414,7 +414,7 @@ function updateSurface( applet, surfaceType ) {
   }
   else if ( surfaceType === SurfaceType.ELECTRON_DENSITY ) {
     if ( diatomic ) {
-      doScript( applet, 'isosurface VDW color ' + toJmolColor( MPColors.NEUTRAL_GRAY ) + ' translucent' );
+      doScript( applet, `isosurface VDW color ${toJmolColor( MPColors.NEUTRAL_GRAY )} translucent` );
     }
     else {
       doScript( applet, 'isosurface VDW map MEP colorscheme "BW" translucent' );
@@ -433,27 +433,27 @@ function updateSurface( applet, surfaceType ) {
 function isHomogeneousDiatomic( applet ) {
 
   const status = Jmol.evaluateVar( applet,
-    'script(\'' +
+    `${'script(\'' +
     'numberOfAtoms = {*}.length\n' +
-    'homogeneousDiatomic = "' + RESULT_TRUE + '"\n' +
+    'homogeneousDiatomic = "'}${RESULT_TRUE}"\n` +
     'if ( numberOfAtoms == 2 ) {\n' +
     '    firstElement = {*}[0].element\n' +
     '    for ( i = 0; i < numberOfAtoms; i++ ) {\n' +
     '        nextElement = {*}[i].element\n' +
     '        if ( firstElement != nextElement ) {\n' +
-    '            homogeneousDiatomic = "' + RESULT_FALSE + '"\n' +
+    `            homogeneousDiatomic = "${RESULT_FALSE}"\n` +
     '        }\n' +
     '    }\n' +
     '}\n' +
     'else {\n' +
-    '    homogeneousDiatomic = "' + RESULT_FALSE + '"\n' +
+    `    homogeneousDiatomic = "${RESULT_FALSE}"\n` +
     '}\n' +
     'print homogeneousDiatomic' +
     '\')' );
-  phet.log && phet.log( 'isHomogeneousDiatomic, status=' + status );
+  phet.log && phet.log( `isHomogeneousDiatomic, status=${status}` );
 
   if ( status === null || status === 'ERROR' ) {
-    throw new Error( 'JSmolViewerNode.isHomogeneousDiatomic, script error: ' + status );
+    throw new Error( `JSmolViewerNode.isHomogeneousDiatomic, script error: ${status}` );
   }
   else {
     return ( status === 'true' );

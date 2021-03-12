@@ -118,7 +118,7 @@ class RealMoleculeViewer extends Node {
 
     // unlink is not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      this.surfaceTypeText.text = ( 'surface: ' + surfaceType.name );
+      this.surfaceTypeText.text = ( `surface: ${surfaceType.name}` );
     } );
 
     // unlink not needed
