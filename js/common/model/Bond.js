@@ -67,9 +67,11 @@ class Bond extends PhetioObject {
 
         return dipole;
       }, {
-        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
         tandem: options.tandem.createTandem( 'dipoleProperty' ),
-        phetioDocumentation: 'qualitative vector representation of the dipole, based on the electronegativity difference between the atoms'
+        phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
+        phetioDocumentation:
+          'Qualitative vector representation of the dipole, based on the electronegativity difference ' +
+          'between the atoms. +x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
       } );
   }
 
