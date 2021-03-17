@@ -41,26 +41,32 @@ class TriatomicMoleculeNode extends Node {
     assert && AssertUtils.assertPropertyOf( partialChargesVisibleProperty, 'boolean' );
 
     options = merge( {
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      inputEnabledPropertyPhetioInstrumented: true
     }, options );
 
     // atoms
     const atomANode = new AtomNode( molecule.atomA, {
-      tandem: options.tandem.createTandem( 'atomANode' )
+      tandem: options.tandem.createTandem( 'atomANode' ),
+      inputEnabledPropertyPhetioInstrumented: true
     } );
     const atomBNode = new AtomNode( molecule.atomB, {
-      tandem: options.tandem.createTandem( 'atomBNode' )
+      tandem: options.tandem.createTandem( 'atomBNode' ),
+      inputEnabledPropertyPhetioInstrumented: true
     } );
     const atomCNode = new AtomNode( molecule.atomC, {
-      tandem: options.tandem.createTandem( 'atomCNode' )
+      tandem: options.tandem.createTandem( 'atomCNode' ),
+      inputEnabledPropertyPhetioInstrumented: true
     } );
 
     // bonds
     const bondABNode = new BondNode( molecule.bondAB, {
-      tandem: options.tandem.createTandem( 'bondABNode' )
+      tandem: options.tandem.createTandem( 'bondABNode' ),
+      inputEnabledPropertyPhetioInstrumented: true
     } );
     const bondBCNode = new BondNode( molecule.bondBC, {
-      tandem: options.tandem.createTandem( 'bondBCNode' )
+      tandem: options.tandem.createTandem( 'bondBCNode' ),
+      inputEnabledPropertyPhetioInstrumented: true
     } );
 
     // arrows to provide interaction hints
