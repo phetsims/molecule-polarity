@@ -107,11 +107,11 @@ class TriatomicMolecule extends Molecule {
 
     // @private (phet-io) {DerivedProperty.<number>} the angle between bonds AB and BC
     // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
-    this.boundAngleABCProperty = new DerivedProperty(
+    this.bondAngleABCProperty = new DerivedProperty(
       [ bondAngleABProperty, bondAngleBCProperty ],
       ( bondAngleAB, bondAngleBC ) => normalizeAngle( bondAngleAB - bondAngleBC, MPConstants.ANGLE_RANGE.min ), {
         isValidValue: value => MPConstants.ANGLE_RANGE.contains( value ),
-        tandem: options.tandem.createTandem( 'boundAngleABCProperty' ),
+        tandem: options.tandem.createTandem( 'bondAngleABCProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         phetioDocumentation: 'the angle between bonds AB and BC, with positive rotation being CLOCKWISE'
       } );
