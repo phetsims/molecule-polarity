@@ -39,11 +39,9 @@ class MPControlPanel extends Panel {
 
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];
-    let separatorCount = 0;
     for ( let i = 1; i < subPanels.length; i++ ) {
-      separatorCount++;
       children.push( new HSeparator( separatorWidth, {
-        tandem: options.tandem.createTandem( `separator${separatorCount}` )
+        tandem: options.tandem.createTandem( `separator${i}` )
       } ) );
       children.push( subPanels[ i ] );
     }
