@@ -38,7 +38,8 @@ class DiatomicMoleculeNode extends Node {
 
     options = merge( {
       cursor: 'pointer',
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      inputEnabledPropertyPhetioInstrumented: true
     }, options );
 
     // atoms
