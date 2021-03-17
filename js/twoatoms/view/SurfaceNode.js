@@ -1,8 +1,8 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 /**
- * Abstract base type for 2D surfaces.
- * The 'look' of 2D surfaces is similar to the corresponding Jmol 3D isosurfaces, see http://jmol.sourceforge.net/docs/surface/.
+ * SurfaceNode is the base class for 2D representations of an isosurface.
+ * The 2D 'look' is similar to the corresponding Jmol 3D isosurfaces, see http://jmol.sourceforge.net/docs/surface/.
  * Shapes are created in global coordinates, so this node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -15,7 +15,6 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Molecule from '../../common/model/Molecule.js';
 import MPConstants from '../../common/MPConstants.js';
-import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 // constants
@@ -69,12 +68,6 @@ class SurfaceNode extends Node {
         this.matrix = molecule.createTransformMatrix();
       }
     } );
-
-    this.cursor = 'pointer';
-    this.addInputListener( new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'dragging on the surface rotates the molecule',
-      tandem: options.tandem.createTandem( 'dragListener' )
-    } ) );
 
     // Updates the fill when this Node become visible.
     this.visibleProperty.link( visible => {

@@ -21,8 +21,8 @@ import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
-import ElectronDensityNode from './ElectronDensityNode.js';
-import ElectrostaticPotentialNode from './ElectrostaticPotentialNode.js';
+import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
+import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 class DiatomicMoleculeNode extends Node {
@@ -72,11 +72,11 @@ class DiatomicMoleculeNode extends Node {
     } );
 
     // surfaces
-    const electrostaticPotentialNode = new ElectrostaticPotentialNode( molecule, {
-      tandem: options.tandem.createTandem( 'electrostaticPotentialNode' )
+    const electrostaticPotentialSurfaceNode = new ElectrostaticPotentialSurfaceNode( molecule, {
+      tandem: options.tandem.createTandem( 'electrostaticPotentialSurfaceNode' )
     } );
-    const electronDensityNode = new ElectronDensityNode( molecule, {
-      tandem: options.tandem.createTandem( 'electronDensityNode' )
+    const electronDensitySurfaceNode = new ElectronDensitySurfaceNode( molecule, {
+      tandem: options.tandem.createTandem( 'electronDensitySurfaceNode' )
     } );
 
     // dipole
@@ -86,7 +86,7 @@ class DiatomicMoleculeNode extends Node {
 
     assert && assert( !options.children, 'DiatomicMoleculeNode sets children' );
     options.children = [
-      electrostaticPotentialNode, electronDensityNode,
+      electrostaticPotentialSurfaceNode, electronDensitySurfaceNode,
       bondNode, atomANode, atomBNode,
       hintArrowsNode,
       partialChargeANode, partialChargeBNode, bondDipoleNode
@@ -102,8 +102,8 @@ class DiatomicMoleculeNode extends Node {
     this.addInputListener( dragListener );
 
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      electrostaticPotentialNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
-      electronDensityNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+      electrostaticPotentialSurfaceNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      electronDensitySurfaceNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
 
     // When the user drags any atom or bond, hide the cueing arrows.

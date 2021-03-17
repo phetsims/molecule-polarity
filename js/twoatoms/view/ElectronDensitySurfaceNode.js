@@ -17,7 +17,7 @@ import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import SurfaceNode from './SurfaceNode.js';
 
-class ElectronDensityNode extends SurfaceNode {
+class ElectronDensitySurfaceNode extends SurfaceNode {
 
   /**
    * @param {Molecule} molecule
@@ -69,5 +69,5 @@ class ElectronDensityNode extends SurfaceNode {
   }
 }
 
-moleculePolarity.register( 'ElectronDensityNode', ElectronDensityNode );
-export default ElectronDensityNode;
+moleculePolarity.register( 'ElectronDensitySurfaceNode', ElectronDensitySurfaceNode );
+export default ElectronDensitySurfaceNode;
