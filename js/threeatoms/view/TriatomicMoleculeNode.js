@@ -175,9 +175,9 @@ class TriatomicMoleculeNode extends Node {
     );
 
     // When the user drags any atom or bond, hide the cueing arrows.
+    // Set the hint arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
-        // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
         hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = false;
         moleculeHasChanged = true;
       }
