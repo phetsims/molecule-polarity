@@ -106,12 +106,23 @@ class DiatomicMoleculeNode extends Node {
       electronDensitySurfaceNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
 
+    // {boolean} Set to true when the molecule has been changed by the user.
+    let moleculeHasChanged = false;
+
+    // Hide the hint arrows if the molecule becomes non-interactive.
+    // Set the hint arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
+    // unlink is not needed.
+    const updateHintArrowsVisible = () => {
+      hintArrowANode.visible = hintArrowBNode.visible = ( !moleculeHasChanged && this.inputEnabled );
+    };
+    this.inputEnabledProperty.link( () => updateHintArrowsVisible() );
+
     // When the user drags any atom or bond, hide the cueing arrows.
+    // unlink is not needed.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
-
-        // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
-        hintArrowANode.visible = hintArrowBNode.visible = false;
+        moleculeHasChanged = true;
+        updateHintArrowsVisible();
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
@@ -128,9 +139,8 @@ class DiatomicMoleculeNode extends Node {
 
     // @private
     this.resetDiatomicMoleculeNode = () => {
-
-      // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
-      hintArrowANode.visible = hintArrowBNode.visible = true;
+      moleculeHasChanged = false;
+      updateHintArrowsVisible();
     };
   }
 
