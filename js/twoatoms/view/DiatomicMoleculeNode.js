@@ -109,23 +109,23 @@ class DiatomicMoleculeNode extends Node {
     // {boolean} Set to true when the molecule has been changed by the user.
     let moleculeHasChanged = false;
 
-    // Hide the hint arrows if the molecule becomes non-interactive.
+    // Hides the hint arrows if the molecule becomes non-interactive.
     // Set the hint arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
-    // unlink is not needed.
-    const updateHintArrowsVisible = () => {
+    const updateHintArrows = () => {
       hintArrowANode.visible = hintArrowBNode.visible = ( !moleculeHasChanged && this.inputEnabled );
     };
-    this.inputEnabledProperty.link( () => updateHintArrowsVisible() );
 
-    // When the user drags any atom or bond, hide the cueing arrows.
-    // unlink is not needed.
+    // When the user drags any atom or bond, hide the hint arrows. unlink is not needed.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
         moleculeHasChanged = true;
-        updateHintArrowsVisible();
+        updateHintArrows();
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
+
+    // unlink is not needed.
+    this.inputEnabledProperty.link( () => updateHintArrows() );
 
     // Show molecule angle as an arrow that points from the center to the atom in the direction of angle.
     if ( MPQueryParameters.showMoleculeAngle ) {
@@ -140,7 +140,7 @@ class DiatomicMoleculeNode extends Node {
     // @private
     this.resetDiatomicMoleculeNode = () => {
       moleculeHasChanged = false;
-      updateHintArrowsVisible();
+      updateHintArrows();
     };
   }
 

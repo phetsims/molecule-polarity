@@ -159,32 +159,47 @@ class TriatomicMoleculeNode extends Node {
     atomANode.addInputListener( atomADragListener );
     atomCNode.addInputListener( atomCDragListener );
 
-    // Hide a hint arrow if the molecule or the atom associated with the arrow becomes non-interactive. unmultilink is not needed.
+    // {boolean} Set to true when the molecule has been changed by the user.
     let moleculeHasChanged = false;
-    const setHintArrowVisible = ( hintArrowNode, moleculeInputEnabled, atomInputEnabled ) => {
-      hintArrowNode.visible = !moleculeHasChanged && moleculeInputEnabled && atomInputEnabled;
-    };
-    Property.multilink( [ this.inputEnabledProperty, atomANode.inputEnabledProperty ],
-      ( moleculeInputEnabled, atomInputEnabled ) => setHintArrowVisible( hintArrowANode, moleculeInputEnabled, atomInputEnabled )
-    );
-    Property.multilink( [ this.inputEnabledProperty, atomBNode.inputEnabledProperty ],
-      ( moleculeInputEnabled, atomInputEnabled ) => setHintArrowVisible( hintArrowBNode, moleculeInputEnabled, atomInputEnabled )
-    );
-    Property.multilink( [ this.inputEnabledProperty, atomCNode.inputEnabledProperty ],
-      ( moleculeInputEnabled, atomInputEnabled ) => setHintArrowVisible( hintArrowCNode, moleculeInputEnabled, atomInputEnabled )
-    );
 
-    // When the user drags any atom or bond, hide the cueing arrows.
+    /**
+     * Updates the visibility of one hint arrow.
+     * @param {Node} hintArrowNode - the hint arrow
+     * @param {Node} atomNode - the atom that the hint arrow is associated with
+     */
+    const updateOneHintArrow = ( hintArrowNode, atomNode ) => {
+      hintArrowNode.visible = ( !moleculeHasChanged && this.inputEnabled && atomNode.inputEnabled );
+    };
+
+    // Updates the visibility of all hint arrows.
     // Set the hint arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
+    const updateAllHintArrows = () => {
+      updateOneHintArrow( hintArrowANode, atomANode );
+      updateOneHintArrow( hintArrowBNode, atomBNode );
+      updateOneHintArrow( hintArrowCNode, atomCNode );
+    };
+
+    // When the user drags any atom or bond, hide the hint arrows. unlink is not needed.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
-        hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = false;
         moleculeHasChanged = true;
+        updateAllHintArrows();
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
     molecule.bondAngleABProperty.lazyLink( hideArrows );
     molecule.bondAngleBCProperty.lazyLink( hideArrows );
+
+    // Update a hint arrow when the molecule inputEnabled or atom inputEnabled changes.
+    // unmultilink is not needed.
+    const createMultilink = ( hintArrowNode, atomNode ) => {
+      Property.multilink( [ this.inputEnabledProperty, atomNode.inputEnabledProperty ],
+        () => updateOneHintArrow( hintArrowNode, atomNode )
+      );
+    };
+    createMultilink( hintArrowANode, atomANode );
+    createMultilink( hintArrowBNode, atomBNode );
+    createMultilink( hintArrowCNode, atomCNode );
 
     // Show molecule angle as an arrow that points from the center to the atom in the direction of angle.
     if ( MPQueryParameters.showMoleculeAngle ) {
@@ -198,14 +213,8 @@ class TriatomicMoleculeNode extends Node {
 
     // @private
     this.resetTriatomicMoleculeNode = () => {
-
-      // Make hint arrows visible.
-      // Set the arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
       moleculeHasChanged = false;
-      const moleculeInputEnabled = this.inputEnabledProperty.value;
-      setHintArrowVisible( hintArrowANode, moleculeInputEnabled, atomANode.inputEnabledProperty.value );
-      setHintArrowVisible( hintArrowBNode, moleculeInputEnabled, atomBNode.inputEnabledProperty.value );
-      setHintArrowVisible( hintArrowCNode, moleculeInputEnabled, atomCNode.inputEnabledProperty.value );
+      updateAllHintArrows();
     };
   }
 
