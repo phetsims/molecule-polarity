@@ -118,7 +118,13 @@ class MPModel {
 
     // convert dipole rotation to molecule rotation
     const deltaMoleculeAngle = newDipoleAngle - dipoleAngle;
-    const angle = molecule.angleProperty.value + deltaMoleculeAngle;
+    let angle = molecule.angleProperty.value + deltaMoleculeAngle;
+
+    // If dipole is aligned with molecule orientation, snap to zero when we're close enough.
+    // See https://github.com/phetsims/molecule-polarity/issues/97
+    if ( newDipoleAngle === 0 && Math.abs( angle ) < 1E-5 ) {
+      angle = 0;
+    }
 
     molecule.angleProperty.value = normalizeAngle( angle, molecule.angleProperty.range.min );
   }
