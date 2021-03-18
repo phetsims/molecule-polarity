@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -158,12 +159,27 @@ class TriatomicMoleculeNode extends Node {
     atomANode.addInputListener( atomADragListener );
     atomCNode.addInputListener( atomCDragListener );
 
+    // Hide a hint arrow if the molecule or the atom associated with the arrow becomes non-interactive. unmultilink is not needed.
+    let moleculeHasChanged = false;
+    const setHintArrowVisible = ( hintArrowNode, moleculeInputEnabled, atomInputEnabled ) => {
+      hintArrowNode.visible = !moleculeHasChanged && moleculeInputEnabled && atomInputEnabled;
+    };
+    Property.multilink( [ this.inputEnabledProperty, atomANode.inputEnabledProperty ],
+      ( moleculeInputEnabled, atomInputEnabled ) => setHintArrowVisible( hintArrowANode, moleculeInputEnabled, atomInputEnabled )
+    );
+    Property.multilink( [ this.inputEnabledProperty, atomBNode.inputEnabledProperty ],
+      ( moleculeInputEnabled, atomInputEnabled ) => setHintArrowVisible( hintArrowBNode, moleculeInputEnabled, atomInputEnabled )
+    );
+    Property.multilink( [ this.inputEnabledProperty, atomCNode.inputEnabledProperty ],
+      ( moleculeInputEnabled, atomInputEnabled ) => setHintArrowVisible( hintArrowCNode, moleculeInputEnabled, atomInputEnabled )
+    );
+
     // When the user drags any atom or bond, hide the cueing arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
-
         // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
         hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = false;
+        moleculeHasChanged = true;
       }
     };
     molecule.angleProperty.lazyLink( hideArrows );
@@ -180,11 +196,16 @@ class TriatomicMoleculeNode extends Node {
       molecule.angleProperty.link( angle => arrowNode.setRotation( angle ) );
     }
 
-    // @private makes the cueing arrows visible
+    // @private
     this.resetTriatomicMoleculeNode = () => {
 
-      // Set the hint arrows individually, so that hintArrowsNode visibility can be set via PhET-iO.
-      hintArrowANode.visible = hintArrowBNode.visible = hintArrowCNode.visible = true;
+      // Make hint arrows visible.
+      // Set the arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
+      moleculeHasChanged = false;
+      const moleculeInputEnabled = this.inputEnabledProperty.value;
+      setHintArrowVisible( hintArrowANode, moleculeInputEnabled, atomANode.inputEnabledProperty.value );
+      setHintArrowVisible( hintArrowBNode, moleculeInputEnabled, atomBNode.inputEnabledProperty.value );
+      setHintArrowVisible( hintArrowCNode, moleculeInputEnabled, atomCNode.inputEnabledProperty.value );
     };
   }
 
