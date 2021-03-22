@@ -58,7 +58,8 @@ class Molecule {
     // This is Property only so that it appears in PhET-iO state.
     this.isDraggingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isDraggingProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioState: false
     } );
 
     // update atom positions when molecule is rotated, unlink not needed
