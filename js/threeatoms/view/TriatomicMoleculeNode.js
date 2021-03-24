@@ -71,12 +71,22 @@ class TriatomicMoleculeNode extends Node {
     } );
 
     // arrows to provide interaction hints
-    const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA );
-    const hintArrowCNode = new TranslateArrowsNode( molecule, molecule.atomC );
-    const hintArrowBNode = new RotateArrowsNode( molecule, molecule.atomB );
+    const hintArrowsTandem = options.tandem.createTandem( 'hintArrowsNode' );
+    const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA, {
+      tandem: hintArrowsTandem.createTandem( 'hintArrowANode' )
+    } );
+    const hintArrowCNode = new TranslateArrowsNode( molecule, molecule.atomC, {
+      tandem: hintArrowsTandem.createTandem( 'hintArrowCNode' )
+    } );
+    const hintArrowBNode = new RotateArrowsNode( molecule, molecule.atomB, {
+      tandem: hintArrowsTandem.createTandem( 'hintArrowBNode' )
+    } );
     const hintArrowsNode = new Node( {
       children: [ hintArrowANode, hintArrowCNode, hintArrowBNode ],
-      tandem: options.tandem.createTandem( 'hintArrowsNode' )
+      tandem: hintArrowsTandem,
+      visiblePropertyOptions: {
+        phetioDocumentation: 'Set to false to permanently hide hint arrows.'
+      }
     } );
 
     // We'll be moving the dragged atom to the front, because A & C can overlap

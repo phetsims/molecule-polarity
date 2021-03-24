@@ -56,11 +56,19 @@ class DiatomicMoleculeNode extends Node {
     } );
 
     // arrows to provide interaction hints
-    const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA );
-    const hintArrowBNode = new TranslateArrowsNode( molecule, molecule.atomB );
+    const hintArrowsTandem = options.tandem.createTandem( 'hintArrowsNode' );
+    const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA, {
+      tandem: hintArrowsTandem.createTandem( 'hintArrowANode' )
+    } );
+    const hintArrowBNode = new TranslateArrowsNode( molecule, molecule.atomB, {
+      tandem: hintArrowsTandem.createTandem( 'hintArrowBNode' )
+    } );
     const hintArrowsNode = new Node( {
       children: [ hintArrowANode, hintArrowBNode ],
-      tandem: options.tandem.createTandem( 'hintArrowsNode' )
+      tandem: hintArrowsTandem,
+      visiblePropertyOptions: {
+        phetioDocumentation: 'Set to false to permanently hide hint arrows.'
+      }
     } );
 
     // partial charge
