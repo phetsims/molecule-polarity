@@ -26,7 +26,7 @@ const options = {
     leadDesign: 'Kelly Lancaster',
     softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
     team: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins',
-    qualityAssurance: 'Steele Dalton, Alex Dornan, Ethan Johnson'
+    qualityAssurance: 'Steele Dalton, Alex Dornan, Ethan Johnson, Kathryn Woessner'
   }
 };
 
