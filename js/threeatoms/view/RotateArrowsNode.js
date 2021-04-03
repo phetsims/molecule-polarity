@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Matrix3 from '../../../../dot/js/Matrix3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -49,14 +48,10 @@ class RotateArrowsNode extends Node {
 
     super( options );
 
-    // Align with atom position and molecular dipole
-    const updateTransform = () => {
-      this.matrix = Matrix3
-        .translationFromVector( atom.positionProperty.value )
-        .timesMatrix( Matrix3.rotation2( molecule.dipoleProperty.value.angle + Math.PI / 2 ) );
-    };
-    molecule.dipoleProperty.link( updateTransform.bind( this ) ); // unlink not needed
-    atom.positionProperty.link( updateTransform.bind( this ) ); // unlink not needed
+    // Sync with atom position. unlink not needed
+    atom.positionProperty.link( position => {
+      this.translation = position;
+    } );
   }
 }
 
