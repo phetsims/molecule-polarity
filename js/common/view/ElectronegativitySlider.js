@@ -14,6 +14,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
+import Slider from '../../../../sun/js/Slider.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -52,7 +53,7 @@ class ElectronegativitySlider extends HSlider {
     // custom thumb
     const thumbNode = new PointySliderThumb( {
       size: new Dimension2( 30, 35 ),
-      tandem: options.tandem.createTandem( 'thumbNode' )
+      tandem: options.tandem.createTandem( Slider.THUMB_NODE_TANDEM_NAME )
     } );
     thumbNode.touchArea = thumbNode.localBounds.dilatedXY( 10, 10 );
 
