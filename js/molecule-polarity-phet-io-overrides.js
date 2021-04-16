@@ -61,6 +61,9 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.model.molecule.dipoleProperty": {
       "phetioFeatured": true
     },
+    "moleculePolarity.threeAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.toggleSwitch.visibleProperty": {
+      "phetioFeatured": false
+    },
     "moleculePolarity.threeAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.visibleProperty": {
       "phetioFeatured": false
     },
@@ -181,6 +184,9 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.twoAtomsScreen.model.molecule.dipoleProperty": {
       "phetioFeatured": true
     },
+    "moleculePolarity.twoAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.toggleSwitch.visibleProperty": {
+      "phetioFeatured": false
+    },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.visibleProperty": {
       "phetioFeatured": false
     },
@@ -204,6 +210,9 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.surfaceControl.radioButtonGroup.noneText.textProperty": {
       "phetioFeatured": true
+    },
+    "moleculePolarity.twoAtomsScreen.view.controlPanel.surfaceControl.radioButtonGroup.visibleProperty": {
+      "phetioFeatured": false
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.surfaceControl.titleText.textProperty": {
       "phetioFeatured": true
