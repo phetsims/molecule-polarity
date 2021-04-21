@@ -43,31 +43,31 @@ class TriatomicMoleculeNode extends Node {
 
     options = merge( {
       tandem: Tandem.REQUIRED,
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     }, options );
 
     // atoms
     const atomANode = new AtomNode( molecule.atomA, {
       tandem: options.tandem.createTandem( 'atomANode' ),
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     } );
     const atomBNode = new AtomNode( molecule.atomB, {
       tandem: options.tandem.createTandem( 'atomBNode' ),
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     } );
     const atomCNode = new AtomNode( molecule.atomC, {
       tandem: options.tandem.createTandem( 'atomCNode' ),
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     } );
 
     // bonds
     const bondABNode = new BondNode( molecule.bondAB, {
       tandem: options.tandem.createTandem( 'bondABNode' ),
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     } );
     const bondBCNode = new BondNode( molecule.bondBC, {
       tandem: options.tandem.createTandem( 'bondBCNode' ),
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     } );
 
     // arrows to provide interaction hints
