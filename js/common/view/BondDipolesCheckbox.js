@@ -60,9 +60,7 @@ function createLabelNode( options ) {
     }, MPConstants.CONTROL_TEXT_OPTIONS )
   );
 
-  const labelIcon = BondDipoleNode.createIcon( {
-    tandem: options.tandem.createTandem( 'labelIcon' )
-  } );
+  const labelIcon = BondDipoleNode.createIcon();
 
   assert && assert( !options.children, 'createLabelNode sets children' );
   options.children = [ labelText, labelIcon ];

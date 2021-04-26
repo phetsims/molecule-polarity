@@ -76,9 +76,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.controlPanel.separator1.visibleProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.controlPanel.viewControls.bondDipolesCheckbox.labelNode.labelIcon.visibleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.controlPanel.viewControls.bondDipolesCheckbox.labelNode.labelText.textProperty": {
       "phetioFeatured": true
     },
@@ -221,9 +218,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.viewControls.bondCharacterCheckbox.labelText.textProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.viewControls.bondDipoleCheckbox.labelNode.labelIcon.visibleProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.viewControls.bondDipoleCheckbox.labelNode.labelText.textProperty": {
