@@ -97,25 +97,16 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomAElectronegativityPanel.subtitleText.textProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomAElectronegativityPanel.titleText.textProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomAElectronegativityPanel.visibleProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomBElectronegativityPanel.subtitleText.textProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomBElectronegativityPanel.titleText.textProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomBElectronegativityPanel.visibleProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomCElectronegativityPanel.subtitleText.textProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomCElectronegativityPanel.titleText.textProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomCElectronegativityPanel.visibleProperty": {
