@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "9773ad9757f37af8b03fe1ef656bd6e038a65b0a",
+    "sha": "38c95b8890bbfaab3db1710095b33eab4be99458",
     "branch": "1.0"
   },
   "nitroglycerin": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "1675536ee44387b6405a6f0be39cee423fe7d340",
+    "sha": "92afaa0886227a71e14d766050a2e644fda8273c",
     "branch": "molecule-polarity-1.0"
   },
   "scenery-phet": {
