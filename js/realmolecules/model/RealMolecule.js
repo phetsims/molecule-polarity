@@ -30,6 +30,7 @@ class RealMolecule extends PhetioObject {
 
     super( {
       phetioType: RealMolecule.RealMoleculeIO,
+      phetioState: false, // because RealMoleculeIO extends ReferenceIO
       tandem: tandem
     } );
 
