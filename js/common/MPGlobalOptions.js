@@ -34,7 +34,12 @@ class MPGlobalOptions {
     // @public
     this.surfaceColorProperty = new EnumerationProperty(
       SurfaceColor, MPQueryParameters.getSurfaceColor(), {
-        tandem: options.tandem.createTandem( 'surfaceColorProperty' ),
+
+        //TODO see https://github.com/phetsims/molecule-polarity/issues/32
+        // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
+        tandem: ( MPQueryParameters.realMolecules ) ?
+                options.tandem.createTandem( 'surfaceColorProperty' ) :
+                Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
         phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
       } );
   }
