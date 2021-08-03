@@ -29,10 +29,12 @@ class UnderDevelopmentPlane extends Plane {
   constructor( layoutBounds ) {
     assert && assert( layoutBounds instanceof Bounds2, 'invalid layoutBounds' );
 
-    const linkText = StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
-      href: LEGACY_URL,
-      text: LEGACY_URL
-    } );
+    const urlString = phet.chipper.queryParameters.allowLinks ?
+                      StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
+                        href: LEGACY_URL,
+                        text: LEGACY_URL
+                      } ) :
+                      LEGACY_URL;
 
     const maxTextWidth = 0.75 * layoutBounds.width;
 
@@ -51,8 +53,8 @@ class UnderDevelopmentPlane extends Plane {
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
             } ),
-            new RichText( linkText, {
-              links: true, // allow links in linkText
+            new RichText( urlString, {
+              links: true,
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
             } )
