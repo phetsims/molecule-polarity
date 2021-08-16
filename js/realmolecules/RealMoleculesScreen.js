@@ -12,7 +12,7 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import merge from '../../../phet-core/js/merge.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import homeIcon from '../../images/RealMolecules-home-icon_png.js';
+import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
 import MPColors from '../common/MPColors.js';
 import MPQueryParameters from '../common/MPQueryParameters.js';
 import moleculePolarity from '../moleculePolarity.js';
@@ -51,7 +51,7 @@ class RealMoleculesScreen extends Screen {
  * @returns {ScreenIcon}
  */
 function createScreenIcon() {
-  return new ScreenIcon( new Image( homeIcon ), {
+  return new ScreenIcon( new Image( realMoleculesScreenIcon_png ), {
     maxIconWidthProportion: 1,
     maxIconHeightProportion: 1
   } );
