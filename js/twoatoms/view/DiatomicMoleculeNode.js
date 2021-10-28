@@ -58,9 +58,11 @@ class DiatomicMoleculeNode extends Node {
     // arrows to provide interaction hints
     const hintArrowsTandem = options.tandem.createTandem( 'hintArrowsNode' );
     const hintArrowANode = new TranslateArrowsNode( molecule, molecule.atomA, {
+      pickable: false,
       tandem: hintArrowsTandem.createTandem( 'hintArrowANode' )
     } );
     const hintArrowBNode = new TranslateArrowsNode( molecule, molecule.atomB, {
+      pickable: false,
       tandem: hintArrowsTandem.createTandem( 'hintArrowBNode' )
     } );
     const hintArrowsNode = new Node( {
