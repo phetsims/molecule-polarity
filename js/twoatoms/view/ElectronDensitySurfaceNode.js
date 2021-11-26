@@ -11,7 +11,7 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
+import { LinearGradient } from '../../../../scenery/js/imports.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
