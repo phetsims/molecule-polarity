@@ -6,10 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-const DipoleDirection = Enumeration.byKeys( [ 'POSITIVE_TO_NEGATIVE', 'NEGATIVE_TO_POSITIVE' ] );
+const DipoleDirection = EnumerationDeprecated.byKeys( [ 'POSITIVE_TO_NEGATIVE', 'NEGATIVE_TO_POSITIVE' ] );
 
 moleculePolarity.register( 'DipoleDirection', DipoleDirection );
 export default DipoleDirection;

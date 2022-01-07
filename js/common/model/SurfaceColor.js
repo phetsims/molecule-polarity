@@ -6,10 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-const SurfaceColor = Enumeration.byKeys( [ 'RWB', 'ROYGB' ] );
+const SurfaceColor = EnumerationDeprecated.byKeys( [ 'RWB', 'ROYGB' ] );
 
 moleculePolarity.register( 'SurfaceColor', SurfaceColor );
 export default SurfaceColor;
