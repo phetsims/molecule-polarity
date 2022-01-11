@@ -27,7 +27,7 @@ const TEXT_OPTIONS = {
 class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<DipoleDirection>} dipoleDirectionProperty
+   * @param {EnumerationDeprecatedProperty.<DipoleDirection>} dipoleDirectionProperty
    * @param {Object} [options]
    */
   constructor( dipoleDirectionProperty, options ) {

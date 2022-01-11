@@ -20,7 +20,7 @@ import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
 class SurfaceControl extends VBox {
 
   /**
-   * @param {EnumerationProperty.<SurfaceType>} surfaceTypeProperty
+   * @param {EnumerationDeprecatedProperty.<SurfaceType>} surfaceTypeProperty
    * @param {Object} [options]
    */
   constructor( surfaceTypeProperty, options ) {

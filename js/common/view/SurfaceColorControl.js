@@ -21,7 +21,7 @@ import SurfaceColorRadioButtonGroup from './SurfaceColorRadioButtonGroup.js';
 class SurfaceColorControl extends VBox {
 
   /**
-   * @param {EnumerationProperty.<SurfaceColor>} surfaceColorProperty
+   * @param {EnumerationDeprecatedProperty.<SurfaceColor>} surfaceColorProperty
    * @param {Object} [options]
    */
   constructor( surfaceColorProperty, options ) {

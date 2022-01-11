@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../axon/js/EnumerationDeprecatedProperty.js';
 import merge from '../../../phet-core/js/merge.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import moleculePolarity from '../moleculePolarity.js';
@@ -26,13 +26,13 @@ class MPGlobalOptions {
     }, options );
 
     // @public
-    this.dipoleDirectionProperty = new EnumerationProperty(
+    this.dipoleDirectionProperty = new EnumerationDeprecatedProperty(
       DipoleDirection, MPQueryParameters.getDipoleDirection(), {
         tandem: options.tandem.createTandem( 'dipoleDirectionProperty' )
       } );
 
     // @public
-    this.surfaceColorProperty = new EnumerationProperty(
+    this.surfaceColorProperty = new EnumerationDeprecatedProperty(
       SurfaceColor, MPQueryParameters.getSurfaceColor(), {
 
         //TODO see https://github.com/phetsims/molecule-polarity/issues/32

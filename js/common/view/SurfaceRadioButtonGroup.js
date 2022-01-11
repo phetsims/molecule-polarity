@@ -19,7 +19,7 @@ import MPConstants from '../MPConstants.js';
 class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<SurfaceType>} surfaceTypeProperty
+   * @param {EnumerationDeprecatedProperty.<SurfaceType>} surfaceTypeProperty
    * @param {Object} [options]
    */
   constructor( surfaceTypeProperty, options ) {

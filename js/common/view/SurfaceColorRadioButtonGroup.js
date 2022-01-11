@@ -29,7 +29,7 @@ const COLOR_KEY_OPTIONS = {
 class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<SurfaceColor>} surfaceColorProperty
+   * @param {EnumerationDeprecatedProperty.<SurfaceColor>} surfaceColorProperty
    * @param {Object} [options]
    */
   constructor( surfaceColorProperty, options ) {

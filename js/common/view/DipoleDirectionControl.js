@@ -21,7 +21,7 @@ import DipoleDirectionRadioButtonGroup from './DipoleDirectionRadioButtonGroup.j
 class DipoleDirectionControl extends VBox {
 
   /**
-   * @param {EnumerationProperty.<DipoleDirection>} dipoleDirectionProperty
+   * @param {EnumerationDeprecatedProperty.<DipoleDirection>} dipoleDirectionProperty
    * @param {Object} [options]
    */
   constructor( dipoleDirectionProperty, options ) {

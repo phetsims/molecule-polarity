@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
@@ -34,7 +34,7 @@ class TwoAtomsViewProperties {
     this.bondCharacterVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'bondCharacterVisibleProperty' )
     } );
-    this.surfaceTypeProperty = new EnumerationProperty( SurfaceType, SurfaceType.NONE, {
+    this.surfaceTypeProperty = new EnumerationDeprecatedProperty( SurfaceType, SurfaceType.NONE, {
       tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
     } );
   }

@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
@@ -40,7 +40,7 @@ class RealMoleculesViewProperties {
     this.atomLabelsVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' )
     } );
-    this.surfaceTypeProperty = new EnumerationProperty( SurfaceType, SurfaceType.NONE, {
+    this.surfaceTypeProperty = new EnumerationDeprecatedProperty( SurfaceType, SurfaceType.NONE, {
       tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
     } );
   }
