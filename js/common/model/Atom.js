@@ -51,8 +51,7 @@ class Atom {
     // @public
     this.electronegativityProperty = new NumberProperty( options.electronegativity, {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
-      tandem: options.tandem.createTandem( 'electronegativityProperty' ),
-      phetioStudioControl: false // because not continuous, see https://github.com/phetsims/molecule-polarity/issues/94
+      tandem: options.tandem.createTandem( 'electronegativityProperty' )
     } );
 
     // @public partial charge is zero until this atom participates in a bond
