@@ -28,7 +28,6 @@ class BondNode extends Line {
     options = merge( {
       stroke: MPColors.BOND,
       lineWidth: 12,
-      strokePickable: true, // include stroke in hit-testing
       tandem: Tandem.REQUIRED,
       visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
