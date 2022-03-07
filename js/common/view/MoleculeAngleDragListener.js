@@ -58,7 +58,7 @@ class MoleculeAngleDragListener extends DragListener {
     };
 
     assert && assert( !options.end, 'MoleculeAngleDragListener sets end' );
-    options.end = event => {
+    options.end = () => {
       molecule.isDraggingProperty.value = false;
     };
 
