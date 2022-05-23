@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -203,7 +203,7 @@ class TriatomicMoleculeNode extends Node {
     // Update a hint arrow when the molecule inputEnabled or atom inputEnabled changes.
     // unmultilink is not needed.
     const createMultilink = ( hintArrowNode, atomNode ) => {
-      Property.multilink( [ this.inputEnabledProperty, atomNode.inputEnabledProperty ],
+      Multilink.multilink( [ this.inputEnabledProperty, atomNode.inputEnabledProperty ],
         () => updateOneHintArrow( hintArrowNode, atomNode )
       );
     };

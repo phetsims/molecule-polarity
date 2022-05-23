@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -73,7 +73,7 @@ class ElectronegativityPanel extends Panel {
     } );
 
     // layout, handled dynamically because titleText and subtitleText can be changed via PhET-iO
-    Property.multilink( [ titleText.boundsProperty, subtitleText.boundsProperty ], () => {
+    Multilink.multilink( [ titleText.boundsProperty, subtitleText.boundsProperty ], () => {
       subtitleText.centerX = slider.centerX = titleText.centerX;
       subtitleText.top = titleText.bottom;
       slider.top = subtitleText.bottom + 8;
