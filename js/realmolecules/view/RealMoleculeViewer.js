@@ -13,12 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { LayoutBox } from '../../../../scenery/js/imports.js';
-import { Line } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { RichText } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Line, Node, Rectangle, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -81,9 +76,8 @@ class RealMoleculeViewer extends Node {
     } );
     const surfaceTypeText = new Text( '?', { font: FONT } );
 
-    const debugText = new LayoutBox( {
+    const debugText = new VBox( {
       excludeInvisibleChildrenFromBounds: false,
-      orientation: 'vertical',
       align: 'left',
       spacing: 10,
       centerX: rectNode.centerX,
