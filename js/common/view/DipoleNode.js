@@ -31,12 +31,12 @@ const FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIO
 class DipoleNode extends Path {
 
   /**
-   * @param {Property.<Vector2>} dipoleProperty
+   * @param {AbstractProperty.<Vector2>} dipoleProperty
    * @param {Object} [options]
    * @abstract
    */
   constructor( dipoleProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( dipoleProperty, Vector2 );
+    assert && AssertUtils.assertAbstractPropertyOf( dipoleProperty, Vector2 );
 
     options = merge( {
       fill: 'black',
