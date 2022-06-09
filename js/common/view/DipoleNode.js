@@ -31,7 +31,7 @@ const FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIO
 class DipoleNode extends Path {
 
   /**
-   * @param {AbstractProperty.<Vector2>} dipoleProperty
+   * @param {ReadOnlyProperty.<Vector2>} dipoleProperty
    * @param {Object} [options]
    * @abstract
    */
