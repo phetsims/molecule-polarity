@@ -304,8 +304,8 @@ function updateElements( applet, elementsProperty ) {
   // Convert the tokens to an array of {Element}.
   const elements = [];
   for ( let i = 0; i < tokens.length; i = i + 4 ) {
-    const elementNumber = parseInt( tokens[ i ], 10 );
-    const color = new Color( parseInt( tokens[ i + 1 ], 10 ), parseInt( tokens[ i + 2 ], 10 ), parseInt( tokens[ i + 3 ], 10 ) );
+    const elementNumber = Number( tokens[ i ] );
+    const color = new Color( Number( tokens[ i + 1 ] ), Number( tokens[ i + 2 ] ), Number( tokens[ i + 3 ] ) );
     elements.push( new Element( elementNumber, color ) );
   }
   elementsProperty.value = elements;
