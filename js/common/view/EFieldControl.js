@@ -47,7 +47,7 @@ class EFieldControl extends VBox {
     const onOffSwitch = new ABSwitch( eFieldEnabledProperty,
       false, new Text( moleculePolarityStrings.off, SWITCH_LABEL_OPTIONS ),
       true, new Text( moleculePolarityStrings.on, SWITCH_LABEL_OPTIONS ), {
-        xSpacing: 12,
+        spacing: 12,
         toggleSwitchOptions: {
           trackFillLeft: 'rgb( 180, 180, 180 )',
           trackFillRight: 'rgb( 0, 180, 0 )'
