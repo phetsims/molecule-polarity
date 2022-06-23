@@ -34,7 +34,7 @@ class AtomLabelsCheckbox extends Checkbox {
       }, MPConstants.CONTROL_TEXT_OPTIONS )
     );
 
-    super( labelText, atomLabelsVisibleProperty, options );
+    super( atomLabelsVisibleProperty, labelText, options );
   }
 }
 

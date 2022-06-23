@@ -34,7 +34,7 @@ class AtomElectronegativitiesCheckbox extends Checkbox {
       }, MPConstants.CONTROL_TEXT_OPTIONS )
     );
 
-    super( labelText, atomElectronegativitiesVisibleProperty, options );
+    super( atomElectronegativitiesVisibleProperty, labelText, options );
   }
 }
 

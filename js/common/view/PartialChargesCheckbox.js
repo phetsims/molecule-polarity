@@ -34,7 +34,7 @@ class PartialChargesCheckbox extends Checkbox {
       }, MPConstants.CONTROL_TEXT_OPTIONS )
     );
 
-    super( labelText, partialChargesVisibleProperty, options );
+    super( partialChargesVisibleProperty, labelText, options );
   }
 }
 

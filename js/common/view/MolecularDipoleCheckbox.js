@@ -34,7 +34,7 @@ class MolecularDipoleCheckbox extends Checkbox {
       tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
-    super( labelNode, molecularDipoleVisibleProperty, options );
+    super( molecularDipoleVisibleProperty, labelNode, options );
   }
 }
 

@@ -36,7 +36,7 @@ class BondDipolesCheckbox extends Checkbox {
       tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
-    super( labelNode, bondDipolesVisibleProperty, options );
+    super( bondDipolesVisibleProperty, labelNode, options );
   }
 }
 

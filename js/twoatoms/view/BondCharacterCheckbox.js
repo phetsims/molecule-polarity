@@ -34,7 +34,7 @@ class BondCharacterCheckbox extends Checkbox {
       }, MPConstants.CONTROL_TEXT_OPTIONS )
     );
 
-    super( labelText, bondCharacterVisibleProperty, options );
+    super( bondCharacterVisibleProperty, labelText, options );
   }
 }
 
