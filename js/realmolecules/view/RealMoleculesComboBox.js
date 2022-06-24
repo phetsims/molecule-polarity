@@ -23,13 +23,13 @@ import RealMolecule from '../model/RealMolecule.js';
 class RealMoleculesComboBox extends ComboBox {
 
   /**
-   * @param {RealMolecule[]} molecules
    * @param {Property.<RealMolecule>} moleculeProperty
+   * @param {RealMolecule[]} molecules
    * @param {Node} listParent
    * @param {Object} [options]
    * @constructor
    */
-  constructor( molecules, moleculeProperty, listParent, options ) {
+  constructor( moleculeProperty, molecules, listParent, options ) {
     assert && AssertUtils.assertArrayOf( molecules, RealMolecule );
     assert && AssertUtils.assertPropertyOf( moleculeProperty, RealMolecule );
     assert && assert( listParent instanceof Node, 'invalid listParent' );
@@ -53,7 +53,7 @@ class RealMoleculesComboBox extends ComboBox {
     // {ComboBoxItem[]}
     const items = molecules.map( createItem );
 
-    super( items, moleculeProperty, listParent, options );
+    super( moleculeProperty, items, listParent, options );
   }
 }
 

@@ -60,7 +60,7 @@ class RealMoleculesScreenView extends ScreenView {
     } );
 
     const comboBoxListParent = new Node();
-    const moleculesComboBox = new RealMoleculesComboBox( model.molecules, model.moleculeProperty, comboBoxListParent, {
+    const moleculesComboBox = new RealMoleculesComboBox( model.moleculeProperty, model.molecules, comboBoxListParent, {
       tandem: options.tandem.createTandem( 'moleculesComboBox' )
     } );
 
