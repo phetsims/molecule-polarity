@@ -1,4 +1,4 @@
-// Copyright 2021, University of Colorado Boulder
+// Copyright 2021-2022, University of Colorado Boulder
 
 /**
  * MolecularDipoleCheckbox is the checkbox for controlling visibility of the molecular dipole.
