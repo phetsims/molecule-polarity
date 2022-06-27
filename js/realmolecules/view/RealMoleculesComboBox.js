@@ -10,11 +10,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { RichText } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
-import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -75,9 +72,11 @@ function createItem( molecule ) {
     font: new PhetFont( 18 )
   } );
 
-  return new ComboBoxItem( node, molecule, {
-    tandemName: `${molecule.tandem.name}Item`
-  } );
+  return {
+    value: molecule,
+    node: node,
+    tandemName: `${molecule.tandem.name}${ComboBox.ITEM_TANDEM_NAME_SUFFIX}`
+  };
 }
 
 moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
