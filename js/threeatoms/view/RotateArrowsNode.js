@@ -9,8 +9,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import { Node, Path } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import Atom from '../../common/model/Atom.js';
 import Molecule from '../../common/model/Molecule.js';
