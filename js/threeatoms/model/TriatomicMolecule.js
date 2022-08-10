@@ -112,7 +112,7 @@ class TriatomicMolecule extends Molecule {
       ( bondAngleAB, bondAngleBC ) => normalizeAngle( bondAngleAB - bondAngleBC, MPConstants.ANGLE_RANGE.min ), {
         isValidValue: value => MPConstants.ANGLE_RANGE.contains( value ),
         tandem: options.tandem.createTandem( 'bondAngleABCProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         phetioDocumentation: 'the angle between bonds AB and BC, with positive rotation being CLOCKWISE'
       } );
 

@@ -83,7 +83,7 @@ class Molecule {
       return sum;
     }, {
       tandem: options.tandem.createTandem( 'dipoleProperty' ),
-      phetioType: DerivedProperty.DerivedPropertyIO( Vector2.Vector2IO ),
+      phetioValueType: Vector2.Vector2IO,
       phetioDocumentation: 'The molecular dipole, vector sum of the bond dipoles. ' +
                            '+x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
     } );

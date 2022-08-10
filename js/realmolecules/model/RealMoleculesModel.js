@@ -57,7 +57,7 @@ class RealMoleculesModel {
     // @public the selected molecule
     this.moleculeProperty = new Property( this.molecules[ 4 ], {
       validValues: this.molecules,
-      phetioType: Property.PropertyIO( RealMolecule.RealMoleculeIO ),
+      phetioValueType: RealMolecule.RealMoleculeIO,
       tandem: options.tandem.createTandem( 'moleculeProperty' )
     } );
   }
