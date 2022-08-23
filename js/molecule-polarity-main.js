@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
@@ -24,10 +25,12 @@ simLauncher.launch( () => {
   ];
 
   const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].title, screens, {
-
-    // Creates content for the Options dialog
-    createOptionsDialogContent: tandem => new MPOptionsNode( {
-      tandem: tandem
+    preferencesModel: new PreferencesModel( {
+      generalOptions: {
+        customPreferences: [ {
+          createContent: tandem => new MPOptionsNode( { tandem: tandem.createTandem( 'optionsNode' ) } )
+        } ]
+      }
     } ),
 
     credits: {
