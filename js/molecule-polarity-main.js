@@ -28,7 +28,7 @@ simLauncher.launch( () => {
     preferencesModel: new PreferencesModel( {
       generalOptions: {
         customPreferences: [ {
-          createContent: tandem => new MPOptionsNode( { tandem: tandem.createTandem( 'optionsNode' ) } )
+          createContent: tandem => new MPOptionsNode( { tandem: tandem.createTandem( 'moleculePolarityPreferencesContent' ) } )
         } ]
       }
     } ),
