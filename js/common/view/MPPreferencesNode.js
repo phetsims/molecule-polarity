@@ -14,7 +14,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import { VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MPPreferences from '../MPPreferences.js';
+import MPPreferences from '../model/MPPreferences.js';
 import MPQueryParameters from '../MPQueryParameters.js';
 import DipoleDirectionControl from './DipoleDirectionControl.js';
 import SurfaceColorControl from './SurfaceColorControl.js';

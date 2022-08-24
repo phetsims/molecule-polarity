@@ -7,12 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecatedProperty from '../../../axon/js/EnumerationDeprecatedProperty.js';
-import Tandem from '../../../tandem/js/Tandem.js';
-import moleculePolarity from '../moleculePolarity.js';
-import DipoleDirection from './model/DipoleDirection.js';
-import SurfaceColor from './model/SurfaceColor.js';
-import MPQueryParameters from './MPQueryParameters.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import moleculePolarity from '../../moleculePolarity.js';
+import DipoleDirection from './DipoleDirection.js';
+import SurfaceColor from './SurfaceColor.js';
+import MPQueryParameters from '../MPQueryParameters.js';
 
 const preferencesTandem = Tandem.GLOBAL_MODEL.createTandem( 'preferences' );
 

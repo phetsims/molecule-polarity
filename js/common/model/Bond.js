@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MPPreferences from '../MPPreferences.js';
+import MPPreferences from './MPPreferences.js';
 import Atom from './Atom.js';
 import DipoleDirection from './DipoleDirection.js';
 

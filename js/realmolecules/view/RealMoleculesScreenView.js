@@ -16,7 +16,7 @@ import SurfaceColor from '../../common/model/SurfaceColor.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import MPPreferences from '../../common/MPPreferences.js';
+import MPPreferences from '../../common/model/MPPreferences.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';

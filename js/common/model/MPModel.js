@@ -14,7 +14,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
-import MPPreferences from '../MPPreferences.js';
+import MPPreferences from './MPPreferences.js';
 import DipoleDirection from './DipoleDirection.js';
 import normalizeAngle from './normalizeAngle.js';
 
