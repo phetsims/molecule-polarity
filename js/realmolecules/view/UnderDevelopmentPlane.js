@@ -10,7 +10,7 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Plane, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
+import { allowLinksProperty, Plane, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -26,7 +26,7 @@ class UnderDevelopmentPlane extends Plane {
   constructor( layoutBounds ) {
     assert && assert( layoutBounds instanceof Bounds2, 'invalid layoutBounds' );
 
-    const urlString = phet.chipper.queryParameters.allowLinks ?
+    const urlString = allowLinksProperty.value ?
                       StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
                         href: LEGACY_URL,
                         text: LEGACY_URL
