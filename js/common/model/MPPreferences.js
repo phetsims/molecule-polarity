@@ -10,17 +10,15 @@
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MPQueryParameters from '../MPQueryParameters.js';
 import DipoleDirection from './DipoleDirection.js';
 import SurfaceColor from './SurfaceColor.js';
-import MPQueryParameters from '../MPQueryParameters.js';
-
-const preferencesTandem = Tandem.GLOBAL_MODEL.createTandem( 'preferences' );
 
 const MPPreferences = {
 
   dipoleDirectionProperty: new EnumerationDeprecatedProperty(
     DipoleDirection, MPQueryParameters.getDipoleDirection(), {
-      tandem: preferencesTandem.createTandem( 'dipoleDirectionProperty' )
+      tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
     } ),
 
   surfaceColorProperty: new EnumerationDeprecatedProperty(
@@ -29,7 +27,7 @@ const MPPreferences = {
       //TODO see https://github.com/phetsims/molecule-polarity/issues/32
       // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
       tandem: ( MPQueryParameters.realMolecules ) ?
-              preferencesTandem.createTandem( 'surfaceColorProperty' ) :
+              Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ) :
               Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
       phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
     } )
