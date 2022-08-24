@@ -10,7 +10,7 @@ import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import MPOptionsNode from './common/view/MPOptionsNode.js';
+import MPPreferencesNode from './common/view/MPPreferencesNode.js';
 import moleculePolarityStrings from './moleculePolarityStrings.js';
 import RealMoleculesScreen from './realmolecules/RealMoleculesScreen.js';
 import ThreeAtomsScreen from './threeatoms/ThreeAtomsScreen.js';
@@ -28,7 +28,9 @@ simLauncher.launch( () => {
     preferencesModel: new PreferencesModel( {
       generalOptions: {
         customPreferences: [ {
-          createContent: tandem => new MPOptionsNode( { tandem: tandem.createTandem( 'moleculePolarityPreferencesContent' ) } )
+          createContent: tandem => new MPPreferencesNode( {
+            tandem: tandem.createTandem( 'simPreferences' )
+          } )
         } ]
       }
     } ),

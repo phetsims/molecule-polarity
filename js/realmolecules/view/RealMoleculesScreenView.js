@@ -16,6 +16,7 @@ import SurfaceColor from '../../common/model/SurfaceColor.js';
 import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
+import MPPreferences from '../../common/MPPreferences.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -75,7 +76,7 @@ class RealMoleculesScreenView extends ScreenView {
     } );
 
     // unlink not needed
-    MPConstants.GLOBAL_OPTIONS.surfaceColorProperty.link( surfaceColor => {
+    MPPreferences.surfaceColorProperty.link( surfaceColor => {
       electrostaticPotentialRWBColorKey.visible = ( surfaceColor === SurfaceColor.RWB );
       electrostaticPotentialROYGBColorKey.visible = ( surfaceColor === SurfaceColor.ROYGB );
     } );

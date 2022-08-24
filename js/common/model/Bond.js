@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MPConstants from '../MPConstants.js';
+import MPPreferences from '../MPPreferences.js';
 import Atom from './Atom.js';
 import DipoleDirection from './DipoleDirection.js';
 
@@ -42,7 +42,7 @@ class Bond extends PhetioObject {
     this.dipoleProperty = new DerivedProperty( [
         atom1.positionProperty, atom2.positionProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
-        MPConstants.GLOBAL_OPTIONS.dipoleDirectionProperty
+        MPPreferences.dipoleDirectionProperty
       ],
       ( position1, position2, electronegativity1, electronegativity2, dipoleDirection ) => {
 

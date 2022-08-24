@@ -13,7 +13,7 @@ import SurfaceColor from './model/SurfaceColor.js';
 
 const MPQueryParameters = QueryStringMachine.getAll( {
 
-  // Direction of the dipole, see MPGlobalOptions.dipoleDirectionProperty
+  // Direction of the dipole, see MPPreferences.dipoleDirectionProperty
   dipoleDirection: {
     type: 'string',
     validValues: [ 'positiveToNegative', 'negativeToPositive' ],
@@ -22,7 +22,7 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   },
 
   // Surface color used for Electrostatic Potential surface in the Real Molecules screen.
-  // See MPGlobalOptions.surfaceColorProperty
+  // See MPPreferences.surfaceColorProperty
   surfaceColor: {
     type: 'string',
     validValues: [ 'RWB', 'ROYGB' ],

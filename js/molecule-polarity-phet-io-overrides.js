@@ -1,7 +1,7 @@
-/* eslint-disable */
+  /* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
   {
-    "moleculePolarity.global.model.dipoleDirectionProperty": {
+    "moleculePolarity.global.model.preferences.dipoleDirectionProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.model.eFieldEnabledProperty": {
