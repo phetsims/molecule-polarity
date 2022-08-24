@@ -38,7 +38,7 @@ class MPPreferencesNode extends VBox {
 
     const surfaceColorControl = new SurfaceColorControl( MPPreferences.surfaceColorProperty, {
 
-      //TODO https://github.com/phetsims/molecule-polarity/issues/32 remove the Surface Color option until Real Molecules screen is implemented
+      //TODO https://github.com/phetsims/molecule-polarity/issues/32 hide the Surface Color option until Real Molecules screen is implemented
       visible: MPQueryParameters.realMolecules,
       tandem: options.tandem.createTandem( 'surfaceColorControl' )
     } );
