@@ -52,7 +52,7 @@ class MPPreferencesNode extends VBox {
     super( options );
 
     // @private
-    this.disposeMPOptionsNode = () => {
+    this.disposeMPPreferencesNode = () => {
       dipoleDirectionControl.dispose();
       surfaceColorControl.dispose();
     };
@@ -64,7 +64,7 @@ class MPPreferencesNode extends VBox {
    * @override
    */
   dispose() {
-    this.disposeMPOptionsNode();
+    this.disposeMPPreferencesNode();
     super.dispose();
   }
 }
