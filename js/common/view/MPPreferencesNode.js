@@ -59,10 +59,7 @@ class MPPreferencesNode extends VBox {
   }
 
   /**
-   * NOTE: In the current design of joist, a new instance of OptionsDialog is created every time that
-   * the Options menu item is selected from the PhET menu.  But one instance of the dialog's
-   * content (in this case MPPreferencesNode) is reused. This is (imo) a bad design, and likely to
-   * change in the future. So I'm implementing dispose to future-proof this sim.
+   * Helpful for future-proofing, since PhET-iO will tear down and re-create the PreferencesDialog when setting state.
    * @public
    * @override
    */
