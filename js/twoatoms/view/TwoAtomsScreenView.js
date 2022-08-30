@@ -75,6 +75,7 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: colorKeysTandem.createTandem( 'electrostaticPotentialColorKey' ),
       phetioVisiblePropertyInstrumented: false
     } );
+
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
       tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' ),
       visiblePropertyOptions: { readOnly: true }

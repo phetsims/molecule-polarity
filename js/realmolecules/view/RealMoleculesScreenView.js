@@ -71,9 +71,11 @@ class RealMoleculesScreenView extends ScreenView {
     const electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
       tandem: colorKeysTandem.createTandem( 'electrostaticPotentialRWBColorKey' )
     } );
+
     const electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( {
       tandem: colorKeysTandem.createTandem( 'electrostaticPotentialROYGBColorKey' )
     } );
+
     const colorKeyNode = new Node( {
       children: [
         electrostaticPotentialRWBColorKey,
