@@ -65,14 +65,20 @@ class RealMoleculesScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'moleculesComboBox' )
     } );
 
-    const electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
-    const electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
-    const electrostaticPotentialColorKeyParent = new Node( {
+    // Group color keys under a common parent, so that PhET-iO can hide the color key.
+    const colorKeysTandem = options.tandem.createTandem( 'colorKeys' );
+
+    const electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
+      tandem: colorKeysTandem.createTandem( 'electrostaticPotentialRWBColorKey' )
+    } );
+    const electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( {
+      tandem: colorKeysTandem.createTandem( 'electrostaticPotentialROYGBColorKey' )
+    } );
+    const colorKeyNode = new Node( {
       children: [
         electrostaticPotentialRWBColorKey,
         electrostaticPotentialROYGBColorKey
-      ],
-      tandem: options.tandem.createTandem( 'electrostaticPotentialColorKey' )
+      ]
     } );
 
     // unlink not needed
@@ -82,7 +88,8 @@ class RealMoleculesScreenView extends ScreenView {
     } );
 
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
-      tandem: options.tandem.createTandem( 'electronDensityColorKey' )
+      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' ),
+      visiblePropertyOptions: { readOnly: true }
     } );
 
     const controlPanel = new RealMoleculesControlPanel( viewProperties, {
@@ -106,7 +113,7 @@ class RealMoleculesScreenView extends ScreenView {
         electronegativityTableNode,
         moleculesComboBox,
         controlPanel,
-        electrostaticPotentialColorKeyParent,
+        colorKeyNode,
         electronDensityColorKey,
         resetAllButton,
         comboBoxListParent // last, so that combo box list is on top
@@ -123,11 +130,11 @@ class RealMoleculesScreenView extends ScreenView {
     electronegativityTableNode.top = this.layoutBounds.top + 25;
 
     // centered below electronegativity table
-    electrostaticPotentialColorKeyParent.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
-    electrostaticPotentialColorKeyParent.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
+    colorKeyNode.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
+    colorKeyNode.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
 
     // below color keys
-    this.moleculeViewer.top = electrostaticPotentialColorKeyParent.bottom + 15;
+    this.moleculeViewer.top = colorKeyNode.bottom + 15;
 
     // centered below viewer
     moleculesComboBox.centerX = this.moleculeViewer.centerX;
@@ -145,7 +152,7 @@ class RealMoleculesScreenView extends ScreenView {
 
     // unlink not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      electrostaticPotentialColorKeyParent.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
+      colorKeyNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
       electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
     } );
 

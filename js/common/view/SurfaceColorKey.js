@@ -13,6 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { LinearGradient, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
@@ -21,16 +22,16 @@ class SurfaceColorKey extends Node {
 
   /**
    * @param {ColorDef[]} colors colors used for the gradient, in left-to-right order
-   * @param {string} title
-   * @param {string} leftLabel
-   * @param {string} rightLabel
+   * @param {TReadOnlyProperty<string>} titleStringProperty
+   * @param {TReadOnlyProperty<string>} leftLabelStringProperty
+   * @param {TReadOnlyProperty<string>} rightLabelStringProperty
    * @param {Object} [options]
    */
-  constructor( colors, title, leftLabel, rightLabel, options ) {
+  constructor( colors, titleStringProperty, leftLabelStringProperty, rightLabelStringProperty, options ) {
     assert && assert( Array.isArray( colors ), 'invalid colors' );
-    assert && assert( typeof title === 'string', 'invalid title' );
-    assert && assert( typeof leftLabel === 'string', 'invalid leftLabel' );
-    assert && assert( typeof rightLabel === 'string', 'rightLabel title' );
+    assert && assert( titleStringProperty instanceof ReadOnlyProperty );
+    assert && assert( leftLabelStringProperty instanceof ReadOnlyProperty );
+    assert && assert( rightLabelStringProperty instanceof ReadOnlyProperty );
 
     options = merge( {
       size: new Dimension2( 420, 20 ),
@@ -39,7 +40,8 @@ class SurfaceColorKey extends Node {
       rangeFont: new PhetFont( 16 ),
       xMargin: 0,
       ySpacing: 2,
-      tandem: Tandem.OPTIONAL
+      tandem: Tandem.REQUIRED,
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     super();
@@ -59,34 +61,40 @@ class SurfaceColorKey extends Node {
     } );
 
     // title
-    const titleNode = new Text( title, {
+    const titleText = new Text( titleStringProperty, {
       fill: 'black',
       font: options.titleFont,
-      maxWidth: 0.5 * options.size.width // i18n, determined empirically
+      maxWidth: 0.5 * options.size.width, // i18n, determined empirically
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     // range labels
     const labelOptions = {
       fill: 'black',
       font: options.rangeFont,
-      maxWidth: 0.2 * options.size.width // i18n, determined empirically
+      maxWidth: 0.2 * options.size.width, // i18n, determined empirically
+      phetioVisiblePropertyInstrumented: false
     };
-    const leftLabelNode = new Text( leftLabel, labelOptions );
-    const rightLabelNode = new Text( rightLabel, labelOptions );
+    const leftLabelText = new Text( leftLabelStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'leftLabelText' )
+    }, labelOptions ) );
+    const rightLabelText = new Text( rightLabelStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'rightLabelText' )
+    }, labelOptions ) );
 
     // rendering order
     this.addChild( spectrumNode );
-    this.addChild( leftLabelNode );
-    this.addChild( rightLabelNode );
+    this.addChild( leftLabelText );
+    this.addChild( rightLabelText );
     if ( options.titleVisible ) {
-      this.addChild( titleNode );
+      this.addChild( titleText );
     }
 
     // layout
-    titleNode.centerX = spectrumNode.centerX;
-    leftLabelNode.left = spectrumNode.left + options.xMargin;
-    rightLabelNode.right = spectrumNode.right - options.xMargin;
-    titleNode.top = leftLabelNode.top = rightLabelNode.top = spectrumNode.bottom + options.ySpacing;
+    titleText.centerX = spectrumNode.centerX;
+    leftLabelText.left = spectrumNode.left + options.xMargin;
+    rightLabelText.right = spectrumNode.right - options.xMargin;
+    titleText.top = leftLabelText.top = rightLabelText.top = spectrumNode.bottom + options.ySpacing;
 
     this.mutate( options );
   }
@@ -99,8 +107,8 @@ class SurfaceColorKey extends Node {
    * @static
    */
   static createElectronDensityColorKey( options ) {
-    return new SurfaceColorKey( MPColors.BW_GRADIENT, moleculePolarityStrings.electronDensity,
-      moleculePolarityStrings.less, moleculePolarityStrings.more, options );
+    return new SurfaceColorKey( MPColors.BW_GRADIENT, moleculePolarityStrings.electronDensityStringProperty,
+      moleculePolarityStrings.lessStringProperty, moleculePolarityStrings.moreStringProperty, options );
   }
 
   /**
@@ -111,8 +119,8 @@ class SurfaceColorKey extends Node {
    * @static
    */
   static createElectrostaticPotentialRWBColorKey( options ) {
-    return new SurfaceColorKey( MPColors.RWB_GRADIENT, moleculePolarityStrings.electrostaticPotential,
-      moleculePolarityStrings.positive, moleculePolarityStrings.negative, options );
+    return new SurfaceColorKey( MPColors.RWB_GRADIENT, moleculePolarityStrings.electrostaticPotentialStringProperty,
+      moleculePolarityStrings.positiveStringProperty, moleculePolarityStrings.negativeStringProperty, options );
   }
 
   /**
@@ -123,8 +131,8 @@ class SurfaceColorKey extends Node {
    * @static
    */
   static createElectrostaticPotentialROYGBColorKey( options ) {
-    return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, moleculePolarityStrings.electrostaticPotential,
-      moleculePolarityStrings.positive, moleculePolarityStrings.negative, options );
+    return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, moleculePolarityStrings.electrostaticPotentialStringProperty,
+      moleculePolarityStrings.positiveStringProperty, moleculePolarityStrings.negativeStringProperty, options );
   }
 }
 

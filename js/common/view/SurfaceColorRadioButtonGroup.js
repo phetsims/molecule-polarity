@@ -23,7 +23,8 @@ const COLOR_KEY_OPTIONS = {
   titleVisible: false,
   rangeFont: new PhetFont( 8 ),
   xMargin: 0,
-  ySpacing: 2
+  ySpacing: 2,
+  tandem: Tandem.OPT_OUT
 };
 
 class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {

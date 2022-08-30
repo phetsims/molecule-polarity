@@ -68,13 +68,20 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'bondCharacterPanel' )
     } );
 
-    const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
-    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
-
     // Group color keys under a common parent, so that PhET-iO can hide the color key.
+    const colorKeysTandem = options.tandem.createTandem( 'colorKeys' );
+
+    const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
+      tandem: colorKeysTandem.createTandem( 'electrostaticPotentialColorKey' ),
+      phetioVisiblePropertyInstrumented: false
+    } );
+    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
+      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' ),
+      visiblePropertyOptions: { readOnly: true }
+    } );
+
     const colorKeyNode = new Node( {
-      children: [ electrostaticPotentialColorKey, electronDensityColorKey ],
-      tandem: options.tandem.createTandem( 'colorKeyNode' )
+      children: [ electrostaticPotentialColorKey, electronDensityColorKey ]
     } );
 
     const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
