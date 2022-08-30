@@ -28,11 +28,10 @@ class AtomElectronegativitiesCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelText = new Text( moleculePolarityStrings.atomElectronegativities,
-      merge( {
-        tandem: options.tandem.createTandem( 'labelText' )
-      }, MPConstants.CONTROL_TEXT_OPTIONS )
-    );
+    const labelText = new Text( moleculePolarityStrings.atomElectronegativitiesStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'labelText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     super( atomElectronegativitiesVisibleProperty, labelText, options );
   }

@@ -39,14 +39,14 @@ class UnderDevelopmentPlane extends Plane {
       align: 'left',
       spacing: 20,
       children: [
-        new Text( moleculePolarityStrings.underDevelopment.line1, {
+        new Text( moleculePolarityStrings.underDevelopment.line1StringProperty, {
           font: new PhetFont( 22 ),
           maxWidth: maxTextWidth
         } ),
         new VBox( {
           align: 'left',
           children: [
-            new Text( moleculePolarityStrings.underDevelopment.line2, {
+            new Text( moleculePolarityStrings.underDevelopment.line2StringProperty, {
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
             } ),

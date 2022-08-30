@@ -28,11 +28,10 @@ class AtomLabelsCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelText = new Text( moleculePolarityStrings.atomLabels,
-      merge( {
-        tandem: options.tandem.createTandem( 'labelText' )
-      }, MPConstants.CONTROL_TEXT_OPTIONS )
-    );
+    const labelText = new Text( moleculePolarityStrings.atomLabelsStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'labelText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     super( atomLabelsVisibleProperty, labelText, options );
   }

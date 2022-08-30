@@ -41,10 +41,11 @@ class RealMoleculesComboBox extends ComboBox {
 
     // label
     assert && assert( !options.children, 'RealMoleculesComboBox sets labelNode' );
-    options.labelNode = new Text( moleculePolarityStrings.molecule, {
+    options.labelNode = new Text( moleculePolarityStrings.moleculeStringProperty, {
       font: new PhetFont( 22 ),
       maxWidth: 150,
-      tandem: options.tandem.createTandem( 'labelNode' )
+      tandem: options.tandem.createTandem( 'labelNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // {ComboBoxItem[]}

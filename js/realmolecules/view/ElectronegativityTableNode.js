@@ -38,10 +38,11 @@ class ElectronegativityTableNode extends Node {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const titleText = new Text( moleculePolarityStrings.atomElectronegativities, {
+    const titleText = new Text( moleculePolarityStrings.atomElectronegativitiesStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       maxWidth: 300,
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: options.tandem.createTandem( 'titleText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const cells = [
