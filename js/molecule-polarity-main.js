@@ -24,7 +24,7 @@ simLauncher.launch( () => {
     new RealMoleculesScreen( { tandem: Tandem.ROOT.createTandem( 'realMoleculesScreen' ) } )
   ];
 
-  const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].title, screens, {
+  const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].titleStringProperty, screens, {
     preferencesModel: new PreferencesModel( {
       generalOptions: {
         customPreferences: [ {

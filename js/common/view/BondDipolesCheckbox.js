@@ -16,7 +16,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
 
-class BondDipolesCheckbox extends Checkbox {
+export default class BondDipolesCheckbox extends Checkbox {
 
   /**
    * @param {Property.<boolean>} bondDipolesVisibleProperty
@@ -30,42 +30,25 @@ class BondDipolesCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = createLabelNode( {
-      singular: options.singular,
-      tandem: options.tandem.createTandem( 'labelNode' )
+    const stringProperty = options.singular ?
+                           moleculePolarityStrings.bondDipolesStringProperty :
+                           moleculePolarityStrings.bondDipoleStringProperty;
+
+    const textNode = new Text( stringProperty,
+      merge( {
+        tandem: options.tandem.createTandem( 'textNode' )
+      }, MPConstants.CONTROL_TEXT_OPTIONS )
+    );
+
+    const iconNode = BondDipoleNode.createIcon();
+
+    const content = new HBox( {
+      children: [ textNode, iconNode ],
+      spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
 
-    super( bondDipolesVisibleProperty, labelNode, options );
+    super( bondDipolesVisibleProperty, content, options );
   }
 }
 
-/**
- * Creates the label for this checkbox.
- * @param {Object} [options]
- * @returns {HBox}
- */
-function createLabelNode( options ) {
-
-  options = merge( {
-    singular: false,
-    spacing: MPConstants.CONTROL_ICON_X_SPACING,
-    tandem: Tandem.REQUIRED
-  }, options );
-
-  const labelString = options.singular ? moleculePolarityStrings.bondDipole : moleculePolarityStrings.bondDipoles;
-  const labelText = new Text( labelString,
-    merge( {
-      tandem: options.tandem.createTandem( 'labelText' )
-    }, MPConstants.CONTROL_TEXT_OPTIONS )
-  );
-
-  const labelIcon = BondDipoleNode.createIcon();
-
-  assert && assert( !options.children, 'createLabelNode sets children' );
-  options.children = [ labelText, labelIcon ];
-
-  return new HBox( options );
-}
-
 moleculePolarity.register( 'BondDipolesCheckbox', BondDipolesCheckbox );
-export default BondDipolesCheckbox;
