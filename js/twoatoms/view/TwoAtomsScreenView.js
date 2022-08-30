@@ -64,7 +64,8 @@ class TwoAtomsScreenView extends ScreenView {
     } );
 
     const bondCharacterPanel = new BondCharacterPanel( model.molecule, {
-      visibleProperty: viewProperties.bondCharacterVisibleProperty
+      visibleProperty: viewProperties.bondCharacterVisibleProperty,
+      tandem: options.tandem.createTandem( 'bondCharacterPanel' )
     } );
 
     const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();

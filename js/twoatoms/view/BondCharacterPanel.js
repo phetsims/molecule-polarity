@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Tandem from '../../../../tandem/js/Tandem.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -36,14 +37,17 @@ class BondCharacterPanel extends Panel {
       fill: 'white',
       stroke: 'black',
       xMargin: 10,
-      yMargin: 3
+      yMargin: 3,
+      tandem: Tandem.REQUIRED
     }, options );
 
     // title
-    const titleNode = new Text( moleculePolarityStrings.bondCharacter, {
+    const bondCharacterText = new Text( moleculePolarityStrings.bondCharacterStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: 'black',
-      maxWidth: 0.3 * TRACK_WIDTH
+      maxWidth: 0.3 * TRACK_WIDTH,
+      tandem: options.tandem.createTandem( 'bondCharacterText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // labels
@@ -52,30 +56,36 @@ class BondCharacterPanel extends Panel {
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     };
-    const leftLabelNode = new Text( moleculePolarityStrings.moreCovalent, labelOptions );
-    const rightLabelNode = new Text( moleculePolarityStrings.moreIonic, labelOptions );
+    const moreCovalentText = new Text( moleculePolarityStrings.moreCovalentStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'moreCovalentText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, labelOptions ) );
+    const moreIconicText = new Text( moleculePolarityStrings.moreIonicStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'moreIconicText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, labelOptions ) );
 
     // marker that moves along the track, not interactive
     const markerNode = new PointerNode( molecule.atomA, molecule.atomB );
 
     // track
-    const trackHeight = titleNode.height + Y_SPACING + markerNode.height;
+    const trackHeight = bondCharacterText.height + Y_SPACING + markerNode.height;
     const trackNode = new Rectangle( 0, 0, TRACK_WIDTH, trackHeight, {
       cornerRadius: 5,
       fill: 'transparent'
     } );
 
     // layout, relative to track
-    titleNode.centerX = trackNode.centerX;
-    titleNode.top = trackNode.top;
-    markerNode.top = titleNode.bottom + Y_SPACING;
-    leftLabelNode.left = trackNode.left;
-    leftLabelNode.top = trackNode.top;
-    rightLabelNode.right = trackNode.right;
-    rightLabelNode.top = trackNode.top;
+    bondCharacterText.centerX = trackNode.centerX;
+    bondCharacterText.top = trackNode.top;
+    markerNode.top = bondCharacterText.bottom + Y_SPACING;
+    moreCovalentText.left = trackNode.left;
+    moreCovalentText.top = trackNode.top;
+    moreIconicText.right = trackNode.right;
+    moreIconicText.top = trackNode.top;
 
     const content = new Node( {
-      children: [ trackNode, markerNode, titleNode, rightLabelNode, leftLabelNode ]
+      children: [ trackNode, markerNode, bondCharacterText, moreIconicText, moreCovalentText ]
     } );
 
     super( content, options );

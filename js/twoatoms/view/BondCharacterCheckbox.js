@@ -28,11 +28,10 @@ class BondCharacterCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelText = new Text( moleculePolarityStrings.bondCharacter,
-      merge( {
-        tandem: options.tandem.createTandem( 'labelText' )
-      }, MPConstants.CONTROL_TEXT_OPTIONS )
-    );
+    const labelText = new Text( moleculePolarityStrings.bondCharacterStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'labelText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     super( bondCharacterVisibleProperty, labelText, options );
   }
