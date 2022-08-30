@@ -13,9 +13,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.model.molecule.atomA.electronegativityProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomA.labelProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.model.molecule.atomA.partialChargeProperty": {
       "phetioFeatured": true
     },
@@ -25,9 +22,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.model.molecule.atomB.electronegativityProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomB.labelProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.model.molecule.atomB.partialChargeProperty": {
       "phetioFeatured": true
     },
@@ -35,9 +29,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.model.molecule.atomC.electronegativityProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomC.labelProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.model.molecule.atomC.partialChargeProperty": {
@@ -109,9 +100,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.twoAtomsScreen.model.molecule.atomA.electronegativityProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.twoAtomsScreen.model.molecule.atomA.labelProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.twoAtomsScreen.model.molecule.atomA.partialChargeProperty": {
       "phetioFeatured": true
     },
@@ -119,9 +107,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.model.molecule.atomB.electronegativityProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.atomB.labelProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.model.molecule.atomB.partialChargeProperty": {

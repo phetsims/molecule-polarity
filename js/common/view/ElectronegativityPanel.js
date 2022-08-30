@@ -45,9 +45,9 @@ class ElectronegativityPanel extends Panel {
     }, options );
 
     const titleStringProperty = new DerivedProperty(
-      [ atom.labelProperty, moleculePolarityStrings.pattern.atomNameStringProperty ],
-      ( atomLabel, patternString ) => StringUtils.fillIn( patternString, {
-        name: atomLabel
+      [ atom.labelStringProperty, moleculePolarityStrings.pattern.atomNameStringProperty ],
+      ( atomLabelString, patternString ) => StringUtils.fillIn( patternString, {
+        name: atomLabelString
       } ), {
         tandem: options.tandem.createTandem( 'titleStringProperty' ),
         phetioValueType: StringIO

@@ -34,16 +34,16 @@ class TriatomicMolecule extends Molecule {
     }, options );
 
     // atoms labeled A, B, C
-    const atomA = new Atom( moleculePolarityStrings.atomA, {
+    const atomA = new Atom( moleculePolarityStrings.atomAStringProperty, {
       color: MPColors.ATOM_A,
       tandem: options.tandem.createTandem( 'atomA' )
     } );
-    const atomB = new Atom( moleculePolarityStrings.atomB, {
+    const atomB = new Atom( moleculePolarityStrings.atomBStringProperty, {
       color: MPColors.ATOM_B,
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ),
       tandem: options.tandem.createTandem( 'atomB' )
     } );
-    const atomC = new Atom( moleculePolarityStrings.atomC, {
+    const atomC = new Atom( moleculePolarityStrings.atomCStringProperty, {
       color: MPColors.ATOM_C,
       tandem: options.tandem.createTandem( 'atomC' )
     } );
