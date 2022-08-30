@@ -36,11 +36,10 @@ class EFieldControl extends VBox {
     }, options );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.electricField,
-      merge( {
-        tandem: options.tandem.createTandem( 'titleText' )
-      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS )
-    );
+    const titleText = new Text( moleculePolarityStrings.electricFieldStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'titleText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
 
     // on/off switch
     const onOffSwitch = new ABSwitch( eFieldEnabledProperty,
