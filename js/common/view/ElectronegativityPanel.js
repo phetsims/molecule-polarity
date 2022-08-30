@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -13,6 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
@@ -42,8 +44,17 @@ class ElectronegativityPanel extends Panel {
       tandem: Tandem.REQUIRED
     }, options );
 
+    const titleStringProperty = new DerivedProperty(
+      [ atom.labelProperty, moleculePolarityStrings.pattern.atomNameStringProperty ],
+      ( atomLabel, patternString ) => StringUtils.fillIn( patternString, {
+        name: atomLabel
+      } ), {
+        tandem: options.tandem.createTandem( 'titleStringProperty' ),
+        phetioValueType: StringIO
+      } );
+
     // title
-    const titleText = new Text( '', {
+    const titleText = new Text( titleStringProperty, {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: 150,
       tandem: options.tandem.createTandem( 'titleText' ),
@@ -51,10 +62,11 @@ class ElectronegativityPanel extends Panel {
     } );
 
     // subtitle
-    const subtitleText = new Text( moleculePolarityStrings.electronegativity, {
+    const subtitleText = new Text( moleculePolarityStrings.electronegativityStringProperty, {
       font: new PhetFont( 18 ),
       maxWidth: titleText.maxWidth,
-      tandem: options.tandem.createTandem( 'subtitleText' )
+      tandem: options.tandem.createTandem( 'subtitleText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // slider
@@ -63,13 +75,6 @@ class ElectronegativityPanel extends Panel {
     } );
 
     const content = new Node( { children: [ titleText, subtitleText, slider ] } );
-
-    // Update the title if the atom's label is changed via PhET-iO.
-    atom.labelProperty.link( label => {
-      titleText.text = StringUtils.fillIn( moleculePolarityStrings.pattern.atomName, {
-        name: atom.labelProperty.value
-      } );
-    } );
 
     // layout, handled dynamically because titleText and subtitleText can be changed via PhET-iO
     Multilink.multilink( [ titleText.boundsProperty, subtitleText.boundsProperty ], () => {

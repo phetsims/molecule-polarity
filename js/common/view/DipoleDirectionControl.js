@@ -33,10 +33,11 @@ class DipoleDirectionControl extends VBox {
     }, options );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.dipoleDirection, {
+    const titleText = new Text( moleculePolarityStrings.dipoleDirectionStringProperty, {
       font: new PhetFont( 18 ),
       maxWidth: 500,
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: options.tandem.createTandem( 'titleText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // Radio button group
