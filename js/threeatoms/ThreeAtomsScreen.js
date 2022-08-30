@@ -28,7 +28,7 @@ class ThreeAtomsScreen extends Screen {
   constructor( options ) {
 
     options = merge( {
-      name: moleculePolarityStrings.screen.threeAtoms,
+      name: moleculePolarityStrings.screen.threeAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: Tandem.REQUIRED
@@ -92,19 +92,19 @@ function createScreenIcon() {
     centerY: bondBC.bottom
   } );
 
-  const textA = new Text( moleculePolarityStrings.atomA, {
+  const textA = new Text( moleculePolarityStrings.atomAStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomA.center
   } );
 
-  const textB = new Text( moleculePolarityStrings.atomB, {
+  const textB = new Text( moleculePolarityStrings.atomBStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomB.center
   } );
 
-  const textC = new Text( moleculePolarityStrings.atomC, {
+  const textC = new Text( moleculePolarityStrings.atomCStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomC.center

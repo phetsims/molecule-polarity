@@ -32,10 +32,11 @@ class SurfaceColorControl extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const titleText = new Text( moleculePolarityStrings.surfaceColorRealMolecules, {
+    const titleText = new Text( moleculePolarityStrings.surfaceColorRealMoleculesStringProperty, {
       font: new PhetFont( 14 ),
       maxWidth: 400,
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: options.tandem.createTandem( 'titleText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const radioButtonGroup = new SurfaceColorRadioButtonGroup( surfaceColorProperty, {

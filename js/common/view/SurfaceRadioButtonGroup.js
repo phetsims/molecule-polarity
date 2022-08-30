@@ -32,23 +32,26 @@ class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
 
     const radioButtonGroupItems = [
       {
-        node: new Text( moleculePolarityStrings.none, merge( {
-          tandem: options.tandem.createTandem( 'noneText' )
+        node: new Text( moleculePolarityStrings.noneStringProperty, merge( {
+          tandem: options.tandem.createTandem( 'noneText' ),
+          phetioVisiblePropertyInstrumented: false
         }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
         value: SurfaceType.NONE,
         tandemName: 'noneRadioButton'
       },
       {
         value: SurfaceType.ELECTROSTATIC_POTENTIAL,
-        node: new Text( moleculePolarityStrings.electrostaticPotential, merge( {
-          tandem: options.tandem.createTandem( 'electrostaticPotentialText' )
+        node: new Text( moleculePolarityStrings.electrostaticPotentialStringProperty, merge( {
+          tandem: options.tandem.createTandem( 'electrostaticPotentialText' ),
+          phetioVisiblePropertyInstrumented: false
         }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
         tandemName: 'electrostaticPotentialRadioButton'
       },
       {
         value: SurfaceType.ELECTRON_DENSITY,
-        node: new Text( moleculePolarityStrings.electronDensity, merge( {
-          tandem: options.tandem.createTandem( 'electronDensityText' )
+        node: new Text( moleculePolarityStrings.electronDensityStringProperty, merge( {
+          tandem: options.tandem.createTandem( 'electronDensityText' ),
+          phetioVisiblePropertyInstrumented: false
         }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
         tandemName: 'electronDensityRadioButton'
       }

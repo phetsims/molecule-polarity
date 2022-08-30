@@ -28,7 +28,7 @@ class TwoAtomsScreen extends Screen {
   constructor( options ) {
 
     options = merge( {
-      name: moleculePolarityStrings.screen.twoAtoms,
+      name: moleculePolarityStrings.screen.twoAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: Tandem.REQUIRED
@@ -75,13 +75,13 @@ function createScreenIcon() {
     y: bond.centerY
   } );
 
-  const textA = new Text( moleculePolarityStrings.atomA, {
+  const textA = new Text( moleculePolarityStrings.atomAStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomA.center
   } );
 
-  const textB = new Text( moleculePolarityStrings.atomB, {
+  const textB = new Text( moleculePolarityStrings.atomBStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomB.center

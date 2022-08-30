@@ -28,7 +28,7 @@ class RealMoleculesScreen extends Screen {
   constructor( options ) {
 
     options = merge( {
-      name: moleculePolarityStrings.screen.realMolecules,
+      name: moleculePolarityStrings.screen.realMoleculesStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: Tandem.REQUIRED
