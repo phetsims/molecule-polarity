@@ -70,9 +70,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.controlPanel.separator1.visibleProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.controlPanel.viewControls.molecularDipoleCheckbox.labelNode.labelText.textProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.controlPanel.viewControls.partialChargesCheckbox.labelText.textProperty": {
       "phetioFeatured": true
     },

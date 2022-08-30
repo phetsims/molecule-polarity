@@ -16,7 +16,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
 
-class MolecularDipoleCheckbox extends Checkbox {
+export default class MolecularDipoleCheckbox extends Checkbox {
 
   /**
    * @param {Property.<boolean>} molecularDipoleVisibleProperty
@@ -29,40 +29,20 @@ class MolecularDipoleCheckbox extends Checkbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = createLabelNode( {
-      tandem: options.tandem.createTandem( 'labelNode' )
+    const textNode = new Text( moleculePolarityStrings.molecularDipoleStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
+    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+
+    const iconNode = MolecularDipoleNode.createIcon();
+
+    const content = new HBox( {
+      children: [ textNode, iconNode ],
+      spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
 
-    super( molecularDipoleVisibleProperty, labelNode, options );
+    super( molecularDipoleVisibleProperty, content, options );
   }
 }
 
-/**
- * Creates the label for this checkbox.
- * @param {Object} [options]
- * @returns {HBox}
- */
-function createLabelNode( options ) {
-
-  options = merge( {
-    singular: false,
-    spacing: MPConstants.CONTROL_ICON_X_SPACING,
-    tandem: Tandem.REQUIRED
-  }, options );
-
-  const labelText = new Text( moleculePolarityStrings.molecularDipole,
-    merge( {
-      tandem: options.tandem.createTandem( 'labelText' )
-    }, MPConstants.CONTROL_TEXT_OPTIONS )
-  );
-
-  const labelIcon = MolecularDipoleNode.createIcon();
-
-  assert && assert( !options.children, 'createLabelNode sets children' );
-  options.children = [ labelText, labelIcon ];
-
-  return new HBox( options );
-}
-
 moleculePolarity.register( 'MolecularDipoleCheckbox', MolecularDipoleCheckbox );
-export default MolecularDipoleCheckbox;

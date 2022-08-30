@@ -78,8 +78,8 @@ class ElectronegativitySlider extends HSlider {
       font: new PhetFont( 16 ),
       maxWidth: 40
     };
-    this.addMajorTick( range.min, new Text( moleculePolarityStrings.less, tickLabelOptions ) );
-    this.addMajorTick( range.max, new Text( moleculePolarityStrings.more, tickLabelOptions ) );
+    this.addMajorTick( range.min, new Text( moleculePolarityStrings.lessStringProperty, tickLabelOptions ) );
+    this.addMajorTick( range.max, new Text( moleculePolarityStrings.moreStringProperty, tickLabelOptions ) );
     const centerTick = range.min + ( range.getLength() / 2 );
     this.addMajorTick( centerTick );
     for ( let i = range.min + options.tickInterval; i < range.max; i += options.tickInterval ) {
