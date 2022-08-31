@@ -6,8 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
@@ -17,7 +16,7 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import BondCharacterCheckbox from './BondCharacterCheckbox.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,7 +35,7 @@ export default class TwoAtomsViewControls extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.viewStringProperty, merge( {
+    const titleText = new Text( moleculePolarityStrings.viewStringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'titleText' ),
       phetioVisiblePropertyInstrumented: false
     }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );

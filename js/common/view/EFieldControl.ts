@@ -7,17 +7,16 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
-const SWITCH_LABEL_OPTIONS = merge( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
+const SWITCH_LABEL_OPTIONS = combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
   maxWidth: 80  // i18n, set empirically
 } );
 
@@ -37,10 +36,11 @@ export default class EFieldControl extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.electricFieldStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'titleText' ),
-      phetioVisiblePropertyInstrumented: false
-    }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
+    const titleText = new Text( moleculePolarityStrings.electricFieldStringProperty,
+      combineOptions<TextOptions>( {
+        tandem: options.tandem.createTandem( 'titleText' ),
+        phetioVisiblePropertyInstrumented: false
+      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
 
     // on/off switch
     const onOffSwitch = new ABSwitch( eFieldEnabledProperty,

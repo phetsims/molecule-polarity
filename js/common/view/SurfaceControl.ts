@@ -6,10 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -36,7 +35,7 @@ export default class SurfaceControl extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.surfaceStringProperty, merge( {
+    const titleText = new Text( moleculePolarityStrings.surfaceStringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'titleText' ),
       phetioVisiblePropertyInstrumented: false
     }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );

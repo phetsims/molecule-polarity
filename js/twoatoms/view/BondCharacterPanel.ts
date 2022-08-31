@@ -9,15 +9,14 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, Line, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Circle, Line, Node, Rectangle, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Atom from '../../common/model/Atom.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -61,14 +60,16 @@ export default class BondCharacterPanel extends Panel {
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     };
-    const moreCovalentText = new Text( moleculePolarityStrings.moreCovalentStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'moreCovalentText' ),
-      phetioVisiblePropertyInstrumented: false
-    }, labelOptions ) );
-    const moreIconicText = new Text( moleculePolarityStrings.moreIonicStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'moreIconicText' ),
-      phetioVisiblePropertyInstrumented: false
-    }, labelOptions ) );
+    const moreCovalentText = new Text( moleculePolarityStrings.moreCovalentStringProperty,
+      combineOptions<TextOptions>( {
+        tandem: options.tandem.createTandem( 'moreCovalentText' ),
+        phetioVisiblePropertyInstrumented: false
+      }, labelOptions ) );
+    const moreIconicText = new Text( moleculePolarityStrings.moreIonicStringProperty,
+      combineOptions<TextOptions>( {
+        tandem: options.tandem.createTandem( 'moreIconicText' ),
+        phetioVisiblePropertyInstrumented: false
+      }, labelOptions ) );
 
     // marker that moves along the track, not interactive
     const markerNode = new PointerNode( molecule.atomA, molecule.atomB );
