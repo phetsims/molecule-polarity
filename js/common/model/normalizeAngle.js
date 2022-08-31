@@ -1,5 +1,6 @@
 // Copyright 2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Normalizes an angle to be in a range whose length is 2 * PI.
  * This was created for https://github.com/phetsims/molecule-polarity/issues/91.
