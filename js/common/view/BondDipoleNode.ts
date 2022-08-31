@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
@@ -63,10 +63,8 @@ class BondDipoleNode extends DipoleNode {
   /**
    * Creates an icon, for use in control panels.
    */
-  public static override createIcon( options: DipoleNodeOptions ): Node {
-    return DipoleNode.createIcon( combineOptions<DipoleNodeOptions>( {
-      fill: MPColors.BOND_DIPOLE
-    }, options ) );
+  public static override createIcon(): Node {
+    return DipoleNode.createIcon( { fill: MPColors.BOND_DIPOLE } );
   }
 }
 

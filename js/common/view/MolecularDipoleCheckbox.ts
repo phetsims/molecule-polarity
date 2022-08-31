@@ -1,39 +1,36 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MolecularDipoleCheckbox is the checkbox for controlling visibility of the molecular dipole.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { HBox, Text } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
 
+type SelfOptions = EmptySelfOptions;
+
+export type MolecularDipoleCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+
 export default class MolecularDipoleCheckbox extends Checkbox {
 
-  /**
-   * @param {Property.<boolean>} molecularDipoleVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( molecularDipoleVisibleProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( molecularDipoleVisibleProperty, 'boolean' );
+  public constructor( molecularDipoleVisibleProperty: Property<boolean>, providedOptions: MolecularDipoleCheckboxOptions ) {
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = providedOptions;
 
-    const textNode = new Text( moleculePolarityStrings.molecularDipoleStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'textNode' ),
-      phetioVisiblePropertyInstrumented: false
-    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+    const textNode = new Text( moleculePolarityStrings.molecularDipoleStringProperty,
+      combineOptions<TextOptions>( {
+        tandem: options.tandem.createTandem( 'textNode' ),
+        phetioVisiblePropertyInstrumented: false
+      }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     const iconNode = MolecularDipoleNode.createIcon();
 
@@ -43,6 +40,11 @@ export default class MolecularDipoleCheckbox extends Checkbox {
     } );
 
     super( molecularDipoleVisibleProperty, content, options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 

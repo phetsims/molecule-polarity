@@ -8,7 +8,6 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import MPColors from '../MPColors.js';
@@ -54,10 +53,8 @@ export default class MolecularDipoleNode extends DipoleNode {
   /**
    * Creates an icon, for use in control panels.
    */
-  public static override createIcon( options: DipoleNodeOptions ): Node {
-    return DipoleNode.createIcon( merge( {
-      fill: MPColors.MOLECULAR_DIPOLE
-    }, options ) );
+  public static override createIcon(): Node {
+    return DipoleNode.createIcon( { fill: MPColors.MOLECULAR_DIPOLE } );
   }
 }
 

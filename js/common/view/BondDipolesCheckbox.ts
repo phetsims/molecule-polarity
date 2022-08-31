@@ -1,41 +1,42 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BondDipolesCheckbox is the checkbox for controlling visibility of one or more bond dipoles.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { HBox, Text } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
 
+type SelfOptions = {
+  singular?: boolean; // whether the Text label should be singular or plural
+};
+
+export type BondDipolesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+
 export default class BondDipolesCheckbox extends Checkbox {
 
-  /**
-   * @param {Property.<boolean>} bondDipolesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( bondDipolesVisibleProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( bondDipolesVisibleProperty, 'boolean' );
+  public constructor( bondDipolesVisibleProperty: Property<boolean>, providedOptions: BondDipolesCheckboxOptions ) {
 
-    options = merge( {
-      singular: false,
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<BondDipolesCheckboxOptions, SelfOptions, CheckboxOptions>()( {
+
+      // BondDipolesCheckboxOptions
+      singular: false
+    }, providedOptions );
 
     const stringProperty = options.singular ?
                            moleculePolarityStrings.bondDipolesStringProperty :
                            moleculePolarityStrings.bondDipoleStringProperty;
 
-    const textNode = new Text( stringProperty, merge( {
+    const textNode = new Text( stringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'textNode' ),
       phetioVisiblePropertyInstrumented: false
     }, MPConstants.CONTROL_TEXT_OPTIONS ) );
@@ -48,6 +49,11 @@ export default class BondDipolesCheckbox extends Checkbox {
     } );
 
     super( bondDipolesVisibleProperty, content, options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 

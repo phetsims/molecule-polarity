@@ -15,7 +15,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, Path, PathOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
@@ -33,8 +32,7 @@ const FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIO
 type SelfOptions = EmptySelfOptions;
 
 export type DipoleNodeOptions = SelfOptions &
-  PickRequired<PathOptions, 'visibleProperty'> &
-  PickOptional<PathOptions, 'fill'>;
+  PickOptional<PathOptions, 'visibleProperty' | 'fill'>;
 
 export default class DipoleNode extends Path {
 
@@ -104,7 +102,7 @@ export default class DipoleNode extends Path {
   /**
    * Creates a dipole icon, with arrow pointing to the right.
    */
-  public static createIcon( options: DipoleNodeOptions ): Node {
+  protected static createIcon( options?: DipoleNodeOptions ): Node {
     return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), options );
   }
 }

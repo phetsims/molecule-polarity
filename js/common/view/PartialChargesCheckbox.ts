@@ -1,40 +1,42 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PartialChargesCheckbox is the checkbox for controlling visibility of partial charges.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, TextOptions } from '../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
+type SelfOptions = EmptySelfOptions;
+
+export type PartialChargesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+
 class PartialChargesCheckbox extends Checkbox {
 
-  /**
-   * @param {Property.<boolean>} partialChargesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( partialChargesVisibleProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( partialChargesVisibleProperty, 'boolean' );
+  public constructor( partialChargesVisibleProperty: Property<boolean>, providedOptions: PartialChargesCheckboxOptions ) {
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = providedOptions;
 
-    const labelText = new Text( moleculePolarityStrings.partialChargesStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'labelText' ),
-      phetioVisiblePropertyInstrumented: false
-    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+    const labelText = new Text( moleculePolarityStrings.partialChargesStringProperty,
+      combineOptions<TextOptions>( {
+        tandem: options.tandem.createTandem( 'labelText' ),
+        phetioVisiblePropertyInstrumented: false
+      }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     super( partialChargesVisibleProperty, labelText, options );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 
