@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representations of partial charge, a delta symbol followed by either + or -.
  * Controls its own position in global coordinates, so clients should not attempt to position it.
@@ -10,29 +9,32 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
+import Bond from '../model/Bond.js';
 import MPConstants from '../MPConstants.js';
+import Molecule from '../model/Molecule.js';
 
 // constants
 const REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
 const REFERENCE_SCALE = 1;
 
-class PartialChargeNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Atom} atom
-   * @param {function} unitVectorFunction has no parameters, returns {Vector}
-   * @param {Object} [options]
-   */
-  constructor( atom, unitVectorFunction, options ) {
-    assert && assert( atom instanceof Atom, 'invalid atom' );
-    assert && assert( typeof unitVectorFunction === 'function', 'invalid unitVectorFunction' );
+export type PartialChargeNodeOptions = SelfOptions & PickOptional<NodeOptions, 'visibleProperty'>;
 
-    super( options );
+export default class PartialChargeNode extends Node {
+
+  public readonly update: () => void;
+
+  public constructor( atom: Atom, unitVectorFunction: () => Vector2, providedOptions?: PartialChargeNodeOptions ) {
+
+    super( providedOptions );
 
     // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
     const textNode = new Text( '?', {
@@ -45,7 +47,6 @@ class PartialChargeNode extends Node {
     } );
     this.addChild( chargeNode );
 
-    // @public
     this.update = () => {
       const partialCharge = atom.partialChargeProperty.value;
 
@@ -70,7 +71,7 @@ class PartialChargeNode extends Node {
         }
 
         // A vector that points in the direction we will need to move the charge node.
-        const unitVector = unitVectorFunction.apply();
+        const unitVector = unitVectorFunction();
 
         // Compute the amount to move the partial charge node
         const multiplier = ( atom.diameter / 2 ) + ( Math.max( this.width, this.height ) / 2 ) + 3;
@@ -90,15 +91,8 @@ class PartialChargeNode extends Node {
    * Partial charge for an atom that participates in a single bond.
    * It's partial charge is the opposite of the charge of the other atom in the bond.
    * The charge is placed along the axis of the bond, away from the atom.
-   * @static
-   * @param {Atom} atom
-   * @param {Bond} bond
-   * @param {Object} [options] - options to PartialChargeNode
-   * @returns {PartialChargeNode}
-   * @public
-   * @static
    */
-  static createOppositePartialChargeNode( atom, bond, options ) {
+  public static createOppositePartialChargeNode( atom: Atom, bond: Bond, options?: PartialChargeNodeOptions ): Node {
     return new PartialChargeNode( atom, () => {
 
       // along the bond axis, in the direction of the atom
@@ -120,15 +114,8 @@ class PartialChargeNode extends Node {
    * Partial charge for an atom that participates in more than one bond.
    * Its partial charge is the composite of charges contributed by other atoms in the bonds.
    * The charge is placed along the axis of the molecular dipole, on the opposite side of the atom from the dipole.
-   * @static
-   * @param {Atom} atom
-   * @param {Molecule} molecule
-   * @param {Object} [options]
-   * @returns {PartialChargeNode}
-   * @public
-   * @static
    */
-  static createCompositePartialChargeNode( atom, molecule, options ) {
+  public static createCompositePartialChargeNode( atom: Atom, molecule: Molecule, options?: PartialChargeNodeOptions ): Node {
     const node = new PartialChargeNode( atom, () => {
       if ( molecule.dipoleProperty.value.magnitude > 0 ) {
         return molecule.dipoleProperty.value.rotated( Math.PI ).normalize();
@@ -144,4 +131,3 @@ class PartialChargeNode extends Node {
 }
 
 moleculePolarity.register( 'PartialChargeNode', PartialChargeNode );
-export default PartialChargeNode;
