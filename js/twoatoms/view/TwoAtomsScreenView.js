@@ -81,7 +81,7 @@ class TwoAtomsScreenView extends ScreenView {
       visiblePropertyOptions: { readOnly: true }
     } );
 
-    const colorKeyNode = new Node( {
+    const colorKeysNode = new Node( {
       children: [ electrostaticPotentialColorKey, electronDensityColorKey ]
     } );
 
@@ -109,7 +109,7 @@ class TwoAtomsScreenView extends ScreenView {
         electronegativityPanels,
         controlPanel,
         bondCharacterPanel,
-        colorKeyNode,
+        colorKeysNode,
         moleculeNode,
         resetAllButton
       ]

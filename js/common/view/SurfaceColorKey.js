@@ -65,7 +65,8 @@ class SurfaceColorKey extends Node {
       fill: 'black',
       font: options.titleFont,
       maxWidth: 0.5 * options.size.width, // i18n, determined empirically
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: options.tandem.createTandem( 'titleText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // range labels

@@ -8,6 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -76,22 +77,17 @@ class RealMoleculesScreenView extends ScreenView {
       tandem: colorKeysTandem.createTandem( 'electrostaticPotentialROYGBColorKey' )
     } );
 
-    const colorKeyNode = new Node( {
-      children: [
-        electrostaticPotentialRWBColorKey,
-        electrostaticPotentialROYGBColorKey
-      ]
-    } );
-
-    // unlink not needed
-    MPPreferences.surfaceColorProperty.link( surfaceColor => {
-      electrostaticPotentialRWBColorKey.visible = ( surfaceColor === SurfaceColor.RWB );
-      electrostaticPotentialROYGBColorKey.visible = ( surfaceColor === SurfaceColor.ROYGB );
-    } );
-
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
       tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' ),
       visiblePropertyOptions: { readOnly: true }
+    } );
+
+    const colorKeysNode = new Node( {
+      children: [
+        electrostaticPotentialRWBColorKey,
+        electrostaticPotentialROYGBColorKey,
+        electronDensityColorKey
+      ]
     } );
 
     const controlPanel = new RealMoleculesControlPanel( viewProperties, {
@@ -115,8 +111,7 @@ class RealMoleculesScreenView extends ScreenView {
         electronegativityTableNode,
         moleculesComboBox,
         controlPanel,
-        colorKeyNode,
-        electronDensityColorKey,
+        colorKeysNode,
         resetAllButton,
         comboBoxListParent // last, so that combo box list is on top
       ]
@@ -132,11 +127,11 @@ class RealMoleculesScreenView extends ScreenView {
     electronegativityTableNode.top = this.layoutBounds.top + 25;
 
     // centered below electronegativity table
-    colorKeyNode.centerX = electronDensityColorKey.centerX = electronegativityTableNode.centerX;
-    colorKeyNode.top = electronDensityColorKey.top = electronegativityTableNode.bottom + 15;
+    colorKeysNode.centerX = electronegativityTableNode.centerX;
+    colorKeysNode.top = electronegativityTableNode.bottom + 15;
 
     // below color keys
-    this.moleculeViewer.top = colorKeyNode.bottom + 15;
+    this.moleculeViewer.top = colorKeysNode.bottom + 15;
 
     // centered below viewer
     moleculesComboBox.centerX = this.moleculeViewer.centerX;
@@ -153,10 +148,12 @@ class RealMoleculesScreenView extends ScreenView {
     // synchronization with view Properties ------------------------------
 
     // unlink not needed
-    viewProperties.surfaceTypeProperty.link( surfaceType => {
-      colorKeyNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
-      electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
-    } );
+    Multilink.multilink( [ viewProperties.surfaceTypeProperty, MPPreferences.surfaceColorProperty ],
+      ( surfaceType, surfaceColor ) => {
+        electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL && surfaceColor === SurfaceColor.RWB );
+        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL && surfaceColor === SurfaceColor.ROYGB );
+        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+      } );
 
     //TODO see https://github.com/phetsims/molecule-polarity/issues/32
     // Until the Real Molecules screen is fully implemented, hide everything that was created above, and display
