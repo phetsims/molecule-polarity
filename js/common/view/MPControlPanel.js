@@ -1,5 +1,6 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Control panel used throughout Molecule Polarity.
  * Responsible for inserting horizontal spacers between a set of sub-panels.
