@@ -1,6 +1,5 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Control panel used throughout Molecule Polarity.
  * Responsible for inserting horizontal spacers between a set of sub-panels.
@@ -8,34 +7,34 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, VBox } from '../../../../scenery/js/imports.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
-import Panel from '../../../../sun/js/Panel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../MPColors.js';
 import MPConstants from '../MPConstants.js';
 
-class MPControlPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Node[]} subPanels
-   * @param {Object} [options]
-   */
-  constructor( subPanels, options ) {
-    assert && AssertUtils.assertArrayOf( subPanels, Node );
+export type MPControlPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-    options = merge( {
+export default class MPControlPanel extends Panel {
+
+  public constructor( subPanels: Node[], providedOptions: MPControlPanelOptions ) {
+
+    const options = optionize<MPControlPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // PanelOptions
       fill: MPColors.CONTROL_PANEL_BACKGROUND,
       xMargin: 20,
-      yMargin: 15,
-      tandem: Tandem.REQUIRED
-    }, options );
+      yMargin: 15
+    }, providedOptions );
 
     // horizontal separator width is the max width of the subPanels
-    const separatorWidth = _.maxBy( subPanels, node => node.width ).width;
+    assert && assert( subPanels.length > 0 );
+    const separatorWidth = _.maxBy( subPanels, node => node.width )!.width;
 
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];
@@ -57,4 +56,3 @@ class MPControlPanel extends Panel {
 }
 
 moleculePolarity.register( 'MPControlPanel', MPControlPanel );
-export default MPControlPanel;
