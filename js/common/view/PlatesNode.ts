@@ -1,31 +1,32 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * PlatesNode displays the plates for the E-field creation device.
+ * PlatesNode displays the 2 plates (negative and positive) for the E-field creation device.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MPColors from '../MPColors.js';
-import PolarityIndicator from './PolarityIndicator.js';
+import PlateNode, { PlateNodeOptions } from './PlateNode.js';
 
-class PlatesNode extends Node {
+type SelfOptions = {
+  spacing?: number; // horizontal spacing between the 2 plates
+  plateOptions?: PlateNodeOptions;
+};
 
-  /**
-   * @param {Property.<boolean>} eFieldEnabledProperty
-   * @param {Object} [options]
-   */
-  constructor( eFieldEnabledProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
+export type PlatesNodeOptions = SelfOptions;
 
-    options = merge( {
-      align: 'bottom',
+export default class PlatesNode extends Node {
+
+  public readonly plateHeight: number; // height of the plates, for layout
+
+  public constructor( eFieldEnabledProperty: Property<boolean>, providedOptions: PlatesNodeOptions ) {
+
+    const options = optionize<PlatesNodeOptions, SelfOptions, NodeOptions>()( {
       spacing: 500,
       plateOptions: {
         plateWidth: 50,
@@ -33,7 +34,7 @@ class PlatesNode extends Node {
         plateThickness: 5,
         platePerspectiveYOffset: 35
       }
-    }, options );
+    }, providedOptions );
 
     assert && assert( !options.visibleProperty, 'PlateNode sets visibleProperty' );
     options.visibleProperty = eFieldEnabledProperty;
@@ -50,90 +51,18 @@ class PlatesNode extends Node {
       bottom: negativePlateNode.bottom
     }, options.plateOptions ) );
 
-    assert && assert( !options.children, 'PlateNodes sets children' );
     options.children = [ negativePlateNode, positivePlateNode ];
 
     super( options );
 
-    // @public for layout
-    this.plateHeight = options.plateOptions.plateHeight;
+    assert && assert( options.plateOptions?.plateHeight );
+    this.plateHeight = options.plateOptions.plateHeight!;
   }
-}
 
-/**
- * PlateNode is a single plate.
- */
-class PlateNode extends Node {
-
-  /**
-   * @param {Property.<boolean>} eFieldEnabledProperty
-   * @param {Object} [options]
-   */
-  constructor( eFieldEnabledProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
-
-    options = merge( {
-      polarity: 'negative',
-      perspective: 'left', // 'left' or 'right'
-      plateWidth: 50,
-      plateHeight: 430,
-      plateThickness: 5,
-      platePerspectiveYOffset: 35 // y difference between foreground and background edges of the plate
-    }, options );
-
-    assert && assert( options.perspective === 'right' || options.perspective === 'left',
-      `invalid perspective: ${options.perspective}` );
-
-    // polarity indicator
-    const polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
-
-    // constants
-    const plateOptions = {
-      fill: MPColors.PLATE,
-      stroke: 'black'
-    };
-
-    // face of a positive plate, drawn in perspective, starting at upper-left and going clockwise
-    const faceNode = new Path( new Shape()
-        .moveTo( 0, options.platePerspectiveYOffset )
-        .lineTo( options.plateWidth, 0 )
-        .lineTo( options.plateWidth, options.plateHeight )
-        .lineTo( 0, options.platePerspectiveYOffset + ( options.plateHeight - 2 * options.platePerspectiveYOffset ) )
-        .close(),
-      plateOptions
-    );
-
-    // side edge of a positive plate
-    const edgeNode = new Rectangle( options.plateWidth, 0, options.plateThickness, options.plateHeight, plateOptions );
-
-    const plateNode = new Node( {
-      children: [
-        edgeNode,
-        faceNode
-      ]
-    } );
-
-    // The plate is drawn in perspective for positive polarity.
-    // If the polarity is negative, reflect about the y axis.
-    if ( options.polarity === 'negative' ) {
-      plateNode.setScaleMagnitude( -1, 1 );
-    }
-
-    // Put the polarity indicator at the top center of the plate's face.
-    polarityIndicatorNode.centerX = plateNode.centerX;
-    polarityIndicatorNode.bottom = plateNode.top + ( options.platePerspectiveYOffset / 2 );
-
-    assert && assert( !options.children, 'PlateNode sets children' );
-    options.children = [ polarityIndicatorNode, plateNode ];
-
-    super( options );
-
-    // show/hide when the field is enabled/disabled... (unlink not needed)
-    eFieldEnabledProperty.link( enabled => {
-      this.visible = enabled;
-    } );
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 
 moleculePolarity.register( 'PlatesNode', PlatesNode );
-export default PlatesNode;
