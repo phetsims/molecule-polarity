@@ -23,7 +23,7 @@ export default class PlatesNode extends HBox {
 
   public readonly plateHeight: number; // height of the plates, for layout
 
-  public constructor( eFieldEnabledProperty: Property<boolean>, providedOptions: PlatesNodeOptions ) {
+  public constructor( eFieldEnabledProperty: Property<boolean>, providedOptions?: PlatesNodeOptions ) {
 
     const options = optionize<PlatesNodeOptions, StrictOmit<SelfOptions, 'plateOptions'>, HBoxOptions>()( {
 

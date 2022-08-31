@@ -49,7 +49,7 @@ export default class SurfaceColorKey extends Node {
       ySpacing: 2,
 
       // NodeOptions
-      phetioVisiblePropertyInstrumented: false
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, providedOptions );
 
     super();

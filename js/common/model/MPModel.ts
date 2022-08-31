@@ -14,7 +14,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import MPPreferences from './MPPreferences.js';
 import normalizeAngle from './normalizeAngle.js';
-import Molecule, { MoleculeOptions } from './Molecule.js';
+import Molecule from './Molecule.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -29,14 +29,10 @@ export type MPModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'ta
 
 export default abstract class MPModel extends PhetioObject {
 
-  public readonly molecule: Molecule;
+  private readonly molecule: Molecule;
   public readonly eFieldEnabledProperty: Property<boolean>;
 
-  /**
-   * @param createMolecule - creates the molecule for this model
-   * @param [providedOptions]
-   */
-  protected constructor( createMolecule: ( options: MoleculeOptions ) => Molecule, providedOptions: MPModelOptions ) {
+  protected constructor( molecule: Molecule, providedOptions: MPModelOptions ) {
 
     const options = optionize<MPModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -46,9 +42,7 @@ export default abstract class MPModel extends PhetioObject {
 
     super( options );
 
-    this.molecule = createMolecule( {
-      tandem: options.tandem.createTandem( 'molecule' )
-    } );
+    this.molecule = molecule;
 
     this.eFieldEnabledProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'eFieldEnabledProperty' )
@@ -61,7 +55,6 @@ export default abstract class MPModel extends PhetioObject {
   }
 
   public reset(): void {
-    this.molecule.reset();
     this.eFieldEnabledProperty.reset();
   }
 

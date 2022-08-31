@@ -20,6 +20,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Atom from '../../common/model/Atom.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 // constants
 const TRACK_WIDTH = 415;
@@ -27,7 +28,9 @@ const Y_SPACING = 3;
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondCharacterPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+export type BondCharacterPanelOptions = SelfOptions &
+  PickRequired<PanelOptions, 'tandem'> &
+  PickOptional<PanelOptions, 'visibleProperty'>;
 
 export default class BondCharacterPanel extends Panel {
 

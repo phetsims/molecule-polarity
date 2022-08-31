@@ -1,17 +1,16 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for the 'Two Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenView from '../../../../joist/js/ScreenView.js';
-import merge from '../../../../phet-core/js/merge.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
@@ -23,18 +22,16 @@ import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
-class TwoAtomsScreenView extends ScreenView {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {TwoAtomsModel} model
-   * @param {Object} [options]
-   */
-  constructor( model, options ) {
-    assert && assert( model instanceof TwoAtomsModel, 'invalid model' );
+export type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, MPConstants.SCREEN_VIEW_OPTIONS, options );
+export default class TwoAtomsScreenView extends ScreenView {
+
+  public constructor( model: TwoAtomsModel, provideOptions: TwoAtomsViewControlsOptions ) {
+
+    const options = optionize3<TwoAtomsViewControlsOptions, SelfOptions, ScreenViewOptions>()( {},
+      MPConstants.SCREEN_VIEW_OPTIONS, provideOptions );
 
     super( options );
 
@@ -43,7 +40,7 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
 
-    const moleculeNode = new DiatomicMoleculeNode( model.molecule, viewProperties, {
+    const moleculeNode = new DiatomicMoleculeNode( model.diatomicMolecule, viewProperties, {
       tandem: options.tandem.createTandem( 'moleculeNode' )
     } );
 
@@ -51,10 +48,10 @@ class TwoAtomsScreenView extends ScreenView {
 
     const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
 
-    const atomAElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomA, model.molecule, {
+    const atomAElectronegativityPanel = new ElectronegativityPanel( model.diatomicMolecule.atomA, model.diatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
     } );
-    const atomBElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomB, model.molecule, {
+    const atomBElectronegativityPanel = new ElectronegativityPanel( model.diatomicMolecule.atomB, model.diatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
     } );
     const electronegativityPanels = new HBox( {
@@ -63,7 +60,7 @@ class TwoAtomsScreenView extends ScreenView {
       tandem: electronegativityPanelsTandem
     } );
 
-    const bondCharacterPanel = new BondCharacterPanel( model.molecule, {
+    const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,
       tandem: options.tandem.createTandem( 'bondCharacterPanel' )
     } );
@@ -72,13 +69,11 @@ class TwoAtomsScreenView extends ScreenView {
     const colorKeysTandem = options.tandem.createTandem( 'colorKeys' );
 
     const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
-      tandem: colorKeysTandem.createTandem( 'electrostaticPotentialColorKey' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: colorKeysTandem.createTandem( 'electrostaticPotentialColorKey' )
     } );
 
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
-      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' ),
-      visiblePropertyOptions: { readOnly: true }
+      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' )
     } );
 
     const colorKeysNode = new Node( {
@@ -118,8 +113,8 @@ class TwoAtomsScreenView extends ScreenView {
 
     // layout, based on molecule position ---------------------------------
 
-    const moleculeX = model.molecule.position.x;
-    const moleculeY = model.molecule.position.y;
+    const moleculeX = model.diatomicMolecule.position.x;
+    const moleculeY = model.diatomicMolecule.position.y;
 
     platesNode.centerX = moleculeX;
     platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
@@ -152,7 +147,11 @@ class TwoAtomsScreenView extends ScreenView {
       electronDensityColorKey.visible = ( surfaceType === 'electronDensity' );
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'TwoAtomsScreenView', TwoAtomsScreenView );
-export default TwoAtomsScreenView;

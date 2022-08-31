@@ -48,10 +48,10 @@ export default abstract class SurfaceNode extends Node {
     this.colors = colors;
 
     // each atom is surrounded with a 'cloud' (circle)
-    const radius = this.molecule.atomA.diameter * DIAMETER_SCALE / 2;
+    const radius = molecule.atomA.diameter * DIAMETER_SCALE / 2;
     this.path = new Path( new Shape()
-      .arc( molecule.position.x - this.molecule.atomB.positionProperty.value.x, molecule.position.y - this.molecule.atomB.positionProperty.value.y, radius, Math.PI / 4, 7 * Math.PI / 4 )
-      .arc( molecule.position.x - this.molecule.atomA.positionProperty.value.x, molecule.position.y - this.molecule.atomA.positionProperty.value.y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
+      .arc( molecule.position.x - molecule.atomB.positionProperty.value.x, molecule.position.y - molecule.atomB.positionProperty.value.y, radius, Math.PI / 4, 7 * Math.PI / 4 )
+      .arc( molecule.position.x - molecule.atomA.positionProperty.value.x, molecule.position.y - molecule.atomA.positionProperty.value.y, radius, 5 * Math.PI / 4, 3 * Math.PI / 4 )
     );
     this.addChild( this.path );
 
@@ -73,7 +73,7 @@ export default abstract class SurfaceNode extends Node {
     // Updates the fill when this Node become visible.
     this.visibleProperty.link( visible => {
       if ( visible ) {
-        this.matrix = this.molecule.createTransformMatrix();
+        this.matrix = molecule.createTransformMatrix();
         this.updateFill();
       }
     } );

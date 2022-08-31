@@ -41,7 +41,7 @@ class ThreeAtomsScreenView extends ScreenView {
     } );
 
     // nodes
-    const moleculeNode = new TriatomicMoleculeNode( model.molecule, viewProperties.bondDipolesVisibleProperty,
+    const moleculeNode = new TriatomicMoleculeNode( model.triatomicMolecule, viewProperties.bondDipolesVisibleProperty,
       viewProperties.molecularDipoleVisibleProperty, viewProperties.partialChargesVisibleProperty, {
         tandem: options.tandem.createTandem( 'moleculeNode' )
       } );
@@ -51,13 +51,13 @@ class ThreeAtomsScreenView extends ScreenView {
 
     const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
 
-    const atomAElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomA, model.molecule, {
+    const atomAElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomA, model.triatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
     } );
-    const atomBElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomB, model.molecule, {
+    const atomBElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomB, model.triatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
     } );
-    const atomCElectronegativityPanel = new ElectronegativityPanel( model.molecule.atomC, model.molecule, {
+    const atomCElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomC, model.triatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' )
     } );
     const electronegativityPanels = new HBox( {
@@ -97,8 +97,8 @@ class ThreeAtomsScreenView extends ScreenView {
 
     // layout, based on molecule position ---------------------------------
 
-    const moleculeX = model.molecule.position.x;
-    const moleculeY = model.molecule.position.y;
+    const moleculeX = model.triatomicMolecule.position.x;
+    const moleculeY = model.triatomicMolecule.position.y;
 
     platesNode.centerX = moleculeX;
     platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
