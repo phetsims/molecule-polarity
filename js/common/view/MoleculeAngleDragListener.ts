@@ -1,63 +1,61 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Drag handler for manipulating orientation of a molecule.
+ * MoleculeAngleDragListener is the drag listener for manipulating orientation of a molecule.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { DragListener, Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { DragListener, DragListenerOptions, Node, PressedDragListener, SceneryEvent } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import normalizeAngle from '../model/normalizeAngle.js';
 
-class MoleculeAngleDragListener extends DragListener {
+type SelfOptions = EmptySelfOptions;
+
+export type MoleculeAngleDragListenerOptions = SelfOptions & PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'>;
+
+export default class MoleculeAngleDragListener extends DragListener {
 
   /**
-   * @param {Molecule} molecule
-   * @param {Node} relativeNode - angles are computed relative to this Node
-   * @param {Object} [options]
+   * @param molecule
+   * @param relativeNode - angles are computed relative to this Node
+   * @param [providedOptions]
    */
-  constructor( molecule, relativeNode, options ) {
-    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
-    assert && assert( relativeNode instanceof Node, 'invalid relativeNode' );
+  public constructor( molecule: Molecule, relativeNode: Node, providedOptions: MoleculeAngleDragListenerOptions ) {
 
-    options = merge( {
-      allowTouchSnag: true,
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<MoleculeAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
 
-    let previousAngle; // angle between the pointer and the molecule when the drag started
+      // DragListenerOptions
+      allowTouchSnag: true
+    }, providedOptions );
 
-    /**
-     * Gets the angle of the pointer relative to relativeNode.
-     * @param {SceneryEvent} event
-     * @returns {number} angle in radians
-     */
-    const getAngle = event => {
+    let previousAngle: number; // angle between the pointer and the molecule when the drag started
+
+    // Gets the angle (in radians) of the pointer, relative to relativeNode.
+    const getAngle = ( event: SceneryEvent ) => {
       const point = relativeNode.globalToParentPoint( event.pointer.point );
       return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
-    assert && assert( !options.start, 'MoleculeAngleDragListener sets start' );
     options.start = event => {
       molecule.isDraggingProperty.value = true;
       previousAngle = getAngle( event );
     };
 
-    assert && assert( !options.drag, 'MoleculeAngleDragListener sets drag' );
+    assert && assert( molecule.angleProperty.range );
+    const angleRange = molecule.angleProperty.range!;
+
     options.drag = event => {
       const currentAngle = getAngle( event );
       molecule.angleProperty.value =
-        normalizeAngle( molecule.angleProperty.value + currentAngle - previousAngle, molecule.angleProperty.range.min );
+        normalizeAngle( molecule.angleProperty.value + currentAngle - previousAngle, angleRange.min );
       previousAngle = currentAngle;
     };
 
-    assert && assert( !options.end, 'MoleculeAngleDragListener sets end' );
     options.end = () => {
       molecule.isDraggingProperty.value = false;
     };
@@ -67,4 +65,3 @@ class MoleculeAngleDragListener extends DragListener {
 }
 
 moleculePolarity.register( 'MoleculeAngleDragListener', MoleculeAngleDragListener );
-export default MoleculeAngleDragListener;
