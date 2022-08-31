@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Panel with slider control for electronegativity.
  *
@@ -9,12 +8,12 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
-import Panel from '../../../../sun/js/Panel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
@@ -22,28 +21,27 @@ import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import ElectronegativitySlider from './ElectronegativitySlider.js';
 
-class ElectronegativityPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
+
+export type ElectronegativityPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+
+export default class ElectronegativityPanel extends Panel {
 
   /**
-   * @param {Atom} atom - the atom whose electronegativity we're controlling
-   * @param {Molecule} molecule - molecule that the atom belongs to, for pausing animation while this control is used
-   * @param {Object} [options]
+   * @param atom - the atom whose electronegativity we're controlling
+   * @param molecule - molecule that the atom belongs to, for pausing animation while this control is used
+   * @param [providedOptions]
    */
-  constructor( atom, molecule, options ) {
-    assert && assert( atom instanceof Atom, 'invalid atom' );
-    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
+  public constructor( atom: Atom, molecule: Molecule, providedOptions: ElectronegativityPanelOptions ) {
 
-    options = merge( {
+    const options = optionize<ElectronegativityPanelOptions, SelfOptions, PanelOptions>()( {
 
-      // Panel
+      // PanelOptions
       fill: atom.color,
       stroke: 'black',
       xMargin: 15,
-      yMargin: 6,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      yMargin: 6
+    }, providedOptions );
 
     const titleStringProperty = new DerivedProperty(
       [ atom.labelStringProperty, moleculePolarityStrings.pattern.atomNameStringProperty ],
@@ -89,4 +87,3 @@ class ElectronegativityPanel extends Panel {
 }
 
 moleculePolarity.register( 'ElectronegativityPanel', ElectronegativityPanel );
-export default ElectronegativityPanel;
