@@ -42,7 +42,7 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
     }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
 
     // d+ -> d-
-    //TODO https://github.com/phetsims/molecule-polarity/issues/140 not showing up in Studio, maybe because dialog is in a PhetioCapsule?
+    //TODO https://github.com/phetsims/molecule-polarity/issues/144 not showing up in Studio
     const positiveToNegativeStringProperty = new DerivedProperty( [
       moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
       moleculePolarityStrings.deltaPlusStringProperty,
@@ -57,7 +57,7 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
       } ) );
 
     // d- -> d+
-    //TODO https://github.com/phetsims/molecule-polarity/issues/140 not showing up in Studio, maybe because dialog is in a PhetioCapsule?
+    //TODO https://github.com/phetsims/molecule-polarity/issues/144 not showing up in Studio
     const negativeToPositiveStringProperty = new DerivedProperty( [
       moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
       moleculePolarityStrings.deltaPlusStringProperty,
@@ -77,6 +77,8 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
     const radioButtonGroupItems = [
       {
         value: DipoleDirection.POSITIVE_TO_NEGATIVE,
+
+        //TODO //TODO https://github.com/phetsims/molecule-polarity/issues/144 no textProperty linked element in Studio
         node: new Text( positiveToNegativeStringProperty, merge( {
           tandem: options.tandem.createTandem( positiveToNegativeRadioButtonTandemName ).createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
@@ -84,6 +86,8 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
       },
       {
         value: DipoleDirection.NEGATIVE_TO_POSITIVE,
+
+        //TODO //TODO https://github.com/phetsims/molecule-polarity/issues/144 no textProperty linked element in Studio
         node: new Text( negativeToPositiveStringProperty, merge( {
           tandem: options.tandem.createTandem( negativeToPositiveRadioButtonTandem ).createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
