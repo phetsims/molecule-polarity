@@ -8,7 +8,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
@@ -17,7 +16,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
-import DipoleDirection from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
@@ -30,11 +28,10 @@ const TEXT_OPTIONS = {
 class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<DipoleDirection>} dipoleDirectionProperty
+   * @param {StringEnumerationProperty.<DipoleDirection>} dipoleDirectionProperty
    * @param {Object} [options]
    */
   constructor( dipoleDirectionProperty, options ) {
-    assert && AssertUtils.assertEnumerationPropertyOf( dipoleDirectionProperty, DipoleDirection );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -74,7 +71,7 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
 
     const radioButtonGroupItems = [
       {
-        value: DipoleDirection.POSITIVE_TO_NEGATIVE,
+        value: 'positiveToNegative',
 
         //TODO //TODO https://github.com/phetsims/molecule-polarity/issues/144 no textProperty linked element in Studio
         node: new Text( positiveToNegativeStringProperty, merge( {
@@ -83,7 +80,7 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
         tandemName: positiveToNegativeRadioButtonTandemName
       },
       {
-        value: DipoleDirection.NEGATIVE_TO_POSITIVE,
+        value: 'negativeToPositive',
 
         //TODO //TODO https://github.com/phetsims/molecule-polarity/issues/144 no textProperty linked element in Studio
         node: new Text( negativeToPositiveStringProperty, merge( {

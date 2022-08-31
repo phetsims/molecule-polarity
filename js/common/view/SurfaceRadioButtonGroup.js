@@ -7,23 +7,20 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
-import SurfaceType from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 
 class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<SurfaceType>} surfaceTypeProperty
+   * @param {StringEnumerationProperty.<SurfaceType>} surfaceTypeProperty
    * @param {Object} [options]
    */
   constructor( surfaceTypeProperty, options ) {
-    assert && AssertUtils.assertEnumerationPropertyOf( surfaceTypeProperty, SurfaceType );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -36,11 +33,11 @@ class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
           tandem: options.tandem.createTandem( 'noneText' ),
           phetioVisiblePropertyInstrumented: false
         }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
-        value: SurfaceType.NONE,
+        value: 'none',
         tandemName: 'noneRadioButton'
       },
       {
-        value: SurfaceType.ELECTROSTATIC_POTENTIAL,
+        value: 'electrostaticPotential',
         node: new Text( moleculePolarityStrings.electrostaticPotentialStringProperty, merge( {
           tandem: options.tandem.createTandem( 'electrostaticPotentialText' ),
           phetioVisiblePropertyInstrumented: false
@@ -48,7 +45,7 @@ class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
         tandemName: 'electrostaticPotentialRadioButton'
       },
       {
-        value: SurfaceType.ELECTRON_DENSITY,
+        value: 'electronDensity',
         node: new Text( moleculePolarityStrings.electronDensityStringProperty, merge( {
           tandem: options.tandem.createTandem( 'electronDensityText' ),
           phetioVisiblePropertyInstrumented: false

@@ -11,7 +11,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import SurfaceType from '../../common/model/SurfaceType.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
@@ -148,8 +147,8 @@ class TwoAtomsScreenView extends ScreenView {
 
     // unlink not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      electrostaticPotentialColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
-      electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+      electrostaticPotentialColorKey.visible = ( surfaceType === 'electrostaticPotential' );
+      electronDensityColorKey.visible = ( surfaceType === 'electronDensity' );
     } );
   }
 }

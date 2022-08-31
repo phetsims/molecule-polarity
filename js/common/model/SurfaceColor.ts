@@ -1,17 +1,10 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Enumeration for dipole direction.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import moleculePolarity from '../../moleculePolarity.js';
-
-const SurfaceColor = EnumerationDeprecated.byKeys( [ 'RWB', 'ROYGB' ] );
-
-moleculePolarity.register( 'SurfaceColor', SurfaceColor );
-export default SurfaceColor;
-
+export const SurfaceColorValues = [ 'RWB', 'ROYGB' ] as const;
+export type SurfaceColor = ( typeof SurfaceColorValues )[number];

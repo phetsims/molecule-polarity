@@ -10,7 +10,6 @@
 import merge from '../../../../phet-core/js/merge.js';
 import { Circle, Line, Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import Polarity from '../model/Polarity.js';
 
 class PolarityIndicator extends Node {
 
@@ -20,7 +19,7 @@ class PolarityIndicator extends Node {
   constructor( options ) {
 
     options = merge( {
-      polarity: Polarity.POSITIVE,
+      polarity: 'positive',
       radius: 20,
       lineWidth: 4,
       stroke: 'black'
@@ -37,7 +36,7 @@ class PolarityIndicator extends Node {
     this.addChild( new Line( -0.5 * options.radius, 0, 0.5 * options.radius, 0, pathOptions ) );
 
     // vertical bar for plus sign
-    if ( options.polarity === Polarity.POSITIVE ) {
+    if ( options.polarity === 'positive' ) {
       this.addChild( new Line( 0, -0.5 * options.radius, 0, 0.5 * options.radius, pathOptions ) );
     }
 

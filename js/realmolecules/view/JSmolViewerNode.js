@@ -33,8 +33,8 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Color, DOM } from '../../../../scenery/js/imports.js';
-import SurfaceType from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Element from '../model/Element.js';
 import RealMolecule from '../model/RealMolecule.js';
@@ -395,23 +395,25 @@ function updateSurface( applet, surfaceType ) {
   phet.log && phet.log( 'updateSurface' );
 
   const diatomic = isHomogeneousDiatomic( applet );
-  if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_ROYGB ) {
-    if ( diatomic ) {
-      doScript( applet, `isosurface VDW color ${toJmolColor( MPColors.NEUTRAL_POTENTIAL )} translucent` );
+  if ( surfaceType === 'electrostaticPotential' ) {
+    if ( MPQueryParameters.surfaceColor === 'ROYGB' ) {
+      if ( diatomic ) {
+        doScript( applet, `isosurface VDW color ${toJmolColor( MPColors.NEUTRAL_POTENTIAL )} translucent` );
+      }
+      else {
+        doScript( applet, 'isosurface VDW map MEP translucent' );
+      }
     }
-    else {
-      doScript( applet, 'isosurface VDW map MEP translucent' );
+    else { // 'RWB'
+      if ( diatomic ) {
+        doScript( applet, 'isosurface VDW color white translucent' );
+      }
+      else {
+        doScript( applet, 'isosurface VDW map MEP colorscheme "RWB" translucent' );
+      }
     }
   }
-  else if ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL_RWB ) {
-    if ( diatomic ) {
-      doScript( applet, 'isosurface VDW color white translucent' );
-    }
-    else {
-      doScript( applet, 'isosurface VDW map MEP colorscheme "RWB" translucent' );
-    }
-  }
-  else if ( surfaceType === SurfaceType.ELECTRON_DENSITY ) {
+  else if ( surfaceType === 'electronDensity' ) {
     if ( diatomic ) {
       doScript( applet, `isosurface VDW color ${toJmolColor( MPColors.NEUTRAL_GRAY )} translucent` );
     }
@@ -419,7 +421,7 @@ function updateSurface( applet, surfaceType ) {
       doScript( applet, 'isosurface VDW map MEP colorscheme "BW" translucent' );
     }
   }
-  else {
+  else { // 'none'
     doScript( applet, 'isosurface off' );
   }
 }

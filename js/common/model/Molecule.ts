@@ -1,8 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Abstract base type for all 2D molecules.
+ * Molecule is the abstract base type for all 2D molecules.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,44 +9,62 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import Atom from './Atom.js';
 import Bond from './Bond.js';
 
-class Molecule {
+type SelfOptions = {
+  position?: Vector2; // the point about which the molecule rotates, in global model coordinate frame
+  angle?: number; // angle of rotation of the entire molecule about the position, in radians
+};
+
+export type MoleculeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+export default abstract class Molecule extends PhetioObject {
+
+  public readonly position: Vector2; // the point about which the molecule rotates, in global model coordinate frame
+  public readonly atoms: Atom[];
+  public readonly bonds: Bond[];
+  public readonly angleProperty: NumberProperty;
+  public readonly isDraggingProperty: Property<boolean>; // true when the user is dragging the molecule
+  public readonly dipoleProperty: TReadOnlyProperty<Vector2>; // the molecular dipole, sum of the bond dipoles
 
   /**
-   * @param {Atom[]} atoms - atoms that make up the molecule
-   * @param {Bond[]} bonds - bonds between the atoms
-   * @param {function} updateAtomPositions - repositions the atoms (no arguments, no return value)
-   * @param {function} updatePartialCharges - updates the partial charges (no arguments, no return value)
-   * @param {Object} [options]
-   * @abstract
+   * @param atoms - atoms that make up the molecule
+   * @param bonds - bonds between the atoms
+   * @param updateAtomPositions - repositions the atoms
+   * @param updatePartialCharges - updates the partial charges
+   * @param [providedOptions]
    */
-  constructor( atoms, bonds, updateAtomPositions, updatePartialCharges, options ) {
-    assert && AssertUtils.assertArrayOf( atoms, Atom );
-    assert && AssertUtils.assertArrayOf( bonds, Bond );
-    assert && assert( typeof updateAtomPositions === 'function', 'invalid updateAtomPositions' );
-    assert && assert( typeof updatePartialCharges === 'function', 'invalid updatePartialCharges' );
+  protected constructor( atoms: Atom[], bonds: Bond[],
+                         updateAtomPositions: ( position: Vector2, angle: number ) => void,
+                         updatePartialCharges: () => void,
+                         providedOptions: MoleculeOptions ) {
 
-    options = merge( {
-      position: new Vector2( 0, 0 ), // the point about which the molecule rotates, in global model coordinate frame
-      angle: 0, // angle of rotation of the entire molecule about the position, in radians
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<MoleculeOptions, SelfOptions, PhetioObjectOptions>()( {
 
-    // @public (read-only)
-    this.position = options.position; // the point about which the molecule rotates, in global model coordinate frame
+      // SelfOptions
+      position: new Vector2( 0, 0 ),
+      angle: 0,
+
+      // PhetioObjectOptions
+      phetioState: false
+    }, providedOptions );
+
+    super( options );
+
+    this.position = options.position;
     this.atoms = atoms;
     this.bonds = bonds;
 
-    // @public
     this.angleProperty = new NumberProperty( options.angle, {
       range: MPConstants.ANGLE_RANGE,
       units: 'radians',
@@ -55,26 +72,25 @@ class Molecule {
       phetioDocumentation: 'rotation angle of the molecule, with positive rotation being CLOCKWISE'
     } );
 
-    // @pubic true when the user is dragging the molecule
-    // This is Property only so that it appears in PhET-iO state.
     this.isDraggingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isDraggingProperty' ),
       phetioReadOnly: true,
       phetioState: false
     } );
 
-    // update atom positions when molecule is rotated, unlink not needed
+    // update atom positions when molecule is rotated
     this.angleProperty.link( angle => updateAtomPositions( this.position, angle ) );
 
     // bond dipoles, for deriving molecular dipole
-    const bondDipoleProperties = [];
-    this.bonds.forEach( bond => bondDipoleProperties.push( bond.dipoleProperty ) );
+    const bondDipoleProperties = this.bonds.map( bond => bond.dipoleProperty );
 
-    // @public {DerivedProperty.<Vector2>} the molecular dipole, sum of the bond dipoles, dispose not needed
+    // @ts-ignore https://github.com/phetsims/molecule-polarity/issues/145
     this.dipoleProperty = new DerivedProperty( bondDipoleProperties, () => {
+
+      // Sum the bond dipoles
       const sum = new Vector2( 0, 0 );
-      this.bonds.forEach( bond => {
-        sum.add( bond.dipoleProperty.value ); // add to the same Vector2 instance
+      bondDipoleProperties.forEach( bondDipoleProperty => {
+        sum.add( bondDipoleProperty.value );
       } );
 
       // If y is effectively zero, snap to zero. See https://github.com/phetsims/molecule-polarity/issues/89
@@ -95,21 +111,22 @@ class Molecule {
     } );
   }
 
-  // @public
-  reset() {
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  public reset(): void {
     this.angleProperty.reset();
     this.atoms.forEach( atom => atom.reset() );
   }
 
   /**
    * Creates a transform that accounts for the molecule's position and orientation.
-   * @returns {Matrix3}
-   * @public
    */
-  createTransformMatrix() {
+  public createTransformMatrix(): Matrix3 {
     return Matrix3.translationFromVector( this.position ).timesMatrix( Matrix3.rotation2( this.angleProperty.value ) );
   }
 }
 
 moleculePolarity.register( 'Molecule', Molecule );
-export default Molecule;

@@ -1,45 +1,44 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Model of a bond between 2 atoms.
+ * Bond is the model of a bond between 2 atoms.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPPreferences from './MPPreferences.js';
 import Atom from './Atom.js';
-import DipoleDirection from './DipoleDirection.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
-class Bond extends PhetioObject {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Atom} atom1
-   * @param {Atom} atom2
-   * @param {Object} [options]
-   */
-  constructor( atom1, atom2, options ) {
-    assert && assert( atom1 instanceof Atom, 'invalid atom1' );
-    assert && assert( atom2 instanceof Atom, 'invalid atom2' );
+export type BondOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioDocumentation'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
-      phetioState: false // extends PhetioObject only for phetioDocumentation
-    }, options );
+export default class Bond extends PhetioObject {
+
+  public readonly atom1: Atom;
+  public readonly atom2: Atom;
+  public readonly dipoleProperty: TReadOnlyProperty<Vector2>;
+
+  public constructor( atom1: Atom, atom2: Atom, providedOptions: BondOptions ) {
+
+    const options = optionize<BondOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
+      phetioState: false
+    }, providedOptions );
 
     super( options );
 
-    // @public (read-only)
     this.atom1 = atom1;
     this.atom2 = atom2;
 
-    // @public {DerivedProperty.<Vector2>} dispose not needed, exists for the lifetime of the sim
     this.dipoleProperty = new DerivedProperty( [
         atom1.positionProperty, atom2.positionProperty,
         atom1.electronegativityProperty, atom2.electronegativityProperty,
@@ -62,7 +61,7 @@ class Bond extends PhetioObject {
         // The above algorithm is for a dipole that points from positive to negative charge.
         // For IUPAC convention, the direction of the dipole is from negative to positive charge,
         // so rotate the dipole 180 degrees. See issue #5 and #56.
-        if ( dipoleDirection === DipoleDirection.NEGATIVE_TO_POSITIVE ) {
+        if ( dipoleDirection === 'negativeToPositive' ) {
           dipole.rotate( Math.PI );
         }
 
@@ -76,34 +75,32 @@ class Bond extends PhetioObject {
       } );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Gets the center of the bond, the midpoint between the 2 atom positions.
-   * @returns {Vector2}
-   * @public
    */
-  getCenter() {
+  public getCenter(): Vector2 {
     return this.atom1.positionProperty.value.average( this.atom2.positionProperty.value );
   }
 
   /**
-   * Gets the angle of atom2 relative to the horizontal axis.
-   * @returns {number} angle in radians
-   * @public
+   * Gets the angle (in radians) of atom2 relative to the horizontal axis.
    */
-  getAngle() {
+  public getAngle(): number {
     const center = this.getCenter();
     return Math.atan2( this.atom2.positionProperty.value.y - center.y, this.atom2.positionProperty.value.x - center.x );
   }
 
   /**
    * Gets the bond length, the distance between the 2 atoms.
-   * @returns {number}
-   * @public
    */
-  getLength() {
+  public getLength(): number {
     return this.atom1.positionProperty.value.distance( this.atom2.positionProperty.value );
   }
 }
 
 moleculePolarity.register( 'Bond', Bond );
-export default Bond;

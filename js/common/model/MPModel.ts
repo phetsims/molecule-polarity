@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MPModel is the abstract base type for 2D models in this sim.
  * Every 2D model has an E-field and a molecule.
@@ -11,53 +10,66 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import MPPreferences from './MPPreferences.js';
 import normalizeAngle from './normalizeAngle.js';
+import Molecule, { MoleculeOptions } from './Molecule.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import Property from '../../../../axon/js/Property.js';
 
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
 
-class MPModel {
+type SelfOptions = EmptySelfOptions;
+
+export type MPModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+export default abstract class MPModel extends PhetioObject {
+
+  public readonly molecule: Molecule;
+  public readonly eFieldEnabledProperty: Property<boolean>;
 
   /**
-   * @param {function(options:Object):Molecule} createMolecule - creates the molecule for this model
-   * @param {Object} [options]
-   * @abstract
+   * @param createMolecule - creates the molecule for this model
+   * @param [providedOptions]
    */
-  constructor( createMolecule, options ) {
-    assert && assert( typeof createMolecule === 'function', 'invalid createMolecule' );
+  protected constructor( createMolecule: ( options: MoleculeOptions ) => Molecule, providedOptions: MPModelOptions ) {
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+    const options = optionize<MPModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
-    // @public (read-only)
+      // PhetioObjectOptions
+      phetioState: false
+    }, providedOptions );
+
+    super( options );
+
     this.molecule = createMolecule( {
       tandem: options.tandem.createTandem( 'molecule' )
     } );
 
-    // @public
     this.eFieldEnabledProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'eFieldEnabledProperty' )
     } );
   }
 
-  // @public
-  reset() {
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  public reset(): void {
     this.molecule.reset();
     this.eFieldEnabledProperty.reset();
   }
 
   /**
    * Advances the model.
-   * @param {number} dt - time step, in seconds
-   * @public
+   * @param dt - time step, in seconds
    */
-  step( dt ) {
+  public step( dt: number ): void {
 
     // If the E-field is on and the user isn't controlling the molecule's orientation, animate molecule rotation.
     if ( this.eFieldEnabledProperty.value && !this.molecule.isDraggingProperty.value ) {
@@ -68,10 +80,8 @@ class MPModel {
   /**
    * Rotate the molecule one step towards alignment of the molecular dipole with the E-field.
    * Angular velocity is proportional to the dipole's magnitude.
-   * @param {Molecule} molecule
-   * @private
    */
-  updateMoleculeOrientation( molecule ) {
+  private updateMoleculeOrientation( molecule: Molecule ): void {
 
     let dipole = molecule.dipoleProperty.value;
 
@@ -127,9 +137,8 @@ class MPModel {
       angle = 0;
     }
 
-    molecule.angleProperty.value = normalizeAngle( angle, molecule.angleProperty.range.min );
+    molecule.angleProperty.value = normalizeAngle( angle, molecule.angleProperty.range!.min );
   }
 }
 
 moleculePolarity.register( 'MPModel', MPModel );
-export default MPModel;

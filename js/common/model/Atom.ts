@@ -1,7 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * A make-believe atom whose electronegativity is mutable.
+ * Atom is a make-believe atom whose electronegativity is mutable.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,20 +14,20 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { TColor } from '../../../../scenery/js/imports.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
 type SelfOptions = {
-  diameter: number; // the atom's diameter
-  color: TColor; // base color of the atom
-  position: Vector2; // initial position
-  electronegativity: number;
+  diameter?: number; // the atom's diameter
+  color?: TColor; // base color of the atom
+  position?: Vector2; // initial position
+  electronegativity?: number;
 };
 
 export type AtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class Atom {
+export default class Atom extends PhetioObject {
 
   public readonly labelStringProperty: TReadOnlyProperty<string>;
   public readonly diameter: number;
@@ -36,16 +36,21 @@ export default class Atom {
   public readonly electronegativityProperty: NumberProperty;
   public readonly partialChargeProperty: TProperty<number>;
 
-  public constructor( labelStringProperty: TReadOnlyProperty<string>, providedOptions?: AtomOptions ) {
+  public constructor( labelStringProperty: TReadOnlyProperty<string>, providedOptions: AtomOptions ) {
 
-    const options = optionize<AtomOptions, SelfOptions>()( {
+    const options = optionize<AtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // SelfOptions
       diameter: MPConstants.ATOM_DIAMETER,
       color: 'white',
       position: new Vector2( 0, 0 ),
-      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min
+      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min,
+
+      // PhetioObjectOptions
+      phetioState: false
     }, providedOptions );
+
+    super( options );
 
     this.labelStringProperty = labelStringProperty;
     this.diameter = options.diameter;
@@ -68,6 +73,11 @@ export default class Atom {
       phetioDocumentation: 'qualitative scalar representation of the partial charge, computed as the electronegativity difference',
       phetioReadOnly: true // because this is computed based on electronegativity of atoms in a molecule
     } );
+  }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 
   public reset(): void {

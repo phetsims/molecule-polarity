@@ -6,18 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import SurfaceColor from '../../common/model/SurfaceColor.js';
-import SurfaceType from '../../common/model/SurfaceType.js';
+import MPPreferences from '../../common/model/MPPreferences.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import MPPreferences from '../../common/model/MPPreferences.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -150,9 +148,9 @@ class RealMoleculesScreenView extends ScreenView {
     // unlink not needed
     Multilink.multilink( [ viewProperties.surfaceTypeProperty, MPPreferences.surfaceColorProperty ],
       ( surfaceType, surfaceColor ) => {
-        electrostaticPotentialRWBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL && surfaceColor === SurfaceColor.RWB );
-        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL && surfaceColor === SurfaceColor.ROYGB );
-        electronDensityColorKey.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+        electrostaticPotentialRWBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'RWB' );
+        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'ROYGB' );
+        electronDensityColorKey.visible = ( surfaceType === 'electronDensity' );
       } );
 
     //TODO see https://github.com/phetsims/molecule-polarity/issues/32

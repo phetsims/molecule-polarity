@@ -8,12 +8,10 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import SurfaceColor from '../model/SurfaceColor.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
 
@@ -30,11 +28,10 @@ const COLOR_KEY_OPTIONS = {
 class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<SurfaceColor>} surfaceColorProperty
+   * @param {StringEnumerationProperty.<SurfaceColor>} surfaceColorProperty
    * @param {Object} [options]
    */
   constructor( surfaceColorProperty, options ) {
-    assert && AssertUtils.assertEnumerationPropertyOf( surfaceColorProperty, SurfaceColor );
 
     options = merge( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -43,12 +40,12 @@ class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
 
     const radioButtonGroupItems = [
       {
-        value: SurfaceColor.RWB,
+        value: 'RWB',
         node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
         tandemName: 'RWBRadioButton'
       },
       {
-        value: SurfaceColor.ROYGB,
+        value: 'ROYGB',
         node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
         tandemName: 'ROYGBRadioButton'
       }

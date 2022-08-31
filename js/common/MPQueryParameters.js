@@ -8,8 +8,6 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import moleculePolarity from '../moleculePolarity.js';
-import DipoleDirection from './model/DipoleDirection.js';
-import SurfaceColor from './model/SurfaceColor.js';
 
 const MPQueryParameters = QueryStringMachine.getAll( {
 
@@ -38,24 +36,6 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   // outward in the direction of the angle. For internal use only.
   showMoleculeAngle: { type: 'flag' }
 } );
-
-/**
- * Gets the DipoleDirection that corresponds to the associated query parameter value.
- * @returns {DipoleDirection}
- * @public
- */
-MPQueryParameters.getDipoleDirection = () =>
-  ( MPQueryParameters.dipoleDirection === 'positiveToNegative' ) ?
-  DipoleDirection.POSITIVE_TO_NEGATIVE :
-  DipoleDirection.NEGATIVE_TO_POSITIVE;
-
-/**
- * Gets the SurfaceColor that corresponds to the associated query parameter value.
- * @returns {SurfaceColor}
- * @public
- */
-MPQueryParameters.getSurfaceColor = () =>
-  ( MPQueryParameters.surfaceColor === 'RWB' ) ? SurfaceColor.RWB : SurfaceColor.ROYGB;
 
 moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
 

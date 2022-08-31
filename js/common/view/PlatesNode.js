@@ -11,7 +11,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import Polarity from '../model/Polarity.js';
 import MPColors from '../MPColors.js';
 import PolarityIndicator from './PolarityIndicator.js';
 
@@ -39,12 +38,12 @@ class PlatesNode extends Node {
     options.visibleProperty = eFieldEnabledProperty;
 
     const negativePlateNode = new PlateNode( eFieldEnabledProperty, merge( {
-      polarity: Polarity.NEGATIVE,
+      polarity: 'negative',
       perspective: 'left'
     }, options.plateOptions ) );
 
     const positivePlateNode = new PlateNode( eFieldEnabledProperty, merge( {
-      polarity: Polarity.POSITIVE,
+      polarity: 'positive',
       perspective: 'right',
       left: negativePlateNode.right + options.spacing,
       bottom: negativePlateNode.bottom
@@ -73,7 +72,7 @@ class PlateNode extends Node {
     assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
 
     options = merge( {
-      polarity: Polarity.NEGATIVE,
+      polarity: 'negative',
       perspective: 'left', // 'left' or 'right'
       plateWidth: 50,
       plateHeight: 430,
@@ -115,7 +114,7 @@ class PlateNode extends Node {
 
     // The plate is drawn in perspective for positive polarity.
     // If the polarity is negative, reflect about the y axis.
-    if ( options.polarity === Polarity.NEGATIVE ) {
+    if ( options.polarity === 'negative' ) {
       plateNode.setScaleMagnitude( -1, 1 );
     }
 

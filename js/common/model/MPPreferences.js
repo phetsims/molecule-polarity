@@ -7,30 +7,31 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPQueryParameters from '../MPQueryParameters.js';
-import DipoleDirection from './DipoleDirection.js';
-import SurfaceColor from './SurfaceColor.js';
+import { DipoleDirectionValues } from './DipoleDirection.js';
+import { SurfaceColorValues } from './SurfaceColor.js';
 
 const MPPreferences = {
 
-  dipoleDirectionProperty: new EnumerationDeprecatedProperty(
-    DipoleDirection, MPQueryParameters.getDipoleDirection(), {
-      tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
-    } ),
+  dipoleDirectionProperty: new StringEnumerationProperty( MPQueryParameters.dipoleDirection, {
+    validValues: DipoleDirectionValues,
+    tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
+  } ),
 
-  surfaceColorProperty: new EnumerationDeprecatedProperty(
-    SurfaceColor, MPQueryParameters.getSurfaceColor(), {
+  surfaceColorProperty: new StringEnumerationProperty( MPQueryParameters.surfaceColor, {
+    validValues: SurfaceColorValues,
 
-      //TODO see https://github.com/phetsims/molecule-polarity/issues/32
-      // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
-      tandem: ( MPQueryParameters.realMolecules ) ?
-              Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ) :
-              Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
-      phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
-    } )
+    //TODO see https://github.com/phetsims/molecule-polarity/issues/32
+    // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
+    // In the meantime, support testing via the realMolecules query parameter.
+    tandem: ( MPQueryParameters.realMolecules ) ?
+            Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ) :
+            Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
+    phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
+  } )
 };
 
 moleculePolarity.register( 'MPPreferences', MPPreferences );

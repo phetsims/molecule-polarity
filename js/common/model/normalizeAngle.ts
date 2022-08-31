@@ -1,6 +1,5 @@
-// Copyright 2021, University of Colorado Boulder
+// Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Normalizes an angle to be in a range whose length is 2 * PI.
  * This was created for https://github.com/phetsims/molecule-polarity/issues/91.
@@ -15,11 +14,10 @@ const RANGE_LENGTH = 2 * Math.PI;
 
 /**
  * Normalizes an angle to the range [ minAngle, minAngle + 2 * PI )
- * @param {number} angle - the angle to normalize, in radians
- * @param {number} [minAngle] - minimum angle, in radians
- * @returns {number}
+ * @param angle - the angle to normalize, in radians
+ * @param [minAngle] - minimum angle, in radians
  */
-function normalizeAngle( angle, minAngle = 0 ) {
+function normalizeAngle( angle: number, minAngle = 0 ): number {
 
   // Shift to the range [0,2*PI)
   const shiftedAngle = angle - minAngle;

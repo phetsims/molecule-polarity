@@ -1,8 +1,7 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Model of a make-believe triatomic (3 atoms) molecule with a very specific topology.
+ * TriatomicMolecule is the model of a make-believe triatomic (3 atoms) molecule with a very specific topology.
  * Variables are named based on the English labels applied to the atoms.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -10,40 +9,53 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import Atom from '../../common/model/Atom.js';
 import Bond from '../../common/model/Bond.js';
-import Molecule from '../../common/model/Molecule.js';
+import Molecule, { MoleculeOptions } from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
-class TriatomicMolecule extends Molecule {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type TriatomicMoleculeOptions = SelfOptions & MoleculeOptions;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class TriatomicMolecule extends Molecule {
+
+  public readonly atomA: Atom; // the atom labeled 'A'
+  public readonly atomB: Atom; // the atom labeled 'B'
+  public readonly atomC: Atom; // the atom labeled 'C'
+  public readonly bondAB: Bond; // the bond between atoms 'A' and 'B'
+  public readonly bondBC: Bond; // the bond between atoms 'B' and 'C'
+  public readonly bondAngleABProperty: NumberProperty; // see phetioDocumentation
+  public readonly bondAngleBCProperty: NumberProperty; // see phetioDocumentation
+
+  // the angle between bondAB and bondBC
+  // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
+  private readonly bondAngleABCProperty: TReadOnlyProperty<number>;
+
+  public constructor( providedOptions: TriatomicMoleculeOptions ) {
+
+    const options = providedOptions;
 
     // atoms labeled A, B, C
     const atomA = new Atom( moleculePolarityStrings.atomAStringProperty, {
       color: MPColors.ATOM_A,
       tandem: options.tandem.createTandem( 'atomA' )
     } );
+
     const atomB = new Atom( moleculePolarityStrings.atomBStringProperty, {
       color: MPColors.ATOM_B,
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ),
       tandem: options.tandem.createTandem( 'atomB' )
     } );
+
     const atomC = new Atom( moleculePolarityStrings.atomCStringProperty, {
       color: MPColors.ATOM_C,
       tandem: options.tandem.createTandem( 'atomC' )
@@ -80,7 +92,7 @@ class TriatomicMolecule extends Molecule {
       phetioDocumentation: 'rotation angle of the bond between atoms B and C, relative to the molecule\'s angle and position, with positive rotation being CLOCKWISE'
     } );
 
-    const updateAtomPositions = ( position, angle ) => {
+    const updateAtomPositions = ( position: Vector2, angle: number ) => {
       atomB.positionProperty.value = position;  // atom B remains at the molecule's position
       updateAtomPosition( atomA, bondAngleABProperty.value, position, angle );
       updateAtomPosition( atomC, bondAngleBCProperty.value, position, angle );
@@ -101,13 +113,10 @@ class TriatomicMolecule extends Molecule {
 
     super( [ atomA, atomB, atomC ], [ bondAB, bondBC ], updateAtomPositions, updatePartialCharges, options );
 
-    // unlink not needed
     const bondAngleListener = () => updateAtomPositions( this.position, this.angleProperty.value );
     bondAngleABProperty.link( bondAngleListener );
     bondAngleBCProperty.link( bondAngleListener );
 
-    // @private (phet-io) {DerivedProperty.<number>} the angle between bonds AB and BC
-    // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
     this.bondAngleABCProperty = new DerivedProperty(
       [ bondAngleABProperty, bondAngleBCProperty ],
       ( bondAngleAB, bondAngleBC ) => normalizeAngle( bondAngleAB - bondAngleBC, MPConstants.ANGLE_RANGE.min ), {
@@ -117,7 +126,6 @@ class TriatomicMolecule extends Molecule {
         phetioDocumentation: 'the angle between bonds AB and BC, with positive rotation being CLOCKWISE'
       } );
 
-    // @public
     this.atomA = atomA;
     this.atomB = atomB;
     this.atomC = atomC;
@@ -127,11 +135,12 @@ class TriatomicMolecule extends Molecule {
     this.bondAngleBCProperty = bondAngleBCProperty;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  reset() {
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  public override reset(): void {
     super.reset();
     this.bondAngleABProperty.reset();
     this.bondAngleBCProperty.reset();
@@ -140,13 +149,12 @@ class TriatomicMolecule extends Molecule {
 
 /*
  * Repositions one atom.
- *
- * @param {Atom} atom the atom to reposition
- * @param {number} bondAngle the angle of the bond that the atom participates in
- * @param {Vector2} position position of the molecule
- * @param {number} angle orientation of the molecule
+ * @param atom - the atom to reposition
+ * @param bondAngle - the angle of the bond that the atom participates in
+ * @param position - position of the molecule
+ * @param angle - orientation of the molecule
  */
-function updateAtomPosition( atom, bondAngle, position, angle ) {
+function updateAtomPosition( atom: Atom, bondAngle: number, position: Vector2, angle: number ): void {
   const thetaA = angle + bondAngle;
   const xA = ( MPConstants.BOND_LENGTH * Math.cos( thetaA ) ) + position.x;
   const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + position.y;
@@ -154,4 +162,3 @@ function updateAtomPosition( atom, bondAngle, position, angle ) {
 }
 
 moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );
-export default TriatomicMolecule;

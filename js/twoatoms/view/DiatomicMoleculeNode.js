@@ -11,7 +11,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import SurfaceType from '../../common/model/SurfaceType.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -112,8 +111,8 @@ class DiatomicMoleculeNode extends Node {
     this.addInputListener( dragListener );
 
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      electrostaticPotentialSurfaceNode.visible = ( surfaceType === SurfaceType.ELECTROSTATIC_POTENTIAL );
-      electronDensitySurfaceNode.visible = ( surfaceType === SurfaceType.ELECTRON_DENSITY );
+      electrostaticPotentialSurfaceNode.visible = ( surfaceType === 'electrostaticPotential' );
+      electronDensitySurfaceNode.visible = ( surfaceType === 'electronDensity' );
     } );
 
     // {boolean} Set to true when the molecule has been changed by the user.
