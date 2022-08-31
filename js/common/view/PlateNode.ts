@@ -18,7 +18,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 type Perspective = 'left' | 'right';
 
 type SelfOptions = {
-  polarity?: Polarity;
   perspective?: Perspective;
   plateWidth?: number;
   plateHeight?: number;
@@ -30,10 +29,9 @@ export type PlateNodeOptions = SelfOptions;
 
 export default class PlateNode extends Node {
 
-  public constructor( eFieldEnabledProperty: Property<boolean>, providedOptions?: PlateNodeOptions ) {
+  public constructor( polarity: Polarity, eFieldEnabledProperty: Property<boolean>, providedOptions?: PlateNodeOptions ) {
 
     const options = optionize<PlateNodeOptions, SelfOptions, NodeOptions>()( {
-      polarity: 'negative',
       perspective: 'left',
       plateWidth: 50,
       plateHeight: 430,
@@ -42,7 +40,7 @@ export default class PlateNode extends Node {
     }, providedOptions );
 
     // polarity indicator
-    const polarityIndicatorNode = new PolarityIndicator( options.polarity );
+    const polarityIndicatorNode = new PolarityIndicator( polarity );
 
     // constants
     const plateOptions = {
@@ -72,7 +70,7 @@ export default class PlateNode extends Node {
 
     // The plate is drawn in perspective for positive polarity.
     // If the polarity is negative, reflect about the y axis.
-    if ( options.polarity === 'negative' ) {
+    if ( polarity === 'negative' ) {
       plateNode.setScaleMagnitude( -1, 1 );
     }
 

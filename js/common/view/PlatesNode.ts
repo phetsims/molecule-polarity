@@ -39,13 +39,11 @@ export default class PlatesNode extends Node {
     assert && assert( !options.visibleProperty, 'PlateNode sets visibleProperty' );
     options.visibleProperty = eFieldEnabledProperty;
 
-    const negativePlateNode = new PlateNode( eFieldEnabledProperty, merge( {
-      polarity: 'negative',
+    const negativePlateNode = new PlateNode( 'negative', eFieldEnabledProperty, merge( {
       perspective: 'left'
     }, options.plateOptions ) );
 
-    const positivePlateNode = new PlateNode( eFieldEnabledProperty, merge( {
-      polarity: 'positive',
+    const positivePlateNode = new PlateNode( 'positive', eFieldEnabledProperty, merge( {
       perspective: 'right',
       left: negativePlateNode.right + options.spacing,
       bottom: negativePlateNode.bottom
