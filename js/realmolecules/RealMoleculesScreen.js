@@ -36,6 +36,7 @@ class RealMoleculesScreen extends Screen {
 
     //TODO see https://github.com/phetsims/molecule-polarity/issues/32
     // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
+    // In the meantime, support testing via the realMolecules query parameter.
     const parentTandem = ( MPQueryParameters.realMolecules ) ? options.tandem : Tandem.OPT_OUT;
 
     super(
