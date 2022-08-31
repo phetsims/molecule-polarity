@@ -1,6 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View-specific Properties for the 'Real Molecules' screen.
  *
@@ -9,46 +8,57 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { SurfaceTypeValues } from '../../common/model/SurfaceType.js';
+import { SurfaceType, SurfaceTypeValues } from '../../common/model/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Property from '../../../../axon/js/Property.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 
-class RealMoleculesViewProperties {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type RealMoleculesViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class RealMoleculesViewProperties {
 
-    // @public
+  public readonly bondDipolesVisibleProperty: Property<boolean>;
+  public readonly molecularDipoleVisibleProperty: Property<boolean>;
+  public readonly partialChargesVisibleProperty: Property<boolean>;
+  public readonly atomElectronegativitiesVisibleProperty: Property<boolean>;
+  public readonly atomLabelsVisibleProperty: Property<boolean>;
+  public readonly surfaceTypeProperty: StringEnumerationProperty<SurfaceType>;
+
+  public constructor( providedOptions: RealMoleculesViewPropertiesOptions ) {
+
+    const options = providedOptions;
+
     this.bondDipolesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' )
     } );
+
     this.molecularDipoleVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' )
     } );
+
     this.partialChargesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' )
     } );
+
     this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'atomElectronegativitiesVisibleProperty' )
     } );
+
     this.atomLabelsVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' )
     } );
+
     this.surfaceTypeProperty = new StringEnumerationProperty( 'none', {
       validValues: SurfaceTypeValues,
       tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
     } );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.bondDipolesVisibleProperty.reset();
     this.molecularDipoleVisibleProperty.reset();
     this.partialChargesVisibleProperty.reset();
@@ -59,4 +69,3 @@ class RealMoleculesViewProperties {
 }
 
 moleculePolarity.register( 'RealMoleculesViewProperties', RealMoleculesViewProperties );
-export default RealMoleculesViewProperties;

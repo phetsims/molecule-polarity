@@ -1,6 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View-specific Properties for the 'Two Atoms' screen.
  *
@@ -8,41 +7,48 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { SurfaceTypeValues } from '../../common/model/SurfaceType.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import { SurfaceType, SurfaceTypeValues } from '../../common/model/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class TwoAtomsViewProperties {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type TwoAtomsViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class TwoAtomsViewProperties {
 
-    // @public
+  public readonly bondDipoleVisibleProperty: Property<boolean>;
+  public readonly partialChargesVisibleProperty: Property<boolean>;
+  public readonly bondCharacterVisibleProperty: Property<boolean>;
+  public readonly surfaceTypeProperty: StringEnumerationProperty<SurfaceType>;
+
+  public constructor( providedOptions: TwoAtomsViewPropertiesOptions ) {
+
+    const options = providedOptions;
+
     this.bondDipoleVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'bondDipoleVisibleProperty' )
     } );
+
     this.partialChargesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' )
     } );
+
     this.bondCharacterVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'bondCharacterVisibleProperty' )
     } );
-    this.surfaceTypeProperty = new StringEnumerationProperty( 'none', {
+
+    this.surfaceTypeProperty = new StringEnumerationProperty<SurfaceType>( 'none', {
       validValues: SurfaceTypeValues,
       tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
     } );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.bondDipoleVisibleProperty.reset();
     this.partialChargesVisibleProperty.reset();
     this.bondCharacterVisibleProperty.reset();
@@ -51,4 +57,3 @@ class TwoAtomsViewProperties {
 }
 
 moleculePolarity.register( 'TwoAtomsViewProperties', TwoAtomsViewProperties );
-export default TwoAtomsViewProperties;
