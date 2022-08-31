@@ -42,7 +42,7 @@ export default class PlateNode extends Node {
     }, providedOptions );
 
     // polarity indicator
-    const polarityIndicatorNode = new PolarityIndicator( { polarity: options.polarity } );
+    const polarityIndicatorNode = new PolarityIndicator( options.polarity );
 
     // constants
     const plateOptions = {

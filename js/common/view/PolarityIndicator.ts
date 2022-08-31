@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Indicator of polarity (positive or negative) used on E-field plates.
  * Origin at center of cross hairs.
@@ -8,45 +7,35 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { Circle, Line, Node } from '../../../../scenery/js/imports.js';
+import { Circle, CircleOptions, Line, Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import { Polarity } from '../model/Polarity.js';
 
-class PolarityIndicator extends Node {
+export default class PolarityIndicator extends Node {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-
-    options = merge( {
-      polarity: 'positive',
-      radius: 20,
-      lineWidth: 4,
-      stroke: 'black'
-    }, options );
+  public constructor( polarity: Polarity, radius = 20 ) {
 
     super();
 
-    const pathOptions = { stroke: options.stroke, lineWidth: options.lineWidth };
+    const pathOptions: CircleOptions = {
+      lineWidth: 4,
+      stroke: 'black'
+    };
 
     // circle
-    this.addChild( new Circle( options.radius, pathOptions ) );
+    this.addChild( new Circle( radius, pathOptions ) );
 
     // horizontal bar for plus or minus sign
-    this.addChild( new Line( -0.5 * options.radius, 0, 0.5 * options.radius, 0, pathOptions ) );
+    this.addChild( new Line( -0.5 * radius, 0, 0.5 * radius, 0, pathOptions ) );
 
     // vertical bar for plus sign
-    if ( options.polarity === 'positive' ) {
-      this.addChild( new Line( 0, -0.5 * options.radius, 0, 0.5 * options.radius, pathOptions ) );
+    if ( polarity === 'positive' ) {
+      this.addChild( new Line( 0, -0.5 * radius, 0, 0.5 * radius, pathOptions ) );
     }
 
     // vertical connecting bar
-    this.addChild( new Line( 0, options.radius, 0, 2 * options.radius, pathOptions ) );
-
-    this.mutate( options );
+    this.addChild( new Line( 0, radius, 0, 2 * radius, pathOptions ) );
   }
 }
 
 moleculePolarity.register( 'PolarityIndicator', PolarityIndicator );
-export default PolarityIndicator;
