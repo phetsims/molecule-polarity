@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representation of a triatomic molecule.
  * Children position themselves in global coordinates, so this node's position should be (0,0).
