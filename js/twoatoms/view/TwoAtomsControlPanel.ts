@@ -1,36 +1,32 @@
 // Copyright 2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * TwoAtomsControlPanel is the control panel in the 'Two Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
-import MPControlPanel from '../../common/view/MPControlPanel.js';
+import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
 import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsViewControls from './TwoAtomsViewControls.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
-class TwoAtomsControlPanel extends MPControlPanel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {TwoAtomsViewProperties} viewProperties
-   * @param {Property.<boolean>} eFieldEnabledProperty
-   * @param {Object} [options]
-   */
-  constructor( viewProperties, eFieldEnabledProperty, options ) {
-    assert && assert( viewProperties instanceof TwoAtomsViewProperties, 'invalid viewProperties' );
-    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
+export type TwoAtomsControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class TwoAtomsControlPanel extends MPControlPanel {
+
+  public constructor( viewProperties: TwoAtomsViewProperties,
+                      eFieldEnabledProperty: Property<boolean>,
+                      providedOptions: TwoAtomsControlPanelOptions ) {
+
+    const options = providedOptions;
 
     const subPanels = [
       new TwoAtomsViewControls( viewProperties, {
@@ -49,4 +45,3 @@ class TwoAtomsControlPanel extends MPControlPanel {
 }
 
 moleculePolarity.register( 'TwoAtomsControlPanel', TwoAtomsControlPanel );
-export default TwoAtomsControlPanel;

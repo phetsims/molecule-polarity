@@ -1,14 +1,13 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * 'View' controls for the 'Two Atoms' screen.
+ * TwoAtomsViewControls is the subpanel labeled 'View' in the 'Two Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
@@ -17,21 +16,24 @@ import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import BondCharacterCheckbox from './BondCharacterCheckbox.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
-class TwoAtomsViewControls extends VBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {TwoAtomsViewProperties} viewProperties
-   * @param {Object} [options]
-   */
-  constructor( viewProperties, options ) {
-    assert && assert( viewProperties instanceof TwoAtomsViewProperties, 'invalid viewProperties' );
+export type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
-    options = merge( {
+export default class TwoAtomsViewControls extends VBox {
+
+  public constructor( viewProperties: TwoAtomsViewProperties, providedOptions: TwoAtomsViewControlsOptions ) {
+
+    const options = optionize<TwoAtomsViewControlsOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       tandem: Tandem.REQUIRED
-    }, options );
+    }, providedOptions );
 
     // title
     const titleText = new Text( moleculePolarityStrings.viewStringProperty, merge( {
@@ -51,7 +53,6 @@ class TwoAtomsViewControls extends VBox {
       tandem: options.tandem.createTandem( 'bondCharacterCheckbox' )
     } );
 
-    assert && assert( !options.children, 'NAME sets children' );
     options.children = [
       titleText,
       bondDipoleCheckbox,
@@ -64,4 +65,3 @@ class TwoAtomsViewControls extends VBox {
 }
 
 moleculePolarity.register( 'TwoAtomsViewControls', TwoAtomsViewControls );
-export default TwoAtomsViewControls;
