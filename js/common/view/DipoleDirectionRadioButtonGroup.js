@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -13,6 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import DipoleDirection from '../model/DipoleDirection.js';
@@ -21,7 +23,8 @@ import MPConstants from '../MPConstants.js';
 // constants
 const TEXT_OPTIONS = {
   font: new PhetFont( 24 ),
-  maxWidth: 500
+  maxWidth: 500,
+  phetioVisiblePropertyInstrumented: false
 };
 
 class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
@@ -39,33 +42,52 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
     }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
 
     // d+ -> d-
-    //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
-    const positiveToNegativeString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
-      from: moleculePolarityStrings.deltaPlus,
-      to: moleculePolarityStrings.deltaMinus
-    } );
+    //TODO https://github.com/phetsims/molecule-polarity/issues/140 not showing up in Studio, maybe because dialog is in a PhetioCapsule?
+    const positiveToNegativeStringProperty = new DerivedProperty( [
+      moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
+      moleculePolarityStrings.deltaPlusStringProperty,
+      moleculePolarityStrings.deltaMinusStringProperty
+    ], ( patternString, deltaPlusString, deltaMinusString ) =>
+      StringUtils.fillIn( patternString, {
+        from: deltaPlusString,
+        to: deltaMinusString
+      }, {
+        tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
+        phetioValueType: StringIO
+      } ) );
 
     // d- -> d+
-    //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
-    const negativeToPositiveString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
-      from: moleculePolarityStrings.deltaMinus,
-      to: moleculePolarityStrings.deltaPlus
-    } );
+    //TODO https://github.com/phetsims/molecule-polarity/issues/140 not showing up in Studio, maybe because dialog is in a PhetioCapsule?
+    const negativeToPositiveStringProperty = new DerivedProperty( [
+      moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
+      moleculePolarityStrings.deltaPlusStringProperty,
+      moleculePolarityStrings.deltaMinusStringProperty
+    ], ( patternString, deltaPlusString, deltaMinusString ) =>
+      StringUtils.fillIn( patternString, {
+        from: deltaMinusString,
+        to: deltaPlusString
+      }, {
+        tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
+        phetioValueType: StringIO
+      } ) );
+
+    const positiveToNegativeRadioButtonTandemName = 'positiveToNegativeRadioButton';
+    const negativeToPositiveRadioButtonTandem = 'negativeToPositiveRadioButton';
 
     const radioButtonGroupItems = [
       {
         value: DipoleDirection.POSITIVE_TO_NEGATIVE,
-        node: new Text( positiveToNegativeString, merge( {
-          tandem: options.tandem.createTandem( 'positiveToNegativeText' )
+        node: new Text( positiveToNegativeStringProperty, merge( {
+          tandem: options.tandem.createTandem( positiveToNegativeRadioButtonTandemName ).createTandem( 'positiveToNegativeText' )
         }, TEXT_OPTIONS ) ),
-        tandemName: 'positiveToNegativeRadioButton'
+        tandemName: positiveToNegativeRadioButtonTandemName
       },
       {
         value: DipoleDirection.NEGATIVE_TO_POSITIVE,
-        node: new Text( negativeToPositiveString, merge( {
-          tandem: options.tandem.createTandem( 'negativeToPositiveText' )
+        node: new Text( negativeToPositiveStringProperty, merge( {
+          tandem: options.tandem.createTandem( negativeToPositiveRadioButtonTandem ).createTandem( 'negativeToPositiveText' )
         }, TEXT_OPTIONS ) ),
-        tandemName: 'negativeToPositiveRadioButton'
+        tandemName: negativeToPositiveRadioButtonTandem
       }
     ];
 
@@ -73,6 +95,8 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
 
     // @private
     this.disposeDipoleDirectionRadioButtonGroup = () => {
+      positiveToNegativeStringProperty.dispose();
+      negativeToPositiveStringProperty.dispose();
       radioButtonGroupItems.forEach( item => item.node.dispose() );
     };
   }

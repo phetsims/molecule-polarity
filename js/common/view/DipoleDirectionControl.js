@@ -33,10 +33,10 @@ class DipoleDirectionControl extends VBox {
     }, options );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.dipoleDirectionStringProperty, {
+    const dipoleDirectionText = new Text( moleculePolarityStrings.dipoleDirectionStringProperty, {
       font: new PhetFont( 18 ),
       maxWidth: 500,
-      tandem: options.tandem.createTandem( 'titleText' ),
+      tandem: options.tandem.createTandem( 'dipoleDirectionText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
@@ -46,13 +46,13 @@ class DipoleDirectionControl extends VBox {
     } );
 
     assert && assert( !options.children, 'DipoleDirectionControl sets children' );
-    options.children = [ titleText, radioButtonGroup ];
+    options.children = [ dipoleDirectionText, radioButtonGroup ];
 
     super( options );
 
     // @private
     this.disposeDipoleDirectionControl = () => {
-      titleText.dispose();
+      dipoleDirectionText.dispose();
       radioButtonGroup.dispose();
     };
   }
