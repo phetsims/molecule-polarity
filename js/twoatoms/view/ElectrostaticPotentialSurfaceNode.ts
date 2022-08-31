@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * 2D surface that represents electrostatic potential for a diatomic molecule.
  * Electron density uses a 3-color gradient, so we use 2 Path nodes that meet in the middle.
@@ -16,24 +15,21 @@ import { LinearGradient } from '../../../../scenery/js/imports.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import SurfaceNode from './SurfaceNode.js';
+import SurfaceNode, { SurfaceNodeOptions } from './SurfaceNode.js';
+import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
-class ElectrostaticPotentialSurfaceNode extends SurfaceNode {
+export type ElectrostaticPotentialSurfaceNodeOptions = SurfaceNodeOptions;
 
-  /**
-   * @param {Molecule} molecule
-   * @param {Object} [options]
-   */
-  constructor( molecule, options ) {
-    super( molecule, MPColors.RWB_GRADIENT, options );
+export default class ElectrostaticPotentialSurfaceNode extends SurfaceNode {
+
+  public constructor( molecule: DiatomicMolecule, providedOptions: ElectrostaticPotentialSurfaceNodeOptions ) {
+    super( molecule, MPColors.RWB_GRADIENT, providedOptions );
   }
 
   /**
-   * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
-   * @private
-   * @override
+   * Updates the surface fill.
    */
-  updateFill() {
+  protected override updateFill(): void {
     assert && assert( this.colors.length === 3, 'this implementation only works for 3 colors' );
 
     // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
@@ -70,4 +66,3 @@ class ElectrostaticPotentialSurfaceNode extends SurfaceNode {
 }
 
 moleculePolarity.register( 'ElectrostaticPotentialSurfaceNode', ElectrostaticPotentialSurfaceNode );
-export default ElectrostaticPotentialSurfaceNode;

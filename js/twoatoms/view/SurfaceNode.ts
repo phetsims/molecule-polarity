@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SurfaceNode is the base class for 2D representations of an isosurface.
  * The 2D 'look' is similar to the corresponding Jmol 3D isosurfaces, see http://jmol.sourceforge.net/docs/surface/.
@@ -10,38 +9,40 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Node, Path } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import Molecule from '../../common/model/Molecule.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
+import Range from '../../../../dot/js/Range.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
 // constants
 const DIAMETER_SCALE = 2.25; // multiply atom diameters by this scale when computing surface size
 
-class SurfaceNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Molecule} molecule
-   * @param {ColorDef[]} colors
-   * @param {Object} [options]
-   * @abstract
-   */
-  constructor( molecule, colors, options ) {
-    assert && assert( molecule instanceof Molecule, 'molecule must be a DiatomicMolecule' );
+export type SurfaceNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
+export default abstract class SurfaceNode extends Node {
+
+  protected readonly molecule: DiatomicMolecule;
+  protected readonly electronegativityRange: Range;
+  protected readonly colors: TColor[];
+  protected readonly path: Path;
+
+  protected constructor( molecule: DiatomicMolecule, colors: TColor[], providedOptions: SurfaceNodeOptions ) {
     assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
-    assert && assert( Array.isArray( colors ), 'invalid colors' );
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
+    const options = optionize<SurfaceNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       phetioReadOnly: true
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @private
     this.molecule = molecule;
     this.electronegativityRange = MPConstants.ELECTRONEGATIVITY_RANGE;
     this.colors = colors;
@@ -78,24 +79,22 @@ class SurfaceNode extends Node {
     } );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Gets the surface width.
-   * @returns {number}
-   * @protected
    */
-  getSurfaceWidth() {
+  protected getSurfaceWidth(): number {
     return this.molecule.bond.getLength() + ( DIAMETER_SCALE * this.molecule.atomA.diameter / 2 ) + ( DIAMETER_SCALE * this.molecule.atomB.diameter / 2 );
   }
 
   /**
    * Updates the surface fill.
-   * @private
-   * @abstract
    */
-  updateFill() {
-    throw new Error( 'must be implemented by subtype' );
-  }
+  protected abstract updateFill(): void;
 }
 
 moleculePolarity.register( 'SurfaceNode', SurfaceNode );
-export default SurfaceNode;

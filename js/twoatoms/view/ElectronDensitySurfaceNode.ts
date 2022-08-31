@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * 2D surface that represents electron density for a diatomic molecule.
  * Electron density uses a 2-color gradient, so we can use a single PPath.
@@ -16,24 +15,21 @@ import { LinearGradient } from '../../../../scenery/js/imports.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import SurfaceNode from './SurfaceNode.js';
+import SurfaceNode, { SurfaceNodeOptions } from './SurfaceNode.js';
+import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
-class ElectronDensitySurfaceNode extends SurfaceNode {
+export type ElectronDensitySurfaceNodeOptions = SurfaceNodeOptions;
 
-  /**
-   * @param {Molecule} molecule
-   * @param {Object} [options]
-   */
-  constructor( molecule, options ) {
-    super( molecule, MPColors.BW_GRADIENT, options );
+export default class ElectronDensitySurfaceNode extends SurfaceNode {
+
+  public constructor( molecule: DiatomicMolecule, providedOptions: ElectronDensitySurfaceNodeOptions ) {
+    super( molecule, MPColors.BW_GRADIENT, providedOptions );
   }
 
   /**
    * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
-   * @private
-   * @override
    */
-  updateFill() {
+  protected override updateFill(): void {
     assert && assert( this.colors.length === 2, 'this implementation only works for 2 colors' );
 
     // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
@@ -71,4 +67,3 @@ class ElectronDensitySurfaceNode extends SurfaceNode {
 }
 
 moleculePolarity.register( 'ElectronDensitySurfaceNode', ElectronDensitySurfaceNode );
-export default ElectronDensitySurfaceNode;
