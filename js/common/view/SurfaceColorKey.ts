@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Key for a surface's color scheme. This legend is a rectangular box with a gradient fill that matches the surface
  * in the Molecule. Each label is a unit for a color.
@@ -12,38 +11,46 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { LinearGradient, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
+import { Font, LinearGradient, Node, NodeOptions, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
-class SurfaceColorKey extends Node {
+type SelfOptions = {
+  size?: Dimension2;
+  titleVisible?: boolean;
+  titleFont?: Font;
+  rangeFont?: Font;
+  xMargin?: number;
+  ySpacing?: number;
+};
 
-  /**
-   * @param {ColorDef[]} colors colors used for the gradient, in left-to-right order
-   * @param {TReadOnlyProperty<string>} titleStringProperty
-   * @param {TReadOnlyProperty<string>} leftLabelStringProperty
-   * @param {TReadOnlyProperty<string>} rightLabelStringProperty
-   * @param {Object} [options]
-   */
-  constructor( colors, titleStringProperty, leftLabelStringProperty, rightLabelStringProperty, options ) {
-    assert && assert( Array.isArray( colors ), 'invalid colors' );
-    assert && assert( titleStringProperty instanceof ReadOnlyProperty );
-    assert && assert( leftLabelStringProperty instanceof ReadOnlyProperty );
-    assert && assert( rightLabelStringProperty instanceof ReadOnlyProperty );
+export type SurfaceColorKeyOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    options = merge( {
+export default class SurfaceColorKey extends Node {
+
+  public constructor( colors: TColor[],
+                      titleStringProperty: TReadOnlyProperty<string>,
+                      leftLabelStringProperty: TReadOnlyProperty<string>,
+                      rightLabelStringProperty: TReadOnlyProperty<string>,
+                      providedOptions: SurfaceColorKeyOptions ) {
+
+    const options = optionize<SurfaceColorKeyOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       size: new Dimension2( 420, 20 ),
       titleVisible: true,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       rangeFont: new PhetFont( 16 ),
       xMargin: 0,
       ySpacing: 2,
-      tandem: Tandem.REQUIRED,
+
+      // NodeOptions
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     super();
 
@@ -103,40 +110,27 @@ class SurfaceColorKey extends Node {
 
   /**
    * Creates the color key for black-&-white gradient.
-   * @param options
-   * @returns {SurfaceColorKey}
-   * @public
-   * @static
    */
-  static createElectronDensityColorKey( options ) {
+  public static createElectronDensityColorKey( options: SurfaceColorKeyOptions ): SurfaceColorKey {
     return new SurfaceColorKey( MPColors.BW_GRADIENT, moleculePolarityStrings.electronDensityStringProperty,
       moleculePolarityStrings.lessStringProperty, moleculePolarityStrings.moreStringProperty, options );
   }
 
   /**
-   * Creates the color key for red-white-blue gradient.
-   * @param options
-   * @returns {SurfaceColorKey}
-   * @public
-   * @static
+   * Creates the color key for RWB (red-white-blue) gradient.
    */
-  static createElectrostaticPotentialRWBColorKey( options ) {
+  public static createElectrostaticPotentialRWBColorKey( options: SurfaceColorKeyOptions ): SurfaceColorKey {
     return new SurfaceColorKey( MPColors.RWB_GRADIENT, moleculePolarityStrings.electrostaticPotentialStringProperty,
       moleculePolarityStrings.positiveStringProperty, moleculePolarityStrings.negativeStringProperty, options );
   }
 
   /**
    * Creates the color key for ROYGB gradient.
-   * @param options
-   * @returns {SurfaceColorKey}
-   * @public
-   * @static
    */
-  static createElectrostaticPotentialROYGBColorKey( options ) {
+  public static createElectrostaticPotentialROYGBColorKey( options: SurfaceColorKeyOptions ): SurfaceColorKey {
     return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, moleculePolarityStrings.electrostaticPotentialStringProperty,
       moleculePolarityStrings.positiveStringProperty, moleculePolarityStrings.negativeStringProperty, options );
   }
 }
 
 moleculePolarity.register( 'SurfaceColorKey', SurfaceColorKey );
-export default SurfaceColorKey;
