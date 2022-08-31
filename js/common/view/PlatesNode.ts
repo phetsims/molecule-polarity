@@ -7,54 +7,45 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { HBox, HBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import PlateNode, { PlateNodeOptions } from './PlateNode.js';
 
 type SelfOptions = {
-  spacing?: number; // horizontal spacing between the 2 plates
   plateOptions?: PlateNodeOptions;
 };
 
 export type PlatesNodeOptions = SelfOptions;
 
-export default class PlatesNode extends Node {
+export default class PlatesNode extends HBox {
 
   public readonly plateHeight: number; // height of the plates, for layout
 
   public constructor( eFieldEnabledProperty: Property<boolean>, providedOptions: PlatesNodeOptions ) {
 
-    const options = optionize<PlatesNodeOptions, SelfOptions, NodeOptions>()( {
-      spacing: 500,
-      plateOptions: {
-        plateWidth: 50,
-        plateHeight: 430,
-        plateThickness: 5,
-        platePerspectiveYOffset: 35
-      }
+    const options = optionize<PlatesNodeOptions, StrictOmit<SelfOptions, 'plateOptions'>, HBoxOptions>()( {
+
+      // HBoxOptions
+      spacing: 500
     }, providedOptions );
 
-    assert && assert( !options.visibleProperty, 'PlateNode sets visibleProperty' );
     options.visibleProperty = eFieldEnabledProperty;
 
-    const negativePlateNode = new PlateNode( 'negative', eFieldEnabledProperty, merge( {
+    const negativePlateNode = new PlateNode( 'negative', combineOptions<PlateNodeOptions>( {
       perspective: 'left'
     }, options.plateOptions ) );
 
-    const positivePlateNode = new PlateNode( 'positive', eFieldEnabledProperty, merge( {
-      perspective: 'right',
-      left: negativePlateNode.right + options.spacing,
-      bottom: negativePlateNode.bottom
+    const positivePlateNode = new PlateNode( 'positive', combineOptions<PlateNodeOptions>( {
+      perspective: 'right'
     }, options.plateOptions ) );
 
     options.children = [ negativePlateNode, positivePlateNode ];
 
     super( options );
 
-    assert && assert( options.plateOptions?.plateHeight );
-    this.plateHeight = options.plateOptions.plateHeight!;
+    this.plateHeight = negativePlateNode.plateHeight;
   }
 
   public override dispose(): void {

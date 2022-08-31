@@ -121,7 +121,7 @@ class TwoAtomsScreenView extends ScreenView {
     const moleculeY = model.molecule.position.y;
 
     platesNode.centerX = moleculeX;
-    platesNode.y = moleculeY - ( platesNode.plateHeight / 2 );
+    platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
 
     // centered below molecule
     electronegativityPanels.centerX = moleculeX;
@@ -137,7 +137,7 @@ class TwoAtomsScreenView extends ScreenView {
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 70;
-    controlPanel.top = platesNode.y;
+    controlPanel.top = platesNode.bottom - platesNode.plateHeight;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;

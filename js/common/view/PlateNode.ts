@@ -9,7 +9,6 @@
 import PolarityIndicator from './PolarityIndicator.js';
 import MPColors from '../MPColors.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import Property from '../../../../axon/js/Property.js';
 import { Polarity } from '../model/Polarity.js';
 import { Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -29,7 +28,9 @@ export type PlateNodeOptions = SelfOptions;
 
 export default class PlateNode extends Node {
 
-  public constructor( polarity: Polarity, eFieldEnabledProperty: Property<boolean>, providedOptions?: PlateNodeOptions ) {
+  public readonly plateHeight: number;
+
+  public constructor( polarity: Polarity, providedOptions?: PlateNodeOptions ) {
 
     const options = optionize<PlateNodeOptions, SelfOptions, NodeOptions>()( {
       perspective: 'left',
@@ -82,10 +83,7 @@ export default class PlateNode extends Node {
 
     super( options );
 
-    // show/hide when the field is enabled/disabled...
-    eFieldEnabledProperty.link( enabled => {
-      this.visible = enabled;
-    } );
+    this.plateHeight = options.plateHeight;
   }
 
   public override dispose(): void {
