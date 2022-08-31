@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * 2D surface that represents electrostatic potential for a diatomic molecule.
  * Electron density uses a 3-color gradient, so we use 2 Path nodes that meet in the middle.

@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * 2D surface that represents electron density for a diatomic molecule.
  * Electron density uses a 2-color gradient, so we can use a single PPath.
