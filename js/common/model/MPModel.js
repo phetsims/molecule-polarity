@@ -1,7 +1,8 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
- * Abstract base type for 2D models in this sim.
+ * MPModel is the abstract base type for 2D models in this sim.
  * Every 2D model has an E-field and a molecule.
  * If the E-field is enabled, the molecule rotates until its molecular dipole is aligned with the E-field.
  *
@@ -15,7 +16,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import MPPreferences from './MPPreferences.js';
-import DipoleDirection from './DipoleDirection.js';
 import normalizeAngle from './normalizeAngle.js';
 
 // constants
@@ -78,7 +78,7 @@ class MPModel {
     // This algorithm is for a dipole that points from positive to negative charge, and is therefore
     // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
     // is from negative to positive charge, so rotate the dipole 180 degrees. See issue #5 and #56.
-    if ( MPPreferences.dipoleDirectionProperty.value === DipoleDirection.NEGATIVE_TO_POSITIVE ) {
+    if ( MPPreferences.dipoleDirectionProperty.value === 'negativeToPositive' ) {
       dipole = dipole.rotated( Math.PI );
     }
 
