@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Indicator of polarity (positive or negative) used on E-field plates.
  * Origin at center of cross hairs.
