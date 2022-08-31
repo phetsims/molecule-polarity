@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model of a make-believe triatomic (3 atoms) molecule with a very specific topology.
  * Variables are named based on the English labels applied to the atoms.

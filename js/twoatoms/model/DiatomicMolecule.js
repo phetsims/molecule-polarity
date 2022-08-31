@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model of a make-believe diatomic (2 atoms) molecule.
  * Variables are named based on the English labels applied to the atoms.
