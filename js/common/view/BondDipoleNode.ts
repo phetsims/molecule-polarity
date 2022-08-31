@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation of a bond dipole.
  * Controls its own position, so clients should not attempt to position this node.
@@ -8,27 +7,29 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
-import DipoleNode from './DipoleNode.js';
+import DipoleNode, { DipoleNodeOptions } from './DipoleNode.js';
 
 // constants
 const PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond
 
+type SelfOptions = EmptySelfOptions;
+
+export type BondDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
+
 class BondDipoleNode extends DipoleNode {
 
-  /**
-   * @param {Bond} bond
-   * @param {Object} [options]
-   */
-  constructor( bond, options ) {
-    assert && assert( bond instanceof Bond, 'invalid bond' );
+  public constructor( bond: Bond, providedOptions?: BondDipoleNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<BondDipoleNodeOptions, SelfOptions, DipoleNodeOptions>()( {
+
+      // DipoleNodeOptions
       fill: MPColors.BOND_DIPOLE
-    }, options );
+    }, providedOptions );
 
     super( bond.dipoleProperty, options );
 
@@ -54,15 +55,16 @@ class BondDipoleNode extends DipoleNode {
     } );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Creates an icon, for use in control panels.
-   * @param {Object} [options] - DipoleNode options
-   * @returns {Node}
-   * @public
-   * @static
    */
-  static createIcon( options ) {
-    return DipoleNode.createIcon( merge( {
+  public static override createIcon( options: DipoleNodeOptions ): Node {
+    return DipoleNode.createIcon( combineOptions<DipoleNodeOptions>( {
       fill: MPColors.BOND_DIPOLE
     }, options ) );
   }

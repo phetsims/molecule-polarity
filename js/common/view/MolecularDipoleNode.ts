@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation of a molecular dipole.
  * Controls its own position in global coordinates, so clients should not attempt to position this node.
@@ -13,23 +12,26 @@ import merge from '../../../../phet-core/js/merge.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import MPColors from '../MPColors.js';
-import DipoleNode from './DipoleNode.js';
+import DipoleNode, { DipoleNodeOptions } from './DipoleNode.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const OFFSET = 55; // offset in the direction that the dipole points
 
-class MolecularDipoleNode extends DipoleNode {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Molecule} molecule
-   * @param {Object} [options]
-   */
-  constructor( molecule, options ) {
-    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
+export type MolecularDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
 
-    options = merge( {
+export default class MolecularDipoleNode extends DipoleNode {
+
+  public constructor( molecule: Molecule, providedOptions?: MolecularDipoleNodeOptions ) {
+
+    const options = optionize<MolecularDipoleNodeOptions, SelfOptions, DipoleNodeOptions>()( {
+
+      // DipoleNodeOptions
       fill: MPColors.MOLECULAR_DIPOLE
-    }, options );
+    }, providedOptions );
 
     super( molecule.dipoleProperty, options );
 
@@ -44,14 +46,15 @@ class MolecularDipoleNode extends DipoleNode {
     } );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Creates an icon, for use in control panels.
-   * @param {Object} [options] - DipoleNode options
-   * @returns {Node}
-   * @public
-   * @static
    */
-  static createIcon( options ) {
+  public static override createIcon( options: DipoleNodeOptions ): Node {
     return DipoleNode.createIcon( merge( {
       fill: MPColors.MOLECULAR_DIPOLE
     }, options ) );
@@ -59,4 +62,3 @@ class MolecularDipoleNode extends DipoleNode {
 }
 
 moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );
-export default MolecularDipoleNode;
