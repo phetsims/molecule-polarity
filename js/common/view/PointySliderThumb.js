@@ -1,5 +1,6 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Slider thumb that points up, rounded corners, origin at top center.
  * See https://github.com/phetsims/molecule-polarity/issues/39
