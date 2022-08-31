@@ -16,6 +16,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 
 class RealMolecule extends PhetioObject {
 
+  //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
   /**
    * @param {string} symbol - chemical symbol of the molecule
    * @param {string} fullName - full name of the molecule

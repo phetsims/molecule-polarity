@@ -57,6 +57,7 @@ class PartialChargeNode extends Node {
       if ( partialChargeVisible ) {
 
         // d+ or d-
+        //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
         textNode.text = ( partialCharge > 0 ) ? moleculePolarityStrings.deltaPlus : moleculePolarityStrings.deltaMinus;
 
         // size proportional to bond dipole magnitude

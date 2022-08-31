@@ -117,6 +117,8 @@ class RealMoleculeViewer extends Node {
 
     // unlink not needed
     moleculeProperty.link( molecule => {
+
+      //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
       moleculeText.text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
         symbol: molecule.symbol,
         name: molecule.fullName

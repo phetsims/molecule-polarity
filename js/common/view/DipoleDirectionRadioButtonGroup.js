@@ -39,12 +39,14 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
     }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
 
     // d+ -> d-
+    //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
     const positiveToNegativeString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
       from: moleculePolarityStrings.deltaPlus,
       to: moleculePolarityStrings.deltaMinus
     } );
 
     // d- -> d+
+    //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
     const negativeToPositiveString = StringUtils.fillIn( moleculePolarityStrings.pattern.dipoleDirection, {
       from: moleculePolarityStrings.deltaMinus,
       to: moleculePolarityStrings.deltaPlus

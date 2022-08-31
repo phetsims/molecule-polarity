@@ -63,6 +63,7 @@ class RealMoleculesComboBox extends ComboBox {
 function createItem( molecule ) {
   assert && assert( molecule instanceof RealMolecule, 'invalid molecule' );
 
+  //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
   const text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
     symbol: molecule.symbol,
     name: molecule.fullName
