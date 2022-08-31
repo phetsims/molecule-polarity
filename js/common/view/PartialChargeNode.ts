@@ -87,6 +87,11 @@ export default class PartialChargeNode extends Node {
     this.visibleProperty.link( visible => visible && this.update() );
   }
 
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
   /**
    * Partial charge for an atom that participates in a single bond.
    * It's partial charge is the opposite of the charge of the other atom in the bond.

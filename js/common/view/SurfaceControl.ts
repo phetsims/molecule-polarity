@@ -1,6 +1,5 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Control panel for the molecule's surface.
  *
@@ -8,26 +7,33 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
+import { SurfaceType } from '../model/SurfaceType.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 
-class SurfaceControl extends VBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {StringEnumerationProperty.<SurfaceType>} surfaceTypeProperty
-   * @param {Object} [options]
-   */
-  constructor( surfaceTypeProperty, options ) {
+export type SurfaceControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
-    options = merge( {
+export default class SurfaceControl extends VBox {
+
+  public constructor( surfaceTypeProperty: StringEnumerationProperty<SurfaceType>,
+                      providedOptions: SurfaceControlOptions ) {
+
+    const options = optionize<SurfaceControlOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       tandem: Tandem.REQUIRED
-    }, options );
+    }, providedOptions );
 
     // title
     const titleText = new Text( moleculePolarityStrings.surfaceStringProperty, merge( {
@@ -40,12 +46,15 @@ class SurfaceControl extends VBox {
       tandem: options.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    assert && assert( !options.children, 'SurfaceControl sets children' );
     options.children = [ titleText, radioButtonGroup ];
 
     super( options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'SurfaceControl', SurfaceControl );
-export default SurfaceControl;

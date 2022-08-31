@@ -36,6 +36,11 @@ export default class PolarityIndicator extends Node {
     // vertical connecting bar
     this.addChild( new Line( 0, radius, 0, 2 * radius, pathOptions ) );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'PolarityIndicator', PolarityIndicator );
