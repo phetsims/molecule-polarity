@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representations of partial charge, a delta symbol followed by either + or -.
  * Controls its own position in global coordinates, so clients should not attempt to position it.
