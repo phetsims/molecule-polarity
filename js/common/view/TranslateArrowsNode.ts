@@ -1,41 +1,43 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * A pair of arrows that are placed around an atom to indicate that the atom can be translated.
- * Shapes are created in global coordinates, so this node's position should be (0,0).
+ * TranslateArrowsNode is a pair of arrows that are placed around an atom to indicate that the atom can be translated.
+ * Shapes are created in global coordinates, so this Node's position should be (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Transform3 from '../../../../dot/js/Transform3.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
-import { Node, Path } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 
-class TranslateArrowsNode extends Node {
+type SelfOptions = {
+  length?: number;
+};
 
-  /**
-   * @param {Molecule} molecule
-   * @param {Atom} atom
-   * @param {Object} [options]
-   */
-  constructor( molecule, atom, options ) {
-    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
-    assert && assert( atom instanceof Atom, 'invalid atom' );
+export type TranslateArrowsNodeOptions = SelfOptions &
+  PickRequired<NodeOptions, 'tandem'> &
+  PickOptional<NodeOptions, 'pickable'>;
 
-    options = merge( {
+export default class TranslateArrowsNode extends Node {
+
+  public constructor( molecule: Molecule, atom: Atom, providedOptions: TranslateArrowsNodeOptions ) {
+
+    const options = optionize<TranslateArrowsNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       length: 25, // relatively short, so we don't need curved arrows
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
     const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
@@ -47,7 +49,6 @@ class TranslateArrowsNode extends Node {
     const leftArrow = new ArrowShape( -( radius + spacing ), 0, -( radius + spacing + options.length ), 0, arrowShapeOptions );
     const rightArrow = new ArrowShape( ( radius + spacing ), 0, ( radius + spacing + options.length ), 0, arrowShapeOptions );
 
-    assert && assert( !options.children, 'decoration not supported' );
     options.children = [ leftArrowNode, rightArrowNode ];
 
     // unlink not needed
@@ -66,4 +67,3 @@ class TranslateArrowsNode extends Node {
 }
 
 moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );
-export default TranslateArrowsNode;
