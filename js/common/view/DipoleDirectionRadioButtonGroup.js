@@ -42,7 +42,6 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
     }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
 
     // d+ -> d-
-    //TODO https://github.com/phetsims/molecule-polarity/issues/144 not showing up in Studio
     const positiveToNegativeStringProperty = new DerivedProperty( [
       moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
       moleculePolarityStrings.deltaPlusStringProperty,
@@ -51,13 +50,12 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
       StringUtils.fillIn( patternString, {
         from: deltaPlusString,
         to: deltaMinusString
-      }, {
-        tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
-        phetioValueType: StringIO
-      } ) );
+      } ), {
+      tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
+      phetioValueType: StringIO
+    } );
 
     // d- -> d+
-    //TODO https://github.com/phetsims/molecule-polarity/issues/144 not showing up in Studio
     const negativeToPositiveStringProperty = new DerivedProperty( [
       moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
       moleculePolarityStrings.deltaPlusStringProperty,
@@ -66,10 +64,10 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
       StringUtils.fillIn( patternString, {
         from: deltaMinusString,
         to: deltaPlusString
-      }, {
-        tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
-        phetioValueType: StringIO
-      } ) );
+      } ), {
+      tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
+      phetioValueType: StringIO
+    } );
 
     const positiveToNegativeRadioButtonTandemName = 'positiveToNegativeRadioButton';
     const negativeToPositiveRadioButtonTandem = 'negativeToPositiveRadioButton';
