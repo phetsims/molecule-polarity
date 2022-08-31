@@ -1,17 +1,17 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Control for the E-field.
+ * EFieldControl is the control for turning E-field on/off.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -21,20 +21,20 @@ const SWITCH_LABEL_OPTIONS = merge( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
   maxWidth: 80  // i18n, set empirically
 } );
 
-class EFieldControl extends VBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<boolean>} eFieldEnabledProperty
-   * @param {Object} [options]
-   */
-  constructor( eFieldEnabledProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
+export type EFieldControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
-    options = merge( {
+export default class EFieldControl extends VBox {
+
+  public constructor( eFieldEnabledProperty: Property<boolean>, providedOptions: EFieldControlOptions ) {
+
+    const options = optionize<EFieldControlOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
-    }, options );
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
+    }, providedOptions );
 
     // title
     const titleText = new Text( moleculePolarityStrings.electricFieldStringProperty, merge( {
@@ -54,7 +54,6 @@ class EFieldControl extends VBox {
         tandem: options.tandem.createTandem( 'onOffSwitch' )
       } );
 
-    assert && assert( !options.children, 'EFieldControl sets children' );
     options.children = [ titleText, onOffSwitch ];
 
     super( options );
@@ -62,4 +61,3 @@ class EFieldControl extends VBox {
 }
 
 moleculePolarity.register( 'EFieldControl', EFieldControl );
-export default EFieldControl;
