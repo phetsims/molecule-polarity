@@ -33,8 +33,8 @@ export default class BondDipolesCheckbox extends Checkbox {
     }, providedOptions );
 
     const stringProperty = options.singular ?
-                           moleculePolarityStrings.bondDipolesStringProperty :
-                           moleculePolarityStrings.bondDipoleStringProperty;
+                           moleculePolarityStrings.bondDipoleStringProperty :
+                           moleculePolarityStrings.bondDipolesStringProperty;
 
     const textNode = new Text( stringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'textNode' ),
