@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Abstract base type for visual representation of 2D dipoles.
  * The dipole is created at (0,0) with proper length and orientation, and the subtype is responsible

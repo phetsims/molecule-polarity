@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representation of a bond dipole.
  * Controls its own position, so clients should not attempt to position this node.
