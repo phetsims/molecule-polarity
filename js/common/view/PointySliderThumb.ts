@@ -1,33 +1,40 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Slider thumb that points up, rounded corners, origin at top center.
+ * PointySliderThumb is the thumb used for the Electronegativity sliders.
+ * It points up, has rounded corners, and origin at top center.
  * See https://github.com/phetsims/molecule-polarity/issues/39
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Path, PressListener } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Path, PathOptions, PressListener, TColor } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class PointySliderThumb extends Path {
+type SelfOptions = {
+  size?: Dimension2;
+  fillHighlighted?: TColor;
+};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type PointySliderThumbOptions = SelfOptions & PickRequired<PathOptions, 'tandem'>;
 
-    options = merge( {
+export default class PointySliderThumb extends Path {
+
+  public constructor( providedOptions: PointySliderThumbOptions ) {
+
+    const options = optionize<PointySliderThumbOptions, SelfOptions, PathOptions>()( {
+
+      // SelfOptions
       size: new Dimension2( 30, 35 ),
-      stroke: 'black',
-      lineWidth: 1,
-      fill: 'rgb( 50, 145, 184 )',
       fillHighlighted: 'rgb( 71, 207, 255 )',
-      tandem: Tandem.REQUIRED
-    }, options );
+
+      // PathOptions
+      fill: 'rgb( 50, 145, 184 )',
+      stroke: 'black',
+      lineWidth: 1
+    }, providedOptions );
 
     // To improve readability
     const width = options.size.width;
@@ -56,9 +63,10 @@ class PointySliderThumb extends Path {
 
     // Save the coordinates for the point above the left side arc, for use on the other side.
     const sideArcPoint = shape.getLastPoint();
+    assert && assert( sideArcPoint );
 
     shape.lineTo( 0, 0 )
-      .lineTo( -sideArcPoint.x, sideArcPoint.y )
+      .lineTo( -sideArcPoint!.x, sideArcPoint!.y )
       .arc( 0.5 * width - radius, 0.3 * height + heightOffset, radius, -angle, 0 )
       .close();
 
@@ -77,4 +85,3 @@ class PointySliderThumb extends Path {
 }
 
 moleculePolarity.register( 'PointySliderThumb', PointySliderThumb );
-export default PointySliderThumb;
