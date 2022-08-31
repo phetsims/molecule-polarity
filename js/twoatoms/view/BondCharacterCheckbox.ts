@@ -1,42 +1,38 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BondCharacterCheckbox is the checkbox for controlling visibility of the 'Bond Character' display.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, TextOptions } from '../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 
-class BondCharacterCheckbox extends Checkbox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<boolean>} bondCharacterVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( bondCharacterVisibleProperty, options ) {
-    assert && AssertUtils.assertPropertyOf( bondCharacterVisibleProperty, 'boolean' );
+export type BondCharacterCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class BondCharacterCheckbox extends Checkbox {
 
-    const labelText = new Text( moleculePolarityStrings.bondCharacterStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'labelText' ),
-      phetioVisiblePropertyInstrumented: false
-    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+  public constructor( bondCharacterVisibleProperty: Property<boolean>, providedOptions: BondCharacterCheckboxOptions ) {
+
+    const options = providedOptions;
+
+    const labelText = new Text( moleculePolarityStrings.bondCharacterStringProperty,
+      combineOptions<TextOptions>( {
+        tandem: options.tandem.createTandem( 'labelText' ),
+        phetioVisiblePropertyInstrumented: false
+      }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     super( bondCharacterVisibleProperty, labelText, options );
   }
 }
 
 moleculePolarity.register( 'BondCharacterCheckbox', BondCharacterCheckbox );
-export default BondCharacterCheckbox;
