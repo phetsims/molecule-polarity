@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representation of an atom.
  * Controls its own position, so clients should not attempt to position it.

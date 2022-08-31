@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representation of a bond between 2 atoms.
  * Intended to be rendered before the 2 atoms, so that the atoms cover the portion of the bond that overlaps the atoms.
