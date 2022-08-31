@@ -1,6 +1,5 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SurfaceColorRadioButtonGroup is the radio button group for choosing a color for the molecule surface.
  *
@@ -8,13 +7,16 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
+import { SurfaceColor } from '../model/SurfaceColor.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 // constants
 const COLOR_KEY_OPTIONS = {
@@ -26,18 +28,21 @@ const COLOR_KEY_OPTIONS = {
   tandem: Tandem.OPT_OUT
 };
 
-class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {StringEnumerationProperty.<SurfaceColor>} surfaceColorProperty
-   * @param {Object} [options]
-   */
-  constructor( surfaceColorProperty, options ) {
+export type SurfaceColorRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
 
-    options = merge( {
+export default class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceColor> {
+
+  public constructor( surfaceColorProperty: StringEnumerationProperty<SurfaceColor>,
+                      providedOptions: SurfaceColorRadioButtonGroupOptions ) {
+
+    const options = optionize<SurfaceColorRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+
+      // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
-    }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    }, providedOptions );
 
     const radioButtonGroupItems = [
       {
@@ -52,22 +57,9 @@ class SurfaceColorRadioButtonGroup extends AquaRadioButtonGroup {
       }
     ];
 
+    // @ts-ignore https://github.com/phetsims/molecule-polarity/issues/145
     super( surfaceColorProperty, radioButtonGroupItems, options );
-
-    this.disposeSurfaceColorRadioButtonGroup = () => {
-      radioButtonGroupItems.forEach( item => item.node.dispose() );
-    };
-  }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    this.disposeSurfaceColorRadioButtonGroup();
-    super.dispose();
   }
 }
 
 moleculePolarity.register( 'SurfaceColorRadioButtonGroup', SurfaceColorRadioButtonGroup );
-export default SurfaceColorRadioButtonGroup;

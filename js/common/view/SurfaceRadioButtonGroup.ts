@@ -1,63 +1,60 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SurfaceRadioButtonGroup is the radio button group for choosing a surface for the molecule.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, TextOptions } from '../../../../scenery/js/imports.js';
+import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-class SurfaceRadioButtonGroup extends AquaRadioButtonGroup {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {StringEnumerationProperty.<SurfaceType>} surfaceTypeProperty
-   * @param {Object} [options]
-   */
-  constructor( surfaceTypeProperty, options ) {
+export type SurfaceRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
 
-    options = merge( {
+export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceType> {
+
+  public constructor( surfaceTypeProperty: StringEnumerationProperty<SurfaceType>,
+                      providedOptions: SurfaceRadioButtonGroupOptions ) {
+
+    const options = optionize<SurfaceRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
-    }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    }, providedOptions );
 
     const radioButtonGroupItems = [
-      {
-        node: new Text( moleculePolarityStrings.noneStringProperty, merge( {
-          tandem: options.tandem.createTandem( 'noneText' ),
-          phetioVisiblePropertyInstrumented: false
-        }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
-        value: 'none',
-        tandemName: 'noneRadioButton'
-      },
-      {
-        value: 'electrostaticPotential',
-        node: new Text( moleculePolarityStrings.electrostaticPotentialStringProperty, merge( {
-          tandem: options.tandem.createTandem( 'electrostaticPotentialText' ),
-          phetioVisiblePropertyInstrumented: false
-        }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
-        tandemName: 'electrostaticPotentialRadioButton'
-      },
-      {
-        value: 'electronDensity',
-        node: new Text( moleculePolarityStrings.electronDensityStringProperty, merge( {
-          tandem: options.tandem.createTandem( 'electronDensityText' ),
-          phetioVisiblePropertyInstrumented: false
-        }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
-        tandemName: 'electronDensityRadioButton'
-      }
+      createItem( 'none', moleculePolarityStrings.noneStringProperty, 'noneRadioButton' ),
+      createItem( 'electrostaticPotential', moleculePolarityStrings.electrostaticPotentialStringProperty, 'electrostaticPotentialRadioButton' ),
+      createItem( 'electronDensity', moleculePolarityStrings.electronDensityStringProperty, 'electronDensityRadioButton' )
     ];
 
     super( surfaceTypeProperty, radioButtonGroupItems, options );
   }
 }
 
+// Creates an item for this radio-button group.
+function createItem( value: SurfaceType,
+                     labelStringProperty: TReadOnlyProperty<string>,
+                     tandemName: string ): AquaRadioButtonGroupItem<SurfaceType> {
+  return {
+    value: value,
+    createNode: ( tandem: Tandem ) => new Text( labelStringProperty, combineOptions<TextOptions>( {
+      tandem: tandem.createTandem( 'electronDensityText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
+    tandemName: tandemName
+  };
+}
+
 moleculePolarity.register( 'SurfaceRadioButtonGroup', SurfaceRadioButtonGroup );
-export default SurfaceRadioButtonGroup;

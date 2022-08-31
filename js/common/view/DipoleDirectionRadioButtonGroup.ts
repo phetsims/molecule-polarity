@@ -1,6 +1,5 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DipoleDirectionRadioButtonGroup is the radio button group for choosing dipole direction.
  *
@@ -8,36 +7,39 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import AquaRadioButtonGroup from '../../../../sun/js/AquaRadioButtonGroup.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
+import { DipoleDirection } from '../model/DipoleDirection.js';
+import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-// constants
-const TEXT_OPTIONS = {
-  font: new PhetFont( 24 ),
-  maxWidth: 500,
-  phetioVisiblePropertyInstrumented: false
-};
+type SelfOptions = EmptySelfOptions;
 
-class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
+export type DipoleDirectionRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
 
-  /**
-   * @param {StringEnumerationProperty.<DipoleDirection>} dipoleDirectionProperty
-   * @param {Object} [options]
-   */
-  constructor( dipoleDirectionProperty, options ) {
+export default class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioButtonGroup<DipoleDirection> {
 
-    options = merge( {
+  private readonly disposeDipoleDirectionRadioButtonGroup: () => void;
+
+  public constructor( dipoleDirectionProperty: StringEnumerationProperty<DipoleDirection>,
+                      providedOptions: DipoleDirectionRadioButtonGroupOptions ) {
+
+    const options = optionize<DipoleDirectionRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+
+      // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
-    }, MPConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    }, providedOptions );
 
     // d+ -> d-
     const positiveToNegativeStringProperty = new DerivedProperty( [
@@ -67,49 +69,39 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
       phetioValueType: StringIO
     } );
 
-    const positiveToNegativeRadioButtonTandemName = 'positiveToNegativeRadioButton';
-    const negativeToPositiveRadioButtonTandem = 'negativeToPositiveRadioButton';
-
     const radioButtonGroupItems = [
-      {
-        value: 'positiveToNegative',
-
-        //TODO //TODO https://github.com/phetsims/molecule-polarity/issues/144 no textProperty linked element in Studio
-        node: new Text( positiveToNegativeStringProperty, merge( {
-          tandem: options.tandem.createTandem( positiveToNegativeRadioButtonTandemName ).createTandem( 'labelText' )
-        }, TEXT_OPTIONS ) ),
-        tandemName: positiveToNegativeRadioButtonTandemName
-      },
-      {
-        value: 'negativeToPositive',
-
-        //TODO //TODO https://github.com/phetsims/molecule-polarity/issues/144 no textProperty linked element in Studio
-        node: new Text( negativeToPositiveStringProperty, merge( {
-          tandem: options.tandem.createTandem( negativeToPositiveRadioButtonTandem ).createTandem( 'labelText' )
-        }, TEXT_OPTIONS ) ),
-        tandemName: negativeToPositiveRadioButtonTandem
-      }
+      createItem( 'positiveToNegative', positiveToNegativeStringProperty, 'positiveToNegativeRadioButton' ),
+      createItem( 'negativeToPositive', negativeToPositiveStringProperty, 'negativeToPositiveRadioButton' )
     ];
 
     super( dipoleDirectionProperty, radioButtonGroupItems, options );
 
-    // @private
     this.disposeDipoleDirectionRadioButtonGroup = () => {
       positiveToNegativeStringProperty.dispose();
       negativeToPositiveStringProperty.dispose();
-      radioButtonGroupItems.forEach( item => item.node.dispose() );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeDipoleDirectionRadioButtonGroup();
     super.dispose();
   }
 }
 
+// Creates an item for this radio-button group.
+function createItem( value: DipoleDirection,
+                     labelStringProperty: TReadOnlyProperty<string>,
+                     tandemName: string ): AquaRadioButtonGroupItem<DipoleDirection> {
+  return {
+    value: value,
+    createNode: ( tandem: Tandem ) => new Text( labelStringProperty, {
+      font: new PhetFont( 24 ),
+      maxWidth: 500,
+      tandem: tandem.createTandem( 'labelText' ),
+      phetioVisiblePropertyInstrumented: false
+    } ),
+    tandemName: tandemName
+  };
+}
+
 moleculePolarity.register( 'DipoleDirectionRadioButtonGroup', DipoleDirectionRadioButtonGroup );
-export default DipoleDirectionRadioButtonGroup;
