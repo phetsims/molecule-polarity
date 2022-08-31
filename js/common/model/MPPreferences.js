@@ -1,5 +1,6 @@
 // Copyright 2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MPPreferences is the model for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.
