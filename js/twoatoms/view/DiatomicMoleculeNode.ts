@@ -1,6 +1,5 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation of a diatomic molecule.
  * Children position themselves in global coordinates, so this node's position should be (0,0).
@@ -8,10 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -25,22 +24,24 @@ import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
 import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
+type SelfOptions = EmptySelfOptions;
+
+export type DiatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 class DiatomicMoleculeNode extends Node {
 
-  /**
-   * @param {DiatomicMolecule} molecule
-   * @param {TwoAtomsViewProperties} viewProperties
-   * @param {Object} [options]
-   */
-  constructor( molecule, viewProperties, options ) {
-    assert && assert( molecule instanceof DiatomicMolecule, 'invalid molecule' );
-    assert && assert( viewProperties instanceof TwoAtomsViewProperties, 'invalid viewProperties' );
+  private readonly resetDiatomicMoleculeNode: () => void;
 
-    options = merge( {
+  public constructor( molecule: DiatomicMolecule,
+                      viewProperties: TwoAtomsViewProperties,
+                      providedOptions: DiatomicMoleculeNodeOptions ) {
+
+    const options = optionize<DiatomicMoleculeNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       cursor: 'pointer',
-      tandem: Tandem.REQUIRED,
       phetioInputEnabledPropertyInstrumented: true
-    }, options );
+    }, providedOptions );
 
     // atoms
     const atomANode = new AtomNode( molecule.atomA, {
@@ -94,7 +95,6 @@ class DiatomicMoleculeNode extends Node {
       visibleProperty: viewProperties.bondDipoleVisibleProperty
     } );
 
-    assert && assert( !options.children, 'DiatomicMoleculeNode sets children' );
     options.children = [
       electrostaticPotentialSurfaceNode, electronDensitySurfaceNode,
       bondNode, atomANode, atomBNode,
@@ -134,7 +134,6 @@ class DiatomicMoleculeNode extends Node {
     };
     molecule.angleProperty.lazyLink( hideArrows );
 
-    // unlink is not needed.
     this.inputEnabledProperty.link( () => updateHintArrows() );
 
     // Show molecule angle as an arrow that points from the center to the atom in the direction of angle.
@@ -147,15 +146,18 @@ class DiatomicMoleculeNode extends Node {
       molecule.angleProperty.link( angle => arrowNode.setRotation( angle ) );
     }
 
-    // @private
     this.resetDiatomicMoleculeNode = () => {
       moleculeHasChanged = false;
       updateHintArrows();
     };
   }
 
-  // @public
-  reset() {
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  public reset(): void {
     this.resetDiatomicMoleculeNode();
   }
 }

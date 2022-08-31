@@ -1,34 +1,36 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Visual representation of an atom.
- * Controls its own position, so clients should not attempt to position it.
+ * AtomNode is the visual representation of an atom.
+ * It controls its own position, so clients should not attempt to position it.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Atom from '../model/Atom.js';
 
-class AtomNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Atom} atom
-   * @param {Object} [options]
-   */
-  constructor( atom, options ) {
-    assert && assert( atom instanceof Atom, 'invalid atom' );
+export type AtomNodeOptions = SelfOptions &
+  PickRequired<NodeOptions, 'tandem'> &
+  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
+export default class AtomNode extends Node {
+
+  public constructor( atom: Atom, providedOptions: AtomNodeOptions ) {
+
+    const options = optionize<AtomNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     // atom
     const sphereNode = new ShadedSphereNode( atom.diameter, {
@@ -43,7 +45,6 @@ class AtomNode extends Node {
       phetioVisiblePropertyInstrumented: false
     } );
 
-    assert && assert( !options.children, 'AtomNode sets children' );
     options.children = [ sphereNode, labelText ];
 
     super( options );
@@ -56,7 +57,11 @@ class AtomNode extends Node {
       labelText.center = sphereNode.center;
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'AtomNode', AtomNode );
-export default AtomNode;

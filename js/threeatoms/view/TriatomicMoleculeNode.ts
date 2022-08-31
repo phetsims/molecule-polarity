@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Visual representation of a triatomic molecule.
  * Children position themselves in global coordinates, so this node's position should be (0,0).
@@ -9,11 +8,11 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -27,25 +26,25 @@ import TriatomicMolecule from '../model/TriatomicMolecule.js';
 import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
 
-class TriatomicMoleculeNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {TriatomicMolecule} molecule
-   * @param {Property.<boolean>} bondDipolesVisibleProperty
-   * @param {Property.<boolean>} molecularDipoleVisibleProperty
-   * @param {Property.<boolean>} partialChargesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( molecule, bondDipolesVisibleProperty, molecularDipoleVisibleProperty, partialChargesVisibleProperty, options ) {
-    assert && assert( molecule instanceof TriatomicMolecule, 'invalid molecule' );
-    assert && AssertUtils.assertPropertyOf( bondDipolesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( molecularDipoleVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( partialChargesVisibleProperty, 'boolean' );
+export type TriatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
+export default class TriatomicMoleculeNode extends Node {
+
+  private readonly resetTriatomicMoleculeNode: () => void;
+
+  public constructor( molecule: TriatomicMolecule,
+                      bondDipolesVisibleProperty: Property<boolean>,
+                      molecularDipoleVisibleProperty: Property<boolean>,
+                      partialChargesVisibleProperty: Property<boolean>,
+                      providedOptions: TriatomicMoleculeNodeOptions ) {
+
+    const options = optionize<TriatomicMoleculeNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       phetioInputEnabledPropertyInstrumented: true
-    }, options );
+    }, providedOptions );
 
     // atoms
     const atomANode = new AtomNode( molecule.atomA, {
@@ -115,7 +114,6 @@ class TriatomicMoleculeNode extends Node {
       visibleProperty: molecularDipoleVisibleProperty
     } );
 
-    assert && assert( !options.children, 'TriatomicMoleculeNode sets children' );
     options.children = [
       bondABNode, bondBCNode,
       atomsParent,
@@ -125,14 +123,6 @@ class TriatomicMoleculeNode extends Node {
     ];
 
     super( options );
-
-    // @private nodes whose visibility may change
-    this.partialChargeANode = partialChargeANode;
-    this.partialChargeBNode = partialChargeBNode;
-    this.partialChargeCNode = partialChargeCNode;
-    this.bondDipoleABNode = bondDipoleABNode;
-    this.bondDipoleBCNode = bondDipoleBCNode;
-    this.molecularDipoleNode = molecularDipoleNode;
 
     // cursors
     atomANode.cursor = atomBNode.cursor = atomCNode.cursor = 'pointer'; // atoms
@@ -175,10 +165,10 @@ class TriatomicMoleculeNode extends Node {
 
     /**
      * Updates the visibility of one hint arrow.
-     * @param {Node} hintArrowNode - the hint arrow
-     * @param {Node} atomNode - the atom that the hint arrow is associated with
+     * @param hintArrowNode - the hint arrow
+     * @param atomNode - the atom that the hint arrow is associated with
      */
-    const updateOneHintArrow = ( hintArrowNode, atomNode ) => {
+    const updateOneHintArrow = ( hintArrowNode: Node, atomNode: Node ) => {
       hintArrowNode.visible = ( !moleculeHasChanged && this.inputEnabled && atomNode.inputEnabled );
     };
 
@@ -203,7 +193,7 @@ class TriatomicMoleculeNode extends Node {
 
     // Update a hint arrow when the molecule inputEnabled or atom inputEnabled changes.
     // unmultilink is not needed.
-    const createMultilink = ( hintArrowNode, atomNode ) => {
+    const createMultilink = ( hintArrowNode: Node, atomNode: Node ) => {
       Multilink.multilink( [ this.inputEnabledProperty, atomNode.inputEnabledProperty ],
         () => updateOneHintArrow( hintArrowNode, atomNode )
       );
@@ -222,18 +212,20 @@ class TriatomicMoleculeNode extends Node {
       molecule.angleProperty.link( angle => arrowNode.setRotation( angle ) );
     }
 
-    // @private
     this.resetTriatomicMoleculeNode = () => {
       moleculeHasChanged = false;
       updateAllHintArrows();
     };
   }
 
-  // @public
-  reset() {
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  public reset(): void {
     this.resetTriatomicMoleculeNode();
   }
 }
 
 moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );
-export default TriatomicMoleculeNode;
