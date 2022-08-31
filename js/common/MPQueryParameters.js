@@ -8,13 +8,15 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import moleculePolarity from '../moleculePolarity.js';
+import { DipoleDirectionValues } from './model/DipoleDirection.js';
+import { SurfaceColorValues } from './model/SurfaceColor.js';
 
 const MPQueryParameters = QueryStringMachine.getAll( {
 
   // Direction of the dipole, see MPPreferences.dipoleDirectionProperty
   dipoleDirection: {
     type: 'string',
-    validValues: [ 'positiveToNegative', 'negativeToPositive' ],
+    validValues: DipoleDirectionValues,
     defaultValue: 'positiveToNegative',
     public: true
   },
@@ -23,12 +25,12 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   // See MPPreferences.surfaceColorProperty
   surfaceColor: {
     type: 'string',
-    validValues: [ 'RWB', 'ROYGB' ],
+    validValues: SurfaceColorValues,
     defaultValue: 'RWB',
     public: true
   },
 
-  //TODO https://github.com/phetsims/molecule-polarity/issues/32 delete when Real Molecules is fully implemented
+  //TODO https://github.com/phetsims/molecule-polarity/issues/32 delete when the Real Molecules screen is fully implemented
   // Enables the 'Real Molecules' screen, for internal use only.
   realMolecules: { type: 'flag' },
 

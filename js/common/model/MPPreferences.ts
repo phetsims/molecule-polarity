@@ -1,6 +1,5 @@
 // Copyright 2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MPPreferences is the model for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.
@@ -12,27 +11,29 @@ import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProp
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPQueryParameters from '../MPQueryParameters.js';
-import { DipoleDirectionValues } from './DipoleDirection.js';
-import { SurfaceColorValues } from './SurfaceColor.js';
+import { DipoleDirection, DipoleDirectionValues } from './DipoleDirection.js';
+import { SurfaceColor, SurfaceColorValues } from './SurfaceColor.js';
 
 const MPPreferences = {
 
-  dipoleDirectionProperty: new StringEnumerationProperty( MPQueryParameters.dipoleDirection, {
-    validValues: DipoleDirectionValues,
-    tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
-  } ),
+  dipoleDirectionProperty: new StringEnumerationProperty<DipoleDirection>(
+    MPQueryParameters.dipoleDirection as DipoleDirection, {
+      validValues: DipoleDirectionValues,
+      tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
+    } ),
 
-  surfaceColorProperty: new StringEnumerationProperty( MPQueryParameters.surfaceColor, {
-    validValues: SurfaceColorValues,
+  surfaceColorProperty: new StringEnumerationProperty<SurfaceColor>(
+    MPQueryParameters.surfaceColor as SurfaceColor, {
+      validValues: SurfaceColorValues,
 
-    //TODO see https://github.com/phetsims/molecule-polarity/issues/32
-    // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
-    // In the meantime, support testing via the realMolecules query parameter.
-    tandem: ( MPQueryParameters.realMolecules ) ?
-            Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ) :
-            Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
-    phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
-  } )
+      //TODO see https://github.com/phetsims/molecule-polarity/issues/32
+      // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
+      // In the meantime, support testing via the realMolecules query parameter.
+      tandem: ( MPQueryParameters.realMolecules ) ?
+              Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ) :
+              Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
+      phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
+    } )
 };
 
 moleculePolarity.register( 'MPPreferences', MPPreferences );

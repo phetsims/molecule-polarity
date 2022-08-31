@@ -1,6 +1,5 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MPPreferencesNode is the user interface for sim-specific preferences, accessed via the Preferences dialog.
  * These preferences are global, and affect all screens.
@@ -11,27 +10,31 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPPreferences from '../model/MPPreferences.js';
 import MPQueryParameters from '../MPQueryParameters.js';
 import DipoleDirectionControl from './DipoleDirectionControl.js';
 import SurfaceColorControl from './SurfaceColorControl.js';
 
-class MPPreferencesNode extends VBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type MPPreferencesNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
-    options = merge( {
+export default class MPPreferencesNode extends VBox {
+
+  private readonly disposeMPPreferencesNode: () => void;
+
+  public constructor( providedOptions: MPPreferencesNodeOptions ) {
+
+    const options = optionize<MPPreferencesNodeOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       align: 'left',
-      spacing: 25,
-      tandem: Tandem.REQUIRED
-    }, options );
+      spacing: 25
+    }, providedOptions );
 
     const dipoleDirectionControl = new DipoleDirectionControl( MPPreferences.dipoleDirectionProperty, {
       tandem: options.tandem.createTandem( 'dipoleDirectionControl' )
@@ -39,12 +42,13 @@ class MPPreferencesNode extends VBox {
 
     const surfaceColorControl = new SurfaceColorControl( MPPreferences.surfaceColorProperty, {
 
-      //TODO https://github.com/phetsims/molecule-polarity/issues/32 hide the Surface Color option until Real Molecules screen is implemented
+      //TODO https://github.com/phetsims/molecule-polarity/issues/32
+      // Hide the Surface Color option until the Real Molecules screen is implemented.
+      // In the meantime, support testing via the realMolecules query parameter.
       visible: MPQueryParameters.realMolecules,
       tandem: options.tandem.createTandem( 'surfaceColorControl' )
     } );
 
-    assert && assert( !options.children, 'MPPreferencesNode sets children' );
     options.children = [
       dipoleDirectionControl,
       surfaceColorControl
@@ -52,23 +56,16 @@ class MPPreferencesNode extends VBox {
 
     super( options );
 
-    // @private
     this.disposeMPPreferencesNode = () => {
       dipoleDirectionControl.dispose();
       surfaceColorControl.dispose();
     };
   }
 
-  /**
-   * Helpful for future-proofing, since PhET-iO will tear down and re-create the PreferencesDialog when setting state.
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeMPPreferencesNode();
     super.dispose();
   }
 }
 
 moleculePolarity.register( 'MPPreferencesNode', MPPreferencesNode );
-export default MPPreferencesNode;
