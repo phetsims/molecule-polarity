@@ -48,6 +48,10 @@ export default class TwoAtomsViewProperties {
     } );
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   public reset(): void {
     this.bondDipoleVisibleProperty.reset();
     this.partialChargesVisibleProperty.reset();

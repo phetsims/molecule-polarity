@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Displays the bond 'character' of the molecule, by placing a marker on a continuum whose extremes are "covalent"
  * and "ionic". This node is derived; the marker serves as a "readout" and is updated based on the properties
@@ -9,38 +8,40 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Tandem from '../../../../tandem/js/Tandem.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, Line, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import Atom from '../../common/model/Atom.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
 // constants
 const TRACK_WIDTH = 415;
 const Y_SPACING = 3;
 
-class BondCharacterPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {DiatomicMolecule} molecule
-   * @param {Object} [options]
-   */
-  constructor( molecule, options ) {
-    assert && assert( molecule instanceof DiatomicMolecule, 'invalid molecule' );
+export type BondCharacterPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-    options = merge( {
+export default class BondCharacterPanel extends Panel {
+
+  public constructor( molecule: DiatomicMolecule, providedOptions: BondCharacterPanelOptions ) {
+
+    const options = optionize<BondCharacterPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // PanelOptions
       cornerRadius: 5,
       fill: 'white',
       stroke: 'black',
       xMargin: 10,
-      yMargin: 3,
-      tandem: Tandem.REQUIRED
-    }, options );
+      yMargin: 3
+    }, providedOptions );
 
     // title
     const bondCharacterText = new Text( moleculePolarityStrings.bondCharacterStringProperty, {
@@ -99,6 +100,11 @@ class BondCharacterPanel extends Panel {
         dipole.magnitude );
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 /**
@@ -106,11 +112,7 @@ class BondCharacterPanel extends Panel {
  */
 class PointerNode extends Node {
 
-  /**
-   * @param {Atom} atom1
-   * @param {Atom} atom2
-   */
-  constructor( atom1, atom2 ) {
+  public constructor( atom1: Atom, atom2: Atom ) {
     super();
 
     const atomRadius = 5;
@@ -130,4 +132,3 @@ class PointerNode extends Node {
 }
 
 moleculePolarity.register( 'BondCharacterPanel', BondCharacterPanel );
-export default BondCharacterPanel;
