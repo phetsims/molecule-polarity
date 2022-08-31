@@ -78,14 +78,14 @@ class DipoleDirectionRadioButtonGroup extends AquaRadioButtonGroup {
       {
         value: DipoleDirection.POSITIVE_TO_NEGATIVE,
         node: new Text( positiveToNegativeStringProperty, merge( {
-          tandem: options.tandem.createTandem( positiveToNegativeRadioButtonTandemName ).createTandem( 'positiveToNegativeText' )
+          tandem: options.tandem.createTandem( positiveToNegativeRadioButtonTandemName ).createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: positiveToNegativeRadioButtonTandemName
       },
       {
         value: DipoleDirection.NEGATIVE_TO_POSITIVE,
         node: new Text( negativeToPositiveStringProperty, merge( {
-          tandem: options.tandem.createTandem( negativeToPositiveRadioButtonTandem ).createTandem( 'negativeToPositiveText' )
+          tandem: options.tandem.createTandem( negativeToPositiveRadioButtonTandem ).createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: negativeToPositiveRadioButtonTandem
       }
