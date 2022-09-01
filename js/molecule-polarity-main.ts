@@ -26,7 +26,7 @@ simLauncher.launch( () => {
 
   const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].titleStringProperty, screens, {
     preferencesModel: new PreferencesModel( {
-      generalOptions: {
+      simulationOptions: {
         customPreferences: [ {
           createContent: tandem => new MPPreferencesNode( {
             tandem: tandem.createTandem( 'simPreferences' )
