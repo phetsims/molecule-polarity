@@ -103,8 +103,10 @@ export default class ThreeAtomsScreenView extends ScreenView {
     platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
 
     // centered below molecule
-    electronegativityPanels.centerX = moleculeX;
-    electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
+    electronegativityPanels.boundsProperty.link( () => {
+      electronegativityPanels.centerX = moleculeX;
+      electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
+    } );
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 25;
