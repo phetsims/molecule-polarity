@@ -1,5 +1,6 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * AtomLabelsCheckbox is the checkbox for controlling visibility of atom labels.
  *
