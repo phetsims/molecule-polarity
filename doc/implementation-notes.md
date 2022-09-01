@@ -22,8 +22,7 @@ in [MPQueryParameters](https://github.com/phetsims/molecule-polarity/blob/master
 
 **Memory management**:
 
-Classes related to the Preferences dialog implement `dispose` because the (joist) Preferences dialog is created
-dynamically.
+Classes related to the Preferences dialog (created dynamically by joist) must implement `dispose`.
 See [MPPreferencesNode](https://github.com/phetsims/molecule-polarity/blob/master/js/common/view/MPPreferencesNode.ts)
 and its subcomponents.
 
