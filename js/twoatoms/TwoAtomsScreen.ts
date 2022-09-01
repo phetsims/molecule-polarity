@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Two Atoms' screen.
  *
@@ -8,9 +7,10 @@
  */
 
 import Property from '../../../axon/js/Property.js';
-import Screen from '../../../joist/js/Screen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import merge from '../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
+import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
@@ -21,19 +21,20 @@ import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
-class TwoAtomsScreen extends Screen {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type TwoAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
-    options = merge( {
+export default class TwoAtomsScreen extends Screen {
+
+  public constructor( providedOptions: TwoAtomsScreenOptions ) {
+
+    const options = optionize<TwoAtomsScreenOptions, SelfOptions, ScreenOptions>()( {
       name: moleculePolarityStrings.screen.twoAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
       tandem: Tandem.REQUIRED
-    }, options );
+    }, providedOptions );
 
     super(
       () => new TwoAtomsModel( { tandem: options.tandem.createTandem( 'model' ) } ),
@@ -45,9 +46,8 @@ class TwoAtomsScreen extends Screen {
 
 /**
  * Creates the icon for this screen, a diatomic molecule with atoms 'A' and 'B'.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
 
   const atomDiameter = 225;
   const bondLength = 1.15 * atomDiameter;
@@ -97,4 +97,3 @@ function createScreenIcon() {
 }
 
 moleculePolarity.register( 'TwoAtomsScreen', TwoAtomsScreen );
-export default TwoAtomsScreen;
