@@ -6,11 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../phetcommon/js/util/PatternStringProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -43,14 +42,12 @@ export default class ElectronegativityPanel extends Panel {
       yMargin: 6
     }, providedOptions );
 
-    const titleStringProperty = new DerivedProperty(
-      [ atom.labelStringProperty, moleculePolarityStrings.pattern.atomNameStringProperty ],
-      ( atomLabelString, patternString ) => StringUtils.fillIn( patternString, {
-        name: atomLabelString
-      } ), {
-        tandem: options.tandem.createTandem( 'titleStringProperty' ),
-        phetioValueType: StringIO
-      } );
+    const titleStringProperty = new PatternStringProperty( moleculePolarityStrings.pattern.atomNameStringProperty, {
+      name: atom.labelStringProperty
+    }, {
+      tandem: options.tandem.createTandem( 'titleStringProperty' ),
+      phetioValueType: StringIO
+    } );
 
     // title
     const titleText = new Text( titleStringProperty, {

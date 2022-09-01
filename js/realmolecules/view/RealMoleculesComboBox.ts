@@ -6,11 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../phetcommon/js/util/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
@@ -60,13 +59,10 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
  */
 function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
-  const textProperty = new DerivedProperty( [
-    molecule.fullNameProperty,
-    moleculePolarityStrings.pattern.symbolNameStringProperty
-  ], ( fullName, patternString ) => StringUtils.fillIn( patternString, {
+  const textProperty = new PatternStringProperty( moleculePolarityStrings.pattern.symbolNameStringProperty, {
     symbol: molecule.symbol,
-    name: fullName
-  } ) );
+    name: molecule.fullNameProperty
+  } );
 
   const node = new RichText( textProperty, {
     maxWidth: 200,

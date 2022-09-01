@@ -7,11 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PatternStringProperty from '../../../../phetcommon/js/util/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line, Node, NodeOptions, Rectangle, RichText, TColor, Text, VBox } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -19,7 +19,6 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Element from '../model/Element.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
@@ -71,12 +70,10 @@ export default class RealMoleculeViewer extends Node {
     moleculeProperty.link( molecule => {
       moleculeTextParent.removeAllChildren();
       moleculeStringProperty && moleculeStringProperty.dispose();
-      moleculeStringProperty = new DerivedProperty(
-        [ molecule.fullNameProperty, moleculePolarityStrings.pattern.symbolNameStringProperty ],
-        ( fullName, patternString ) => StringUtils.fillIn( patternString, {
-          symbol: molecule.symbol,
-          name: fullName
-        } ) );
+      moleculeStringProperty = new PatternStringProperty( moleculePolarityStrings.pattern.symbolNameStringProperty, {
+        symbol: molecule.symbol,
+        name: molecule.fullNameProperty
+      } );
       moleculeTextParent.addChild( new RichText( moleculeStringProperty, {
         font: FONT,
         maxWidth: 200

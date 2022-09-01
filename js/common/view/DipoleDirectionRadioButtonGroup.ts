@@ -6,10 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../phetcommon/js/util/PatternStringProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
@@ -42,32 +41,24 @@ export default class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioBu
     }, providedOptions );
 
     // d+ -> d-
-    const positiveToNegativeStringProperty = new DerivedProperty( [
-      moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
-      moleculePolarityStrings.deltaPlusStringProperty,
-      moleculePolarityStrings.deltaMinusStringProperty
-    ], ( patternString, deltaPlusString, deltaMinusString ) =>
-      StringUtils.fillIn( patternString, {
-        from: deltaPlusString,
-        to: deltaMinusString
-      } ), {
-      tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
-      phetioValueType: StringIO
-    } );
+    const positiveToNegativeStringProperty =
+      new PatternStringProperty( moleculePolarityStrings.pattern.dipoleDirectionStringProperty, {
+        from: moleculePolarityStrings.deltaPlusStringProperty,
+        to: moleculePolarityStrings.deltaMinusStringProperty
+      }, {
+        tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
+        phetioValueType: StringIO
+      } );
 
     // d- -> d+
-    const negativeToPositiveStringProperty = new DerivedProperty( [
-      moleculePolarityStrings.pattern.dipoleDirectionStringProperty,
-      moleculePolarityStrings.deltaPlusStringProperty,
-      moleculePolarityStrings.deltaMinusStringProperty
-    ], ( patternString, deltaPlusString, deltaMinusString ) =>
-      StringUtils.fillIn( patternString, {
-        from: deltaMinusString,
-        to: deltaPlusString
-      } ), {
-      tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
-      phetioValueType: StringIO
-    } );
+    const negativeToPositiveStringProperty =
+      new PatternStringProperty( moleculePolarityStrings.pattern.dipoleDirectionStringProperty, {
+        from: moleculePolarityStrings.deltaMinusStringProperty,
+        to: moleculePolarityStrings.deltaPlusStringProperty
+      }, {
+        tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
+        phetioValueType: StringIO
+      } );
 
     const radioButtonGroupItems = [
       createItem( 'positiveToNegative', positiveToNegativeStringProperty, 'positiveToNegativeRadioButton' ),
