@@ -1,5 +1,6 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
+// @ts-nocheck
 //TODO Moved here from litmus repository. Delete when 100% certain that we're not using JSmol. See https://github.com/phetsims/molecule-polarity/issues/15
 /**
  * Scenery node that displays a JSmol viewer.

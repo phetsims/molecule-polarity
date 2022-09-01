@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Table that shows electronegativity for a set of elements.
  * By default, all cells in the table are the same color.
