@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for the 'Real Molecules' screen.
  *
@@ -9,13 +8,12 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ScreenView from '../../../../joist/js/ScreenView.js';
-import merge from '../../../../phet-core/js/merge.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
-import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
@@ -28,19 +26,21 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
 import UnderDevelopmentPlane from './UnderDevelopmentPlane.js';
 
-class RealMoleculesScreenView extends ScreenView {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {RealMoleculesModel} model
-   * @param {Object} [options]
-   */
-  constructor( model, options ) {
-    assert && assert( model instanceof RealMoleculesModel, 'invalid model' );
+export type RealMoleculesScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
 
-    options = merge( {
-      layoutBounds: MPConstants.LAYOUT_BOUNDS,
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class RealMoleculesScreenView extends ScreenView {
+
+  private readonly moleculeViewer: RealMoleculeViewer;
+
+  public constructor( model: RealMoleculesModel, providedOptions: RealMoleculesScreenViewOptions ) {
+
+    const options = optionize<RealMoleculesScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
+
+      // ScreenViewOptions
+      layoutBounds: MPConstants.LAYOUT_BOUNDS
+    }, providedOptions );
 
     super( options );
 
@@ -49,9 +49,7 @@ class RealMoleculesScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'viewProperties' )
     } );
 
-    // @private
     this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
-      viewerFill: MPColors.SCREEN_BACKGROUND,
       viewerSize: new Dimension2( 450, 450 ),
       tandem: options.tandem.createTandem( 'moleculeViewer' )
     } );
@@ -78,8 +76,7 @@ class RealMoleculesScreenView extends ScreenView {
     } );
 
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
-      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' ),
-      visiblePropertyOptions: { readOnly: true }
+      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' )
     } );
 
     const colorKeysNode = new Node( {
@@ -166,4 +163,3 @@ class RealMoleculesScreenView extends ScreenView {
 }
 
 moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
-export default RealMoleculesScreenView;

@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Real Molecules' screen.
  *
@@ -8,9 +7,10 @@
  */
 
 import Property from '../../../axon/js/Property.js';
-import Screen from '../../../joist/js/Screen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import merge from '../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
+import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import { Image } from '../../../scenery/js/imports.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
@@ -21,19 +21,21 @@ import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
-class RealMoleculesScreen extends Screen {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type RealMoleculesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
-    options = merge( {
+export default class RealMoleculesScreen extends Screen {
+
+  public constructor( provideOptions: RealMoleculesScreenOptions ) {
+
+    const options = optionize<RealMoleculesScreenOptions, SelfOptions, ScreenOptions>()( {
+
+      // ScreenOptions
       name: moleculePolarityStrings.screen.realMoleculesStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon(),
-      tandem: Tandem.REQUIRED
-    }, options );
+      homeScreenIcon: createScreenIcon()
+    }, provideOptions );
 
     //TODO see https://github.com/phetsims/molecule-polarity/issues/32
     // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
@@ -50,9 +52,8 @@ class RealMoleculesScreen extends Screen {
 
 /**
  * Creates the screen icon.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
   return new ScreenIcon( new Image( realMoleculesScreenIcon_png ), {
     maxIconWidthProportion: 1,
     maxIconHeightProportion: 1
@@ -60,4 +61,3 @@ function createScreenIcon() {
 }
 
 moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );
-export default RealMoleculesScreen;
