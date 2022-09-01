@@ -61,9 +61,8 @@ export default abstract class SurfaceNode extends Node {
         this.updateFill();
       }
     };
-    molecule.atoms.forEach( atom => atom.electronegativityProperty.link( update ) ); // unlink not needed
+    molecule.atoms.forEach( atom => atom.electronegativityProperty.link( update ) );
 
-    // unlink not needed
     molecule.angleProperty.link( angle => {
       if ( this.visible ) {
         this.matrix = molecule.createTransformMatrix();

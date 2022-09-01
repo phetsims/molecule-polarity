@@ -142,7 +142,6 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     // synchronization with view Properties ------------------------------
 
-    // unlink not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
       electrostaticPotentialColorKey.visible = ( surfaceType === 'electrostaticPotential' );
       electronDensityColorKey.visible = ( surfaceType === 'electronDensity' );

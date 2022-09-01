@@ -49,7 +49,7 @@ export default class AtomNode extends Node {
 
     super( options );
 
-    // sync position with model, unlink not needed
+    // sync position with model
     atom.positionProperty.linkAttribute( this, 'translation' );
 
     // Keep the label centered in the sphere. The label can be changed via PhET-iO.

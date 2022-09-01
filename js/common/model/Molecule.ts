@@ -107,7 +107,7 @@ export default abstract class Molecule extends PhetioObject {
 
     // update partial charges when atoms' EN changes
     this.atoms.forEach( atom => {
-      atom.electronegativityProperty.link( updatePartialCharges ); // unlink not needed
+      atom.electronegativityProperty.link( updatePartialCharges );
     } );
   }
 

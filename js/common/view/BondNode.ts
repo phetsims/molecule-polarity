@@ -37,7 +37,7 @@ export default class BondNode extends Line {
 
     super( bond.atom1.positionProperty.value, bond.atom2.positionProperty.value, options );
 
-    // adjust the bond when its endpoints change, unlinks not needed
+    // adjust the bond when its endpoints change
     bond.atom1.positionProperty.link( position => this.setPoint1( position ) );
     bond.atom2.positionProperty.link( position => this.setPoint2( position ) );
   }

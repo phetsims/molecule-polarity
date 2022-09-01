@@ -96,7 +96,7 @@ export default class BondCharacterPanel extends Panel {
 
     super( content, options );
 
-    // when difference in electronegativity changes, move the pointer, unlink not needed
+    // When difference in electronegativity changes, move the pointer.
     molecule.bond.dipoleProperty.link( dipole => {
       markerNode.left = Utils.linear(
         0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),

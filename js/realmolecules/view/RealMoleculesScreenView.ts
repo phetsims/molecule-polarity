@@ -144,7 +144,6 @@ export default class RealMoleculesScreenView extends ScreenView {
 
     // synchronization with view Properties ------------------------------
 
-    // unlink not needed
     Multilink.multilink( [ viewProperties.surfaceTypeProperty, MPPreferences.surfaceColorProperty ],
       ( surfaceType, surfaceColor ) => {
         electrostaticPotentialRWBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'RWB' );

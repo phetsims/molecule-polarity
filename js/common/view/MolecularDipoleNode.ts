@@ -34,7 +34,7 @@ export default class MolecularDipoleNode extends DipoleNode {
 
     super( molecule.dipoleProperty, options );
 
-    // position the dipole with some radial offset from the molecule's position, unlink not needed
+    // position the dipole with some radial offset from the molecule's position
     molecule.dipoleProperty.link( dipole => {
 
       // offset vector relative to molecule position

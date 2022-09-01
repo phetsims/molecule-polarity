@@ -41,7 +41,7 @@ export default class RotateArrowsNode extends Node {
 
     super( options );
 
-    // Sync with atom position. unlink not needed
+    // Sync with atom position
     atom.positionProperty.link( position => {
       this.translation = position;
     } );

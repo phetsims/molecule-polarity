@@ -180,7 +180,7 @@ export default class TriatomicMoleculeNode extends Node {
       updateOneHintArrow( hintArrowCNode, atomCNode );
     };
 
-    // When the user drags any atom or bond, hide the hint arrows. unlink is not needed.
+    // When the user drags any atom or bond, hide the hint arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
         moleculeHasChanged = true;
@@ -192,7 +192,6 @@ export default class TriatomicMoleculeNode extends Node {
     molecule.bondAngleBCProperty.lazyLink( hideArrows );
 
     // Update a hint arrow when the molecule inputEnabled or atom inputEnabled changes.
-    // unmultilink is not needed.
     const createMultilink = ( hintArrowNode: Node, atomNode: Node ) => {
       Multilink.multilink( [ this.inputEnabledProperty, atomNode.inputEnabledProperty ],
         () => updateOneHintArrow( hintArrowNode, atomNode )

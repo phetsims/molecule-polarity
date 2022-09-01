@@ -125,7 +125,7 @@ class DiatomicMoleculeNode extends Node {
       hintArrowANode.visible = hintArrowBNode.visible = ( !moleculeHasChanged && this.inputEnabled );
     };
 
-    // When the user drags any atom or bond, hide the hint arrows. unlink is not needed.
+    // When the user drags any atom or bond, hide the hint arrows.
     const hideArrows = () => {
       if ( molecule.isDraggingProperty.value ) {
         moleculeHasChanged = true;

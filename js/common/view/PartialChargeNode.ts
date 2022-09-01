@@ -80,8 +80,8 @@ export default class PartialChargeNode extends Node {
       }
     };
 
-    atom.partialChargeProperty.link( this.update.bind( this ) ); // unlink not needed
-    atom.positionProperty.link( this.update.bind( this ) ); // unlink not needed
+    atom.partialChargeProperty.link( this.update.bind( this ) );
+    atom.positionProperty.link( this.update.bind( this ) );
 
     // Update when this Node becomes visible
     this.visibleProperty.link( visible => visible && this.update() );
@@ -130,7 +130,7 @@ export default class PartialChargeNode extends Node {
         return new Vector2( 1, molecule.dipoleProperty.value.angle );
       }
     }, options );
-    molecule.dipoleProperty.link( node.update.bind( this ) ); // unlink not needed
+    molecule.dipoleProperty.link( node.update.bind( this ) );
     return node;
   }
 }

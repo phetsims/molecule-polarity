@@ -33,7 +33,7 @@ class BondDipoleNode extends DipoleNode {
 
     super( bond.dipoleProperty, options );
 
-    // position the dipole to be parallel with the bond, with some perpendicular offset, unlink not needed
+    // position the dipole to be parallel with the bond, with some perpendicular offset
     bond.dipoleProperty.link( dipole => {
 
       const bondAngle = bond.getAngle();

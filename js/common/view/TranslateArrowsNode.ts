@@ -51,10 +51,8 @@ export default class TranslateArrowsNode extends Node {
 
     options.children = [ leftArrowNode, rightArrowNode ];
 
-    // unlink not needed
+    // transform the arrow shapes to account for atom position and relationship to molecule position
     atom.positionProperty.link( () => {
-
-      // transform the arrow shapes to account for atom position and relationship to molecule position
       const v = molecule.position.minus( atom.positionProperty.value );
       const angle = v.angle - ( Math.PI / 2 );
       const transform = new Transform3( Matrix3.translationFromVector( atom.positionProperty.value ).timesMatrix( Matrix3.rotation2( angle ) ) );
