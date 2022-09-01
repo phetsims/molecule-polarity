@@ -1,47 +1,45 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Combo box for choosing a real molecule.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, RichText, Text } from '../../../../scenery/js/imports.js';
-import ComboBox from '../../../../sun/js/ComboBox.js';
+import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 
-class RealMoleculesComboBox extends ComboBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<RealMolecule>} moleculeProperty
-   * @param {RealMolecule[]} molecules
-   * @param {Node} listParent
-   * @param {Object} [options]
-   * @constructor
-   */
-  constructor( moleculeProperty, molecules, listParent, options ) {
-    assert && AssertUtils.assertArrayOf( molecules, RealMolecule );
-    assert && AssertUtils.assertPropertyOf( moleculeProperty, RealMolecule );
-    assert && assert( listParent instanceof Node, 'invalid listParent' );
+export type RealMoleculesComboBoxOptions = SelfOptions & PickRequired<ComboBoxOptions, 'tandem'>;
 
-    options = merge( {
+export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
+
+  public constructor( moleculeProperty: Property<RealMolecule>,
+                      molecules: RealMolecule[],
+                      listParent: Node,
+                      provideOptions: RealMoleculesComboBoxOptions ) {
+
+    const options = optionize<RealMoleculesComboBoxOptions, SelfOptions, ComboBoxOptions>()( {
+
+      // ComboBoxOptions
       listPosition: 'above',
       highlightFill: 'rgb(218,255,255)',
       cornerRadius: 8,
       maxWidth: 450,
       tandem: Tandem.REQUIRED
-    }, options );
+    }, provideOptions );
 
     // label
-    assert && assert( !options.children, 'RealMoleculesComboBox sets labelNode' );
     options.labelNode = new Text( moleculePolarityStrings.moleculeStringProperty, {
       font: new PhetFont( 22 ),
       maxWidth: 150,
@@ -58,11 +56,8 @@ class RealMoleculesComboBox extends ComboBox {
 
 /**
  * Creates an item for the combo box.
- * @param {RealMolecule} molecule
- * @returns {ComboBoxItem}
  */
-function createItem( molecule ) {
-  assert && assert( molecule instanceof RealMolecule, 'invalid molecule' );
+function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
   //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
   const text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
@@ -83,4 +78,3 @@ function createItem( molecule ) {
 }
 
 moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
-export default RealMoleculesComboBox;

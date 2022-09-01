@@ -1,32 +1,28 @@
 // Copyright 2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * RealMoleculesControlPanel is the control panel in the 'Real Molecules' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import MPControlPanel from '../../common/view/MPControlPanel.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
 import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesViewControls from './RealMoleculesViewControls.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
-class RealMoleculesControlPanel extends MPControlPanel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {RealMoleculesViewProperties} viewProperties
-   * @param {Object} [options]
-   */
-  constructor( viewProperties, options ) {
-    assert && assert( viewProperties instanceof RealMoleculesViewProperties, 'invalid viewProperties' );
+export type RealMoleculesControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class RealMoleculesControlPanel extends MPControlPanel {
+
+  public constructor( viewProperties: RealMoleculesViewProperties, providedOptions: RealMoleculesControlPanelOptions ) {
+
+    const options = providedOptions;
 
     const subPanels = [
       new RealMoleculesViewControls( viewProperties, {
@@ -42,4 +38,3 @@ class RealMoleculesControlPanel extends MPControlPanel {
 }
 
 moleculePolarity.register( 'RealMoleculesControlPanel', RealMoleculesControlPanel );
-export default RealMoleculesControlPanel;
