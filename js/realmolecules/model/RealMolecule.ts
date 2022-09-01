@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ChemUtils from '../../../../nitroglycerin/js/ChemUtils.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -17,7 +18,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 export default class RealMolecule extends PhetioObject {
 
   public readonly symbol: string;
-  public readonly fullName: string;
+  public readonly fullNameProperty: TReadOnlyProperty<string>;
   public readonly mol2Data: string;
 
   public static readonly RealMoleculeIO = new IOType( 'RealMoleculeIO', {
@@ -27,12 +28,11 @@ export default class RealMolecule extends PhetioObject {
 
   /**
    * @param symbol - chemical symbol of the molecule
-   * @param fullName - full name of the molecule
+   * @param fullNameProperty - full name of the molecule
    * @param mol2Data molecule data description, in mol2 format
    * @param tandem
    */
-  //TODO https://github.com/phetsims/molecule-polarity/issues/140 change fullName to fullNameProperty
-  public constructor( symbol: string, fullName: string, mol2Data: string, tandem: Tandem ) {
+  public constructor( symbol: string, fullNameProperty: TReadOnlyProperty<string>, mol2Data: string, tandem: Tandem ) {
 
     super( {
       phetioType: RealMolecule.RealMoleculeIO,
@@ -41,7 +41,7 @@ export default class RealMolecule extends PhetioObject {
     } );
 
     this.symbol = ChemUtils.toSubscript( symbol );
-    this.fullName = fullName;
+    this.fullNameProperty = fullNameProperty;
     this.mol2Data = mol2Data;
   }
 }

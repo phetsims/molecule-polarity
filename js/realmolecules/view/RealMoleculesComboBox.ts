@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -59,13 +60,15 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
  */
 function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
-  //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
-  const text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
+  const textProperty = new DerivedProperty( [
+    molecule.fullNameProperty,
+    moleculePolarityStrings.pattern.symbolNameStringProperty
+  ], ( fullName, patternString ) => StringUtils.fillIn( patternString, {
     symbol: molecule.symbol,
-    name: molecule.fullName
-  } );
+    name: fullName
+  } ) );
 
-  const node = new RichText( text, {
+  const node = new RichText( textProperty, {
     maxWidth: 200,
     font: new PhetFont( 18 )
   } );
