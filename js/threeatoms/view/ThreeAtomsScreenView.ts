@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for the 'Three Atoms' screen.
  *
@@ -8,11 +7,10 @@
  */
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -21,18 +19,15 @@ import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
-class ThreeAtomsScreenView extends ScreenView {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {ThreeAtomsModel} model
-   * @param {Object} [options]
-   */
-  constructor( model, options ) {
-    assert && assert( model instanceof ThreeAtomsModel, 'invalid model' );
+export type ThreeAtomsScreenViewOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, MPConstants.SCREEN_VIEW_OPTIONS, options );
+export default class ThreeAtomsScreenView extends ScreenView {
+
+  public constructor( model: ThreeAtomsModel, providedOptions: ThreeAtomsScreenViewOptions ) {
+
+    const options = providedOptions;
 
     super( options );
 
@@ -119,4 +114,3 @@ class ThreeAtomsScreenView extends ScreenView {
 }
 
 moleculePolarity.register( 'ThreeAtomsScreenView', ThreeAtomsScreenView );
-export default ThreeAtomsScreenView;

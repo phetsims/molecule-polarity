@@ -8,6 +8,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { HBox, HBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -17,7 +18,7 @@ type SelfOptions = {
   plateOptions?: PlateNodeOptions;
 };
 
-export type PlatesNodeOptions = SelfOptions;
+export type PlatesNodeOptions = SelfOptions & PickOptional<HBoxOptions, 'spacing'>;
 
 export default class PlatesNode extends HBox {
 

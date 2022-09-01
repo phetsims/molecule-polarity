@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Three Atoms' screen.
  *
@@ -8,32 +7,34 @@
  */
 
 import Property from '../../../axon/js/Property.js';
-import Screen from '../../../joist/js/Screen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import merge from '../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
+import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
-import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
 import moleculePolarityStrings from '../moleculePolarityStrings.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
 
-class ThreeAtomsScreen extends Screen {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type ThreeAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
-    options = merge( {
+export default class ThreeAtomsScreen extends Screen {
+
+  public constructor( providedOptions: ThreeAtomsScreenOptions ) {
+
+    const options = optionize<ThreeAtomsScreenOptions, SelfOptions, ScreenOptions>()( {
+
+      // ScreenOptions
       name: moleculePolarityStrings.screen.threeAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon(),
-      tandem: Tandem.REQUIRED
-    }, options );
+      homeScreenIcon: createScreenIcon()
+    }, providedOptions );
 
     super(
       () => new ThreeAtomsModel( { tandem: options.tandem.createTandem( 'model' ) } ),
@@ -45,9 +46,8 @@ class ThreeAtomsScreen extends Screen {
 
 /**
  * Creates the icon for this screen, a triatomic molecule with atoms 'A', 'B' and 'C'.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
 
   const atomDiameter = 175;
   const bondLength = 1.05 * atomDiameter;
@@ -120,4 +120,3 @@ function createScreenIcon() {
 }
 
 moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );
-export default ThreeAtomsScreen;
