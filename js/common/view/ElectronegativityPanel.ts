@@ -57,7 +57,7 @@ export default class ElectronegativityPanel extends Panel {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: 150,
       tandem: options.tandem.createTandem( 'titleText' ),
-      textPropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // subtitle
