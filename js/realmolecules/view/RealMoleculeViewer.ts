@@ -19,6 +19,8 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Element from '../model/Element.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
 const FONT = new PhetFont( 18 );
@@ -63,9 +65,22 @@ export default class RealMoleculeViewer extends Node {
       center: rectNode.center
     } );
 
-    const moleculeText = new RichText( '?', {
-      font: FONT,
-      maxWidth: 200
+    // Symbol and name of the molecule shown by the viewer
+    const moleculeTextParent = new Node();
+    let moleculeStringProperty: TReadOnlyProperty<string>;
+    moleculeProperty.link( molecule => {
+      moleculeTextParent.removeAllChildren();
+      moleculeStringProperty && moleculeStringProperty.dispose();
+      moleculeStringProperty = new DerivedProperty(
+        [ molecule.fullNameProperty, moleculePolarityStrings.pattern.symbolNameStringProperty ],
+        ( fullName, patternString ) => StringUtils.fillIn( patternString, {
+          symbol: molecule.symbol,
+          name: fullName
+        } ) );
+      moleculeTextParent.addChild( new RichText( moleculeStringProperty, {
+        font: FONT,
+        maxWidth: 200
+      } ) );
     } );
 
     const bondDipolesText = new Text( 'bond dipoles', {
@@ -99,7 +114,7 @@ export default class RealMoleculeViewer extends Node {
       children: [
         titleNode,
         new Line( 0, 0, 0, 30 ),
-        moleculeText,
+        moleculeTextParent,
         new Line( 0, 0, 0, 30 ),
         bondDipolesText,
         molecularDipoleText,
@@ -126,12 +141,6 @@ export default class RealMoleculeViewer extends Node {
     } );
 
     moleculeProperty.link( molecule => {
-
-      //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
-      moleculeText.text = StringUtils.fillIn( moleculePolarityStrings.pattern.symbolName, {
-        symbol: molecule.symbol,
-        name: molecule.fullName
-      } );
 
       //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/15
     } );
