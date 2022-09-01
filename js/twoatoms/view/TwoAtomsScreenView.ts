@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -120,17 +121,22 @@ export default class TwoAtomsScreenView extends ScreenView {
     platesNode.centerX = moleculeX;
     platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
 
-    // centered below molecule
-    electronegativityPanels.centerX = moleculeX;
-    electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
+    Multilink.multilink( [ electronegativityPanels.boundsProperty, bondCharacterPanel.boundsProperty ], () => {
+
+      // centered below molecule
+      electronegativityPanels.centerX = moleculeX;
+      electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
+
+      // centered above EN controls
+      bondCharacterPanel.centerX = moleculeX;
+      bondCharacterPanel.bottom = electronegativityPanels.top - 10;
+    } );
 
     // centered above molecule
-    electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
-    electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
-
-    // centered above EN controls
-    bondCharacterPanel.centerX = moleculeX;
-    bondCharacterPanel.bottom = electronegativityPanels.top - 10;
+    electrostaticPotentialColorKey.boundsProperty.link( () => {
+      electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
+      electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
+    } );
 
     // to right of positive plate, top aligned
     controlPanel.left = platesNode.right + 70;

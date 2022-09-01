@@ -99,10 +99,19 @@ export default class SurfaceColorKey extends Node {
     }
 
     // layout
-    titleText.centerX = spectrumNode.centerX;
-    leftLabelText.left = spectrumNode.left + options.xMargin;
-    rightLabelText.right = spectrumNode.right - options.xMargin;
-    titleText.top = leftLabelText.top = rightLabelText.top = spectrumNode.bottom + options.ySpacing;
+    const top = spectrumNode.bottom + options.ySpacing;
+    titleText.boundsProperty.link( () => {
+      titleText.centerX = spectrumNode.centerX;
+      titleText.top = top;
+    } );
+    leftLabelText.boundsProperty.link( () => {
+      leftLabelText.left = spectrumNode.left + options.xMargin;
+      leftLabelText.top = top;
+    } );
+    rightLabelText.boundsProperty.link( () => {
+      rightLabelText.right = spectrumNode.right - options.xMargin;
+      rightLabelText.top = top;
+    } );
 
     this.mutate( options );
   }
