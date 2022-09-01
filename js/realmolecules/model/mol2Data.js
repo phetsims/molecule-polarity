@@ -1,5 +1,6 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Mol2 data for Molecule Polarity molecules.
  * These strings were created by processing files in data/mol2/ with bin/mol2string.sh

@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Real molecule that is viewable in PhET's 3D molecule viewer.
  * The molecule is described using the mol2 standard format.
