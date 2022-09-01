@@ -19,6 +19,7 @@ import Atom from '../model/Atom.js';
 import Bond from '../model/Bond.js';
 import MPConstants from '../MPConstants.js';
 import Molecule from '../model/Molecule.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants
 const REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
@@ -36,8 +37,16 @@ export default class PartialChargeNode extends Node {
 
     super( providedOptions );
 
+    const textProperty = new DerivedProperty( [
+        atom.partialChargeProperty,
+        moleculePolarityStrings.deltaPlusStringProperty,
+        moleculePolarityStrings.deltaMinusStringProperty
+      ], ( partialCharge: number, deltaPlusString: string, deltaMinusString: string ) =>
+        ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString
+    );
+
     // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
-    const textNode = new Text( '?', {
+    const textNode = new Text( textProperty, {
       font: new PhetFont( 32 ),
       fill: 'black',
       maxWidth: 50
@@ -58,10 +67,6 @@ export default class PartialChargeNode extends Node {
       // Only update if the partial charge is visible
       if ( partialChargeVisible ) {
 
-        // d+ or d-
-        //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
-        textNode.text = ( partialCharge > 0 ) ? moleculePolarityStrings.deltaPlus : moleculePolarityStrings.deltaMinus;
-
         // size proportional to bond dipole magnitude
         const scale = Math.abs( REFERENCE_SCALE * partialCharge / REFERENCE_MAGNITUDE );
         if ( scale !== 0 ) {
@@ -80,8 +85,10 @@ export default class PartialChargeNode extends Node {
       }
     };
 
+    // Changing any of these Properties requires an update.
     atom.partialChargeProperty.link( this.update.bind( this ) );
     atom.positionProperty.link( this.update.bind( this ) );
+    textNode.boundsProperty.link( this.update.bind( this ) );
 
     // Update when this Node becomes visible
     this.visibleProperty.link( visible => visible && this.update() );
