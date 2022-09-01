@@ -1,6 +1,5 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 //TODO Delete when the Real Molecules screen is completed, see https://github.com/phetsims/molecule-polarity/issues/32
 /**
  * Used to disable the 'Real Molecules' screen and display a message indicating that it's under development.
@@ -19,13 +18,9 @@ import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 // constants
 const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
 
-class UnderDevelopmentPlane extends Plane {
+export default class UnderDevelopmentPlane extends Plane {
 
-  /**
-   * @param {Bounds2} layoutBounds
-   */
-  constructor( layoutBounds ) {
-    assert && assert( layoutBounds instanceof Bounds2, 'invalid layoutBounds' );
+  public constructor( layoutBounds: Bounds2 ) {
 
     const urlString = allowLinksProperty.value ?
                       StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
@@ -79,4 +74,3 @@ class UnderDevelopmentPlane extends Plane {
 }
 
 moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
-export default UnderDevelopmentPlane;
