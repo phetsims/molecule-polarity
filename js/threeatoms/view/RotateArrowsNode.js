@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * A pair of arrows used to indicate that an atom can be rotated.
  * Shapes are created in global coordinates, so this node's position should be (0,0).

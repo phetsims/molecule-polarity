@@ -1,5 +1,6 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Drag handler for manipulating a bond angle.
  * The atom being dragged is popped to the front.
