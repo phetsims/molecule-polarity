@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 //TODO This is currently a stub, integrate with 3D viewer in https://github.com/phetsims/molecule-polarity/issues/15
 /**
  * JSmol viewer.
@@ -10,36 +9,46 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Line, Node, Rectangle, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Line, Node, NodeOptions, Rectangle, RichText, TColor, Text, VBox } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
+import Element from '../model/Element.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 // constants
 const FONT = new PhetFont( 18 );
 
-class RealMoleculeViewer extends Node {
+type SelfOptions = {
+  backgroundColor?: TColor;
+  viewerSize?: Dimension2;
+};
 
-  /**
-   * @param {Property.<RealMolecule>} moleculeProperty
-   * @param {RealMoleculesViewProperties} viewProperties
-   * @param {Object} [options]
-   */
-  constructor( moleculeProperty, viewProperties, options ) {
-    assert && AssertUtils.assertPropertyOf( moleculeProperty, RealMolecule );
-    assert && assert( viewProperties instanceof RealMoleculesViewProperties, 'invalid viewProperties' );
+export type RealMoleculeViewerOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    options = merge( {
+export default class RealMoleculeViewer extends Node {
+
+  public readonly elementsProperty: Property<Element[]>;
+  public readonly bondDipolesText: Text;
+  public readonly molecularDipoleText: Text;
+  public readonly partialChargesText: Text;
+  public readonly atomLabelsText: Text;
+  public readonly surfaceTypeText: Text;
+
+  public constructor( moleculeProperty: Property<RealMolecule>,
+                      viewProperties: RealMoleculesViewProperties,
+                      providedOptions: RealMoleculeViewerOptions ) {
+
+    const options = optionize<RealMoleculeViewerOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       backgroundColor: 'white',
-      viewerSize: new Dimension2( 200, 200 ),
-      tandem: Tandem.REQUIRED
-    }, options );
+      viewerSize: new Dimension2( 200, 200 )
+    }, providedOptions );
 
     const rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
       stroke: 'rgba(0,0,0,0.25)',
@@ -63,18 +72,22 @@ class RealMoleculeViewer extends Node {
       font: FONT,
       visibleProperty: viewProperties.bondDipolesVisibleProperty
     } );
+
     const molecularDipoleText = new Text( 'molecular dipole', {
       font: FONT,
       visibleProperty: viewProperties.molecularDipoleVisibleProperty
     } );
+
     const partialChargesText = new Text( 'partial charges', {
       font: FONT,
       visibleProperty: viewProperties.partialChargesVisibleProperty
     } );
+
     const atomLabelsText = new Text( 'atom labels', {
       font: FONT,
       visibleProperty: viewProperties.atomLabelsVisibleProperty
     } );
+
     const surfaceTypeText = new Text( '?', { font: FONT } );
 
     const debugText = new VBox( {
@@ -96,27 +109,22 @@ class RealMoleculeViewer extends Node {
       ]
     } );
 
-    assert && assert( !options.children, 'RealMoleculeViewer sets children' );
     options.children = [ rectNode, debugText ];
 
     super( options );
 
-    // {Property.<Element[]>} @public (read-only)
-    this.elementsProperty = new Property( [] );
+    this.elementsProperty = new Property<Element[]>( [] );
 
-    // @private used by methods
     this.bondDipolesText = bondDipolesText;
     this.molecularDipoleText = molecularDipoleText;
     this.partialChargesText = partialChargesText;
     this.atomLabelsText = atomLabelsText;
     this.surfaceTypeText = surfaceTypeText;
 
-    // unlink is not needed
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      this.surfaceTypeText.text = ( `surface: ${surfaceType.name}` );
+      this.surfaceTypeText.text = ( `surface: ${surfaceType}` );
     } );
 
-    // unlink not needed
     moleculeProperty.link( molecule => {
 
       //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
@@ -128,7 +136,11 @@ class RealMoleculeViewer extends Node {
       //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/15
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'RealMoleculeViewer', RealMoleculeViewer );
-export default RealMoleculeViewer;

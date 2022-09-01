@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Table that shows electronegativity for a set of elements.
  * By default, all cells in the table are the same color.
@@ -11,11 +10,11 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Color, HBox, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Color, HBox, Node, NodeOptions, Rectangle, TColor, Text, VBox } from '../../../../scenery/js/imports.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
@@ -26,18 +25,19 @@ const BACKGROUND_COLOR = new Color( 210, 210, 210 );
 const NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
 const HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
 
-class ElectronegativityTableNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {RealMoleculeViewer} moleculeViewer
-   * @param {Object} [options]
-   */
-  constructor( moleculeViewer, options ) {
-    assert && assert( moleculeViewer instanceof RealMoleculeViewer, 'invalid moleculeViewer' );
+export type ElectronegativityTableNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class ElectronegativityTableNode extends Node {
+
+  private readonly cells: Node[];
+
+  public constructor( moleculeViewer: RealMoleculeViewer, providedOptions: ElectronegativityTableNodeOptions ) {
+
+    const options = optionize<ElectronegativityTableNodeOptions, SelfOptions, NodeOptions>()( {
+      // This no-op optionize call is needed in order to set options.children below.
+    }, providedOptions );
 
     const titleText = new Text( moleculePolarityStrings.atomElectronegativitiesStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
@@ -59,7 +59,6 @@ class ElectronegativityTableNode extends Node {
     ];
 
     // Horizontal layout of cells, with title centered below the cel
-    assert && assert( !options.children, 'ElectronegativityTableNode sets children' );
     options.children = [
       new VBox( {
         spacing: 4,
@@ -75,29 +74,32 @@ class ElectronegativityTableNode extends Node {
 
     super( options );
 
-    // @private
     this.cells = cells;
 
     // highlight elements displayed by the viewer
     moleculeViewer.elementsProperty.lazyLink( elements => {
       this.resetCells();
-      elements.forEach( element => {
-        this.setColor( element.elementNumber, element.color );
-      } );
+      elements.forEach( element => this.setColor( element.elementNumber, element.color ) );
     } );
   }
 
-  // @private
-  resetCells() {
-    this.cells.forEach( cell => cell.disable() );
+  private resetCells(): void {
+    this.cells.forEach( cell => {
+      if ( cell instanceof Cell ) {
+        cell.disable();
+      }
+    } );
   }
 
-  // @private Sets the {Color} color of a specified {number} element
-  setColor( elementNumber, color ) {
+  // Sets the {Color} color of a specified {number} element
+  private setColor( elementNumber: number, color: TColor ): void {
     for ( let i = 0; i < this.cells.length; i++ ) {
-      if ( this.cells[ i ].elementNumber === elementNumber ) {
-        this.cells[ i ].enable( color );
-        break;
+      const cell = this.cells[ i ];
+      if ( cell instanceof Cell ) {
+        if ( cell.elementNumber === elementNumber ) {
+          cell.enable( color );
+          break;
+        }
       }
     }
   }
@@ -108,26 +110,32 @@ class ElectronegativityTableNode extends Node {
  */
 class Cell extends Node {
 
+  public readonly elementNumber: number;
+  private readonly backgroundNode: Rectangle;
+  private readonly symbolNode: Text;
+  private readonly electronegativityNode: Text;
+
   /**
-   * @param {string} symbol - element's symbol in the periodic table
-   * @param {number} elementNumber - element's number in the periodic table
-   * @param {number} electronegativity
+   * @param symbol - element's symbol in the periodic table
+   * @param elementNumber - element's number in the periodic table
+   * @param electronegativity
    */
-  constructor( symbol, elementNumber, electronegativity ) {
+  public constructor( symbol: string, elementNumber: number, electronegativity: number ) {
 
     super();
 
     this.elementNumber = elementNumber;
 
-    // @private nodes
     this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, {
       fill: BACKGROUND_COLOR,
       stroke: 'black'
     } );
+
     this.symbolNode = new Text( symbol, {
       font: new PhetFont( { size: 22, weight: 'bold' } ),
       fill: NORMAL_TEXT_COLOR
     } );
+
     this.electronegativityNode = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
       font: new PhetFont( 16 ),
       fill: NORMAL_TEXT_COLOR
@@ -141,18 +149,17 @@ class Cell extends Node {
     this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
   }
 
-  // @public makes the cell appear enabled
-  enable( color ) {
+  // makes the cell appear enabled
+  public enable( color: TColor ): void {
     this.backgroundNode.fill = color;
     this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
   }
 
-  // @public makes the cell appear disabled
-  disable() {
+  // makes the cell appear disabled
+  public disable(): void {
     this.backgroundNode.fill = BACKGROUND_COLOR;
     this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;
   }
 }
 
 moleculePolarity.register( 'ElectronegativityTableNode', ElectronegativityTableNode );
-export default ElectronegativityTableNode;
