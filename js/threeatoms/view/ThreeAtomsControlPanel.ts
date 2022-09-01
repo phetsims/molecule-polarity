@@ -1,35 +1,31 @@
-// Copyright 2021, University of Colorado Boulder
+// Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ThreeAtomsControlPanel is the control panel in the 'Three Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
-import MPControlPanel from '../../common/view/MPControlPanel.js';
+import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ThreeAtomsViewControls from './ThreeAtomsViewControls.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
-class ThreeAtomsControlPanel extends MPControlPanel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {ThreeAtomsViewProperties} viewProperties
-   * @param {Property.<boolean>} eFieldEnabledProperty
-   * @param {Object} [options]
-   */
-  constructor( viewProperties, eFieldEnabledProperty, options ) {
-    assert && assert( viewProperties instanceof ThreeAtomsViewProperties, 'invalid viewProperties' );
-    assert && AssertUtils.assertPropertyOf( eFieldEnabledProperty, 'boolean' );
+export type ThreeAtomsControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class ThreeAtomsControlPanel extends MPControlPanel {
+
+  public constructor( viewProperties: ThreeAtomsViewProperties,
+                      eFieldEnabledProperty: Property<boolean>,
+                      providedOptions: ThreeAtomsControlPanelOptions ) {
+
+    const options = providedOptions;
 
     const subPanels = [
       new ThreeAtomsViewControls( viewProperties, {
@@ -42,7 +38,11 @@ class ThreeAtomsControlPanel extends MPControlPanel {
 
     super( subPanels, options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'ThreeAtomsControlPanel', ThreeAtomsControlPanel );
-export default ThreeAtomsControlPanel;

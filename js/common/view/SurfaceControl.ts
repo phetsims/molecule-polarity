@@ -9,7 +9,6 @@
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -30,8 +29,7 @@ export default class SurfaceControl extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
     }, providedOptions );
 
     // title

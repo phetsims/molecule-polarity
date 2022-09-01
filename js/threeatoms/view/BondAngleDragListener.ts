@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Drag handler for manipulating a bond angle.
  * The atom being dragged is popped to the front.
@@ -12,67 +11,73 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { DragListener, Node } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { DragListener, DragListenerOptions, Node, PressedDragListener, SceneryEvent } from '../../../../scenery/js/imports.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Molecule from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class BondAngleDragListener extends DragListener {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Molecule} molecule
-   * @param {NumberProperty} bondAngleProperty - Property that this listener modifies
-   * @param {Node} targetNode
-   * @param {Object} [options]
-   */
-  constructor( molecule, bondAngleProperty, targetNode, options ) {
-    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
-    assert && assert( bondAngleProperty instanceof NumberProperty, 'invalid bondAngleProperty' );
-    assert && assert( bondAngleProperty.range, 'bondAngleProperty.range is required' );
-    assert && assert( targetNode instanceof Node, 'invalid targetNode' );
+export type BondAngleDragListenerOptions = SelfOptions &
+  PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'> &
+  //TODO https://github.com/phetsims/axon/issues/412 until fixed, phetioDocumentation is ignored
+  //PickOptional<DragListenerOptions<PressedDragListener>, 'phetioDocumentation'>
+  PickOptional<PhetioObjectOptions, 'phetioDocumentation'>;
 
-    options = merge( {
-      allowTouchSnag: true,
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class BondAngleDragListener extends DragListener {
+
+  public constructor( molecule: Molecule,
+                      bondAngleProperty: NumberProperty,
+                      targetNode: Node,
+                      providedOptions: BondAngleDragListenerOptions ) {
+
+    const options = optionize<BondAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
+
+      // DragListenerOptions
+      allowTouchSnag: true
+    }, providedOptions );
 
     let previousAngle = 0;
 
-    /**
-     * Finds the angle about the molecule's position.
-     * @param {SceneryEvent} event
-     * @returns {number} angle in radians
-     */
-    const getAngle = event => {
-      const point = targetNode.getParent().globalToLocalPoint( event.pointer.point );
+    // Finds the angle (in radians) about the molecule's position.
+    const getAngle = ( event: SceneryEvent ) => {
+      const parent = targetNode.getParent()!;
+      assert && assert( parent );
+      const point = parent.globalToLocalPoint( event.pointer.point );
       return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
-    assert && assert( !options.start, 'BondAngleDragListener sets start' );
     options.start = event => {
       molecule.isDraggingProperty.value = true;
       targetNode.moveToFront();
       previousAngle = getAngle( event );
     };
 
-    assert && assert( !options.drag, 'BondAngleDragListener sets drag' );
+    const bondAngleRange = bondAngleProperty.range!;
+    assert && assert( bondAngleRange );
+
     options.drag = event => {
       const currentAngle = getAngle( event );
       bondAngleProperty.value =
-        normalizeAngle( bondAngleProperty.value + currentAngle - previousAngle, bondAngleProperty.range.min );
+        normalizeAngle( bondAngleProperty.value + currentAngle - previousAngle, bondAngleRange.min );
       previousAngle = currentAngle;
     };
 
-    assert && assert( !options.end, 'BondAngleDragListener sets end' );
     options.end = () => {
       molecule.isDraggingProperty.value = false;
     };
 
     super( options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'BondAngleDragListener', BondAngleDragListener );
-export default BondAngleDragListener;

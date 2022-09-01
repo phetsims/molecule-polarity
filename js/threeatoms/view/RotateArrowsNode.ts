@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * A pair of arrows used to indicate that an atom can be rotated.
  * Shapes are created in global coordinates, so this node's position should be (0,0).
@@ -8,31 +7,26 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
-import { Node, Path } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
 import Atom from '../../common/model/Atom.js';
-import Molecule from '../../common/model/Molecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class RotateArrowsNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Molecule} molecule
-   * @param {Atom} atom
-   * @param {Object} [options]
-   */
-  constructor( molecule, atom, options ) {
-    assert && assert( molecule instanceof Molecule, 'invalid molecule' );
-    assert && assert( atom instanceof Atom, 'invalid atom' );
+export type RotateArrowsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    options = merge( {
+export default class RotateArrowsNode extends Node {
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+  public constructor( atom: Atom, providedOptions: RotateArrowsNodeOptions ) {
+
+    const options = optionize<RotateArrowsNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     // arrow configuration
     const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
@@ -40,7 +34,6 @@ class RotateArrowsNode extends Node {
     const radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     const theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 
-    assert && assert( !options.children, 'RotateArrowsNode sets children' );
     options.children = [
       new Path( new CurvedArrowShape( radius, -theta, theta, arrowShapeOptions ), arrowPathOptions ),
       new Path( new CurvedArrowShape( radius, Math.PI - theta, Math.PI + theta, arrowShapeOptions ), arrowPathOptions )
@@ -53,7 +46,11 @@ class RotateArrowsNode extends Node {
       this.translation = position;
     } );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'RotateArrowsNode', RotateArrowsNode );
-export default RotateArrowsNode;

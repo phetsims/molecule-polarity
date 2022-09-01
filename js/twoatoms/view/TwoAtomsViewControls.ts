@@ -7,7 +7,6 @@
  */
 
 import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
@@ -30,8 +29,7 @@ export default class TwoAtomsViewControls extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
     }, providedOptions );
 
     // title

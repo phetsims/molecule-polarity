@@ -78,7 +78,7 @@ export default class TriatomicMoleculeNode extends Node {
     const hintArrowCNode = new TranslateArrowsNode( molecule, molecule.atomC, {
       tandem: hintArrowsTandem.createTandem( 'hintArrowCNode' )
     } );
-    const hintArrowBNode = new RotateArrowsNode( molecule, molecule.atomB, {
+    const hintArrowBNode = new RotateArrowsNode( molecule.atomB, {
       tandem: hintArrowsTandem.createTandem( 'hintArrowBNode' )
     } );
     const hintArrowsNode = new Node( {

@@ -14,7 +14,6 @@ import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
-import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
 import moleculePolarityStrings from '../moleculePolarityStrings.js';
@@ -30,10 +29,11 @@ export default class TwoAtomsScreen extends Screen {
   public constructor( providedOptions: TwoAtomsScreenOptions ) {
 
     const options = optionize<TwoAtomsScreenOptions, SelfOptions, ScreenOptions>()( {
+
+      // ScreenOptions
       name: moleculePolarityStrings.screen.twoAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon(),
-      tandem: Tandem.REQUIRED
+      homeScreenIcon: createScreenIcon()
     }, providedOptions );
 
     super(

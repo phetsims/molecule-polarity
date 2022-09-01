@@ -1,6 +1,5 @@
 // Copyright 2017-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * 'View' controls for the 'Three Atoms' screen.
  *
@@ -8,8 +7,9 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.js';
@@ -18,20 +18,20 @@ import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
-class ThreeAtomsViewControls extends VBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {ThreeAtomsViewProperties} viewProperties
-   * @param {Object} [options]
-   */
-  constructor( viewProperties, options ) {
-    assert && assert( viewProperties instanceof ThreeAtomsViewProperties, 'invalid viewProperties' );
+export type ThreeAtomsViewControlsOptions = SelfOptions & PickRequired<VBox, 'tandem'>;
 
-    options = merge( {
+export default class ThreeAtomsViewControls extends VBox {
+
+  public constructor( viewProperties: ThreeAtomsViewProperties, providedOptions: ThreeAtomsViewControlsOptions ) {
+
+    const options = optionize<ThreeAtomsViewControlsOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: Tandem.REQUIRED
-    }, options );
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
+    }, providedOptions );
 
     // title
     const titleText = new Text( moleculePolarityStrings.viewStringProperty, merge( {
@@ -50,7 +50,6 @@ class ThreeAtomsViewControls extends VBox {
       tandem: options.tandem.createTandem( 'partialChargesCheckbox' )
     } );
 
-    assert && assert( !options.children, 'ThreeAtomsViewControls sets children' );
     options.children = [
       titleText,
       bondDipolesCheckbox,
@@ -60,7 +59,11 @@ class ThreeAtomsViewControls extends VBox {
 
     super( options );
   }
+
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 moleculePolarity.register( 'ThreeAtomsViewControls', ThreeAtomsViewControls );
-export default ThreeAtomsViewControls;
