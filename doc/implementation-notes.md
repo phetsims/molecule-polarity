@@ -30,14 +30,10 @@ Instances of all other classes are created statically, at startup. Most of them
 have a `dispose` method that looks like this, to guard against accidentally using
 them in a dynamic situation.
 
-```js
-public
-override
-dispose()
-:
-void {
+```typescript
+public override dispose(): void {
   assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-super.dispose();
+  super.dispose();
 }
 ```
 
