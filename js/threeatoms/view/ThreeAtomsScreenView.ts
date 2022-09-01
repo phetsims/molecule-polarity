@@ -6,8 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenView from '../../../../joist/js/ScreenView.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
@@ -18,6 +18,7 @@ import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
+import MPConstants from '../../common/MPConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -27,7 +28,8 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
   public constructor( model: ThreeAtomsModel, providedOptions: ThreeAtomsScreenViewOptions ) {
 
-    const options = providedOptions;
+    const options = optionize3<ThreeAtomsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {},
+      MPConstants.SCREEN_VIEW_OPTIONS, providedOptions );
 
     super( options );
 

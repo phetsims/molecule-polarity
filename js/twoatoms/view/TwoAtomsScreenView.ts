@@ -28,10 +28,10 @@ export type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<ScreenView,
 
 export default class TwoAtomsScreenView extends ScreenView {
 
-  public constructor( model: TwoAtomsModel, provideOptions: TwoAtomsViewControlsOptions ) {
+  public constructor( model: TwoAtomsModel, providedOptions: TwoAtomsViewControlsOptions ) {
 
     const options = optionize3<TwoAtomsViewControlsOptions, SelfOptions, ScreenViewOptions>()( {},
-      MPConstants.SCREEN_VIEW_OPTIONS, provideOptions );
+      MPConstants.SCREEN_VIEW_OPTIONS, providedOptions );
 
     super( options );
 
