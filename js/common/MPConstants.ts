@@ -15,9 +15,7 @@ import moleculePolarity from '../moleculePolarity.js';
 const MPConstants = {
 
   // ScreenView
-  SCREEN_VIEW_OPTIONS: {
-    layoutBounds: new Bounds2( 0, 0, 1100, 700 )
-  },
+  LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ),
 
   // Model
   ELECTRONEGATIVITY_RANGE: new RangeWithValue( 2, 4, 2 ),

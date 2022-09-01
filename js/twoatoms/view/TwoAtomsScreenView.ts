@@ -7,7 +7,7 @@
  */
 
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
@@ -30,8 +30,9 @@ export default class TwoAtomsScreenView extends ScreenView {
 
   public constructor( model: TwoAtomsModel, providedOptions: TwoAtomsViewControlsOptions ) {
 
-    const options = optionize3<TwoAtomsViewControlsOptions, SelfOptions, ScreenViewOptions>()( {},
-      MPConstants.SCREEN_VIEW_OPTIONS, providedOptions );
+    const options = optionize<TwoAtomsViewControlsOptions, SelfOptions, ScreenViewOptions>()( {
+      layoutBounds: MPConstants.LAYOUT_BOUNDS
+    }, providedOptions );
 
     super( options );
 

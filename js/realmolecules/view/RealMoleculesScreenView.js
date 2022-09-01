@@ -37,8 +37,9 @@ class RealMoleculesScreenView extends ScreenView {
     assert && assert( model instanceof RealMoleculesModel, 'invalid model' );
 
     options = merge( {
+      layoutBounds: MPConstants.LAYOUT_BOUNDS,
       tandem: Tandem.REQUIRED
-    }, MPConstants.SCREEN_VIEW_OPTIONS, options );
+    }, options );
 
     super( options );
 
