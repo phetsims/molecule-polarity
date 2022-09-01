@@ -30,7 +30,7 @@ export type PartialChargeNodeOptions = SelfOptions & PickOptional<NodeOptions, '
 
 export default class PartialChargeNode extends Node {
 
-  public readonly update: () => void;
+  private readonly update: () => void;
 
   public constructor( atom: Atom, unitVectorFunction: () => Vector2, providedOptions?: PartialChargeNodeOptions ) {
 
