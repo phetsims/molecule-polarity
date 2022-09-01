@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -22,12 +23,13 @@ export default class UnderDevelopmentPlane extends Plane {
 
   public constructor( layoutBounds: Bounds2 ) {
 
-    const urlString = allowLinksProperty.value ?
-                      StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
-                        href: LEGACY_URL,
-                        text: LEGACY_URL
-                      } ) :
-                      LEGACY_URL;
+    const urlStringProperty = new DerivedProperty( [ allowLinksProperty ],
+      ( allowLinks: boolean ) => allowLinks ?
+                                 StringUtils.fillIn( '<a href="{{href}}">{{text}}</a>', {
+                                   href: LEGACY_URL,
+                                   text: LEGACY_URL
+                                 } ) :
+                                 LEGACY_URL );
 
     const maxTextWidth = 0.75 * layoutBounds.width;
 
@@ -46,7 +48,7 @@ export default class UnderDevelopmentPlane extends Plane {
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
             } ),
-            new RichText( urlString, {
+            new RichText( urlStringProperty, {
               links: true,
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
