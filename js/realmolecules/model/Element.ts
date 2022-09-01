@@ -1,29 +1,26 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * An element in the periodic table.
+ * Element is an element in the periodic table.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import { TColor } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class Element {
+export default class Element {
 
-  /**
-   * @param {number} elementNumber
-   * @param {Color|String} color
-   */
-  constructor( elementNumber, color ) {
-    assert && AssertUtils.assertPositiveInteger( elementNumber );
+  public readonly elementNumber: number;
+  public readonly color: TColor;
 
-    // @public (read-only)
+  public constructor( elementNumber: number, color: TColor ) {
+    assert && assert( Number.isInteger( elementNumber ) && elementNumber > 0,
+      `elementNumber must be a positive integer: ${elementNumber}` );
+
     this.elementNumber = elementNumber;
     this.color = color;
   }
 }
 
 moleculePolarity.register( 'Element', Element );
-export default Element;

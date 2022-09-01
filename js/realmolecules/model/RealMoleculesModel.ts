@@ -1,41 +1,53 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Model for the 'Real Molecules' screen.
+ * RealMoleculesModel is the model for the 'Real Molecules' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import moleculePolarityStrings from '../../moleculePolarityStrings.js';
 import mol2Data from './mol2Data.js';
 import RealMolecule from './RealMolecule.js';
 
-class RealMoleculesModel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type RealMoleculesModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED
-    }, options );
+export default class RealMoleculesModel extends PhetioObject {
+
+  // the set of molecules to choose from
+  public readonly molecules: RealMolecule[];
+
+  // the selected molecule
+  public readonly moleculeProperty: Property<RealMolecule>;
+
+  public constructor( providedOptions: RealMoleculesModelOptions ) {
+
+    const options = optionize<RealMoleculesModelOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
+      phetioState: false
+    }, providedOptions );
+
+    super( options );
 
     const moleculesTandem = options.tandem.createTandem( 'molecules' );
 
-    // @public (read-only) the set of molecules to choose from
+    const selectedMolecule = new RealMolecule( 'HF', moleculePolarityStrings.hydrogenFluoride, mol2Data.HF, moleculesTandem.createTandem( 'HF' ) );
+
     this.molecules = [
 
       new RealMolecule( 'H2', moleculePolarityStrings.hydrogen, mol2Data.H2, moleculesTandem.createTandem( 'H2' ) ),
       new RealMolecule( 'N2', moleculePolarityStrings.nitrogen, mol2Data.N2, moleculesTandem.createTandem( 'N2' ) ),
       new RealMolecule( 'O2', moleculePolarityStrings.oxygen, mol2Data.O2, moleculesTandem.createTandem( 'O2' ) ),
       new RealMolecule( 'F2', moleculePolarityStrings.fluorine, mol2Data.F2, moleculesTandem.createTandem( 'F2' ) ),
-      new RealMolecule( 'HF', moleculePolarityStrings.hydrogenFluoride, mol2Data.HF, moleculesTandem.createTandem( 'HF' ) ),
+      selectedMolecule,
 
       new RealMolecule( 'H2O', moleculePolarityStrings.water, mol2Data.H2O, moleculesTandem.createTandem( 'H2O' ) ),
       new RealMolecule( 'CO2', moleculePolarityStrings.carbonDioxide, mol2Data.CO2, moleculesTandem.createTandem( 'CO2' ) ),
@@ -55,19 +67,16 @@ class RealMoleculesModel {
       new RealMolecule( 'CHCl3', moleculePolarityStrings.chloroform, mol2Data.CHCl3, moleculesTandem.createTandem( 'CHCl3' ) )
     ];
 
-    // @public the selected molecule
-    this.moleculeProperty = new Property( this.molecules[ 4 ], {
+    this.moleculeProperty = new Property( selectedMolecule, {
       validValues: this.molecules,
       phetioValueType: RealMolecule.RealMoleculeIO,
       tandem: options.tandem.createTandem( 'moleculeProperty' )
     } );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.moleculeProperty.reset();
   }
 }
 
 moleculePolarity.register( 'RealMoleculesModel', RealMoleculesModel );
-export default RealMoleculesModel;

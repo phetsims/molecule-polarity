@@ -1,6 +1,5 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Real molecule that is viewable in PhET's 3D molecule viewer.
  * The molecule is described using the mol2 standard format.
@@ -15,20 +14,25 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-class RealMolecule extends PhetioObject {
+export default class RealMolecule extends PhetioObject {
 
-  //TODO https://github.com/phetsims/molecule-polarity/issues/140 support for dynamic locale
+  public readonly symbol: string;
+  public readonly fullName: string;
+  public readonly mol2Data: string;
+
+  public static readonly RealMoleculeIO = new IOType( 'RealMoleculeIO', {
+    valueType: RealMolecule,
+    supertype: ReferenceIO( IOType.ObjectIO )
+  } );
+
   /**
-   * @param {string} symbol - chemical symbol of the molecule
-   * @param {string} fullName - full name of the molecule
-   * @param {string} mol2Data molecule data description, in mol2 format
-   * @param {Tandem} tandem
+   * @param symbol - chemical symbol of the molecule
+   * @param fullName - full name of the molecule
+   * @param mol2Data molecule data description, in mol2 format
+   * @param tandem
    */
-  constructor( symbol, fullName, mol2Data, tandem ) {
-    assert && assert( typeof symbol === 'string', 'invalid symbol' );
-    assert && assert( typeof fullName === 'string', 'invalid fullName' );
-    assert && assert( typeof mol2Data === 'string', 'invalid mol2Data' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  //TODO https://github.com/phetsims/molecule-polarity/issues/140 change fullName to fullNameProperty
+  public constructor( symbol: string, fullName: string, mol2Data: string, tandem: Tandem ) {
 
     super( {
       phetioType: RealMolecule.RealMoleculeIO,
@@ -36,17 +40,10 @@ class RealMolecule extends PhetioObject {
       tandem: tandem
     } );
 
-    // @public (read-only)
     this.symbol = ChemUtils.toSubscript( symbol );
     this.fullName = fullName;
     this.mol2Data = mol2Data;
   }
 }
 
-RealMolecule.RealMoleculeIO = new IOType( 'RealMoleculeIO', {
-  valueType: RealMolecule,
-  supertype: ReferenceIO( IOType.ObjectIO )
-} );
-
 moleculePolarity.register( 'RealMolecule', RealMolecule );
-export default RealMolecule;

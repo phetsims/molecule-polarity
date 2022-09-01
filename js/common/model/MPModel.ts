@@ -79,7 +79,7 @@ export default abstract class MPModel extends PhetioObject {
     let dipole = molecule.dipoleProperty.value;
 
     // This algorithm is for a dipole that points from positive to negative charge, and is therefore
-    // anti-parallel to the E-field.  For IUPAC convention, the direction of the dipole moment
+    // antiparallel to the E-field.  For IUPAC convention, the direction of the dipole moment
     // is from negative to positive charge, so rotate the dipole 180 degrees. See issue #5 and #56.
     if ( MPPreferences.dipoleDirectionProperty.value === 'negativeToPositive' ) {
       dipole = dipole.rotated( Math.PI );
