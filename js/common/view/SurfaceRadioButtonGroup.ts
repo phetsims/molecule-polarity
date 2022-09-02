@@ -50,7 +50,7 @@ function createItem( value: SurfaceType,
   return {
     value: value,
     createNode: ( tandem: Tandem ) => new Text( labelStringProperty, combineOptions<TextOptions>( {
-      tandem: tandem.createTandem( 'electronDensityText' ),
+      tandem: tandem.createTandem( 'labelText' ),
       phetioVisiblePropertyInstrumented: false
     }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
     tandemName: tandemName
