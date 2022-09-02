@@ -26,16 +26,16 @@ export default class MolecularDipoleCheckbox extends Checkbox {
 
     const options = providedOptions;
 
-    const textNode = new Text( moleculePolarityStrings.molecularDipoleStringProperty,
+    const labelText = new Text( moleculePolarityStrings.molecularDipoleStringProperty,
       combineOptions<TextOptions>( {
-        tandem: options.tandem.createTandem( 'textNode' ),
+        tandem: options.tandem.createTandem( 'labelText' ),
         phetioVisiblePropertyInstrumented: false
       }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     const iconNode = MolecularDipoleNode.createIcon();
 
     const content = new HBox( {
-      children: [ textNode, iconNode ],
+      children: [ labelText, iconNode ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
     } );
 

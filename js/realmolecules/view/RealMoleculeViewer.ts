@@ -56,7 +56,7 @@ export default class RealMoleculeViewer extends Node {
       fill: options.backgroundColor
     } );
 
-    const titleNode = new Text( '3D molecule viewer goes here', {
+    const titleText = new Text( '3D molecule viewer goes here', {
       font: new PhetFont( {
         size: 22,
         weight: 'bold'
@@ -109,7 +109,7 @@ export default class RealMoleculeViewer extends Node {
       centerX: rectNode.centerX,
       centerY: rectNode.centerY,
       children: [
-        titleNode,
+        titleText,
         new Line( 0, 0, 0, 30 ),
         moleculeTextParent,
         new Line( 0, 0, 0, 30 ),

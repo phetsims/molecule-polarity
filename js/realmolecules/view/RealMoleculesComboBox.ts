@@ -43,7 +43,7 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
     options.labelNode = new Text( moleculePolarityStrings.moleculeStringProperty, {
       font: new PhetFont( 22 ),
       maxWidth: 150,
-      tandem: options.tandem.createTandem( 'labelNode' ),
+      tandem: options.tandem.createTandem( 'labelText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 

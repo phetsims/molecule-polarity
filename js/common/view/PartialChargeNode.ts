@@ -45,14 +45,14 @@ export default class PartialChargeNode extends Node {
         ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString
     );
 
-    // textNode has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
-    const textNode = new Text( textProperty, {
+    // labelText has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
+    const labelText = new Text( textProperty, {
       font: new PhetFont( 32 ),
       fill: 'black',
       maxWidth: 50
     } );
     const chargeNode = new Node( {
-      children: [ textNode ]
+      children: [ labelText ]
     } );
     this.addChild( chargeNode );
 
@@ -62,7 +62,7 @@ export default class PartialChargeNode extends Node {
       // invisible if dipole is zero
       const partialChargeVisible = ( partialCharge !== 0 );
 
-      textNode.visible = partialChargeVisible;
+      labelText.visible = partialChargeVisible;
 
       // Only update if the partial charge is visible
       if ( partialChargeVisible ) {
@@ -88,7 +88,7 @@ export default class PartialChargeNode extends Node {
     // Changing any of these Properties requires an update.
     atom.partialChargeProperty.link( this.update.bind( this ) );
     atom.positionProperty.link( this.update.bind( this ) );
-    textNode.boundsProperty.link( this.update.bind( this ) );
+    labelText.boundsProperty.link( this.update.bind( this ) );
 
     // Update when this Node becomes visible
     this.visibleProperty.link( visible => visible && this.update() );

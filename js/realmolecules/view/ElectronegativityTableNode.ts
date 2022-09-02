@@ -113,8 +113,8 @@ class Cell extends Node {
 
   public readonly elementNumber: number;
   private readonly backgroundNode: Rectangle;
-  private readonly symbolNode: Text;
-  private readonly electronegativityNode: Text;
+  private readonly symbolText: Text;
+  private readonly electronegativityText: Text;
 
   /**
    * @param symbol - element's symbol in the periodic table
@@ -132,34 +132,34 @@ class Cell extends Node {
       stroke: 'black'
     } );
 
-    this.symbolNode = new Text( symbol, {
+    this.symbolText = new Text( symbol, {
       font: new PhetFont( { size: 22, weight: 'bold' } ),
       fill: NORMAL_TEXT_COLOR
     } );
 
-    this.electronegativityNode = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
+    this.electronegativityText = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
       font: new PhetFont( 16 ),
       fill: NORMAL_TEXT_COLOR
     } );
 
-    this.children = [ this.backgroundNode, this.symbolNode, this.electronegativityNode ];
+    this.children = [ this.backgroundNode, this.symbolText, this.electronegativityText ];
 
     // layout
-    this.symbolNode.centerX = this.electronegativityNode.centerX = this.backgroundNode.centerX;
-    this.symbolNode.top = 3;
-    this.electronegativityNode.bottom = this.backgroundNode.bottom - 3;
+    this.symbolText.centerX = this.electronegativityText.centerX = this.backgroundNode.centerX;
+    this.symbolText.top = 3;
+    this.electronegativityText.bottom = this.backgroundNode.bottom - 3;
   }
 
   // makes the cell appear enabled
   public enable( color: TColor ): void {
     this.backgroundNode.fill = color;
-    this.symbolNode.fill = this.electronegativityNode.fill = HIGHLIGHTED_TEXT_COLOR;
+    this.symbolText.fill = this.electronegativityText.fill = HIGHLIGHTED_TEXT_COLOR;
   }
 
   // makes the cell appear disabled
   public disable(): void {
     this.backgroundNode.fill = BACKGROUND_COLOR;
-    this.symbolNode.fill = this.electronegativityNode.fill = NORMAL_TEXT_COLOR;
+    this.symbolText.fill = this.electronegativityText.fill = NORMAL_TEXT_COLOR;
   }
 }
 
