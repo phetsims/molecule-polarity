@@ -14,7 +14,7 @@ import { Circle, Line, Node, Rectangle, Text, TextOptions } from '../../../../sc
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Atom from '../../common/model/Atom.js';
@@ -46,7 +46,7 @@ export default class BondCharacterPanel extends Panel {
     }, providedOptions );
 
     // title
-    const bondCharacterText = new Text( moleculePolarityStrings.bondCharacterStringProperty, {
+    const bondCharacterText = new Text( MoleculePolarityStrings.bondCharacterStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH,
@@ -60,12 +60,12 @@ export default class BondCharacterPanel extends Panel {
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     };
-    const moreCovalentText = new Text( moleculePolarityStrings.moreCovalentStringProperty,
+    const moreCovalentText = new Text( MoleculePolarityStrings.moreCovalentStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'moreCovalentText' ),
         phetioVisiblePropertyInstrumented: false
       }, labelOptions ) );
-    const moreIconicText = new Text( moleculePolarityStrings.moreIonicStringProperty,
+    const moreIconicText = new Text( MoleculePolarityStrings.moreIonicStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'moreIconicText' ),
         phetioVisiblePropertyInstrumented: false

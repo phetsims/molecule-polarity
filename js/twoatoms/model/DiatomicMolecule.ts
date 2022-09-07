@@ -15,7 +15,7 @@ import Molecule, { MoleculeOptions } from '../../common/model/Molecule.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -32,12 +32,12 @@ export default class DiatomicMolecule extends Molecule {
 
     const options = providedOptions;
 
-    const atomA = new Atom( moleculePolarityStrings.atomAStringProperty, {
+    const atomA = new Atom( MoleculePolarityStrings.atomAStringProperty, {
       color: MPColors.ATOM_A,
       tandem: options.tandem.createTandem( 'atomA' )
     } );
 
-    const atomB = new Atom( moleculePolarityStrings.atomBStringProperty, {
+    const atomB = new Atom( MoleculePolarityStrings.atomBStringProperty, {
       color: MPColors.ATOM_B,
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ),
       tandem: options.tandem.createTandem( 'atomB' )

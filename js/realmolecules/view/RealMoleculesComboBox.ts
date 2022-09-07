@@ -15,7 +15,7 @@ import { Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -40,7 +40,7 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
     }, provideOptions );
 
     // label
-    options.labelNode = new Text( moleculePolarityStrings.moleculeStringProperty, {
+    options.labelNode = new Text( MoleculePolarityStrings.moleculeStringProperty, {
       font: new PhetFont( 22 ),
       maxWidth: 150,
       tandem: options.tandem.createTandem( 'labelText' ),
@@ -59,7 +59,7 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
  */
 function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
-  const textProperty = new PatternStringProperty( moleculePolarityStrings.pattern.symbolNameStringProperty, {
+  const textProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
     symbol: molecule.symbol,
     name: molecule.fullNameProperty
   } );

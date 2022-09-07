@@ -10,7 +10,7 @@ import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-co
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
 import { SurfaceType } from '../model/SurfaceType.js';
@@ -33,7 +33,7 @@ export default class SurfaceControl extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.surfaceStringProperty, combineOptions<TextOptions>( {
+    const titleText = new Text( MoleculePolarityStrings.surfaceStringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'titleText' ),
       phetioVisiblePropertyInstrumented: false
     }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );

@@ -14,7 +14,7 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Bond from '../model/Bond.js';
 import MPConstants from '../MPConstants.js';
@@ -39,8 +39,8 @@ export default class PartialChargeNode extends Node {
 
     const textProperty = new DerivedProperty( [
         atom.partialChargeProperty,
-        moleculePolarityStrings.deltaPlusStringProperty,
-        moleculePolarityStrings.deltaMinusStringProperty
+        MoleculePolarityStrings.deltaPlusStringProperty,
+        MoleculePolarityStrings.deltaMinusStringProperty
       ], ( partialCharge: number, deltaPlusString: string, deltaMinusString: string ) =>
         ( partialCharge > 0 ) ? deltaPlusString : deltaMinusString
     );

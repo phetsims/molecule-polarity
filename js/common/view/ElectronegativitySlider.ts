@@ -17,7 +17,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import HSlider, { HSliderOptions } from '../../../../sun/js/HSlider.js';
 import Slider from '../../../../sun/js/Slider.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import MPConstants from '../MPConstants.js';
@@ -74,8 +74,8 @@ export default class ElectronegativitySlider extends HSlider {
       font: new PhetFont( 16 ),
       maxWidth: 40
     };
-    this.addMajorTick( range.min, new Text( moleculePolarityStrings.lessStringProperty, tickLabelOptions ) );
-    this.addMajorTick( range.max, new Text( moleculePolarityStrings.moreStringProperty, tickLabelOptions ) );
+    this.addMajorTick( range.min, new Text( MoleculePolarityStrings.lessStringProperty, tickLabelOptions ) );
+    this.addMajorTick( range.max, new Text( MoleculePolarityStrings.moreStringProperty, tickLabelOptions ) );
     const centerTick = range.min + ( range.getLength() / 2 );
     this.addMajorTick( centerTick );
     for ( let i = range.min + options.tickSpacing; i < range.max; i += options.tickSpacing ) {

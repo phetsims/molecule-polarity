@@ -15,7 +15,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line, Node, NodeOptions, Rectangle, RichText, TColor, Text, VBox } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Element from '../model/Element.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
@@ -70,7 +70,7 @@ export default class RealMoleculeViewer extends Node {
     moleculeProperty.link( molecule => {
       moleculeTextParent.removeAllChildren();
       moleculeStringProperty && moleculeStringProperty.dispose();
-      moleculeStringProperty = new PatternStringProperty( moleculePolarityStrings.pattern.symbolNameStringProperty, {
+      moleculeStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
         symbol: molecule.symbol,
         name: molecule.fullNameProperty
       } );

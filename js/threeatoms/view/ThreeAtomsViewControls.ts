@@ -14,7 +14,7 @@ import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.js';
 import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -33,7 +33,7 @@ export default class ThreeAtomsViewControls extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.viewStringProperty,
+    const titleText = new Text( MoleculePolarityStrings.viewStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'titleText' ),
         phetioVisiblePropertyInstrumented: false

@@ -16,7 +16,7 @@ import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
-import moleculePolarityStrings from '../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
@@ -31,7 +31,7 @@ export default class TwoAtomsScreen extends Screen {
     const options = optionize<TwoAtomsScreenOptions, SelfOptions, ScreenOptions>()( {
 
       // ScreenOptions
-      name: moleculePolarityStrings.screen.twoAtomsStringProperty,
+      name: MoleculePolarityStrings.screen.twoAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon()
     }, providedOptions );
@@ -76,13 +76,13 @@ function createScreenIcon(): ScreenIcon {
     y: bond.centerY
   } );
 
-  const textA = new Text( moleculePolarityStrings.atomAStringProperty, {
+  const textA = new Text( MoleculePolarityStrings.atomAStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomA.center
   } );
 
-  const textB = new Text( moleculePolarityStrings.atomBStringProperty, {
+  const textB = new Text( MoleculePolarityStrings.atomBStringProperty, {
     font: font,
     maxWidth: 0.75 * atomDiameter,
     center: atomB.center

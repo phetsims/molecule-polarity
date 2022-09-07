@@ -13,7 +13,7 @@ import { Text, TextOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,7 +25,7 @@ class PartialChargesCheckbox extends Checkbox {
 
     const options = providedOptions;
 
-    const labelText = new Text( moleculePolarityStrings.partialChargesStringProperty,
+    const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'labelText' ),
         phetioVisiblePropertyInstrumented: false

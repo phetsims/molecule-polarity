@@ -14,7 +14,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import { DipoleDirection } from '../model/DipoleDirection.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
@@ -42,9 +42,9 @@ export default class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioBu
 
     // d+ -> d-
     const positiveToNegativeStringProperty =
-      new PatternStringProperty( moleculePolarityStrings.pattern.dipoleDirectionStringProperty, {
-        from: moleculePolarityStrings.deltaPlusStringProperty,
-        to: moleculePolarityStrings.deltaMinusStringProperty
+      new PatternStringProperty( MoleculePolarityStrings.pattern.dipoleDirectionStringProperty, {
+        from: MoleculePolarityStrings.deltaPlusStringProperty,
+        to: MoleculePolarityStrings.deltaMinusStringProperty
       }, {
         tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
         phetioValueType: StringIO
@@ -52,9 +52,9 @@ export default class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioBu
 
     // d- -> d+
     const negativeToPositiveStringProperty =
-      new PatternStringProperty( moleculePolarityStrings.pattern.dipoleDirectionStringProperty, {
-        from: moleculePolarityStrings.deltaMinusStringProperty,
-        to: moleculePolarityStrings.deltaPlusStringProperty
+      new PatternStringProperty( MoleculePolarityStrings.pattern.dipoleDirectionStringProperty, {
+        from: MoleculePolarityStrings.deltaMinusStringProperty,
+        to: MoleculePolarityStrings.deltaPlusStringProperty
       }, {
         tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
         phetioValueType: StringIO

@@ -11,7 +11,7 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import MPPreferencesNode from './common/view/MPPreferencesNode.js';
-import moleculePolarityStrings from './moleculePolarityStrings.js';
+import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 import RealMoleculesScreen from './realmolecules/RealMoleculesScreen.js';
 import ThreeAtomsScreen from './threeatoms/ThreeAtomsScreen.js';
 import TwoAtomsScreen from './twoatoms/TwoAtomsScreen.js';
@@ -24,7 +24,7 @@ simLauncher.launch( () => {
     new RealMoleculesScreen( { tandem: Tandem.ROOT.createTandem( 'realMoleculesScreen' ) } )
   ];
 
-  const sim = new Sim( moleculePolarityStrings[ 'molecule-polarity' ].titleStringProperty, screens, {
+  const sim = new Sim( MoleculePolarityStrings[ 'molecule-polarity' ].titleStringProperty, screens, {
     preferencesModel: new PreferencesModel( {
       simulationOptions: {
         customPreferences: [ {

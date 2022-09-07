@@ -15,7 +15,7 @@ import { Node, Text } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import ElectronegativitySlider from './ElectronegativitySlider.js';
@@ -42,7 +42,7 @@ export default class ElectronegativityPanel extends Panel {
       yMargin: 6
     }, providedOptions );
 
-    const titleStringProperty = new PatternStringProperty( moleculePolarityStrings.pattern.atomNameStringProperty, {
+    const titleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.atomNameStringProperty, {
       name: atom.labelStringProperty
     }, {
       tandem: options.tandem.createTandem( 'titleStringProperty' ),
@@ -58,7 +58,7 @@ export default class ElectronegativityPanel extends Panel {
     } );
 
     // subtitle
-    const subtitleText = new Text( moleculePolarityStrings.electronegativityStringProperty, {
+    const subtitleText = new Text( MoleculePolarityStrings.electronegativityStringProperty, {
       font: new PhetFont( 18 ),
       maxWidth: titleText.maxWidth,
       tandem: options.tandem.createTandem( 'subtitleText' ),

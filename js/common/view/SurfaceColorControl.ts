@@ -9,7 +9,7 @@
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceColorRadioButtonGroup from './SurfaceColorRadioButtonGroup.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
@@ -35,7 +35,7 @@ export default class SurfaceColorControl extends VBox {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING
     }, providedOptions );
 
-    const titleText = new Text( moleculePolarityStrings.surfaceColorRealMoleculesStringProperty, {
+    const titleText = new Text( MoleculePolarityStrings.surfaceColorRealMoleculesStringProperty, {
       font: new PhetFont( 14 ),
       maxWidth: 400,
       tandem: options.tandem.createTandem( 'titleText' ),

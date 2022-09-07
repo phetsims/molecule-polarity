@@ -14,7 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { allowLinksProperty, Plane, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 // constants
 const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
@@ -37,14 +37,14 @@ export default class UnderDevelopmentPlane extends Plane {
       align: 'left',
       spacing: 20,
       children: [
-        new Text( moleculePolarityStrings.underDevelopment.line1StringProperty, {
+        new Text( MoleculePolarityStrings.underDevelopment.line1StringProperty, {
           font: new PhetFont( 22 ),
           maxWidth: maxTextWidth
         } ),
         new VBox( {
           align: 'left',
           children: [
-            new Text( moleculePolarityStrings.underDevelopment.line2StringProperty, {
+            new Text( MoleculePolarityStrings.underDevelopment.line2StringProperty, {
               font: new PhetFont( 16 ),
               maxWidth: maxTextWidth
             } ),

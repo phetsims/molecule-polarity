@@ -17,7 +17,7 @@ import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_pn
 import MPColors from '../common/MPColors.js';
 import MPQueryParameters from '../common/MPQueryParameters.js';
 import moleculePolarity from '../moleculePolarity.js';
-import moleculePolarityStrings from '../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
@@ -32,7 +32,7 @@ export default class RealMoleculesScreen extends Screen {
     const options = optionize<RealMoleculesScreenOptions, SelfOptions, ScreenOptions>()( {
 
       // ScreenOptions
-      name: moleculePolarityStrings.screen.realMoleculesStringProperty,
+      name: MoleculePolarityStrings.screen.realMoleculesStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
       homeScreenIcon: createScreenIcon()
     }, provideOptions );

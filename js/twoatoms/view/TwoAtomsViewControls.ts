@@ -11,7 +11,7 @@ import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondCharacterCheckbox from './BondCharacterCheckbox.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -33,7 +33,7 @@ export default class TwoAtomsViewControls extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.viewStringProperty, combineOptions<TextOptions>( {
+    const titleText = new Text( MoleculePolarityStrings.viewStringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'titleText' ),
       phetioVisiblePropertyInstrumented: false
     }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );

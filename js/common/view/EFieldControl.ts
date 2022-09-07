@@ -12,7 +12,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
@@ -36,7 +36,7 @@ export default class EFieldControl extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( moleculePolarityStrings.electricFieldStringProperty,
+    const titleText = new Text( MoleculePolarityStrings.electricFieldStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'titleText' ),
         phetioVisiblePropertyInstrumented: false
@@ -44,8 +44,8 @@ export default class EFieldControl extends VBox {
 
     // on/off switch
     const onOffSwitch = new ABSwitch( eFieldEnabledProperty,
-      false, new Text( moleculePolarityStrings.offStringProperty, SWITCH_LABEL_OPTIONS ),
-      true, new Text( moleculePolarityStrings.onStringProperty, SWITCH_LABEL_OPTIONS ), {
+      false, new Text( MoleculePolarityStrings.offStringProperty, SWITCH_LABEL_OPTIONS ),
+      true, new Text( MoleculePolarityStrings.onStringProperty, SWITCH_LABEL_OPTIONS ), {
         spacing: 12,
         toggleSwitchOptions: {
           trackFillLeft: 'rgb( 180, 180, 180 )',

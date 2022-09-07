@@ -9,7 +9,7 @@
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import DipoleDirectionRadioButtonGroup from './DipoleDirectionRadioButtonGroup.js';
 import { DipoleDirection } from '../model/DipoleDirection.js';
@@ -36,7 +36,7 @@ export default class DipoleDirectionControl extends VBox {
     }, providedOptions );
 
     // title
-    const dipoleDirectionText = new Text( moleculePolarityStrings.dipoleDirectionStringProperty, {
+    const dipoleDirectionText = new Text( MoleculePolarityStrings.dipoleDirectionStringProperty, {
       font: new PhetFont( 18 ),
       maxWidth: 500,
       tandem: options.tandem.createTandem( 'dipoleDirectionText' ),

@@ -16,7 +16,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Color, HBox, Node, NodeOptions, Rectangle, TColor, Text, VBox } from '../../../../scenery/js/imports.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
 
 // constants
@@ -40,7 +40,7 @@ export default class ElectronegativityTableNode extends Node {
       // This no-op optionize call is needed in order to set options.children below.
     }, providedOptions );
 
-    const titleText = new Text( moleculePolarityStrings.atomElectronegativitiesStringProperty, {
+    const titleText = new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       maxWidth: 300,
       tandem: options.tandem.createTandem( 'titleText' ),

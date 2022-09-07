@@ -13,7 +13,7 @@ import { Text, TextOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -25,7 +25,7 @@ export default class BondCharacterCheckbox extends Checkbox {
 
     const options = providedOptions;
 
-    const labelText = new Text( moleculePolarityStrings.bondCharacterStringProperty,
+    const labelText = new Text( MoleculePolarityStrings.bondCharacterStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'labelText' ),
         phetioVisiblePropertyInstrumented: false

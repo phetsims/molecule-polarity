@@ -12,7 +12,7 @@ import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.js';
 import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import AtomElectronegativitiesCheckbox from './AtomElectronegativitiesCheckbox.js';
 import AtomLabelsCheckbox from './AtomLabelsCheckbox.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
@@ -34,7 +34,7 @@ export default class RealMoleculesViewControls extends VBox {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING
     }, provideOptions );
 
-    const titleText = new Text( moleculePolarityStrings.viewStringProperty,
+    const titleText = new Text( MoleculePolarityStrings.viewStringProperty,
       combineOptions<TextOptions>( {
         tandem: options.tandem.createTandem( 'titleText' ),
         phetioVisiblePropertyInstrumented: false

@@ -13,7 +13,7 @@ import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
 
 type SelfOptions = {
@@ -33,8 +33,8 @@ export default class BondDipolesCheckbox extends Checkbox {
     }, providedOptions );
 
     const stringProperty = options.singular ?
-                           moleculePolarityStrings.bondDipoleStringProperty :
-                           moleculePolarityStrings.bondDipolesStringProperty;
+                           MoleculePolarityStrings.bondDipoleStringProperty :
+                           MoleculePolarityStrings.bondDipolesStringProperty;
 
     const labelText = new Text( stringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'labelText' ),

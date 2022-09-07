@@ -12,7 +12,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions } from '../../../../scenery/js/imports.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import moleculePolarityStrings from '../../moleculePolarityStrings.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -34,9 +34,9 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
     }, providedOptions );
 
     const radioButtonGroupItems = [
-      createItem( 'none', moleculePolarityStrings.noneStringProperty, 'noneRadioButton' ),
-      createItem( 'electrostaticPotential', moleculePolarityStrings.electrostaticPotentialStringProperty, 'electrostaticPotentialRadioButton' ),
-      createItem( 'electronDensity', moleculePolarityStrings.electronDensityStringProperty, 'electronDensityRadioButton' )
+      createItem( 'none', MoleculePolarityStrings.noneStringProperty, 'noneRadioButton' ),
+      createItem( 'electrostaticPotential', MoleculePolarityStrings.electrostaticPotentialStringProperty, 'electrostaticPotentialRadioButton' ),
+      createItem( 'electronDensity', MoleculePolarityStrings.electronDensityStringProperty, 'electronDensityRadioButton' )
     ];
 
     super( surfaceTypeProperty, radioButtonGroupItems, options );

@@ -77,8 +77,8 @@ type StringsType = {
   }
 };
 
-const moleculePolarityStrings = getStringModule( 'MOLECULE_POLARITY' ) as StringsType;
+const MoleculePolarityStrings = getStringModule( 'MOLECULE_POLARITY' ) as StringsType;
 
-moleculePolarity.register( 'moleculePolarityStrings', moleculePolarityStrings );
+moleculePolarity.register( 'MoleculePolarityStrings', MoleculePolarityStrings );
 
-export default moleculePolarityStrings;
+export default MoleculePolarityStrings;
