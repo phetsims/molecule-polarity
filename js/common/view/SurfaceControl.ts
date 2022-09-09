@@ -34,8 +34,7 @@ export default class SurfaceControl extends VBox {
 
     // title
     const titleText = new Text( MoleculePolarityStrings.surfaceStringProperty, combineOptions<TextOptions>( {
-      tandem: options.tandem.createTandem( 'titleText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'titleText' )
     }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
 
     // Radio button group

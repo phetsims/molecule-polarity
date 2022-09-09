@@ -88,8 +88,7 @@ function createItem( value: DipoleDirection,
     createNode: ( tandem: Tandem ) => new Text( labelStringProperty, {
       font: new PhetFont( 24 ),
       maxWidth: 500,
-      tandem: tandem.createTandem( 'labelText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: tandem.createTandem( 'labelText' )
     } ),
     tandemName: tandemName
   };

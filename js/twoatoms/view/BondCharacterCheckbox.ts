@@ -27,8 +27,7 @@ export default class BondCharacterCheckbox extends Checkbox {
 
     const labelText = new Text( MoleculePolarityStrings.bondCharacterStringProperty,
       combineOptions<TextOptions>( {
-        tandem: options.tandem.createTandem( 'labelText' ),
-        phetioVisiblePropertyInstrumented: false
+        tandem: options.tandem.createTandem( 'labelText' )
       }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     super( bondCharacterVisibleProperty, labelText, options );

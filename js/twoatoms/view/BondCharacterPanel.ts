@@ -50,8 +50,7 @@ export default class BondCharacterPanel extends Panel {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH,
-      tandem: options.tandem.createTandem( 'bondCharacterText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'bondCharacterText' )
     } );
 
     // labels
@@ -62,13 +61,11 @@ export default class BondCharacterPanel extends Panel {
     };
     const moreCovalentText = new Text( MoleculePolarityStrings.moreCovalentStringProperty,
       combineOptions<TextOptions>( {
-        tandem: options.tandem.createTandem( 'moreCovalentText' ),
-        phetioVisiblePropertyInstrumented: false
+        tandem: options.tandem.createTandem( 'moreCovalentText' )
       }, labelOptions ) );
     const moreIconicText = new Text( MoleculePolarityStrings.moreIonicStringProperty,
       combineOptions<TextOptions>( {
-        tandem: options.tandem.createTandem( 'moreIconicText' ),
-        phetioVisiblePropertyInstrumented: false
+        tandem: options.tandem.createTandem( 'moreIconicText' )
       }, labelOptions ) );
 
     // marker that moves along the track, not interactive

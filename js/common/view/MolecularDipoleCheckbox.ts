@@ -28,8 +28,7 @@ export default class MolecularDipoleCheckbox extends Checkbox {
 
     const labelText = new Text( MoleculePolarityStrings.molecularDipoleStringProperty,
       combineOptions<TextOptions>( {
-        tandem: options.tandem.createTandem( 'labelText' ),
-        phetioVisiblePropertyInstrumented: false
+        tandem: options.tandem.createTandem( 'labelText' )
       }, MPConstants.CONTROL_TEXT_OPTIONS ) );
 
     const iconNode = MolecularDipoleNode.createIcon();

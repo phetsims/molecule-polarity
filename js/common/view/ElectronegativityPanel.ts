@@ -53,16 +53,14 @@ export default class ElectronegativityPanel extends Panel {
     const titleText = new Text( titleStringProperty, {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: 150,
-      tandem: options.tandem.createTandem( 'titleText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     // subtitle
     const subtitleText = new Text( MoleculePolarityStrings.electronegativityStringProperty, {
       font: new PhetFont( 18 ),
       maxWidth: titleText.maxWidth,
-      tandem: options.tandem.createTandem( 'subtitleText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'subtitleText' )
     } );
 
     // slider

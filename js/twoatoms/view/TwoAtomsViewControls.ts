@@ -34,8 +34,7 @@ export default class TwoAtomsViewControls extends VBox {
 
     // title
     const titleText = new Text( MoleculePolarityStrings.viewStringProperty, combineOptions<TextOptions>( {
-      tandem: options.tandem.createTandem( 'titleText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'titleText' )
     }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
 
     // Checkboxes

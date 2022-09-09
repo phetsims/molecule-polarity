@@ -72,16 +72,14 @@ export default class SurfaceColorKey extends Node {
       fill: 'black',
       font: options.titleFont,
       maxWidth: 0.5 * options.size.width, // i18n, determined empirically
-      tandem: options.tandem.createTandem( 'titleText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     // range labels
     const labelOptions = {
       fill: 'black',
       font: options.rangeFont,
-      maxWidth: 0.2 * options.size.width, // i18n, determined empirically
-      phetioVisiblePropertyInstrumented: false
+      maxWidth: 0.2 * options.size.width // i18n, determined empirically
     };
     const leftLabelText = new Text( leftLabelStringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'leftLabelText' )
