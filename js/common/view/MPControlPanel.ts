@@ -9,8 +9,7 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, VBox } from '../../../../scenery/js/imports.js';
-import HSeparator from '../../../../sun/js/HSeparator.js';
+import { Node, VBox, VDivider } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../MPColors.js';
@@ -32,15 +31,12 @@ export default class MPControlPanel extends Panel {
       yMargin: 15
     }, providedOptions );
 
-    // horizontal separator width is the max width of the subPanels
-    assert && assert( subPanels.length > 0 );
-    const separatorWidth = _.maxBy( subPanels, node => node.width )!.width;
-
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];
     for ( let i = 1; i < subPanels.length; i++ ) {
-      children.push( new HSeparator( separatorWidth, {
-        tandem: options.tandem.createTandem( `separator${i}` )
+      children.push( new VDivider( {
+        stroke: 'black',
+        tandem: options.tandem.createTandem( `divider${i}` )
       } ) );
       children.push( subPanels[ i ] );
     }
