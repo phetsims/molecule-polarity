@@ -76,19 +76,27 @@ function createScreenIcon(): ScreenIcon {
     y: bond.centerY
   } );
 
+  const textMaxWidth = 0.65 * atomDiameter;
+
   const textA = new Text( MoleculePolarityStrings.atomAStringProperty, {
     font: font,
-    maxWidth: 0.75 * atomDiameter,
-    center: atomA.center
+    maxWidth: textMaxWidth
   } );
 
   const textB = new Text( MoleculePolarityStrings.atomBStringProperty, {
     font: font,
-    maxWidth: 0.75 * atomDiameter,
-    center: atomB.center
+    maxWidth: textMaxWidth
   } );
 
   const iconNode = new Node( { children: [ background, bond, atomA, atomB, textA, textB ] } );
+
+  textA.boundsProperty.link( bounds => {
+    textA.center = atomA.center;
+  } );
+
+  textB.boundsProperty.link( bounds => {
+    textB.center = atomB.center;
+  } );
 
   return new ScreenIcon( iconNode, {
     maxIconWidthProportion: 1,

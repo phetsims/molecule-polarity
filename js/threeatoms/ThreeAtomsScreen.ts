@@ -93,25 +93,36 @@ function createScreenIcon(): ScreenIcon {
     centerY: bondBC.bottom
   } );
 
+  const textMaxWidth = 0.65 * atomDiameter;
+
   const textA = new Text( MoleculePolarityStrings.atomAStringProperty, {
     font: font,
-    maxWidth: 0.75 * atomDiameter,
-    center: atomA.center
+    maxWidth: textMaxWidth
   } );
 
   const textB = new Text( MoleculePolarityStrings.atomBStringProperty, {
     font: font,
-    maxWidth: 0.75 * atomDiameter,
-    center: atomB.center
+    maxWidth: textMaxWidth
   } );
 
   const textC = new Text( MoleculePolarityStrings.atomCStringProperty, {
     font: font,
-    maxWidth: 0.75 * atomDiameter,
-    center: atomC.center
+    maxWidth: textMaxWidth
   } );
 
   const iconNode = new Node( { children: [ background, bondAB, bondBC, atomA, atomB, atomC, textA, textB, textC ] } );
+
+  textA.boundsProperty.link( bounds => {
+    textA.center = atomA.center;
+  } );
+
+  textB.boundsProperty.link( bounds => {
+    textB.center = atomB.center;
+  } );
+
+  textC.boundsProperty.link( bounds => {
+    textC.center = atomC.center;
+  } );
 
   return new ScreenIcon( iconNode, {
     maxIconWidthProportion: 1,
