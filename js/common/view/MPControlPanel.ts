@@ -9,7 +9,7 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, VBox, VDivider } from '../../../../scenery/js/imports.js';
+import { Node, VBox, HSeparator } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../MPColors.js';
@@ -34,7 +34,7 @@ export default class MPControlPanel extends Panel {
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];
     for ( let i = 1; i < subPanels.length; i++ ) {
-      children.push( new VDivider( {
+      children.push( new HSeparator( {
         stroke: 'black',
         tandem: options.tandem.createTandem( `divider${i}` )
       } ) );

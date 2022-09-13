@@ -14,7 +14,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Color, HBox, Node, NodeOptions, Rectangle, TColor, Text, VBox } from '../../../../scenery/js/imports.js';
-import HSeparator from '../../../../sun/js/HSeparator.js';
+import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
@@ -48,13 +48,13 @@ export default class ElectronegativityTableNode extends Node {
 
     const cells = [
       new Cell( 'H', 1, 2.1 ),
-      new HSeparator( 12 ),
+      new HSeparatorDeprecated( 12 ),
       new Cell( 'B', 5, 2.0 ),
       new Cell( 'C', 6, 2.5 ),
       new Cell( 'N', 7, 3.0 ),
       new Cell( 'O', 8, 3.5 ),
       new Cell( 'F', 9, 4.0 ),
-      new HSeparator( 12 ),
+      new HSeparatorDeprecated( 12 ),
       new Cell( 'Cl', 17, 3.0 )
     ];
 
