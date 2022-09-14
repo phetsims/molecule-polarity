@@ -18,7 +18,7 @@ treated as equivalent, and no transform is required. (If you don't understand th
 
 **Query parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and testing. All
 such query parameters are documented
-in [MPQueryParameters](https://github.com/phetsims/molecule-polarity/blob/master/js/common/MPQueryParameters.js).
+in [MPQueryParameters](https://github.com/phetsims/molecule-polarity/blob/master/js/common/MPQueryParameters.ts).
 
 **Memory management**:
 
