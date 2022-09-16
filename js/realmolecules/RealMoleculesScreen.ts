@@ -25,7 +25,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type RealMoleculesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
-export default class RealMoleculesScreen extends Screen {
+export default class RealMoleculesScreen extends Screen<RealMoleculesModel, RealMoleculesScreenView> {
 
   public constructor( provideOptions: RealMoleculesScreenOptions ) {
 

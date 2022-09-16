@@ -24,7 +24,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type TwoAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
-export default class TwoAtomsScreen extends Screen {
+export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 
   public constructor( providedOptions: TwoAtomsScreenOptions ) {
 

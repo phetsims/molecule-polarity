@@ -19,6 +19,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Property from '../../../../axon/js/Property.js';
+import TModel from '../../../../joist/js/TModel.js';
 
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
@@ -27,7 +28,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type MPModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default abstract class MPModel extends PhetioObject {
+export default abstract class MPModel extends PhetioObject implements TModel {
 
   private readonly molecule: Molecule;
   public readonly eFieldEnabledProperty: Property<boolean>;

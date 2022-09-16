@@ -7,6 +7,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import TModel from '../../../../joist/js/TModel.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
@@ -19,7 +20,7 @@ type SelfOptions = EmptySelfOptions;
 
 export type RealMoleculesModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class RealMoleculesModel extends PhetioObject {
+export default class RealMoleculesModel extends PhetioObject implements TModel {
 
   // the set of molecules to choose from
   public readonly molecules: RealMolecule[];
@@ -76,6 +77,10 @@ export default class RealMoleculesModel extends PhetioObject {
 
   public reset(): void {
     this.moleculeProperty.reset();
+  }
+
+  public step( dt: number ): void {
+    // required by TModel
   }
 }
 
