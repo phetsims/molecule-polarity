@@ -58,12 +58,12 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
  */
 function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
-  const textProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
+  const stringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
     symbol: molecule.symbol,
     name: molecule.fullNameProperty
   } );
 
-  const node = new RichText( textProperty, {
+  const node = new RichText( stringProperty, {
     maxWidth: 200,
     font: new PhetFont( 18 )
   } );

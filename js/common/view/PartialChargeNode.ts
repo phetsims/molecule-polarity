@@ -37,7 +37,7 @@ export default class PartialChargeNode extends Node {
 
     super( providedOptions );
 
-    const textProperty = new DerivedProperty( [
+    const stringProperty = new DerivedProperty( [
         atom.partialChargeProperty,
         MoleculePolarityStrings.deltaPlusStringProperty,
         MoleculePolarityStrings.deltaMinusStringProperty
@@ -46,7 +46,7 @@ export default class PartialChargeNode extends Node {
     );
 
     // labelText has a maxWidth for i18n. Then wrap chargeNode, so that we can scale it.
-    const labelText = new Text( textProperty, {
+    const labelText = new Text( stringProperty, {
       font: new PhetFont( 32 ),
       fill: 'black',
       maxWidth: 50
