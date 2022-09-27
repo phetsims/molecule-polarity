@@ -47,12 +47,12 @@ export default class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButto
     const radioButtonGroupItems = [
       {
         value: 'RWB',
-        node: SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
+        createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
         tandemName: 'RWBRadioButton'
       },
       {
         value: 'ROYGB',
-        node: SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
+        createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
         tandemName: 'ROYGBRadioButton'
       }
     ];
