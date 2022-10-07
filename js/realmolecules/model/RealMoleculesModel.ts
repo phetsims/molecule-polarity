@@ -78,10 +78,6 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   public reset(): void {
     this.moleculeProperty.reset();
   }
-
-  public step( dt: number ): void {
-    // required by TModel
-  }
 }
 
 moleculePolarity.register( 'RealMoleculesModel', RealMoleculesModel );
