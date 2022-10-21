@@ -34,10 +34,7 @@ export default class MPControlPanel extends Panel {
     // put a horizontal separator between each sub-panel
     const children = [ subPanels[ 0 ] ];
     for ( let i = 1; i < subPanels.length; i++ ) {
-      children.push( new HSeparator( {
-        stroke: 'black',
-        tandem: options.tandem.createTandem( `separator${i}` )
-      } ) );
+      children.push( new HSeparator( { stroke: 'black' } ) );
       children.push( subPanels[ i ] );
     }
 

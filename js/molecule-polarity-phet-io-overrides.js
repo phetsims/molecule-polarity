@@ -58,9 +58,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.controlPanel.eFieldControl.visibleProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.controlPanel.separator1.visibleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.controlPanel.viewControls.visibleProperty": {
       "phetioFeatured": true
     },
@@ -128,12 +125,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": false
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.eFieldControl.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.separator1.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.separator2.visibleProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.surfaceControl.radioButtonGroup.visibleProperty": {
