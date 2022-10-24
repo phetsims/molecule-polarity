@@ -36,9 +36,9 @@ export default class BondDipolesCheckbox extends Checkbox {
                            MoleculePolarityStrings.bondDipoleStringProperty :
                            MoleculePolarityStrings.bondDipolesStringProperty;
 
-    const labelText = new Text( stringProperty, combineOptions<TextOptions>( {
+    const labelText = new Text( stringProperty, combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
       tandem: options.tandem.createTandem( 'labelText' )
-    }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+    } ) );
 
     const iconNode = BondDipoleNode.createIcon();
 

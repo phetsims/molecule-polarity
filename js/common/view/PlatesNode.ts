@@ -34,13 +34,13 @@ export default class PlatesNode extends HBox {
 
     options.visibleProperty = eFieldEnabledProperty;
 
-    const negativePlateNode = new PlateNode( 'negative', combineOptions<PlateNodeOptions>( {
+    const negativePlateNode = new PlateNode( 'negative', combineOptions<PlateNodeOptions>( {}, options.plateOptions, {
       perspective: 'left'
-    }, options.plateOptions ) );
+    } ) );
 
-    const positivePlateNode = new PlateNode( 'positive', combineOptions<PlateNodeOptions>( {
+    const positivePlateNode = new PlateNode( 'positive', combineOptions<PlateNodeOptions>( {}, options.plateOptions, {
       perspective: 'right'
-    }, options.plateOptions ) );
+    } ) );
 
     options.children = [ negativePlateNode, positivePlateNode ];
 

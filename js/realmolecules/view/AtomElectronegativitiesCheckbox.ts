@@ -27,9 +27,9 @@ export default class AtomElectronegativitiesCheckbox extends Checkbox {
     const options = providedOptions;
 
     const labelText = new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
         tandem: options.tandem.createTandem( 'labelText' )
-      }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+      } ) );
 
     super( atomElectronegativitiesVisibleProperty, labelText, options );
   }

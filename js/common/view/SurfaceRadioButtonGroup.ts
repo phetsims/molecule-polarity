@@ -49,9 +49,10 @@ function createItem( value: SurfaceType,
                      tandemName: string ): AquaRadioButtonGroupItem<SurfaceType> {
   return {
     value: value,
-    createNode: ( tandem: Tandem ) => new Text( labelStringProperty, combineOptions<TextOptions>( {
-      tandem: tandem.createTandem( 'labelText' )
-    }, MPConstants.CONTROL_TEXT_OPTIONS ) ),
+    createNode: ( tandem: Tandem ) => new Text( labelStringProperty, combineOptions<TextOptions>(
+      {}, MPConstants.CONTROL_TEXT_OPTIONS, {
+        tandem: tandem.createTandem( 'labelText' )
+      } ) ),
     tandemName: tandemName
   };
 }

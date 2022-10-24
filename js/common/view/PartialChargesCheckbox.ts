@@ -26,9 +26,9 @@ class PartialChargesCheckbox extends Checkbox {
     const options = providedOptions;
 
     const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
         tandem: options.tandem.createTandem( 'labelText' )
-      }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+      } ) );
 
     super( partialChargesVisibleProperty, labelText, options );
   }

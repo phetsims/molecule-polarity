@@ -81,12 +81,12 @@ export default class SurfaceColorKey extends Node {
       font: options.rangeFont,
       maxWidth: 0.2 * options.size.width // i18n, determined empirically
     };
-    const leftLabelText = new Text( leftLabelStringProperty, combineOptions<TextOptions>( {
+    const leftLabelText = new Text( leftLabelStringProperty, combineOptions<TextOptions>( {}, labelOptions, {
       tandem: options.tandem.createTandem( 'leftLabelText' )
-    }, labelOptions ) );
-    const rightLabelText = new Text( rightLabelStringProperty, combineOptions<TextOptions>( {
+    } ) );
+    const rightLabelText = new Text( rightLabelStringProperty, combineOptions<TextOptions>( {}, labelOptions, {
       tandem: options.tandem.createTandem( 'rightLabelText' )
-    }, labelOptions ) );
+    } ) );
 
     // rendering order
     this.addChild( spectrumNode );

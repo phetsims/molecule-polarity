@@ -34,9 +34,9 @@ export default class ThreeAtomsViewControls extends VBox {
 
     // title
     const titleText = new Text( MoleculePolarityStrings.viewStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, MPConstants.CONTROL_PANEL_TITLE_OPTIONS, {
         tandem: options.tandem.createTandem( 'titleText' )
-      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
+      } ) );
 
     // Checkboxes
     const bondDipolesCheckbox = new BondDipolesCheckbox( viewProperties.bondDipolesVisibleProperty, {

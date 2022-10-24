@@ -29,9 +29,9 @@ export default class AtomLabelsCheckbox extends Checkbox {
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.atomLabelsStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
         tandem: options.tandem.createTandem( 'labelText' )
-      }, MPConstants.CONTROL_TEXT_OPTIONS ) );
+      } ) );
 
     super( atomLabelsVisibleProperty, labelText, options );
   }

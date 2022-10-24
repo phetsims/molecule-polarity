@@ -35,9 +35,9 @@ export default class RealMoleculesViewControls extends VBox {
     }, provideOptions );
 
     const titleText = new Text( MoleculePolarityStrings.viewStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, MPConstants.CONTROL_PANEL_TITLE_OPTIONS, {
         tandem: options.tandem.createTandem( 'titleText' )
-      }, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ) );
+      } ) );
 
     const bondDipolesCheckbox = new BondDipolesCheckbox( viewProperties.bondDipolesVisibleProperty, {
       tandem: options.tandem.createTandem( 'bondDipolesCheckbox' )

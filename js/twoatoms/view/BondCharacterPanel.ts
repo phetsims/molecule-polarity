@@ -60,13 +60,13 @@ export default class BondCharacterPanel extends Panel {
       maxWidth: 0.3 * TRACK_WIDTH
     };
     const moreCovalentText = new Text( MoleculePolarityStrings.moreCovalentStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, labelOptions, {
         tandem: options.tandem.createTandem( 'moreCovalentText' )
-      }, labelOptions ) );
+      } ) );
     const moreIconicText = new Text( MoleculePolarityStrings.moreIonicStringProperty,
-      combineOptions<TextOptions>( {
+      combineOptions<TextOptions>( {}, labelOptions, {
         tandem: options.tandem.createTandem( 'moreIconicText' )
-      }, labelOptions ) );
+      } ) );
 
     // marker that moves along the track, not interactive
     const markerNode = new PointerNode( molecule.atomA, molecule.atomB );
