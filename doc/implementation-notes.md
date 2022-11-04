@@ -12,19 +12,17 @@ high-level description of the simulation model.
 ## General
 
 **Model-view transform**: Many PhET simulations have a model-view transform that maps between model and view coordinate
-frames (see [ModelViewTransform2](https://github.com/phetsims/phetcommon/blob/master/js/view/ModelViewTransform2.ts)).
+frames (see `ModelViewTransform2`).
 The domain of this simulation has no need for a model coordinate frame, so the model and view coordinate frames are
 treated as equivalent, and no transform is required. (If you don't understand that, don't worry about it.)
 
 **Query parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and testing. All
-such query parameters are documented
-in [MPQueryParameters](https://github.com/phetsims/molecule-polarity/blob/master/js/common/MPQueryParameters.ts).
+such query parameters are documented in `MPQueryParameters`.
 
 **Memory management**:
 
 Classes related to the Preferences dialog (created dynamically by joist) must implement `dispose`.
-See [MPPreferencesNode](https://github.com/phetsims/molecule-polarity/blob/master/js/common/view/MPPreferencesNode.ts)
-and its subcomponents.
+See `MPPreferencesNode` and its subcomponents.
 
 Instances of all other classes are created statically, at startup. Most of them
 have a `dispose` method that looks like this, to guard against accidentally using
