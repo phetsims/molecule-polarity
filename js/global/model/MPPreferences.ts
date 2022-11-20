@@ -10,9 +10,9 @@
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MPQueryParameters from '../MPQueryParameters.js';
-import { DipoleDirection, DipoleDirectionValues } from './DipoleDirection.js';
-import { SurfaceColor, SurfaceColorValues } from './SurfaceColor.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
+import { DipoleDirection, DipoleDirectionValues } from '../../common/model/DipoleDirection.js';
+import { SurfaceColor, SurfaceColorValues } from '../../common/model/SurfaceColor.js';
 
 const MPPreferences = {
 

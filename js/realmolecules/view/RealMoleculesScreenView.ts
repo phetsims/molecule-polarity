@@ -13,7 +13,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import MPPreferences from '../../common/model/MPPreferences.js';
+import MPPreferences from '../../global/model/MPPreferences.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
