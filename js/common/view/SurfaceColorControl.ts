@@ -1,7 +1,7 @@
 // Copyright 2015-2022, University of Colorado Boulder
 
 /**
- * Control for selecting surface color that appears in the Options dialog.
+ * Control for selecting surface color that appears in the Preferences dialog.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,11 +11,25 @@ import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
-import SurfaceColorRadioButtonGroup from './SurfaceColorRadioButtonGroup.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import SurfaceColorKey from './SurfaceColorKey.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
+import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
+
+// constants
+const COLOR_KEY_OPTIONS = {
+  size: new Dimension2( 150, 15 ),
+  titleVisible: false,
+  rangeFont: new PhetFont( 8 ),
+  xMargin: 0,
+  ySpacing: 2,
+  tandem: Tandem.OPT_OUT
+};
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,7 +50,7 @@ export default class SurfaceColorControl extends VBox {
     }, providedOptions );
 
     const titleText = new Text( MoleculePolarityStrings.surfaceColorRealMoleculesStringProperty, {
-      font: new PhetFont( 14 ),
+      font: PreferencesDialog.CONTENT_FONT,
       maxWidth: 400,
       tandem: options.tandem.createTandem( 'titleText' )
     } );
@@ -58,6 +72,44 @@ export default class SurfaceColorControl extends VBox {
   public override dispose(): void {
     this.disposeSurfaceColorControl();
     super.dispose();
+  }
+}
+
+/**
+ * SurfaceColorRadioButtonGroup is the radio button group for choosing a color for the molecule surface.
+ */
+
+type SurfaceColorRadioButtonGroupSelfOptions = EmptySelfOptions;
+
+type SurfaceColorRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
+
+class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceColor> {
+
+  public constructor( surfaceColorProperty: StringEnumerationProperty<SurfaceColor>,
+                      providedOptions: SurfaceColorRadioButtonGroupOptions ) {
+
+    const options = optionize<SurfaceColorRadioButtonGroupOptions, SurfaceColorRadioButtonGroupSelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+
+      // VerticalAquaRadioButtonGroupOptions
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+    }, providedOptions );
+
+    const radioButtonGroupItems = [
+      {
+        value: 'RWB',
+        createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
+        tandemName: 'RWBRadioButton'
+      },
+      {
+        value: 'ROYGB',
+        createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
+        tandemName: 'ROYGBRadioButton'
+      }
+    ];
+
+    // @ts-ignore https://github.com/phetsims/molecule-polarity/issues/145
+    super( surfaceColorProperty, radioButtonGroupItems, options );
   }
 }
 
