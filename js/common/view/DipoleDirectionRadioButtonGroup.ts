@@ -9,7 +9,6 @@
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
@@ -21,6 +20,7 @@ import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProp
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -86,7 +86,7 @@ function createItem( value: DipoleDirection,
   return {
     value: value,
     createNode: ( tandem: Tandem ) => new Text( labelStringProperty, {
-      font: new PhetFont( 24 ),
+      font: PreferencesDialog.CONTENT_FONT,
       maxWidth: 500,
       tandem: tandem.createTandem( 'labelText' )
     } ),

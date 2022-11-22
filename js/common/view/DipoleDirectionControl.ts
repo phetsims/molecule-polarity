@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -16,6 +15,7 @@ import { DipoleDirection } from '../model/DipoleDirection.js';
 import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -37,7 +37,7 @@ export default class DipoleDirectionControl extends VBox {
 
     // title
     const dipoleDirectionText = new Text( MoleculePolarityStrings.dipoleDirectionStringProperty, {
-      font: new PhetFont( 18 ),
+      font: PreferencesDialog.CONTENT_FONT,
       maxWidth: 500,
       tandem: options.tandem.createTandem( 'dipoleDirectionText' )
     } );
