@@ -15,7 +15,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPPreferences from '../model/MPPreferences.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
+import MPQueryParameters from '../MPQueryParameters.js';
 import DipoleDirectionControl from './DipoleDirectionControl.js';
 import SurfaceColorControl from './SurfaceColorControl.js';
 

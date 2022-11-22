@@ -12,7 +12,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
-import MPPreferences from '../../global/model/MPPreferences.js';
+import MPPreferences from './MPPreferences.js';
 import normalizeAngle from './normalizeAngle.js';
 import Molecule from './Molecule.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
