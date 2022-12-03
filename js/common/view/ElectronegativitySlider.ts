@@ -64,7 +64,7 @@ export default class ElectronegativitySlider extends HSlider {
       atom.electronegativityProperty.value = Utils.roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
     };
 
-    const range = atom.electronegativityProperty.range!;
+    const range = atom.electronegativityProperty.range;
     assert && assert( range );
 
     super( atom.electronegativityProperty, range, options );
