@@ -84,8 +84,7 @@ export default abstract class Molecule extends PhetioObject {
     // bond dipoles, for deriving molecular dipole
     const bondDipoleProperties = this.bonds.map( bond => bond.dipoleProperty );
 
-    // @ts-ignore https://github.com/phetsims/molecule-polarity/issues/145
-    this.dipoleProperty = new DerivedProperty( bondDipoleProperties, () => {
+    this.dipoleProperty = DerivedProperty.deriveAny( bondDipoleProperties, () => {
 
       // Sum the bond dipoles
       const sum = new Vector2( 0, 0 );

@@ -20,6 +20,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
+import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 
 // constants
 const COLOR_KEY_OPTIONS = {
@@ -95,7 +96,7 @@ class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceC
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
     }, providedOptions );
 
-    const radioButtonGroupItems = [
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<SurfaceColor>[] = [
       {
         value: 'RWB',
         createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
@@ -108,7 +109,6 @@ class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceC
       }
     ];
 
-    // @ts-ignore https://github.com/phetsims/molecule-polarity/issues/145
     super( surfaceColorProperty, radioButtonGroupItems, options );
   }
 }
