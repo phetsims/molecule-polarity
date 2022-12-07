@@ -47,7 +47,7 @@ const RESULT_TRUE = 'true';
 const RESULT_FALSE = 'false';
 
 // Jmol is loaded via <script> in the .html file, this prevents lint from complaining the Jmol is undefined.
-// @ts-ignore https://github.com/phetsims/molecule-polarity/issues/15
+// @ts-expect-error https://github.com/phetsims/molecule-polarity/issues/15
 const Jmol = window.Jmol;
 
 // each Jmol object instance is given a new identifier, numbered sequentially
@@ -226,7 +226,7 @@ export default class JSmolViewerNode extends DOM {
     const appletId = `jmolApplet${instanceNumber++}`; // create a unique id for this viewer
     Jmol.getApplet( appletId, appletConfig ); // creates window[appletId]
 
-    // @ts-ignore https://github.com/phetsims/molecule-polarity/issues/15
+    // @ts-expect-error https://github.com/phetsims/molecule-polarity/issues/15
     this.applet = window[ appletId ]; // so that we don't pollute our code with window[appletId]
     this.div.innerHTML = Jmol.getAppletHtml( this.applet ); // add the viewer's HTML fragment to this node's HTML element
     this.applet._cover( false ); // TODO Why do we need to call this? See https://github.com/phetsims/molecule-polarity/issues/14
