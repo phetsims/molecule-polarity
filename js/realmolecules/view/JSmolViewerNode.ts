@@ -25,6 +25,8 @@
  *
  * WARNING #3: JSmol 14.2.4 incorrectly identifies itself as 14.2.3 when Jmol._version is inspected in the debugger.
  *
+ * WARNING #4: When this file was converted to TypeScript in 9/2022, it passed lint and tsc, but was not tested.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -40,15 +42,43 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 
 // strings
 const DELTA = '\u03B4';
 const RESULT_TRUE = 'true';
 const RESULT_FALSE = 'false';
 
+type WindowKey = keyof typeof window;
+
+// Opaque handle to the JSmol applet, so 'any' is an appropriate type.
+type AppletId = IntentionalAny;
+
+// configuration for the JSmol object, called Info by convention
+type AppletConfig = {
+  color: string | Color; // background color of the JSmol object
+  width: number; // width of the Jmol object in pixels or expressed as percent of its container width as a string in quotes: '100%'.
+  height: number; // height, similar format as width
+  debug: boolean; // Set this value to true if you are having problems getting your page to show the Jmol object
+  j2sPath: string; // path to the suite of JavaScript libraries needed for JSmol
+  serverURL: string; // URL to be used for getting file data into non-Java modalities
+  use: string; // determines the various options to be tried (applet and surrogates) and the order in which to try them
+  script: string; // script to run when the Jmol object has finished loading
+  readyFunction: ( applet: AppletId ) => void; // function to call when the Jmol object has been created and is ready to receive commands
+  disableJ2SLoadMonitor: boolean; // disable display of messages in a single line, colored, at bottom-left of the page
+  disableInitialConsole: boolean; // avoids the display of messages in the Jmol panel while the Jmol object is being built initially
+};
+
+type JmolType = {
+  setDocument: ( doc: boolean ) => void;
+  getApplet: ( appletId: AppletId, appletConfig: AppletConfig ) => void;
+  getAppletHtml: ( appletId: AppletId ) => string;
+  scriptWait: ( applet: AppletId, script: string ) => string;
+  evaluateVar: ( applet: AppletId, script: string ) => string;
+};
+
 // Jmol is loaded via <script> in the .html file, this prevents lint from complaining the Jmol is undefined.
-// @ts-expect-error https://github.com/phetsims/molecule-polarity/issues/15
-const Jmol = window.Jmol;
+const Jmol = window[ 'Jmol' as WindowKey ] as JmolType;
 
 // each Jmol object instance is given a new identifier, numbered sequentially
 let instanceNumber = 0;
@@ -98,15 +128,8 @@ const JmolActionValues = [
   '_translate',
   '_wheelZoom'
 ] as const;
+
 type JmolAction = ( typeof JmolActionValues )[number];
-
-//TODO https://github.com/phetsims/molecule-polarity/issues/15
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AppletType = any;
-
-//TODO https://github.com/phetsims/molecule-polarity/issues/15
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DivType = any;
 
 type JSmolViewerColor = string | Color;
 
@@ -128,8 +151,8 @@ export default class JSmolViewerNode extends DOM {
   private readonly viewerSize: Dimension2;
   private readonly viewerFill: JSmolViewerColor;
   private readonly viewerStroke: JSmolViewerColor;
-  private readonly div: DivType;
-  private applet: AppletType | null;
+  private readonly div: HTMLDivElement;
+  private applet: AppletId | null;
 
   public constructor( moleculeProperty: Property<RealMolecule>,
                       viewProperties: RealMoleculesViewProperties,
@@ -176,7 +199,7 @@ export default class JSmolViewerNode extends DOM {
     assert && assert( !this.isInitialized(), 'already initialized' );
 
     // Called when the Jmol object has been created and is ready to receive commands
-    const readyFunction = ( applet: AppletType ) => {
+    const readyFunction = ( applet: AppletId ) => {
       phet.log && phet.log( 'readyFunction' );
 
       unbindActions( applet, JmolActionValues );
@@ -208,7 +231,7 @@ export default class JSmolViewerNode extends DOM {
     };
 
     // configuration for the JSmol object, called Info by convention
-    const appletConfig = {
+    const appletConfig: AppletConfig = {
       color: toJmolColor( this.viewerFill ), // background color of the JSmol object
       width: this.viewerSize.width, // width of the Jmol object in pixels or expressed as percent of its container width as a string in quotes: '100%'.
       height: this.viewerSize.height, // height, similar format as width
@@ -226,15 +249,17 @@ export default class JSmolViewerNode extends DOM {
     const appletId = `jmolApplet${instanceNumber++}`; // create a unique id for this viewer
     Jmol.getApplet( appletId, appletConfig ); // creates window[appletId]
 
-    // @ts-expect-error https://github.com/phetsims/molecule-polarity/issues/15
-    this.applet = window[ appletId ]; // so that we don't pollute our code with window[appletId]
+    this.applet = window[ appletId as WindowKey ]; // so that we don't pollute our code with window[appletId]
+
     this.div.innerHTML = Jmol.getAppletHtml( this.applet ); // add the viewer's HTML fragment to this node's HTML element
-    this.applet._cover( false ); // TODO Why do we need to call this? See https://github.com/phetsims/molecule-polarity/issues/14
+
+    // TODO Why do we need to call this? See https://github.com/phetsims/molecule-polarity/issues/14
+    this.applet._cover( false );
   }
 }
 
 // executes a JSmol script
-function doScript( applet: AppletType, script: string ): void {
+function doScript( applet: AppletId, script: string ): void {
   // use scriptWait (which is synchronous) so that we get status and can use evaluateVar elsewhere
   const status = Jmol.scriptWait( applet, script );
   phet.log && phet.log( `doScript, status=${status}` );
@@ -243,7 +268,7 @@ function doScript( applet: AppletType, script: string ): void {
 /**
  * Unbinds mouse actions from JSmol actions.
  */
-function unbindActions( applet: AppletType, actions: readonly JmolAction[] ): void {
+function unbindActions( applet: AppletId, actions: readonly JmolAction[] ): void {
   let script = '';
   actions.forEach( action => {
     script += `unbind ${action}\n`;
@@ -262,7 +287,7 @@ function toJmolColor( jSmolViewerColor: JSmolViewerColor ): string {
 /**
  * Loads a molecule by URL, then sets things that must be reset whenever the molecule changes.
  */
-function updateMolecule( applet: AppletType, molecule: RealMolecule, viewProperties: RealMoleculesViewProperties ): void {
+function updateMolecule( applet: AppletId, molecule: RealMolecule, viewProperties: RealMoleculesViewProperties ): void {
   phet.log && phet.log( 'updateMolecule' );
 
   const url = URL.createObjectURL( new Blob( [ molecule.mol2Data ], { type: 'text/plain', endings: 'native' } ) );
@@ -288,7 +313,7 @@ function updateMolecule( applet: AppletType, molecule: RealMolecule, viewPropert
 /**
  * Updates the elements in the molecule that is currently displayed by the viewer.
  */
-function updateElements( applet: AppletType, elementsProperty: Property<Element[] | null> ): void {
+function updateElements( applet: AppletId, elementsProperty: Property<Element[] | null> ): void {
 
   /*
    * Returns a string where elemno and color are separated by newlines.
@@ -334,7 +359,7 @@ function updateElements( applet: AppletType, elementsProperty: Property<Element[
 /**
  * When any dipole is visible, make the atoms and bonds translucent, so we can see the dipoles through them.
  */
-function updateTranslucency( applet: AppletType, bondDipolesVisible: boolean, molecularDipoleVisible: boolean ): void {
+function updateTranslucency( applet: AppletId, bondDipolesVisible: boolean, molecularDipoleVisible: boolean ): void {
   phet.log && phet.log( 'updateTransparency' );
   const arg = ( bondDipolesVisible || molecularDipoleVisible ) ? '0.25' : '0.0'; // 0.0=opaque, 1.0=transparent
   doScript( applet, `color atoms translucent ${arg}` );
@@ -344,7 +369,7 @@ function updateTranslucency( applet: AppletType, bondDipolesVisible: boolean, mo
 /**
  * Updates visibility of dipoles.
  */
-function updateDipoles( applet: AppletType, bondDipolesVisible: boolean, molecularDipoleVisible: boolean ): void {
+function updateDipoles( applet: AppletId, bondDipolesVisible: boolean, molecularDipoleVisible: boolean ): void {
   phet.log && phet.log( 'updateDipoles' );
 
   if ( bondDipolesVisible ) {
@@ -367,7 +392,7 @@ function updateDipoles( applet: AppletType, bondDipolesVisible: boolean, molecul
 /**
  * Updates visibility of labels on the atoms, to show atom names, partial charges, or both.
  */
-function updateLabels( applet: AppletType, atomLabelsVisible: boolean, partialChargesVisible: boolean ): void {
+function updateLabels( applet: AppletId, atomLabelsVisible: boolean, partialChargesVisible: boolean ): void {
   phet.log && phet.log( 'updateLabels' );
 
   if ( atomLabelsVisible || partialChargesVisible ) {
@@ -401,7 +426,7 @@ function updateLabels( applet: AppletType, atomLabelsVisible: boolean, partialCh
 /**
  * Updates the type of surface displayed.
  */
-function updateSurface( applet: AppletType, surfaceType: SurfaceType ): void {
+function updateSurface( applet: AppletId, surfaceType: SurfaceType ): void {
   phet.log && phet.log( 'updateSurface' );
 
   const diatomic = isHomogeneousDiatomic( applet );
@@ -439,7 +464,7 @@ function updateSurface( applet: AppletType, surfaceType: SurfaceType ): void {
 /**
  * Determines if the current molecule is homogeneous diatomic (2 atoms of the same type.)
  */
-function isHomogeneousDiatomic( applet: AppletType ): boolean {
+function isHomogeneousDiatomic( applet: AppletId ): boolean {
 
   const status = Jmol.evaluateVar( applet,
     `${'script(\'' +
