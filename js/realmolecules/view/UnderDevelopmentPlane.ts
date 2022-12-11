@@ -11,7 +11,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { allowLinksProperty, Plane, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
+import { allowLinksProperty, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -19,7 +19,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 // constants
 const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
 
-export default class UnderDevelopmentPlane extends Plane {
+export default class UnderDevelopmentPlane extends Panel {
 
   public constructor( layoutBounds: Bounds2 ) {
 
@@ -58,19 +58,16 @@ export default class UnderDevelopmentPlane extends Plane {
       ]
     } );
 
-    const panel = new Panel( vBox, {
+    super( vBox, {
       cornerRadius: 10,
       xMargin: 25,
       yMargin: 50,
       fill: 'white',
-      stroke: 'black',
-      center: layoutBounds.center
+      stroke: 'black'
     } );
 
-    super( {
-      children: [ panel ],
-      fill: 'rgba( 0, 0, 0, 0.2 )',
-      pickable: true // blocks interaction with anything behind this Plane
+    this.boundsProperty.link( () => {
+      this.center = layoutBounds.center;
     } );
   }
 }
