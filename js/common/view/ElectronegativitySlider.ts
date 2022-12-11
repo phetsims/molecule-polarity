@@ -65,7 +65,6 @@ export default class ElectronegativitySlider extends HSlider {
     };
 
     const range = atom.electronegativityProperty.range;
-    assert && assert( range );
 
     super( atom.electronegativityProperty, range, options );
 
