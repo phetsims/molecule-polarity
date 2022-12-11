@@ -7,11 +7,10 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
+import { Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -63,18 +62,19 @@ export default class ElectronegativityPanel extends Panel {
       tandem: options.tandem.createTandem( 'subtitleText' )
     } );
 
+    const titleVBox = new VBox( {
+      children: [ titleText, subtitleText ],
+      spacing: 0
+    } );
+
     // slider
     const slider = new ElectronegativitySlider( molecule, atom, {
       tandem: options.tandem.createTandem( 'slider' )
     } );
 
-    const content = new Node( { children: [ titleText, subtitleText, slider ] } );
-
-    // layout, handled dynamically because titleText and subtitleText can be changed via PhET-iO
-    Multilink.multilink( [ titleText.boundsProperty, subtitleText.boundsProperty ], () => {
-      subtitleText.centerX = slider.centerX = titleText.centerX;
-      subtitleText.top = titleText.bottom;
-      slider.top = subtitleText.bottom + 8;
+    const content = new VBox( {
+      children: [ titleVBox, slider ],
+      spacing: 8
     } );
 
     super( content, options );
