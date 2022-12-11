@@ -18,7 +18,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioDocumentation'>;
+type BondOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioDocumentation'>;
 
 export default class Bond extends PhetioObject {
 

@@ -18,7 +18,7 @@ import Atom from '../model/Atom.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type AtomNodeOptions = SelfOptions &
+type AtomNodeOptions = SelfOptions &
   PickRequired<NodeOptions, 'tandem'> &
   PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'>;
 

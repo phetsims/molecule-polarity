@@ -24,7 +24,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type DipoleDirectionControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type DipoleDirectionControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class DipoleDirectionControl extends VBox {
 

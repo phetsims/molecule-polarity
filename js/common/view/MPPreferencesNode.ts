@@ -21,7 +21,7 @@ import SurfaceColorControl from './SurfaceColorControl.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type MPPreferencesNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type MPPreferencesNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class MPPreferencesNode extends VBox {
 

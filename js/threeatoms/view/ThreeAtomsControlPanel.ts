@@ -17,7 +17,7 @@ import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ThreeAtomsControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
+type ThreeAtomsControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
 
 export default class ThreeAtomsControlPanel extends MPControlPanel {
 

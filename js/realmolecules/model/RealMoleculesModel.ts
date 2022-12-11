@@ -18,7 +18,7 @@ import RealMolecule from './RealMolecule.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type RealMoleculesModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class RealMoleculesModel extends PhetioObject implements TModel {
 

@@ -18,7 +18,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type AtomLabelsCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type AtomLabelsCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class AtomLabelsCheckbox extends Checkbox {
 

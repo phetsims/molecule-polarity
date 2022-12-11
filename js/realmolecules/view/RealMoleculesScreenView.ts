@@ -28,7 +28,7 @@ import UnderDevelopmentPanel from './UnderDevelopmentPanel.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
+type RealMoleculesScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
 
 export default class RealMoleculesScreenView extends ScreenView {
 

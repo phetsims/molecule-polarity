@@ -19,7 +19,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type DiatomicMoleculeOptions = SelfOptions & MoleculeOptions;
+type DiatomicMoleculeOptions = SelfOptions & MoleculeOptions;
 
 export default class DiatomicMolecule extends Molecule {
 

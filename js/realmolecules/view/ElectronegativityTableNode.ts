@@ -26,7 +26,7 @@ const HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
 
 type SelfOptions = EmptySelfOptions;
 
-export type ElectronegativityTableNodeOptions = SelfOptions &
+type ElectronegativityTableNodeOptions = SelfOptions &
   PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class ElectronegativityTableNode extends Node {

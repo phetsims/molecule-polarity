@@ -16,7 +16,7 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
+type RealMoleculesControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
 
 export default class RealMoleculesControlPanel extends MPControlPanel {
 

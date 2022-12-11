@@ -18,7 +18,7 @@ import normalizeAngle from '../model/normalizeAngle.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type MoleculeAngleDragListenerOptions = SelfOptions &
+type MoleculeAngleDragListenerOptions = SelfOptions &
   PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'> &
   //TODO https://github.com/phetsims/axon/issues/412 until fixed, phetioDocumentation is ignored
   //PickOptional<DragListenerOptions<PressedDragListener>, 'phetioDocumentation'>

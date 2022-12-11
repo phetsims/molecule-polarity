@@ -28,7 +28,7 @@ import RotateArrowsNode from './RotateArrowsNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type TriatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type TriatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class TriatomicMoleculeNode extends Node {
 

@@ -18,7 +18,7 @@ import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProp
 
 type SelfOptions = EmptySelfOptions;
 
-export type SurfaceControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type SurfaceControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class SurfaceControl extends VBox {
 

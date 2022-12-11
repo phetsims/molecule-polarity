@@ -22,7 +22,7 @@ type SelfOptions = {
   length?: number;
 };
 
-export type TranslateArrowsNodeOptions = SelfOptions &
+type TranslateArrowsNodeOptions = SelfOptions &
   PickRequired<NodeOptions, 'tandem'> &
   PickOptional<NodeOptions, 'pickable'>;
 

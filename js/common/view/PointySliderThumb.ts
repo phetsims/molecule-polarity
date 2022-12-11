@@ -18,7 +18,7 @@ type SelfOptions = {
   fillHighlighted?: TColor;
 };
 
-export type PointySliderThumbOptions = SelfOptions & PickRequired<PathOptions, 'tandem'>;
+type PointySliderThumbOptions = SelfOptions & PickRequired<PathOptions, 'tandem'>;
 
 export default class PointySliderThumb extends Path {
 

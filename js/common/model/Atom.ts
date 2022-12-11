@@ -25,7 +25,7 @@ type SelfOptions = {
   electronegativity?: number;
 };
 
-export type AtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type AtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Atom extends PhetioObject {
 

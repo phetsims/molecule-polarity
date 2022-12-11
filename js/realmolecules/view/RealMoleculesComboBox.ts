@@ -20,7 +20,7 @@ import RealMolecule from '../model/RealMolecule.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesComboBoxOptions = SelfOptions & PickRequired<ComboBoxOptions, 'tandem'>;
+type RealMoleculesComboBoxOptions = SelfOptions & PickRequired<ComboBoxOptions, 'tandem'>;
 
 export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
 

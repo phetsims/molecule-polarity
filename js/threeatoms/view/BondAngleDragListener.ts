@@ -22,7 +22,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondAngleDragListenerOptions = SelfOptions &
+type BondAngleDragListenerOptions = SelfOptions &
   PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'> &
   //TODO https://github.com/phetsims/axon/issues/412 until fixed, phetioDocumentation is ignored
   //PickOptional<DragListenerOptions<PressedDragListener>, 'phetioDocumentation'>

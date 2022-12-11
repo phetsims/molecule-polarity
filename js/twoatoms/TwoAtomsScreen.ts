@@ -22,7 +22,7 @@ import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type TwoAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
+type TwoAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
 export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 

@@ -18,7 +18,7 @@ import MolecularDipoleNode from './MolecularDipoleNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type MolecularDipoleCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type MolecularDipoleCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class MolecularDipoleCheckbox extends Checkbox {
 

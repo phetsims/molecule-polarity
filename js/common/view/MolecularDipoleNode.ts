@@ -20,7 +20,7 @@ const OFFSET = 55; // offset in the direction that the dipole points
 
 type SelfOptions = EmptySelfOptions;
 
-export type MolecularDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
+type MolecularDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
 
 export default class MolecularDipoleNode extends DipoleNode {
 

@@ -139,7 +139,7 @@ type SelfOptions = {
   viewerStroke?: JSmolViewerColor;
 };
 
-export type JSmolViewerNodeOptions = SelfOptions & PickRequired<DOMOptions, 'tandem'>;
+type JSmolViewerNodeOptions = SelfOptions & PickRequired<DOMOptions, 'tandem'>;
 
 export default class JSmolViewerNode extends DOM {
 

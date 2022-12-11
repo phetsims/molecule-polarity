@@ -17,7 +17,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondCharacterCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type BondCharacterCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class BondCharacterCheckbox extends Checkbox {
 

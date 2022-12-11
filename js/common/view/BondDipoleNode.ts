@@ -19,7 +19,7 @@ const PERPENDICULAR_OFFSET = 55; // offset perpendicular to the axis of the bond
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
+type BondDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
 
 class BondDipoleNode extends DipoleNode {
 

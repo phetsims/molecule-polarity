@@ -31,8 +31,7 @@ const FRACTIONAL_HEAD_HEIGHT = 0.4; // when the head height is more than FRACTIO
 
 type SelfOptions = EmptySelfOptions;
 
-export type DipoleNodeOptions = SelfOptions &
-  PickOptional<PathOptions, 'visibleProperty' | 'fill'>;
+export type DipoleNodeOptions = SelfOptions & PickOptional<PathOptions, 'visibleProperty' | 'fill'>;
 
 export default class DipoleNode extends Path {
 

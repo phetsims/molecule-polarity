@@ -29,7 +29,7 @@ type SelfOptions = {
   viewerSize?: Dimension2;
 };
 
-export type RealMoleculeViewerOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type RealMoleculeViewerOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class RealMoleculeViewer extends Node {
 

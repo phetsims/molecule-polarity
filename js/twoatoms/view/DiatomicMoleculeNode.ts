@@ -26,7 +26,7 @@ import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type DiatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type DiatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 class DiatomicMoleculeNode extends Node {
 

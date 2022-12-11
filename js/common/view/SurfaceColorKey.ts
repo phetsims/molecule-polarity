@@ -27,7 +27,7 @@ type SelfOptions = {
   ySpacing?: number;
 };
 
-export type SurfaceColorKeyOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type SurfaceColorKeyOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class SurfaceColorKey extends Node {
 

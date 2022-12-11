@@ -27,7 +27,7 @@ const REFERENCE_SCALE = 1;
 
 type SelfOptions = EmptySelfOptions;
 
-export type PartialChargeNodeOptions = SelfOptions & PickOptional<NodeOptions, 'visibleProperty'>;
+type PartialChargeNodeOptions = SelfOptions & PickOptional<NodeOptions, 'visibleProperty'>;
 
 export default class PartialChargeNode extends Node {
 

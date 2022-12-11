@@ -22,7 +22,7 @@ import MPConstants from '../../common/MPConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ThreeAtomsScreenViewOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
+type ThreeAtomsScreenViewOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
 
 export default class ThreeAtomsScreenView extends ScreenView {
 

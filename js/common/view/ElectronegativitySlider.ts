@@ -27,7 +27,7 @@ type SelfOptions = {
   tickSpacing?: number; // space between tick marks
 };
 
-export type ElectronegativitySliderOptions = SelfOptions & PickRequired<HSliderOptions, 'tandem'>;
+type ElectronegativitySliderOptions = SelfOptions & PickRequired<HSliderOptions, 'tandem'>;
 
 export default class ElectronegativitySlider extends HSlider {
 

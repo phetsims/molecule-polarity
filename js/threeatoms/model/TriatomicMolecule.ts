@@ -24,7 +24,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type TriatomicMoleculeOptions = SelfOptions & MoleculeOptions;
+type TriatomicMoleculeOptions = SelfOptions & MoleculeOptions;
 
 export default class TriatomicMolecule extends Molecule {
 

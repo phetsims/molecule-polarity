@@ -19,7 +19,7 @@ import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-co
 
 type SelfOptions = EmptySelfOptions;
 
-export type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class TwoAtomsViewControls extends VBox {
 

@@ -17,7 +17,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type TwoAtomsViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type TwoAtomsViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class TwoAtomsViewProperties {
 

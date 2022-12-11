@@ -20,7 +20,7 @@ type SelfOptions = {
   singular?: boolean; // whether the Text label should be singular or plural
 };
 
-export type BondDipolesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type BondDipolesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class BondDipolesCheckbox extends Checkbox {
 

@@ -22,7 +22,7 @@ const SWITCH_LABEL_OPTIONS = combineOptions<TextOptions>( {}, MPConstants.CONTRO
 
 type SelfOptions = EmptySelfOptions;
 
-export type EFieldControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type EFieldControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class EFieldControl extends VBox {
 

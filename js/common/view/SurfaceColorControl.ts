@@ -34,7 +34,7 @@ const COLOR_KEY_OPTIONS = {
 
 type SelfOptions = EmptySelfOptions;
 
-export type SurfaceColorControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type SurfaceColorControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class SurfaceColorControl extends VBox {
 

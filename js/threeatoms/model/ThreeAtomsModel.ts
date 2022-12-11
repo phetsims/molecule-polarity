@@ -14,7 +14,7 @@ import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ThreeAtomsModelOptions = SelfOptions & MPModelOptions;
+type ThreeAtomsModelOptions = SelfOptions & MPModelOptions;
 
 export default class ThreeAtomsModel extends MPModel {
 

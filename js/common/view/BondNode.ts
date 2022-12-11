@@ -19,7 +19,7 @@ import MPColors from '../MPColors.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondNodeOptions = SelfOptions &
+type BondNodeOptions = SelfOptions &
   PickRequired<LineOptions, 'tandem'> &
   PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'>;
 

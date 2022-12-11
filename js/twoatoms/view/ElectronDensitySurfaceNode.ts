@@ -18,7 +18,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import SurfaceNode, { SurfaceNodeOptions } from './SurfaceNode.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
-export type ElectronDensitySurfaceNodeOptions = SurfaceNodeOptions;
+type ElectronDensitySurfaceNodeOptions = SurfaceNodeOptions;
 
 export default class ElectronDensitySurfaceNode extends SurfaceNode {
 

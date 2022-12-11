@@ -18,7 +18,7 @@ type SelfOptions = {
   plateOptions?: PlateNodeOptions;
 };
 
-export type PlatesNodeOptions = SelfOptions & PickOptional<HBoxOptions, 'spacing'>;
+type PlatesNodeOptions = SelfOptions & PickOptional<HBoxOptions, 'spacing'>;
 
 export default class PlatesNode extends HBox {
 

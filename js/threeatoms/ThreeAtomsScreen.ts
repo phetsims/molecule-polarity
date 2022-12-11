@@ -22,7 +22,7 @@ import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ThreeAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
+type ThreeAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
 export default class ThreeAtomsScreen extends Screen {
 

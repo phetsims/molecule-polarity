@@ -21,7 +21,7 @@ import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-co
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesViewControlsOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type RealMoleculesViewControlsOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class RealMoleculesViewControls extends VBox {
 

@@ -18,7 +18,7 @@ import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type TwoAtomsControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
+type TwoAtomsControlPanelOptions = SelfOptions & PickRequired<MPControlPanelOptions, 'tandem'>;
 
 export default class TwoAtomsControlPanel extends MPControlPanel {
 

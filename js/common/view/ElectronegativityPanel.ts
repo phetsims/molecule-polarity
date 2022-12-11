@@ -21,7 +21,7 @@ import ElectronegativitySlider from './ElectronegativitySlider.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ElectronegativityPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+type ElectronegativityPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class ElectronegativityPanel extends Panel {
 

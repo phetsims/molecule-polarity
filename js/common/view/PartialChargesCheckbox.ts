@@ -17,7 +17,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type PartialChargesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type PartialChargesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
 class PartialChargesCheckbox extends Checkbox {
 

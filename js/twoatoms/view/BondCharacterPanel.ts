@@ -27,7 +27,7 @@ const Y_SPACING = 3;
 
 type SelfOptions = EmptySelfOptions;
 
-export type BondCharacterPanelOptions = SelfOptions &
+type BondCharacterPanelOptions = SelfOptions &
   PickRequired<PanelOptions, 'tandem'> &
   PickOptional<PanelOptions, 'visibleProperty'>;
 

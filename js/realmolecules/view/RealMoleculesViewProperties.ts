@@ -17,7 +17,7 @@ import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type RealMoleculesViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class RealMoleculesViewProperties {
 

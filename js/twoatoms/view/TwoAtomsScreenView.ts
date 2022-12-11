@@ -25,7 +25,7 @@ import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
+type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
 
 export default class TwoAtomsScreenView extends ScreenView {
 

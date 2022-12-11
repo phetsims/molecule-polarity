@@ -19,7 +19,7 @@ import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type ThreeAtomsViewControlsOptions = SelfOptions & PickRequired<VBox, 'tandem'>;
+type ThreeAtomsViewControlsOptions = SelfOptions & PickRequired<VBox, 'tandem'>;
 
 export default class ThreeAtomsViewControls extends VBox {
 

@@ -23,7 +23,7 @@ import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
+type RealMoleculesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
 export default class RealMoleculesScreen extends Screen<RealMoleculesModel, RealMoleculesScreenView> {
 

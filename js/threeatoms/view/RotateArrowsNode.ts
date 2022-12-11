@@ -16,7 +16,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RotateArrowsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type RotateArrowsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class RotateArrowsNode extends Node {
 
