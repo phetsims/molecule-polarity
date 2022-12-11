@@ -24,7 +24,7 @@ import RealMoleculesComboBox from './RealMoleculesComboBox.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
-import UnderDevelopmentPlane from './UnderDevelopmentPlane.js';
+import UnderDevelopmentPanel from './UnderDevelopmentPanel.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -156,7 +156,7 @@ export default class RealMoleculesScreenView extends ScreenView {
     // a message. We're continuing to create everything to reduce the possibility that regressions creep in.
     if ( !MPQueryParameters.realMolecules ) {
       rootNode.visible = false;
-      this.addChild( new UnderDevelopmentPlane( this.layoutBounds ) );
+      this.addChild( new UnderDevelopmentPanel( this.layoutBounds ) );
     }
   }
 }

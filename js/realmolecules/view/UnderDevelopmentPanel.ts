@@ -19,7 +19,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 // constants
 const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
 
-export default class UnderDevelopmentPlane extends Panel {
+export default class UnderDevelopmentPanel extends Panel {
 
   public constructor( layoutBounds: Bounds2 ) {
 
@@ -72,4 +72,4 @@ export default class UnderDevelopmentPlane extends Panel {
   }
 }
 
-moleculePolarity.register( 'UnderDevelopmentPlane', UnderDevelopmentPlane );
+moleculePolarity.register( 'UnderDevelopmentPanel', UnderDevelopmentPanel );
