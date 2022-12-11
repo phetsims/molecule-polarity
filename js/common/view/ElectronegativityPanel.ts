@@ -41,10 +41,12 @@ export default class ElectronegativityPanel extends Panel {
       yMargin: 6
     }, providedOptions );
 
+    const titleTextTandem = options.tandem.createTandem( 'titleText' );
+
     const titleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.atomNameStringProperty, {
       name: atom.labelStringProperty
     }, {
-      tandem: options.tandem.createTandem( 'titleStringProperty' ),
+      tandem: titleTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
 
@@ -52,7 +54,7 @@ export default class ElectronegativityPanel extends Panel {
     const titleText = new Text( titleStringProperty, {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
       maxWidth: 150,
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: titleTextTandem
     } );
 
     // subtitle
