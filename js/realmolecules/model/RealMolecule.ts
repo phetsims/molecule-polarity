@@ -21,11 +21,6 @@ export default class RealMolecule extends PhetioObject {
   public readonly fullNameProperty: TReadOnlyProperty<string>;
   public readonly mol2Data: string;
 
-  public static readonly RealMoleculeIO = new IOType( 'RealMoleculeIO', {
-    valueType: RealMolecule,
-    supertype: ReferenceIO( IOType.ObjectIO )
-  } );
-
   /**
    * @param symbol - chemical symbol of the molecule
    * @param fullNameProperty - full name of the molecule
@@ -44,6 +39,16 @@ export default class RealMolecule extends PhetioObject {
     this.fullNameProperty = fullNameProperty;
     this.mol2Data = mol2Data;
   }
+
+  /**
+   * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at
+   * startup, it implements 'Reference type serialization', as described in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly RealMoleculeIO = new IOType( 'RealMoleculeIO', {
+    valueType: RealMolecule,
+    supertype: ReferenceIO( IOType.ObjectIO )
+  } );
 }
 
 moleculePolarity.register( 'RealMolecule', RealMolecule );
