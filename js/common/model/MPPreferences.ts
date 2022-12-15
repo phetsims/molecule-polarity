@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPQueryParameters from '../MPQueryParameters.js';
@@ -16,13 +16,13 @@ import { SurfaceColor, SurfaceColorValues } from './SurfaceColor.js';
 
 const MPPreferences = {
 
-  dipoleDirectionProperty: new StringEnumerationProperty<DipoleDirection>(
+  dipoleDirectionProperty: new StringUnionProperty<DipoleDirection>(
     MPQueryParameters.dipoleDirection as DipoleDirection, {
       validValues: DipoleDirectionValues,
       tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
     } ),
 
-  surfaceColorProperty: new StringEnumerationProperty<SurfaceColor>(
+  surfaceColorProperty: new StringUnionProperty<SurfaceColor>(
     MPQueryParameters.surfaceColor as SurfaceColor, {
       validValues: SurfaceColorValues,
 

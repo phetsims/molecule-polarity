@@ -14,7 +14,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
 import { SurfaceType } from '../model/SurfaceType.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -22,7 +22,7 @@ type SurfaceControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
 
 export default class SurfaceControl extends VBox {
 
-  public constructor( surfaceTypeProperty: StringEnumerationProperty<SurfaceType>,
+  public constructor( surfaceTypeProperty: StringUnionProperty<SurfaceType>,
                       providedOptions: SurfaceControlOptions ) {
 
     const options = optionize<SurfaceControlOptions, SelfOptions, VBoxOptions>()( {

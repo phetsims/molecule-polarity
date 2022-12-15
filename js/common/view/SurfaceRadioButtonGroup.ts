@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions } from '../../../../scenery/js/imports.js';
@@ -25,7 +25,7 @@ type SurfaceRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRad
 
 export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceType> {
 
-  public constructor( surfaceTypeProperty: StringEnumerationProperty<SurfaceType>,
+  public constructor( surfaceTypeProperty: StringUnionProperty<SurfaceType>,
                       providedOptions: SurfaceRadioButtonGroupOptions ) {
 
     const options = optionize<SurfaceRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {

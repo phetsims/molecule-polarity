@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { SurfaceType, SurfaceTypeValues } from '../../common/model/SurfaceType.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Property from '../../../../axon/js/Property.js';
@@ -26,7 +26,7 @@ export default class RealMoleculesViewProperties {
   public readonly partialChargesVisibleProperty: Property<boolean>;
   public readonly atomElectronegativitiesVisibleProperty: Property<boolean>;
   public readonly atomLabelsVisibleProperty: Property<boolean>;
-  public readonly surfaceTypeProperty: StringEnumerationProperty<SurfaceType>;
+  public readonly surfaceTypeProperty: StringUnionProperty<SurfaceType>;
 
   public constructor( providedOptions: RealMoleculesViewPropertiesOptions ) {
 
@@ -52,7 +52,7 @@ export default class RealMoleculesViewProperties {
       tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' )
     } );
 
-    this.surfaceTypeProperty = new StringEnumerationProperty( 'none', {
+    this.surfaceTypeProperty = new StringUnionProperty( 'none', {
       validValues: SurfaceTypeValues,
       tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
     } );

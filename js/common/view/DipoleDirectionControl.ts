@@ -11,7 +11,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import { DipoleDirection } from '../model/DipoleDirection.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
@@ -30,7 +30,7 @@ export default class DipoleDirectionControl extends VBox {
 
   private readonly disposeDipoleDirectionControl: () => void;
 
-  public constructor( dipoleDirectionProperty: StringEnumerationProperty<DipoleDirection>,
+  public constructor( dipoleDirectionProperty: StringUnionProperty<DipoleDirection>,
                       providedOptions: DipoleDirectionControlOptions ) {
 
     const options = optionize<DipoleDirectionControlOptions, SelfOptions, VBoxOptions>()( {
@@ -80,7 +80,7 @@ class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioButtonGroup<Dipol
 
   private readonly disposeDipoleDirectionRadioButtonGroup: () => void;
 
-  public constructor( dipoleDirectionProperty: StringEnumerationProperty<DipoleDirection>,
+  public constructor( dipoleDirectionProperty: StringUnionProperty<DipoleDirection>,
                       providedOptions: DipoleDirectionRadioButtonGroupOptions ) {
 
     const options = optionize<DipoleDirectionRadioButtonGroupOptions, DipoleDirectionRadioButtonGroupSelfOptions, VerticalAquaRadioButtonGroupOptions>()( {

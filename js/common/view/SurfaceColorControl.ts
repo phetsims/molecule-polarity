@@ -12,7 +12,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
@@ -40,7 +40,7 @@ export default class SurfaceColorControl extends VBox {
 
   private readonly disposeSurfaceColorControl: () => void;
 
-  public constructor( surfaceColorProperty: StringEnumerationProperty<SurfaceColor>,
+  public constructor( surfaceColorProperty: StringUnionProperty<SurfaceColor>,
                       providedOptions: SurfaceColorControlOptions ) {
 
     const options = optionize<SurfaceColorControlOptions, SelfOptions, VBoxOptions>()( {
@@ -86,7 +86,7 @@ type SurfaceColorRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAq
 
 class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceColor> {
 
-  public constructor( surfaceColorProperty: StringEnumerationProperty<SurfaceColor>,
+  public constructor( surfaceColorProperty: StringUnionProperty<SurfaceColor>,
                       providedOptions: SurfaceColorRadioButtonGroupOptions ) {
 
     const options = optionize<SurfaceColorRadioButtonGroupOptions, SurfaceColorRadioButtonGroupSelfOptions, VerticalAquaRadioButtonGroupOptions>()( {

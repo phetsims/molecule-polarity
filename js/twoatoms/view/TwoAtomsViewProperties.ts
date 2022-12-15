@@ -8,7 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringEnumerationProperty from '../../../../axon/js/StringEnumerationProperty.js';
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
@@ -24,7 +24,7 @@ export default class TwoAtomsViewProperties {
   public readonly bondDipoleVisibleProperty: Property<boolean>;
   public readonly partialChargesVisibleProperty: Property<boolean>;
   public readonly bondCharacterVisibleProperty: Property<boolean>;
-  public readonly surfaceTypeProperty: StringEnumerationProperty<SurfaceType>;
+  public readonly surfaceTypeProperty: StringUnionProperty<SurfaceType>;
 
   public constructor( providedOptions: TwoAtomsViewPropertiesOptions ) {
 
@@ -42,7 +42,7 @@ export default class TwoAtomsViewProperties {
       tandem: options.tandem.createTandem( 'bondCharacterVisibleProperty' )
     } );
 
-    this.surfaceTypeProperty = new StringEnumerationProperty<SurfaceType>( 'none', {
+    this.surfaceTypeProperty = new StringUnionProperty<SurfaceType>( 'none', {
       validValues: SurfaceTypeValues,
       tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
     } );
