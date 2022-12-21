@@ -1,5 +1,5 @@
 {
-  "comment": "# molecule-polarity 1.2.6-rc.1 Tue Dec 20 2022 20:59:22 GMT-0700 (Mountain Standard Time)",
+  "comment": "# molecule-polarity 1.2.6 Wed Dec 21 2022 11:16:20 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "f360fa1bd09a47b3c9e49cd90c8dddd136a13e0c",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "8bece58b72e26ba0975b680a208cc8b10f9a44b5",
+    "sha": "09a991a37875c68d8a640ff5915471d314035809",
     "branch": "1.2"
   },
   "nitroglycerin": {
