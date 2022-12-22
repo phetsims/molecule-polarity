@@ -17,7 +17,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 // constants
-const LEGACY_URL = 'https://phet.colorado.edu/en/simulation/legacy/molecule-polarity';
+const LEGACY_URL = 'https://phet.colorado.edu/en/simulations/legacy/molecule-polarity/translations';
 
 export default class UnderDevelopmentPanel extends Panel {
 
