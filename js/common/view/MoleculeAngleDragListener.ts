@@ -53,7 +53,6 @@ export default class MoleculeAngleDragListener extends DragListener {
     };
 
     const angleRange = molecule.angleProperty.range;
-    assert && assert( angleRange );
 
     options.drag = event => {
       const currentAngle = getAngle( event );

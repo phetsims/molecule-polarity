@@ -132,7 +132,6 @@ export default abstract class MPModel extends PhetioObject implements TModel {
     }
 
     const angleRange = molecule.angleProperty.range;
-    assert && assert( angleRange );
     molecule.angleProperty.value = normalizeAngle( angle, angleRange.min );
   }
 }
