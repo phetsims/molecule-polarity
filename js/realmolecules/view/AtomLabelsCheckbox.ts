@@ -11,7 +11,6 @@ import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-co
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, TextOptions } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -24,9 +23,7 @@ export default class AtomLabelsCheckbox extends Checkbox {
 
   public constructor( atomLabelsVisibleProperty: Property<boolean>, providedOptions: AtomLabelsCheckboxOptions ) {
 
-    const options = optionize<AtomLabelsCheckboxOptions, SelfOptions, CheckboxOptions>()( {
-      tandem: Tandem.REQUIRED
-    }, providedOptions );
+    const options = optionize<AtomLabelsCheckboxOptions, SelfOptions, CheckboxOptions>()( {}, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.atomLabelsStringProperty,
       combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {

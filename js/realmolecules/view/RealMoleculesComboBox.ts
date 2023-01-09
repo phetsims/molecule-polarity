@@ -13,7 +13,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
@@ -35,8 +34,7 @@ export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
       listPosition: 'above',
       highlightFill: 'rgb(218,255,255)',
       cornerRadius: 8,
-      maxWidth: 450,
-      tandem: Tandem.REQUIRED
+      maxWidth: 450
     }, provideOptions );
 
     // label
