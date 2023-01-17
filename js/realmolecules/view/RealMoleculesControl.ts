@@ -8,46 +8,55 @@
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, RichText, Text } from '../../../../scenery/js/imports.js';
+import { HBox, HBoxOptions, Node, RichText, Text } from '../../../../scenery/js/imports.js';
 import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  comboBoxOptions?: WithRequired<ComboBoxOptions, 'tandem'>;
+};
 
-type RealMoleculesComboBoxOptions = SelfOptions & PickRequired<ComboBoxOptions, 'tandem'>;
+type RealMoleculesComboBoxOptions = SelfOptions & StrictOmit<HBoxOptions, 'children'>;
 
-export default class RealMoleculesComboBox extends ComboBox<RealMolecule> {
+export default class RealMoleculesControl extends HBox {
 
   public constructor( moleculeProperty: Property<RealMolecule>,
                       molecules: RealMolecule[],
                       listParent: Node,
                       provideOptions: RealMoleculesComboBoxOptions ) {
 
-    const options = optionize<RealMoleculesComboBoxOptions, SelfOptions, ComboBoxOptions>()( {
+    const options = optionize<RealMoleculesComboBoxOptions, SelfOptions, HBoxOptions>()( {
+      spacing: 10,
 
-      // ComboBoxOptions
-      listPosition: 'above',
-      highlightFill: 'rgb(218,255,255)',
-      cornerRadius: 8,
-      maxWidth: 450
+      comboBoxOptions: {
+        tandem: Tandem.REQUIRED,
+        listPosition: 'above',
+        highlightFill: 'rgb(218,255,255)',
+        cornerRadius: 8,
+        maxWidth: 450
+      }
     }, provideOptions );
-
-    // label
-    options.labelNode = new Text( MoleculePolarityStrings.moleculeStringProperty, {
-      font: new PhetFont( 22 ),
-      maxWidth: 150,
-      tandem: options.tandem.createTandem( 'labelText' )
-    } );
 
     // {ComboBoxItem[]}
     const items = molecules.map( createItem );
 
-    super( moleculeProperty, items, listParent, options );
+    options.children = [
+      new Text( MoleculePolarityStrings.moleculeStringProperty, {
+        font: new PhetFont( 22 ),
+        maxWidth: 150,
+        tandem: options.comboBoxOptions.tandem.createTandem( 'labelText' )
+      } ),
+      new ComboBox( moleculeProperty, items, listParent, options.comboBoxOptions )
+    ];
+
+    super( options );
   }
 }
 
@@ -73,4 +82,4 @@ function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
   };
 }
 
-moleculePolarity.register( 'RealMoleculesComboBox', RealMoleculesComboBox );
+moleculePolarity.register( 'RealMoleculesControl', RealMoleculesControl );

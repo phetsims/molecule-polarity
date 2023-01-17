@@ -20,7 +20,7 @@ import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesModel from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
-import RealMoleculesComboBox from './RealMoleculesComboBox.js';
+import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
@@ -60,8 +60,10 @@ export default class RealMoleculesScreenView extends ScreenView {
     } );
 
     const comboBoxListParent = new Node();
-    const moleculesComboBox = new RealMoleculesComboBox( model.moleculeProperty, model.molecules, comboBoxListParent, {
-      tandem: options.tandem.createTandem( 'moleculesComboBox' )
+    const moleculesComboBox = new RealMoleculesControl( model.moleculeProperty, model.molecules, comboBoxListParent, {
+      comboBoxOptions: {
+        tandem: options.tandem.createTandem( 'moleculesComboBox' )
+      }
     } );
 
     // Group color keys under a common parent, so that PhET-iO can hide the color key.
