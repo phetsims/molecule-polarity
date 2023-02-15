@@ -24,7 +24,7 @@ type SelfOptions = EmptySelfOptions;
 
 type ThreeAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
 
-export default class ThreeAtomsScreen extends Screen {
+export default class ThreeAtomsScreen extends Screen<ThreeAtomsModel, ThreeAtomsScreenView> {
 
   public constructor( providedOptions: ThreeAtomsScreenOptions ) {
 
