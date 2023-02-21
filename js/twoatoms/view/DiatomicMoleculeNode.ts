@@ -28,7 +28,7 @@ type SelfOptions = EmptySelfOptions;
 
 type DiatomicMoleculeNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-class DiatomicMoleculeNode extends Node {
+export default class DiatomicMoleculeNode extends Node {
 
   private readonly resetDiatomicMoleculeNode: () => void;
 
@@ -163,4 +163,3 @@ class DiatomicMoleculeNode extends Node {
 }
 
 moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );
-export default DiatomicMoleculeNode;

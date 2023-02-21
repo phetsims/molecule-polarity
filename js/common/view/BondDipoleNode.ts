@@ -21,7 +21,7 @@ type SelfOptions = EmptySelfOptions;
 
 type BondDipoleNodeOptions = SelfOptions & DipoleNodeOptions;
 
-class BondDipoleNode extends DipoleNode {
+export default class BondDipoleNode extends DipoleNode {
 
   public constructor( bond: Bond, providedOptions?: BondDipoleNodeOptions ) {
 
@@ -69,4 +69,3 @@ class BondDipoleNode extends DipoleNode {
 }
 
 moleculePolarity.register( 'BondDipoleNode', BondDipoleNode );
-export default BondDipoleNode;

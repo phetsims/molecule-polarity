@@ -19,7 +19,7 @@ type SelfOptions = EmptySelfOptions;
 
 type PartialChargesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
 
-class PartialChargesCheckbox extends Checkbox {
+export default class PartialChargesCheckbox extends Checkbox {
 
   public constructor( partialChargesVisibleProperty: Property<boolean>, providedOptions: PartialChargesCheckboxOptions ) {
 
@@ -40,4 +40,3 @@ class PartialChargesCheckbox extends Checkbox {
 }
 
 moleculePolarity.register( 'PartialChargesCheckbox', PartialChargesCheckbox );
-export default PartialChargesCheckbox;
