@@ -134,7 +134,7 @@ export default class RealMoleculeViewer extends Node {
     this.surfaceTypeText = surfaceTypeText;
 
     viewProperties.surfaceTypeProperty.link( surfaceType => {
-      this.surfaceTypeText.text = ( `surface: ${surfaceType}` );
+      this.surfaceTypeText.string = ( `surface: ${surfaceType}` );
     } );
 
     moleculeProperty.link( molecule => {
