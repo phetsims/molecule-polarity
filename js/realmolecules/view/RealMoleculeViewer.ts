@@ -139,7 +139,7 @@ export default class RealMoleculeViewer extends Node {
 
     moleculeProperty.link( molecule => {
 
-      //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/15
+      //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/issues/15
     } );
   }
 
