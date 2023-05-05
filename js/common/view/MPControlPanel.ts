@@ -28,7 +28,10 @@ export default class MPControlPanel extends Panel {
       // PanelOptions
       fill: MPColors.CONTROL_PANEL_BACKGROUND,
       xMargin: 20,
-      yMargin: 15
+      yMargin: 15,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // put a horizontal separator between each sub-panel

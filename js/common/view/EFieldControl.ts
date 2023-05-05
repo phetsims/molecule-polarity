@@ -32,7 +32,10 @@ export default class EFieldControl extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // title

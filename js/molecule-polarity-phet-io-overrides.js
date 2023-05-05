@@ -7,15 +7,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.visibleProperty": {
       "phetioFeatured": false
     },
-    "moleculePolarity.threeAtomsScreen.view.controlPanel.eFieldControl.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.view.controlPanel.viewControls.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.view.controlPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomAElectronegativityPanel.slider.visibleProperty": {
       "phetioFeatured": false
     },
@@ -55,20 +46,8 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.twoAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.visibleProperty": {
       "phetioFeatured": false
     },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.eFieldControl.visibleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.surfaceControl.radioButtonGroup.visibleProperty": {
       "phetioFeatured": false
-    },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.surfaceControl.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.viewControls.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.view.controlPanel.visibleProperty": {
-      "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.view.electronegativityPanels.atomAElectronegativityPanel.slider.visibleProperty": {
       "phetioFeatured": false
