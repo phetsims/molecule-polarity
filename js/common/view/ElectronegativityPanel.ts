@@ -38,7 +38,10 @@ export default class ElectronegativityPanel extends Panel {
       fill: atom.color,
       stroke: 'black',
       xMargin: 15,
-      yMargin: 6
+      yMargin: 6,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const titleTextTandem = options.tandem.createTandem( 'titleText' );
