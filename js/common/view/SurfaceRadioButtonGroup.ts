@@ -29,8 +29,13 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
                       providedOptions: SurfaceRadioButtonGroupOptions ) {
 
     const options = optionize<SurfaceRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+
+      // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
+      visiblePropertyOptions: {
+        phetioFeatured: false
+      }
     }, providedOptions );
 
     const radioButtonGroupItems = [

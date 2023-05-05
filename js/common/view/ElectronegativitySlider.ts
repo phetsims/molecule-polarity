@@ -42,7 +42,10 @@ export default class ElectronegativitySlider extends HSlider {
       thumbYOffset: 10,
       trackSize: new Dimension2( 150, 5 ),
       majorTickLength: 20,
-      minorTickLength: 10
+      minorTickLength: 10,
+      visiblePropertyOptions: {
+        phetioFeatured: false
+      }
     }, providedOptions );
 
     // custom thumb
