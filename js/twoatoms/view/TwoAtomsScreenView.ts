@@ -59,7 +59,10 @@ export default class TwoAtomsScreenView extends ScreenView {
     const electronegativityPanels = new HBox( {
       spacing: 10,
       children: [ atomAElectronegativityPanel, atomBElectronegativityPanel ],
-      tandem: electronegativityPanelsTandem
+      tandem: electronegativityPanelsTandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {

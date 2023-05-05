@@ -25,9 +25,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomCElectronegativityPanel.visibleProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.visibleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.moleculeNode.hintArrowsNode.visibleProperty": {
       "phetioFeatured": true
     },
@@ -57,9 +54,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     },
     "moleculePolarity.twoAtomsScreen.view.electronegativityPanels.atomBElectronegativityPanel.slider.visibleProperty": {
       "phetioFeatured": false
-    },
-    "moleculePolarity.twoAtomsScreen.view.electronegativityPanels.visibleProperty": {
-      "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.view.moleculeNode.hintArrowsNode.visibleProperty": {
       "phetioFeatured": true

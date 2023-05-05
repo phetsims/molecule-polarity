@@ -62,7 +62,10 @@ export default class ThreeAtomsScreenView extends ScreenView {
     const electronegativityPanels = new HBox( {
       spacing: 10,
       children: [ atomAElectronegativityPanel, atomBElectronegativityPanel, atomCElectronegativityPanel ],
-      tandem: electronegativityPanelsTandem
+      tandem: electronegativityPanelsTandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
