@@ -31,20 +31,24 @@ export default class TwoAtomsViewProperties {
     const options = providedOptions;
 
     this.bondDipoleVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'bondDipoleVisibleProperty' )
+      tandem: options.tandem.createTandem( 'bondDipoleVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.partialChargesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.bondCharacterVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'bondCharacterVisibleProperty' )
+      tandem: options.tandem.createTandem( 'bondCharacterVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.surfaceTypeProperty = new StringUnionProperty<SurfaceType>( 'none', {
       validValues: SurfaceTypeValues,
-      tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
+      tandem: options.tandem.createTandem( 'surfaceTypeProperty' ),
+      phetioFeatured: true
     } );
   }
 

@@ -28,15 +28,18 @@ export default class ThreeAtomsViewProperties {
     const options = providedOptions;
 
     this.bondDipolesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.molecularDipoleVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' )
+      tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.partialChargesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' ),
+      phetioFeatured: true
     } );
   }
 
