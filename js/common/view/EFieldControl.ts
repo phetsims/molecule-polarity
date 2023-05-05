@@ -51,9 +51,15 @@ export default class EFieldControl extends VBox {
         spacing: 12,
         toggleSwitchOptions: {
           trackFillLeft: 'rgb( 180, 180, 180 )',
-          trackFillRight: 'rgb( 0, 180, 0 )'
+          trackFillRight: 'rgb( 0, 180, 0 )',
+          visiblePropertyOptions: {
+            phetioFeatured: false
+          }
         },
-        tandem: options.tandem.createTandem( 'onOffSwitch' )
+        tandem: options.tandem.createTandem( 'onOffSwitch' ),
+        visiblePropertyOptions: {
+          phetioFeatured: false
+        }
       } );
 
     options.children = [ titleText, onOffSwitch ];
