@@ -70,6 +70,7 @@ export default class DiatomicMoleculeNode extends Node {
       children: [ hintArrowANode, hintArrowBNode ],
       tandem: hintArrowsTandem,
       visiblePropertyOptions: {
+        phetioFeatured: true,
         phetioDocumentation: 'Set to false to permanently hide hint arrows.'
       }
     } );

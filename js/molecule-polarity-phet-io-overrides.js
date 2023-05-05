@@ -10,13 +10,7 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "moleculePolarity.threeAtomsScreen.view.electronegativityPanels.atomCElectronegativityPanel.visibleProperty": {
       "phetioFeatured": true
     },
-    "moleculePolarity.threeAtomsScreen.view.moleculeNode.hintArrowsNode.visibleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.twoAtomsScreen.view.electronegativityPanels.atomAElectronegativityPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.view.moleculeNode.hintArrowsNode.visibleProperty": {
       "phetioFeatured": true
     }
   };

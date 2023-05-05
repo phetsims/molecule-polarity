@@ -85,6 +85,7 @@ export default class TriatomicMoleculeNode extends Node {
       children: [ hintArrowANode, hintArrowCNode, hintArrowBNode ],
       tandem: hintArrowsTandem,
       visiblePropertyOptions: {
+        phetioFeatured: true,
         phetioDocumentation: 'Set to false to permanently hide hint arrows.'
       }
     } );
