@@ -46,7 +46,8 @@ export default abstract class MPModel extends PhetioObject implements TModel {
     this.molecule = molecule;
 
     this.eFieldEnabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'eFieldEnabledProperty' )
+      tandem: options.tandem.createTandem( 'eFieldEnabledProperty' ),
+      phetioFeatured: true
     } );
   }
 

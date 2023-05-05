@@ -69,6 +69,7 @@ export default abstract class Molecule extends PhetioObject {
       range: MPConstants.ANGLE_RANGE,
       units: 'radians',
       tandem: options.tandem.createTandem( 'angleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'rotation angle of the molecule, with positive rotation being CLOCKWISE'
     } );
 

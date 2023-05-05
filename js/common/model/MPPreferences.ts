@@ -19,7 +19,8 @@ const MPPreferences = {
   dipoleDirectionProperty: new StringUnionProperty<DipoleDirection>(
     MPQueryParameters.dipoleDirection as DipoleDirection, {
       validValues: DipoleDirectionValues,
-      tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' )
+      tandem: Tandem.PREFERENCES.createTandem( 'dipoleDirectionProperty' ),
+      phetioFeatured: true
     } ),
 
   surfaceColorProperty: new StringUnionProperty<SurfaceColor>(
