@@ -1,36 +1,6 @@
 /* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
   {
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomA.partialChargeProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomA.positionProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomB.partialChargeProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomB.positionProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomC.partialChargeProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.atomC.positionProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.bondAB.dipoleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.bondAngleABCProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.bondBC.dipoleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.threeAtomsScreen.model.molecule.dipoleProperty": {
-      "phetioFeatured": true
-    },
     "moleculePolarity.threeAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.toggleSwitch.visibleProperty": {
       "phetioFeatured": false
     },
@@ -77,24 +47,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "moleculePolarity.threeAtomsScreen.view.viewProperties.partialChargesVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.atomA.partialChargeProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.atomA.positionProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.atomB.partialChargeProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.atomB.positionProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.bond.dipoleProperty": {
-      "phetioFeatured": true
-    },
-    "moleculePolarity.twoAtomsScreen.model.molecule.dipoleProperty": {
       "phetioFeatured": true
     },
     "moleculePolarity.twoAtomsScreen.view.controlPanel.eFieldControl.onOffSwitch.toggleSwitch.visibleProperty": {

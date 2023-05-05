@@ -68,6 +68,7 @@ export default class Bond extends PhetioObject {
         return dipole;
       }, {
         tandem: options.tandem.createTandem( 'dipoleProperty' ),
+        phetioFeatured: true,
         phetioValueType: Vector2.Vector2IO,
         phetioDocumentation:
           'Qualitative vector representation of the dipole, based on the electronegativity difference ' +

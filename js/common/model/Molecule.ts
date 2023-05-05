@@ -100,6 +100,7 @@ export default abstract class Molecule extends PhetioObject {
       return sum;
     }, {
       tandem: options.tandem.createTandem( 'dipoleProperty' ),
+      phetioFeatured: true,
       phetioValueType: Vector2.Vector2IO,
       phetioDocumentation: 'The molecular dipole, vector sum of the bond dipoles. ' +
                            '+x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'

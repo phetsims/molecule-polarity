@@ -58,6 +58,7 @@ export default class Atom extends PhetioObject {
 
     this.positionProperty = new Vector2Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'The position of this atom. (0,0) is at the upper-LEFT, +x is to the right, and +y is DOWN.',
       phetioReadOnly: true // because position is constrained by molecule structure
     } );
@@ -71,6 +72,7 @@ export default class Atom extends PhetioObject {
     // partial charge is zero until this atom participates in a bond
     this.partialChargeProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'partialChargeProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'qualitative scalar representation of the partial charge, computed as the electronegativity difference',
       phetioReadOnly: true // because this is computed based on electronegativity of atoms in a molecule
     } );
