@@ -1,4 +1,4 @@
-// Copyright 2014-2022, University of Colorado Boulder
+// Copyright 2014-2023, University of Colorado Boulder
 
 /**
  * TriatomicMolecule is the model of a make-believe triatomic (3 atoms) molecule with a very specific topology.

@@ -1,4 +1,4 @@
-// Copyright 2021-2022, University of Colorado Boulder
+// Copyright 2021-2023, University of Colorado Boulder
 
 /**
  * SurfaceRadioButtonGroup is the radio button group for choosing a surface for the molecule.
