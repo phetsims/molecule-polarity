@@ -23,7 +23,12 @@
     ],
     "phet-io": {
       "compareDesignedAPIChanges": true
-    }
+    },
+    "screenNameKeys": [
+      "MOLECULE_POLARITY/screen.twoAtoms",
+      "MOLECULE_POLARITY/screen.threeAtoms",
+      "MOLECULE_POLARITY/screen.realMolecules"
+    ]
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js"
