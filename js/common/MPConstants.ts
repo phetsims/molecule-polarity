@@ -15,7 +15,7 @@ import moleculePolarity from '../moleculePolarity.js';
 const MPConstants = {
 
   // ScreenView
-  LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ),
+  LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ), //TODO https://github.com/phetsims/molecule-polarity/issues/146
 
   // Model
   ELECTRONEGATIVITY_RANGE: new RangeWithValue( 2, 4, 2 ),
