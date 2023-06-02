@@ -20,6 +20,7 @@ import RealMolecule from '../model/RealMolecule.js';
 import Element from '../model/Element.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const FONT = new PhetFont( 18 );
@@ -73,7 +74,7 @@ export default class RealMoleculeViewer extends Node {
       moleculeStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
         symbol: molecule.symbol,
         name: molecule.fullNameProperty
-      } );
+      }, { tandem: Tandem.OPT_OUT } );
       moleculeTextParent.addChild( new RichText( moleculeStringProperty, {
         font: FONT,
         maxWidth: 200
