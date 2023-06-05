@@ -78,14 +78,26 @@ export default class BondCharacterPanel extends Panel {
       fill: 'transparent'
     } );
 
-    // layout, relative to track
-    bondCharacterText.centerX = trackNode.centerX;
-    bondCharacterText.top = trackNode.top;
-    markerNode.top = bondCharacterText.bottom + Y_SPACING;
-    moreCovalentText.left = trackNode.left;
-    moreCovalentText.top = trackNode.top;
-    moreIconicText.right = trackNode.right;
-    moreIconicText.top = trackNode.top;
+    // Marker is at the bottom of the track.
+    markerNode.bottom = trackNode.bottom;
+
+    // 'Bond Character' is centered
+    bondCharacterText.boundsProperty.link( () => {
+      bondCharacterText.centerX = trackNode.centerX;
+      bondCharacterText.top = trackNode.top;
+    } );
+
+    // 'more covalent' is left justified.
+    moreCovalentText.boundsProperty.link( () => {
+      moreCovalentText.left = trackNode.left;
+      moreCovalentText.top = trackNode.top;
+    } );
+
+    // 'more ionic' is right justified.
+    moreIconicText.boundsProperty.link( () => {
+      moreIconicText.right = trackNode.right;
+      moreIconicText.top = trackNode.top;
+    } );
 
     const content = new Node( {
       children: [ trackNode, markerNode, bondCharacterText, moreIconicText, moreCovalentText ]
