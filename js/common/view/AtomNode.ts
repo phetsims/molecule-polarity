@@ -20,7 +20,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AtomNodeOptions = SelfOptions &
   PickRequired<NodeOptions, 'tandem'> &
-  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'>;
+  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented' | 'phetioType' | 'phetioState'>;
 
 export default class AtomNode extends Node {
 

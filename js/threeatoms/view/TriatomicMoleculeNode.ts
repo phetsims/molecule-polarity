@@ -12,7 +12,7 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { IndexedNodeIO, Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -49,7 +49,11 @@ export default class TriatomicMoleculeNode extends Node {
     // atoms
     const atomANode = new AtomNode( molecule.atomA, {
       tandem: options.tandem.createTandem( 'atomANode' ),
-      phetioInputEnabledPropertyInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true,
+
+      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+      phetioType: IndexedNodeIO,
+      phetioState: true
     } );
     const atomBNode = new AtomNode( molecule.atomB, {
       tandem: options.tandem.createTandem( 'atomBNode' ),
@@ -57,7 +61,11 @@ export default class TriatomicMoleculeNode extends Node {
     } );
     const atomCNode = new AtomNode( molecule.atomC, {
       tandem: options.tandem.createTandem( 'atomCNode' ),
-      phetioInputEnabledPropertyInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true,
+
+      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+      phetioType: IndexedNodeIO,
+      phetioState: true
     } );
 
     // bonds
