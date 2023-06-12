@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.js';
@@ -36,10 +36,7 @@ export default class ThreeAtomsViewControls extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( MoleculePolarityStrings.viewStringProperty,
-      combineOptions<TextOptions>( {}, MPConstants.CONTROL_PANEL_TITLE_OPTIONS, {
-        tandem: options.tandem.createTandem( 'titleText' )
-      } ) );
+    const titleText = new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // Checkboxes
     const bondDipolesCheckbox = new BondDipolesCheckbox( viewProperties.bondDipolesVisibleProperty, {

@@ -40,8 +40,7 @@ export default class AtomNode extends Node {
     // name centered on atom
     const labelText = new Text( atom.labelStringProperty, {
       font: new PhetFont( { size: 32, weight: 'bold' } ),
-      maxWidth: 0.75 * atom.diameter,
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 0.75 * atom.diameter
     } );
 
     options.children = [ sphereNode, labelText ];

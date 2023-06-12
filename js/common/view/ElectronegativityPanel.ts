@@ -56,15 +56,13 @@ export default class ElectronegativityPanel extends Panel {
     // title
     const titleText = new Text( titleStringProperty, {
       font: new PhetFont( { size: 20, weight: 'bold' } ),
-      maxWidth: 150,
-      tandem: titleTextTandem
+      maxWidth: 150
     } );
 
     // subtitle
     const subtitleText = new Text( MoleculePolarityStrings.electronegativityStringProperty, {
       font: new PhetFont( 18 ),
-      maxWidth: titleText.maxWidth,
-      tandem: options.tandem.createTandem( 'subtitleText' )
+      maxWidth: titleText.maxWidth
     } );
 
     const titleVBox = new VBox( {

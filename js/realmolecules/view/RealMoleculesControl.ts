@@ -50,8 +50,7 @@ export default class RealMoleculesControl extends HBox {
     options.children = [
       new Text( MoleculePolarityStrings.moleculeStringProperty, {
         font: new PhetFont( 22 ),
-        maxWidth: 150,
-        tandem: options.comboBoxOptions.tandem.createTandem( 'labelText' )
+        maxWidth: 150
       } ),
       new ComboBox( moleculeProperty, items, listParent, options.comboBoxOptions )
     ];

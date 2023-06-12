@@ -7,9 +7,9 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { HBox, Text } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -26,10 +26,7 @@ export default class MolecularDipoleCheckbox extends Checkbox {
 
     const options = providedOptions;
 
-    const labelText = new Text( MoleculePolarityStrings.molecularDipoleStringProperty,
-      combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
-        tandem: options.tandem.createTandem( 'labelText' )
-      } ) );
+    const labelText = new Text( MoleculePolarityStrings.molecularDipoleStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
     const iconNode = MolecularDipoleNode.createIcon();
 

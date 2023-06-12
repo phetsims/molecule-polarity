@@ -52,8 +52,7 @@ export default class SurfaceColorControl extends VBox {
 
     const titleText = new Text( MoleculePolarityStrings.surfaceColorRealMoleculesStringProperty, {
       font: PreferencesDialog.CONTENT_FONT,
-      maxWidth: 400,
-      tandem: options.tandem.createTandem( 'titleText' )
+      maxWidth: 400
     } );
 
     const radioButtonGroup = new SurfaceColorRadioButtonGroup( surfaceColorProperty, {

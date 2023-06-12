@@ -10,12 +10,12 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Font, LinearGradient, Node, NodeOptions, Rectangle, TColor, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { Font, LinearGradient, Node, NodeOptions, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 type SelfOptions = {
@@ -71,8 +71,7 @@ export default class SurfaceColorKey extends Node {
     const titleText = new Text( titleStringProperty, {
       fill: 'black',
       font: options.titleFont,
-      maxWidth: 0.5 * options.size.width, // i18n, determined empirically
-      tandem: options.tandem.createTandem( 'titleText' )
+      maxWidth: 0.5 * options.size.width // i18n, determined empirically
     } );
 
     // range labels
@@ -81,12 +80,8 @@ export default class SurfaceColorKey extends Node {
       font: options.rangeFont,
       maxWidth: 0.2 * options.size.width // i18n, determined empirically
     };
-    const leftLabelText = new Text( leftLabelStringProperty, combineOptions<TextOptions>( {}, labelOptions, {
-      tandem: options.tandem.createTandem( 'leftLabelText' )
-    } ) );
-    const rightLabelText = new Text( rightLabelStringProperty, combineOptions<TextOptions>( {}, labelOptions, {
-      tandem: options.tandem.createTandem( 'rightLabelText' )
-    } ) );
+    const leftLabelText = new Text( leftLabelStringProperty, labelOptions );
+    const rightLabelText = new Text( rightLabelStringProperty, labelOptions );
 
     // rendering order
     this.addChild( spectrumNode );

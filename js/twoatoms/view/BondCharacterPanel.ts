@@ -10,13 +10,13 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, Line, Node, Rectangle, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { Circle, Line, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Atom from '../../common/model/Atom.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -49,8 +49,7 @@ export default class BondCharacterPanel extends Panel {
     const bondCharacterText = new Text( MoleculePolarityStrings.bondCharacterStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       fill: 'black',
-      maxWidth: 0.3 * TRACK_WIDTH,
-      tandem: options.tandem.createTandem( 'bondCharacterText' )
+      maxWidth: 0.3 * TRACK_WIDTH
     } );
 
     // labels
@@ -59,14 +58,8 @@ export default class BondCharacterPanel extends Panel {
       fill: 'black',
       maxWidth: 0.3 * TRACK_WIDTH
     };
-    const moreCovalentText = new Text( MoleculePolarityStrings.moreCovalentStringProperty,
-      combineOptions<TextOptions>( {}, labelOptions, {
-        tandem: options.tandem.createTandem( 'moreCovalentText' )
-      } ) );
-    const moreIconicText = new Text( MoleculePolarityStrings.moreIonicStringProperty,
-      combineOptions<TextOptions>( {}, labelOptions, {
-        tandem: options.tandem.createTandem( 'moreIconicText' )
-      } ) );
+    const moreCovalentText = new Text( MoleculePolarityStrings.moreCovalentStringProperty, labelOptions );
+    const moreIconicText = new Text( MoleculePolarityStrings.moreIonicStringProperty, labelOptions );
 
     // marker that moves along the track, not interactive
     const markerNode = new PointerNode( molecule.atomA, molecule.atomB );

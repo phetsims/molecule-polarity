@@ -7,9 +7,9 @@
  */
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -17,7 +17,6 @@ import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -54,10 +53,7 @@ function createItem( value: SurfaceType,
                      tandemName: string ): AquaRadioButtonGroupItem<SurfaceType> {
   return {
     value: value,
-    createNode: ( tandem: Tandem ) => new Text( labelStringProperty, combineOptions<TextOptions>(
-      {}, MPConstants.CONTROL_TEXT_OPTIONS, {
-        tandem: tandem.createTandem( 'labelText' )
-      } ) ),
+    createNode: () => new Text( labelStringProperty, MPConstants.CONTROL_TEXT_OPTIONS ),
     tandemName: tandemName
   };
 }

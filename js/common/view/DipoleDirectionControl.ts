@@ -20,7 +20,6 @@ import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } fro
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,8 +42,7 @@ export default class DipoleDirectionControl extends VBox {
     // title
     const dipoleDirectionText = new Text( MoleculePolarityStrings.dipoleDirectionStringProperty, {
       font: PreferencesDialog.CONTENT_FONT,
-      maxWidth: 500,
-      tandem: options.tandem.createTandem( 'dipoleDirectionText' )
+      maxWidth: 500
     } );
 
     // Radio button group
@@ -135,10 +133,9 @@ function createItem( value: DipoleDirection,
                      tandemName: string ): AquaRadioButtonGroupItem<DipoleDirection> {
   return {
     value: value,
-    createNode: ( tandem: Tandem ) => new Text( labelStringProperty, {
+    createNode: () => new Text( labelStringProperty, {
       font: PreferencesDialog.CONTENT_FONT,
-      maxWidth: 500,
-      tandem: tandem.createTandem( 'labelText' )
+      maxWidth: 500
     } ),
     tandemName: tandemName
   };

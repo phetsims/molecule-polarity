@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
@@ -15,7 +15,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondCharacterCheckbox from './BondCharacterCheckbox.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,10 +36,7 @@ export default class TwoAtomsViewControls extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( MoleculePolarityStrings.viewStringProperty, combineOptions<TextOptions>(
-      {}, MPConstants.CONTROL_PANEL_TITLE_OPTIONS, {
-        tandem: options.tandem.createTandem( 'titleText' )
-      } ) );
+    const titleText = new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // Checkboxes
     const bondDipoleCheckbox = new BondDipolesCheckbox( viewProperties.bondDipoleVisibleProperty, {

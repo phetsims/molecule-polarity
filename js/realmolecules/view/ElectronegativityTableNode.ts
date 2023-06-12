@@ -41,8 +41,7 @@ export default class ElectronegativityTableNode extends Node {
 
     const titleText = new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty, {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
-      maxWidth: 300,
-      tandem: options.tandem.createTandem( 'titleText' )
+      maxWidth: 300
     } );
 
     const cells = [

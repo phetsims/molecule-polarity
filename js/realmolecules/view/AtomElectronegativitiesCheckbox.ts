@@ -7,9 +7,9 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, TextOptions } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -26,10 +26,7 @@ export default class AtomElectronegativitiesCheckbox extends Checkbox {
 
     const options = providedOptions;
 
-    const labelText = new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty,
-      combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
-        tandem: options.tandem.createTandem( 'labelText' )
-      } ) );
+    const labelText = new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
     super( atomElectronegativitiesVisibleProperty, labelText, options );
   }

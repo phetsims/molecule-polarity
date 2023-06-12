@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -36,10 +36,7 @@ export default class SurfaceControl extends VBox {
     }, providedOptions );
 
     // title
-    const titleText = new Text( MoleculePolarityStrings.surfaceStringProperty, combineOptions<TextOptions>(
-      {}, MPConstants.CONTROL_PANEL_TITLE_OPTIONS, {
-        tandem: options.tandem.createTandem( 'titleText' )
-      } ) );
+    const titleText = new Text( MoleculePolarityStrings.surfaceStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // Radio button group
     const radioButtonGroup = new SurfaceRadioButtonGroup( surfaceTypeProperty, {
