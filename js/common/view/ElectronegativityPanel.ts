@@ -44,12 +44,10 @@ export default class ElectronegativityPanel extends Panel {
       }
     }, providedOptions );
 
-    const titleTextTandem = options.tandem.createTandem( 'titleText' );
-
     const titleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.atomNameStringProperty, {
       name: atom.labelStringProperty
     }, {
-      tandem: titleTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
+      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
 
