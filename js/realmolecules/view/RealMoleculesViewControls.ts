@@ -1,4 +1,4 @@
-// Copyright 2017-2022, University of Colorado Boulder
+// Copyright 2017-2023, University of Colorado Boulder
 
 /**
  * RealMoleculesViewControls is the subpanel labeled 'View' in the 'Real Molecules' screen.
