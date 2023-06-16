@@ -8,19 +8,20 @@
 
 import Property from '../../../../axon/js/Property.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, Text } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import MPCheckbox from './MPCheckbox.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type MolecularDipoleCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type MolecularDipoleCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
 
-export default class MolecularDipoleCheckbox extends Checkbox {
+export default class MolecularDipoleCheckbox extends MPCheckbox {
 
   public constructor( molecularDipoleVisibleProperty: Property<boolean>, providedOptions: MolecularDipoleCheckboxOptions ) {
 

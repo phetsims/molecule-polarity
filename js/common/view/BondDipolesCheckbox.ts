@@ -8,21 +8,22 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import MPCheckbox from './MPCheckbox.js';
 
 type SelfOptions = {
   singular?: boolean; // whether the Text label should be singular or plural
 };
 
-type BondDipolesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+export type BondDipolesCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
 
-export default class BondDipolesCheckbox extends Checkbox {
+export default class BondDipolesCheckbox extends MPCheckbox {
 
   public constructor( bondDipolesVisibleProperty: Property<boolean>, providedOptions: BondDipolesCheckboxOptions ) {
 

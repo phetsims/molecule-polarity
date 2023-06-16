@@ -8,18 +8,19 @@
 
 import Property from '../../../../axon/js/Property.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import MPCheckbox from '../../common/view/MPCheckbox.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type AtomElectronegativitiesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type AtomElectronegativitiesCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
 
-export default class AtomElectronegativitiesCheckbox extends Checkbox {
+export default class AtomElectronegativitiesCheckbox extends MPCheckbox {
 
   public constructor( atomElectronegativitiesVisibleProperty: Property<boolean>,
                       providedOptions: AtomElectronegativitiesCheckboxOptions ) {
