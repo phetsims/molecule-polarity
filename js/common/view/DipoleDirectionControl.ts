@@ -17,7 +17,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
@@ -94,8 +93,7 @@ class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioButtonGroup<Dipol
         from: MoleculePolarityStrings.deltaPlusStringProperty,
         to: MoleculePolarityStrings.deltaMinusStringProperty
       }, {
-        tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' ),
-        phetioValueType: StringIO
+        tandem: options.tandem.createTandem( 'positiveToNegativeStringProperty' )
       } );
 
     // d- -> d+
@@ -104,8 +102,7 @@ class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioButtonGroup<Dipol
         from: MoleculePolarityStrings.deltaMinusStringProperty,
         to: MoleculePolarityStrings.deltaPlusStringProperty
       }, {
-        tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' ),
-        phetioValueType: StringIO
+        tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' )
       } );
 
     const radioButtonGroupItems = [

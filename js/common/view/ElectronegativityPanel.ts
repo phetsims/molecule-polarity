@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
@@ -47,8 +46,7 @@ export default class ElectronegativityPanel extends Panel {
     const titleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.atomNameStringProperty, {
       name: atom.labelStringProperty
     }, {
-      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
-      phetioValueType: StringIO
+      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
     } );
 
     // title
