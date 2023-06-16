@@ -8,18 +8,19 @@
 
 import Property from '../../../../axon/js/Property.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
+import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import MPCheckbox from './MPCheckbox.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type PartialChargesCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+type PartialChargesCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
 
-export default class PartialChargesCheckbox extends Checkbox {
+export default class PartialChargesCheckbox extends MPCheckbox {
 
   public constructor( partialChargesVisibleProperty: Property<boolean>, providedOptions: PartialChargesCheckboxOptions ) {
 
