@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "889e5b8f89379c24604948f337ac3e90bf62a4a3",
+    "sha": "652b307d9fe39320f18aff15529734ec0ae65883",
     "branch": "1.3"
   },
   "nitroglycerin": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "d5b7bfe5d20adf56dc39b8908ea689aeb682c27d",
+    "sha": "8fe2957179f035077c9b4b1a7475a34e74ecb95e",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
@@ -85,7 +85,7 @@
     "branch": "HEAD"
   },
   "sun": {
-    "sha": "74c7c4c9e28f7e68016749c2a9d1f0ae8a279e1c",
+    "sha": "ddc3bc4afa36c7d73f915aa49ed54ecc2fac8275",
     "branch": "HEAD"
   },
   "tambo": {
