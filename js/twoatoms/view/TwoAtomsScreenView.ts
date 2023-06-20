@@ -15,13 +15,13 @@ import { HBox, Node } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
-import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
+import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -70,20 +70,8 @@ export default class TwoAtomsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'bondCharacterPanel' )
     } );
 
-    // Group color keys under a common parent, so that PhET-iO can hide the color key.
-    const colorKeysTandem = options.tandem.createTandem( 'colorKeys' );
-
-    const electrostaticPotentialColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey( {
-      tandem: colorKeysTandem.createTandem( 'electrostaticPotentialColorKey' )
-    } );
-
-    const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey( {
-      tandem: colorKeysTandem.createTandem( 'electronDensityColorKey' )
-    } );
-
-    const colorKeysNode = new Node( {
-      children: [ electrostaticPotentialColorKey, electronDensityColorKey ]
-    } );
+    const colorKeyNode = new TwoAtomsColorKeyNode( viewProperties.surfaceTypeProperty,
+      options.tandem.createTandem( 'colorKeyNode' ) );
 
     const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
       tandem: options.tandem.createTandem( 'controlPanel' )
@@ -109,7 +97,7 @@ export default class TwoAtomsScreenView extends ScreenView {
         electronegativityPanels,
         controlPanel,
         bondCharacterPanel,
-        colorKeysNode,
+        colorKeyNode,
         moleculeNode,
         resetAllButton
       ]
@@ -136,9 +124,9 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
 
     // centered above molecule
-    electrostaticPotentialColorKey.boundsProperty.link( () => {
-      electrostaticPotentialColorKey.centerX = electronDensityColorKey.centerX = moleculeX;
-      electrostaticPotentialColorKey.top = electronDensityColorKey.top = 25;
+    colorKeyNode.boundsProperty.link( () => {
+      colorKeyNode.centerX = moleculeX;
+      colorKeyNode.top = 25;
     } );
 
     // to right of positive plate, top aligned
@@ -148,13 +136,6 @@ export default class TwoAtomsScreenView extends ScreenView {
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
-
-    // synchronization with view Properties ------------------------------
-
-    viewProperties.surfaceTypeProperty.link( surfaceType => {
-      electrostaticPotentialColorKey.visible = ( surfaceType === 'electrostaticPotential' );
-      electronDensityColorKey.visible = ( surfaceType === 'electronDensity' );
-    } );
   }
 
   public override dispose(): void {

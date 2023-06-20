@@ -14,7 +14,6 @@ import { Font, LinearGradient, Node, NodeOptions, Rectangle, TColor, Text } from
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
@@ -27,7 +26,7 @@ type SelfOptions = {
   ySpacing?: number;
 };
 
-type SurfaceColorKeyOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type SurfaceColorKeyOptions = SelfOptions;
 
 export default class SurfaceColorKey extends Node {
 
@@ -35,7 +34,7 @@ export default class SurfaceColorKey extends Node {
                       titleStringProperty: TReadOnlyProperty<string>,
                       leftLabelStringProperty: TReadOnlyProperty<string>,
                       rightLabelStringProperty: TReadOnlyProperty<string>,
-                      providedOptions: SurfaceColorKeyOptions ) {
+                      providedOptions?: SurfaceColorKeyOptions ) {
 
     const options = optionize<SurfaceColorKeyOptions, SelfOptions, NodeOptions>()( {
 
@@ -112,7 +111,7 @@ export default class SurfaceColorKey extends Node {
   /**
    * Creates the color key for black-&-white gradient.
    */
-  public static createElectronDensityColorKey( options: SurfaceColorKeyOptions ): SurfaceColorKey {
+  public static createElectronDensityColorKey( options?: SurfaceColorKeyOptions ): SurfaceColorKey {
     return new SurfaceColorKey( MPColors.BW_GRADIENT, MoleculePolarityStrings.electronDensityStringProperty,
       MoleculePolarityStrings.lessStringProperty, MoleculePolarityStrings.moreStringProperty, options );
   }
@@ -120,7 +119,7 @@ export default class SurfaceColorKey extends Node {
   /**
    * Creates the color key for RWB (red-white-blue) gradient.
    */
-  public static createElectrostaticPotentialRWBColorKey( options: SurfaceColorKeyOptions ): SurfaceColorKey {
+  public static createElectrostaticPotentialRWBColorKey( options?: SurfaceColorKeyOptions ): SurfaceColorKey {
     return new SurfaceColorKey( MPColors.RWB_GRADIENT, MoleculePolarityStrings.electrostaticPotentialStringProperty,
       MoleculePolarityStrings.positiveStringProperty, MoleculePolarityStrings.negativeStringProperty, options );
   }
@@ -128,7 +127,7 @@ export default class SurfaceColorKey extends Node {
   /**
    * Creates the color key for ROYGB gradient.
    */
-  public static createElectrostaticPotentialROYGBColorKey( options: SurfaceColorKeyOptions ): SurfaceColorKey {
+  public static createElectrostaticPotentialROYGBColorKey( options?: SurfaceColorKeyOptions ): SurfaceColorKey {
     return new SurfaceColorKey( MPColors.ROYGB_GRADIENT, MoleculePolarityStrings.electrostaticPotentialStringProperty,
       MoleculePolarityStrings.positiveStringProperty, MoleculePolarityStrings.negativeStringProperty, options );
   }
