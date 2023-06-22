@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import { Circle, CircleOptions, Line, Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { Polarity } from '../model/Polarity.js';
@@ -38,7 +39,7 @@ export default class PolarityIndicator extends Node {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }

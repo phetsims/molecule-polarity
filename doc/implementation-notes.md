@@ -30,7 +30,7 @@ them in a dynamic situation.
 
 ```typescript
 public override dispose(): void {
-  assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  Disposable.assertNotDisposable();
   super.dispose();
 }
 ```
