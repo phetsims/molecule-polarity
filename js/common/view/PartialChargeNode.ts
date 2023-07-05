@@ -8,9 +8,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, Text } from '../../../../scenery/js/imports.js';
@@ -36,7 +35,13 @@ export default class PartialChargeNode extends Node {
 
   public constructor( atom: Atom, unitVectorFunction: () => Vector2, providedOptions?: PartialChargeNodeOptions ) {
 
-    super( providedOptions );
+    const options = optionize<PartialChargeNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
+      isDisposable: false
+    }, providedOptions );
+
+    super( options );
 
     const stringProperty = new DerivedProperty( [
         atom.partialChargeProperty,
@@ -93,11 +98,6 @@ export default class PartialChargeNode extends Node {
 
     // Update when this Node becomes visible
     this.visibleProperty.link( visible => visible && this.update() );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

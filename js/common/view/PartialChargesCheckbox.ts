@@ -6,35 +6,32 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import MPCheckbox from './MPCheckbox.js';
+import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type PartialChargesCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
+type PartialChargesCheckboxOptions = SelfOptions & PickRequired<MPCheckboxOptions, 'tandem'>;
 
 export default class PartialChargesCheckbox extends MPCheckbox {
 
   public constructor( partialChargesVisibleProperty: Property<boolean>, providedOptions: PartialChargesCheckboxOptions ) {
 
-    const options = providedOptions;
+    const options = optionize<PartialChargesCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
+
+      // MPCheckboxOptions
+      isDisposable: false
+    }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
     super( partialChargesVisibleProperty, labelText, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

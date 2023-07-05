@@ -6,32 +6,33 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
-import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
-import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import MPCheckbox from './MPCheckbox.js';
+import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   singular?: boolean; // whether the Text label should be singular or plural
 };
 
-export type BondDipolesCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
+export type BondDipolesCheckboxOptions = SelfOptions & PickRequired<MPCheckboxOptions, 'tandem'>;
 
 export default class BondDipolesCheckbox extends MPCheckbox {
 
   public constructor( bondDipolesVisibleProperty: Property<boolean>, providedOptions: BondDipolesCheckboxOptions ) {
 
-    const options = optionize<BondDipolesCheckboxOptions, SelfOptions, CheckboxOptions>()( {
+    const options = optionize<BondDipolesCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
 
       // BondDipolesCheckboxOptions
-      singular: false
+      singular: false,
+
+      // MPCheckboxOptions
+      isDisposable: false
     }, providedOptions );
 
     const stringProperty = options.singular ?
@@ -48,11 +49,6 @@ export default class BondDipolesCheckbox extends MPCheckbox {
     } );
 
     super( bondDipolesVisibleProperty, content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

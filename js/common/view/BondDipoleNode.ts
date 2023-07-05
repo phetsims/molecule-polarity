@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -54,11 +53,6 @@ export default class BondDipoleNode extends DipoleNode {
       // position of tail in global coordinate frame
       this.translation = bond.getCenter().plusXY( tailX, tailY );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

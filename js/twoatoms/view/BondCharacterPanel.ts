@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, Line, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
@@ -43,7 +42,8 @@ export default class BondCharacterPanel extends Panel {
       fill: 'white',
       stroke: 'black',
       xMargin: 10,
-      yMargin: 3
+      yMargin: 3,
+      isDisposable: false
     }, providedOptions );
 
     // title
@@ -106,11 +106,6 @@ export default class BondCharacterPanel extends Panel {
         0, TRACK_WIDTH - markerNode.width,
         dipole.magnitude );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

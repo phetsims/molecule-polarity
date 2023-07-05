@@ -9,7 +9,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -39,7 +38,8 @@ export default class BondAngleDragListener extends DragListener {
     const options = optionize<BondAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
 
       // DragListenerOptions
-      allowTouchSnag: true
+      allowTouchSnag: true,
+      isDisposable: false
     }, providedOptions );
 
     let previousAngle = 0;
@@ -72,11 +72,6 @@ export default class BondAngleDragListener extends DragListener {
     };
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

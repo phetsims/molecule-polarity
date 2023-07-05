@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -46,7 +45,8 @@ export default class ElectronegativitySlider extends HSlider {
       minorTickLength: 10,
       visiblePropertyOptions: {
         phetioFeatured: false
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // custom thumb
@@ -86,11 +86,6 @@ export default class ElectronegativitySlider extends HSlider {
         this.addMinorTick( i );
       }
     }
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

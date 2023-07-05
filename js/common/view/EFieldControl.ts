@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -36,7 +35,8 @@ export default class EFieldControl extends VBox {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // title
@@ -63,11 +63,6 @@ export default class EFieldControl extends VBox {
     options.children = [ titleText, onOffSwitch ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

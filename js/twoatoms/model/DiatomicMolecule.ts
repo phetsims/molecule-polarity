@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Atom from '../../common/model/Atom.js';
@@ -84,11 +83,6 @@ export default class DiatomicMolecule extends Molecule {
     this.atomB = atomB;
     this.bond = bond;
     this.getDeltaEN = getDeltaEN;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { Circle, CircleOptions, Line, Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { Polarity } from '../model/Polarity.js';
@@ -16,7 +15,9 @@ export default class PolarityIndicator extends Node {
 
   public constructor( polarity: Polarity, radius = 20 ) {
 
-    super();
+    super( {
+      isDisposable: false
+    } );
 
     const pathOptions: CircleOptions = {
       lineWidth: 4,
@@ -36,11 +37,6 @@ export default class PolarityIndicator extends Node {
 
     // vertical connecting bar
     this.addChild( new Line( 0, radius, 0, 2 * radius, pathOptions ) );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

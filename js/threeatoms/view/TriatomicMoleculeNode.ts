@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -44,7 +43,8 @@ export default class TriatomicMoleculeNode extends Node {
     const options = optionize<TriatomicMoleculeNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      phetioInputEnabledPropertyInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true,
+      isDisposable: false
     }, providedOptions );
 
     // atoms
@@ -225,11 +225,6 @@ export default class TriatomicMoleculeNode extends Node {
       moleculeHasChanged = false;
       updateAllHintArrows();
     };
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

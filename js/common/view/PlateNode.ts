@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PolarityIndicator from './PolarityIndicator.js';
 import MPColors from '../MPColors.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -34,11 +33,16 @@ export default class PlateNode extends Node {
   public constructor( polarity: Polarity, providedOptions?: PlateNodeOptions ) {
 
     const options = optionize<PlateNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       perspective: 'left',
       plateWidth: 50,
       plateHeight: 430,
       plateThickness: 5,
-      platePerspectiveYOffset: 35
+      platePerspectiveYOffset: 35,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // polarity indicator
@@ -85,11 +89,6 @@ export default class PlateNode extends Node {
     super( options );
 
     this.plateHeight = options.plateHeight;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

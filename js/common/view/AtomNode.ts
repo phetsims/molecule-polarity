@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -30,7 +29,8 @@ export default class AtomNode extends Node {
     const options = optionize<AtomNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true },
+      isDisposable: false
     }, providedOptions );
 
     // atom
@@ -55,11 +55,6 @@ export default class AtomNode extends Node {
     labelText.boundsProperty.link( () => {
       labelText.center = sphereNode.center;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

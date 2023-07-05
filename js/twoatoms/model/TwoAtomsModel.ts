@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import MPModel, { MPModelOptions } from '../../common/model/MPModel.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -31,11 +30,6 @@ export default class TwoAtomsModel extends MPModel {
     super( diatomicMolecule, providedOptions );
 
     this.diatomicMolecule = diatomicMolecule;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public override reset(): void {

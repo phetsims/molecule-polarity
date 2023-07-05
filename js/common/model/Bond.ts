@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
@@ -32,6 +31,7 @@ export default class Bond extends PhetioObject {
     const options = optionize<BondOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false
     }, providedOptions );
 
@@ -75,11 +75,6 @@ export default class Bond extends PhetioObject {
           'Qualitative vector representation of the dipole, based on the electronegativity difference ' +
           'between the atoms. +x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
       } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

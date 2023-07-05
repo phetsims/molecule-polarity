@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -39,6 +38,7 @@ export default abstract class MPModel extends PhetioObject implements TModel {
     const options = optionize<MPModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false
     }, providedOptions );
 
@@ -50,11 +50,6 @@ export default abstract class MPModel extends PhetioObject implements TModel {
       tandem: options.tandem.createTandem( 'eFieldEnabledProperty' ),
       phetioFeatured: true
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

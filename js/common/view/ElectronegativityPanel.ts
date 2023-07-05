@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -41,7 +40,8 @@ export default class ElectronegativityPanel extends Panel {
       yMargin: 6,
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     const titleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.atomNameStringProperty, {
@@ -78,11 +78,6 @@ export default class ElectronegativityPanel extends Panel {
     } );
 
     super( content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

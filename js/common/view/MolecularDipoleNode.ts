@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
@@ -44,11 +43,6 @@ export default class MolecularDipoleNode extends DipoleNode {
       // offset in global coordinate frame
       this.translation = molecule.position.plus( v );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

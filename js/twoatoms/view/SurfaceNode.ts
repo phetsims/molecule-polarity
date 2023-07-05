@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -39,7 +38,8 @@ export default abstract class SurfaceNode extends Node {
     const options = optionize<SurfaceNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -77,11 +77,6 @@ export default abstract class SurfaceNode extends Node {
         this.updateFill();
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

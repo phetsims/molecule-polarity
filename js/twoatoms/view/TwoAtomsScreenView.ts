@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -33,7 +32,8 @@ export default class TwoAtomsScreenView extends ScreenView {
   public constructor( model: TwoAtomsModel, providedOptions: TwoAtomsViewControlsOptions ) {
 
     const options = optionize<TwoAtomsViewControlsOptions, SelfOptions, ScreenViewOptions>()( {
-      layoutBounds: MPConstants.LAYOUT_BOUNDS
+      layoutBounds: MPConstants.LAYOUT_BOUNDS,
+      isDisposable: false
     }, providedOptions );
 
     super( options );
@@ -137,11 +137,6 @@ export default class TwoAtomsScreenView extends ScreenView {
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

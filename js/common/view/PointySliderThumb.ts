@@ -6,7 +6,6 @@
  * See https://github.com/phetsims/molecule-polarity/issues/39
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -34,7 +33,8 @@ export default class PointySliderThumb extends Path {
       // PathOptions
       fill: 'rgb( 50, 145, 184 )',
       stroke: 'black',
-      lineWidth: 1
+      lineWidth: 1,
+      isDisposable: false
     }, providedOptions );
 
     // To improve readability
@@ -82,11 +82,6 @@ export default class PointySliderThumb extends Path {
       this.fill = isHighlighted ? options.fillHighlighted : options.fill;
     } );
     this.addInputListener( pressListener );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
@@ -26,7 +25,8 @@ export default class RotateArrowsNode extends Node {
     const options = optionize<RotateArrowsNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true },
+      isDisposable: false
     }, providedOptions );
 
     // arrow configuration
@@ -46,11 +46,6 @@ export default class RotateArrowsNode extends Node {
     atom.positionProperty.link( position => {
       this.translation = position;
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

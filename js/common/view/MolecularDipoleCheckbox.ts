@@ -6,27 +6,29 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { HBox, Text } from '../../../../scenery/js/imports.js';
-import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
-import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import MPCheckbox from './MPCheckbox.js';
+import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type MolecularDipoleCheckboxOptions = SelfOptions & WithRequired<CheckboxOptions, 'tandem'>;
+type MolecularDipoleCheckboxOptions = SelfOptions & PickRequired<MPCheckboxOptions, 'tandem'>;
 
 export default class MolecularDipoleCheckbox extends MPCheckbox {
 
   public constructor( molecularDipoleVisibleProperty: Property<boolean>, providedOptions: MolecularDipoleCheckboxOptions ) {
 
-    const options = providedOptions;
+    const options = optionize<MolecularDipoleCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
+
+      // MPCheckboxOptions
+      isDisposable: false
+    }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.molecularDipoleStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
@@ -38,11 +40,6 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
     } );
 
     super( molecularDipoleVisibleProperty, content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

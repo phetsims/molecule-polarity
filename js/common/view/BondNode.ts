@@ -9,7 +9,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -33,7 +32,8 @@ export default class BondNode extends Line {
       // LineOptions
       stroke: MPColors.BOND,
       lineWidth: 12,
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true },
+      isDisposable: false
     }, providedOptions );
 
     super( bond.atom1.positionProperty.value, bond.atom2.positionProperty.value, options );
@@ -41,11 +41,6 @@ export default class BondNode extends Line {
     // adjust the bond when its endpoints change
     bond.atom1.positionProperty.link( position => this.setPoint1( position ) );
     bond.atom2.positionProperty.link( position => this.setPoint2( position ) );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

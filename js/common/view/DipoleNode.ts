@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -45,7 +44,8 @@ export default class DipoleNode extends Path {
 
       // PathOptions
       fill: 'black',
-      stroke: 'black'
+      stroke: 'black',
+      isDisposable: false
     }, providedOptions );
 
     super( null, options );
@@ -92,11 +92,6 @@ export default class DipoleNode extends Path {
         this.setRotation( dipole.angle );
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

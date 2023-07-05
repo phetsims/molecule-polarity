@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -41,7 +40,8 @@ export default class DiatomicMoleculeNode extends Node {
 
       // NodeOptions
       cursor: 'pointer',
-      phetioInputEnabledPropertyInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true,
+      isDisposable: false
     }, providedOptions );
 
     // atoms
@@ -152,11 +152,6 @@ export default class DiatomicMoleculeNode extends Node {
       moleculeHasChanged = false;
       updateHintArrows();
     };
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

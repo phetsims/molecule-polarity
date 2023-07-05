@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -50,7 +49,10 @@ export default class RealMoleculeViewer extends Node {
 
       // SelfOptions
       backgroundColor: 'white',
-      viewerSize: new Dimension2( 200, 200 )
+      viewerSize: new Dimension2( 200, 200 ),
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     const rectNode = new Rectangle( 0, 0, options.viewerSize.width, options.viewerSize.height, {
@@ -143,11 +145,6 @@ export default class RealMoleculeViewer extends Node {
 
       //TODO populate elementsProperty with [Elements] for the selected molecule, see https://github.com/phetsims/molecule-polarity/issues/15
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

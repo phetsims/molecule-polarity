@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -37,7 +36,8 @@ export default class MoleculeAngleDragListener extends DragListener {
     const options = optionize<MoleculeAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
 
       // DragListenerOptions
-      allowTouchSnag: true
+      allowTouchSnag: true,
+      isDisposable: false
     }, providedOptions );
 
     let previousAngle: number; // angle between the pointer and the molecule when the drag started
@@ -67,11 +67,6 @@ export default class MoleculeAngleDragListener extends DragListener {
     };
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

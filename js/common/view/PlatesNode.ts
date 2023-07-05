@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -30,7 +29,8 @@ export default class PlatesNode extends HBox {
     const options = optionize<PlatesNodeOptions, StrictOmit<SelfOptions, 'plateOptions'>, HBoxOptions>()( {
 
       // HBoxOptions
-      spacing: 500
+      spacing: 500,
+      isDisposable: false
     }, providedOptions );
 
     options.visibleProperty = eFieldEnabledProperty;
@@ -48,11 +48,6 @@ export default class PlatesNode extends HBox {
     super( options );
 
     this.plateHeight = negativePlateNode.plateHeight;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

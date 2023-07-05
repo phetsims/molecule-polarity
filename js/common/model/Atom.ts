@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -48,6 +47,7 @@ export default class Atom extends PhetioObject {
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min,
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false
     }, providedOptions );
 
@@ -77,11 +77,6 @@ export default class Atom extends PhetioObject {
       phetioDocumentation: 'qualitative scalar representation of the partial charge, computed as the electronegativity difference',
       phetioReadOnly: true // because this is computed based on electronegativity of atoms in a molecule
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

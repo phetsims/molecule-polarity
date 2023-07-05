@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
@@ -33,7 +32,8 @@ export default class ThreeAtomsViewControls extends VBox {
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // title
@@ -58,11 +58,6 @@ export default class ThreeAtomsViewControls extends VBox {
     ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
