@@ -24,14 +24,12 @@ such query parameters are documented in `MPQueryParameters`.
 Classes related to the Preferences dialog (created dynamically by joist) must implement `dispose`.
 See `MPPreferencesNode` and its subcomponents.
 
-Instances of all other classes are created statically, at startup. Most of them
-have a `dispose` method that looks like this, to guard against accidentally using
-them in a dynamic situation.
+Instances of all other classes are created statically, at startup. They are created with `isDisposable: false`,
+or have a `dispose` method that looks like this:
 
 ```ts
-public override dispose(): void {
+public dispose(): void {
   Disposable.assertNotDisposable();
-  super.dispose();
 }
 ```
 
