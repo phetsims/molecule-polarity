@@ -28,7 +28,7 @@ Instances of all other classes are created statically, at startup. Most of them
 have a `dispose` method that looks like this, to guard against accidentally using
 them in a dynamic situation.
 
-```typescript
+```ts
 public override dispose(): void {
   Disposable.assertNotDisposable();
   super.dispose();
