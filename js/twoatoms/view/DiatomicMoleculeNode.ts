@@ -108,7 +108,6 @@ export default class DiatomicMoleculeNode extends Node {
 
     // rotate molecule by dragging anywhere
     const dragListener = new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'rotates the molecule by dragging anywhere on it',
       tandem: options.tandem.createTandem( 'dragListener' )
     } );
     this.addInputListener( dragListener );

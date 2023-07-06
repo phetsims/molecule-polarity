@@ -143,15 +143,12 @@ export default class TriatomicMoleculeNode extends Node {
 
     // rotate molecule by dragging atom B or bonds
     const atomBDragListener = new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'dragging atom B rotates the molecule',
       tandem: dragListenersTandem.createTandem( 'atomBDragListener' )
     } );
     const bondABDragListener = new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'dragging the bond between atoms A and C rotates the molecule',
       tandem: dragListenersTandem.createTandem( 'bondABDragListener' )
     } );
     const bondBCDragListener = new MoleculeAngleDragListener( molecule, this, {
-      phetioDocumentation: 'dragging the bond between atoms B and C rotates the molecule',
       tandem: dragListenersTandem.createTandem( 'bondBCDragListener' )
     } );
     atomBNode.addInputListener( atomBDragListener );

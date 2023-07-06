@@ -8,10 +8,8 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { DragListener, DragListenerOptions, Node, PressedDragListener, SceneryEvent } from '../../../../scenery/js/imports.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import normalizeAngle from '../model/normalizeAngle.js';
@@ -19,10 +17,7 @@ import normalizeAngle from '../model/normalizeAngle.js';
 type SelfOptions = EmptySelfOptions;
 
 type MoleculeAngleDragListenerOptions = SelfOptions &
-  PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'> &
-  //TODO https://github.com/phetsims/axon/issues/412 until fixed, phetioDocumentation is ignored
-  //PickOptional<DragListenerOptions<PressedDragListener>, 'phetioDocumentation'>
-  PickOptional<PhetioObjectOptions, 'phetioDocumentation'>;
+  PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'>;
 
 export default class MoleculeAngleDragListener extends DragListener {
 
