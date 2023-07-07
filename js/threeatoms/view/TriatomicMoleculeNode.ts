@@ -157,11 +157,9 @@ export default class TriatomicMoleculeNode extends Node {
 
     // change bond angles by dragging atom A or C
     const atomADragListener = new BondAngleDragListener( molecule, molecule.bondAngleABProperty, atomANode, {
-      phetioDocumentation: 'dragging atom A changes the angle of the bond between atoms A and B',
       tandem: dragListenersTandem.createTandem( 'atomADragListener' )
     } );
     const atomCDragListener = new BondAngleDragListener( molecule, molecule.bondAngleBCProperty, atomCNode, {
-      phetioDocumentation: 'dragging atom C changes the angle of the bond between atoms B and C',
       tandem: dragListenersTandem.createTandem( 'atomCDragListener' )
     } );
     atomANode.addInputListener( atomADragListener );
