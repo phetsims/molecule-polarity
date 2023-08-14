@@ -43,7 +43,7 @@ export default class RealMolecule extends PhetioObject {
   /**
    * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at
    * startup, it implements 'Reference type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   public static readonly RealMoleculeIO = new IOType( 'RealMoleculeIO', {
     valueType: RealMolecule,
