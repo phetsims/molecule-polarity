@@ -31,7 +31,7 @@ net partial charge is the sum of the partial charges contributed by each bond.
 **Electrostatic potential** and **electron density** are linearly proportional to delta EN.
 Larger delta EN corresponds to greater difference in potential (or electron density)
 and is reflected in the coloring of the surface. When delta EN is at its maximum, the
-surface is colored using the full range of colors shown in the color key.  When delta
+surface is colored using the full range of colors shown in the color key. When delta
 EN is zero, the entire surface is colored with the neutral color shown at the midpoint
 of the color key. These surfaces are not implemented for the triatomic molecule in
 the "Three Atoms" screen, because the manipulation of bond angles results in undefinable surfaces.
