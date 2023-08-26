@@ -9,8 +9,6 @@
 import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
-import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
@@ -19,26 +17,22 @@ import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type ThreeAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
+import Tandem from '../../../tandem/js/Tandem.js';
 
 export default class ThreeAtomsScreen extends Screen<ThreeAtomsModel, ThreeAtomsScreenView> {
 
-  public constructor( providedOptions: ThreeAtomsScreenOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<ThreeAtomsScreenOptions, SelfOptions, ScreenOptions>()( {
-
-      // ScreenOptions
+    const options: ScreenOptions = {
       name: MoleculePolarityStrings.screen.threeAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    }, providedOptions );
+      homeScreenIcon: createScreenIcon(),
+      tandem: tandem
+    };
 
     super(
-      () => new ThreeAtomsModel( { tandem: options.tandem.createTandem( 'model' ) } ),
-      model => new ThreeAtomsScreenView( model, { tandem: options.tandem.createTandem( 'view' ) } ),
+      () => new ThreeAtomsModel( options.tandem.createTandem( 'model' ) ),
+      model => new ThreeAtomsScreenView( model, options.tandem.createTandem( 'view' ) ),
       options
     );
   }

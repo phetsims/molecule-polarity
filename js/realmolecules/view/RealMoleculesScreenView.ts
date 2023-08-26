@@ -7,9 +7,7 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
@@ -24,52 +22,46 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
 import UnderDevelopmentPanel from './UnderDevelopmentPanel.js';
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type RealMoleculesScreenViewOptions = SelfOptions & PickRequired<ScreenViewOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class RealMoleculesScreenView extends ScreenView {
 
   private readonly moleculeViewer: RealMoleculeViewer;
 
-  public constructor( model: RealMoleculesModel, providedOptions: RealMoleculesScreenViewOptions ) {
+  public constructor( model: RealMoleculesModel, tandem: Tandem ) {
 
-    const options = optionize<RealMoleculesScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-
-      // ScreenViewOptions
-      layoutBounds: MPConstants.LAYOUT_BOUNDS
-    }, providedOptions );
-
-    super( options );
+    super( {
+      layoutBounds: MPConstants.LAYOUT_BOUNDS,
+      tandem: tandem
+    } );
 
     // view-specific Properties
     const viewProperties = new RealMoleculesViewProperties( {
-      tandem: options.tandem.createTandem( 'viewProperties' )
+      tandem: tandem.createTandem( 'viewProperties' )
     } );
 
     this.moleculeViewer = new RealMoleculeViewer( model.moleculeProperty, viewProperties, {
       viewerSize: new Dimension2( 450, 450 ),
-      tandem: options.tandem.createTandem( 'moleculeViewer' )
+      tandem: tandem.createTandem( 'moleculeViewer' )
     } );
 
     const electronegativityTableNode = new ElectronegativityTableNode( this.moleculeViewer, {
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty,
-      tandem: options.tandem.createTandem( 'electronegativityTableNode' )
+      tandem: tandem.createTandem( 'electronegativityTableNode' )
     } );
 
     const comboBoxListParent = new Node();
     const moleculesComboBox = new RealMoleculesControl( model.moleculeProperty, model.molecules, comboBoxListParent, {
       comboBoxOptions: {
-        tandem: options.tandem.createTandem( 'moleculesComboBox' )
+        tandem: tandem.createTandem( 'moleculesComboBox' )
       }
     } );
 
     const colorKeyNode = new RealMoleculesColorKeyNode( viewProperties.surfaceTypeProperty,
-      MPPreferences.surfaceColorProperty, options.tandem.createTandem( 'colorKeyNode' ) );
+      MPPreferences.surfaceColorProperty, tandem.createTandem( 'colorKeyNode' ) );
 
     const controlPanel = new RealMoleculesControlPanel( viewProperties, {
-      tandem: options.tandem.createTandem( 'controlPanel' )
+      tandem: tandem.createTandem( 'controlPanel' )
     } );
 
     const resetAllButton = new ResetAllButton( {
@@ -79,7 +71,7 @@ export default class RealMoleculesScreenView extends ScreenView {
         viewProperties.reset();
       },
       scale: 1.32,
-      tandem: options.tandem.createTandem( 'resetAllButton' )
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     // Parent for all nodes added to this screen

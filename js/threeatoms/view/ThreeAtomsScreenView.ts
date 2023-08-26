@@ -6,9 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
@@ -19,36 +17,32 @@ import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 import MPConstants from '../../common/MPConstants.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type ThreeAtomsScreenViewOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ThreeAtomsScreenView extends ScreenView {
 
-  public constructor( model: ThreeAtomsModel, providedOptions: ThreeAtomsScreenViewOptions ) {
+  public constructor( model: ThreeAtomsModel, tandem: Tandem ) {
 
-    const options = optionize<ThreeAtomsScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
-      layoutBounds: MPConstants.LAYOUT_BOUNDS
-    }, providedOptions );
-
-    super( options );
+    super( {
+      layoutBounds: MPConstants.LAYOUT_BOUNDS,
+      tandem: tandem
+    } );
 
     // view-specific Properties
     const viewProperties = new ThreeAtomsViewProperties( {
-      tandem: options.tandem.createTandem( 'viewProperties' )
+      tandem: tandem.createTandem( 'viewProperties' )
     } );
 
     // nodes
     const moleculeNode = new TriatomicMoleculeNode( model.triatomicMolecule, viewProperties.bondDipolesVisibleProperty,
       viewProperties.molecularDipoleVisibleProperty, viewProperties.partialChargesVisibleProperty, {
-        tandem: options.tandem.createTandem( 'moleculeNode' )
+        tandem: tandem.createTandem( 'moleculeNode' )
       } );
     const platesNode = new PlatesNode( model.eFieldEnabledProperty, {
       spacing: 600
     } );
 
-    const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
+    const electronegativityPanelsTandem = tandem.createTandem( 'electronegativityPanels' );
 
     const atomAElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomA, model.triatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
@@ -69,7 +63,7 @@ export default class ThreeAtomsScreenView extends ScreenView {
     } );
 
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
-      tandem: options.tandem.createTandem( 'controlPanel' )
+      tandem: tandem.createTandem( 'controlPanel' )
     } );
 
     const resetAllButton = new ResetAllButton( {
@@ -80,7 +74,7 @@ export default class ThreeAtomsScreenView extends ScreenView {
         moleculeNode.reset();
       },
       scale: 1.32,
-      tandem: options.tandem.createTandem( 'resetAllButton' )
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     // Parent for all nodes added to this screen

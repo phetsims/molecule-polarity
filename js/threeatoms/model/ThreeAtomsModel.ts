@@ -7,27 +7,23 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import MPModel, { MPModelOptions } from '../../common/model/MPModel.js';
+import MPModel from '../../common/model/MPModel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import TriatomicMolecule from './TriatomicMolecule.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type ThreeAtomsModelOptions = SelfOptions & MPModelOptions;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ThreeAtomsModel extends MPModel {
 
   public readonly triatomicMolecule: TriatomicMolecule;
 
-  public constructor( providedOptions: ThreeAtomsModelOptions ) {
+  public constructor( tandem: Tandem ) {
 
     const triatomicMolecule = new TriatomicMolecule( {
       position: new Vector2( 400, 280 ),
-      tandem: providedOptions.tandem.createTandem( 'molecule' )
+      tandem: tandem.createTandem( 'molecule' )
     } );
 
-    super( triatomicMolecule, providedOptions );
+    super( triatomicMolecule, tandem );
 
     this.triatomicMolecule = triatomicMolecule;
   }

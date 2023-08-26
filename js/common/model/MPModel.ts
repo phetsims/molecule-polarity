@@ -15,39 +15,31 @@ import MPConstants from '../MPConstants.js';
 import MPPreferences from './MPPreferences.js';
 import normalizeAngle from './normalizeAngle.js';
 import Molecule from './Molecule.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Property from '../../../../axon/js/Property.js';
 import TModel from '../../../../joist/js/TModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment
-
-type SelfOptions = EmptySelfOptions;
-
-export type MPModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default abstract class MPModel extends PhetioObject implements TModel {
 
   private readonly molecule: Molecule;
   public readonly eFieldEnabledProperty: Property<boolean>;
 
-  protected constructor( molecule: Molecule, providedOptions: MPModelOptions ) {
+  protected constructor( molecule: Molecule, tandem: Tandem ) {
 
-    const options = optionize<MPModelOptions, SelfOptions, PhetioObjectOptions>()( {
-
-      // PhetioObjectOptions
+    super( {
       isDisposable: false,
+      tandem: tandem,
       phetioState: false
-    }, providedOptions );
-
-    super( options );
+    } );
 
     this.molecule = molecule;
 
     this.eFieldEnabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'eFieldEnabledProperty' ),
+      tandem: tandem.createTandem( 'eFieldEnabledProperty' ),
       phetioFeatured: true
     } );
   }

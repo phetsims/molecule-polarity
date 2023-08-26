@@ -7,9 +7,7 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -22,34 +20,30 @@ import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type TwoAtomsViewControlsOptions = SelfOptions & PickRequired<ScreenView, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class TwoAtomsScreenView extends ScreenView {
 
-  public constructor( model: TwoAtomsModel, providedOptions: TwoAtomsViewControlsOptions ) {
+  public constructor( model: TwoAtomsModel, tandem: Tandem ) {
 
-    const options = optionize<TwoAtomsViewControlsOptions, SelfOptions, ScreenViewOptions>()( {
+    super( {
       layoutBounds: MPConstants.LAYOUT_BOUNDS,
-      isDisposable: false
-    }, providedOptions );
-
-    super( options );
+      isDisposable: false,
+      tandem: tandem
+    } );
 
     // view-specific Properties
     const viewProperties = new TwoAtomsViewProperties( {
-      tandem: options.tandem.createTandem( 'viewProperties' )
+      tandem: tandem.createTandem( 'viewProperties' )
     } );
 
     const moleculeNode = new DiatomicMoleculeNode( model.diatomicMolecule, viewProperties, {
-      tandem: options.tandem.createTandem( 'moleculeNode' )
+      tandem: tandem.createTandem( 'moleculeNode' )
     } );
 
     const platesNode = new PlatesNode( model.eFieldEnabledProperty );
 
-    const electronegativityPanelsTandem = options.tandem.createTandem( 'electronegativityPanels' );
+    const electronegativityPanelsTandem = tandem.createTandem( 'electronegativityPanels' );
 
     const atomAElectronegativityPanel = new ElectronegativityPanel( model.diatomicMolecule.atomA, model.diatomicMolecule, {
       tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
@@ -68,14 +62,14 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,
-      tandem: options.tandem.createTandem( 'bondCharacterPanel' )
+      tandem: tandem.createTandem( 'bondCharacterPanel' )
     } );
 
     const colorKeyNode = new TwoAtomsColorKeyNode( viewProperties.surfaceTypeProperty,
-      options.tandem.createTandem( 'colorKeyNode' ) );
+      tandem.createTandem( 'colorKeyNode' ) );
 
     const controlPanel = new TwoAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
-      tandem: options.tandem.createTandem( 'controlPanel' )
+      tandem: tandem.createTandem( 'controlPanel' )
     } );
 
     const resetAllButton = new ResetAllButton( {
@@ -86,7 +80,7 @@ export default class TwoAtomsScreenView extends ScreenView {
         moleculeNode.reset();
       },
       scale: 1.32,
-      tandem: options.tandem.createTandem( 'resetAllButton' )
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     // Parent for all nodes added to this screen

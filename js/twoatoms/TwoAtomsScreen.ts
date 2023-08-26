@@ -9,8 +9,6 @@
 import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
-import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
@@ -19,26 +17,22 @@ import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type TwoAtomsScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
+import Tandem from '../../../tandem/js/Tandem.js';
 
 export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 
-  public constructor( providedOptions: TwoAtomsScreenOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<TwoAtomsScreenOptions, SelfOptions, ScreenOptions>()( {
-
-      // ScreenOptions
+    const options: ScreenOptions = {
       name: MoleculePolarityStrings.screen.twoAtomsStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    }, providedOptions );
+      homeScreenIcon: createScreenIcon(),
+      tandem: tandem
+    };
 
     super(
-      () => new TwoAtomsModel( { tandem: options.tandem.createTandem( 'model' ) } ),
-      model => new TwoAtomsScreenView( model, { tandem: options.tandem.createTandem( 'view' ) } ),
+      () => new TwoAtomsModel( tandem.createTandem( 'model' ) ),
+      model => new TwoAtomsScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

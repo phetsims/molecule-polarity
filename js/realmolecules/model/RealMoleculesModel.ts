@@ -8,17 +8,12 @@
 
 import Property from '../../../../axon/js/Property.js';
 import TModel from '../../../../joist/js/TModel.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import mol2Data from './mol2Data.js';
 import RealMolecule from './RealMolecule.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type RealMoleculesModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class RealMoleculesModel extends PhetioObject implements TModel {
 
@@ -28,17 +23,14 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   // the selected molecule
   public readonly moleculeProperty: Property<RealMolecule>;
 
-  public constructor( providedOptions: RealMoleculesModelOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<RealMoleculesModelOptions, SelfOptions, PhetioObjectOptions>()( {
-
-      // PhetioObjectOptions
+    super( {
+      tandem: tandem,
       phetioState: false
-    }, providedOptions );
+    } );
 
-    super( options );
-
-    const moleculesTandem = options.tandem.createTandem( 'molecules' );
+    const moleculesTandem = tandem.createTandem( 'molecules' );
 
     const selectedMolecule = new RealMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty, mol2Data.HF, moleculesTandem.createTandem( 'HF' ) );
 
@@ -71,7 +63,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     this.moleculeProperty = new Property( selectedMolecule, {
       validValues: this.molecules,
       phetioValueType: RealMolecule.RealMoleculeIO,
-      tandem: options.tandem.createTandem( 'moleculeProperty' )
+      tandem: tandem.createTandem( 'moleculeProperty' )
     } );
   }
 

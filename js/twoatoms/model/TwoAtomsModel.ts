@@ -7,27 +7,23 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import MPModel, { MPModelOptions } from '../../common/model/MPModel.js';
+import MPModel from '../../common/model/MPModel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from './DiatomicMolecule.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-
-type SelfOptions = EmptySelfOptions;
-
-type TwoAtomsModelOptions = SelfOptions & MPModelOptions;
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class TwoAtomsModel extends MPModel {
 
   public readonly diatomicMolecule: DiatomicMolecule;
 
-  public constructor( providedOptions: TwoAtomsModelOptions ) {
+  public constructor( tandem: Tandem ) {
 
     const diatomicMolecule = new DiatomicMolecule( {
       position: new Vector2( 380, 280 ),
-      tandem: providedOptions.tandem.createTandem( 'molecule' )
+      tandem: tandem.createTandem( 'molecule' )
     } );
 
-    super( diatomicMolecule, providedOptions );
+    super( diatomicMolecule, tandem );
 
     this.diatomicMolecule = diatomicMolecule;
   }

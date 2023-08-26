@@ -7,7 +7,7 @@
  */
 
 import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
-import Sim from '../../joist/js/Sim.js';
+import Sim, { SimOptions } from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import MPPreferencesNode from './common/view/MPPreferencesNode.js';
@@ -18,13 +18,15 @@ import TwoAtomsScreen from './twoatoms/TwoAtomsScreen.js';
 
 simLauncher.launch( () => {
 
+  const titleStringProperty = MoleculePolarityStrings[ 'molecule-polarity' ].titleStringProperty;
+
   const screens = [
-    new TwoAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'twoAtomsScreen' ) } ),
-    new ThreeAtomsScreen( { tandem: Tandem.ROOT.createTandem( 'threeAtomsScreen' ) } ),
-    new RealMoleculesScreen( { tandem: Tandem.ROOT.createTandem( 'realMoleculesScreen' ) } )
+    new TwoAtomsScreen( Tandem.ROOT.createTandem( 'twoAtomsScreen' ) ),
+    new ThreeAtomsScreen( Tandem.ROOT.createTandem( 'threeAtomsScreen' ) ),
+    new RealMoleculesScreen( Tandem.ROOT.createTandem( 'realMoleculesScreen' ) )
   ];
 
-  const sim = new Sim( MoleculePolarityStrings[ 'molecule-polarity' ].titleStringProperty, screens, {
+  const options: SimOptions = {
     preferencesModel: new PreferencesModel( {
       simulationOptions: {
         customPreferences: [ {
@@ -44,7 +46,8 @@ simLauncher.launch( () => {
 
     // phet-io options
     phetioDesigned: true
-  } );
+  };
 
+  const sim = new Sim( titleStringProperty, screens, options );
   sim.start();
 } );

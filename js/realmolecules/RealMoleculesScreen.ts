@@ -9,8 +9,6 @@
 import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import optionize, { EmptySelfOptions } from '../../../phet-core/js/optionize.js';
-import PickRequired from '../../../phet-core/js/types/PickRequired.js';
 import { Image } from '../../../scenery/js/imports.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
@@ -21,21 +19,16 @@ import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type RealMoleculesScreenOptions = SelfOptions & PickRequired<ScreenOptions, 'tandem'>;
-
 export default class RealMoleculesScreen extends Screen<RealMoleculesModel, RealMoleculesScreenView> {
 
-  public constructor( provideOptions: RealMoleculesScreenOptions ) {
+  public constructor( tandem: Tandem ) {
 
-    const options = optionize<RealMoleculesScreenOptions, SelfOptions, ScreenOptions>()( {
-
-      // ScreenOptions
+    const options: ScreenOptions = {
       name: MoleculePolarityStrings.screen.realMoleculesStringProperty,
       backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: createScreenIcon()
-    }, provideOptions );
+      homeScreenIcon: createScreenIcon(),
+      tandem: tandem
+    };
 
     //TODO see https://github.com/phetsims/molecule-polarity/issues/32
     // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
@@ -43,8 +36,8 @@ export default class RealMoleculesScreen extends Screen<RealMoleculesModel, Real
     const parentTandem = ( MPQueryParameters.realMolecules ) ? options.tandem : Tandem.OPT_OUT;
 
     super(
-      () => new RealMoleculesModel( { tandem: parentTandem.createTandem( 'model' ) } ),
-      model => new RealMoleculesScreenView( model, { tandem: parentTandem.createTandem( 'view' ) } ),
+      () => new RealMoleculesModel( parentTandem.createTandem( 'model' ) ),
+      model => new RealMoleculesScreenView( model, parentTandem.createTandem( 'view' ) ),
       options
     );
   }
