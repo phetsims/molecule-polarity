@@ -18,14 +18,14 @@ export default class TwoAtomsModel extends MPModel {
 
   public constructor( tandem: Tandem ) {
 
-    const diatomicMolecule = new DiatomicMolecule( {
+    const molecule = new DiatomicMolecule( {
       position: new Vector2( 380, 280 ),
       tandem: tandem.createTandem( 'molecule' )
     } );
 
-    super( diatomicMolecule, tandem );
+    super( molecule, tandem );
 
-    this.diatomicMolecule = diatomicMolecule;
+    this.diatomicMolecule = molecule;
   }
 
   public override reset(): void {

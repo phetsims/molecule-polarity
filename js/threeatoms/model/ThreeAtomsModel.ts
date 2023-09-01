@@ -18,14 +18,14 @@ export default class ThreeAtomsModel extends MPModel {
 
   public constructor( tandem: Tandem ) {
 
-    const triatomicMolecule = new TriatomicMolecule( {
+    const molecule = new TriatomicMolecule( {
       position: new Vector2( 400, 280 ),
       tandem: tandem.createTandem( 'molecule' )
     } );
 
-    super( triatomicMolecule, tandem );
+    super( molecule, tandem );
 
-    this.triatomicMolecule = triatomicMolecule;
+    this.triatomicMolecule = molecule;
   }
 
   public override reset(): void {
