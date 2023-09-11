@@ -12,9 +12,9 @@ high-level description of the simulation model.
 ## General
 
 **Model-view transform**: Many PhET simulations have a model-view transform that maps between model and view coordinate
-frames (see `ModelViewTransform2`).
-The domain of this simulation has no need for a model coordinate frame, so the model and view coordinate frames are
-treated as equivalent, and no transform is required. (If you don't understand that, don't worry about it.)
+frames (see `ModelViewTransform2`). The domain of this simulation has no need for a model coordinate frame, so the model
+and view coordinate frames are treated as equivalent, and no transform is required. (If you don't understand that, don't
+worry about it.)
 
 **Query parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and testing. All
 such query parameters are documented in `MPQueryParameters`.
@@ -24,8 +24,8 @@ such query parameters are documented in `MPQueryParameters`.
 Classes related to the Preferences dialog (created dynamically by joist) must implement `dispose`.
 See `MPPreferencesNode` and its subcomponents.
 
-Instances of all other classes are created statically, at startup. They are created with `isDisposable: false`,
-or have a `dispose` method that looks like this:
+Instances of all other classes are created statically, at startup. They are created with `isDisposable: false`, or have
+a `dispose` method that looks like this:
 
 ```ts
 public dispose(): void {
