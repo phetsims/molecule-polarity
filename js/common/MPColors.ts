@@ -7,7 +7,7 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
-import { Color } from '../../../scenery/js/imports.js';
+import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import moleculePolarity from '../moleculePolarity.js';
 
 // constants
@@ -16,9 +16,13 @@ const NEUTRAL_GREEN = new Color( 31, 247, 0 );
 
 const MPColors = {
 
-  SCREEN_BACKGROUND: 'rgb( 180, 205, 255)',
+  screenBackgroundColorProperty: new ProfileColorProperty( moleculePolarity, 'screenBackgroundColor', {
+    default: 'rgb( 180, 205, 255)'
+  } ),
 
-  CONTROL_PANEL_BACKGROUND: 'rgb( 238, 238, 238)',
+  panelFillProperty: new ProfileColorProperty( moleculePolarity, 'panelFill', {
+    default: 'rgb( 238, 238, 238)'
+  } ),
 
   // atoms
   ATOM_A: 'rgb( 255, 255, 90 )',

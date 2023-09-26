@@ -26,7 +26,7 @@ export default class MPControlPanel extends Panel {
     const options = optionize<MPControlPanelOptions, SelfOptions, PanelOptions>()( {
 
       // PanelOptions
-      fill: MPColors.CONTROL_PANEL_BACKGROUND,
+      fill: MPColors.panelFillProperty,
       xMargin: 20,
       yMargin: 15,
       visiblePropertyOptions: {

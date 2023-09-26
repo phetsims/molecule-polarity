@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
@@ -25,7 +24,7 @@ export default class ThreeAtomsScreen extends Screen<ThreeAtomsModel, ThreeAtoms
 
     const options: ScreenOptions = {
       name: MoleculePolarityStrings.screen.threeAtomsStringProperty,
-      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
+      backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
     };
@@ -53,7 +52,7 @@ function createScreenIcon(): ScreenIcon {
 
   const background = new Rectangle( 0, 0,
     Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width, Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height,
-    { fill: MPColors.SCREEN_BACKGROUND } );
+    { fill: MPColors.screenBackgroundColorProperty } );
 
   const bondAB = new Line( 0, 0, -xOffset, yOffset, {
     stroke: MPColors.BOND,

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
@@ -25,7 +24,7 @@ export default class RealMoleculesScreen extends Screen<RealMoleculesModel, Real
 
     const options: ScreenOptions = {
       name: MoleculePolarityStrings.screen.realMoleculesStringProperty,
-      backgroundColorProperty: new Property( MPColors.SCREEN_BACKGROUND ),
+      backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       tandem: tandem
     };
