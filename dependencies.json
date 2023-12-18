@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "f7199135d502390a85e097959c95557a475319c9",
+    "sha": "8453986f20efe144b872cd88d525f2aaaa54c8ba",
     "branch": "1.3"
   },
   "nitroglycerin": {
@@ -85,7 +85,7 @@
     "branch": "HEAD"
   },
   "sun": {
-    "sha": "90550eef96cda025bbf3d6c32e3c41946cc6f0f0",
+    "sha": "955270784943886cda0768c4679e2ff1f9b1feb7",
     "branch": "HEAD"
   },
   "tambo": {
