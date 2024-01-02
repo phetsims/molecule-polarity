@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "2613aa43bb66dca5d8f6d6455af4ba7bebc0443f",
+    "sha": "ead1d4a7a2a9ae1daba28c929a089ccb5080844c",
     "branch": "1.3"
   },
   "nitroglycerin": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "379bb2af56cbe0399c753bbc5ff645fc8751268c",
+    "sha": "bc13b28dbd161f34fdff6ef8feff92b1610de2ac",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
