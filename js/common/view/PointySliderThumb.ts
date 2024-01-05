@@ -4,6 +4,8 @@
  * PointySliderThumb is the thumb used for the Electronegativity sliders.
  * It points up, has rounded corners, and origin at top center.
  * See https://github.com/phetsims/molecule-polarity/issues/39
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
