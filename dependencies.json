@@ -5,7 +5,7 @@
     "branch": "HEAD"
   },
   "axon": {
-    "sha": "d7f3373e978aa26739efb9a025b49d3ba432deee",
+    "sha": "9e68721fcca25ebe5a196397a818336c8de4a773",
     "branch": "HEAD"
   },
   "brand": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "ecd3b1045cfdf7b43ce7229a2e984bbed041d3a2",
+    "sha": "6c2dbbde472b32ed970d9bc82a5f0bc6a736e70f",
     "branch": "1.3"
   },
   "nitroglycerin": {
