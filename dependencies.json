@@ -5,7 +5,7 @@
     "branch": "HEAD"
   },
   "axon": {
-    "sha": "af17596de043b6307bfa3598a1c515e8a95bcc60",
+    "sha": "d7f3373e978aa26739efb9a025b49d3ba432deee",
     "branch": "HEAD"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "a735218221c9076d4853ab056f6d604a4c23b517",
+    "sha": "1b38755069bb0b5a06d7313ca953dc122b45cb15",
     "branch": "HEAD"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "a1b0d74c4288af67f24b9ec69d2f59947fe3b3ec",
+    "sha": "ecd3b1045cfdf7b43ce7229a2e984bbed041d3a2",
     "branch": "1.3"
   },
   "nitroglycerin": {
