@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "ceb4ce1574ad66e4f6cfe51d261c63f884baa589",
+    "sha": "ec9e1f19059d9a47fe04500d68ff99160b376976",
     "branch": "HEAD"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "1b38755069bb0b5a06d7313ca953dc122b45cb15",
+    "sha": "df16dd13815e37de1121b9717f449db25b7cbfe0",
     "branch": "HEAD"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "molecule-polarity": {
-    "sha": "6c2dbbde472b32ed970d9bc82a5f0bc6a736e70f",
+    "sha": "d4d32b911c490cbdfb959f0cde766ee4a39fc26e",
     "branch": "1.3"
   },
   "nitroglycerin": {
