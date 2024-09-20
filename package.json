@@ -58,7 +58,7 @@
         },
         "parserOptions": {
           "project": [
-            "../molecule-polarity/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
