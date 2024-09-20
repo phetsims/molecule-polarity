@@ -55,6 +55,11 @@
               "ts-nocheck": true
             }
           ]
+        },
+        "parserOptions": {
+          "project": [
+            "../molecule-polarity/tsconfig.json"
+          ]
         }
       }
     ]
