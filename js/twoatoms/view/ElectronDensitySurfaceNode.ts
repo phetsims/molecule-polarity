@@ -15,8 +15,8 @@ import { LinearGradient } from '../../../../scenery/js/imports.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import SurfaceNode, { SurfaceNodeOptions } from './SurfaceNode.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
+import SurfaceNode, { SurfaceNodeOptions } from './SurfaceNode.js';
 
 type ElectronDensitySurfaceNodeOptions = SurfaceNodeOptions;
 

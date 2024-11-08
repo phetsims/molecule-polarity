@@ -9,11 +9,11 @@
 import Property from '../../../../axon/js/Property.js';
 import TModel from '../../../../joist/js/TModel.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import mol2Data from './mol2Data.js';
 import RealMolecule from './RealMolecule.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class RealMoleculesModel extends PhetioObject implements TModel {
 

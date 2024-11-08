@@ -32,17 +32,17 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Color, DOM, DOMOptions } from '../../../../scenery/js/imports.js';
+import { SurfaceType } from '../../common/model/SurfaceType.js';
 import MPColors from '../../common/MPColors.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Element from '../model/Element.js';
 import RealMolecule from '../model/RealMolecule.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
-import { SurfaceType } from '../../common/model/SurfaceType.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 
 // strings
 const DELTA = '\u03B4';

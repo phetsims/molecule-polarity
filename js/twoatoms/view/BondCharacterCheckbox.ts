@@ -8,12 +8,12 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
+import MPCheckbox, { MPCheckboxOptions } from '../../common/view/MPCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import MPCheckbox, { MPCheckboxOptions } from '../../common/view/MPCheckbox.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 

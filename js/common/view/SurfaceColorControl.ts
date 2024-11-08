@@ -6,21 +6,21 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
+import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import MPConstants from '../MPConstants.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
-import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import MPConstants from '../MPConstants.js';
 import SurfaceColorKey from './SurfaceColorKey.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
-import PreferencesDialog from '../../../../joist/js/preferences/PreferencesDialog.js';
-import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 
 // constants
 const COLOR_KEY_OPTIONS = {

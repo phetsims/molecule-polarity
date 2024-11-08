@@ -8,12 +8,12 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import MPColors from '../MPColors.js';
 import DipoleNode, { DipoleNodeOptions } from './DipoleNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const OFFSET = 55; // offset in the direction that the dipole points

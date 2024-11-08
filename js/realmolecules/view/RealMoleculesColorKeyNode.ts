@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { SurfaceType } from '../../common/model/SurfaceType.js';
-import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import { SurfaceColor } from '../../common/model/SurfaceColor.js';
+import { SurfaceType } from '../../common/model/SurfaceType.js';
+import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
 export default class RealMoleculesColorKeyNode extends Node {
 

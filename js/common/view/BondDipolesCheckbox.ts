@@ -8,13 +8,13 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
 import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   singular?: boolean; // whether the Text label should be singular or plural

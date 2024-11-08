@@ -11,12 +11,12 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
 import { Line, Node, Rectangle, Text } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
-import Tandem from '../../../tandem/js/Tandem.js';
 
 export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 

@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
@@ -16,8 +18,6 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import AtomElectronegativitiesCheckbox from './AtomElectronegativitiesCheckbox.js';
 import AtomLabelsCheckbox from './AtomLabelsCheckbox.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 

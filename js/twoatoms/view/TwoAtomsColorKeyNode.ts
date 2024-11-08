@@ -6,12 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { SurfaceType } from '../../common/model/SurfaceType.js';
-import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { SurfaceType } from '../../common/model/SurfaceType.js';
+import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
 export default class TwoAtomsColorKeyNode extends Node {
 

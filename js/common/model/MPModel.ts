@@ -9,16 +9,16 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
+import TModel from '../../../../joist/js/TModel.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
+import Molecule from './Molecule.js';
 import MPPreferences from './MPPreferences.js';
 import normalizeAngle from './normalizeAngle.js';
-import Molecule from './Molecule.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Property from '../../../../axon/js/Property.js';
-import TModel from '../../../../joist/js/TModel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 const MAX_RADIANS_PER_STEP = 0.17; // controls animation of E-field alignment

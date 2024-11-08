@@ -6,13 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PolarityIndicator from './PolarityIndicator.js';
-import MPColors from '../MPColors.js';
+import { Shape } from '../../../../kite/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { Polarity } from '../model/Polarity.js';
-import { Node, NodeOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import MPColors from '../MPColors.js';
+import PolarityIndicator from './PolarityIndicator.js';
 
 type Perspective = 'left' | 'right';
 

@@ -10,6 +10,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { HBox, Node } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
@@ -17,10 +18,9 @@ import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
+import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
-import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class TwoAtomsScreenView extends ScreenView {
 
