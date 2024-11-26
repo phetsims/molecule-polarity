@@ -74,7 +74,6 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
         moleculeNode.reset();

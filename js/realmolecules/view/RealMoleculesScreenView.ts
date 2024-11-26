@@ -66,7 +66,6 @@ export default class RealMoleculesScreenView extends ScreenView {
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
       },
