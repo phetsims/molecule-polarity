@@ -25,7 +25,7 @@
  *
  * WARNING #3: JSmol 14.2.4 incorrectly identifies itself as 14.2.3 when Jmol._version is inspected in the debugger.
  *
- * WARNING #4: When this file was converted to TypeScript in 9/2022, it passed lint and tsc, but was not tested.
+ * WARNING #4: When this file was converted to TypeScript in 9/2022, it passed lint and type-check, but was not tested.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
