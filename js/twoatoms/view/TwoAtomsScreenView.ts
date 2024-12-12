@@ -106,15 +106,18 @@ export default class TwoAtomsScreenView extends ScreenView {
     platesNode.centerX = moleculeX;
     platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
 
-    Multilink.multilink( [ electronegativityPanels.boundsProperty, bondCharacterPanel.boundsProperty ], () => {
+    Multilink.multilink( [ electronegativityPanels.boundsProperty, bondCharacterPanel.boundsProperty, electronegativityPanels.visibleProperty ], () => {
+
+      const bottomFromLayoutBounds = this.layoutBounds.bottom - 25;
 
       // centered below molecule
       electronegativityPanels.centerX = moleculeX;
-      electronegativityPanels.bottom = this.layoutBounds.bottom - 25;
+      electronegativityPanels.bottom = bottomFromLayoutBounds;
 
       // centered above EN controls
       bondCharacterPanel.centerX = moleculeX;
-      bondCharacterPanel.bottom = electronegativityPanels.top - 10;
+      // Support cases where PhET-iO has hidden the electronegativityPanels and/or container
+      bondCharacterPanel.bottom = electronegativityPanels.visible && electronegativityPanels.bounds.isFinite() ? electronegativityPanels.top - 10 : bottomFromLayoutBounds;
     } );
 
     // centered above molecule
