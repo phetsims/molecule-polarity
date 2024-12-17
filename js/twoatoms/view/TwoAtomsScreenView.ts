@@ -6,10 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../axon/js/Multilink.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import { HBox, Node } from '../../../../scenery/js/imports.js';
+import { HBox, Node, VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
@@ -65,6 +64,12 @@ export default class TwoAtomsScreenView extends ScreenView {
       tandem: tandem.createTandem( 'bondCharacterPanel' )
     } );
 
+    const panelsVBox = new VBox( {
+      excludeInvisibleChildrenFromBounds: false,
+      children: [ bondCharacterPanel, electronegativityPanels ],
+      spacing: 10
+    } );
+
     const colorKeyNode = new TwoAtomsColorKeyNode( viewProperties.surfaceTypeProperty,
       tandem.createTandem( 'colorKeyNode' ) );
 
@@ -88,9 +93,8 @@ export default class TwoAtomsScreenView extends ScreenView {
 
         // nodes are rendered in this order
         platesNode,
-        electronegativityPanels,
         controlPanel,
-        bondCharacterPanel,
+        panelsVBox,
         colorKeyNode,
         moleculeNode,
         resetAllButton
@@ -106,18 +110,10 @@ export default class TwoAtomsScreenView extends ScreenView {
     platesNode.centerX = moleculeX;
     platesNode.bottom = moleculeY + ( platesNode.plateHeight / 2 );
 
-    Multilink.multilink( [ electronegativityPanels.boundsProperty, bondCharacterPanel.boundsProperty, electronegativityPanels.visibleProperty ], () => {
-
-      const bottomFromLayoutBounds = this.layoutBounds.bottom - 25;
-
-      // centered below molecule
-      electronegativityPanels.centerX = moleculeX;
-      electronegativityPanels.bottom = bottomFromLayoutBounds;
-
-      // centered above EN controls
-      bondCharacterPanel.centerX = moleculeX;
-      // Support cases where PhET-iO has hidden the electronegativityPanels and/or container
-      bondCharacterPanel.bottom = electronegativityPanels.visible && electronegativityPanels.bounds.isFinite() ? electronegativityPanels.top - 10 : bottomFromLayoutBounds;
+    // centered below molecule
+    panelsVBox.boundsProperty.link( () => {
+      panelsVBox.centerX = moleculeX;
+      panelsVBox.bottom = this.layoutBounds.bottom - 25;
     } );
 
     // centered above molecule
