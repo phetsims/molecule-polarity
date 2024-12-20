@@ -27,6 +27,7 @@ export default class BondDipolesCheckbox extends MPCheckbox {
   public constructor( bondDipolesVisibleProperty: Property<boolean>, providedOptions: BondDipolesCheckboxOptions ) {
 
     const options = optionize<BondDipolesCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
+      phetioDisplayOnlyPropertyInstrumented: true,
 
       // BondDipolesCheckboxOptions
       singular: false,

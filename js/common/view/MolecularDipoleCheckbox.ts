@@ -25,6 +25,7 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
   public constructor( molecularDipoleVisibleProperty: Property<boolean>, providedOptions: MolecularDipoleCheckboxOptions ) {
 
     const options = optionize<MolecularDipoleCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
+      phetioDisplayOnlyPropertyInstrumented: true,
 
       // MPCheckboxOptions
       isDisposable: false
