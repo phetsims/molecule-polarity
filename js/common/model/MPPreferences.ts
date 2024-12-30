@@ -30,10 +30,9 @@ const MPPreferences = {
       //TODO see https://github.com/phetsims/molecule-polarity/issues/32
       // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
       // In the meantime, support testing via the realMolecules query parameter.
-      tandem: ( MPQueryParameters.realMolecules ) ?
-              Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ) :
-              Tandem.OPT_OUT.createTandem( 'surfaceColorProperty' ),
-      phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen'
+      tandem: Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ),
+      phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen',
+      phetioFeatured: true
     } )
 };
 
