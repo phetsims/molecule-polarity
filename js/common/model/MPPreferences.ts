@@ -27,8 +27,9 @@ const MPPreferences = {
     MPQueryParameters.surfaceColor as SurfaceColor, {
       validValues: SurfaceColorValues,
 
-      // TODO: It would be preferable to uninstrument this when running without the Real Molecules screen, which is not yet phet-io instrumented, see https://github.com/phetsims/molecule-polarity/issues/32
-      tandem: Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ),
+      //TODO When Real Molecules screen is eventually implemented, make this tandem change. See https://github.com/phetsims/molecule-polarity/issues/32
+      // tandem: Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ),
+      tandem: Tandem.OPT_OUT,
       phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen',
       phetioFeatured: true
     } )

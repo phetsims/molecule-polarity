@@ -13,6 +13,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPPreferences from '../model/MPPreferences.js';
 import MPQueryParameters from '../MPQueryParameters.js';
@@ -41,7 +42,9 @@ export default class MPPreferencesNode extends VBox {
     } );
 
     const surfaceColorControl = new SurfaceColorControl( MPPreferences.surfaceColorProperty, {
-      tandem: options.tandem.createTandem( 'surfaceColorControl' )
+      //TODO When Real Molecules screen is eventually implemented, make this tandem change. See https://github.com/phetsims/molecule-polarity/issues/32
+      // tandem: options.tandem.createTandem( 'surfaceColorControl' )
+      tandem: Tandem.OPT_OUT
     } );
 
     //TODO https://github.com/phetsims/molecule-polarity/issues/32
