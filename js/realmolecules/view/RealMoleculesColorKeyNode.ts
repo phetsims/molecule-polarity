@@ -8,7 +8,7 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { SurfaceColor } from '../../common/model/SurfaceColor.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';

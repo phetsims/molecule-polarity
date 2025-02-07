@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { TColor } from '../../../../scenery/js/imports.js';
+import TColor from '../../../../scenery/js/util/TColor.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 export default class Element {

@@ -10,7 +10,7 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { HBox, HBoxOptions } from '../../../../scenery/js/imports.js';
+import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import PlateNode, { PlateNodeOptions } from './PlateNode.js';
 

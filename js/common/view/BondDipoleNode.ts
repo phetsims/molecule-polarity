@@ -8,7 +8,7 @@
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';

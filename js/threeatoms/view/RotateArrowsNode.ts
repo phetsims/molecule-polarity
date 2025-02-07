@@ -10,7 +10,8 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import CurvedArrowShape from '../../../../scenery-phet/js/CurvedArrowShape.js';
-import { Node, NodeOptions, Path } from '../../../../scenery/js/imports.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import Atom from '../../common/model/Atom.js';
 import moleculePolarity from '../../moleculePolarity.js';
 

@@ -12,7 +12,8 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Line, LineOptions, NodeOptions } from '../../../../scenery/js/imports.js';
+import Line, { LineOptions } from '../../../../scenery/js/nodes/Line.js';
+import { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';

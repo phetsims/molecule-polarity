@@ -7,7 +7,7 @@
  */
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';

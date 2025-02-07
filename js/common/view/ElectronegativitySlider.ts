@@ -13,7 +13,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider, { HSliderOptions } from '../../../../sun/js/HSlider.js';
 import Slider from '../../../../sun/js/Slider.js';
 import moleculePolarity from '../../moleculePolarity.js';

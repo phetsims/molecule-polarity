@@ -10,7 +10,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';

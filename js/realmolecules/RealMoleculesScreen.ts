@@ -8,7 +8,7 @@
 
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Image } from '../../../scenery/js/imports.js';
+import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
 import MPColors from '../common/MPColors.js';

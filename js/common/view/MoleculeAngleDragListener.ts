@@ -9,7 +9,9 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { DragListener, DragListenerOptions, Node, PressedDragListener, SceneryEvent } from '../../../../scenery/js/imports.js';
+import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
+import DragListener, { DragListenerOptions, PressedDragListener } from '../../../../scenery/js/listeners/DragListener.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import normalizeAngle from '../model/normalizeAngle.js';

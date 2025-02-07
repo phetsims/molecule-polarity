@@ -7,7 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Circle, CircleOptions, Line, Node } from '../../../../scenery/js/imports.js';
+import Circle, { CircleOptions } from '../../../../scenery/js/nodes/Circle.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { Polarity } from '../model/Polarity.js';
 

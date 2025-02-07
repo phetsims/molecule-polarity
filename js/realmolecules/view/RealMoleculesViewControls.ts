@@ -8,7 +8,8 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
 import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
 import MolecularDipoleCheckbox from '../../common/view/MolecularDipoleCheckbox.js';
