@@ -1,4 +1,4 @@
-// Copyright 2014-2024, University of Colorado Boulder
+// Copyright 2014-2025, University of Colorado Boulder
 
 /**
  * Displays the bond 'character' of the molecule, by placing a marker on a continuum whose extremes are "covalent"

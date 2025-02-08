@@ -1,4 +1,4 @@
-// Copyright 2014-2024, University of Colorado Boulder
+// Copyright 2014-2025, University of Colorado Boulder
 
 //TODO This is currently a stub, integrate with 3D viewer in https://github.com/phetsims/molecule-polarity/issues/15
 /**

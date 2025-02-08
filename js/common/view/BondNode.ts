@@ -1,4 +1,4 @@
-// Copyright 2014-2023, University of Colorado Boulder
+// Copyright 2014-2025, University of Colorado Boulder
 
 /**
  * BondNode is the visual representation of a bond between 2 atoms. It is intended to be rendered before the 2 atoms,

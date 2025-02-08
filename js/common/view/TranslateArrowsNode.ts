@@ -1,4 +1,4 @@
-// Copyright 2014-2022, University of Colorado Boulder
+// Copyright 2014-2025, University of Colorado Boulder
 
 /**
  * TranslateArrowsNode is a pair of arrows that are placed around an atom to indicate that the atom can be translated.

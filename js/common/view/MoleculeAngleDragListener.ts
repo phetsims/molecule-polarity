@@ -1,4 +1,4 @@
-// Copyright 2014-2023, University of Colorado Boulder
+// Copyright 2014-2025, University of Colorado Boulder
 
 /**
  * MoleculeAngleDragListener is the drag listener for manipulating orientation of a molecule.

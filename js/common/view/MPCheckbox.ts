@@ -1,4 +1,4 @@
-// Copyright 2023-2024, University of Colorado Boulder
+// Copyright 2023-2025, University of Colorado Boulder
 
 /**
  * MPCheckbox is the base class for checkboxes in this sim.
