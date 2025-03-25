@@ -7,6 +7,7 @@
  */
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
+import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import moleculePolarity from '../moleculePolarity.js';
 import { DipoleDirectionValues } from './model/DipoleDirection.js';
 import { SurfaceColorValues } from './model/SurfaceColor.js';
