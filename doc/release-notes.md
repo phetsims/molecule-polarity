@@ -41,4 +41,6 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 ### New Features
 * PhET-iO
 
+## 1.1 (skipped, see https://github.com/phetsims/molecule-polarity/issues/112)
+
 ## 1.0 (2020-09-01)
