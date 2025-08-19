@@ -29,7 +29,6 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     super( {
       layoutBounds: MPConstants.LAYOUT_BOUNDS,
-      isDisposable: false,
       tandem: tandem
     } );
 
