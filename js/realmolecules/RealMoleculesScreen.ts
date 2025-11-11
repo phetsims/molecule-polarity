@@ -12,7 +12,6 @@ import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
 import MPColors from '../common/MPColors.js';
-import MPQueryParameters from '../common/MPQueryParameters.js';
 import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
@@ -29,14 +28,9 @@ export default class RealMoleculesScreen extends Screen<RealMoleculesModel, Real
       tandem: tandem
     };
 
-    //TODO see https://github.com/phetsims/molecule-polarity/issues/32
-    // Until the 'Real Molecules' screen is fully implemented, opt out of PhET-iO instrumentation.
-    // In the meantime, support testing via the realMolecules query parameter.
-    const parentTandem = ( MPQueryParameters.realMolecules ) ? options.tandem : Tandem.OPT_OUT;
-
     super(
-      () => new RealMoleculesModel( parentTandem.createTandem( 'model' ) ),
-      model => new RealMoleculesScreenView( model, parentTandem.createTandem( 'view' ) ),
+      () => new RealMoleculesModel( tandem.createTandem( 'model' ) ),
+      model => new RealMoleculesScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

@@ -26,10 +26,7 @@ const MPPreferences = {
   surfaceColorProperty: new StringUnionProperty<SurfaceColor>(
     MPQueryParameters.surfaceColor as SurfaceColor, {
       validValues: SurfaceColorValues,
-
-      //TODO When Real Molecules screen is eventually implemented, make this tandem change. See https://github.com/phetsims/molecule-polarity/issues/32
-      // tandem: Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ),
-      tandem: Tandem.OPT_OUT,
+      tandem: Tandem.PREFERENCES.createTandem( 'surfaceColorProperty' ),
       phetioDocumentation: 'color scheme for the Electrostatic Potential surface in the Real Molecules screen',
       phetioFeatured: true
     } )

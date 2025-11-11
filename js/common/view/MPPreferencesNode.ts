@@ -13,10 +13,8 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPPreferences from '../model/MPPreferences.js';
-import MPQueryParameters from '../MPQueryParameters.js';
 import DipoleDirectionControl from './DipoleDirectionControl.js';
 import SurfaceColorControl from './SurfaceColorControl.js';
 
@@ -42,15 +40,8 @@ export default class MPPreferencesNode extends VBox {
     } );
 
     const surfaceColorControl = new SurfaceColorControl( MPPreferences.surfaceColorProperty, {
-      //TODO When Real Molecules screen is eventually implemented, make this tandem change. See https://github.com/phetsims/molecule-polarity/issues/32
-      // tandem: options.tandem.createTandem( 'surfaceColorControl' )
-      tandem: Tandem.OPT_OUT
+      tandem: options.tandem.createTandem( 'surfaceColorControl' )
     } );
-
-    //TODO https://github.com/phetsims/molecule-polarity/issues/32
-    // Hide the Surface Color option until the Real Molecules screen is implemented.
-    // In the meantime, support testing via the realMolecules query parameter.
-    surfaceColorControl.visible = MPQueryParameters.realMolecules;
 
     options.children = [
       dipoleDirectionControl,

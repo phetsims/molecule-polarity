@@ -63,7 +63,8 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     this.moleculeProperty = new Property( selectedMolecule, {
       validValues: this.molecules,
       phetioValueType: RealMolecule.RealMoleculeIO,
-      tandem: tandem.createTandem( 'moleculeProperty' )
+      tandem: tandem.createTandem( 'moleculeProperty' ),
+      phetioFeatured: true
     } );
   }
 

@@ -34,28 +34,34 @@ export default class RealMoleculesViewProperties {
     const options = providedOptions;
 
     this.bondDipolesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.molecularDipoleVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' )
+      tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.partialChargesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.atomElectronegativitiesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'atomElectronegativitiesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'atomElectronegativitiesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.atomLabelsVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.surfaceTypeProperty = new StringUnionProperty( 'none', {
       validValues: SurfaceTypeValues,
-      tandem: options.tandem.createTandem( 'surfaceTypeProperty' )
+      tandem: options.tandem.createTandem( 'surfaceTypeProperty' ),
+      phetioFeatured: true
     } );
   }
 

@@ -13,7 +13,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPConstants from '../../common/MPConstants.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesModel from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
@@ -22,7 +21,6 @@ import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeViewer from './RealMoleculeViewer.js';
-import UnderDevelopmentPanel from './UnderDevelopmentPanel.js';
 
 export default class RealMoleculesScreenView extends ScreenView {
 
@@ -115,14 +113,6 @@ export default class RealMoleculesScreenView extends ScreenView {
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
-
-    //TODO see https://github.com/phetsims/molecule-polarity/issues/32
-    // Until the Real Molecules screen is fully implemented, hide everything that was created above, and display
-    // a message. We're continuing to create everything to reduce the possibility that regressions creep in.
-    if ( !MPQueryParameters.realMolecules ) {
-      rootNode.visible = false;
-      this.addChild( new UnderDevelopmentPanel( this.layoutBounds ) );
-    }
   }
 }
 
