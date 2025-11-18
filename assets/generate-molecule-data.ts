@@ -262,6 +262,66 @@ function parseXYZCoords( xyzText: string ): number[][] {
 }
 
 /**
+ * Parse coordinates (Å) from XYZ string.
+ * Format:
+ *   natoms
+ *   comment
+ *   Sym x y z
+ *   ...
+ * Returns array of [x, y, z].
+ */
+function parseAtoms( xyzText: string ): {
+  symbol: string;
+  x: number;
+  y: number;
+  z: number;
+}[] {
+  const lines = xyzText
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
+
+  if (lines.length < 3) {
+    throw new Error("XYZ content too short (need at least 3 lines).");
+  }
+
+  const natoms = parseInt(lines[0].split(/\s+/)[0], 10);
+  if (!Number.isFinite(natoms)) {
+    throw new Error(`Could not parse atom count from first XYZ line: '${lines[0]}'`);
+  }
+
+  const atomLines = lines.slice(2, 2 + natoms);
+  if (atomLines.length < natoms) {
+    throw new Error(
+      `Expected ${natoms} atom lines in XYZ, found ${atomLines.length}.`
+    );
+  }
+
+  const atoms: { symbol: string; x: number; y: number; z: number }[] = [];
+  for (const line of atomLines) {
+    const parts = line.split(/\s+/);
+    if (parts.length < 4) {
+      throw new Error(`Bad XYZ atom line: '${line}'`);
+    }
+    const symbol = parts[0];
+    const x = parseFloat(parts[1]);
+    const y = parseFloat(parts[2]);
+    const z = parseFloat(parts[3]);
+    if (![x, y, z].every(Number.isFinite)) {
+      throw new Error(`Invalid coordinates in XYZ line: '${line}'`);
+    }
+    atoms.push( {
+      symbol: symbol,
+      x: x,
+      y: y,
+      z: z
+    } );
+  }
+
+  return atoms;
+}
+
+/**
  * Parse bonds from SDF (V2000) text.
  * Returns array of [i, j] pairs (0-based indices).
  */
@@ -730,7 +790,12 @@ print("Dipole moment (Debye):", wfn.variable('SCF DIPOLE'))
       throw new Error( `Some vertex Dt values are NaN` );
     }
 
+    const atoms = parseAtoms( xyz );
+    const bonds = parseSDFBonds( sdf );
+
     const moleculeData = {
+      atoms: atoms,
+      bonds: bonds,
       ...dipoleObj,
       vertexPositions: vertexPositions,
       vertexNormals: vertexNormals,
