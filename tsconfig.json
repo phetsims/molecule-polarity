@@ -8,6 +8,9 @@
   ],
   "references": [
     {
+      "path": "../mobius/tsconfig.json"
+    },
+    {
       "path": "../nitroglycerin/tsconfig.json"
     },
     {

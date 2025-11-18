@@ -23,7 +23,9 @@ import Color from '../../../../scenery/js/util/Color.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import RealMoleculeViewer from './RealMoleculeViewer.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import RealMolecule from '../model/RealMolecule.js';
+import Element from '../model/Element.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -40,7 +42,7 @@ export default class ElectronegativityTableNode extends Node {
 
   private readonly cells: Node[];
 
-  public constructor( moleculeViewer: RealMoleculeViewer, providedOptions: ElectronegativityTableNodeOptions ) {
+  public constructor( moleculeProperty: TReadOnlyProperty<RealMolecule>, providedOptions: ElectronegativityTableNodeOptions ) {
 
     const options = optionize<ElectronegativityTableNodeOptions, SelfOptions, NodeOptions>()( {
       // This no-op optionize call is needed in order to set options.children below.
@@ -82,7 +84,9 @@ export default class ElectronegativityTableNode extends Node {
     this.cells = cells;
 
     // highlight elements displayed by the viewer
-    moleculeViewer.elementsProperty.lazyLink( elements => {
+    moleculeProperty.link( molecule => {
+      const elements: Element[] = [];
+
       this.resetCells();
       elements.forEach( element => this.setColor( element.elementNumber, element.color ) );
     } );

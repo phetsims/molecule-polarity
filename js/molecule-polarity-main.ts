@@ -27,6 +27,8 @@ simLauncher.launch( () => {
   ];
 
   const options: SimOptions = {
+    webgl: true,
+
     preferencesModel: new PreferencesModel( {
       simulationOptions: {
         customPreferences: [ {

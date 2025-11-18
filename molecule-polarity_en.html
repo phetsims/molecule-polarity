@@ -42,7 +42,11 @@
           "adapted-from-phet"
         ],
         "phetLibs": [
+          "mobius",
           "nitroglycerin"
+        ],
+        "preload": [
+          "../sherpa/lib/three-r104.js"
         ],
         "phet-io": {
           "compareDesignedAPIChanges": true
@@ -67,6 +71,10 @@
       {
         "repo": "joist",
         "requirejsNamespace": "JOIST"
+      },
+      {
+        "repo": "mobius",
+        "requirejsNamespace": "MOBIUS"
       },
       {
         "repo": "molecule-polarity",
@@ -113,7 +121,8 @@
     '../chipper/js/browser/initialize-globals.js',
     '../sherpa/lib/seedrandom-2.4.2.js',
     '../sherpa/lib/base64-js-1.2.0.js',
-    '../sherpa/lib/TextEncoderLite-3c9f6f0.js'
+    '../sherpa/lib/TextEncoderLite-3c9f6f0.js',
+    '../sherpa/lib/three-r104.js'
   ];
 
   const query = new URLSearchParams( window.location.search );

@@ -19,7 +19,11 @@
       "adapted-from-phet"
     ],
     "phetLibs": [
+      "mobius",
       "nitroglycerin"
+    ],
+    "preload": [
+      "../sherpa/lib/three-r104.js"
     ],
     "phet-io": {
       "compareDesignedAPIChanges": true
