@@ -14,6 +14,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import mol2Data from './mol2Data.js';
 import RealMolecule from './RealMolecule.js';
+import ThreeQuaternionIO from '../../../../mobius/js/ThreeQuaternionIO.js';
 
 export default class RealMoleculesModel extends PhetioObject implements TModel {
 
@@ -22,6 +23,9 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
   // the selected molecule
   public readonly moleculeProperty: Property<RealMolecule>;
+
+  // the rotation of the molecule view
+  public readonly moleculeQuaternionProperty: Property<THREE.Quaternion>;
 
   public constructor( tandem: Tandem ) {
 
@@ -33,6 +37,12 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     const moleculesTandem = tandem.createTandem( 'molecules' );
 
     const selectedMolecule = new RealMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty, mol2Data.HF, moleculesTandem.createTandem( 'HF' ) );
+
+    this.moleculeQuaternionProperty = new Property( new THREE.Quaternion(), {
+      tandem: tandem.createTandem( 'moleculeQuaternionProperty' ),
+      phetioValueType: ThreeQuaternionIO,
+      phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
+    } );
 
     this.molecules = [
 
