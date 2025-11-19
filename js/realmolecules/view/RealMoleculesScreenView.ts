@@ -43,7 +43,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       tandem: tandem,
       sceneNodeOptions: {
         parentMatrixProperty: animatedPanZoomSingleton.listener.matrixProperty,
-        cameraPosition: new Vector3( 0, 0.2, 2 ),
+        cameraPosition: new Vector3( 0, 1.5, 15 ),
         viewOffset: new Vector2( 0, 0 ),
         backgroundColorProperty: new ColorProperty( Color.TRANSPARENT )
       }
