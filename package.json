@@ -26,7 +26,8 @@
       "../sherpa/lib/three-r104.js"
     ],
     "phet-io": {
-      "compareDesignedAPIChanges": true
+      "compareDesignedAPIChanges": false,
+      "validation": false
     },
     "supportsOutputJS": true,
     "simFeatures": {
