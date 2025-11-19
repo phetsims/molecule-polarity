@@ -13,6 +13,7 @@ import { RealMoleculeData } from '../model/RealMoleculeData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
+import { clamp } from '../../../../dot/js/util/clamp.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -43,6 +44,54 @@ export default class RealMoleculeView extends THREE.Object3D {
         const cubeMesh = new THREE.Mesh( sphereGeometry, atomMaterial );
         cubeMesh.position.set( atom.x, atom.y, atom.z );
         this.add( cubeMesh );
+      }
+
+      {
+        const meshGeometry = new THREE.BufferGeometry();
+        meshGeometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
+          const vertex0Data = moleculeData.vertexPositions[ indices[ 0 ] ];
+          const vertex1Data = moleculeData.vertexPositions[ indices[ 1 ] ];
+          const vertex2Data = moleculeData.vertexPositions[ indices[ 2 ] ];
+
+          return [
+            ...vertex0Data,
+            ...vertex1Data,
+            ...vertex2Data
+          ];
+        } ) ), 3 ) );
+        meshGeometry.addAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
+          const vertex0Data = moleculeData.vertexNormals[ indices[ 0 ] ];
+          const vertex1Data = moleculeData.vertexNormals[ indices[ 1 ] ];
+          const vertex2Data = moleculeData.vertexNormals[ indices[ 2 ] ];
+
+          return [
+            ...vertex0Data,
+            ...vertex1Data,
+            ...vertex2Data
+          ];
+        } ) ), 3 ) );
+        meshGeometry.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
+          const v0 = moleculeData.vertexESPs[ indices[ 0 ] ];
+          const v1 = moleculeData.vertexESPs[ indices[ 1 ] ];
+          const v2 = moleculeData.vertexESPs[ indices[ 2 ] ];
+
+          return [
+            clamp( v0 + 0.5, 0, 1 ), 0, 0,
+            clamp( v1 + 0.5, 0, 1 ), 0, 0,
+            clamp( v2 + 0.5, 0, 1 ), 0, 0
+          ];
+        } ) ), 3 ) );
+
+        const meshMaterial = new THREE.MeshBasicMaterial( {
+          vertexColors: true,
+          // color: 0x888888
+          transparent: true,
+          opacity: 0.5
+          // side: THREE.DoubleSide
+        } );
+
+        const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+        this.add( mesh );
       }
     } );
 
