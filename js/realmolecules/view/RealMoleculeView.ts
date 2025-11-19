@@ -47,6 +47,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       {
+        // https://github.com/stevinz/three-subdivide
+        // https://github.com/stevinz/three-wboit
+        // Shader-material might work + render targets --- ASK about background and what is desired!
+
         const meshGeometry = new THREE.BufferGeometry();
         meshGeometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
           const vertex0Data = moleculeData.vertexPositions[ indices[ 0 ] ];
@@ -86,8 +90,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           vertexColors: true,
           // color: 0x888888
           transparent: true,
-          opacity: 0.5
-          // side: THREE.DoubleSide
+          opacity: 0.5,
+          depthWrite: false,
+          side: THREE.DoubleSide
         } );
 
         const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
