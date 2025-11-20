@@ -91,6 +91,14 @@ export default class RealMoleculeView extends THREE.Object3D {
         // https://observablehq.com/@mroehlig/3d-volume-rendering-with-webgl-three-js
         // Shader-material might work + render targets --- ASK about background and what is desired!
         // NOTE: need to support reconstruction of the renderer --- use LocalGeometry/etc.?
+        // https://github.com/mrdoob/three.js/wiki/Migration-Guide
+
+        // three 104 is April 24, 2019
+        // 1.0.13 wboit: January 2, 2023
+
+        // https://unpkg.com/:package@:version/:file
+
+        // https://unpkg.com/three-wboit@1.0.13/build/index.module.js
 
         const colorizeElectrostaticPotential = ( espValue: number ): number[] => {
           espValue *= 7;
