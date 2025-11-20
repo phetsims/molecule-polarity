@@ -63,7 +63,7 @@ const xyzToXyzr = ( xyzString: string ): string => {
     CL: 1.75
   };
 
-  const lines = xyzString.split( /\r?\n/ ).map( l => l.trim() ).filter( l => l.length > 0 );
+  const lines = xyzString.split( /\r?\n/ ).map( l => l.trim() );
 
   // Line 1: atom count
   const first = lines[ 0 ].split( /\s+/ );
@@ -224,8 +224,7 @@ function parseMolecularDipoleFromMultipole( outText: string ): number[] {
 function parseXYZCoords( xyzText: string ): number[][] {
   const lines = xyzText
     .split(/\r?\n/)
-    .map((l) => l.trim())
-    .filter((l) => l.length > 0);
+    .map((l) => l.trim());
 
   if (lines.length < 3) {
     throw new Error("XYZ content too short (need at least 3 lines).");
@@ -278,8 +277,7 @@ function parseAtoms( xyzText: string ): {
 }[] {
   const lines = xyzText
     .split(/\r?\n/)
-    .map((l) => l.trim())
-    .filter((l) => l.length > 0);
+    .map((l) => l.trim());
 
   if (lines.length < 3) {
     throw new Error("XYZ content too short (need at least 3 lines).");
@@ -711,6 +709,9 @@ oeprop(wfn, 'LOWDIN_CHARGES', title='molecule')
 cubeprop(wfn)
 
 print("Dipole moment (Debye):", wfn.variable('SCF DIPOLE'))
+
+geom = wfn.molecule()
+geom.save_xyz_file("reoriented.xyz", 12)
   ` );
 
     await execute( 'psi4', [
@@ -720,13 +721,17 @@ print("Dipole moment (Debye):", wfn.variable('SCF DIPOLE'))
     ], TEMP_DIR );
 
     // get our reoriented xyz
-    const xyz = fs.readFileSync( path.join( TEMP_DIR, `geom.xyz` ), 'utf8' );
+    const xyz = fs.readFileSync( path.join( TEMP_DIR, `reoriented.xyz` ), 'utf8' );
+
+    console.log( 'xyz\n', xyz );
 
     // convert to xyzr
 
-    const xyzr = xyzToXyzr( xyz );
+    const xyzr = xyzToXyzr( xyz ) + '\n';
 
     fs.writeFileSync( path.join( TEMP_DIR, `${moleculeName}.xyzr` ), xyzr );
+
+    console.log( 'xyzr\n', xyzr );
 
     await execute( MSMS_PATH, [
       '-if',

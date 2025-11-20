@@ -31,7 +31,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       for ( const atom of moleculeData.atoms ) {
-        const element = Element.getElementBySymbol( atom.symbol );
+        const element = Element.getElementBySymbol( atom.symbol === 'CL' ? 'Cl' : atom.symbol );
 
         const vanDerWallsRadiusInAngstroms = element.vanDerWaalsRadius / 100;
         const threeColor = ThreeUtils.colorToThree( Color.toColor( element.color ) );
