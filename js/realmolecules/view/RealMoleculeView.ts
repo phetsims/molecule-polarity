@@ -86,7 +86,6 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       if ( surfaceType !== 'none' ) {
-        // https://github.com/stevinz/three-subdivide
         // https://github.com/stevinz/three-wboit
         // https://observablehq.com/@mroehlig/3d-volume-rendering-with-webgl-three-js
         // Shader-material might work + render targets --- ASK about background and what is desired!
@@ -166,7 +165,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           side: THREE.DoubleSide
         } );
 
-        const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error Having to use external lib like this
+        const mesh = new THREE.Mesh( window.ThreeLoopSubdivision.modify( meshGeometry, 2 ), meshMaterial );
         this.add( mesh );
       }
     } );
