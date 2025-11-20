@@ -446,6 +446,8 @@ export function computeDipolesFromPsi4( psiOutText: string, xyzText: string, sdf
   const bonds = parseSDFBonds( sdfText );
   const muMol = parseMolecularDipoleFromMultipole( psiOutText );
 
+  console.log( 'charges', charges );
+
   const bondDipoles = computeBondDipoles( coords, charges, bonds );
 
   return {
@@ -517,6 +519,8 @@ export class CubeScalarField {
     // Skip natoms atom lines
     idx += natoms;
 
+    console.log( lines.slice( 0, idx + 3 ) );
+
     const total = nx * ny * nz;
     const data = new Float32Array(total);
     let p = 0;
@@ -579,7 +583,7 @@ export class CubeScalarField {
     }
 
     const get = (i: number, j: number, k: number) => {
-      return this.data[i + nx * (j + ny * k)];
+      return this.data[k + nz * (j + ny * i)];
     };
 
     const c000 = get(ix,     iy,     iz);
@@ -780,8 +784,14 @@ print("Dipole moment (Debye):", wfn.variable('SCF DIPOLE'))
     const espField = CubeScalarField.fromText( fs.readFileSync( path.join( TEMP_DIR, `ESP.cube` ), 'utf8' ) );
     const dtField = CubeScalarField.fromText( fs.readFileSync( path.join( TEMP_DIR, `Dt.cube` ), 'utf8' ) );
 
-    const vertexESPs = vertexPositions.map( pos => espField.sample( pos[0], pos[1], pos[2] ) );
-    const vertexDTs = vertexPositions.map( pos => dtField.sample( pos[0], pos[1], pos[2] ) );
+    const bohrInAngstroms = 1.8897259886
+
+    const vertexESPs = vertexPositions.map( pos => espField.sample(
+      pos[0] * bohrInAngstroms, pos[1] * bohrInAngstroms, pos[2] * bohrInAngstroms
+    ) );
+    const vertexDTs = vertexPositions.map( pos => dtField.sample(
+      pos[0] * bohrInAngstroms, pos[1] * bohrInAngstroms, pos[2] * bohrInAngstroms
+    ) );
 
     if ( vertexESPs.some( v => Number.isNaN( v ) ) ) {
       throw new Error( `Some vertex ESPs are NaN` );
