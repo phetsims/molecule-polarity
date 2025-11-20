@@ -16,6 +16,7 @@ import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -50,11 +51,46 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.add( cubeMesh );
       }
 
+      for ( const bond of moleculeData.bonds ) {
+        const atomA = moleculeData.atoms[ bond[ 0 ] ];
+        const atomB = moleculeData.atoms[ bond[ 1 ] ];
+
+        const positionA = new Vector3( atomA.x, atomA.y, atomA.z );
+        const positionB = new Vector3( atomB.x, atomB.y, atomB.z );
+
+        const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
+        const bondMaterial = new THREE.MeshLambertMaterial( {
+          color: 0xffffff
+        } );
+
+        const bondMesh = new THREE.Mesh( bondGeometry, bondMaterial );
+
+        bondMesh.position.set(
+          0.5 * ( atomA.x + atomB.x ),
+          0.5 * ( atomA.y + atomB.y ),
+          0.5 * ( atomA.z + atomB.z )
+        );
+
+        bondMesh.quaternion.setFromUnitVectors(
+          new THREE.Vector3( 0, 1, 0 ),
+          ThreeUtils.vectorToThree( positionB.minus( positionA ).normalized() )
+        );
+
+        bondMesh.scale.x = bondMesh.scale.z = 0.1; // BOND RADIUS
+
+        bondMesh.scale.y = positionA.distance( positionB );
+
+        bondMesh.updateMatrix();
+
+        this.add( bondMesh );
+      }
+
       if ( surfaceType !== 'none' ) {
         // https://github.com/stevinz/three-subdivide
         // https://github.com/stevinz/three-wboit
         // https://observablehq.com/@mroehlig/3d-volume-rendering-with-webgl-three-js
         // Shader-material might work + render targets --- ASK about background and what is desired!
+        // NOTE: need to support reconstruction of the renderer --- use LocalGeometry/etc.?
 
         const colorizeElectrostaticPotential = ( espValue: number ): number[] => {
           espValue *= 7;
