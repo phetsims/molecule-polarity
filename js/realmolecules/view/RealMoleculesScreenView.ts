@@ -149,7 +149,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     moonLight.position.set( 2.0, -1.0, 1.0 );
     this.sceneNode.stage.threeScene.add( moonLight );
 
-    this.moleculeView = new RealMoleculeView( model.moleculeProperty, model.moleculeQuaternionProperty );
+    this.moleculeView = new RealMoleculeView(
+      model.moleculeProperty,
+      model.moleculeQuaternionProperty,
+      viewProperties
+    );
     this.sceneNode.stage.threeScene.add( this.moleculeView );
 
     let isRotating = false;

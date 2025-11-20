@@ -14,15 +14,19 @@ import Element from '../../../../nitroglycerin/js/Element.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
+import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
-    moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>
+    moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
+    viewProperties: RealMoleculesViewProperties
   ) {
     super();
 
-    moleculeProperty.link( molecule => {
+    Multilink.multilink( [ moleculeProperty, viewProperties.surfaceTypeProperty ], ( molecule, surfaceType ) => {
+
       const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
       const moleculeData = RealMoleculeData[ strippedSymbol ];
 
@@ -46,10 +50,33 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.add( cubeMesh );
       }
 
-      {
+      if ( surfaceType !== 'none' ) {
         // https://github.com/stevinz/three-subdivide
         // https://github.com/stevinz/three-wboit
+        // https://observablehq.com/@mroehlig/3d-volume-rendering-with-webgl-three-js
         // Shader-material might work + render targets --- ASK about background and what is desired!
+
+        const colorizeElectrostaticPotential = ( espValue: number ): number[] => {
+          espValue *= 7;
+
+          if ( espValue > 0 ) {
+            const v = clamp( 1 - espValue, 0, 1 );
+            return [ v, v, 1 ];
+          }
+          else {
+            const v = clamp( 1 + espValue, 0, 1 );
+            return [ 1, v, v ];
+          }
+        };
+
+        const colorizeElectronDensity = ( densityValue: number ): number[] => {
+          densityValue *= 7;
+
+          const clampedValue = clamp( densityValue, 0, 1 );
+          return [ clampedValue, clampedValue, clampedValue ];
+        };
+
+        const toColor = surfaceType === 'electrostaticPotential' ? colorizeElectrostaticPotential : colorizeElectronDensity;
 
         const meshGeometry = new THREE.BufferGeometry();
         meshGeometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
@@ -80,9 +107,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           const v2 = moleculeData.vertexESPs[ indices[ 2 ] ];
 
           return [
-            clamp( v0 + 0.5, 0, 1 ), 0, 0,
-            clamp( v1 + 0.5, 0, 1 ), 0, 0,
-            clamp( v2 + 0.5, 0, 1 ), 0, 0
+            ...toColor( v0 ),
+            ...toColor( v1 ),
+            ...toColor( v2 )
           ];
         } ) ), 3 ) );
 
@@ -99,7 +126,6 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.add( mesh );
       }
     } );
-
 
     moleculeQuaternionProperty.link( quaternion => {
       this.quaternion.copy( quaternion );
