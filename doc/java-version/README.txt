@@ -1,0 +1,1 @@
+Documents from the legacy Java version. MoleculePolarity.pdf is the main design document.
