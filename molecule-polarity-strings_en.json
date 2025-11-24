@@ -172,5 +172,14 @@
   },
   "underDevelopment.line2": {
     "value": "If your device runs Java, you can use the Java version at"
+  },
+  "a11y": {
+    "common": {
+      "electronegativitySlider": {
+        "accessibleName": {
+          "value": "Atom { $atomName } Electronegativity"
+        }
+      }
+    }
   }
 }

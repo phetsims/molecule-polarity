@@ -77,6 +77,13 @@ type StringsType = {
   'underDevelopment': {
     'line1StringProperty': LocalizedStringProperty;
     'line2StringProperty': LocalizedStringProperty;
+  };
+  'a11y': {
+    'common': {
+      'electronegativitySlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      }
+    }
   }
 };
 

@@ -17,6 +17,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider, { HSliderOptions } from '../../../../sun/js/HSlider.js';
 import Slider from '../../../../sun/js/Slider.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
@@ -46,7 +47,10 @@ export default class ElectronegativitySlider extends HSlider {
       visiblePropertyOptions: {
         phetioFeatured: false
       },
-      isDisposable: false
+      isDisposable: false,
+      accessibleName: MoleculePolarityFluent.a11y.common.electronegativitySlider.accessibleName.createProperty( {
+        atomName: atom.labelStringProperty
+      } )
     }, providedOptions );
 
     // custom thumb

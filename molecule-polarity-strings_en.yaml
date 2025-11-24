@@ -1,0 +1,64 @@
+molecule-polarity.title: Molecule Polarity
+screen.twoAtoms: Two Atoms
+screen.threeAtoms: Three Atoms
+screen.realMolecules: Real Molecules
+electricField: Electric Field
+'on': 'on'
+'off': 'off'
+bondCharacter: Bond Character
+partialCharges: Partial Charges
+bondDipole: Bond Dipole
+bondDipoles: Bond Dipoles
+molecularDipole: Molecular Dipole
+electronegativity: Electronegativity
+less: less
+more: more
+atomA: A
+atomB: B
+atomC: C
+moreCovalent: more covalent
+moreIonic: more ionic
+pattern.atomName: Atom {{name}}
+pattern.symbolName: '{{symbol}} ({{name}})'
+none: None
+electrostaticPotential: Electrostatic Potential
+electronDensity: Electron Density
+surface: Surface
+view: View
+atomLabels: Atom Labels
+molecule: 'Molecule:'
+atomElectronegativities: Atom Electronegativities
+positive: positive
+negative: negative
+ammonia: ammonia
+borane: borane
+boronTrifluoride: boron trifluoride
+carbonDioxide: carbon dioxide
+chloroform: chloroform
+difluoromethane: difluoromethane
+fluorine: fluorine
+fluoromethane: fluoromethane
+formaldehyde: formaldehyde
+hydrogen: hydrogen
+hydrogenCyanide: hydrogen cyanide
+hydrogenFluoride: hydrogen fluoride
+methane: methane
+nitrogen: nitrogen
+oxygen: oxygen
+ozone: ozone
+tetrafluoromethane: tetrafluoromethane
+trifluoromethane: trifluoromethane
+water: water
+dipoleDirection: 'Dipole direction:'
+deltaPlus: δ+
+deltaMinus: δ−
+pattern.dipoleDirection: '{{from}} → {{to}}'
+surfaceColorRealMolecules: 'Surface color (Real Molecules):'
+underDevelopment.line1: Real Molecules is not currently available in HTML5.
+underDevelopment.line2: If your device runs Java, you can use the Java version at
+
+a11y:
+  common:
+    electronegativitySlider:
+      accessibleName: |-
+        Atom { $atomName } Electronegativity
