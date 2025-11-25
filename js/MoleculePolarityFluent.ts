@@ -5,9 +5,9 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
 import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
