@@ -30,14 +30,9 @@ export default class MoleculeAngleDragListener extends DragListener {
    */
   public constructor( molecule: Molecule, relativeNode: Node, providedOptions: MoleculeAngleDragListenerOptions ) {
 
-    const options = optionize<MoleculeAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
-
-      // DragListenerOptions
-      allowTouchSnag: true,
-      isDisposable: false
-    }, providedOptions );
-
     let previousAngle: number; // angle between the pointer and the molecule when the drag started
+
+    const angleRange = molecule.angleProperty.range;
 
     // Gets the angle (in radians) of the pointer, relative to relativeNode.
     const getAngle = ( event: SceneryEvent ) => {
@@ -45,23 +40,28 @@ export default class MoleculeAngleDragListener extends DragListener {
       return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
     };
 
-    options.start = event => {
-      molecule.isDraggingProperty.value = true;
-      previousAngle = getAngle( event );
-    };
+    const options = optionize<MoleculeAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
 
-    const angleRange = molecule.angleProperty.range;
+      // DragListenerOptions
+      allowTouchSnag: true,
+      isDisposable: false,
 
-    options.drag = event => {
-      const currentAngle = getAngle( event );
-      molecule.angleProperty.value =
-        normalizeAngle( molecule.angleProperty.value + currentAngle - previousAngle, angleRange.min );
-      previousAngle = currentAngle;
-    };
+      start: event => {
+        molecule.isDraggingProperty.value = true;
+        previousAngle = getAngle( event );
+      },
 
-    options.end = () => {
-      molecule.isDraggingProperty.value = false;
-    };
+      drag: event => {
+        const currentAngle = getAngle( event );
+        molecule.angleProperty.value =
+          normalizeAngle( molecule.angleProperty.value + currentAngle - previousAngle, angleRange.min );
+        previousAngle = currentAngle;
+      },
+
+      end: () => {
+        molecule.isDraggingProperty.value = false;
+      }
+    }, providedOptions );
 
     super( options );
   }
