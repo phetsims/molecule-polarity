@@ -60,5 +60,7 @@ underDevelopment.line2: If your device runs Java, you can use the Java version a
 a11y:
   common:
     electronegativitySlider:
-      accessibleName: |-
-        Atom { $atomName } Electronegativity
+      accessibleName: 'Atom { $atomName } Electronegativity'
+    atom:
+      accessibleName: 'Atom { $name }'
+      accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'

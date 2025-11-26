@@ -179,6 +179,14 @@
         "accessibleName": {
           "value": "Atom { $atomName } Electronegativity"
         }
+      },
+      "atom": {
+        "accessibleName": {
+          "value": "Atom { $name }"
+        },
+        "accessibleHelpText": {
+          "value": "Turn the molecule with left and right keys, or A and D keys"
+        }
       }
     }
   }

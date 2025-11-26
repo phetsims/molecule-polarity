@@ -103,6 +103,18 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
     this.addChild( rootNode );
 
+    this.pdomPlayAreaNode.pdomOrder = [
+      moleculeNode
+    ];
+
+    this.pdomControlAreaNode.pdomOrder = [
+      platesNode,
+      controlPanel,
+      panelsVBox,
+      colorKeyNode,
+      resetAllButton
+    ];
+
     // layout, based on molecule position ---------------------------------
 
     const moleculeX = model.diatomicMolecule.position.x;

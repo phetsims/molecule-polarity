@@ -91,6 +91,17 @@ export default class ThreeAtomsScreenView extends ScreenView {
     } );
     this.addChild( rootNode );
 
+    this.pdomPlayAreaNode.pdomOrder = [
+      moleculeNode
+    ];
+
+    this.pdomControlAreaNode.pdomOrder = [
+      platesNode,
+      electronegativityPanels,
+      controlPanel,
+      resetAllButton
+    ];
+
     // layout, based on molecule position ---------------------------------
 
     const moleculeX = model.triatomicMolecule.position.x;

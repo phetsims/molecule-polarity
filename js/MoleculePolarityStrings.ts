@@ -82,6 +82,10 @@ type StringsType = {
     'common': {
       'electronegativitySlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
+      };
+      'atom': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
       }
     }
   }

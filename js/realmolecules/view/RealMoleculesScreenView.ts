@@ -6,8 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+import MobiusScreenView from '../../../../mobius/js/MobiusScreenView.js';
+import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
+import TInputListener from '../../../../scenery/js/input/TInputListener.js';
+import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import ColorProperty from '../../../../scenery/js/util/ColorProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -18,17 +28,7 @@ import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
-import MobiusScreenView from '../../../../mobius/js/MobiusScreenView.js';
-import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import ColorProperty from '../../../../scenery/js/util/ColorProperty.js';
-import Color from '../../../../scenery/js/util/Color.js';
-import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculeView from './RealMoleculeView.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import TInputListener from '../../../../scenery/js/input/TInputListener.js';
-import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -108,6 +108,18 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       ]
     } );
     this.addChild( rootNode );
+
+    this.pdomPlayAreaNode.pdomOrder = [
+    ];
+
+    this.pdomControlAreaNode.pdomOrder = [
+      electronegativityTableNode,
+      moleculesComboBox,
+      controlPanel,
+      colorKeyNode,
+      resetAllButton,
+      comboBoxListParent
+    ];
 
     // layout ---------------------------------
 
