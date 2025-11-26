@@ -15,6 +15,7 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
+import DiatomicMoleculeKeyboardListener from '../../common/view/DiatomicMoleculeKeyboardListener.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
@@ -111,6 +112,12 @@ export default class DiatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'dragListener' )
     } );
     this.addInputListener( dragListener );
+
+    const keyboardListener = new DiatomicMoleculeKeyboardListener( molecule, {
+      tandem: options.tandem.createTandem( 'keyboardListener' )
+    } );
+    atomANode.addInputListener( keyboardListener );
+    atomBNode.addInputListener( keyboardListener );
 
     viewProperties.surfaceTypeProperty.link( surfaceType => {
       electrostaticPotentialSurfaceNode.visible = ( surfaceType === 'electrostaticPotential' );
