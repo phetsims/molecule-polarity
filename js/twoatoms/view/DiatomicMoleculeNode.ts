@@ -15,8 +15,8 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
-import DiatomicMoleculeKeyboardListener from '../../common/view/DiatomicMoleculeKeyboardListener.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
+import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -113,7 +113,7 @@ export default class DiatomicMoleculeNode extends Node {
     } );
     this.addInputListener( dragListener );
 
-    const keyboardListener = new DiatomicMoleculeKeyboardListener( molecule, {
+    const keyboardListener = new MoleculeKeyboardListener( molecule.angleProperty, {
       tandem: options.tandem.createTandem( 'keyboardListener' )
     } );
     atomANode.addInputListener( keyboardListener );

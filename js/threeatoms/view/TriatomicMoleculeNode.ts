@@ -20,6 +20,7 @@ import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
+import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -165,6 +166,16 @@ export default class TriatomicMoleculeNode extends Node {
     } );
     atomANode.addInputListener( atomADragListener );
     atomCNode.addInputListener( atomCDragListener );
+
+    atomANode.addInputListener( new MoleculeKeyboardListener( molecule.bondAngleABProperty, {
+      tandem: options.tandem.createTandem( 'keyboardListener' )
+    } ) );
+    atomBNode.addInputListener( new MoleculeKeyboardListener( molecule.angleProperty, {
+      tandem: options.tandem.createTandem( 'keyboardListener' )
+    } ) );
+    atomCNode.addInputListener( new MoleculeKeyboardListener( molecule.bondAngleBCProperty, {
+      tandem: options.tandem.createTandem( 'keyboardListener' )
+    } ) );
 
     // {boolean} Set to true when the molecule has been changed by the user.
     let moleculeHasChanged = false;

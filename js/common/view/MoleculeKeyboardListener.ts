@@ -1,33 +1,30 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * DiatomicMoleculeKeyboardListener is the keyboard listener for manipulating orientation of a molecule.
+ * MoleculeKeyboardListener is the keyboard listener for manipulating orientation of a molecule.
  *
  * @author Agustín Vallejo
  */
 
+import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import { OneKeyStroke } from '../../../../scenery/js/input/KeyDescriptor.js';
 import KeyboardListener, { KeyboardListenerOptions } from '../../../../scenery/js/listeners/KeyboardListener.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import Molecule from '../model/Molecule.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type DiatomicMoleculeKeyboardListenerOptions = SelfOptions &
+type MoleculeKeyboardListenerOptions = SelfOptions &
   WithRequired<KeyboardListenerOptions<OneKeyStroke[]>, 'tandem'>;
 
 const NAVIGATION_KEYS: OneKeyStroke[] = [ 'arrowRight', 'arrowLeft', 'a', 'd' ];
 
-export default class DiatomicMoleculeKeyboardListener extends KeyboardListener<OneKeyStroke[]> {
+export default class MoleculeKeyboardListener extends KeyboardListener<OneKeyStroke[]> {
 
-  /**
-   * @param molecule
-   */
-  public constructor( molecule: Molecule, providedOptions: DiatomicMoleculeKeyboardListenerOptions ) {
+  public constructor( angleProperty: Property<number>, providedOptions: MoleculeKeyboardListenerOptions ) {
 
-    const options = optionize<DiatomicMoleculeKeyboardListenerOptions, SelfOptions, KeyboardListenerOptions<OneKeyStroke[]>>()( {
+    const options = optionize<MoleculeKeyboardListenerOptions, SelfOptions, KeyboardListenerOptions<OneKeyStroke[]>>()( {
 
       keys: NAVIGATION_KEYS,
       isDisposable: false,
@@ -36,15 +33,15 @@ export default class DiatomicMoleculeKeyboardListener extends KeyboardListener<O
       fire: ( event, keysPressed ) => {
         if ( keysPressed === 'arrowRight' || keysPressed === 'd' ) {
           // rotate clockwise
-          let newAngle = molecule.angleProperty.value + Math.PI / 4;
+          let newAngle = angleProperty.value + Math.PI / 4;
           newAngle = newAngle > Math.PI ? newAngle - 2 * Math.PI : newAngle;
-          molecule.angleProperty.value = newAngle;
+          angleProperty.value = newAngle;
         }
         else if ( keysPressed === 'arrowLeft' || keysPressed === 'a' ) {
           // rotate counter-clockwise
-          let newAngle = molecule.angleProperty.value - Math.PI / 4;
+          let newAngle = angleProperty.value - Math.PI / 4;
           newAngle = newAngle < -Math.PI ? newAngle + 2 * Math.PI : newAngle;
-          molecule.angleProperty.value = newAngle;
+          angleProperty.value = newAngle;
         }
       }
     }, providedOptions );
@@ -53,4 +50,4 @@ export default class DiatomicMoleculeKeyboardListener extends KeyboardListener<O
   }
 }
 
-moleculePolarity.register( 'DiatomicMoleculeKeyboardListener', DiatomicMoleculeKeyboardListener );
+moleculePolarity.register( 'MoleculeKeyboardListener', MoleculeKeyboardListener );
