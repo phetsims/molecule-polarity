@@ -29,7 +29,7 @@ const MPColors = {
   ATOM_A: 'rgb( 255, 255, 90 )',
   ATOM_B: 'rgb( 0, 255, 0 )',
   ATOM_C: 'rgb( 255, 175, 175)',
-  BOND: 'rgb( 90, 90, 90)',
+  BOND: 'rgb( 140, 140, 140 )',
   OXYGEN: PhetColorScheme.RED_COLORBLIND,
 
   // dipoles

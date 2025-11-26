@@ -9,11 +9,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import Line, { LineOptions } from '../../../../scenery/js/nodes/Line.js';
+import { LineOptions } from '../../../../scenery/js/nodes/Line.js';
 import { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
@@ -21,27 +23,43 @@ import MPColors from '../MPColors.js';
 type SelfOptions = EmptySelfOptions;
 
 type BondNodeOptions = SelfOptions &
-  PickRequired<LineOptions, 'tandem'> &
+  PickRequired<RectangleOptions, 'tandem'> &
   PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'>;
 
-export default class BondNode extends Line {
+export default class BondNode extends Rectangle {
 
   public constructor( bond: Bond, providedOptions: BondNodeOptions ) {
 
     const options = optionize<BondNodeOptions, SelfOptions, LineOptions>()( {
 
       // LineOptions
-      stroke: MPColors.BOND,
-      lineWidth: 12,
+      fill: MPColors.BOND,
+      stroke: 'black',
       visiblePropertyOptions: { phetioReadOnly: true },
       isDisposable: false
     }, providedOptions );
 
-    super( bond.atom1.positionProperty.value, bond.atom2.positionProperty.value, options );
+    const bondLength = bond.atom1.positionProperty.value.distance( bond.atom2.positionProperty.value );
 
-    // adjust the bond when its endpoints change
-    bond.atom1.positionProperty.link( position => this.setPoint1( position ) );
-    bond.atom2.positionProperty.link( position => this.setPoint2( position ) );
+    super( 0, 0, 12, bondLength, options );
+
+    Multilink.multilink(
+      [
+        bond.atom1.positionProperty,
+        bond.atom2.positionProperty
+      ],
+      ( position1, position2 ) => {
+
+        // Since the atoms only rotate, no need to stretch the bond, just position and rotate
+        const delta = position2.minus( position1 );
+        const angle = delta.angle;
+        this.rotation = angle + Math.PI / 2;
+
+        // Set center in the middle of the two atoms
+        this.centerX = ( position1.x + position2.x ) / 2;
+        this.centerY = ( position1.y + position2.y ) / 2;
+      }
+    );
   }
 }
 

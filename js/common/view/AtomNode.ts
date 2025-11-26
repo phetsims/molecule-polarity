@@ -36,7 +36,8 @@ export default class AtomNode extends Node {
 
     // atom
     const sphereNode = new ShadedSphereNode( atom.diameter, {
-      mainColor: atom.color
+      mainColor: atom.color,
+      stroke: 'black'
     } );
 
     // name centered on atom

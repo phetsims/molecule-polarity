@@ -32,7 +32,7 @@ export default class RotateArrowsNode extends Node {
 
     // arrow configuration
     const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
-    const arrowPathOptions = { fill: atom.color, stroke: 'gray' };
+    const arrowPathOptions = { fill: atom.color, stroke: 'black' };
     const radius = ( 0.5 * atom.diameter ) + ( 0.5 * arrowShapeOptions.headWidth ) + 2; // distance of arrow's tip from the atom's center
     const theta = 0.1 * Math.PI; // central angle of the arc that the arrow traces
 

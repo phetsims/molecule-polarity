@@ -40,8 +40,8 @@ export default class TranslateArrowsNode extends Node {
       visiblePropertyOptions: { phetioReadOnly: true }
     }, providedOptions );
 
-    const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
-    const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'gray' } );
+    const leftArrowNode = new Path( null, { fill: atom.color, stroke: 'black' } );
+    const rightArrowNode = new Path( null, { fill: atom.color, stroke: 'black' } );
 
     // create "normalized" shapes at (0,0) with no rotation
     const arrowShapeOptions = { headWidth: 30, headHeight: 15, tailWidth: 15 };
