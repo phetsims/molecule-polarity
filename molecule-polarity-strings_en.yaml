@@ -138,7 +138,6 @@ a11y:
       equal: 'Atoms have equal electronegativity.'
       aGreater: 'Atom A has greater electronegativity than Atom B.'
       bGreater: 'Atom B has greater electronegativity than Atom A.'
-      bGreaterThanA: 'Atom B has greater electronegativity than Atom A.'
       bGreaterThanC: 'Atom B has greater electronegativity than Atom C.'
       cGreater: 'Atom C has greater electronegativity than Atom B.'
     dipoleDescription:
@@ -146,8 +145,12 @@ a11y:
       dipolePointsTo: 'Bond dipole points toward { $atom }.'
       molecularDipoleDescription: |-
         { $magnitude ->
-          [zero] No molecular dipole is present.
-          *[other] Molecular dipole is { $magnitude } and points toward { $direction }.
+          [no] No molecular dipole is present.
+          [verySmall] Molecular dipole is very small and points toward { $direction }.
+          [small] Molecular dipole is small and points toward { $direction }.
+          [medium] Molecular dipole is medium and points toward { $direction }.
+          [large] Molecular dipole is large and points toward { $direction }.
+          *[veryLarge] Molecular dipole is very large and points toward { $direction }.
         }
     plates:
       accessibleName: 'Electric Field Plates'
