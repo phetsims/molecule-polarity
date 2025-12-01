@@ -61,9 +61,10 @@ a11y:
   common:
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
+      accessibleHelpText: 'Adjust the electronegativity value with arrow keys or by dragging the slider.'
     atom:
       accessibleName: 'Atom { $name }'
-      accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
+      accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys.'
     bondType:
       select_strength:
         veryIonic: 'very ionic'
@@ -85,3 +86,147 @@ a11y:
         zero: 'zero'
         smaller: 'smaller'
         larger: 'larger'
+    partialCharge:
+      select_charge:
+        none: 'no partial charge'
+        small: 'small partial charge'
+        medium: 'medium partial charge'
+        large: 'large partial charge'
+    viewCheckboxes:
+      bondDipole:
+        accessibleName: 'Bond Dipole'
+        accessibleHelpText: 'Show or hide the bond dipole arrow.'
+      bondDipoles:
+        accessibleName: 'Bond Dipoles'
+        accessibleHelpText: 'Show or hide the bond dipole arrows.'
+      molecularDipole:
+        accessibleName: 'Molecular Dipole'
+        accessibleHelpText: 'Show or hide the molecular dipole arrow.'
+      partialCharges:
+        accessibleName: 'Partial Charges'
+        accessibleHelpText: 'Show or hide the partial charge symbols.'
+      bondCharacter:
+        accessibleName: 'Bond Character'
+        accessibleHelpText: 'Show or hide the bond character display.'
+      atomLabels:
+        accessibleName: 'Atom Labels'
+        accessibleHelpText: 'Show or hide the atom labels.'
+      atomElectronegativities:
+        accessibleName: 'Atom Electronegativities'
+        accessibleHelpText: 'Show or hide the atom electronegativities table.'
+    surfaceControl:
+      accessibleName: 'Surface'
+      accessibleHelpText: 'Choose a surface type to display on the molecule.'
+      none:
+        accessibleName: 'None'
+      electrostaticPotential:
+        accessibleName: 'Electrostatic Potential'
+      electronDensity:
+        accessibleName: 'Electron Density'
+    eFieldControl:
+      accessibleName: 'Electric Field'
+      accessibleHelpText: 'Turn the electric field on or off.'
+      onOffSwitch:
+        accessibleName: 'Electric Field Switch'
+    bondCharacterPanel:
+      accessibleName: 'Bond Character'
+      bondCharacterDescription: 'The bond is { $strength }.'
+    moleculeDescription:
+      twoAtoms: 'Diatomic molecule with atoms A and B connected by a single bond.'
+      threeAtoms: 'Triatomic molecule with atom B in the center, connected to atoms A and C.'
+    electronegativityComparison:
+      equal: 'Atoms have equal electronegativity.'
+      aGreater: 'Atom A has greater electronegativity than Atom B.'
+      bGreater: 'Atom B has greater electronegativity than Atom A.'
+      bGreaterThanA: 'Atom B has greater electronegativity than Atom A.'
+      bGreaterThanC: 'Atom B has greater electronegativity than Atom C.'
+      cGreater: 'Atom C has greater electronegativity than Atom B.'
+    dipoleDescription:
+      noDipole: 'No bond dipole is present.'
+      dipolePointsTo: 'Bond dipole points toward { $atom }.'
+      molecularDipoleDescription: |-
+        { $magnitude ->
+          [zero] No molecular dipole is present.
+          *[other] Molecular dipole is { $magnitude } and points toward { $direction }.
+        }
+    plates:
+      accessibleName: 'Electric Field Plates'
+      accessibleHelpText: 'Negative and positive plates create an electric field when turned on.'
+
+  twoAtomsScreen:
+    screenSummary:
+      playArea: 'The play area has a diatomic molecule that you can rotate. Adjust the electronegativity of each atom to explore bond polarity, dipoles, and surface visualizations.'
+      controlArea: 'Control area has options to adjust molecule view, surface type, and electric field. Reset the simulation to start over.'
+      interactionHint: 'Adjust electronegativity sliders and rotate the molecule to explore polarity.'
+    currentDetails: |-
+      { $bondDipoleVisible ->
+        [true] Bond dipole is shown.
+        *[false] Bond dipole is hidden.
+      } { $partialChargesVisible ->
+        [true] Partial charges are shown.
+        *[false] Partial charges are hidden.
+      } { $surfaceType ->
+        [none] No surface is displayed.
+        [electrostaticPotential] Electrostatic potential surface is displayed.
+        *[electronDensity] Electron density surface is displayed.
+      }
+    electronegativityPanels:
+      accessibleHeading: 'Electronegativity Controls'
+
+  threeAtomsScreen:
+    screenSummary:
+      playArea: 'The play area has a triatomic molecule that you can rotate. Drag outer atoms to change bond angles. Adjust electronegativity of each atom to explore bond and molecular dipoles.'
+      controlArea: 'Control area has options to adjust molecule view and electric field. Reset the simulation to start over.'
+      interactionHint: 'Adjust electronegativity sliders, change bond angles, and rotate the molecule to explore polarity.'
+    currentDetails: |-
+      { $bondDipolesVisible ->
+        [true] Bond dipoles are shown.
+        *[false] Bond dipoles are hidden.
+      } { $molecularDipoleVisible ->
+        [true] Molecular dipole is shown.
+        *[false] Molecular dipole is hidden.
+      } { $partialChargesVisible ->
+        [true] Partial charges are shown.
+        *[false] Partial charges are hidden.
+      }
+    electronegativityPanels:
+      accessibleHeading: 'Electronegativity Controls'
+    bondAngle:
+      accessibleName: 'Bond Angle { $bond }'
+      accessibleHelpText: 'Drag to change the bond angle, or use arrow keys.'
+
+  realMoleculesScreen:
+    screenSummary:
+      playArea: 'The play area shows a 3D view of real molecules. Drag to rotate the molecule and explore its polarity.'
+      controlArea: 'Control area has options to select different molecules, adjust view options, and surface type. Reset the simulation to start over.'
+      interactionHint: 'Select a molecule and rotate it to explore its polarity properties.'
+    currentDetails: |-
+      Currently viewing { $moleculeName }. { $bondDipolesVisible ->
+        [true] Bond dipoles are shown.
+        *[false] Bond dipoles are hidden.
+      } { $molecularDipoleVisible ->
+        [true] Molecular dipole is shown.
+        *[false] Molecular dipole is hidden.
+      }
+    moleculeComboBox:
+      accessibleName: 'Molecule Selector'
+      accessibleHelpText: 'Choose a real molecule to explore.'
+    electronegativityTable:
+      accessibleName: 'Atom Electronegativities Table'
+      accessibleHelpText: 'Displays electronegativity values for atoms in the current molecule.'
+
+  keyboardHelpContent:
+    moleculeInteractionHeading: 'Molecule Interaction'
+    rotateMolecule: 'Rotate molecule'
+    rotateMoleculeDescription: 'Rotate molecule with Left and Right arrow keys, or A and D keys.'
+    adjustElectronegativity: 'Adjust electronegativity'
+    adjustElectronegativityDescription: 'Use Up and Down arrow keys to change electronegativity value.'
+    changeBondAngle: 'Change bond angle'
+    changeBondAngleDescription: 'In Three Atoms screen, use Left and Right arrow keys on outer atoms to change bond angle.'
+    generalNavigationHeading: 'General Navigation'
+    moveToNextItem: 'Move to next item'
+    moveToNextItemDescription: 'Use Tab key to move focus to next interactive element.'
+    moveToPreviousItem: 'Move to previous item'
+    moveToPreviousItemDescription: 'Use Shift plus Tab keys to move focus to previous interactive element.'
+    activateItem: 'Activate item'
+    activateItemDescription: 'Press Space or Enter key to activate buttons and checkboxes.'
