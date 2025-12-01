@@ -64,3 +64,24 @@ a11y:
     atom:
       accessibleName: 'Atom { $name }'
       accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
+    bondType:
+      select_strength:
+        veryIonic: 'very ionic'
+        mostlyIonic: 'mostly ionic'
+        slightlyIonic: 'slightly ionic'
+        slightlyCovalent: 'slightly covalent'
+        mostlyCovalent: 'mostly covalent'
+        veryCovalent: 'very covalent'
+    bondDipole:
+      select_dipole:
+        no: 'no'
+        verySmall: 'very small'
+        small: 'small'
+        medium: 'medium'
+        large: 'large'
+        veryLarge: 'very large'
+    dipoleProgress:
+      select_progress:
+        zero: 'zero'
+        smaller: 'smaller'
+        larger: 'larger'
