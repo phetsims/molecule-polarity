@@ -58,178 +58,430 @@ underDevelopment.line1: Real Molecules is not currently available in HTML5.
 underDevelopment.line2: If your device runs Java, you can use the Java version at
 
 a11y:
-  common:
-    electronegativitySlider:
-      accessibleName: 'Atom { $atomName } Electronegativity'
-      accessibleHelpText: 'Adjust the electronegativity value with arrow keys or by dragging the slider.'
-    atom:
-      accessibleName: 'Atom { $name }'
-      accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys.'
-    bondType:
-      select_strength:
-        veryIonic: 'very ionic'
-        mostlyIonic: 'mostly ionic'
-        slightlyIonic: 'slightly ionic'
-        slightlyCovalent: 'slightly covalent'
-        mostlyCovalent: 'mostly covalent'
-        veryCovalent: 'very covalent'
-    bondDipole:
-      select_dipole:
-        no: 'no'
-        verySmall: 'very small'
-        small: 'small'
-        medium: 'medium'
-        large: 'large'
-        veryLarge: 'very large'
-    dipoleProgress:
-      select_progress:
-        zero: 'zero'
-        smaller: 'smaller'
-        larger: 'larger'
-    partialCharge:
-      select_charge:
-        none: 'no partial charge'
-        small: 'small partial charge'
-        medium: 'medium partial charge'
-        large: 'large partial charge'
-    viewCheckboxes:
-      bondDipole:
-        accessibleName: 'Bond Dipole'
-        accessibleHelpText: 'Show or hide the bond dipole arrow.'
-      bondDipoles:
-        accessibleName: 'Bond Dipoles'
-        accessibleHelpText: 'Show or hide the bond dipole arrows.'
-      molecularDipole:
-        accessibleName: 'Molecular Dipole'
-        accessibleHelpText: 'Show or hide the molecular dipole arrow.'
-      partialCharges:
-        accessibleName: 'Partial Charges'
-        accessibleHelpText: 'Show or hide the partial charge symbols.'
-      bondCharacter:
-        accessibleName: 'Bond Character'
-        accessibleHelpText: 'Show or hide the bond character display.'
-      atomLabels:
-        accessibleName: 'Atom Labels'
-        accessibleHelpText: 'Show or hide the atom labels.'
-      atomElectronegativities:
-        accessibleName: 'Atom Electronegativities'
-        accessibleHelpText: 'Show or hide the atom electronegativities table.'
-    surfaceControl:
-      accessibleName: 'Surface'
-      accessibleHelpText: 'Choose a surface type to display on the molecule.'
-      none:
-        accessibleName: 'None'
-      electrostaticPotential:
-        accessibleName: 'Electrostatic Potential'
-      electronDensity:
-        accessibleName: 'Electron Density'
-    eFieldControl:
-      accessibleName: 'Electric Field'
-      accessibleHelpText: 'Turn the electric field on or off.'
-      onOffSwitch:
-        accessibleName: 'Electric Field Switch'
-    bondCharacterPanel:
-      accessibleName: 'Bond Character'
-      bondCharacterDescription: 'The bond is { $strength }.'
-    moleculeDescription:
-      twoAtoms: 'Diatomic molecule with atoms A and B connected by a single bond.'
-      threeAtoms: 'Triatomic molecule with atom B in the center, connected to atoms A and C.'
-    electronegativityComparison:
-      equal: 'Atoms have equal electronegativity.'
-      aGreater: 'Atom A has greater electronegativity than Atom B.'
-      bGreater: 'Atom B has greater electronegativity than Atom A.'
-      bGreaterThanC: 'Atom B has greater electronegativity than Atom C.'
-      cGreater: 'Atom C has greater electronegativity than Atom B.'
-    dipoleDescription:
-      noDipole: 'No bond dipole is present.'
-      dipolePointsTo: 'Bond dipole points toward { $atom }.'
-      molecularDipoleDescription: |-
-        { $magnitude ->
-          [no] No molecular dipole is present.
-          [verySmall] Molecular dipole is very small and points toward { $direction }.
-          [small] Molecular dipole is small and points toward { $direction }.
-          [medium] Molecular dipole is medium and points toward { $direction }.
-          [large] Molecular dipole is large and points toward { $direction }.
-          *[veryLarge] Molecular dipole is very large and points toward { $direction }.
-        }
-    plates:
-      accessibleName: 'Electric Field Plates'
-      accessibleHelpText: 'Negative and positive plates create an electric field when turned on.'
+  # ===================
+  # REGIONS / PARAMETERS
+  # ===================
+  
+  # BondChar4 - Bond Character (Screen 1)
+  # Note: Can't say "ionic" alone. Implementation: See Bond Parameters table
+  bondCharacter:
+    select_strength:
+      nonpolarCovalent: 'nonpolar covalent'
+      nearlyNonpolarCovalent: 'nearly nonpolar covalent'
+      slightlyPolarCovalent: 'slightly polar covalent'
+      polarCovalent: 'polar covalent'
+      slightlyIonic: 'slightly ionic'
+      mostlyIonic: 'mostly ionic'
+  
+  # BondCharProgress2 - Bond Character Progress (Screen 1)
+  # Implementation: ΔEN > 0 = more ionic; ΔEN < 0 more covalent
+  bondCharacterProgress:
+    select_progress:
+      moreIonic: 'more ionic'
+      moreCovalent: 'more covalent'
+  
+  # BondDipole6 - Bond Dipole magnitude (Screen 1/2)
+  bondDipole:
+    select_magnitude:
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      large: 'large'
+      veryLarge: 'very large'
+  
+  # DipoleOrientAB2 - Dipole Orientation AB (Screen 1/2)
+  dipoleOrientAB:
+    select_direction:
+      toB: 'to B'
+      toA: 'to A'
+  
+  # DipoleOrientBC2 - Dipole Orientation BC (Screen 2)
+  dipoleOrientBC:
+    select_direction:
+      toB: 'to B'
+      toC: 'to C'
+  
+  # DipoleProgress3 - Dipole Progress (Screen 1/2)
+  dipoleProgress:
+    select_progress:
+      smaller: 'smaller'
+      larger: 'larger'
+      zero: 'zero'
+  
+  # ElectronDensity6 - Electron Density (Screen 1)
+  electronDensity:
+    select_density:
+      evenly: 'evenly'
+      nearlyEvenly: 'nearly evenly'
+      slightlyUnevenly: 'slightly unevenly'
+      unevenly: 'unevenly'
+      veryUnevenly: 'very unevenly'
+      mostUnevenly: 'most unevenly'
+  
+  # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
+  electronDensityProgress:
+    select_progress:
+      more: 'more'
+      less: 'less'
+  
+  # ElectroPotential6 - Electrostatic Potential (Screen 1)
+  electrostaticPotential:
+    select_potential:
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      large: 'large'
+      veryLarge: 'very large'
+  
+  # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
+  # 2-range spectrum: positive-neutral-negative
+  electrostaticPotentialProgress:
+    select_progress:
+      morePositive: 'more positive'
+      lessPositive: 'less positive'
+      neutral: 'neutral'
+      lessNegative: 'less negative'
+      moreNegative: 'more negative'
+  
+  # EN6 - Electronegativity levels (Screen 1/2)
+  electronegativity:
+    select_level:
+      veryLow: 'very low'
+      low: 'low'
+      mediumLow: 'medium-low'
+      mediumHigh: 'medium-high'
+      high: 'high'
+      veryHigh: 'very high'
+  
+  # Field2 - Electric Field state (Screen 1/2)
+  field:
+    select_state:
+      on: 'on'
+      off: 'off'
+  
+  # MolecularDipole6 - Molecular Dipole magnitude (Screen 2)
+  # Note: May need a larger region set - alternative 7-region
+  molecularDipole:
+    select_magnitude:
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      large: 'large'
+      veryLarge: 'very large'
+      extremelyLarge: 'extremely large'
+  
+  # Orient12 - Clock orientation (Screen 2)
+  orientation:
+    select_clock:
+      one: '1'
+      two: '2'
+      three: '3'
+      four: '4'
+      five: '5'
+      six: '6'
+      seven: '7'
+      eight: '8'
+      nine: '9'
+      ten: '10'
+      eleven: '11'
+      twelve: '12'
+  
+  # OrientationAtomA - Orientation for Atom A (Screen 1)
+  orientationAtomA:
+    select_position:
+      at9: 'at 9'
+      between10And11: 'between 10 and 11'
+      at12: 'at 12'
+      between1And2: 'between 1 and 2'
+      at3: 'at 3'
+      between4And5: 'between 4 and 5'
+      at6: 'at 6'
+      between7And8: 'between 7 and 8'
+  
+  # OrientationAtomB - Orientation for Atom B (Screen 1)
+  orientationAtomB:
+    select_position:
+      at3: 'at 3'
+      between4And5: 'between 4 and 5'
+      at6: 'at 6'
+      between7And8: 'between 7 and 8'
+      at9: 'at 9'
+      between10And11: 'between 10 and 11'
+      at12: 'at 12'
+      between1And2: 'between 1 and 2'
+  
+  # OrientationMol3 - Molecule orientation (Screen 1)
+  orientationMolecule:
+    select_orientation:
+      horizontal: 'horizontal'
+      diagonal: 'diagonal'
+      vertical: 'vertical'
+  
+  # PartialCharge2 - Partial Charge sign (Screen 1/2)
+  partialChargeSign:
+    select_sign:
+      positive: 'positive'
+      negative: 'negative'
+  
+  # PartialCharge6 - Partial Charge magnitude (Screen 1/2)
+  partialChargeMagnitude:
+    select_magnitude:
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      large: 'large'
+      veryLarge: 'very large'
+  
+  # PartialChargeProgress3 - Partial Charge Progress (Screen 1/2)
+  partialChargeProgress:
+    select_progress:
+      morePositive: 'more positive'
+      moreNegative: 'more negative'
+      zero: 'zero'
+  
+  # Polarity6 - Bond Polarity (Screen 1/2)
+  polarity:
+    select_polarity:
+      nonpolar: 'nonpolar'
+      veryWeaklyPolar: 'very weakly polar'
+      weaklyPolar: 'weakly polar'
+      polar: 'polar'
+      stronglyPolar: 'strongly polar'
+      veryStronglyPolar: 'very strongly polar'
+  
+  # Rotation2 - Rotation direction (Screen 1/2)
+  rotation:
+    select_direction:
+      clockwise: 'clockwise'
+      counterclockwise: 'counterclockwise'
+  
+  # Shape7 - Molecule shape (Screen 2)
+  shape:
+    select_shape:
+      linear: 'linear'
+      nearlyLinear: 'nearly linear'
+      slightlyBent: 'slightly bent'
+      bent: 'bent'
+      veryBent: 'very bent'
+      extremelyBentSlightOverlap: 'extremely bent, slight overlap'
+      atomsOverlap: 'atoms overlap'
 
+  # ===================
+  # TWO ATOMS SCREEN
+  # ===================
   twoAtomsScreen:
+    # Screen Summary
     screenSummary:
-      playArea: 'The play area has a diatomic molecule that you can rotate. Adjust the electronegativity of each atom to explore bond polarity, dipoles, and surface visualizations.'
-      controlArea: 'Control area has options to adjust molecule view, surface type, and electric field. Reset the simulation to start over.'
-      interactionHint: 'Adjust electronegativity sliders and rotate the molecule to explore polarity.'
-    currentDetails: |-
-      { $bondDipoleVisible ->
-        [true] Bond dipole is shown.
-        *[false] Bond dipole is hidden.
-      } { $partialChargesVisible ->
-        [true] Partial charges are shown.
-        *[false] Partial charges are hidden.
-      } { $surfaceType ->
-        [none] No surface is displayed.
-        [electrostaticPotential] Electrostatic potential surface is displayed.
-        *[electronDensity] Electron density surface is displayed.
-      }
-    electronegativityPanels:
-      accessibleHeading: 'Electronegativity Controls'
+      playArea: "In Play Area: There is an interactive two-atom molecule, A–B. You can rotate the molecule, and change each atom's electronegativity to explore the effect on the bond dipole. Turn on an electric field to see how the molecule responds."
+      controlArea: 'In Control Area: Checkboxes change visibility of the bond dipole and partial charges. A radio button lets you choose to add electrostatic potential or electron density surfaces to the molecule. You can turn on the electric field, or reset the sim to start over.'
+      currentDetails: 'Currently, the molecule is { $polarity }. The electric field is { $field }.'
+      interactionHint: 'Change atom electronegativities to explore the effect on the bond dipole.'
+    
+    # Play Area - Molecule AB heading
+    moleculeAB:
+      heading: 'Molecule AB'
+      currentState: 'Currently, the molecule is { $polarity }.'
+      bondDipoleDescription: 'with { $bondDipoleMagnitude } dipole arrow.'
+      bondDipoleDirection: 'Bond dipole points { $dipoleDirection }.'
+      partialChargesDescription: 'Partial charges are { $partialChargeMagnitude }.'
+      partialChargesDetail: 'Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
+      bondCharacterDescription: 'Bond is { $bondCharacter }.'
+      electrostaticPotentialDescription: '{ $potential } electrostatic difference across molecule.'
+      electronDensityDescription: 'Electron density is { $density } shared between atoms.'
+      electricFieldAligned: 'Molecule aligned with electric field.'
+      orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
+      electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }.'
+    
+    # Rotate Molecule AB Slider
+    rotateMoleculeSlider:
+      accessibleName: 'Rotate Molecule AB'
+      accessibleHelpText: 'Rotate molecule 360 degrees.'
+      # ARIA valuetext options
+      valueText:
+        deg0: '0 degrees, horizontal'
+        deg45: '45 degrees, diagonal'
+        deg90: '90 degrees, vertical'
+        deg135: '135 degrees, diagonal'
+        deg180: '180 degrees, horizontal'
+        deg225: '225 degrees, diagonal'
+        deg270: '270 degrees, vertical'
+        deg315: '315 degrees, diagonal'
+        deg360: '360 degrees, horizontal, back to start'
+      rotationDirection: '{ $direction }'
+      electricFieldContext: 'Rotating { $direction } Horizontal, Aligned with electric field.'
+    
+    # Atom A Electronegativity Slider
+    atomAElectronegativitySlider:
+      accessibleName: 'Atom A Electronegativity'
+      accessibleHelpText: 'Change how strongly Atom A attracts electrons.'
+      dipoleContext: 'Dipole arrow { $progress }'
+      dipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
+      partialChargeContext: 'Partial charge is { $progress }'
+      partialChargeSignChange: 'Partial charge now { $sign }'
+      bondCharacterContext: 'Bond is { $progress }.'
+      electrostaticContext: '{ $progress } electrostatic difference.'
+      electronDensityContext: '{ $progress } electron density.'
+      electricFieldContext: 'Molecule aligned with electric field.'
+    
+    # Atom B Electronegativity Slider
+    atomBElectronegativitySlider:
+      accessibleName: 'Atom B Electronegativity'
+      accessibleHelpText: 'Change how strongly Atom B attracts electrons.'
+    
+    # Control Area
+    controlArea:
+      bondDipoleCheckbox:
+        accessibleName: 'Bond Dipole'
+        accessibleHelpText: 'Explore with or without Bond Dipole shown.'
+        checked: 'Bond Dipole shown'
+        unchecked: 'Bond Dipole hidden'
+      partialChargesCheckbox:
+        accessibleName: 'Partial Charges'
+        accessibleHelpText: 'Explore with or without Partial Charges shown.'
+        checked: 'Partial Charges shown'
+        unchecked: 'Partial Charges hidden'
+      bondCharacterCheckbox:
+        accessibleName: 'Bond Character'
+        accessibleHelpText: 'Explore with or without Bond Character shown.'
+        checked: 'Bond Character shown'
+        unchecked: 'Bond Character hidden'
+      surfaceRadioGroup:
+        accessibleName: 'Surface'
+        accessibleHelpText: |-
+          Explore with different charge surfaces shown.
+          Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).
+          Electron density ranges from less to more (surface colors: white to dark grey).
+        noneSelected: 'No charge surfaces shown'
+        electrostaticSelected: 'Electrostatic Potential surface shown'
+        electronDensitySelected: 'Electron Density surface shown'
+      electricFieldToggle:
+        accessibleName: 'Electric Field'
+        accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'
+        on: 'Electric field on'
+        off: 'Electric field off'
 
+  # ===================
+  # THREE ATOMS SCREEN
+  # ===================
   threeAtomsScreen:
+    # Screen Summary
     screenSummary:
-      playArea: 'The play area has a triatomic molecule that you can rotate. Drag outer atoms to change bond angles. Adjust electronegativity of each atom to explore bond and molecular dipoles.'
-      controlArea: 'Control area has options to adjust molecule view and electric field. Reset the simulation to start over.'
-      interactionHint: 'Adjust electronegativity sliders, change bond angles, and rotate the molecule to explore polarity.'
-    currentDetails: |-
-      { $bondDipolesVisible ->
-        [true] Bond dipoles are shown.
-        *[false] Bond dipoles are hidden.
-      } { $molecularDipoleVisible ->
-        [true] Molecular dipole is shown.
-        *[false] Molecular dipole is hidden.
-      } { $partialChargesVisible ->
-        [true] Partial charges are shown.
-        *[false] Partial charges are hidden.
-      }
-    electronegativityPanels:
-      accessibleHeading: 'Electronegativity Controls'
-    bondAngle:
-      accessibleName: 'Bond Angle { $bond }'
-      accessibleHelpText: 'Drag to change the bond angle, or use arrow keys.'
-
-  realMoleculesScreen:
-    screenSummary:
-      playArea: 'The play area shows a 3D view of real molecules. Drag to rotate the molecule and explore its polarity.'
-      controlArea: 'Control area has options to select different molecules, adjust view options, and surface type. Reset the simulation to start over.'
-      interactionHint: 'Select a molecule and rotate it to explore its polarity properties.'
-    currentDetails: |-
-      Currently viewing { $moleculeName }. { $bondDipolesVisible ->
-        [true] Bond dipoles are shown.
-        *[false] Bond dipoles are hidden.
-      } { $molecularDipoleVisible ->
-        [true] Molecular dipole is shown.
-        *[false] Molecular dipole is hidden.
-      }
-    moleculeComboBox:
-      accessibleName: 'Molecule Selector'
-      accessibleHelpText: 'Choose a real molecule to explore.'
-    electronegativityTable:
-      accessibleName: 'Atom Electronegativities Table'
-      accessibleHelpText: 'Displays electronegativity values for atoms in the current molecule.'
-
-  keyboardHelpContent:
-    moleculeInteractionHeading: 'Molecule Interaction'
-    rotateMolecule: 'Rotate molecule'
-    rotateMoleculeDescription: 'Rotate molecule with Left and Right arrow keys, or A and D keys.'
-    adjustElectronegativity: 'Adjust electronegativity'
-    adjustElectronegativityDescription: 'Use Up and Down arrow keys to change electronegativity value.'
-    changeBondAngle: 'Change bond angle'
-    changeBondAngleDescription: 'In Three Atoms screen, use Left and Right arrow keys on outer atoms to change bond angle.'
-    generalNavigationHeading: 'General Navigation'
-    moveToNextItem: 'Move to next item'
-    moveToNextItemDescription: 'Use Tab key to move focus to next interactive element.'
-    moveToPreviousItem: 'Move to previous item'
-    moveToPreviousItemDescription: 'Use Shift plus Tab keys to move focus to previous interactive element.'
-    activateItem: 'Activate item'
-    activateItemDescription: 'Press Space or Enter key to activate buttons and checkboxes.'
+      playArea: "In Play Area: There is an interactive three-atom molecule, A–B–C. You can change each atom's electronegativity, rotate the molecule around the central atom B, and move atoms A and C to adjust the bond angle. As you make changes, you can explore how shape and bond polarity affect the molecule's overall dipole."
+      controlArea: 'In Control Area: Checkboxes change visibility of bond dipoles, molecular dipole, and partial charges. You can turn on the electric field to see how the molecule responds, or reset the sim to start over.'
+      currentDetails: 'Currently, the molecule is { $polarity }, the shape is { $shape }. The electric field is { $field }.'
+      interactionHint: 'Move Atom A or C to explore how shape changes the molecular dipole.'
+    
+    # Play Area - Molecule ABC heading
+    moleculeABC:
+      heading: 'Molecule ABC'
+      currentState: 'Currently, the molecule is { $polarity }.'
+      orientationDescription: 'Molecule is { $shape } with Atom A at { $atomAPosition } o''clock, Atom B at center, and Atom C at { $atomCPosition } o''clock.'
+      electricFieldAligned: 'Molecule aligned with electric field.'
+      electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
+      molecularDipoleDescription: 'With { $magnitude } molecular dipole arrow.'
+      molecularDipoleDirection: 'Molecular dipole points to { $position } o''clock.'
+      molecularDipoleTwice: 'Molecular dipole is twice the size of bond dipoles.'
+      bondDipoleABDescription: 'with { $magnitude } AB bond dipole arrow.'
+      bondDipoleABDirection: 'AB bond dipole points { $direction }, towards { $position } o''clock.'
+      bondDipoleBCDescription: 'With { $magnitude } BC bond dipole arrow'
+      bondDipoleBCDirection: 'BC bond dipole points { $direction }, towards { $position } o''clock.'
+      partialChargesDescription: 'Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge.'
+    
+    # Move Atom A Slider
+    moveAtomASlider:
+      accessibleName: 'Move Atom A'
+      accessibleHelpText: 'Move Atom A around center Atom B.'
+      # ARIA valuetext - clock positions
+      valueText:
+        oclock: '{ $hour } o''clock'
+        overlappingC: 'Overlapping Atom C'
+        onTopOfC: 'On top of Atom C'
+      bondDipoleContext: 'Bond dipole points to { $position } o''clock.'
+      molecularDipoleContext: '{ $magnitude } molecular dipole points to { $position } o''clock.'
+    
+    # Move Atom C Slider
+    moveAtomCSlider:
+      accessibleName: 'Move Atom C'
+      accessibleHelpText: 'Move Atom C around center Atom B.'
+      valueText:
+        oclock: '{ $hour } o''clock'
+        overlappingA: 'Overlapping Atom A'
+        onTopOfA: 'On top of Atom A'
+    
+    # Rotate Molecule ABC Slider
+    rotateMoleculeSlider:
+      accessibleName: 'Rotate Molecule ABC'
+      accessibleHelpText: 'Rotate molecule 360 degrees.'
+      valueText:
+        deg0: '0 degrees, starting position'
+        deg30: '30 degrees'
+        deg60: '60 degrees'
+        deg90: '90 degrees'
+        deg120: '120 degrees'
+        deg150: '150 degrees'
+        deg180: '180 degrees, halfway'
+        deg210: '210 degrees'
+        deg240: '240 degrees'
+        deg270: '270 degrees'
+        deg300: '300 degrees'
+        deg330: '330 degrees'
+        deg360: '360 degrees, back to starting position'
+      molecularDipoleContext: 'Molecular dipole points to { $position } o''clock.'
+      electricFieldContext: 'Rotating { $direction }, Aligned with electric field.'
+    
+    # Atom A Electronegativity Slider
+    atomAElectronegativitySlider:
+      accessibleName: 'Atom A Electronegativity'
+      accessibleHelpText: 'Change how strongly Atom A attracts electrons.'
+      bondDipoleContext: 'Bond dipole arrow { $progress }'
+      bondDipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
+      molecularDipoleContext: 'Molecular dipole arrow { $progress }'
+      molecularDipoleDirection: 'Points to { $position } o''clock.'
+      partialChargeContext: 'Partial charge is { $progress }'
+      partialChargeSignChange: 'Partial charge now { $sign }'
+      electricFieldContext: 'Molecule aligned with electric field.'
+    
+    # Atom B Electronegativity Slider
+    atomBElectronegativitySlider:
+      accessibleName: 'Atom B Electronegativity'
+      accessibleHelpText: 'Change how strongly Atom B attracts electrons.'
+      bondDipoleContext: 'Bond dipole AB { $progressAB }, BC { $progressBC }'
+      bondDipoleABDirectionChange: 'Bond dipole AB now points { $direction }'
+      bondDipoleBCDirectionChange: 'Bond dipole BC now points { $direction }'
+      molecularDipoleContext: 'Molecular dipole arrow { $progress }'
+      molecularDipoleDirection: 'Points to { $position } o''clock.'
+      partialChargeContext: 'Partial charge is { $progress }'
+      electricFieldContext: 'Molecule aligned with electric field.'
+    
+    # Atom C Electronegativity Slider
+    atomCElectronegativitySlider:
+      accessibleName: 'Atom C Electronegativity'
+      accessibleHelpText: 'Change how strongly Atom C attracts electrons.'
+      bondDipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
+    
+    # Control Area
+    controlArea:
+      bondDipoleCheckbox:
+        accessibleName: 'Bond Dipole'
+        accessibleHelpText: 'Explore with or without Bond Dipole shown.'
+        checked: 'Bond Dipole shown'
+        unchecked: 'Bond Dipole hidden'
+      molecularDipoleCheckbox:
+        accessibleName: 'Molecular Dipole'
+        accessibleHelpText: 'Explore with or without Molecular Dipole shown.'
+        checked: 'Molecular Dipole shown'
+        unchecked: 'Molecular Dipole hidden'
+      partialChargesCheckbox:
+        accessibleName: 'Partial Charges'
+        accessibleHelpText: 'Explore with or without Partial Charges shown.'
+        checked: 'Partial Charges shown'
+        unchecked: 'Partial Charges hidden'
+      electricFieldToggle:
+        accessibleName: 'Electric Field'
+        accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'
+        on: 'Electric field on'
+        off: 'Electric field off'
