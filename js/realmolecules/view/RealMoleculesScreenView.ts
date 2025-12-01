@@ -152,12 +152,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.sceneNode.stage.threeCamera.lookAt( ThreeUtils.vectorToThree( Vector3.ZERO ) );
 
     // Lights
-    const ambientLight = new THREE.AmbientLight( 0x333333 );
+    const ambientLight = new THREE.AmbientLight( 0x333333, Math.PI );
     this.sceneNode.stage.threeScene.add( ambientLight );
-    const sunLight = new THREE.DirectionalLight( 0xffffff, 1 );
+    const sunLight = new THREE.DirectionalLight( 0xffffff, Math.PI );
     sunLight.position.set( -1, 1.5, 0.8 );
     this.sceneNode.stage.threeScene.add( sunLight );
-    const moonLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
+    const moonLight = new THREE.DirectionalLight( 0xffffff, 0.2 * Math.PI );
     moonLight.position.set( 2.0, -1.0, 1.0 );
     this.sceneNode.stage.threeScene.add( moonLight );
 

@@ -93,6 +93,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         // https://github.com/mrdoob/three.js/wiki/Migration-Guide
 
         // three 104 is April 24, 2019
+        // three 160 is Dec 22, 2023
         // 1.0.13 wboit: January 2, 2023
 
         // https://unpkg.com/:package@:version/:file
@@ -100,7 +101,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         // https://unpkg.com/three-wboit@1.0.13/build/index.module.js
 
         const colorizeElectrostaticPotential = ( espValue: number ): number[] => {
-          espValue *= 7;
+          espValue *= 15;
 
           if ( espValue > 0 ) {
             const v = clamp( 1 - espValue, 0, 1 );
@@ -122,7 +123,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         const toColor = surfaceType === 'electrostaticPotential' ? colorizeElectrostaticPotential : colorizeElectronDensity;
 
         const meshGeometry = new THREE.BufferGeometry();
-        meshGeometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
+        meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
           const vertex0Data = moleculeData.vertexPositions[ indices[ 0 ] ];
           const vertex1Data = moleculeData.vertexPositions[ indices[ 1 ] ];
           const vertex2Data = moleculeData.vertexPositions[ indices[ 2 ] ];
@@ -133,7 +134,7 @@ export default class RealMoleculeView extends THREE.Object3D {
             ...vertex2Data
           ];
         } ) ), 3 ) );
-        meshGeometry.addAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
+        meshGeometry.setAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
           const vertex0Data = moleculeData.vertexNormals[ indices[ 0 ] ];
           const vertex1Data = moleculeData.vertexNormals[ indices[ 1 ] ];
           const vertex2Data = moleculeData.vertexNormals[ indices[ 2 ] ];
@@ -144,7 +145,7 @@ export default class RealMoleculeView extends THREE.Object3D {
             ...vertex2Data
           ];
         } ) ), 3 ) );
-        meshGeometry.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
+        meshGeometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
           const v0 = moleculeData.vertexESPs[ indices[ 0 ] ];
           const v1 = moleculeData.vertexESPs[ indices[ 1 ] ];
           const v2 = moleculeData.vertexESPs[ indices[ 2 ] ];
