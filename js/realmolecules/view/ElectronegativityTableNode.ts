@@ -25,7 +25,8 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule from '../model/RealMolecule.js';
-import Element from '../model/Element.js';
+import Element from '../../../../nitroglycerin/js/Element.js';
+import { RealMoleculeData } from '../model/RealMoleculeData.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -54,15 +55,15 @@ export default class ElectronegativityTableNode extends Node {
     } );
 
     const cells = [
-      new Cell( 'H', 1, 2.1 ),
+      new Cell( 'H', Element.H, 2.1 ),
       new Line( 0, 0, 12, 0, { stroke: 'rgb( 100, 100, 100 )' } ),
-      new Cell( 'B', 5, 2.0 ),
-      new Cell( 'C', 6, 2.5 ),
-      new Cell( 'N', 7, 3.0 ),
-      new Cell( 'O', 8, 3.5 ),
-      new Cell( 'F', 9, 4.0 ),
+      new Cell( 'B', Element.B, 2.0 ),
+      new Cell( 'C', Element.C, 2.5 ),
+      new Cell( 'N', Element.N, 3.0 ),
+      new Cell( 'O', Element.O, 3.5 ),
+      new Cell( 'F', Element.F, 4.0 ),
       new Line( 0, 0, 12, 0, { stroke: 'rgb( 100, 100, 100 )' } ),
-      new Cell( 'Cl', 17, 3.0 )
+      new Cell( 'Cl', Element.Cl, 3.0 )
     ];
 
     // Horizontal layout of cells, with title centered below the cells
@@ -85,10 +86,17 @@ export default class ElectronegativityTableNode extends Node {
 
     // highlight elements displayed by the viewer
     moleculeProperty.link( molecule => {
-      const elements: Element[] = [];
+
+      const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
+      const moleculeData = RealMoleculeData[ strippedSymbol ];
 
       this.resetCells();
-      elements.forEach( element => this.setColor( element.elementNumber, element.color ) );
+
+      for ( const atom of moleculeData.atoms ) {
+        const element = Element.getElementBySymbol( atom.symbol === 'CL' ? 'Cl' : atom.symbol );
+
+        this.setColor( element, element.color );
+      }
     } );
   }
 
@@ -101,11 +109,11 @@ export default class ElectronegativityTableNode extends Node {
   }
 
   // Sets the {Color} color of a specified {number} element
-  private setColor( elementNumber: number, color: TColor ): void {
+  private setColor( element: Element, color: TColor ): void {
     for ( let i = 0; i < this.cells.length; i++ ) {
       const cell = this.cells[ i ];
       if ( cell instanceof Cell ) {
-        if ( cell.elementNumber === elementNumber ) {
+        if ( cell.element === element ) {
           cell.enable( color );
           break;
         }
@@ -119,7 +127,7 @@ export default class ElectronegativityTableNode extends Node {
  */
 class Cell extends Node {
 
-  public readonly elementNumber: number;
+  public readonly element: Element;
   private readonly backgroundNode: Rectangle;
   private readonly symbolText: Text;
   private readonly electronegativityText: Text;
@@ -129,11 +137,11 @@ class Cell extends Node {
    * @param elementNumber - element's number in the periodic table
    * @param electronegativity
    */
-  public constructor( symbol: string, elementNumber: number, electronegativity: number ) {
+  public constructor( symbol: string, element: Element, electronegativity: number ) {
 
     super();
 
-    this.elementNumber = elementNumber;
+    this.element = element;
 
     this.backgroundNode = new Rectangle( 0, 0, CELL_SIZE.width, CELL_SIZE.height, {
       fill: BACKGROUND_COLOR,
