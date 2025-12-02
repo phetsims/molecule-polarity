@@ -64,7 +64,7 @@ a11y:
     atom:
       accessibleName: 'Atom { $name }'
       accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
-    bondType:
+    bondChar:
       select_strength:
         veryIonic: 'very ionic'
         mostlyIonic: 'mostly ionic'
