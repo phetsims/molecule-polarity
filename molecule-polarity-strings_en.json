@@ -188,7 +188,7 @@
           "value": "Turn the molecule with left and right keys, or A and D keys"
         }
       },
-      "bondType": {
+      "bondChar": {
         "value": "{ $strength ->\n  [veryIonic] very ionic\n  [mostlyIonic] mostly ionic\n  [slightlyIonic] slightly ionic\n  [slightlyCovalent] slightly covalent\n  [mostlyCovalent] mostly covalent\n  *[veryCovalent] very covalent\n}"
       },
       "bondDipole": {
@@ -258,10 +258,10 @@
     "twoAtomsScreen": {
       "screenSummary": {
         "playArea": {
-          "value": "In Play Area: There is an interactive two-atom molecule, A–B. You can rotate the molecule, and change each atom's electronegativity to explore the effect on the bond dipole. Turn on an electric field to see how the molecule responds."
+          "value": "There is an interactive two-atom molecule, A–B. You can rotate the molecule, and change each atom's electronegativity to explore the effect on the bond dipole. Turn on an electric field to see how the molecule responds."
         },
         "controlArea": {
-          "value": "In Control Area: Checkboxes change visibility of the bond dipole and partial charges. A radio button lets you choose to add electrostatic potential or electron density surfaces to the molecule. You can turn on the electric field, or reset the sim to start over."
+          "value": "Checkboxes change visibility of the bond dipole and partial charges. A radio button lets you choose to add electrostatic potential or electron density surfaces to the molecule. You can turn on the electric field, or reset the sim to start over."
         },
         "currentDetails": {
           "value": "Currently, the molecule is { $polarity }. The electric field is { $field }."

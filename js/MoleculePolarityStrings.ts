@@ -87,7 +87,7 @@ type StringsType = {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };
-      'bondTypeStringProperty': LocalizedStringProperty;
+      'bondCharStringProperty': LocalizedStringProperty;
       'bondDipoleStringProperty': LocalizedStringProperty;
       'dipoleProgressStringProperty': LocalizedStringProperty;
     };

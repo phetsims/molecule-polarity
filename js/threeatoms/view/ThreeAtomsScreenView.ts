@@ -17,6 +17,7 @@ import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
+import ThreeAtomsScreenSummaryContentNode from './ThreeAtomsScreenSummaryContentNode.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
@@ -26,7 +27,8 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
     super( {
       layoutBounds: MPConstants.LAYOUT_BOUNDS,
-      tandem: tandem
+      tandem: tandem,
+      screenSummaryContent: new ThreeAtomsScreenSummaryContentNode( model )
     } );
 
     // view-specific Properties

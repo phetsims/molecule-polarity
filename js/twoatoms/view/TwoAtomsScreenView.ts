@@ -21,6 +21,7 @@ import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
+import TwoAtomsScreenSummaryContentNode from './TwoAtomsScreenSummaryContentNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 export default class TwoAtomsScreenView extends ScreenView {
@@ -29,7 +30,8 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     super( {
       layoutBounds: MPConstants.LAYOUT_BOUNDS,
-      tandem: tandem
+      tandem: tandem,
+      screenSummaryContent: new TwoAtomsScreenSummaryContentNode( model )
     } );
 
     // view-specific Properties

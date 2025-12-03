@@ -85,7 +85,7 @@ addToMapIfDefined( 'underDevelopment_line2', 'underDevelopment.line2StringProper
 addToMapIfDefined( 'a11y_common_electronegativitySlider_accessibleName', 'a11y.common.electronegativitySlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleName', 'a11y.common.atom.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleHelpText', 'a11y.common.atom.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_common_bondType', 'a11y.common.bondTypeStringProperty' );
+addToMapIfDefined( 'a11y_common_bondChar', 'a11y.common.bondCharStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipole', 'a11y.common.bondDipoleStringProperty' );
 addToMapIfDefined( 'a11y_common_dipoleProgress', 'a11y.common.dipoleProgressStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacterProgress', 'a11y.bondCharacterProgressStringProperty' );
@@ -345,7 +345,7 @@ const MoleculePolarityFluent = {
         accessibleName: new FluentPattern<{ name: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleNameStringProperty' ), [{"name":"name"}] ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleHelpTextStringProperty' ) )
       },
-      bondType: new FluentPattern<{ strength: 'veryIonic' | 'mostlyIonic' | 'slightlyIonic' | 'slightlyCovalent' | 'mostlyCovalent' | 'veryCovalent' | TReadOnlyProperty<'veryIonic' | 'mostlyIonic' | 'slightlyIonic' | 'slightlyCovalent' | 'mostlyCovalent' | 'veryCovalent'> }>( fluentSupport.bundleProperty, 'a11y_common_bondType', _.get( MoleculePolarityStrings, 'a11y.common.bondTypeStringProperty' ), [{"name":"strength","variants":["veryIonic","mostlyIonic","slightlyIonic","slightlyCovalent","mostlyCovalent","veryCovalent"]}] ),
+      bondChar: new FluentPattern<{ strength: 'veryIonic' | 'mostlyIonic' | 'slightlyIonic' | 'slightlyCovalent' | 'mostlyCovalent' | 'veryCovalent' | TReadOnlyProperty<'veryIonic' | 'mostlyIonic' | 'slightlyIonic' | 'slightlyCovalent' | 'mostlyCovalent' | 'veryCovalent'> }>( fluentSupport.bundleProperty, 'a11y_common_bondChar', _.get( MoleculePolarityStrings, 'a11y.common.bondCharStringProperty' ), [{"name":"strength","variants":["veryIonic","mostlyIonic","slightlyIonic","slightlyCovalent","mostlyCovalent","veryCovalent"]}] ),
       bondDipole: new FluentPattern<{ dipole: 'no' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge' | TReadOnlyProperty<'no' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge'> }>( fluentSupport.bundleProperty, 'a11y_common_bondDipole', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleStringProperty' ), [{"name":"dipole","variants":["no","verySmall","small","medium","large","veryLarge"]}] ),
       dipoleProgress: new FluentPattern<{ progress: number | 'zero' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_common_dipoleProgress', _.get( MoleculePolarityStrings, 'a11y.common.dipoleProgressStringProperty' ), [{"name":"progress","variants":[{"type":"number","value":"zero"},"smaller","larger"]}] )
     },
