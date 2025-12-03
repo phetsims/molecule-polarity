@@ -22,16 +22,18 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import RealMoleculesModel from '../model/RealMoleculesModel.js';
+import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
+import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
+  private readonly stepEmitter = new TinyEmitter();
   private readonly moleculeView: RealMoleculeView;
 
   // scale applied to interaction that isn't directly tied to screen coordinates (rotation)
@@ -43,7 +45,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       tandem: tandem,
       sceneNodeOptions: {
         parentMatrixProperty: animatedPanZoomSingleton.listener.matrixProperty,
-        cameraPosition: new Vector3( 0, 1.5, 15 ),
+        cameraPosition: REAL_MOLECULES_CAMERA_POSITION,
         viewOffset: new Vector2( 0, 0 ),
         backgroundColorProperty: new ColorProperty( Color.TRANSPARENT )
       }
@@ -164,7 +166,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.moleculeView = new RealMoleculeView(
       model.moleculeProperty,
       model.moleculeQuaternionProperty,
-      viewProperties
+      viewProperties,
+      this.stepEmitter
     );
     this.sceneNode.stage.threeScene.add( this.moleculeView );
 
@@ -216,6 +219,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       }
     };
     backgroundEventTarget.addInputListener( rotateListener );
+  }
+
+  public override step( dt: number ): void {
+    this.stepEmitter.emit();
+
+    super.step( dt );
   }
 }
 

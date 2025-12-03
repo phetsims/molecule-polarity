@@ -17,31 +17,56 @@ import { clamp } from '../../../../dot/js/util/clamp.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
+import TextureQuad from '../../../../mobius/js/TextureQuad.js';
+import NodeTexture from '../../../../mobius/js/NodeTexture.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
+import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
+
+const LABEL_SIZE = 0.4;
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
-    viewProperties: RealMoleculesViewProperties
+    viewProperties: RealMoleculesViewProperties,
+    stepEmitter: TinyEmitter
   ) {
     super();
 
-    Multilink.multilink( [ moleculeProperty, viewProperties.surfaceTypeProperty ], ( molecule, surfaceType ) => {
+    const stepLabels: TextureQuad[] = [];
+
+    const elementToRadius = ( element: Element ) => {
+      const angstroms = element.vanDerWaalsRadius / 100;
+
+      return 0.2 * angstroms; // scale factor for better visibility
+    };
+
+    Multilink.multilink( [
+      moleculeProperty,
+      viewProperties.surfaceTypeProperty,
+      viewProperties.atomLabelsVisibleProperty,
+      viewProperties.partialChargesVisibleProperty
+    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible ) => {
 
       const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
       const moleculeData = RealMoleculeData[ strippedSymbol ];
 
+      // Clear out children
       while ( this.children.length > 0 ) {
         this.remove( this.children[ 0 ] );
       }
+      stepLabels.length = 0;
 
       for ( const atom of moleculeData.atoms ) {
-        const element = Element.getElementBySymbol( atom.symbol === 'CL' ? 'Cl' : atom.symbol );
+        const element = Element.getElementBySymbol( atom.symbol );
 
-        const vanDerWallsRadiusInAngstroms = element.vanDerWaalsRadius / 100;
         const threeColor = ThreeUtils.colorToThree( Color.toColor( element.color ) );
 
-        const sphereGeometry = new THREE.SphereGeometry( 0.2 * vanDerWallsRadiusInAngstroms, 32, 32 );
+        const sphereGeometry = new THREE.SphereGeometry( elementToRadius( element ), 32, 32 );
         const atomMaterial = new THREE.MeshLambertMaterial( {
           color: threeColor
         } );
@@ -51,6 +76,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.add( cubeMesh );
       }
 
+      // TODO: double/triple bonds https://github.com/phetsims/molecule-polarity/issues/15
       for ( const bond of moleculeData.bonds ) {
         const atomA = moleculeData.atoms[ bond[ 0 ] ];
         const atomB = moleculeData.atoms[ bond[ 1 ] ];
@@ -83,6 +109,39 @@ export default class RealMoleculeView extends THREE.Object3D {
         bondMesh.updateMatrix();
 
         this.add( bondMesh );
+      }
+
+      if ( atomLabelsVisible ) {
+        for ( const atom of moleculeData.atoms ) {
+          const element = Element.getElementBySymbol( atom.symbol );
+
+          const labelFont = new PhetFont( { size: 120 } );
+          const labelNode = new VBox( {
+            children: [
+              // TODO: remap indices! https://github.com/phetsims/molecule-polarity/issues/15
+              new Text( `${element.symbol}1`, { font: labelFont } ),
+              ...( partialChargesVisible ? [
+                // TODO: partial charges! https://github.com/phetsims/molecule-polarity/issues/15
+                new Text( 'δ=-0.05', { font: labelFont } )
+              ] : [] )
+            ],
+            center: new Vector2( 256, 128 )
+          } );
+
+          const labelNodeTexture = new NodeTexture( labelNode, {
+            width: 512,
+            height: 256
+          } );
+
+          const label = new TextureQuad( labelNodeTexture, 2 * LABEL_SIZE, LABEL_SIZE, {
+            depthTest: true
+          } );
+
+          label.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
+
+          this.add( label );
+          stepLabels.push( label );
+        }
       }
 
       if ( surfaceType !== 'none' ) {
@@ -177,6 +236,64 @@ export default class RealMoleculeView extends THREE.Object3D {
       this.quaternion.copy( quaternion );
       this.updateMatrix();
       this.updateMatrixWorld();
+    } );
+
+    stepEmitter.addListener( () => {
+
+      // TODO: factor this out https://github.com/phetsims/molecule-polarity/issues/15
+      const strippedSymbol = moleculeProperty.value.symbol.replace( /<\/?sub>/g, '' );
+      const moleculeData = RealMoleculeData[ strippedSymbol ];
+
+      if ( stepLabels.length ) {
+        for ( let i = 0; i < stepLabels.length; i++ ) {
+          const label = stepLabels[ i ];
+          const atom = moleculeData.atoms[ i ];
+
+          const localPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+          const localUpPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION.plus( Vector3.Y_UNIT ) ) ) );
+
+          const dirToCamera = localPoint.normalized();
+          const upDir = localUpPoint.minus( localPoint ).normalized();
+          const rightDir = upDir.cross( dirToCamera ).normalized();
+
+          // const atom = moleculeData.atoms[ 0 ];
+          const element = Element.getElementBySymbol( atom.symbol ); // TODO: factor out https://github.com/phetsims/molecule-polarity/issues/15
+          const atomPosition = new Vector3( atom.x, atom.y, atom.z );
+          const atomRadius = elementToRadius( element );
+
+          const labelCenter = atomPosition.plus( dirToCamera.timesScalar( atomRadius + 0.03 ) );
+          const labelLowerLeft = labelCenter.plus( rightDir.timesScalar( -LABEL_SIZE ).plus( upDir.timesScalar( -0.5 * LABEL_SIZE ) ) );
+
+          // OLD position... replace this with both position and rotation
+          // label.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
+
+          // label.position.copy( ThreeUtils.vectorToThree( labelLowerLeft ) );
+
+          // TODO: don't require a renormalization https://github.com/phetsims/molecule-polarity/issues/15
+          const forward = dirToCamera; // Z+
+          const up = upDir; // Y+
+          const right = up.cross( forward ).normalized(); // X+
+          const rotMatrix = new THREE.Matrix4();
+          // makeBasis(xAxis, yAxis, zAxis)
+          rotMatrix.makeBasis(
+            ThreeUtils.vectorToThree( right ),
+            ThreeUtils.vectorToThree( up ),
+            ThreeUtils.vectorToThree( forward )
+          );
+
+          label.matrixAutoUpdate = false;
+
+          const m = new THREE.Matrix4();
+          m.makeBasis(
+            ThreeUtils.vectorToThree( right ),
+            ThreeUtils.vectorToThree( up ),
+            ThreeUtils.vectorToThree( forward )
+          );
+          m.setPosition( ThreeUtils.vectorToThree( labelLowerLeft ) );
+
+          label.matrix.copy( m );
+        }
+      }
     } );
   }
 

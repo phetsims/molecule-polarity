@@ -93,7 +93,7 @@ export default class ElectronegativityTableNode extends Node {
       this.resetCells();
 
       for ( const atom of moleculeData.atoms ) {
-        const element = Element.getElementBySymbol( atom.symbol === 'CL' ? 'Cl' : atom.symbol );
+        const element = Element.getElementBySymbol( atom.symbol );
 
         this.setColor( element, element.color );
       }

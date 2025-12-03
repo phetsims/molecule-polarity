@@ -15,6 +15,9 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import mol2Data from './mol2Data.js';
 import RealMolecule from './RealMolecule.js';
 import ThreeQuaternionIO from '../../../../mobius/js/ThreeQuaternionIO.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+
+export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
 export default class RealMoleculesModel extends PhetioObject implements TModel {
 

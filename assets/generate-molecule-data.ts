@@ -309,7 +309,7 @@ function parseAtoms( xyzText: string ): {
       throw new Error(`Invalid coordinates in XYZ line: '${line}'`);
     }
     atoms.push( {
-      symbol: symbol,
+      symbol: symbol === 'CL' ? 'Cl' : symbol,
       x: x,
       y: y,
       z: z
