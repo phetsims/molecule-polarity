@@ -187,19 +187,19 @@
         "accessibleHelpText": {
           "value": "Turn the molecule with left and right keys, or A and D keys"
         }
-      },
-      "bondChar": {
-        "value": "{ $strength ->\n  [veryIonic] very ionic\n  [mostlyIonic] mostly ionic\n  [slightlyIonic] slightly ionic\n  [slightlyCovalent] slightly covalent\n  [mostlyCovalent] mostly covalent\n  *[veryCovalent] very covalent\n}"
-      },
-      "bondDipole": {
-        "value": "{ $dipole ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
-      },
-      "dipoleProgress": {
-        "value": "{ $progress ->\n  [zero] zero\n  [smaller] smaller\n  *[larger] larger\n}"
       }
+    },
+    "bondCharacter": {
+      "value": "{ $bondCharacter ->\n  [veryIonic] very ionic\n  [mostlyIonic] mostly ionic\n  [slightlyIonic] slightly ionic\n  [slightlyCovalent] slightly covalent\n  [mostlyCovalent] mostly covalent\n  [veryCovalent] very covalent\n  *[nonpolarCovalent] nonpolar covalent\n}"
     },
     "bondCharacterProgress": {
       "value": "{ $progress ->\n  [moreIonic] more ionic\n  *[moreCovalent] more covalent\n}"
+    },
+    "bondDipole": {
+      "value": "{ $bondDipole ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
+    },
+    "dipoleProgress": {
+      "value": "{ $progress ->\n  [zero] zero\n  [smaller] smaller\n  *[larger] larger\n}"
     },
     "dipoleOrientAB": {
       "value": "{ $direction ->\n  [toB] to B\n  *[toA] to A\n}"
@@ -208,13 +208,13 @@
       "value": "{ $direction ->\n  [toB] to B\n  *[toC] to C\n}"
     },
     "electronDensity": {
-      "value": "{ $density ->\n  [evenly] evenly\n  [nearlyEvenly] nearly evenly\n  [slightlyUnevenly] slightly unevenly\n  [unevenly] unevenly\n  [veryUnevenly] very unevenly\n  *[mostUnevenly] most unevenly\n}"
+      "value": "{ $density ->\n  [evenlyShared] evenly shared\n  [nearlyEvenlyShared] nearly evenly shared\n  [slightlyUnevenlyShared] slightly unevenly shared\n  [unevenlyShared] unevenly shared\n  [veryUnevenlyShared] very unevenly shared\n  *[mostUnevenlyShared] most unevenly shared\n}"
     },
     "electronDensityProgress": {
       "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
     },
     "electrostaticPotential": {
-      "value": "{ $potential ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
+      "value": "{ $potential ->\n  [noDifference] no difference\n  [verySmallDifference] very small difference\n  [smallDifference] small difference\n  [mediumDifference] medium difference\n  [largeDifference] large difference\n  *[veryLargeDifference] very large difference\n}"
     },
     "electrostaticPotentialProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"

@@ -86,12 +86,12 @@ type StringsType = {
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-      };
-      'bondCharStringProperty': LocalizedStringProperty;
-      'bondDipoleStringProperty': LocalizedStringProperty;
-      'dipoleProgressStringProperty': LocalizedStringProperty;
+      }
     };
+    'bondCharacterStringProperty': LocalizedStringProperty;
     'bondCharacterProgressStringProperty': LocalizedStringProperty;
+    'bondDipoleStringProperty': LocalizedStringProperty;
+    'dipoleProgressStringProperty': LocalizedStringProperty;
     'dipoleOrientABStringProperty': LocalizedStringProperty;
     'dipoleOrientBCStringProperty': LocalizedStringProperty;
     'electronDensityStringProperty': LocalizedStringProperty;

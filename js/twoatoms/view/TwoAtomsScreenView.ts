@@ -16,6 +16,7 @@ import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
@@ -40,7 +41,8 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
 
     const moleculeNode = new DiatomicMoleculeNode( model.diatomicMolecule, viewProperties, {
-      tandem: tandem.createTandem( 'moleculeNode' )
+      tandem: tandem.createTandem( 'moleculeNode' ),
+      accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
     } );
 
     const platesNode = new PlatesNode( model.eFieldEnabledProperty );

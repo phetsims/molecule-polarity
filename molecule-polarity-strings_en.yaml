@@ -64,31 +64,21 @@ a11y:
     atom:
       accessibleName: 'Atom { $name }'
       accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
-    bondChar:
-      select_strength:
-        veryIonic: 'very ionic'
-        mostlyIonic: 'mostly ionic'
-        slightlyIonic: 'slightly ionic'
-        slightlyCovalent: 'slightly covalent'
-        mostlyCovalent: 'mostly covalent'
-        veryCovalent: 'very covalent'
-    bondDipole:
-      select_dipole:
-        no: 'no'
-        verySmall: 'very small'
-        small: 'small'
-        medium: 'medium'
-        large: 'large'
-        veryLarge: 'very large'
-    dipoleProgress:
-      select_progress:
-        zero: 'zero'
-        smaller: 'smaller'
-        larger: 'larger'
 
   # ===================
   # REGIONS / PARAMETERS
   # ===================
+
+  # BondChar4 - Bond Character (Screen 1)
+  bondCharacter:
+    select_bondCharacter:
+      veryIonic: 'very ionic'
+      mostlyIonic: 'mostly ionic'
+      slightlyIonic: 'slightly ionic'
+      slightlyCovalent: 'slightly covalent'
+      mostlyCovalent: 'mostly covalent'
+      veryCovalent: 'very covalent'
+      nonpolarCovalent: 'nonpolar covalent'
   
   # BondCharProgress2 - Bond Character Progress (Screen 1)
   # Implementation: ΔEN > 0 = more ionic; ΔEN < 0 more covalent
@@ -96,6 +86,23 @@ a11y:
     select_progress:
       moreIonic: 'more ionic'
       moreCovalent: 'more covalent'
+
+  # BondDipole6 - Bond Dipole magnitude (Screen 1)
+  bondDipole:
+    select_bondDipole:
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      large: 'large'
+      veryLarge: 'very large'
+
+  # DipoleProgress3 - Dipole Progress (Screen 1)
+  dipoleProgress:
+    select_progress:
+      zero: 'zero'
+      smaller: 'smaller'
+      larger: 'larger'
   
   # DipoleOrientAB2 - Dipole Orientation AB (Screen 1/2)
   dipoleOrientAB:
@@ -112,12 +119,12 @@ a11y:
   # ElectronDensity6 - Electron Density (Screen 1)
   electronDensity:
     select_density:
-      evenly: 'evenly'
-      nearlyEvenly: 'nearly evenly'
-      slightlyUnevenly: 'slightly unevenly'
-      unevenly: 'unevenly'
-      veryUnevenly: 'very unevenly'
-      mostUnevenly: 'most unevenly'
+      evenlyShared: 'evenly shared'
+      nearlyEvenlyShared: 'nearly evenly shared'
+      slightlyUnevenlyShared: 'slightly unevenly shared'
+      unevenlyShared: 'unevenly shared'
+      veryUnevenlyShared: 'very unevenly shared'
+      mostUnevenlyShared: 'most unevenly shared'
   
   # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
   electronDensityProgress:
@@ -128,12 +135,12 @@ a11y:
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotential:
     select_potential:
-      no: 'no'
-      verySmall: 'very small'
-      small: 'small'
-      medium: 'medium'
-      large: 'large'
-      veryLarge: 'very large'
+      noDifference: 'no difference'
+      verySmallDifference: 'very small difference'
+      smallDifference: 'small difference'
+      mediumDifference: 'medium difference'
+      largeDifference: 'large difference'
+      veryLargeDifference: 'very large difference'
   
   # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
   # 2-range spectrum: positive-neutral-negative
