@@ -86,6 +86,233 @@ type StringsType = {
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      };
+      'bondTypeStringProperty': LocalizedStringProperty;
+      'bondDipoleStringProperty': LocalizedStringProperty;
+      'dipoleProgressStringProperty': LocalizedStringProperty;
+    };
+    'bondCharacterProgressStringProperty': LocalizedStringProperty;
+    'dipoleOrientABStringProperty': LocalizedStringProperty;
+    'dipoleOrientBCStringProperty': LocalizedStringProperty;
+    'electronDensityStringProperty': LocalizedStringProperty;
+    'electronDensityProgressStringProperty': LocalizedStringProperty;
+    'electrostaticPotentialStringProperty': LocalizedStringProperty;
+    'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;
+    'electronegativityStringProperty': LocalizedStringProperty;
+    'fieldStringProperty': LocalizedStringProperty;
+    'molecularDipoleStringProperty': LocalizedStringProperty;
+    'orientationAtomAStringProperty': LocalizedStringProperty;
+    'orientationAtomBStringProperty': LocalizedStringProperty;
+    'orientationMoleculeStringProperty': LocalizedStringProperty;
+    'partialChargeSignStringProperty': LocalizedStringProperty;
+    'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
+    'partialChargeProgressStringProperty': LocalizedStringProperty;
+    'polarityStringProperty': LocalizedStringProperty;
+    'rotationStringProperty': LocalizedStringProperty;
+    'shapeStringProperty': LocalizedStringProperty;
+    'twoAtomsScreen': {
+      'screenSummary': {
+        'playAreaStringProperty': LocalizedStringProperty;
+        'controlAreaStringProperty': LocalizedStringProperty;
+        'currentDetailsStringProperty': LocalizedStringProperty;
+        'interactionHintStringProperty': LocalizedStringProperty;
+      };
+      'moleculeAB': {
+        'headingStringProperty': LocalizedStringProperty;
+        'currentStateStringProperty': LocalizedStringProperty;
+        'bondDipoleDescriptionStringProperty': LocalizedStringProperty;
+        'bondDipoleDirectionStringProperty': LocalizedStringProperty;
+        'partialChargesDescriptionStringProperty': LocalizedStringProperty;
+        'partialChargesDetailStringProperty': LocalizedStringProperty;
+        'bondCharacterDescriptionStringProperty': LocalizedStringProperty;
+        'electrostaticPotentialDescriptionStringProperty': LocalizedStringProperty;
+        'electronDensityDescriptionStringProperty': LocalizedStringProperty;
+        'electricFieldAlignedStringProperty': LocalizedStringProperty;
+        'orientationDescriptionStringProperty': LocalizedStringProperty;
+        'electronegativityValuesStringProperty': LocalizedStringProperty;
+      };
+      'rotateMoleculeSlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'valueText': {
+          'deg0StringProperty': LocalizedStringProperty;
+          'deg45StringProperty': LocalizedStringProperty;
+          'deg90StringProperty': LocalizedStringProperty;
+          'deg135StringProperty': LocalizedStringProperty;
+          'deg180StringProperty': LocalizedStringProperty;
+          'deg225StringProperty': LocalizedStringProperty;
+          'deg270StringProperty': LocalizedStringProperty;
+          'deg315StringProperty': LocalizedStringProperty;
+          'deg360StringProperty': LocalizedStringProperty;
+        };
+        'rotationDirectionStringProperty': LocalizedStringProperty;
+        'electricFieldContextStringProperty': LocalizedStringProperty;
+      };
+      'atomAElectronegativitySlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'dipoleContextStringProperty': LocalizedStringProperty;
+        'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
+        'partialChargeContextStringProperty': LocalizedStringProperty;
+        'partialChargeSignChangeStringProperty': LocalizedStringProperty;
+        'bondCharacterContextStringProperty': LocalizedStringProperty;
+        'electrostaticContextStringProperty': LocalizedStringProperty;
+        'electronDensityContextStringProperty': LocalizedStringProperty;
+        'electricFieldContextStringProperty': LocalizedStringProperty;
+      };
+      'atomBElectronegativitySlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      };
+      'controlArea': {
+        'bondDipoleCheckbox': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'checkedStringProperty': LocalizedStringProperty;
+          'uncheckedStringProperty': LocalizedStringProperty;
+        };
+        'partialChargesCheckbox': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'checkedStringProperty': LocalizedStringProperty;
+          'uncheckedStringProperty': LocalizedStringProperty;
+        };
+        'bondCharacterCheckbox': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'checkedStringProperty': LocalizedStringProperty;
+          'uncheckedStringProperty': LocalizedStringProperty;
+        };
+        'surfaceRadioGroup': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'noneSelectedStringProperty': LocalizedStringProperty;
+          'electrostaticSelectedStringProperty': LocalizedStringProperty;
+          'electronDensitySelectedStringProperty': LocalizedStringProperty;
+        };
+        'electricFieldToggle': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'onStringProperty': LocalizedStringProperty;
+          'offStringProperty': LocalizedStringProperty;
+        }
+      }
+    };
+    'threeAtomsScreen': {
+      'screenSummary': {
+        'playAreaStringProperty': LocalizedStringProperty;
+        'controlAreaStringProperty': LocalizedStringProperty;
+        'currentDetailsStringProperty': LocalizedStringProperty;
+        'interactionHintStringProperty': LocalizedStringProperty;
+      };
+      'moleculeABC': {
+        'headingStringProperty': LocalizedStringProperty;
+        'currentStateStringProperty': LocalizedStringProperty;
+        'orientationDescriptionStringProperty': LocalizedStringProperty;
+        'electricFieldAlignedStringProperty': LocalizedStringProperty;
+        'electronegativityValuesStringProperty': LocalizedStringProperty;
+        'molecularDipoleDescriptionStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
+        'molecularDipoleTwiceStringProperty': LocalizedStringProperty;
+        'bondDipoleABDescriptionStringProperty': LocalizedStringProperty;
+        'bondDipoleABDirectionStringProperty': LocalizedStringProperty;
+        'bondDipoleBCDescriptionStringProperty': LocalizedStringProperty;
+        'bondDipoleBCDirectionStringProperty': LocalizedStringProperty;
+        'partialChargesDescriptionStringProperty': LocalizedStringProperty;
+      };
+      'moveAtomASlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'valueText': {
+          'oclockStringProperty': LocalizedStringProperty;
+          'overlappingCStringProperty': LocalizedStringProperty;
+          'onTopOfCStringProperty': LocalizedStringProperty;
+        };
+        'bondDipoleContextStringProperty': LocalizedStringProperty;
+        'molecularDipoleContextStringProperty': LocalizedStringProperty;
+      };
+      'moveAtomCSlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'valueText': {
+          'oclockStringProperty': LocalizedStringProperty;
+          'overlappingAStringProperty': LocalizedStringProperty;
+          'onTopOfAStringProperty': LocalizedStringProperty;
+        }
+      };
+      'rotateMoleculeSlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'valueText': {
+          'deg0StringProperty': LocalizedStringProperty;
+          'deg30StringProperty': LocalizedStringProperty;
+          'deg60StringProperty': LocalizedStringProperty;
+          'deg90StringProperty': LocalizedStringProperty;
+          'deg120StringProperty': LocalizedStringProperty;
+          'deg150StringProperty': LocalizedStringProperty;
+          'deg180StringProperty': LocalizedStringProperty;
+          'deg210StringProperty': LocalizedStringProperty;
+          'deg240StringProperty': LocalizedStringProperty;
+          'deg270StringProperty': LocalizedStringProperty;
+          'deg300StringProperty': LocalizedStringProperty;
+          'deg330StringProperty': LocalizedStringProperty;
+          'deg360StringProperty': LocalizedStringProperty;
+        };
+        'molecularDipoleContextStringProperty': LocalizedStringProperty;
+        'electricFieldContextStringProperty': LocalizedStringProperty;
+      };
+      'atomAElectronegativitySlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'bondDipoleContextStringProperty': LocalizedStringProperty;
+        'bondDipoleDirectionChangeStringProperty': LocalizedStringProperty;
+        'molecularDipoleContextStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
+        'partialChargeContextStringProperty': LocalizedStringProperty;
+        'partialChargeSignChangeStringProperty': LocalizedStringProperty;
+        'electricFieldContextStringProperty': LocalizedStringProperty;
+      };
+      'atomBElectronegativitySlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'bondDipoleContextStringProperty': LocalizedStringProperty;
+        'bondDipoleABDirectionChangeStringProperty': LocalizedStringProperty;
+        'bondDipoleBCDirectionChangeStringProperty': LocalizedStringProperty;
+        'molecularDipoleContextStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
+        'partialChargeContextStringProperty': LocalizedStringProperty;
+        'electricFieldContextStringProperty': LocalizedStringProperty;
+      };
+      'atomCElectronegativitySlider': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'bondDipoleDirectionChangeStringProperty': LocalizedStringProperty;
+      };
+      'controlArea': {
+        'bondDipoleCheckbox': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'checkedStringProperty': LocalizedStringProperty;
+          'uncheckedStringProperty': LocalizedStringProperty;
+        };
+        'molecularDipoleCheckbox': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'checkedStringProperty': LocalizedStringProperty;
+          'uncheckedStringProperty': LocalizedStringProperty;
+        };
+        'partialChargesCheckbox': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'checkedStringProperty': LocalizedStringProperty;
+          'uncheckedStringProperty': LocalizedStringProperty;
+        };
+        'electricFieldToggle': {
+          'accessibleNameStringProperty': LocalizedStringProperty;
+          'accessibleHelpTextStringProperty': LocalizedStringProperty;
+          'onStringProperty': LocalizedStringProperty;
+          'offStringProperty': LocalizedStringProperty;
+        }
       }
     }
   }
