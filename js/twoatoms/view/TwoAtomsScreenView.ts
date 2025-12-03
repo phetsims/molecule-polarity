@@ -110,9 +110,9 @@ export default class TwoAtomsScreenView extends ScreenView {
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
+      panelsVBox,
       platesNode,
       controlPanel,
-      panelsVBox,
       colorKeyNode,
       resetAllButton
     ];
