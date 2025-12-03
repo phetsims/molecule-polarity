@@ -9,6 +9,7 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import Utils from '../../../../dot/js/Utils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -44,6 +45,7 @@ export default class ElectronegativitySlider extends HSlider {
       trackSize: new Dimension2( 150, 5 ),
       majorTickLength: 20,
       minorTickLength: 10,
+      constrainValue: value => roundToInterval( value, 0.2 ), // rounds to nearest 0.2
       visiblePropertyOptions: {
         phetioFeatured: false
       },
@@ -86,7 +88,7 @@ export default class ElectronegativitySlider extends HSlider {
     const centerTick = range.min + ( range.getLength() / 2 );
     this.addMajorTick( centerTick );
     for ( let i = range.min + options.tickSpacing; i < range.max; i += options.tickSpacing ) {
-      if ( i !== centerTick ) {
+      if ( roundToInterval( i, 0.1 ) !== centerTick ) {
         this.addMinorTick( i );
       }
     }
