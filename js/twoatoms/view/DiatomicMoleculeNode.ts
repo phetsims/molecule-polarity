@@ -20,7 +20,9 @@ import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
+import BondDescriptionMaps from './BondDescriptionMaps.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
 import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
@@ -158,6 +160,24 @@ export default class DiatomicMoleculeNode extends Node {
       moleculeHasChanged = false;
       updateHintArrows();
     };
+
+    // ------------------------------------ Accessibility ---------------------------------------
+
+    // Current polarity description
+    this.addChild( new Node( {
+      accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
+        polarity: BondDescriptionMaps.createPolarityStringProperty( molecule.deltaENProperty )
+      } )
+    } ) );
+
+    // Current Electronegativities
+    this.addChild( new Node( {
+      accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronegativityValues.createProperty( {
+        enA: molecule.atomA.electronegativityProperty,
+        enB: molecule.atomB.electronegativityProperty
+      } )
+    } ) );
+
   }
 
   public reset(): void {

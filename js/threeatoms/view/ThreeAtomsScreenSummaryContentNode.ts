@@ -19,9 +19,12 @@ export type ThreeAtomsScreenSummaryContentNodeOptions = SelfOptions & ScreenSumm
 export default class ThreeAtomsScreenSummaryContentNode extends ScreenSummaryContent {
   public constructor( model: ThreeAtomsModel, providedOptions?: ThreeAtomsScreenSummaryContentNodeOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, ThreeAtomsScreenSummaryContentNodeOptions>()( {
-      currentDetailsContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.currentDetails.createProperty( {
-        polarity: 'TODO',
-        field: 'TODO'
+      currentDetailsContent: MoleculePolarityFluent.a11y.threeAtomsScreen.screenSummary.currentDetails.createProperty( {
+        polarity: 'TODO', // TODO https://github.com/phetsims/molecule-polarity/issues/174,
+        shape: 'TODO', // TODO https://github.com/phetsims/molecule-polarity/issues/174,
+        field: MoleculePolarityFluent.a11y.field.createProperty( {
+          state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
+        } )
       } ),
       playAreaContent: MoleculePolarityStrings.a11y.threeAtomsScreen.screenSummary.playAreaStringProperty,
       controlAreaContent: MoleculePolarityStrings.a11y.threeAtomsScreen.screenSummary.controlAreaStringProperty,
