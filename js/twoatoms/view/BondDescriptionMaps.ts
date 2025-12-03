@@ -12,7 +12,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
 type Dipole = 'small' | 'no' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
 type PartialChargeMagnitude = 'small' | 'no' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
-// type BondCharacter = 'veryIonic' | 'mostlyIonic' | 'slightlyIonic' | 'slightlyCovalent' | 'mostlyCovalent' | 'veryCovalent' | 'nonpolarCovalent';
+type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
 
@@ -39,11 +39,11 @@ export default class BondDescriptionMaps {
     } );
   }
 
-  // public static createBondCharacterStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-  //   return MoleculePolarityFluent.a11y.bondCharacter.createProperty( {
-  //     bondCharacter: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoBondCharacter( value ) )
-  //   } );
-  // }
+  public static createBondCharacterStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.bondCharacter.createProperty( {
+      bondCharacter: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoBondCharacter( value ) )
+    } );
+  }
 
   public static createElectrostaticPotentialStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.electrostaticPotential.createProperty( {
@@ -84,14 +84,14 @@ export default class BondDescriptionMaps {
            'veryLarge';
   }
 
-  // private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {
-  //   return deltaEN === 0 ? 'nonpolarCovalent' :
-  //          deltaEN <= 0.4 ? 'nearlyNonpolarCovalent' :
-  //          deltaEN <= 0.8 ? 'slightlyPolarCovalent' :
-  //          deltaEN <= 1.2 ? 'polarCovalent' :
-  //          deltaEN <= 1.6 ? 'slightlyIonic' :
-  //          'mostlyIonic';
-  // }
+  private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {
+    return deltaEN === 0 ? 'nonpolarCovalent' :
+           deltaEN <= 0.4 ? 'nearlyNonpolarCovalent' :
+           deltaEN <= 0.8 ? 'slightlyPolarCovalent' :
+           deltaEN <= 1.2 ? 'polarCovalent' :
+           deltaEN <= 1.6 ? 'slightlyIonic' :
+           'mostlyIonic';
+  }
 
   private static deltaENtoElectrostaticPotential( deltaEN: number ): ElectrostaticPotential {
     return deltaEN === 0 ? 'noDifference' :

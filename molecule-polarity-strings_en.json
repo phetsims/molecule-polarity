@@ -190,7 +190,7 @@
       }
     },
     "bondCharacter": {
-      "value": "{ $bondCharacter ->\n  [veryIonic] very ionic\n  [mostlyIonic] mostly ionic\n  [slightlyIonic] slightly ionic\n  [slightlyCovalent] slightly covalent\n  [mostlyCovalent] mostly covalent\n  [veryCovalent] very covalent\n  *[nonpolarCovalent] nonpolar covalent\n}"
+      "value": "{ $bondCharacter ->\n  [nonpolarCovalent] nonpolar covalent\n  [nearlyNonpolarCovalent] nearly nonpolar covalent\n  [slightlyPolarCovalent] slightly polar covalent\n  [polarCovalent] polar covalent\n  [slightlyIonic] slightly ionic\n  *[mostlyIonic] mostly ionic\n}"
     },
     "bondCharacterProgress": {
       "value": "{ $progress ->\n  [moreIonic] more ionic\n  *[moreCovalent] more covalent\n}"

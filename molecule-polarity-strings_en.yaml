@@ -69,16 +69,15 @@ a11y:
   # REGIONS / PARAMETERS
   # ===================
 
-  # BondChar4 - Bond Character (Screen 1)
+  # BondChar6 - Bond Character (Screen 1)
   bondCharacter:
     select_bondCharacter:
-      veryIonic: 'very ionic'
-      mostlyIonic: 'mostly ionic'
-      slightlyIonic: 'slightly ionic'
-      slightlyCovalent: 'slightly covalent'
-      mostlyCovalent: 'mostly covalent'
-      veryCovalent: 'very covalent'
       nonpolarCovalent: 'nonpolar covalent'
+      nearlyNonpolarCovalent: 'nearly nonpolar covalent'
+      slightlyPolarCovalent: 'slightly polar covalent'
+      polarCovalent: 'polar covalent'
+      slightlyIonic: 'slightly ionic'
+      mostlyIonic: 'mostly ionic'
   
   # BondCharProgress2 - Bond Character Progress (Screen 1)
   # Implementation: ΔEN > 0 = more ionic; ΔEN < 0 more covalent
