@@ -30,6 +30,7 @@
     "simFeatures": {
       "supportsInteractiveDescription": true,
       "supportsDynamicLocale": true,
+      "supportsSound": true,
       "colorProfiles": [
         "default"
       ]
