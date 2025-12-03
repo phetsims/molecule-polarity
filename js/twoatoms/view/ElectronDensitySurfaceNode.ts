@@ -9,7 +9,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
+import { linear } from '../../../../dot/js/util/linear.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import MPColors from '../../common/MPColors.js';
@@ -46,7 +46,7 @@ export default class ElectronDensitySurfaceNode extends SurfaceNode {
       const surfaceWidth = this.getSurfaceWidth();
 
       // compute the gradient width
-      const gradientWidth = Utils.linear( 1, 0, surfaceWidth, surfaceWidth * MPConstants.SURFACE_GRADIENT_WIDTH_MULTIPLIER, scale );
+      const gradientWidth = linear( 1, 0, surfaceWidth, surfaceWidth * MPConstants.SURFACE_GRADIENT_WIDTH_MULTIPLIER, scale );
 
       // gradient endpoints prior to accounting for molecule transform
       const pointA = new Vector2( -gradientWidth / 2, 0 );

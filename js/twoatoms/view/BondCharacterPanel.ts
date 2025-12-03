@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
+import { linear } from '../../../../dot/js/util/linear.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -105,7 +105,7 @@ export default class BondCharacterPanel extends Panel {
 
     // When difference in electronegativity changes, move the pointer.
     molecule.bond.dipoleProperty.link( dipole => {
-      markerNode.left = Utils.linear(
+      markerNode.left = linear(
         0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(),
         0, TRACK_WIDTH - markerNode.width,
         dipole.magnitude );

@@ -10,7 +10,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { linear } from '../../../../dot/js/util/linear.js';
 import TModel from '../../../../joist/js/TModel.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -76,7 +76,7 @@ export default abstract class MPModel extends PhetioObject implements TModel {
     }
 
     // magnitude of angular velocity is proportional to molecular dipole magnitude
-    const deltaDipoleAngle = Math.abs( Utils.linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
+    const deltaDipoleAngle = Math.abs( linear( 0, MPConstants.ELECTRONEGATIVITY_RANGE.getLength(), 0, MAX_RADIANS_PER_STEP, dipole.magnitude ) );
 
     // normalize to [0,2*PI), because that's what the next chunk of code expects.
     const dipoleAngle = normalizeAngle( dipole.angle );
