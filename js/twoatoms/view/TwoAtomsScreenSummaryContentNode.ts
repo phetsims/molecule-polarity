@@ -7,11 +7,11 @@
 
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../joist/js/ScreenSummaryContent.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import BondDescriptionMaps from '../../common/view/BondDescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
-import BondDescriptionMaps from './BondDescriptionMaps.js';
 
 type SelfOptions = EmptySelfOptions;
 
