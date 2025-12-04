@@ -281,7 +281,10 @@ a11y:
       partialChargesDetail: 'Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
       bondCharacterDescription: 'Bond is { $bondCharacter }.'
       electrostaticPotentialDescription: '{ $potential } electrostatic difference across molecule.'
-      electronDensityDescription: 'Electron density is { $density } shared between atoms.'
+      electronDensityDescription:
+        firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
+        lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards atom { $atom }. 
+
       electricFieldAligned: 'Molecule aligned with electric field.'
       orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
       electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }.'
