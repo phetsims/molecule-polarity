@@ -61,6 +61,15 @@ a11y:
   common:
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
+      accessibleHelpText: 'Change how strongly { $atomName } attracts electrons.'
+      dipoleContext: 'Dipole arrow { $progress }'
+      dipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
+      partialChargeContext: 'Partial charge is { $progress }'
+      partialChargeSignChange: 'Partial charge now { $sign }'
+      bondCharacterContext: 'Bond is { $progress }.'
+      electrostaticContext: '{ $progress } electrostatic difference.'
+      electronDensityContext: '{ $progress } electron density.'
+      electricFieldContext: 'Molecule aligned with electric field.'
     atom:
       accessibleName: 'Atom { $name }'
       accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
@@ -313,24 +322,6 @@ a11y:
         deg360: '360 degrees, horizontal, back to start'
       rotationDirection: '{ $direction }'
       electricFieldContext: 'Rotating { $direction } Horizontal, Aligned with electric field.'
-    
-    # Atom A Electronegativity Slider
-    atomAElectronegativitySlider:
-      accessibleName: 'Atom A Electronegativity'
-      accessibleHelpText: 'Change how strongly Atom A attracts electrons.'
-      dipoleContext: 'Dipole arrow { $progress }'
-      dipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
-      partialChargeContext: 'Partial charge is { $progress }'
-      partialChargeSignChange: 'Partial charge now { $sign }'
-      bondCharacterContext: 'Bond is { $progress }.'
-      electrostaticContext: '{ $progress } electrostatic difference.'
-      electronDensityContext: '{ $progress } electron density.'
-      electricFieldContext: 'Molecule aligned with electric field.'
-    
-    # Atom B Electronegativity Slider
-    atomBElectronegativitySlider:
-      accessibleName: 'Atom B Electronegativity'
-      accessibleHelpText: 'Change how strongly Atom B attracts electrons.'
     
     # Control Area
     controlArea:

@@ -10,9 +10,8 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
-import Utils from '../../../../dot/js/Utils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider, { HSliderOptions } from '../../../../sun/js/HSlider.js';
@@ -23,13 +22,14 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import MPConstants from '../MPConstants.js';
+import BondDescriptionMaps from './BondDescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
 
 type SelfOptions = {
   tickSpacing?: number; // space between tick marks
 };
 
-type ElectronegativitySliderOptions = SelfOptions & PickRequired<HSliderOptions, 'tandem'>;
+type ElectronegativitySliderOptions = SelfOptions & WithRequired<HSliderOptions, 'tandem'>;
 
 export default class ElectronegativitySlider extends HSlider {
 
@@ -52,7 +52,16 @@ export default class ElectronegativitySlider extends HSlider {
       isDisposable: false,
       accessibleName: MoleculePolarityFluent.a11y.common.electronegativitySlider.accessibleName.createProperty( {
         atomName: atom.labelStringProperty
-      } )
+      } ),
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.electronegativitySlider.accessibleHelpText.createProperty( {
+        atomName: atom.labelStringProperty
+      } ),
+
+      createAriaValueText: value => {
+        return MoleculePolarityFluent.a11y.electronegativity.format( {
+          level: BondDescriptionMaps.ENtoQualitative( value )
+        } );
+      }
     }, providedOptions );
 
     // custom thumb
@@ -64,6 +73,52 @@ export default class ElectronegativitySlider extends HSlider {
 
     options.thumbNode = thumbNode;
 
+    // TODO: Move this to an internal function https://github.com/phetsims/molecule-polarity/issues/171
+    const contextResponse = ( message: string ) => {
+      this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
+    };
+
+    const emitContextResponse = () => {
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
+          progress: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
+          direction: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
+          progress: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
+          sign: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
+          progress: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
+          progress: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
+          progress: 'TODO'
+        } )
+      );
+      contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
+      );
+    };
+
     options.startDrag = () => {
       molecule.isDraggingProperty.value = true;
     };
@@ -71,7 +126,8 @@ export default class ElectronegativitySlider extends HSlider {
     // snaps to the closest tick mark
     options.endDrag = () => {
       molecule.isDraggingProperty.value = false;
-      atom.electronegativityProperty.value = Utils.roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
+      atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
+      emitContextResponse();
     };
 
     const range = atom.electronegativityProperty.range;

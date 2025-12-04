@@ -178,6 +178,33 @@
       "electronegativitySlider": {
         "accessibleName": {
           "value": "Atom { $atomName } Electronegativity"
+        },
+        "accessibleHelpText": {
+          "value": "Change how strongly { $atomName } attracts electrons."
+        },
+        "dipoleContext": {
+          "value": "Dipole arrow { $progress }"
+        },
+        "dipoleDirectionChange": {
+          "value": "Bond dipole arrow now points { $direction }"
+        },
+        "partialChargeContext": {
+          "value": "Partial charge is { $progress }"
+        },
+        "partialChargeSignChange": {
+          "value": "Partial charge now { $sign }"
+        },
+        "bondCharacterContext": {
+          "value": "Bond is { $progress }."
+        },
+        "electrostaticContext": {
+          "value": "{ $progress } electrostatic difference."
+        },
+        "electronDensityContext": {
+          "value": "{ $progress } electron density."
+        },
+        "electricFieldContext": {
+          "value": "Molecule aligned with electric field."
         }
       },
       "atom": {
@@ -357,46 +384,6 @@
         },
         "electricFieldContext": {
           "value": "Rotating { $direction } Horizontal, Aligned with electric field."
-        }
-      },
-      "atomAElectronegativitySlider": {
-        "accessibleName": {
-          "value": "Atom A Electronegativity"
-        },
-        "accessibleHelpText": {
-          "value": "Change how strongly Atom A attracts electrons."
-        },
-        "dipoleContext": {
-          "value": "Dipole arrow { $progress }"
-        },
-        "dipoleDirectionChange": {
-          "value": "Bond dipole arrow now points { $direction }"
-        },
-        "partialChargeContext": {
-          "value": "Partial charge is { $progress }"
-        },
-        "partialChargeSignChange": {
-          "value": "Partial charge now { $sign }"
-        },
-        "bondCharacterContext": {
-          "value": "Bond is { $progress }."
-        },
-        "electrostaticContext": {
-          "value": "{ $progress } electrostatic difference."
-        },
-        "electronDensityContext": {
-          "value": "{ $progress } electron density."
-        },
-        "electricFieldContext": {
-          "value": "Molecule aligned with electric field."
-        }
-      },
-      "atomBElectronegativitySlider": {
-        "accessibleName": {
-          "value": "Atom B Electronegativity"
-        },
-        "accessibleHelpText": {
-          "value": "Change how strongly Atom B attracts electrons."
         }
       },
       "controlArea": {

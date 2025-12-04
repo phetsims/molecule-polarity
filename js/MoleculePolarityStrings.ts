@@ -82,6 +82,15 @@ type StringsType = {
     'common': {
       'electronegativitySlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'dipoleContextStringProperty': LocalizedStringProperty;
+        'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
+        'partialChargeContextStringProperty': LocalizedStringProperty;
+        'partialChargeSignChangeStringProperty': LocalizedStringProperty;
+        'bondCharacterContextStringProperty': LocalizedStringProperty;
+        'electrostaticContextStringProperty': LocalizedStringProperty;
+        'electronDensityContextStringProperty': LocalizedStringProperty;
+        'electricFieldContextStringProperty': LocalizedStringProperty;
       };
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
@@ -151,22 +160,6 @@ type StringsType = {
         };
         'rotationDirectionStringProperty': LocalizedStringProperty;
         'electricFieldContextStringProperty': LocalizedStringProperty;
-      };
-      'atomAElectronegativitySlider': {
-        'accessibleNameStringProperty': LocalizedStringProperty;
-        'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'dipoleContextStringProperty': LocalizedStringProperty;
-        'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
-        'partialChargeContextStringProperty': LocalizedStringProperty;
-        'partialChargeSignChangeStringProperty': LocalizedStringProperty;
-        'bondCharacterContextStringProperty': LocalizedStringProperty;
-        'electrostaticContextStringProperty': LocalizedStringProperty;
-        'electronDensityContextStringProperty': LocalizedStringProperty;
-        'electricFieldContextStringProperty': LocalizedStringProperty;
-      };
-      'atomBElectronegativitySlider': {
-        'accessibleNameStringProperty': LocalizedStringProperty;
-        'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };
       'controlArea': {
         'bondDipoleCheckbox': {
