@@ -14,6 +14,7 @@ import { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPCheckbox, { MPCheckboxOptions } from '../../common/view/MPCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -27,12 +28,21 @@ export default class AtomLabelsCheckbox extends MPCheckbox {
     const options = optionize<AtomLabelsCheckboxOptions, SelfOptions, CheckboxOptions>()( {
 
       // MPCheckboxOptions
-      isDisposable: false
+      isDisposable: false,
+      accessibleName: MoleculePolarityFluent.a11y.common.atomLabelsCheckbox.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.atomLabelsCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.atomLabelsStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
     super( atomLabelsVisibleProperty, labelText, options );
+
+    atomLabelsVisibleProperty.lazyLink( checked => {
+      const objectResponse = checked ?
+                             MoleculePolarityFluent.a11y.common.atomLabelsCheckbox.checkedStringProperty.value :
+                             MoleculePolarityFluent.a11y.common.atomLabelsCheckbox.uncheckedStringProperty.value;
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 

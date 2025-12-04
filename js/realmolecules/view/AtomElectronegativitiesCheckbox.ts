@@ -13,6 +13,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPCheckbox, { MPCheckboxOptions } from '../../common/view/MPCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -27,12 +28,21 @@ export default class AtomElectronegativitiesCheckbox extends MPCheckbox {
     const options = optionize<AtomElectronegativitiesCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
 
       // MPCheckboxOptions
-      isDisposable: false
+      isDisposable: false,
+      accessibleName: MoleculePolarityFluent.a11y.common.atomElectronegativitiesCheckbox.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.atomElectronegativitiesCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
     super( atomElectronegativitiesVisibleProperty, labelText, options );
+
+    atomElectronegativitiesVisibleProperty.lazyLink( checked => {
+      const objectResponse = checked ?
+                             MoleculePolarityFluent.a11y.common.atomElectronegativitiesCheckbox.checkedStringProperty.value :
+                             MoleculePolarityFluent.a11y.common.atomElectronegativitiesCheckbox.uncheckedStringProperty.value;
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 

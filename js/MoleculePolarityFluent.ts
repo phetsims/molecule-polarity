@@ -92,6 +92,39 @@ addToMapIfDefined( 'a11y_common_electronegativitySlider_bondCharacterContext', '
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electrostaticContext', 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electronDensityContext', 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electricFieldContext', 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleName', 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleHelpText', 'a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_checked', 'a11y.common.bondDipoleCheckbox.checkedStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_unchecked', 'a11y.common.bondDipoleCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_partialChargesCheckbox_accessibleName', 'a11y.common.partialChargesCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_partialChargesCheckbox_accessibleHelpText', 'a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_partialChargesCheckbox_checked', 'a11y.common.partialChargesCheckbox.checkedStringProperty' );
+addToMapIfDefined( 'a11y_common_partialChargesCheckbox_unchecked', 'a11y.common.partialChargesCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_bondCharacterCheckbox_accessibleName', 'a11y.common.bondCharacterCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_bondCharacterCheckbox_accessibleHelpText', 'a11y.common.bondCharacterCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_bondCharacterCheckbox_checked', 'a11y.common.bondCharacterCheckbox.checkedStringProperty' );
+addToMapIfDefined( 'a11y_common_bondCharacterCheckbox_unchecked', 'a11y.common.bondCharacterCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_molecularDipoleCheckbox_accessibleName', 'a11y.common.molecularDipoleCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_molecularDipoleCheckbox_accessibleHelpText', 'a11y.common.molecularDipoleCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_molecularDipoleCheckbox_checked', 'a11y.common.molecularDipoleCheckbox.checkedStringProperty' );
+addToMapIfDefined( 'a11y_common_molecularDipoleCheckbox_unchecked', 'a11y.common.molecularDipoleCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_atomLabelsCheckbox_accessibleName', 'a11y.common.atomLabelsCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_atomLabelsCheckbox_accessibleHelpText', 'a11y.common.atomLabelsCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_atomLabelsCheckbox_checked', 'a11y.common.atomLabelsCheckbox.checkedStringProperty' );
+addToMapIfDefined( 'a11y_common_atomLabelsCheckbox_unchecked', 'a11y.common.atomLabelsCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_accessibleName', 'a11y.common.atomElectronegativitiesCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_accessibleHelpText', 'a11y.common.atomElectronegativitiesCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_checked', 'a11y.common.atomElectronegativitiesCheckbox.checkedStringProperty' );
+addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_unchecked', 'a11y.common.atomElectronegativitiesCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioGroup_accessibleName', 'a11y.common.surfaceRadioGroup.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioGroup_accessibleHelpText', 'a11y.common.surfaceRadioGroup.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioGroup_noneSelected', 'a11y.common.surfaceRadioGroup.noneSelectedStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioGroup_electrostaticSelected', 'a11y.common.surfaceRadioGroup.electrostaticSelectedStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioGroup_electronDensitySelected', 'a11y.common.surfaceRadioGroup.electronDensitySelectedStringProperty' );
+addToMapIfDefined( 'a11y_common_electricFieldToggle_accessibleName', 'a11y.common.electricFieldToggle.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_electricFieldToggle_accessibleHelpText', 'a11y.common.electricFieldToggle.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_electricFieldToggle_on', 'a11y.common.electricFieldToggle.onStringProperty' );
+addToMapIfDefined( 'a11y_common_electricFieldToggle_off', 'a11y.common.electricFieldToggle.offStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleName', 'a11y.common.atom.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleHelpText', 'a11y.common.atom.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacter', 'a11y.bondCharacterStringProperty' );
@@ -147,27 +180,6 @@ addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg315', 
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg360', 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_rotationDirection', 'a11y.twoAtomsScreen.rotateMoleculeSlider.rotationDirectionStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_electricFieldContext', 'a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_accessibleName', 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_accessibleHelpText', 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_checked', 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.checkedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_unchecked', 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_accessibleName', 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_accessibleHelpText', 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_checked', 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.checkedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_unchecked', 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_accessibleName', 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_accessibleHelpText', 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_checked', 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.checkedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_unchecked', 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_accessibleName', 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_accessibleHelpText', 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_noneSelected', 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.noneSelectedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_electrostaticSelected', 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.electrostaticSelectedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_electronDensitySelected', 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.electronDensitySelectedStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_accessibleName', 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_accessibleHelpText', 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_on', 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.onStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_off', 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.offStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_screenSummary_playArea', 'a11y.threeAtomsScreen.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_screenSummary_controlArea', 'a11y.threeAtomsScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_screenSummary_currentDetails', 'a11y.threeAtomsScreen.screenSummary.currentDetailsStringProperty' );
@@ -214,15 +226,6 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg330'
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg360', 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_electricFieldContext', 'a11y.threeAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_accessibleName', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_accessibleHelpText', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_bondDipoleContext', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.bondDipoleContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_bondDipoleDirectionChange', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.bondDipoleDirectionChangeStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_molecularDipoleContext', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.molecularDipoleContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_molecularDipoleDirection', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.molecularDipoleDirectionStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_partialChargeContext', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.partialChargeContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_partialChargeSignChange', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.partialChargeSignChangeStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomAElectronegativitySlider_electricFieldContext', 'a11y.threeAtomsScreen.atomAElectronegativitySlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_accessibleName', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_accessibleHelpText', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleContextStringProperty' );
@@ -232,25 +235,6 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecular
 addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleDirection', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_partialChargeContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.partialChargeContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_electricFieldContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.electricFieldContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomCElectronegativitySlider_accessibleName', 'a11y.threeAtomsScreen.atomCElectronegativitySlider.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomCElectronegativitySlider_accessibleHelpText', 'a11y.threeAtomsScreen.atomCElectronegativitySlider.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomCElectronegativitySlider_bondDipoleDirectionChange', 'a11y.threeAtomsScreen.atomCElectronegativitySlider.bondDipoleDirectionChangeStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_accessibleName', 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_accessibleHelpText', 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_checked', 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.checkedStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_unchecked', 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_accessibleName', 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_accessibleHelpText', 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_checked', 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.checkedStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_unchecked', 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_accessibleName', 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_accessibleHelpText', 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_checked', 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.checkedStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_unchecked', 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_accessibleName', 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_accessibleHelpText', 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_on', 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.onStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_off', 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.offStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -354,6 +338,55 @@ const MoleculePolarityFluent = {
         electronDensityContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electronDensityContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' ), [{"name":"progress"}] ),
         electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' ) )
       },
+      bondDipoleCheckbox: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty' ) ),
+        checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.checkedStringProperty' ) ),
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.uncheckedStringProperty' ) )
+      },
+      partialChargesCheckbox: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_partialChargesCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.partialChargesCheckbox.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_partialChargesCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty' ) ),
+        checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_partialChargesCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.partialChargesCheckbox.checkedStringProperty' ) ),
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_partialChargesCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.partialChargesCheckbox.uncheckedStringProperty' ) )
+      },
+      bondCharacterCheckbox: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondCharacterCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.bondCharacterCheckbox.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondCharacterCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.bondCharacterCheckbox.accessibleHelpTextStringProperty' ) ),
+        checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondCharacterCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.bondCharacterCheckbox.checkedStringProperty' ) ),
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondCharacterCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.bondCharacterCheckbox.uncheckedStringProperty' ) )
+      },
+      molecularDipoleCheckbox: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleCheckbox.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleCheckbox.accessibleHelpTextStringProperty' ) ),
+        checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleCheckbox.checkedStringProperty' ) ),
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleCheckbox.uncheckedStringProperty' ) )
+      },
+      atomLabelsCheckbox: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomLabelsCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atomLabelsCheckbox.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomLabelsCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.atomLabelsCheckbox.accessibleHelpTextStringProperty' ) ),
+        checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomLabelsCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.atomLabelsCheckbox.checkedStringProperty' ) ),
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomLabelsCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.atomLabelsCheckbox.uncheckedStringProperty' ) )
+      },
+      atomElectronegativitiesCheckbox: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomElectronegativitiesCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atomElectronegativitiesCheckbox.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomElectronegativitiesCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.atomElectronegativitiesCheckbox.accessibleHelpTextStringProperty' ) ),
+        checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomElectronegativitiesCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.atomElectronegativitiesCheckbox.checkedStringProperty' ) ),
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomElectronegativitiesCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.atomElectronegativitiesCheckbox.uncheckedStringProperty' ) )
+      },
+      surfaceRadioGroup: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.accessibleHelpTextStringProperty' ) ),
+        noneSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_noneSelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.noneSelectedStringProperty' ) ),
+        electrostaticSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_electrostaticSelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.electrostaticSelectedStringProperty' ) ),
+        electronDensitySelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_electronDensitySelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.electronDensitySelectedStringProperty' ) )
+      },
+      electricFieldToggle: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electricFieldToggle_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.electricFieldToggle.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electricFieldToggle_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.electricFieldToggle.accessibleHelpTextStringProperty' ) ),
+        onStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electricFieldToggle_on', _.get( MoleculePolarityStrings, 'a11y.common.electricFieldToggle.onStringProperty' ) ),
+        offStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electricFieldToggle_off', _.get( MoleculePolarityStrings, 'a11y.common.electricFieldToggle.offStringProperty' ) )
+      },
       atom: {
         accessibleName: new FluentPattern<{ name: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleNameStringProperty' ), [{"name":"name"}] ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleHelpTextStringProperty' ) )
@@ -419,8 +452,6 @@ const MoleculePolarityFluent = {
       _comment_1: new FluentComment( {"comment":"Screen Summary","associatedKey":"screenSummary"} ),
       screenSummary: {
         playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_screenSummary_playArea', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.screenSummary.playAreaStringProperty' ) ),
-        _comment_0: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
-        _comment_1: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
         controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_screenSummary_controlArea', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.screenSummary.controlAreaStringProperty' ) ),
         currentDetails: new FluentPattern<{ field: FluentVariable, polarity: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_screenSummary_currentDetails', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.screenSummary.currentDetailsStringProperty' ), [{"name":"field"},{"name":"polarity"}] ),
         interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_screenSummary_interactionHint', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.screenSummary.interactionHintStringProperty' ) )
@@ -463,41 +494,6 @@ const MoleculePolarityFluent = {
         },
         rotationDirection: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_rotationDirection', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.rotationDirectionStringProperty' ), [{"name":"direction"}] ),
         electricFieldContext: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ), [{"name":"direction"}] )
-      },
-      _comment_5: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
-      _comment_6: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
-      controlArea: {
-        bondDipoleCheckbox: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.accessibleHelpTextStringProperty' ) ),
-          checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.checkedStringProperty' ) ),
-          uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondDipoleCheckbox.uncheckedStringProperty' ) )
-        },
-        partialChargesCheckbox: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.accessibleHelpTextStringProperty' ) ),
-          checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.checkedStringProperty' ) ),
-          uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_partialChargesCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.partialChargesCheckbox.uncheckedStringProperty' ) )
-        },
-        bondCharacterCheckbox: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.accessibleHelpTextStringProperty' ) ),
-          checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.checkedStringProperty' ) ),
-          uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_bondCharacterCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.bondCharacterCheckbox.uncheckedStringProperty' ) )
-        },
-        surfaceRadioGroup: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_accessibleName', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.accessibleHelpTextStringProperty' ) ),
-          noneSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_noneSelected', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.noneSelectedStringProperty' ) ),
-          electrostaticSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_electrostaticSelected', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.electrostaticSelectedStringProperty' ) ),
-          electronDensitySelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_surfaceRadioGroup_electronDensitySelected', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.surfaceRadioGroup.electronDensitySelectedStringProperty' ) )
-        },
-        electricFieldToggle: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_accessibleName', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.accessibleHelpTextStringProperty' ) ),
-          onStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_on', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.onStringProperty' ) ),
-          offStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_controlArea_electricFieldToggle_off', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.controlArea.electricFieldToggle.offStringProperty' ) )
-        }
       }
     },
     _comment_32: new FluentComment( {"comment":"===================","associatedKey":"threeAtomsScreen"} ),
@@ -508,8 +504,6 @@ const MoleculePolarityFluent = {
       _comment_1: new FluentComment( {"comment":"Screen Summary","associatedKey":"screenSummary"} ),
       screenSummary: {
         playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_screenSummary_playArea', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.screenSummary.playAreaStringProperty' ) ),
-        _comment_0: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
-        _comment_1: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
         controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_screenSummary_controlArea', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.screenSummary.controlAreaStringProperty' ) ),
         currentDetails: new FluentPattern<{ field: FluentVariable, polarity: FluentVariable, shape: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_screenSummary_currentDetails', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.screenSummary.currentDetailsStringProperty' ), [{"name":"field"},{"name":"polarity"},{"name":"shape"}] ),
         interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_screenSummary_interactionHint', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.screenSummary.interactionHintStringProperty' ) )
@@ -581,19 +575,7 @@ const MoleculePolarityFluent = {
         molecularDipoleContext: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' ), [{"name":"position"}] ),
         electricFieldContext: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ), [{"name":"direction"}] )
       },
-      _comment_7: new FluentComment( {"comment":"Atom A Electronegativity Slider","associatedKey":"atomAElectronegativitySlider"} ),
-      atomAElectronegativitySlider: {
-        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.accessibleNameStringProperty' ) ),
-        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.accessibleHelpTextStringProperty' ) ),
-        bondDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_bondDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.bondDipoleContextStringProperty' ), [{"name":"progress"}] ),
-        bondDipoleDirectionChange: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_bondDipoleDirectionChange', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.bondDipoleDirectionChangeStringProperty' ), [{"name":"direction"}] ),
-        molecularDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.molecularDipoleContextStringProperty' ), [{"name":"progress"}] ),
-        molecularDipoleDirection: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.molecularDipoleDirectionStringProperty' ), [{"name":"position"}] ),
-        partialChargeContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_partialChargeContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.partialChargeContextStringProperty' ), [{"name":"progress"}] ),
-        partialChargeSignChange: new FluentPattern<{ sign: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_partialChargeSignChange', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.partialChargeSignChangeStringProperty' ), [{"name":"sign"}] ),
-        electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomAElectronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomAElectronegativitySlider.electricFieldContextStringProperty' ) )
-      },
-      _comment_8: new FluentComment( {"comment":"Atom B Electronegativity Slider","associatedKey":"atomBElectronegativitySlider"} ),
+      _comment_7: new FluentComment( {"comment":"Atom B Electronegativity Slider","associatedKey":"atomBElectronegativitySlider"} ),
       atomBElectronegativitySlider: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.accessibleNameStringProperty' ) ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.accessibleHelpTextStringProperty' ) ),
@@ -604,40 +586,6 @@ const MoleculePolarityFluent = {
         molecularDipoleDirection: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirectionStringProperty' ), [{"name":"position"}] ),
         partialChargeContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_partialChargeContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.partialChargeContextStringProperty' ), [{"name":"progress"}] ),
         electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.electricFieldContextStringProperty' ) )
-      },
-      _comment_9: new FluentComment( {"comment":"Atom C Electronegativity Slider","associatedKey":"atomCElectronegativitySlider"} ),
-      atomCElectronegativitySlider: {
-        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomCElectronegativitySlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomCElectronegativitySlider.accessibleNameStringProperty' ) ),
-        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomCElectronegativitySlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomCElectronegativitySlider.accessibleHelpTextStringProperty' ) ),
-        bondDipoleDirectionChange: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomCElectronegativitySlider_bondDipoleDirectionChange', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomCElectronegativitySlider.bondDipoleDirectionChangeStringProperty' ), [{"name":"direction"}] )
-      },
-      _comment_10: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
-      _comment_11: new FluentComment( {"comment":"Control Area","associatedKey":"controlArea"} ),
-      controlArea: {
-        bondDipoleCheckbox: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.accessibleHelpTextStringProperty' ) ),
-          checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.checkedStringProperty' ) ),
-          uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_bondDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.bondDipoleCheckbox.uncheckedStringProperty' ) )
-        },
-        molecularDipoleCheckbox: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.accessibleHelpTextStringProperty' ) ),
-          checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.checkedStringProperty' ) ),
-          uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_molecularDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.molecularDipoleCheckbox.uncheckedStringProperty' ) )
-        },
-        partialChargesCheckbox: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.accessibleHelpTextStringProperty' ) ),
-          checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.checkedStringProperty' ) ),
-          uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_partialChargesCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.partialChargesCheckbox.uncheckedStringProperty' ) )
-        },
-        electricFieldToggle: {
-          accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.accessibleNameStringProperty' ) ),
-          accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.accessibleHelpTextStringProperty' ) ),
-          onStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_on', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.onStringProperty' ) ),
-          offStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_controlArea_electricFieldToggle_off', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.controlArea.electricFieldToggle.offStringProperty' ) )
-        }
       }
     }
   }

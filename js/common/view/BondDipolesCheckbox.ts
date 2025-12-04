@@ -13,6 +13,7 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import BondDipoleNode from './BondDipoleNode.js';
 import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
@@ -34,7 +35,10 @@ export default class BondDipolesCheckbox extends MPCheckbox {
       singular: false,
 
       // MPCheckboxOptions
-      isDisposable: false
+      isDisposable: false,
+
+      accessibleName: MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const stringProperty = options.singular ?
@@ -51,6 +55,13 @@ export default class BondDipolesCheckbox extends MPCheckbox {
     } );
 
     super( bondDipolesVisibleProperty, content, options );
+
+    bondDipolesVisibleProperty.lazyLink( checked => {
+      const objectResponse = checked ?
+                             MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedStringProperty.value :
+                              MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedStringProperty.value;
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 

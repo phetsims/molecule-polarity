@@ -70,6 +70,50 @@ a11y:
       electrostaticContext: '{ $progress } electrostatic difference.'
       electronDensityContext: '{ $progress } electron density.'
       electricFieldContext: 'Molecule aligned with electric field.'
+    bondDipoleCheckbox:
+      accessibleName: 'Bond Dipole'
+      accessibleHelpText: 'Explore with or without Bond Dipole shown.'
+      checked: 'Bond Dipole shown'
+      unchecked: 'Bond Dipole hidden'
+    partialChargesCheckbox:
+      accessibleName: 'Partial Charges'
+      accessibleHelpText: 'Explore with or without Partial Charges shown.'
+      checked: 'Partial Charges shown'
+      unchecked: 'Partial Charges hidden'
+    bondCharacterCheckbox:
+      accessibleName: 'Bond Character'
+      accessibleHelpText: 'Explore with or without Bond Character shown.'
+      checked: 'Bond Character shown'
+      unchecked: 'Bond Character hidden'
+    molecularDipoleCheckbox:
+        accessibleName: 'Molecular Dipole'
+        accessibleHelpText: 'Explore with or without Molecular Dipole shown.'
+        checked: 'Molecular Dipole shown'
+        unchecked: 'Molecular Dipole hidden'
+    atomLabelsCheckbox:
+      accessibleName: 'Atom Labels'
+      accessibleHelpText: 'Show or hide labels for each atom in the molecule.'
+      checked: 'Atom labels shown'
+      unchecked: 'Atom labels hidden'
+    atomElectronegativitiesCheckbox:
+      accessibleName: 'Atom Electronegativities'
+      accessibleHelpText: 'Show or hide electronegativity values for each atom in the molecule.'
+      checked: 'Atom electronegativities shown'
+      unchecked: 'Atom electronegativities hidden'
+    surfaceRadioGroup:
+      accessibleName: 'Surface'
+      accessibleHelpText: |-
+        Explore with different charge surfaces shown.
+          Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).
+          Electron density ranges from less to more (surface colors: white to dark grey).
+      noneSelected: 'No charge surfaces shown'
+      electrostaticSelected: 'Electrostatic Potential surface shown'
+      electronDensitySelected: 'Electron Density surface shown'
+    electricFieldToggle:
+      accessibleName: 'Electric Field'
+      accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'
+      on: 'Electric field on'
+      off: 'Electric field off'
     atom:
       accessibleName: 'Atom { $name }'
       accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
@@ -322,38 +366,6 @@ a11y:
         deg360: '360 degrees, horizontal, back to start'
       rotationDirection: '{ $direction }'
       electricFieldContext: 'Rotating { $direction } Horizontal, Aligned with electric field.'
-    
-    # Control Area
-    controlArea:
-      bondDipoleCheckbox:
-        accessibleName: 'Bond Dipole'
-        accessibleHelpText: 'Explore with or without Bond Dipole shown.'
-        checked: 'Bond Dipole shown'
-        unchecked: 'Bond Dipole hidden'
-      partialChargesCheckbox:
-        accessibleName: 'Partial Charges'
-        accessibleHelpText: 'Explore with or without Partial Charges shown.'
-        checked: 'Partial Charges shown'
-        unchecked: 'Partial Charges hidden'
-      bondCharacterCheckbox:
-        accessibleName: 'Bond Character'
-        accessibleHelpText: 'Explore with or without Bond Character shown.'
-        checked: 'Bond Character shown'
-        unchecked: 'Bond Character hidden'
-      surfaceRadioGroup:
-        accessibleName: 'Surface'
-        accessibleHelpText: |-
-          Explore with different charge surfaces shown.
-            Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).
-            Electron density ranges from less to more (surface colors: white to dark grey).
-        noneSelected: 'No charge surfaces shown'
-        electrostaticSelected: 'Electrostatic Potential surface shown'
-        electronDensitySelected: 'Electron Density surface shown'
-      electricFieldToggle:
-        accessibleName: 'Electric Field'
-        accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'
-        on: 'Electric field on'
-        off: 'Electric field off'
 
   # ===================
   # THREE ATOMS SCREEN
@@ -424,18 +436,6 @@ a11y:
       molecularDipoleContext: 'Molecular dipole points to { $position } o''clock.'
       electricFieldContext: 'Rotating { $direction }, Aligned with electric field.'
     
-    # Atom A Electronegativity Slider
-    atomAElectronegativitySlider:
-      accessibleName: 'Atom A Electronegativity'
-      accessibleHelpText: 'Change how strongly Atom A attracts electrons.'
-      bondDipoleContext: 'Bond dipole arrow { $progress }'
-      bondDipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
-      molecularDipoleContext: 'Molecular dipole arrow { $progress }'
-      molecularDipoleDirection: 'Points to { $position } o''clock.'
-      partialChargeContext: 'Partial charge is { $progress }'
-      partialChargeSignChange: 'Partial charge now { $sign }'
-      electricFieldContext: 'Molecule aligned with electric field.'
-    
     # Atom B Electronegativity Slider
     atomBElectronegativitySlider:
       accessibleName: 'Atom B Electronegativity'
@@ -447,32 +447,3 @@ a11y:
       molecularDipoleDirection: 'Points to { $position } o''clock.'
       partialChargeContext: 'Partial charge is { $progress }'
       electricFieldContext: 'Molecule aligned with electric field.'
-    
-    # Atom C Electronegativity Slider
-    atomCElectronegativitySlider:
-      accessibleName: 'Atom C Electronegativity'
-      accessibleHelpText: 'Change how strongly Atom C attracts electrons.'
-      bondDipoleDirectionChange: 'Bond dipole arrow now points { $direction }'
-    
-    # Control Area
-    controlArea:
-      bondDipoleCheckbox:
-        accessibleName: 'Bond Dipole'
-        accessibleHelpText: 'Explore with or without Bond Dipole shown.'
-        checked: 'Bond Dipole shown'
-        unchecked: 'Bond Dipole hidden'
-      molecularDipoleCheckbox:
-        accessibleName: 'Molecular Dipole'
-        accessibleHelpText: 'Explore with or without Molecular Dipole shown.'
-        checked: 'Molecular Dipole shown'
-        unchecked: 'Molecular Dipole hidden'
-      partialChargesCheckbox:
-        accessibleName: 'Partial Charges'
-        accessibleHelpText: 'Explore with or without Partial Charges shown.'
-        checked: 'Partial Charges shown'
-        unchecked: 'Partial Charges hidden'
-      electricFieldToggle:
-        accessibleName: 'Electric Field'
-        accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'
-        on: 'Electric field on'
-        off: 'Electric field off'

@@ -207,6 +207,121 @@
           "value": "Molecule aligned with electric field."
         }
       },
+      "bondDipoleCheckbox": {
+        "accessibleName": {
+          "value": "Bond Dipole"
+        },
+        "accessibleHelpText": {
+          "value": "Explore with or without Bond Dipole shown."
+        },
+        "checked": {
+          "value": "Bond Dipole shown"
+        },
+        "unchecked": {
+          "value": "Bond Dipole hidden"
+        }
+      },
+      "partialChargesCheckbox": {
+        "accessibleName": {
+          "value": "Partial Charges"
+        },
+        "accessibleHelpText": {
+          "value": "Explore with or without Partial Charges shown."
+        },
+        "checked": {
+          "value": "Partial Charges shown"
+        },
+        "unchecked": {
+          "value": "Partial Charges hidden"
+        }
+      },
+      "bondCharacterCheckbox": {
+        "accessibleName": {
+          "value": "Bond Character"
+        },
+        "accessibleHelpText": {
+          "value": "Explore with or without Bond Character shown."
+        },
+        "checked": {
+          "value": "Bond Character shown"
+        },
+        "unchecked": {
+          "value": "Bond Character hidden"
+        }
+      },
+      "molecularDipoleCheckbox": {
+        "accessibleName": {
+          "value": "Molecular Dipole"
+        },
+        "accessibleHelpText": {
+          "value": "Explore with or without Molecular Dipole shown."
+        },
+        "checked": {
+          "value": "Molecular Dipole shown"
+        },
+        "unchecked": {
+          "value": "Molecular Dipole hidden"
+        }
+      },
+      "atomLabelsCheckbox": {
+        "accessibleName": {
+          "value": "Atom Labels"
+        },
+        "accessibleHelpText": {
+          "value": "Show or hide labels for each atom in the molecule."
+        },
+        "checked": {
+          "value": "Atom labels shown"
+        },
+        "unchecked": {
+          "value": "Atom labels hidden"
+        }
+      },
+      "atomElectronegativitiesCheckbox": {
+        "accessibleName": {
+          "value": "Atom Electronegativities"
+        },
+        "accessibleHelpText": {
+          "value": "Show or hide electronegativity values for each atom in the molecule."
+        },
+        "checked": {
+          "value": "Atom electronegativities shown"
+        },
+        "unchecked": {
+          "value": "Atom electronegativities hidden"
+        }
+      },
+      "surfaceRadioGroup": {
+        "accessibleName": {
+          "value": "Surface"
+        },
+        "accessibleHelpText": {
+          "value": "Explore with different charge surfaces shown.\n  Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).\n  Electron density ranges from less to more (surface colors: white to dark grey)."
+        },
+        "noneSelected": {
+          "value": "No charge surfaces shown"
+        },
+        "electrostaticSelected": {
+          "value": "Electrostatic Potential surface shown"
+        },
+        "electronDensitySelected": {
+          "value": "Electron Density surface shown"
+        }
+      },
+      "electricFieldToggle": {
+        "accessibleName": {
+          "value": "Electric Field"
+        },
+        "accessibleHelpText": {
+          "value": "Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field."
+        },
+        "on": {
+          "value": "Electric field on"
+        },
+        "off": {
+          "value": "Electric field off"
+        }
+      },
       "atom": {
         "accessibleName": {
           "value": "Atom { $name }"
@@ -385,81 +500,6 @@
         "electricFieldContext": {
           "value": "Rotating { $direction } Horizontal, Aligned with electric field."
         }
-      },
-      "controlArea": {
-        "bondDipoleCheckbox": {
-          "accessibleName": {
-            "value": "Bond Dipole"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with or without Bond Dipole shown."
-          },
-          "checked": {
-            "value": "Bond Dipole shown"
-          },
-          "unchecked": {
-            "value": "Bond Dipole hidden"
-          }
-        },
-        "partialChargesCheckbox": {
-          "accessibleName": {
-            "value": "Partial Charges"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with or without Partial Charges shown."
-          },
-          "checked": {
-            "value": "Partial Charges shown"
-          },
-          "unchecked": {
-            "value": "Partial Charges hidden"
-          }
-        },
-        "bondCharacterCheckbox": {
-          "accessibleName": {
-            "value": "Bond Character"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with or without Bond Character shown."
-          },
-          "checked": {
-            "value": "Bond Character shown"
-          },
-          "unchecked": {
-            "value": "Bond Character hidden"
-          }
-        },
-        "surfaceRadioGroup": {
-          "accessibleName": {
-            "value": "Surface"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with different charge surfaces shown.\n  Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).\n  Electron density ranges from less to more (surface colors: white to dark grey)."
-          },
-          "noneSelected": {
-            "value": "No charge surfaces shown"
-          },
-          "electrostaticSelected": {
-            "value": "Electrostatic Potential surface shown"
-          },
-          "electronDensitySelected": {
-            "value": "Electron Density surface shown"
-          }
-        },
-        "electricFieldToggle": {
-          "accessibleName": {
-            "value": "Electric Field"
-          },
-          "accessibleHelpText": {
-            "value": "Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field."
-          },
-          "on": {
-            "value": "Electric field on"
-          },
-          "off": {
-            "value": "Electric field off"
-          }
-        }
       }
     },
     "threeAtomsScreen": {
@@ -617,35 +657,6 @@
           "value": "Rotating { $direction }, Aligned with electric field."
         }
       },
-      "atomAElectronegativitySlider": {
-        "accessibleName": {
-          "value": "Atom A Electronegativity"
-        },
-        "accessibleHelpText": {
-          "value": "Change how strongly Atom A attracts electrons."
-        },
-        "bondDipoleContext": {
-          "value": "Bond dipole arrow { $progress }"
-        },
-        "bondDipoleDirectionChange": {
-          "value": "Bond dipole arrow now points { $direction }"
-        },
-        "molecularDipoleContext": {
-          "value": "Molecular dipole arrow { $progress }"
-        },
-        "molecularDipoleDirection": {
-          "value": "Points to { $position } o'clock."
-        },
-        "partialChargeContext": {
-          "value": "Partial charge is { $progress }"
-        },
-        "partialChargeSignChange": {
-          "value": "Partial charge now { $sign }"
-        },
-        "electricFieldContext": {
-          "value": "Molecule aligned with electric field."
-        }
-      },
       "atomBElectronegativitySlider": {
         "accessibleName": {
           "value": "Atom B Electronegativity"
@@ -673,75 +684,6 @@
         },
         "electricFieldContext": {
           "value": "Molecule aligned with electric field."
-        }
-      },
-      "atomCElectronegativitySlider": {
-        "accessibleName": {
-          "value": "Atom C Electronegativity"
-        },
-        "accessibleHelpText": {
-          "value": "Change how strongly Atom C attracts electrons."
-        },
-        "bondDipoleDirectionChange": {
-          "value": "Bond dipole arrow now points { $direction }"
-        }
-      },
-      "controlArea": {
-        "bondDipoleCheckbox": {
-          "accessibleName": {
-            "value": "Bond Dipole"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with or without Bond Dipole shown."
-          },
-          "checked": {
-            "value": "Bond Dipole shown"
-          },
-          "unchecked": {
-            "value": "Bond Dipole hidden"
-          }
-        },
-        "molecularDipoleCheckbox": {
-          "accessibleName": {
-            "value": "Molecular Dipole"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with or without Molecular Dipole shown."
-          },
-          "checked": {
-            "value": "Molecular Dipole shown"
-          },
-          "unchecked": {
-            "value": "Molecular Dipole hidden"
-          }
-        },
-        "partialChargesCheckbox": {
-          "accessibleName": {
-            "value": "Partial Charges"
-          },
-          "accessibleHelpText": {
-            "value": "Explore with or without Partial Charges shown."
-          },
-          "checked": {
-            "value": "Partial Charges shown"
-          },
-          "unchecked": {
-            "value": "Partial Charges hidden"
-          }
-        },
-        "electricFieldToggle": {
-          "accessibleName": {
-            "value": "Electric Field"
-          },
-          "accessibleHelpText": {
-            "value": "Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field."
-          },
-          "on": {
-            "value": "Electric field on"
-          },
-          "off": {
-            "value": "Electric field off"
-          }
         }
       }
     }

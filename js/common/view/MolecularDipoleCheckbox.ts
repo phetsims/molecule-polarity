@@ -13,6 +13,7 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
 import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
@@ -29,7 +30,9 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
       phetioDisplayOnlyPropertyInstrumented: true,
 
       // MPCheckboxOptions
-      isDisposable: false
+      isDisposable: false,
+      accessibleName: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.molecularDipoleStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
@@ -42,6 +45,13 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
     } );
 
     super( molecularDipoleVisibleProperty, content, options );
+
+    molecularDipoleVisibleProperty.lazyLink( checked => {
+      const objectResponse = checked ?
+                             MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.checkedStringProperty.value :
+                             MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.uncheckedStringProperty.value;
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 

@@ -12,6 +12,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
 
@@ -26,12 +27,22 @@ export default class PartialChargesCheckbox extends MPCheckbox {
     const options = optionize<PartialChargesCheckboxOptions, SelfOptions, MPCheckboxOptions>()( {
 
       // MPCheckboxOptions
-      isDisposable: false
+      isDisposable: false,
+
+      accessibleName: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
 
     super( partialChargesVisibleProperty, labelText, options );
+
+    partialChargesVisibleProperty.lazyLink( checked => {
+      const objectResponse = checked ?
+                             MoleculePolarityFluent.a11y.common.partialChargesCheckbox.checkedStringProperty.value :
+                             MoleculePolarityFluent.a11y.common.partialChargesCheckbox.uncheckedStringProperty.value;
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 
