@@ -5,12 +5,12 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
-import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
+import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -92,6 +92,7 @@ addToMapIfDefined( 'a11y_dipoleProgress', 'a11y.dipoleProgressStringProperty' );
 addToMapIfDefined( 'a11y_dipoleOrientAB', 'a11y.dipoleOrientABStringProperty' );
 addToMapIfDefined( 'a11y_dipoleOrientBC', 'a11y.dipoleOrientBCStringProperty' );
 addToMapIfDefined( 'a11y_electronDensity', 'a11y.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_electronDensityShift', 'a11y.electronDensityShiftStringProperty' );
 addToMapIfDefined( 'a11y_electronDensityProgress', 'a11y.electronDensityProgressStringProperty' );
 addToMapIfDefined( 'a11y_electrostaticPotential', 'a11y.electrostaticPotentialStringProperty' );
 addToMapIfDefined( 'a11y_electrostaticPotentialProgress', 'a11y.electrostaticPotentialProgressStringProperty' );
@@ -119,7 +120,8 @@ addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_partialChargesDescription', '
 addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_partialChargesDetail', 'a11y.twoAtomsScreen.moleculeAB.partialChargesDetailStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_bondCharacterDescription', 'a11y.twoAtomsScreen.moleculeAB.bondCharacterDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_electrostaticPotentialDescription', 'a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescriptionStringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_electronDensityDescription', 'a11y.twoAtomsScreen.moleculeAB.electronDensityDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_electronDensityDescription_firstTwoRegions', 'a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegionsStringProperty' );
+addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_electronDensityDescription_lastFourRegions', 'a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegionsStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_electricFieldAligned', 'a11y.twoAtomsScreen.moleculeAB.electricFieldAlignedStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_orientationDescription', 'a11y.twoAtomsScreen.moleculeAB.orientationDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_moleculeAB_electronegativityValues', 'a11y.twoAtomsScreen.moleculeAB.electronegativityValuesStringProperty' );
@@ -369,41 +371,43 @@ const MoleculePolarityFluent = {
     dipoleOrientBC: new FluentPattern<{ direction: 'toB' | 'toC' | TReadOnlyProperty<'toB' | 'toC'> }>( fluentSupport.bundleProperty, 'a11y_dipoleOrientBC', _.get( MoleculePolarityStrings, 'a11y.dipoleOrientBCStringProperty' ), [{"name":"direction","variants":["toB","toC"]}] ),
     _comment_10: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
     electronDensity: new FluentPattern<{ density: 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared' | TReadOnlyProperty<'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared'> }>( fluentSupport.bundleProperty, 'a11y_electronDensity', _.get( MoleculePolarityStrings, 'a11y.electronDensityStringProperty' ), [{"name":"density","variants":["evenlyShared","nearlyEvenlyShared","slightlyUnevenlyShared","unevenlyShared","veryUnevenlyShared","mostUnevenlyShared"]}] ),
-    _comment_11: new FluentComment( {"comment":"ElectronDensityProgress2 - Electron Density Progress (Screen 1)","associatedKey":"electronDensityProgress"} ),
+    _comment_11: new FluentComment( {"comment":"ElectronDensityShift6 - Electron Density Shift (Screen 1)","associatedKey":"electronDensityShift"} ),
+    electronDensityShift: new FluentPattern<{ shift: 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely' | TReadOnlyProperty<'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely'> }>( fluentSupport.bundleProperty, 'a11y_electronDensityShift', _.get( MoleculePolarityStrings, 'a11y.electronDensityShiftStringProperty' ), [{"name":"shift","variants":["shiftedSlightly","shifted","shiftedMuchMore","shiftedAlmostCompletely"]}] ),
+    _comment_12: new FluentComment( {"comment":"ElectronDensityProgress2 - Electron Density Progress (Screen 1)","associatedKey":"electronDensityProgress"} ),
     electronDensityProgress: new FluentPattern<{ progress: 'more' | 'less' | TReadOnlyProperty<'more' | 'less'> }>( fluentSupport.bundleProperty, 'a11y_electronDensityProgress', _.get( MoleculePolarityStrings, 'a11y.electronDensityProgressStringProperty' ), [{"name":"progress","variants":["more","less"]}] ),
-    _comment_12: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+    _comment_13: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
     electrostaticPotential: new FluentPattern<{ potential: 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference' | TReadOnlyProperty<'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference'> }>( fluentSupport.bundleProperty, 'a11y_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.electrostaticPotentialStringProperty' ), [{"name":"potential","variants":["noDifference","verySmallDifference","smallDifference","mediumDifference","largeDifference","veryLargeDifference"]}] ),
-    _comment_13: new FluentComment( {"comment":"ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)","associatedKey":"electrostaticPotentialProgress"} ),
-    _comment_14: new FluentComment( {"comment":"2-range spectrum: positive-neutral-negative","associatedKey":"electrostaticPotentialProgress"} ),
+    _comment_14: new FluentComment( {"comment":"ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)","associatedKey":"electrostaticPotentialProgress"} ),
+    _comment_15: new FluentComment( {"comment":"2-range spectrum: positive-neutral-negative","associatedKey":"electrostaticPotentialProgress"} ),
     electrostaticPotentialProgress: new FluentPattern<{ progress: 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative' | TReadOnlyProperty<'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative'> }>( fluentSupport.bundleProperty, 'a11y_electrostaticPotentialProgress', _.get( MoleculePolarityStrings, 'a11y.electrostaticPotentialProgressStringProperty' ), [{"name":"progress","variants":["morePositive","lessPositive","neutral","lessNegative","moreNegative"]}] ),
-    _comment_15: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+    _comment_16: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
     electronegativity: new FluentPattern<{ level: 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh' | TReadOnlyProperty<'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh'> }>( fluentSupport.bundleProperty, 'a11y_electronegativity', _.get( MoleculePolarityStrings, 'a11y.electronegativityStringProperty' ), [{"name":"level","variants":["veryLow","low","mediumLow","mediumHigh","high","veryHigh"]}] ),
-    _comment_16: new FluentComment( {"comment":"Field2 - Electric Field state (Screen 1/2)","associatedKey":"field"} ),
+    _comment_17: new FluentComment( {"comment":"Field2 - Electric Field state (Screen 1/2)","associatedKey":"field"} ),
     field: new FluentPattern<{ state: 'on' | 'off' | TReadOnlyProperty<'on' | 'off'> }>( fluentSupport.bundleProperty, 'a11y_field', _.get( MoleculePolarityStrings, 'a11y.fieldStringProperty' ), [{"name":"state","variants":["on","off"]}] ),
-    _comment_17: new FluentComment( {"comment":"MolecularDipole6 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
-    _comment_18: new FluentComment( {"comment":"Note: May need a larger region set - alternative 7-region","associatedKey":"molecularDipole"} ),
+    _comment_18: new FluentComment( {"comment":"MolecularDipole6 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+    _comment_19: new FluentComment( {"comment":"Note: May need a larger region set - alternative 7-region","associatedKey":"molecularDipole"} ),
     molecularDipole: new FluentPattern<{ magnitude: 'no' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge' | 'extremelyLarge' | TReadOnlyProperty<'no' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge' | 'extremelyLarge'> }>( fluentSupport.bundleProperty, 'a11y_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.molecularDipoleStringProperty' ), [{"name":"magnitude","variants":["no","verySmall","small","medium","large","veryLarge","extremelyLarge"]}] ),
-    _comment_19: new FluentComment( {"comment":"OrientationAtomA - Orientation for Atom A (Screen 1)","associatedKey":"orientationAtomA"} ),
+    _comment_20: new FluentComment( {"comment":"OrientationAtomA - Orientation for Atom A (Screen 1)","associatedKey":"orientationAtomA"} ),
     orientationAtomA: new FluentPattern<{ position: 'at9' | 'between10And11' | 'at12' | 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | TReadOnlyProperty<'at9' | 'between10And11' | 'at12' | 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8'> }>( fluentSupport.bundleProperty, 'a11y_orientationAtomA', _.get( MoleculePolarityStrings, 'a11y.orientationAtomAStringProperty' ), [{"name":"position","variants":["at9","between10And11","at12","between1And2","at3","between4And5","at6","between7And8"]}] ),
-    _comment_20: new FluentComment( {"comment":"OrientationAtomB - Orientation for Atom B (Screen 1)","associatedKey":"orientationAtomB"} ),
+    _comment_21: new FluentComment( {"comment":"OrientationAtomB - Orientation for Atom B (Screen 1)","associatedKey":"orientationAtomB"} ),
     orientationAtomB: new FluentPattern<{ position: 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12' | 'between1And2' | TReadOnlyProperty<'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12' | 'between1And2'> }>( fluentSupport.bundleProperty, 'a11y_orientationAtomB', _.get( MoleculePolarityStrings, 'a11y.orientationAtomBStringProperty' ), [{"name":"position","variants":["at3","between4And5","at6","between7And8","at9","between10And11","at12","between1And2"]}] ),
-    _comment_21: new FluentComment( {"comment":"OrientationMol3 - Molecule orientation (Screen 1)","associatedKey":"orientationMolecule"} ),
+    _comment_22: new FluentComment( {"comment":"OrientationMol3 - Molecule orientation (Screen 1)","associatedKey":"orientationMolecule"} ),
     orientationMolecule: new FluentPattern<{ orientation: 'horizontal' | 'diagonal' | 'vertical' | TReadOnlyProperty<'horizontal' | 'diagonal' | 'vertical'> }>( fluentSupport.bundleProperty, 'a11y_orientationMolecule', _.get( MoleculePolarityStrings, 'a11y.orientationMoleculeStringProperty' ), [{"name":"orientation","variants":["horizontal","diagonal","vertical"]}] ),
-    _comment_22: new FluentComment( {"comment":"PartialCharge2 - Partial Charge sign (Screen 1/2)","associatedKey":"partialChargeSign"} ),
+    _comment_23: new FluentComment( {"comment":"PartialCharge2 - Partial Charge sign (Screen 1/2)","associatedKey":"partialChargeSign"} ),
     partialChargeSign: new FluentPattern<{ sign: 'positive' | 'negative' | TReadOnlyProperty<'positive' | 'negative'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeSign', _.get( MoleculePolarityStrings, 'a11y.partialChargeSignStringProperty' ), [{"name":"sign","variants":["positive","negative"]}] ),
-    _comment_23: new FluentComment( {"comment":"PartialCharge6 - Partial Charge magnitude (Screen 1/2)","associatedKey":"partialChargeMagnitude"} ),
+    _comment_24: new FluentComment( {"comment":"PartialCharge6 - Partial Charge magnitude (Screen 1/2)","associatedKey":"partialChargeMagnitude"} ),
     partialChargeMagnitude: new FluentPattern<{ magnitude: 'no' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge' | TReadOnlyProperty<'no' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeMagnitude', _.get( MoleculePolarityStrings, 'a11y.partialChargeMagnitudeStringProperty' ), [{"name":"magnitude","variants":["no","verySmall","small","medium","large","veryLarge"]}] ),
-    _comment_24: new FluentComment( {"comment":"PartialChargeProgress3 - Partial Charge Progress (Screen 1/2)","associatedKey":"partialChargeProgress"} ),
+    _comment_25: new FluentComment( {"comment":"PartialChargeProgress3 - Partial Charge Progress (Screen 1/2)","associatedKey":"partialChargeProgress"} ),
     partialChargeProgress: new FluentPattern<{ progress: 'morePositive' | 'moreNegative' | number | 'zero' | TReadOnlyProperty<'morePositive' | 'moreNegative' | number | 'zero'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeProgress', _.get( MoleculePolarityStrings, 'a11y.partialChargeProgressStringProperty' ), [{"name":"progress","variants":["morePositive","moreNegative",{"type":"number","value":"zero"}]}] ),
-    _comment_25: new FluentComment( {"comment":"Polarity6 - Bond Polarity (Screen 1/2)","associatedKey":"polarity"} ),
+    _comment_26: new FluentComment( {"comment":"Polarity6 - Bond Polarity (Screen 1/2)","associatedKey":"polarity"} ),
     polarity: new FluentPattern<{ polarity: 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar' | TReadOnlyProperty<'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar'> }>( fluentSupport.bundleProperty, 'a11y_polarity', _.get( MoleculePolarityStrings, 'a11y.polarityStringProperty' ), [{"name":"polarity","variants":["nonpolar","veryWeaklyPolar","weaklyPolar","polar","stronglyPolar","veryStronglyPolar"]}] ),
-    _comment_26: new FluentComment( {"comment":"Rotation2 - Rotation direction (Screen 1/2)","associatedKey":"rotation"} ),
+    _comment_27: new FluentComment( {"comment":"Rotation2 - Rotation direction (Screen 1/2)","associatedKey":"rotation"} ),
     rotation: new FluentPattern<{ direction: 'clockwise' | 'counterclockwise' | TReadOnlyProperty<'clockwise' | 'counterclockwise'> }>( fluentSupport.bundleProperty, 'a11y_rotation', _.get( MoleculePolarityStrings, 'a11y.rotationStringProperty' ), [{"name":"direction","variants":["clockwise","counterclockwise"]}] ),
-    _comment_27: new FluentComment( {"comment":"Shape7 - Molecule shape (Screen 2)","associatedKey":"shape"} ),
+    _comment_28: new FluentComment( {"comment":"Shape7 - Molecule shape (Screen 2)","associatedKey":"shape"} ),
     shape: new FluentPattern<{ shape: 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap' | TReadOnlyProperty<'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap'> }>( fluentSupport.bundleProperty, 'a11y_shape', _.get( MoleculePolarityStrings, 'a11y.shapeStringProperty' ), [{"name":"shape","variants":["linear","nearlyLinear","slightlyBent","bent","veryBent","extremelyBentSlightOverlap","atomsOverlap"]}] ),
-    _comment_28: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),
-    _comment_29: new FluentComment( {"comment":"TWO ATOMS SCREEN","associatedKey":"twoAtomsScreen"} ),
-    _comment_30: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),
+    _comment_29: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),
+    _comment_30: new FluentComment( {"comment":"TWO ATOMS SCREEN","associatedKey":"twoAtomsScreen"} ),
+    _comment_31: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),
     twoAtomsScreen: {
       _comment_0: new FluentComment( {"comment":"Screen Summary","associatedKey":"screenSummary"} ),
       _comment_1: new FluentComment( {"comment":"Screen Summary","associatedKey":"screenSummary"} ),
@@ -425,7 +429,10 @@ const MoleculePolarityFluent = {
         partialChargesDetail: new FluentPattern<{ chargeA: FluentVariable, chargeB: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_partialChargesDetail', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.partialChargesDetailStringProperty' ), [{"name":"chargeA"},{"name":"chargeB"}] ),
         bondCharacterDescription: new FluentPattern<{ bondCharacter: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_bondCharacterDescription', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.bondCharacterDescriptionStringProperty' ), [{"name":"bondCharacter"}] ),
         electrostaticPotentialDescription: new FluentPattern<{ potential: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_electrostaticPotentialDescription', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescriptionStringProperty' ), [{"name":"potential"}] ),
-        electronDensityDescription: new FluentPattern<{ density: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_electronDensityDescription', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.electronDensityDescriptionStringProperty' ), [{"name":"density"}] ),
+        electronDensityDescription: {
+          firstTwoRegions: new FluentPattern<{ density: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_electronDensityDescription_firstTwoRegions', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegionsStringProperty' ), [{"name":"density"}] ),
+          lastFourRegions: new FluentPattern<{ atom: FluentVariable, density: FluentVariable, electronDensityShift: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_electronDensityDescription_lastFourRegions', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegionsStringProperty' ), [{"name":"atom"},{"name":"density"},{"name":"electronDensityShift"}] )
+        },
         electricFieldAlignedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_electricFieldAligned', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.electricFieldAlignedStringProperty' ) ),
         orientationDescription: new FluentPattern<{ atomAPosition: FluentVariable, atomBPosition: FluentVariable, orientation: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_orientationDescription', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.orientationDescriptionStringProperty' ), [{"name":"atomAPosition"},{"name":"atomBPosition"},{"name":"orientation"}] ),
         electronegativityValues: new FluentPattern<{ enA: FluentVariable, enB: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_moleculeAB_electronegativityValues', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.moleculeAB.electronegativityValuesStringProperty' ), [{"name":"enA"},{"name":"enB"}] )
@@ -507,9 +514,9 @@ const MoleculePolarityFluent = {
         }
       }
     },
-    _comment_31: new FluentComment( {"comment":"===================","associatedKey":"threeAtomsScreen"} ),
-    _comment_32: new FluentComment( {"comment":"THREE ATOMS SCREEN","associatedKey":"threeAtomsScreen"} ),
-    _comment_33: new FluentComment( {"comment":"===================","associatedKey":"threeAtomsScreen"} ),
+    _comment_32: new FluentComment( {"comment":"===================","associatedKey":"threeAtomsScreen"} ),
+    _comment_33: new FluentComment( {"comment":"THREE ATOMS SCREEN","associatedKey":"threeAtomsScreen"} ),
+    _comment_34: new FluentComment( {"comment":"===================","associatedKey":"threeAtomsScreen"} ),
     threeAtomsScreen: {
       _comment_0: new FluentComment( {"comment":"Screen Summary","associatedKey":"screenSummary"} ),
       _comment_1: new FluentComment( {"comment":"Screen Summary","associatedKey":"screenSummary"} ),

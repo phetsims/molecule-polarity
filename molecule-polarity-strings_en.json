@@ -210,6 +210,9 @@
     "electronDensity": {
       "value": "{ $density ->\n  [evenlyShared] evenly shared\n  [nearlyEvenlyShared] nearly evenly shared\n  [slightlyUnevenlyShared] slightly unevenly shared\n  [unevenlyShared] unevenly shared\n  [veryUnevenlyShared] very unevenly shared\n  *[mostUnevenlyShared] most unevenly shared\n}"
     },
+    "electronDensityShift": {
+      "value": "{ $shift ->\n  [shiftedSlightly] shifted slightly\n  [shifted] shifted\n  [shiftedMuchMore] shifted much more\n  *[shiftedAlmostCompletely] shifted almost completely\n}"
+    },
     "electronDensityProgress": {
       "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
     },
@@ -296,7 +299,12 @@
           "value": "{ $potential } electrostatic difference across molecule."
         },
         "electronDensityDescription": {
-          "value": "Electron density is { $density } shared between atoms."
+          "firstTwoRegions": {
+            "value": "Electron density is { $density } distributed between atoms."
+          },
+          "lastFourRegions": {
+            "value": "Electron density is { $density } distributed, shifted { $electronDensityShift } towards atom { $atom }."
+          }
         },
         "electricFieldAligned": {
           "value": "Molecule aligned with electric field."

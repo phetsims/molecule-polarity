@@ -95,6 +95,7 @@ type StringsType = {
     'dipoleOrientABStringProperty': LocalizedStringProperty;
     'dipoleOrientBCStringProperty': LocalizedStringProperty;
     'electronDensityStringProperty': LocalizedStringProperty;
+    'electronDensityShiftStringProperty': LocalizedStringProperty;
     'electronDensityProgressStringProperty': LocalizedStringProperty;
     'electrostaticPotentialStringProperty': LocalizedStringProperty;
     'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;
@@ -126,7 +127,10 @@ type StringsType = {
         'partialChargesDetailStringProperty': LocalizedStringProperty;
         'bondCharacterDescriptionStringProperty': LocalizedStringProperty;
         'electrostaticPotentialDescriptionStringProperty': LocalizedStringProperty;
-        'electronDensityDescriptionStringProperty': LocalizedStringProperty;
+        'electronDensityDescription': {
+          'firstTwoRegionsStringProperty': LocalizedStringProperty;
+          'lastFourRegionsStringProperty': LocalizedStringProperty;
+        };
         'electricFieldAlignedStringProperty': LocalizedStringProperty;
         'orientationDescriptionStringProperty': LocalizedStringProperty;
         'electronegativityValuesStringProperty': LocalizedStringProperty;

@@ -124,6 +124,14 @@ a11y:
       unevenlyShared: 'unevenly shared'
       veryUnevenlyShared: 'very unevenly shared'
       mostUnevenlyShared: 'most unevenly shared'
+
+  # ElectronDensityShift6 - Electron Density Shift (Screen 1)
+  electronDensityShift:
+    select_shift:
+      shiftedSlightly: 'shifted slightly'
+      shifted: 'shifted'
+      shiftedMuchMore: 'shifted much more'
+      shiftedAlmostCompletely: 'shifted almost completely'
   
   # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
   electronDensityProgress:
@@ -283,8 +291,7 @@ a11y:
       electrostaticPotentialDescription: '{ $potential } electrostatic difference across molecule.'
       electronDensityDescription:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
-        lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards atom { $atom }. 
-
+        lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards atom { $atom }.'
       electricFieldAligned: 'Molecule aligned with electric field.'
       orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
       electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }.'
