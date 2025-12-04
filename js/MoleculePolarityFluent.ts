@@ -5,12 +5,12 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
+import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -279,7 +279,7 @@ const MoleculePolarityFluent = {
   _comment_0: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
   _comment_1: new FluentComment( {"comment":"REGIONS / PARAMETERS","associatedKey":"bondCharacter"} ),
   _comment_2: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
-  _comment_3: new FluentComment( {"comment":"BondChar4 - Bond Character (Screen 1)","associatedKey":"bondCharacter"} ),
+  _comment_3: new FluentComment( {"comment":"BondChar6 - Bond Character (Screen 1)","associatedKey":"bondCharacter"} ),
   bondCharacterStringProperty: _.get( MoleculePolarityStrings, 'bondCharacterStringProperty' ),
   partialChargesStringProperty: _.get( MoleculePolarityStrings, 'partialChargesStringProperty' ),
   _comment_4: new FluentComment( {"comment":"BondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
@@ -354,7 +354,7 @@ const MoleculePolarityFluent = {
     _comment_0: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
     _comment_1: new FluentComment( {"comment":"REGIONS / PARAMETERS","associatedKey":"bondCharacter"} ),
     _comment_2: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
-    _comment_3: new FluentComment( {"comment":"BondChar4 - Bond Character (Screen 1)","associatedKey":"bondCharacter"} ),
+    _comment_3: new FluentComment( {"comment":"BondChar6 - Bond Character (Screen 1)","associatedKey":"bondCharacter"} ),
     bondCharacter: new FluentPattern<{ bondCharacter: 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic' | TReadOnlyProperty<'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic'> }>( fluentSupport.bundleProperty, 'a11y_bondCharacter', _.get( MoleculePolarityStrings, 'a11y.bondCharacterStringProperty' ), [{"name":"bondCharacter","variants":["nonpolarCovalent","nearlyNonpolarCovalent","slightlyPolarCovalent","polarCovalent","slightlyIonic","mostlyIonic"]}] ),
     _comment_4: new FluentComment( {"comment":"BondCharProgress2 - Bond Character Progress (Screen 1)","associatedKey":"bondCharacterProgress"} ),
     _comment_5: new FluentComment( {"comment":"Implementation: ΔEN > 0 = more ionic; ΔEN < 0 more covalent","associatedKey":"bondCharacterProgress"} ),
