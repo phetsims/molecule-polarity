@@ -217,7 +217,7 @@
       "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
     },
     "electrostaticPotential": {
-      "value": "{ $potential ->\n  [noDifference] no difference\n  [verySmallDifference] very small difference\n  [smallDifference] small difference\n  [mediumDifference] medium difference\n  [largeDifference] large difference\n  *[veryLargeDifference] very large difference\n}"
+      "value": "{ $potential ->\n  [noDifference] no\n  [verySmallDifference] very small\n  [smallDifference] small\n  [mediumDifference] medium\n  [largeDifference] large\n  *[veryLargeDifference] very large\n}"
     },
     "electrostaticPotentialProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"

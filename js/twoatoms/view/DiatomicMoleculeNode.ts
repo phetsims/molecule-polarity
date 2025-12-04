@@ -23,6 +23,7 @@ import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
+import DiatomicMoleculeAccessibleListNode from './DiatomicMoleculeAccessibleListNode.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
 import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
@@ -170,13 +171,8 @@ export default class DiatomicMoleculeNode extends Node {
       } )
     } ) );
 
-    // Current Electronegativities
-    this.addChild( new Node( {
-      accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronegativityValues.createProperty( {
-        enA: molecule.atomA.electronegativityProperty,
-        enB: molecule.atomB.electronegativityProperty
-      } )
-    } ) );
+    // Molecule description
+    this.addChild( new DiatomicMoleculeAccessibleListNode( molecule ) );
 
   }
 
