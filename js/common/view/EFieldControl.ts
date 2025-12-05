@@ -13,6 +13,7 @@ import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
 
@@ -49,6 +50,8 @@ export default class EFieldControl extends VBox {
       true, new Text( MoleculePolarityStrings.onStringProperty, SWITCH_LABEL_OPTIONS ), {
         spacing: 12,
         toggleSwitchOptions: {
+          accessibleName: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
+          accessibleHelpText: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleHelpTextStringProperty,
           trackFillLeft: 'rgb( 180, 180, 180 )',
           trackFillRight: 'rgb( 0, 180, 0 )',
           visiblePropertyOptions: {
@@ -64,6 +67,13 @@ export default class EFieldControl extends VBox {
     options.children = [ titleText, onOffSwitch ];
 
     super( options );
+
+    eFieldEnabledProperty.lazyLink( enabled => {
+      const objectResponse = enabled ?
+                             MoleculePolarityFluent.a11y.common.electricFieldToggle.onStringProperty.value :
+                             MoleculePolarityFluent.a11y.common.electricFieldToggle.offStringProperty.value;
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 
