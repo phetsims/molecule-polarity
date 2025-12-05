@@ -15,7 +15,7 @@ type PartialChargeMagnitude = 'small' | 'no' | 'verySmall' | 'medium' | 'large' 
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
-type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
+type Electronegativity = 'low' | 'mediumLow' | 'medium' | 'mediumHigh' | 'high' | 'veryHigh';
 
 
 export default class BondDescriptionMaps {
@@ -29,9 +29,21 @@ export default class BondDescriptionMaps {
     } );
   }
 
+  public static formatPolarityString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.polarity.format( {
+      polarity: BondDescriptionMaps.deltaENtoPolarity( deltaEN )
+    } );
+  }
+
   public static createBondDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.bondDipole.createProperty( {
       bondDipole: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoBondDipole( value ) )
+    } );
+  }
+
+  public static formatBondDipoleString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.bondDipole.format( {
+      bondDipole: BondDescriptionMaps.deltaENtoBondDipole( deltaEN )
     } );
   }
 
@@ -41,9 +53,21 @@ export default class BondDescriptionMaps {
     } );
   }
 
+  public static formatPartialChargesString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.partialChargeMagnitude.format( {
+      magnitude: BondDescriptionMaps.deltaENtoPartialCharges( deltaEN )
+    } );
+  }
+
   public static createBondCharacterStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.bondCharacter.createProperty( {
       bondCharacter: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoBondCharacter( value ) )
+    } );
+  }
+
+  public static formatBondCharacterString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.bondCharacter.format( {
+      bondCharacter: BondDescriptionMaps.deltaENtoBondCharacter( deltaEN )
     } );
   }
 
@@ -53,15 +77,33 @@ export default class BondDescriptionMaps {
     } );
   }
 
+  public static formatElectrostaticPotentialString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.electrostaticPotential.format( {
+      potential: BondDescriptionMaps.deltaENtoElectrostaticPotential( deltaEN )
+    } );
+  }
+
   public static createElectronDensityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.electronDensity.createProperty( {
       density: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoElectronDensity( value ) )
     } );
   }
 
+  public static formatElectronDensityString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.electronDensity.format( {
+      density: BondDescriptionMaps.deltaENtoElectronDensity( deltaEN )
+    } );
+  }
+
   public static createElectronegativityStringProperty( ENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.electronegativity.createProperty( {
       level: ENProperty.derived( value => BondDescriptionMaps.ENtoQualitative( value ) )
+    } );
+  }
+
+  public static formatElectronegativityString( EN: number ): string {
+    return MoleculePolarityFluent.a11y.electronegativity.format( {
+      level: BondDescriptionMaps.ENtoQualitative( EN )
     } );
   }
 
@@ -120,12 +162,11 @@ export default class BondDescriptionMaps {
   }
 
   public static ENtoQualitative( EN: number ): Electronegativity {
-    return EN === 2.0 ? 'veryLow' :
-           EN < 2.4 ? 'low' :
+    return EN < 2.4 ? 'low' :
            EN < 2.8 ? 'mediumLow' :
-           EN < 3.2 ? 'mediumHigh' :
-           EN < 3.6 ? 'high' :
-           'veryHigh';
+           EN < 3.2 ? 'medium' :
+           EN < 3.6 ? 'mediumHigh' :
+           'high';
   }
 }
 

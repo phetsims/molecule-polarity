@@ -215,9 +215,9 @@ a11y:
   # EN6 - Electronegativity levels (Screen 1/2)
   electronegativity:
     select_level:
-      veryLow: 'very low'
       low: 'low'
       mediumLow: 'medium-low'
+      medium: 'medium'
       mediumHigh: 'medium-high'
       high: 'high'
       veryHigh: 'very high'

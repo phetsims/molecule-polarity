@@ -35,6 +35,7 @@ export default class TriatomicMolecule extends Molecule {
   public readonly bondBC: Bond; // the bond between atoms 'B' and 'C'
   public readonly bondAngleABProperty: NumberProperty; // see phetioDocumentation
   public readonly bondAngleBCProperty: NumberProperty; // see phetioDocumentation
+  public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   // the angle between bondAB and bondBC
   // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
@@ -134,6 +135,15 @@ export default class TriatomicMolecule extends Molecule {
     this.bondBC = bondBC;
     this.bondAngleABProperty = bondAngleABProperty;
     this.bondAngleBCProperty = bondAngleBCProperty;
+
+    this.deltaENProperty = new DerivedProperty(
+      [
+        this.dipoleProperty
+      ],
+      ( dipole: Vector2 ) => {
+        return dipole.magnitude;
+      }
+    );
   }
 
   public override reset(): void {

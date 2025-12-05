@@ -73,52 +73,6 @@ export default class ElectronegativitySlider extends HSlider {
 
     options.thumbNode = thumbNode;
 
-    // TODO: Move this to an internal function https://github.com/phetsims/molecule-polarity/issues/171
-    const contextResponse = ( message: string ) => {
-      this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
-    };
-
-    const emitContextResponse = () => {
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
-          progress: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
-          direction: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
-          progress: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
-          sign: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-          progress: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-          progress: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-          progress: 'TODO'
-        } )
-      );
-      contextResponse(
-        MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
-      );
-    };
-
     options.startDrag = () => {
       molecule.isDraggingProperty.value = true;
     };
@@ -127,7 +81,7 @@ export default class ElectronegativitySlider extends HSlider {
     options.endDrag = () => {
       molecule.isDraggingProperty.value = false;
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
-      emitContextResponse();
+      this.emitContextResponse( molecule );
     };
 
     const range = atom.electronegativityProperty.range;
@@ -148,6 +102,54 @@ export default class ElectronegativitySlider extends HSlider {
         this.addMinorTick( i );
       }
     }
+  }
+
+  private emitContextResponse( molecule: Molecule ): void {
+    const contextResponse = ( message: string ) => {
+      this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
+    };
+
+    const deltaEN = molecule.deltaENProperty.value;
+
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
+        progress: 'TODO'
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
+        direction: 'TODO'
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
+        progress: 'TODO'
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
+        sign: 'TODO'
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
+        progress: BondDescriptionMaps.formatBondCharacterString( deltaEN )
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
+        progress: BondDescriptionMaps.formatElectrostaticPotentialString( deltaEN )
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
+        progress: BondDescriptionMaps.formatElectronDensityString( deltaEN )
+      } )
+    );
+    contextResponse(
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
+    );
+
   }
 }
 

@@ -365,7 +365,7 @@
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"
     },
     "electronegativity": {
-      "value": "{ $level ->\n  [veryLow] very low\n  [low] low\n  [mediumLow] medium-low\n  [mediumHigh] medium-high\n  [high] high\n  *[veryHigh] very high\n}"
+      "value": "{ $level ->\n  [low] low\n  [mediumLow] medium-low\n  [medium] medium\n  [mediumHigh] medium-high\n  [high] high\n  *[veryHigh] very high\n}"
     },
     "field": {
       "value": "{ $state ->\n  [on] on\n  *[off] off\n}"
