@@ -120,11 +120,11 @@ export default class BondDescriptionMaps {
   }
 
   public static ENtoQualitative( EN: number ): Electronegativity {
-    return EN < 1.0 ? 'veryLow' :
-           EN < 2.0 ? 'low' :
-           EN < 3.0 ? 'mediumLow' :
-           EN < 4.0 ? 'mediumHigh' :
-           EN < 5.0 ? 'high' :
+    return EN === 2.0 ? 'veryLow' :
+           EN < 2.4 ? 'low' :
+           EN < 2.8 ? 'mediumLow' :
+           EN < 3.2 ? 'mediumHigh' :
+           EN < 3.6 ? 'high' :
            'veryHigh';
   }
 }
