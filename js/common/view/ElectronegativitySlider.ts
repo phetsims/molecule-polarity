@@ -22,7 +22,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import MPConstants from '../MPConstants.js';
-import BondDescriptionMaps from './BondDescriptionMaps.js';
+import DescriptionMaps from './DescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
 
 type SelfOptions = {
@@ -59,7 +59,7 @@ export default class ElectronegativitySlider extends HSlider {
 
       createAriaValueText: value => {
         return MoleculePolarityFluent.a11y.electronegativity.format( {
-          level: BondDescriptionMaps.ENtoQualitative( value )
+          level: DescriptionMaps.ENtoQualitative( value )
         } );
       }
     }, providedOptions );
@@ -133,17 +133,17 @@ export default class ElectronegativitySlider extends HSlider {
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-        progress: BondDescriptionMaps.formatBondCharacterString( deltaEN )
+        progress: DescriptionMaps.formatBondCharacterString( deltaEN )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-        progress: BondDescriptionMaps.formatElectrostaticPotentialString( deltaEN )
+        progress: DescriptionMaps.formatElectrostaticPotentialString( deltaEN )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-        progress: BondDescriptionMaps.formatElectronDensityString( deltaEN )
+        progress: DescriptionMaps.formatElectronDensityString( deltaEN )
       } )
     );
     contextResponse(

@@ -13,9 +13,9 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
-import BondDescriptionMaps from '../../common/view/BondDescriptionMaps.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
@@ -167,7 +167,7 @@ export default class DiatomicMoleculeNode extends Node {
     // Current polarity description
     this.addChild( new Node( {
       accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
-        polarity: BondDescriptionMaps.createPolarityStringProperty( molecule.deltaENProperty )
+        polarity: DescriptionMaps.createPolarityStringProperty( molecule.deltaENProperty )
       } )
     } ) );
 

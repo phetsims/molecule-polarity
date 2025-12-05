@@ -7,7 +7,7 @@
 
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../joist/js/ScreenSummaryContent.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import BondDescriptionMaps from '../../common/view/BondDescriptionMaps.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -21,7 +21,7 @@ export default class TwoAtomsScreenSummaryContentNode extends ScreenSummaryConte
   public constructor( model: TwoAtomsModel, providedOptions?: TwoAtomsScreenSummaryContentNodeOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TwoAtomsScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.currentDetails.createProperty( {
-        polarity: BondDescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.deltaENProperty ),
+        polarity: DescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.deltaENProperty ),
         field: MoleculePolarityFluent.a11y.field.createProperty( {
           state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
         } )

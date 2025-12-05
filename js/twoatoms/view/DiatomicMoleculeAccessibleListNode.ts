@@ -8,7 +8,7 @@
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
-import BondDescriptionMaps from '../../common/view/BondDescriptionMaps.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
@@ -28,7 +28,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Bond Dipole Description
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDescription.createProperty( {
-          bondDipoleMagnitude: BondDescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty )
+          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -44,7 +44,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Partial Charges Description
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDescription.createProperty( {
-          partialChargeMagnitude: BondDescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty )
+          partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -59,29 +59,29 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Bond Character
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondCharacterDescription.createProperty( {
-          bondCharacter: BondDescriptionMaps.createBondCharacterStringProperty( diatomicMolecule.deltaENProperty )
+          bondCharacter: DescriptionMaps.createBondCharacterStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
       // Electrostatic Potential
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescription.createProperty( {
-          potential: BondDescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty )
+          potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
       // Electron density (First two regions)
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegions.createProperty( {
-          density: BondDescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty )
+          density: DescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
       // Electron density (Last four regions)
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegions.createProperty( {
-          density: BondDescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty ),
-          electronDensityShift: BondDescriptionMaps.createElectronDensityShiftStringProperty( diatomicMolecule.deltaENProperty ),
+          density: DescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty ),
+          electronDensityShift: DescriptionMaps.createElectronDensityShiftStringProperty( diatomicMolecule.deltaENProperty ),
           atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
@@ -100,12 +100,12 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
               return absSin === 0 ? 'horizontal' : absSin === 1 ? 'vertical' : 'diagonal';
             } )
           } ),
-          atomAPosition: BondDescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty.derived(
+          atomAPosition: DescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty.derived(
             angle => {
               return angle + Math.PI;
             }
           ) ),
-          atomBPosition: BondDescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty )
+          atomBPosition: DescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty )
         } )
       },
 
