@@ -350,7 +350,7 @@
       "value": "{ $direction ->\n  [toB] to B\n  *[toC] to C\n}"
     },
     "electronDensity": {
-      "value": "{ $density ->\n  [evenlyShared] evenly shared\n  [nearlyEvenlyShared] nearly evenly shared\n  [slightlyUnevenlyShared] slightly unevenly shared\n  [unevenlyShared] unevenly shared\n  [veryUnevenlyShared] very unevenly shared\n  *[mostUnevenlyShared] most unevenly shared\n}"
+      "value": "{ $density ->\n  [evenlyShared] evenly\n  [nearlyEvenlyShared] nearly evenly\n  [slightlyUnevenlyShared] slightly unevenly\n  [unevenlyShared] unevenly\n  [veryUnevenlyShared] very unevenly\n  *[mostUnevenlyShared] most unevenly\n}"
     },
     "electronDensityShift": {
       "value": "{ $shift ->\n  [shiftedSlightly] shifted slightly\n  [shifted] shifted\n  [shiftedMuchMore] shifted much more\n  *[shiftedAlmostCompletely] shifted almost completely\n}"
@@ -365,7 +365,7 @@
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"
     },
     "electronegativity": {
-      "value": "{ $level ->\n  [low] low\n  [mediumLow] medium-low\n  [medium] medium\n  [mediumHigh] medium-high\n  [high] high\n  *[veryHigh] very high\n}"
+      "value": "{ $level ->\n  [veryLow] very low\n  [low] low\n  [mediumLow] medium-low\n  [mediumHigh] medium-high\n  [high] high\n  *[veryHigh] very high\n}"
     },
     "field": {
       "value": "{ $state ->\n  [on] on\n  *[off] off\n}"

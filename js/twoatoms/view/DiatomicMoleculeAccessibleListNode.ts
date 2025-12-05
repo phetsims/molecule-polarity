@@ -5,6 +5,7 @@
  * @author Agustín Vallejo
  */
 
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import BondDescriptionMaps from '../../common/view/BondDescriptionMaps.js';
@@ -34,7 +35,9 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Bond dipole direction
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
-          dipoleDirection: 'TODO'
+          dipoleDirection: MoleculePolarityFluent.a11y.dipoleOrientAB.createProperty( {
+            direction: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'toA' : 'toB' )
+          } )
         } )
       },
 
@@ -78,8 +81,8 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegions.createProperty( {
           density: BondDescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty ),
-          electronDensityShift: 'TODO',
-          atom: 'TODO'
+          electronDensityShift: BondDescriptionMaps.createElectronDensityShiftStringProperty( diatomicMolecule.deltaENProperty ),
+          atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
 
@@ -91,7 +94,12 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Orientation
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.orientationDescription.createProperty( {
-          orientation: 'TODO',
+          orientation: MoleculePolarityFluent.a11y.orientationMolecule.createProperty( {
+            orientation: diatomicMolecule.angleProperty.derived( angle => {
+              const absSin = roundToInterval( Math.abs( Math.sin( angle ) ), 0.1 );
+              return absSin === 0 ? 'horizontal' : absSin === 1 ? 'vertical' : 'diagonal';
+            } )
+          } ),
           atomAPosition: 'TODO',
           atomBPosition: 'TODO'
         } )
@@ -100,8 +108,8 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electronegativity Values
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronegativityValues.createProperty( {
-          enA: 'TODO',
-          enB: 'TODO'
+          enA: diatomicMolecule.atomA.electronegativityProperty,
+          enB: diatomicMolecule.atomB.electronegativityProperty
         } )
       }
     ], options );

@@ -15,7 +15,8 @@ type PartialChargeMagnitude = 'small' | 'no' | 'verySmall' | 'medium' | 'large' 
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
-type Electronegativity = 'low' | 'mediumLow' | 'medium' | 'mediumHigh' | 'high' | 'veryHigh';
+type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely';
+type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
 
 
 export default class BondDescriptionMaps {
@@ -25,7 +26,7 @@ export default class BondDescriptionMaps {
 
   public static createPolarityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.polarity.createProperty( {
-      polarity: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoPolarity( value ) )
+      polarity: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoPolarity( deltaEN ) )
     } );
   }
 
@@ -37,7 +38,7 @@ export default class BondDescriptionMaps {
 
   public static createBondDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.bondDipole.createProperty( {
-      bondDipole: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoBondDipole( value ) )
+      bondDipole: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoBondDipole( deltaEN ) )
     } );
   }
 
@@ -49,7 +50,7 @@ export default class BondDescriptionMaps {
 
   public static createPartialChargesStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.partialChargeMagnitude.createProperty( {
-      magnitude: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoPartialCharges( value ) )
+      magnitude: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoPartialCharges( deltaEN ) )
     } );
   }
 
@@ -61,7 +62,7 @@ export default class BondDescriptionMaps {
 
   public static createBondCharacterStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.bondCharacter.createProperty( {
-      bondCharacter: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoBondCharacter( value ) )
+      bondCharacter: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoBondCharacter( deltaEN ) )
     } );
   }
 
@@ -73,7 +74,7 @@ export default class BondDescriptionMaps {
 
   public static createElectrostaticPotentialStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.electrostaticPotential.createProperty( {
-      potential: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoElectrostaticPotential( value ) )
+      potential: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoElectrostaticPotential( deltaEN ) )
     } );
   }
 
@@ -85,13 +86,25 @@ export default class BondDescriptionMaps {
 
   public static createElectronDensityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.electronDensity.createProperty( {
-      density: deltaENProperty.derived( value => BondDescriptionMaps.deltaENtoElectronDensity( value ) )
+      density: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoElectronDensity( deltaEN ) )
     } );
   }
 
   public static formatElectronDensityString( deltaEN: number ): string {
     return MoleculePolarityFluent.a11y.electronDensity.format( {
       density: BondDescriptionMaps.deltaENtoElectronDensity( deltaEN )
+    } );
+  }
+
+  public static createElectronDensityShiftStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electronDensityShift.createProperty( {
+      shift: deltaENProperty.derived( deltaEN => BondDescriptionMaps.deltaENtoElectronDensityShift( deltaEN ) )
+    } );
+  }
+
+  public static formatElectronDensityShiftString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.electronDensityShift.format( {
+      shift: BondDescriptionMaps.deltaENtoElectronDensityShift( deltaEN )
     } );
   }
 
@@ -108,6 +121,7 @@ export default class BondDescriptionMaps {
   }
 
   private static deltaENtoPolarity( deltaEN: number ): Polarity {
+    deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'nonpolar' :
            deltaEN <= 0.4 ? 'veryWeaklyPolar' :
            deltaEN <= 0.8 ? 'weaklyPolar' :
@@ -117,6 +131,7 @@ export default class BondDescriptionMaps {
   }
 
   private static deltaENtoBondDipole( deltaEN: number ): Dipole {
+    deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'no' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
@@ -126,6 +141,7 @@ export default class BondDescriptionMaps {
   }
 
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
+    deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'no' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
@@ -135,6 +151,7 @@ export default class BondDescriptionMaps {
   }
 
   private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {
+    deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'nonpolarCovalent' :
            deltaEN <= 0.4 ? 'nearlyNonpolarCovalent' :
            deltaEN <= 0.8 ? 'slightlyPolarCovalent' :
@@ -144,6 +161,7 @@ export default class BondDescriptionMaps {
   }
 
   private static deltaENtoElectrostaticPotential( deltaEN: number ): ElectrostaticPotential {
+    deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'noDifference' :
            deltaEN <= 0.4 ? 'verySmallDifference' :
            deltaEN <= 0.8 ? 'smallDifference' :
@@ -153,6 +171,7 @@ export default class BondDescriptionMaps {
   }
 
   private static deltaENtoElectronDensity( deltaEN: number ): ElectronDensity {
+    deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'evenlyShared' :
            deltaEN <= 0.4 ? 'nearlyEvenlyShared' :
            deltaEN <= 0.8 ? 'slightlyUnevenlyShared' :
@@ -161,12 +180,21 @@ export default class BondDescriptionMaps {
            'mostUnevenlyShared';
   }
 
+  private static deltaENtoElectronDensityShift( deltaEN: number ): ElectronDensityShift {
+    deltaEN = Math.abs( deltaEN );
+    return deltaEN < 0.5 ? 'shiftedSlightly' :
+           deltaEN < 1.0 ? 'shifted' :
+           deltaEN < 1.5 ? 'shiftedMuchMore' :
+           'shiftedAlmostCompletely';
+  }
+
   public static ENtoQualitative( EN: number ): Electronegativity {
-    return EN < 2.4 ? 'low' :
+    return EN === 2.0 ? 'veryLow' :
+           EN < 2.4 ? 'low' :
            EN < 2.8 ? 'mediumLow' :
-           EN < 3.2 ? 'medium' :
-           EN < 3.6 ? 'mediumHigh' :
-           'high';
+           EN < 3.2 ? 'mediumHigh' :
+           EN < 3.6 ? 'high' :
+           'veryHigh';
   }
 }
 
