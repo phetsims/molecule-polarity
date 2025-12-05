@@ -8,12 +8,14 @@
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
@@ -34,7 +36,10 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
       visiblePropertyOptions: {
         phetioFeatured: false
-      }
+      },
+
+      accessibleName: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleHelpTextStringProperty
     }, providedOptions );
 
     const radioButtonGroupItems = [
@@ -44,6 +49,24 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
     ];
 
     super( surfaceTypeProperty, radioButtonGroupItems, options );
+
+    surfaceTypeProperty.lazyLink( surfaceType => {
+      let objectResponse: string;
+      switch( surfaceType ) {
+        case 'none':
+          objectResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.noneSelectedStringProperty.value;
+          break;
+        case 'electrostaticPotential':
+          objectResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty.value;
+          break;
+        case 'electronDensity':
+          objectResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electronDensitySelectedStringProperty.value;
+          break;
+        default:
+          affirm( false, `Unknown surfaceType: ${surfaceType}` );
+      }
+      this.addAccessibleObjectResponse( objectResponse );
+    } );
   }
 }
 

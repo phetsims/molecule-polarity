@@ -100,7 +100,7 @@ a11y:
       accessibleHelpText: 'Show or hide electronegativity values for each atom in the molecule.'
       checked: 'Atom electronegativities shown'
       unchecked: 'Atom electronegativities hidden'
-    surfaceRadioGroup:
+    surfaceRadioButtonGroup:
       accessibleName: 'Surface'
       accessibleHelpText: |-
         Explore with different charge surfaces shown.

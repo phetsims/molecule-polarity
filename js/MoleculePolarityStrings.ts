@@ -128,7 +128,7 @@ type StringsType = {
         'checkedStringProperty': LocalizedStringProperty;
         'uncheckedStringProperty': LocalizedStringProperty;
       };
-      'surfaceRadioGroup': {
+      'surfaceRadioButtonGroup': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'noneSelectedStringProperty': LocalizedStringProperty;

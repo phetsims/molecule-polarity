@@ -5,12 +5,12 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
-import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
+import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -116,11 +116,11 @@ addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_accessibleName',
 addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_accessibleHelpText', 'a11y.common.atomElectronegativitiesCheckbox.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_checked', 'a11y.common.atomElectronegativitiesCheckbox.checkedStringProperty' );
 addToMapIfDefined( 'a11y_common_atomElectronegativitiesCheckbox_unchecked', 'a11y.common.atomElectronegativitiesCheckbox.uncheckedStringProperty' );
-addToMapIfDefined( 'a11y_common_surfaceRadioGroup_accessibleName', 'a11y.common.surfaceRadioGroup.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_common_surfaceRadioGroup_accessibleHelpText', 'a11y.common.surfaceRadioGroup.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_common_surfaceRadioGroup_noneSelected', 'a11y.common.surfaceRadioGroup.noneSelectedStringProperty' );
-addToMapIfDefined( 'a11y_common_surfaceRadioGroup_electrostaticSelected', 'a11y.common.surfaceRadioGroup.electrostaticSelectedStringProperty' );
-addToMapIfDefined( 'a11y_common_surfaceRadioGroup_electronDensitySelected', 'a11y.common.surfaceRadioGroup.electronDensitySelectedStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioButtonGroup_accessibleName', 'a11y.common.surfaceRadioButtonGroup.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioButtonGroup_accessibleHelpText', 'a11y.common.surfaceRadioButtonGroup.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioButtonGroup_noneSelected', 'a11y.common.surfaceRadioButtonGroup.noneSelectedStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioButtonGroup_electrostaticSelected', 'a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty' );
+addToMapIfDefined( 'a11y_common_surfaceRadioButtonGroup_electronDensitySelected', 'a11y.common.surfaceRadioButtonGroup.electronDensitySelectedStringProperty' );
 addToMapIfDefined( 'a11y_common_electricFieldToggle_accessibleName', 'a11y.common.electricFieldToggle.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_electricFieldToggle_accessibleHelpText', 'a11y.common.electricFieldToggle.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_common_electricFieldToggle_on', 'a11y.common.electricFieldToggle.onStringProperty' );
@@ -374,12 +374,12 @@ const MoleculePolarityFluent = {
         checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomElectronegativitiesCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.atomElectronegativitiesCheckbox.checkedStringProperty' ) ),
         uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atomElectronegativitiesCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.atomElectronegativitiesCheckbox.uncheckedStringProperty' ) )
       },
-      surfaceRadioGroup: {
-        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.accessibleNameStringProperty' ) ),
-        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.accessibleHelpTextStringProperty' ) ),
-        noneSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_noneSelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.noneSelectedStringProperty' ) ),
-        electrostaticSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_electrostaticSelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.electrostaticSelectedStringProperty' ) ),
-        electronDensitySelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioGroup_electronDensitySelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioGroup.electronDensitySelectedStringProperty' ) )
+      surfaceRadioButtonGroup: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioButtonGroup_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioButtonGroup.accessibleNameStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioButtonGroup_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioButtonGroup.accessibleHelpTextStringProperty' ) ),
+        noneSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioButtonGroup_noneSelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioButtonGroup.noneSelectedStringProperty' ) ),
+        electrostaticSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioButtonGroup_electrostaticSelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty' ) ),
+        electronDensitySelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_surfaceRadioButtonGroup_electronDensitySelected', _.get( MoleculePolarityStrings, 'a11y.common.surfaceRadioButtonGroup.electronDensitySelectedStringProperty' ) )
       },
       electricFieldToggle: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electricFieldToggle_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.electricFieldToggle.accessibleNameStringProperty' ) ),
