@@ -240,21 +240,10 @@ a11y:
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
   
-  # OrientationAtomA - Orientation for Atom A (Screen 1)
-  orientationAtomA:
+  # OrientationAtom - Orientation for any atom (Screen 1)
+  orientationAtom:
     select_position:
-      at9: 'at 9'
-      between10And11: 'between 10 and 11'
-      at12: 'at 12'
       between1And2: 'between 1 and 2'
-      at3: 'at 3'
-      between4And5: 'between 4 and 5'
-      at6: 'at 6'
-      between7And8: 'between 7 and 8'
-  
-  # OrientationAtomB - Orientation for Atom B (Screen 1)
-  orientationAtomB:
-    select_position:
       at3: 'at 3'
       between4And5: 'between 4 and 5'
       at6: 'at 6'
@@ -262,8 +251,7 @@ a11y:
       at9: 'at 9'
       between10And11: 'between 10 and 11'
       at12: 'at 12'
-      between1And2: 'between 1 and 2'
-  
+
   # OrientationMol3 - Molecule orientation (Screen 1)
   orientationMolecule:
     select_orientation:

@@ -6,6 +6,7 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
@@ -17,7 +18,7 @@ type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDif
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
 type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely';
 type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
-
+type Directions = 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12';
 
 export default class BondDescriptionMaps {
   public constructor() {
@@ -120,6 +121,18 @@ export default class BondDescriptionMaps {
     } );
   }
 
+  public static createOrientationStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.orientationAtom.createProperty( {
+      position: angleProperty.derived( angle => BondDescriptionMaps.angleToOrientation( angle ) )
+    } );
+  }
+
+  public static formatOrientationString( angle: number ): string {
+    return MoleculePolarityFluent.a11y.orientationAtom.format( {
+      position: BondDescriptionMaps.angleToOrientation( angle )
+    } );
+  }
+
   private static deltaENtoPolarity( deltaEN: number ): Polarity {
     deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'nonpolar' :
@@ -195,6 +208,24 @@ export default class BondDescriptionMaps {
            EN < 3.2 ? 'mediumHigh' :
            EN < 3.6 ? 'high' :
            'veryHigh';
+  }
+
+  public static angleToOrientation( angle: number ): Directions {
+    const sin = roundToInterval( Math.sin( angle ), 0.1 );
+    const cos = roundToInterval( Math.cos( angle ), 0.1 );
+
+    if ( sin === 0 ) {
+      return cos > 0 ? 'at3' : 'at9';
+    }
+    else if ( cos === 0 ) {
+      return sin < 0 ? 'at12' : 'at6';
+    }
+    else if ( sin < 0 ) {
+      return cos > 0 ? 'between1And2' : 'between10And11';
+    }
+    else {
+      return cos > 0 ? 'between4And5' : 'between7And8';
+    }
   }
 }
 

@@ -100,8 +100,12 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
               return absSin === 0 ? 'horizontal' : absSin === 1 ? 'vertical' : 'diagonal';
             } )
           } ),
-          atomAPosition: 'TODO',
-          atomBPosition: 'TODO'
+          atomAPosition: BondDescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty.derived(
+            angle => {
+              return angle + Math.PI;
+            }
+          ) ),
+          atomBPosition: BondDescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty )
         } )
       },
 

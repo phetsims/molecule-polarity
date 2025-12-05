@@ -160,8 +160,7 @@ type StringsType = {
     'electronegativityStringProperty': LocalizedStringProperty;
     'fieldStringProperty': LocalizedStringProperty;
     'molecularDipoleStringProperty': LocalizedStringProperty;
-    'orientationAtomAStringProperty': LocalizedStringProperty;
-    'orientationAtomBStringProperty': LocalizedStringProperty;
+    'orientationAtomStringProperty': LocalizedStringProperty;
     'orientationMoleculeStringProperty': LocalizedStringProperty;
     'partialChargeSignStringProperty': LocalizedStringProperty;
     'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
