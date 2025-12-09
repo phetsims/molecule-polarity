@@ -374,7 +374,7 @@ a11y:
       electricFieldAligned: 'Molecule aligned with electric field.'
       electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
       molecularDipoleDescription: 'With { $magnitude } molecular dipole arrow.'
-      molecularDipoleDirection: 'Molecular dipole points to { $position } o''clock.'
+      molecularDipoleDirection: 'Molecular dipole points to { $direction } o''clock.'
       molecularDipoleTwice: 'Molecular dipole is twice the size of bond dipoles.'
       bondDipoleABDescription: 'with { $magnitude } AB bond dipole arrow.'
       bondDipoleABDirection: 'AB bond dipole points { $direction }, towards { $position } o''clock.'

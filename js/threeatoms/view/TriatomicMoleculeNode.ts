@@ -27,6 +27,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
 import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
+import TriatomicMoleculeAccessibleListNode from './TriatomicMoleculeAccessibleListNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -232,6 +233,9 @@ export default class TriatomicMoleculeNode extends Node {
       moleculeHasChanged = false;
       updateAllHintArrows();
     };
+
+    // Molecule description
+    this.addChild( new TriatomicMoleculeAccessibleListNode( molecule ) );
   }
 
   public reset(): void {
