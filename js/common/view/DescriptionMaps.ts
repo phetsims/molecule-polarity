@@ -21,6 +21,8 @@ type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenly
 type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely';
 type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
 type Directions = 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12';
+type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap';
+
 
 export default class DescriptionMaps {
   public constructor() {
@@ -135,6 +137,18 @@ export default class DescriptionMaps {
     } );
   }
 
+  public static createShapeStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.shape.createProperty( {
+      shape: angleProperty.derived( angle => DescriptionMaps.angleToShape( angle ) )
+    } );
+  }
+
+  public static formatShapeString( angle: number ): string {
+    return MoleculePolarityFluent.a11y.shape.format( {
+      shape: DescriptionMaps.angleToShape( angle )
+    } );
+  }
+
   private static deltaENtoPolarity( deltaEN: number ): Polarity {
     deltaEN = Math.abs( deltaEN );
     return deltaEN === 0 ? 'nonpolar' :
@@ -203,7 +217,7 @@ export default class DescriptionMaps {
            'shiftedAlmostCompletely';
   }
 
-  public static ENtoQualitative( EN: number ): Electronegativity {
+  private static ENtoQualitative( EN: number ): Electronegativity {
     return EN === 2.0 ? 'veryLow' :
            EN < 2.4 ? 'low' :
            EN < 2.8 ? 'mediumLow' :
@@ -212,7 +226,7 @@ export default class DescriptionMaps {
            'veryHigh';
   }
 
-  public static angleToOrientation( angle: number ): Directions {
+  private static angleToOrientation( angle: number ): Directions {
     const sin = roundToInterval( Math.sin( angle ), 0.1 );
     const cos = roundToInterval( Math.cos( angle ), 0.1 );
 
@@ -228,6 +242,17 @@ export default class DescriptionMaps {
     else {
       return cos > 0 ? 'between4And5' : 'between7And8';
     }
+  }
+
+  private static angleToShape( angle: number ): Shape {
+    const absAngle = Math.abs( angle );
+    return absAngle <= 0.05 * Math.PI ? 'atomsOverlap' :
+            absAngle <= 0.2 * Math.PI ? 'extremelyBentSlightOverlap' :
+            absAngle <= 0.4 * Math.PI ? 'veryBent' :
+            absAngle <= 0.6 * Math.PI ? 'bent' :
+            absAngle <= 0.9 * Math.PI ? 'slightlyBent' :
+            absAngle <= 0.95 * Math.PI ? 'nearlyLinear' :
+            'linear';
   }
 }
 

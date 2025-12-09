@@ -25,6 +25,7 @@ export default class Bond extends PhetioObject {
   public readonly atom1: Atom;
   public readonly atom2: Atom;
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>;
+  public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   public constructor( atom1: Atom, atom2: Atom, providedOptions: BondOptions ) {
 
@@ -75,6 +76,16 @@ export default class Bond extends PhetioObject {
           'Qualitative vector representation of the dipole, based on the electronegativity difference ' +
           'between the atoms. +x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
       } );
+
+    this.deltaENProperty = new DerivedProperty(
+      [
+        atom1.electronegativityProperty,
+        atom2.electronegativityProperty
+      ],
+      ( atom1Electronegativity: number, atom2Electronegativity: number ) => {
+        return atom2Electronegativity - atom1Electronegativity;
+      }
+    );
   }
 
   /**

@@ -423,7 +423,7 @@
           "value": "with { $bondDipoleMagnitude } dipole arrow."
         },
         "bondDipoleDirection": {
-          "value": "Bond dipole points { $dipoleDirection }."
+          "value": "Bond dipole points { $dipoleDirection } o'clock.."
         },
         "partialChargesDescription": {
           "value": "Partial charges are { $partialChargeMagnitude }."
@@ -534,7 +534,7 @@
           "value": "With { $magnitude } molecular dipole arrow."
         },
         "molecularDipoleDirection": {
-          "value": "Molecular dipole points to { $direction } o'clock."
+          "value": "Molecular dipole points { $direction } o'clock."
         },
         "molecularDipoleTwice": {
           "value": "Molecular dipole is twice the size of bond dipoles."
@@ -543,13 +543,13 @@
           "value": "with { $magnitude } AB bond dipole arrow."
         },
         "bondDipoleABDirection": {
-          "value": "AB bond dipole points { $direction }, towards { $position } o'clock."
+          "value": "AB bond dipole points to atom { $atom }, { $direction } o'clock."
         },
         "bondDipoleBCDescription": {
           "value": "With { $magnitude } BC bond dipole arrow"
         },
         "bondDipoleBCDirection": {
-          "value": "BC bond dipole points { $direction }, towards { $position } o'clock."
+          "value": "BC bond dipole points to atom { $atom }, { $direction } o'clock."
         },
         "partialChargesDescription": {
           "value": "Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge."

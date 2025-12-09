@@ -18,12 +18,14 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
 import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
@@ -233,6 +235,15 @@ export default class TriatomicMoleculeNode extends Node {
       moleculeHasChanged = false;
       updateAllHintArrows();
     };
+
+    // ------------------------------------ Accessibility ---------------------------------------
+
+    // Current polarity description
+    this.addChild( new Node( {
+      accessibleParagraph: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
+        polarity: DescriptionMaps.createPolarityStringProperty( molecule.deltaENProperty )
+      } )
+    } ) );
 
     // Molecule description
     this.addChild( new TriatomicMoleculeAccessibleListNode( molecule ) );

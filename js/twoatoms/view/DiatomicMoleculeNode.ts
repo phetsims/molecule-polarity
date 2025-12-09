@@ -22,6 +22,7 @@ import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import DiatomicMoleculeAccessibleListNode from './DiatomicMoleculeAccessibleListNode.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
@@ -45,7 +46,8 @@ export default class DiatomicMoleculeNode extends Node {
       // NodeOptions
       cursor: 'pointer',
       phetioInputEnabledPropertyInstrumented: true,
-      isDisposable: false
+      isDisposable: false,
+      accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
     }, providedOptions );
 
     // atoms

@@ -58,9 +58,7 @@ export default class ElectronegativitySlider extends HSlider {
       } ),
 
       createAriaValueText: value => {
-        return MoleculePolarityFluent.a11y.electronegativity.format( {
-          level: DescriptionMaps.ENtoQualitative( value )
-        } );
+        return DescriptionMaps.formatElectronegativityString( value );
       }
     }, providedOptions );
 

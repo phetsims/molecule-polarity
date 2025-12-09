@@ -112,8 +112,8 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electronegativity Values
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronegativityValues.createProperty( {
-          enA: diatomicMolecule.atomA.electronegativityProperty,
-          enB: diatomicMolecule.atomB.electronegativityProperty
+          enA: DescriptionMaps.createElectronegativityStringProperty( diatomicMolecule.atomA.electronegativityProperty ),
+          enB: DescriptionMaps.createElectronegativityStringProperty( diatomicMolecule.atomB.electronegativityProperty )
         } )
       }
     ], options );
