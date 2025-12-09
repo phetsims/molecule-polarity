@@ -146,12 +146,12 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       // Partial Charges Description
       {
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
-          magnitudeA: triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude ),
-          signA: triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.x < 0 ? 'negative' : 'positive' ),
-          magnitudeB: triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude ),
-          signB: triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.x < 0 ? 'negative' : 'positive' ),
-          magnitudeC: triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude ),
-          signC: triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.x > 0 ? 'negative' : 'positive' )
+          magnitudeA: triatomicMolecule.atomA.partialChargeProperty.derived( charge => Math.abs( charge ) ),
+          signA: triatomicMolecule.atomA.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' ),
+          magnitudeB: triatomicMolecule.atomB.partialChargeProperty.derived( charge => Math.abs( charge ) ),
+          signB: triatomicMolecule.atomB.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' ),
+          magnitudeC: triatomicMolecule.atomC.partialChargeProperty.derived( charge => Math.abs( charge ) ),
+          signC: triatomicMolecule.atomC.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' )
         } )
       }
 
