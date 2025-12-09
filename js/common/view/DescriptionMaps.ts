@@ -151,7 +151,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoPolarity( deltaEN: number ): Polarity {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN === 0 ? 'nonpolar' :
+    return deltaEN <= 0.05 ? 'nonpolar' :
            deltaEN <= 0.4 ? 'veryWeaklyPolar' :
            deltaEN <= 0.8 ? 'weaklyPolar' :
            deltaEN <= 1.2 ? 'polar' :
@@ -161,7 +161,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoBondDipole( deltaEN: number ): Dipole {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN === 0 ? 'no' :
+    return deltaEN <= 0.05 ? 'no' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
            deltaEN <= 1.2 ? 'medium' :
@@ -171,7 +171,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN === 0 ? 'no' :
+    return deltaEN <= 0.05 ? 'no' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
            deltaEN <= 1.2 ? 'medium' :
@@ -181,7 +181,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN === 0 ? 'nonpolarCovalent' :
+    return deltaEN <= 0.05 ? 'nonpolarCovalent' :
            deltaEN <= 0.4 ? 'nearlyNonpolarCovalent' :
            deltaEN <= 0.8 ? 'slightlyPolarCovalent' :
            deltaEN <= 1.2 ? 'polarCovalent' :
@@ -191,7 +191,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoElectrostaticPotential( deltaEN: number ): ElectrostaticPotential {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN === 0 ? 'noDifference' :
+    return deltaEN <= 0.05 ? 'noDifference' :
            deltaEN <= 0.4 ? 'verySmallDifference' :
            deltaEN <= 0.8 ? 'smallDifference' :
            deltaEN <= 1.2 ? 'mediumDifference' :
@@ -201,7 +201,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoElectronDensity( deltaEN: number ): ElectronDensity {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN === 0 ? 'evenlyShared' :
+    return deltaEN <= 0.05 ? 'evenlyShared' :
            deltaEN <= 0.4 ? 'nearlyEvenlyShared' :
            deltaEN <= 0.8 ? 'slightlyUnevenlyShared' :
            deltaEN <= 1.2 ? 'unevenlyShared' :
