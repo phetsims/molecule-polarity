@@ -115,14 +115,19 @@ export default class RealMoleculeView extends THREE.Object3D {
         for ( const atom of moleculeData.atoms ) {
           const element = Element.getElementBySymbol( atom.symbol );
 
-          const labelFont = new PhetFont( { size: 120 } );
+          const labelFill = [ Element.N, Element.O ].includes( element ) ? 'white' : 'black';
+
+          const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
           const labelNode = new VBox( {
             children: [
               // TODO: remap indices! https://github.com/phetsims/molecule-polarity/issues/15
-              new Text( `${element.symbol}1`, { font: labelFont } ),
+              new Text( `${element.symbol}1`, {
+                font: labelFont,
+                fill: labelFill
+              } ),
               ...( partialChargesVisible ? [
                 // TODO: partial charges! https://github.com/phetsims/molecule-polarity/issues/15
-                new Text( 'δ=-0.05', { font: labelFont } )
+                new Text( 'δ=-0.05', { font: labelFont, fill: labelFill } )
               ] : [] )
             ],
             center: new Vector2( 256, 128 )
@@ -222,7 +227,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           transparent: true,
           opacity: 0.5,
           depthWrite: false,
-          side: THREE.DoubleSide
+          side: THREE.FrontSide
         } );
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
