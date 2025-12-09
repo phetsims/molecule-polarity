@@ -26,18 +26,21 @@
     }
   ],
   "bonds": [
-    [
-      0,
-      3
-    ],
-    [
-      1,
-      3
-    ],
-    [
-      2,
-      3
-    ]
+    {
+      "indexA": 0,
+      "indexB": 3,
+      "bondType": 1
+    },
+    {
+      "indexA": 1,
+      "indexB": 3,
+      "bondType": 1
+    },
+    {
+      "indexA": 2,
+      "indexB": 3,
+      "bondType": 1
+    }
   ],
   "molecularDipole": [
     -0.00042726757856439,
@@ -69,6 +72,12 @@
       "z": 0,
       "magnitude": 4.433766134592988
     }
+  ],
+  "charges": [
+    -0.17293,
+    -0.17292,
+    -0.1729,
+    0.51875
   ],
   "vertexPositions": [
     [

@@ -14,10 +14,11 @@
     }
   ],
   "bonds": [
-    [
-      0,
-      1
-    ]
+    {
+      "indexA": 0,
+      "indexB": 1,
+      "bondType": 3
+    }
   ],
   "molecularDipole": [
     0,
@@ -33,6 +34,10 @@
       "z": 0,
       "magnitude": 0
     }
+  ],
+  "charges": [
+    0,
+    0
   ],
   "vertexPositions": [
     [

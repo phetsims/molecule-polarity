@@ -13,7 +13,11 @@ export type RealMoleculeDataType = Record<string, {
     y: number;
     z: number;
   }[];
-  bonds: [ number, number ][];
+  bonds: {
+    indexA: number;
+    indexB: number;
+    bondType: 1 | 2 | 3;
+  }[];
   molecularDipole: [ number, number, number ];
   bondDipoles: {
     indexA: number;
@@ -23,6 +27,7 @@ export type RealMoleculeDataType = Record<string, {
     z: number;
     magnitude: number;
   }[];
+  charges: number[];
   vertexPositions: [ number, number, number ][];
   vertexNormals: [ number, number, number ][];
   faceIndices: [ number, number, number ][];
@@ -59,18 +64,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        3
-      ],
-      [
-        1,
-        3
-      ],
-      [
-        2,
-        3
-      ]
+      {
+        indexA: 0,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 2,
+        indexB: 3,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       -0.00042726757856439,
@@ -102,6 +110,12 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 4.433766134592988
       }
+    ],
+    charges: [
+      -0.17293,
+      -0.17292,
+      -0.1729,
+      0.51875
     ],
     vertexPositions: [
       [
@@ -7690,18 +7704,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ],
-      [
-        0,
-        3
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 3,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0.00000203339716152,
@@ -7733,6 +7750,12 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 0.20878852853775776
       }
+    ],
+    charges: [
+      -0.02708,
+      0.00903,
+      0.00903,
+      0.00903
     ],
     vertexPositions: [
       [
@@ -13853,22 +13876,26 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        4
-      ],
-      [
-        1,
-        4
-      ],
-      [
-        2,
-        4
-      ],
-      [
-        3,
-        4
-      ]
+      {
+        indexA: 0,
+        indexB: 4,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 4,
+        bondType: 1
+      },
+      {
+        indexA: 2,
+        indexB: 4,
+        bondType: 1
+      },
+      {
+        indexA: 3,
+        indexB: 4,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       -0.00011336189175474,
@@ -13908,6 +13935,13 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 1.3727147951312244,
         magnitude: 6.807811232246634
       }
+    ],
+    charges: [
+      -0.21151,
+      -0.21156,
+      -0.21163,
+      -0.21153,
+      0.84624
     ],
     vertexPositions: [
       [
@@ -22272,22 +22306,26 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        2,
-        3
-      ],
-      [
-        2,
-        4
-      ]
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 2,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 2,
+        indexB: 4,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0,
@@ -22327,6 +22365,13 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: -1.12435684755306,
         magnitude: 2.028308297112761
       }
+    ],
+    charges: [
+      -0.27917,
+      -0.27917,
+      0.43179,
+      0.06328,
+      0.06328
     ],
     vertexPositions: [
       [
@@ -29167,18 +29212,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1,
-        3
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 2
+      },
+      {
+        indexA: 1,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 3,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       -2.290181671966811,
@@ -29210,6 +29258,12 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: -0.8373820983843856,
         magnitude: 1.0482451554507475
       }
+    ],
+    charges: [
+      -0.28071,
+      0.21871,
+      0.031,
+      0.031
     ],
     vertexPositions: [
       [
@@ -35880,22 +35934,26 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1,
-        3
-      ],
-      [
-        1,
-        4
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 4,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       -1.605881000152614,
@@ -35935,6 +35993,13 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0.022952921446819388,
         magnitude: 0.41429534177230704
       }
+    ],
+    charges: [
+      -0.32606,
+      0.13834,
+      0.06258,
+      0.06257,
+      0.06257
     ],
     vertexPositions: [
       [
@@ -43353,22 +43418,26 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ],
-      [
-        0,
-        3
-      ],
-      [
-        0,
-        4
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 4,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0.00001245455761431,
@@ -43408,6 +43477,13 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: -1.1348295770796997,
         magnitude: 1.3589363724096197
       }
+    ],
+    charges: [
+      -0.20032,
+      0.05008,
+      0.05008,
+      0.05008,
+      0.05008
     ],
     vertexPositions: [
       [
@@ -49308,22 +49384,26 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        3
-      ],
-      [
-        1,
-        3
-      ],
-      [
-        2,
-        3
-      ],
-      [
-        3,
-        4
-      ]
+      {
+        indexA: 0,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 2,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 3,
+        indexB: 4,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       -0.0008540268078383999,
@@ -49363,6 +49443,13 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: -2.027299539634766,
         magnitude: 2.0272995462461214
       }
+    ],
+    charges: [
+      0.01006,
+      0.01006,
+      0.01004,
+      -0.20379,
+      0.17363
     ],
     vertexPositions: [
       [
@@ -60807,22 +60894,26 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        3
-      ],
-      [
-        1,
-        3
-      ],
-      [
-        2,
-        3
-      ],
-      [
-        3,
-        4
-      ]
+      {
+        indexA: 0,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 1,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 2,
+        indexB: 3,
+        bondType: 1
+      },
+      {
+        indexA: 3,
+        indexB: 4,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       -0.000051343278328379996,
@@ -60862,6 +60953,13 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 3.2433463219347147,
         magnitude: 3.2433463791486767
       }
+    ],
+    charges: [
+      -0.24094,
+      -0.24084,
+      -0.2408,
+      0.6565,
+      0.06607
     ],
     vertexPositions: [
       [
@@ -68532,14 +68630,16 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        2
-      ],
-      [
-        1,
-        2
-      ]
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 2
+      },
+      {
+        indexA: 1,
+        indexB: 2,
+        bondType: 2
+      }
     ],
     molecularDipole: [
       0,
@@ -68563,6 +68663,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 4.207579590933855
       }
+    ],
+    charges: [
+      -0.24464,
+      -0.24464,
+      0.48928
     ],
     vertexPositions: [
       [
@@ -75039,10 +75144,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0,
@@ -75058,6 +75164,10 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 0
       }
+    ],
+    charges: [
+      0,
+      0
     ],
     vertexPositions: [
       [
@@ -79246,10 +79356,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0,
@@ -79265,6 +79376,10 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 0
       }
+    ],
+    charges: [
+      0,
+      0
     ],
     vertexPositions: [
       [
@@ -82271,14 +82386,16 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0.00014843799279096,
@@ -82302,6 +82419,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 1.644709130781436
       }
+    ],
+    charges: [
+      -0.23273,
+      0.11637,
+      0.11636
     ],
     vertexPositions: [
       [
@@ -86738,14 +86860,16 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        1,
-        2
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 3
+      },
+      {
+        indexA: 1,
+        indexB: 2,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0,
@@ -86769,6 +86893,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: -0.07487718905433438,
         magnitude: 0.07487718905433438
       }
+    ],
+    charges: [
+      -0.26526,
+      0.13968,
+      0.12558
     ],
     vertexPositions: [
       [
@@ -92321,10 +92450,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       0,
@@ -92340,6 +92470,10 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 1.8392997519539673,
         magnitude: 1.8392997519539673
       }
+    ],
+    charges: [
+      -0.20504,
+      0.20504
     ],
     vertexPositions: [
       [
@@ -96264,10 +96398,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 3
+      }
     ],
     molecularDipole: [
       0,
@@ -96283,6 +96418,10 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 0
       }
+    ],
+    charges: [
+      0,
+      0
     ],
     vertexPositions: [
       [
@@ -100703,18 +100842,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ],
-      [
-        0,
-        3
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 3,
+        bondType: 1
+      }
     ],
     molecularDipole: [
       1.079812686907129,
@@ -100746,6 +100888,12 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0.3824994743537415,
         magnitude: 1.2159280776088068
       }
+    ],
+    charges: [
+      -0.17986,
+      0.05995,
+      0.05995,
+      0.05995
     ],
     vertexPositions: [
       [
@@ -105440,10 +105588,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 2
+      }
     ],
     molecularDipole: [
       0,
@@ -105459,6 +105608,10 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 0
       }
+    ],
+    charges: [
+      0,
+      0
     ],
     vertexPositions: [
       [
@@ -109873,14 +110026,16 @@ export const RealMoleculeData: RealMoleculeDataType = {
       }
     ],
     bonds: [
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ]
+      {
+        indexA: 0,
+        indexB: 1,
+        bondType: 1
+      },
+      {
+        indexA: 0,
+        indexB: 2,
+        bondType: 2
+      }
     ],
     molecularDipole: [
       -0.7087654897630246,
@@ -109904,6 +110059,11 @@ export const RealMoleculeData: RealMoleculeDataType = {
         z: 0,
         magnitude: 1.8417885612533071
       }
+    ],
+    charges: [
+      0.19739,
+      -0.09885,
+      -0.09854
     ],
     vertexPositions: [
       [

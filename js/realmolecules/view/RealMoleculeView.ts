@@ -25,8 +25,12 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
+import { simplifiedPartialChargesMap } from '../model/RealMoleculeSimplifiedData.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 const LABEL_SIZE = 0.4;
+
+const USE_REAL = false;
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -54,6 +58,22 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
       const moleculeData = RealMoleculeData[ strippedSymbol ];
+      const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ strippedSymbol ];
+
+      const getPartialCharge = ( symbol: string, bondQuantity: number ): number => {
+        const basicCharge = simplifiedPartialChargeMap[ symbol ];
+
+        if ( basicCharge !== undefined ) {
+          return basicCharge;
+        }
+
+        const numberedCharge = simplifiedPartialChargeMap[ `${symbol}${bondQuantity}` ];
+        if ( numberedCharge !== undefined ) {
+          return numberedCharge;
+        }
+
+        throw new Error( `No partial charge found for atom symbol: ${symbol} with bond quantity: ${bondQuantity}` );
+      };
 
       // Clear out children
       while ( this.children.length > 0 ) {
@@ -78,8 +98,8 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // TODO: double/triple bonds https://github.com/phetsims/molecule-polarity/issues/15
       for ( const bond of moleculeData.bonds ) {
-        const atomA = moleculeData.atoms[ bond[ 0 ] ];
-        const atomB = moleculeData.atoms[ bond[ 1 ] ];
+        const atomA = moleculeData.atoms[ bond.indexA ];
+        const atomB = moleculeData.atoms[ bond.indexB ];
 
         const positionA = new Vector3( atomA.x, atomA.y, atomA.z );
         const positionB = new Vector3( atomB.x, atomB.y, atomB.z );
@@ -113,21 +133,23 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       if ( atomLabelsVisible ) {
         for ( const atom of moleculeData.atoms ) {
+          const atomIndex = moleculeData.atoms.indexOf( atom );
           const element = Element.getElementBySymbol( atom.symbol );
+          const partialCharge = getPartialCharge( atom.symbol, moleculeData.bonds.filter( bond => bond.indexA === atomIndex || bond.indexB === atomIndex ).length );
+          const atomVisualIndex = moleculeData.atoms.filter( a => a.symbol === atom.symbol ).indexOf( atom );
 
           const labelFill = [ Element.N, Element.O ].includes( element ) ? 'white' : 'black';
 
           const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
           const labelNode = new VBox( {
             children: [
-              // TODO: remap indices! https://github.com/phetsims/molecule-polarity/issues/15
-              new Text( `${element.symbol}1`, {
+              new Text( `${element.symbol}${atomVisualIndex + 1}`, {
                 font: labelFont,
                 fill: labelFill
               } ),
               ...( partialChargesVisible ? [
-                // TODO: partial charges! https://github.com/phetsims/molecule-polarity/issues/15
-                new Text( 'δ=-0.05', { font: labelFont, fill: labelFill } )
+                // TODO: strings! https://github.com/phetsims/molecule-polarity/issues/15
+                new Text( `δ=${toFixed( partialCharge, 2 )}`, { font: labelFont, fill: labelFill } )
               ] : [] )
             ],
             center: new Vector2( 256, 128 )
@@ -178,10 +200,16 @@ export default class RealMoleculeView extends THREE.Object3D {
         };
 
         const colorizeElectronDensity = ( densityValue: number ): number[] => {
-          densityValue *= 7;
+          if ( USE_REAL ) {
+            densityValue *= 200;
 
-          const clampedValue = clamp( densityValue, 0, 1 );
-          return [ clampedValue, clampedValue, clampedValue ];
+            const clampedValue = clamp( 1 - densityValue, 0, 1 );
+            return [ clampedValue, clampedValue, clampedValue ];
+          }
+          else {
+            const clampedValue = clamp( 15 * densityValue / 2 + 0.5, 0, 1 );
+            return [ clampedValue, clampedValue, clampedValue ];
+          }
         };
 
         const toColor = surfaceType === 'electrostaticPotential' ? colorizeElectrostaticPotential : colorizeElectronDensity;
@@ -210,15 +238,45 @@ export default class RealMoleculeView extends THREE.Object3D {
           ];
         } ) ), 3 ) );
         meshGeometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
-          const v0 = moleculeData.vertexESPs[ indices[ 0 ] ];
-          const v1 = moleculeData.vertexESPs[ indices[ 1 ] ];
-          const v2 = moleculeData.vertexESPs[ indices[ 2 ] ];
 
-          return [
-            ...toColor( v0 ),
-            ...toColor( v1 ),
-            ...toColor( v2 )
-          ];
+
+          if ( USE_REAL ) {
+            const data = ( surfaceType === 'electrostaticPotential' ? moleculeData.vertexESPs : moleculeData.vertexDTs );
+            const v0 = data[ indices[ 0 ] ];
+            const v1 = data[ indices[ 1 ] ];
+            const v2 = data[ indices[ 2 ] ];
+
+            return [
+              ...toColor( v0 ),
+              ...toColor( v1 ),
+              ...toColor( v2 )
+            ];
+          }
+          else {
+            const getColor = ( location: [ number, number, number ] ): number[] => {
+              let espValue = 0;
+
+              for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+                const atom = moleculeData.atoms[ i ];
+                const distance = Math.sqrt(
+                  ( location[ 0 ] - atom.x ) ** 2 +
+                  ( location[ 1 ] - atom.y ) ** 2 +
+                  ( location[ 2 ] - atom.z ) ** 2
+                );
+
+                const partialCharge = getPartialCharge( atom.symbol, moleculeData.bonds.filter( bond => bond.indexA === i || bond.indexB === i ).length );
+
+                espValue += partialCharge / distance;
+              }
+
+              return toColor( espValue );
+            };
+            return [
+              ...getColor( moleculeData.vertexPositions[ indices[ 0 ] ] ),
+              ...getColor( moleculeData.vertexPositions[ indices[ 1 ] ] ),
+              ...getColor( moleculeData.vertexPositions[ indices[ 2 ] ] )
+            ];
+          }
         } ) ), 3 ) );
 
         const meshMaterial = new THREE.MeshBasicMaterial( {

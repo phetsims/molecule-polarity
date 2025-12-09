@@ -321,9 +321,8 @@ function parseAtoms( xyzText: string ): {
 
 /**
  * Parse bonds from SDF (V2000) text.
- * Returns array of [i, j] pairs (0-based indices).
  */
-function parseSDFBonds( sdfText: string ): number[][] {
+function parseSDFBonds( sdfText: string ): { indexA: number, indexB: number, bondType: number }[] {
   const lines = sdfText.split(/\r?\n/);
 
   if (lines.length < 4) {
@@ -359,19 +358,27 @@ function parseSDFBonds( sdfText: string ): number[][] {
 
   for (let i = bondStart; i < bondEnd; i++) {
     const line = lines[i];
-    if (!line || line.length < 6) continue;
+    if (!line || line.length < 9) continue;
     try {
       const a = parseInt(line.slice(0, 3), 10);
       const b = parseInt(line.slice(3, 6), 10);
-      if (!Number.isFinite(a) || !Number.isFinite(b)) continue;
-      // Convert 1-based to 0-based
-      bonds.push([a - 1, b - 1]);
+      const bondType = parseInt(line.slice(6, 9), 10);
+
+      if (!Number.isFinite(a) || !Number.isFinite(b) || !Number.isFinite(bondType)) {
+        continue;
+      }
+
+      bonds.push({
+        indexA: a - 1,
+        indexB: b - 1,
+        bondType
+      });
     } catch {
       // ignore malformed bond lines
     }
   }
 
-  return bonds; // Array<[i,j>]
+  return bonds;
 }
 
 /**
@@ -381,7 +388,7 @@ function parseSDFBonds( sdfText: string ): number[][] {
  * charges: Array<number> in e
  * bonds: Array<[i,j]> 0-based
  */
-function computeBondDipoles( coords: number[][], charges: number[], bonds: number[][] ) {
+function computeBondDipoles( coords: number[][], charges: number[], bonds: { indexA: number; indexB: number }[] ) {
   if (coords.length !== charges.length) {
     throw new Error(
       `coords (${coords.length}) and charges (${charges.length}) mismatch`
@@ -390,7 +397,9 @@ function computeBondDipoles( coords: number[][], charges: number[], bonds: numbe
 
   const bondDipoles = [];
 
-  for (const [a, b] of bonds) {
+  for (const { indexA, indexB } of bonds) {
+    const a = indexA;
+    const b = indexB;
     const ra = coords[a];
     const rb = coords[b];
     if (!ra || !rb) {
@@ -443,8 +452,6 @@ export function computeDipolesFromPsi4( psiOutText: string, xyzText: string, sdf
   const charges = parseMullikenFromOut( psiOutText );
   const bonds = parseSDFBonds( sdfText );
   const muMol = parseMolecularDipoleFromMultipole( psiOutText );
-
-  console.log( 'charges', charges );
 
   const bondDipoles = computeBondDipoles( coords, charges, bonds );
 
@@ -751,6 +758,7 @@ geom.save_xyz_file("reoriented.xyz", 12)
     const psi4Out = fs.readFileSync( path.join( TEMP_DIR, `psi4-output` ), 'utf8' );
 
     const dipoleObj = computeDipolesFromPsi4( psi4Out, xyz, sdf );
+    const charges = parseMullikenFromOut( psi4Out );
 
     const vertexLines = fs.readFileSync( path.join( TEMP_DIR, `${moleculeName}.ses.vert` ), 'utf8' ).split( /\r?\n/ ).slice( 3 ).filter( l => l.trim().length > 0 );
     const faceLines = fs.readFileSync( path.join( TEMP_DIR, `${moleculeName}.ses.face` ), 'utf8' ).split( /\r?\n/ ).slice( 3 ).filter( l => l.trim().length > 0 );
@@ -812,6 +820,7 @@ geom.save_xyz_file("reoriented.xyz", 12)
       atoms: atoms,
       bonds: bonds,
       ...dipoleObj,
+      charges: charges,
       vertexPositions: vertexPositions,
       vertexNormals: vertexNormals,
       faceIndices: faceIndices,
