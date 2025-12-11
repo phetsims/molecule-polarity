@@ -42,6 +42,8 @@ export default class RealMoleculeView extends THREE.Object3D {
     super();
 
     const stepLabels: TextureQuad[] = [];
+    let bondsMeshes: THREE.Mesh[][] = [];
+    const bondRadius = 0.085;
 
     const elementToRadius = ( element: Element ) => {
       const angstroms = element.vanDerWaalsRadius / 100;
@@ -96,39 +98,19 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.add( cubeMesh );
       }
 
-      // TODO: double/triple bonds https://github.com/phetsims/molecule-polarity/issues/15
+      bondsMeshes = [];
+
       for ( const bond of moleculeData.bonds ) {
-        const atomA = moleculeData.atoms[ bond.indexA ];
-        const atomB = moleculeData.atoms[ bond.indexB ];
-
-        const positionA = new Vector3( atomA.x, atomA.y, atomA.z );
-        const positionB = new Vector3( atomB.x, atomB.y, atomB.z );
-
+        const meshes: THREE.Mesh[] = [];
         const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
-        const bondMaterial = new THREE.MeshLambertMaterial( {
-          color: 0xffffff
-        } );
+        const bondMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff } );
 
-        const bondMesh = new THREE.Mesh( bondGeometry, bondMaterial );
-
-        bondMesh.position.set(
-          0.5 * ( atomA.x + atomB.x ),
-          0.5 * ( atomA.y + atomB.y ),
-          0.5 * ( atomA.z + atomB.z )
-        );
-
-        bondMesh.quaternion.setFromUnitVectors(
-          new THREE.Vector3( 0, 1, 0 ),
-          ThreeUtils.vectorToThree( positionB.minus( positionA ).normalized() )
-        );
-
-        bondMesh.scale.x = bondMesh.scale.z = 0.1; // BOND RADIUS
-
-        bondMesh.scale.y = positionA.distance( positionB );
-
-        bondMesh.updateMatrix();
-
-        this.add( bondMesh );
+        for ( let i = 0; i < bond.bondType; i++ ) {
+          const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
+          this.add( mesh );
+          meshes.push( mesh );
+        }
+        bondsMeshes.push( meshes );
       }
 
       if ( atomLabelsVisible ) {
@@ -355,6 +337,59 @@ export default class RealMoleculeView extends THREE.Object3D {
           m.setPosition( ThreeUtils.vectorToThree( labelLowerLeft ) );
 
           label.matrix.copy( m );
+        }
+      }
+
+      // Update bonds to face the camera and handle double/triple offsets
+      {
+        const strippedSymbol = moleculeProperty.value.symbol.replace( /<\/?sub>/g, '' );
+        const moleculeData = RealMoleculeData[ strippedSymbol ];
+
+        const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+
+        const threeYUnit = new THREE.Vector3( 0, 1, 0 );
+
+        const bondSeparation = bondRadius * ( 12 / 5 );
+
+        for ( let b = 0; b < moleculeData.bonds.length; b++ ) {
+          const bond = moleculeData.bonds[ b ];
+          const atomA = moleculeData.atoms[ bond.indexA ];
+          const atomB = moleculeData.atoms[ bond.indexB ];
+
+          const start = new Vector3( atomA.x, atomA.y, atomA.z );
+          const end = new Vector3( atomB.x, atomB.y, atomB.z );
+          const towardsEnd = end.minus( start ).normalized();
+          const distance = start.distance( end );
+          const center = start.timesScalar( 0.5 ).plus( end.timesScalar( 0.5 ) );
+
+          // Perpendicular to bond direction and camera direction
+          const perpendicular = center.minus( end ).normalized().cross( center.minus( localCamera ).normalized() ).normalized();
+
+          let offsets: Vector3[] = [];
+          switch( bond.bondType ) {
+            case 1:
+              offsets = [ new Vector3( 0, 0, 0 ) ];
+              break;
+            case 2:
+              offsets = [ perpendicular.timesScalar( bondSeparation / 2 ), perpendicular.timesScalar( -bondSeparation / 2 ) ];
+              break;
+            case 3:
+              offsets = [ new Vector3( 0, 0, 0 ), perpendicular.timesScalar( bondSeparation ), perpendicular.timesScalar( -bondSeparation ) ];
+              break;
+            default:
+              throw new Error( `Unsupported bond type: ${bond.bondType}` );
+          }
+
+          const threeTowardsEnd = ThreeUtils.vectorToThree( towardsEnd );
+          for ( let i = 0; i < bondsMeshes[ b ].length; i++ ) {
+            const mesh = bondsMeshes[ b ][ i ];
+            const translation = center.plus( offsets[ i ] );
+            mesh.position.set( translation.x, translation.y, translation.z );
+            mesh.quaternion.setFromUnitVectors( threeYUnit, threeTowardsEnd );
+            mesh.scale.x = mesh.scale.z = bondRadius;
+            mesh.scale.y = distance;
+            mesh.updateMatrix();
+          }
         }
       }
     } );
