@@ -57,8 +57,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       moleculeProperty,
       viewProperties.surfaceTypeProperty,
       viewProperties.atomLabelsVisibleProperty,
-      viewProperties.partialChargesVisibleProperty
-    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible ) => {
+      viewProperties.partialChargesVisibleProperty,
+      viewProperties.molecularDipoleVisibleProperty,
+      viewProperties.bondDipolesVisibleProperty
+    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible ) => {
 
       const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
       const moleculeData = RealMoleculeData[ strippedSymbol ];
@@ -116,7 +118,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       // Molecular dipole arrow
-      {
+      if ( molecularDipoleVisible ) {
         const charges = moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ? moleculeData.charges : moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
 
         // Molecular dipole computation (Jmol-style centroid method)
