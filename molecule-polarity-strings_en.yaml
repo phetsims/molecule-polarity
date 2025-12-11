@@ -268,7 +268,7 @@ a11y:
   # PartialCharge6 - Partial Charge magnitude (Screen 1/2)
   partialChargeMagnitude:
     select_magnitude:
-      no: 'no'
+      zero: 'zero'
       verySmall: 'very small'
       small: 'small'
       medium: 'medium'
@@ -324,7 +324,7 @@ a11y:
     moleculeAB:
       heading: 'Molecule AB'
       currentState: 'Currently, the molecule is { $polarity }.'
-      bondDipoleDescription: 'with { $bondDipoleMagnitude } dipole arrow.'
+      bondDipoleDescription: 'Molecule has { $bondDipoleMagnitude } dipole arrow.'
       bondDipoleDirection: 'Bond dipole points { $dipoleDirection } o''clock..'
       partialChargesDescription: 'Partial charges are { $partialChargeMagnitude }.'
       partialChargesDetail: 'Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
@@ -332,10 +332,10 @@ a11y:
       electrostaticPotentialDescription: '{ $potential } electrostatic difference across molecule.'
       electronDensityDescription:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
-        lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards atom { $atom }.'
+        lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards Atom { $atom }.'
       electricFieldAligned: 'Molecule aligned with electric field.'
       orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
-      electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }.'
+      electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }.'
     
     # Rotate Molecule AB Slider
     rotateMoleculeSlider:
@@ -372,14 +372,14 @@ a11y:
       currentState: 'Currently, the molecule is { $polarity }.'
       orientationDescription: 'Molecule is { $shape } with Atom A at { $atomAPosition } o''clock, Atom B at center, and Atom C at { $atomCPosition } o''clock.'
       electricFieldAligned: 'Molecule aligned with electric field.'
-      electronegativityValues: 'Electronegativity for atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
-      molecularDipoleDescription: 'With { $magnitude } molecular dipole arrow.'
+      electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
+      molecularDipoleDescription: 'with { $magnitude } molecular dipole arrow.'
       molecularDipoleDirection: 'Molecular dipole points { $direction } o''clock.'
       molecularDipoleTwice: 'Molecular dipole is twice the size of bond dipoles.'
       bondDipoleABDescription: 'with { $magnitude } AB bond dipole arrow.'
-      bondDipoleABDirection: 'AB bond dipole points to atom { $atom }, { $direction } o''clock.'
+      bondDipoleABDirection: 'AB bond dipole points to Atom { $atom }, { $direction } o''clock.'
       bondDipoleBCDescription: 'With { $magnitude } BC bond dipole arrow'
-      bondDipoleBCDirection: 'BC bond dipole points to atom { $atom }, { $direction } o''clock.'
+      bondDipoleBCDirection: 'BC bond dipole points to Atom { $atom }, { $direction } o''clock.'
       partialChargesDescription: 'Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge.'
     
     # Move Atom A Slider
