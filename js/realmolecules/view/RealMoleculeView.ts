@@ -27,6 +27,8 @@ import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import { simplifiedPartialChargesMap } from '../model/RealMoleculeSimplifiedData.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
+import DipoleArrow from './DipoleArrow.js';
+import MPColors from '../../common/MPColors.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -111,6 +113,103 @@ export default class RealMoleculeView extends THREE.Object3D {
           meshes.push( mesh );
         }
         bondsMeshes.push( meshes );
+      }
+
+      // Molecular dipole arrow
+      {
+        const charges = moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ? moleculeData.charges : moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
+
+        // Molecular dipole computation (Jmol-style centroid method)
+        const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
+        let cPos = 0;
+        let cNeg = 0;
+        const pos = { x: 0, y: 0, z: 0 };
+        const neg = { x: 0, y: 0, z: 0 };
+        for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+          const a = moleculeData.atoms[ i ];
+          const q = charges[ i ];
+          if ( q > 0 ) {
+            cPos += q;
+            pos.x += q * a.x; pos.y += q * a.y; pos.z += q * a.z;
+          }
+          else if ( q < 0 ) {
+            cNeg += q;
+            neg.x += q * a.x; neg.y += q * a.y; neg.z += q * a.z;
+          }
+        }
+        let mu: { x: number; y: number; z: number } | null = null;
+        if ( cPos !== 0 && cNeg !== 0 ) {
+          pos.x /= cPos; pos.y /= cPos; pos.z /= cPos;
+          neg.x /= cNeg; neg.y /= cNeg; neg.z /= cNeg;
+          const sep = { x: pos.x - neg.x, y: pos.y - neg.y, z: pos.z - neg.z };
+          const factor = cPos / E_ANG_PER_DEBYE;
+          mu = { x: sep.x * factor, y: sep.y * factor, z: sep.z * factor };
+        }
+
+        if ( mu ) {
+          // Determine center atom as closest to centroid
+          const centroid = new Vector3( 0, 0, 0 );
+          moleculeData.atoms.forEach( atom => {
+            centroid.x += atom.x;
+            centroid.y += atom.y;
+            centroid.z += atom.z;
+          } );
+          centroid.x /= moleculeData.atoms.length;
+          centroid.y /= moleculeData.atoms.length;
+          centroid.z /= moleculeData.atoms.length;
+          let centerIndex = 0;
+          let bestDist2 = Number.POSITIVE_INFINITY;
+          for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+            const a = moleculeData.atoms[ i ];
+            const dx = a.x - centroid.x;
+            const dy = a.y - centroid.y;
+            const dz = a.z - centroid.z;
+            const d2 = dx * dx + dy * dy + dz * dz;
+            if ( d2 < bestDist2 ) { bestDist2 = d2; centerIndex = i; }
+          }
+
+          const centerAtom = moleculeData.atoms[ centerIndex ];
+          const centerElement = Element.getElementBySymbol( centerAtom.symbol );
+          const centerRadius = elementToRadius( centerElement );
+
+          const dirThree = new THREE.Vector3( -mu.x, -mu.y, -mu.z ).normalize();
+
+          // Tail just outside the center atom
+          const tail = new THREE.Vector3( centerAtom.x, centerAtom.y, centerAtom.z ).add( dirThree.clone().multiplyScalar( centerRadius + 0.07 ) );
+
+          // Choose visual arrow length relative to molecule size
+          let maxR2 = 0;
+          for ( const a of moleculeData.atoms ) {
+            const dx = a.x - centroid.x;
+            const dy = a.y - centroid.y;
+            const dz = a.z - centroid.z;
+            const d2 = dx * dx + dy * dy + dz * dz;
+            if ( d2 > maxR2 ) { maxR2 = d2; }
+          }
+          const span = Math.sqrt( maxR2 );
+          const baseLength = Math.max( 0.2, span * 0.6 );
+
+          // Scale arrow by dipole magnitude: if weaker than reference, uniformly shrink arrow;
+          // if stronger, just lengthen (keep width constant).
+          const muMag = Math.sqrt( mu.x * mu.x + mu.y * mu.y + mu.z * mu.z ); // Debye
+          const MU_REF = 0.5; // 1 Debye as reference
+
+          // If essentially zero, skip rendering to avoid visual noise
+          if ( muMag > 1e-3 ) {
+            const factor = muMag / MU_REF;
+            const arrow = new DipoleArrow( { color: ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
+            if ( factor >= 1 ) {
+              // Longer arrow, same thickness
+              arrow.setFrom( tail, dirThree, baseLength * factor );
+            }
+            else {
+              // Uniformly scale down (length and thickness)
+              arrow.setFrom( tail, dirThree, baseLength );
+              arrow.scale.setScalar( factor );
+            }
+            this.add( arrow );
+          }
+        }
       }
 
       if ( atomLabelsVisible ) {
