@@ -27,7 +27,7 @@ import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import { simplifiedPartialChargesMap } from '../model/RealMoleculeSimplifiedData.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
-import DipoleArrow from './DipoleArrow.js';
+import DipoleArrowView from './DipoleArrowView.js';
 import MPColors from '../../common/MPColors.js';
 
 const LABEL_SIZE = 0.4;
@@ -46,7 +46,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     const stepLabels: TextureQuad[] = [];
     let bondsMeshes: THREE.Mesh[][] = [];
     type BondDipoleState = {
-      arrow: DipoleArrow;
+      arrow: DipoleArrowView;
       tailAtomIndex: number;
       dir: THREE.Vector3; // unit vector, positive -> negative
       baseLength: number;
@@ -214,7 +214,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           // If essentially zero, skip rendering to avoid visual noise
           if ( muMag > 1e-3 ) {
             const factor = muMag / MU_REF;
-            const arrow = new DipoleArrow( { color: ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
+            const arrow = new DipoleArrowView( { color: ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
             if ( factor >= 1 ) {
               // Longer arrow, same thickness
               arrow.setFrom( tail, dirThree, baseLength * factor );
@@ -273,7 +273,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const baseLength = Math.max( 0.1, dist * 0.6 );
           const factor = muMag / MU_REF_BOND;
 
-          const arrow = new DipoleArrow( { color: 0x000000 } );
+          const arrow = new DipoleArrowView( { color: 0x000000 } );
           // Initial placement centered at the bond centerline (no side offset yet)
           // Apply overall scale and cap to bond length to avoid overshooting
           const magLengthFactor = ( factor >= 1 ? factor : 1 );

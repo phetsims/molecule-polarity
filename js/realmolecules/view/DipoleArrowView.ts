@@ -1,29 +1,29 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * A dipole arrow
+ * A dipole arrow in the 3d view
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import moleculePolarity from '../../moleculePolarity.js';
 
-export type DipoleArrowOptions = {
+export type DipoleArrowViewOptions = {
   color: THREE.Color | number;
 };
 
 const headRadius = 0.1;
 const bodyRadius = headRadius * 0.4;
 const headLength = headRadius * 2.0;
-const crossLength = headLength * 0.4;
+const crossLength = bodyRadius * 0.8;
 const crossRadius = headRadius;
 
-export default class DipoleArrow extends THREE.Object3D {
+export default class DipoleArrowView extends THREE.Object3D {
   private body: THREE.Mesh;
   private head: THREE.Mesh;
   private cross: THREE.Mesh;
 
-  public constructor( options: DipoleArrowOptions ) {
+  public constructor( options: DipoleArrowViewOptions ) {
     super();
 
     const material = new THREE.MeshLambertMaterial( { color: options.color } );
@@ -74,4 +74,4 @@ export default class DipoleArrow extends THREE.Object3D {
   }
 }
 
-moleculePolarity.register( 'DipoleArrow', DipoleArrow );
+moleculePolarity.register( 'DipoleArrowView', DipoleArrowView );
