@@ -9,7 +9,7 @@
 import moleculePolarity from '../../moleculePolarity.js';
 
 export type DipoleArrowOptions = {
-  color: THREE.Color;
+  color: THREE.Color | number;
 };
 
 const headRadius = 0.1;

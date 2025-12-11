@@ -45,6 +45,20 @@ export default class RealMoleculeView extends THREE.Object3D {
 
     const stepLabels: TextureQuad[] = [];
     let bondsMeshes: THREE.Mesh[][] = [];
+    type BondDipoleState = {
+      arrow: DipoleArrow;
+      tailAtomIndex: number;
+      dir: THREE.Vector3; // unit vector, positive -> negative
+      baseLength: number;
+      factor: number; // magnitude scaling
+      tailRadius: number;
+      start: Vector3;
+      end: Vector3;
+      lastOffsetDir?: THREE.Vector3; // unit vector for side selection persistence
+    };
+    let bondDipoleStates: BondDipoleState[] = [];
+    const BOND_DIPOLE_OFFSET = 0.3; // view units offset from bond centerline
+    const BOND_DIPOLE_SCALE = 0.6; // overall scale for bond dipole arrows (length and thickness)
     const bondRadius = 0.085;
 
     const elementToRadius = ( element: Element ) => {
@@ -103,6 +117,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       bondsMeshes = [];
+      bondDipoleStates = [];
 
       for ( const bond of moleculeData.bonds ) {
         const meshes: THREE.Mesh[] = [];
@@ -211,6 +226,75 @@ export default class RealMoleculeView extends THREE.Object3D {
             }
             this.add( arrow );
           }
+        }
+      }
+
+      // Bond dipole arrows (black), one per bond
+      if ( bondDipolesVisible ) {
+        const charges = moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ? moleculeData.charges : moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
+        const E_ANG_PER_DEBYE = 0.208194;
+        const MU_REF_BOND = 0.5; // reference Debye for scaling
+
+        for ( const bond of moleculeData.bonds ) {
+          const iA = bond.indexA;
+          const iB = bond.indexB;
+          const a = moleculeData.atoms[ iA ];
+          const b = moleculeData.atoms[ iB ];
+          const c1 = charges[ iA ];
+          const c2 = charges[ iB ];
+
+          const start = new Vector3( a.x, a.y, a.z );
+          const end = new Vector3( b.x, b.y, b.z );
+          const dist = start.distance( end );
+          if ( dist === 0 ) { continue; }
+
+          // Bond dipole magnitude in Debye (Jmol convention)
+          const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
+          const muMag = Math.abs( valueDebye );
+          if ( muMag <= 1e-3 ) { continue; }
+
+          // Direction from positive to negative end
+          let dirThree: THREE.Vector3;
+          let tailAtomIndex: number;
+          if ( ( c1 - c2 ) >= 0 ) {
+            dirThree = ThreeUtils.vectorToThree( end.minus( start ).normalized() );
+            tailAtomIndex = iA; // positive end near A
+          }
+          else {
+            dirThree = ThreeUtils.vectorToThree( start.minus( end ).normalized() );
+            tailAtomIndex = iB; // positive end near B
+          }
+
+          const tailAtom = moleculeData.atoms[ tailAtomIndex ];
+          const tailElement = Element.getElementBySymbol( tailAtom.symbol );
+          const tailRadius = elementToRadius( tailElement );
+
+          // Base length proportional to bond length
+          const baseLength = Math.max( 0.1, dist * 0.6 );
+          const factor = muMag / MU_REF_BOND;
+
+          const arrow = new DipoleArrow( { color: 0x000000 } );
+          // Initial placement centered at the bond centerline (no side offset yet)
+          // Apply overall scale and cap to bond length to avoid overshooting
+          const magLengthFactor = ( factor >= 1 ? factor : 1 );
+          const drawLength = Math.min( dist, baseLength * BOND_DIPOLE_SCALE * magLengthFactor );
+          const centerInit = new THREE.Vector3( ( a.x + b.x ) / 2, ( a.y + b.y ) / 2, ( a.z + b.z ) / 2 );
+          const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
+          arrow.setFrom( initialTail, dirThree, drawLength );
+          const thicknessFactor = BOND_DIPOLE_SCALE * ( factor < 1 ? factor : 1 );
+          arrow.scale.set( thicknessFactor, 1, thicknessFactor );
+          this.add( arrow );
+
+          bondDipoleStates.push( {
+            arrow: arrow,
+            tailAtomIndex: tailAtomIndex,
+            dir: dirThree.clone(),
+            baseLength: baseLength,
+            factor: factor,
+            tailRadius: tailRadius,
+            start: start,
+            end: end
+          } );
         }
       }
 
@@ -491,6 +575,45 @@ export default class RealMoleculeView extends THREE.Object3D {
             mesh.scale.y = distance;
             mesh.updateMatrix();
           }
+        }
+      }
+
+      // Update bond dipole arrows to offset perpendicular to view and bond, with stable side selection
+      if ( viewProperties.bondDipolesVisibleProperty.value && bondDipoleStates.length ) {
+        const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+        for ( const state of bondDipoleStates ) {
+          const start = state.start;
+          const end = state.end;
+          const center = start.timesScalar( 0.5 ).plus( end.timesScalar( 0.5 ) );
+          const bondDir = ThreeUtils.vectorToThree( end.minus( start ).normalized() );
+
+          // Compute a perpendicular direction relative to camera
+          const viewDir = ThreeUtils.vectorToThree( center.minus( localCamera ).normalized() );
+          const perp = new THREE.Vector3().crossVectors( bondDir, viewDir ).normalize();
+          if ( perp.lengthSq() < 1e-6 ) { continue; }
+          const perpNeg = perp.clone().multiplyScalar( -1 );
+
+          // Choose side closest to previous frame
+          let chosen = perp;
+          if ( state.lastOffsetDir ) {
+            const d1 = perp.dot( state.lastOffsetDir );
+            const d2 = perpNeg.dot( state.lastOffsetDir );
+            chosen = ( d2 > d1 ) ? perpNeg : perp;
+          }
+          state.lastOffsetDir = chosen.clone();
+
+          // Recompute tail position so that the arrow is centered at the bond center,
+          // with side offset perpendicular to view and bond.
+          const centerThree = ThreeUtils.vectorToThree( center );
+          const distNow = start.distance( end );
+          const magLengthFactor = ( state.factor >= 1 ? state.factor : 1 );
+          const drawLength = Math.min( distNow, state.baseLength * BOND_DIPOLE_SCALE * magLengthFactor );
+          const tail = centerThree.clone()
+            .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET ) )
+            .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
+          state.arrow.setFrom( tail, state.dir, drawLength );
+          const thicknessFactor = BOND_DIPOLE_SCALE * ( state.factor < 1 ? state.factor : 1 );
+          state.arrow.scale.set( thicknessFactor, 1, thicknessFactor );
         }
       }
     } );
