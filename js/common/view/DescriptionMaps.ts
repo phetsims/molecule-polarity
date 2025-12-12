@@ -14,7 +14,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
 type Dipole = 'small' | 'no' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
-type PartialChargeMagnitude = 'small' | 'no' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
+type PartialChargeMagnitude = 'small' | 'zero' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
@@ -171,7 +171,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
     deltaEN = Math.abs( deltaEN );
-    return deltaEN <= 0.05 ? 'no' :
+    return deltaEN <= 0.05 ? 'zero' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
            deltaEN <= 1.2 ? 'medium' :

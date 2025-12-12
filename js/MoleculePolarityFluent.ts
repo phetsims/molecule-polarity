@@ -5,12 +5,12 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
-import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
+import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -432,7 +432,7 @@ const MoleculePolarityFluent = {
     _comment_22: new FluentComment( {"comment":"PartialCharge2 - Partial Charge sign (Screen 1/2)","associatedKey":"partialChargeSign"} ),
     partialChargeSign: new FluentPattern<{ sign: 'positive' | 'negative' | TReadOnlyProperty<'positive' | 'negative'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeSign', _.get( MoleculePolarityStrings, 'a11y.partialChargeSignStringProperty' ), [{"name":"sign","variants":["positive","negative"]}] ),
     _comment_23: new FluentComment( {"comment":"PartialCharge6 - Partial Charge magnitude (Screen 1/2)","associatedKey":"partialChargeMagnitude"} ),
-    partialChargeMagnitude: new FluentPattern<{ magnitude: 'no' | number | 'zero' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge' | TReadOnlyProperty<'no' | number | 'zero' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeMagnitude', _.get( MoleculePolarityStrings, 'a11y.partialChargeMagnitudeStringProperty' ), [{"name":"magnitude","variants":["no",{"type":"number","value":"zero"},"verySmall","small","medium","large","veryLarge"]}] ),
+    partialChargeMagnitude: new FluentPattern<{ magnitude: number | 'zero' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge' | TReadOnlyProperty<number | 'zero' | 'verySmall' | 'small' | 'medium' | 'large' | 'veryLarge'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeMagnitude', _.get( MoleculePolarityStrings, 'a11y.partialChargeMagnitudeStringProperty' ), [{"name":"magnitude","variants":[{"type":"number","value":"zero"},"verySmall","small","medium","large","veryLarge"]}] ),
     _comment_24: new FluentComment( {"comment":"PartialChargeProgress3 - Partial Charge Progress (Screen 1/2)","associatedKey":"partialChargeProgress"} ),
     partialChargeProgress: new FluentPattern<{ progress: 'morePositive' | 'moreNegative' | number | 'zero' | TReadOnlyProperty<'morePositive' | 'moreNegative' | number | 'zero'> }>( fluentSupport.bundleProperty, 'a11y_partialChargeProgress', _.get( MoleculePolarityStrings, 'a11y.partialChargeProgressStringProperty' ), [{"name":"progress","variants":["morePositive","moreNegative",{"type":"number","value":"zero"}]}] ),
     _comment_25: new FluentComment( {"comment":"Polarity6 - Bond Polarity (Screen 1/2)","associatedKey":"polarity"} ),
