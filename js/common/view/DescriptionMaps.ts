@@ -4,7 +4,7 @@
  *
  * Each mapping defines a createStringProperty function as well as a formatString function for convenience.
  *
- * @author Agustín vallejo
+ * @author Agustín Vallejo
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
