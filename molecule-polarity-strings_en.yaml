@@ -268,6 +268,7 @@ a11y:
   # PartialCharge6 - Partial Charge magnitude (Screen 1/2)
   partialChargeMagnitude:
     select_magnitude:
+      no: 'TODO: unknown variable, see https://github.com/phetsims/molecule-polarity/issues/171'
       zero: 'zero'
       verySmall: 'very small'
       small: 'small'

@@ -383,7 +383,7 @@
       "value": "{ $sign ->\n  [positive] positive\n  *[negative] negative\n}"
     },
     "partialChargeMagnitude": {
-      "value": "{ $magnitude ->\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
+      "value": "{ $magnitude ->\n  [no] TODO: unknown variable, see https://github.com/phetsims/molecule-polarity/issues/171\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
     },
     "partialChargeProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [moreNegative] more negative\n  *[zero] zero\n}"
