@@ -383,7 +383,7 @@
       "value": "{ $sign ->\n  [positive] positive\n  *[negative] negative\n}"
     },
     "partialChargeMagnitude": {
-      "value": "{ $magnitude ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
+      "value": "{ $magnitude ->\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
     },
     "partialChargeProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [moreNegative] more negative\n  *[zero] zero\n}"
@@ -420,7 +420,7 @@
           "value": "Currently, the molecule is { $polarity }."
         },
         "bondDipoleDescription": {
-          "value": "with { $bondDipoleMagnitude } dipole arrow."
+          "value": "Molecule has { $bondDipoleMagnitude } dipole arrow."
         },
         "bondDipoleDirection": {
           "value": "Bond dipole points { $dipoleDirection } o'clock.."
@@ -442,7 +442,7 @@
             "value": "Electron density is { $density } distributed between atoms."
           },
           "lastFourRegions": {
-            "value": "Electron density is { $density } distributed, shifted { $electronDensityShift } towards atom { $atom }."
+            "value": "Electron density is { $density } distributed, shifted { $electronDensityShift } towards Atom { $atom }."
           }
         },
         "electricFieldAligned": {
@@ -452,7 +452,7 @@
           "value": "Molecule is { $orientation } with Atom A { $atomAPosition } o'clock and Atom B { $atomBPosition } o'clock."
         },
         "electronegativityValues": {
-          "value": "Electronegativity for atom A is { $enA }, for Atom B is { $enB }."
+          "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }."
         }
       },
       "rotateMoleculeSlider": {
@@ -528,10 +528,10 @@
           "value": "Molecule aligned with electric field."
         },
         "electronegativityValues": {
-          "value": "Electronegativity for atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }."
+          "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }."
         },
         "molecularDipoleDescription": {
-          "value": "With { $magnitude } molecular dipole arrow."
+          "value": "with { $magnitude } molecular dipole arrow."
         },
         "molecularDipoleDirection": {
           "value": "Molecular dipole points { $direction } o'clock."
@@ -543,13 +543,13 @@
           "value": "with { $magnitude } AB bond dipole arrow."
         },
         "bondDipoleABDirection": {
-          "value": "AB bond dipole points to atom { $atom }, { $direction } o'clock."
+          "value": "AB bond dipole points to Atom { $atom }, { $direction } o'clock."
         },
         "bondDipoleBCDescription": {
           "value": "With { $magnitude } BC bond dipole arrow"
         },
         "bondDipoleBCDirection": {
-          "value": "BC bond dipole points to atom { $atom }, { $direction } o'clock."
+          "value": "BC bond dipole points to Atom { $atom }, { $direction } o'clock."
         },
         "partialChargesDescription": {
           "value": "Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge."
