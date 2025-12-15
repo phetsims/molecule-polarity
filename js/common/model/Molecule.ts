@@ -16,6 +16,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import Atom from './Atom.js';
@@ -36,6 +37,7 @@ export default abstract class Molecule extends PhetioObject {
   public readonly angleProperty: NumberProperty;
   public readonly isDraggingProperty: Property<boolean>; // true when the user is dragging the molecule
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>; // the molecular dipole, sum of the bond dipoles
+  public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
   public abstract readonly deltaENProperty: TReadOnlyProperty<number>;
 
   /**
@@ -106,6 +108,11 @@ export default abstract class Molecule extends PhetioObject {
       phetioValueType: Vector2.Vector2IO,
       phetioDocumentation: 'The molecular dipole, vector sum of the bond dipoles. ' +
                            '+x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
+    } );
+
+    this.dipoleMagnitudeProperty = new DerivedProperty( [ this.dipoleProperty ], dipole => dipole.magnitude, {
+      tandem: options.tandem.createTandem( 'dipoleMagnitudeProperty' ),
+      phetioValueType: NumberIO
     } );
 
     // update partial charges when atoms' EN changes

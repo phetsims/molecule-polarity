@@ -12,6 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Atom from './Atom.js';
 import MPPreferences from './MPPreferences.js';
@@ -25,6 +26,7 @@ export default class Bond extends PhetioObject {
   public readonly atom1: Atom;
   public readonly atom2: Atom;
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>;
+  public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
   public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   public constructor( atom1: Atom, atom2: Atom, providedOptions: BondOptions ) {
@@ -76,6 +78,11 @@ export default class Bond extends PhetioObject {
           'Qualitative vector representation of the dipole, based on the electronegativity difference ' +
           'between the atoms. +x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
       } );
+
+    this.dipoleMagnitudeProperty = new DerivedProperty( [ this.dipoleProperty ], dipole => dipole.magnitude, {
+      tandem: options.tandem.createTandem( 'dipoleMagnitudeProperty' ),
+      phetioValueType: NumberIO
+    } );
 
     this.deltaENProperty = new DerivedProperty(
       [
