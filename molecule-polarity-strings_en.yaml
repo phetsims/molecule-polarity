@@ -230,17 +230,20 @@ a11y:
       on: 'on'
       off: 'off'
   
-  # MolecularDipole6 - Molecular Dipole magnitude (Screen 2)
-  # Note: May need a larger region set - alternative 7-region
+  # MolecularDipole11 - Molecular Dipole magnitude (Screen 2)
   molecularDipole:
     select_magnitude:
-      no: 'no'
+      zero: 'zero'
+      tiny: 'tiny'
       verySmall: 'very small'
       small: 'small'
+      fairlySmall: 'fairly small'
       medium: 'medium'
+      fairlyLarge: 'fairly large'
       large: 'large'
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
+      huge: 'huge'
   
   # OrientationAtom - Orientation for any atom (Screen 1)
   orientationAtom:
@@ -267,15 +270,20 @@ a11y:
       positive: 'positive'
       negative: 'negative'
   
-  # PartialCharge6 - Partial Charge magnitude (Screen 1/2)
+  # PartialCharge11 - Partial Charge magnitude (Screen 1/2)
   partialChargeMagnitude:
     select_magnitude:
       zero: 'zero'
+      tiny: 'tiny'
       verySmall: 'very small'
       small: 'small'
+      fairlySmall: 'fairly small'
       medium: 'medium'
+      fairlyLarge: 'fairly large'
       large: 'large'
       veryLarge: 'very large'
+      extremelyLarge: 'extremely large'
+      huge: 'huge'
   
   # PartialChargeProgress3 - Partial Charge Progress (Screen 1/2)
   partialChargeProgress:

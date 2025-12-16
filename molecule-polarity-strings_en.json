@@ -377,7 +377,7 @@
       "value": "{ $state ->\n  [on] on\n  *[off] off\n}"
     },
     "molecularDipole": {
-      "value": "{ $magnitude ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  [veryLarge] very large\n  *[extremelyLarge] extremely large\n}"
+      "value": "{ $magnitude ->\n  [zero] zero\n  [tiny] tiny\n  [verySmall] very small\n  [small] small\n  [fairlySmall] fairly small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  [extremelyLarge] extremely large\n  *[huge] huge\n}"
     },
     "orientationAtom": {
       "value": "{ $position ->\n  [between1And2] between 1 and 2\n  [at3] at 3\n  [between4And5] between 4 and 5\n  [at6] at 6\n  [between7And8] between 7 and 8\n  [at9] at 9\n  [between10And11] between 10 and 11\n  *[at12] at 12\n}"
@@ -389,7 +389,7 @@
       "value": "{ $sign ->\n  [positive] positive\n  *[negative] negative\n}"
     },
     "partialChargeMagnitude": {
-      "value": "{ $magnitude ->\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
+      "value": "{ $magnitude ->\n  [zero] zero\n  [tiny] tiny\n  [verySmall] very small\n  [small] small\n  [fairlySmall] fairly small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  [extremelyLarge] extremely large\n  *[huge] huge\n}"
     },
     "partialChargeProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [moreNegative] more negative\n  *[zero] zero\n}"
