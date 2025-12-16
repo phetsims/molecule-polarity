@@ -245,6 +245,19 @@ export default class RealMoleculeView extends THREE.Object3D {
           const span = Math.sqrt( maxR2 );
           const baseLength = Math.max( 0.2, span * 0.6 );
 
+          // Cap the maximum displayed arrow length to 1.5x the longest bond length in the molecule
+          let maxBondLength = 0;
+          for ( const b of moleculeData.bonds ) {
+            const a1 = moleculeData.atoms[ b.indexA ];
+            const a2 = moleculeData.atoms[ b.indexB ];
+            const dx = a2.x - a1.x;
+            const dy = a2.y - a1.y;
+            const dz = a2.z - a1.z;
+            const d = Math.sqrt( dx * dx + dy * dy + dz * dz );
+            if ( d > maxBondLength ) { maxBondLength = d; }
+          }
+          const molecularCap = 1.5 * maxBondLength;
+
           // Scale arrow by dipole magnitude: if weaker than reference, uniformly shrink arrow;
           // if stronger, just lengthen (keep width constant).
           const muMag = Math.sqrt( mu.x * mu.x + mu.y * mu.y + mu.z * mu.z ); // Debye
@@ -253,14 +266,18 @@ export default class RealMoleculeView extends THREE.Object3D {
           // If essentially zero, skip rendering to avoid visual noise
           if ( muMag > 1e-3 ) {
             const factor = muMag / MU_REF;
+            const desiredDisplayedLength = baseLength * factor; // consistent for both branches
+            const cappedDisplayedLength = Math.min( molecularCap, desiredDisplayedLength );
+
             const arrow = new DipoleArrowView( { color: ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
             if ( factor >= 1 ) {
-              // Longer arrow, same thickness
-              arrow.setFrom( tail, dirThree, baseLength * factor );
+              // No uniform scale; set the final displayed length directly
+              arrow.setFrom( tail, dirThree, cappedDisplayedLength );
             }
             else {
-              // Uniformly scale down (length and thickness)
-              arrow.setFrom( tail, dirThree, baseLength );
+              // Uniformly scale arrow by factor; pre-scale length so final displayed length equals the cap
+              const preScaleLength = cappedDisplayedLength / Math.max( factor, 1e-6 );
+              arrow.setFrom( tail, dirThree, preScaleLength );
               arrow.scale.setScalar( factor );
             }
             this.add( arrow );
