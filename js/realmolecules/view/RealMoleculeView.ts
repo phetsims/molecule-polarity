@@ -60,7 +60,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     const BOND_DIPOLE_OFFSET = 0.3; // view units offset from bond centerline
     const BOND_DIPOLE_SCALE = 0.6; // overall scale for bond dipole arrows (length and thickness)
-    const BOND_DIPOLE_FACTOR = 0.75; // max fraction of bond length allowed for the longest dipole
+    const BOND_DIPOLE_FACTOR = 0.6; // max fraction of bond length allowed for the longest dipole
     const bondRadius = 0.085;
 
     const elementToRadius = ( element: Element ) => {
@@ -338,7 +338,10 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centerInit = new THREE.Vector3( ( a.x + b.x ) / 2, ( a.y + b.y ) / 2, ( a.z + b.z ) / 2 );
           const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
           arrow.setFrom( initialTail, dirThree, drawLength );
-          const thicknessFactor = BOND_DIPOLE_SCALE * ( factor < 1 ? factor : 1 );
+          // Scale thickness consistently with the final length scaling
+          const baseScaledLength = baseLength * BOND_DIPOLE_SCALE;
+          const effectiveScalar = Math.min( 1, drawLength / baseScaledLength );
+          const thicknessFactor = BOND_DIPOLE_SCALE * effectiveScalar;
           arrow.scale.set( thicknessFactor, 1, thicknessFactor );
           this.add( arrow );
 
@@ -697,8 +700,11 @@ export default class RealMoleculeView extends THREE.Object3D {
             axisFrame = new THREE.Vector3().crossVectors( viewDirFrame, ( Math.abs( viewDirFrame.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
           }
           state.arrow.setCrossPerp( axisFrame );
-          const thicknessFactor = BOND_DIPOLE_SCALE * ( state.factor < 1 ? state.factor : 1 );
-          state.arrow.scale.set( thicknessFactor, 1, thicknessFactor );
+          // Scale thickness consistently with the final length scaling
+          const baseScaledLengthU = state.baseLength * BOND_DIPOLE_SCALE;
+          const effectiveScalarU = Math.min( 1, drawLength / baseScaledLengthU );
+          const thicknessFactorU = BOND_DIPOLE_SCALE * effectiveScalarU;
+          state.arrow.scale.set( thicknessFactorU, 1, thicknessFactorU );
         }
       }
     } );
