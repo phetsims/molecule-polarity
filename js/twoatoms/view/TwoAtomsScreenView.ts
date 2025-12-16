@@ -13,11 +13,14 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
+import DiatomicMoleculeAccessibleListNode from './DiatomicMoleculeAccessibleListNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
@@ -42,6 +45,22 @@ export default class TwoAtomsScreenView extends ScreenView {
     const moleculeNode = new DiatomicMoleculeNode( model.diatomicMolecule, viewProperties, {
       tandem: tandem.createTandem( 'moleculeNode' )
     } );
+
+    const moleculeDescriptionNode = new Node( {
+      accessibleHeading: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
+    } );
+
+    moleculeDescriptionNode.addChild( new Node( {
+      accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
+        polarity: DescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.deltaENProperty )
+      } )
+    } ) );
+
+    // Molecule description
+    moleculeDescriptionNode.addChild( new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule ) );
+
+    // Current polarity description
+    this.addChild( moleculeDescriptionNode );
 
     const platesNode = new PlatesNode( model.eFieldEnabledProperty );
 
@@ -106,6 +125,7 @@ export default class TwoAtomsScreenView extends ScreenView {
     this.addChild( rootNode );
 
     this.pdomPlayAreaNode.pdomOrder = [
+      moleculeDescriptionNode,
       moleculeNode
     ];
 

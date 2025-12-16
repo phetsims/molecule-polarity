@@ -10,7 +10,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -26,9 +25,9 @@ export default class TwoAtomsScreenSummaryContentNode extends ScreenSummaryConte
           state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
         } )
       } ),
-      playAreaContent: MoleculePolarityStrings.a11y.twoAtomsScreen.screenSummary.playAreaStringProperty,
-      controlAreaContent: MoleculePolarityStrings.a11y.twoAtomsScreen.screenSummary.controlAreaStringProperty,
-      interactionHintContent: MoleculePolarityStrings.a11y.twoAtomsScreen.screenSummary.interactionHintStringProperty
+      playAreaContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.playAreaStringProperty,
+      controlAreaContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.controlAreaStringProperty,
+      interactionHintContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.interactionHintStringProperty
     }, providedOptions );
 
     super( options );

@@ -7,35 +7,37 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import Range from '../../../../dot/js/Range.js';
+import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import Shape from '../../../../kite/js/Shape.js';
-import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
-import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import AccessibleInteractiveOptions from '../../../../scenery-phet/js/accessibility/AccessibleInteractiveOptions.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/accessibility/AccessibleSlider.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
-import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
-import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
-import DiatomicMoleculeAccessibleListNode from './DiatomicMoleculeAccessibleListNode.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
 import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type DiatomicMoleculeNodeOptions = SelfOptions & WithRequired<NodeOptions, 'tandem'>;
+type ParentOptions = NodeOptions & AccessibleSliderOptions;
 
-export default class DiatomicMoleculeNode extends Node {
+export type DiatomicMoleculeNodeOptions = SelfOptions & StrictOmit<ParentOptions, 'interactiveHighlightEnabled' | 'enabledRangeProperty' | 'valueProperty' | 'startDrag' | 'endDrag'>;
+
+export default class DiatomicMoleculeNode extends AccessibleSlider( Node, 0 ) {
 
   private readonly resetDiatomicMoleculeNode: () => void;
 
@@ -43,15 +45,25 @@ export default class DiatomicMoleculeNode extends Node {
                       viewProperties: TwoAtomsViewProperties,
                       providedOptions: DiatomicMoleculeNodeOptions ) {
 
-    const options = optionize4<DiatomicMoleculeNodeOptions, SelfOptions, NodeOptions>()(
-      {},
-      AccessibleInteractiveOptions,
+    const options = optionize<DiatomicMoleculeNodeOptions, SelfOptions, ParentOptions>()(
       {
         // NodeOptions
         cursor: 'pointer',
         phetioInputEnabledPropertyInstrumented: true,
         isDisposable: false,
-        accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
+        accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
+        accessibleHelpText: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty,
+
+        // AccessibleSliderOptions
+        enabledRangeProperty: new Property( new Range( -Math.PI, Math.PI ) ),
+        valueProperty: molecule.angleProperty,
+        keyboardStep: Math.PI / 8,
+        shiftKeyboardStep: Math.PI / 8,
+        createAriaValueText: angle => {
+          angle *= -1; // Inverting the angle to have +Y pointing up
+          angle = toDegrees( angle < 0 ? angle + 2 * Math.PI : angle ); // Mapping to [0-360]
+          return toFixed( angle, 1 ); // Rounding
+        }
       }, providedOptions );
 
     // atoms
@@ -166,10 +178,6 @@ export default class DiatomicMoleculeNode extends Node {
 
     // ------------------------------------ Accessibility ---------------------------------------
 
-    this.addInputListener( new MoleculeKeyboardListener( molecule.angleProperty, {
-      tandem: options.tandem.createTandem( 'keyboardListener' )
-    } ) );
-
     molecule.angleProperty.link( angle => {
       // Create a focus highlight that looks like an ellipse around the molecule
       this.focusHighlight = new Shape().ellipse(
@@ -179,20 +187,10 @@ export default class DiatomicMoleculeNode extends Node {
         angle
       );
     } );
-
-    // Current polarity description
-    this.addChild( new Node( {
-      accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( molecule.deltaENProperty )
-      } )
-    } ) );
-
-    // Molecule description
-    this.addChild( new DiatomicMoleculeAccessibleListNode( molecule ) );
-
   }
 
-  public reset(): void {
+  public override reset(): void {
+    super.reset();
     this.resetDiatomicMoleculeNode();
   }
 }
