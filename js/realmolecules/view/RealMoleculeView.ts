@@ -98,6 +98,12 @@ export default class RealMoleculeView extends THREE.Object3D {
         throw new Error( `No partial charge found for atom symbol: ${symbol} with bond quantity: ${bondQuantity}` );
       };
 
+      // Select charge source per requested rule: when USE_REAL is true, use moleculeData.charges;
+      // otherwise use simplified partial charges.
+      const charges: number[] = ( USE_REAL && moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ) ?
+        moleculeData.charges :
+        moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
+
       // Clear out children
       while ( this.children.length > 0 ) {
         this.remove( this.children[ 0 ] );
@@ -138,7 +144,6 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
-        const charges = moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ? moleculeData.charges : moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
 
         // Molecular dipole computation (Jmol-style centroid method)
         const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
@@ -246,7 +251,6 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Bond dipole arrows (black), one per bond
       if ( bondDipolesVisible ) {
-        const charges = moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ? moleculeData.charges : moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
         const E_ANG_PER_DEBYE = 0.208194;
         const MU_REF_BOND = 0.5; // reference Debye for scaling
 
@@ -295,8 +299,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           // Base length proportional to bond length
           const baseLength = Math.max( 0.1, dist * 0.6 );
           const factor = muMag / MU_REF_BOND;
-          const magLengthFactor = ( factor >= 1 ? factor : 1 );
-          const rawLength = baseLength * BOND_DIPOLE_SCALE * magLengthFactor;
+          const rawLength = baseLength * BOND_DIPOLE_SCALE * factor;
 
           const tailAtom = moleculeData.atoms[ tailAtomIndex ];
           const tailElement = Element.getElementBySymbol( tailAtom.symbol );
@@ -329,23 +332,14 @@ export default class RealMoleculeView extends THREE.Object3D {
         }
 
         // Compute global scale so that max(rawLength) per bond does not exceed BOND_DIPOLE_FACTOR * bondLength
-        let globalScale = 1;
-        for ( const r of raws ) {
-          if ( r.rawLength > 1e-6 ) {
-            const allowed = BOND_DIPOLE_FACTOR * r.dist;
-            globalScale = Math.min( globalScale, allowed / r.rawLength );
-          }
-        }
-        bondDipoleGlobalScale = Math.min( 1, globalScale );
-
-        // Second pass: create arrows with global scale applied
+        // Second pass: create arrows with per-bond clamping (no global downscale)
         for ( const r of raws ) {
           const { start, end, dist, dirThree, tailAtomIndex, tailRadius, baseLength, factor, rawLength, centerVisible } = r;
 
           const arrow = new DipoleArrowView( { color: 0x000000 } );
-          // Initial placement centered at the bond centerline (no side offset yet)
-          // Apply globalScale and cap to BOND_DIPOLE_FACTOR * dist to avoid overshooting
-          const drawLength = Math.min( BOND_DIPOLE_FACTOR * dist, rawLength * bondDipoleGlobalScale );
+          // Initial placement centered at the visible bond centerline (no side offset yet)
+          // Cap to BOND_DIPOLE_FACTOR * dist to avoid overshooting
+          const drawLength = Math.min( BOND_DIPOLE_FACTOR * dist, rawLength );
           const centerInit = new THREE.Vector3( centerVisible.x, centerVisible.y, centerVisible.z );
           const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
           arrow.setFrom( initialTail, dirThree, drawLength );
@@ -696,8 +690,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           // with side offset perpendicular to view and bond.
           const centerThree = ThreeUtils.vectorToThree( center );
           const distNow = start.distance( end );
-          const magLengthFactor = ( state.factor >= 1 ? state.factor : 1 );
-          const rawLength = state.baseLength * BOND_DIPOLE_SCALE * magLengthFactor;
+          const rawLength = state.baseLength * BOND_DIPOLE_SCALE * state.factor;
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * distNow, rawLength * bondDipoleGlobalScale );
           const tail = centerThree.clone()
             .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET ) )
