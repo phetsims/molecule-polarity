@@ -58,6 +58,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       lastOffsetDir?: THREE.Vector3; // unit vector for side selection persistence
     };
     let bondDipoleStates: BondDipoleState[] = [];
+    // Track molecular arrow so we can update its cross orientation per frame
+    let molecularArrow: DipoleArrowView | null = null;
+    let molecularArrowDir: THREE.Vector3 | null = null;
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     const BOND_DIPOLE_OFFSET = 0.3; // view units offset from bond centerline
     const BOND_DIPOLE_SCALE = 0.6; // overall scale for bond dipole arrows (length and thickness)
@@ -108,6 +111,8 @@ export default class RealMoleculeView extends THREE.Object3D {
       while ( this.children.length > 0 ) {
         this.remove( this.children[ 0 ] );
       }
+      molecularArrow = null;
+      molecularArrowDir = null;
       stepLabels.length = 0;
 
       for ( const atom of moleculeData.atoms ) {
@@ -235,9 +240,9 @@ export default class RealMoleculeView extends THREE.Object3D {
             }
             this.add( arrow );
 
-            // Orient cross axis: parallel to arrow direction, but perpendicular to camera (projection onto camera plane)
+            // Orient cross axis per frame later; initialize based on tail position now
             const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-            const viewDir = new THREE.Vector3( centroid.x - localCamera.x, centroid.y - localCamera.y, centroid.z - localCamera.z ).normalize();
+            const viewDir = new THREE.Vector3( arrow.position.x - localCamera.x, arrow.position.y - localCamera.y, arrow.position.z - localCamera.z ).normalize();
             let axis = dirThree.clone().sub( viewDir.clone().multiplyScalar( dirThree.dot( viewDir ) ) ).normalize();
             if ( axis.lengthSq() < 1e-6 ) {
               // Fallback to an axis perpendicular to view
@@ -245,6 +250,10 @@ export default class RealMoleculeView extends THREE.Object3D {
               axis = new THREE.Vector3().crossVectors( viewDir, ( Math.abs( viewDir.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
             }
             arrow.setCrossPerp( axis );
+
+            // Track for per-frame update
+            molecularArrow = arrow;
+            molecularArrowDir = dirThree.clone();
           }
         }
       }
@@ -711,6 +720,19 @@ export default class RealMoleculeView extends THREE.Object3D {
           const thicknessFactorU = BOND_DIPOLE_SCALE * effectiveScalarU;
           state.arrow.scale.set( thicknessFactorU, 1, thicknessFactorU );
         }
+      }
+
+      // Update molecular dipole cross orientation each frame
+      if ( molecularArrow && molecularArrowDir ) {
+        const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+        const tailPos = molecularArrow.position; // tail in parent space
+        const viewDir = new THREE.Vector3( tailPos.x - localCamera.x, tailPos.y - localCamera.y, tailPos.z - localCamera.z ).normalize();
+        let axis = molecularArrowDir.clone().sub( viewDir.clone().multiplyScalar( molecularArrowDir.dot( viewDir ) ) ).normalize();
+        if ( axis.lengthSq() < 1e-6 ) {
+          const worldX = new THREE.Vector3( 1, 0, 0 );
+          axis = new THREE.Vector3().crossVectors( viewDir, ( Math.abs( viewDir.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
+        }
+        molecularArrow.setCrossPerp( axis );
       }
     } );
   }
