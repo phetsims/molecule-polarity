@@ -25,7 +25,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AtomNodeOptions = SelfOptions &
   PickRequired<NodeOptions, 'tandem'> &
-  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented' | 'phetioType' | 'phetioState'>;
+  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented' | 'phetioType' | 'phetioState' | 'focusable'>;
 
 export default class AtomNode extends Node {
 

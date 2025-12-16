@@ -7,8 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import Shape from '../../../../kite/js/Shape.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import AccessibleInteractiveOptions from '../../../../scenery-phet/js/accessibility/AccessibleInteractiveOptions.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
@@ -41,21 +43,25 @@ export default class DiatomicMoleculeNode extends Node {
                       viewProperties: TwoAtomsViewProperties,
                       providedOptions: DiatomicMoleculeNodeOptions ) {
 
-    const options = optionize<DiatomicMoleculeNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // NodeOptions
-      cursor: 'pointer',
-      phetioInputEnabledPropertyInstrumented: true,
-      isDisposable: false,
-      accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
-    }, providedOptions );
+    const options = optionize4<DiatomicMoleculeNodeOptions, SelfOptions, NodeOptions>()(
+      {},
+      AccessibleInteractiveOptions,
+      {
+        // NodeOptions
+        cursor: 'pointer',
+        phetioInputEnabledPropertyInstrumented: true,
+        isDisposable: false,
+        accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
+      }, providedOptions );
 
     // atoms
     const atomANode = new AtomNode( molecule.atomA, {
-      tandem: options.tandem.createTandem( 'atomANode' )
+      tandem: options.tandem.createTandem( 'atomANode' ),
+      focusable: false
     } );
     const atomBNode = new AtomNode( molecule.atomB, {
-      tandem: options.tandem.createTandem( 'atomBNode' )
+      tandem: options.tandem.createTandem( 'atomBNode' ),
+      focusable: false
     } );
 
     // bond
@@ -118,12 +124,6 @@ export default class DiatomicMoleculeNode extends Node {
     } );
     this.addInputListener( dragListener );
 
-    const keyboardListener = new MoleculeKeyboardListener( molecule.angleProperty, {
-      tandem: options.tandem.createTandem( 'keyboardListener' )
-    } );
-    atomANode.addInputListener( keyboardListener );
-    atomBNode.addInputListener( keyboardListener );
-
     viewProperties.surfaceTypeProperty.link( surfaceType => {
       electrostaticPotentialSurfaceNode.visible = ( surfaceType === 'electrostaticPotential' );
       electronDensitySurfaceNode.visible = ( surfaceType === 'electronDensity' );
@@ -165,6 +165,20 @@ export default class DiatomicMoleculeNode extends Node {
     };
 
     // ------------------------------------ Accessibility ---------------------------------------
+
+    this.addInputListener( new MoleculeKeyboardListener( molecule.angleProperty, {
+      tandem: options.tandem.createTandem( 'keyboardListener' )
+    } ) );
+
+    molecule.angleProperty.link( angle => {
+      // Create a focus highlight that looks like an ellipse around the molecule
+      this.focusHighlight = new Shape().ellipse(
+        this.center,
+        150,
+        100,
+        angle
+      );
+    } );
 
     // Current polarity description
     this.addChild( new Node( {
