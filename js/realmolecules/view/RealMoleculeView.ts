@@ -240,16 +240,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             }
             this.add( arrow );
 
-            // Orient cross axis per frame later; initialize based on tail position now
-            const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-            const viewDir = new THREE.Vector3( arrow.position.x - localCamera.x, arrow.position.y - localCamera.y, arrow.position.z - localCamera.z ).normalize();
-            let axis = dirThree.clone().sub( viewDir.clone().multiplyScalar( dirThree.dot( viewDir ) ) ).normalize();
-            if ( axis.lengthSq() < 1e-6 ) {
-              // Fallback to an axis perpendicular to view
-              const worldX = new THREE.Vector3( 1, 0, 0 );
-              axis = new THREE.Vector3().crossVectors( viewDir, ( Math.abs( viewDir.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
-            }
-            arrow.setCrossPerp( axis );
+            // Initialize cross axis aligned with the arrow direction
+            arrow.setCrossPerp( dirThree );
 
             // Track for per-frame update
             molecularArrow = arrow;
@@ -722,17 +714,9 @@ export default class RealMoleculeView extends THREE.Object3D {
         }
       }
 
-      // Update molecular dipole cross orientation each frame
+      // Update molecular dipole cross orientation each frame (aligned with arrow)
       if ( molecularArrow && molecularArrowDir ) {
-        const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-        const tailPos = molecularArrow.position; // tail in parent space
-        const viewDir = new THREE.Vector3( tailPos.x - localCamera.x, tailPos.y - localCamera.y, tailPos.z - localCamera.z ).normalize();
-        let axis = molecularArrowDir.clone().sub( viewDir.clone().multiplyScalar( molecularArrowDir.dot( viewDir ) ) ).normalize();
-        if ( axis.lengthSq() < 1e-6 ) {
-          const worldX = new THREE.Vector3( 1, 0, 0 );
-          axis = new THREE.Vector3().crossVectors( viewDir, ( Math.abs( viewDir.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
-        }
-        molecularArrow.setCrossPerp( axis );
+        molecularArrow.setCrossPerp( molecularArrowDir );
       }
     } );
   }
