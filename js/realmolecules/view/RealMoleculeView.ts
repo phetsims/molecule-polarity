@@ -156,7 +156,6 @@ export default class RealMoleculeView extends THREE.Object3D {
         const bondMaterial = new THREE.MeshLambertMaterial( {
           color: 0xffffff,
           depthTest: true,
-          depthWrite: false,
           side: THREE.FrontSide // for when transparent
         } );
 
