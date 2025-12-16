@@ -45,6 +45,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     super();
 
     const stepLabels: TextureQuad[] = [];
+    const atomMeshes: THREE.Mesh[] = [];
     let bondsMeshes: THREE.Mesh[][] = [];
     type BondDipoleState = {
       arrow: DipoleArrowView;
@@ -122,6 +123,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       molecularArrowDir = null;
       stepLabels.length = 0;
 
+      atomMeshes.length = 0;
       for ( const atom of moleculeData.atoms ) {
         const element = Element.getElementBySymbol( atom.symbol );
 
@@ -132,9 +134,10 @@ export default class RealMoleculeView extends THREE.Object3D {
           color: threeColor
         } );
 
-        const cubeMesh = new THREE.Mesh( sphereGeometry, atomMaterial );
-        cubeMesh.position.set( atom.x, atom.y, atom.z );
-        this.add( cubeMesh );
+        const sphereMesh = new THREE.Mesh( sphereGeometry, atomMaterial );
+        sphereMesh.position.set( atom.x, atom.y, atom.z );
+        this.add( sphereMesh );
+        atomMeshes.push( sphereMesh );
       }
 
       bondsMeshes = [];
@@ -255,6 +258,44 @@ export default class RealMoleculeView extends THREE.Object3D {
             // Track for per-frame update
             molecularArrow = arrow;
             molecularArrowDir = dirThree.clone();
+
+            // Dim the non-central atom that lies along the arrow direction (if any)
+            const alignmentThreshold = 0.95; // cosine threshold for alignment
+            let bestDot = alignmentThreshold;
+            let alignedIndex: number | null = null;
+            for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+              if ( i === centerIndex ) { continue; }
+              const a = moleculeData.atoms[ i ];
+              const v = new THREE.Vector3( a.x - centerAtom.x, a.y - centerAtom.y, a.z - centerAtom.z ).normalize();
+              const d = v.dot( dirThree );
+              if ( d > bestDot ) {
+                bestDot = d;
+                alignedIndex = i;
+              }
+            }
+
+            if ( alignedIndex !== null ) {
+              // Dim the aligned atom mesh
+              const atomMesh = atomMeshes[ alignedIndex ];
+              if ( atomMesh ) {
+                const mat = atomMesh.material as THREE.MeshLambertMaterial;
+                mat.transparent = true;
+                mat.opacity = 0.5;
+              }
+
+              // Dim the bond mesh between center and aligned atom
+              const bondIndex = moleculeData.bonds.findIndex( b =>
+                ( b.indexA === centerIndex && b.indexB === alignedIndex ) ||
+                ( b.indexB === centerIndex && b.indexA === alignedIndex )
+              );
+              if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
+                for ( const mesh of bondsMeshes[ bondIndex ] ) {
+                  const bmat = mesh.material as THREE.MeshLambertMaterial;
+                  bmat.transparent = true;
+                  bmat.opacity = 0.5;
+                }
+              }
+            }
           }
         }
       }
