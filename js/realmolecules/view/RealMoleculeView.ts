@@ -225,6 +225,17 @@ export default class RealMoleculeView extends THREE.Object3D {
               arrow.scale.setScalar( factor );
             }
             this.add( arrow );
+
+            // Orient cross axis: parallel to arrow direction, but perpendicular to camera (projection onto camera plane)
+            const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+            const viewDir = new THREE.Vector3( centroid.x - localCamera.x, centroid.y - localCamera.y, centroid.z - localCamera.z ).normalize();
+            let axis = dirThree.clone().sub( viewDir.clone().multiplyScalar( dirThree.dot( viewDir ) ) ).normalize();
+            if ( axis.lengthSq() < 1e-6 ) {
+              // Fallback to an axis perpendicular to view
+              const worldX = new THREE.Vector3( 1, 0, 0 );
+              axis = new THREE.Vector3().crossVectors( viewDir, ( Math.abs( viewDir.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
+            }
+            arrow.setCrossPerp( axis );
           }
         }
       }
@@ -284,6 +295,17 @@ export default class RealMoleculeView extends THREE.Object3D {
           const thicknessFactor = BOND_DIPOLE_SCALE * ( factor < 1 ? factor : 1 );
           arrow.scale.set( thicknessFactor, 1, thicknessFactor );
           this.add( arrow );
+
+          // Initial crossbar orientation
+          const localCamera2 = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+          const viewDirInit = new THREE.Vector3( centerInit.x - localCamera2.x, centerInit.y - localCamera2.y, centerInit.z - localCamera2.z ).normalize();
+          // axisInit: projection of bond direction onto camera plane
+          let axisInit = dirThree.clone().sub( viewDirInit.clone().multiplyScalar( dirThree.dot( viewDirInit ) ) ).normalize();
+          if ( axisInit.lengthSq() < 1e-6 ) {
+            const worldX = new THREE.Vector3( 1, 0, 0 );
+            axisInit = new THREE.Vector3().crossVectors( viewDirInit, ( Math.abs( viewDirInit.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
+          }
+          arrow.setCrossPerp( axisInit );
 
           bondDipoleStates.push( {
             arrow: arrow,
@@ -591,8 +613,13 @@ export default class RealMoleculeView extends THREE.Object3D {
 
           // Compute a perpendicular direction relative to camera
           const viewDir = ThreeUtils.vectorToThree( center.minus( localCamera ).normalized() );
-          const perp = new THREE.Vector3().crossVectors( bondDir, viewDir ).normalize();
-          if ( perp.lengthSq() < 1e-6 ) { continue; }
+          let perp = new THREE.Vector3().crossVectors( bondDir, viewDir ).normalize();
+          if ( perp.lengthSq() < 1e-6 ) {
+            // Fallback perpendicular independent of view
+            const worldX = new THREE.Vector3( 1, 0, 0 );
+            const alt = ( Math.abs( bondDir.dot( worldX ) ) > 0.9 ) ? new THREE.Vector3( 0, 1, 0 ) : worldX;
+            perp = new THREE.Vector3().crossVectors( bondDir, alt ).normalize();
+          }
           const perpNeg = perp.clone().multiplyScalar( -1 );
 
           // Choose side closest to previous frame
@@ -614,6 +641,15 @@ export default class RealMoleculeView extends THREE.Object3D {
             .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET ) )
             .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
           state.arrow.setFrom( tail, state.dir, drawLength );
+          // Cross axis should be parallel to bond direction but perpendicular to camera at arrow location (tail)
+          const arrowPosFrame = state.arrow.position; // tail in parent space
+          const viewDirFrame = new THREE.Vector3( arrowPosFrame.x - localCamera.x, arrowPosFrame.y - localCamera.y, arrowPosFrame.z - localCamera.z ).normalize();
+          let axisFrame = state.dir.clone().sub( viewDirFrame.clone().multiplyScalar( state.dir.dot( viewDirFrame ) ) ).normalize();
+          if ( axisFrame.lengthSq() < 1e-6 ) {
+            const worldX = new THREE.Vector3( 1, 0, 0 );
+            axisFrame = new THREE.Vector3().crossVectors( viewDirFrame, ( Math.abs( viewDirFrame.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
+          }
+          state.arrow.setCrossPerp( axisFrame );
           const thicknessFactor = BOND_DIPOLE_SCALE * ( state.factor < 1 ? state.factor : 1 );
           state.arrow.scale.set( thicknessFactor, 1, thicknessFactor );
         }

@@ -9,7 +9,7 @@
 import moleculePolarity from '../../moleculePolarity.js';
 
 export type DipoleArrowViewOptions = {
-  color: THREE.Color | number;
+  color: THREE.ColorRepresentation;
 };
 
 const headRadius = 0.1;
@@ -22,6 +22,7 @@ export default class DipoleArrowView extends THREE.Object3D {
   private body: THREE.Mesh;
   private head: THREE.Mesh;
   private cross: THREE.Mesh;
+  private crossAnchor: THREE.Object3D;
 
   public constructor( options: DipoleArrowViewOptions ) {
     super();
@@ -36,6 +37,7 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.body = new THREE.Mesh( bodyGeometry, material );
     this.head = new THREE.Mesh( headGeometry, material );
     this.cross = new THREE.Mesh( crossGeometry, material );
+    this.crossAnchor = new THREE.Object3D();
 
     this.body.scale.x = this.body.scale.z = bodyRadius;
     this.head.scale.x = this.head.scale.z = headRadius;
@@ -45,9 +47,11 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.cross.scale.z = crossRadius;
     this.cross.scale.y = crossLength;
 
+    this.crossAnchor.add( this.cross );
+
     this.add( this.body );
     this.add( this.head );
-    this.add( this.cross );
+    this.add( this.crossAnchor );
   }
 
   public setFrom( origin: THREE.Vector3, direction: THREE.Vector3, totalLength: number ): void {
@@ -69,8 +73,21 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.head.position.set( 0, bodyLength + headLength / 2, 0 );
     this.head.updateMatrix();
 
-    this.cross.position.set( 0, 2.5 * crossLength, 0 );
-    this.cross.updateMatrix();
+    this.crossAnchor.position.set( 0, 2.5 * crossLength, 0 );
+    this.crossAnchor.updateMatrix();
+  }
+
+  /**
+   * Set the cross orientation so its axis is perpendicular to both arrow direction and camera direction.
+   * Provided vector is in the parent (arrow group) space.
+   */
+  public setCrossPerp( perpParentDir: THREE.Vector3 ): void {
+    const inv = this.quaternion.clone().invert();
+    const up = new THREE.Vector3( 0, 1, 0 );
+    const localPerp = perpParentDir.clone().normalize().applyQuaternion( inv );
+    if ( localPerp.lengthSq() > 1e-6 ) {
+      this.cross.quaternion.setFromUnitVectors( up, localPerp );
+    }
   }
 }
 
