@@ -66,7 +66,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     let molecularArrow: DipoleArrowView | null = null;
     let molecularArrowDir: THREE.Vector3 | null = null;
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
-    const BOND_DIPOLE_OFFSET = 0.3; // view units offset from bond centerline
+    const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
     const BOND_DIPOLE_SCALE = 0.6; // overall scale for bond dipole arrows (length and thickness)
     const BOND_DIPOLE_FACTOR = 0.6; // max fraction of bond length allowed for the longest dipole
     const bondRadius = 0.085;
@@ -74,7 +74,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     const elementToRadius = ( element: Element ) => {
       const angstroms = element.vanDerWaalsRadius / 100;
 
-      return 0.2 * angstroms; // scale factor for better visibility
+      return 0.25 * angstroms; // scale factor for better visibility
     };
 
     Multilink.multilink( [
@@ -470,6 +470,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const labelFill = elementToForegroundColor( element );
 
           const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
+          const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
           const labelNode = new VBox( {
             children: [
               ...( atomLabelsVisible ? [
@@ -480,7 +481,7 @@ export default class RealMoleculeView extends THREE.Object3D {
               ] : [] ),
               ...( partialChargesVisible ? [
                 // TODO: strings! https://github.com/phetsims/molecule-polarity/issues/15
-                new Text( `δ=${toFixed( partialCharge, 2 )}`, { font: labelFont, fill: labelFill } )
+                new Text( `δ=${toFixed( partialCharge, 2 )}`, { font: smallFont, fill: labelFill } )
               ] : [] )
             ],
             center: new Vector2( 256, 128 )
@@ -809,7 +810,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const distNow = start.distance( end );
           const rawLength = state.baseLength * BOND_DIPOLE_SCALE * state.factor;
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * distNow, rawLength * bondDipoleGlobalScale );
-          const sideOffsetScale = ( state.bondType === 3 ? 1.2 : 1 );
+          const sideOffsetScale = ( state.bondType === 3 ? 1.2 : ( state.bondType === 2 ? 1 : 0.8 ) );
           const tail = centerThree.clone()
             .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
             .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
