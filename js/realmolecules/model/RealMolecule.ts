@@ -20,15 +20,13 @@ export default class RealMolecule extends PhetioObject {
 
   public readonly symbol: string;
   public readonly fullNameProperty: TReadOnlyProperty<string>;
-  public readonly mol2Data: string;
 
   /**
    * @param symbol - chemical symbol of the molecule
    * @param fullNameProperty - full name of the molecule
-   * @param mol2Data molecule data description, in mol2 format
    * @param tandem
    */
-  public constructor( symbol: string, fullNameProperty: TReadOnlyProperty<string>, mol2Data: string, tandem: Tandem ) {
+  public constructor( symbol: string, fullNameProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
 
     super( {
       phetioType: RealMolecule.RealMoleculeIO,
@@ -38,7 +36,6 @@ export default class RealMolecule extends PhetioObject {
 
     this.symbol = ChemUtils.toSubscript( symbol );
     this.fullNameProperty = fullNameProperty;
-    this.mol2Data = mol2Data;
   }
 
   /**
