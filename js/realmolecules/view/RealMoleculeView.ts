@@ -648,6 +648,9 @@ export default class RealMoleculeView extends THREE.Object3D {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error Having to use external lib like this
         const mesh = new THREE.Mesh( window.ThreeLoopSubdivision.modify( meshGeometry, 2 ), meshMaterial );
+
+        mesh.renderOrder = 150; // after everything else
+
         this.add( mesh );
       }
     } );
