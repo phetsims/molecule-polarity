@@ -82,8 +82,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       viewProperties.partialChargesVisibleProperty,
       viewProperties.molecularDipoleVisibleProperty,
       viewProperties.bondDipolesVisibleProperty,
+      MPPreferences.dipoleDirectionProperty,
       MPPreferences.surfaceColorProperty
-    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible ) => {
+    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible, dipoleDirection, surfaceColor ) => {
 
       const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
       const moleculeData = RealMoleculeData[ strippedSymbol ];
@@ -109,6 +110,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       const charges: number[] = ( USE_REAL && moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ) ?
         moleculeData.charges :
         moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
+
+      // Dipole direction preference: default is positiveToNegative; otherwise reverse arrows
+      const orientationSign = ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
 
       // Clear out children
       while ( this.children.length > 0 ) {
@@ -206,7 +210,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centerElement = Element.getElementBySymbol( centerAtom.symbol );
           const centerRadius = elementToRadius( centerElement );
 
-          const dirThree = new THREE.Vector3( -mu.x, -mu.y, -mu.z ).normalize();
+          // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
+          const dirThreeBase = new THREE.Vector3( -mu.x, -mu.y, -mu.z ).normalize();
+          const dirThree = dirThreeBase.clone().multiplyScalar( orientationSign );
 
           // Tail just outside the center atom
           const tail = new THREE.Vector3( centerAtom.x, centerAtom.y, centerAtom.z ).add( dirThree.clone().multiplyScalar( centerRadius + 0.07 ) );
@@ -288,7 +294,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const muMag = Math.abs( valueDebye );
           if ( muMag <= 1e-3 ) { continue; }
 
-          // Direction from positive to negative end
+          // Direction from positive to negative end (then apply preference)
           let dirThree: THREE.Vector3;
           let tailAtomIndex: number;
           if ( ( c1 - c2 ) >= 0 ) {
@@ -299,6 +305,7 @@ export default class RealMoleculeView extends THREE.Object3D {
             dirThree = ThreeUtils.vectorToThree( start.minus( end ).normalized() );
             tailAtomIndex = iB; // positive end near B
           }
+          dirThree.multiplyScalar( orientationSign );
 
           // Base length proportional to bond length
           const baseLength = Math.max( 0.1, dist * 0.6 );
@@ -489,7 +496,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         };
 
         const toColor = surfaceType === 'electrostaticPotential'
-          ? ( MPPreferences.surfaceColorProperty.value === 'ROYGB' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
+          ? ( surfaceColor === 'ROYGB' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
           : colorizeElectronDensity;
 
         const meshGeometry = new THREE.BufferGeometry();
