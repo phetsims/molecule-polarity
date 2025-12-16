@@ -463,7 +463,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           const atomIndex = moleculeData.atoms.indexOf( atom );
           const element = Element.getElementBySymbol( atom.symbol );
           const partialCharge = getPartialCharge( atom.symbol, moleculeData.bonds.filter( bond => bond.indexA === atomIndex || bond.indexB === atomIndex ).length );
-          const atomVisualIndex = moleculeData.atoms.filter( a => a.symbol === atom.symbol ).indexOf( atom );
+          const sameElementAtoms = moleculeData.atoms.filter( a => a.symbol === atom.symbol );
+          const atomVisualIndex = sameElementAtoms.indexOf( atom );
+          const showIndex = sameElementAtoms.length > 1;
 
           const labelFill = elementToForegroundColor( element );
 
@@ -471,7 +473,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const labelNode = new VBox( {
             children: [
               ...( atomLabelsVisible ? [
-                new Text( `${element.symbol}${atomVisualIndex + 1}`, {
+                new Text( showIndex ? `${element.symbol}${atomVisualIndex + 1}` : `${element.symbol}`, {
                   font: labelFont,
                   fill: labelFill
                 } )
