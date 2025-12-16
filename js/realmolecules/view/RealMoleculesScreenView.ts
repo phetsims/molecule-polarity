@@ -46,7 +46,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       sceneNodeOptions: {
         parentMatrixProperty: animatedPanZoomSingleton.listener.matrixProperty,
         cameraPosition: REAL_MOLECULES_CAMERA_POSITION,
-        viewOffset: new Vector2( 0, 0 ),
+
+        // Manually tuned constant for placement (for now), since we need this on startup.
+        // This will move the "center" of the molecule view down a bit to account for the thicker UI content on the
+        // top of the screen.
+        viewOffset: new Vector2( 0, 50 ),
+
         backgroundColorProperty: new ColorProperty( Color.TRANSPARENT )
       }
     } );
