@@ -57,8 +57,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       lastOffsetDir?: THREE.Vector3; // unit vector for side selection persistence
     };
     let bondDipoleStates: BondDipoleState[] = [];
+    let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     const BOND_DIPOLE_OFFSET = 0.3; // view units offset from bond centerline
     const BOND_DIPOLE_SCALE = 0.6; // overall scale for bond dipole arrows (length and thickness)
+    const BOND_DIPOLE_FACTOR = 0.75; // max fraction of bond length allowed for the longest dipole
     const bondRadius = 0.085;
 
     const elementToRadius = ( element: Element ) => {
@@ -118,6 +120,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       bondsMeshes = [];
       bondDipoleStates = [];
+      bondDipoleGlobalScale = 1;
 
       for ( const bond of moleculeData.bonds ) {
         const meshes: THREE.Mesh[] = [];
@@ -246,6 +249,17 @@ export default class RealMoleculeView extends THREE.Object3D {
         const E_ANG_PER_DEBYE = 0.208194;
         const MU_REF_BOND = 0.5; // reference Debye for scaling
 
+        // First pass: compute raw (unclamped) draw lengths to determine a global scale
+        type BondRaw = {
+          iA: number; iB: number;
+          a: typeof moleculeData.atoms[number];
+          b: typeof moleculeData.atoms[number];
+          start: Vector3; end: Vector3; dist: number;
+          dirThree: THREE.Vector3; tailAtomIndex: number; tailRadius: number;
+          baseLength: number; factor: number; rawLength: number;
+        };
+        const raws: BondRaw[] = [];
+
         for ( const bond of moleculeData.bonds ) {
           const iA = bond.indexA;
           const iB = bond.indexB;
@@ -276,19 +290,51 @@ export default class RealMoleculeView extends THREE.Object3D {
             tailAtomIndex = iB; // positive end near B
           }
 
+          // Base length proportional to bond length
+          const baseLength = Math.max( 0.1, dist * 0.6 );
+          const factor = muMag / MU_REF_BOND;
+          const magLengthFactor = ( factor >= 1 ? factor : 1 );
+          const rawLength = baseLength * BOND_DIPOLE_SCALE * magLengthFactor;
+
           const tailAtom = moleculeData.atoms[ tailAtomIndex ];
           const tailElement = Element.getElementBySymbol( tailAtom.symbol );
           const tailRadius = elementToRadius( tailElement );
 
-          // Base length proportional to bond length
-          const baseLength = Math.max( 0.1, dist * 0.6 );
-          const factor = muMag / MU_REF_BOND;
+          raws.push( {
+            iA: iA,
+            iB: iB,
+            a: a,
+            b: b,
+            start: start,
+            end: end,
+            dist: dist,
+            dirThree: dirThree,
+            tailAtomIndex: tailAtomIndex,
+            tailRadius: tailRadius,
+            baseLength: baseLength,
+            factor: factor,
+            rawLength: rawLength
+          } );
+        }
+
+        // Compute global scale so that max(rawLength) per bond does not exceed BOND_DIPOLE_FACTOR * bondLength
+        let globalScale = 1;
+        for ( const r of raws ) {
+          if ( r.rawLength > 1e-6 ) {
+            const allowed = BOND_DIPOLE_FACTOR * r.dist;
+            globalScale = Math.min( globalScale, allowed / r.rawLength );
+          }
+        }
+        bondDipoleGlobalScale = Math.min( 1, globalScale );
+
+        // Second pass: create arrows with global scale applied
+        for ( const r of raws ) {
+          const { a, b, start, end, dist, dirThree, tailAtomIndex, tailRadius, baseLength, factor, rawLength } = r;
 
           const arrow = new DipoleArrowView( { color: 0x000000 } );
           // Initial placement centered at the bond centerline (no side offset yet)
-          // Apply overall scale and cap to bond length to avoid overshooting
-          const magLengthFactor = ( factor >= 1 ? factor : 1 );
-          const drawLength = Math.min( dist, baseLength * BOND_DIPOLE_SCALE * magLengthFactor );
+          // Apply globalScale and cap to BOND_DIPOLE_FACTOR * dist to avoid overshooting
+          const drawLength = Math.min( BOND_DIPOLE_FACTOR * dist, rawLength * bondDipoleGlobalScale );
           const centerInit = new THREE.Vector3( ( a.x + b.x ) / 2, ( a.y + b.y ) / 2, ( a.z + b.z ) / 2 );
           const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
           arrow.setFrom( initialTail, dirThree, drawLength );
@@ -636,7 +682,8 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centerThree = ThreeUtils.vectorToThree( center );
           const distNow = start.distance( end );
           const magLengthFactor = ( state.factor >= 1 ? state.factor : 1 );
-          const drawLength = Math.min( distNow, state.baseLength * BOND_DIPOLE_SCALE * magLengthFactor );
+          const rawLength = state.baseLength * BOND_DIPOLE_SCALE * magLengthFactor;
+          const drawLength = Math.min( BOND_DIPOLE_FACTOR * distNow, rawLength * bondDipoleGlobalScale );
           const tail = centerThree.clone()
             .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET ) )
             .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
