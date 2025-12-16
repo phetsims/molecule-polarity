@@ -31,10 +31,6 @@ const MPQueryParameters = QueryStringMachine.getAll( {
     public: true
   },
 
-  //TODO https://github.com/phetsims/molecule-polarity/issues/32 delete when the Real Molecules screen is fully implemented
-  // Enables the 'Real Molecules' screen, for internal use only.
-  realMolecules: { type: 'flag' },
-
   // Shows the molecule angle by adding an arrow whose tail is at the molecule center, and points
   // outward in the direction of the angle. For internal use only.
   showMoleculeAngle: { type: 'flag' }
