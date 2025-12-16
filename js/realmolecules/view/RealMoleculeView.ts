@@ -30,6 +30,7 @@ import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPColors from '../../common/MPColors.js';
+import { elementToColor, elementToForegroundColor } from '../model/RealMoleculeColors.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -127,7 +128,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       for ( const atom of moleculeData.atoms ) {
         const element = Element.getElementBySymbol( atom.symbol );
 
-        const threeColor = ThreeUtils.colorToThree( Color.toColor( element === Element.C ? '#444' : element.color ) );
+        const threeColor = ThreeUtils.colorToThree( Color.toColor( elementToColor( element ) ) );
 
         const sphereGeometry = new THREE.SphereGeometry( elementToRadius( element ), 32, 32 );
         const atomMaterial = new THREE.MeshLambertMaterial( {
@@ -464,7 +465,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const partialCharge = getPartialCharge( atom.symbol, moleculeData.bonds.filter( bond => bond.indexA === atomIndex || bond.indexB === atomIndex ).length );
           const atomVisualIndex = moleculeData.atoms.filter( a => a.symbol === atom.symbol ).indexOf( atom );
 
-          const labelFill = [ Element.N, Element.O, Element.C ].includes( element ) ? 'white' : 'black';
+          const labelFill = elementToForegroundColor( element );
 
           const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
           const labelNode = new VBox( {

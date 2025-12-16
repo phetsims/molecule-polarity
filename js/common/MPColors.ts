@@ -31,6 +31,7 @@ const MPColors = {
   ATOM_C: 'rgb( 255, 175, 175)',
   BOND: 'rgb( 140, 140, 140 )',
   OXYGEN: PhetColorScheme.RED_COLORBLIND,
+  CARBON: '#444',
 
   // dipoles
   BOND_DIPOLE: 'black',

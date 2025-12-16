@@ -27,12 +27,12 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import { RealMoleculeData } from '../model/RealMoleculeData.js';
+import { elementToColor, elementToForegroundColor } from '../model/RealMoleculeColors.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
 const BACKGROUND_COLOR = new Color( 210, 210, 210 );
 const NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
-const HIGHLIGHTED_TEXT_COLOR = Color.BLACK;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -95,7 +95,7 @@ export default class ElectronegativityTableNode extends Node {
       for ( const atom of moleculeData.atoms ) {
         const element = Element.getElementBySymbol( atom.symbol );
 
-        this.setColor( element, element.color );
+        this.setColor( element, elementToColor( element ), elementToForegroundColor( element ) );
       }
     } );
   }
@@ -109,12 +109,12 @@ export default class ElectronegativityTableNode extends Node {
   }
 
   // Sets the {Color} color of a specified {number} element
-  private setColor( element: Element, color: TColor ): void {
+  private setColor( element: Element, color: TColor, foregroundColor: TColor ): void {
     for ( let i = 0; i < this.cells.length; i++ ) {
       const cell = this.cells[ i ];
       if ( cell instanceof Cell ) {
         if ( cell.element === element ) {
-          cell.enable( color );
+          cell.enable( color, foregroundColor );
           break;
         }
       }
@@ -167,9 +167,9 @@ class Cell extends Node {
   }
 
   // makes the cell appear enabled
-  public enable( color: TColor ): void {
+  public enable( color: TColor, foregroundColor: TColor ): void {
     this.backgroundNode.fill = color;
-    this.symbolText.fill = this.electronegativityText.fill = HIGHLIGHTED_TEXT_COLOR;
+    this.symbolText.fill = this.electronegativityText.fill = foregroundColor;
   }
 
   // makes the cell appear disabled
