@@ -29,6 +29,7 @@ export default class RealMoleculesControlPanel extends MPControlPanel {
         tandem: options.tandem.createTandem( 'viewControls' )
       } ),
       new SurfaceControl( viewProperties.surfaceTypeProperty, {
+        electrosaticSurfaceColors: 'realMolecules',
         tandem: options.tandem.createTandem( 'surfaceControl' )
       } )
     ];

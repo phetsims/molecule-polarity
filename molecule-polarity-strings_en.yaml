@@ -102,10 +102,12 @@ a11y:
       unchecked: 'Atom electronegativities hidden.'
     surfaceRadioButtonGroup:
       accessibleName: 'Surface'
-      accessibleHelpText: |-
-        Explore with different charge surfaces shown.
-          Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).
-          Electron density ranges from less to more (surface colors: white to dark grey).
+      accessibleHelpText: 'Explore with different charge surfaces shown.'
+      electrostaticPotentialHelpText:
+        select_colorMap:
+          blueWhiteRed: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).'
+          realMolecules: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: TODO).'
+      electronDensityHelpText: 'Electron density ranges from less to more (surface colors: white to dark grey).'
       noneSelected: 'No charge surfaces shown'
       electrostaticSelected: 'Electrostatic Potential surface shown'
       electronDensitySelected: 'Electron Density surface shown'

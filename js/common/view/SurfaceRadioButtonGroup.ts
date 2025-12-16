@@ -9,7 +9,7 @@
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
@@ -20,7 +20,14 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 
-type SelfOptions = EmptySelfOptions;
+// The color mapping used for electrostatic surface, determined by preferences or options
+export type ElectrostaticSurfaceColors = 'blueWhiteRed' | 'realMolecules';
+
+type SelfOptions = {
+
+  // Color map used for the electrostatic surface
+  electrosaticSurfaceColors?: ElectrostaticSurfaceColors;
+};
 
 type SurfaceRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
 
@@ -30,6 +37,9 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
                       providedOptions: SurfaceRadioButtonGroupOptions ) {
 
     const options = optionize<SurfaceRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+
+      // Self Options
+      electrosaticSurfaceColors: 'blueWhiteRed',
 
       // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -43,9 +53,23 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
     }, providedOptions );
 
     const radioButtonGroupItems = [
-      createItem( 'none', MoleculePolarityStrings.noneStringProperty, 'noneRadioButton' ),
-      createItem( 'electrostaticPotential', MoleculePolarityStrings.electrostaticPotentialStringProperty, 'electrostaticPotentialRadioButton' ),
-      createItem( 'electronDensity', MoleculePolarityStrings.electronDensityStringProperty, 'electronDensityRadioButton' )
+      createItem( 'none',
+        MoleculePolarityStrings.noneStringProperty,
+        null,
+        'noneRadioButton'
+      ),
+      createItem( 'electrostaticPotential',
+        MoleculePolarityStrings.electrostaticPotentialStringProperty,
+        MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticPotentialHelpText
+          .createProperty( {
+            colorMap: options.electrosaticSurfaceColors
+          } ),
+        'electrostaticPotentialRadioButton'
+      ),
+      createItem( 'electronDensity',
+        MoleculePolarityStrings.electronDensityStringProperty,
+        MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electronDensityHelpTextStringProperty,
+        'electronDensityRadioButton' )
     ];
 
     super( surfaceTypeProperty, radioButtonGroupItems, options );
@@ -71,13 +95,19 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
 }
 
 // Creates an item for this radio-button group.
-function createItem( value: SurfaceType,
-                     labelStringProperty: TReadOnlyProperty<string>,
-                     tandemName: string ): AquaRadioButtonGroupItem<SurfaceType> {
+function createItem(
+  value: SurfaceType,
+  labelStringProperty: TReadOnlyProperty<string>,
+  accessibleHelpText: TReadOnlyProperty<string> | null,
+  tandemName: string
+): AquaRadioButtonGroupItem<SurfaceType> {
   return {
     value: value,
     createNode: () => new Text( labelStringProperty, MPConstants.CONTROL_TEXT_OPTIONS ),
-    tandemName: tandemName
+    tandemName: tandemName,
+    options: {
+      accessibleHelpText: accessibleHelpText
+    }
   };
 }
 

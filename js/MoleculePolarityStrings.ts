@@ -131,6 +131,8 @@ type StringsType = {
       'surfaceRadioButtonGroup': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'electrostaticPotentialHelpTextStringProperty': LocalizedStringProperty;
+        'electronDensityHelpTextStringProperty': LocalizedStringProperty;
         'noneSelectedStringProperty': LocalizedStringProperty;
         'electrostaticSelectedStringProperty': LocalizedStringProperty;
         'electronDensitySelectedStringProperty': LocalizedStringProperty;
