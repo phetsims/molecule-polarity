@@ -55,6 +55,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       start: Vector3;
       end: Vector3;
       centerVisible: Vector3;
+      bondType: number;
       lastOffsetDir?: THREE.Vector3; // unit vector for side selection persistence
     };
     let bondDipoleStates: BondDipoleState[] = [];
@@ -371,7 +372,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             tailRadius: tailRadius,
             start: start,
             end: end,
-            centerVisible: centerVisible
+            centerVisible: centerVisible,
+            bondType: moleculeData.bonds.find( bb => ( bb.indexA === r.iA && bb.indexB === r.iB ) || ( bb.indexA === r.iB && bb.indexB === r.iA ) )?.bondType || 1
           } );
         }
       }
@@ -693,8 +695,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           const distNow = start.distance( end );
           const rawLength = state.baseLength * BOND_DIPOLE_SCALE * state.factor;
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * distNow, rawLength * bondDipoleGlobalScale );
+          const sideOffsetScale = ( state.bondType === 3 ? 1.2 : 1 );
           const tail = centerThree.clone()
-            .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET ) )
+            .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
             .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
           state.arrow.setFrom( tail, state.dir, drawLength );
           // Cross axis should be parallel to bond direction but perpendicular to camera at arrow location (tail)
