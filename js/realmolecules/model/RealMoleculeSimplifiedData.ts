@@ -86,14 +86,3 @@ export const simplifiedPartialChargesMap: Record<string, Record<string, number>>
     O1: -0.121133
   }
 };
-
-export type RealMoleculeSimplifiedDataType = Record<string, {
-  atoms: {
-    symbol: string;
-    x: number;
-    y: number;
-    z: number;
-    partialCharge: number;
-  }[];
-  bonds: { indexA: number; indexB: number; bondType: number }[];
-}>;

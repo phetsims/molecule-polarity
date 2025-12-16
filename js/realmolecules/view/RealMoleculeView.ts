@@ -31,7 +31,7 @@ import MPPreferences from '../../common/model/MPPreferences.js';
 import { colorizeElectrostaticPotentialRWB, colorizeElectrostaticPotentialROYGB } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPColors from '../../common/MPColors.js';
-import { elementToColor, elementToForegroundColor } from '../model/RealMoleculeColors.js';
+import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -126,14 +126,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       stepLabels.length = 0;
 
       atomMeshes.length = 0;
-      for ( const atom of moleculeData.atoms ) {
-        const element = Element.getElementBySymbol( atom.symbol );
-
-        const threeColor = ThreeUtils.colorToThree( Color.toColor( elementToColor( element ) ) );
-
-        const sphereGeometry = new THREE.SphereGeometry( elementToRadius( element ), 32, 32 );
+      for ( const atom of molecule.atoms ) {
+        const sphereGeometry = new THREE.SphereGeometry( atom.getDisplayRadius(), 32, 32 );
         const atomMaterial = new THREE.MeshLambertMaterial( {
-          color: threeColor,
+          color: ThreeUtils.colorToThree( atom.getColor() ),
           side: THREE.FrontSide // for when transparent
         } );
 
@@ -142,7 +138,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         const sphereMesh = new THREE.Mesh( sphereGeometry, atomMaterial );
         // Lower renderOrder so atoms render before bonds
         sphereMesh.renderOrder = 0;
-        sphereMesh.position.set( atom.x, atom.y, atom.z );
+        sphereMesh.position.set( atom.position.x, atom.position.y, atom.position.z );
         this.add( sphereMesh );
         atomMeshes.push( sphereMesh );
       }
@@ -151,7 +147,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       bondDipoleStates = [];
       bondDipoleGlobalScale = 1;
 
-      for ( const bond of moleculeData.bonds ) {
+      for ( const bond of molecule.bonds ) {
         const meshes: THREE.Mesh[] = [];
         const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
         // Bonds: depthTest against atoms, but do not write depth to avoid self-occlusion artifacts when semi-transparent
