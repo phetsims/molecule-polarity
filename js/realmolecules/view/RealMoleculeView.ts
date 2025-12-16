@@ -7,13 +7,12 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import RealMolecule from '../model/RealMolecule.js';
+import RealMolecule, { USE_REAL_VALUES } from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { RealMoleculeData } from '../model/RealMoleculeData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
-import { clamp } from '../../../../dot/js/util/clamp.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -28,14 +27,12 @@ import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import { simplifiedPartialChargesMap } from '../model/RealMoleculeSimplifiedData.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
-import { colorizeElectrostaticPotentialRWB, colorizeElectrostaticPotentialROYGB } from '../model/RealMoleculeColors.js';
+import { colorizeElectrostaticPotentialRWB, colorizeElectrostaticPotentialROYGB, colorizeElectronDensity } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPColors from '../../common/MPColors.js';
 import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 
 const LABEL_SIZE = 0.4;
-
-const USE_REAL = false;
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -108,9 +105,9 @@ export default class RealMoleculeView extends THREE.Object3D {
         throw new Error( `No partial charge found for atom symbol: ${symbol} with bond quantity: ${bondQuantity}` );
       };
 
-      // Select charge source per requested rule: when USE_REAL is true, use moleculeData.charges;
+      // Select charge source per requested rule: when USE_REAL_VALUES is true, use moleculeData.charges;
       // otherwise use simplified partial charges.
-      const charges: number[] = ( USE_REAL && moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ) ?
+      const charges: number[] = ( USE_REAL_VALUES && moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ) ?
         moleculeData.charges :
         moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
 
@@ -503,102 +500,22 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       if ( surfaceType !== 'none' ) {
-        // https://github.com/stevinz/three-wboit
-        // https://observablehq.com/@mroehlig/3d-volume-rendering-with-webgl-three-js
-        // Shader-material might work + render targets --- ASK about background and what is desired!
-        // NOTE: need to support reconstruction of the renderer --- use LocalGeometry/etc.?
-        // https://github.com/mrdoob/three.js/wiki/Migration-Guide
-
-        // three 104 is April 24, 2019
-        // three 160 is Dec 22, 2023
-        // 1.0.13 wboit: January 2, 2023
-
-        // https://unpkg.com/:package@:version/:file
-
-        // https://unpkg.com/three-wboit@1.0.13/build/index.module.js
-
-        // Electrostatic Potential palettes implemented in RealMoleculeColors
-
-        const colorizeElectronDensity = ( densityValue: number ): number[] => {
-          if ( USE_REAL ) {
-            densityValue *= 200;
-
-            const clampedValue = clamp( 1 - densityValue, 0, 1 );
-            return [ clampedValue, clampedValue, clampedValue ];
-          }
-          else {
-            const clampedValue = clamp( 15 * densityValue / 2 + 0.5, 0, 1 );
-            return [ clampedValue, clampedValue, clampedValue ];
-          }
-        };
-
         const toColor = surfaceType === 'electrostaticPotential'
           ? ( surfaceColor === 'ROYGB' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
           : colorizeElectronDensity;
 
         const meshGeometry = new THREE.BufferGeometry();
-        meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
-          const vertex0Data = moleculeData.vertexPositions[ indices[ 0 ] ];
-          const vertex1Data = moleculeData.vertexPositions[ indices[ 1 ] ];
-          const vertex2Data = moleculeData.vertexPositions[ indices[ 2 ] ];
-
-          return [
-            ...vertex0Data,
-            ...vertex1Data,
-            ...vertex2Data
-          ];
+        meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
+          return vertices.flatMap( vertex => vertex.getPositionArray() );
         } ) ), 3 ) );
-        meshGeometry.setAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
-          const vertex0Data = moleculeData.vertexNormals[ indices[ 0 ] ];
-          const vertex1Data = moleculeData.vertexNormals[ indices[ 1 ] ];
-          const vertex2Data = moleculeData.vertexNormals[ indices[ 2 ] ];
-
-          return [
-            ...vertex0Data,
-            ...vertex1Data,
-            ...vertex2Data
-          ];
+        meshGeometry.setAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
+          return vertices.flatMap( vertex => vertex.getNormalArray() );
         } ) ), 3 ) );
-        meshGeometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( moleculeData.faceIndices.flatMap( indices => {
-
-
-          if ( USE_REAL ) {
-            const data = ( surfaceType === 'electrostaticPotential' ? moleculeData.vertexESPs : moleculeData.vertexDTs );
-            const v0 = data[ indices[ 0 ] ];
-            const v1 = data[ indices[ 1 ] ];
-            const v2 = data[ indices[ 2 ] ];
-
-            return [
-              ...toColor( v0 ),
-              ...toColor( v1 ),
-              ...toColor( v2 )
-            ];
-          }
-          else {
-            const getColor = ( location: [ number, number, number ] ): number[] => {
-              let espValue = 0;
-
-              for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
-                const atom = moleculeData.atoms[ i ];
-                const distance = Math.sqrt(
-                  ( location[ 0 ] - atom.x ) ** 2 +
-                  ( location[ 1 ] - atom.y ) ** 2 +
-                  ( location[ 2 ] - atom.z ) ** 2
-                );
-
-                const partialCharge = getPartialCharge( atom.symbol, moleculeData.bonds.filter( bond => bond.indexA === i || bond.indexB === i ).length );
-
-                espValue += partialCharge / distance;
-              }
-
-              return toColor( espValue );
-            };
-            return [
-              ...getColor( moleculeData.vertexPositions[ indices[ 0 ] ] ),
-              ...getColor( moleculeData.vertexPositions[ indices[ 1 ] ] ),
-              ...getColor( moleculeData.vertexPositions[ indices[ 2 ] ] )
-            ];
-          }
+        meshGeometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
+          return vertices.flatMap( vertex => {
+            const value = ( surfaceType === 'electrostaticPotential' ? molecule.getElectrostaticPotential( vertex ) : molecule.getElectronDensity( vertex ) );
+            return toColor( value );
+          } );
         } ) ), 3 ) );
 
         const meshMaterial = new THREE.MeshBasicMaterial( {

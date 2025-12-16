@@ -22,6 +22,8 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import { elementToColor } from './RealMoleculeColors.js';
 
+export const USE_REAL_VALUES = false;
+
 export default class RealMolecule extends PhetioObject {
 
   public readonly symbol: string;
@@ -103,6 +105,39 @@ export default class RealMolecule extends PhetioObject {
     this.faces = moleculeData.faceIndices.map( faceIndices => faceIndices.map( index => this.vertices[ index ] ) );
   }
 
+  public getElectrostaticPotential( vertex: SurfaceVertex ): number {
+    if ( USE_REAL_VALUES ) {
+      return vertex.espValue;
+    }
+    else {
+      return this.getSimplifiedElectrostaticPotential( vertex.position );
+    }
+  }
+
+  public getElectronDensity( vertex: SurfaceVertex ): number {
+    if ( USE_REAL_VALUES ) {
+      return vertex.dtValue;
+    }
+    else {
+      // NOTE: Yes... the "simplified" model is to just hack the same value for electron density as electrostatic potential.
+      return this.getSimplifiedElectrostaticPotential( vertex.position );
+    }
+  }
+
+  public getSimplifiedElectrostaticPotential( point: Vector3 ): number {
+    let espValue = 0;
+
+    for ( let i = 0; i < this.atoms.length; i++ ) {
+      const atom = this.atoms[ i ];
+      const distance = point.distance( atom.position );
+      const partialCharge = atom.simplifiedPartialCharge;
+
+      espValue += partialCharge / distance;
+    }
+
+    return espValue;
+  }
+
   /**
    * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at
    * startup, it implements 'Reference type serialization', as described in the Serialization section of
@@ -160,4 +195,12 @@ export class SurfaceVertex {
     public readonly espValue: number,
     public readonly dtValue: number
   ) {}
+
+  public getPositionArray(): number[] {
+    return [ this.position.x, this.position.y, this.position.z ];
+  }
+
+  public getNormalArray(): number[] {
+    return [ this.normal.x, this.normal.y, this.normal.z ];
+  }
 }
