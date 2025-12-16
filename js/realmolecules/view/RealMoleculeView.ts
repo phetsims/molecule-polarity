@@ -54,6 +54,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       tailRadius: number;
       start: Vector3;
       end: Vector3;
+      centerVisible: Vector3;
       lastOffsetDir?: THREE.Vector3; // unit vector for side selection persistence
     };
     let bondDipoleStates: BondDipoleState[] = [];
@@ -257,6 +258,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           start: Vector3; end: Vector3; dist: number;
           dirThree: THREE.Vector3; tailAtomIndex: number; tailRadius: number;
           baseLength: number; factor: number; rawLength: number;
+          centerVisible: Vector3;
         };
         const raws: BondRaw[] = [];
 
@@ -300,6 +302,14 @@ export default class RealMoleculeView extends THREE.Object3D {
           const tailElement = Element.getElementBySymbol( tailAtom.symbol );
           const tailRadius = elementToRadius( tailElement );
 
+          // Compute visible center for this bond using displayed radii
+          const rA = elementToRadius( Element.getElementBySymbol( a.symbol ) );
+          const rB = elementToRadius( Element.getElementBySymbol( b.symbol ) );
+          const u = end.minus( start ).normalized();
+          const pA = start.plus( u.timesScalar( rA ) );
+          const pB = end.minus( u.timesScalar( rB ) );
+          const centerVisible = pA.plus( pB ).timesScalar( 0.5 );
+
           raws.push( {
             iA: iA,
             iB: iB,
@@ -313,7 +323,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             tailRadius: tailRadius,
             baseLength: baseLength,
             factor: factor,
-            rawLength: rawLength
+            rawLength: rawLength,
+            centerVisible: centerVisible
           } );
         }
 
@@ -329,13 +340,13 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         // Second pass: create arrows with global scale applied
         for ( const r of raws ) {
-          const { a, b, start, end, dist, dirThree, tailAtomIndex, tailRadius, baseLength, factor, rawLength } = r;
+          const { start, end, dist, dirThree, tailAtomIndex, tailRadius, baseLength, factor, rawLength, centerVisible } = r;
 
           const arrow = new DipoleArrowView( { color: 0x000000 } );
           // Initial placement centered at the bond centerline (no side offset yet)
           // Apply globalScale and cap to BOND_DIPOLE_FACTOR * dist to avoid overshooting
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * dist, rawLength * bondDipoleGlobalScale );
-          const centerInit = new THREE.Vector3( ( a.x + b.x ) / 2, ( a.y + b.y ) / 2, ( a.z + b.z ) / 2 );
+          const centerInit = new THREE.Vector3( centerVisible.x, centerVisible.y, centerVisible.z );
           const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
           arrow.setFrom( initialTail, dirThree, drawLength );
           // Scale thickness consistently with the final length scaling
@@ -364,7 +375,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             factor: factor,
             tailRadius: tailRadius,
             start: start,
-            end: end
+            end: end,
+            centerVisible: centerVisible
           } );
         }
       }
@@ -657,7 +669,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         for ( const state of bondDipoleStates ) {
           const start = state.start;
           const end = state.end;
-          const center = start.timesScalar( 0.5 ).plus( end.timesScalar( 0.5 ) );
+          const center = state.centerVisible;
           const bondDir = ThreeUtils.vectorToThree( end.minus( start ).normalized() );
 
           // Compute a perpendicular direction relative to camera
