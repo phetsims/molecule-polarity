@@ -28,6 +28,7 @@ import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import { simplifiedPartialChargesMap } from '../model/RealMoleculeSimplifiedData.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
+import { colorizeElectrostaticPotentialRWB, colorizeElectrostaticPotentialROYGB } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPColors from '../../common/MPColors.js';
 import { elementToColor, elementToForegroundColor } from '../model/RealMoleculeColors.js';
@@ -520,43 +521,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         // https://unpkg.com/three-wboit@1.0.13/build/index.module.js
 
-        // Two palettes for Electrostatic Potential: RWB (red-white-blue) and ROYGB (rainbow)
-        const colorizeElectrostaticPotentialRWB = ( espValue: number ): number[] => {
-          espValue *= 15;
-
-          if ( espValue > 0 ) {
-            const v = clamp( 1 - espValue, 0, 1 );
-            return [ v, v, 1 ];
-          }
-          else {
-            const v = clamp( 1 + espValue, 0, 1 );
-            return [ 1, v, v ];
-          }
-        };
-
-        const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[] => {
-          // Normalize to [0,1] range centered at 0 using same scaling as RWB
-          const scaled = clamp( ( espValue * 15 + 1 ) / 2, 0, 1 );
-          // Simple ROYGB gradient stops (red, orange, yellow, green, blue)
-          const stops: [number, number, number][] = [
-            [ 1, 0, 0 ],      // red
-            [ 1, 0.5, 0 ],    // orange
-            [ 1, 1, 0 ],      // yellow
-            [ 0, 1, 0 ],      // green
-            [ 0, 0, 1 ]       // blue
-          ];
-          const n = stops.length;
-          const t = scaled * ( n - 1 );
-          const i = Math.floor( t );
-          const f = t - i;
-          const c0 = stops[ Math.max( 0, Math.min( i, n - 1 ) ) ];
-          const c1 = stops[ Math.max( 0, Math.min( i + 1, n - 1 ) ) ];
-          return [
-            c0[ 0 ] * ( 1 - f ) + c1[ 0 ] * f,
-            c0[ 1 ] * ( 1 - f ) + c1[ 1 ] * f,
-            c0[ 2 ] * ( 1 - f ) + c1[ 2 ] * f
-          ];
-        };
+        // Electrostatic Potential palettes implemented in RealMoleculeColors
 
         const colorizeElectronDensity = ( densityValue: number ): number[] => {
           if ( USE_REAL ) {
