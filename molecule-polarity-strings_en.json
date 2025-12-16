@@ -183,16 +183,16 @@
           "value": "Change how strongly { $atomName } attracts electrons."
         },
         "dipoleContext": {
-          "value": "Dipole arrow { $progress }"
+          "value": "Dipole arrow { $progress }."
         },
         "dipoleDirectionChange": {
-          "value": "Bond dipole arrow now points { $direction }"
+          "value": "Bond dipole arrow now points { $direction }."
         },
         "partialChargeContext": {
-          "value": "Partial charge is { $progress }"
+          "value": "Partial charge is { $progress }."
         },
         "partialChargeSignChange": {
-          "value": "Partial charge now { $sign }"
+          "value": "Partial charge now { $sign }."
         },
         "bondCharacterContext": {
           "value": "Bond is { $progress }."
@@ -212,13 +212,13 @@
           "value": "Bond Dipole"
         },
         "accessibleHelpText": {
-          "value": "Explore with or without Bond Dipole shown."
+          "value": "Explore with or without bond dipole shown."
         },
         "checked": {
-          "value": "Bond Dipole shown"
+          "value": "Bond dipole shown."
         },
         "unchecked": {
-          "value": "Bond Dipole hidden"
+          "value": "Bond dipole hidden."
         }
       },
       "partialChargesCheckbox": {
@@ -226,13 +226,13 @@
           "value": "Partial Charges"
         },
         "accessibleHelpText": {
-          "value": "Explore with or without Partial Charges shown."
+          "value": "Explore with or without partial charges shown."
         },
         "checked": {
-          "value": "Partial Charges shown"
+          "value": "Partial charges shown."
         },
         "unchecked": {
-          "value": "Partial Charges hidden"
+          "value": "Partial charges hidden."
         }
       },
       "bondCharacterCheckbox": {
@@ -240,13 +240,13 @@
           "value": "Bond Character"
         },
         "accessibleHelpText": {
-          "value": "Explore with or without Bond Character shown."
+          "value": "Explore with or without bond character shown."
         },
         "checked": {
-          "value": "Bond Character shown"
+          "value": "Bond character shown."
         },
         "unchecked": {
-          "value": "Bond Character hidden"
+          "value": "Bond character hidden."
         }
       },
       "molecularDipoleCheckbox": {
@@ -254,13 +254,13 @@
           "value": "Molecular Dipole"
         },
         "accessibleHelpText": {
-          "value": "Explore with or without Molecular Dipole shown."
+          "value": "Explore with or without molecular dipole shown."
         },
         "checked": {
-          "value": "Molecular Dipole shown"
+          "value": "Molecular dipole shown."
         },
         "unchecked": {
-          "value": "Molecular Dipole hidden"
+          "value": "Molecular dipole hidden."
         }
       },
       "atomLabelsCheckbox": {
@@ -271,10 +271,10 @@
           "value": "Show or hide labels for each atom in the molecule."
         },
         "checked": {
-          "value": "Atom labels shown"
+          "value": "Atom labels shown."
         },
         "unchecked": {
-          "value": "Atom labels hidden"
+          "value": "Atom labels hidden."
         }
       },
       "atomElectronegativitiesCheckbox": {
@@ -285,10 +285,10 @@
           "value": "Show or hide electronegativity values for each atom in the molecule."
         },
         "checked": {
-          "value": "Atom electronegativities shown"
+          "value": "Atom electronegativities shown."
         },
         "unchecked": {
-          "value": "Atom electronegativities hidden"
+          "value": "Atom electronegativities hidden."
         }
       },
       "surfaceRadioButtonGroup": {
@@ -316,10 +316,10 @@
           "value": "Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field."
         },
         "on": {
-          "value": "Electric field on"
+          "value": "Electric field on."
         },
         "off": {
-          "value": "Electric field off"
+          "value": "Electric field off."
         }
       },
       "atom": {
