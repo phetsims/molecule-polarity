@@ -131,10 +131,15 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         const sphereGeometry = new THREE.SphereGeometry( elementToRadius( element ), 32, 32 );
         const atomMaterial = new THREE.MeshLambertMaterial( {
-          color: threeColor
+          color: threeColor,
+          side: THREE.FrontSide // for when transparent
         } );
 
+        // Ensure atoms write depth (default), so bonds can depth-test against them
+        atomMaterial.depthWrite = true;
         const sphereMesh = new THREE.Mesh( sphereGeometry, atomMaterial );
+        // Lower renderOrder so atoms render before bonds
+        sphereMesh.renderOrder = 0;
         sphereMesh.position.set( atom.x, atom.y, atom.z );
         this.add( sphereMesh );
         atomMeshes.push( sphereMesh );
@@ -147,10 +152,18 @@ export default class RealMoleculeView extends THREE.Object3D {
       for ( const bond of moleculeData.bonds ) {
         const meshes: THREE.Mesh[] = [];
         const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
-        const bondMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff } );
+        // Bonds: depthTest against atoms, but do not write depth to avoid self-occlusion artifacts when semi-transparent
+        const bondMaterial = new THREE.MeshLambertMaterial( {
+          color: 0xffffff,
+          depthTest: true,
+          depthWrite: false,
+          side: THREE.FrontSide // for when transparent
+        } );
 
         for ( let i = 0; i < bond.bondType; i++ ) {
           const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
+          // Higher renderOrder so bonds render after atoms regardless of transparency
+          mesh.renderOrder = 10;
           this.add( mesh );
           meshes.push( mesh );
         }
@@ -462,6 +475,8 @@ export default class RealMoleculeView extends THREE.Object3D {
           const label = new TextureQuad( labelNodeTexture, 2 * LABEL_SIZE, LABEL_SIZE, {
             depthTest: true
           } );
+
+          ( label as unknown as THREE.Object3D ).renderOrder = 100;
 
           label.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
 
