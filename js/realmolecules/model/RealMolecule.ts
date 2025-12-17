@@ -173,6 +173,43 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
+   * Computes the molecular dipole using a centroid method (Jmol-style):
+   * find centroids of positive and negative charge distributions and scale by total positive charge.
+   * Returns a Vector3 in model coordinates, or null if it cannot be computed.
+   */
+  public computeMolecularDipole(): Vector3 | null {
+    const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
+    let cPos = 0;
+    let cNeg = 0;
+
+    const positive = new Vector3( 0, 0, 0 );
+    const negative = new Vector3( 0, 0, 0 );
+
+    for ( let i = 0; i < this.atoms.length; i++ ) {
+      const atom = this.atoms[ i ];
+      const q = atom.getPartialCharge();
+      if ( q > 0 ) {
+        cPos += q;
+        positive.add( atom.position.timesScalar( q ) );
+      }
+      else if ( q < 0 ) {
+        cNeg += q;
+        negative.add( atom.position.timesScalar( q ) );
+      }
+    }
+
+    if ( cPos !== 0 && cNeg !== 0 ) {
+      positive.divideScalar( cPos );
+      negative.divideScalar( cNeg );
+
+      const sep = positive.minus( negative );
+      const factor = cPos / E_ANG_PER_DEBYE;
+      return sep.timesScalar( factor );
+    }
+    return null;
+  }
+
+  /**
    * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at
    * startup, it implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization

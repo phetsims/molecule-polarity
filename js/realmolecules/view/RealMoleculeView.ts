@@ -141,38 +141,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
-
-        // Molecular dipole computation (Jmol-style centroid method)
-        const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
-        let cPos = 0;
-        let cNeg = 0;
-
-        // Mutated vectors
-        const positive = new Vector3( 0, 0, 0 );
-        const negative = new Vector3( 0, 0, 0 );
-
-        for ( let i = 0; i < molecule.atoms.length; i++ ) {
-          const atom = molecule.atoms[ i ];
-          const q = atom.getPartialCharge();
-          if ( q > 0 ) {
-            cPos += q;
-            positive.add( atom.position.timesScalar( q ) );
-          }
-          else if ( q < 0 ) {
-            cNeg += q;
-            negative.add( atom.position.timesScalar( q ) );
-          }
-        }
-        let mu: Vector3 | null = null;
-        if ( cPos !== 0 && cNeg !== 0 ) {
-          positive.divideScalar( cPos );
-          negative.divideScalar( cNeg );
-
-          const sep = positive.minus( negative );
-          const factor = cPos / E_ANG_PER_DEBYE;
-          mu = sep.timesScalar( factor );
-        }
-
+        const mu = molecule.computeMolecularDipole();
         if ( mu ) {
           // Determine center atom as closest to centroid
           const centroid = new Vector3( 0, 0, 0 );
