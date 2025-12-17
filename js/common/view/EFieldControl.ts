@@ -50,7 +50,7 @@ export default class EFieldControl extends VBox {
       true, new Text( MoleculePolarityStrings.onStringProperty, SWITCH_LABEL_OPTIONS ), {
         spacing: 12,
         toggleSwitchOptions: {
-          accessibleName: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
+          accessibleHeading: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
           accessibleHelpText: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleHelpTextStringProperty,
           trackFillLeft: 'rgb( 180, 180, 180 )',
           trackFillRight: 'rgb( 0, 180, 0 )',
