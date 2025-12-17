@@ -7,12 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Vector2 from '../../../../dot/js/Vector2.js';
-import Shape from '../../../../kite/js/Shape.js';
-import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import AccessibleInteractiveOptions from '../../../../scenery-phet/js/accessibility/AccessibleInteractiveOptions.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
@@ -23,7 +20,7 @@ import Atom from '../model/Atom.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type AtomNodeOptions = SelfOptions &
+export type AtomNodeOptions = SelfOptions &
   PickRequired<NodeOptions, 'tandem'> &
   PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented' | 'phetioType' | 'phetioState' | 'focusable'>;
 
@@ -31,20 +28,11 @@ export default class AtomNode extends Node {
 
   public constructor( atom: Atom, providedOptions: AtomNodeOptions ) {
 
-    // Create a focus highlight that looks like a single electron positioned below the nucleus.
-    const focusHighlight = new Shape().circle(
-      Vector2.ZERO,
-      atom.diameter * 0.6
-    );
-
-    const options = optionize4<AtomNodeOptions, SelfOptions, NodeOptions>()(
-      {},
-      AccessibleInteractiveOptions,
+    const options = optionize<AtomNodeOptions, SelfOptions, NodeOptions>()(
       {
         // NodeOptions
         visiblePropertyOptions: { phetioReadOnly: true },
         isDisposable: false,
-        focusHighlight: focusHighlight,
         accessibleName: MoleculePolarityFluent.a11y.common.atom.accessibleName.createProperty( {
           name: atom.labelStringProperty
         } )

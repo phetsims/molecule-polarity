@@ -15,17 +15,17 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import IndexedNodeIO from '../../../../scenery/js/nodes/IndexedNodeIO.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
-import AtomNode from '../../common/view/AtomNode.js';
+import AccessibleAtomNode from '../../common/view/AccessibleAtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
-import MoleculeKeyboardListener from '../../common/view/MoleculeKeyboardListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
 import BondAngleDragListener from './BondAngleDragListener.js';
 import RotateArrowsNode from './RotateArrowsNode.js';
@@ -53,25 +53,37 @@ export default class TriatomicMoleculeNode extends Node {
     }, providedOptions );
 
     // atoms
-    const atomANode = new AtomNode( molecule.atomA, {
-      tandem: options.tandem.createTandem( 'atomANode' ),
-      phetioInputEnabledPropertyInstrumented: true,
+    const atomANode = new AccessibleAtomNode( molecule.atomA, molecule.bondAngleABProperty, {
+      atomNodeOptions: {
+        tandem: options.tandem.createTandem( 'atomANode' ),
+        phetioInputEnabledPropertyInstrumented: true,
 
-      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
-      phetioType: IndexedNodeIO,
-      phetioState: true
+        // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+        phetioType: IndexedNodeIO,
+        phetioState: true
+      },
+      accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
     } );
-    const atomBNode = new AtomNode( molecule.atomB, {
-      tandem: options.tandem.createTandem( 'atomBNode' ),
-      phetioInputEnabledPropertyInstrumented: true
+    const atomBNode = new AccessibleAtomNode( molecule.atomB, molecule.angleProperty, {
+      atomNodeOptions: {
+        tandem: options.tandem.createTandem( 'atomBNode' ),
+        phetioInputEnabledPropertyInstrumented: true
+      },
+      accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
     } );
-    const atomCNode = new AtomNode( molecule.atomC, {
-      tandem: options.tandem.createTandem( 'atomCNode' ),
-      phetioInputEnabledPropertyInstrumented: true,
+    const atomCNode = new AccessibleAtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
+      atomNodeOptions: {
+        tandem: options.tandem.createTandem( 'atomCNode' ),
+        phetioInputEnabledPropertyInstrumented: true,
 
-      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
-      phetioType: IndexedNodeIO,
-      phetioState: true
+        // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+        phetioType: IndexedNodeIO,
+        phetioState: true
+      },
+      accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty
     } );
 
     // bonds
@@ -169,16 +181,6 @@ export default class TriatomicMoleculeNode extends Node {
     } );
     atomANode.addInputListener( atomADragListener );
     atomCNode.addInputListener( atomCDragListener );
-
-    atomANode.addInputListener( new MoleculeKeyboardListener( molecule.bondAngleABProperty, {
-      tandem: options.tandem.createTandem( 'keyboardListener' )
-    } ) );
-    atomBNode.addInputListener( new MoleculeKeyboardListener( molecule.angleProperty, {
-      tandem: options.tandem.createTandem( 'keyboardListener' )
-    } ) );
-    atomCNode.addInputListener( new MoleculeKeyboardListener( molecule.bondAngleBCProperty, {
-      tandem: options.tandem.createTandem( 'keyboardListener' )
-    } ) );
 
     // {boolean} Set to true when the molecule has been changed by the user.
     let moleculeHasChanged = false;

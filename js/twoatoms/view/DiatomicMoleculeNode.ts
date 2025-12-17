@@ -7,21 +7,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
-import Range from '../../../../dot/js/Range.js';
-import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
-import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/accessibility/AccessibleSlider.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
+import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view/MPAccessibleSlider.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -33,11 +28,9 @@ import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ParentOptions = NodeOptions & AccessibleSliderOptions;
+export type DiatomicMoleculeNodeOptions = SelfOptions & MPAccessibleSliderOptions;
 
-export type DiatomicMoleculeNodeOptions = SelfOptions & StrictOmit<ParentOptions, 'interactiveHighlightEnabled' | 'enabledRangeProperty' | 'valueProperty' | 'startDrag' | 'endDrag'>;
-
-export default class DiatomicMoleculeNode extends AccessibleSlider( Node, 0 ) {
+export default class DiatomicMoleculeNode extends MPAccessibleSlider {
 
   private readonly resetDiatomicMoleculeNode: () => void;
 
@@ -45,25 +38,14 @@ export default class DiatomicMoleculeNode extends AccessibleSlider( Node, 0 ) {
                       viewProperties: TwoAtomsViewProperties,
                       providedOptions: DiatomicMoleculeNodeOptions ) {
 
-    const options = optionize<DiatomicMoleculeNodeOptions, SelfOptions, ParentOptions>()(
+    const options = optionize<DiatomicMoleculeNodeOptions, SelfOptions, MPAccessibleSliderOptions>()(
       {
         // NodeOptions
         cursor: 'pointer',
         phetioInputEnabledPropertyInstrumented: true,
         isDisposable: false,
         accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
-        accessibleHelpText: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty,
-
-        // AccessibleSliderOptions
-        enabledRangeProperty: new Property( new Range( -Math.PI, Math.PI ) ),
-        valueProperty: molecule.angleProperty,
-        keyboardStep: Math.PI / 8,
-        shiftKeyboardStep: Math.PI / 8,
-        createAriaValueText: angle => {
-          angle *= -1; // Inverting the angle to have +Y pointing up
-          angle = toDegrees( angle < 0 ? angle + 2 * Math.PI : angle ); // Mapping to [0-360]
-          return toFixed( angle, 1 ); // Rounding
-        }
+        accessibleHelpText: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
       }, providedOptions );
 
     // atoms
@@ -128,7 +110,7 @@ export default class DiatomicMoleculeNode extends AccessibleSlider( Node, 0 ) {
       partialChargeANode, partialChargeBNode, bondDipoleNode
     ];
 
-    super( options );
+    super( molecule.angleProperty, options );
 
     // rotate molecule by dragging anywhere
     const dragListener = new MoleculeAngleDragListener( molecule, this, {
