@@ -186,7 +186,7 @@
           "value": "Dipole arrow { $progress }."
         },
         "dipoleDirectionChange": {
-          "value": "Bond dipole arrow now points { $direction }."
+          "value": "Bond dipole arrow now points to Atom { $atom }."
         },
         "partialChargeContext": {
           "value": "Partial charge is { $progress }."
@@ -350,10 +350,10 @@
       "value": "{ $progress ->\n  [zero] zero\n  [smaller] smaller\n  *[larger] larger\n}"
     },
     "dipoleOrientAB": {
-      "value": "{ $direction ->\n  [toB] to B\n  *[toA] to A\n}"
+      "value": "{ $direction ->\n  [B] B\n  *[A] A\n}"
     },
     "dipoleOrientBC": {
-      "value": "{ $direction ->\n  [toB] to B\n  *[toC] to C\n}"
+      "value": "{ $direction ->\n  [B] B\n  *[C] C\n}"
     },
     "electronDensity": {
       "value": "{ $density ->\n  [evenlyShared] evenly\n  [nearlyEvenlyShared] nearly evenly\n  [slightlyUnevenlyShared] slightly unevenly\n  [unevenlyShared] unevenly\n  [veryUnevenlyShared] very unevenly\n  *[mostUnevenlyShared] most unevenly\n}"
@@ -429,7 +429,7 @@
           "value": "Molecule has { $bondDipoleMagnitude } dipole arrow."
         },
         "bondDipoleDirection": {
-          "value": "Bond dipole points { $dipoleDirection } o'clock.."
+          "value": "Bond dipole points to Atom { $atom }."
         },
         "partialChargesDescription": {
           "value": "Partial charges are { $partialChargeMagnitude }."
@@ -540,7 +540,7 @@
           "value": "with { $magnitude } molecular dipole arrow."
         },
         "molecularDipoleDirection": {
-          "value": "Molecular dipole points { $direction } o'clock."
+          "value": "Molecular dipole points towards { $direction } o'clock."
         },
         "molecularDipoleTwice": {
           "value": "Molecular dipole is twice the size of bond dipoles."
@@ -549,13 +549,13 @@
           "value": "with { $magnitude } AB bond dipole arrow."
         },
         "bondDipoleABDirection": {
-          "value": "AB bond dipole points to Atom { $atom }, { $direction } o'clock."
+          "value": "AB bond dipole points to Atom { $atom }, towards { $direction } o'clock."
         },
         "bondDipoleBCDescription": {
           "value": "With { $magnitude } BC bond dipole arrow"
         },
         "bondDipoleBCDirection": {
-          "value": "BC bond dipole points to Atom { $atom }, { $direction } o'clock."
+          "value": "BC bond dipole points to Atom { $atom }, towards { $direction } o'clock."
         },
         "partialChargesDescription": {
           "value": "Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge."
@@ -671,10 +671,10 @@
           "value": "Bond dipole AB { $progressAB }, BC { $progressBC }"
         },
         "bondDipoleABDirectionChange": {
-          "value": "Bond dipole AB now points { $direction }"
+          "value": "Bond dipole AB now points to Atom { $atom }"
         },
         "bondDipoleBCDirectionChange": {
-          "value": "Bond dipole BC now points { $direction }"
+          "value": "Bond dipole BC now points to Atom { $atom }"
         },
         "molecularDipoleContext": {
           "value": "Molecular dipole arrow { $progress }"

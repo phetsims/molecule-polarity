@@ -35,9 +35,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Bond dipole direction
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
-          dipoleDirection: MoleculePolarityFluent.a11y.dipoleOrientAB.createProperty( {
-            direction: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'toA' : 'toB' )
-          } )
+          atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
 

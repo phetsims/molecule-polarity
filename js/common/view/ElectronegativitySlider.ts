@@ -120,7 +120,7 @@ export default class ElectronegativitySlider extends HSlider {
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
-        direction: 'TODO'
+        atom: 'TODO'
       } )
     );
     contextResponse(
