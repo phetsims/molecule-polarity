@@ -388,13 +388,22 @@ export default class RealMoleculeView extends THREE.Object3D {
           // Cap to BOND_DIPOLE_FACTOR * dist to avoid overshooting
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * dist, rawLength );
           const centerInit = new THREE.Vector3( centerVisible.x, centerVisible.y, centerVisible.z );
-          const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
-          arrow.setFrom( initialTail, dirThree, drawLength );
-          // Scale thickness consistently with the final length scaling
-          const baseScaledLength = baseLength * BOND_DIPOLE_SCALE;
-          const effectiveScalar = Math.min( 1, drawLength / baseScaledLength );
-          const thicknessFactor = BOND_DIPOLE_SCALE * effectiveScalar;
-          arrow.scale.set( thicknessFactor, 1, thicknessFactor );
+          const baseScaledLength = baseLength * BOND_DIPOLE_SCALE; // base M
+          const minUnscaled = 2 * baseScaledLength; // make minimum unscaled size ~2x larger
+          if ( drawLength < minUnscaled ) {
+            // Create an arrow of size M and uniformly scale by X/M.
+            // To keep the arrow centered at centerInit after scaling, compute tail using X (final length), not M.
+            const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
+            arrow.setFrom( initialTail, dirThree, minUnscaled );
+            const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
+            arrow.scale.setScalar( uniformScale );
+          }
+          else {
+            // No downscale; set the final desired length directly
+            const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
+            arrow.setFrom( initialTail, dirThree, drawLength );
+            arrow.scale.setScalar( 1 );
+          }
           this.add( arrow );
 
           // Initial crossbar orientation
@@ -613,7 +622,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const distNow = start.distance( end );
           const rawLength = state.baseLength * BOND_DIPOLE_SCALE * state.factor;
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * distNow, rawLength * bondDipoleGlobalScale );
-          const sideOffsetScale = ( state.bondType === 3 ? 1.2 : ( state.bondType === 2 ? 1 : 0.8 ) );
+          const sideOffsetScale = ( state.bondType === 3 ? 1.3 : ( state.bondType === 2 ? 1.1 : 0.9 ) );
           const tail = centerThree.clone()
             .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
             .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
@@ -628,10 +637,22 @@ export default class RealMoleculeView extends THREE.Object3D {
           }
           state.arrow.setCrossPerp( axisFrame );
           // Scale thickness consistently with the final length scaling
-          const baseScaledLengthU = state.baseLength * BOND_DIPOLE_SCALE;
-          const effectiveScalarU = Math.min( 1, drawLength / baseScaledLengthU );
-          const thicknessFactorU = BOND_DIPOLE_SCALE * effectiveScalarU;
-          state.arrow.scale.set( thicknessFactorU, 1, thicknessFactorU );
+          const baseScaledLengthU = state.baseLength * BOND_DIPOLE_SCALE; // base M
+          const minUnscaledU = 2 * baseScaledLengthU; // ~2x larger minimum unscaled
+          if ( drawLength < minUnscaledU ) {
+            // Build arrow at M and uniformly scale to X/M.
+            // Keep arrow centered at visible center by computing tail with X (final length).
+            const tailForM = centerThree.clone()
+              .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
+              .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
+            state.arrow.setFrom( tailForM, state.dir, minUnscaledU );
+            const uniformScaleU = Math.max( drawLength / Math.max( minUnscaledU, 1e-6 ), 0 );
+            state.arrow.scale.setScalar( uniformScaleU );
+          }
+          else {
+            state.arrow.setFrom( tail, state.dir, drawLength );
+            state.arrow.scale.setScalar( 1 );
+          }
         }
       }
 

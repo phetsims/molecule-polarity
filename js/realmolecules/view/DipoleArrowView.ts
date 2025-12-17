@@ -11,10 +11,10 @@ import MPColors from '../../common/MPColors.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 
+const bodyRadius = 0.03;
 const headRadius = 0.1;
-const bodyRadius = headRadius * 0.3;
-const headLength = headRadius * 2.0;
-const crossLength = bodyRadius * 0.8;
+const headLength = headRadius * 2.5;
+const crossLength = bodyRadius * 2;
 const crossRadius = headRadius;
 
 export default class DipoleArrowView extends THREE.Object3D {
@@ -74,7 +74,7 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.head.position.set( 0, bodyLength + headLength / 2, 0 );
     this.head.updateMatrix();
 
-    this.crossAnchor.position.set( 0, 3 * crossLength, 0 );
+    this.crossAnchor.position.set( 0, 2.5 * crossLength, 0 );
     this.crossAnchor.updateMatrix();
   }
 
