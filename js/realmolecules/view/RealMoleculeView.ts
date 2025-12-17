@@ -11,7 +11,6 @@ import RealMolecule from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { RealMoleculeData } from '../model/RealMoleculeData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
-import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
@@ -28,7 +27,6 @@ import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
-import MPColors from '../../common/MPColors.js';
 import SurfaceMesh from './SurfaceMesh.js';
 
 const LABEL_SIZE = 0.4;
@@ -236,7 +234,7 @@ export default class RealMoleculeView extends THREE.Object3D {
             const desiredDisplayedLength = baseLength * factor; // consistent for both branches
             const cappedDisplayedLength = Math.min( molecularCap, desiredDisplayedLength );
 
-            const arrow = new DipoleArrowView( { color: ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
+            const arrow = new DipoleArrowView( false );
             if ( factor >= 1 ) {
               // No uniform scale; set the final displayed length directly
               arrow.setFrom( tail, dirThree, cappedDisplayedLength );
@@ -385,7 +383,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         for ( const r of raws ) {
           const { start, end, dist, dirThree, tailAtomIndex, tailRadius, baseLength, factor, rawLength, centerVisible } = r;
 
-          const arrow = new DipoleArrowView( { color: 0x000000 } );
+          const arrow = new DipoleArrowView( true );
           // Initial placement centered at the visible bond centerline (no side offset yet)
           // Cap to BOND_DIPOLE_FACTOR * dist to avoid overshooting
           const drawLength = Math.min( BOND_DIPOLE_FACTOR * dist, rawLength );

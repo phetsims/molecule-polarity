@@ -7,13 +7,12 @@
  */
 
 import moleculePolarity from '../../moleculePolarity.js';
-
-export type DipoleArrowViewOptions = {
-  color: THREE.ColorRepresentation;
-};
+import MPColors from '../../common/MPColors.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 
 const headRadius = 0.1;
-const bodyRadius = headRadius * 0.4;
+const bodyRadius = headRadius * 0.3;
 const headLength = headRadius * 2.0;
 const crossLength = bodyRadius * 0.8;
 const crossRadius = headRadius;
@@ -24,10 +23,12 @@ export default class DipoleArrowView extends THREE.Object3D {
   private cross: THREE.Mesh;
   private crossAnchor: THREE.Object3D;
 
-  public constructor( options: DipoleArrowViewOptions ) {
+  public constructor(
+    isBondDipole: boolean
+  ) {
     super();
 
-    const material = new THREE.MeshLambertMaterial( { color: options.color } );
+    const material = new THREE.MeshLambertMaterial( { color: isBondDipole ? 0x000000 : ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
 
     // Will be scaled below
     const bodyGeometry = new THREE.CylinderGeometry( 1, 1, 1, 24, 1, false );
@@ -43,8 +44,8 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.head.scale.x = this.head.scale.z = headRadius;
     this.head.scale.y = headLength;
 
-    this.cross.scale.x = crossRadius;
-    this.cross.scale.z = crossRadius;
+    this.cross.scale.x = crossRadius * ( isBondDipole ? 1 : 0.7 );
+    this.cross.scale.z = crossRadius * ( isBondDipole ? 1 : 0.7 );
     this.cross.scale.y = crossLength;
 
     this.crossAnchor.add( this.cross );
@@ -73,7 +74,7 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.head.position.set( 0, bodyLength + headLength / 2, 0 );
     this.head.updateMatrix();
 
-    this.crossAnchor.position.set( 0, 2.5 * crossLength, 0 );
+    this.crossAnchor.position.set( 0, 3 * crossLength, 0 );
     this.crossAnchor.updateMatrix();
   }
 
