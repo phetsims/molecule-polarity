@@ -26,10 +26,10 @@ import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
-import { colorizeElectrostaticPotentialRWB, colorizeElectrostaticPotentialROYGB, colorizeElectronDensity } from '../model/RealMoleculeColors.js';
+import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPColors from '../../common/MPColors.js';
-import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
+import SurfaceMesh from './SurfaceMesh.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -472,40 +472,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       if ( surfaceType !== 'none' ) {
-        const toColor = surfaceType === 'electrostaticPotential'
-          ? ( surfaceColor === 'ROYGB' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
-          : colorizeElectronDensity;
-
-        const meshGeometry = new THREE.BufferGeometry();
-        meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
-          return vertices.flatMap( vertex => vertex.getPositionArray() );
-        } ) ), 3 ) );
-        meshGeometry.setAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
-          return vertices.flatMap( vertex => vertex.getNormalArray() );
-        } ) ), 3 ) );
-        meshGeometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
-          return vertices.flatMap( vertex => {
-            const value = ( surfaceType === 'electrostaticPotential' ? molecule.getElectrostaticPotential( vertex ) : molecule.getElectronDensity( vertex ) );
-            return toColor( value );
-          } );
-        } ) ), 3 ) );
-
-        const meshMaterial = new THREE.MeshBasicMaterial( {
-          vertexColors: true,
-          // color: 0x888888
-          transparent: true,
-          opacity: 0.5,
-          depthWrite: false,
-          side: THREE.FrontSide
-        } );
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error Having to use external lib like this
-        const mesh = new THREE.Mesh( window.ThreeLoopSubdivision.modify( meshGeometry, 2 ), meshMaterial );
-
-        mesh.renderOrder = 150; // after everything else
-
-        this.add( mesh );
+        this.add( new SurfaceMesh( molecule, surfaceType, surfaceColor ) );
       }
     } );
 
@@ -538,17 +505,11 @@ export default class RealMoleculeView extends THREE.Object3D {
           const labelCenter = atomPosition.plus( dirToCamera.timesScalar( atomRadius + 0.03 ) );
           const labelLowerLeft = labelCenter.plus( rightDir.timesScalar( -LABEL_SIZE ).plus( upDir.timesScalar( -0.5 * LABEL_SIZE ) ) );
 
-          // OLD position... replace this with both position and rotation
-          // label.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
-
-          // label.position.copy( ThreeUtils.vectorToThree( labelLowerLeft ) );
-
           // TODO: don't require a renormalization https://github.com/phetsims/molecule-polarity/issues/15
           const forward = dirToCamera; // Z+
           const up = upDir; // Y+
           const right = up.cross( forward ).normalized(); // X+
           const rotMatrix = new THREE.Matrix4();
-          // makeBasis(xAxis, yAxis, zAxis)
           rotMatrix.makeBasis(
             ThreeUtils.vectorToThree( right ),
             ThreeUtils.vectorToThree( up ),
