@@ -103,6 +103,10 @@ export default class ElectronegativitySlider extends HSlider {
   }
 
   private emitContextResponse( molecule: Molecule ): void {
+
+    // clear the queue of utterances
+    this.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
+
     const contextResponse = ( message: string ) => {
       this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
     };
