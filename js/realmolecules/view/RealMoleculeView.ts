@@ -46,7 +46,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     type BondDipoleState = {
       arrow: DipoleArrowView;
       tailAtomIndex: number;
-      dir: THREE.Vector3; // unit vector, positive -> negative
+      dir: Vector3; // unit vector, positive -> negative
       muMag: number; // Debye magnitude for this bond
       tailRadius: number;
       start: Vector3;
@@ -54,12 +54,12 @@ export default class RealMoleculeView extends THREE.Object3D {
       centerVisible: Vector3;
       visibleLength: number;
       bondType: number;
-      lastOffsetDir?: THREE.Vector3; // unit vector for side selection persistence
+      lastOffsetDir?: Vector3; // unit vector for side selection persistence
     };
     let bondDipoleStates: BondDipoleState[] = [];
     // Track molecular arrow so we can update its cross orientation per frame
     let molecularArrow: DipoleArrowView | null = null;
-    let molecularArrowDir: THREE.Vector3 | null = null;
+    let molecularArrowDir: Vector3 | null = null;
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
     const BOND_DIPOLE_FACTOR = 1.3; // max fraction of VISIBLE bond length allowed per arrow
@@ -194,13 +194,6 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centerElement = centerAtom.element;
           const centerRadius = elementToRadius( centerElement );
 
-          // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
-          const dirThreeBase = ThreeUtils.vectorToThree( mu.negated().normalized() );
-          const dirThree = dirThreeBase.clone().multiplyScalar( orientationSign );
-
-          // Tail just outside the center atom
-          const tail = ThreeUtils.vectorToThree( centerAtom.position ).add( dirThree.clone().multiplyScalar( centerRadius + 0.07 ) );
-
           // Choose visual arrow length relative to molecule size
           let maxR2 = 0;
           for ( const atom of molecule.atoms ) {
@@ -227,8 +220,12 @@ export default class RealMoleculeView extends THREE.Object3D {
           const muMag = mu.getMagnitude(); // Debye
           const MU_REF = 0.5; // 1 Debye as reference
 
-          // If essentially zero, skip rendering to avoid visual noise
+          // If essentially zero, do not render (avoid normalize errors and visual noise)
           if ( muMag > 1e-3 ) {
+            // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
+            const dir = mu.negated().dividedScalar( muMag ).timesScalar( orientationSign );
+            // Tail just outside the center atom
+            const tailV = centerAtom.position.plus( dir.timesScalar( centerRadius + 0.07 ) );
             const factor = muMag / MU_REF;
             const desiredDisplayedLength = baseLength * factor; // consistent for both branches
             const cappedDisplayedLength = Math.min( molecularCap, desiredDisplayedLength );
@@ -236,22 +233,22 @@ export default class RealMoleculeView extends THREE.Object3D {
             const arrow = new DipoleArrowView( false );
             if ( factor >= 1 ) {
               // No uniform scale; set the final displayed length directly
-              arrow.setFrom( tail, dirThree, cappedDisplayedLength );
+              arrow.setFrom( tailV, dir, cappedDisplayedLength );
             }
             else {
               // Uniformly scale arrow by factor; pre-scale length so final displayed length equals the cap
               const preScaleLength = cappedDisplayedLength / Math.max( factor, 1e-6 );
-              arrow.setFrom( tail, dirThree, preScaleLength );
+              arrow.setFrom( tailV, dir, preScaleLength );
               arrow.scale.setScalar( factor );
             }
             this.add( arrow );
 
             // Initialize cross axis aligned with the arrow direction
-            arrow.setCrossPerp( dirThree );
+            arrow.setCrossPerp( dir );
 
             // Track for per-frame update
             molecularArrow = arrow;
-            molecularArrowDir = dirThree.clone();
+            molecularArrowDir = dir;
 
             // Dim the non-central atom that lies along the arrow direction (if any)
             const alignmentThreshold = 0.95; // cosine threshold for alignment
@@ -260,8 +257,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             for ( let i = 0; i < molecule.atoms.length; i++ ) {
               if ( i === centerIndex ) { continue; }
               const atom = molecule.atoms[ i ];
-              const v = ThreeUtils.vectorToThree( atom.position.minus( centerAtom.position ).normalized() );
-              const d = v.dot( dirThree );
+              const v = atom.position.minus( centerAtom.position ).normalized();
+              const d = v.dot( dir );
               if ( d > bestDot ) {
                 bestDot = d;
                 alignedIndex = i;
@@ -303,7 +300,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           a: typeof molecule.atoms[number];
           b: typeof molecule.atoms[number];
           start: Vector3; end: Vector3; dist: number;
-          dirThree: THREE.Vector3; tailAtomIndex: number; tailRadius: number;
+          tailAtomIndex: number; tailRadius: number;
           muMag: number;
           centerVisible: Vector3; visibleLength: number;
         };
@@ -328,17 +325,13 @@ export default class RealMoleculeView extends THREE.Object3D {
           if ( muMag <= 1e-3 ) { continue; }
 
           // Direction from positive to negative end (then apply preference)
-          let dirThree: THREE.Vector3;
           let tailAtomIndex: number;
           if ( ( c1 - c2 ) >= 0 ) {
-            dirThree = ThreeUtils.vectorToThree( end.minus( start ).normalized() );
             tailAtomIndex = iA; // positive end near A
           }
           else {
-            dirThree = ThreeUtils.vectorToThree( start.minus( end ).normalized() );
             tailAtomIndex = iB; // positive end near B
           }
-          dirThree.multiplyScalar( orientationSign );
 
           // Base length proportional to VISIBLE bond length (ignoring covered parts)
           // Compute visible endpoints using displayed radii
@@ -363,7 +356,6 @@ export default class RealMoleculeView extends THREE.Object3D {
             start: start,
             end: end,
             dist: dist,
-            dirThree: dirThree,
             tailAtomIndex: tailAtomIndex,
             tailRadius: tailRadius,
             muMag: muMag,
@@ -387,46 +379,49 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         // Second pass: create arrows with the uniform global scale
         for ( const r of raws ) {
-          const { start, end, dist, dirThree, tailAtomIndex, tailRadius, muMag, centerVisible, visibleLength } = r;
+          const { start, end, dist, tailAtomIndex, tailRadius, muMag, centerVisible, visibleLength } = r;
+          // Direction in Vector3: from positive end (tail) to negative end, then apply orientation preference
+          const dir = ( tailAtomIndex === r.iA ? end.minus( start ) : start.minus( end ) ).normalized().timesScalar( orientationSign );
 
           const arrow = new DipoleArrowView( true );
           // Initial placement centered at the visible bond centerline (no side offset yet)
           const drawLength = Math.max( 0, muMag * bondDipoleGlobalScale );
-          const centerInit = new THREE.Vector3( centerVisible.x, centerVisible.y, centerVisible.z );
+          const centerInit = centerVisible;
           // Build geometry at a reasonable size tied to the full bond distance,
           // so thickness doesn't collapse for short visible lengths.
           const minUnscaled = Math.max( 0.2, 0.72 * dist );
           if ( drawLength < minUnscaled ) {
             // Create an arrow of size M and uniformly scale by X/M.
             // To keep the arrow centered at centerInit after scaling, compute tail using X (final length), not M.
-            const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
-            arrow.setFrom( initialTail, dirThree, minUnscaled );
+            const initialTail = centerInit.plus( dir.timesScalar( -drawLength / 2 ) );
+            arrow.setFrom( initialTail, dir, minUnscaled );
             const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
             arrow.scale.setScalar( uniformScale );
           }
           else {
             // No downscale; set the final desired length directly
-            const initialTail = centerInit.clone().add( dirThree.clone().multiplyScalar( -drawLength / 2 ) );
-            arrow.setFrom( initialTail, dirThree, drawLength );
+            const initialTail = centerInit.plus( dir.timesScalar( -drawLength / 2 ) );
+            arrow.setFrom( initialTail, dir, drawLength );
             arrow.scale.setScalar( 1 );
           }
           this.add( arrow );
 
           // Initial crossbar orientation
           const localCamera2 = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-          const viewDirInit = new THREE.Vector3( centerInit.x - localCamera2.x, centerInit.y - localCamera2.y, centerInit.z - localCamera2.z ).normalize();
+          const viewDirInit = centerInit.minus( localCamera2 ).normalized();
           // axisInit: projection of bond direction onto camera plane
-          let axisInit = dirThree.clone().sub( viewDirInit.clone().multiplyScalar( dirThree.dot( viewDirInit ) ) ).normalize();
-          if ( axisInit.lengthSq() < 1e-6 ) {
-            const worldX = new THREE.Vector3( 1, 0, 0 );
-            axisInit = new THREE.Vector3().crossVectors( viewDirInit, ( Math.abs( viewDirInit.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
+          let axisInit = dir.minus( viewDirInit.timesScalar( dir.dot( viewDirInit ) ) ).normalized();
+          if ( axisInit.getMagnitudeSquared() < 1e-6 ) {
+            const worldX = Vector3.X_UNIT;
+            const alt = ( Math.abs( viewDirInit.dot( worldX ) ) > 0.9 ) ? Vector3.Y_UNIT : worldX;
+            axisInit = viewDirInit.cross( alt ).normalized();
           }
           arrow.setCrossPerp( axisInit );
 
           bondDipoleStates.push( {
             arrow: arrow,
             tailAtomIndex: tailAtomIndex,
-            dir: dirThree.clone(),
+            dir: dir,
             muMag: muMag,
             tailRadius: tailRadius,
             start: start,
@@ -600,62 +595,61 @@ export default class RealMoleculeView extends THREE.Object3D {
           const start = state.start;
           const end = state.end;
           const center = state.centerVisible;
-          const bondDir = ThreeUtils.vectorToThree( end.minus( start ).normalized() );
+          const bondDirV = end.minus( start ).normalized();
 
           // Compute a perpendicular direction relative to camera
-          const viewDir = ThreeUtils.vectorToThree( center.minus( localCamera ).normalized() );
-          let perp = new THREE.Vector3().crossVectors( bondDir, viewDir ).normalize();
-          if ( perp.lengthSq() < 1e-6 ) {
+          const viewDirV = center.minus( localCamera ).normalized();
+          let perpV = bondDirV.cross( viewDirV ).normalized();
+          if ( perpV.getMagnitudeSquared() < 1e-6 ) {
             // Fallback perpendicular independent of view
-            const worldX = new THREE.Vector3( 1, 0, 0 );
-            const alt = ( Math.abs( bondDir.dot( worldX ) ) > 0.9 ) ? new THREE.Vector3( 0, 1, 0 ) : worldX;
-            perp = new THREE.Vector3().crossVectors( bondDir, alt ).normalize();
+            const alt = ( Math.abs( bondDirV.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;
+            perpV = bondDirV.cross( alt ).normalized();
           }
-          const perpNeg = perp.clone().multiplyScalar( -1 );
+          const perpNegV = perpV.timesScalar( -1 );
 
           // Choose side closest to previous frame
-          let chosen = perp;
+          let chosenV = perpV;
           if ( state.lastOffsetDir ) {
-            const d1 = perp.dot( state.lastOffsetDir );
-            const d2 = perpNeg.dot( state.lastOffsetDir );
-            chosen = ( d2 > d1 ) ? perpNeg : perp;
+            const d1 = perpV.dot( state.lastOffsetDir );
+            const d2 = perpNegV.dot( state.lastOffsetDir );
+            chosenV = ( d2 > d1 ) ? perpNegV : perpV;
           }
-          state.lastOffsetDir = chosen.clone();
+          state.lastOffsetDir = chosenV;
 
           // Recompute tail position so that the arrow is centered at the bond center,
           // with side offset perpendicular to view and bond.
-          const centerThree = ThreeUtils.vectorToThree( center );
+          const centerV = center;
           // Use the global uniform scale so proportionality remains correct
           const distNow = start.distance( end );
           const drawLength = Math.max( 0, state.muMag * bondDipoleGlobalScale );
           const sideOffsetScale = ( state.bondType === 3 ? 1.3 : ( state.bondType === 2 ? 1.1 : 0.9 ) );
-          const tail = centerThree.clone()
-            .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
-            .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
-          state.arrow.setFrom( tail, state.dir, drawLength );
+          const tailV = centerV
+            .plus( chosenV.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
+            .plus( state.dir.timesScalar( -drawLength / 2 ) );
+          state.arrow.setFrom( tailV, state.dir, drawLength );
           // Cross axis should be parallel to bond direction but perpendicular to camera at arrow location (tail)
-          const arrowPosFrame = state.arrow.position; // tail in parent space
-          const viewDirFrame = new THREE.Vector3( arrowPosFrame.x - localCamera.x, arrowPosFrame.y - localCamera.y, arrowPosFrame.z - localCamera.z ).normalize();
-          let axisFrame = state.dir.clone().sub( viewDirFrame.clone().multiplyScalar( state.dir.dot( viewDirFrame ) ) ).normalize();
-          if ( axisFrame.lengthSq() < 1e-6 ) {
-            const worldX = new THREE.Vector3( 1, 0, 0 );
-            axisFrame = new THREE.Vector3().crossVectors( viewDirFrame, ( Math.abs( viewDirFrame.dot( worldX ) ) > 0.9 ? new THREE.Vector3( 0, 1, 0 ) : worldX ) ).normalize();
+          const arrowPosFrameV = ThreeUtils.threeToVector( state.arrow.position ); // tail in parent space
+          const viewDirFrameV = arrowPosFrameV.minus( localCamera ).normalized();
+          let axisFrameV = state.dir.minus( viewDirFrameV.timesScalar( state.dir.dot( viewDirFrameV ) ) ).normalized();
+          if ( axisFrameV.getMagnitudeSquared() < 1e-6 ) {
+            const alt = ( Math.abs( viewDirFrameV.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;
+            axisFrameV = viewDirFrameV.cross( alt ).normalized();
           }
-          state.arrow.setCrossPerp( axisFrame );
+          state.arrow.setCrossPerp( axisFrameV );
           // Scale thickness consistently with the final length scaling
           const minUnscaledU = Math.max( 0.2, 0.72 * distNow );
           if ( drawLength < minUnscaledU ) {
             // Build arrow at M and uniformly scale to X/M.
             // Keep arrow centered at visible center by computing tail with X (final length).
-            const tailForM = centerThree.clone()
-              .add( chosen.clone().multiplyScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
-              .add( state.dir.clone().multiplyScalar( -drawLength / 2 ) );
+            const tailForM = centerV
+              .plus( chosenV.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
+              .plus( state.dir.timesScalar( -drawLength / 2 ) );
             state.arrow.setFrom( tailForM, state.dir, minUnscaledU );
             const uniformScaleU = Math.max( drawLength / Math.max( minUnscaledU, 1e-6 ), 0 );
             state.arrow.scale.setScalar( uniformScaleU );
           }
           else {
-            state.arrow.setFrom( tail, state.dir, drawLength );
+            state.arrow.setFrom( tailV, state.dir, drawLength );
             state.arrow.scale.setScalar( 1 );
           }
         }

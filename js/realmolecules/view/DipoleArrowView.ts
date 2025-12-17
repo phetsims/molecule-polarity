@@ -10,6 +10,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MPColors from '../../common/MPColors.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
 
 const bodyRadius = 0.03;
 const headRadius = 0.1;
@@ -55,8 +56,9 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.add( this.crossAnchor );
   }
 
-  public setFrom( origin: THREE.Vector3, direction: THREE.Vector3, totalLength: number ): void {
-    const dir = direction.clone().normalize();
+  public setFrom( origin: Vector3, direction: Vector3, totalLength: number ): void {
+    const originThree = ThreeUtils.vectorToThree( origin );
+    const dir = ThreeUtils.vectorToThree( direction ).normalize();
 
     const headLength = this.head.scale.y;
     const bodyLength = Math.max( 0.0001, totalLength - headLength );
@@ -65,7 +67,7 @@ export default class DipoleArrowView extends THREE.Object3D {
     const quat = new THREE.Quaternion().setFromUnitVectors( up, dir );
     this.quaternion.copy( quat );
 
-    this.position.copy( origin );
+    this.position.copy( originThree );
 
     this.body.position.set( 0, bodyLength / 2, 0 );
     this.body.scale.y = bodyLength;
@@ -82,10 +84,10 @@ export default class DipoleArrowView extends THREE.Object3D {
    * Set the cross orientation so its axis is perpendicular to both arrow direction and camera direction.
    * Provided vector is in the parent (arrow group) space.
    */
-  public setCrossPerp( perpParentDir: THREE.Vector3 ): void {
+  public setCrossPerp( perpParentDir: Vector3 ): void {
     const inv = this.quaternion.clone().invert();
     const up = new THREE.Vector3( 0, 1, 0 );
-    const localPerp = perpParentDir.clone().normalize().applyQuaternion( inv );
+    const localPerp = ThreeUtils.vectorToThree( perpParentDir ).normalize().applyQuaternion( inv );
     if ( localPerp.lengthSq() > 1e-6 ) {
       this.cross.quaternion.setFromUnitVectors( up, localPerp );
     }
