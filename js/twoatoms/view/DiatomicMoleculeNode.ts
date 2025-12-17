@@ -7,10 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import { SurfaceType } from '../../common/model/SurfaceType.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -160,15 +162,28 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
 
     // ------------------------------------ Accessibility ---------------------------------------
 
-    molecule.angleProperty.link( angle => {
-      // Create a focus highlight that looks like an ellipse around the molecule
-      this.focusHighlight = new Shape().ellipse(
-        this.center,
-        150,
-        100,
-        angle
-      );
-    } );
+    Multilink.multilink(
+      [
+        molecule.angleProperty,
+        viewProperties.surfaceTypeProperty
+      ], ( angle: number, surfaceType: SurfaceType ) => {
+
+        // Dimensions of the focus highlight ellipse
+        let radiusX = 150;
+        let radiusY = 100;
+        if ( surfaceType !== 'none' ) {
+          radiusX = 200;
+          radiusY = 150;
+        }
+
+        // Update the focus highlight to match the current angle and surface type
+        this.focusHighlight = new Shape().ellipse(
+          this.center,
+          radiusX,
+          radiusY,
+          angle
+        );
+      } );
   }
 
   public override reset(): void {
