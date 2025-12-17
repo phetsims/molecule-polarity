@@ -8,7 +8,7 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
@@ -24,13 +24,16 @@ type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 
 type PartialChargeMagnitude = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
 type MolecularDipole = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
 
+// Rounds the absolute value of a number, used to avoid issues with floating point precision and maintain the absolute value of deltaEN
+const roundAbs = ( value: number ) => toFixedNumber( Math.abs( value ), 2 );
+
 export default class DescriptionMaps {
   public constructor() {
     // no-op
   }
 
   private static deltaENtoPolarity( deltaEN: number ): Polarity {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'nonpolar' :
            deltaEN <= 0.4 ? 'veryWeaklyPolar' :
            deltaEN <= 0.8 ? 'weaklyPolar' :
@@ -40,7 +43,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoBondDipole( deltaEN: number ): Dipole {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'no' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
@@ -50,7 +53,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'zero' :
            deltaEN <= 0.4 ? 'tiny' :
            deltaEN <= 0.8 ? 'verySmall' :
@@ -65,7 +68,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoMolecularDipole( deltaEN: number ): MolecularDipole {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'zero' :
            deltaEN <= 0.4 ? 'tiny' :
            deltaEN <= 0.8 ? 'verySmall' :
@@ -80,7 +83,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'nonpolarCovalent' :
            deltaEN <= 0.4 ? 'nearlyNonpolarCovalent' :
            deltaEN <= 0.8 ? 'slightlyPolarCovalent' :
@@ -90,7 +93,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoElectrostaticPotential( deltaEN: number ): ElectrostaticPotential {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'noDifference' :
            deltaEN <= 0.4 ? 'verySmallDifference' :
            deltaEN <= 0.8 ? 'smallDifference' :
@@ -100,7 +103,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoElectronDensity( deltaEN: number ): ElectronDensity {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN <= 0.05 ? 'evenlyShared' :
            deltaEN <= 0.4 ? 'nearlyEvenlyShared' :
            deltaEN <= 0.8 ? 'slightlyUnevenlyShared' :
@@ -110,7 +113,7 @@ export default class DescriptionMaps {
   }
 
   private static deltaENtoElectronDensityShift( deltaEN: number ): ElectronDensityShift {
-    deltaEN = Math.abs( deltaEN );
+    deltaEN = roundAbs( deltaEN );
     return deltaEN < 0.8 ? 'shiftedSlightly' :
            deltaEN < 1.2 ? 'shifted' :
            deltaEN < 1.6 ? 'shiftedMuchMore' :
@@ -127,8 +130,8 @@ export default class DescriptionMaps {
   }
 
   private static angleToOrientation( angle: number ): Directions {
-    const sin = roundToInterval( Math.sin( angle ), 0.1 );
-    const cos = roundToInterval( Math.cos( angle ), 0.1 );
+    const sin = toFixedNumber( Math.sin( angle ), 2 );
+    const cos = toFixedNumber( Math.cos( angle ), 2 );
 
     if ( sin === 0 ) {
       return cos > 0 ? 'at3' : 'at9';

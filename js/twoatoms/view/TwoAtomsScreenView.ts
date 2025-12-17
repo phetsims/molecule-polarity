@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
@@ -49,6 +50,12 @@ export default class TwoAtomsScreenView extends ScreenView {
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
     } );
+
+    moleculeDescriptionNode.addChild( new Node( {
+      accessibleParagraph: model.diatomicMolecule.deltaENProperty.derived( deltaEN => {
+        return 'TEMPORARY: Delta EN: ' + toFixed( deltaEN, 2 );
+      } )
+    } ) );
 
     moleculeDescriptionNode.addChild( new Node( {
       accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
