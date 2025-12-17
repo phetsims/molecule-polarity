@@ -7,7 +7,7 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import RealMolecule, { USE_REAL_VALUES } from '../model/RealMolecule.js';
+import RealMolecule from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { RealMoleculeData } from '../model/RealMoleculeData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
@@ -24,7 +24,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
-import { simplifiedPartialChargesMap } from '../model/RealMoleculeSimplifiedData.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import { colorizeElectrostaticPotentialRWB, colorizeElectrostaticPotentialROYGB, colorizeElectronDensity } from '../model/RealMoleculeColors.js';
@@ -86,30 +85,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       MPPreferences.surfaceColorProperty
     ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible, dipoleDirection, surfaceColor ) => {
 
+      // TODO: remove these bits, deprecated: https://github.com/phetsims/molecule-polarity/issues/32
       const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
       const moleculeData = RealMoleculeData[ strippedSymbol ];
-      const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ strippedSymbol ];
-
-      const getPartialCharge = ( symbol: string, bondQuantity: number ): number => {
-        const basicCharge = simplifiedPartialChargeMap[ symbol ];
-
-        if ( basicCharge !== undefined ) {
-          return basicCharge;
-        }
-
-        const numberedCharge = simplifiedPartialChargeMap[ `${symbol}${bondQuantity}` ];
-        if ( numberedCharge !== undefined ) {
-          return numberedCharge;
-        }
-
-        throw new Error( `No partial charge found for atom symbol: ${symbol} with bond quantity: ${bondQuantity}` );
-      };
-
-      // Select charge source per requested rule: when USE_REAL_VALUES is true, use moleculeData.charges;
-      // otherwise use simplified partial charges.
-      const charges: number[] = ( USE_REAL_VALUES && moleculeData.charges && moleculeData.charges.length === moleculeData.atoms.length ) ?
-        moleculeData.charges :
-        moleculeData.atoms.map( ( atom, i ) => getPartialCharge( atom.symbol, moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length ) );
 
       // Dipole direction preference: default is positiveToNegative; otherwise reverse arrows
       const orientationSign = ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
@@ -171,90 +149,85 @@ export default class RealMoleculeView extends THREE.Object3D {
         const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
         let cPos = 0;
         let cNeg = 0;
-        const pos = { x: 0, y: 0, z: 0 };
-        const neg = { x: 0, y: 0, z: 0 };
-        for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
-          const a = moleculeData.atoms[ i ];
-          const q = charges[ i ];
+
+        // Mutated vectors
+        const positive = new Vector3( 0, 0, 0 );
+        const negative = new Vector3( 0, 0, 0 );
+
+        for ( let i = 0; i < molecule.atoms.length; i++ ) {
+          const atom = molecule.atoms[ i ];
+          const q = atom.getPartialCharge();
           if ( q > 0 ) {
             cPos += q;
-            pos.x += q * a.x; pos.y += q * a.y; pos.z += q * a.z;
+            positive.add( atom.position.timesScalar( q ) );
           }
           else if ( q < 0 ) {
             cNeg += q;
-            neg.x += q * a.x; neg.y += q * a.y; neg.z += q * a.z;
+            negative.add( atom.position.timesScalar( q ) );
           }
         }
-        let mu: { x: number; y: number; z: number } | null = null;
+        let mu: Vector3 | null = null;
         if ( cPos !== 0 && cNeg !== 0 ) {
-          pos.x /= cPos; pos.y /= cPos; pos.z /= cPos;
-          neg.x /= cNeg; neg.y /= cNeg; neg.z /= cNeg;
-          const sep = { x: pos.x - neg.x, y: pos.y - neg.y, z: pos.z - neg.z };
+          positive.divideScalar( cPos );
+          negative.divideScalar( cNeg );
+
+          const sep = positive.minus( negative );
           const factor = cPos / E_ANG_PER_DEBYE;
-          mu = { x: sep.x * factor, y: sep.y * factor, z: sep.z * factor };
+          mu = sep.timesScalar( factor );
         }
 
         if ( mu ) {
           // Determine center atom as closest to centroid
           const centroid = new Vector3( 0, 0, 0 );
-          moleculeData.atoms.forEach( atom => {
-            centroid.x += atom.x;
-            centroid.y += atom.y;
-            centroid.z += atom.z;
+          molecule.atoms.forEach( atom => {
+            centroid.add( atom.position );
           } );
-          centroid.x /= moleculeData.atoms.length;
-          centroid.y /= moleculeData.atoms.length;
-          centroid.z /= moleculeData.atoms.length;
+          centroid.divideScalar( molecule.atoms.length );
           let centerIndex = 0;
           let bestDist2 = Number.POSITIVE_INFINITY;
-          for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
-            const a = moleculeData.atoms[ i ];
-            const dx = a.x - centroid.x;
-            const dy = a.y - centroid.y;
-            const dz = a.z - centroid.z;
-            const d2 = dx * dx + dy * dy + dz * dz;
-            if ( d2 < bestDist2 ) { bestDist2 = d2; centerIndex = i; }
+          for ( let i = 0; i < molecule.atoms.length; i++ ) {
+            const atom = molecule.atoms[ i ];
+            const distanceSquared = atom.position.distanceSquared( centroid );
+            if ( distanceSquared < bestDist2 ) {
+              bestDist2 = distanceSquared; centerIndex = i;
+            }
           }
 
-          const centerAtom = moleculeData.atoms[ centerIndex ];
-          const centerElement = Element.getElementBySymbol( centerAtom.symbol );
+          const centerAtom = molecule.atoms[ centerIndex ];
+          const centerElement = centerAtom.element;
           const centerRadius = elementToRadius( centerElement );
 
           // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
-          const dirThreeBase = new THREE.Vector3( -mu.x, -mu.y, -mu.z ).normalize();
+          const dirThreeBase = ThreeUtils.vectorToThree( mu.negated().normalized() );
           const dirThree = dirThreeBase.clone().multiplyScalar( orientationSign );
 
           // Tail just outside the center atom
-          const tail = new THREE.Vector3( centerAtom.x, centerAtom.y, centerAtom.z ).add( dirThree.clone().multiplyScalar( centerRadius + 0.07 ) );
+          const tail = ThreeUtils.vectorToThree( centerAtom.position ).add( dirThree.clone().multiplyScalar( centerRadius + 0.07 ) );
 
           // Choose visual arrow length relative to molecule size
           let maxR2 = 0;
-          for ( const a of moleculeData.atoms ) {
-            const dx = a.x - centroid.x;
-            const dy = a.y - centroid.y;
-            const dz = a.z - centroid.z;
-            const d2 = dx * dx + dy * dy + dz * dz;
-            if ( d2 > maxR2 ) { maxR2 = d2; }
+          for ( const atom of molecule.atoms ) {
+            const distanceSquared = atom.position.distanceSquared( centroid );
+            if ( distanceSquared > maxR2 ) {
+              maxR2 = distanceSquared;
+            }
           }
           const span = Math.sqrt( maxR2 );
           const baseLength = Math.max( 0.2, span * 0.6 );
 
           // Cap the maximum displayed arrow length to 1.5x the longest bond length in the molecule
           let maxBondLength = 0;
-          for ( const b of moleculeData.bonds ) {
-            const a1 = moleculeData.atoms[ b.indexA ];
-            const a2 = moleculeData.atoms[ b.indexB ];
-            const dx = a2.x - a1.x;
-            const dy = a2.y - a1.y;
-            const dz = a2.z - a1.z;
-            const d = Math.sqrt( dx * dx + dy * dy + dz * dz );
-            if ( d > maxBondLength ) { maxBondLength = d; }
+          for ( const bond of molecule.bonds ) {
+            const d = bond.atomA.position.distance( bond.atomB.position );
+            if ( d > maxBondLength ) {
+              maxBondLength = d;
+            }
           }
           const molecularCap = 1.5 * maxBondLength;
 
           // Scale arrow by dipole magnitude: if weaker than reference, uniformly shrink arrow;
           // if stronger, just lengthen (keep width constant).
-          const muMag = Math.sqrt( mu.x * mu.x + mu.y * mu.y + mu.z * mu.z ); // Debye
+          const muMag = mu.getMagnitude(); // Debye
           const MU_REF = 0.5; // 1 Debye as reference
 
           // If essentially zero, skip rendering to avoid visual noise
@@ -287,10 +260,10 @@ export default class RealMoleculeView extends THREE.Object3D {
             const alignmentThreshold = 0.95; // cosine threshold for alignment
             let bestDot = alignmentThreshold;
             let alignedIndex: number | null = null;
-            for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+            for ( let i = 0; i < molecule.atoms.length; i++ ) {
               if ( i === centerIndex ) { continue; }
-              const a = moleculeData.atoms[ i ];
-              const v = new THREE.Vector3( a.x - centerAtom.x, a.y - centerAtom.y, a.z - centerAtom.z ).normalize();
+              const atom = molecule.atoms[ i ];
+              const v = ThreeUtils.vectorToThree( atom.position.minus( centerAtom.position ).normalized() );
               const d = v.dot( dirThree );
               if ( d > bestDot ) {
                 bestDot = d;
@@ -332,8 +305,8 @@ export default class RealMoleculeView extends THREE.Object3D {
         // First pass: compute raw (unclamped) draw lengths to determine a global scale
         type BondRaw = {
           iA: number; iB: number;
-          a: typeof moleculeData.atoms[number];
-          b: typeof moleculeData.atoms[number];
+          a: typeof molecule.atoms[number];
+          b: typeof molecule.atoms[number];
           start: Vector3; end: Vector3; dist: number;
           dirThree: THREE.Vector3; tailAtomIndex: number; tailRadius: number;
           baseLength: number; factor: number; rawLength: number;
@@ -341,16 +314,16 @@ export default class RealMoleculeView extends THREE.Object3D {
         };
         const raws: BondRaw[] = [];
 
-        for ( const bond of moleculeData.bonds ) {
-          const iA = bond.indexA;
-          const iB = bond.indexB;
-          const a = moleculeData.atoms[ iA ];
-          const b = moleculeData.atoms[ iB ];
-          const c1 = charges[ iA ];
-          const c2 = charges[ iB ];
+        for ( const bond of molecule.bonds ) {
+          const iA = bond.atomA.index;
+          const iB = bond.atomB.index;
+          const a = molecule.atoms[ iA ];
+          const b = molecule.atoms[ iB ];
+          const c1 = a.getPartialCharge();
+          const c2 = b.getPartialCharge();
 
-          const start = new Vector3( a.x, a.y, a.z );
-          const end = new Vector3( b.x, b.y, b.z );
+          const start = a.position;
+          const end = b.position;
           const dist = start.distance( end );
           if ( dist === 0 ) { continue; }
 
@@ -377,13 +350,13 @@ export default class RealMoleculeView extends THREE.Object3D {
           const factor = muMag / MU_REF_BOND;
           const rawLength = baseLength * BOND_DIPOLE_SCALE * factor;
 
-          const tailAtom = moleculeData.atoms[ tailAtomIndex ];
-          const tailElement = Element.getElementBySymbol( tailAtom.symbol );
+          const tailAtom = molecule.atoms[ tailAtomIndex ];
+          const tailElement = tailAtom.element;
           const tailRadius = elementToRadius( tailElement );
 
           // Compute visible center for this bond using displayed radii
-          const rA = elementToRadius( Element.getElementBySymbol( a.symbol ) );
-          const rB = elementToRadius( Element.getElementBySymbol( b.symbol ) );
+          const rA = elementToRadius( a.element );
+          const rB = elementToRadius( b.element );
           const u = end.minus( start ).normalized();
           const pA = start.plus( u.timesScalar( rA ) );
           const pB = end.minus( u.timesScalar( rB ) );
@@ -453,11 +426,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       if ( atomLabelsVisible || partialChargesVisible ) {
-        for ( const atom of moleculeData.atoms ) {
-          const atomIndex = moleculeData.atoms.indexOf( atom );
-          const element = Element.getElementBySymbol( atom.symbol );
-          const partialCharge = getPartialCharge( atom.symbol, moleculeData.bonds.filter( bond => bond.indexA === atomIndex || bond.indexB === atomIndex ).length );
-          const sameElementAtoms = moleculeData.atoms.filter( a => a.symbol === atom.symbol );
+        for ( const atom of molecule.atoms ) {
+          const element = atom.element;
+          const partialCharge = atom.getPartialCharge();
+          const sameElementAtoms = molecule.atoms.filter( a => a.element === atom.element );
           const atomVisualIndex = sameElementAtoms.indexOf( atom );
           const showIndex = sameElementAtoms.length > 1;
 
@@ -545,14 +517,12 @@ export default class RealMoleculeView extends THREE.Object3D {
 
     stepEmitter.addListener( () => {
 
-      // TODO: factor this out https://github.com/phetsims/molecule-polarity/issues/15
-      const strippedSymbol = moleculeProperty.value.symbol.replace( /<\/?sub>/g, '' );
-      const moleculeData = RealMoleculeData[ strippedSymbol ];
+      const molecule = moleculeProperty.value;
 
       if ( stepLabels.length ) {
         for ( let i = 0; i < stepLabels.length; i++ ) {
           const label = stepLabels[ i ];
-          const atom = moleculeData.atoms[ i ];
+          const atom = molecule.atoms[ i ];
 
           const localPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
           const localUpPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION.plus( Vector3.Y_UNIT ) ) ) );
@@ -561,9 +531,8 @@ export default class RealMoleculeView extends THREE.Object3D {
           const upDir = localUpPoint.minus( localPoint ).normalized();
           const rightDir = upDir.cross( dirToCamera ).normalized();
 
-          // const atom = moleculeData.atoms[ 0 ];
-          const element = Element.getElementBySymbol( atom.symbol ); // TODO: factor out https://github.com/phetsims/molecule-polarity/issues/15
-          const atomPosition = new Vector3( atom.x, atom.y, atom.z );
+          const element = atom.element;
+          const atomPosition = atom.position;
           const atomRadius = elementToRadius( element );
 
           const labelCenter = atomPosition.plus( dirToCamera.timesScalar( atomRadius + 0.03 ) );
@@ -602,22 +571,19 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Update bonds to face the camera and handle double/triple offsets
       {
-        const strippedSymbol = moleculeProperty.value.symbol.replace( /<\/?sub>/g, '' );
-        const moleculeData = RealMoleculeData[ strippedSymbol ];
-
         const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
 
         const threeYUnit = new THREE.Vector3( 0, 1, 0 );
 
         const bondSeparation = bondRadius * ( 12 / 5 );
 
-        for ( let b = 0; b < moleculeData.bonds.length; b++ ) {
-          const bond = moleculeData.bonds[ b ];
-          const atomA = moleculeData.atoms[ bond.indexA ];
-          const atomB = moleculeData.atoms[ bond.indexB ];
+        for ( let b = 0; b < molecule.bonds.length; b++ ) {
+          const bond = molecule.bonds[ b ];
+          const atomA = bond.atomA;
+          const atomB = bond.atomB;
 
-          const start = new Vector3( atomA.x, atomA.y, atomA.z );
-          const end = new Vector3( atomB.x, atomB.y, atomB.z );
+          const start = atomA.position;
+          const end = atomB.position;
           const towardsEnd = end.minus( start ).normalized();
           const distance = start.distance( end );
           const center = start.timesScalar( 0.5 ).plus( end.timesScalar( 0.5 ) );

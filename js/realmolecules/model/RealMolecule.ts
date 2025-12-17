@@ -55,6 +55,40 @@ export default class RealMolecule extends PhetioObject {
     const moleculeData = RealMoleculeData[ rawSymbol ];
     const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ rawSymbol ];
 
+    let originOffset: Vector3;
+    let centralAtomIndex: number | null = null;
+    if ( moleculeData.atoms.length === 2 ) {
+      // Homogeneous diatomic centered between two atoms
+      if ( moleculeData.atoms[ 0 ].symbol === moleculeData.atoms[ 1 ].symbol ) {
+        const a = new Vector3( moleculeData.atoms[ 0 ].x, moleculeData.atoms[ 0 ].y, moleculeData.atoms[ 0 ].z );
+        const b = new Vector3( moleculeData.atoms[ 1 ].x, moleculeData.atoms[ 1 ].y, moleculeData.atoms[ 1 ].z );
+        originOffset = a.average( b );
+      }
+      else {
+        // it's HF, for now we'll center around the F
+        const fluorine = moleculeData.atoms.find( atom => atom.symbol === 'F' )!;
+        originOffset = new Vector3( fluorine.x, fluorine.y, fluorine.z );
+        centralAtomIndex = moleculeData.atoms.indexOf( fluorine );
+      }
+    }
+    else {
+      // Find the atom with the most bonds, we'll center around that
+
+      let bestBondCount = 0;
+
+      for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+        const bondCount = moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length;
+
+        if ( bondCount > bestBondCount ) {
+          bestBondCount = bondCount;
+          centralAtomIndex = i;
+        }
+      }
+
+      const centralAtom = moleculeData.atoms[ centralAtomIndex! ];
+      originOffset = new Vector3( centralAtom.x, centralAtom.y, centralAtom.z );
+    }
+
     this.atoms = moleculeData.atoms.map( ( atomData, atomIndex ) => {
       const symbol = atomData.symbol;
       const bonds = moleculeData.bonds.filter( b => b.indexA === atomIndex || b.indexB === atomIndex );
@@ -73,7 +107,7 @@ export default class RealMolecule extends PhetioObject {
         Element.getElementBySymbol( symbol ),
         simplifiedPartialCharge,
         realPartialCharge,
-        new Vector3( atomData.x, atomData.y, atomData.z )
+        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset )
       );
     } );
 
@@ -94,7 +128,7 @@ export default class RealMolecule extends PhetioObject {
     this.vertices = moleculeData.vertexPositions.map( ( positionData, index ) => {
       const normalData = moleculeData.vertexNormals[ index ];
 
-      const position = new Vector3( positionData[ 0 ], positionData[ 1 ], positionData[ 2 ] );
+      const position = new Vector3( positionData[ 0 ], positionData[ 1 ], positionData[ 2 ] ).minus( originOffset );
       const normal = new Vector3( normalData[ 0 ], normalData[ 1 ], normalData[ 2 ] );
       const espValue = moleculeData.vertexESPs[ index ];
       const dtValue = moleculeData.vertexDTs[ index ];
@@ -163,6 +197,10 @@ export class RealAtom {
     public position: Vector3
   ) {
 
+  }
+
+  public getPartialCharge(): number {
+    return USE_REAL_VALUES ? this.realPartialCharge : this.simplifiedPartialCharge;
   }
 
   public getColor(): Color {
