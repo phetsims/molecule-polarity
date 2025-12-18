@@ -142,12 +142,12 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
         const mu = molecule.computeMolecularDipole();
-        if ( mu ) {
-          // Use model helpers for centroid and central atom
-          const centroid = molecule.getCentroid();
-          const centerAtomOpt = molecule.getCentralAtom();
-          const centerIndex = centerAtomOpt ? centerAtomOpt.index : -1;
-          const centerRadius = centerAtomOpt ? elementToRadius( centerAtomOpt.element ) : 0;
+        if ( mu && mu.getMagnitude() > 1e-3 ) {
+          const centralAtom = molecule.getCentralAtom()!;
+          assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
+
+          const centralIndex = centralAtom.index;
+          const centralRadius = elementToRadius( centralAtom.element );
 
           // Choose visual arrow length relative to molecule size
           const span = molecule.getMaximumExtent();
@@ -168,13 +168,10 @@ export default class RealMoleculeView extends THREE.Object3D {
           const muMag = mu.getMagnitude(); // Debye
           const MU_REF = 0.5; // 1 Debye as reference
 
-          // If essentially zero, do not render (avoid normalize errors and visual noise)
-          if ( muMag > 1e-3 ) {
-            // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
-            const dir = mu.negated().dividedScalar( muMag ).timesScalar( orientationSign );
-            // Tail just outside the center atom (fallback to centroid if none)
-            const tailOrigin = centerAtomOpt ? centerAtomOpt.position : centroid;
-            const tailV = tailOrigin.plus( dir.timesScalar( centerRadius + 0.07 ) );
+          // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
+          const dir = mu.negated().dividedScalar( muMag ).timesScalar( orientationSign );
+          // Tail just outside the central atom
+          const tailV = centralAtom.position.plus( dir.timesScalar( centralRadius + 0.07 ) );
             const factor = muMag / MU_REF;
             const desiredDisplayedLength = baseLength * factor; // consistent for both branches
             const cappedDisplayedLength = Math.min( molecularCap, desiredDisplayedLength );
@@ -200,45 +197,42 @@ export default class RealMoleculeView extends THREE.Object3D {
             molecularArrowDir = dir;
 
             // Dim the non-central atom that lies along the arrow direction (if any)
-            if ( centerAtomOpt ) {
-              const alignmentThreshold = 0.95; // cosine threshold for alignment
-              let bestDot = alignmentThreshold;
-              let alignedIndex: number | null = null;
-              for ( let i = 0; i < molecule.atoms.length; i++ ) {
-                if ( i === centerIndex ) { continue; }
-                const atom = molecule.atoms[ i ];
-                const v = atom.position.minus( centerAtomOpt.position ).normalized();
-                const d = v.dot( dir );
-                if ( d > bestDot ) {
-                  bestDot = d;
-                  alignedIndex = i;
-                }
+            const alignmentThreshold = 0.95; // cosine threshold for alignment
+            let bestDot = alignmentThreshold;
+            let alignedIndex: number | null = null;
+            for ( let i = 0; i < molecule.atoms.length; i++ ) {
+              if ( i === centralIndex ) { continue; }
+              const atom = molecule.atoms[ i ];
+              const v = atom.position.minus( centralAtom.position ).normalized();
+              const d = v.dot( dir );
+              if ( d > bestDot ) {
+                bestDot = d;
+                alignedIndex = i;
+              }
+            }
+
+            if ( alignedIndex !== null ) {
+              // Dim the aligned atom mesh
+              const atomMesh = atomMeshes[ alignedIndex ];
+              if ( atomMesh ) {
+                const mat = atomMesh.material as THREE.MeshLambertMaterial;
+                mat.transparent = true;
+                mat.opacity = 0.5;
               }
 
-              if ( alignedIndex !== null ) {
-                // Dim the aligned atom mesh
-                const atomMesh = atomMeshes[ alignedIndex ];
-                if ( atomMesh ) {
-                  const mat = atomMesh.material as THREE.MeshLambertMaterial;
-                  mat.transparent = true;
-                  mat.opacity = 0.5;
-                }
-
-                // Dim the bond mesh between center and aligned atom
-                const bondIndex = moleculeData.bonds.findIndex( b =>
-                  ( b.indexA === centerIndex && b.indexB === alignedIndex ) ||
-                  ( b.indexB === centerIndex && b.indexA === alignedIndex )
-                );
-                if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
-                  for ( const mesh of bondsMeshes[ bondIndex ] ) {
-                    const bmat = mesh.material as THREE.MeshLambertMaterial;
-                    bmat.transparent = true;
-                    bmat.opacity = 0.5;
-                  }
+              // Dim the bond mesh between center and aligned atom
+              const bondIndex = moleculeData.bonds.findIndex( b =>
+                ( b.indexA === centralIndex && b.indexB === alignedIndex ) ||
+                ( b.indexB === centralIndex && b.indexA === alignedIndex )
+              );
+              if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
+                for ( const mesh of bondsMeshes[ bondIndex ] ) {
+                  const bmat = mesh.material as THREE.MeshLambertMaterial;
+                  bmat.transparent = true;
+                  bmat.opacity = 0.5;
                 }
               }
             }
-          }
         }
       }
 
