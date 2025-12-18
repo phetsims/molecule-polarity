@@ -7,9 +7,8 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import RealMolecule, { RealAtom } from '../model/RealMolecule.js';
+import RealMolecule, { RealAtom, RealBond } from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import { RealMoleculeData } from '../model/RealMoleculeData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
@@ -42,7 +41,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
     const stepLabels: TextureQuad[] = [];
     const atomMeshMap = new Map<RealAtom, THREE.Mesh>();
-    let bondsMeshes: THREE.Mesh[][] = [];
+    const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
     type BondDipoleState = {
       arrow: DipoleArrowView;
       tailAtomIndex: number;
@@ -82,10 +81,6 @@ export default class RealMoleculeView extends THREE.Object3D {
       MPPreferences.surfaceColorProperty
     ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible, dipoleDirection, surfaceColor ) => {
 
-      // TODO: remove these bits, deprecated: https://github.com/phetsims/molecule-polarity/issues/32
-      const strippedSymbol = molecule.symbol.replace( /<\/?sub>/g, '' );
-      const moleculeData = RealMoleculeData[ strippedSymbol ];
-
       // Dipole direction preference: default is positiveToNegative; otherwise reverse arrows
       const orientationSign = ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
 
@@ -115,7 +110,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         atomMeshMap.set( atom, sphereMesh );
       }
 
-      bondsMeshes = [];
+      bondsMeshesMap.clear();
       bondDipoleStates = [];
       bondDipoleGlobalScale = 1;
 
@@ -136,7 +131,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           this.add( mesh );
           meshes.push( mesh );
         }
-        bondsMeshes.push( meshes );
+        bondsMeshesMap.set( bond, meshes );
       }
 
       // Molecular dipole arrow
@@ -219,17 +214,18 @@ export default class RealMoleculeView extends THREE.Object3D {
               }
 
               // Dim the bond mesh between center and aligned atom
-              const aIndex = centralAtom.index;
-              const bIndex = alignedAtom.index;
-              const bondIndex = moleculeData.bonds.findIndex( b =>
-                ( b.indexA === aIndex && b.indexB === bIndex ) ||
-                ( b.indexB === aIndex && b.indexA === bIndex )
+              const bond = molecule.bonds.find( bb =>
+                ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
+                ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
               );
-              if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
-                for ( const mesh of bondsMeshes[ bondIndex ] ) {
-                  const bmat = mesh.material as THREE.MeshLambertMaterial;
-                  bmat.transparent = true;
-                  bmat.opacity = 0.5;
+              if ( bond ) {
+                const meshes = bondsMeshesMap.get( bond );
+                if ( meshes ) {
+                  for ( const mesh of meshes ) {
+                    const bmat = mesh.material as THREE.MeshLambertMaterial;
+                    bmat.transparent = true;
+                    bmat.opacity = 0.5;
+                  }
                 }
               }
             }
@@ -248,6 +244,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           tailAtomIndex: number; tailRadius: number;
           muMag: number;
           centerVisible: Vector3; visibleLength: number;
+          bondType: number;
         };
         const raws: BondRaw[] = [];
 
@@ -305,7 +302,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             tailRadius: tailRadius,
             muMag: muMag,
             centerVisible: centerVisible,
-            visibleLength: visibleLength
+            visibleLength: visibleLength,
+            bondType: bond.bondType
           } );
         }
 
@@ -324,7 +322,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         // Second pass: create arrows with the uniform global scale
         for ( const r of raws ) {
-          const { start, end, dist, tailAtomIndex, tailRadius, muMag, centerVisible, visibleLength } = r;
+          const { start, end, dist, tailAtomIndex, tailRadius, muMag, centerVisible, visibleLength, bondType } = r;
           // Direction in Vector3: from positive end (tail) to negative end, then apply orientation preference
           const dir = ( tailAtomIndex === r.iA ? end.minus( start ) : start.minus( end ) ).normalized().timesScalar( orientationSign );
 
@@ -373,7 +371,7 @@ export default class RealMoleculeView extends THREE.Object3D {
             end: end,
             centerVisible: centerVisible,
             visibleLength: visibleLength,
-            bondType: moleculeData.bonds.find( bb => ( bb.indexA === r.iA && bb.indexB === r.iB ) || ( bb.indexA === r.iB && bb.indexB === r.iA ) )?.bondType || 1
+            bondType: bondType
           } );
         }
       }
@@ -491,8 +489,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         const bondSeparation = bondRadius * ( 12 / 5 );
 
-        for ( let b = 0; b < molecule.bonds.length; b++ ) {
-          const bond = molecule.bonds[ b ];
+        for ( const bond of molecule.bonds ) {
           const atomA = bond.atomA;
           const atomB = bond.atomB;
 
@@ -521,8 +518,10 @@ export default class RealMoleculeView extends THREE.Object3D {
           }
 
           const threeTowardsEnd = ThreeUtils.vectorToThree( towardsEnd );
-          for ( let i = 0; i < bondsMeshes[ b ].length; i++ ) {
-            const mesh = bondsMeshes[ b ][ i ];
+          const meshes = bondsMeshesMap.get( bond );
+          if ( !meshes ) { continue; }
+          for ( let i = 0; i < meshes.length; i++ ) {
+            const mesh = meshes[ i ];
             const translation = center.plus( offsets[ i ] );
             mesh.position.set( translation.x, translation.y, translation.z );
             mesh.quaternion.setFromUnitVectors( threeYUnit, threeTowardsEnd );
