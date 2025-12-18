@@ -7,7 +7,7 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import RealMolecule from '../model/RealMolecule.js';
+import RealMolecule, { RealAtom } from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { RealMoleculeData } from '../model/RealMoleculeData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
@@ -41,7 +41,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     super();
 
     const stepLabels: TextureQuad[] = [];
-    const atomMeshes: THREE.Mesh[] = [];
+    const atomMeshMap = new Map<RealAtom, THREE.Mesh>();
     let bondsMeshes: THREE.Mesh[][] = [];
     type BondDipoleState = {
       arrow: DipoleArrowView;
@@ -97,7 +97,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       molecularArrowDir = null;
       stepLabels.length = 0;
 
-      atomMeshes.length = 0;
+      atomMeshMap.clear();
       for ( const atom of molecule.atoms ) {
         const sphereGeometry = new THREE.SphereGeometry( atom.getDisplayRadius(), 32, 32 );
         const atomMaterial = new THREE.MeshLambertMaterial( {
@@ -112,7 +112,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         sphereMesh.renderOrder = 0;
         sphereMesh.position.set( atom.position.x, atom.position.y, atom.position.z );
         this.add( sphereMesh );
-        atomMeshes.push( sphereMesh );
+        atomMeshMap.set( atom, sphereMesh );
       }
 
       bondsMeshes = [];
@@ -146,7 +146,6 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 
-          const centralIndex = centralAtom.index;
           const centralRadius = elementToRadius( centralAtom.element );
 
           // Choose visual arrow length relative to molecule size
@@ -199,21 +198,20 @@ export default class RealMoleculeView extends THREE.Object3D {
             // Dim the non-central atom that lies along the arrow direction (if any)
             const alignmentThreshold = 0.95; // cosine threshold for alignment
             let bestDot = alignmentThreshold;
-            let alignedIndex: number | null = null;
-            for ( let i = 0; i < molecule.atoms.length; i++ ) {
-              if ( i === centralIndex ) { continue; }
-              const atom = molecule.atoms[ i ];
+            let alignedAtom: RealAtom | null = null;
+            for ( const atom of molecule.atoms ) {
+              if ( atom === centralAtom ) { continue; }
               const v = atom.position.minus( centralAtom.position ).normalized();
               const d = v.dot( dir );
               if ( d > bestDot ) {
                 bestDot = d;
-                alignedIndex = i;
+                alignedAtom = atom;
               }
             }
 
-            if ( alignedIndex !== null ) {
+            if ( alignedAtom ) {
               // Dim the aligned atom mesh
-              const atomMesh = atomMeshes[ alignedIndex ];
+              const atomMesh = atomMeshMap.get( alignedAtom );
               if ( atomMesh ) {
                 const mat = atomMesh.material as THREE.MeshLambertMaterial;
                 mat.transparent = true;
@@ -221,9 +219,11 @@ export default class RealMoleculeView extends THREE.Object3D {
               }
 
               // Dim the bond mesh between center and aligned atom
+              const aIndex = centralAtom.index;
+              const bIndex = alignedAtom.index;
               const bondIndex = moleculeData.bonds.findIndex( b =>
-                ( b.indexA === centralIndex && b.indexB === alignedIndex ) ||
-                ( b.indexB === centralIndex && b.indexA === alignedIndex )
+                ( b.indexA === aIndex && b.indexB === bIndex ) ||
+                ( b.indexB === aIndex && b.indexA === bIndex )
               );
               if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
                 for ( const mesh of bondsMeshes[ bondIndex ] ) {
