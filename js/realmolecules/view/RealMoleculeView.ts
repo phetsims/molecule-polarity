@@ -30,18 +30,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const LABEL_SIZE = 0.4;
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
-const BOND_DIPOLE_FACTOR = 1.3; // max fraction of VISIBLE bond length allowed per arrow
-
-const BOND_DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
-  HF: 2,
-  HCN: 1.6,
-  CH2O: 1.6,
-  CHCl3: 1.6
-};
-
-const getBondDipoleFactor = ( molecule: RealMolecule ): number => {
-  return BOND_DIPOLE_FACTOR_OVERRIDES[ molecule.rawSymbol ] ?? BOND_DIPOLE_FACTOR;
-};
+const BOND_RADIUS = 0.085;
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -58,9 +47,6 @@ export default class RealMoleculeView extends THREE.Object3D {
     const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
     const bondDipoleMap = new Map<RealBond, DipoleArrowView>();
     const bondDipoleLastOffsetDirMap = new Map<RealBond, Vector3>();
-
-    let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
-    const bondRadius = 0.085;
 
     const orientationSignProperty = new DerivedProperty( [ MPPreferences.dipoleDirectionProperty ], dipoleDirection => {
       return ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
@@ -105,12 +91,9 @@ export default class RealMoleculeView extends THREE.Object3D {
         atomMeshMap.set( atom, sphereMesh );
       }
 
-      bondDipoleGlobalScale = 1;
-
       for ( const bond of molecule.bonds ) {
         const meshes: THREE.Mesh[] = [];
         const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
-        // Bonds: depthTest against atoms, but do not write depth to avoid self-occlusion artifacts when semi-transparent
         const bondMaterial = new THREE.MeshLambertMaterial( {
           color: 0xffffff,
           depthTest: true,
@@ -127,21 +110,6 @@ export default class RealMoleculeView extends THREE.Object3D {
         bondsMeshesMap.set( bond, meshes );
       }
 
-      // Ensure bond dipole global scale is computed so molecular/bond arrows share the same per-Debye scale
-      {
-        let globalScalePerDebye = Number.POSITIVE_INFINITY;
-        for ( const bond of molecule.bonds ) {
-          const muMag = bond.getDipoleMagnitudeDebye();
-          if ( muMag <= 1e-3 ) { continue; }
-          const cap = getBondDipoleFactor( molecule ) * bond.getVisibleLength();
-          globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
-        }
-        if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
-          globalScalePerDebye = 0;
-        }
-        bondDipoleGlobalScale = globalScalePerDebye;
-      }
-
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
         const mu = molecule.computeBondDipoleVectorSum();
@@ -156,7 +124,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const tailV = centralAtom.position.plus( dir.timesScalar( centralRadius + 0.07 ) );
 
           // Use the same per-Debye scale as bond dipoles
-          const drawLength = Math.max( 0, muMag * bondDipoleGlobalScale );
+          const drawLength = Math.max( 0, muMag * molecule.getDipoleScale() );
           const span = molecule.getMaximumExtent();
           const minUnscaled = Math.max( 0.2, 0.6 * span );
 
@@ -217,19 +185,6 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Bond dipole arrows (black), one per bond
       if ( bondDipolesVisible ) {
-        // Compute a global scale so each bond arrow fits within its visible bond length
-        let globalScalePerDebye = Number.POSITIVE_INFINITY;
-        for ( const bond of molecule.bonds ) {
-          const muMag = bond.getDipoleMagnitudeDebye();
-          if ( muMag <= 1e-3 ) { continue; }
-          const cap = getBondDipoleFactor( molecule ) * bond.getVisibleLength();
-          globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
-        }
-        if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
-          globalScalePerDebye = 0;
-        }
-        bondDipoleGlobalScale = globalScalePerDebye;
-
         // Create arrows with the uniform global scale
         for ( const bond of molecule.bonds ) {
           const muMag = bond.getDipoleMagnitudeDebye();
@@ -241,7 +196,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centerVisible = bond.getVisibleCenter();
 
           const arrow = new DipoleArrowView( true );
-          const drawLength = Math.max( 0, muMag * bondDipoleGlobalScale );
+          const drawLength = Math.max( 0, muMag * molecule.getDipoleScale() );
           const centerInit = centerVisible;
           const minUnscaled = Math.max( 0.2, 0.72 * dist );
           if ( drawLength < minUnscaled ) {
@@ -328,7 +283,6 @@ export default class RealMoleculeView extends THREE.Object3D {
     } );
 
     stepEmitter.addListener( () => {
-
       const molecule = moleculeProperty.value;
 
       if ( atomLabelMap.size ) {
@@ -377,7 +331,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         const threeYUnit = new THREE.Vector3( 0, 1, 0 );
 
-        const bondSeparation = bondRadius * ( 12 / 5 );
+        const bondSeparation = BOND_RADIUS * ( 12 / 5 );
 
         for ( const bond of molecule.bonds ) {
           const atomA = bond.atomA;
@@ -415,7 +369,7 @@ export default class RealMoleculeView extends THREE.Object3D {
             const translation = center.plus( offsets[ i ] );
             mesh.position.set( translation.x, translation.y, translation.z );
             mesh.quaternion.setFromUnitVectors( threeYUnit, threeTowardsEnd );
-            mesh.scale.x = mesh.scale.z = bondRadius;
+            mesh.scale.x = mesh.scale.z = BOND_RADIUS;
             mesh.scale.y = distance;
             mesh.updateMatrix();
           }
@@ -455,7 +409,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           // with side offset perpendicular to view and bond.
           const centerV = center;
           const distNow = start.distance( end );
-          const drawLength = Math.max( 0, bond.getDipoleMagnitudeDebye() * bondDipoleGlobalScale );
+          const drawLength = Math.max( 0, bond.getDipoleMagnitudeDebye() * molecule.getDipoleScale() );
           const sideOffsetScale = ( bond.bondType === 3 ? 1.3 : ( bond.bondType === 2 ? 1.1 : 0.9 ) );
           const dir = bond.getPositiveToNegativeUnit().timesScalar( orientationSignProperty.value );
           const tailV = centerV

@@ -22,6 +22,15 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import { elementToColor } from './RealMoleculeColors.js';
 
+// Visualization constants for dipoles
+const DEFAULT_DIPOLE_FACTOR = 1.3;
+const DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
+  HF: 2,
+  HCN: 1.6,
+  CH2O: 1.6,
+  CHCl3: 1.6
+};
+
 export const USE_REAL_VALUES = false;
 
 export default class RealMolecule extends PhetioObject {
@@ -170,6 +179,32 @@ export default class RealMolecule extends PhetioObject {
     }
 
     return espValue;
+  }
+
+  /**
+   * Returns the bond-dipole cap factor for this molecule. Allows per-molecule overrides.
+   */
+  public getBondDipoleFactor(): number {
+    return DIPOLE_FACTOR_OVERRIDES[ this.rawSymbol ] ?? DEFAULT_DIPOLE_FACTOR;
+  }
+
+  /**
+   * Computes the per-Debye scale used to size dipole arrows so that all bond dipoles fit within their
+   * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
+   */
+  public getDipoleScale(): number {
+    let globalScalePerDebye = Number.POSITIVE_INFINITY;
+    const factor = this.getBondDipoleFactor();
+    for ( const bond of this.bonds ) {
+      const muMag = bond.getDipoleMagnitudeDebye();
+      if ( muMag <= 1e-3 ) { continue; }
+      const cap = factor * bond.getVisibleLength();
+      globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
+    }
+    if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
+      return 0;
+    }
+    return globalScalePerDebye;
   }
 
   /**
