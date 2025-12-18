@@ -29,6 +29,19 @@ import DipoleArrowView from './DipoleArrowView.js';
 import SurfaceMesh from './SurfaceMesh.js';
 
 const LABEL_SIZE = 0.4;
+const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
+const BOND_DIPOLE_FACTOR = 1.3; // max fraction of VISIBLE bond length allowed per arrow
+
+const BOND_DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
+  HF: 2,
+  HCN: 1.6,
+  CH2O: 1.6,
+  CHCl3: 1.6
+};
+
+const getBondDipoleFactor = ( molecule: RealMolecule ): number => {
+  return BOND_DIPOLE_FACTOR_OVERRIDES[ molecule.rawSymbol ] ?? BOND_DIPOLE_FACTOR;
+};
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -49,8 +62,6 @@ export default class RealMoleculeView extends THREE.Object3D {
     let molecularArrowDir: Vector3 | null = null;
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     let currentOrientationSign = 1; // cache for per-frame updates
-    const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
-    const BOND_DIPOLE_FACTOR = 1.3; // max fraction of VISIBLE bond length allowed per arrow
     const bondRadius = 0.085;
 
     const elementToRadius = ( element: Element ) => {
@@ -125,61 +136,57 @@ export default class RealMoleculeView extends THREE.Object3D {
         bondsMeshesMap.set( bond, meshes );
       }
 
+      // Ensure bond dipole global scale is computed so molecular/bond arrows share the same per-Debye scale
+      {
+        let globalScalePerDebye = Number.POSITIVE_INFINITY;
+        for ( const bond of molecule.bonds ) {
+          const muMag = bond.getDipoleMagnitudeDebye();
+          if ( muMag <= 1e-3 ) { continue; }
+          const cap = getBondDipoleFactor( molecule ) * bond.getVisibleLength();
+          globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
+        }
+        if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
+          globalScalePerDebye = 0;
+        }
+        bondDipoleGlobalScale = globalScalePerDebye;
+      }
+
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
-        const mu = molecule.computeMolecularDipole();
-        if ( mu && mu.getMagnitude() > 1e-3 ) {
+        const mu = molecule.computeBondDipoleVectorSum();
+        if ( mu.getMagnitude() > 1e-3 ) {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 
           const centralRadius = elementToRadius( centralAtom.element );
-
-          // Choose visual arrow length relative to molecule size
-          const span = molecule.getMaximumExtent();
-          const baseLength = Math.max( 0.2, span * 0.6 );
-
-          // Cap the maximum displayed arrow length to 1.5x the longest bond length in the molecule
-          let maxBondLength = 0;
-          for ( const bond of molecule.bonds ) {
-            const d = bond.atomA.position.distance( bond.atomB.position );
-            if ( d > maxBondLength ) {
-              maxBondLength = d;
-            }
-          }
-          const molecularCap = 1.5 * maxBondLength;
-
-          // Scale arrow by dipole magnitude: if weaker than reference, uniformly shrink arrow;
-          // if stronger, just lengthen (keep width constant).
           const muMag = mu.getMagnitude(); // Debye
-          const MU_REF = 0.5; // 1 Debye as reference
-
-          // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
-          const dir = mu.negated().dividedScalar( muMag ).timesScalar( orientationSign );
-          // Tail just outside the central atom
+          // Bond arrows are from positive->negative, so our sum is too; no negation needed here.
+          const dir = mu.dividedScalar( muMag ).timesScalar( currentOrientationSign );
           const tailV = centralAtom.position.plus( dir.timesScalar( centralRadius + 0.07 ) );
-            const factor = muMag / MU_REF;
-            const desiredDisplayedLength = baseLength * factor; // consistent for both branches
-            const cappedDisplayedLength = Math.min( molecularCap, desiredDisplayedLength );
 
-            const arrow = new DipoleArrowView( false );
-            if ( factor >= 1 ) {
-              // No uniform scale; set the final displayed length directly
-              arrow.setFrom( tailV, dir, cappedDisplayedLength );
-            }
-            else {
-              // Uniformly scale arrow by factor; pre-scale length so final displayed length equals the cap
-              const preScaleLength = cappedDisplayedLength / Math.max( factor, 1e-6 );
-              arrow.setFrom( tailV, dir, preScaleLength );
-              arrow.scale.setScalar( factor );
-            }
-            this.add( arrow );
+          // Use the same per-Debye scale as bond dipoles
+          const drawLength = Math.max( 0, muMag * bondDipoleGlobalScale );
+          const span = molecule.getMaximumExtent();
+          const minUnscaled = Math.max( 0.2, 0.6 * span );
 
-            // Initialize cross axis aligned with the arrow direction
-            arrow.setCrossPerp( dir );
+          const arrow = new DipoleArrowView( false );
+          if ( drawLength < minUnscaled ) {
+            arrow.setFrom( tailV, dir, minUnscaled );
+            const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
+            arrow.scale.setScalar( uniformScale );
+          }
+          else {
+            arrow.setFrom( tailV, dir, drawLength );
+            arrow.scale.setScalar( 1 );
+          }
+          this.add( arrow );
 
-            // Track for per-frame update
-            molecularArrow = arrow;
-            molecularArrowDir = dir;
+          // Initialize cross axis aligned with the arrow direction
+          arrow.setCrossPerp( dir );
+
+          // Track for per-frame update
+          molecularArrow = arrow;
+          molecularArrowDir = dir;
 
             // Dim the non-central atom that lies along the arrow direction (if any)
             const alignmentThreshold = 0.95; // cosine threshold for alignment
@@ -208,9 +215,8 @@ export default class RealMoleculeView extends THREE.Object3D {
               const bond = molecule.bonds.find( bb =>
                 ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
                 ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
-              )!;
-
-              const meshes = bondsMeshesMap.get( bond );
+              );
+              const meshes = bond ? bondsMeshesMap.get( bond ) : null;
               if ( meshes ) {
                 for ( const mesh of meshes ) {
                   const bmat = mesh.material as THREE.MeshLambertMaterial;
@@ -229,7 +235,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         for ( const bond of molecule.bonds ) {
           const muMag = bond.getDipoleMagnitudeDebye();
           if ( muMag <= 1e-3 ) { continue; }
-          const cap = BOND_DIPOLE_FACTOR * bond.getVisibleLength();
+          const cap = getBondDipoleFactor( molecule ) * bond.getVisibleLength();
           globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
         }
         if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {

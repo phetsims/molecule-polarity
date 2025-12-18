@@ -210,6 +210,22 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
+   * Vector sum of per-bond dipoles (in Debye), each oriented from positive to negative.
+   * Useful for visual consistency with bond dipole arrows.
+   */
+  public computeBondDipoleVectorSum(): Vector3 {
+    let sum = new Vector3( 0, 0, 0 );
+    for ( const bond of this.bonds ) {
+      const muMag = bond.getDipoleMagnitudeDebye();
+      if ( muMag > 1e-6 ) {
+        const dir = bond.getPositiveToNegativeUnit();
+        sum = sum.plus( dir.timesScalar( muMag ) );
+      }
+    }
+    return sum;
+  }
+
+  /**
    * Returns a representative central atom for positioning the molecular dipole arrow and related visuals.
    * - Homogeneous diatomic (e.g., H2, F2): returns null
    * - HF: returns the Fluorine atom
