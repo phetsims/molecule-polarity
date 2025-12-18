@@ -50,9 +50,27 @@ export default class BondDipoleView extends THREE.Object3D {
     }
     const perpNeg = perp.timesScalar( -1 );
 
-    // Stable side selection
+    // Side selection
     let chosen = perp;
-    if ( this.lastOffsetDir ) {
+    const partner = this.molecule.getSymmetricPartnerBond( this.bond );
+    if ( partner ) {
+      // Enforce obtuse-side selection relative to the partner bond
+      const central = this.molecule.getCentralAtom();
+      if ( central ) {
+        const other = partner.atomA === central ? partner.atomB : partner.atomB === central ? partner.atomA : null;
+        if ( other ) {
+          const u = bondDir.minus( viewDir.timesScalar( bondDir.dot( viewDir ) ) ).normalized();
+          const v = viewDir.cross( u ).normalized(); // in-plane perpendicular basis
+          const w = other.position.minus( central.position ).normalized();
+          const wProj = w.minus( viewDir.timesScalar( w.dot( viewDir ) ) ).normalized();
+          const s = wProj.dot( v );
+          // If partner is on +v side, choose +perp (which corresponds to -v); otherwise choose -perp
+          chosen = s > 0 ? perp : perpNeg;
+        }
+      }
+    }
+    else if ( this.lastOffsetDir ) {
+      // Stable side selection
       const d1 = perp.dot( this.lastOffsetDir );
       const d2 = perpNeg.dot( this.lastOffsetDir );
       chosen = ( d2 > d1 ) ? perpNeg : perp;

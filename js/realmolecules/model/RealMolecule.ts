@@ -292,6 +292,36 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
+   * If the bond is one of a symmetric pair around the central atom (two neighbors with the same element),
+   * returns its partner bond; otherwise null.
+   */
+  public getSymmetricPartnerBond( bond: RealBond ): RealBond | null {
+    const centralAtom = this.getCentralAtom();
+    if ( !centralAtom ) {
+      return null;
+    }
+    let other: RealAtom | null = null;
+    if ( bond.atomA === centralAtom ) {
+      other = bond.atomB;
+    }
+    else if ( bond.atomB === centralAtom ) {
+      other = bond.atomA;
+    }
+    else {
+      return null;
+    }
+    const targetSymbol = other.element.symbol;
+    const sameSymbolBonds = centralAtom.bonds.filter( b => {
+      const neighbor = b.atomA === centralAtom ? b.atomB : ( b.atomB === centralAtom ? b.atomA : null );
+      return neighbor !== null && neighbor.element.symbol === targetSymbol;
+    } );
+    if ( sameSymbolBonds.length === 2 ) {
+      return sameSymbolBonds[ 0 ] === bond ? sameSymbolBonds[ 1 ] : ( sameSymbolBonds[ 1 ] === bond ? sameSymbolBonds[ 0 ] : null );
+    }
+    return null;
+  }
+
+  /**
    * Returns a representative central atom for positioning the molecular dipole arrow and related visuals.
    * - Homogeneous diatomic (e.g., H2, F2): returns null
    * - HF: returns the Fluorine atom
