@@ -7,6 +7,7 @@
  */
 
 import RealMolecule from '../model/RealMolecule.js';
+import { SURFACE_MESH_RENDER_ORDER } from './RenderOrder.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { colorizeElectronDensity, colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB } from '../model/RealMoleculeColors.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
@@ -48,7 +49,7 @@ export default class SurfaceMesh extends THREE.Mesh {
     // @ts-expect-error Having to use external lib like this
     super( window.ThreeLoopSubdivision.modify( meshGeometry, 2 ), meshMaterial );
 
-    this.renderOrder = 150; // after everything else
+    this.renderOrder = SURFACE_MESH_RENDER_ORDER;
   }
 }
 

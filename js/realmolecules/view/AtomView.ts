@@ -8,6 +8,7 @@
 
 import { RealAtom } from '../model/RealMolecule.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
+import { ATOM_RENDER_ORDER } from './RenderOrder.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 export default class AtomView extends THREE.Object3D {
@@ -24,7 +25,7 @@ export default class AtomView extends THREE.Object3D {
     atomMaterial.depthWrite = true;
 
     this.mesh = new THREE.Mesh( sphereGeometry, atomMaterial );
-    this.mesh.renderOrder = 0;
+    this.mesh.renderOrder = ATOM_RENDER_ORDER;
     this.add( this.mesh );
 
     // Position at the atom's location

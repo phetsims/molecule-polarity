@@ -19,6 +19,7 @@ import RealMolecule, { RealAtom } from '../model/RealMolecule.js';
 import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -58,7 +59,7 @@ export default class AtomLabelView extends TextureQuad {
 
     super( labelNodeTexture, 2 * LABEL_SIZE, LABEL_SIZE, { depthTest: true } );
 
-    ( this as unknown as THREE.Object3D ).renderOrder = 100;
+    ( this as unknown as THREE.Object3D ).renderOrder = ATOM_LABEL_RENDER_ORDER;
 
     this.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
 

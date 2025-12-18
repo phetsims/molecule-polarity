@@ -8,6 +8,7 @@
 
 import Vector3 from '../../../../dot/js/Vector3.js';
 import { RealBond } from '../model/RealMolecule.js';
+import { BOND_RENDER_ORDER } from './RenderOrder.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 const BOND_RADIUS = 0.085;
@@ -31,7 +32,7 @@ export default class BondView extends THREE.Object3D {
 
     for ( let i = 0; i < bond.bondType; i++ ) {
       const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
-      mesh.renderOrder = 10;
+      mesh.renderOrder = BOND_RENDER_ORDER;
       this.add( mesh );
       this.meshes.push( mesh );
     }
