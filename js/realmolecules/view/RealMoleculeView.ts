@@ -13,24 +13,14 @@ import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
-import TextureQuad from '../../../../mobius/js/TextureQuad.js';
-import NodeTexture from '../../../../mobius/js/NodeTexture.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import AtomLabelView from './AtomLabelView.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
-import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import SurfaceMesh from './SurfaceMesh.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
-const LABEL_SIZE = 0.4;
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
 const BOND_RADIUS = 0.085;
 
@@ -44,7 +34,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     super();
 
     // Map atoms/bonds to views, needed for update logic.
-    const atomLabelMap = new Map<RealAtom, TextureQuad>();
+    const atomLabelViews: AtomLabelView[] = [];
     const atomMeshMap = new Map<RealAtom, THREE.Mesh>();
     const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
     const bondDipoleMap = new Map<RealBond, DipoleArrowView>();
@@ -70,7 +60,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.remove( this.children[ 0 ] );
       }
 
-      atomLabelMap.clear();
+      atomLabelViews.length = 0;
       atomMeshMap.clear();
       bondsMeshesMap.clear();
       bondDipoleMap.clear();
@@ -229,47 +219,9 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       if ( atomLabelsVisible || partialChargesVisible ) {
         for ( const atom of molecule.atoms ) {
-          const sameElementAtoms = molecule.atoms.filter( a => a.element === atom.element );
-          const atomVisualIndex = sameElementAtoms.indexOf( atom );
-          const showIndex = sameElementAtoms.length > 1;
-
-          const labelFill = elementToForegroundColor( atom.element );
-
-          const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
-          const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
-          const labelNode = new VBox( {
-            children: [
-              ...( atomLabelsVisible ? [
-                new Text( showIndex ? `${atom.element.symbol}${atomVisualIndex + 1}` : `${atom.element.symbol}`, {
-                  font: labelFont,
-                  fill: labelFill
-                } )
-              ] : [] ),
-              ...( partialChargesVisible ? [
-                // TODO: disposal! https://github.com/phetsims/molecule-polarity/issues/15
-                new Text( new PatternStringProperty( MoleculePolarityStrings.pattern.deltaEqualsStringProperty, {
-                  partialCharge: toFixed( atom.getPartialCharge(), 2 )
-                } ), { font: smallFont, fill: labelFill } )
-              ] : [] )
-            ],
-            center: new Vector2( 256, 128 )
-          } );
-
-          const labelNodeTexture = new NodeTexture( labelNode, {
-            width: 512,
-            height: 256
-          } );
-
-          const label = new TextureQuad( labelNodeTexture, 2 * LABEL_SIZE, LABEL_SIZE, {
-            depthTest: true
-          } );
-
-          ( label as unknown as THREE.Object3D ).renderOrder = 100;
-
-          label.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
-
+          const label = new AtomLabelView( molecule, atom, atomLabelsVisible, partialChargesVisible );
           this.add( label );
-          atomLabelMap.set( atom, label );
+          atomLabelViews.push( label );
         }
       }
 
@@ -287,43 +239,9 @@ export default class RealMoleculeView extends THREE.Object3D {
     stepEmitter.addListener( () => {
       const molecule = moleculeProperty.value;
 
-      if ( atomLabelMap.size ) {
-        for ( const atom of molecule.atoms ) {
-          const label = atomLabelMap.get( atom );
-          if ( !label ) { continue; }
-
-          const localPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-          const localUpPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION.plus( Vector3.Y_UNIT ) ) ) );
-
-          const dirToCamera = localPoint.normalized();
-          const upDir = localUpPoint.minus( localPoint ).normalized();
-          const rightDir = upDir.cross( dirToCamera ).normalized();
-
-          const labelCenter = atom.position.plus( dirToCamera.timesScalar( atom.getDisplayRadius() + 0.03 ) );
-          const labelLowerLeft = labelCenter.plus( rightDir.timesScalar( -LABEL_SIZE ).plus( upDir.timesScalar( -0.5 * LABEL_SIZE ) ) );
-
-          // TODO: don't require a renormalization https://github.com/phetsims/molecule-polarity/issues/15
-          const forward = dirToCamera; // Z+
-          const up = upDir; // Y+
-          const right = up.cross( forward ).normalized(); // X+
-          const rotMatrix = new THREE.Matrix4();
-          rotMatrix.makeBasis(
-            ThreeUtils.vectorToThree( right ),
-            ThreeUtils.vectorToThree( up ),
-            ThreeUtils.vectorToThree( forward )
-          );
-
-          label.matrixAutoUpdate = false;
-
-          const m = new THREE.Matrix4();
-          m.makeBasis(
-            ThreeUtils.vectorToThree( right ),
-            ThreeUtils.vectorToThree( up ),
-            ThreeUtils.vectorToThree( forward )
-          );
-          m.setPosition( ThreeUtils.vectorToThree( labelLowerLeft ) );
-
-          label.matrix.copy( m );
+      if ( atomLabelViews.length ) {
+        for ( const view of atomLabelViews ) {
+          view.update( this );
         }
       }
 
