@@ -1,0 +1,96 @@
+// Copyright 2025, University of Colorado Boulder
+
+/**
+ * Bond dipole arrow view for the 3D molecule view.
+ *
+ * Uses the model-provided per‑Debye scale so bond dipoles and molecular
+ * dipoles share visual scaling. Handles side-offset selection stable across
+ * frames and keeps the crossbar perpendicular to camera direction.
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ */
+
+import moleculePolarity from '../../moleculePolarity.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+import RealMolecule, { RealBond } from '../model/RealMolecule.js';
+import DipoleArrowView from './DipoleArrowView.js';
+
+export default class BondDipoleView extends THREE.Object3D {
+  private readonly molecule: RealMolecule;
+  private readonly bond: RealBond;
+  private readonly arrow: DipoleArrowView;
+  private lastOffsetDir: Vector3 | null = null;
+
+  public constructor( molecule: RealMolecule, bond: RealBond ) {
+    super();
+    this.molecule = molecule;
+    this.bond = bond;
+
+    this.arrow = new DipoleArrowView( true );
+    this.add( this.arrow );
+  }
+
+  public update( parent: THREE.Object3D, localCamera: Vector3, orientationSign: number, offsetBase: number ): void {
+    const start = this.bond.atomA.position;
+    const end = this.bond.atomB.position;
+    const dist = start.distance( end );
+    if ( dist === 0 ) { return; }
+
+    const center = this.bond.getVisibleCenter();
+    const bondDir = end.minus( start ).normalized();
+
+    // Perpendicular offset relative to camera
+    const viewDir = center.minus( localCamera ).normalized();
+    let perp = bondDir.cross( viewDir ).normalized();
+    if ( perp.getMagnitudeSquared() < 1e-6 ) {
+      const alt = ( Math.abs( bondDir.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;
+      perp = bondDir.cross( alt ).normalized();
+    }
+    const perpNeg = perp.timesScalar( -1 );
+
+    // Stable side selection
+    let chosen = perp;
+    if ( this.lastOffsetDir ) {
+      const d1 = perp.dot( this.lastOffsetDir );
+      const d2 = perpNeg.dot( this.lastOffsetDir );
+      chosen = ( d2 > d1 ) ? perpNeg : perp;
+    }
+    this.lastOffsetDir = chosen;
+
+    const muMag = this.bond.getDipoleMagnitudeDebye();
+    const drawLength = Math.max( 0, muMag * this.molecule.getDipoleScale() );
+    const sideOffsetScale = ( this.bond.bondType === 3 ? 1.3 : ( this.bond.bondType === 2 ? 1.1 : 0.9 ) );
+    const dir = this.bond.getPositiveToNegativeUnit().timesScalar( orientationSign );
+
+    const tail = center
+      .plus( chosen.timesScalar( offsetBase * sideOffsetScale ) )
+      .plus( dir.timesScalar( -drawLength / 2 ) );
+
+    // Cross axis perpendicular to camera at arrow location
+    const arrowPosFrame = tail; // tail in parent space
+    const viewDirFrame = new Vector3( arrowPosFrame.x - localCamera.x, arrowPosFrame.y - localCamera.y, arrowPosFrame.z - localCamera.z ).normalized();
+    let axis = dir.minus( viewDirFrame.timesScalar( dir.dot( viewDirFrame ) ) ).normalized();
+    if ( axis.getMagnitudeSquared() < 1e-6 ) {
+      const alt = ( Math.abs( viewDirFrame.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;
+      axis = viewDirFrame.cross( alt ).normalized();
+    }
+
+    const minUnscaled = Math.max( 0.2, 0.72 * dist );
+    if ( drawLength < minUnscaled ) {
+      const tailForM = center
+        .plus( chosen.timesScalar( offsetBase * sideOffsetScale ) )
+        .plus( dir.timesScalar( -drawLength / 2 ) );
+      this.arrow.setFrom( tailForM, dir, minUnscaled );
+      const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
+      this.arrow.scale.setScalar( uniformScale );
+    }
+    else {
+      this.arrow.setFrom( tail, dir, drawLength );
+      this.arrow.scale.setScalar( 1 );
+    }
+    this.arrow.setCrossPerp( axis );
+  }
+}
+
+moleculePolarity.register( 'BondDipoleView', BondDipoleView );
+
