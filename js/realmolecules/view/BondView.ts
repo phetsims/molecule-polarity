@@ -10,14 +10,16 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import { RealBond } from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
+const BOND_RADIUS = 0.085;
+
 export default class BondView extends THREE.Object3D {
   private readonly meshes: THREE.Mesh[] = [];
   private readonly bondRadius: number;
   private readonly bond: RealBond;
 
-  public constructor( bond: RealBond, bondRadius: number ) {
+  public constructor( bond: RealBond ) {
     super();
-    this.bondRadius = bondRadius;
+    this.bondRadius = BOND_RADIUS;
     this.bond = bond;
 
     const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );

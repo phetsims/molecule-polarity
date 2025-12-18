@@ -26,6 +26,9 @@ export default class AtomView extends THREE.Object3D {
     this.mesh = new THREE.Mesh( sphereGeometry, atomMaterial );
     this.mesh.renderOrder = 0;
     this.add( this.mesh );
+
+    // Position at the atom's location
+    this.position.set( atom.position.x, atom.position.y, atom.position.z );
   }
 
   public setDimmed( dimmed: boolean ): void {

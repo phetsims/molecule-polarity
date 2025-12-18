@@ -24,7 +24,6 @@ import AtomView from './AtomView.js';
 import BondView from './BondView.js';
 
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
-const BOND_RADIUS = 0.085;
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -68,13 +67,12 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       for ( const atom of molecule.atoms ) {
         const view = new AtomView( atom );
-        view.position.set( atom.position.x, atom.position.y, atom.position.z );
         this.add( view );
         atomViewMap.set( atom, view );
       }
 
       for ( const bond of molecule.bonds ) {
-        const view = new BondView( bond, BOND_RADIUS );
+        const view = new BondView( bond );
         this.add( view );
         bondViewMap.set( bond, view );
       }
@@ -113,8 +111,8 @@ export default class RealMoleculeView extends THREE.Object3D {
               ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
               ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
             );
-            const bView = bond ? bondViewMap.get( bond ) : null;
-            bView && bView.setDimmed( true );
+            const bondView = bond ? bondViewMap.get( bond ) : null;
+            bondView && bondView.setDimmed( true );
           }
         }
       }
