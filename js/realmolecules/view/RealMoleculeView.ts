@@ -20,6 +20,8 @@ import MPPreferences from '../../common/model/MPPreferences.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import SurfaceMesh from './SurfaceMesh.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import AtomView from './AtomView.js';
+import BondView from './BondView.js';
 
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
 const BOND_RADIUS = 0.085;
@@ -35,8 +37,8 @@ export default class RealMoleculeView extends THREE.Object3D {
 
     // Map atoms/bonds to views, needed for update logic.
     const atomLabelViews: AtomLabelView[] = [];
-    const atomMeshMap = new Map<RealAtom, THREE.Mesh>();
-    const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
+    const atomViewMap = new Map<RealAtom, AtomView>();
+    const bondViewMap = new Map<RealBond, BondView>();
     const bondDipoleMap = new Map<RealBond, DipoleArrowView>();
     const bondDipoleLastOffsetDirMap = new Map<RealBond, Vector3>();
 
@@ -61,45 +63,22 @@ export default class RealMoleculeView extends THREE.Object3D {
       }
 
       atomLabelViews.length = 0;
-      atomMeshMap.clear();
-      bondsMeshesMap.clear();
+      atomViewMap.clear();
+      bondViewMap.clear();
       bondDipoleMap.clear();
       bondDipoleLastOffsetDirMap.clear();
 
       for ( const atom of molecule.atoms ) {
-        const sphereGeometry = new THREE.SphereGeometry( atom.getDisplayRadius(), 32, 32 );
-        const atomMaterial = new THREE.MeshLambertMaterial( {
-          color: ThreeUtils.colorToThree( atom.getColor() ),
-          side: THREE.FrontSide // for when transparent
-        } );
-
-        // Ensure atoms write depth (default), so bonds can depth-test against them
-        atomMaterial.depthWrite = true;
-        const sphereMesh = new THREE.Mesh( sphereGeometry, atomMaterial );
-        // Lower renderOrder so atoms render before bonds
-        sphereMesh.renderOrder = 0;
-        sphereMesh.position.set( atom.position.x, atom.position.y, atom.position.z );
-        this.add( sphereMesh );
-        atomMeshMap.set( atom, sphereMesh );
+        const view = new AtomView( atom );
+        view.position.set( atom.position.x, atom.position.y, atom.position.z );
+        this.add( view );
+        atomViewMap.set( atom, view );
       }
 
       for ( const bond of molecule.bonds ) {
-        const meshes: THREE.Mesh[] = [];
-        const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
-        const bondMaterial = new THREE.MeshLambertMaterial( {
-          color: 0xffffff,
-          depthTest: true,
-          side: THREE.FrontSide // for when transparent
-        } );
-
-        for ( let i = 0; i < bond.bondType; i++ ) {
-          const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
-          // Higher renderOrder so bonds render after atoms regardless of transparency
-          mesh.renderOrder = 10;
-          this.add( mesh );
-          meshes.push( mesh );
-        }
-        bondsMeshesMap.set( bond, meshes );
+        const view = new BondView( bond, BOND_RADIUS );
+        this.add( view );
+        bondViewMap.set( bond, view );
       }
 
       // Molecular dipole arrow
@@ -151,26 +130,16 @@ export default class RealMoleculeView extends THREE.Object3D {
 
           if ( alignedAtom ) {
             // Dim the aligned atom mesh
-            const atomMesh = atomMeshMap.get( alignedAtom );
-            if ( atomMesh ) {
-              const mat = atomMesh.material as THREE.MeshLambertMaterial;
-              mat.transparent = true;
-              mat.opacity = 0.5;
-            }
+            const atomView = atomViewMap.get( alignedAtom );
+            atomView && atomView.setDimmed( true );
 
             // Dim the bond mesh between center and aligned atom
             const bond = molecule.bonds.find( bb =>
               ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
               ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
             );
-            const meshes = bond ? bondsMeshesMap.get( bond ) : null;
-            if ( meshes ) {
-              for ( const mesh of meshes ) {
-                const bmat = mesh.material as THREE.MeshLambertMaterial;
-                bmat.transparent = true;
-                bmat.opacity = 0.5;
-              }
-            }
+            const bView = bond ? bondViewMap.get( bond ) : null;
+            bView && bView.setDimmed( true );
           }
         }
       }
@@ -249,8 +218,6 @@ export default class RealMoleculeView extends THREE.Object3D {
       {
         const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
 
-        const threeYUnit = new THREE.Vector3( 0, 1, 0 );
-
         const bondSeparation = BOND_RADIUS * ( 12 / 5 );
 
         for ( const bond of molecule.bonds ) {
@@ -281,18 +248,8 @@ export default class RealMoleculeView extends THREE.Object3D {
               throw new Error( `Unsupported bond type: ${bond.bondType}` );
           }
 
-          const threeTowardsEnd = ThreeUtils.vectorToThree( towardsEnd );
-          const meshes = bondsMeshesMap.get( bond );
-          if ( !meshes ) { continue; }
-          for ( let i = 0; i < meshes.length; i++ ) {
-            const mesh = meshes[ i ];
-            const translation = center.plus( offsets[ i ] );
-            mesh.position.set( translation.x, translation.y, translation.z );
-            mesh.quaternion.setFromUnitVectors( threeYUnit, threeTowardsEnd );
-            mesh.scale.x = mesh.scale.z = BOND_RADIUS;
-            mesh.scale.y = distance;
-            mesh.updateMatrix();
-          }
+          const view = bondViewMap.get( bond );
+          view && view.setTransforms( towardsEnd, center, distance, offsets );
         }
       }
 
