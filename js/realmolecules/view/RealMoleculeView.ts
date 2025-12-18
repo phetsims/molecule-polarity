@@ -153,27 +153,18 @@ export default class RealMoleculeView extends THREE.Object3D {
 
     stepEmitter.addListener( () => {
       const molecule = moleculeProperty.value;
+      const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
 
-      if ( atomLabelViews.length ) {
-        for ( const view of atomLabelViews ) {
-          view.update( this );
-        }
+      for ( const view of atomLabelViews ) {
+        view.update( this );
       }
 
-      // Update bonds to face the camera and handle double/triple offsets
-      {
-        const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-        for ( const bond of molecule.bonds ) {
-          const view = bondViewMap.get( bond );
-          view && view.update( this, localCamera );
-        }
-      }
+      for ( const bond of molecule.bonds ) {
+        const bondView = bondViewMap.get( bond );
+        bondView && bondView.update( this, localCamera );
 
-      if ( viewProperties.bondDipolesVisibleProperty.value && bondDipoleViewMap.size ) {
-        const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-        for ( const view of bondDipoleViewMap.values() ) {
-          view.update( this, localCamera, orientationSignProperty.value, BOND_DIPOLE_OFFSET );
-        }
+        const bondDipoleView = bondDipoleViewMap.get( bond );
+        bondDipoleView && bondDipoleView.update( this, localCamera, orientationSignProperty.value, BOND_DIPOLE_OFFSET );
       }
     } );
   }
