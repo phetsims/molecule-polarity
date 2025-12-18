@@ -231,104 +231,48 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Bond dipole arrows (black), one per bond
       if ( bondDipolesVisible ) {
-        const E_ANG_PER_DEBYE = 0.208194;
-        // First pass: gather per-bond quantities to compute a global scale
-        type BondRaw = {
-          start: Vector3; end: Vector3; dist: number;
-          dir: Vector3; // unit vector positive -> negative, with orientation preference applied
-          muMag: number;
-          centerVisible: Vector3; visibleLength: number;
-          bondType: number;
-        };
-        const raws: BondRaw[] = [];
-
-        for ( const bond of molecule.bonds ) {
-          const a = bond.atomA;
-          const b = bond.atomB;
-          const c1 = a.getPartialCharge();
-          const c2 = b.getPartialCharge();
-
-          const start = a.position;
-          const end = b.position;
-          const dist = start.distance( end );
-          if ( dist === 0 ) { continue; }
-
-          // Bond dipole magnitude in Debye (Jmol convention)
-          const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
-          const muMag = Math.abs( valueDebye );
-          if ( muMag <= 1e-3 ) { continue; }
-
-          // Direction from positive to negative end (then apply preference)
-          const dirV = ( ( c1 - c2 ) >= 0 ? end.minus( start ) : start.minus( end ) ).normalized().timesScalar( orientationSign );
-
-          // Base length proportional to VISIBLE bond length (ignoring covered parts)
-          // Compute visible endpoints using displayed radii
-          const rA = elementToRadius( a.element );
-          const rB = elementToRadius( b.element );
-          const u = end.minus( start ).normalized();
-          const pA = start.plus( u.timesScalar( rA ) );
-          const pB = end.minus( u.timesScalar( rB ) );
-          // Visible bond length is the portion not covered by spheres
-          const visibleLength = Math.max( 0, dist - ( rA + rB ) );
-
-          const centerVisible = pA.plus( pB ).timesScalar( 0.5 );
-
-          raws.push( {
-            start: start,
-            end: end,
-            dist: dist,
-            dir: dirV,
-            muMag: muMag,
-            centerVisible: centerVisible,
-            visibleLength: visibleLength,
-            bondType: bond.bondType
-          } );
-        }
-
         // Compute a global scale so each bond arrow fits within its visible bond length
         let globalScalePerDebye = Number.POSITIVE_INFINITY;
-        for ( const r of raws ) {
-          const cap = BOND_DIPOLE_FACTOR * r.visibleLength;
-          if ( r.muMag > 1e-6 ) {
-            globalScalePerDebye = Math.min( globalScalePerDebye, cap / r.muMag );
-          }
+        for ( const bond of molecule.bonds ) {
+          const muMag = bond.getDipoleMagnitudeDebye();
+          if ( muMag <= 1e-3 ) { continue; }
+          const cap = BOND_DIPOLE_FACTOR * bond.getVisibleLength();
+          globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
         }
         if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
           globalScalePerDebye = 0;
         }
         bondDipoleGlobalScale = globalScalePerDebye;
 
-        // Second pass: create arrows with the uniform global scale
-        for ( const r of raws ) {
-          const { start, end, dist, muMag, centerVisible, visibleLength, bondType, dir } = r;
+        // Create arrows with the uniform global scale
+        for ( const bond of molecule.bonds ) {
+          const muMag = bond.getDipoleMagnitudeDebye();
+          if ( muMag <= 1e-3 ) { continue; }
+          const start = bond.atomA.position;
+          const end = bond.atomB.position;
+          const dist = start.distance( end );
+          const dir = bond.getPositiveToNegativeUnit().timesScalar( orientationSign );
+          const centerVisible = bond.getVisibleCenter();
 
           const arrow = new DipoleArrowView( true );
-          // Initial placement centered at the visible bond centerline (no side offset yet)
           const drawLength = Math.max( 0, muMag * bondDipoleGlobalScale );
           const centerInit = centerVisible;
-          // Build geometry at a reasonable size tied to the full bond distance,
-          // so thickness doesn't collapse for short visible lengths.
           const minUnscaled = Math.max( 0.2, 0.72 * dist );
           if ( drawLength < minUnscaled ) {
-            // Create an arrow of size M and uniformly scale by X/M.
-            // To keep the arrow centered at centerInit after scaling, compute tail using X (final length), not M.
             const initialTail = centerInit.plus( dir.timesScalar( -drawLength / 2 ) );
             arrow.setFrom( initialTail, dir, minUnscaled );
             const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
             arrow.scale.setScalar( uniformScale );
           }
           else {
-            // No downscale; set the final desired length directly
             const initialTail = centerInit.plus( dir.timesScalar( -drawLength / 2 ) );
             arrow.setFrom( initialTail, dir, drawLength );
             arrow.scale.setScalar( 1 );
           }
           this.add( arrow );
 
-          // Initial crossbar orientation
           const localCamera2 = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
           const viewDirInit = centerInit.minus( localCamera2 ).normalized();
-          // axisInit: projection of bond direction onto camera plane
           let axisInit = dir.minus( viewDirInit.timesScalar( dir.dot( viewDirInit ) ) ).normalized();
           if ( axisInit.getMagnitudeSquared() < 1e-6 ) {
             const worldX = Vector3.X_UNIT;
@@ -344,8 +288,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             start: start,
             end: end,
             centerVisible: centerVisible,
-            visibleLength: visibleLength,
-            bondType: bondType
+            visibleLength: bond.getVisibleLength(),
+            bondType: bond.bondType
           } );
         }
       }

@@ -324,6 +324,52 @@ export class RealBond {
     atomA.bonds.push( this );
     atomB.bonds.push( this );
   }
+
+  public getDistance(): number {
+    return this.atomA.position.distance( this.atomB.position );
+  }
+
+  public getUnitAtoB(): Vector3 {
+    return this.atomB.position.minus( this.atomA.position ).normalized();
+  }
+
+  /**
+   * Unit direction vector from positive to negative end (Jmol convention), independent of orientation preference.
+   */
+  public getPositiveToNegativeUnit(): Vector3 {
+    const c1 = this.atomA.getPartialCharge();
+    const c2 = this.atomB.getPartialCharge();
+    return ( ( c1 - c2 ) >= 0 ? this.getUnitAtoB() : this.getUnitAtoB().negated() );
+  }
+
+  /** Visible bond length (portion not covered by spheres). */
+  public getVisibleLength(): number {
+    const rA = this.atomA.getDisplayRadius();
+    const rB = this.atomB.getDisplayRadius();
+    return Math.max( 0, this.getDistance() - ( rA + rB ) );
+  }
+
+  /** Visible bond center, midway between the exposed endpoints. */
+  public getVisibleCenter(): Vector3 {
+    const u = this.getUnitAtoB();
+    const rA = this.atomA.getDisplayRadius();
+    const rB = this.atomB.getDisplayRadius();
+    const pA = this.atomA.position.plus( u.timesScalar( rA ) );
+    const pB = this.atomB.position.minus( u.timesScalar( rB ) );
+    return pA.plus( pB ).timesScalar( 0.5 );
+  }
+
+  /**
+   * Bond dipole magnitude in Debye (Jmol convention) using partial charges and bond distance.
+   */
+  public getDipoleMagnitudeDebye(): number {
+    const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
+    const c1 = this.atomA.getPartialCharge();
+    const c2 = this.atomB.getPartialCharge();
+    const dist = this.getDistance();
+    const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
+    return Math.abs( valueDebye );
+  }
 }
 
 export class SurfaceVertex {
