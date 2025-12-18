@@ -81,11 +81,12 @@ export default class RealMoleculeView extends THREE.Object3D {
       while ( this.children.length > 0 ) {
         this.remove( this.children[ 0 ] );
       }
-      atomLabelMap.clear();
 
+      atomLabelMap.clear();
+      atomMeshMap.clear();
+      bondsMeshesMap.clear();
       bondDipoleMap.clear();
       bondDipoleLastOffsetDirMap.clear();
-      atomMeshMap.clear();
 
       for ( const atom of molecule.atoms ) {
         const sphereGeometry = new THREE.SphereGeometry( atom.getDisplayRadius(), 32, 32 );
@@ -104,7 +105,6 @@ export default class RealMoleculeView extends THREE.Object3D {
         atomMeshMap.set( atom, sphereMesh );
       }
 
-      bondsMeshesMap.clear();
       bondDipoleGlobalScale = 1;
 
       for ( const bond of molecule.bonds ) {
