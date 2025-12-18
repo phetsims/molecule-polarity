@@ -23,8 +23,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AtomView from './AtomView.js';
 import BondView from './BondView.js';
 
-const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
-
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
@@ -110,7 +108,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           if ( muMag <= 1e-3 ) { continue; }
           const view = new BondDipoleView( molecule, bond );
           this.add( view );
-          view.update( this, localCamera2, orientationSign, BOND_DIPOLE_OFFSET );
+          view.update( this, localCamera2, orientationSign );
           bondDipoleViewMap.set( bond, view );
         }
       }
@@ -147,7 +145,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         bondView && bondView.update( this, localCamera );
 
         const bondDipoleView = bondDipoleViewMap.get( bond );
-        bondDipoleView && bondDipoleView.update( this, localCamera, orientationSignProperty.value, BOND_DIPOLE_OFFSET );
+        bondDipoleView && bondDipoleView.update( this, localCamera, orientationSignProperty.value );
       }
     } );
   }

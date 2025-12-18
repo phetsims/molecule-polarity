@@ -15,6 +15,8 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import RealMolecule, { RealBond } from '../model/RealMolecule.js';
 import DipoleArrowView from './DipoleArrowView.js';
 
+const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
+
 export default class BondDipoleView extends THREE.Object3D {
   private readonly molecule: RealMolecule;
   private readonly bond: RealBond;
@@ -30,7 +32,7 @@ export default class BondDipoleView extends THREE.Object3D {
     this.add( this.arrow );
   }
 
-  public update( parent: THREE.Object3D, localCamera: Vector3, orientationSign: number, offsetBase: number ): void {
+  public update( parent: THREE.Object3D, localCamera: Vector3, orientationSign: number ): void {
     const start = this.bond.atomA.position;
     const end = this.bond.atomB.position;
     const dist = start.distance( end );
@@ -63,7 +65,7 @@ export default class BondDipoleView extends THREE.Object3D {
     const dir = this.bond.getPositiveToNegativeUnit().timesScalar( orientationSign );
 
     const tail = center
-      .plus( chosen.timesScalar( offsetBase * sideOffsetScale ) )
+      .plus( chosen.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
       .plus( dir.timesScalar( -drawLength / 2 ) );
 
     // Cross axis perpendicular to camera at arrow location
@@ -78,7 +80,7 @@ export default class BondDipoleView extends THREE.Object3D {
     const minUnscaled = Math.max( 0.2, 0.72 * dist );
     if ( drawLength < minUnscaled ) {
       const tailForM = center
-        .plus( chosen.timesScalar( offsetBase * sideOffsetScale ) )
+        .plus( chosen.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
         .plus( dir.timesScalar( -drawLength / 2 ) );
       this.arrow.setFrom( tailForM, dir, minUnscaled );
       const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
@@ -93,4 +95,3 @@ export default class BondDipoleView extends THREE.Object3D {
 }
 
 moleculePolarity.register( 'BondDipoleView', BondDipoleView );
-
