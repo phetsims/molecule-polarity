@@ -18,6 +18,7 @@ import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import DipoleArrowView from './DipoleArrowView.js';
+import MolecularDipoleView from './MolecularDipoleView.js';
 import SurfaceMesh from './SurfaceMesh.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AtomView from './AtomView.js';
@@ -88,31 +89,8 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 
-          const centralRadius = centralAtom.getDisplayRadius();
-          const muMag = mu.getMagnitude(); // Debye
-          // Bond arrows are from positive->negative, so our sum is too; no negation needed here.
-          const dir = mu.dividedScalar( muMag ).timesScalar( orientationSign );
-          const tailV = centralAtom.position.plus( dir.timesScalar( centralRadius + 0.07 ) );
-
-          // Use the same per-Debye scale as bond dipoles
-          const drawLength = Math.max( 0, muMag * molecule.getDipoleScale() );
-          const span = molecule.getMaximumExtent();
-          const minUnscaled = Math.max( 0.2, 0.6 * span );
-
-          const arrow = new DipoleArrowView( false );
-          if ( drawLength < minUnscaled ) {
-            arrow.setFrom( tailV, dir, minUnscaled );
-            const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
-            arrow.scale.setScalar( uniformScale );
-          }
-          else {
-            arrow.setFrom( tailV, dir, drawLength );
-            arrow.scale.setScalar( 1 );
-          }
-          this.add( arrow );
-
-          // Initialize cross axis aligned with the arrow direction
-          arrow.setCrossPerp( dir );
+          const mdView = new MolecularDipoleView( molecule, orientationSign );
+          this.add( mdView );
 
           // Dim the non-central atom that lies along the arrow direction (if any)
           const alignmentThreshold = 0.95; // cosine threshold for alignment
@@ -121,7 +99,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           for ( const atom of molecule.atoms ) {
             if ( atom === centralAtom ) { continue; }
             const v = atom.position.minus( centralAtom.position ).normalized();
-            const d = v.dot( dir );
+            const d = v.dot( mdView.dir );
             if ( d > bestDot ) {
               bestDot = d;
               alignedAtom = atom;
