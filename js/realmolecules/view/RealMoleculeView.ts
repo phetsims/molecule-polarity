@@ -26,6 +26,7 @@ import MPPreferences from '../../common/model/MPPreferences.js';
 import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import SurfaceMesh from './SurfaceMesh.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const LABEL_SIZE = 0.4;
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
@@ -59,8 +60,11 @@ export default class RealMoleculeView extends THREE.Object3D {
     const bondDipoleLastOffsetDirMap = new Map<RealBond, Vector3>();
 
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
-    let currentOrientationSign = 1; // cache for per-frame updates
     const bondRadius = 0.085;
+
+    const orientationSignProperty = new DerivedProperty( [ MPPreferences.dipoleDirectionProperty ], dipoleDirection => {
+      return ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
+    } );
 
     Multilink.multilink( [
       moleculeProperty,
@@ -69,13 +73,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       viewProperties.partialChargesVisibleProperty,
       viewProperties.molecularDipoleVisibleProperty,
       viewProperties.bondDipolesVisibleProperty,
-      MPPreferences.dipoleDirectionProperty,
+      orientationSignProperty,
       MPPreferences.surfaceColorProperty
-    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible, dipoleDirection, surfaceColor ) => {
-
-      // Dipole direction preference: default is positiveToNegative; otherwise reverse arrows
-      const orientationSign = ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
-      currentOrientationSign = orientationSign;
+    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible, orientationSign, surfaceColor ) => {
 
       // Clear out children
       while ( this.children.length > 0 ) {
@@ -152,7 +152,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centralRadius = centralAtom.getDisplayRadius();
           const muMag = mu.getMagnitude(); // Debye
           // Bond arrows are from positive->negative, so our sum is too; no negation needed here.
-          const dir = mu.dividedScalar( muMag ).timesScalar( currentOrientationSign );
+          const dir = mu.dividedScalar( muMag ).timesScalar( orientationSign );
           const tailV = centralAtom.position.plus( dir.timesScalar( centralRadius + 0.07 ) );
 
           // Use the same per-Debye scale as bond dipoles
@@ -237,7 +237,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const start = bond.atomA.position;
           const end = bond.atomB.position;
           const dist = start.distance( end );
-          const dir = bond.getPositiveToNegativeUnit().timesScalar( currentOrientationSign );
+          const dir = bond.getPositiveToNegativeUnit().timesScalar( orientationSign );
           const centerVisible = bond.getVisibleCenter();
 
           const arrow = new DipoleArrowView( true );
@@ -457,7 +457,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const distNow = start.distance( end );
           const drawLength = Math.max( 0, bond.getDipoleMagnitudeDebye() * bondDipoleGlobalScale );
           const sideOffsetScale = ( bond.bondType === 3 ? 1.3 : ( bond.bondType === 2 ? 1.1 : 0.9 ) );
-          const dir = bond.getPositiveToNegativeUnit().timesScalar( currentOrientationSign );
+          const dir = bond.getPositiveToNegativeUnit().timesScalar( orientationSignProperty.value );
           const tailV = centerV
             .plus( chosenV.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
             .plus( dir.timesScalar( -drawLength / 2 ) );
