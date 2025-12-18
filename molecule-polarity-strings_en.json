@@ -164,6 +164,9 @@
   "pattern.dipoleDirection": {
     "value": "{{from}} → {{to}}"
   },
+  "pattern.deltaEquals": {
+    "value": "δ={{partialCharge}}"
+  },
   "surfaceColorRealMolecules": {
     "value": "Surface color (Real Molecules):"
   },

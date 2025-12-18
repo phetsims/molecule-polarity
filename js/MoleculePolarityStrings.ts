@@ -40,6 +40,7 @@ type StringsType = {
     'atomNameStringProperty': LocalizedStringProperty;
     'symbolNameStringProperty': LocalizedStringProperty;
     'dipoleDirectionStringProperty': LocalizedStringProperty;
+    'deltaEqualsStringProperty': LocalizedStringProperty;
   };
   'noneStringProperty': LocalizedStringProperty;
   'electrostaticPotentialStringProperty': LocalizedStringProperty;

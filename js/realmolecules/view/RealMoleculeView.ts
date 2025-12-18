@@ -27,6 +27,8 @@ import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import SurfaceMesh from './SurfaceMesh.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 const LABEL_SIZE = 0.4;
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
@@ -227,27 +229,27 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       if ( atomLabelsVisible || partialChargesVisible ) {
         for ( const atom of molecule.atoms ) {
-          const element = atom.element;
-          const partialCharge = atom.getPartialCharge();
           const sameElementAtoms = molecule.atoms.filter( a => a.element === atom.element );
           const atomVisualIndex = sameElementAtoms.indexOf( atom );
           const showIndex = sameElementAtoms.length > 1;
 
-          const labelFill = elementToForegroundColor( element );
+          const labelFill = elementToForegroundColor( atom.element );
 
           const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
           const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
           const labelNode = new VBox( {
             children: [
               ...( atomLabelsVisible ? [
-                new Text( showIndex ? `${element.symbol}${atomVisualIndex + 1}` : `${element.symbol}`, {
+                new Text( showIndex ? `${atom.element.symbol}${atomVisualIndex + 1}` : `${atom.element.symbol}`, {
                   font: labelFont,
                   fill: labelFill
                 } )
               ] : [] ),
               ...( partialChargesVisible ? [
-                // TODO: strings! https://github.com/phetsims/molecule-polarity/issues/15
-                new Text( `δ=${toFixed( partialCharge, 2 )}`, { font: smallFont, fill: labelFill } )
+                // TODO: disposal! https://github.com/phetsims/molecule-polarity/issues/15
+                new Text( new PatternStringProperty( MoleculePolarityStrings.pattern.deltaEqualsStringProperty, {
+                  partialCharge: toFixed( atom.getPartialCharge(), 2 )
+                } ), { font: smallFont, fill: labelFill } )
               ] : [] )
             ],
             center: new Vector2( 256, 128 )

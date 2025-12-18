@@ -5,12 +5,12 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
+import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -283,7 +283,8 @@ const MoleculePolarityFluent = {
   pattern: {
     atomNameStringProperty: _.get( MoleculePolarityStrings, 'pattern.atomNameStringProperty' ),
     symbolNameStringProperty: _.get( MoleculePolarityStrings, 'pattern.symbolNameStringProperty' ),
-    dipoleDirectionStringProperty: _.get( MoleculePolarityStrings, 'pattern.dipoleDirectionStringProperty' )
+    dipoleDirectionStringProperty: _.get( MoleculePolarityStrings, 'pattern.dipoleDirectionStringProperty' ),
+    deltaEqualsStringProperty: _.get( MoleculePolarityStrings, 'pattern.deltaEqualsStringProperty' )
   },
   noneStringProperty: _.get( MoleculePolarityStrings, 'noneStringProperty' ),
   _comment_7: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),

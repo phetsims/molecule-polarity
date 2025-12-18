@@ -53,6 +53,7 @@ dipoleDirection: 'Dipole direction:'
 deltaPlus: δ+
 deltaMinus: δ−
 pattern.dipoleDirection: '{{from}} → {{to}}'
+pattern.deltaEquals: 'δ={{partialCharge}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules):'
 underDevelopment.line1: Real Molecules is not currently available in HTML5.
 underDevelopment.line2: If your device runs Java, you can use the Java version at
