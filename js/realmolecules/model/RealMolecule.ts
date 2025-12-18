@@ -261,6 +261,37 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
+   * Returns the atom most aligned with the molecular dipole direction from the central atom.
+   * Uses the vector sum of bond dipoles (positive->negative) and an orientation sign.
+   * Returns null if no central atom or negligible dipole.
+   */
+  public getMoleculeDipoleAlignedAtom( orientationSign: number ): RealAtom | null {
+    const centralAtom = this.getCentralAtom();
+    if ( !centralAtom ) {
+      return null;
+    }
+    const mu = this.computeBondDipoleVectorSum();
+    const muMag = mu.getMagnitude();
+    if ( muMag <= 1e-3 ) {
+      return null;
+    }
+    const dir = mu.dividedScalar( muMag ).timesScalar( orientationSign );
+    const threshold = 0.95;
+    let bestDot = threshold;
+    let best: RealAtom | null = null;
+    for ( const atom of this.atoms ) {
+      if ( atom === centralAtom ) { continue; }
+      const v = atom.position.minus( centralAtom.position ).normalized();
+      const d = v.dot( dir );
+      if ( d > bestDot ) {
+        bestDot = d;
+        best = atom;
+      }
+    }
+    return best;
+  }
+
+  /**
    * Returns a representative central atom for positioning the molecular dipole arrow and related visuals.
    * - Homogeneous diatomic (e.g., H2, F2): returns null
    * - HF: returns the Fluorine atom

@@ -87,26 +87,11 @@ export default class RealMoleculeView extends THREE.Object3D {
           const mdView = new MolecularDipoleView( molecule, orientationSign );
           this.add( mdView );
 
-          // Dim the non-central atom that lies along the arrow direction (if any)
-          const alignmentThreshold = 0.95; // cosine threshold for alignment
-          let bestDot = alignmentThreshold;
-          let alignedAtom: RealAtom | null = null;
-          for ( const atom of molecule.atoms ) {
-            if ( atom === centralAtom ) { continue; }
-            const v = atom.position.minus( centralAtom.position ).normalized();
-            const d = v.dot( mdView.dir );
-            if ( d > bestDot ) {
-              bestDot = d;
-              alignedAtom = atom;
-            }
-          }
-
+          const alignedAtom = molecule.getMoleculeDipoleAlignedAtom( orientationSign );
           if ( alignedAtom ) {
-            // Dim the aligned atom mesh
             const atomView = atomViewMap.get( alignedAtom );
             atomView && atomView.setDimmed( true );
 
-            // Dim the bond mesh between center and aligned atom
             const bond = molecule.bonds.find( bb =>
               ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
               ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
