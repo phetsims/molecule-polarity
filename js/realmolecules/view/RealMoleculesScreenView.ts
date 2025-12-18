@@ -50,7 +50,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         // Manually tuned constant for placement (for now), since we need this on startup.
         // This will move the "center" of the molecule view down a bit to account for the thicker UI content on the
         // top of the screen.
-        viewOffset: new Vector2( 0, 50 ),
+        viewOffset: new Vector2( -141, 50 ),
 
         backgroundColorProperty: new ColorProperty( Color.TRANSPARENT )
       }
@@ -130,8 +130,14 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     // layout ---------------------------------
 
+    // right of viewer
+    controlPanel.right = this.layoutBounds.right - 25;
+    controlPanel.centerY = this.layoutBounds.centerY;
+
+    const layoutCenter = ( controlPanel.left + this.layoutBounds.left ) / 2;
+
     // centered above viewer
-    electronegativityTableNode.centerX = this.layoutBounds.centerX;
+    electronegativityTableNode.centerX = layoutCenter;
     electronegativityTableNode.top = this.layoutBounds.top + 25;
 
     // centered below electronegativity table
@@ -141,12 +147,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
 
     // centered below viewer
-    moleculesComboBox.centerX = this.layoutBounds.centerX;
+    moleculesComboBox.centerX = layoutCenter;
     moleculesComboBox.bottom = this.layoutBounds.bottom - 15;
-
-    // right of viewer
-    controlPanel.right = this.layoutBounds.right - 25;
-    controlPanel.centerY = this.layoutBounds.centerY;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
