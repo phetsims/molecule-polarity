@@ -44,10 +44,8 @@ export default class RealMoleculeView extends THREE.Object3D {
     const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
     type BondDipoleState = {
       arrow: DipoleArrowView;
-      tailAtomIndex: number;
       dir: Vector3; // unit vector, positive -> negative
       muMag: number; // Debye magnitude for this bond
-      tailRadius: number;
       start: Vector3;
       end: Vector3;
       centerVisible: Vector3;
@@ -217,15 +215,14 @@ export default class RealMoleculeView extends THREE.Object3D {
               const bond = molecule.bonds.find( bb =>
                 ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
                 ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
-              );
-              if ( bond ) {
-                const meshes = bondsMeshesMap.get( bond );
-                if ( meshes ) {
-                  for ( const mesh of meshes ) {
-                    const bmat = mesh.material as THREE.MeshLambertMaterial;
-                    bmat.transparent = true;
-                    bmat.opacity = 0.5;
-                  }
+              )!;
+
+              const meshes = bondsMeshesMap.get( bond );
+              if ( meshes ) {
+                for ( const mesh of meshes ) {
+                  const bmat = mesh.material as THREE.MeshLambertMaterial;
+                  bmat.transparent = true;
+                  bmat.opacity = 0.5;
                 }
               }
             }
@@ -237,11 +234,8 @@ export default class RealMoleculeView extends THREE.Object3D {
         const E_ANG_PER_DEBYE = 0.208194;
         // First pass: gather per-bond quantities to compute a global scale
         type BondRaw = {
-          iA: number; iB: number;
-          a: typeof molecule.atoms[number];
-          b: typeof molecule.atoms[number];
           start: Vector3; end: Vector3; dist: number;
-          tailAtomIndex: number; tailRadius: number;
+          dir: Vector3; // unit vector positive -> negative, with orientation preference applied
           muMag: number;
           centerVisible: Vector3; visibleLength: number;
           bondType: number;
@@ -249,10 +243,8 @@ export default class RealMoleculeView extends THREE.Object3D {
         const raws: BondRaw[] = [];
 
         for ( const bond of molecule.bonds ) {
-          const iA = bond.atomA.index;
-          const iB = bond.atomB.index;
-          const a = molecule.atoms[ iA ];
-          const b = molecule.atoms[ iB ];
+          const a = bond.atomA;
+          const b = bond.atomB;
           const c1 = a.getPartialCharge();
           const c2 = b.getPartialCharge();
 
@@ -267,13 +259,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           if ( muMag <= 1e-3 ) { continue; }
 
           // Direction from positive to negative end (then apply preference)
-          let tailAtomIndex: number;
-          if ( ( c1 - c2 ) >= 0 ) {
-            tailAtomIndex = iA; // positive end near A
-          }
-          else {
-            tailAtomIndex = iB; // positive end near B
-          }
+          const dirV = ( ( c1 - c2 ) >= 0 ? end.minus( start ) : start.minus( end ) ).normalized().timesScalar( orientationSign );
 
           // Base length proportional to VISIBLE bond length (ignoring covered parts)
           // Compute visible endpoints using displayed radii
@@ -285,21 +271,13 @@ export default class RealMoleculeView extends THREE.Object3D {
           // Visible bond length is the portion not covered by spheres
           const visibleLength = Math.max( 0, dist - ( rA + rB ) );
 
-          const tailAtom = molecule.atoms[ tailAtomIndex ];
-          const tailElement = tailAtom.element;
-          const tailRadius = elementToRadius( tailElement );
           const centerVisible = pA.plus( pB ).timesScalar( 0.5 );
 
           raws.push( {
-            iA: iA,
-            iB: iB,
-            a: a,
-            b: b,
             start: start,
             end: end,
             dist: dist,
-            tailAtomIndex: tailAtomIndex,
-            tailRadius: tailRadius,
+            dir: dirV,
             muMag: muMag,
             centerVisible: centerVisible,
             visibleLength: visibleLength,
@@ -322,9 +300,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
         // Second pass: create arrows with the uniform global scale
         for ( const r of raws ) {
-          const { start, end, dist, tailAtomIndex, tailRadius, muMag, centerVisible, visibleLength, bondType } = r;
-          // Direction in Vector3: from positive end (tail) to negative end, then apply orientation preference
-          const dir = ( tailAtomIndex === r.iA ? end.minus( start ) : start.minus( end ) ).normalized().timesScalar( orientationSign );
+          const { start, end, dist, muMag, centerVisible, visibleLength, bondType, dir } = r;
 
           const arrow = new DipoleArrowView( true );
           // Initial placement centered at the visible bond centerline (no side offset yet)
@@ -363,10 +339,8 @@ export default class RealMoleculeView extends THREE.Object3D {
 
           bondDipoleStates.push( {
             arrow: arrow,
-            tailAtomIndex: tailAtomIndex,
             dir: dir,
             muMag: muMag,
-            tailRadius: tailRadius,
             start: start,
             end: end,
             centerVisible: centerVisible,
