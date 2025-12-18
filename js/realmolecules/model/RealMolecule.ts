@@ -210,6 +210,69 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
+   * Returns a representative central atom for positioning the molecular dipole arrow and related visuals.
+   * - Homogeneous diatomic (e.g., H2, F2): returns null
+   * - HF: returns the Fluorine atom
+   * - Otherwise: returns the atom with the most bonds (ties resolved by first encountered)
+   */
+  public getCentralAtom(): RealAtom | null {
+    if ( this.atoms.length === 2 ) {
+      const a = this.atoms[ 0 ];
+      const b = this.atoms[ 1 ];
+      if ( a.element.symbol === b.element.symbol ) {
+        return null; // homogeneous diatomic
+      }
+      // Prefer Fluorine for HF (our known hetero-diatomic case)
+      const fluorine = this.atoms.find( atom => atom.element.symbol === 'F' );
+      if ( fluorine ) {
+        return fluorine;
+      }
+      // If we ever encounter other hetero-diatomics, fall back to null to avoid arbitrary choice
+      return null;
+    }
+
+    // Pick the atom with the most bonds
+    let best: RealAtom = this.atoms[ 0 ];
+    let bestCount = best.bonds.length;
+    for ( let i = 1; i < this.atoms.length; i++ ) {
+      const count = this.atoms[ i ].bonds.length;
+      if ( count > bestCount ) {
+        best = this.atoms[ i ];
+        bestCount = count;
+      }
+    }
+    return best;
+  }
+
+  /**
+   * Centroid (unweighted average position) of atom positions in model coordinates.
+   */
+  public getCentroid(): Vector3 {
+    const centroid = new Vector3( 0, 0, 0 );
+    for ( let i = 0; i < this.atoms.length; i++ ) {
+      centroid.add( this.atoms[ i ].position );
+    }
+    centroid.divideScalar( this.atoms.length );
+    return centroid;
+  }
+
+  /**
+   * Maximum radial extent: the maximum distance from the centroid to any atom position.
+   * Returns a length in model units (same as previously used 'span').
+   */
+  public getMaximumExtent(): number {
+    const centroid = this.getCentroid();
+    let maxR2 = 0;
+    for ( let i = 0; i < this.atoms.length; i++ ) {
+      const d2 = this.atoms[ i ].position.distanceSquared( centroid );
+      if ( d2 > maxR2 ) {
+        maxR2 = d2;
+      }
+    }
+    return Math.sqrt( maxR2 );
+  }
+
+  /**
    * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at
    * startup, it implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization

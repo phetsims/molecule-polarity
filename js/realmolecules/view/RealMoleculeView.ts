@@ -143,35 +143,14 @@ export default class RealMoleculeView extends THREE.Object3D {
       if ( molecularDipoleVisible ) {
         const mu = molecule.computeMolecularDipole();
         if ( mu ) {
-          // Determine center atom as closest to centroid
-          const centroid = new Vector3( 0, 0, 0 );
-          molecule.atoms.forEach( atom => {
-            centroid.add( atom.position );
-          } );
-          centroid.divideScalar( molecule.atoms.length );
-          let centerIndex = 0;
-          let bestDist2 = Number.POSITIVE_INFINITY;
-          for ( let i = 0; i < molecule.atoms.length; i++ ) {
-            const atom = molecule.atoms[ i ];
-            const distanceSquared = atom.position.distanceSquared( centroid );
-            if ( distanceSquared < bestDist2 ) {
-              bestDist2 = distanceSquared; centerIndex = i;
-            }
-          }
-
-          const centerAtom = molecule.atoms[ centerIndex ];
-          const centerElement = centerAtom.element;
-          const centerRadius = elementToRadius( centerElement );
+          // Use model helpers for centroid and central atom
+          const centroid = molecule.getCentroid();
+          const centerAtomOpt = molecule.getCentralAtom();
+          const centerIndex = centerAtomOpt ? centerAtomOpt.index : -1;
+          const centerRadius = centerAtomOpt ? elementToRadius( centerAtomOpt.element ) : 0;
 
           // Choose visual arrow length relative to molecule size
-          let maxR2 = 0;
-          for ( const atom of molecule.atoms ) {
-            const distanceSquared = atom.position.distanceSquared( centroid );
-            if ( distanceSquared > maxR2 ) {
-              maxR2 = distanceSquared;
-            }
-          }
-          const span = Math.sqrt( maxR2 );
+          const span = molecule.getMaximumExtent();
           const baseLength = Math.max( 0.2, span * 0.6 );
 
           // Cap the maximum displayed arrow length to 1.5x the longest bond length in the molecule
@@ -193,8 +172,9 @@ export default class RealMoleculeView extends THREE.Object3D {
           if ( muMag > 1e-3 ) {
             // Chemistry default: arrow from positive -> negative (we previously inverted from physics μ)
             const dir = mu.negated().dividedScalar( muMag ).timesScalar( orientationSign );
-            // Tail just outside the center atom
-            const tailV = centerAtom.position.plus( dir.timesScalar( centerRadius + 0.07 ) );
+            // Tail just outside the center atom (fallback to centroid if none)
+            const tailOrigin = centerAtomOpt ? centerAtomOpt.position : centroid;
+            const tailV = tailOrigin.plus( dir.timesScalar( centerRadius + 0.07 ) );
             const factor = muMag / MU_REF;
             const desiredDisplayedLength = baseLength * factor; // consistent for both branches
             const cappedDisplayedLength = Math.min( molecularCap, desiredDisplayedLength );
@@ -220,39 +200,41 @@ export default class RealMoleculeView extends THREE.Object3D {
             molecularArrowDir = dir;
 
             // Dim the non-central atom that lies along the arrow direction (if any)
-            const alignmentThreshold = 0.95; // cosine threshold for alignment
-            let bestDot = alignmentThreshold;
-            let alignedIndex: number | null = null;
-            for ( let i = 0; i < molecule.atoms.length; i++ ) {
-              if ( i === centerIndex ) { continue; }
-              const atom = molecule.atoms[ i ];
-              const v = atom.position.minus( centerAtom.position ).normalized();
-              const d = v.dot( dir );
-              if ( d > bestDot ) {
-                bestDot = d;
-                alignedIndex = i;
-              }
-            }
-
-            if ( alignedIndex !== null ) {
-              // Dim the aligned atom mesh
-              const atomMesh = atomMeshes[ alignedIndex ];
-              if ( atomMesh ) {
-                const mat = atomMesh.material as THREE.MeshLambertMaterial;
-                mat.transparent = true;
-                mat.opacity = 0.5;
+            if ( centerAtomOpt ) {
+              const alignmentThreshold = 0.95; // cosine threshold for alignment
+              let bestDot = alignmentThreshold;
+              let alignedIndex: number | null = null;
+              for ( let i = 0; i < molecule.atoms.length; i++ ) {
+                if ( i === centerIndex ) { continue; }
+                const atom = molecule.atoms[ i ];
+                const v = atom.position.minus( centerAtomOpt.position ).normalized();
+                const d = v.dot( dir );
+                if ( d > bestDot ) {
+                  bestDot = d;
+                  alignedIndex = i;
+                }
               }
 
-              // Dim the bond mesh between center and aligned atom
-              const bondIndex = moleculeData.bonds.findIndex( b =>
-                ( b.indexA === centerIndex && b.indexB === alignedIndex ) ||
-                ( b.indexB === centerIndex && b.indexA === alignedIndex )
-              );
-              if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
-                for ( const mesh of bondsMeshes[ bondIndex ] ) {
-                  const bmat = mesh.material as THREE.MeshLambertMaterial;
-                  bmat.transparent = true;
-                  bmat.opacity = 0.5;
+              if ( alignedIndex !== null ) {
+                // Dim the aligned atom mesh
+                const atomMesh = atomMeshes[ alignedIndex ];
+                if ( atomMesh ) {
+                  const mat = atomMesh.material as THREE.MeshLambertMaterial;
+                  mat.transparent = true;
+                  mat.opacity = 0.5;
+                }
+
+                // Dim the bond mesh between center and aligned atom
+                const bondIndex = moleculeData.bonds.findIndex( b =>
+                  ( b.indexA === centerIndex && b.indexB === alignedIndex ) ||
+                  ( b.indexB === centerIndex && b.indexA === alignedIndex )
+                );
+                if ( bondIndex >= 0 && bondsMeshes[ bondIndex ] ) {
+                  for ( const mesh of bondsMeshes[ bondIndex ] ) {
+                    const bmat = mesh.material as THREE.MeshLambertMaterial;
+                    bmat.transparent = true;
+                    bmat.opacity = 0.5;
+                  }
                 }
               }
             }
