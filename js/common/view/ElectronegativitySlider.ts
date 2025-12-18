@@ -25,6 +25,8 @@ import MPConstants from '../MPConstants.js';
 import DescriptionMaps from './DescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
 
+type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
+
 type SelfOptions = {
   tickSpacing?: number; // space between tick marks
 };
@@ -34,6 +36,8 @@ type ElectronegativitySliderOptions = SelfOptions & WithRequired<HSliderOptions,
 export default class ElectronegativitySlider extends HSlider {
 
   public constructor( molecule: Molecule, atom: Atom, providedOptions: ElectronegativitySliderOptions ) {
+
+    let previousEN = atom.electronegativityProperty.value;
 
     const options = optionize<ElectronegativitySliderOptions, SelfOptions, HSliderOptions>()( {
 
@@ -46,6 +50,8 @@ export default class ElectronegativitySlider extends HSlider {
       majorTickLength: 20,
       minorTickLength: 10,
       constrainValue: value => roundToInterval( value, 0.2 ), // rounds to nearest 0.2
+      shiftKeyboardStep: 0.2,
+      keyboardStep: 0.4,
       visiblePropertyOptions: {
         phetioFeatured: false
       },
@@ -73,13 +79,14 @@ export default class ElectronegativitySlider extends HSlider {
 
     options.startDrag = () => {
       molecule.isDraggingProperty.value = true;
+      previousEN = atom.electronegativityProperty.value;
     };
 
     // snaps to the closest tick mark
     options.endDrag = () => {
       molecule.isDraggingProperty.value = false;
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
-      this.emitContextResponse( molecule );
+      this.emitContextResponse( molecule, atom, previousEN );
     };
 
     const range = atom.electronegativityProperty.range;
@@ -102,56 +109,81 @@ export default class ElectronegativitySlider extends HSlider {
     }
   }
 
-  private emitContextResponse( molecule: Molecule ): void {
+  private emitContextResponse( molecule: Molecule, atom: Atom, previousEN: number ): void {
 
     // clear the queue of utterances
     this.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
 
+    // Mini-utility function for emitting context resposnes without repeating the verbosity
     const contextResponse = ( message: string ) => {
       this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
     };
 
-    const deltaEN = molecule.deltaENProperty.value;
+    const bondDeltaEN = molecule.deltaENProperty.value;
+
+    // This is how much is changing because of the slider, not to be confused with deltaEN
+    const currentEN = atom.electronegativityProperty.value;
+    const changeInEN = currentEN - previousEN;
+
 
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
-        progress: 'TODO'
+        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
+          progress: changeInEN === 0 ? 'zero' : changeInEN > 0 ? 'smaller' : 'larger'
+        } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
-        atom: 'TODO'
+        atom: bondDeltaEN > 0 ? 'B' : 'A'
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
-        progress: 'TODO'
+        progress: MoleculePolarityFluent.a11y.partialChargeProgress.format( {
+          progress: changeInEN === 0 ? 'zero' : changeInEN > 0 ? 'moreNegative' : 'morePositive'
+        } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
-        sign: 'TODO'
+        sign: MoleculePolarityFluent.a11y.partialChargeSign.format( {
+          sign: bondDeltaEN > 0 ? 'positive' : 'negative'
+        } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-        progress: DescriptionMaps.formatBondCharacterString( deltaEN )
+        progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
+          progress: changeInEN > 0 ? 'moreIonic' : 'moreCovalent'
+        } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-        progress: DescriptionMaps.formatElectrostaticPotentialString( deltaEN )
+        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
+          progress: this.changeInENtoElectrostaticPotentialProgress( changeInEN )
+        } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-        progress: DescriptionMaps.formatElectronDensityString( deltaEN )
+        progress: MoleculePolarityFluent.a11y.electronDensityProgress.format( {
+          progress: changeInEN > 0 ? 'more' : 'less'
+        } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
     );
 
+  }
+
+  private changeInENtoElectrostaticPotentialProgress( changeInEN: number ): EPProgress {
+    return changeInEN > 0.5 ? 'morePositive' :
+           changeInEN > 0.25 ? 'lessPositive' :
+           changeInEN > -0.25 ? 'neutral' :
+           changeInEN > -0.5 ? 'lessNegative' : 'moreNegative';
   }
 }
 

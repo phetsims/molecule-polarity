@@ -133,11 +133,11 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
-      moleculeNode
+      moleculeNode,
+      panelsVBox
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
-      panelsVBox,
       platesNode,
       controlPanel,
       colorKeyNode,
