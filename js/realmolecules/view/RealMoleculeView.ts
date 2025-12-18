@@ -9,7 +9,6 @@
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule, { RealAtom, RealBond } from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import Element from '../../../../nitroglycerin/js/Element.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
@@ -52,20 +51,16 @@ export default class RealMoleculeView extends THREE.Object3D {
   ) {
     super();
 
-    const stepLabels: TextureQuad[] = [];
+    // Map atoms/bonds to views, needed for update logic.
+    const atomLabelMap = new Map<RealAtom, TextureQuad>();
     const atomMeshMap = new Map<RealAtom, THREE.Mesh>();
     const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
     const bondDipoleMap = new Map<RealBond, DipoleArrowView>();
     const bondDipoleLastOffsetDirMap = new Map<RealBond, Vector3>();
+
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     let currentOrientationSign = 1; // cache for per-frame updates
     const bondRadius = 0.085;
-
-    const elementToRadius = ( element: Element ) => {
-      const angstroms = element.vanDerWaalsRadius / 100;
-
-      return 0.25 * angstroms; // scale factor for better visibility
-    };
 
     Multilink.multilink( [
       moleculeProperty,
@@ -86,11 +81,12 @@ export default class RealMoleculeView extends THREE.Object3D {
       while ( this.children.length > 0 ) {
         this.remove( this.children[ 0 ] );
       }
-      stepLabels.length = 0;
+      atomLabelMap.clear();
+
       bondDipoleMap.clear();
       bondDipoleLastOffsetDirMap.clear();
-
       atomMeshMap.clear();
+
       for ( const atom of molecule.atoms ) {
         const sphereGeometry = new THREE.SphereGeometry( atom.getDisplayRadius(), 32, 32 );
         const atomMaterial = new THREE.MeshLambertMaterial( {
@@ -153,7 +149,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 
-          const centralRadius = elementToRadius( centralAtom.element );
+          const centralRadius = centralAtom.getDisplayRadius();
           const muMag = mu.getMagnitude(); // Debye
           // Bond arrows are from positive->negative, so our sum is too; no negation needed here.
           const dir = mu.dividedScalar( muMag ).timesScalar( currentOrientationSign );
@@ -316,7 +312,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           label.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
 
           this.add( label );
-          stepLabels.push( label );
+          atomLabelMap.set( atom, label );
         }
       }
 
@@ -335,10 +331,10 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       const molecule = moleculeProperty.value;
 
-      if ( stepLabels.length ) {
-        for ( let i = 0; i < stepLabels.length; i++ ) {
-          const label = stepLabels[ i ];
-          const atom = molecule.atoms[ i ];
+      if ( atomLabelMap.size ) {
+        for ( const atom of molecule.atoms ) {
+          const label = atomLabelMap.get( atom );
+          if ( !label ) { continue; }
 
           const localPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
           const localUpPoint = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION.plus( Vector3.Y_UNIT ) ) ) );
@@ -347,11 +343,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           const upDir = localUpPoint.minus( localPoint ).normalized();
           const rightDir = upDir.cross( dirToCamera ).normalized();
 
-          const element = atom.element;
-          const atomPosition = atom.position;
-          const atomRadius = elementToRadius( element );
-
-          const labelCenter = atomPosition.plus( dirToCamera.timesScalar( atomRadius + 0.03 ) );
+          const labelCenter = atom.position.plus( dirToCamera.timesScalar( atom.getDisplayRadius() + 0.03 ) );
           const labelLowerLeft = labelCenter.plus( rightDir.timesScalar( -LABEL_SIZE ).plus( upDir.timesScalar( -0.5 * LABEL_SIZE ) ) );
 
           // TODO: don't require a renormalization https://github.com/phetsims/molecule-polarity/issues/15
