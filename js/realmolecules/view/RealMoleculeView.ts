@@ -12,7 +12,6 @@ import moleculePolarity from '../../moleculePolarity.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import Multilink from '../../../../axon/js/Multilink.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
 import AtomLabelView from './AtomLabelView.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
@@ -164,39 +163,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Update bonds to face the camera and handle double/triple offsets
       {
         const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
-
-        const bondSeparation = BOND_RADIUS * ( 12 / 5 );
-
         for ( const bond of molecule.bonds ) {
-          const atomA = bond.atomA;
-          const atomB = bond.atomB;
-
-          const start = atomA.position;
-          const end = atomB.position;
-          const towardsEnd = end.minus( start ).normalized();
-          const distance = start.distance( end );
-          const center = start.timesScalar( 0.5 ).plus( end.timesScalar( 0.5 ) );
-
-          // Perpendicular to bond direction and camera direction
-          const perpendicular = center.minus( end ).normalized().cross( center.minus( localCamera ).normalized() ).normalized();
-
-          let offsets: Vector3[] = [];
-          switch( bond.bondType ) {
-            case 1:
-              offsets = [ new Vector3( 0, 0, 0 ) ];
-              break;
-            case 2:
-              offsets = [ perpendicular.timesScalar( bondSeparation / 2 ), perpendicular.timesScalar( -bondSeparation / 2 ) ];
-              break;
-            case 3:
-              offsets = [ new Vector3( 0, 0, 0 ), perpendicular.timesScalar( bondSeparation ), perpendicular.timesScalar( -bondSeparation ) ];
-              break;
-            default:
-              throw new Error( `Unsupported bond type: ${bond.bondType}` );
-          }
-
           const view = bondViewMap.get( bond );
-          view && view.setTransforms( towardsEnd, center, distance, offsets );
+          view && view.update( this, localCamera );
         }
       }
 
