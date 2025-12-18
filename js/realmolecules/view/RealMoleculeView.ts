@@ -63,12 +63,14 @@ export default class RealMoleculeView extends THREE.Object3D {
       bondViewMap.clear();
       bondDipoleViewMap.clear();
 
+      // Atom spheres
       for ( const atom of molecule.atoms ) {
         const view = new AtomView( atom );
         this.add( view );
         atomViewMap.set( atom, view );
       }
 
+      // Bond cylinders
       for ( const bond of molecule.bonds ) {
         const view = new BondView( bond );
         this.add( view );
@@ -100,19 +102,20 @@ export default class RealMoleculeView extends THREE.Object3D {
         }
       }
 
-      // Bond dipole arrows (black), one per bond
+      // Bond dipole arrows
       if ( bondDipolesVisible ) {
         const localCamera2 = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
         for ( const bond of molecule.bonds ) {
-          const muMag = bond.getDipoleMagnitudeDebye();
-          if ( muMag <= 1e-3 ) { continue; }
-          const view = new BondDipoleView( molecule, bond );
-          this.add( view );
-          view.update( this, localCamera2, orientationSign );
-          bondDipoleViewMap.set( bond, view );
+          if ( bond.getDipoleMagnitudeDebye() > 1e-3 ) {
+            const view = new BondDipoleView( molecule, bond );
+            this.add( view );
+            view.update( this, localCamera2, orientationSign );
+            bondDipoleViewMap.set( bond, view );
+          }
         }
       }
 
+      // Atom labels
       if ( atomLabelsVisible || partialChargesVisible ) {
         for ( const atom of molecule.atoms ) {
           const label = new AtomLabelView( molecule, atom, atomLabelsVisible, partialChargesVisible );
@@ -121,6 +124,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         }
       }
 
+      // Surface (MEP or electron density)
       if ( surfaceType !== 'none' ) {
         this.add( new SurfaceMesh( molecule, surfaceType, surfaceColor ) );
       }
