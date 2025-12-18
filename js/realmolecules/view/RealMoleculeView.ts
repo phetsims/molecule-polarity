@@ -57,9 +57,6 @@ export default class RealMoleculeView extends THREE.Object3D {
     const bondsMeshesMap = new Map<RealBond, THREE.Mesh[]>();
     const bondDipoleMap = new Map<RealBond, DipoleArrowView>();
     const bondDipoleLastOffsetDirMap = new Map<RealBond, Vector3>();
-    // Track molecular arrow so we can update its cross orientation per frame
-    let molecularArrow: DipoleArrowView | null = null;
-    let molecularArrowDir: Vector3 | null = null;
     let bondDipoleGlobalScale = 1; // rescales all bond dipole lengths uniformly
     let currentOrientationSign = 1; // cache for per-frame updates
     const bondRadius = 0.085;
@@ -89,8 +86,6 @@ export default class RealMoleculeView extends THREE.Object3D {
       while ( this.children.length > 0 ) {
         this.remove( this.children[ 0 ] );
       }
-      molecularArrow = null;
-      molecularArrowDir = null;
       stepLabels.length = 0;
       bondDipoleMap.clear();
       bondDipoleLastOffsetDirMap.clear();
@@ -184,47 +179,43 @@ export default class RealMoleculeView extends THREE.Object3D {
           // Initialize cross axis aligned with the arrow direction
           arrow.setCrossPerp( dir );
 
-          // Track for per-frame update
-          molecularArrow = arrow;
-          molecularArrowDir = dir;
+          // Dim the non-central atom that lies along the arrow direction (if any)
+          const alignmentThreshold = 0.95; // cosine threshold for alignment
+          let bestDot = alignmentThreshold;
+          let alignedAtom: RealAtom | null = null;
+          for ( const atom of molecule.atoms ) {
+            if ( atom === centralAtom ) { continue; }
+            const v = atom.position.minus( centralAtom.position ).normalized();
+            const d = v.dot( dir );
+            if ( d > bestDot ) {
+              bestDot = d;
+              alignedAtom = atom;
+            }
+          }
 
-            // Dim the non-central atom that lies along the arrow direction (if any)
-            const alignmentThreshold = 0.95; // cosine threshold for alignment
-            let bestDot = alignmentThreshold;
-            let alignedAtom: RealAtom | null = null;
-            for ( const atom of molecule.atoms ) {
-              if ( atom === centralAtom ) { continue; }
-              const v = atom.position.minus( centralAtom.position ).normalized();
-              const d = v.dot( dir );
-              if ( d > bestDot ) {
-                bestDot = d;
-                alignedAtom = atom;
-              }
+          if ( alignedAtom ) {
+            // Dim the aligned atom mesh
+            const atomMesh = atomMeshMap.get( alignedAtom );
+            if ( atomMesh ) {
+              const mat = atomMesh.material as THREE.MeshLambertMaterial;
+              mat.transparent = true;
+              mat.opacity = 0.5;
             }
 
-            if ( alignedAtom ) {
-              // Dim the aligned atom mesh
-              const atomMesh = atomMeshMap.get( alignedAtom );
-              if ( atomMesh ) {
-                const mat = atomMesh.material as THREE.MeshLambertMaterial;
-                mat.transparent = true;
-                mat.opacity = 0.5;
-              }
-
-              // Dim the bond mesh between center and aligned atom
-              const bond = molecule.bonds.find( bb =>
-                ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
-                ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
-              );
-              const meshes = bond ? bondsMeshesMap.get( bond ) : null;
-              if ( meshes ) {
-                for ( const mesh of meshes ) {
-                  const bmat = mesh.material as THREE.MeshLambertMaterial;
-                  bmat.transparent = true;
-                  bmat.opacity = 0.5;
-                }
+            // Dim the bond mesh between center and aligned atom
+            const bond = molecule.bonds.find( bb =>
+              ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
+              ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
+            );
+            const meshes = bond ? bondsMeshesMap.get( bond ) : null;
+            if ( meshes ) {
+              for ( const mesh of meshes ) {
+                const bmat = mesh.material as THREE.MeshLambertMaterial;
+                bmat.transparent = true;
+                bmat.opacity = 0.5;
               }
             }
+          }
         }
       }
 
@@ -505,11 +496,6 @@ export default class RealMoleculeView extends THREE.Object3D {
             arrow.scale.setScalar( 1 );
           }
         }
-      }
-
-      // Update molecular dipole cross orientation each frame (aligned with arrow)
-      if ( molecularArrow && molecularArrowDir ) {
-        molecularArrow.setCrossPerp( molecularArrowDir );
       }
     } );
   }
