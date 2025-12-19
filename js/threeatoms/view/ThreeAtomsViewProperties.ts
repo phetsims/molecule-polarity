@@ -28,7 +28,7 @@ export default class ThreeAtomsViewProperties {
 
     const options = providedOptions;
 
-    this.bondDipolesVisibleProperty = new BooleanProperty( false, {
+    this.bondDipolesVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' ),
       phetioFeatured: true
     } );
@@ -38,7 +38,7 @@ export default class ThreeAtomsViewProperties {
       phetioFeatured: true
     } );
 
-    this.partialChargesVisibleProperty = new BooleanProperty( false, {
+    this.partialChargesVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' ),
       phetioFeatured: true
     } );

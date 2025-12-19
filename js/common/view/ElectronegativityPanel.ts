@@ -7,7 +7,7 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
@@ -19,7 +19,10 @@ import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import ElectronegativitySlider from './ElectronegativitySlider.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  // Option passed to ElectroNegativitySlider to invert the mapping of some context responses based on the atom.
+  invertMapping?: boolean;
+};
 
 type ElectronegativityPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
@@ -33,6 +36,9 @@ export default class ElectronegativityPanel extends Panel {
   public constructor( atom: Atom, molecule: Molecule, providedOptions: ElectronegativityPanelOptions ) {
 
     const options = optionize<ElectronegativityPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // SelfOptions
+      invertMapping: false,
 
       // PanelOptions
       fill: atom.color,
@@ -70,7 +76,8 @@ export default class ElectronegativityPanel extends Panel {
 
     // slider
     const slider = new ElectronegativitySlider( molecule, atom, {
-      tandem: options.tandem.createTandem( 'slider' )
+      tandem: options.tandem.createTandem( 'slider' ),
+      invertMapping: options.invertMapping
     } );
 
     const content = new VBox( {

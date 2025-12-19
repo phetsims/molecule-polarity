@@ -36,12 +36,12 @@ export default class TwoAtomsViewProperties {
       phetioFeatured: true
     } );
 
-    this.partialChargesVisibleProperty = new BooleanProperty( false, {
+    this.partialChargesVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' ),
       phetioFeatured: true
     } );
 
-    this.bondCharacterVisibleProperty = new BooleanProperty( false, {
+    this.bondCharacterVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'bondCharacterVisibleProperty' ),
       phetioFeatured: true
     } );

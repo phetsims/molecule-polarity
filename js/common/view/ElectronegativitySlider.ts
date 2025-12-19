@@ -29,11 +29,18 @@ type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' |
 
 type SelfOptions = {
   tickSpacing?: number; // space between tick marks
+
+  // In some cases an increase in deltaEN results in different context responses depending on which atom is being changed
+  // i.e. An increase in deltaEN emits one response if this slider is for atom A, and a different one for atom B.
+  invertMapping?: boolean;
 };
 
 type ElectronegativitySliderOptions = SelfOptions & WithRequired<HSliderOptions, 'tandem'>;
 
 export default class ElectronegativitySlider extends HSlider {
+
+  // Wether to invert some context responses based on which atom is being changed.
+  private readonly invertMapping;
 
   public constructor( molecule: Molecule, atom: Atom, providedOptions: ElectronegativitySliderOptions ) {
 
@@ -43,6 +50,7 @@ export default class ElectronegativitySlider extends HSlider {
 
       // SelfOptions
       tickSpacing: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
+      invertMapping: false,
 
       // HSliderOptions
       thumbYOffset: 10,
@@ -107,6 +115,8 @@ export default class ElectronegativitySlider extends HSlider {
         this.addMinorTick( i );
       }
     }
+
+    this.invertMapping = options.invertMapping;
   }
 
   private emitContextResponse( molecule: Molecule, atom: Atom, previousEN: number ): void {
@@ -125,11 +135,14 @@ export default class ElectronegativitySlider extends HSlider {
     const currentEN = atom.electronegativityProperty.value;
     const changeInEN = currentEN - previousEN;
 
+    // For some cases we need to invert the change in EN for context responses based on which atom is being changed
+    const invertedChangeInEN = this.invertMapping ? -changeInEN : changeInEN;
+    const invertedBondDeltaEN = this.invertMapping ? -bondDeltaEN : bondDeltaEN;
 
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: changeInEN === 0 ? 'zero' : changeInEN > 0 ? 'smaller' : 'larger'
+          progress: changeInEN === 0 ? 'zero' : bondDeltaEN * invertedChangeInEN > 0 ? 'smaller' : 'larger'
         } )
       } )
     );
@@ -141,34 +154,34 @@ export default class ElectronegativitySlider extends HSlider {
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
         progress: MoleculePolarityFluent.a11y.partialChargeProgress.format( {
-          progress: changeInEN === 0 ? 'zero' : changeInEN > 0 ? 'moreNegative' : 'morePositive'
-        } )
+          progress: bondDeltaEN === 0 ? 'zero' : changeInEN < 0 ? 'morePositive' : 'moreNegative'
+  } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
         sign: MoleculePolarityFluent.a11y.partialChargeSign.format( {
-          sign: bondDeltaEN > 0 ? 'positive' : 'negative'
+          sign: invertedBondDeltaEN > 0 ? 'positive' : 'negative'
         } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
         progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
-          progress: changeInEN > 0 ? 'moreIonic' : 'moreCovalent'
-        } )
+          progress: bondDeltaEN * invertedChangeInEN > 0 ? 'moreCovalent' : 'moreIonic'
+  } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
-          progress: this.changeInENtoElectrostaticPotentialProgress( changeInEN )
+        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
+          progress: this.changeInENtoElectrostaticPotentialProgress( invertedBondDeltaEN, changeInEN )
         } )
       } )
     );
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-        progress: MoleculePolarityFluent.a11y.electronDensityProgress.format( {
+        progress: MoleculePolarityFluent.a11y.electronDensityProgressUppercase.format( {
           progress: changeInEN > 0 ? 'more' : 'less'
         } )
       } )
@@ -179,11 +192,10 @@ export default class ElectronegativitySlider extends HSlider {
 
   }
 
-  private changeInENtoElectrostaticPotentialProgress( changeInEN: number ): EPProgress {
-    return changeInEN > 0.5 ? 'morePositive' :
-           changeInEN > 0.25 ? 'lessPositive' :
-           changeInEN > -0.25 ? 'neutral' :
-           changeInEN > -0.5 ? 'lessNegative' : 'moreNegative';
+  private changeInENtoElectrostaticPotentialProgress( deltaEN: number, changeInEN: number ): EPProgress {
+    return deltaEN === 0 ? 'neutral' :
+           deltaEN > 0 ? changeInEN < 0 ? 'morePositive' : 'lessPositive' :
+           changeInEN > 0 ? 'moreNegative' : 'lessNegative';
   }
 }
 

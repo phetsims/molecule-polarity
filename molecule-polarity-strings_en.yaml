@@ -68,7 +68,7 @@ a11y:
       partialChargeContext: 'Partial charge is { $progress }.'
       partialChargeSignChange: 'Partial charge now { $sign }.'
       bondCharacterContext: 'Bond is { $progress }.'
-      electrostaticContext: '{ $progress } electrostatic difference.'
+      electrostaticContext: '{ $progress } electrostatic potential.'
       electronDensityContext: '{ $progress } electron density.'
       electricFieldContext: 'Molecule aligned with electric field.'
     bondDipoleCheckbox:
@@ -188,12 +188,18 @@ a11y:
       shifted: 'shifted'
       shiftedMuchMore: 'shifted much more'
       shiftedAlmostCompletely: 'shifted almost completely'
-  
+
   # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
   electronDensityProgress:
     select_progress:
       more: 'more'
       less: 'less'
+
+  # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
+  electronDensityProgressUppercase:
+    select_progress:
+      more: 'More'
+      less: 'Less'
   
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotential:
@@ -214,6 +220,16 @@ a11y:
       neutral: 'neutral'
       lessNegative: 'less negative'
       moreNegative: 'more negative'
+
+  # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
+  # 2-range spectrum: positive-neutral-negative
+  electrostaticPotentialProgressUppercase:
+    select_progress:
+      morePositive: 'More positive'
+      lessPositive: 'Less positive'
+      neutral: 'Neutral'
+      lessNegative: 'Less negative'
+      moreNegative: 'More negative'
   
   # EN6 - Electronegativity levels (Screen 1/2)
   electronegativity:

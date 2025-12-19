@@ -158,8 +158,10 @@ type StringsType = {
     'electronDensityStringProperty': LocalizedStringProperty;
     'electronDensityShiftStringProperty': LocalizedStringProperty;
     'electronDensityProgressStringProperty': LocalizedStringProperty;
+    'electronDensityProgressUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticPotentialStringProperty': LocalizedStringProperty;
     'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;
+    'electrostaticPotentialProgressUppercaseStringProperty': LocalizedStringProperty;
     'electronegativityStringProperty': LocalizedStringProperty;
     'fieldStringProperty': LocalizedStringProperty;
     'molecularDipoleStringProperty': LocalizedStringProperty;

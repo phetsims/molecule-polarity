@@ -77,7 +77,8 @@ export default class TwoAtomsScreenView extends ScreenView {
       tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
     } );
     const atomBElectronegativityPanel = new ElectronegativityPanel( model.diatomicMolecule.atomB, model.diatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' ),
+      invertMapping: true
     } );
     const electronegativityPanels = new HBox( {
       spacing: 10,

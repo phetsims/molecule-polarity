@@ -201,7 +201,7 @@
           "value": "Bond is { $progress }."
         },
         "electrostaticContext": {
-          "value": "{ $progress } electrostatic difference."
+          "value": "{ $progress } electrostatic potential."
         },
         "electronDensityContext": {
           "value": "{ $progress } electron density."
@@ -367,11 +367,17 @@
     "electronDensityProgress": {
       "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
     },
+    "electronDensityProgressUppercase": {
+      "value": "{ $progress ->\n  [more] More\n  *[less] Less\n}"
+    },
     "electrostaticPotential": {
       "value": "{ $potential ->\n  [noDifference] no\n  [verySmallDifference] very small\n  [smallDifference] small\n  [mediumDifference] medium\n  [largeDifference] large\n  *[veryLargeDifference] very large\n}"
     },
     "electrostaticPotentialProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"
+    },
+    "electrostaticPotentialProgressUppercase": {
+      "value": "{ $progress ->\n  [morePositive] More positive\n  [lessPositive] Less positive\n  [neutral] Neutral\n  [lessNegative] Less negative\n  *[moreNegative] More negative\n}"
     },
     "electronegativity": {
       "value": "{ $level ->\n  [veryLow] very low\n  [low] low\n  [mediumLow] medium-low\n  [mediumHigh] medium-high\n  [high] high\n  *[veryHigh] very high\n}"
