@@ -75,21 +75,21 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
     super( surfaceTypeProperty, radioButtonGroupItems, options );
 
     surfaceTypeProperty.lazyLink( surfaceType => {
-      let objectResponse: string;
+      let contextResponse: string;
       switch( surfaceType ) {
         case 'none':
-          objectResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.noneSelectedStringProperty.value;
+          contextResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.noneSelectedStringProperty.value;
           break;
         case 'electrostaticPotential':
-          objectResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty.value;
+          contextResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty.value;
           break;
         case 'electronDensity':
-          objectResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electronDensitySelectedStringProperty.value;
+          contextResponse = MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electronDensitySelectedStringProperty.value;
           break;
         default:
           affirm( false, `Unknown surfaceType: ${surfaceType}` );
       }
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( contextResponse );
     } );
   }
 }

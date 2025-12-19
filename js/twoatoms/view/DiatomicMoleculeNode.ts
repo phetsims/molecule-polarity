@@ -46,7 +46,7 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
         cursor: 'pointer',
         phetioInputEnabledPropertyInstrumented: true,
         isDisposable: false,
-        accessibleHeading: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
+        accessibleName: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
         accessibleHelpText: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
       }, providedOptions );
 
