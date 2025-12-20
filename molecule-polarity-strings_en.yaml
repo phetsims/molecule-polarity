@@ -356,7 +356,7 @@ a11y:
       partialChargesDescription: 'Partial charges are { $partialChargeMagnitude }.'
       partialChargesDetail: 'Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
       bondCharacterDescription: 'Bond is { $bondCharacter }.'
-      electrostaticPotentialDescription: '{ $potential } electrostatic difference across molecule.'
+      electrostaticPotentialDescription: '{ $potential } electrostatic potential difference across molecule.'
       electronDensityDescription:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
         lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards Atom { $atom }.'
