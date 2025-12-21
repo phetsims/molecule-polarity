@@ -450,7 +450,7 @@
           "value": "Bond is { $bondCharacter }."
         },
         "electrostaticPotentialDescription": {
-          "value": "{ $potential } electrostatic difference across molecule."
+          "value": "{ $potential } electrostatic potential difference across molecule."
         },
         "electronDensityDescription": {
           "firstTwoRegions": {
