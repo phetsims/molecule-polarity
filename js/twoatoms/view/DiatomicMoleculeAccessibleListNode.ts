@@ -5,6 +5,7 @@
  * @author Agustín Vallejo
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
@@ -23,32 +24,40 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // no-op
     }, providedOptions );
 
+    // Couple of utility properties for when list elements are visible or not
+    const isDeltaENNonZeroProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
+    const isDeltaENZeroProperty = DerivedProperty.not( isDeltaENNonZeroProperty );
+
     super( [
 
-      // Bond Dipole Description
+      // Bond Dipole Null Description. e.g. Molecule has { no } dipole arrow.
       {
+        visibleProperty: isDeltaENZeroProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDescription.createProperty( {
           bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
-      // Bond dipole direction
+      // Bond dipole direction e.g. Molecule has { small } dipole arrow. Bond dipole points to Atom { B }.
       {
+        visibleProperty: isDeltaENNonZeroProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
           bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty ),
           atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
 
-      // Partial Charges Description
+      // Partial Charges Null Description e.g. Partial charges are { zero }.
       {
+        visibleProperty: isDeltaENZeroProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDescription.createProperty( {
           partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
-      // Partial Charges Detail
+      // Partial Charges Detail. e.g. Partial charges are small. Atom A has partial positive charge, Atom B has partial negative charge.
       {
+        visibleProperty: isDeltaENNonZeroProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDetail.createProperty( {
           partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty ),
           chargeA: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
@@ -69,14 +78,16 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
         } )
       },
 
-      // Electrostatic Potential
+      // Electrostatic Potential Null Description
       {
+        visibleProperty: isDeltaENZeroProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescription.createProperty( {
           potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
       {
+        visibleProperty: isDeltaENNonZeroProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialRegions.createProperty( {
           potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty ),
           chargeA: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
