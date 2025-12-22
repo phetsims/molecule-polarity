@@ -34,10 +34,12 @@ export default class AccessibleAtomNode extends MPAccessibleSlider {
           tandem: Tandem.OPT_OUT
         },
 
-        // NodeOptions
+        // ParentOptions
         cursor: 'pointer',
         phetioInputEnabledPropertyInstrumented: true,
-        isDisposable: false
+        isDisposable: false,
+        keyboardStep: Math.PI / 3,
+        shiftKeyboardStep: Math.PI / 6
       }, providedOptions );
 
     super( angleProperty, options );
