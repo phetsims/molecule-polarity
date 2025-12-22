@@ -457,7 +457,7 @@
             "value": "Electron density is { $density } distributed between atoms."
           },
           "lastFourRegions": {
-            "value": "Electron density is { $density } distributed, shifted { $electronDensityShift } towards Atom { $atom }."
+            "value": "Electron density is { $density } distributed, { $electronDensityShift } towards Atom { $atom }."
           }
         },
         "electricFieldAligned": {
@@ -546,7 +546,7 @@
           "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }."
         },
         "molecularDipoleDescription": {
-          "value": "with { $magnitude } molecular dipole arrow."
+          "value": "Molecule has { $magnitude } molecular dipole arrow."
         },
         "molecularDipoleDirection": {
           "value": "Molecular dipole points towards { $direction } o'clock."
@@ -555,7 +555,7 @@
           "value": "Molecular dipole is twice the size of bond dipoles."
         },
         "bondDipoleABDescription": {
-          "value": "with { $magnitude } AB bond dipole arrow."
+          "value": "With { $magnitude } AB bond dipole arrow."
         },
         "bondDipoleABDirection": {
           "value": "AB bond dipole points to Atom { $atom }, towards { $direction } o'clock."
