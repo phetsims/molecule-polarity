@@ -76,6 +76,22 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
         } )
       },
 
+      {
+        stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialRegions.createProperty( {
+          potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty ),
+          chargeA: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
+            sign: diatomicMolecule.atomA.partialChargeProperty.derived(
+              charge => charge > 0 ? 'positive' : 'negative' )
+          } ),
+          chargeB: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
+            sign: diatomicMolecule.atomB.partialChargeProperty.derived(
+              charge => charge > 0 ? 'positive' : 'negative' )
+          } ),
+          regionA: DescriptionMaps.createElectrostaticRegionsStringProperty( diatomicMolecule.deltaENProperty ),
+          regionB: DescriptionMaps.createElectrostaticRegionsStringProperty( diatomicMolecule.deltaENProperty )
+        } )
+      },
+
       // Electron density (First two regions)
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegions.createProperty( {

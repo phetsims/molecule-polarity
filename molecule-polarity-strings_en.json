@@ -373,11 +373,17 @@
     "electrostaticPotential": {
       "value": "{ $potential ->\n  [noDifference] no\n  [verySmallDifference] very small\n  [smallDifference] small\n  [mediumDifference] medium\n  [largeDifference] large\n  *[veryLargeDifference] very large\n}"
     },
+    "electrostaticPotentialUppercase": {
+      "value": "{ $potential ->\n  [noDifference] No\n  [verySmallDifference] Very small\n  [smallDifference] Small\n  [mediumDifference] Medium\n  [largeDifference] Large\n  *[veryLargeDifference] Very large\n}"
+    },
     "electrostaticPotentialProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"
     },
     "electrostaticPotentialProgressUppercase": {
       "value": "{ $progress ->\n  [morePositive] More positive\n  [lessPositive] Less positive\n  [neutral] Neutral\n  [lessNegative] Less negative\n  *[moreNegative] More negative\n}"
+    },
+    "electrostaticRegions": {
+      "value": "{ $regions ->\n  [verySlightly] Very slightly\n  [slightly] Slightly\n  [moderately] Moderately\n  [highly] Highly\n  *[veryHighly] Very highly\n}"
     },
     "electronegativity": {
       "value": "{ $level ->\n  [veryLow] very low\n  [low] low\n  [mediumLow] medium-low\n  [mediumHigh] medium-high\n  [high] high\n  *[veryHigh] very high\n}"
@@ -451,6 +457,9 @@
         },
         "electrostaticPotentialDescription": {
           "value": "{ $potential } electrostatic potential difference across molecule."
+        },
+        "electrostaticPotentialRegions": {
+          "value": "{ a11y_twoAtomsScreen_moleculeAB_electrostaticPotentialDescription } { $regionA } { $chargeA } towards Atom A. { $regionB } { $chargeB } towards Atom B."
         },
         "electronDensityDescription": {
           "firstTwoRegions": {

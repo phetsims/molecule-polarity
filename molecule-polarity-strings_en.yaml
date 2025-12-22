@@ -210,6 +210,16 @@ a11y:
       mediumDifference: 'medium'
       largeDifference: 'large'
       veryLargeDifference: 'very large'
+
+  # ElectroPotential6 - Electrostatic Potential (Screen 1)
+  electrostaticPotentialUppercase:
+    select_potential:
+      noDifference: 'No'
+      verySmallDifference: 'Very small'
+      smallDifference: 'Small'
+      mediumDifference: 'Medium'
+      largeDifference: 'Large'
+      veryLargeDifference: 'Very large'
   
   # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
   # 2-range spectrum: positive-neutral-negative
@@ -230,6 +240,15 @@ a11y:
       neutral: 'Neutral'
       lessNegative: 'Less negative'
       moreNegative: 'More negative'
+
+  # ElectroPotentialRegions5
+  electrostaticRegions:
+      select_regions:
+        verySlightly: 'Very slightly'
+        slightly: 'Slightly'
+        moderately: 'Moderately'
+        highly: 'Highly'
+        veryHighly: 'Very highly'
   
   # EN6 - Electronegativity levels (Screen 1/2)
   electronegativity:
@@ -357,6 +376,7 @@ a11y:
       partialChargesDetail: '{ a11y.twoAtomsScreen.moleculeAB.partialChargesDescription } Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
       bondCharacterDescription: 'Bond is { $bondCharacter }.'
       electrostaticPotentialDescription: '{ $potential } electrostatic potential difference across molecule.'
+      electrostaticPotentialRegions: '{ a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescription } { $regionA } { $chargeA } towards Atom A. { $regionB } { $chargeB } towards Atom B.'
       electronDensityDescription:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
         lastFourRegions: 'Electron density is { $density } distributed, { $electronDensityShift } towards Atom { $atom }.'

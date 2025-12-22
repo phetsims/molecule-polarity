@@ -16,6 +16,7 @@ type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stro
 type Dipole = 'small' | 'no' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
+type ElectrostaticRegions = 'verySlightly' | 'slightly' | 'moderately' | 'highly' | 'veryHighly';
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
 type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely';
 type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
@@ -100,6 +101,15 @@ export default class DescriptionMaps {
            deltaEN <= 1.2 ? 'mediumDifference' :
            deltaEN <= 1.6 ? 'largeDifference' :
            'veryLargeDifference';
+  }
+
+  private static deltaENtoElectrostaticRegions( deltaEN: number ): ElectrostaticRegions {
+    deltaEN = roundAbs( deltaEN );
+    return deltaEN <= 0.4 ? 'verySlightly' :
+           deltaEN <= 0.8 ? 'slightly' :
+           deltaEN <= 1.2 ? 'moderately' :
+           deltaEN <= 1.6 ? 'highly' :
+           'veryHighly';
   }
 
   private static deltaENtoElectronDensity( deltaEN: number ): ElectronDensity {
@@ -219,14 +229,26 @@ export default class DescriptionMaps {
   }
 
   public static createElectrostaticPotentialStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.electrostaticPotential.createProperty( {
+    return MoleculePolarityFluent.a11y.electrostaticPotentialUppercase.createProperty( {
       potential: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectrostaticPotential( deltaEN ) )
     } );
   }
 
   public static formatElectrostaticPotentialString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.electrostaticPotential.format( {
+    return MoleculePolarityFluent.a11y.electrostaticPotentialUppercase.format( {
       potential: DescriptionMaps.deltaENtoElectrostaticPotential( deltaEN )
+    } );
+  }
+
+  public static createElectrostaticRegionsStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electrostaticRegions.createProperty( {
+      regions: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectrostaticRegions( deltaEN ) )
+    } );
+  }
+
+  public static formatElectrostaticRegionsString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.electrostaticRegions.format( {
+      regions: DescriptionMaps.deltaENtoElectrostaticRegions( deltaEN )
     } );
   }
 

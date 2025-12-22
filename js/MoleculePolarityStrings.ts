@@ -160,8 +160,10 @@ type StringsType = {
     'electronDensityProgressStringProperty': LocalizedStringProperty;
     'electronDensityProgressUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticPotentialStringProperty': LocalizedStringProperty;
+    'electrostaticPotentialUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;
     'electrostaticPotentialProgressUppercaseStringProperty': LocalizedStringProperty;
+    'electrostaticRegionsStringProperty': LocalizedStringProperty;
     'electronegativityStringProperty': LocalizedStringProperty;
     'fieldStringProperty': LocalizedStringProperty;
     'molecularDipoleStringProperty': LocalizedStringProperty;
@@ -189,6 +191,7 @@ type StringsType = {
         'partialChargesDetailStringProperty': LocalizedStringProperty;
         'bondCharacterDescriptionStringProperty': LocalizedStringProperty;
         'electrostaticPotentialDescriptionStringProperty': LocalizedStringProperty;
+        'electrostaticPotentialRegionsStringProperty': LocalizedStringProperty;
         'electronDensityDescription': {
           'firstTwoRegionsStringProperty': LocalizedStringProperty;
           'lastFourRegionsStringProperty': LocalizedStringProperty;
