@@ -359,7 +359,7 @@ a11y:
       electrostaticPotentialDescription: '{ $potential } electrostatic potential difference across molecule.'
       electronDensityDescription:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
-        lastFourRegions: 'Electron density is { $density } distributed, shifted { $electronDensityShift } towards Atom { $atom }.'
+        lastFourRegions: 'Electron density is { $density } distributed, { $electronDensityShift } towards Atom { $atom }.'
       electricFieldAligned: 'Molecule aligned with electric field.'
       orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }.'
