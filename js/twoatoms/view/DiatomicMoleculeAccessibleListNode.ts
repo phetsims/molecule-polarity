@@ -35,6 +35,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Bond dipole direction
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
+          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty ),
           atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
@@ -49,8 +50,15 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Partial Charges Detail
       {
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDetail.createProperty( {
-          chargeA: diatomicMolecule.atomA.partialChargeProperty,
-          chargeB: diatomicMolecule.atomB.partialChargeProperty
+          partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty ),
+          chargeA: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
+            sign: diatomicMolecule.atomA.partialChargeProperty.derived(
+              charge => charge > 0 ? 'positive' : 'negative' )
+          } ),
+          chargeB: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
+            sign: diatomicMolecule.atomB.partialChargeProperty.derived(
+              charge => charge > 0 ? 'positive' : 'negative' )
+          } )
         } )
       },
 

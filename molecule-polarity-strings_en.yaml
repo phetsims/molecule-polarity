@@ -352,9 +352,9 @@ a11y:
       heading: 'Molecule AB'
       currentState: 'Currently, the molecule is { $polarity }.'
       bondDipoleDescription: 'Molecule has { $bondDipoleMagnitude } dipole arrow.'
-      bondDipoleDirection: 'Bond dipole points to Atom { $atom }.'
+      bondDipoleDirection: '{ a11y.twoAtomsScreen.moleculeAB.bondDipoleDescription } Bond dipole points to Atom { $atom }.'
       partialChargesDescription: 'Partial charges are { $partialChargeMagnitude }.'
-      partialChargesDetail: 'Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
+      partialChargesDetail: '{ a11y.twoAtomsScreen.moleculeAB.partialChargesDescription } Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge.'
       bondCharacterDescription: 'Bond is { $bondCharacter }.'
       electrostaticPotentialDescription: '{ $potential } electrostatic potential difference across molecule.'
       electronDensityDescription:

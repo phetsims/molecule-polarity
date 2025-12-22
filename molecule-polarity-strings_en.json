@@ -438,13 +438,13 @@
           "value": "Molecule has { $bondDipoleMagnitude } dipole arrow."
         },
         "bondDipoleDirection": {
-          "value": "Bond dipole points to Atom { $atom }."
+          "value": "{ a11y_twoAtomsScreen_moleculeAB_bondDipoleDescription } Bond dipole points to Atom { $atom }."
         },
         "partialChargesDescription": {
           "value": "Partial charges are { $partialChargeMagnitude }."
         },
         "partialChargesDetail": {
-          "value": "Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge."
+          "value": "{ a11y_twoAtomsScreen_moleculeAB_partialChargesDescription } Atom A has partial { $chargeA } charge, Atom B has partial { $chargeB } charge."
         },
         "bondCharacterDescription": {
           "value": "Bond is { $bondCharacter }."
