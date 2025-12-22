@@ -168,7 +168,7 @@ export default class ElectronegativitySlider extends HSlider {
     contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
         progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
-          progress: bondDeltaEN * invertedChangeInEN > 0 ? 'moreCovalent' : 'moreIonic'
+          progress: bondDeltaEN * invertedChangeInEN >= 0 ? 'moreCovalent' : 'moreIonic'
   } )
       } )
     );
