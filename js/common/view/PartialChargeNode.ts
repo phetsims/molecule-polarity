@@ -90,6 +90,10 @@ export default class PartialChargeNode extends Node {
         const relativeOffset = unitVector.timesScalar( multiplier );
         this.translation = atom.positionProperty.value.plus( relativeOffset );
       }
+      else {
+        // Set the translation anyways so the molecule bounds are correct
+        this.translation = atom.positionProperty.value;
+      }
     };
 
     // Changing any of these Properties requires an update.
