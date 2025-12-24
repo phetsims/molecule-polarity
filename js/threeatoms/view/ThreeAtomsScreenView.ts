@@ -6,19 +6,23 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
 import ThreeAtomsScreenSummaryContentNode from './ThreeAtomsScreenSummaryContentNode.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
+import TriatomicMoleculeAccessibleListNode from './TriatomicMoleculeAccessibleListNode.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
 export default class ThreeAtomsScreenView extends ScreenView {
@@ -41,6 +45,33 @@ export default class ThreeAtomsScreenView extends ScreenView {
       viewProperties.molecularDipoleVisibleProperty, viewProperties.partialChargesVisibleProperty, {
         tandem: tandem.createTandem( 'moleculeNode' )
       } );
+
+
+    const moleculeDescriptionNode = new Node( {
+      accessibleHeading: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.headingStringProperty
+    } );
+
+    moleculeDescriptionNode.addChild( new Node( {
+      accessibleParagraph: model.triatomicMolecule.deltaENProperty.derived( deltaEN => {
+        return 'TEMPORARY: Delta EN: ' + toFixed( deltaEN, 2 );
+      } )
+    } ) );
+
+    // TODO: Can this be inside of the List Node? https://github.com/phetsims/molecule-polarity/issues/193
+    moleculeDescriptionNode.addChild( new Node( {
+      accessibleParagraph: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
+        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.deltaENProperty )
+      } )
+    } ) );
+
+    // Molecule description
+    moleculeDescriptionNode.addChild(
+      new TriatomicMoleculeAccessibleListNode( model.triatomicMolecule, viewProperties, model.eFieldEnabledProperty )
+    );
+
+    // Current polarity description
+    this.addChild( moleculeDescriptionNode );
+
     const platesNode = new PlatesNode( model.eFieldEnabledProperty, {
       spacing: 600
     } );
@@ -96,12 +127,13 @@ export default class ThreeAtomsScreenView extends ScreenView {
     this.addChild( rootNode );
 
     this.pdomPlayAreaNode.pdomOrder = [
-      moleculeNode
+      moleculeDescriptionNode,
+      moleculeNode,
+      electronegativityPanels
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
       platesNode,
-      electronegativityPanels,
       controlPanel,
       resetAllButton
     ];

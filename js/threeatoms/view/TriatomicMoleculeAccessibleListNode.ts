@@ -6,6 +6,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
@@ -15,13 +16,19 @@ import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
+import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
 export type TriatomicMoleculeAccessibleListNodeOptions = SelfOptions & AccessibleListNodeOptions;
 
 export default class TriatomicMoleculeAccessibleListNode extends AccessibleListNode {
-  public constructor( triatomicMolecule: TriatomicMolecule, providedOptions?: TriatomicMoleculeAccessibleListNodeOptions ) {
+  public constructor(
+    triatomicMolecule: TriatomicMolecule,
+    viewProperties: ThreeAtomsViewProperties,
+    eFieldEnabledProperty: TReadOnlyProperty<boolean>,
+    providedOptions?: TriatomicMoleculeAccessibleListNodeOptions
+  ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TriatomicMoleculeAccessibleListNodeOptions>()( {
       // no-op
     }, providedOptions );

@@ -57,6 +57,7 @@ export default class TwoAtomsScreenView extends ScreenView {
       } )
     } ) );
 
+    // TODO: Can this be inside of the List Node? https://github.com/phetsims/molecule-polarity/issues/193
     moleculeDescriptionNode.addChild( new Node( {
       accessibleParagraph: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
         polarity: DescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.deltaENProperty )
