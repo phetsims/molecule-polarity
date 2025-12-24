@@ -64,7 +64,9 @@ export default class TwoAtomsScreenView extends ScreenView {
     } ) );
 
     // Molecule description
-    moleculeDescriptionNode.addChild( new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule ) );
+    moleculeDescriptionNode.addChild(
+      new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule, viewProperties, model.eFieldEnabledProperty )
+    );
 
     // Current polarity description
     this.addChild( moleculeDescriptionNode );

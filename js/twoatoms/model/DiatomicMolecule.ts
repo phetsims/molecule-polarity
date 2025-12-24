@@ -37,7 +37,6 @@ export default class DiatomicMolecule extends Molecule {
 
     const atomA = new Atom( MoleculePolarityStrings.atomAStringProperty, {
       color: MPColors.ATOM_A,
-      electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ),
       tandem: options.tandem.createTandem( 'atomA' )
     } );
 
