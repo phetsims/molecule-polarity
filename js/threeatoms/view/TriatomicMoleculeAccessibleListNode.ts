@@ -33,6 +33,9 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       // no-op
     }, providedOptions );
 
+    // Wether deltaEN is non-zero
+    const isMoleculePolarProperty = triatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
+
     const absoluteBondAngleABProperty = new DerivedProperty( [
       triatomicMolecule.bondAngleABProperty,
       triatomicMolecule.angleProperty
@@ -70,6 +73,10 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
 
       // Electric Field
       {
+        visibleProperty: DerivedProperty.and( [
+          isMoleculePolarProperty,
+          eFieldEnabledProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty
       },
 
@@ -82,8 +89,12 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         } )
       },
 
-      // Molecular Dipole Description
+      // Molecular Dipole Null Description. e.g. Molecule has no molecular dipole arrow.
       {
+        visibleProperty: DerivedProperty.and( [
+          DerivedProperty.not( isMoleculePolarProperty ),
+          viewProperties.molecularDipoleVisibleProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription.createProperty( {
           magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
             triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude )
@@ -91,8 +102,12 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         } )
       },
 
-      // Molecular dipole direction
+      // Molecular dipole direction TODO: Join with above https://github.com/phetsims/molecule-polarity/issues/193
       {
+        visibleProperty: DerivedProperty.and( [
+          isMoleculePolarProperty,
+          viewProperties.molecularDipoleVisibleProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirection.createProperty( {
           direction: DescriptionMaps.createOrientationStringProperty(
             triatomicMolecule.dipoleProperty.derived( dipole => dipole.angle )
@@ -102,12 +117,21 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
 
       // Twice the size Molecular Dipole
       {
+        visibleProperty: DerivedProperty.and( [
+          isMoleculePolarProperty,
+          viewProperties.molecularDipoleVisibleProperty,
+          DerivedProperty.valueEqualsConstant( triatomicMolecule.dipoleMagnitudeProperty, 4 )
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty
       },
 
       // Bond Dipole Descriptions
       // AB Bond Magnitude
       {
+        visibleProperty: DerivedProperty.and( [
+          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
+          viewProperties.bondDipolesVisibleProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescription.createProperty( {
           magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
@@ -116,6 +140,10 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       },
       // AB Bond Direction
       {
+        visibleProperty: DerivedProperty.and( [
+          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
+          viewProperties.bondDipolesVisibleProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDirection.createProperty( {
           direction: new DerivedProperty(
             [
@@ -133,6 +161,10 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
 
       // BC Bond Magnitude
       {
+        visibleProperty: DerivedProperty.and( [
+          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
+          viewProperties.bondDipolesVisibleProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
           magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
@@ -141,6 +173,10 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       },
       // BC Bond Direction
       {
+        visibleProperty: DerivedProperty.and( [
+          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
+          viewProperties.bondDipolesVisibleProperty
+        ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDirection.createProperty( {
           direction: new DerivedProperty(
             [
@@ -156,8 +192,9 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         } )
       },
 
-      // Partial Charges Description
+      // Partial Charges Description TODO: Use Select pattern https://github.com/phetsims/molecule-polarity/issues/193
       {
+        visibleProperty: viewProperties.partialChargesVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
           magnitudeA: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomA.partialChargeProperty ),
           signA: triatomicMolecule.atomA.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' ),

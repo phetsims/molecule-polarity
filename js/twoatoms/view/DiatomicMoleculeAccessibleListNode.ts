@@ -31,16 +31,15 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // no-op
     }, providedOptions );
 
-    // Couple of utility properties for when list elements are visible or not
-    const isDeltaENNonZeroProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
-    const isDeltaENZeroProperty = DerivedProperty.not( isDeltaENNonZeroProperty );
+    // Wether deltaEN is non-zero
+    const isMoleculePolarProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
 
     super( [
 
       // Bond Dipole Null Description. e.g. Molecule has { no } dipole arrow.
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENZeroProperty,
+          DerivedProperty.not( isMoleculePolarProperty ),
           viewProperties.bondDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDescription.createProperty( {
@@ -51,7 +50,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Bond dipole direction e.g. Molecule has { small } dipole arrow. Bond dipole points to Atom { B }.
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENNonZeroProperty,
+          isMoleculePolarProperty,
           viewProperties.bondDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
@@ -63,7 +62,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Partial Charges Null Description e.g. Partial charges are { zero }.
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENZeroProperty,
+          DerivedProperty.not( isMoleculePolarProperty ),
           viewProperties.partialChargesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDescription.createProperty( {
@@ -74,7 +73,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Partial Charges Detail. e.g. Partial charges are small. Atom A has partial positive charge, Atom B has partial negative charge.
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENNonZeroProperty,
+          isMoleculePolarProperty,
           viewProperties.partialChargesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDetail.createProperty( {
@@ -101,7 +100,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electrostatic Potential Null Description
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENZeroProperty,
+          DerivedProperty.not( isMoleculePolarProperty ),
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescription.createProperty( {
@@ -111,7 +110,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
 
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENNonZeroProperty,
+          isMoleculePolarProperty,
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialRegions.createProperty( {
@@ -132,7 +131,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electron density (First two regions)
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENZeroProperty, // TODO what regions https://github.com/phetsims/molecule-polarity/issues/193
+          DerivedProperty.not( isMoleculePolarProperty ), // TODO what regions https://github.com/phetsims/molecule-polarity/issues/193
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegions.createProperty( {
@@ -143,7 +142,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electron density (Last four regions)
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENNonZeroProperty, // TODO what regions https://github.com/phetsims/molecule-polarity/issues/193
+          isMoleculePolarProperty, // TODO what regions https://github.com/phetsims/molecule-polarity/issues/193
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegions.createProperty( {
@@ -156,7 +155,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electric Field
       {
         visibleProperty: DerivedProperty.and( [
-          isDeltaENNonZeroProperty,
+          isMoleculePolarProperty,
           eFieldEnabledProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electricFieldAlignedStringProperty
