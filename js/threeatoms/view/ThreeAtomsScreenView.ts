@@ -48,14 +48,15 @@ export default class ThreeAtomsScreenView extends ScreenView {
     const electronegativityPanelsTandem = tandem.createTandem( 'electronegativityPanels' );
 
     const atomAElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomA, model.triatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
-    } );
-    const atomBElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomB, model.triatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' ),
+      tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
       invertMapping: true
     } );
+    const atomBElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomB, model.triatomicMolecule, {
+      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
+    } );
     const atomCElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomC, model.triatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' )
+      tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' ),
+      invertMapping: true
     } );
     const electronegativityPanels = new HBox( {
       spacing: 10,
