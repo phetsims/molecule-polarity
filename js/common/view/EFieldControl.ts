@@ -51,7 +51,9 @@ export default class EFieldControl extends VBox {
         spacing: 12,
         toggleSwitchOptions: {
           accessibleHeading: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
+          accessibleName: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
           accessibleHelpText: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleHelpTextStringProperty,
+          accessibleRoleConfiguration: 'switch',
           trackFillLeft: 'rgb( 180, 180, 180 )',
           trackFillRight: 'rgb( 0, 180, 0 )',
           visiblePropertyOptions: {
