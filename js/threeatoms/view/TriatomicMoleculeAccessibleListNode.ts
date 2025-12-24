@@ -6,7 +6,9 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
@@ -33,6 +35,10 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       triatomicMolecule.bondAngleBCProperty,
       triatomicMolecule.angleProperty
     ], ( bondAngleBC: number, moleculeAngle: number ) => roundToInterval( bondAngleBC + moleculeAngle, 0.1 ) );
+
+    const toClock = ( radians: number ) => {
+      return ( roundSymmetric( toDegrees( radians ) / 30 ) + 3 ) % 12 || 12;
+    };
 
     super( [
 
@@ -98,19 +104,19 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescription.createProperty( {
           magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
-            )
+          )
         } )
       },
       // AB Bond Direction
       {
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDirection.createProperty( {
-          direction: DescriptionMaps.createOrientationStringProperty(
-            new DerivedProperty(
-              [
-                absoluteBondAngleABProperty,
-                triatomicMolecule.bondAB.deltaENProperty
-              ], ( bondAngle: number, deltaEN: number ) => deltaEN < 0 ? bondAngle : bondAngle + Math.PI
-            )
+          direction: new DerivedProperty(
+            [
+              absoluteBondAngleABProperty,
+              triatomicMolecule.bondBC.deltaENProperty
+            ], ( bondAngle: number, deltaEN: number ) => {
+              return deltaEN > 0 ? toClock( bondAngle ) : toClock( bondAngle + Math.PI );
+            }
           ),
           atom: new DerivedProperty(
             [ triatomicMolecule.bondAB.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'A' : 'B'
@@ -123,19 +129,19 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
           magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
-            )
+          )
         } )
       },
       // BC Bond Direction
       {
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDirection.createProperty( {
-          direction: DescriptionMaps.createOrientationStringProperty(
-            new DerivedProperty(
-              [
-                absoluteBondAngleBCProperty,
-                triatomicMolecule.bondBC.deltaENProperty
-              ], ( bondAngle: number, deltaEN: number ) => deltaEN > 0 ? bondAngle : bondAngle + Math.PI
-            )
+          direction: new DerivedProperty(
+            [
+              absoluteBondAngleBCProperty,
+              triatomicMolecule.bondBC.deltaENProperty
+            ], ( bondAngle: number, deltaEN: number ) => {
+              return deltaEN > 0 ? toClock( bondAngle ) : toClock( bondAngle + Math.PI );
+            }
           ),
           atom: new DerivedProperty(
             [ triatomicMolecule.bondBC.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'B' : 'C'
