@@ -576,7 +576,7 @@
           "value": "BC bond dipole points to Atom { $atom }, towards { $direction } o'clock."
         },
         "partialChargesDescription": {
-          "value": "Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge."
+          "value": "{ $sign ->\n  [positive] Atom { $atom } has { $magnitude } positive partial charge\n  [negative] Atom { $atom } has { $magnitude } negative partial charge\n  *[zero] Atom { $atom } has { $magnitude } partial charge\n}"
         }
       },
       "moveAtomASlider": {

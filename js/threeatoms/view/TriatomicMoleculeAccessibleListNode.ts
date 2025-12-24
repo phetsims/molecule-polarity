@@ -192,16 +192,29 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         } )
       },
 
-      // Partial Charges Description TODO: Use Select pattern https://github.com/phetsims/molecule-polarity/issues/193
+      // Partial Charges Description
       {
         visibleProperty: viewProperties.partialChargesVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
-          magnitudeA: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomA.partialChargeProperty ),
-          signA: triatomicMolecule.atomA.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' ),
-          magnitudeB: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomB.partialChargeProperty ),
-          signB: triatomicMolecule.atomB.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' ),
-          magnitudeC: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomC.partialChargeProperty ),
-          signC: triatomicMolecule.atomC.partialChargeProperty.derived( charge => charge < 0 ? 'negative' : 'positive' )
+          atom: 'A',
+          magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomA.partialChargeProperty ),
+          sign: triatomicMolecule.atomA.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
+        } )
+      },
+      {
+        visibleProperty: viewProperties.partialChargesVisibleProperty,
+        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
+          atom: 'B',
+          magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomB.partialChargeProperty ),
+          sign: triatomicMolecule.atomB.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
+        } )
+      },
+      {
+        visibleProperty: viewProperties.partialChargesVisibleProperty,
+        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
+          atom: 'C',
+          magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomC.partialChargeProperty ),
+          sign: triatomicMolecule.atomC.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
         } )
       }
 

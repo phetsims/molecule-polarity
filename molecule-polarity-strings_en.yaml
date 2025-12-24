@@ -427,7 +427,12 @@ a11y:
       bondDipoleABDirection: 'AB bond dipole points to Atom { $atom }, towards { $direction } o''clock.'
       bondDipoleBCDescription: 'With { $magnitude } BC bond dipole arrow'
       bondDipoleBCDirection: 'BC bond dipole points to Atom { $atom }, towards { $direction } o''clock.'
-      partialChargesDescription: 'Atom A has { $magnitudeA } { $signA } partial charge, Atom B has { $magnitudeB } { $signB } partial charge, Atom C has { $magnitudeC } { $signC } partial charge.'
+      partialChargesDescription:
+        select_sign:
+          positive: 'Atom { $atom } has { $magnitude } positive partial charge'
+          negative: 'Atom { $atom } has { $magnitude } negative partial charge'
+          zero: 'Atom { $atom } has { $magnitude } partial charge'
+
     
     # Move Atom A Slider
     moveAtomASlider:
