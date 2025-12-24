@@ -137,10 +137,11 @@ export default class ElectronegativitySlider extends HSlider {
 
     // For some cases we need to invert the change in EN for context responses based on which atom is being changed
     const invertedChangeInEN = this.invertMapping ? -changeInEN : changeInEN;
+
+    // Similarly, deltaEN>0 might mean something different based on which atom is being changed. i.e. electron density
     const invertedBondDeltaEN = this.invertMapping ? -bondDeltaEN : bondDeltaEN;
 
     const previousBondDeltaEN = bondDeltaEN - invertedChangeInEN;
-
     const isBondDeltaENGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
 
     contextResponse(
