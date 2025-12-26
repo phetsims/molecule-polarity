@@ -41,12 +41,12 @@ export default class ThreeAtomsViewProperties {
       phetioFeatured: true
     } );
 
-    this.molecularDipoleVisibleProperty = new BooleanProperty( true, {
+    this.molecularDipoleVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' ),
       phetioFeatured: true
     } );
 
-    this.partialChargesVisibleProperty = new BooleanProperty( true, {
+    this.partialChargesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'partialChargesVisibleProperty' ),
       phetioFeatured: true
     } );
