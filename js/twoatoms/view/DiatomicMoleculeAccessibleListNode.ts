@@ -6,7 +6,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
@@ -24,7 +23,6 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
   public constructor(
     diatomicMolecule: DiatomicMolecule,
     viewProperties: TwoAtomsViewProperties,
-    eFieldEnabledProperty: TReadOnlyProperty<boolean>,
     providedOptions?: DiatomicMoleculeAccessibleListNodeOptions
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
@@ -156,7 +154,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       {
         visibleProperty: DerivedProperty.and( [
           isMoleculePolarProperty,
-          eFieldEnabledProperty
+          viewProperties.eFieldEnabledProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electricFieldAlignedStringProperty
       },

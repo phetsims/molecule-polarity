@@ -68,7 +68,7 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
     // Molecule description
     moleculeDescriptionNode.addChild(
-      new TriatomicMoleculeAccessibleListNode( model.triatomicMolecule, viewProperties, model.eFieldEnabledProperty )
+      new TriatomicMoleculeAccessibleListNode( model.triatomicMolecule, viewProperties )
     );
 
     // Current polarity description

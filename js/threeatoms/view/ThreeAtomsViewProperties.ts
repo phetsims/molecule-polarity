@@ -33,6 +33,7 @@ export default class ThreeAtomsViewProperties {
 
     const options = providedOptions;
 
+    // E Field is handled by the model but it's useful to keep track of it in here for accessibility purposes
     this.eFieldEnabledProperty = eFieldEnabledProperty;
 
     this.bondDipolesVisibleProperty = new BooleanProperty( true, {

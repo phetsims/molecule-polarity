@@ -68,7 +68,7 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     // Molecule description
     moleculeDescriptionNode.addChild(
-      new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule, viewProperties, model.eFieldEnabledProperty )
+      new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule, viewProperties )
     );
 
     // Current polarity description

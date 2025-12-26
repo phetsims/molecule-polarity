@@ -6,7 +6,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
@@ -26,7 +25,6 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
   public constructor(
     triatomicMolecule: TriatomicMolecule,
     viewProperties: ThreeAtomsViewProperties,
-    eFieldEnabledProperty: TReadOnlyProperty<boolean>,
     providedOptions?: TriatomicMoleculeAccessibleListNodeOptions
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TriatomicMoleculeAccessibleListNodeOptions>()( {
@@ -75,7 +73,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       {
         visibleProperty: DerivedProperty.and( [
           isMoleculePolarProperty,
-          eFieldEnabledProperty
+          viewProperties.eFieldEnabledProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty
       },
