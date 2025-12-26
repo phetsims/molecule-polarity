@@ -36,9 +36,11 @@ export default class ThreeAtomsScreenView extends ScreenView {
     } );
 
     // view-specific Properties
-    const viewProperties = new ThreeAtomsViewProperties( {
-      tandem: tandem.createTandem( 'viewProperties' )
-    } );
+    const viewProperties = new ThreeAtomsViewProperties(
+      model.eFieldEnabledProperty,
+      {
+        tandem: tandem.createTandem( 'viewProperties' )
+      } );
 
     // nodes
     const moleculeNode = new TriatomicMoleculeNode( model.triatomicMolecule, viewProperties.bondDipolesVisibleProperty,
@@ -78,17 +80,29 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
     const electronegativityPanelsTandem = tandem.createTandem( 'electronegativityPanels' );
 
-    const atomAElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomA, model.triatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
-      invertMapping: true
-    } );
-    const atomBElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomB, model.triatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
-    } );
-    const atomCElectronegativityPanel = new ElectronegativityPanel( model.triatomicMolecule.atomC, model.triatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' ),
-      invertMapping: true
-    } );
+    const atomAElectronegativityPanel = new ElectronegativityPanel(
+      model.triatomicMolecule.atomA,
+      model.triatomicMolecule,
+      viewProperties,
+      {
+        tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
+        invertMapping: true
+      } );
+    const atomBElectronegativityPanel = new ElectronegativityPanel(
+      model.triatomicMolecule.atomB,
+      model.triatomicMolecule,
+      viewProperties,
+      {
+        tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
+      } );
+    const atomCElectronegativityPanel = new ElectronegativityPanel(
+      model.triatomicMolecule.atomC,
+      model.triatomicMolecule,
+      viewProperties,
+      {
+        tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' ),
+        invertMapping: true
+      } );
     const electronegativityPanels = new HBox( {
       spacing: 10,
       children: [ atomAElectronegativityPanel, atomBElectronegativityPanel, atomCElectronegativityPanel ],

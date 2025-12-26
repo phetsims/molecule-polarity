@@ -9,6 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Disposable from '../../../../axon/js/Disposable.js';
 import Property from '../../../../axon/js/Property.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
@@ -20,13 +21,19 @@ type ThreeAtomsViewPropertiesOptions = SelfOptions & PickRequired<PhetioObjectOp
 
 export default class ThreeAtomsViewProperties {
 
+  public readonly eFieldEnabledProperty: TReadOnlyProperty<boolean>;
   public readonly bondDipolesVisibleProperty: Property<boolean>;
   public readonly molecularDipoleVisibleProperty: Property<boolean>;
   public readonly partialChargesVisibleProperty: Property<boolean>;
 
-  public constructor( providedOptions: ThreeAtomsViewPropertiesOptions ) {
+  public constructor(
+    eFieldEnabledProperty: TReadOnlyProperty<boolean>,
+    providedOptions: ThreeAtomsViewPropertiesOptions
+  ) {
 
     const options = providedOptions;
+
+    this.eFieldEnabledProperty = eFieldEnabledProperty;
 
     this.bondDipolesVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' ),

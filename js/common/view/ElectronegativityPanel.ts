@@ -15,6 +15,8 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
+import ThreeAtomsViewProperties from '../../threeatoms/view/ThreeAtomsViewProperties.js';
+import TwoAtomsViewProperties from '../../twoatoms/view/TwoAtomsViewProperties.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import ElectronegativitySlider from './ElectronegativitySlider.js';
@@ -31,9 +33,14 @@ export default class ElectronegativityPanel extends Panel {
   /**
    * @param atom - the atom whose electronegativity we're controlling
    * @param molecule - molecule that the atom belongs to, for pausing animation while this control is used
+   * @param viewProperties - visibility properties that determine wether to emit context responses
    * @param [providedOptions]
    */
-  public constructor( atom: Atom, molecule: Molecule, providedOptions: ElectronegativityPanelOptions ) {
+  public constructor(
+    atom: Atom,
+    molecule: Molecule,
+    viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties,
+    providedOptions: ElectronegativityPanelOptions ) {
 
     const options = optionize<ElectronegativityPanelOptions, SelfOptions, PanelOptions>()( {
 
@@ -75,7 +82,11 @@ export default class ElectronegativityPanel extends Panel {
     } );
 
     // slider
-    const slider = new ElectronegativitySlider( molecule, atom, {
+    const slider = new ElectronegativitySlider(
+      atom,
+      molecule,
+      viewProperties,
+      {
       tandem: options.tandem.createTandem( 'slider' ),
       invertMapping: options.invertMapping
     } );

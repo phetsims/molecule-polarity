@@ -39,9 +39,11 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
 
     // view-specific Properties
-    const viewProperties = new TwoAtomsViewProperties( {
-      tandem: tandem.createTandem( 'viewProperties' )
-    } );
+    const viewProperties = new TwoAtomsViewProperties(
+      model.eFieldEnabledProperty,
+      {
+        tandem: tandem.createTandem( 'viewProperties' )
+      } );
 
     const moleculeNode = new DiatomicMoleculeNode( model.diatomicMolecule, viewProperties, {
       tandem: tandem.createTandem( 'moleculeNode' )
@@ -76,13 +78,21 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     const electronegativityPanelsTandem = tandem.createTandem( 'electronegativityPanels' );
 
-    const atomAElectronegativityPanel = new ElectronegativityPanel( model.diatomicMolecule.atomA, model.diatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
-      invertMapping: true
-    } );
-    const atomBElectronegativityPanel = new ElectronegativityPanel( model.diatomicMolecule.atomB, model.diatomicMolecule, {
-      tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
-    } );
+    const atomAElectronegativityPanel = new ElectronegativityPanel(
+      model.diatomicMolecule.atomA,
+      model.diatomicMolecule,
+      viewProperties,
+      {
+        tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
+        invertMapping: true
+      } );
+    const atomBElectronegativityPanel = new ElectronegativityPanel(
+      model.diatomicMolecule.atomB,
+      model.diatomicMolecule,
+      viewProperties,
+      {
+        tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
+      } );
     const electronegativityPanels = new HBox( {
       spacing: 10,
       children: [ atomAElectronegativityPanel, atomBElectronegativityPanel ],
