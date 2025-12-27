@@ -28,7 +28,9 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
     providedOptions?: TriatomicMoleculeAccessibleListNodeOptions
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TriatomicMoleculeAccessibleListNodeOptions>()( {
-      // no-op
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
+        polarity: DescriptionMaps.createPolarityStringProperty( triatomicMolecule.deltaENProperty )
+      } )
     }, providedOptions );
 
     // Wether deltaEN is non-zero

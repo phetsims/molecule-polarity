@@ -26,7 +26,9 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
     providedOptions?: DiatomicMoleculeAccessibleListNodeOptions
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
-      // no-op
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
+      polarity: DescriptionMaps.createPolarityStringProperty( diatomicMolecule.deltaENProperty )
+    } )
     }, providedOptions );
 
     // Wether deltaEN is non-zero

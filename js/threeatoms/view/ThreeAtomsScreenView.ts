@@ -13,7 +13,6 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -56,13 +55,6 @@ export default class ThreeAtomsScreenView extends ScreenView {
     moleculeDescriptionNode.addChild( new Node( {
       accessibleParagraph: model.triatomicMolecule.deltaENProperty.derived( deltaEN => {
         return 'TEMPORARY: Delta EN: ' + toFixed( deltaEN, 2 );
-      } )
-    } ) );
-
-    // TODO: Can this be inside of the List Node? https://github.com/phetsims/molecule-polarity/issues/193
-    moleculeDescriptionNode.addChild( new Node( {
-      accessibleParagraph: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.deltaENProperty )
       } )
     } ) );
 

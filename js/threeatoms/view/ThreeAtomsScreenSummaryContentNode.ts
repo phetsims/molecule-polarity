@@ -7,6 +7,7 @@
 
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../joist/js/ScreenSummaryContent.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -20,7 +21,7 @@ export default class ThreeAtomsScreenSummaryContentNode extends ScreenSummaryCon
   public constructor( model: ThreeAtomsModel, providedOptions?: ThreeAtomsScreenSummaryContentNodeOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, ThreeAtomsScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.threeAtomsScreen.screenSummary.currentDetails.createProperty( {
-        polarity: 'TODO', // TODO https://github.com/phetsims/molecule-polarity/issues/174,
+        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.deltaENProperty ),
         shape: 'TODO', // TODO https://github.com/phetsims/molecule-polarity/issues/174,
         field: MoleculePolarityFluent.a11y.field.createProperty( {
           state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
