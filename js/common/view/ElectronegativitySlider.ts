@@ -193,7 +193,7 @@ export default class ElectronegativitySlider extends HSlider {
     bondDipolesVisible && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: changeInEN === 0 ? 'zero' : isDipoleMagnitudeGrowing ? 'larger' : 'smaller'
+          progress: isDipoleMagnitudeGrowing ? 'larger' : 'smaller'
         } )
       } )
     );
