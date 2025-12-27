@@ -131,7 +131,10 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electron density (First two regions)
       {
         visibleProperty: DerivedProperty.and( [
-          DerivedProperty.not( isMoleculePolarProperty ), // TODO what regions https://github.com/phetsims/molecule-polarity/issues/193
+          new DerivedProperty(
+            [ diatomicMolecule.dipoleMagnitudeProperty ],
+            ( dipoleMagnitude: number ) => dipoleMagnitude <= 0.4
+          ),
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegions.createProperty( {
@@ -142,7 +145,10 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       // Electron density (Last four regions)
       {
         visibleProperty: DerivedProperty.and( [
-          isMoleculePolarProperty, // TODO what regions https://github.com/phetsims/molecule-polarity/issues/193
+          new DerivedProperty(
+            [ diatomicMolecule.dipoleMagnitudeProperty ],
+            ( dipoleMagnitude: number ) => dipoleMagnitude > 0.4
+          ),
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegions.createProperty( {
