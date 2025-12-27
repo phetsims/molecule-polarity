@@ -38,7 +38,7 @@ export default class TriatomicMolecule extends Molecule {
 
   // the angle between bondAB and bondBC
   // This was added for PhET-iO, see https://github.com/phetsims/molecule-polarity/issues/98
-  private readonly bondAngleABCProperty: TReadOnlyProperty<number>;
+  public readonly bondAngleABCProperty: TReadOnlyProperty<number>;
 
   public constructor( providedOptions: TriatomicMoleculeOptions ) {
 
