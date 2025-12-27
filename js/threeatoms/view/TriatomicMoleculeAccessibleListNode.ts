@@ -29,13 +29,12 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TriatomicMoleculeAccessibleListNodeOptions>()( {
       leadingParagraphStringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( triatomicMolecule.dipoleMagnitudeProperty )
+        polarity: DescriptionMaps.createPolarityStringProperty( triatomicMolecule.deltaENProperty )
       } )
     }, providedOptions );
 
     // Wether deltaEN is non-zero
-    const isMoleculePolarProperty = triatomicMolecule.dipoleMagnitudeProperty.derived(
-      dipoleMagnitude => dipoleMagnitude !== 0 );
+    const isMoleculePolarProperty = triatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
 
     const absoluteBondAngleABProperty = new DerivedProperty( [
       triatomicMolecule.bondAngleABProperty,

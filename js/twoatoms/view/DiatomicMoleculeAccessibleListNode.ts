@@ -27,12 +27,12 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
       leadingParagraphStringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.currentState.createProperty( {
-      polarity: DescriptionMaps.createPolarityStringProperty( diatomicMolecule.bond.deltaENProperty )
+      polarity: DescriptionMaps.createPolarityStringProperty( diatomicMolecule.deltaENProperty )
     } )
     }, providedOptions );
 
     // Wether deltaEN is non-zero
-    const isMoleculePolarProperty = diatomicMolecule.bond.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
+    const isMoleculePolarProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
 
     super( [
 
@@ -43,7 +43,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           viewProperties.bondDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDescription.createProperty( {
-          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.bond.deltaENProperty )
+          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -54,8 +54,8 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           viewProperties.bondDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
-          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.bond.deltaENProperty ),
-          atom: diatomicMolecule.bond.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
+          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty ),
+          atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
 
@@ -66,7 +66,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           viewProperties.partialChargesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDescription.createProperty( {
-          partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.bond.deltaENProperty )
+          partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -77,7 +77,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           viewProperties.partialChargesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.partialChargesDetail.createProperty( {
-          partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.bond.deltaENProperty ),
+          partialChargeMagnitude: DescriptionMaps.createPartialChargesStringProperty( diatomicMolecule.deltaENProperty ),
           chargeA: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
             sign: diatomicMolecule.atomA.partialChargeProperty.derived(
               charge => charge > 0 ? 'positive' : 'negative' )
@@ -93,7 +93,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
       {
         visibleProperty: viewProperties.bondCharacterVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondCharacterDescription.createProperty( {
-          bondCharacter: DescriptionMaps.createBondCharacterStringProperty( diatomicMolecule.bond.deltaENProperty )
+          bondCharacter: DescriptionMaps.createBondCharacterStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -104,7 +104,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialDescription.createProperty( {
-          potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.bond.deltaENProperty )
+          potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -114,7 +114,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electrostaticPotentialRegions.createProperty( {
-          potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.bond.deltaENProperty ),
+          potential: DescriptionMaps.createElectrostaticPotentialStringProperty( diatomicMolecule.deltaENProperty ),
           chargeA: MoleculePolarityFluent.a11y.partialChargeSign.createProperty( {
             sign: diatomicMolecule.atomA.partialChargeProperty.derived(
               charge => charge > 0 ? 'positive' : 'negative' )
@@ -123,8 +123,8 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
             sign: diatomicMolecule.atomB.partialChargeProperty.derived(
               charge => charge > 0 ? 'positive' : 'negative' )
           } ),
-          regionA: DescriptionMaps.createElectrostaticRegionsStringProperty( diatomicMolecule.bond.deltaENProperty ),
-          regionB: DescriptionMaps.createElectrostaticRegionsStringProperty( diatomicMolecule.bond.deltaENProperty )
+          regionA: DescriptionMaps.createElectrostaticRegionsStringProperty( diatomicMolecule.deltaENProperty ),
+          regionB: DescriptionMaps.createElectrostaticRegionsStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -138,7 +138,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.firstTwoRegions.createProperty( {
-          density: DescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.bond.deltaENProperty )
+          density: DescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -152,9 +152,9 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronDensityDescription.lastFourRegions.createProperty( {
-          density: DescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.bond.deltaENProperty ),
-          electronDensityShift: DescriptionMaps.createElectronDensityShiftStringProperty( diatomicMolecule.bond.deltaENProperty ),
-          atom: diatomicMolecule.bond.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
+          density: DescriptionMaps.createElectronDensityStringProperty( diatomicMolecule.deltaENProperty ),
+          electronDensityShift: DescriptionMaps.createElectronDensityShiftStringProperty( diatomicMolecule.deltaENProperty ),
+          atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },
 

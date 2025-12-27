@@ -38,6 +38,7 @@ export default abstract class Molecule extends PhetioObject {
   public readonly isDraggingProperty: Property<boolean>; // true when the user is dragging the molecule
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>; // the molecular dipole, sum of the bond dipoles
   public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
+  public abstract readonly deltaENProperty: TReadOnlyProperty<number>;
 
   /**
    * @param atoms - atoms that make up the molecule

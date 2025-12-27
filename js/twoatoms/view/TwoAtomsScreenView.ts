@@ -53,7 +53,7 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
 
     moleculeDescriptionNode.addChild( new Node( {
-      accessibleParagraph: model.diatomicMolecule.bond.deltaENProperty.derived( deltaEN => {
+      accessibleParagraph: model.diatomicMolecule.deltaENProperty.derived( deltaEN => {
         return 'TEMPORARY: Delta EN: ' + toFixed( deltaEN, 2 );
       } )
     } ) );

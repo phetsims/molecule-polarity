@@ -21,7 +21,7 @@ export default class ThreeAtomsScreenSummaryContentNode extends ScreenSummaryCon
   public constructor( model: ThreeAtomsModel, providedOptions?: ThreeAtomsScreenSummaryContentNodeOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, ThreeAtomsScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.threeAtomsScreen.screenSummary.currentDetails.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.dipoleMagnitudeProperty ),
+        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.deltaENProperty ),
         shape: DescriptionMaps.createShapeStringProperty( model.triatomicMolecule.bondAngleABCProperty ),
         field: MoleculePolarityFluent.a11y.field.createProperty( {
           state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
