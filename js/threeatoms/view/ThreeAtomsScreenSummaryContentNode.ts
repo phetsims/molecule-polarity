@@ -21,7 +21,7 @@ export default class ThreeAtomsScreenSummaryContentNode extends ScreenSummaryCon
   public constructor( model: ThreeAtomsModel, providedOptions?: ThreeAtomsScreenSummaryContentNodeOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, ThreeAtomsScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.threeAtomsScreen.screenSummary.currentDetails.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.deltaENProperty ),
+        polarity: DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.dipoleMagnitudeProperty ),
         shape: 'TODO', // TODO https://github.com/phetsims/molecule-polarity/issues/174,
         field: MoleculePolarityFluent.a11y.field.createProperty( {
           state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )

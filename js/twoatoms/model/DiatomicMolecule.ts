@@ -7,8 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Atom from '../../common/model/Atom.js';
@@ -29,7 +27,6 @@ export default class DiatomicMolecule extends Molecule {
   public readonly atomB: Atom; // the atom labeled 'B'
   public readonly bond: Bond;
   public readonly getDeltaEN: () => number;
-  public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   public constructor( providedOptions: DiatomicMoleculeOptions ) {
 
@@ -86,17 +83,6 @@ export default class DiatomicMolecule extends Molecule {
     this.atomB = atomB;
     this.bond = bond;
     this.getDeltaEN = getDeltaEN;
-
-    // TODO: This lives in the bond, delete from here https://github.com/phetsims/molecule-polarity/issues/171
-    this.deltaENProperty = new DerivedProperty(
-      [
-        atomA.electronegativityProperty,
-        atomB.electronegativityProperty
-      ],
-      ( atomAElectronegativity: number, atomBElectronegativity: number ) => {
-        return atomBElectronegativity - atomAElectronegativity;
-      }
-    );
   }
 }
 

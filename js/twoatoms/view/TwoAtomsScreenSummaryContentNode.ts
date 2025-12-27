@@ -20,7 +20,7 @@ export default class TwoAtomsScreenSummaryContentNode extends ScreenSummaryConte
   public constructor( model: TwoAtomsModel, providedOptions?: TwoAtomsScreenSummaryContentNodeOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TwoAtomsScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.currentDetails.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.deltaENProperty ),
+        polarity: DescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.bond.deltaENProperty ),
         field: MoleculePolarityFluent.a11y.field.createProperty( {
           state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
         } )

@@ -154,15 +154,14 @@ export default class ElectronegativitySlider extends HSlider {
     // For some cases we need to invert the change in EN for context responses based on which atom is being changed
     const invertedChangeInEN = this.invertMapping ? -changeInEN : changeInEN;
 
-    // deltaEN = EN_B - EN_A
-    const bondDeltaEN = molecule.deltaENProperty.value;
-    const previousBondDeltaEN = bondDeltaEN - invertedChangeInEN;
+    const dipoleMagnitude = molecule.dipoleMagnitudeProperty.value;
+    const previousDipoleMagnitude = dipoleMagnitude - invertedChangeInEN;
 
     // Similarly, deltaEN > 0 might mean something different based on which atom is being changed.
     // i.e. high deltaEN means a high electron density for one atom but low for the other.
-    const invertedBondDeltaEN = this.invertMapping ? -bondDeltaEN : bondDeltaEN;
-    const isBondDeltaENGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
-    const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0;
+    const invertedDipoleMagnitude = this.invertMapping ? -dipoleMagnitude : dipoleMagnitude;
+    const isDipoleMagnitudeGrowing = Math.abs( previousDipoleMagnitude ) < Math.abs( dipoleMagnitude );
+    const didDipoleChangeDirection = dipoleMagnitude * previousDipoleMagnitude < 0;
 
     // Sim visibility properties that condidtion the context responses
     // In some cases we have to check for the Two Atom Molecule or the Three Atom One
@@ -194,15 +193,15 @@ export default class ElectronegativitySlider extends HSlider {
     bondDipolesVisible && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: changeInEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
+          progress: changeInEN === 0 ? 'zero' : isDipoleMagnitudeGrowing ? 'larger' : 'smaller'
         } )
       } )
     );
 
     // If bond dipole changes direction
-    bondDipolesVisible && didBondChangeDirection && contextResponse(
+    bondDipolesVisible && didDipoleChangeDirection && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
-        atom: bondDeltaEN > 0 ? 'B' : 'A'
+        atom: dipoleMagnitude > 0 ? 'B' : 'A'
       } )
     );
 
@@ -210,28 +209,28 @@ export default class ElectronegativitySlider extends HSlider {
     partialChargesVisible && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
         progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
-          progress: this.changeInENtoElectrostaticPotentialProgress( invertedBondDeltaEN, changeInEN )
+          progress: this.changeInENtoElectrostaticPotentialProgress( invertedDipoleMagnitude, changeInEN )
         } )
       } )
     );
-    partialChargesVisible && didBondChangeDirection && contextResponse(
+    partialChargesVisible && didDipoleChangeDirection && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
         sign: MoleculePolarityFluent.a11y.partialChargeSign.format( {
-          sign: invertedBondDeltaEN < 0 ? 'positive' : 'negative'
+          sign: invertedDipoleMagnitude < 0 ? 'positive' : 'negative'
         } )
       } )
     );
     bondCharacterVisible && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
         progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
-          progress: isBondDeltaENGrowing ? 'moreIonic' : 'moreCovalent'
+          progress: isDipoleMagnitudeGrowing ? 'moreIonic' : 'moreCovalent'
         } )
       } )
     );
     surfaceType === 'electrostaticPotential' && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
         progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
-          progress: this.changeInENtoElectrostaticPotentialProgress( invertedBondDeltaEN, changeInEN )
+          progress: this.changeInENtoElectrostaticPotentialProgress( invertedDipoleMagnitude, changeInEN )
         } )
       } )
     );
@@ -244,7 +243,7 @@ export default class ElectronegativitySlider extends HSlider {
     );
 
     // If E Field enabled and the molecule is polar
-    eFieldEnabled && bondDeltaEN !== 0 && contextResponse(
+    eFieldEnabled && dipoleMagnitude !== 0 && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
     );
 
