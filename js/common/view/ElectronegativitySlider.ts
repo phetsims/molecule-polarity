@@ -163,6 +163,7 @@ export default class ElectronegativitySlider extends HSlider {
     const invertedBondDeltaEN = this.invertMapping ? -bondDeltaEN : bondDeltaEN;
     const isBondDeltaENGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
     const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0;
+    const didDipoleMagnitudeChange = Math.abs( previousBondDeltaEN ) !== Math.abs( bondDeltaEN );
 
     // Sim visibility properties that condidtion the context responses
     // In some cases we have to check for the Two Atom Molecule or the Three Atom One
@@ -191,7 +192,7 @@ export default class ElectronegativitySlider extends HSlider {
     /////// CONTEXT RESPONSES ///////
 
     // If Bond Dipoles visible, emit bond dipole related context responses
-    bondDipolesVisible && contextResponse(
+    bondDipolesVisible && didDipoleMagnitudeChange && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: isBondDeltaENGrowing ? 'larger' : 'smaller'
@@ -209,8 +210,8 @@ export default class ElectronegativitySlider extends HSlider {
     // If Partial Charges visible
     partialChargesVisible && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
-          progress: this.changeInENtoElectrostaticPotentialProgress( invertedBondDeltaEN, changeInEN )
+        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
+          progress: this.changeInENtoProgress( invertedBondDeltaEN, changeInEN )
         } )
       } )
     );
@@ -231,7 +232,7 @@ export default class ElectronegativitySlider extends HSlider {
     surfaceType === 'electrostaticPotential' && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
         progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
-          progress: this.changeInENtoElectrostaticPotentialProgress( invertedBondDeltaEN, changeInEN )
+          progress: this.changeInENtoProgress( invertedBondDeltaEN, changeInEN )
         } )
       } )
     );
@@ -250,7 +251,7 @@ export default class ElectronegativitySlider extends HSlider {
 
   }
 
-  private changeInENtoElectrostaticPotentialProgress( deltaEN: number, changeInEN: number ): EPProgress {
+  private changeInENtoProgress( deltaEN: number, changeInEN: number ): EPProgress {
     return deltaEN === 0 ? 'neutral' :
            deltaEN < 0 ? changeInEN < 0 ? 'morePositive' : 'lessPositive' :
            changeInEN > 0 ? 'moreNegative' : 'lessNegative';
