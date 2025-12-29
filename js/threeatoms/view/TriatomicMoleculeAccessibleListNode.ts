@@ -6,12 +6,11 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
-import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
+import { toClock } from '../../common/view/toClock.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
@@ -45,10 +44,6 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       triatomicMolecule.bondAngleBCProperty,
       triatomicMolecule.angleProperty
     ], ( bondAngleBC: number, moleculeAngle: number ) => roundToInterval( bondAngleBC + moleculeAngle, 0.1 ) );
-
-    const toClock = ( radians: number ) => {
-      return ( roundSymmetric( toDegrees( radians ) / 30 ) + 3 ) % 12 || 12;
-    };
 
     super( [
 

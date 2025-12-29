@@ -21,6 +21,7 @@ import BondNode from '../../common/view/BondNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
+import { toClock } from '../../common/view/toClock.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -59,6 +60,9 @@ export default class TriatomicMoleculeNode extends Node {
         phetioType: IndexedNodeIO,
         phetioState: true
       },
+      createAriaValueText: ( value: number ) => {
+        return toClock( value + molecule.angleProperty.value ).toString();
+      },
       accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
     } );
@@ -79,8 +83,17 @@ export default class TriatomicMoleculeNode extends Node {
         phetioType: IndexedNodeIO,
         phetioState: true
       },
+      createAriaValueText: ( value: number ) => {
+        return toClock( value + molecule.angleProperty.value ).toString();
+      },
       accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty
+    } );
+
+    // For aria value, update bond angles when molecule is rotated
+    molecule.angleProperty.link( () => {
+      molecule.bondAngleABProperty.notifyListenersStatic();
+      molecule.bondAngleBCProperty.notifyListenersStatic();
     } );
 
     // bonds
@@ -234,6 +247,12 @@ export default class TriatomicMoleculeNode extends Node {
       moleculeHasChanged = false;
       updateAllHintArrows();
     };
+
+    this.pdomOrder = [
+      atomANode,
+      atomBNode,
+      atomCNode
+    ];
   }
 
   public reset(): void {
