@@ -87,10 +87,10 @@ a11y:
       checked: 'Bond character shown.'
       unchecked: 'Bond character hidden.'
     molecularDipoleCheckbox:
-        accessibleName: 'Molecular Dipole'
-        accessibleHelpText: 'Explore with or without molecular dipole shown.'
-        checked: 'Molecular dipole shown.'
-        unchecked: 'Molecular dipole hidden.'
+      accessibleName: 'Molecular Dipole'
+      accessibleHelpText: 'Explore with or without molecular dipole shown.'
+      checked: 'Molecular dipole shown.'
+      unchecked: 'Molecular dipole hidden.'
     atomLabelsCheckbox:
       accessibleName: 'Atom Labels'
       accessibleHelpText: 'Show or hide labels for each atom in the molecule.'
@@ -243,12 +243,12 @@ a11y:
 
   # ElectroPotentialRegions5
   electrostaticRegions:
-      select_regions:
-        verySlightly: 'Very slightly'
-        slightly: 'Slightly'
-        moderately: 'Moderately'
-        highly: 'Highly'
-        veryHighly: 'Very highly'
+    select_regions:
+      verySlightly: 'Very slightly'
+      slightly: 'Slightly'
+      moderately: 'Moderately'
+      highly: 'Highly'
+      veryHighly: 'Very highly'
   
   # EN6 - Electronegativity levels (Screen 1/2)
   electronegativity:
@@ -421,7 +421,7 @@ a11y:
       electricFieldAligned: 'Molecule aligned with electric field.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
       molecularDipoleDescription: 'Molecule has { $magnitude } molecular dipole arrow.'
-      molecularDipoleDirection: 'Molecular dipole points towards { $direction } o''clock.'
+      molecularDipoleDirection: '{ a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription } Molecular dipole points { $direction } o''clock.'
       molecularDipoleTwice: 'Molecular dipole is twice the size of bond dipoles.'
       bondDipoleABDescription: 'With { $magnitude } AB bond dipole arrow.'
       bondDipoleABDirection: 'AB bond dipole points to Atom { $atom }, towards { $direction } o''clock.'

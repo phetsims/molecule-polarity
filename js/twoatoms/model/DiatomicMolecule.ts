@@ -87,7 +87,6 @@ export default class DiatomicMolecule extends Molecule {
     this.bond = bond;
     this.getDeltaEN = getDeltaEN;
 
-    // TODO: This lives in the bond, delete from here https://github.com/phetsims/molecule-polarity/issues/171
     this.deltaENProperty = new DerivedProperty(
       [
         atomA.electronegativityProperty,

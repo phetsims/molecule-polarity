@@ -558,7 +558,7 @@
           "value": "Molecule has { $magnitude } molecular dipole arrow."
         },
         "molecularDipoleDirection": {
-          "value": "Molecular dipole points towards { $direction } o'clock."
+          "value": "{ a11y_threeAtomsScreen_moleculeABC_molecularDipoleDescription } Molecular dipole points { $direction } o'clock."
         },
         "molecularDipoleTwice": {
           "value": "Molecular dipole is twice the size of bond dipoles."

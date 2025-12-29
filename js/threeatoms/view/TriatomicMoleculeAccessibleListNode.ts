@@ -96,13 +96,16 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         } )
       },
 
-      // Molecular dipole direction TODO: Join with above https://github.com/phetsims/molecule-polarity/issues/193
+      // Molecular dipole direction
       {
         visibleProperty: DerivedProperty.and( [
           isMoleculePolarProperty,
           viewProperties.molecularDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirection.createProperty( {
+          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+            triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude )
+          ),
           direction: DescriptionMaps.createOrientationStringProperty(
             triatomicMolecule.dipoleProperty.derived( dipole => dipole.angle )
           )
@@ -123,7 +126,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       // AB Bond Magnitude
       {
         visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
+          DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescription.createProperty( {
@@ -135,7 +138,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       // AB Bond Direction
       {
         visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
+          DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDirection.createProperty( {
@@ -156,7 +159,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       // BC Bond Magnitude
       {
         visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
+          DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
@@ -168,7 +171,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       // BC Bond Direction
       {
         visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
+          DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDirection.createProperty( {
