@@ -24,6 +24,7 @@ import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import { toClock } from '../../common/view/toClock.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
 import BondAngleDragListener from './BondAngleDragListener.js';
@@ -61,7 +62,9 @@ export default class TriatomicMoleculeNode extends Node {
         phetioState: true
       },
       createAriaValueText: ( value: number ) => {
-        return toClock( value + molecule.angleProperty.value ).toString();
+        return MoleculePolarityFluent.a11y.oClock.format( {
+          hour: toClock( value + molecule.angleProperty.value ).toString()
+        } );
       },
       accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
@@ -84,7 +87,9 @@ export default class TriatomicMoleculeNode extends Node {
         phetioState: true
       },
       createAriaValueText: ( value: number ) => {
-        return toClock( value + molecule.angleProperty.value ).toString();
+        return MoleculePolarityFluent.a11y.oClock.format( {
+          hour: toClock( value + molecule.angleProperty.value ).toString()
+        } );
       },
       accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty

@@ -355,6 +355,14 @@ a11y:
       extremelyBentSlightOverlap: 'extremely bent, slight overlap'
       atomsOverlap: 'atoms overlap'
 
+  direction:
+    select_direction:
+      vertical: '{ $angle }, vertical'
+      diagonal: '{ $angle }, diagonal'
+      horizontal: '{ $angle }, horizontal'
+
+  oClock: '{ $hour } o''clock'
+
   # ===================
   # TWO ATOMS SCREEN
   # ===================

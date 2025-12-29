@@ -156,6 +156,8 @@ addToMapIfDefined( 'a11y_partialChargeProgress', 'a11y.partialChargeProgressStri
 addToMapIfDefined( 'a11y_polarity', 'a11y.polarityStringProperty' );
 addToMapIfDefined( 'a11y_rotation', 'a11y.rotationStringProperty' );
 addToMapIfDefined( 'a11y_shape', 'a11y.shapeStringProperty' );
+addToMapIfDefined( 'a11y_direction', 'a11y.directionStringProperty' );
+addToMapIfDefined( 'a11y_oClock', 'a11y.oClockStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_screenSummary_playArea', 'a11y.twoAtomsScreen.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_screenSummary_controlArea', 'a11y.twoAtomsScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_screenSummary_currentDetails', 'a11y.twoAtomsScreen.screenSummary.currentDetailsStringProperty' );
@@ -459,6 +461,8 @@ const MoleculePolarityFluent = {
     rotation: new FluentPattern<{ direction: 'clockwise' | 'counterclockwise' | TReadOnlyProperty<'clockwise' | 'counterclockwise'> }>( fluentSupport.bundleProperty, 'a11y_rotation', _.get( MoleculePolarityStrings, 'a11y.rotationStringProperty' ), [{"name":"direction","variants":["clockwise","counterclockwise"]}] ),
     _comment_31: new FluentComment( {"comment":"Shape7 - Molecule shape (Screen 2)","associatedKey":"shape"} ),
     shape: new FluentPattern<{ shape: 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap' | TReadOnlyProperty<'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap'> }>( fluentSupport.bundleProperty, 'a11y_shape', _.get( MoleculePolarityStrings, 'a11y.shapeStringProperty' ), [{"name":"shape","variants":["linear","nearlyLinear","slightlyBent","bent","veryBent","extremelyBentSlightOverlap","atomsOverlap"]}] ),
+    direction: new FluentPattern<{ angle: FluentVariable, direction: 'vertical' | 'diagonal' | 'horizontal' | TReadOnlyProperty<'vertical' | 'diagonal' | 'horizontal'> }>( fluentSupport.bundleProperty, 'a11y_direction', _.get( MoleculePolarityStrings, 'a11y.directionStringProperty' ), [{"name":"angle"},{"name":"direction","variants":["vertical","diagonal","horizontal"]}] ),
+    oClock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_oClock', _.get( MoleculePolarityStrings, 'a11y.oClockStringProperty' ), [{"name":"hour"}] ),
     _comment_32: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),
     _comment_33: new FluentComment( {"comment":"TWO ATOMS SCREEN","associatedKey":"twoAtomsScreen"} ),
     _comment_34: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),

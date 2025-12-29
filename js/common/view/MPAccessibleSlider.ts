@@ -9,12 +9,13 @@ import Property from '../../../../axon/js/Property.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/accessibility/AccessibleSlider.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -32,8 +33,13 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
       shiftKeyboardStep: Math.PI / 8,
       createAriaValueText: angle => {
         angle *= -1; // Inverting the angle to have +Y pointing up
-        angle = toDegrees( angle < 0 ? angle + 2 * Math.PI : angle ); // Mapping to [0-360]
-        return toFixed( angle, 1 ); // Rounding
+        let angleDeg = toDegrees( angle < 0 ? angle + 2 * Math.PI : angle ); // Mapping to [0-360]
+        angleDeg = toFixedNumber( angleDeg, 1 ); // Rounding
+        return MoleculePolarityFluent.a11y.direction.format( {
+          angle: angleDeg,
+          direction: Math.abs( Math.sin( angle ) ) <= 0.01 ? 'horizontal' :
+                      Math.abs( Math.cos( angle ) ) <= 0.01 ? 'vertical' : 'diagonal'
+          } );
       }
     }, providedOptions );
 

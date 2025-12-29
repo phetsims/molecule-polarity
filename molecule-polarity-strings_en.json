@@ -418,6 +418,12 @@
     "shape": {
       "value": "{ $shape ->\n  [linear] linear\n  [nearlyLinear] nearly linear\n  [slightlyBent] slightly bent\n  [bent] bent\n  [veryBent] very bent\n  [extremelyBentSlightOverlap] extremely bent, slight overlap\n  *[atomsOverlap] atoms overlap\n}"
     },
+    "direction": {
+      "value": "{ $direction ->\n  [vertical] { $angle }, vertical\n  [diagonal] { $angle }, diagonal\n  *[horizontal] { $angle }, horizontal\n}"
+    },
+    "oClock": {
+      "value": "{ $hour } o'clock"
+    },
     "twoAtomsScreen": {
       "screenSummary": {
         "playArea": {
