@@ -5,13 +5,13 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
-import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
-import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
+import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -187,7 +187,6 @@ addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg225', 
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg270', 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg270StringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg315', 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg315StringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg360', 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' );
-addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_rotationDirection', 'a11y.twoAtomsScreen.rotateMoleculeSlider.rotationDirectionStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_rotateMoleculeSlider_electricFieldContext', 'a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_screenSummary_playArea', 'a11y.threeAtomsScreen.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_screenSummary_controlArea', 'a11y.threeAtomsScreen.screenSummary.controlAreaStringProperty' );
@@ -512,7 +511,6 @@ const MoleculePolarityFluent = {
           deg315StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg315', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg315StringProperty' ) ),
           deg360StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg360', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' ) )
         },
-        rotationDirection: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_rotationDirection', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.rotationDirectionStringProperty' ), [{"name":"direction"}] ),
         electricFieldContext: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ), [{"name":"direction"}] )
       }
     },

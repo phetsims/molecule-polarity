@@ -22,6 +22,7 @@ import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
@@ -139,7 +140,54 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       moleculeHasChanged = true;
       updateHintArrows();
     };
-    molecule.angleProperty.lazyLink( hideArrows );
+
+    let lastDirection: 'clockwise' | 'counterclockwise' | null = null;
+    const emitRotationResponse = ( direction: 'clockwise' | 'counterclockwise' ) => {
+      if ( molecule.isRotatingDueToEFieldProperty.value ) {
+
+        // Context response for E-field rotations
+        this.addAccessibleContextResponse(
+          MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContext.format( {
+            direction: direction
+          } )
+        );
+      }
+      else {
+
+        // Normal object response for manual rotations
+        this.addAccessibleObjectResponse(
+          MoleculePolarityFluent.a11y.rotation.format( { direction: direction } )
+        );
+      }
+      lastDirection = direction;
+    };
+
+    molecule.isRotatingDueToEFieldProperty.lazyLink( () => {
+      lastDirection = null;
+    } );
+
+    // Storing the dipole to track angle changes.
+    let lastDipole = molecule.dipoleProperty.value;
+    molecule.angleProperty.lazyLink( () => {
+      hideArrows();
+
+      const dipole = molecule.dipoleProperty.value;
+
+      // Using the cross product of the dipole to determine wether the dipole change due to the angle
+      // is rotating the molecule clockwise or counterclockwise.
+      if ( dipole.crossScalar( lastDipole ) < 0 ) {
+        if ( lastDirection !== 'clockwise' ) {
+          emitRotationResponse( 'clockwise' );
+        }
+      }
+      else {
+        if ( lastDirection !== 'counterclockwise' ) {
+          emitRotationResponse( 'counterclockwise' );
+        }
+      }
+
+      lastDipole = dipole;
+    } );
 
     this.inputEnabledProperty.link( () => updateHintArrows() );
 

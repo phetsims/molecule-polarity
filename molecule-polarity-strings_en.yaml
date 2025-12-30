@@ -407,7 +407,6 @@ a11y:
         deg270: '270 degrees, vertical'
         deg315: '315 degrees, diagonal'
         deg360: '360 degrees, horizontal, back to start'
-      rotationDirection: '{ $direction }'
       electricFieldContext: 'Rotating { $direction } Horizontal, Aligned with electric field.'
 
   # ===================

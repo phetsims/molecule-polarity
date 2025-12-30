@@ -39,6 +39,7 @@ export default abstract class Molecule extends PhetioObject {
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>; // the molecular dipole, sum of the bond dipoles
   public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
   public abstract readonly deltaENProperty: TReadOnlyProperty<number>;
+  public readonly isRotatingDueToEFieldProperty: Property<boolean>;
 
   /**
    * @param atoms - atoms that make up the molecule
@@ -79,6 +80,12 @@ export default abstract class Molecule extends PhetioObject {
 
     this.isDraggingProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isDraggingProperty' ),
+      phetioReadOnly: true,
+      phetioState: false
+    } );
+
+    this.isRotatingDueToEFieldProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'isRotatingDueToEFieldProperty' ),
       phetioReadOnly: true,
       phetioState: false
     } );

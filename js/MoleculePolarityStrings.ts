@@ -216,7 +216,6 @@ type StringsType = {
           'deg315StringProperty': LocalizedStringProperty;
           'deg360StringProperty': LocalizedStringProperty;
         };
-        'rotationDirectionStringProperty': LocalizedStringProperty;
         'electricFieldContextStringProperty': LocalizedStringProperty;
       }
     };

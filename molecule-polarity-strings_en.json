@@ -521,9 +521,6 @@
             "value": "360 degrees, horizontal, back to start"
           }
         },
-        "rotationDirection": {
-          "value": "{ $direction }"
-        },
         "electricFieldContext": {
           "value": "Rotating { $direction } Horizontal, Aligned with electric field."
         }
