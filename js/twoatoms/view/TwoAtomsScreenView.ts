@@ -15,6 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
+import MoleculeContextResponses from '../../common/view/MoleculeContextResponses.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
@@ -93,6 +94,25 @@ export default class TwoAtomsScreenView extends ScreenView {
         phetioFeatured: true
       }
     } );
+
+    // Context responses for electronegativity changes
+    // Atom A has invertMapping: true because changes to atom A affect deltaEN inversely
+    new MoleculeContextResponses(
+      model.diatomicMolecule.atomA,
+      model.diatomicMolecule,
+      viewProperties,
+      atomAElectronegativityPanel,
+      true
+    );
+
+    // Atom B uses default mapping
+    new MoleculeContextResponses(
+      model.diatomicMolecule.atomB,
+      model.diatomicMolecule,
+      viewProperties,
+      atomBElectronegativityPanel,
+      false
+    );
 
     const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,

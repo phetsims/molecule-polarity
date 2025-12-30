@@ -33,7 +33,7 @@ export default class ElectronegativityPanel extends Panel {
   /**
    * @param atom - the atom whose electronegativity we're controlling
    * @param molecule - molecule that the atom belongs to, for pausing animation while this control is used
-   * @param viewProperties - visibility properties that determine wether to emit context responses
+   * @param viewProperties - visibility properties that determine whether to emit context responses
    * @param [providedOptions]
    */
   public constructor(
@@ -84,11 +84,9 @@ export default class ElectronegativityPanel extends Panel {
     // slider
     const slider = new ElectronegativitySlider(
       atom,
-      molecule,
-      viewProperties,
+      molecule.isDraggingProperty,
       {
-      tandem: options.tandem.createTandem( 'slider' ),
-      invertMapping: options.invertMapping
+      tandem: options.tandem.createTandem( 'slider' )
     } );
 
     const content = new VBox( {
