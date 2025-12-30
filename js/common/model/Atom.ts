@@ -34,6 +34,10 @@ export default class Atom extends PhetioObject {
   public readonly color: TColor;
   public readonly positionProperty: TProperty<Vector2>;
   public readonly electronegativityProperty: NumberProperty;
+
+  // For accessibility, we track the EN value before the slider changed it.
+  // This is needed for context responses to track whether the EN increased or decreased.
+  public readonly previousElectronegativityProperty: NumberProperty;
   public readonly partialChargeProperty: TProperty<number>;
 
   public constructor( labelStringProperty: TReadOnlyProperty<string>, providedOptions: AtomOptions ) {
@@ -68,6 +72,12 @@ export default class Atom extends PhetioObject {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tandem: options.tandem.createTandem( 'electronegativityProperty' ),
       phetioFeatured: true
+    } );
+
+    this.previousElectronegativityProperty = new NumberProperty( options.electronegativity, {
+      range: MPConstants.ELECTRONEGATIVITY_RANGE,
+      tandem: options.tandem.createTandem( 'previousElectronegativityProperty' ),
+      phetioFeatured: false
     } );
 
     // partial charge is zero until this atom participates in a bond
