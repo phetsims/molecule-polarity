@@ -78,15 +78,14 @@ export default class ElectronegativitySlider extends HSlider {
 
     options.startDrag = () => {
       isDraggingProperty.value = true;
+      // Store the current EN value before dragging starts
       atom.previousElectronegativityProperty.value = atom.electronegativityProperty.value;
     };
 
     // snaps to the closest tick mark
     options.endDrag = () => {
-      isDraggingProperty.value = false;
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
-      // Update previousElectronegativityProperty to trigger context responses
-      atom.previousElectronegativityProperty.value = atom.electronegativityProperty.value;
+      isDraggingProperty.value = false;
     };
 
     const range = atom.electronegativityProperty.range;

@@ -32,6 +32,7 @@ export default class MoleculeContextResponses {
   // Track previous values for comparison
   private previousEN: number;
   private previousDipole: Vector2;
+  private isDragging: boolean;
 
   /**
    * @param atom - the atom whose electronegativity changes trigger context responses
@@ -55,10 +56,21 @@ export default class MoleculeContextResponses {
 
     this.previousEN = atom.electronegativityProperty.value;
     this.previousDipole = molecule.dipoleProperty.value;
+    this.isDragging = false;
 
-    // Listen to changes in previousElectronegativityProperty to trigger context responses
-    atom.previousElectronegativityProperty.link( previousEN => {
-      this.emitContextResponse( previousEN );
+    // Track when dragging starts to capture the "before" state
+    molecule.isDraggingProperty.link( isDragging => {
+      if ( isDragging ) {
+        // Dragging just started - capture current state as "previous"
+        this.isDragging = true;
+        this.previousEN = atom.previousElectronegativityProperty.value;
+        this.previousDipole = molecule.dipoleProperty.value;
+      }
+      else if ( this.isDragging ) {
+        // Dragging just ended - emit context responses
+        this.isDragging = false;
+        this.emitContextResponse();
+      }
     } );
   }
 
@@ -67,7 +79,7 @@ export default class MoleculeContextResponses {
    * depending on various factors that change the visible sim.
    * This function calculates all those changes.
    */
-  private emitContextResponse( previousEN: number ): void {
+  private emitContextResponse(): void {
 
     // clear the queue of utterances
     this.contextResponseNode.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
@@ -79,7 +91,7 @@ export default class MoleculeContextResponses {
 
     // This is how much the atom's EN is changing because of the slider, not to be confused with deltaEN
     const currentEN = this.atom.electronegativityProperty.value;
-    const changeInEN = currentEN - previousEN;
+    const changeInEN = currentEN - this.previousEN;
 
     if ( Math.abs( changeInEN ) === 0 ) { return; } // no change, no context response
 
@@ -209,9 +221,6 @@ export default class MoleculeContextResponses {
     eFieldEnabled && !isDipoleZero && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
     );
-
-    // Update stored values for next comparison
-    this.previousDipole = currentDipole;
   }
 
   private changeInENtoProgress( deltaEN: number, changeInEN: number ): EPProgress {
