@@ -20,41 +20,26 @@ import Slider from '../../../../sun/js/Slider.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import ThreeAtomsViewProperties from '../../threeatoms/view/ThreeAtomsViewProperties.js';
-import TwoAtomsViewProperties from '../../twoatoms/view/TwoAtomsViewProperties.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
-import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 import DescriptionMaps from './DescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
-import { toClock } from './toClock.js';
-
-type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 
 type SelfOptions = {
   tickSpacing?: number; // space between tick marks
-
-  // In some cases an increase in deltaEN results in different context responses depending on which atom is being changed
-  // i.e. An increase in deltaEN emits one response if this slider is for atom A, and a different one for atom B.
-  invertMapping?: boolean;
 };
 
 type ElectronegativitySliderOptions = SelfOptions & WithRequired<HSliderOptions, 'tandem'>;
 
 export default class ElectronegativitySlider extends HSlider {
 
-  // Wether to invert some context responses based on which atom is being changed.
-  private readonly invertMapping;
-
-  private readonly viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties;
-
   public constructor(
     atom: Atom,
     molecule: Molecule,
-    viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties,
     providedOptions: ElectronegativitySliderOptions ) {
 
+    // Values to store state before the drag for context responses
     let previousEN: number;
     let previousDipole: Vector2;
 
@@ -62,7 +47,6 @@ export default class ElectronegativitySlider extends HSlider {
 
       // SelfOptions
       tickSpacing: MPConstants.ELECTRONEGATIVITY_TICK_SPACING,
-      invertMapping: false,
 
       // HSliderOptions
       thumbYOffset: 10,
@@ -99,22 +83,23 @@ export default class ElectronegativitySlider extends HSlider {
 
     options.startDrag = () => {
       molecule.isDraggingProperty.value = true;
+      // Store the current EN value at the start of the drag
       previousEN = atom.electronegativityProperty.value;
       previousDipole = molecule.dipoleProperty.value;
     };
-
-    // snaps to the closest tick mark
     options.endDrag = () => {
-      molecule.isDraggingProperty.value = false;
+      // Setting the previous EN property at the END of the drag, to trigger context responses
+      atom.previousElectronegativityProperty.value = previousEN;
+      molecule.previousDipoleProperty.value = previousDipole;
+
+      // snaps to the closest tick mark
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
-      this.emitContextResponse( molecule, atom, previousEN, previousDipole );
+      molecule.isDraggingProperty.value = false;
     };
 
     const range = atom.electronegativityProperty.range;
 
     super( atom.electronegativityProperty, range, options );
-
-    this.viewProperties = viewProperties;
 
     // tick labels
     const tickLabelOptions = {
@@ -130,164 +115,6 @@ export default class ElectronegativitySlider extends HSlider {
         this.addMinorTick( i );
       }
     }
-
-    this.invertMapping = options.invertMapping;
-  }
-
-  /**
-   * The change in electronegativity will trigger a multitude of context responses
-   * depending on various factors that change the visible sim.
-   * This function calculates all those changes.
-   */
-  private emitContextResponse( molecule: Molecule, atom: Atom, previousEN: number, previousDipole: Vector2 ): void {
-
-    // clear the queue of utterances
-    this.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
-
-    // Mini-utility function for emitting context responses without repeating the verbosity
-    const contextResponse = ( message: string ) => {
-      this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
-    };
-
-    // This is how much the atom's EN is changing because of the slider, not to be confused with deltaEN
-    const currentEN = atom.electronegativityProperty.value;
-    const changeInEN = currentEN - previousEN;
-
-    if ( Math.abs( changeInEN ) === 0 ) { return; } // no change, no context response
-
-    // For some cases we need to invert the change in EN for context responses based on which atom is being changed
-    const invertedChangeInEN = this.invertMapping ? -changeInEN : changeInEN;
-
-    // deltaEN = EN_B - EN_A
-    const bondDeltaEN = molecule.deltaENProperty.value;
-    const previousBondDeltaEN = bondDeltaEN - invertedChangeInEN;
-
-    // Similarly, deltaEN > 0 might mean something different based on which atom is being changed.
-    // i.e. high deltaEN means a high electron density for one atom but low for the other.
-    const invertedBondDeltaEN = this.invertMapping ? -bondDeltaEN : bondDeltaEN;
-    const isBondDeltaENGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
-    const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0;
-
-    // Dipole
-    const currentDipole = molecule.dipoleProperty.value;
-    const dipoleMagnitudeChange = currentDipole.magnitude - previousDipole.magnitude;
-    const didDipoleMagnitudeChange = Math.abs( dipoleMagnitudeChange ) > 0.01;
-    const isDipoleZero = currentDipole.magnitude < 0.01;
-
-    // Sim visibility properties that condidtion the context responses
-    // In some cases we have to check for the Two Atom Molecule or the Three Atom One
-    let bondDipolesVisible: boolean;
-    if ( this.viewProperties instanceof TwoAtomsViewProperties ) {
-      bondDipolesVisible = this.viewProperties.bondDipoleVisibleProperty.value;
-    }
-    else {
-      bondDipolesVisible = this.viewProperties.bondDipolesVisibleProperty.value;
-    }
-
-    let molecularDipoleVisible = false;
-    if ( this.viewProperties instanceof ThreeAtomsViewProperties ) {
-      molecularDipoleVisible = this.viewProperties.molecularDipoleVisibleProperty.value;
-    }
-
-    const partialChargesVisible = this.viewProperties.partialChargesVisibleProperty.value;
-
-    let bondCharacterVisible = false;
-    if ( this.viewProperties instanceof TwoAtomsViewProperties ) {
-      bondCharacterVisible = this.viewProperties.bondCharacterVisibleProperty.value;
-    }
-
-    let surfaceType: SurfaceType = 'none';
-    if ( this.viewProperties instanceof TwoAtomsViewProperties ) {
-      surfaceType = this.viewProperties.surfaceTypeProperty.value;
-    }
-
-    const eFieldEnabled = this.viewProperties.eFieldEnabledProperty.value;
-
-    /////// CONTEXT RESPONSES ///////
-
-    // If Bond Dipoles visible, emit bond dipole related context responses
-    bondDipolesVisible && didDipoleMagnitudeChange && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: isBondDeltaENGrowing ? 'larger' : 'smaller'
-        } )
-      } )
-    );
-
-    // If bond dipole changes direction
-    bondDipolesVisible && didBondChangeDirection && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
-        atom: bondDeltaEN > 0 ? 'B' : 'A'
-      } )
-    );
-
-    // Molecular dipole null description: Molecular dipole zero.
-    molecularDipoleVisible && isDipoleZero && contextResponse(
-      MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContext.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: 'zero'
-        } )
-      } )
-    );
-
-    // Molecular dipole description
-    molecularDipoleVisible && !isDipoleZero && contextResponse(
-      MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirection.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
-        } ),
-        position: toClock( currentDipole.angle )
-      } )
-    );
-
-    // If Partial Charges visible
-    partialChargesVisible && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
-          progress: this.changeInENtoProgress( invertedBondDeltaEN, changeInEN )
-        } )
-      } )
-    );
-    partialChargesVisible && didBondChangeDirection && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
-        sign: MoleculePolarityFluent.a11y.partialChargeSign.format( {
-          sign: invertedBondDeltaEN < 0 ? 'positive' : 'negative'
-        } )
-      } )
-    );
-    bondCharacterVisible && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-        progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
-          progress: isBondDeltaENGrowing ? 'moreIonic' : 'moreCovalent'
-        } )
-      } )
-    );
-    surfaceType === 'electrostaticPotential' && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
-          progress: this.changeInENtoProgress( invertedBondDeltaEN, changeInEN )
-        } )
-      } )
-    );
-    surfaceType === 'electronDensity' && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-        progress: MoleculePolarityFluent.a11y.electronDensityProgressUppercase.format( {
-          progress: changeInEN > 0 ? 'more' : 'less'
-        } )
-      } )
-    );
-
-    // If E Field enabled and the molecule is polar
-    eFieldEnabled && !isDipoleZero && contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
-    );
-
-  }
-
-  private changeInENtoProgress( deltaEN: number, changeInEN: number ): EPProgress {
-    return deltaEN === 0 ? 'neutral' :
-           deltaEN < 0 ? changeInEN < 0 ? 'morePositive' : 'lessPositive' :
-           changeInEN > 0 ? 'moreNegative' : 'lessNegative';
   }
 }
 

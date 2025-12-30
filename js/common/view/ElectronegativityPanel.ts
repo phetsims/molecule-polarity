@@ -7,7 +7,7 @@
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
@@ -15,16 +15,11 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import ThreeAtomsViewProperties from '../../threeatoms/view/ThreeAtomsViewProperties.js';
-import TwoAtomsViewProperties from '../../twoatoms/view/TwoAtomsViewProperties.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import ElectronegativitySlider from './ElectronegativitySlider.js';
 
-type SelfOptions = {
-  // Option passed to ElectroNegativitySlider to invert the mapping of some context responses based on the atom.
-  invertMapping?: boolean;
-};
+type SelfOptions = EmptySelfOptions;
 
 type ElectronegativityPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
@@ -33,19 +28,14 @@ export default class ElectronegativityPanel extends Panel {
   /**
    * @param atom - the atom whose electronegativity we're controlling
    * @param molecule - molecule that the atom belongs to, for pausing animation while this control is used
-   * @param viewProperties - visibility properties that determine wether to emit context responses
    * @param [providedOptions]
    */
   public constructor(
     atom: Atom,
     molecule: Molecule,
-    viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties,
     providedOptions: ElectronegativityPanelOptions ) {
 
     const options = optionize<ElectronegativityPanelOptions, SelfOptions, PanelOptions>()( {
-
-      // SelfOptions
-      invertMapping: false,
 
       // PanelOptions
       fill: atom.color,
@@ -85,10 +75,8 @@ export default class ElectronegativityPanel extends Panel {
     const slider = new ElectronegativitySlider(
       atom,
       molecule,
-      viewProperties,
       {
-      tandem: options.tandem.createTandem( 'slider' ),
-      invertMapping: options.invertMapping
+      tandem: options.tandem.createTandem( 'slider' )
     } );
 
     const content = new VBox( {

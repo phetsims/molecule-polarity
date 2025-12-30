@@ -14,6 +14,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
+import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
@@ -75,25 +76,20 @@ export default class ThreeAtomsScreenView extends ScreenView {
     const atomAElectronegativityPanel = new ElectronegativityPanel(
       model.triatomicMolecule.atomA,
       model.triatomicMolecule,
-      viewProperties,
       {
-        tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
-        invertMapping: true
+        tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
       } );
     const atomBElectronegativityPanel = new ElectronegativityPanel(
       model.triatomicMolecule.atomB,
       model.triatomicMolecule,
-      viewProperties,
       {
         tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
       } );
     const atomCElectronegativityPanel = new ElectronegativityPanel(
       model.triatomicMolecule.atomC,
       model.triatomicMolecule,
-      viewProperties,
       {
-        tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' ),
-        invertMapping: true
+        tandem: electronegativityPanelsTandem.createTandem( 'atomCElectronegativityPanel' )
       } );
     const electronegativityPanels = new HBox( {
       spacing: 10,
@@ -103,6 +99,34 @@ export default class ThreeAtomsScreenView extends ScreenView {
         phetioFeatured: true
       }
     } );
+
+    // Context responses for electronegativity changes
+    // Atom A has invertMapping: true because changes to atom A affect deltaEN inversely
+    this.addChild( new MoleculeContextResponsesNode(
+      model.triatomicMolecule.atomA,
+      model.triatomicMolecule,
+      [ model.triatomicMolecule.bondAB ],
+      viewProperties,
+      true
+    ) );
+
+    // Atom B uses default mapping
+    this.addChild( new MoleculeContextResponsesNode(
+      model.triatomicMolecule.atomB,
+      model.triatomicMolecule,
+      [ model.triatomicMolecule.bondAB, model.triatomicMolecule.bondBC ],
+      viewProperties,
+      false
+    ) );
+
+    // Atom C has invertMapping: true
+    this.addChild( new MoleculeContextResponsesNode(
+      model.triatomicMolecule.atomC,
+      model.triatomicMolecule,
+      [ model.triatomicMolecule.bondBC ],
+      viewProperties,
+      true
+    ) );
 
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
       tandem: tandem.createTandem( 'controlPanel' )

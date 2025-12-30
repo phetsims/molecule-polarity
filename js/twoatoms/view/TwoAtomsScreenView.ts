@@ -15,6 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
+import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
@@ -73,15 +74,12 @@ export default class TwoAtomsScreenView extends ScreenView {
     const atomAElectronegativityPanel = new ElectronegativityPanel(
       model.diatomicMolecule.atomA,
       model.diatomicMolecule,
-      viewProperties,
       {
-        tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' ),
-        invertMapping: true
+        tandem: electronegativityPanelsTandem.createTandem( 'atomAElectronegativityPanel' )
       } );
     const atomBElectronegativityPanel = new ElectronegativityPanel(
       model.diatomicMolecule.atomB,
       model.diatomicMolecule,
-      viewProperties,
       {
         tandem: electronegativityPanelsTandem.createTandem( 'atomBElectronegativityPanel' )
       } );
@@ -93,6 +91,25 @@ export default class TwoAtomsScreenView extends ScreenView {
         phetioFeatured: true
       }
     } );
+
+    // Context responses for electronegativity changes
+    // Atom A has invertMapping: true because changes to atom A affect deltaEN inversely
+    this.addChild( new MoleculeContextResponsesNode(
+      model.diatomicMolecule.atomA,
+      model.diatomicMolecule,
+      [ model.diatomicMolecule.bond ],
+      viewProperties,
+      true
+    ) );
+
+    // Atom B uses default mapping
+    this.addChild( new MoleculeContextResponsesNode(
+      model.diatomicMolecule.atomB,
+      model.diatomicMolecule,
+      [ model.diatomicMolecule.bond ],
+      viewProperties,
+      false
+    ) );
 
     const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,
