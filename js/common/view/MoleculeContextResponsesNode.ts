@@ -2,75 +2,55 @@
 
 /**
  * MoleculeContextResponses handles accessibility context responses when electronegativity changes.
- * This class manages the logic for emitting appropriate ARIA context responses based on changes
- * in atom electronegativity and molecule properties.
  *
- * @author Chris Malley (PixelZoom, Inc.)
+ * @author Agustín Vallejo
  */
 
-import Vector2 from '../../../../dot/js/Vector2.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsViewProperties from '../../threeatoms/view/ThreeAtomsViewProperties.js';
 import TwoAtomsViewProperties from '../../twoatoms/view/TwoAtomsViewProperties.js';
 import Atom from '../model/Atom.js';
+import Bond from '../model/Bond.js';
 import Molecule from '../model/Molecule.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import { toClock } from './toClock.js';
 
 type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 
-export default class MoleculeContextResponses {
+export default class MoleculeContextResponsesNode extends Node {
 
   private readonly atom: Atom;
   private readonly molecule: Molecule;
+  private readonly bonds: Bond[];
   private readonly viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties;
   private readonly invertMapping: boolean;
-  private readonly contextResponseNode: Node;
-
-  // Track previous values for comparison
-  private previousEN: number;
-  private previousDipole: Vector2;
-  private isDragging: boolean;
 
   /**
    * @param atom - the atom whose electronegativity changes trigger context responses
    * @param molecule - the molecule containing the atom
+   * @param bonds - bonds directly affected by this atom's electronegativity changes
    * @param viewProperties - visibility properties that determine whether to emit context responses
-   * @param contextResponseNode - the node to use for emitting context responses
-   * @param invertMapping - whether to invert some context responses based on which atom is being changed
+   * @param invertMapping - whether to invert some context responses based on the changed atom
    */
   public constructor(
     atom: Atom,
     molecule: Molecule,
+    bonds: Bond[],
     viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties,
-    contextResponseNode: Node,
     invertMapping = false
   ) {
+    super();
+
     this.atom = atom;
     this.molecule = molecule;
+    this.bonds = bonds;
     this.viewProperties = viewProperties;
     this.invertMapping = invertMapping;
-    this.contextResponseNode = contextResponseNode;
 
-    this.previousEN = atom.electronegativityProperty.value;
-    this.previousDipole = molecule.dipoleProperty.value;
-    this.isDragging = false;
-
-    // Track when dragging starts to capture the "before" state
-    molecule.isDraggingProperty.link( isDragging => {
-      if ( isDragging ) {
-        // Dragging just started - capture current state as "previous"
-        this.isDragging = true;
-        this.previousEN = atom.previousElectronegativityProperty.value;
-        this.previousDipole = molecule.dipoleProperty.value;
-      }
-      else if ( this.isDragging ) {
-        // Dragging just ended - emit context responses
-        this.isDragging = false;
-        this.emitContextResponse();
-      }
+    atom.previousElectronegativityProperty.link( () => {
+      this.emitContextResponse();
     } );
   }
 
@@ -82,16 +62,16 @@ export default class MoleculeContextResponses {
   private emitContextResponse(): void {
 
     // clear the queue of utterances
-    this.contextResponseNode.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
+    this.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
 
     // Mini-utility function for emitting context responses without repeating the verbosity
     const contextResponse = ( message: string ) => {
-      this.contextResponseNode.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
+      this.addAccessibleContextResponse( message, { alertBehavior: 'queue' } );
     };
 
     // This is how much the atom's EN is changing because of the slider, not to be confused with deltaEN
     const currentEN = this.atom.electronegativityProperty.value;
-    const changeInEN = currentEN - this.previousEN;
+    const changeInEN = currentEN - this.atom.previousElectronegativityProperty.value;
 
     if ( Math.abs( changeInEN ) === 0 ) { return; } // no change, no context response
 
@@ -109,8 +89,9 @@ export default class MoleculeContextResponses {
     const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0;
 
     // Dipole
+    const previousDipole = this.molecule.previousDipoleProperty.value;
     const currentDipole = this.molecule.dipoleProperty.value;
-    const dipoleMagnitudeChange = currentDipole.magnitude - this.previousDipole.magnitude;
+    const dipoleMagnitudeChange = currentDipole.magnitude - previousDipole.magnitude;
     const didDipoleMagnitudeChange = Math.abs( dipoleMagnitudeChange ) > 0.01;
     const isDipoleZero = currentDipole.magnitude < 0.01;
 
@@ -230,4 +211,4 @@ export default class MoleculeContextResponses {
   }
 }
 
-moleculePolarity.register( 'MoleculeContextResponses', MoleculeContextResponses );
+moleculePolarity.register( 'MoleculeContextResponsesNode', MoleculeContextResponsesNode );

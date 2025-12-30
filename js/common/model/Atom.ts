@@ -74,7 +74,9 @@ export default class Atom extends PhetioObject {
       phetioFeatured: true
     } );
 
-    this.previousElectronegativityProperty = new NumberProperty( options.electronegativity, {
+    // initialized to PI so that it's different from any valid EN value within the range
+    // Cannot be started to the current one because it wouldn't trigger context responses on first change
+    this.previousElectronegativityProperty = new NumberProperty( Math.PI, {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tandem: options.tandem.createTandem( 'previousElectronegativityProperty' ),
       phetioFeatured: false

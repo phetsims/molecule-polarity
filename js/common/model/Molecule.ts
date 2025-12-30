@@ -37,6 +37,7 @@ export default abstract class Molecule extends PhetioObject {
   public readonly angleProperty: NumberProperty;
   public readonly isDraggingProperty: Property<boolean>; // true when the user is dragging the molecule
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>; // the molecular dipole, sum of the bond dipoles
+  public readonly previousDipoleProperty: Property<Vector2>; // the molecular dipole before the last EN change
   public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
   public abstract readonly deltaENProperty: TReadOnlyProperty<number>;
   public readonly isRotatingDueToEFieldProperty: Property<boolean>;
@@ -116,6 +117,8 @@ export default abstract class Molecule extends PhetioObject {
       phetioDocumentation: 'The molecular dipole, vector sum of the bond dipoles. ' +
                            '+x is to the right, +y is DOWN, and positive rotation is CLOCKWISE.'
     } );
+
+    this.previousDipoleProperty = new Property<Vector2>( Vector2.ZERO );
 
     this.dipoleMagnitudeProperty = new DerivedProperty( [ this.dipoleProperty ], dipole => dipole.magnitude, {
       tandem: options.tandem.createTandem( 'dipoleMagnitudeProperty' ),

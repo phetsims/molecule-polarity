@@ -10,7 +10,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
-import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -21,6 +21,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
+import Molecule from '../model/Molecule.js';
 import MPConstants from '../MPConstants.js';
 import DescriptionMaps from './DescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
@@ -35,8 +36,12 @@ export default class ElectronegativitySlider extends HSlider {
 
   public constructor(
     atom: Atom,
-    isDraggingProperty: Property<boolean>,
+    molecule: Molecule,
     providedOptions: ElectronegativitySliderOptions ) {
+
+    // Values to store state before the drag for context responses
+    let previousEN: number;
+    let previousDipole: Vector2;
 
     const options = optionize<ElectronegativitySliderOptions, SelfOptions, HSliderOptions>()( {
 
@@ -77,15 +82,19 @@ export default class ElectronegativitySlider extends HSlider {
     options.thumbNode = thumbNode;
 
     options.startDrag = () => {
-      isDraggingProperty.value = true;
-      // Store the current EN value before dragging starts
-      atom.previousElectronegativityProperty.value = atom.electronegativityProperty.value;
+      molecule.isDraggingProperty.value = true;
+      // Store the current EN value at the start of the drag
+      previousEN = atom.electronegativityProperty.value;
+      previousDipole = molecule.dipoleProperty.value;
     };
-
-    // snaps to the closest tick mark
     options.endDrag = () => {
+      // Setting the previous EN property at the END of the drag, to trigger context responses
+      atom.previousElectronegativityProperty.value = previousEN;
+      molecule.previousDipoleProperty.value = previousDipole;
+
+      // snaps to the closest tick mark
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
-      isDraggingProperty.value = false;
+      molecule.isDraggingProperty.value = false;
     };
 
     const range = atom.electronegativityProperty.range;
