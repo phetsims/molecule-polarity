@@ -698,10 +698,10 @@
           "value": "Bond dipole BC now points to Atom { $atom }"
         },
         "molecularDipoleContext": {
-          "value": "Molecular dipole arrow { $progress }"
+          "value": "Molecular dipole arrow { $progress }."
         },
         "molecularDipoleDirection": {
-          "value": "Points to { $position } o'clock."
+          "value": "{ a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleContext } Points to { $position } o'clock."
         },
         "partialChargeContext": {
           "value": "Partial charge is { $progress }"

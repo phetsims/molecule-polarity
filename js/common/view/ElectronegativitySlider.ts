@@ -10,6 +10,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -27,6 +28,7 @@ import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
 import DescriptionMaps from './DescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
+import { toClock } from './toClock.js';
 
 type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 
@@ -53,7 +55,8 @@ export default class ElectronegativitySlider extends HSlider {
     viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties,
     providedOptions: ElectronegativitySliderOptions ) {
 
-    let previousEN = atom.electronegativityProperty.value;
+    let previousEN: number;
+    let previousDipole: Vector2;
 
     const options = optionize<ElectronegativitySliderOptions, SelfOptions, HSliderOptions>()( {
 
@@ -97,13 +100,14 @@ export default class ElectronegativitySlider extends HSlider {
     options.startDrag = () => {
       molecule.isDraggingProperty.value = true;
       previousEN = atom.electronegativityProperty.value;
+      previousDipole = molecule.dipoleProperty.value;
     };
 
     // snaps to the closest tick mark
     options.endDrag = () => {
       molecule.isDraggingProperty.value = false;
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
-      this.emitContextResponse( molecule, atom, previousEN );
+      this.emitContextResponse( molecule, atom, previousEN, previousDipole );
     };
 
     const range = atom.electronegativityProperty.range;
@@ -135,7 +139,7 @@ export default class ElectronegativitySlider extends HSlider {
    * depending on various factors that change the visible sim.
    * This function calculates all those changes.
    */
-  private emitContextResponse( molecule: Molecule, atom: Atom, previousEN: number ): void {
+  private emitContextResponse( molecule: Molecule, atom: Atom, previousEN: number, previousDipole: Vector2 ): void {
 
     // clear the queue of utterances
     this.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
@@ -163,7 +167,12 @@ export default class ElectronegativitySlider extends HSlider {
     const invertedBondDeltaEN = this.invertMapping ? -bondDeltaEN : bondDeltaEN;
     const isBondDeltaENGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
     const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0;
-    const didDipoleMagnitudeChange = Math.abs( previousBondDeltaEN ) !== Math.abs( bondDeltaEN );
+
+    // Dipole
+    const currentDipole = molecule.dipoleProperty.value;
+    const dipoleMagnitudeChange = currentDipole.magnitude - previousDipole.magnitude;
+    const didDipoleMagnitudeChange = Math.abs( dipoleMagnitudeChange ) > 0.01;
+    const isDipoleZero = currentDipole.magnitude < 0.01;
 
     // Sim visibility properties that condidtion the context responses
     // In some cases we have to check for the Two Atom Molecule or the Three Atom One
@@ -173,6 +182,11 @@ export default class ElectronegativitySlider extends HSlider {
     }
     else {
       bondDipolesVisible = this.viewProperties.bondDipolesVisibleProperty.value;
+    }
+
+    let molecularDipoleVisible = false;
+    if ( this.viewProperties instanceof ThreeAtomsViewProperties ) {
+      molecularDipoleVisible = this.viewProperties.molecularDipoleVisibleProperty.value;
     }
 
     const partialChargesVisible = this.viewProperties.partialChargesVisibleProperty.value;
@@ -204,6 +218,25 @@ export default class ElectronegativitySlider extends HSlider {
     bondDipolesVisible && didBondChangeDirection && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
         atom: bondDeltaEN > 0 ? 'B' : 'A'
+      } )
+    );
+
+    // Molecular dipole null description: Molecular dipole zero.
+    molecularDipoleVisible && isDipoleZero && contextResponse(
+      MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContext.format( {
+        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
+          progress: 'zero'
+        } )
+      } )
+    );
+
+    // Molecular dipole description
+    molecularDipoleVisible && !isDipoleZero && contextResponse(
+      MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirection.format( {
+        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
+          progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
+        } ),
+        position: toClock( currentDipole.angle )
       } )
     );
 
@@ -245,7 +278,7 @@ export default class ElectronegativitySlider extends HSlider {
     );
 
     // If E Field enabled and the molecule is polar
-    eFieldEnabled && bondDeltaEN !== 0 && contextResponse(
+    eFieldEnabled && !isDipoleZero && contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
     );
 
