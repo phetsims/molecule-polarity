@@ -142,6 +142,8 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
     };
 
     let lastDirection: 'clockwise' | 'counterclockwise' | null = null;
+
+    // Utility function to emit accessible responses based on rotation direction and context.
     const emitRotationResponse = ( direction: 'clockwise' | 'counterclockwise' ) => {
       if ( molecule.isRotatingDueToEFieldProperty.value ) {
 
@@ -162,12 +164,14 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       lastDirection = direction;
     };
 
+    // Reset lastDirection when E-field rotation state changes.
     molecule.isRotatingDueToEFieldProperty.lazyLink( () => {
       lastDirection = null;
     } );
 
-    // Storing the dipole to track angle changes.
+    // Storing the dipole to track direction of angle changes.
     let lastDipole = molecule.dipoleProperty.value;
+
     molecule.angleProperty.lazyLink( () => {
       hideArrows();
 
@@ -175,6 +179,8 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
 
       // Using the cross product of the dipole to determine wether the dipole change due to the angle
       // is rotating the molecule clockwise or counterclockwise.
+      // We do not listen directly to the dipole because we don't want magnitude changes to trigger
+      // these accessible responses.
       if ( dipole.crossScalar( lastDipole ) < 0 ) {
         if ( lastDirection !== 'clockwise' ) {
           emitRotationResponse( 'clockwise' );
