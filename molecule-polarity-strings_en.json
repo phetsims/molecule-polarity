@@ -522,7 +522,7 @@
           }
         },
         "electricFieldContext": {
-          "value": "Rotating { $direction } Horizontal, Aligned with electric field."
+          "value": "Rotating { $direction }. Horizontal, Aligned with electric field."
         }
       }
     },
