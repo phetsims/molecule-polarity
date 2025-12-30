@@ -136,10 +136,8 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
 
     // When the user drags any atom or bond, hide the hint arrows.
     const hideArrows = () => {
-      if ( molecule.isDraggingProperty.value ) {
-        moleculeHasChanged = true;
-        updateHintArrows();
-      }
+      moleculeHasChanged = true;
+      updateHintArrows();
     };
     molecule.angleProperty.lazyLink( hideArrows );
 

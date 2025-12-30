@@ -219,10 +219,8 @@ export default class TriatomicMoleculeNode extends Node {
 
     // When the user drags any atom or bond, hide the hint arrows.
     const hideArrows = () => {
-      if ( molecule.isDraggingProperty.value ) {
-        moleculeHasChanged = true;
-        updateAllHintArrows();
-      }
+      moleculeHasChanged = true;
+      updateAllHintArrows();
     };
     molecule.angleProperty.lazyLink( hideArrows );
     molecule.bondAngleABProperty.lazyLink( hideArrows );
