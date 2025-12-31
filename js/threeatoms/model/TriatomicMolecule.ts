@@ -46,18 +46,18 @@ export default class TriatomicMolecule extends Molecule {
     const options = providedOptions;
 
     // atoms labeled A, B, C
-    const atomA = new Atom( MoleculePolarityStrings.atomAStringProperty, {
+    const atomA = new Atom( 'A', MoleculePolarityStrings.atomAStringProperty, {
       color: MPColors.ATOM_A,
       tandem: options.tandem.createTandem( 'atomA' )
     } );
 
-    const atomB = new Atom( MoleculePolarityStrings.atomBStringProperty, {
+    const atomB = new Atom( 'B', MoleculePolarityStrings.atomBStringProperty, {
       color: MPColors.ATOM_B,
       electronegativity: MPConstants.ELECTRONEGATIVITY_RANGE.min + ( MPConstants.ELECTRONEGATIVITY_RANGE.getLength() / 2 ),
       tandem: options.tandem.createTandem( 'atomB' )
     } );
 
-    const atomC = new Atom( MoleculePolarityStrings.atomCStringProperty, {
+    const atomC = new Atom( 'C', MoleculePolarityStrings.atomCStringProperty, {
       color: MPColors.ATOM_C,
       tandem: options.tandem.createTandem( 'atomC' )
     } );

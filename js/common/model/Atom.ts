@@ -29,6 +29,7 @@ type AtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class Atom extends PhetioObject {
 
+  public readonly label: string; // Used for accessibility, not translatable
   public readonly labelStringProperty: TReadOnlyProperty<string>;
   public readonly diameter: number;
   public readonly color: TColor;
@@ -40,7 +41,7 @@ export default class Atom extends PhetioObject {
   public readonly previousElectronegativityProperty: NumberProperty;
   public readonly partialChargeProperty: TProperty<number>;
 
-  public constructor( labelStringProperty: TReadOnlyProperty<string>, providedOptions: AtomOptions ) {
+  public constructor( label: string, labelStringProperty: TReadOnlyProperty<string>, providedOptions: AtomOptions ) {
 
     const options = optionize<AtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -57,6 +58,7 @@ export default class Atom extends PhetioObject {
 
     super( options );
 
+    this.label = label;
     this.labelStringProperty = labelStringProperty;
     this.diameter = options.diameter;
     this.color = options.color;

@@ -119,13 +119,13 @@ export default class ThreeAtomsScreenView extends ScreenView {
       false
     ) );
 
-    // Atom C has invertMapping: true
+    // Atom C
     this.addChild( new MoleculeContextResponsesNode(
       model.triatomicMolecule.atomC,
       model.triatomicMolecule,
       [ model.triatomicMolecule.bondBC ],
       viewProperties,
-      true
+      false
     ) );
 
     const controlPanel = new ThreeAtomsControlPanel( viewProperties, model.eFieldEnabledProperty, {
