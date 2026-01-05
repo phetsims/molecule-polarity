@@ -33,7 +33,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
     }, providedOptions );
 
     // Molecule is polar if its dipole magnitude is not zero
-    const isMoleculePolarProperty = triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude !== 0 );
+    const isMoleculePolarProperty = triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude > 0.05 );
 
     const absoluteBondAngleABProperty = new DerivedProperty( [
       triatomicMolecule.bondAngleABProperty,
@@ -112,7 +112,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         visibleProperty: DerivedProperty.and( [
           isMoleculePolarProperty,
           viewProperties.molecularDipoleVisibleProperty,
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.dipoleMagnitudeProperty, 4 )
+          new DerivedProperty( [ triatomicMolecule.dipoleMagnitudeProperty ], magnitude => magnitude > 3.98 )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty
       },

@@ -125,9 +125,9 @@ export default class DescriptionMaps {
 
   private static deltaENtoElectronDensityShift( deltaEN: number ): ElectronDensityShift {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN < 0.8 ? 'shiftedSlightly' :
-           deltaEN < 1.2 ? 'shifted' :
-           deltaEN < 1.6 ? 'shiftedMuchMore' :
+    return deltaEN <= 0.8 ? 'shiftedSlightly' :
+           deltaEN <= 1.2 ? 'shifted' :
+           deltaEN <= 1.6 ? 'shiftedMuchMore' :
            'shiftedAlmostCompletely';
   }
 
