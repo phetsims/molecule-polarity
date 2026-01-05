@@ -3,8 +3,8 @@ screen.twoAtoms: Two Atoms
 screen.threeAtoms: Three Atoms
 screen.realMolecules: Real Molecules
 electricField: Electric Field
-'on': 'on'
-'off': 'off'
+on: 'on'
+off: 'off'
 bondCharacter: Bond Character
 partialCharges: Partial Charges
 bondDipole: Bond Dipole

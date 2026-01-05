@@ -7,20 +7,15 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
-import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
-import ABSwitch from '../../../../sun/js/ABSwitch.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import ToggleSwitch from '../../../../sun/js/ToggleSwitch.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
-
-// constants
-const SWITCH_LABEL_OPTIONS = combineOptions<TextOptions>( {}, MPConstants.CONTROL_TEXT_OPTIONS, {
-  maxWidth: 80  // i18n, set empirically
-} );
 
 type SelfOptions = EmptySelfOptions;
 
@@ -45,21 +40,12 @@ export default class EFieldControl extends VBox {
     const titleText = new Text( MoleculePolarityStrings.electricFieldStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
     // on/off switch
-    const onOffSwitch = new ABSwitch( eFieldEnabledProperty,
-      false, new Text( MoleculePolarityStrings.offStringProperty, SWITCH_LABEL_OPTIONS ),
-      true, new Text( MoleculePolarityStrings.onStringProperty, SWITCH_LABEL_OPTIONS ), {
-        spacing: 12,
-        toggleSwitchOptions: {
-          accessibleHeading: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
-          accessibleName: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
-          accessibleHelpText: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleHelpTextStringProperty,
-          accessibleRoleConfiguration: 'switch',
-          trackFillLeft: 'rgb( 180, 180, 180 )',
-          trackFillRight: 'rgb( 0, 180, 0 )',
-          visiblePropertyOptions: {
-            phetioFeatured: false
-          }
-        },
+    const onOffSwitch = new ToggleSwitch( eFieldEnabledProperty,
+      false, true, {
+        accessibleName: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleNameStringProperty,
+        accessibleHelpText: MoleculePolarityFluent.a11y.common.electricFieldToggle.accessibleHelpTextStringProperty,
+        trackFillLeft: 'rgb( 180, 180, 180 )',
+        trackFillRight: 'rgb( 0, 180, 0 )',
         tandem: options.tandem.createTandem( 'onOffSwitch' ),
         visiblePropertyOptions: {
           phetioFeatured: false
