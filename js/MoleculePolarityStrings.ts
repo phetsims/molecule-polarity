@@ -235,10 +235,10 @@ type StringsType = {
         'molecularDipoleDescriptionStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
         'molecularDipoleTwiceStringProperty': LocalizedStringProperty;
+        'bondDipoleABStringProperty': LocalizedStringProperty;
         'bondDipoleABDescriptionStringProperty': LocalizedStringProperty;
-        'bondDipoleABDirectionStringProperty': LocalizedStringProperty;
+        'bondDipoleBCStringProperty': LocalizedStringProperty;
         'bondDipoleBCDescriptionStringProperty': LocalizedStringProperty;
-        'bondDipoleBCDirectionStringProperty': LocalizedStringProperty;
         'partialChargesDescriptionStringProperty': LocalizedStringProperty;
       };
       'moveAtomASlider': {

@@ -5,13 +5,13 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
-import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
-import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
+import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -200,10 +200,10 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_electronegativityValues', 
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDescription', 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDirection', 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleTwice', 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty' );
+addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleAB', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDescription', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescriptionStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDirection', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDirectionStringProperty' );
+addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBC', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDescription', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescriptionStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDirection', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDirectionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_partialChargesDescription', 'a11y.threeAtomsScreen.moleculeABC.partialChargesDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_accessibleName', 'a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_accessibleHelpText', 'a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty' );
@@ -536,10 +536,10 @@ const MoleculePolarityFluent = {
         molecularDipoleDescription: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescriptionStringProperty' ), [{"name":"magnitude"}] ),
         molecularDipoleDirection: new FluentPattern<{ direction: FluentVariable, magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirectionStringProperty' ), [{"name":"direction"},{"name":"magnitude"}] ),
         molecularDipoleTwiceStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleTwice', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty' ) ),
-        bondDipoleABDescription: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescriptionStringProperty' ), [{"name":"magnitude"}] ),
-        bondDipoleABDirection: new FluentPattern<{ atom: FluentVariable, direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDirectionStringProperty' ), [{"name":"atom"},{"name":"direction"}] ),
-        bondDipoleBCDescription: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescriptionStringProperty' ), [{"name":"magnitude"}] ),
-        bondDipoleBCDirection: new FluentPattern<{ atom: FluentVariable, direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDirectionStringProperty' ), [{"name":"atom"},{"name":"direction"}] ),
+        bondDipoleAB: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleAB', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABStringProperty' ), [{"name":"magnitude"}] ),
+        bondDipoleABDescription: new FluentPattern<{ atom: FluentVariable, direction: FluentVariable, magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescriptionStringProperty' ), [{"name":"atom"},{"name":"direction"},{"name":"magnitude"}] ),
+        bondDipoleBC: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBC', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCStringProperty' ), [{"name":"magnitude"}] ),
+        bondDipoleBCDescription: new FluentPattern<{ atom: FluentVariable, direction: FluentVariable, magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescriptionStringProperty' ), [{"name":"atom"},{"name":"direction"},{"name":"magnitude"}] ),
         partialChargesDescription: new FluentPattern<{ atom: FluentVariable, magnitude: FluentVariable, sign: 'positive' | 'negative' | number | 'zero' | TReadOnlyProperty<'positive' | 'negative' | number | 'zero'> }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_partialChargesDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.partialChargesDescriptionStringProperty' ), [{"name":"atom"},{"name":"magnitude"},{"name":"sign","variants":["positive","negative",{"type":"number","value":"zero"}]}] )
       },
       _comment_3: new FluentComment( {"comment":"Move Atom A Slider","associatedKey":"moveAtomASlider"} ),
