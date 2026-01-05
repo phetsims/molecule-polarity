@@ -75,7 +75,9 @@ export default class TriatomicMoleculeNode extends Node {
         phetioInputEnabledPropertyInstrumented: true
       },
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty,
+      keyboardStep: Math.PI / 4,
+      shiftKeyboardStep: Math.PI / 4
     } );
     const atomCNode = new AccessibleAtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
       atomNodeOptions: {

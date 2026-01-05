@@ -38,7 +38,7 @@ export default class AccessibleAtomNode extends MPAccessibleSlider {
         cursor: 'pointer',
         phetioInputEnabledPropertyInstrumented: true,
         isDisposable: false,
-        keyboardStep: Math.PI / 3,
+        keyboardStep: Math.PI / 2,
         shiftKeyboardStep: Math.PI / 6
       }, providedOptions );
 
