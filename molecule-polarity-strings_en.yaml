@@ -424,7 +424,7 @@ a11y:
     moleculeABC:
       heading: 'Molecule ABC'
       currentState: 'Currently, the molecule is { $polarity }.'
-      orientationDescription: 'Molecule is { $shape } with Atom A at { $atomAPosition } o''clock, Atom B at center, and Atom C at { $atomCPosition } o''clock.'
+      orientationDescription: 'Molecule is { $shape } with Atom A { $atomAPosition } o''clock, Atom B at center, and Atom C { $atomCPosition } o''clock.'
       electricFieldAligned: 'Molecule aligned with electric field.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
       molecularDipoleDescription: 'Molecule has { $magnitude } molecular dipole arrow.'
@@ -436,9 +436,9 @@ a11y:
       bondDipoleBCDirection: 'BC bond dipole points to Atom { $atom }, towards { $direction } o''clock.'
       partialChargesDescription:
         select_sign:
-          positive: 'Atom { $atom } has { $magnitude } positive partial charge'
-          negative: 'Atom { $atom } has { $magnitude } negative partial charge'
-          zero: 'Atom { $atom } has { $magnitude } partial charge'
+          positive: 'Atom { $atom } has { $magnitude } positive partial charge.'
+          negative: 'Atom { $atom } has { $magnitude } negative partial charge.'
+          zero: 'Atom { $atom } has { $magnitude } partial charge.'
 
     
     # Move Atom A Slider
