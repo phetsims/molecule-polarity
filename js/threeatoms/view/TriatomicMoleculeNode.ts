@@ -66,7 +66,7 @@ export default class TriatomicMoleculeNode extends Node {
           hour: toClock( value + molecule.angleProperty.value ).toString()
         } );
       },
-      accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
+      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
     } );
     const atomBNode = new AccessibleAtomNode( molecule.atomB, molecule.angleProperty, {
@@ -74,7 +74,7 @@ export default class TriatomicMoleculeNode extends Node {
         tandem: options.tandem.createTandem( 'atomBNode' ),
         phetioInputEnabledPropertyInstrumented: true
       },
-      accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
+      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
     } );
     const atomCNode = new AccessibleAtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
@@ -91,7 +91,7 @@ export default class TriatomicMoleculeNode extends Node {
           hour: toClock( value + molecule.angleProperty.value ).toString()
         } );
       },
-      accessibleHeading: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
+      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty
     } );
 
