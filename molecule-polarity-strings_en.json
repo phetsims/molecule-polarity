@@ -549,7 +549,7 @@
           "value": "Currently, the molecule is { $polarity }."
         },
         "orientationDescription": {
-          "value": "Molecule is { $shape } with Atom A at { $atomAPosition } o'clock, Atom B at center, and Atom C at { $atomCPosition } o'clock."
+          "value": "Molecule is { $shape } with Atom A { $atomAPosition } o'clock, Atom B at center, and Atom C { $atomCPosition } o'clock."
         },
         "electricFieldAligned": {
           "value": "Molecule aligned with electric field."
@@ -579,7 +579,7 @@
           "value": "BC bond dipole points to Atom { $atom }, towards { $direction } o'clock."
         },
         "partialChargesDescription": {
-          "value": "{ $sign ->\n  [positive] Atom { $atom } has { $magnitude } positive partial charge\n  [negative] Atom { $atom } has { $magnitude } negative partial charge\n  *[zero] Atom { $atom } has { $magnitude } partial charge\n}"
+          "value": "{ $sign ->\n  [positive] Atom { $atom } has { $magnitude } positive partial charge.\n  [negative] Atom { $atom } has { $magnitude } negative partial charge.\n  *[zero] Atom { $atom } has { $magnitude } partial charge.\n}"
         }
       },
       "moveAtomASlider": {
