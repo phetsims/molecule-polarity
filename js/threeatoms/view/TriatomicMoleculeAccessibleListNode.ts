@@ -109,7 +109,18 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         visibleProperty: DerivedProperty.and( [
           isMoleculePolarProperty,
           viewProperties.molecularDipoleVisibleProperty,
-          new DerivedProperty( [ triatomicMolecule.dipoleMagnitudeProperty ], magnitude => magnitude > 3.98 )
+          new DerivedProperty(
+            [
+              triatomicMolecule.dipoleMagnitudeProperty,
+              triatomicMolecule.bondAB.deltaENProperty,
+              triatomicMolecule.bondBC.deltaENProperty
+            ], ( dipole, deltaEN_AB, deltaEN_BC ) => {
+
+              // When the bond dipoles are the same size, and the molecular dipole is twice their size
+              return Math.abs( Math.abs( deltaEN_AB ) - Math.abs( deltaEN_BC ) ) < 0.1 &&
+                     dipole > 1.98 * Math.abs( deltaEN_AB ) &&
+                     dipole > 1.98 * Math.abs( deltaEN_BC );
+            } )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty
       },
