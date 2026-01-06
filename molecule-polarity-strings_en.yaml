@@ -73,9 +73,13 @@ a11y:
       electricFieldContext: 'Molecule aligned with electric field.'
     bondDipoleCheckbox:
       accessibleName: 'Bond Dipole'
+      accessibleNamePlural: 'Bond Dipoles'
       accessibleHelpText: 'Explore with or without bond dipole shown.'
+      accessibleHelpTextPlural: 'Explore with or without bond dipoles shown.'
       checked: 'Bond dipole shown.'
       unchecked: 'Bond dipole hidden.'
+      checkedPlural: 'Bond dipoles shown.'
+      uncheckedPlural: 'Bond dipoles hidden.'
     partialChargesCheckbox:
       accessibleName: 'Partial Charges'
       accessibleHelpText: 'Explore with or without partial charges shown.'

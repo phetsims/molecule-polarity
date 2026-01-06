@@ -214,14 +214,26 @@
         "accessibleName": {
           "value": "Bond Dipole"
         },
+        "accessibleNamePlural": {
+          "value": "Bond Dipoles"
+        },
         "accessibleHelpText": {
           "value": "Explore with or without bond dipole shown."
+        },
+        "accessibleHelpTextPlural": {
+          "value": "Explore with or without bond dipoles shown."
         },
         "checked": {
           "value": "Bond dipole shown."
         },
         "unchecked": {
           "value": "Bond dipole hidden."
+        },
+        "checkedPlural": {
+          "value": "Bond dipoles shown."
+        },
+        "uncheckedPlural": {
+          "value": "Bond dipoles hidden."
         }
       },
       "partialChargesCheckbox": {

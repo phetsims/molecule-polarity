@@ -5,13 +5,13 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
-import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import FluentComment from '../../chipper/js/browser/FluentComment.js';
-import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
+import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
+import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import moleculePolarity from './moleculePolarity.js';
 import MoleculePolarityStrings from './MoleculePolarityStrings.js';
 
@@ -94,9 +94,13 @@ addToMapIfDefined( 'a11y_common_electronegativitySlider_electrostaticContext', '
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electronDensityContext', 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electricFieldContext', 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleName', 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleNamePlural', 'a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleHelpText', 'a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleHelpTextPlural', 'a11y.common.bondDipoleCheckbox.accessibleHelpTextPluralStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_checked', 'a11y.common.bondDipoleCheckbox.checkedStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_unchecked', 'a11y.common.bondDipoleCheckbox.uncheckedStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_checkedPlural', 'a11y.common.bondDipoleCheckbox.checkedPluralStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_uncheckedPlural', 'a11y.common.bondDipoleCheckbox.uncheckedPluralStringProperty' );
 addToMapIfDefined( 'a11y_common_partialChargesCheckbox_accessibleName', 'a11y.common.partialChargesCheckbox.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_partialChargesCheckbox_accessibleHelpText', 'a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_common_partialChargesCheckbox_checked', 'a11y.common.partialChargesCheckbox.checkedStringProperty' );
@@ -348,9 +352,13 @@ const MoleculePolarityFluent = {
       },
       bondDipoleCheckbox: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' ) ),
+        accessibleNamePluralStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleNamePlural', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty' ) ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty' ) ),
+        accessibleHelpTextPluralStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleHelpTextPlural', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleHelpTextPluralStringProperty' ) ),
         checkedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_checked', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.checkedStringProperty' ) ),
-        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.uncheckedStringProperty' ) )
+        uncheckedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_unchecked', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.uncheckedStringProperty' ) ),
+        checkedPluralStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_checkedPlural', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.checkedPluralStringProperty' ) ),
+        uncheckedPluralStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_uncheckedPlural', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.uncheckedPluralStringProperty' ) )
       },
       partialChargesCheckbox: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_partialChargesCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.partialChargesCheckbox.accessibleNameStringProperty' ) ),

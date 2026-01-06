@@ -95,9 +95,13 @@ type StringsType = {
       };
       'bondDipoleCheckbox': {
         'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleNamePluralStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextPluralStringProperty': LocalizedStringProperty;
         'checkedStringProperty': LocalizedStringProperty;
         'uncheckedStringProperty': LocalizedStringProperty;
+        'checkedPluralStringProperty': LocalizedStringProperty;
+        'uncheckedPluralStringProperty': LocalizedStringProperty;
       };
       'partialChargesCheckbox': {
         'accessibleNameStringProperty': LocalizedStringProperty;

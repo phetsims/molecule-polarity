@@ -37,8 +37,12 @@ export default class BondDipolesCheckbox extends MPCheckbox {
       // MPCheckboxOptions
       isDisposable: false,
 
-      accessibleName: MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty
+      accessibleName: providedOptions.singular ?
+                      MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleNameStringProperty :
+                      MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty,
+      accessibleHelpText: providedOptions.singular ?
+                          MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty :
+                          MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextPluralStringProperty
     }, providedOptions );
 
     const stringProperty = options.singular ?
@@ -58,8 +62,12 @@ export default class BondDipolesCheckbox extends MPCheckbox {
 
     bondDipolesVisibleProperty.lazyLink( checked => {
       const objectResponse = checked ?
-                             MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedStringProperty.value :
-                              MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedStringProperty.value;
+                             options.singular ?
+                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedStringProperty.value :
+                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedPluralStringProperty.value :
+                             options.singular ?
+                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedStringProperty.value :
+                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedPluralStringProperty.value;
       this.addAccessibleObjectResponse( objectResponse );
     } );
   }
