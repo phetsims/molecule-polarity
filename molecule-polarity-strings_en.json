@@ -549,7 +549,7 @@
           "value": "Currently, the molecule is { $polarity }."
         },
         "orientationDescription": {
-          "value": "Molecule is { $shape } with Atom A { $atomAPosition } o'clock, Atom B at center, and Atom C { $atomCPosition } o'clock."
+          "value": "Molecule is { $shape } with Atom A at { $atomAPosition } o'clock, Atom B at center, and Atom C at { $atomCPosition } o'clock."
         },
         "electricFieldAligned": {
           "value": "Molecule aligned with electric field."

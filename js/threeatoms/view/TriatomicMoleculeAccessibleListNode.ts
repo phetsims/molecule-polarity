@@ -51,12 +51,8 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       {
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.orientationDescription.createProperty( {
           shape: DescriptionMaps.createShapeStringProperty( triatomicMolecule.bondAngleABCProperty ),
-          atomAPosition: DescriptionMaps.createOrientationStringProperty(
-            absoluteBondAngleABProperty
-          ),
-          atomCPosition: DescriptionMaps.createOrientationStringProperty(
-            absoluteBondAngleBCProperty
-          )
+          atomAPosition: absoluteBondAngleABProperty.derived( angle => toClock( angle ) ),
+          atomCPosition: absoluteBondAngleBCProperty.derived( angle => toClock( angle ) )
         } )
       },
 
