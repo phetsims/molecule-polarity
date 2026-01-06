@@ -20,7 +20,8 @@ const OUT_DIR = './assets/generated-data/';
 const GRID_SPACING = 0.1;
 const PROBE_RADIUS = 1.4;
 const SES_DENSITY = 6.0;
-const MSMS_PATH = `~/Downloads/msms/msms_x86_64Darwin_2.6.1/msms.x86_64Darwin.2.6.1`;
+const MSMS_PATH = '~/Downloads/msms/msms_x86_64Darwin_2.6.1/msms.x86_64Darwin.2.6.1';
+const ORCA_PATH = '/Users/jon/Downloads/orca/orca_6_1_1_macosx_arm64_openmpi411/orca';
 
 const MOLECULE_NAMES = [
   'BF3',
@@ -652,6 +653,85 @@ function invert3x3(m: number[][]): number[][] {
   ];
 }
 
+export interface OrcaCharges {
+  mulliken: number[];
+  loewdin: number[];
+  hirshfeld: number[];
+  mbis: number[];
+  chelpg: number[];
+}
+
+export function parseOrcaCharges( orcaString: string ): OrcaCharges {
+
+  const lines = orcaString.split( /\r?\n/ );
+
+  function parseSimpleChargeBlock(
+    headerRegex: RegExp,
+    lineRegex: RegExp,
+    chargeGroupIndex: number
+  ): number[] {
+
+    const charges: number[] = [];
+    let inBlock = false;
+
+    for ( const line of lines ) {
+      if ( headerRegex.test( line ) ) {
+        inBlock = true;
+        continue;
+      }
+
+      if ( inBlock ) {
+        const m = line.match( lineRegex );
+        if ( !m ) {
+          // first non-matching line ends the block
+          if ( charges.length > 0 ) break;
+          continue;
+        }
+        charges.push( parseFloat( m[ chargeGroupIndex ] ) );
+      }
+    }
+
+    return charges;
+  }
+
+  // Mulliken
+  const mulliken = parseSimpleChargeBlock(
+    /MULLIKEN ATOMIC CHARGES/,
+    /^\s*\d+\s+\w+\s*:\s*([+-]?\d+\.\d+)/,
+    1
+  );
+
+  // Löwdin
+  const loewdin = parseSimpleChargeBlock(
+    /LOEWDIN ATOMIC CHARGES/,
+    /^\s*\d+\s+\w+\s*:\s*([+-]?\d+\.\d+)/,
+    1
+  );
+
+  // Hirshfeld (charge is 2nd numeric column)
+  const hirshfeld = parseSimpleChargeBlock(
+    /HIRSHFELD ANALYSIS/,
+    /^\s*\d+\s+\w+\s+([+-]?\d+\.\d+)/,
+    1
+  );
+
+  // MBIS (charge is 2nd numeric column)
+  const mbis = parseSimpleChargeBlock(
+    /MBIS ANALYSIS/,
+    /^\s*\d+\s+\w+\s+([+-]?\d+\.\d+)/,
+    1
+  );
+
+  // CHELPG
+  const chelpg = parseSimpleChargeBlock(
+    /CHELPG Charges/,
+    /^\s*\d+\s+\w+\s*:\s*([+-]?\d+\.\d+)/,
+    1
+  );
+
+  return { mulliken, loewdin, hirshfeld, mbis, chelpg };
+}
+
 ( async () => {
   const allData: Record<string, unknown> = {};
 
@@ -755,6 +835,32 @@ geom.save_xyz_file("reoriented.xyz", 12)
       }
     } );
 
+    // ORCA input file
+    fs.writeFileSync( path.join( TEMP_DIR, 'mol.inp' ), `! r2SCAN-3c TightSCF defgrid3 HIRSHFELD MBIS CHELPG(LARGE)
+
+%output
+  Print[ P_Hirshfeld ] 1   # Hirshfeld section on
+  Print[ P_MBIS ]      1   # MBIS section on
+end
+
+%method
+  MBIS_LARGEPRINT true
+end
+
+%chelpg
+  DIPOLE true
+  GRID   0.3
+  RMAX   2.8
+end
+
+* xyz 0 1
+${xyz.split( os.EOL ).slice( 2 ).join( os.EOL ).trim()}
+*` );
+
+    const orcaString = await execute( ORCA_PATH, [ 'mol.inp' ], TEMP_DIR );
+
+    const orcaCharges = parseOrcaCharges( orcaString );
+
     const psi4Out = fs.readFileSync( path.join( TEMP_DIR, `psi4-output` ), 'utf8' );
 
     const dipoleObj = computeDipolesFromPsi4( psi4Out, xyz, sdf );
@@ -829,7 +935,9 @@ geom.save_xyz_file("reoriented.xyz", 12)
       vertexESPs: vertexESPs,
 
       // In e/a0^3
-      vertexDTs: vertexDTs
+      vertexDTs: vertexDTs,
+
+      ...orcaCharges
     };
 
     fs.writeFileSync( path.join( OUT_DIR, `${moleculeName}.json` ), JSON.stringify( moleculeData, null, 2 ) );

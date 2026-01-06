@@ -82,6 +82,11 @@ export default class BondDipoleView extends THREE.Object3D {
     const sideOffsetScale = ( this.bond.bondType === 3 ? 1.3 : ( this.bond.bondType === 2 ? 1.1 : 0.9 ) );
     const dir = this.bond.getPositiveToNegativeUnit().timesScalar( orientationSign );
 
+    const electronegativityDir = this.bond.atomB.position.minus( this.bond.atomA.position ).timesScalar( this.bond.atomB.element.electronegativity! - this.bond.atomA.element.electronegativity! );
+    if ( electronegativityDir.dot( dir ) < 0 ) {
+      console.log( `${this.molecule.rawSymbol} ${this.bond.atomA.element.symbol}-${this.bond.atomB.element.symbol} reversed` );
+    }
+
     const tail = center
       .plus( chosen.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
       .plus( dir.timesScalar( -drawLength / 2 ) );
