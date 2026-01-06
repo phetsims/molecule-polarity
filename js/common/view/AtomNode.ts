@@ -10,7 +10,7 @@
  * @author Agustín Vallejo
  */
 
-import TProperty from '../../../../axon/js/TProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -31,7 +31,7 @@ export type AtomNodeOptions = SelfOptions &
 
 export default class AtomNode extends MPAccessibleSlider {
 
-  public constructor( atom: Atom, angleProperty: TProperty<number>, providedOptions: AtomNodeOptions ) {
+  public constructor( atom: Atom, angleProperty: NumberProperty, providedOptions: AtomNodeOptions ) {
 
     const options = optionize<AtomNodeOptions, SelfOptions, MPAccessibleSliderOptions>()(
       {

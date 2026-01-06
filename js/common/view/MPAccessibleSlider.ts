@@ -5,9 +5,7 @@
  * @author Agustín Vallejo
  */
 
-import Property from '../../../../axon/js/Property.js';
-import TProperty from '../../../../axon/js/TProperty.js';
-import Range from '../../../../dot/js/Range.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -24,10 +22,10 @@ type ParentOptions = NodeOptions & AccessibleSliderOptions;
 export type MPAccessibleSliderOptions = SelfOptions & StrictOmit<ParentOptions, 'interactiveHighlightEnabled' | 'enabledRangeProperty' | 'valueProperty' | 'startDrag' | 'endDrag'>;
 
 export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
-  public constructor( valueProperty: TProperty<number>, providedOptions: MPAccessibleSliderOptions ) {
+  public constructor( valueProperty: NumberProperty, providedOptions: MPAccessibleSliderOptions ) {
     const options = optionize<SelfOptions, EmptySelfOptions, ParentOptions>()( {
       // AccessibleSliderOptions
-      enabledRangeProperty: new Property( new Range( -Math.PI, Math.PI ) ),
+      enabledRangeProperty: valueProperty.rangeProperty,
       valueProperty: valueProperty,
       keyboardStep: Math.PI / 8,
       shiftKeyboardStep: Math.PI / 8,
