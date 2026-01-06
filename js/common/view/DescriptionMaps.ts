@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2025-2026, University of Colorado Boulder
 /**
  * Static function collection to map continuous numerical values such as deltaEN or angle into discrete descriptions.
  *
