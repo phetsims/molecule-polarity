@@ -3,39 +3,50 @@
 /**
  * AtomNode is the visual representation of an atom.
  * It controls its own position, so clients should not attempt to position it.
+ * It extends MPAccessibleSlider so that the atom can be moved via keyboard input
+ * and show as a slider in the PDOM.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Agustín Vallejo
  */
 
+import TProperty from '../../../../axon/js/TProperty.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Atom from '../model/Atom.js';
+import MPAccessibleSlider, { MPAccessibleSliderOptions } from './MPAccessibleSlider.js';
 
 type SelfOptions = EmptySelfOptions;
 
 export type AtomNodeOptions = SelfOptions &
-  PickRequired<NodeOptions, 'tandem'> &
-  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented' | 'phetioType' | 'phetioState' | 'focusable'>;
+  PickRequired<MPAccessibleSliderOptions, 'tandem'> &
+  MPAccessibleSliderOptions;
 
-export default class AtomNode extends Node {
+export default class AtomNode extends MPAccessibleSlider {
 
-  public constructor( atom: Atom, providedOptions: AtomNodeOptions ) {
+  public constructor( atom: Atom, angleProperty: TProperty<number>, providedOptions: AtomNodeOptions ) {
 
-    const options = optionize<AtomNodeOptions, SelfOptions, NodeOptions>()(
+    const options = optionize<AtomNodeOptions, SelfOptions, MPAccessibleSliderOptions>()(
       {
         // NodeOptions
         visiblePropertyOptions: { phetioReadOnly: true },
         isDisposable: false,
         accessibleName: MoleculePolarityFluent.a11y.common.atom.accessibleName.createProperty( {
           name: atom.labelStringProperty
-        } )
+        } ),
+
+        // MPAccessibleSliderOptions
+        cursor: 'pointer',
+        phetioInputEnabledPropertyInstrumented: true,
+        keyboardStep: Math.PI / 2,
+        shiftKeyboardStep: Math.PI / 6
       }, providedOptions );
 
     // atom
@@ -52,7 +63,7 @@ export default class AtomNode extends Node {
 
     options.children = [ sphereNode, labelText ];
 
-    super( options );
+    super( angleProperty, options );
 
     // sync position with model
     atom.positionProperty.linkAttribute( this, 'translation' );
@@ -61,6 +72,11 @@ export default class AtomNode extends Node {
     labelText.boundsProperty.link( () => {
       labelText.center = sphereNode.center;
     } );
+
+    this.focusHighlight = new Shape().circle(
+      Vector2.ZERO,
+      atom.diameter * 0.6
+    );
   }
 }
 

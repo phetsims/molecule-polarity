@@ -52,11 +52,11 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       }, providedOptions );
 
     // atoms
-    const atomANode = new AtomNode( molecule.atomA, {
+    const atomANode = new AtomNode( molecule.atomA, molecule.angleProperty, {
       tandem: options.tandem.createTandem( 'atomANode' ),
       focusable: false
     } );
-    const atomBNode = new AtomNode( molecule.atomB, {
+    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, {
       tandem: options.tandem.createTandem( 'atomBNode' ),
       focusable: false
     } );

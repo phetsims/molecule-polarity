@@ -15,7 +15,7 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import IndexedNodeIO from '../../../../scenery/js/nodes/IndexedNodeIO.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
-import AccessibleAtomNode from '../../common/view/AccessibleAtomNode.js';
+import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
@@ -52,15 +52,13 @@ export default class TriatomicMoleculeNode extends Node {
     }, providedOptions );
 
     // atoms
-    const atomANode = new AccessibleAtomNode( molecule.atomA, molecule.bondAngleABProperty, {
-      atomNodeOptions: {
-        tandem: options.tandem.createTandem( 'atomANode' ),
-        phetioInputEnabledPropertyInstrumented: true,
+    const atomANode = new AtomNode( molecule.atomA, molecule.bondAngleABProperty, {
+      tandem: options.tandem.createTandem( 'atomANode' ),
+      phetioInputEnabledPropertyInstrumented: true,
 
-        // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
-        phetioType: IndexedNodeIO,
-        phetioState: true
-      },
+      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+      phetioType: IndexedNodeIO,
+      phetioState: true,
       createAriaValueText: ( value: number ) => {
         return MoleculePolarityFluent.a11y.oClock.format( {
           hour: toClock( value + molecule.angleProperty.value ).toString()
@@ -69,25 +67,21 @@ export default class TriatomicMoleculeNode extends Node {
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
     } );
-    const atomBNode = new AccessibleAtomNode( molecule.atomB, molecule.angleProperty, {
-      atomNodeOptions: {
-        tandem: options.tandem.createTandem( 'atomBNode' ),
-        phetioInputEnabledPropertyInstrumented: true
-      },
+    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, {
+      tandem: options.tandem.createTandem( 'atomBNode' ),
+      phetioInputEnabledPropertyInstrumented: true,
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty,
       keyboardStep: Math.PI / 4,
       shiftKeyboardStep: Math.PI / 4
     } );
-    const atomCNode = new AccessibleAtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
-      atomNodeOptions: {
-        tandem: options.tandem.createTandem( 'atomCNode' ),
-        phetioInputEnabledPropertyInstrumented: true,
+    const atomCNode = new AtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
+      tandem: options.tandem.createTandem( 'atomCNode' ),
+      phetioInputEnabledPropertyInstrumented: true,
 
-        // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
-        phetioType: IndexedNodeIO,
-        phetioState: true
-      },
+      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+      phetioType: IndexedNodeIO,
+      phetioState: true,
       createAriaValueText: ( value: number ) => {
         return MoleculePolarityFluent.a11y.oClock.format( {
           hour: toClock( value + molecule.angleProperty.value ).toString()
