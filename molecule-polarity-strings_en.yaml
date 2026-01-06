@@ -415,8 +415,8 @@ a11y:
   threeAtomsScreen:
     # Screen Summary
     screenSummary:
-      playArea: "In Play Area: There is an interactive three-atom molecule, A–B–C. You can change each atom's electronegativity, rotate the molecule around the central atom B, and move atoms A and C to adjust the bond angle. As you make changes, you can explore how shape and bond polarity affect the molecule's overall dipole."
-      controlArea: 'In Control Area: Checkboxes change visibility of bond dipoles, molecular dipole, and partial charges. You can turn on the electric field to see how the molecule responds, or reset the sim to start over.'
+      playArea: "There is an interactive three-atom molecule, A–B–C. You can change each atom's electronegativity, rotate the molecule around the central atom B, and move atoms A and C to adjust the bond angle. As you make changes, you can explore how shape and bond polarity affect the molecule's overall dipole."
+      controlArea: 'Checkboxes change visibility of bond dipoles, molecular dipole, and partial charges. You can turn on the electric field to see how the molecule responds, or reset the sim to start over.'
       currentDetails: 'Currently, the molecule is { $polarity }, the shape is { $shape }. The electric field is { $field }.'
       interactionHint: 'Move Atom A or C to explore how shape changes the molecular dipole.'
     
