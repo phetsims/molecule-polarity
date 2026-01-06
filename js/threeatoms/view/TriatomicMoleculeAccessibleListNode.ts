@@ -116,9 +116,8 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
               triatomicMolecule.bondBC.deltaENProperty
             ], ( dipole, deltaEN_AB, deltaEN_BC ) => {
 
-              // When the bond dipoles are the same size, and the molecular dipole is twice their size
-              return Math.abs( Math.abs( deltaEN_AB ) - Math.abs( deltaEN_BC ) ) < 0.1 &&
-                     dipole > 1.98 * Math.abs( deltaEN_AB ) &&
+              // When the molecular dipole is twice the size of the bond dipoles
+              return dipole > 1.98 * Math.abs( deltaEN_AB ) &&
                      dipole > 1.98 * Math.abs( deltaEN_BC );
             } )
         ] ),
