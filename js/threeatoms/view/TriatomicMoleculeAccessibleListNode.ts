@@ -64,7 +64,8 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       {
         visibleProperty: DerivedProperty.and( [
           isMoleculePolarProperty,
-          viewProperties.eFieldEnabledProperty
+          viewProperties.eFieldEnabledProperty,
+          triatomicMolecule.dipoleProperty.derived( dipole => Math.cos( dipole.angle ) > 0.99 )
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty
       },
