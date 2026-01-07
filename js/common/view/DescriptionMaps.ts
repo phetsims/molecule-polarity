@@ -133,10 +133,10 @@ export default class DescriptionMaps {
 
   private static ENtoQualitative( EN: number ): Electronegativity {
     return EN === 2.0 ? 'veryLow' :
-           EN < 2.4 ? 'low' :
-           EN < 2.8 ? 'mediumLow' :
-           EN < 3.2 ? 'mediumHigh' :
-           EN < 3.6 ? 'high' :
+           EN <= 2.4 ? 'low' :
+           EN <= 2.8 ? 'mediumLow' :
+           EN <= 3.2 ? 'mediumHigh' :
+           EN <= 3.6 ? 'high' :
            'veryHigh';
   }
 
