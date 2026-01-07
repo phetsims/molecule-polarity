@@ -23,6 +23,7 @@ export default class DipoleArrowView extends THREE.Object3D {
   private head: THREE.Mesh;
   private cross: THREE.Mesh;
   private crossAnchor: THREE.Object3D;
+  private material: THREE.MeshLambertMaterial;
 
   public constructor(
     isBondDipole: boolean
@@ -30,6 +31,7 @@ export default class DipoleArrowView extends THREE.Object3D {
     super();
 
     const material = new THREE.MeshLambertMaterial( { color: isBondDipole ? 0x000000 : ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
+    this.material = material;
 
     // Will be scaled below
     const bodyGeometry = new THREE.CylinderGeometry( 1, 1, 1, 24, 1, false );
@@ -54,6 +56,12 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.add( this.body );
     this.add( this.head );
     this.add( this.crossAnchor );
+  }
+
+  public updateColor( matchesElectronegativity: boolean ): void {
+    if ( !matchesElectronegativity ) {
+      this.material.color.set( ThreeUtils.colorToThree( new Color( 'red' ) ) );
+    }
   }
 
   public setFrom( origin: Vector3, direction: Vector3, totalLength: number ): void {

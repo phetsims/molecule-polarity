@@ -14,6 +14,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import RealMolecule, { RealBond } from '../model/RealMolecule.js';
 import DipoleArrowView from './DipoleArrowView.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
 
@@ -83,8 +84,9 @@ export default class BondDipoleView extends THREE.Object3D {
     const dir = this.bond.getPositiveToNegativeUnit().timesScalar( orientationSign );
 
     const electronegativityDir = this.bond.atomB.position.minus( this.bond.atomA.position ).timesScalar( this.bond.atomB.element.electronegativity! - this.bond.atomA.element.electronegativity! );
-    if ( electronegativityDir.dot( dir ) < 0 ) {
+    if ( MPQueryParameters.debug3DModels && electronegativityDir.dot( dir ) < 0 ) {
       console.log( `${this.molecule.rawSymbol} ${this.bond.atomA.element.symbol}-${this.bond.atomB.element.symbol} reversed` );
+      this.arrow.updateColor( false );
     }
 
     const tail = center

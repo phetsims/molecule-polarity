@@ -30,6 +30,10 @@ import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
+import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -153,6 +157,54 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
+
+    if ( MPQueryParameters.debug3DModels ) {
+      const createItem = ( value: string, label: string ) => {
+        return {
+          value: value,
+          createNode: () => new Text( label, { fontSize: 16 } )
+        };
+      };
+
+      const bondDipoleNode = new HBox( {
+        spacing: 20,
+        children: [
+          new Text( 'Bond Dipole Model:', { fontSize: 16 } ),
+          new HorizontalAquaRadioButtonGroup( model.bondDipoleModelProperty, [
+            createItem( 'electronegativity', 'Electronegativity' ),
+            createItem( 'java', 'Java' ),
+            createItem( 'mulliken', 'Mulliken' ),
+            createItem( 'loewdin', 'Loewdin' ),
+            createItem( 'hirschfeld', 'Hirschfeld' ),
+            createItem( 'mbis', 'MBIS' ),
+            createItem( 'psi4', 'Psi4' )
+          ], {
+            spacing: 20
+          } )
+        ]
+      } );
+
+      rootNode.addChild( bondDipoleNode );
+
+      bondDipoleNode.top = 1;
+      bondDipoleNode.left = 1;
+
+      const fieldNode = new HBox( {
+        spacing: 20,
+        children: [
+          new Text( 'Field Model:', { fontSize: 16 } ),
+          new HorizontalAquaRadioButtonGroup( model.fieldModelProperty, [
+            createItem( 'java', 'Java' ),
+            createItem( 'psi4', 'Psi4' )
+          ], { spacing: 20 } )
+        ]
+      } );
+
+      rootNode.addChild( fieldNode );
+
+      fieldNode.top = bondDipoleNode.bottom + 3;
+      fieldNode.left = 1;
+    }
 
     // Camera settings
     this.sceneNode.stage.threeCamera.zoom = 1.7;
