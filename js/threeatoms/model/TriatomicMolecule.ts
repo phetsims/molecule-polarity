@@ -78,16 +78,16 @@ export default class TriatomicMolecule extends Molecule {
       phetioDocumentation: 'the bond between atoms B and C'
     } );
 
-    // the bond angle of atom A relative to atom B, before applying molecule rotation. 8 o clock.
-    const bondAngleABProperty = new NumberProperty( 5 * Math.PI / 6, {
+    // the bond angle of atom A relative to atom B, before applying molecule rotation.
+    const bondAngleABProperty = new NumberProperty( 0.75 * Math.PI, {
       range: new Range( -Math.PI, Math.PI ), // For a11y the range is custom (9 o'clock to 9'o'clock)
       units: 'radians',
       tandem: bondABTandem.createTandem( 'angleProperty' ),
       phetioDocumentation: 'rotation angle of the bond between atoms A and B, relative to the molecule\'s angle and position, with positive rotation being CLOCKWISE'
     } );
 
-    // the bond angle of atom C relative to atom B, before applying molecule rotation. 4 o clock.
-    const bondAngleBCProperty = new NumberProperty( Math.PI / 6, {
+    // the bond angle of atom C relative to atom B, before applying molecule rotation.
+    const bondAngleBCProperty = new NumberProperty( 0.25 * Math.PI, {
       range: new Range( 0, 2 * Math.PI ), // For a11y the range is custom (3 o'clock to 3'o'clock)
       units: 'radians',
       tandem: bondBCTandem.createTandem( 'angleProperty' ),
