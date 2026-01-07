@@ -9,7 +9,7 @@
 import RealMolecule from '../model/RealMolecule.js';
 import { SURFACE_MESH_RENDER_ORDER } from './RenderOrder.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import { colorizeElectronDensity, colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB } from '../model/RealMoleculeColors.js';
+import { colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB, colorizeJavaElectronDensity, colorizeRealElectronDensity } from '../model/RealMoleculeColors.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import { SurfaceColor } from '../../common/model/SurfaceColor.js';
 
@@ -21,7 +21,7 @@ export default class SurfaceMesh extends THREE.Mesh {
   ) {
     const toColor = surfaceType === 'electrostaticPotential'
       ? ( surfaceColor === 'ROYGB' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
-      : colorizeElectronDensity;
+      : ( molecule.fieldModelProperty.value === 'psi4' ? colorizeRealElectronDensity : colorizeJavaElectronDensity );
 
     const meshGeometry = new THREE.BufferGeometry();
     meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {

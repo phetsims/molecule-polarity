@@ -173,6 +173,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.moleculeView = new RealMoleculeView(
       model.moleculeProperty,
       model.moleculeQuaternionProperty,
+      model.bondDipoleModelProperty,
+      model.fieldModelProperty,
       viewProperties,
       this.stepEmitter
     );

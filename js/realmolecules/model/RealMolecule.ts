@@ -21,6 +21,8 @@ import Element from '../../../../nitroglycerin/js/Element.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import { elementToColor } from './RealMoleculeColors.js';
+import { BondDipoleModel } from './BondDipoleModel.js';
+import { FieldModel } from './FieldModel.js';
 
 // Visualization constants for dipoles
 const DEFAULT_DIPOLE_FACTOR = 1.3;
@@ -31,12 +33,9 @@ const DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
   CHCl3: 1.6
 };
 
-export const USE_REAL_VALUES = false;
-
 export default class RealMolecule extends PhetioObject {
 
   public readonly symbol: string;
-  public readonly fullNameProperty: TReadOnlyProperty<string>;
 
   public readonly atoms: RealAtom[];
   public readonly bonds: RealBond[];
@@ -49,7 +48,13 @@ export default class RealMolecule extends PhetioObject {
    * @param fullNameProperty - full name of the molecule
    * @param tandem
    */
-  public constructor( public rawSymbol: string, fullNameProperty: TReadOnlyProperty<string>, tandem: Tandem ) {
+  public constructor(
+    public rawSymbol: string,
+    public fullNameProperty: TReadOnlyProperty<string>,
+    public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
+    public fieldModelProperty: TReadOnlyProperty<FieldModel>,
+    tandem: Tandem
+  ) {
 
     super( {
       phetioType: RealMolecule.RealMoleculeIO,
@@ -109,14 +114,19 @@ export default class RealMolecule extends PhetioObject {
       if ( simplifiedPartialCharge === undefined ) {
         throw new Error( `No partial charge found for atom symbol: ${symbol} with bond quantity: ${bonds.length}` );
       }
-      const realPartialCharge = moleculeData.charges[ atomIndex ];
 
       return new RealAtom(
         atomIndex,
         Element.getElementBySymbol( symbol ),
         simplifiedPartialCharge,
-        realPartialCharge,
-        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset )
+        moleculeData.charges[ atomIndex ],
+        moleculeData.mulliken[ atomIndex ],
+        moleculeData.loewdin[ atomIndex ],
+        moleculeData.hirshfeld[ atomIndex ],
+        moleculeData.mbis[ atomIndex ],
+        moleculeData.chelpg[ atomIndex ],
+        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset ),
+        this.bondDipoleModelProperty
       );
     } );
 
@@ -129,7 +139,7 @@ export default class RealMolecule extends PhetioObject {
         return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
       } )!;
 
-      return new RealBond( atomA, atomB, bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ) );
+      return new RealBond( atomA, atomB, bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ), this.bondDipoleModelProperty );
     } );
 
     this.realMolecularDipole = new Vector3( moleculeData.molecularDipole[ 0 ], moleculeData.molecularDipole[ 1 ], moleculeData.molecularDipole[ 2 ] );
@@ -149,7 +159,7 @@ export default class RealMolecule extends PhetioObject {
   }
 
   public getElectrostaticPotential( vertex: SurfaceVertex ): number {
-    if ( USE_REAL_VALUES ) {
+    if ( this.fieldModelProperty.value === 'psi4' ) {
       return vertex.espValue;
     }
     else {
@@ -158,7 +168,7 @@ export default class RealMolecule extends PhetioObject {
   }
 
   public getElectronDensity( vertex: SurfaceVertex ): number {
-    if ( USE_REAL_VALUES ) {
+    if ( this.fieldModelProperty.value === 'psi4' ) {
       return vertex.dtValue;
     }
     else {
@@ -405,14 +415,44 @@ export class RealAtom {
     public readonly index: number,
     public element: Element,
     public simplifiedPartialCharge: number,
-    public realPartialCharge: number,
-    public position: Vector3
+    public psi4PartialCharge: number,
+    public mullikenPartialCharge: number,
+    public loewdinPartialCharge: number,
+    public hirshfeldPartialCharge: number,
+    public mbisPartialCharge: number,
+    public chelpgPartialCharge: number,
+    public position: Vector3,
+    public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>
   ) {
 
   }
 
   public getPartialCharge(): number {
-    return USE_REAL_VALUES ? this.realPartialCharge : this.simplifiedPartialCharge;
+    const bondDipoleModel = this.bondDipoleModelProperty.value;
+    if ( bondDipoleModel === 'electronegativity' || bondDipoleModel === 'psi4' ) {
+      return this.psi4PartialCharge;
+    }
+    else if ( bondDipoleModel === 'mulliken' ) {
+      return this.mullikenPartialCharge;
+    }
+    else if ( bondDipoleModel === 'loewdin' ) {
+      return this.loewdinPartialCharge;
+    }
+    else if ( bondDipoleModel === 'hirschfeld' ) {
+      return this.hirshfeldPartialCharge;
+    }
+    else if ( bondDipoleModel === 'mbis' ) {
+      return this.mbisPartialCharge;
+    }
+    else if ( bondDipoleModel === 'chelpg' ) {
+      return this.chelpgPartialCharge;
+    }
+    else if ( bondDipoleModel === 'java' ) {
+      return this.simplifiedPartialCharge;
+    }
+    else {
+      throw new Error( `Unknown bond dipole model: ${bondDipoleModel}` );
+    }
   }
 
   public getColor(): Color {
@@ -431,7 +471,8 @@ export class RealBond {
     public readonly atomA: RealAtom,
     public readonly atomB: RealAtom,
     public readonly bondType: 1 | 2 | 3,
-    public readonly realBondDipole: Vector3
+    public readonly realBondDipole: Vector3,
+    public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>
   ) {
     atomA.bonds.push( this );
     atomB.bonds.push( this );
@@ -449,9 +490,16 @@ export class RealBond {
    * Unit direction vector from positive to negative end (Jmol convention), independent of orientation preference.
    */
   public getPositiveToNegativeUnit(): Vector3 {
-    const c1 = this.atomA.getPartialCharge();
-    const c2 = this.atomB.getPartialCharge();
-    return ( ( c1 - c2 ) >= 0 ? this.getUnitAtoB() : this.getUnitAtoB().negated() );
+    if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
+      const en1 = this.atomA.element.electronegativity!;
+      const en2 = this.atomB.element.electronegativity!;
+      return ( ( en2 - en1 ) >= 0 ? this.getUnitAtoB() : this.getUnitAtoB().negated() );
+    }
+    else {
+      const c1 = this.atomA.getPartialCharge();
+      const c2 = this.atomB.getPartialCharge();
+      return ( ( c1 - c2 ) >= 0 ? this.getUnitAtoB() : this.getUnitAtoB().negated() );
+    }
   }
 
   /** Visible bond length (portion not covered by spheres). */
@@ -475,12 +523,17 @@ export class RealBond {
    * Bond dipole magnitude in Debye (Jmol convention) using partial charges and bond distance.
    */
   public getDipoleMagnitudeDebye(): number {
-    const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
-    const c1 = this.atomA.getPartialCharge();
-    const c2 = this.atomB.getPartialCharge();
-    const dist = this.getDistance();
-    const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
-    return Math.abs( valueDebye );
+    if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
+      return Math.abs( this.atomB.element.electronegativity! - this.atomA.element.electronegativity! );
+    }
+    else {
+      const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
+      const c1 = this.atomA.getPartialCharge();
+      const c2 = this.atomB.getPartialCharge();
+      const dist = this.getDistance();
+      const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
+      return Math.abs( valueDebye );
+    }
   }
 }
 

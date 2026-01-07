@@ -16,6 +16,10 @@ import RealMolecule from './RealMolecule.js';
 import ThreeQuaternionIO from '../../../../mobius/js/ThreeQuaternionIO.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
+import { BondDipoleModel } from './BondDipoleModel.js';
+import { FieldModel } from './FieldModel.js';
+import THREE from '../../../../mobius/js/THREE.js';
+import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
@@ -30,6 +34,10 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   // the rotation of the molecule view
   public readonly moleculeQuaternionProperty: Property<THREE.Quaternion>;
 
+  public readonly bondDipoleModelProperty = new Property<BondDipoleModel>( 'electronegativity' );
+
+  public readonly fieldModelProperty = new Property<FieldModel>( 'java' );
+
   public constructor( tandem: Tandem ) {
 
     super( {
@@ -39,39 +47,48 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
     const moleculesTandem = tandem.createTandem( 'molecules' );
 
-    const selectedMolecule = new RealMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty, moleculesTandem.createTandem( 'HF' ) );
-
     this.moleculeQuaternionProperty = new Property( new THREE.Quaternion(), {
       tandem: tandem.createTandem( 'moleculeQuaternionProperty' ),
       phetioValueType: ThreeQuaternionIO,
       phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
     } );
 
+    const createMolecule = ( rawSymbol: string, nameStringProperty: LocalizedStringProperty ) => {
+      return new RealMolecule(
+        rawSymbol,
+        nameStringProperty,
+        this.bondDipoleModelProperty,
+        this.fieldModelProperty,
+        moleculesTandem.createTandem( rawSymbol )
+      );
+    };
+
     this.molecules = [
+      createMolecule( 'H2', MoleculePolarityStrings.hydrogenStringProperty ),
+      createMolecule( 'N2', MoleculePolarityStrings.nitrogenStringProperty ),
+      createMolecule( 'O2', MoleculePolarityStrings.oxygenStringProperty ),
+      createMolecule( 'F2', MoleculePolarityStrings.fluorineStringProperty ),
+      createMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty ),
 
-      new RealMolecule( 'H2', MoleculePolarityStrings.hydrogenStringProperty, moleculesTandem.createTandem( 'H2' ) ),
-      new RealMolecule( 'N2', MoleculePolarityStrings.nitrogenStringProperty, moleculesTandem.createTandem( 'N2' ) ),
-      new RealMolecule( 'O2', MoleculePolarityStrings.oxygenStringProperty, moleculesTandem.createTandem( 'O2' ) ),
-      new RealMolecule( 'F2', MoleculePolarityStrings.fluorineStringProperty, moleculesTandem.createTandem( 'F2' ) ),
-      selectedMolecule,
+      createMolecule( 'H2O', MoleculePolarityStrings.waterStringProperty ),
+      createMolecule( 'CO2', MoleculePolarityStrings.carbonDioxideStringProperty ),
+      createMolecule( 'HCN', MoleculePolarityStrings.hydrogenCyanideStringProperty ),
+      createMolecule( 'O3', MoleculePolarityStrings.ozoneStringProperty ),
 
-      new RealMolecule( 'H2O', MoleculePolarityStrings.waterStringProperty, moleculesTandem.createTandem( 'H2O' ) ),
-      new RealMolecule( 'CO2', MoleculePolarityStrings.carbonDioxideStringProperty, moleculesTandem.createTandem( 'CO2' ) ),
-      new RealMolecule( 'HCN', MoleculePolarityStrings.hydrogenCyanideStringProperty, moleculesTandem.createTandem( 'HCN' ) ),
-      new RealMolecule( 'O3', MoleculePolarityStrings.ozoneStringProperty, moleculesTandem.createTandem( 'O3' ) ),
+      createMolecule( 'NH3', MoleculePolarityStrings.ammoniaStringProperty ),
+      createMolecule( 'BH3', MoleculePolarityStrings.boraneStringProperty ),
+      createMolecule( 'BF3', MoleculePolarityStrings.boronTrifluorideStringProperty ),
+      createMolecule( 'CH2O', MoleculePolarityStrings.formaldehydeStringProperty ),
 
-      new RealMolecule( 'NH3', MoleculePolarityStrings.ammoniaStringProperty, moleculesTandem.createTandem( 'NH3' ) ),
-      new RealMolecule( 'BH3', MoleculePolarityStrings.boraneStringProperty, moleculesTandem.createTandem( 'BH3' ) ),
-      new RealMolecule( 'BF3', MoleculePolarityStrings.boronTrifluorideStringProperty, moleculesTandem.createTandem( 'BF3' ) ),
-      new RealMolecule( 'CH2O', MoleculePolarityStrings.formaldehydeStringProperty, moleculesTandem.createTandem( 'CH2O' ) ),
-
-      new RealMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty, moleculesTandem.createTandem( 'CH4' ) ),
-      new RealMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty, moleculesTandem.createTandem( 'CH3F' ) ),
-      new RealMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty, moleculesTandem.createTandem( 'CH2F2' ) ),
-      new RealMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty, moleculesTandem.createTandem( 'CHF3' ) ),
-      new RealMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty, moleculesTandem.createTandem( 'CF4' ) ),
-      new RealMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty, moleculesTandem.createTandem( 'CHCl3' ) )
+      createMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty ),
+      createMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty ),
+      createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty ),
+      // createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty ),
+      createMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty ),
+      createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty )
     ];
+
+    const selectedMolecule = this.molecules.find( molecule => molecule.rawSymbol === 'HF' )!;
 
     this.moleculeProperty = new Property( selectedMolecule, {
       validValues: this.molecules,
@@ -180,6 +197,8 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   public reset(): void {
     this.moleculeProperty.reset();
     this.moleculeQuaternionProperty.reset();
+    this.bondDipoleModelProperty.reset();
+    this.fieldModelProperty.reset();
     this.updateRotation( this.moleculeProperty.value );
   }
 }

@@ -10,7 +10,6 @@ import Element from '../../../../nitroglycerin/js/Element.js';
 import MPColors from '../../common/MPColors.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
-import { USE_REAL_VALUES } from './RealMolecule.js';
 
 export const elementToColor = ( element: Element ): TColor => {
   return element === Element.C ? MPColors.CARBON : element.color;
@@ -61,18 +60,14 @@ export const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[
   ];
 };
 
-/**
- * Grayscale palette for electron density.
- */
-export const colorizeElectronDensity = ( densityValue: number ): number[] => {
-  if ( USE_REAL_VALUES ) {
-    densityValue *= 200;
+export const colorizeRealElectronDensity = ( densityValue: number ): number[] => {
+  densityValue *= 200;
 
-    const clampedValue = clamp( 1 - densityValue, 0, 1 );
-    return [ clampedValue, clampedValue, clampedValue ];
-  }
-  else {
-    const clampedValue = clamp( 15 * densityValue / 2 + 0.5, 0, 1 );
-    return [ clampedValue, clampedValue, clampedValue ];
-  }
+  const clampedValue = clamp( 1 - densityValue, 0, 1 );
+  return [ clampedValue, clampedValue, clampedValue ];
+};
+
+export const colorizeJavaElectronDensity = ( densityValue: number ): number[] => {
+  const clampedValue = clamp( 15 * densityValue / 2 + 0.5, 0, 1 );
+  return [ clampedValue, clampedValue, clampedValue ];
 };

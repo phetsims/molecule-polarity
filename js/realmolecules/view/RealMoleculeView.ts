@@ -22,11 +22,15 @@ import SurfaceMesh from './SurfaceMesh.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AtomView from './AtomView.js';
 import BondView from './BondView.js';
+import { BondDipoleModel } from '../model/BondDipoleModel.js';
+import { FieldModel } from '../model/FieldModel.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
+    bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
+    fieldModelProperty: TReadOnlyProperty<FieldModel>,
     viewProperties: RealMoleculesViewProperties,
     stepEmitter: TinyEmitter
   ) {
@@ -50,8 +54,21 @@ export default class RealMoleculeView extends THREE.Object3D {
       viewProperties.molecularDipoleVisibleProperty,
       viewProperties.bondDipolesVisibleProperty,
       orientationSignProperty,
-      MPPreferences.surfaceColorProperty
-    ], ( molecule, surfaceType, atomLabelsVisible, partialChargesVisible, molecularDipoleVisible, bondDipolesVisible, orientationSign, surfaceColor ) => {
+      MPPreferences.surfaceColorProperty,
+      bondDipoleModelProperty,
+      fieldModelProperty
+    ], (
+      molecule,
+      surfaceType,
+      atomLabelsVisible,
+      partialChargesVisible,
+      molecularDipoleVisible,
+      bondDipolesVisible,
+      orientationSign,
+      surfaceColor,
+      bondDipoleModel,
+      fieldModel
+    ) => {
 
       // Clear out children
       while ( this.children.length > 0 ) {
