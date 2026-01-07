@@ -38,11 +38,13 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
           direction: Math.abs( Math.sin( angle ) ) <= 0.01 ? 'horizontal' :
                       Math.abs( Math.cos( angle ) ) <= 0.01 ? 'vertical' : 'diagonal'
           } );
+      },
+      startDrag: event => {
+        this.moveToFront();
       }
     }, providedOptions );
 
     super( options );
-    //nop
   }
 }
 
