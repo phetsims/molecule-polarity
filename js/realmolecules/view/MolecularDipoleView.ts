@@ -17,6 +17,7 @@ import DipoleArrowView from './DipoleArrowView.js';
 
 export default class MolecularDipoleView extends THREE.Object3D {
   public readonly dir: Vector3; // normalized, already includes orientationSign
+  private readonly arrow: DipoleArrowView;
 
   public constructor( molecule: RealMolecule, orientationSign: number ) {
     super();
@@ -54,6 +55,12 @@ export default class MolecularDipoleView extends THREE.Object3D {
 
     // Initialize cross axis aligned with the arrow direction
     arrow.setCrossPerp( this.dir );
+
+    this.arrow = arrow;
+  }
+
+  public dispose(): void {
+    this.arrow.dispose();
   }
 }
 

@@ -46,6 +46,8 @@ export default class RealMoleculeView extends THREE.Object3D {
       return ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
     } );
 
+    const disposables: { dispose: () => void }[] = [];
+
     Multilink.multilink( [
       moleculeProperty,
       viewProperties.surfaceTypeProperty,
@@ -75,6 +77,13 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.remove( this.children[ 0 ] );
       }
 
+      // Clear out all disposable items
+      while ( disposables.length > 0 ) {
+        const disposable = disposables.pop()!;
+
+        disposable.dispose();
+      }
+
       atomLabelViews.length = 0;
       atomViewMap.clear();
       bondViewMap.clear();
@@ -85,6 +94,8 @@ export default class RealMoleculeView extends THREE.Object3D {
         const view = new AtomView( atom );
         this.add( view );
         atomViewMap.set( atom, view );
+
+        disposables.push( view );
       }
 
       // Bond cylinders
@@ -92,6 +103,8 @@ export default class RealMoleculeView extends THREE.Object3D {
         const view = new BondView( bond );
         this.add( view );
         bondViewMap.set( bond, view );
+
+        disposables.push( view );
       }
 
       // Molecular dipole arrow
@@ -101,8 +114,8 @@ export default class RealMoleculeView extends THREE.Object3D {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 
-          const mdView = new MolecularDipoleView( molecule, orientationSign );
-          this.add( mdView );
+          const molecularDipoleView = new MolecularDipoleView( molecule, orientationSign );
+          this.add( molecularDipoleView );
 
           const alignedAtom = molecule.getMoleculeDipoleAlignedAtom( orientationSign );
           if ( alignedAtom ) {
@@ -116,6 +129,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             const bondView = bond ? bondViewMap.get( bond ) : null;
             bondView && bondView.setDimmed( true );
           }
+
+          disposables.push( molecularDipoleView );
         }
       }
 
@@ -128,6 +143,8 @@ export default class RealMoleculeView extends THREE.Object3D {
             this.add( view );
             view.update( this, localCamera2, orientationSign );
             bondDipoleViewMap.set( bond, view );
+
+            disposables.push( view );
           }
         }
       }
@@ -138,12 +155,17 @@ export default class RealMoleculeView extends THREE.Object3D {
           const label = new AtomLabelView( molecule, atom, atomLabelsVisible, partialChargesVisible );
           this.add( label );
           atomLabelViews.push( label );
+
+          disposables.push( label );
         }
       }
 
       // Surface (MEP or electron density)
       if ( surfaceType !== 'none' ) {
-        this.add( new SurfaceMesh( molecule, surfaceType, surfaceColor ) );
+        const surfaceMesh = new SurfaceMesh( molecule, surfaceType, surfaceColor );
+        this.add( surfaceMesh );
+
+        disposables.push( surfaceMesh );
       }
     } );
 
@@ -169,13 +191,6 @@ export default class RealMoleculeView extends THREE.Object3D {
         bondDipoleView && bondDipoleView.update( this, localCamera, orientationSignProperty.value );
       }
     } );
-  }
-
-  /**
-   * Disposes this view, so that its components can be reused for new molecules.
-   */
-  public dispose(): void {
-    // Will fill in disposal
   }
 }
 

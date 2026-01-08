@@ -24,6 +24,9 @@ export default class DipoleArrowView extends THREE.Object3D {
   private cross: THREE.Mesh;
   private crossAnchor: THREE.Object3D;
   private material: THREE.MeshLambertMaterial;
+  private readonly bodyGeometry: THREE.CylinderGeometry;
+  private readonly headGeometry: THREE.ConeGeometry;
+  private readonly crossGeometry: THREE.CylinderGeometry;
 
   public constructor(
     isBondDipole: boolean
@@ -56,6 +59,10 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.add( this.body );
     this.add( this.head );
     this.add( this.crossAnchor );
+
+    this.bodyGeometry = bodyGeometry;
+    this.headGeometry = headGeometry;
+    this.crossGeometry = crossGeometry;
   }
 
   public updateColor( matchesElectronegativity: boolean ): void {
@@ -99,6 +106,13 @@ export default class DipoleArrowView extends THREE.Object3D {
     if ( localPerp.lengthSq() > 1e-6 ) {
       this.cross.quaternion.setFromUnitVectors( up, localPerp );
     }
+  }
+
+  public dispose(): void {
+    this.material.dispose();
+    this.bodyGeometry.dispose();
+    this.headGeometry.dispose();
+    this.crossGeometry.dispose();
   }
 }
 

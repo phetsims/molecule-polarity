@@ -26,6 +26,7 @@ const LABEL_SIZE = 0.4;
 export default class AtomLabelView extends TextureQuad {
   private readonly molecule: RealMolecule;
   private readonly atom: RealAtom;
+  private readonly labelNodeTexture: NodeTexture;
 
   public constructor( molecule: RealMolecule, atom: RealAtom, atomLabelsVisible: boolean, partialChargesVisible: boolean ) {
     const element = atom.element;
@@ -46,6 +47,7 @@ export default class AtomLabelView extends TextureQuad {
           } )
         ] : [] ),
         ...( partialChargesVisible ? [
+          // TODO: string for partial charge label, see https://github.com/phetsims/molecule-polarity/issues/32
           new Text( `δ=${toFixed( atom.getPartialCharge(), 2 )}`, { font: smallFont, fill: labelFill } )
         ] : [] )
       ],
@@ -65,6 +67,7 @@ export default class AtomLabelView extends TextureQuad {
 
     this.molecule = molecule;
     this.atom = atom;
+    this.labelNodeTexture = labelNodeTexture;
   }
 
   public update( parent: THREE.Object3D ): void {
@@ -94,6 +97,12 @@ export default class AtomLabelView extends TextureQuad {
 
     this.matrixAutoUpdate = false;
     this.matrix.copy( m );
+  }
+
+  public override dispose(): void {
+    super.dispose();
+
+    this.labelNodeTexture.dispose();
   }
 }
 

@@ -17,6 +17,8 @@ export default class BondView extends THREE.Object3D {
   private readonly meshes: THREE.Mesh[] = [];
   private readonly bondRadius: number;
   private readonly bond: RealBond;
+  private readonly bondGeometry: THREE.CylinderGeometry;
+  private readonly bondMaterial: THREE.MeshLambertMaterial;
 
   public constructor( bond: RealBond ) {
     super();
@@ -36,6 +38,9 @@ export default class BondView extends THREE.Object3D {
       this.add( mesh );
       this.meshes.push( mesh );
     }
+
+    this.bondGeometry = bondGeometry;
+    this.bondMaterial = bondMaterial;
   }
 
   public setTransforms( towardsEnd: Vector3, center: Vector3, distance: number, offsets: Vector3[] ): void {
@@ -90,6 +95,11 @@ export default class BondView extends THREE.Object3D {
     }
 
     this.setTransforms( towardsEnd, center, distance, offsets );
+  }
+
+  public dispose(): void {
+    this.bondGeometry.dispose();
+    this.bondMaterial.dispose();
   }
 }
 

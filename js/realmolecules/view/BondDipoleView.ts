@@ -117,6 +117,10 @@ export default class BondDipoleView extends THREE.Object3D {
     }
     this.arrow.setCrossPerp( axis );
   }
+
+  public dispose(): void {
+    this.arrow.dispose();
+  }
 }
 
 moleculePolarity.register( 'BondDipoleView', BondDipoleView );

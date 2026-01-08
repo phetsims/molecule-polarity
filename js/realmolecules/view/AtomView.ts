@@ -13,6 +13,8 @@ import moleculePolarity from '../../moleculePolarity.js';
 
 export default class AtomView extends THREE.Object3D {
   private readonly mesh: THREE.Mesh;
+  private readonly sphereGeometry: THREE.SphereGeometry;
+  private readonly atomMaterial: THREE.MeshLambertMaterial;
 
   public constructor( atom: RealAtom ) {
     super();
@@ -30,12 +32,20 @@ export default class AtomView extends THREE.Object3D {
 
     // Position at the atom's location
     this.position.set( atom.position.x, atom.position.y, atom.position.z );
+
+    this.sphereGeometry = sphereGeometry;
+    this.atomMaterial = atomMaterial;
   }
 
   public setDimmed( dimmed: boolean ): void {
     const mat = this.mesh.material as THREE.MeshLambertMaterial;
     mat.transparent = dimmed;
     mat.opacity = dimmed ? 0.5 : 1.0;
+  }
+
+  public dispose(): void {
+    this.sphereGeometry.dispose();
+    this.atomMaterial.dispose();
   }
 }
 

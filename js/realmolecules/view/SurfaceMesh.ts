@@ -14,6 +14,10 @@ import { SurfaceType } from '../../common/model/SurfaceType.js';
 import { SurfaceColor } from '../../common/model/SurfaceColor.js';
 
 export default class SurfaceMesh extends THREE.Mesh {
+
+  private meshGeometry: THREE.BufferGeometry;
+  private meshMaterial: THREE.MeshBasicMaterial;
+
   public constructor(
     molecule: RealMolecule,
     surfaceType: SurfaceType,
@@ -50,6 +54,13 @@ export default class SurfaceMesh extends THREE.Mesh {
     super( window.ThreeLoopSubdivision.modify( meshGeometry, 2 ), meshMaterial );
 
     this.renderOrder = SURFACE_MESH_RENDER_ORDER;
+    this.meshGeometry = meshGeometry;
+    this.meshMaterial = meshMaterial;
+  }
+
+  public dispose(): void {
+    this.meshGeometry.dispose();
+    this.meshMaterial.dispose();
   }
 }
 
