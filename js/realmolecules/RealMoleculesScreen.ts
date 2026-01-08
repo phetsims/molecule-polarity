@@ -13,7 +13,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
-import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
+import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
 
@@ -22,9 +22,10 @@ export default class RealMoleculesScreen extends Screen<RealMoleculesModel, Real
   public constructor( tandem: Tandem ) {
 
     const options: ScreenOptions = {
-      name: MoleculePolarityStrings.screen.realMoleculesStringProperty,
+      name: MoleculePolarityFluent.screen.realMoleculesStringProperty,
       backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
+      screenButtonsHelpText: MoleculePolarityFluent.a11y.common.screenIcons.realMoleculesStringProperty,
       tandem: tandem
     };
 

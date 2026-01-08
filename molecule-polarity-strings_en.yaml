@@ -60,6 +60,10 @@ underDevelopment.line2: If your device runs Java, you can use the Java version a
 
 a11y:
   common:
+    screenIcons:
+      twoAtoms: 'Experiment with electronegativity values to explore bond polarity and character.'
+      threeAtoms: 'Explore how bond dipole size and orientation influence molecular polarity.'
+      realMolecules: 'Explore real molecules in three dimensions.'
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
       accessibleHelpText: 'Change how strongly { $atomName } attracts electrons.'

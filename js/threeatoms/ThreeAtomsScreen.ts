@@ -17,6 +17,7 @@ import Text from '../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
+import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
@@ -26,9 +27,10 @@ export default class ThreeAtomsScreen extends Screen<ThreeAtomsModel, ThreeAtoms
   public constructor( tandem: Tandem ) {
 
     const options: ScreenOptions = {
-      name: MoleculePolarityStrings.screen.threeAtomsStringProperty,
+      name: MoleculePolarityFluent.screen.threeAtomsStringProperty,
       backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
+      screenButtonsHelpText: MoleculePolarityFluent.a11y.common.screenIcons.threeAtomsStringProperty,
       tandem: tandem
     };
 

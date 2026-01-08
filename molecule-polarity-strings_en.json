@@ -178,6 +178,17 @@
   },
   "a11y": {
     "common": {
+      "screenIcons": {
+        "twoAtoms": {
+          "value": "Experiment with electronegativity values to explore bond polarity and character."
+        },
+        "threeAtoms": {
+          "value": "Explore how bond dipole size and orientation influence molecular polarity."
+        },
+        "realMolecules": {
+          "value": "Explore real molecules in three dimensions."
+        }
+      },
       "electronegativitySlider": {
         "accessibleName": {
           "value": "Atom { $atomName } Electronegativity"

@@ -83,6 +83,9 @@ addToMapIfDefined( 'deltaMinus', 'deltaMinusStringProperty' );
 addToMapIfDefined( 'surfaceColorRealMolecules', 'surfaceColorRealMoleculesStringProperty' );
 addToMapIfDefined( 'underDevelopment_line1', 'underDevelopment.line1StringProperty' );
 addToMapIfDefined( 'underDevelopment_line2', 'underDevelopment.line2StringProperty' );
+addToMapIfDefined( 'a11y_common_screenIcons_twoAtoms', 'a11y.common.screenIcons.twoAtomsStringProperty' );
+addToMapIfDefined( 'a11y_common_screenIcons_threeAtoms', 'a11y.common.screenIcons.threeAtomsStringProperty' );
+addToMapIfDefined( 'a11y_common_screenIcons_realMolecules', 'a11y.common.screenIcons.realMoleculesStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_accessibleName', 'a11y.common.electronegativitySlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_accessibleHelpText', 'a11y.common.electronegativitySlider.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_dipoleContext', 'a11y.common.electronegativitySlider.dipoleContextStringProperty' );
@@ -338,6 +341,11 @@ const MoleculePolarityFluent = {
   },
   a11y: {
     common: {
+      screenIcons: {
+        twoAtomsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_screenIcons_twoAtoms', _.get( MoleculePolarityStrings, 'a11y.common.screenIcons.twoAtomsStringProperty' ) ),
+        threeAtomsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_screenIcons_threeAtoms', _.get( MoleculePolarityStrings, 'a11y.common.screenIcons.threeAtomsStringProperty' ) ),
+        realMoleculesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_screenIcons_realMolecules', _.get( MoleculePolarityStrings, 'a11y.common.screenIcons.realMoleculesStringProperty' ) )
+      },
       electronegativitySlider: {
         accessibleName: new FluentPattern<{ atomName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.accessibleNameStringProperty' ), [{"name":"atomName"}] ),
         accessibleHelpText: new FluentPattern<{ atomName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.accessibleHelpTextStringProperty' ), [{"name":"atomName"}] ),

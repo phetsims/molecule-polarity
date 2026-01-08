@@ -81,6 +81,11 @@ type StringsType = {
   };
   'a11y': {
     'common': {
+      'screenIcons': {
+        'twoAtomsStringProperty': LocalizedStringProperty;
+        'threeAtomsStringProperty': LocalizedStringProperty;
+        'realMoleculesStringProperty': LocalizedStringProperty;
+      };
       'electronegativitySlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;

@@ -17,6 +17,7 @@ import Text from '../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
 import moleculePolarity from '../moleculePolarity.js';
+import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
@@ -26,9 +27,10 @@ export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreen
   public constructor( tandem: Tandem ) {
 
     const options: ScreenOptions = {
-      name: MoleculePolarityStrings.screen.twoAtomsStringProperty,
+      name: MoleculePolarityFluent.screen.twoAtomsStringProperty,
       backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
+      screenButtonsHelpText: MoleculePolarityFluent.a11y.common.screenIcons.twoAtomsStringProperty,
       tandem: tandem
     };
 
