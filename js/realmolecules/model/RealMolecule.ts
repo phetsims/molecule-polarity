@@ -310,6 +310,7 @@ export default class RealMolecule extends PhetioObject {
     if ( !centralAtom ) {
       return null;
     }
+
     let other: RealAtom | null = null;
     if ( bond.atomA === centralAtom ) {
       other = bond.atomB;
@@ -482,7 +483,7 @@ export class RealBond {
     return this.atomA.position.distance( this.atomB.position );
   }
 
-  public getUnitAtoB(): Vector3 {
+  public getDirection(): Vector3 {
     return this.atomB.position.minus( this.atomA.position ).normalized();
   }
 
@@ -493,12 +494,12 @@ export class RealBond {
     if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
       const en1 = this.atomA.element.electronegativity!;
       const en2 = this.atomB.element.electronegativity!;
-      return ( ( en2 - en1 ) >= 0 ? this.getUnitAtoB() : this.getUnitAtoB().negated() );
+      return ( ( en2 - en1 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
     }
     else {
       const c1 = this.atomA.getPartialCharge();
       const c2 = this.atomB.getPartialCharge();
-      return ( ( c1 - c2 ) >= 0 ? this.getUnitAtoB() : this.getUnitAtoB().negated() );
+      return ( ( c1 - c2 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
     }
   }
 
@@ -511,7 +512,7 @@ export class RealBond {
 
   /** Visible bond center, midway between the exposed endpoints. */
   public getVisibleCenter(): Vector3 {
-    const u = this.getUnitAtoB();
+    const u = this.getDirection();
     const rA = this.atomA.getDisplayRadius();
     const rB = this.atomB.getDisplayRadius();
     const pA = this.atomA.position.plus( u.timesScalar( rA ) );

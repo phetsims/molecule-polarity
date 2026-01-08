@@ -44,37 +44,44 @@ export default class BondDipoleView extends THREE.Object3D {
 
     // Perpendicular offset relative to camera
     const viewDir = center.minus( localCamera ).normalized();
-    let perp = bondDir.cross( viewDir ).normalized();
-    if ( perp.getMagnitudeSquared() < 1e-6 ) {
+    let perpendicular = bondDir.cross( viewDir ).normalized();
+    if ( perpendicular.getMagnitudeSquared() < 1e-6 ) {
       const alt = ( Math.abs( bondDir.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;
-      perp = bondDir.cross( alt ).normalized();
+      perpendicular = bondDir.cross( alt ).normalized();
     }
-    const perpNeg = perp.timesScalar( -1 );
+    const negatedPerpendicular = perpendicular.timesScalar( -1 );
 
     // Side selection
-    let chosen = perp;
+    let chosen = perpendicular;
     const partner = this.molecule.getSymmetricPartnerBond( this.bond );
     if ( partner ) {
-      // Enforce obtuse-side selection relative to the partner bond
-      const central = this.molecule.getCentralAtom();
-      if ( central ) {
-        const other = partner.atomA === central ? partner.atomB : partner.atomB === central ? partner.atomA : null;
-        if ( other ) {
-          const u = bondDir.minus( viewDir.timesScalar( bondDir.dot( viewDir ) ) ).normalized();
-          const v = viewDir.cross( u ).normalized(); // in-plane perpendicular basis
-          const w = other.position.minus( central.position ).normalized();
-          const wProj = w.minus( viewDir.timesScalar( w.dot( viewDir ) ) ).normalized();
-          const s = wProj.dot( v );
-          // If partner is on +v side, choose +perp (which corresponds to -v); otherwise choose -perp
-          chosen = s > 0 ? perp : perpNeg;
+      // Handle the CO2 case where both bonds are aligned
+      if ( partner.getDirection().dot( this.bond.getDirection() ) < -0.9 ) {
+        // Exact opposites! Just choose a consistent side
+        chosen = perpendicular.y > 0 ? perpendicular : negatedPerpendicular;
+      }
+      else {
+        // Enforce obtuse-side selection relative to the partner bond
+        const central = this.molecule.getCentralAtom();
+        if ( central ) {
+          const other = partner.atomA === central ? partner.atomB : partner.atomB === central ? partner.atomA : null;
+          if ( other ) {
+            const u = bondDir.minus( viewDir.timesScalar( bondDir.dot( viewDir ) ) ).normalized();
+            const v = viewDir.cross( u ).normalized(); // in-plane perpendicular basis
+            const w = other.position.minus( central.position ).normalized();
+            const wProj = w.minus( viewDir.timesScalar( w.dot( viewDir ) ) ).normalized();
+            const s = wProj.dot( v );
+            // If partner is on +v side, choose +perp (which corresponds to -v); otherwise choose -perp
+            chosen = s > 0 ? perpendicular : negatedPerpendicular;
+          }
         }
       }
     }
     else if ( this.lastOffsetDir ) {
       // Stable side selection
-      const d1 = perp.dot( this.lastOffsetDir );
-      const d2 = perpNeg.dot( this.lastOffsetDir );
-      chosen = ( d2 > d1 ) ? perpNeg : perp;
+      const d1 = perpendicular.dot( this.lastOffsetDir );
+      const d2 = negatedPerpendicular.dot( this.lastOffsetDir );
+      chosen = ( d2 > d1 ) ? negatedPerpendicular : perpendicular;
     }
     this.lastOffsetDir = chosen;
 
