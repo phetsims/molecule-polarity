@@ -26,7 +26,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
-import { elementToColor, elementToForegroundColor } from '../model/RealMoleculeColors.js';
+import { elementToColorProperty, elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -89,7 +89,7 @@ export default class ElectronegativityTableNode extends Node {
 
       for ( const atom of molecule.atoms ) {
         // TODO: This can be renamed and replaced by passing in the atom, https://github.com/phetsims/molecule-polarity/issues/32
-        this.setColor( atom.element, elementToColor( atom.element ), elementToForegroundColor( atom.element ) );
+        this.setColor( atom.element, elementToColorProperty( atom.element ), elementToForegroundColorProperty( atom.element ) );
       }
     } );
   }

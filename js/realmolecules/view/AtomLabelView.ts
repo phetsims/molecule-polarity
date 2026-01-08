@@ -16,7 +16,7 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import RealMolecule, { RealAtom } from '../model/RealMolecule.js';
-import { elementToForegroundColor } from '../model/RealMoleculeColors.js';
+import { elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
@@ -26,7 +26,7 @@ const LABEL_SIZE = 0.4;
 export default class AtomLabelView extends TextureQuad {
   private readonly molecule: RealMolecule;
   private readonly atom: RealAtom;
-  private readonly labelNodeTexture: NodeTexture;
+  private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor( molecule: RealMolecule, atom: RealAtom, atomLabelsVisible: boolean, partialChargesVisible: boolean ) {
     const element = atom.element;
@@ -34,7 +34,7 @@ export default class AtomLabelView extends TextureQuad {
     const atomVisualIndex = sameElementAtoms.indexOf( atom );
     const showIndex = sameElementAtoms.length > 1;
 
-    const labelFill = elementToForegroundColor( element );
+    const labelFillProperty = elementToForegroundColorProperty( element );
 
     const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
     const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
@@ -43,12 +43,12 @@ export default class AtomLabelView extends TextureQuad {
         ...( atomLabelsVisible ? [
           new Text( showIndex ? `${element.symbol}${atomVisualIndex + 1}` : `${element.symbol}`, {
             font: labelFont,
-            fill: labelFill
+            fill: labelFillProperty
           } )
         ] : [] ),
         ...( partialChargesVisible ? [
           // TODO: string for partial charge label, see https://github.com/phetsims/molecule-polarity/issues/32
-          new Text( `δ=${toFixed( atom.getPartialCharge(), 2 )}`, { font: smallFont, fill: labelFill } )
+          new Text( `δ=${toFixed( atom.getPartialCharge(), 2 )}`, { font: smallFont, fill: labelFillProperty } )
         ] : [] )
       ],
       center: new Vector2( 256, 128 )
@@ -61,13 +61,21 @@ export default class AtomLabelView extends TextureQuad {
 
     super( labelNodeTexture, 2 * LABEL_SIZE, LABEL_SIZE, { depthTest: true } );
 
+    this.disposeCallbacks.push( () => labelNodeTexture.dispose() );
+
+    // We'll need to repaint the texture when the color changes
+    const colorReloadListener = () => {
+      labelNodeTexture.update();
+    };
+    labelFillProperty.link( colorReloadListener );
+    this.disposeCallbacks.push( () => labelFillProperty.unlink( colorReloadListener ) );
+
     ( this as unknown as THREE.Object3D ).renderOrder = ATOM_LABEL_RENDER_ORDER;
 
     this.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
 
     this.molecule = molecule;
     this.atom = atom;
-    this.labelNodeTexture = labelNodeTexture;
   }
 
   public update( parent: THREE.Object3D ): void {
@@ -102,7 +110,7 @@ export default class AtomLabelView extends TextureQuad {
   public override dispose(): void {
     super.dispose();
 
-    this.labelNodeTexture.dispose();
+    this.disposeCallbacks.forEach( callback => callback() );
   }
 }
 

@@ -19,7 +19,7 @@ import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import { elementToColor } from './RealMoleculeColors.js';
+import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
 import { BondDipoleModel } from './BondDipoleModel.js';
 import { FieldModel } from './FieldModel.js';
 
@@ -485,8 +485,12 @@ export class RealAtom {
     }
   }
 
-  public getColor(): Color {
-    return Color.toColor( elementToColor( this.element ) );
+  public getColorProperty(): TReadOnlyProperty<Color> {
+    return elementToColorProperty( this.element );
+  }
+
+  public getLinearColorProperty(): TReadOnlyProperty<Color> {
+    return elementToLinearColorProperty( this.element );
   }
 
   public getDisplayRadius(): number {

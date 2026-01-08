@@ -10,6 +10,7 @@ import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import Color from '../../../scenery/js/util/Color.js';
 import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
 import moleculePolarity from '../moleculePolarity.js';
+import Element from '../../../nitroglycerin/js/Element.js';
 
 // constants
 const SURFACE_ALPHA = 0.72;
@@ -32,6 +33,50 @@ const MPColors = {
   BOND: 'rgb( 140, 140, 140 )',
   OXYGEN: PhetColorScheme.RED_COLORBLIND,
   CARBON: '#444',
+
+  boronProperty: new ProfileColorProperty( moleculePolarity, 'boron', {
+    default: Element.B.color
+  } ),
+  carbonProperty: new ProfileColorProperty( moleculePolarity, 'carbon', {
+    default: '#444' // Element.C isn't dark enough, so it was decided during design to darken this
+  } ),
+  chlorineProperty: new ProfileColorProperty( moleculePolarity, 'chlorine', {
+    default: Element.Cl.color
+  } ),
+  fluorineProperty: new ProfileColorProperty( moleculePolarity, 'fluorine', {
+    default: Element.F.color
+  } ),
+  hydrogenProperty: new ProfileColorProperty( moleculePolarity, 'hydrogen', {
+    default: Element.H.color
+  } ),
+  nitrogenProperty: new ProfileColorProperty( moleculePolarity, 'nitrogen', {
+    default: Element.N.color
+  } ),
+  oxygenProperty: new ProfileColorProperty( moleculePolarity, 'oxygen', {
+    default: Element.O.color
+  } ),
+
+  boronForegroundProperty: new ProfileColorProperty( moleculePolarity, 'boronForeground', {
+    default: 'black'
+  } ),
+  carbonForegroundProperty: new ProfileColorProperty( moleculePolarity, 'carbonForeground', {
+    default: 'white'
+  } ),
+  chlorineForegroundProperty: new ProfileColorProperty( moleculePolarity, 'chlorineForeground', {
+    default: 'black'
+  } ),
+  fluorineForegroundProperty: new ProfileColorProperty( moleculePolarity, 'fluorineForeground', {
+    default: 'black'
+  } ),
+  hydrogenForegroundProperty: new ProfileColorProperty( moleculePolarity, 'hydrogenForeground', {
+    default: 'black'
+  } ),
+  nitrogenForegroundProperty: new ProfileColorProperty( moleculePolarity, 'nitrogenForeground', {
+    default: 'white'
+  } ),
+  oxygenForegroundProperty: new ProfileColorProperty( moleculePolarity, 'oxygenForeground', {
+    default: 'white'
+  } ),
 
   // dipoles
   BOND_DIPOLE: 'black',
