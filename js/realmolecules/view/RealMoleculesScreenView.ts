@@ -37,8 +37,8 @@ import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibilit
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import MPColors from '../../common/MPColors.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { colorToLinear } from '../model/RealMoleculeColors.js';
+import Property from '../../../../axon/js/Property.js';
+import Color from '../../../../scenery/js/util/Color.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -62,7 +62,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         viewOffset: new Vector2( -141, 50 ),
 
         // Convert the background color into linear sRGB so that it will render fully correctly!
-        backgroundColorProperty: new DerivedProperty( [ MPColors.screenBackgroundColorProperty ], colorToLinear )
+        // backgroundColorProperty: new DerivedProperty( [ MPColors.screenBackgroundColorProperty ], colorToLinear )
+        // NOTE: Using TRANSPARENT for now due to needing to apply the background AFTER the outline pass.
+        backgroundColorProperty: new Property( Color.TRANSPARENT )
       }
     } );
 
@@ -281,9 +283,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       const renderPass = new RenderPass( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
       composer.addPass( renderPass );
 
-      const outputPass = new OutputPass();
-      composer.addPass( outputPass );
-
       const outlinePass = new OutlinePass(
         // eslint-disable-next-line phet/bad-sim-text
         new THREE.Vector2( window.innerWidth, window.innerHeight ),
@@ -291,6 +290,16 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         this.sceneNode.stage.threeCamera
       );
       composer.addPass( outlinePass );
+
+      const backgroundCompositePass = new BackgroundCompositePass( ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value ) );
+      composer.addPass( backgroundCompositePass );
+
+      MPColors.screenBackgroundColorProperty.link( color => {
+        backgroundCompositePass.setBackgroundColor( ThreeUtils.colorToThree( color ) );
+      } );
+
+      const outputPass = new OutputPass();
+      composer.addPass( outputPass );
 
       outlinePass.edgeStrength = 8.0;
       outlinePass.edgeGlow = 1.0;
@@ -310,6 +319,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         }
 
         outlinePass.setSize( width, height );
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error - FROM three-r160-addon-postprocessing
+        backgroundCompositePass.setSize( width, height );
         outputPass.setSize( width, height );
         composer.setSize( width, height );
         lastWidth = width;
@@ -391,3 +403,96 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 }
 
 moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
+
+/**
+ * A custom pass that composites the rendered scene over a solid background color,
+ * to handle the case where we want to have correct alpha compositing over a non-transparent background.
+ *
+ * This is required because we (a) need to apply the outline pass BEFORE compositing over the background.
+ */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error - FROM three-r160-addon-postprocessing
+class BackgroundCompositePass extends window.ThreePass {
+
+  private uniforms: {
+    tDiffuse: { value: THREE.Texture | null };
+    uBg: { value: THREE.Vector3 };
+  };
+  private material: THREE.RawShaderMaterial;
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error - FROM three-r160-addon-postprocessing
+  private fsQuad: typeof window.ThreeFullScreenQuad;
+
+  public constructor( private backgroundColor: THREE.Color ) {
+    super();
+
+    this.uniforms = {
+      tDiffuse: { value: null },
+      uBg: { value: new THREE.Vector3(
+        this.backgroundColor.r,
+        this.backgroundColor.g,
+        this.backgroundColor.b
+      ) }
+    };
+
+    this.material = new THREE.RawShaderMaterial( {
+      uniforms: this.uniforms,
+      vertexShader: `
+        precision highp float;
+        attribute vec3 position;
+        attribute vec2 uv;
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        precision highp float;
+        uniform sampler2D tDiffuse;
+        uniform vec3 uBg;
+        varying vec2 vUv;
+
+        void main() {
+          vec4 src = texture2D(tDiffuse, vUv);
+          vec3 rgb = mix(uBg, src.rgb, src.a);
+          gl_FragColor = vec4(rgb, 1.0);
+        }
+      `,
+      depthTest: false,
+      depthWrite: false
+    } );
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error - FROM three-r160-addon-postprocessing
+    this.fsQuad = new window.ThreeFullScreenQuad( this.material );
+  }
+
+  public setBackgroundColor( color: THREE.Color ): void {
+    this.backgroundColor.copy( color );
+    this.uniforms.uBg.value.set( color.r, color.g, color.b );
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error - FROM three-r160-addon-postprocessing
+  public render( renderer: THREE.WebGLRenderer, writeBuffer, readBuffer ): void {
+    this.uniforms.tDiffuse.value = readBuffer.texture;
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error - FROM three-r160-addon-postprocessing
+    renderer.setRenderTarget( this.renderToScreen ? null : writeBuffer );
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error - FROM three-r160-addon-postprocessing
+    if ( this.clear ) {
+      renderer.clear();
+    }
+    this.fsQuad.render( renderer );
+  }
+
+  public dispose(): void {
+    this.material.dispose();
+    this.fsQuad.dispose();
+  }
+}

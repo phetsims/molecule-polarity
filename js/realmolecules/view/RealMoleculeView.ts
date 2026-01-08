@@ -160,13 +160,11 @@ export default class RealMoleculeView extends THREE.Object3D {
         }
       }
 
-      // Surface (MEP or electron density)
-      if ( surfaceType !== 'none' ) {
-        const surfaceMesh = new SurfaceMesh( molecule, surfaceType, surfaceColor );
-        this.add( surfaceMesh );
+      // Surface (MEP or electron density) --- shown even if "none" for the focus highlight
+      const surfaceMesh = new SurfaceMesh( molecule, surfaceType, surfaceColor );
+      this.add( surfaceMesh );
 
-        disposables.push( surfaceMesh );
-      }
+      disposables.push( surfaceMesh );
     } );
 
     moleculeQuaternionProperty.link( quaternion => {

@@ -44,7 +44,7 @@ export default class SurfaceMesh extends THREE.Mesh {
     const meshMaterial = new THREE.MeshBasicMaterial( {
       vertexColors: true,
       transparent: true,
-      opacity: 0.6,
+      opacity: surfaceType === 'none' ? 0 : 0.6,
       depthWrite: false,
       side: THREE.FrontSide
     } );
