@@ -8,6 +8,7 @@
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import ChemUtils from '../../../../nitroglycerin/js/ChemUtils.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
@@ -68,7 +69,7 @@ export default class RealMoleculesControl extends HBox {
 function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
   const stringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
-    symbol: molecule.symbol,
+    symbol: ChemUtils.toSubscript( molecule.rawSymbol ),
     name: molecule.fullNameProperty
   }, { tandem: Tandem.OPT_OUT } );
 

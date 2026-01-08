@@ -8,7 +8,6 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import ChemUtils from '../../../../nitroglycerin/js/ChemUtils.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -35,17 +34,20 @@ const DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
 
 export default class RealMolecule extends PhetioObject {
 
-  public readonly symbol: string;
-
+  // Structure of the molecule
   public readonly atoms: RealAtom[];
   public readonly bonds: RealBond[];
-  public readonly realMolecularDipole: Vector3;
   public readonly vertices: SurfaceVertex[];
   public readonly faces: SurfaceVertex[][];
+
+  // Molecular dipole as calculated by the psi4 quantum chemistry software (debye)
+  public readonly realMolecularDipole: Vector3;
 
   /**
    * @param rawSymbol - chemical symbol of the molecule
    * @param fullNameProperty - full name of the molecule
+   * @param bondDipoleModelProperty - determines how bond dipoles are calculated
+   * @param fieldModelProperty - determines how fields (ESP, electron density) are calculated
    * @param tandem
    */
   public constructor(
@@ -62,8 +64,6 @@ export default class RealMolecule extends PhetioObject {
       tandem: tandem
     } );
 
-    // TODO: rename so we have displaySymbol and symbol, https://github.com/phetsims/molecule-polarity/issues/32
-    this.symbol = ChemUtils.toSubscript( rawSymbol );
     this.fullNameProperty = fullNameProperty;
 
     const moleculeData = RealMoleculeData[ rawSymbol ];
