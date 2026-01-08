@@ -62,8 +62,8 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Properties that trigger updates that don't need to be accessed here
       bondDipoleModelProperty,
       fieldModelProperty,
-      MPColors.moleculeSurfaceBackAlpha,
-      MPColors.moleculeSurfaceFrontAlpha
+      MPColors.moleculeSurfaceBackAlphaProperty,
+      MPColors.moleculeSurfaceFrontAlphaProperty
     ], (
       molecule,
       surfaceType,

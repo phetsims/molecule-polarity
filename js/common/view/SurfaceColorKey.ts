@@ -21,6 +21,7 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = {
   size?: Dimension2;
@@ -117,7 +118,10 @@ export default class SurfaceColorKey extends Node {
    * Creates the color key for black-&-white gradient.
    */
   public static createElectronDensityColorKey( options?: SurfaceColorKeyOptions ): SurfaceColorKey {
-    return new SurfaceColorKey( MPColors.BW_GRADIENT, MoleculePolarityStrings.electronDensityStringProperty,
+    return new SurfaceColorKey( [
+      new DerivedProperty( [ MPColors.surfaceBWBlackProperty ], color => color.withAlpha( MPColors.SURFACE_ALPHA ) ),
+      new DerivedProperty( [ MPColors.surfaceBWWhiteProperty ], color => color.withAlpha( MPColors.SURFACE_ALPHA ) )
+      ], MoleculePolarityStrings.electronDensityStringProperty,
       MoleculePolarityStrings.lessStringProperty, MoleculePolarityStrings.moreStringProperty, options );
   }
 
@@ -125,7 +129,11 @@ export default class SurfaceColorKey extends Node {
    * Creates the color key for RWB (red-white-blue) gradient.
    */
   public static createElectrostaticPotentialRWBColorKey( options?: SurfaceColorKeyOptions ): SurfaceColorKey {
-    return new SurfaceColorKey( MPColors.RWB_GRADIENT, MoleculePolarityStrings.electrostaticPotentialStringProperty,
+    return new SurfaceColorKey( [
+      new DerivedProperty( [ MPColors.surfaceRWBRedProperty ], color => color.withAlpha( MPColors.SURFACE_ALPHA ) ),
+      new DerivedProperty( [ MPColors.surfaceRWBWhiteProperty ], color => color.withAlpha( MPColors.SURFACE_ALPHA ) ),
+      new DerivedProperty( [ MPColors.surfaceRWBBlueProperty ], color => color.withAlpha( MPColors.SURFACE_ALPHA ) )
+      ], MoleculePolarityStrings.electrostaticPotentialStringProperty,
       MoleculePolarityStrings.positiveStringProperty, MoleculePolarityStrings.negativeStringProperty, options );
   }
 

@@ -148,13 +148,29 @@ export const directColorsToLinear = ( color: number[] ): number[] => {
 export const colorizeElectrostaticPotentialRWB = ( espValue: number ): number[] => {
   const scaled = espValue * 15; // match existing scale
 
+  const white = MPColors.surfaceRWBWhiteProperty.value;
+
   if ( scaled > 0 ) {
+    const blue = MPColors.surfaceRWBBlueProperty.value;
+
     const v = clamp( 1 - scaled, 0, 1 );
-    return [ v, v, 1 ];
+
+    return [
+      ( blue.r + ( white.r - blue.r ) * v ) / 255,
+      ( blue.g + ( white.g - blue.g ) * v ) / 255,
+      ( blue.b + ( white.b - blue.b ) * v ) / 255
+    ];
   }
   else {
+    const red = MPColors.surfaceRWBRedProperty.value;
+
     const v = clamp( 1 + scaled, 0, 1 );
-    return [ 1, v, v ];
+
+    return [
+      ( red.r + ( white.r - red.r ) * v ) / 255,
+      ( red.g + ( white.g - red.g ) * v ) / 255,
+      ( red.b + ( white.b - red.b ) * v ) / 255
+    ];
   }
 };
 
@@ -184,11 +200,27 @@ export const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[
 export const colorizeRealElectronDensity = ( densityValue: number ): number[] => {
   densityValue *= 200;
 
+  const white = MPColors.surfaceBWWhiteProperty.value;
+  const black = MPColors.surfaceBWBlackProperty.value;
+
   const clampedValue = clamp( 1 - densityValue, 0, 1 );
-  return [ clampedValue, clampedValue, clampedValue ];
+
+  return [
+    ( black.r + ( white.r - black.r ) * clampedValue ) / 255,
+    ( black.g + ( white.g - black.g ) * clampedValue ) / 255,
+    ( black.b + ( white.b - black.b ) * clampedValue ) / 255
+  ];
 };
 
 export const colorizeJavaElectronDensity = ( densityValue: number ): number[] => {
+  const white = MPColors.surfaceBWWhiteProperty.value;
+  const black = MPColors.surfaceBWBlackProperty.value;
+
   const clampedValue = clamp( 15 * densityValue / 2 + 0.5, 0, 1 );
-  return [ clampedValue, clampedValue, clampedValue ];
+
+  return [
+    ( black.r + ( white.r - black.r ) * clampedValue ) / 255,
+    ( black.g + ( white.g - black.g ) * clampedValue ) / 255,
+    ( black.b + ( white.b - black.b ) * clampedValue ) / 255
+  ];
 };

@@ -15,6 +15,7 @@ import { SurfaceColor } from '../../common/model/SurfaceColor.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import MPColors from '../../common/MPColors.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 export default class SurfaceMesh extends THREE.Object3D {
 
@@ -36,17 +37,22 @@ export default class SurfaceMesh extends THREE.Object3D {
     meshGeometry.setAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
       return vertices.flatMap( vertex => vertex.getNormalArray() );
     } ) ), 3 ) );
-    meshGeometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
-      return vertices.flatMap( vertex => {
-        const value = ( surfaceType === 'electrostaticPotential' ? molecule.getElectrostaticPotential( vertex ) : molecule.getElectronDensity( vertex ) );
-        return toColor( value );
-      } );
-    } ) ), 3 ) );
+
+    const getColorBufferAttribute = () => {
+      return new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
+        return vertices.flatMap( vertex => {
+          const value = ( surfaceType === 'electrostaticPotential' ? molecule.getElectrostaticPotential( vertex ) : molecule.getElectronDensity( vertex ) );
+          return toColor( value );
+        } );
+      } ) ), 3 );
+    };
+
+    meshGeometry.setAttribute( 'color', getColorBufferAttribute() );
 
     const frontMeshMaterial = new THREE.MeshBasicMaterial( {
       vertexColors: true,
       transparent: true,
-      opacity: surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceFrontAlpha.value.alpha, // SurfaceMesh regenerated when this color changes
+      opacity: surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceFrontAlphaProperty.value.alpha, // SurfaceMesh regenerated when this color changes
       depthWrite: false,
       side: THREE.FrontSide
     } );
@@ -61,7 +67,7 @@ export default class SurfaceMesh extends THREE.Object3D {
     // otherwise it renders "in front" of things.
     backMeshMaterial.userData.uBg = ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value );
     // SurfaceMesh regenerated when this color changes
-    backMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlpha.value.alpha;
+    backMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlphaProperty.value.alpha;
     backMeshMaterial.onBeforeCompile = ( shader: THREE.Shader ) => {
       console.log( 'onBeforeCompile for', backMeshMaterial.uuid );
       console.log( shader.fragmentShader ); // inspect it
@@ -115,6 +121,29 @@ export default class SurfaceMesh extends THREE.Object3D {
 
     frontMesh.renderOrder = SURFACE_MESH_RENDER_ORDER;
     backMesh.renderOrder = BACK_SURFACE_MESH_RENDER_ORDER;
+
+    // Update colors a bit more dynamically on changes
+    const colorMultilink = Multilink.lazyMultilink( [
+      MPColors.surfaceRWBRedProperty,
+      MPColors.surfaceRWBWhiteProperty,
+      MPColors.surfaceRWBBlueProperty,
+      MPColors.surfaceBWBlackProperty,
+      MPColors.surfaceBWWhiteProperty
+    ], () => {
+      // Update color buffer attribute
+      meshGeometry.setAttribute( 'color', getColorBufferAttribute() );
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error Having to use external lib like this
+      const highResolutionUpdateGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, 2 );
+
+      frontMesh.geometry.dispose();
+      backMesh.geometry.dispose();
+
+      frontMesh.geometry = highResolutionUpdateGeometry;
+      backMesh.geometry = highResolutionUpdateGeometry;
+    } );
+    this.disposeCallbacks.push( () => colorMultilink.dispose() );
 
     this.add( frontMesh );
     this.add( backMesh );

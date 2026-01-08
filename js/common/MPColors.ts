@@ -91,15 +91,34 @@ const MPColors = {
   } ),
 
   // Alpha control for back/front molecule surfaces
-  moleculeSurfaceBackAlpha: new ProfileColorProperty( moleculePolarity, 'moleculeSurfaceBackAlpha', {
+  moleculeSurfaceBackAlphaProperty: new ProfileColorProperty( moleculePolarity, 'moleculeSurfaceBackAlpha', {
     default: 'rgba( 255, 255, 255, 0.75 )'
   } ),
-  moleculeSurfaceFrontAlpha: new ProfileColorProperty( moleculePolarity, 'moleculeSurfaceFrontAlpha', {
+  moleculeSurfaceFrontAlphaProperty: new ProfileColorProperty( moleculePolarity, 'moleculeSurfaceFrontAlpha', {
     default: 'rgba( 255, 255, 255, 0.25 )'
+  } ),
+
+  // Surface gradients
+  surfaceRWBRedProperty: new ProfileColorProperty( moleculePolarity, 'surfaceRWBRed', {
+    default: 'rgb( 255, 0, 0 )'
+  } ),
+  surfaceRWBWhiteProperty: new ProfileColorProperty( moleculePolarity, 'surfaceRWBWhite', {
+    default: 'rgb( 255, 255, 255 )'
+  } ),
+  surfaceRWBBlueProperty: new ProfileColorProperty( moleculePolarity, 'surfaceRWBBlue', {
+    default: 'rgb( 0, 0, 255 )'
+  } ),
+  surfaceBWBlackProperty: new ProfileColorProperty( moleculePolarity, 'surfaceBWBlack', {
+    default: 'rgb( 0, 0, 0 )'
+  } ),
+  surfaceBWWhiteProperty: new ProfileColorProperty( moleculePolarity, 'surfaceBWWhite', {
+    default: 'rgb( 255, 255, 255 )'
   } ),
 
   // E-field plates
   PLATE: 'rgb( 192, 192, 192 )',
+
+  SURFACE_ALPHA: SURFACE_ALPHA,
 
   // surfaces, colors are ordered negative to positive
   NEUTRAL_GRAY: new Color( 128, 128, 128, SURFACE_ALPHA ),
