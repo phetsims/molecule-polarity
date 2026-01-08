@@ -53,13 +53,13 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
     } );
 
-    const createMolecule = ( rawSymbol: string, nameStringProperty: LocalizedStringProperty ) => {
+    const createMolecule = ( symbol: string, nameStringProperty: LocalizedStringProperty ) => {
       return new RealMolecule(
-        rawSymbol,
+        symbol,
         nameStringProperty,
         this.bondDipoleModelProperty,
         this.fieldModelProperty,
-        moleculesTandem.createTandem( rawSymbol )
+        moleculesTandem.createTandem( symbol )
       );
     };
 
@@ -88,7 +88,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty )
     ];
 
-    const selectedMolecule = this.molecules.find( molecule => molecule.rawSymbol === 'HF' )!;
+    const selectedMolecule = this.molecules.find( molecule => molecule.symbol === 'HF' )!;
 
     this.moleculeProperty = new Property( selectedMolecule, {
       validValues: this.molecules,
@@ -109,18 +109,18 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
   public updateRotation( molecule: RealMolecule ): void {
     if (
-      molecule.rawSymbol === 'HF' ||
-      molecule.rawSymbol === 'HCN'
+      molecule.symbol === 'HF' ||
+      molecule.symbol === 'HCN'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion( 0, -Math.sqrt( 2 ) / 2, 0, Math.sqrt( 2 ) / 2 );
     }
     else if (
-      molecule.rawSymbol === 'O3'
+      molecule.symbol === 'O3'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion( -1, 0, 0, 0 );
     }
     else if (
-      molecule.rawSymbol === 'NH3'
+      molecule.symbol === 'NH3'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
       0.7677141944032492,
@@ -130,7 +130,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
-      molecule.rawSymbol === 'CH2O'
+      molecule.symbol === 'CH2O'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
         0.39532868707908697,
@@ -140,7 +140,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
-      molecule.rawSymbol === 'CH3F'
+      molecule.symbol === 'CH3F'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
         -0.47764744580443635,
@@ -150,7 +150,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
-      molecule.rawSymbol === 'CH2F2'
+      molecule.symbol === 'CH2F2'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
         0.6172145109411314,
@@ -160,7 +160,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
-      molecule.rawSymbol === 'CHF3'
+      molecule.symbol === 'CHF3'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
         0.017834718285708984,
@@ -170,7 +170,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
-      molecule.rawSymbol === 'CF4'
+      molecule.symbol === 'CF4'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
         -0.3937806654121543,
@@ -180,7 +180,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
-      molecule.rawSymbol === 'CHCl3'
+      molecule.symbol === 'CHCl3'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
         -0.0176156710659009,

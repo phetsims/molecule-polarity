@@ -69,7 +69,7 @@ export default class RealMoleculesControl extends HBox {
 function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
   const stringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
-    symbol: ChemUtils.toSubscript( molecule.rawSymbol ),
+    symbol: ChemUtils.toSubscript( molecule.symbol ),
     name: molecule.fullNameProperty
   }, { tandem: Tandem.OPT_OUT } );
 

@@ -25,6 +25,8 @@ import { FieldModel } from './FieldModel.js';
 
 // Visualization constants for dipoles
 const DEFAULT_DIPOLE_FACTOR = 1.3;
+
+// Some dipoles need to be adjusted for molecules (outside of the typical formula for scaling)
 const DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
   HF: 2,
   HCN: 1.6,
@@ -44,14 +46,14 @@ export default class RealMolecule extends PhetioObject {
   public readonly realMolecularDipole: Vector3;
 
   /**
-   * @param rawSymbol - chemical symbol of the molecule
+   * @param symbol - chemical symbol of the molecule
    * @param fullNameProperty - full name of the molecule
    * @param bondDipoleModelProperty - determines how bond dipoles are calculated
    * @param fieldModelProperty - determines how fields (ESP, electron density) are calculated
    * @param tandem
    */
   public constructor(
-    public rawSymbol: string,
+    public symbol: string,
     public fullNameProperty: TReadOnlyProperty<string>,
     public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     public fieldModelProperty: TReadOnlyProperty<FieldModel>,
@@ -66,8 +68,8 @@ export default class RealMolecule extends PhetioObject {
 
     this.fullNameProperty = fullNameProperty;
 
-    const moleculeData = RealMoleculeData[ rawSymbol ];
-    const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ rawSymbol ];
+    const moleculeData = RealMoleculeData[ symbol ];
+    const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ symbol ];
 
     let originOffset: Vector3;
     let centralAtomIndex: number | null = null;
@@ -195,7 +197,7 @@ export default class RealMolecule extends PhetioObject {
    * Returns the bond-dipole cap factor for this molecule. Allows per-molecule overrides.
    */
   public getBondDipoleFactor(): number {
-    return DIPOLE_FACTOR_OVERRIDES[ this.rawSymbol ] ?? DEFAULT_DIPOLE_FACTOR;
+    return DIPOLE_FACTOR_OVERRIDES[ this.symbol ] ?? DEFAULT_DIPOLE_FACTOR;
   }
 
   /**
@@ -263,7 +265,7 @@ export default class RealMolecule extends PhetioObject {
     for ( const bond of this.bonds ) {
       const muMag = bond.getDipoleMagnitudeDebye();
       if ( muMag > 1e-6 ) {
-        const dir = bond.getPositiveToNegativeUnit();
+        const dir = bond.getPositiveToNegativeDirection();
         sum = sum.plus( dir.timesScalar( muMag ) );
       }
     }
@@ -408,6 +410,9 @@ export default class RealMolecule extends PhetioObject {
 
 moleculePolarity.register( 'RealMolecule', RealMolecule );
 
+/**
+ * Represents an atom in a RealMolecule.
+ */
 export class RealAtom {
 
   public readonly bonds: RealBond[] = [];
@@ -467,6 +472,11 @@ export class RealAtom {
   }
 }
 
+moleculePolarity.register( 'RealAtom', RealAtom );
+
+/**
+ * Represents a bond in a RealMolecule.
+ */
 export class RealBond {
   public constructor(
     public readonly atomA: RealAtom,
@@ -480,7 +490,7 @@ export class RealBond {
   }
 
   public getDistance(): number {
-    return this.atomA.position.distance( this.atomB.position );
+    return this.atomB.position.distance( this.atomA.position );
   }
 
   public getDirection(): Vector3 {
@@ -490,7 +500,7 @@ export class RealBond {
   /**
    * Unit direction vector from positive to negative end (Jmol convention), independent of orientation preference.
    */
-  public getPositiveToNegativeUnit(): Vector3 {
+  public getPositiveToNegativeDirection(): Vector3 {
     if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
       const en1 = this.atomA.element.electronegativity!;
       const en2 = this.atomB.element.electronegativity!;
@@ -503,21 +513,26 @@ export class RealBond {
     }
   }
 
-  /** Visible bond length (portion not covered by spheres). */
+  /**
+   * The visible length of the bond is calculated by subtracting the display radii of the two atoms from the total distance
+   * between them.
+   *
+   * (the portion not covered by spheres).
+   */
   public getVisibleLength(): number {
-    const rA = this.atomA.getDisplayRadius();
-    const rB = this.atomB.getDisplayRadius();
-    return Math.max( 0, this.getDistance() - ( rA + rB ) );
+    const radiusA = this.atomA.getDisplayRadius();
+    const radiusB = this.atomB.getDisplayRadius();
+    return Math.max( 0, this.getDistance() - ( radiusA + radiusB ) );
   }
 
-  /** Visible bond center, midway between the exposed endpoints. */
+  /**
+   * Visible bond center, midway between the exposed endpoints.
+   */
   public getVisibleCenter(): Vector3 {
-    const u = this.getDirection();
-    const rA = this.atomA.getDisplayRadius();
-    const rB = this.atomB.getDisplayRadius();
-    const pA = this.atomA.position.plus( u.timesScalar( rA ) );
-    const pB = this.atomB.position.minus( u.timesScalar( rB ) );
-    return pA.plus( pB ).timesScalar( 0.5 );
+    const direction = this.getDirection();
+    const positionA = this.atomA.position.plus( direction.timesScalar( this.atomA.getDisplayRadius() ) );
+    const positionB = this.atomB.position.minus( direction.timesScalar( this.atomB.getDisplayRadius() ) );
+    return positionA.average( positionB );
   }
 
   /**
@@ -525,6 +540,7 @@ export class RealBond {
    */
   public getDipoleMagnitudeDebye(): number {
     if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
+      // An approximate value, we mainly just need relative magnitudes for visualization
       return Math.abs( this.atomB.element.electronegativity! - this.atomA.element.electronegativity! );
     }
     else {
@@ -538,6 +554,11 @@ export class RealBond {
   }
 }
 
+moleculePolarity.register( 'RealBond', RealBond );
+
+/**
+ * Represents a vertex on the molecular surface.
+ */
 export class SurfaceVertex {
   public constructor(
     public readonly position: Vector3,
@@ -554,3 +575,5 @@ export class SurfaceVertex {
     return [ this.normal.x, this.normal.y, this.normal.z ];
   }
 }
+
+moleculePolarity.register( 'SurfaceVertex', SurfaceVertex );
