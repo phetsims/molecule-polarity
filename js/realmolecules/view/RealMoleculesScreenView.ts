@@ -16,8 +16,6 @@ import TInputListener from '../../../../scenery/js/input/TInputListener.js';
 import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Color from '../../../../scenery/js/util/Color.js';
-import ColorProperty from '../../../../scenery/js/util/ColorProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -38,6 +36,9 @@ import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js
 import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import MPColors from '../../common/MPColors.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { colorToLinear } from '../model/RealMoleculeColors.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -60,7 +61,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         // top of the screen.
         viewOffset: new Vector2( -141, 50 ),
 
-        backgroundColorProperty: new ColorProperty( Color.TRANSPARENT )
+        // Convert the background color into linear sRGB so that it will render fully correctly!
+        backgroundColorProperty: new DerivedProperty( [ MPColors.screenBackgroundColorProperty ], colorToLinear )
       }
     } );
 

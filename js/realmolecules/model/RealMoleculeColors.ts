@@ -10,6 +10,8 @@ import Element from '../../../../nitroglycerin/js/Element.js';
 import MPColors from '../../common/MPColors.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 
 export const elementToColor = ( element: Element ): TColor => {
   return element === Element.C ? MPColors.CARBON : element.color;
@@ -17,6 +19,30 @@ export const elementToColor = ( element: Element ): TColor => {
 
 export const elementToForegroundColor = ( element: Element ): TColor => {
   return [ Element.N, Element.O, Element.C ].includes( element ) ? 'white' : 'black';
+};
+
+export const colorToLinear = ( color: Color ): Color => {
+  const redScaled = color.red / 255;
+  const greenScaled = color.green / 255;
+  const blueScaled = color.blue / 255;
+
+  const rescale = ( n: number ) => {
+    return roundSymmetric( n * 255 );
+  };
+
+  return new Color(
+    rescale( redScaled <= 0.0404482362771082 ? redScaled / 12.92 : Math.pow( ( redScaled + 0.055 ) / 1.055, 2.4 ) ),
+    rescale( greenScaled <= 0.0404482362771082 ? greenScaled / 12.92 : Math.pow( ( greenScaled + 0.055 ) / 1.055, 2.4 ) ),
+    rescale( blueScaled <= 0.0404482362771082 ? blueScaled / 12.92 : Math.pow( ( blueScaled + 0.055 ) / 1.055, 2.4 ) )
+  );
+};
+
+export const directColorsToLinear = ( color: number[] ): number[] => {
+  return [
+    color[ 0 ] <= 0.0404482362771082 ? color[ 0 ] / 12.92 : Math.pow( ( color[ 0 ] + 0.055 ) / 1.055, 2.4 ),
+    color[ 1 ] <= 0.0404482362771082 ? color[ 1 ] / 12.92 : Math.pow( ( color[ 1 ] + 0.055 ) / 1.055, 2.4 ),
+    color[ 2 ] <= 0.0404482362771082 ? color[ 2 ] / 12.92 : Math.pow( ( color[ 2 ] + 0.055 ) / 1.055, 2.4 )
+  ];
 };
 
 /**
