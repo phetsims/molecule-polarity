@@ -39,6 +39,7 @@ import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboard
 import MPColors from '../../common/MPColors.js';
 import Property from '../../../../axon/js/Property.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -68,12 +69,19 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       }
     } );
 
-    // our target for drags that don't hit other UI components
-    const backgroundEventTarget = Rectangle.bounds( this.layoutBounds );
-    this.addChild( backgroundEventTarget );
+    const moleculeNodeTandem = tandem.createTandem( 'moleculeNode' );
+
+    // Our "fake" Node for the molecule, for target for drags that don't hit other UI components (and keyboard drag)
+    const moleculeNode = new ( InteractiveHighlighting( Rectangle ) )( combineOptions<NodeOptions>( {}, AccessibleDraggableOptions, {
+      focusable: true,
+      tagName: 'div',
+      focusHighlight: 'invisible',
+      tandem: moleculeNodeTandem
+    } ) );
+    this.addChild( moleculeNode );
 
     this.visibleBoundsProperty.link( visibleBounds => {
-      backgroundEventTarget.setRectBounds( visibleBounds );
+      moleculeNode.setRectBounds( visibleBounds );
 
       const sx = visibleBounds.width / this.layoutBounds.width;
       const sy = visibleBounds.height / this.layoutBounds.height;
@@ -128,15 +136,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     this.addChild( rootNode );
 
-    const moleculeViewNodeTandem = tandem.createTandem( 'moleculeViewNode' );
-    const a11yMoleculeViewNode = new Node( combineOptions<NodeOptions>( {}, AccessibleDraggableOptions, {
-      focusable: true,
-      tagName: 'div',
-      focusHighlight: 'invisible',
-      tandem: moleculeViewNodeTandem
-    } ) );
-    this.addChild( a11yMoleculeViewNode );
-
     const keyboardDragListener = new SoundKeyboardDragListener( {
       moveOnHoldDelay: 0,
       moveOnHoldInterval: 20,
@@ -146,12 +145,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         newQuaternion.multiply( model.moleculeQuaternionProperty.value );
         model.moleculeQuaternionProperty.value = newQuaternion;
       },
-      tandem: moleculeViewNodeTandem.createTandem( 'keyboardDragListener' )
+      tandem: moleculeNodeTandem.createTandem( 'keyboardDragListener' )
     } );
-    a11yMoleculeViewNode.addInputListener( keyboardDragListener );
+    moleculeNode.addInputListener( keyboardDragListener );
 
     this.pdomPlayAreaNode.pdomOrder = [
-      a11yMoleculeViewNode
+      moleculeNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
@@ -344,7 +343,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       this.sceneNode.stage.render = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
 
-        outlinePass.selectedObjects = a11yMoleculeViewNode.isFocused() ? [ this.moleculeView ] : [];
+        outlinePass.selectedObjects = ( moleculeNode.isFocused() || moleculeNode.isInteractiveHighlightActiveProperty.value ) ? [ this.moleculeView ] : [];
 
         if ( target ) {
           // For now, pretend like we don't have a composer
@@ -405,7 +404,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         pointer.addInputListener( pointerListener, true );
       }
     };
-    backgroundEventTarget.addInputListener( rotateListener );
+    moleculeNode.addInputListener( rotateListener );
   }
 
   public override step( dt: number ): void {
