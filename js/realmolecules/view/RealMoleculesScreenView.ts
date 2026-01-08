@@ -14,7 +14,7 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import TInputListener from '../../../../scenery/js/input/TInputListener.js';
 import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ColorProperty from '../../../../scenery/js/util/ColorProperty.js';
@@ -34,6 +34,10 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -120,7 +124,30 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     this.addChild( rootNode );
 
+    const moleculeViewNodeTandem = tandem.createTandem( 'moleculeViewNode' );
+    const a11yMoleculeViewNode = new Node( combineOptions<NodeOptions>( {}, AccessibleDraggableOptions, {
+      focusable: true,
+      tagName: 'div',
+      focusHighlight: 'invisible',
+      tandem: moleculeViewNodeTandem
+    } ) );
+    this.addChild( a11yMoleculeViewNode );
+
+    const keyboardDragListener = new SoundKeyboardDragListener( {
+      moveOnHoldDelay: 0,
+      moveOnHoldInterval: 20,
+      drag: ( event, listener ) => {
+        const scale = 0.005;
+        const newQuaternion = new THREE.Quaternion().setFromEuler( new THREE.Euler( listener.modelDelta.y * scale, listener.modelDelta.x * scale, 0 ) );
+        newQuaternion.multiply( model.moleculeQuaternionProperty.value );
+        model.moleculeQuaternionProperty.value = newQuaternion;
+      },
+      tandem: moleculeViewNodeTandem.createTandem( 'keyboardDragListener' )
+    } );
+    a11yMoleculeViewNode.addInputListener( keyboardDragListener );
+
     this.pdomPlayAreaNode.pdomOrder = [
+      a11yMoleculeViewNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
@@ -231,6 +258,78 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       this.stepEmitter
     );
     this.sceneNode.stage.threeScene.add( this.moleculeView );
+
+    if ( this.sceneNode.stage.threeRenderer && MPQueryParameters.focusHighlight3D ) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error - FROM three-r160-addon-outlinepass
+      const EffectComposer = window.ThreeEffectComposer;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error - FROM three-r160-addon-outlinepass
+      const OutlinePass = window.ThreeOutlinePass;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error - FROM three-r160-addon-outlinepass
+      const RenderPass = window.ThreeRenderPass;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error - FROM three-r160-addon-outlinepass
+      const OutputPass = window.ThreeOutputPass;
+
+      const composer = new EffectComposer( this.sceneNode.stage.threeRenderer );
+      composer.renderToScreen = true;
+
+      const renderPass = new RenderPass( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
+      composer.addPass( renderPass );
+
+      const outputPass = new OutputPass();
+      composer.addPass( outputPass );
+
+      const outlinePass = new OutlinePass(
+        // eslint-disable-next-line phet/bad-sim-text
+        new THREE.Vector2( window.innerWidth, window.innerHeight ),
+        this.sceneNode.stage.threeScene,
+        this.sceneNode.stage.threeCamera
+      );
+      composer.addPass( outlinePass );
+
+      outlinePass.edgeStrength = 8.0;
+      outlinePass.edgeGlow = 1.0;
+      outlinePass.edgeThickness = 3.0;
+      outlinePass.visibleEdgeColor.set( ThreeUtils.colorToThree( HighlightPath.OUTER_FOCUS_COLOR ) );
+      outlinePass.hiddenEdgeColor.set( 0x190a05 );
+
+      let lastWidth = 0;
+      let lastHeight = 0;
+
+      const resize = () => {
+        const width = this.sceneNode.stage.width;
+        const height = this.sceneNode.stage.height;
+
+        if ( lastWidth === width && lastHeight === height ) {
+          return;
+        }
+
+        outlinePass.setSize( width, height );
+        outputPass.setSize( width, height );
+        composer.setSize( width, height );
+        lastWidth = width;
+        lastHeight = height;
+      };
+
+      this.sceneNode.stage.render = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
+        this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
+
+        outlinePass.selectedObjects = a11yMoleculeViewNode.isFocused() ? [ this.moleculeView ] : [];
+
+        if ( target ) {
+          // For now, pretend like we don't have a composer
+          this.sceneNode.stage.threeRenderer!.render( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
+          this.sceneNode.stage.threeRenderer!.autoClear = autoClear;
+        }
+        else {
+          resize();
+          composer.render();
+        }
+      };
+    }
 
     let isRotating = false;
     const rotateListener: TInputListener = {

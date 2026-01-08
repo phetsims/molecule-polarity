@@ -24,7 +24,8 @@
     ],
     "preload": [
       "../sherpa/lib/three-r160.js",
-      "../sherpa/lib/three-subdivide-1.1.3.js"
+      "../sherpa/lib/three-subdivide-1.1.3.js",
+      "../sherpa/lib/three-r160-addon-outlinepass.js"
     ],
     "supportsOutputJS": true,
     "simFeatures": {
