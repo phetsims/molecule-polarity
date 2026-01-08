@@ -6,7 +6,7 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-export type RealMoleculeDataType = Record<string, {
+export type RealMoleculeDataEntry = {
   atoms: {
     symbol: string;
     x: number;
@@ -27,7 +27,7 @@ export type RealMoleculeDataType = Record<string, {
     z: number;
     magnitude: number;
   }[];
-  
+
   // Types of partial charges
   charges: number[]; // psi4-computed mulliken?
   mulliken: number[]; // ORCA computed
@@ -35,13 +35,14 @@ export type RealMoleculeDataType = Record<string, {
   hirshfeld: number[]; // ORCA computed
   mbis: number[]; // ORCA computed
   chelpg: number[]; // ORCA computed
-  
+
   vertexPositions: [ number, number, number ][];
   vertexNormals: [ number, number, number ][];
   faceIndices: [ number, number, number ][];
   vertexESPs: number[];
   vertexDTs: number[];
-}>;
+};
+export type RealMoleculeDataType = Record<string, RealMoleculeDataEntry>;
 
 export const RealMoleculeData: RealMoleculeDataType = {
   BF3: {

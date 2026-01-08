@@ -14,7 +14,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import { RealMoleculeData } from './RealMoleculeData.js';
+import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
 import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -71,44 +71,14 @@ export default class RealMolecule extends PhetioObject {
     const moleculeData = RealMoleculeData[ symbol ];
     const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ symbol ];
 
-    let originOffset: Vector3;
-    let centralAtomIndex: number | null = null;
-    if ( moleculeData.atoms.length === 2 ) {
-      // Homogeneous diatomic centered between two atoms
-      if ( moleculeData.atoms[ 0 ].symbol === moleculeData.atoms[ 1 ].symbol ) {
-        const a = new Vector3( moleculeData.atoms[ 0 ].x, moleculeData.atoms[ 0 ].y, moleculeData.atoms[ 0 ].z );
-        const b = new Vector3( moleculeData.atoms[ 1 ].x, moleculeData.atoms[ 1 ].y, moleculeData.atoms[ 1 ].z );
-        originOffset = a.average( b );
-      }
-      else {
-        // it's HF, for now we'll center around the F
-        const fluorine = moleculeData.atoms.find( atom => atom.symbol === 'F' )!;
-        originOffset = new Vector3( fluorine.x, fluorine.y, fluorine.z );
-        centralAtomIndex = moleculeData.atoms.indexOf( fluorine );
-      }
-    }
-    else {
-      // Find the atom with the most bonds, we'll center around that
-
-      let bestBondCount = 0;
-
-      for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
-        const bondCount = moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length;
-
-        if ( bondCount > bestBondCount ) {
-          bestBondCount = bondCount;
-          centralAtomIndex = i;
-        }
-      }
-
-      const centralAtom = moleculeData.atoms[ centralAtomIndex! ];
-      originOffset = new Vector3( centralAtom.x, centralAtom.y, centralAtom.z );
-    }
+    // Compute the origin offset for centering the molecule
+    const originOffset = RealMolecule.computeOriginOffset( moleculeData );
 
     this.atoms = moleculeData.atoms.map( ( atomData, atomIndex ) => {
       const symbol = atomData.symbol;
       const bonds = moleculeData.bonds.filter( b => b.indexA === atomIndex || b.indexB === atomIndex );
 
+      // Look up the atom symbol (with bond count fallback) in the simplified partial charge map
       let simplifiedPartialCharge = simplifiedPartialChargeMap[ symbol ];
       if ( simplifiedPartialCharge === undefined ) {
         simplifiedPartialCharge = simplifiedPartialChargeMap[ `${symbol}${bonds.length}` ];
@@ -132,6 +102,7 @@ export default class RealMolecule extends PhetioObject {
       );
     } );
 
+    // Bonds later, since they reference atoms
     this.bonds = moleculeData.bonds.map( bondData => {
       const atomA = this.atoms[ bondData.indexA ];
       const atomB = this.atoms[ bondData.indexB ];
@@ -160,6 +131,45 @@ export default class RealMolecule extends PhetioObject {
     this.faces = moleculeData.faceIndices.map( faceIndices => faceIndices.map( index => this.vertices[ index ] ) );
   }
 
+  /**
+   * Compute the origin offset for centering the molecule
+   */
+  public static computeOriginOffset( moleculeData: RealMoleculeDataEntry ): Vector3 {
+    if ( moleculeData.atoms.length === 2 ) {
+      // Homogeneous diatomic centered between two atoms
+      if ( moleculeData.atoms[ 0 ].symbol === moleculeData.atoms[ 1 ].symbol ) {
+        const a = new Vector3( moleculeData.atoms[ 0 ].x, moleculeData.atoms[ 0 ].y, moleculeData.atoms[ 0 ].z );
+        const b = new Vector3( moleculeData.atoms[ 1 ].x, moleculeData.atoms[ 1 ].y, moleculeData.atoms[ 1 ].z );
+        return a.average( b );
+      }
+      else {
+        // it's HF, for now we'll center around the F
+        const fluorine = moleculeData.atoms.find( atom => atom.symbol === 'F' )!;
+        return new Vector3( fluorine.x, fluorine.y, fluorine.z );
+      }
+    }
+    else {
+      // Find the atom with the most bonds, we'll center around that
+      let centralAtomIndex: number | null = null;
+      let bestBondCount = 0;
+
+      for ( let i = 0; i < moleculeData.atoms.length; i++ ) {
+        const bondCount = moleculeData.bonds.filter( b => b.indexA === i || b.indexB === i ).length;
+
+        if ( bondCount > bestBondCount ) {
+          bestBondCount = bondCount;
+          centralAtomIndex = i;
+        }
+      }
+
+      const centralAtom = moleculeData.atoms[ centralAtomIndex! ];
+      return new Vector3( centralAtom.x, centralAtom.y, centralAtom.z );
+    }
+  }
+
+  /**
+   * Returns the electrostatic potential at the given vertex.
+   */
   public getElectrostaticPotential( vertex: SurfaceVertex ): number {
     if ( this.fieldModelProperty.value === 'psi4' ) {
       return vertex.espValue;
@@ -169,6 +179,9 @@ export default class RealMolecule extends PhetioObject {
     }
   }
 
+  /**
+   * Returns the electron density at the given vertex.
+   */
   public getElectronDensity( vertex: SurfaceVertex ): number {
     if ( this.fieldModelProperty.value === 'psi4' ) {
       return vertex.dtValue;
@@ -179,6 +192,11 @@ export default class RealMolecule extends PhetioObject {
     }
   }
 
+  /**
+   * Returns the electrostatic potential at the given point using simplified partial charges.
+   *
+   * NOTE: this can't use the psi4 model, because we only have ESP values at surface vertices for that.
+   */
   public getSimplifiedElectrostaticPotential( point: Vector3 ): number {
     let espValue = 0;
 
@@ -209,13 +227,18 @@ export default class RealMolecule extends PhetioObject {
     const factor = this.getBondDipoleFactor();
     for ( const bond of this.bonds ) {
       const muMag = bond.getDipoleMagnitudeDebye();
-      if ( muMag <= 1e-3 ) { continue; }
+      if ( muMag <= 1e-3 ) {
+        continue;
+      }
+
       const cap = factor * bond.getVisibleLength();
       globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
     }
+
     if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
       return 0;
     }
+
     return globalScalePerDebye;
   }
 
@@ -226,8 +249,8 @@ export default class RealMolecule extends PhetioObject {
    */
   public computeMolecularDipole(): Vector3 | null {
     const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
-    let cPos = 0;
-    let cNeg = 0;
+    let positiveCharge = 0;
+    let negativeCharge = 0;
 
     const positive = new Vector3( 0, 0, 0 );
     const negative = new Vector3( 0, 0, 0 );
@@ -236,21 +259,21 @@ export default class RealMolecule extends PhetioObject {
       const atom = this.atoms[ i ];
       const q = atom.getPartialCharge();
       if ( q > 0 ) {
-        cPos += q;
+        positiveCharge += q;
         positive.add( atom.position.timesScalar( q ) );
       }
       else if ( q < 0 ) {
-        cNeg += q;
+        negativeCharge += q;
         negative.add( atom.position.timesScalar( q ) );
       }
     }
 
-    if ( cPos !== 0 && cNeg !== 0 ) {
-      positive.divideScalar( cPos );
-      negative.divideScalar( cNeg );
+    if ( positiveCharge !== 0 && negativeCharge !== 0 ) {
+      positive.divideScalar( positiveCharge );
+      negative.divideScalar( negativeCharge );
 
       const sep = positive.minus( negative );
-      const factor = cPos / E_ANG_PER_DEBYE;
+      const factor = positiveCharge / E_ANG_PER_DEBYE;
       return sep.timesScalar( factor );
     }
     return null;
@@ -261,14 +284,12 @@ export default class RealMolecule extends PhetioObject {
    * Useful for visual consistency with bond dipole arrows.
    */
   public computeBondDipoleVectorSum(): Vector3 {
-    let sum = new Vector3( 0, 0, 0 );
+    const sum = new Vector3( 0, 0, 0 );
+
     for ( const bond of this.bonds ) {
-      const muMag = bond.getDipoleMagnitudeDebye();
-      if ( muMag > 1e-6 ) {
-        const dir = bond.getPositiveToNegativeDirection();
-        sum = sum.plus( dir.timesScalar( muMag ) );
-      }
+      sum.add( bond.getDipoleVector() );
     }
+
     return sum;
   }
 
@@ -282,21 +303,25 @@ export default class RealMolecule extends PhetioObject {
     if ( !centralAtom ) {
       return null;
     }
+
     const mu = this.computeBondDipoleVectorSum();
     const muMag = mu.getMagnitude();
     if ( muMag <= 1e-3 ) {
       return null;
     }
+
     const dir = mu.dividedScalar( muMag ).timesScalar( orientationSign );
-    const threshold = 0.95;
+    const threshold = 0.95; // dot product threshold
+
     let bestDot = threshold;
     let best: RealAtom | null = null;
+
     for ( const atom of this.atoms ) {
       if ( atom === centralAtom ) { continue; }
-      const v = atom.position.minus( centralAtom.position ).normalized();
-      const d = v.dot( dir );
-      if ( d > bestDot ) {
-        bestDot = d;
+      const vector = atom.position.minus( centralAtom.position ).normalized();
+      const dot = vector.dot( dir );
+      if ( dot > bestDot ) {
+        bestDot = dot;
         best = atom;
       }
     }
@@ -377,8 +402,7 @@ export default class RealMolecule extends PhetioObject {
     for ( let i = 0; i < this.atoms.length; i++ ) {
       centroid.add( this.atoms[ i ].position );
     }
-    centroid.divideScalar( this.atoms.length );
-    return centroid;
+    return centroid.divideScalar( this.atoms.length );
   }
 
   /**
@@ -551,6 +575,12 @@ export class RealBond {
       const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
       return Math.abs( valueDebye );
     }
+  }
+
+  public getDipoleVector(): Vector3 {
+    const muMag = this.getDipoleMagnitudeDebye();
+
+    return this.getPositiveToNegativeDirection().timesScalar( muMag );
   }
 }
 
