@@ -69,9 +69,6 @@ export default class SurfaceMesh extends THREE.Object3D {
     // SurfaceMesh regenerated when this color changes
     backMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlphaProperty.value.alpha;
     backMeshMaterial.onBeforeCompile = ( shader: THREE.Shader ) => {
-      console.log( 'onBeforeCompile for', backMeshMaterial.uuid );
-      console.log( shader.fragmentShader ); // inspect it
-
       shader.uniforms.uBg = { value: backMeshMaterial.userData.uBg };
       shader.uniforms.uAlpha = { value: backMeshMaterial.userData.uAlpha };
 

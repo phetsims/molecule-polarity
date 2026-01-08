@@ -115,6 +115,17 @@ const MPColors = {
     default: 'rgb( 255, 255, 255 )'
   } ),
 
+  // 3D light colors
+  ambientLightProperty: new ProfileColorProperty( moleculePolarity, 'ambientLight', {
+    default: 'rgba( 51, 51, 51, 0.5 )'
+  } ),
+  sunLightProperty: new ProfileColorProperty( moleculePolarity, 'sunLight', {
+    default: 'rgba( 255, 255, 255, 0.5 )'
+  } ),
+  moonLightProperty: new ProfileColorProperty( moleculePolarity, 'moonLight', {
+    default: 'rgba( 255, 255, 255, 0.1 )'
+  } ),
+
   // E-field plates
   PLATE: 'rgb( 192, 192, 192 )',
 
