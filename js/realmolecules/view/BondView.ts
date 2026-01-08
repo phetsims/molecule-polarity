@@ -10,6 +10,9 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import { RealBond } from '../model/RealMolecule.js';
 import { BOND_RENDER_ORDER } from './RenderOrder.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
+import MPColors from '../../common/MPColors.js';
 
 const BOND_RADIUS = 0.085;
 
@@ -17,8 +20,7 @@ export default class BondView extends THREE.Object3D {
   private readonly meshes: THREE.Mesh[] = [];
   private readonly bondRadius: number;
   private readonly bond: RealBond;
-  private readonly bondGeometry: THREE.CylinderGeometry;
-  private readonly bondMaterial: THREE.MeshLambertMaterial;
+  private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor( bond: RealBond ) {
     super();
@@ -26,11 +28,20 @@ export default class BondView extends THREE.Object3D {
     this.bond = bond;
 
     const bondGeometry = new THREE.CylinderGeometry( 1, 1, 1, 32, 1, false );
+    this.disposeCallbacks.push( () => bondGeometry.dispose() );
+
     const bondMaterial = new THREE.MeshLambertMaterial( {
       color: 0xffffff,
       depthTest: true,
       side: THREE.FrontSide
     } );
+    this.disposeCallbacks.push( () => bondMaterial.dispose() );
+
+    const colorListener = ( color: Color ) => {
+      bondMaterial.color = ThreeUtils.colorToThree( color );
+    };
+    MPColors.bondProperty.link( colorListener );
+    this.disposeCallbacks.push( () => MPColors.bondProperty.unlink( colorListener ) );
 
     for ( let i = 0; i < bond.bondType; i++ ) {
       const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
@@ -38,9 +49,6 @@ export default class BondView extends THREE.Object3D {
       this.add( mesh );
       this.meshes.push( mesh );
     }
-
-    this.bondGeometry = bondGeometry;
-    this.bondMaterial = bondMaterial;
   }
 
   public setTransforms( towardsEnd: Vector3, center: Vector3, distance: number, offsets: Vector3[] ): void {
@@ -98,8 +106,7 @@ export default class BondView extends THREE.Object3D {
   }
 
   public dispose(): void {
-    this.bondGeometry.dispose();
-    this.bondMaterial.dispose();
+    this.disposeCallbacks.forEach( callback => callback() );
   }
 }
 

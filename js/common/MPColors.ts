@@ -86,6 +86,10 @@ const MPColors = {
     default: 'rgb( 255, 200, 0 )'
   } ),
 
+  bondProperty: new ProfileColorProperty( moleculePolarity, 'bond', {
+    default: 'white'
+  } ),
+
   // E-field plates
   PLATE: 'rgb( 192, 192, 192 )',
 
