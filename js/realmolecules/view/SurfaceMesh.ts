@@ -46,7 +46,7 @@ export default class SurfaceMesh extends THREE.Object3D {
     const frontMeshMaterial = new THREE.MeshBasicMaterial( {
       vertexColors: true,
       transparent: true,
-      opacity: surfaceType === 'none' ? 0 : 0.25,
+      opacity: surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceFrontAlpha.value.alpha, // SurfaceMesh regenerated when this color changes
       depthWrite: false,
       side: THREE.FrontSide
     } );
@@ -60,7 +60,8 @@ export default class SurfaceMesh extends THREE.Object3D {
     // HANDLE custom shader to blend with the background color --- since our backMeshMaterial can't be transparent
     // otherwise it renders "in front" of things.
     backMeshMaterial.userData.uBg = ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value );
-    backMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : 0.75; // not updated
+    // SurfaceMesh regenerated when this color changes
+    backMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlpha.value.alpha;
     backMeshMaterial.onBeforeCompile = ( shader: THREE.Shader ) => {
       console.log( 'onBeforeCompile for', backMeshMaterial.uuid );
       console.log( shader.fragmentShader ); // inspect it

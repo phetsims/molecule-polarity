@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import Color from '../../../scenery/js/util/Color.js';
 import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
 import moleculePolarity from '../moleculePolarity.js';
@@ -31,9 +30,8 @@ const MPColors = {
   ATOM_B: 'rgb( 0, 255, 0 )',
   ATOM_C: 'rgb( 255, 175, 175)',
   BOND: 'rgb( 140, 140, 140 )',
-  OXYGEN: PhetColorScheme.RED_COLORBLIND,
-  CARBON: '#444',
 
+  // Atom colors
   boronProperty: new ProfileColorProperty( moleculePolarity, 'boron', {
     default: Element.B.color
   } ),
@@ -56,6 +54,7 @@ const MPColors = {
     default: Element.O.color
   } ),
 
+  // Foreground colors for atom labels (or for the electronegativity tables)
   boronForegroundProperty: new ProfileColorProperty( moleculePolarity, 'boronForeground', {
     default: 'black'
   } ),
@@ -86,8 +85,17 @@ const MPColors = {
     default: 'rgb( 255, 200, 0 )'
   } ),
 
+  // Molecule 3D bond colors
   bondProperty: new ProfileColorProperty( moleculePolarity, 'bond', {
     default: 'white'
+  } ),
+
+  // Alpha control for back/front molecule surfaces
+  moleculeSurfaceBackAlpha: new ProfileColorProperty( moleculePolarity, 'moleculeSurfaceBackAlpha', {
+    default: 'rgba( 255, 255, 255, 0.75 )'
+  } ),
+  moleculeSurfaceFrontAlpha: new ProfileColorProperty( moleculePolarity, 'moleculeSurfaceFrontAlpha', {
+    default: 'rgba( 255, 255, 255, 0.25 )'
   } ),
 
   // E-field plates

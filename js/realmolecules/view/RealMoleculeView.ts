@@ -24,6 +24,7 @@ import AtomView from './AtomView.js';
 import BondView from './BondView.js';
 import { BondDipoleModel } from '../model/BondDipoleModel.js';
 import { FieldModel } from '../model/FieldModel.js';
+import MPColors from '../../common/MPColors.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -57,8 +58,12 @@ export default class RealMoleculeView extends THREE.Object3D {
       viewProperties.bondDipolesVisibleProperty,
       orientationSignProperty,
       MPPreferences.surfaceColorProperty,
+
+      // Properties that trigger updates that don't need to be accessed here
       bondDipoleModelProperty,
-      fieldModelProperty
+      fieldModelProperty,
+      MPColors.moleculeSurfaceBackAlpha,
+      MPColors.moleculeSurfaceFrontAlpha
     ], (
       molecule,
       surfaceType,
@@ -67,9 +72,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       molecularDipoleVisible,
       bondDipolesVisible,
       orientationSign,
-      surfaceColor,
-      bondDipoleModel,
-      fieldModel
+      surfaceColor
     ) => {
 
       // Clear out children
