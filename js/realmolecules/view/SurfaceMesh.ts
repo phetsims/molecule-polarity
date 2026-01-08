@@ -15,8 +15,7 @@ import { SurfaceColor } from '../../common/model/SurfaceColor.js';
 
 export default class SurfaceMesh extends THREE.Mesh {
 
-  private meshGeometry: THREE.BufferGeometry;
-  private meshMaterial: THREE.MeshBasicMaterial;
+  private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor(
     molecule: RealMolecule,
@@ -53,14 +52,14 @@ export default class SurfaceMesh extends THREE.Mesh {
     // @ts-expect-error Having to use external lib like this
     super( window.ThreeLoopSubdivision.modify( meshGeometry, 2 ), meshMaterial );
 
+    this.disposeCallbacks.push( () => meshGeometry.dispose() );
+    this.disposeCallbacks.push( () => meshMaterial.dispose() );
+
     this.renderOrder = SURFACE_MESH_RENDER_ORDER;
-    this.meshGeometry = meshGeometry;
-    this.meshMaterial = meshMaterial;
   }
 
   public dispose(): void {
-    this.meshGeometry.dispose();
-    this.meshMaterial.dispose();
+    this.disposeCallbacks.forEach( callback => callback() );
   }
 }
 

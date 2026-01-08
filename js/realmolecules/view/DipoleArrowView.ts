@@ -24,22 +24,33 @@ export default class DipoleArrowView extends THREE.Object3D {
   private cross: THREE.Mesh;
   private crossAnchor: THREE.Object3D;
   private material: THREE.MeshLambertMaterial;
-  private readonly bodyGeometry: THREE.CylinderGeometry;
-  private readonly headGeometry: THREE.ConeGeometry;
-  private readonly crossGeometry: THREE.CylinderGeometry;
+  private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor(
     isBondDipole: boolean
   ) {
     super();
 
-    const material = new THREE.MeshLambertMaterial( { color: isBondDipole ? 0x000000 : ThreeUtils.colorToThree( new Color( MPColors.MOLECULAR_DIPOLE ) ) } );
+    const colorProperty = isBondDipole ? MPColors.bondDipoleProperty : MPColors.molecularDipoleProperty;
+
+    const material = new THREE.MeshLambertMaterial();
     this.material = material;
+    this.disposeCallbacks.push( () => material.dispose() );
+
+    // Color listener
+    const colorListener = ( color: Color ) => {
+      material.color = ThreeUtils.colorToThree( color );
+    };
+    colorProperty.link( colorListener );
+    this.disposeCallbacks.push( () => colorProperty.unlink( colorListener ) );
 
     // Will be scaled below
     const bodyGeometry = new THREE.CylinderGeometry( 1, 1, 1, 24, 1, false );
+    this.disposeCallbacks.push( () => bodyGeometry.dispose() );
     const headGeometry = new THREE.ConeGeometry( 1, 1, 24, 1, false );
+    this.disposeCallbacks.push( () => headGeometry.dispose() );
     const crossGeometry = new THREE.CylinderGeometry( 1, 1, 1, 16, 1, false );
+    this.disposeCallbacks.push( () => crossGeometry.dispose() );
 
     this.body = new THREE.Mesh( bodyGeometry, material );
     this.head = new THREE.Mesh( headGeometry, material );
@@ -59,10 +70,6 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.add( this.body );
     this.add( this.head );
     this.add( this.crossAnchor );
-
-    this.bodyGeometry = bodyGeometry;
-    this.headGeometry = headGeometry;
-    this.crossGeometry = crossGeometry;
   }
 
   public updateColor( matchesElectronegativity: boolean ): void {
@@ -109,10 +116,7 @@ export default class DipoleArrowView extends THREE.Object3D {
   }
 
   public dispose(): void {
-    this.material.dispose();
-    this.bodyGeometry.dispose();
-    this.headGeometry.dispose();
-    this.crossGeometry.dispose();
+    this.disposeCallbacks.forEach( callback => callback() );
   }
 }
 

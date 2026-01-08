@@ -29,7 +29,7 @@ export default class MolecularDipoleNode extends DipoleNode {
     const options = optionize<MolecularDipoleNodeOptions, SelfOptions, DipoleNodeOptions>()( {
 
       // DipoleNodeOptions
-      fill: MPColors.MOLECULAR_DIPOLE
+      fill: MPColors.molecularDipoleProperty
     }, providedOptions );
 
     super( molecule.dipoleProperty, options );
@@ -49,7 +49,7 @@ export default class MolecularDipoleNode extends DipoleNode {
    * Creates an icon, for use in control panels.
    */
   public static override createIcon(): Node {
-    return DipoleNode.createIcon( { fill: MPColors.MOLECULAR_DIPOLE } );
+    return DipoleNode.createIcon( { fill: MPColors.molecularDipoleProperty } );
   }
 }
 

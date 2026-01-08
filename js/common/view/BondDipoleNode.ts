@@ -28,7 +28,7 @@ export default class BondDipoleNode extends DipoleNode {
     const options = optionize<BondDipoleNodeOptions, SelfOptions, DipoleNodeOptions>()( {
 
       // DipoleNodeOptions
-      fill: MPColors.BOND_DIPOLE
+      fill: MPColors.bondDipoleProperty
     }, providedOptions );
 
     super( bond.dipoleProperty, options );
@@ -59,7 +59,7 @@ export default class BondDipoleNode extends DipoleNode {
    * Creates an icon, for use in control panels.
    */
   public static override createIcon(): Node {
-    return DipoleNode.createIcon( { fill: MPColors.BOND_DIPOLE } );
+    return DipoleNode.createIcon( { fill: MPColors.bondDipoleProperty } );
   }
 }
 

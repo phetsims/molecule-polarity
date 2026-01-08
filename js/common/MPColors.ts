@@ -78,9 +78,13 @@ const MPColors = {
     default: 'white'
   } ),
 
-  // dipoles
-  BOND_DIPOLE: 'black',
-  MOLECULAR_DIPOLE: 'rgb( 255, 200, 0 )',
+  // Dipoles
+  bondDipoleProperty: new ProfileColorProperty( moleculePolarity, 'bondDipole', {
+    default: 'black'
+  } ),
+  molecularDipoleProperty: new ProfileColorProperty( moleculePolarity, 'molecularDipole', {
+    default: 'rgb( 255, 200, 0 )'
+  } ),
 
   // E-field plates
   PLATE: 'rgb( 192, 192, 192 )',
