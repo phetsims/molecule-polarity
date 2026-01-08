@@ -11,6 +11,7 @@ import MPColors from '../../common/MPColors.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
+import { DIPOLE_RENDER_ORDER } from './RenderOrder.js';
 
 const bodyRadius = 0.03;
 const headRadius = 0.1;
@@ -56,6 +57,10 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.head = new THREE.Mesh( headGeometry, material );
     this.cross = new THREE.Mesh( crossGeometry, material );
     this.crossAnchor = new THREE.Object3D();
+
+    this.body.renderOrder = DIPOLE_RENDER_ORDER;
+    this.head.renderOrder = DIPOLE_RENDER_ORDER;
+    this.cross.renderOrder = DIPOLE_RENDER_ORDER;
 
     this.body.scale.x = this.body.scale.z = bodyRadius;
     this.head.scale.x = this.head.scale.z = headRadius;
