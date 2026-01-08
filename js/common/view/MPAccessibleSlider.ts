@@ -6,38 +6,44 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
-import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/accessibility/AccessibleSlider.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import { toClock } from './toClock.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type ParentOptions = NodeOptions & AccessibleSliderOptions;
 
-export type MPAccessibleSliderOptions = SelfOptions & StrictOmit<ParentOptions, 'interactiveHighlightEnabled' | 'enabledRangeProperty' | 'valueProperty' | 'startDrag' | 'endDrag'>;
+export type MPAccessibleSliderOptions = SelfOptions & StrictOmit<ParentOptions,
+  'interactiveHighlightEnabled' | 'enabledRangeProperty' | 'valueProperty' | 'startDrag' | 'endDrag'>;
+
+const DEFAULT_STEP = 2 * Math.PI / 24;
 
 export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
   public constructor( valueProperty: NumberProperty, providedOptions: MPAccessibleSliderOptions ) {
-    const options = optionize<SelfOptions, EmptySelfOptions, ParentOptions>()( {
+
+    const options = optionize<MPAccessibleSliderOptions, SelfOptions, ParentOptions>()( {
       // AccessibleSliderOptions
       enabledRangeProperty: valueProperty.rangeProperty,
       valueProperty: valueProperty,
-      keyboardStep: Math.PI / 8,
-      shiftKeyboardStep: Math.PI / 8,
+      keyboardStep: DEFAULT_STEP,
+      shiftKeyboardStep: DEFAULT_STEP,
+      constrainValue: ( value: number ) => {
+        return roundToInterval( value, providedOptions.shiftKeyboardStep || DEFAULT_STEP );
+      },
       createAriaValueText: angle => {
         angle *= -1; // Inverting the angle to have +Y pointing up
-        let angleDeg = toDegrees( angle < 0 ? angle + 2 * Math.PI : angle ); // Mapping to [0-360]
-        angleDeg = toFixedNumber( angleDeg, 1 ); // Rounding
+        const angleLabel = toClock( angle );
         return MoleculePolarityFluent.a11y.direction.format( {
-          angle: angleDeg,
+          angle: angleLabel,
           direction: Math.abs( Math.sin( angle ) ) <= 0.01 ? 'horizontal' :
-                      Math.abs( Math.cos( angle ) ) <= 0.01 ? 'vertical' : 'diagonal'
-          } );
+                     Math.abs( Math.cos( angle ) ) <= 0.01 ? 'vertical' : 'diagonal'
+        } );
       },
       startDrag: event => {
         this.moveToFront();

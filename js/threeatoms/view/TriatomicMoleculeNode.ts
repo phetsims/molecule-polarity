@@ -61,7 +61,7 @@ export default class TriatomicMoleculeNode extends Node {
       phetioState: true,
       createAriaValueText: ( value: number ) => {
         return MoleculePolarityFluent.a11y.oClock.format( {
-          hour: toClock( value + molecule.angleProperty.value ).toString()
+          hour: toClock( value + molecule.angleProperty.value )
         } );
       },
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
@@ -84,7 +84,7 @@ export default class TriatomicMoleculeNode extends Node {
       phetioState: true,
       createAriaValueText: ( value: number ) => {
         return MoleculePolarityFluent.a11y.oClock.format( {
-          hour: toClock( value + molecule.angleProperty.value ).toString()
+          hour: toClock( value + molecule.angleProperty.value )
         } );
       },
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,

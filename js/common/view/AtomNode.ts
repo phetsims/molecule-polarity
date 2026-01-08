@@ -14,7 +14,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -25,9 +24,7 @@ import MPAccessibleSlider, { MPAccessibleSliderOptions } from './MPAccessibleSli
 
 type SelfOptions = EmptySelfOptions;
 
-export type AtomNodeOptions = SelfOptions &
-  PickRequired<MPAccessibleSliderOptions, 'tandem'> &
-  MPAccessibleSliderOptions;
+export type AtomNodeOptions = SelfOptions & MPAccessibleSliderOptions;
 
 export default class AtomNode extends MPAccessibleSlider {
 
@@ -45,8 +42,8 @@ export default class AtomNode extends MPAccessibleSlider {
         // MPAccessibleSliderOptions
         cursor: 'pointer',
         phetioInputEnabledPropertyInstrumented: true,
-        keyboardStep: Math.PI / 2,
-        shiftKeyboardStep: Math.PI / 6
+        keyboardStep: Math.PI / 6,
+        shiftKeyboardStep: Math.PI / 12
       }, providedOptions );
 
     // atom
