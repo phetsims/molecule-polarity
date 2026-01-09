@@ -397,7 +397,7 @@ a11y:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
         lastFourRegions: 'Electron density is { $density } distributed, { $electronDensityShift } towards Atom { $atom }.'
       electricFieldAligned: 'Molecule aligned with electric field.'
-      orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
+      orientationDescription: 'Molecule is { $orientation } with Atom A at { $atomAPosition } o''clock and Atom B at { $atomBPosition } o''clock.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }.'
     
     # Rotate Molecule AB Slider

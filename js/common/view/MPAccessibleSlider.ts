@@ -7,6 +7,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
@@ -22,7 +23,7 @@ type ParentOptions = NodeOptions & AccessibleSliderOptions;
 export type MPAccessibleSliderOptions = SelfOptions & StrictOmit<ParentOptions,
   'interactiveHighlightEnabled' | 'enabledRangeProperty' | 'valueProperty' | 'startDrag' | 'endDrag'>;
 
-const DEFAULT_STEP = 2 * Math.PI / 24;
+const DEFAULT_STEP = toRadians( 5 );
 
 export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
   public constructor( valueProperty: NumberProperty, providedOptions: MPAccessibleSliderOptions ) {
@@ -31,8 +32,8 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
       // AccessibleSliderOptions
       enabledRangeProperty: valueProperty.rangeProperty,
       valueProperty: valueProperty,
-      keyboardStep: DEFAULT_STEP,
-      shiftKeyboardStep: DEFAULT_STEP,
+      keyboardStep: DEFAULT_STEP * 6, // 30 degrees or 1h on the clock
+      shiftKeyboardStep: DEFAULT_STEP, // 5 degrees or 30min on the clock
       constrainValue: ( value: number ) => {
         return roundToInterval( value, providedOptions.shiftKeyboardStep || DEFAULT_STEP );
       },

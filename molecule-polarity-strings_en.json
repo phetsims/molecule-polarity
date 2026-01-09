@@ -502,7 +502,7 @@
           "value": "Molecule aligned with electric field."
         },
         "orientationDescription": {
-          "value": "Molecule is { $orientation } with Atom A { $atomAPosition } o'clock and Atom B { $atomBPosition } o'clock."
+          "value": "Molecule is { $orientation } with Atom A at { $atomAPosition } o'clock and Atom B at { $atomBPosition } o'clock."
         },
         "electronegativityValues": {
           "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }."

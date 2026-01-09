@@ -6,7 +6,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
@@ -38,12 +37,12 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
     const absoluteBondAngleABProperty = new DerivedProperty( [
       triatomicMolecule.bondAngleABProperty,
       triatomicMolecule.angleProperty
-    ], ( bondAngleAB: number, moleculeAngle: number ) => roundToInterval( bondAngleAB + moleculeAngle, 0.1 ) );
+    ], ( bondAngleAB: number, moleculeAngle: number ) => bondAngleAB + moleculeAngle );
 
     const absoluteBondAngleBCProperty = new DerivedProperty( [
       triatomicMolecule.bondAngleBCProperty,
       triatomicMolecule.angleProperty
-    ], ( bondAngleBC: number, moleculeAngle: number ) => roundToInterval( bondAngleBC + moleculeAngle, 0.1 ) );
+    ], ( bondAngleBC: number, moleculeAngle: number ) => bondAngleBC + moleculeAngle );
 
     super( [
 

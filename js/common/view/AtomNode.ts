@@ -41,9 +41,7 @@ export default class AtomNode extends MPAccessibleSlider {
 
         // MPAccessibleSliderOptions
         cursor: 'pointer',
-        phetioInputEnabledPropertyInstrumented: true,
-        keyboardStep: Math.PI / 6,
-        shiftKeyboardStep: Math.PI / 12
+        phetioInputEnabledPropertyInstrumented: true
       }, providedOptions );
 
     // atom

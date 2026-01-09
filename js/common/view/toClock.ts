@@ -1,31 +1,36 @@
 // Copyright 2025-2026, University of Colorado Boulder
 
 /**
- * Utility function for converting radians to clock representation
+ * Utility function for converting radians to clock representation.
+ *
+ * Mapping assigns 0° as 3:00 and 90° as 6:00. We also round to nearest 5 degrees, or 30mins.
+ *
+ * So for example 95° (90° + 5°) is 6:30.
  *
  * @author Agustín Vallejo
  */
 
-import { moduloBetweenDown } from '../../../../dot/js/util/moduloBetweenDown.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import normalizeAngle from '../model/normalizeAngle.js';
 
 export const toClock = ( radians: number ): string => {
 
-  const hours = roundToInterval(
-    moduloBetweenDown( // Constrains to [0,360)°
-      toDegrees( radians + Math.PI / 2 ), // Rad to degrees with +X Axis starts as 90° (3 o clock)
-      0, 360 ) / 30, 0.5 ); // Each hour represents 30°
+  const degrees = roundToInterval( toDegrees( normalizeAngle( radians + Math.PI / 2 ) ), 5 ); // Round to nearest 5 degrees
 
-  if ( hours % 1 !== 0 ) {
-    // Half hour case
-    const hourFloor = Math.floor( hours ) || 12; // Map 0 to 12
-    return `${hourFloor}:30`;
+  const hours = Math.floor( degrees / 30 ) || 12;
+
+  if ( degrees % 30 !== 0 ) {
+    // Non-exact hour case
+    const minutes = roundSymmetric( ( degrees % 30 ) * 2 );
+    const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    return `${hours}:${minutesString}`;
   }
   else {
     // Exact hour case
-    return `${hours || 12}`; // Map 0 to 12
+    return `${hours}`; // Map 0 to 12
   }
 };
 

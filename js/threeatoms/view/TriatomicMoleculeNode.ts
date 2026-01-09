@@ -71,9 +71,7 @@ export default class TriatomicMoleculeNode extends Node {
       tandem: options.tandem.createTandem( 'atomBNode' ),
       phetioInputEnabledPropertyInstrumented: true,
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty,
-      keyboardStep: Math.PI / 4,
-      shiftKeyboardStep: Math.PI / 4
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
     } );
     const atomCNode = new AtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
       tandem: options.tandem.createTandem( 'atomCNode' ),

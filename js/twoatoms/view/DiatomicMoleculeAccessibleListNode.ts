@@ -10,6 +10,7 @@ import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
+import { toClock } from '../../common/view/toClock.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
@@ -176,12 +177,8 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
               return absSin === 0 ? 'horizontal' : absSin === 1 ? 'vertical' : 'diagonal';
             } )
           } ),
-          atomAPosition: DescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty.derived(
-            angle => {
-              return angle + Math.PI;
-            }
-          ) ),
-          atomBPosition: DescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty )
+          atomAPosition: diatomicMolecule.angleProperty.derived( angle => toClock( angle + Math.PI ) ),
+          atomBPosition: diatomicMolecule.angleProperty.derived( angle => toClock( angle ) )
         } )
       },
 
