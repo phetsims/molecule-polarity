@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -37,7 +39,10 @@ export default class MoleculeAngleDragListener extends DragListener {
     // Gets the angle (in radians) of the pointer, relative to relativeNode.
     const getAngle = ( event: SceneryEvent ) => {
       const point = relativeNode.globalToParentPoint( event.pointer.point );
-      return new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle;
+
+      // Rounding to nearest 5° to match keyboard dragging increments.
+      return roundToInterval( new Vector2( point.x - molecule.position.x, point.y - molecule.position.y ).angle,
+        toRadians( 5 ) );
     };
 
     const options = optionize<MoleculeAngleDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
