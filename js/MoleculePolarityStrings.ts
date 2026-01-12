@@ -180,7 +180,6 @@ type StringsType = {
     'orientationMoleculeStringProperty': LocalizedStringProperty;
     'partialChargeSignStringProperty': LocalizedStringProperty;
     'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
-    'partialChargeProgressStringProperty': LocalizedStringProperty;
     'polarityStringProperty': LocalizedStringProperty;
     'rotationStringProperty': LocalizedStringProperty;
     'shapeStringProperty': LocalizedStringProperty;

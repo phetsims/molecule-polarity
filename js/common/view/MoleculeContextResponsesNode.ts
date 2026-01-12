@@ -78,11 +78,13 @@ export default class MoleculeContextResponsesNode extends Node {
 
     if ( Math.abs( changeInEN ) === 0 ) { return; } // no change, no context response
 
+    // DeltaEN of the molecule, which depending on the atom we might need to change the sign for context responses
+    const invertedDeltaEN = this.invertMapping ? -this.molecule.deltaENProperty.value : this.molecule.deltaENProperty.value;
+
     // Dipole
     const previousDipole = this.molecule.previousDipoleProperty.value;
     const currentDipole = this.molecule.dipoleProperty.value;
     const dipoleMagnitudeChange = currentDipole.magnitude - previousDipole.magnitude;
-    const invertedDipoleMagnitudeChange = this.invertMapping ? -dipoleMagnitudeChange : dipoleMagnitudeChange;
     const isDipoleZero = currentDipole.magnitude < 0.01;
 
     ///////// VISIBILITY PROPERTIES /////////
@@ -134,14 +136,7 @@ export default class MoleculeContextResponsesNode extends Node {
     partialChargesVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
         progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
-          progress: this.changeInENtoProgress( invertedDipoleMagnitudeChange, changeInEN )
-        } )
-      } )
-    );
-    partialChargesVisible && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeSignChange.format( {
-        sign: MoleculePolarityFluent.a11y.partialChargeSign.format( {
-          sign: invertedDipoleMagnitudeChange < 0 ? 'positive' : 'negative'
+          progress: this.changeInENtoProgress( invertedDeltaEN, changeInEN )
         } )
       } )
     );
@@ -155,7 +150,7 @@ export default class MoleculeContextResponsesNode extends Node {
     surfaceType === 'electrostaticPotential' && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
         progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
-          progress: this.changeInENtoProgress( invertedDipoleMagnitudeChange, changeInEN )
+          progress: this.changeInENtoProgress( invertedDeltaEN, changeInEN )
         } )
       } )
     );

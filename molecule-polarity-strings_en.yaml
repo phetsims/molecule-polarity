@@ -328,14 +328,7 @@ a11y:
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
       huge: 'huge'
-  
-  # PartialChargeProgress3 - Partial Charge Progress (Screen 1/2)
-  partialChargeProgress:
-    select_progress:
-      morePositive: 'more positive'
-      moreNegative: 'more negative'
-      zero: 'zero'
-  
+
   # Polarity6 - Bond Polarity (Screen 1/2)
   polarity:
     select_polarity:
