@@ -6,19 +6,33 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import MobiusScreenView from '../../../../mobius/js/MobiusScreenView.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import TInputListener from '../../../../scenery/js/input/TInputListener.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
+import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
@@ -27,19 +41,6 @@ import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
-import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
-import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
-import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import MPColors from '../../common/MPColors.js';
-import Property from '../../../../axon/js/Property.js';
-import Color from '../../../../scenery/js/util/Color.js';
-import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -149,7 +150,16 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     moleculeNode.addInputListener( keyboardDragListener );
 
+    const temporaryMoleculeParagraphNode = new Node();
+    this.addChild( temporaryMoleculeParagraphNode );
+
+    model.moleculeProperty.link( molecule => {
+      const dipole = molecule.realMolecularDipole;
+      temporaryMoleculeParagraphNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( dipole.magnitude, 2 );
+    } );
+
     this.pdomPlayAreaNode.pdomOrder = [
+      temporaryMoleculeParagraphNode,
       moleculeNode
     ];
 
@@ -441,11 +451,13 @@ class BackgroundCompositePass extends window.ThreePass {
 
     this.uniforms = {
       tDiffuse: { value: null },
-      uBg: { value: new THREE.Vector3(
-        this.backgroundColor.r,
-        this.backgroundColor.g,
-        this.backgroundColor.b
-      ) }
+      uBg: {
+        value: new THREE.Vector3(
+          this.backgroundColor.r,
+          this.backgroundColor.g,
+          this.backgroundColor.b
+        )
+      }
     };
 
     this.material = new THREE.RawShaderMaterial( {
@@ -476,8 +488,8 @@ class BackgroundCompositePass extends window.ThreePass {
       depthWrite: false
     } );
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error - FROM three-r160-addon-postprocessing
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error - FROM three-r160-addon-postprocessing
     this.fsQuad = new window.ThreeFullScreenQuad( this.material );
   }
 

@@ -54,8 +54,8 @@ export default class ThreeAtomsScreenView extends ScreenView {
     } );
 
     moleculeDescriptionNode.addChild( new Node( {
-      accessibleParagraph: model.triatomicMolecule.deltaENProperty.derived( deltaEN => {
-        return 'TEMPORARY: Delta EN: ' + toFixed( deltaEN, 2 );
+      accessibleParagraph: model.triatomicMolecule.dipoleProperty.derived( dipole => {
+        return 'TEMPORARY: Dipole Magnitude: ' + toFixed( dipole.magnitude, 2 );
       } )
     } ) );
 

@@ -54,8 +54,8 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
 
     moleculeDescriptionNode.addChild( new Node( {
-      accessibleParagraph: model.diatomicMolecule.deltaENProperty.derived( deltaEN => {
-        return 'TEMPORARY: Delta EN: ' + toFixed( deltaEN, 2 );
+      accessibleParagraph: model.diatomicMolecule.dipoleProperty.derived( dipole => {
+        return 'TEMPORARY: Dipole Magnitude: ' + toFixed( dipole.magnitude, 2 );
       } )
     } ) );
 
