@@ -5,9 +5,11 @@
  * @author Agustín Vallejo
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../joist/js/ScreenSummaryContent.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -27,11 +29,13 @@ export default class RealMoleculesScreenSummaryContentNode extends ScreenSummary
 
     const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculesScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.realMoleculesScreen.screenSummary.currentDetails.createProperty( {
-        moleculeName: currentMoleculeNameDynamicProperty, // DescriptionMaps.createPolarityStringProperty( model.triatomicMolecule.deltaENProperty ),
-        realPolarity: 'TODO', // DescriptionMaps.createShapeStringProperty( model.triatomicMolecule.bondAngleABCProperty ),
-        shapeGeometry: 'TODO' // MoleculePolarityFluent.a11y.field.createProperty( {
-        // state: model.eFieldEnabledProperty.derived( enabled => enabled ? 'on' : 'off' )
-        // } )
+        moleculeName: currentMoleculeNameDynamicProperty,
+        realPolarity: DescriptionMaps.createRealPolarityStringProperty(
+          new DerivedProperty( [ model.moleculeProperty ], molecule => molecule.realMolecularDipole.magnitude )
+        ),
+        shapeGeometry: DescriptionMaps.createShapeGeometryStringProperty(
+          new DerivedProperty( [ model.moleculeProperty ], molecule => molecule.geometry )
+        )
       } ),
       playAreaContent: MoleculePolarityStrings.a11y.realMoleculesScreen.screenSummary.playAreaStringProperty,
       controlAreaContent: MoleculePolarityStrings.a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty,

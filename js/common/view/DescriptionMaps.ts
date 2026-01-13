@@ -11,6 +11,7 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import { MoleculeGeometry } from '../../realmolecules/model/RealMolecule.js';
 
 export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
@@ -180,6 +181,24 @@ export default class DescriptionMaps {
            absAngle <= 0.9 * Math.PI ? 'slightlyBent' :
            absAngle <= 0.95 * Math.PI ? 'nearlyLinear' :
            'linear';
+  }
+  
+  public static createShapeGeometryStringProperty( geometry: TReadOnlyProperty<MoleculeGeometry> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.shapeGeometry.createProperty( {
+      geometry: geometry
+    } );
+  }
+
+  public static createRealPolarityStringProperty( dipoleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.realPolarity.createProperty( {
+      polarity: dipoleProperty.derived( dipole => DescriptionMaps.dipoleToRealPolarity( dipole ) )
+    } );
+  }
+
+  public static formatRealPolarityString( dipole: number ): string {
+    return MoleculePolarityFluent.a11y.realPolarity.format( {
+      polarity: DescriptionMaps.dipoleToRealPolarity( dipole )
+    } );
   }
 
   public static createPolarityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {

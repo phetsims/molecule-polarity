@@ -8,20 +8,22 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
+import Element from '../../../../nitroglycerin/js/Element.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
-import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
-import Element from '../../../../nitroglycerin/js/Element.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
-import Color from '../../../../scenery/js/util/Color.js';
-import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
 import { BondDipoleModel } from './BondDipoleModel.js';
 import { FieldModel } from './FieldModel.js';
+import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
+import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
+import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
+
+export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
 // Visualization constants for dipoles
 const DEFAULT_DIPOLE_FACTOR = 1.3;
@@ -48,6 +50,7 @@ export default class RealMolecule extends PhetioObject {
   /**
    * @param symbol - chemical symbol of the molecule
    * @param fullNameProperty - full name of the molecule
+   * @param geometry - geometry of the molecule (linear, bent, tetrahedral, etc.)
    * @param bondDipoleModelProperty - determines how bond dipoles are calculated
    * @param fieldModelProperty - determines how fields (ESP, electron density) are calculated
    * @param tandem
@@ -55,6 +58,7 @@ export default class RealMolecule extends PhetioObject {
   public constructor(
     public symbol: string,
     public fullNameProperty: TReadOnlyProperty<string>,
+    public geometry: MoleculeGeometry,
     public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     public fieldModelProperty: TReadOnlyProperty<FieldModel>,
     tandem: Tandem

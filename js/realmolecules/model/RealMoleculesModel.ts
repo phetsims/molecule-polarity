@@ -7,19 +7,19 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
 import TModel from '../../../../joist/js/TModel.js';
+import THREE from '../../../../mobius/js/THREE.js';
+import ThreeQuaternionIO from '../../../../mobius/js/ThreeQuaternionIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import RealMolecule from './RealMolecule.js';
-import ThreeQuaternionIO from '../../../../mobius/js/ThreeQuaternionIO.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 import { BondDipoleModel } from './BondDipoleModel.js';
 import { FieldModel } from './FieldModel.js';
-import THREE from '../../../../mobius/js/THREE.js';
-import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
+import RealMolecule, { MoleculeGeometry } from './RealMolecule.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
@@ -53,10 +53,11 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
     } );
 
-    const createMolecule = ( symbol: string, nameStringProperty: LocalizedStringProperty ) => {
+    const createMolecule = ( symbol: string, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
       return new RealMolecule(
         symbol,
         nameStringProperty,
+        geometry,
         this.bondDipoleModelProperty,
         this.fieldModelProperty,
         moleculesTandem.createTandem( symbol )
@@ -64,28 +65,28 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     };
 
     this.molecules = [
-      createMolecule( 'H2', MoleculePolarityStrings.hydrogenStringProperty ),
-      createMolecule( 'N2', MoleculePolarityStrings.nitrogenStringProperty ),
-      createMolecule( 'O2', MoleculePolarityStrings.oxygenStringProperty ),
-      createMolecule( 'F2', MoleculePolarityStrings.fluorineStringProperty ),
-      createMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty ),
+      createMolecule( 'H2', MoleculePolarityStrings.hydrogenStringProperty, 'linear' ),
+      createMolecule( 'N2', MoleculePolarityStrings.nitrogenStringProperty, 'linear' ),
+      createMolecule( 'O2', MoleculePolarityStrings.oxygenStringProperty, 'linear' ),
+      createMolecule( 'F2', MoleculePolarityStrings.fluorineStringProperty, 'linear' ),
+      createMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty, 'linear' ),
 
-      createMolecule( 'H2O', MoleculePolarityStrings.waterStringProperty ),
-      createMolecule( 'CO2', MoleculePolarityStrings.carbonDioxideStringProperty ),
-      createMolecule( 'HCN', MoleculePolarityStrings.hydrogenCyanideStringProperty ),
-      createMolecule( 'O3', MoleculePolarityStrings.ozoneStringProperty ),
+      createMolecule( 'H2O', MoleculePolarityStrings.waterStringProperty, 'bent' ),
+      createMolecule( 'CO2', MoleculePolarityStrings.carbonDioxideStringProperty, 'linear' ),
+      createMolecule( 'HCN', MoleculePolarityStrings.hydrogenCyanideStringProperty, 'linear' ),
+      createMolecule( 'O3', MoleculePolarityStrings.ozoneStringProperty, 'bent' ),
 
-      createMolecule( 'NH3', MoleculePolarityStrings.ammoniaStringProperty ),
-      createMolecule( 'BH3', MoleculePolarityStrings.boraneStringProperty ),
-      createMolecule( 'BF3', MoleculePolarityStrings.boronTrifluorideStringProperty ),
-      createMolecule( 'CH2O', MoleculePolarityStrings.formaldehydeStringProperty ),
+      createMolecule( 'NH3', MoleculePolarityStrings.ammoniaStringProperty, 'trigonalPyramidal' ),
+      createMolecule( 'BH3', MoleculePolarityStrings.boraneStringProperty, 'trigonalPlanar' ),
+      createMolecule( 'BF3', MoleculePolarityStrings.boronTrifluorideStringProperty, 'trigonalPlanar' ),
+      createMolecule( 'CH2O', MoleculePolarityStrings.formaldehydeStringProperty, 'trigonalPlanar' ),
 
-      createMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty ),
-      createMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty ),
-      createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty ),
-      // createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty ),
-      createMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty ),
-      createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty )
+      createMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty, 'tetrahedral' ),
+      createMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty, 'tetrahedral' ),
+      createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty, 'tetrahedral' ),
+      // createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty, 'tetrahedral' ),
+      createMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty, 'tetrahedral' ),
+      createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty, 'tetrahedral' )
     ];
 
     const selectedMolecule = this.molecules.find( molecule => molecule.symbol === 'HF' )!;
