@@ -448,9 +448,9 @@ a11y:
       molecularDipoleDirection: '{ a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription } Molecular dipole points { $direction } o''clock.'
       molecularDipoleTwice: 'Molecular dipole is twice the size of bond dipoles.'
       bondDipoleAB: 'With { $magnitude } AB bond dipole arrow.'
-      bondDipoleABDescription: '{ a11y.threeAtomsScreen.moleculeABC.bondDipoleAB } AB bond dipole points to Atom { $atom }, towards { $direction } o''clock.'
+      bondDipoleABDescription: '{ a11y.threeAtomsScreen.moleculeABC.bondDipoleAB } AB bond dipole points to Atom { $atom }.'
       bondDipoleBC: 'With { $magnitude } BC bond dipole arrow.'
-      bondDipoleBCDescription: '{ a11y.threeAtomsScreen.moleculeABC.bondDipoleBC } BC bond dipole points to Atom { $atom }, towards { $direction } o''clock.'
+      bondDipoleBCDescription: '{ a11y.threeAtomsScreen.moleculeABC.bondDipoleBC } BC bond dipole points to Atom { $atom }.'
       partialChargesDescription:
         select_sign:
           positive: 'Atom { $atom } has { $magnitude } positive partial charge.'

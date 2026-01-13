@@ -146,14 +146,6 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
           magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
           ),
-          direction: new DerivedProperty(
-            [
-              absoluteBondAngleABProperty,
-              triatomicMolecule.bondAB.deltaENProperty
-            ], ( bondAngle: number, deltaEN: number ) => {
-              return deltaEN < 0 ? toClock( bondAngle ) : toClock( bondAngle + Math.PI );
-            }
-          ),
           atom: new DerivedProperty(
             [ triatomicMolecule.bondAB.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'A' : 'B'
           )
@@ -181,14 +173,6 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
           magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
-          ),
-          direction: new DerivedProperty(
-            [
-              absoluteBondAngleBCProperty,
-              triatomicMolecule.bondBC.deltaENProperty
-            ], ( bondAngle: number, deltaEN: number ) => {
-              return deltaEN > 0 ? toClock( bondAngle ) : toClock( bondAngle + Math.PI );
-            }
           ),
           atom: new DerivedProperty(
             [ triatomicMolecule.bondBC.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'B' : 'C'
