@@ -50,7 +50,7 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
       const objectResponse = checked ?
                              MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.checkedStringProperty.value :
                              MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( objectResponse );
     } );
   }
 }

@@ -68,7 +68,7 @@ export default class BondDipolesCheckbox extends MPCheckbox {
                              options.singular ?
                                 MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedStringProperty.value :
                                 MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedPluralStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( objectResponse );
     } );
   }
 }

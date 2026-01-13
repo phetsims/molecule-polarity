@@ -60,7 +60,7 @@ export default class EFieldControl extends VBox {
       const objectResponse = enabled ?
                              MoleculePolarityFluent.a11y.common.electricFieldToggle.onStringProperty.value :
                              MoleculePolarityFluent.a11y.common.electricFieldToggle.offStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse, { alertBehavior: 'queue' } );
+      this.addAccessibleContextResponse( objectResponse, { alertBehavior: 'queue' } );
     } );
   }
 }

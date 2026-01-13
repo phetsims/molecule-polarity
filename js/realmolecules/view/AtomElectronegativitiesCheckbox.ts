@@ -41,7 +41,7 @@ export default class AtomElectronegativitiesCheckbox extends MPCheckbox {
       const objectResponse = checked ?
                              MoleculePolarityFluent.a11y.common.atomElectronegativitiesCheckbox.checkedStringProperty.value :
                              MoleculePolarityFluent.a11y.common.atomElectronegativitiesCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( objectResponse );
     } );
   }
 }

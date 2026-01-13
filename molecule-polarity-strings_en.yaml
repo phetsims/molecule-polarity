@@ -117,9 +117,9 @@ a11y:
           blueWhiteRed: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).'
           realMolecules: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: TODO).'
       electronDensityHelpText: 'Electron density ranges from less to more (surface colors: white to dark grey).'
-      noneSelected: 'No charge surfaces shown'
-      electrostaticSelected: 'Electrostatic Potential surface shown'
-      electronDensitySelected: 'Electron Density surface shown'
+      noneSelected: 'No charge surfaces shown.'
+      electrostaticSelected: 'Electrostatic Potential surface shown.'
+      electronDensitySelected: 'Electron Density surface shown.'
     electricFieldToggle:
       accessibleName: 'Electric Field'
       accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'

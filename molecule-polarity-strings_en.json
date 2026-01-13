@@ -331,13 +331,13 @@
           "value": "Electron density ranges from less to more (surface colors: white to dark grey)."
         },
         "noneSelected": {
-          "value": "No charge surfaces shown"
+          "value": "No charge surfaces shown."
         },
         "electrostaticSelected": {
-          "value": "Electrostatic Potential surface shown"
+          "value": "Electrostatic Potential surface shown."
         },
         "electronDensitySelected": {
-          "value": "Electron Density surface shown"
+          "value": "Electron Density surface shown."
         }
       },
       "electricFieldToggle": {

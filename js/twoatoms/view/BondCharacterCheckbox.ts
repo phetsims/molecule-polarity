@@ -40,7 +40,7 @@ export default class BondCharacterCheckbox extends MPCheckbox {
       const objectResponse = checked ?
                              MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.checkedStringProperty.value :
                              MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( objectResponse );
     } );
   }
 }

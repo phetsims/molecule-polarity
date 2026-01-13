@@ -41,7 +41,7 @@ export default class AtomLabelsCheckbox extends MPCheckbox {
       const objectResponse = checked ?
                              MoleculePolarityFluent.a11y.common.atomLabelsCheckbox.checkedStringProperty.value :
                              MoleculePolarityFluent.a11y.common.atomLabelsCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( objectResponse );
     } );
   }
 }

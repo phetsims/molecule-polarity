@@ -41,7 +41,7 @@ export default class PartialChargesCheckbox extends MPCheckbox {
       const objectResponse = checked ?
                              MoleculePolarityFluent.a11y.common.partialChargesCheckbox.checkedStringProperty.value :
                              MoleculePolarityFluent.a11y.common.partialChargesCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleObjectResponse( objectResponse );
+      this.addAccessibleContextResponse( objectResponse );
     } );
   }
 }
