@@ -51,12 +51,15 @@ export default class RealMoleculesControl extends HBox {
     // {ComboBoxItem[]}
     const items = molecules.map( createItem );
 
+    const comboBox = new ComboBox( moleculeProperty, items, listParent, options.comboBoxOptions );
+
     options.children = [
       new Text( MoleculePolarityStrings.moleculeStringProperty, {
         font: new PhetFont( 22 ),
-        maxWidth: 150
+        maxWidth: 150,
+        visibleProperty: comboBox.visibleProperty
       } ),
-      new ComboBox( moleculeProperty, items, listParent, options.comboBoxOptions )
+      comboBox
     ];
 
     super( options );
