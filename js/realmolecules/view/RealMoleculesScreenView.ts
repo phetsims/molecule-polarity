@@ -218,7 +218,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
             createItem( 'loewdin', 'Loewdin' ),
             createItem( 'hirschfeld', 'Hirschfeld' ),
             createItem( 'mbis', 'MBIS' ),
-            createItem( 'psi4', 'Psi4' )
+            createItem( 'psi4', 'Psi4' ),
+            createItem( 'chelpg', 'CHELPG' )
           ], {
             spacing: 20
           } )
