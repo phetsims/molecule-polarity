@@ -9,7 +9,6 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -27,6 +26,7 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import { elementToColorProperty, elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -147,7 +147,7 @@ class Cell extends Node {
       fill: NORMAL_TEXT_COLOR
     } );
 
-    this.electronegativityText = new Text( Utils.toFixedNumber( electronegativity, 1 ), {
+    this.electronegativityText = new Text( toFixed( electronegativity, 1 ), {
       font: new PhetFont( 16 ),
       fill: NORMAL_TEXT_COLOR
     } );
