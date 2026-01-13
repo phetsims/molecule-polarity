@@ -20,9 +20,9 @@ import BondNode from '../../common/view/BondNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view/MPAccessibleSlider.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
+import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
@@ -141,59 +141,12 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       updateHintArrows();
     };
 
-    let lastDirection: 'clockwise' | 'counterclockwise' | null = null;
+    // Adding the node that will emit context responses due to rotations
+    this.addChild(
+      new RotationResponseNode( molecule.angleProperty, molecule.dipoleProperty, molecule.isRotatingDueToEFieldProperty )
+    );
 
-    // Utility function to emit accessible responses based on rotation direction and context.
-    const emitRotationResponse = ( direction: 'clockwise' | 'counterclockwise' ) => {
-      if ( molecule.isRotatingDueToEFieldProperty.value ) {
-
-        // Context response for E-field rotations
-        this.addAccessibleContextResponse(
-          MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContext.format( {
-            direction: direction
-          } )
-        );
-      }
-      else {
-
-        // Normal object response for manual rotations
-        this.addAccessibleObjectResponse(
-          MoleculePolarityFluent.a11y.rotation.format( { direction: direction } )
-        );
-      }
-      lastDirection = direction;
-    };
-
-    // Reset lastDirection when E-field rotation state changes.
-    molecule.isRotatingDueToEFieldProperty.lazyLink( () => {
-      lastDirection = null;
-    } );
-
-    // Storing the dipole to track direction of angle changes.
-    let lastDipole = molecule.dipoleProperty.value;
-
-    molecule.angleProperty.lazyLink( () => {
-      hideArrows();
-
-      const dipole = molecule.dipoleProperty.value;
-
-      // Using the cross product of the dipole to determine wether the dipole change due to the angle
-      // is rotating the molecule clockwise or counterclockwise.
-      // We do not listen directly to the dipole because we don't want magnitude changes to trigger
-      // these accessible responses.
-      if ( dipole.crossScalar( lastDipole ) < 0 ) {
-        if ( lastDirection !== 'clockwise' ) {
-          emitRotationResponse( 'clockwise' );
-        }
-      }
-      else {
-        if ( lastDirection !== 'counterclockwise' ) {
-          emitRotationResponse( 'counterclockwise' );
-        }
-      }
-
-      lastDipole = dipole;
-    } );
+    molecule.angleProperty.link( hideArrows );
 
     this.inputEnabledProperty.link( () => updateHintArrows() );
 
