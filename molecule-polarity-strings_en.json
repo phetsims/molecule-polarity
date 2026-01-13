@@ -593,13 +593,13 @@
           "value": "With { $magnitude } AB bond dipole arrow."
         },
         "bondDipoleABDescription": {
-          "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleAB } AB bond dipole points to Atom { $atom }."
+          "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleAB } AB bond dipole points to Atom { $atom }, towards { $direction } o'clock."
         },
         "bondDipoleBC": {
           "value": "With { $magnitude } BC bond dipole arrow."
         },
         "bondDipoleBCDescription": {
-          "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleBC } BC bond dipole points to Atom { $atom }."
+          "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleBC } BC bond dipole points to Atom { $atom }, towards { $direction } o'clock."
         },
         "partialChargesDescription": {
           "value": "{ $sign ->\n  [positive] Atom { $atom } has { $magnitude } positive partial charge.\n  [negative] Atom { $atom } has { $magnitude } negative partial charge.\n  *[zero] Atom { $atom } has { $magnitude } partial charge.\n}"
