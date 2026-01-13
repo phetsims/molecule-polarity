@@ -194,7 +194,7 @@
           "value": "Atom { $atomName } Electronegativity"
         },
         "accessibleHelpText": {
-          "value": "Change how strongly { $atomName } attracts electrons."
+          "value": "Change how strongly Atom { $atomName } attracts electrons."
         },
         "dipoleContext": {
           "value": "Dipole arrow { $progress }."
@@ -708,12 +708,6 @@
         }
       },
       "atomBElectronegativitySlider": {
-        "accessibleName": {
-          "value": "Atom B Electronegativity"
-        },
-        "accessibleHelpText": {
-          "value": "Change how strongly Atom B attracts electrons."
-        },
         "bondDipoleContext": {
           "value": "Bond dipole AB { $progressAB }, BC { $progressBC }"
         },

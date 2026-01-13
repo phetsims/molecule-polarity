@@ -293,8 +293,6 @@ type StringsType = {
         'electricFieldContextStringProperty': LocalizedStringProperty;
       };
       'atomBElectronegativitySlider': {
-        'accessibleNameStringProperty': LocalizedStringProperty;
-        'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'bondDipoleContextStringProperty': LocalizedStringProperty;
         'bondDipoleABDirectionChangeStringProperty': LocalizedStringProperty;
         'bondDipoleBCDirectionChangeStringProperty': LocalizedStringProperty;
