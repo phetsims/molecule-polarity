@@ -99,8 +99,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
 
     const electronegativityTableNode = new ElectronegativityTableNode( model.moleculeProperty, {
-      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty,
-      tandem: tandem.createTandem( 'electronegativityTableNode' )
+      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
 
     const comboBoxListParent = new Node();

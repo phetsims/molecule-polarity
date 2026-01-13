@@ -36,7 +36,7 @@ const NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
 type SelfOptions = EmptySelfOptions;
 
 type ElectronegativityTableNodeOptions = SelfOptions &
-  PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
+  PickRequired<NodeOptions, 'visibleProperty'>;
 
 export default class ElectronegativityTableNode extends Node {
 
