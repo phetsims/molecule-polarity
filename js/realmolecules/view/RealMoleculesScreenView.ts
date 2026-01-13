@@ -103,9 +103,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
 
     const comboBoxListParent = new Node();
-    const moleculesComboBox = new RealMoleculesControl( model.moleculeProperty, model.molecules, comboBoxListParent, {
+    const moleculeComboBox = new RealMoleculesControl( model.moleculeProperty, model.molecules, comboBoxListParent, {
       comboBoxOptions: {
-        tandem: tandem.createTandem( 'moleculesComboBox' )
+        tandem: tandem.createTandem( 'moleculeComboBox' )
       }
     } );
 
@@ -129,7 +129,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     const rootNode = new Node( {
       children: [
         electronegativityTableNode,
-        moleculesComboBox,
+        moleculeComboBox,
         controlPanel,
         colorKeyNode,
         resetAllButton,
@@ -166,7 +166,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     this.pdomControlAreaNode.pdomOrder = [
       electronegativityTableNode,
-      moleculesComboBox,
+      moleculeComboBox,
       controlPanel,
       colorKeyNode,
       resetAllButton,
@@ -192,8 +192,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
 
     // centered below viewer
-    moleculesComboBox.centerX = layoutCenter;
-    moleculesComboBox.bottom = this.layoutBounds.bottom - 15;
+    moleculeComboBox.centerX = layoutCenter;
+    moleculeComboBox.bottom = this.layoutBounds.bottom - 15;
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;
