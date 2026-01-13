@@ -33,6 +33,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     fieldModelProperty: TReadOnlyProperty<FieldModel>,
     dipoleScaleProperty: TReadOnlyProperty<number | null>,
+    visibleProperty: TReadOnlyProperty<boolean>,
     viewProperties: RealMoleculesViewProperties,
     blackStrokedObjects: THREE.Object3D[],
     stepEmitter: TinyEmitter
@@ -60,6 +61,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       viewProperties.bondDipolesVisibleProperty,
       orientationSignProperty,
       MPPreferences.surfaceColorProperty,
+      visibleProperty,
 
       // Properties that trigger updates that don't need to be accessed here
       bondDipoleModelProperty,
@@ -75,7 +77,8 @@ export default class RealMoleculeView extends THREE.Object3D {
       molecularDipoleVisible,
       bondDipolesVisible,
       orientationSign,
-      surfaceColor
+      surfaceColor,
+      visible
     ) => {
 
       // Clear out children
@@ -99,6 +102,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       atomViewMap.clear();
       bondViewMap.clear();
       bondDipoleViewMap.clear();
+
+      if ( !visible ) {
+        return;
+      }
 
       // Atom spheres
       for ( const atom of molecule.atoms ) {

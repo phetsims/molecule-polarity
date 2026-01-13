@@ -310,6 +310,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       model.bondDipoleModelProperty,
       model.fieldModelProperty,
       model.dipoleScaleProperty,
+      moleculeNode.visibleProperty,
       viewProperties,
       blackStrokedObjects,
       this.stepEmitter
