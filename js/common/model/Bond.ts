@@ -9,7 +9,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -17,7 +17,9 @@ import moleculePolarity from '../../moleculePolarity.js';
 import Atom from './Atom.js';
 import MPPreferences from './MPPreferences.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  isOnlyBond: boolean; // controls whether the magnitude is phet-io featured
+};
 
 type BondOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'phetioDocumentation'>;
 
@@ -81,6 +83,7 @@ export default class Bond extends PhetioObject {
 
     this.dipoleMagnitudeProperty = new DerivedProperty( [ this.dipoleProperty ], dipole => dipole.magnitude, {
       tandem: options.tandem.createTandem( 'dipoleMagnitudeProperty' ),
+      phetioFeatured: !options.isOnlyBond,
       phetioValueType: NumberIO
     } );
 

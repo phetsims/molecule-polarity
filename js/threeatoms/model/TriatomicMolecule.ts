@@ -69,13 +69,15 @@ export default class TriatomicMolecule extends Molecule {
     // the bond connecting atoms A and B
     const bondAB = new Bond( atomA, atomB, {
       tandem: bondABTandem,
-      phetioDocumentation: 'the bond between atoms A and B'
+      phetioDocumentation: 'the bond between atoms A and B',
+      isOnlyBond: false
     } );
 
     // the bond connecting atoms B and C
     const bondBC = new Bond( atomB, atomC, {
       tandem: bondBCTandem,
-      phetioDocumentation: 'the bond between atoms B and C'
+      phetioDocumentation: 'the bond between atoms B and C',
+      isOnlyBond: false
     } );
 
     // the bond angle of atom A relative to atom B, before applying molecule rotation. 8 o clock.

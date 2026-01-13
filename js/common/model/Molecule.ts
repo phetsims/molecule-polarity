@@ -122,6 +122,7 @@ export default abstract class Molecule extends PhetioObject {
 
     this.dipoleMagnitudeProperty = new DerivedProperty( [ this.dipoleProperty ], dipole => dipole.magnitude, {
       tandem: options.tandem.createTandem( 'dipoleMagnitudeProperty' ),
+      phetioFeatured: true,
       phetioValueType: NumberIO
     } );
 

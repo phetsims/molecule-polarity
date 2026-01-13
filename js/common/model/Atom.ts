@@ -81,6 +81,7 @@ export default class Atom extends PhetioObject {
     this.previousElectronegativityProperty = new NumberProperty( Math.PI, {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tandem: options.tandem.createTandem( 'previousElectronegativityProperty' ),
+      phetioDocumentation: 'For internal use only',
       phetioFeatured: false
     } );
 

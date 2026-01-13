@@ -49,7 +49,8 @@ export default class DiatomicMolecule extends Molecule {
     // the bond connecting atoms A and B
     const bond = new Bond( atomA, atomB, {
       tandem: options.tandem.createTandem( 'bond' ),
-      phetioDocumentation: 'the bonds between atoms A and B'
+      phetioDocumentation: 'the bonds between atoms A and B',
+      isOnlyBond: true
     } );
 
     const updateAtomPositions = ( position: Vector2, angle: number ) => {
