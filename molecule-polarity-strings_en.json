@@ -417,6 +417,12 @@
     "orientationAtom": {
       "value": "{ $position ->\n  [between1And2] between 1 and 2\n  [at3] at 3\n  [between4And5] between 4 and 5\n  [at6] at 6\n  [between7And8] between 7 and 8\n  [at9] at 9\n  [between10And11] between 10 and 11\n  *[at12] at 12\n}"
     },
+    "atAngle": {
+      "value": "at { $angle }"
+    },
+    "betweenAngles": {
+      "value": "between { $angle1 } and { $angle2 }"
+    },
     "orientationMolecule": {
       "value": "{ $orientation ->\n  [horizontal] horizontal\n  [diagonal] diagonal\n  *[vertical] vertical\n}"
     },
@@ -502,7 +508,7 @@
           "value": "Molecule aligned with electric field."
         },
         "orientationDescription": {
-          "value": "Molecule is { $orientation } with Atom A at { $atomAPosition } o'clock and Atom B at { $atomBPosition } o'clock."
+          "value": "Molecule is { $orientation } with Atom A { $atomAPosition } o'clock and Atom B { $atomBPosition } o'clock."
         },
         "electronegativityValues": {
           "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }."
@@ -572,7 +578,7 @@
           "value": "Currently, the molecule is { $polarity }."
         },
         "orientationDescription": {
-          "value": "Molecule is { $shape } with Atom A at { $atomAPosition } o'clock, Atom B at center, and Atom C at { $atomCPosition } o'clock."
+          "value": "Molecule is { $shape } with Atom A { $atomAPosition } o'clock, Atom B at center, and Atom C { $atomCPosition } o'clock."
         },
         "electricFieldAligned": {
           "value": "Molecule aligned with electric field."

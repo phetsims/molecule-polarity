@@ -38,7 +38,6 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
         return roundToInterval( value, providedOptions.shiftKeyboardStep || DEFAULT_STEP );
       },
       createAriaValueText: angle => {
-        angle *= -1; // Inverting the angle to have +Y pointing up
         const angleLabel = toClock( angle );
         return MoleculePolarityFluent.a11y.direction.format( {
           angle: angleLabel,

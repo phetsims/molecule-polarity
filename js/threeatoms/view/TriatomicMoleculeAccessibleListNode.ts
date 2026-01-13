@@ -9,7 +9,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
-import { toClock } from '../../common/view/toClock.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
@@ -50,8 +49,8 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       {
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.orientationDescription.createProperty( {
           shape: DescriptionMaps.createShapeStringProperty( triatomicMolecule.bondAngleABCProperty ),
-          atomAPosition: absoluteBondAngleABProperty.derived( angle => toClock( angle ) ),
-          atomCPosition: absoluteBondAngleBCProperty.derived( angle => toClock( angle ) )
+          atomAPosition: DescriptionMaps.createOrientationStringProperty( absoluteBondAngleABProperty ),
+          atomCPosition: DescriptionMaps.createOrientationStringProperty( absoluteBondAngleBCProperty )
         } )
       },
 
@@ -151,7 +150,9 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
               absoluteBondAngleABProperty,
               triatomicMolecule.bondAB.deltaENProperty
             ], ( bondAngle: number, deltaEN: number ) => {
-              return deltaEN < 0 ? toClock( bondAngle ) : toClock( bondAngle + Math.PI );
+              return deltaEN < 0 ?
+                     DescriptionMaps.formatOrientationString( bondAngle ) :
+                     DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
             }
           ),
           atom: new DerivedProperty(
@@ -187,7 +188,9 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
               absoluteBondAngleBCProperty,
               triatomicMolecule.bondBC.deltaENProperty
             ], ( bondAngle: number, deltaEN: number ) => {
-              return deltaEN > 0 ? toClock( bondAngle ) : toClock( bondAngle + Math.PI );
+              return deltaEN > 0 ?
+                     DescriptionMaps.formatOrientationString( bondAngle ) :
+                     DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
             }
           ),
           atom: new DerivedProperty(

@@ -291,6 +291,9 @@ a11y:
       between10And11: 'between 10 and 11'
       at12: 'at 12'
 
+  atAngle: 'at { $angle }'
+  betweenAngles: 'between { $angle1 } and { $angle2 }'
+
   # OrientationMol3 - Molecule orientation (Screen 1)
   orientationMolecule:
     select_orientation:
@@ -396,7 +399,7 @@ a11y:
         firstTwoRegions: 'Electron density is { $density } distributed between atoms.'
         lastFourRegions: 'Electron density is { $density } distributed, { $electronDensityShift } towards Atom { $atom }.'
       electricFieldAligned: 'Molecule aligned with electric field.'
-      orientationDescription: 'Molecule is { $orientation } with Atom A at { $atomAPosition } o''clock and Atom B at { $atomBPosition } o''clock.'
+      orientationDescription: 'Molecule is { $orientation } with Atom A { $atomAPosition } o''clock and Atom B { $atomBPosition } o''clock.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }.'
     
     # Rotate Molecule AB Slider
@@ -431,7 +434,7 @@ a11y:
     moleculeABC:
       heading: 'Molecule ABC'
       currentState: 'Currently, the molecule is { $polarity }.'
-      orientationDescription: 'Molecule is { $shape } with Atom A at { $atomAPosition } o''clock, Atom B at center, and Atom C at { $atomCPosition } o''clock.'
+      orientationDescription: 'Molecule is { $shape } with Atom A { $atomAPosition } o''clock, Atom B at center, and Atom C { $atomCPosition } o''clock.'
       electricFieldAligned: 'Molecule aligned with electric field.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
       molecularDipoleDescription: 'Molecule has { $magnitude } molecular dipole arrow.'

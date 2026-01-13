@@ -7,11 +7,14 @@
  * @author Agustín Vallejo
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import { MoleculeGeometry } from '../../realmolecules/model/RealMolecule.js';
+import { toClock } from './toClock.js';
 
 export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
@@ -299,15 +302,23 @@ export default class DescriptionMaps {
   }
 
   public static createOrientationStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.orientationAtom.createProperty( {
-      position: angleProperty.derived( angle => DescriptionMaps.angleToOrientation( angle ) )
-    } );
+    return new DerivedProperty(
+      [ angleProperty ], angle => {
+        return DescriptionMaps.formatOrientationString( angle );
+      }
+    );
   }
 
   public static formatOrientationString( angle: number ): string {
-    return MoleculePolarityFluent.a11y.orientationAtom.format( {
-      position: DescriptionMaps.angleToOrientation( angle )
-    } );
+    const angleDeg = toFixedNumber( toDegrees( angle ), 1 );
+    if ( angleDeg % 30 !== 0 ) {
+      return toClock( angle );
+    }
+    else {
+      return MoleculePolarityFluent.a11y.atAngle.format( {
+        angle: toClock( angle )
+      } );
+    }
   }
 
   public static createShapeStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {

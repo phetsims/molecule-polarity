@@ -176,6 +176,8 @@ type StringsType = {
     'fieldStringProperty': LocalizedStringProperty;
     'molecularDipoleStringProperty': LocalizedStringProperty;
     'orientationAtomStringProperty': LocalizedStringProperty;
+    'atAngleStringProperty': LocalizedStringProperty;
+    'betweenAnglesStringProperty': LocalizedStringProperty;
     'orientationMoleculeStringProperty': LocalizedStringProperty;
     'partialChargeSignStringProperty': LocalizedStringProperty;
     'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
