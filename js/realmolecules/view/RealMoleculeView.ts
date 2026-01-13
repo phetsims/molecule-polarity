@@ -32,6 +32,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
     bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     fieldModelProperty: TReadOnlyProperty<FieldModel>,
+    dipoleScaleProperty: TReadOnlyProperty<number | null>,
     viewProperties: RealMoleculesViewProperties,
     blackStrokedObjects: THREE.Object3D[],
     stepEmitter: TinyEmitter
@@ -63,6 +64,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Properties that trigger updates that don't need to be accessed here
       bondDipoleModelProperty,
       fieldModelProperty,
+      dipoleScaleProperty,
       MPColors.moleculeSurfaceBackAlphaProperty,
       MPColors.moleculeSurfaceFrontAlphaProperty
     ], (

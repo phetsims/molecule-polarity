@@ -201,7 +201,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
     if ( MPQueryParameters.debug3DModels ) {
-      const createItem = ( value: string, label: string ) => {
+      const createItem = <T>( value: T, label: string ) => {
         return {
           value: value,
           createNode: () => new Text( label, { fontSize: 16 } )
@@ -246,6 +246,32 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
       fieldNode.top = bondDipoleNode.bottom + 3;
       fieldNode.left = 1;
+
+      const dipoleScaleNode = new HBox( {
+        spacing: 20,
+        children: [
+          new Text( 'Dipole Scale:', { fontSize: 16 } ),
+          new HorizontalAquaRadioButtonGroup( model.dipoleScaleProperty, [
+            createItem( null, 'Auto' ),
+            createItem( 0.1, '0.1' ),
+            createItem( 0.15, '0.15' ),
+            createItem( 0.2, '0.2' ),
+            createItem( 0.3, '0.3' ),
+            createItem( 0.4, '0.4' ),
+            createItem( 0.5, '0.5' ),
+            createItem( 0.6, '0.6' ),
+            createItem( 0.7, '0.7' ),
+            createItem( 0.8, '0.8' ),
+            createItem( 0.9, '0.9' ),
+            createItem( 1.0, '1.0' )
+          ], { spacing: 20 } )
+        ]
+      } );
+
+      rootNode.addChild( dipoleScaleNode );
+
+      dipoleScaleNode.top = fieldNode.bottom + 3;
+      dipoleScaleNode.left = 1;
     }
 
     // Camera settings
@@ -284,6 +310,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       model.moleculeQuaternionProperty,
       model.bondDipoleModelProperty,
       model.fieldModelProperty,
+      model.dipoleScaleProperty,
       viewProperties,
       blackStrokedObjects,
       this.stepEmitter

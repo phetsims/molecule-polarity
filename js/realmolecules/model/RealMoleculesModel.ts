@@ -38,6 +38,8 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
   public readonly fieldModelProperty = new Property<FieldModel>( 'java' );
 
+  public readonly dipoleScaleProperty = new Property<number | null>( null );
+
   public constructor( tandem: Tandem ) {
 
     super( {
@@ -60,6 +62,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
         geometry,
         this.bondDipoleModelProperty,
         this.fieldModelProperty,
+        this.dipoleScaleProperty,
         moleculesTandem.createTandem( symbol )
       );
     };
@@ -200,6 +203,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     this.moleculeQuaternionProperty.reset();
     this.bondDipoleModelProperty.reset();
     this.fieldModelProperty.reset();
+    this.dipoleScaleProperty.reset();
     this.updateRotation( this.moleculeProperty.value );
   }
 }

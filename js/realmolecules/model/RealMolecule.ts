@@ -61,6 +61,7 @@ export default class RealMolecule extends PhetioObject {
     public geometry: MoleculeGeometry,
     public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     public fieldModelProperty: TReadOnlyProperty<FieldModel>,
+    public dipoleScaleProperty: TReadOnlyProperty<number | null>,
     tandem: Tandem
   ) {
 
@@ -227,6 +228,10 @@ export default class RealMolecule extends PhetioObject {
    * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
    */
   public getDipoleScale(): number {
+    const constantDipoleScale = this.dipoleScaleProperty.value;
+    if ( constantDipoleScale !== null ) {
+      return constantDipoleScale;
+    }
     let globalScalePerDebye = Number.POSITIVE_INFINITY;
     const factor = this.getBondDipoleFactor();
     for ( const bond of this.bonds ) {
