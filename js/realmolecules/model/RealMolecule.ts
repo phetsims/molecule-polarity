@@ -22,6 +22,7 @@ import { FieldModel } from './FieldModel.js';
 import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
 import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
 import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
@@ -61,7 +62,7 @@ export default class RealMolecule extends PhetioObject {
     public geometry: MoleculeGeometry,
     public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     public fieldModelProperty: TReadOnlyProperty<FieldModel>,
-    public dipoleScaleProperty: TReadOnlyProperty<number | null>,
+    public dipoleScaleProperty: TReadOnlyProperty<number>,
     tandem: Tandem
   ) {
 
@@ -228,27 +229,44 @@ export default class RealMolecule extends PhetioObject {
    * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
    */
   public getDipoleScale(): number {
-    const constantDipoleScale = this.dipoleScaleProperty.value;
-    if ( constantDipoleScale !== null ) {
-      return constantDipoleScale;
-    }
-    let globalScalePerDebye = Number.POSITIVE_INFINITY;
-    const factor = this.getBondDipoleFactor();
-    for ( const bond of this.bonds ) {
-      const muMag = bond.getDipoleMagnitudeDebye();
-      if ( muMag <= 1e-3 ) {
-        continue;
-      }
+    const maxScale = this.dipoleScaleProperty.value;
+    const maxMagnitude = 3;
 
-      const cap = factor * bond.getVisibleLength();
-      globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
+    const bondBasedMolecularDipoleMagnitude = this.computeBondDipoleVectorSum().magnitude;
+    if ( bondBasedMolecularDipoleMagnitude <= 1e-5 ) {
+      return maxScale;
     }
 
-    if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
-      return 0;
-    }
+    const referenceMolecularDipoleMagnitude = this.realMolecularDipole.magnitude;
 
-    return globalScalePerDebye;
+    // ( reference / bondBased ) * maxMagnitude * maxScale ????
+    if ( MPQueryParameters.debug3DModels ) {
+      console.log( this.symbol, 'reference / bondBased molecular dipole mag', referenceMolecularDipoleMagnitude, '/', bondBasedMolecularDipoleMagnitude, '=', referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude );
+    }
+    return ( referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude ) * maxMagnitude * maxScale;
+
+
+    // const constantDipoleScale = this.dipoleScaleProperty.value;
+    // if ( constantDipoleScale !== null ) {
+    //   return constantDipoleScale;
+    // }
+    // let globalScalePerDebye = Number.POSITIVE_INFINITY;
+    // const factor = this.getBondDipoleFactor();
+    // for ( const bond of this.bonds ) {
+    //   const muMag = bond.getDipoleMagnitudeDebye();
+    //   if ( muMag <= 1e-3 ) {
+    //     continue;
+    //   }
+    //
+    //   const cap = factor * bond.getVisibleLength();
+    //   globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
+    // }
+    //
+    // if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
+    //   return 0;
+    // }
+    //
+    // return globalScalePerDebye;
   }
 
   /**

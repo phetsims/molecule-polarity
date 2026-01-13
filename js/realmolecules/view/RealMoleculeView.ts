@@ -25,6 +25,7 @@ import BondView from './BondView.js';
 import { BondDipoleModel } from '../model/BondDipoleModel.js';
 import { FieldModel } from '../model/FieldModel.js';
 import MPColors from '../../common/MPColors.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -32,7 +33,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
     bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     fieldModelProperty: TReadOnlyProperty<FieldModel>,
-    dipoleScaleProperty: TReadOnlyProperty<number | null>,
+    dipoleScaleProperty: TReadOnlyProperty<number>,
     visibleProperty: TReadOnlyProperty<boolean>,
     viewProperties: RealMoleculesViewProperties,
     blackStrokedObjects: THREE.Object3D[],
@@ -128,7 +129,10 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
         const mu = molecule.computeBondDipoleVectorSum();
-        if ( mu.getMagnitude() > 1e-3 ) {
+        if ( MPQueryParameters.debug3DModels ) {
+          console.log( molecule.symbol, 'bond dipole sum', mu.magnitude );
+        }
+        if ( mu.getMagnitude() > 1e-5 ) {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 

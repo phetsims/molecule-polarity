@@ -252,11 +252,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         children: [
           new Text( 'Dipole Scale:', { fontSize: 16 } ),
           new HorizontalAquaRadioButtonGroup( model.dipoleScaleProperty, [
-            createItem( null, 'Auto' ),
             createItem( 0.1, '0.1' ),
             createItem( 0.15, '0.15' ),
             createItem( 0.2, '0.2' ),
+            createItem( 0.25, '0.25' ),
             createItem( 0.3, '0.3' ),
+            createItem( 0.35, '0.35' ),
             createItem( 0.4, '0.4' ),
             createItem( 0.5, '0.5' ),
             createItem( 0.6, '0.6' ),

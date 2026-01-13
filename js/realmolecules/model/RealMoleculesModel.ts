@@ -38,7 +38,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
   public readonly fieldModelProperty = new Property<FieldModel>( 'java' );
 
-  public readonly dipoleScaleProperty = new Property<number | null>( null );
+  public readonly dipoleScaleProperty = new Property<number>( 0.25 );
 
   public constructor( tandem: Tandem ) {
 
