@@ -364,6 +364,22 @@ a11y:
 
   oClock: '{ $hour } o''clock'
 
+  shapeGeometry:
+    select_geometry:
+      linear: 'linear'
+      bent: 'bent'
+      trigonalPlanar: 'trigonal planar'
+      trigonalPyramidal: 'trigonal pyramidal'
+      tetrahedral: 'tetrahedral'
+
+  realPolarity:
+    select_polarity:
+      nonpolar: 'nonpolar' # 0
+      slightlyPolar: 'slightly polar' # <1
+      polar: 'polar' # <1.5
+      stronglyPolar: 'strongly polar' # <2
+      veryStronglyPolar: 'very strongly polar' # >=2
+
   # ===================
   # TWO ATOMS SCREEN
   # ===================

@@ -444,6 +444,12 @@
     "oClock": {
       "value": "{ $hour } o'clock"
     },
+    "shapeGeometry": {
+      "value": "{ $geometry ->\n  [linear] linear\n  [bent] bent\n  [trigonalPlanar] trigonal planar\n  [trigonalPyramidal] trigonal pyramidal\n  *[tetrahedral] tetrahedral\n}"
+    },
+    "realPolarity": {
+      "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [slightlyPolar] slightly polar\n  [polar] polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
+    },
     "twoAtomsScreen": {
       "screenSummary": {
         "playArea": {

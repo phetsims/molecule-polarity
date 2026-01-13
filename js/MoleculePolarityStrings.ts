@@ -185,6 +185,8 @@ type StringsType = {
     'shapeStringProperty': LocalizedStringProperty;
     'directionStringProperty': LocalizedStringProperty;
     'oClockStringProperty': LocalizedStringProperty;
+    'shapeGeometryStringProperty': LocalizedStringProperty;
+    'realPolarityStringProperty': LocalizedStringProperty;
     'twoAtomsScreen': {
       'screenSummary': {
         'playAreaStringProperty': LocalizedStringProperty;
