@@ -88,6 +88,8 @@ export default abstract class MPModel extends PhetioObject implements TModel {
 
       // do nothing, molecule is aligned with E-field
       newDipoleAngle = dipoleAngle;
+
+      molecule.isRotatingDueToEFieldProperty.value = false;
     }
     else if ( dipoleAngle > 0 && dipoleAngle < Math.PI ) {
 
@@ -98,6 +100,8 @@ export default abstract class MPModel extends PhetioObject implements TModel {
         // new angle would overshoot, set to zero
         newDipoleAngle = 0;
       }
+
+      molecule.isRotatingDueToEFieldProperty.value = true;
     }
     else {
 
@@ -108,6 +112,8 @@ export default abstract class MPModel extends PhetioObject implements TModel {
         // new angle would overshoot, set to zero
         newDipoleAngle = 0;
       }
+
+      molecule.isRotatingDueToEFieldProperty.value = true;
     }
 
     // convert dipole rotation to molecule rotation
@@ -120,10 +126,8 @@ export default abstract class MPModel extends PhetioObject implements TModel {
       angle = 0;
     }
 
-    molecule.isRotatingDueToEFieldProperty.value = true;
     const angleRange = molecule.angleProperty.range;
     molecule.angleProperty.value = normalizeAngle( angle, angleRange.min );
-    molecule.isRotatingDueToEFieldProperty.value = false;
 
   }
 }

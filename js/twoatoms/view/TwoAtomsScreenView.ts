@@ -17,6 +17,7 @@ import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
+import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
@@ -63,6 +64,16 @@ export default class TwoAtomsScreenView extends ScreenView {
     moleculeDescriptionNode.addChild(
       new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule, viewProperties )
     );
+
+    // Adding the node that will emit context responses due to rotations
+    this.addChild(
+      new RotationResponseNode(
+        model.diatomicMolecule.angleProperty,
+        model.diatomicMolecule.isRotatingDueToEFieldProperty,
+        viewProperties.eFieldEnabledProperty
+      )
+    );
+
 
     // Current polarity description
     this.addChild( moleculeDescriptionNode );

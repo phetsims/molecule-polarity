@@ -337,8 +337,8 @@ a11y:
   # Rotation2 - Rotation direction (Screen 1/2)
   rotation:
     select_direction:
-      clockwise: 'clockwise'
-      counterclockwise: 'counterclockwise'
+      clockwise: 'Rotating clockwise'
+      counterclockwise: 'Rotating counterclockwise'
   
   # Shape7 - Molecule shape (Screen 2)
   shape:
@@ -411,7 +411,7 @@ a11y:
         deg270: '270 degrees, vertical'
         deg315: '315 degrees, diagonal'
         deg360: '360 degrees, horizontal, back to start'
-      electricFieldContext: 'Rotating { $direction }. Horizontal, Aligned with electric field.'
+      electricFieldContext: 'Molecule aligned with electric field.'
 
   # ===================
   # THREE ATOMS SCREEN

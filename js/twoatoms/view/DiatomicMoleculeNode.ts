@@ -20,7 +20,6 @@ import BondNode from '../../common/view/BondNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view/MPAccessibleSlider.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
-import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -140,11 +139,6 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       moleculeHasChanged = true;
       updateHintArrows();
     };
-
-    // Adding the node that will emit context responses due to rotations
-    this.addChild(
-      new RotationResponseNode( molecule.angleProperty, molecule.dipoleProperty, molecule.isRotatingDueToEFieldProperty )
-    );
 
     molecule.angleProperty.link( hideArrows );
 

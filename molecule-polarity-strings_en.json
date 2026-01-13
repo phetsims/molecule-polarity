@@ -442,7 +442,7 @@
       "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [veryWeaklyPolar] very weakly polar\n  [weaklyPolar] weakly polar\n  [polar] polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
     },
     "rotation": {
-      "value": "{ $direction ->\n  [clockwise] clockwise\n  *[counterclockwise] counterclockwise\n}"
+      "value": "{ $direction ->\n  [clockwise] Rotating clockwise\n  *[counterclockwise] Rotating counterclockwise\n}"
     },
     "shape": {
       "value": "{ $shape ->\n  [linear] linear\n  [nearlyLinear] nearly linear\n  [slightlyBent] slightly bent\n  [bent] bent\n  [veryBent] very bent\n  [extremelyBentSlightOverlap] extremely bent, slight overlap\n  *[atomsOverlap] atoms overlap\n}"
@@ -551,7 +551,7 @@
           }
         },
         "electricFieldContext": {
-          "value": "Rotating { $direction }. Horizontal, Aligned with electric field."
+          "value": "Molecule aligned with electric field."
         }
       }
     },

@@ -21,7 +21,6 @@ import BondNode from '../../common/view/BondNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
-import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import { toClock } from '../../common/view/toClock.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -220,11 +219,6 @@ export default class TriatomicMoleculeNode extends Node {
     molecule.angleProperty.lazyLink( hideArrows );
     molecule.bondAngleABProperty.lazyLink( hideArrows );
     molecule.bondAngleBCProperty.lazyLink( hideArrows );
-
-    // Adding the node that will emit context responses due to rotations
-    this.addChild(
-      new RotationResponseNode( molecule.angleProperty, molecule.dipoleProperty, molecule.isRotatingDueToEFieldProperty )
-    );
 
     // Update a hint arrow when the molecule inputEnabled or atom inputEnabled changes.
     const createMultilink = ( hintArrowNode: Node, atomNode: Node ) => {

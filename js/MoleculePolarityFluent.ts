@@ -531,7 +531,7 @@ const MoleculePolarityFluent = {
           deg315StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg315', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg315StringProperty' ) ),
           deg360StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg360', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' ) )
         },
-        electricFieldContext: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ), [{"name":"direction"}] )
+        electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ) )
       }
     },
     _comment_33: new FluentComment( {"comment":"===================","associatedKey":"threeAtomsScreen"} ),

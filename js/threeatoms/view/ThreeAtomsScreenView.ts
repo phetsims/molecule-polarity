@@ -16,6 +16,7 @@ import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
+import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
@@ -62,6 +63,15 @@ export default class ThreeAtomsScreenView extends ScreenView {
     // Molecule description
     moleculeDescriptionNode.addChild(
       new TriatomicMoleculeAccessibleListNode( model.triatomicMolecule, viewProperties )
+    );
+
+    // Adding the node that will emit context responses due to rotations
+    this.addChild(
+      new RotationResponseNode(
+        model.triatomicMolecule.angleProperty,
+        model.triatomicMolecule.isRotatingDueToEFieldProperty,
+        viewProperties.eFieldEnabledProperty
+      )
     );
 
     // Current polarity description
