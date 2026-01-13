@@ -69,11 +69,11 @@ export default class TwoAtomsScreenView extends ScreenView {
     this.addChild(
       new RotationResponseNode(
         model.diatomicMolecule.angleProperty,
+        model.diatomicMolecule.dipoleProperty,
         model.diatomicMolecule.isRotatingDueToEFieldProperty,
-        viewProperties.eFieldEnabledProperty
+        model.eFieldEnabledProperty
       )
     );
-
 
     // Current polarity description
     this.addChild( moleculeDescriptionNode );

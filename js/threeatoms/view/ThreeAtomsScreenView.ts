@@ -69,8 +69,9 @@ export default class ThreeAtomsScreenView extends ScreenView {
     this.addChild(
       new RotationResponseNode(
         model.triatomicMolecule.angleProperty,
+        model.triatomicMolecule.dipoleProperty,
         model.triatomicMolecule.isRotatingDueToEFieldProperty,
-        viewProperties.eFieldEnabledProperty
+        model.eFieldEnabledProperty
       )
     );
 
