@@ -277,12 +277,15 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       moonLight.intensity = 2 * Math.PI * color.alpha;
     } );
 
+    const blackStrokedObjects: THREE.Object3D[] = [];
+
     this.moleculeView = new RealMoleculeView(
       model.moleculeProperty,
       model.moleculeQuaternionProperty,
       model.bondDipoleModelProperty,
       model.fieldModelProperty,
       viewProperties,
+      blackStrokedObjects,
       this.stepEmitter
     );
     this.sceneNode.stage.threeScene.add( this.moleculeView );
@@ -307,16 +310,24 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       const renderPass = new RenderPass( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
       composer.addPass( renderPass );
 
-      const outlinePass = new OutlinePass(
+      const focusOutlinePass = new OutlinePass(
         // eslint-disable-next-line phet/bad-sim-text
         new THREE.Vector2( window.innerWidth, window.innerHeight ),
         this.sceneNode.stage.threeScene,
         this.sceneNode.stage.threeCamera
       );
-      composer.addPass( outlinePass );
+      composer.addPass( focusOutlinePass );
 
       const backgroundCompositePass = new BackgroundCompositePass( ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value ) );
       composer.addPass( backgroundCompositePass );
+
+      const blackOutlinePass = new OutlinePass(
+        // eslint-disable-next-line phet/bad-sim-text
+        new THREE.Vector2( window.innerWidth, window.innerHeight ),
+        this.sceneNode.stage.threeScene,
+        this.sceneNode.stage.threeCamera
+      );
+      composer.addPass( blackOutlinePass );
 
       MPColors.screenBackgroundColorProperty.link( color => {
         backgroundCompositePass.setBackgroundColor( ThreeUtils.colorToThree( color ) );
@@ -325,11 +336,17 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       const outputPass = new OutputPass();
       composer.addPass( outputPass );
 
-      outlinePass.edgeStrength = 8.0;
-      outlinePass.edgeGlow = 1.0;
-      outlinePass.edgeThickness = 3.0;
-      outlinePass.visibleEdgeColor.set( ThreeUtils.colorToThree( HighlightPath.OUTER_FOCUS_COLOR ) );
-      outlinePass.hiddenEdgeColor.set( 0x190a05 );
+      focusOutlinePass.edgeStrength = 8.0;
+      focusOutlinePass.edgeGlow = 1.0;
+      focusOutlinePass.edgeThickness = 3.0;
+      focusOutlinePass.visibleEdgeColor.set( ThreeUtils.colorToThree( HighlightPath.OUTER_FOCUS_COLOR ) );
+      focusOutlinePass.hiddenEdgeColor.set( ThreeUtils.colorToThree( HighlightPath.OUTER_FOCUS_COLOR ) );
+
+      blackOutlinePass.edgeStrength = 3.0;
+      blackOutlinePass.edgeGlow = 0.5;
+      blackOutlinePass.edgeThickness = 2.0;
+      blackOutlinePass.visibleEdgeColor.set( 0 );
+      blackOutlinePass.hiddenEdgeColor.set( 0x0 );
 
       let lastWidth = 0;
       let lastHeight = 0;
@@ -342,7 +359,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
           return;
         }
 
-        outlinePass.setSize( width, height );
+        focusOutlinePass.setSize( width, height );
+        blackOutlinePass.setSize( width, height );
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error - FROM three-r160-addon-postprocessing
         backgroundCompositePass.setSize( width, height );
@@ -355,7 +373,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       this.sceneNode.stage.render = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
 
-        outlinePass.selectedObjects = ( moleculeNode.isFocused() || moleculeNode.isInteractiveHighlightActiveProperty.value ) ? [ this.moleculeView ] : [];
+        focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || moleculeNode.isInteractiveHighlightActiveProperty.value ) ? [ this.moleculeView ] : [];
+        blackOutlinePass.selectedObjects = blackStrokedObjects;
 
         if ( target ) {
           // For now, pretend like we don't have a composer

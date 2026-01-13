@@ -33,6 +33,7 @@ export default class RealMoleculeView extends THREE.Object3D {
     bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
     fieldModelProperty: TReadOnlyProperty<FieldModel>,
     viewProperties: RealMoleculesViewProperties,
+    blackStrokedObjects: THREE.Object3D[],
     stepEmitter: TinyEmitter
   ) {
     super();
@@ -80,6 +81,11 @@ export default class RealMoleculeView extends THREE.Object3D {
         this.remove( this.children[ 0 ] );
       }
 
+      // Clear out stroked objects
+      while ( blackStrokedObjects.length ) {
+        blackStrokedObjects.pop();
+      }
+
       // Clear out all disposable items
       while ( disposables.length > 0 ) {
         const disposable = disposables.pop()!;
@@ -119,6 +125,8 @@ export default class RealMoleculeView extends THREE.Object3D {
 
           const molecularDipoleView = new MolecularDipoleView( molecule, orientationSign );
           this.add( molecularDipoleView );
+
+          blackStrokedObjects.push( molecularDipoleView );
 
           const alignedAtom = molecule.getMoleculeDipoleAlignedAtom( orientationSign );
           if ( alignedAtom ) {
