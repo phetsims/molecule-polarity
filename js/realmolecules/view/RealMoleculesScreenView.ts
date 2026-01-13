@@ -335,8 +335,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       let lastHeight = 0;
 
       const resize = () => {
-        const width = this.sceneNode.stage.width;
-        const height = this.sceneNode.stage.height;
+        const width = this.sceneNode.stage.width * 2;
+        const height = this.sceneNode.stage.height * 2;
 
         if ( lastWidth === width && lastHeight === height ) {
           return;
