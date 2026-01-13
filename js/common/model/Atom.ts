@@ -82,7 +82,8 @@ export default class Atom extends PhetioObject {
       range: MPConstants.ELECTRONEGATIVITY_RANGE,
       tandem: options.tandem.createTandem( 'previousElectronegativityProperty' ),
       phetioDocumentation: 'For internal use only',
-      phetioFeatured: false
+      phetioFeatured: false,
+      phetioReadOnly: true
     } );
 
     // partial charge is zero until this atom participates in a bond
