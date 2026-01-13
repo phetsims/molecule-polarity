@@ -60,7 +60,8 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
         symbol,
         nameStringProperty,
         geometry,
-        this.bondDipoleModelProperty,
+        // CH2F2 override to use the Java model
+        ( symbol === 'CH2F2' ) ? new Property<BondDipoleModel>( 'java' ) : this.bondDipoleModelProperty,
         this.fieldModelProperty,
         this.dipoleScaleProperty,
         moleculesTandem.createTandem( symbol )
@@ -86,7 +87,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
       createMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty, 'tetrahedral' ),
-      // createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty, 'tetrahedral' ),
+      createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty, 'tetrahedral' ),
       // createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty, 'tetrahedral' )
