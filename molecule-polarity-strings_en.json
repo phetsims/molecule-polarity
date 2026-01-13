@@ -369,9 +369,6 @@
     "bondCharacterProgress": {
       "value": "{ $progress ->\n  [moreIonic] more ionic\n  *[moreCovalent] more covalent\n}"
     },
-    "bondDipole": {
-      "value": "{ $bondDipole ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [large] large\n  *[veryLarge] very large\n}"
-    },
     "dipoleProgress": {
       "value": "{ $progress ->\n  [zero] zero\n  [smaller] smaller\n  *[larger] larger\n}"
     },

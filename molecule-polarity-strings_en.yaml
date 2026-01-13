@@ -150,16 +150,6 @@ a11y:
       moreIonic: 'more ionic'
       moreCovalent: 'more covalent'
 
-  # BondDipole6 - Bond Dipole magnitude (Screen 1)
-  bondDipole:
-    select_bondDipole:
-      no: 'no'
-      verySmall: 'very small'
-      small: 'small'
-      medium: 'medium'
-      large: 'large'
-      veryLarge: 'very large'
-
   # DipoleProgress3 - Dipole Progress (Screen 1)
   dipoleProgress:
     select_progress:

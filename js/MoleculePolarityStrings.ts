@@ -160,7 +160,6 @@ type StringsType = {
     };
     'bondCharacterStringProperty': LocalizedStringProperty;
     'bondCharacterProgressStringProperty': LocalizedStringProperty;
-    'bondDipoleStringProperty': LocalizedStringProperty;
     'dipoleProgressStringProperty': LocalizedStringProperty;
     'dipoleOrientABStringProperty': LocalizedStringProperty;
     'dipoleOrientBCStringProperty': LocalizedStringProperty;

@@ -15,7 +15,7 @@ import { MoleculeGeometry } from '../../realmolecules/model/RealMolecule.js';
 
 export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
-type Dipole = 'small' | 'no' | 'verySmall' | 'medium' | 'large' | 'veryLarge';
+type MolecularDipole = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
 type ElectrostaticRegions = 'verySlightly' | 'slightly' | 'moderately' | 'highly' | 'veryHighly';
@@ -25,7 +25,6 @@ type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high'
 type Directions = 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12';
 type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap';
 type PartialChargeMagnitude = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
-type MolecularDipole = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
 type RealPolarity = 'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
 
 // Approximation of zero to avoid issues with floating point precision
@@ -56,16 +55,6 @@ export default class DescriptionMaps {
            deltaEN <= 1.2 ? 'polar' :
            deltaEN <= 1.6 ? 'stronglyPolar' :
            'veryStronglyPolar';
-  }
-
-  private static deltaENtoBondDipole( deltaEN: number ): Dipole {
-    deltaEN = roundAbs( deltaEN );
-    return deltaEN <= ZERO ? 'no' :
-           deltaEN <= 0.4 ? 'verySmall' :
-           deltaEN <= 0.8 ? 'small' :
-           deltaEN <= 1.2 ? 'medium' :
-           deltaEN <= 1.6 ? 'large' :
-           'veryLarge';
   }
 
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
@@ -210,18 +199,6 @@ export default class DescriptionMaps {
   public static formatPolarityString( deltaEN: number ): string {
     return MoleculePolarityFluent.a11y.polarity.format( {
       polarity: DescriptionMaps.deltaENtoPolarity( deltaEN )
-    } );
-  }
-
-  public static createBondDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.bondDipole.createProperty( {
-      bondDipole: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoBondDipole( deltaEN ) )
-    } );
-  }
-
-  public static formatBondDipoleString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.bondDipole.format( {
-      bondDipole: DescriptionMaps.deltaENtoBondDipole( deltaEN )
     } );
   }
 
