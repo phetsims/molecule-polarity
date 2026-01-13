@@ -25,6 +25,10 @@ type Directions = 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And
 type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap';
 type PartialChargeMagnitude = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
 type MolecularDipole = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
+type RealPolarity = 'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
+
+// Approximation of zero to avoid issues with floating point precision
+const ZERO = 0.05;
 
 // Rounds the absolute value of a number, used to avoid issues with floating point precision and maintain the absolute value of deltaEN
 const roundAbs = ( value: number ) => toFixedNumber( Math.abs( value ), 2 );
@@ -34,9 +38,18 @@ export default class DescriptionMaps {
     // no-op
   }
 
+  private static dipoleToRealPolarity( dipole: number ): RealPolarity {
+    dipole = roundAbs( dipole );
+    return dipole < ZERO ? 'nonpolar' :
+           dipole < 1 ? 'slightlyPolar' :
+           dipole < 1.5 ? 'polar' :
+           dipole < 2 ? 'stronglyPolar' :
+           'veryStronglyPolar';
+  }
+
   private static deltaENtoPolarity( deltaEN: number ): Polarity {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'nonpolar' :
+    return deltaEN <= ZERO ? 'nonpolar' :
            deltaEN <= 0.4 ? 'veryWeaklyPolar' :
            deltaEN <= 0.8 ? 'weaklyPolar' :
            deltaEN <= 1.2 ? 'polar' :
@@ -46,7 +59,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoBondDipole( deltaEN: number ): Dipole {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'no' :
+    return deltaEN <= ZERO ? 'no' :
            deltaEN <= 0.4 ? 'verySmall' :
            deltaEN <= 0.8 ? 'small' :
            deltaEN <= 1.2 ? 'medium' :
@@ -56,7 +69,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'zero' :
+    return deltaEN <= ZERO ? 'zero' :
            deltaEN <= 0.4 ? 'tiny' :
            deltaEN <= 0.8 ? 'verySmall' :
            deltaEN <= 1.2 ? 'small' :
@@ -71,7 +84,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoMolecularDipole( deltaEN: number ): MolecularDipole {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'zero' :
+    return deltaEN <= ZERO ? 'zero' :
            deltaEN <= 0.4 ? 'tiny' :
            deltaEN <= 0.8 ? 'verySmall' :
            deltaEN <= 1.2 ? 'small' :
@@ -86,7 +99,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'nonpolarCovalent' :
+    return deltaEN <= ZERO ? 'nonpolarCovalent' :
            deltaEN <= 0.4 ? 'nearlyNonpolarCovalent' :
            deltaEN <= 0.8 ? 'slightlyPolarCovalent' :
            deltaEN <= 1.2 ? 'polarCovalent' :
@@ -96,7 +109,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoElectrostaticPotential( deltaEN: number ): ElectrostaticPotential {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'noDifference' :
+    return deltaEN <= ZERO ? 'noDifference' :
            deltaEN <= 0.4 ? 'verySmallDifference' :
            deltaEN <= 0.8 ? 'smallDifference' :
            deltaEN <= 1.2 ? 'mediumDifference' :
@@ -115,7 +128,7 @@ export default class DescriptionMaps {
 
   private static deltaENtoElectronDensity( deltaEN: number ): ElectronDensity {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= 0.05 ? 'evenlyShared' :
+    return deltaEN <= ZERO ? 'evenlyShared' :
            deltaEN <= 0.4 ? 'nearlyEvenlyShared' :
            deltaEN <= 0.8 ? 'slightlyUnevenlyShared' :
            deltaEN <= 1.2 ? 'unevenlyShared' :
@@ -160,7 +173,7 @@ export default class DescriptionMaps {
 
   private static angleToShape( angle: number ): Shape {
     const absAngle = Math.abs( angle );
-    return absAngle <= 0.05 * Math.PI ? 'atomsOverlap' :
+    return absAngle <= ZERO * Math.PI ? 'atomsOverlap' :
            absAngle <= 0.2 * Math.PI ? 'extremelyBentSlightOverlap' :
            absAngle <= 0.4 * Math.PI ? 'veryBent' :
            absAngle <= 0.6 * Math.PI ? 'bent' :
