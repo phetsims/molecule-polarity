@@ -1,6 +1,6 @@
 // Copyright 2025, University of Colorado Boulder
 /**
- * Screen Summary for the Two Atoms screen
+ * Screen Summary for the Three Atoms screen
  *
  * @author Agustín Vallejo
  */

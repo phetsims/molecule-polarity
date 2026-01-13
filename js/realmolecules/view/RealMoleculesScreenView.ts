@@ -39,6 +39,7 @@ import ElectronegativityTableNode from './ElectronegativityTableNode.js';
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
+import RealMoleculesScreenSummaryContentNode from './RealMoleculesScreenSummaryContentNode.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
 
@@ -54,6 +55,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     super( {
       layoutBounds: MPConstants.LAYOUT_BOUNDS,
       tandem: tandem,
+      screenSummaryContent: new RealMoleculesScreenSummaryContentNode( model ),
       sceneNodeOptions: {
         parentMatrixProperty: animatedPanZoomSingleton.listener.matrixProperty,
         cameraPosition: REAL_MOLECULES_CAMERA_POSITION,

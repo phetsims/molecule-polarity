@@ -730,6 +730,22 @@
           "value": "Molecule aligned with electric field."
         }
       }
+    },
+    "realMoleculesScreen": {
+      "screenSummary": {
+        "playArea": {
+          "value": "There is an interactive molecule from a list of real molecules. You can rotate it in 3D and explore its atoms, shape, and polarity."
+        },
+        "controlArea": {
+          "value": "You can use checkboxes to show or hide bond dipoles, the molecular dipole, partial charges, atom labels, and atom electronegativities. You can also choose between electrostatic potential or electron density surfaces to see how charge is distributed. Reset the sim to start over."
+        },
+        "currentDetails": {
+          "value": "Currently, you are viewing { $moleculeName }. The molecule is { $realPolarity }, with { $shapeGeometry } geometry."
+        },
+        "interactionHint": {
+          "value": "Choose a molecule and rotate it to explore how shape and bond polarity determine the molecular dipole."
+        }
+      }
     }
   }
 }

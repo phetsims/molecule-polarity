@@ -495,3 +495,14 @@ a11y:
       molecularDipoleDirection: '{ a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContext } Points to { $position } o''clock.'
       partialChargeContext: 'Partial charge is { $progress }'
       electricFieldContext: 'Molecule aligned with electric field.'
+
+  # ===================
+  # REAL MOLECULES SCREEN
+  # ===================
+  realMoleculesScreen:
+    # Screen Summary
+    screenSummary:
+      playArea: 'There is an interactive molecule from a list of real molecules. You can rotate it in 3D and explore its atoms, shape, and polarity.'
+      controlArea: 'You can use checkboxes to show or hide bond dipoles, the molecular dipole, partial charges, atom labels, and atom electronegativities. You can also choose between electrostatic potential or electron density surfaces to see how charge is distributed. Reset the sim to start over.'
+      currentDetails: 'Currently, you are viewing { $moleculeName }. The molecule is { $realPolarity }, with { $shapeGeometry } geometry.'
+      interactionHint: 'Choose a molecule and rotate it to explore how shape and bond polarity determine the molecular dipole.'
