@@ -293,6 +293,8 @@ a11y:
 
   atAngle: 'at { $angle }'
   betweenAngles: 'between { $angle1 } and { $angle2 }'
+  degrees: '{ $angle } degrees'
+  oClock: '{ $hour } o''clock'
 
   # OrientationMol3 - Molecule orientation (Screen 1)
   orientationMolecule:
@@ -300,7 +302,7 @@ a11y:
       horizontal: 'horizontal'
       diagonal: 'diagonal'
       vertical: 'vertical'
-  
+
   # PartialCharge2 - Partial Charge sign (Screen 1/2)
   partialChargeSign:
     select_sign:
@@ -348,14 +350,6 @@ a11y:
       veryBent: 'very bent'
       extremelyBentSlightOverlap: 'extremely bent, slight overlap'
       atomsOverlap: 'atoms overlap'
-
-  direction:
-    select_direction:
-      vertical: '{ $angle }, vertical'
-      diagonal: '{ $angle }, diagonal'
-      horizontal: '{ $angle }, horizontal'
-
-  oClock: '{ $hour } o''clock'
 
   shapeGeometry:
     select_geometry:

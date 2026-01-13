@@ -7,6 +7,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
@@ -14,7 +15,7 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/accessibility/AccessibleSlider.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import { toClock } from './toClock.js';
+import normalizeAngle from '../model/normalizeAngle.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -38,12 +39,8 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
         return roundToInterval( value, providedOptions.shiftKeyboardStep || DEFAULT_STEP );
       },
       createAriaValueText: angle => {
-        const angleLabel = toClock( angle );
-        return MoleculePolarityFluent.a11y.direction.format( {
-          angle: angleLabel,
-          direction: Math.abs( Math.sin( angle ) ) <= 0.01 ? 'horizontal' :
-                     Math.abs( Math.cos( angle ) ) <= 0.01 ? 'vertical' : 'diagonal'
-        } );
+        const degrees = roundToInterval( toDegrees( normalizeAngle( angle ) ), 30 );
+        return MoleculePolarityFluent.a11y.degrees.format( { angle: degrees } );
       },
       startDrag: event => {
         this.moveToFront();

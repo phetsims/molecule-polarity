@@ -157,14 +157,14 @@ addToMapIfDefined( 'a11y_molecularDipole', 'a11y.molecularDipoleStringProperty' 
 addToMapIfDefined( 'a11y_orientationAtom', 'a11y.orientationAtomStringProperty' );
 addToMapIfDefined( 'a11y_atAngle', 'a11y.atAngleStringProperty' );
 addToMapIfDefined( 'a11y_betweenAngles', 'a11y.betweenAnglesStringProperty' );
+addToMapIfDefined( 'a11y_degrees', 'a11y.degreesStringProperty' );
+addToMapIfDefined( 'a11y_oClock', 'a11y.oClockStringProperty' );
 addToMapIfDefined( 'a11y_orientationMolecule', 'a11y.orientationMoleculeStringProperty' );
 addToMapIfDefined( 'a11y_partialChargeSign', 'a11y.partialChargeSignStringProperty' );
 addToMapIfDefined( 'a11y_partialChargeMagnitude', 'a11y.partialChargeMagnitudeStringProperty' );
 addToMapIfDefined( 'a11y_polarity', 'a11y.polarityStringProperty' );
 addToMapIfDefined( 'a11y_rotation', 'a11y.rotationStringProperty' );
 addToMapIfDefined( 'a11y_shape', 'a11y.shapeStringProperty' );
-addToMapIfDefined( 'a11y_direction', 'a11y.directionStringProperty' );
-addToMapIfDefined( 'a11y_oClock', 'a11y.oClockStringProperty' );
 addToMapIfDefined( 'a11y_shapeGeometry', 'a11y.shapeGeometryStringProperty' );
 addToMapIfDefined( 'a11y_realPolarity', 'a11y.realPolarityStringProperty' );
 addToMapIfDefined( 'a11y_twoAtomsScreen_screenSummary_playArea', 'a11y.twoAtomsScreen.screenSummary.playAreaStringProperty' );
@@ -465,6 +465,8 @@ const MoleculePolarityFluent = {
     orientationAtom: new FluentPattern<{ position: 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12' | TReadOnlyProperty<'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12'> }>( fluentSupport.bundleProperty, 'a11y_orientationAtom', _.get( MoleculePolarityStrings, 'a11y.orientationAtomStringProperty' ), [{"name":"position","variants":["between1And2","at3","between4And5","at6","between7And8","at9","between10And11","at12"]}] ),
     atAngle: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_atAngle', _.get( MoleculePolarityStrings, 'a11y.atAngleStringProperty' ), [{"name":"angle"}] ),
     betweenAngles: new FluentPattern<{ angle1: FluentVariable, angle2: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_betweenAngles', _.get( MoleculePolarityStrings, 'a11y.betweenAnglesStringProperty' ), [{"name":"angle1"},{"name":"angle2"}] ),
+    degrees: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_degrees', _.get( MoleculePolarityStrings, 'a11y.degreesStringProperty' ), [{"name":"angle"}] ),
+    oClock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_oClock', _.get( MoleculePolarityStrings, 'a11y.oClockStringProperty' ), [{"name":"hour"}] ),
     _comment_24: new FluentComment( {"comment":"OrientationMol3 - Molecule orientation (Screen 1)","associatedKey":"orientationMolecule"} ),
     orientationMolecule: new FluentPattern<{ orientation: 'horizontal' | 'diagonal' | 'vertical' | TReadOnlyProperty<'horizontal' | 'diagonal' | 'vertical'> }>( fluentSupport.bundleProperty, 'a11y_orientationMolecule', _.get( MoleculePolarityStrings, 'a11y.orientationMoleculeStringProperty' ), [{"name":"orientation","variants":["horizontal","diagonal","vertical"]}] ),
     _comment_25: new FluentComment( {"comment":"PartialCharge2 - Partial Charge sign (Screen 1/2)","associatedKey":"partialChargeSign"} ),
@@ -477,8 +479,6 @@ const MoleculePolarityFluent = {
     rotation: new FluentPattern<{ direction: 'clockwise' | 'counterclockwise' | TReadOnlyProperty<'clockwise' | 'counterclockwise'> }>( fluentSupport.bundleProperty, 'a11y_rotation', _.get( MoleculePolarityStrings, 'a11y.rotationStringProperty' ), [{"name":"direction","variants":["clockwise","counterclockwise"]}] ),
     _comment_29: new FluentComment( {"comment":"Shape7 - Molecule shape (Screen 2)","associatedKey":"shape"} ),
     shape: new FluentPattern<{ shape: 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap' | TReadOnlyProperty<'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap'> }>( fluentSupport.bundleProperty, 'a11y_shape', _.get( MoleculePolarityStrings, 'a11y.shapeStringProperty' ), [{"name":"shape","variants":["linear","nearlyLinear","slightlyBent","bent","veryBent","extremelyBentSlightOverlap","atomsOverlap"]}] ),
-    direction: new FluentPattern<{ angle: FluentVariable, direction: 'vertical' | 'diagonal' | 'horizontal' | TReadOnlyProperty<'vertical' | 'diagonal' | 'horizontal'> }>( fluentSupport.bundleProperty, 'a11y_direction', _.get( MoleculePolarityStrings, 'a11y.directionStringProperty' ), [{"name":"angle"},{"name":"direction","variants":["vertical","diagonal","horizontal"]}] ),
-    oClock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_oClock', _.get( MoleculePolarityStrings, 'a11y.oClockStringProperty' ), [{"name":"hour"}] ),
     shapeGeometry: new FluentPattern<{ geometry: 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral' | TReadOnlyProperty<'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral'> }>( fluentSupport.bundleProperty, 'a11y_shapeGeometry', _.get( MoleculePolarityStrings, 'a11y.shapeGeometryStringProperty' ), [{"name":"geometry","variants":["linear","bent","trigonalPlanar","trigonalPyramidal","tetrahedral"]}] ),
     realPolarity: new FluentPattern<{ polarity: 'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar' | TReadOnlyProperty<'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar'> }>( fluentSupport.bundleProperty, 'a11y_realPolarity', _.get( MoleculePolarityStrings, 'a11y.realPolarityStringProperty' ), [{"name":"polarity","variants":["nonpolar","slightlyPolar","polar","stronglyPolar","veryStronglyPolar"]}] ),
     _comment_30: new FluentComment( {"comment":"===================","associatedKey":"twoAtomsScreen"} ),

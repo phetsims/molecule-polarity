@@ -178,14 +178,14 @@ type StringsType = {
     'orientationAtomStringProperty': LocalizedStringProperty;
     'atAngleStringProperty': LocalizedStringProperty;
     'betweenAnglesStringProperty': LocalizedStringProperty;
+    'degreesStringProperty': LocalizedStringProperty;
+    'oClockStringProperty': LocalizedStringProperty;
     'orientationMoleculeStringProperty': LocalizedStringProperty;
     'partialChargeSignStringProperty': LocalizedStringProperty;
     'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
     'polarityStringProperty': LocalizedStringProperty;
     'rotationStringProperty': LocalizedStringProperty;
     'shapeStringProperty': LocalizedStringProperty;
-    'directionStringProperty': LocalizedStringProperty;
-    'oClockStringProperty': LocalizedStringProperty;
     'shapeGeometryStringProperty': LocalizedStringProperty;
     'realPolarityStringProperty': LocalizedStringProperty;
     'twoAtomsScreen': {

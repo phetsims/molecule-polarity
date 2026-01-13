@@ -423,6 +423,12 @@
     "betweenAngles": {
       "value": "between { $angle1 } and { $angle2 }"
     },
+    "degrees": {
+      "value": "{ $angle } degrees"
+    },
+    "oClock": {
+      "value": "{ $hour } o'clock"
+    },
     "orientationMolecule": {
       "value": "{ $orientation ->\n  [horizontal] horizontal\n  [diagonal] diagonal\n  *[vertical] vertical\n}"
     },
@@ -440,12 +446,6 @@
     },
     "shape": {
       "value": "{ $shape ->\n  [linear] linear\n  [nearlyLinear] nearly linear\n  [slightlyBent] slightly bent\n  [bent] bent\n  [veryBent] very bent\n  [extremelyBentSlightOverlap] extremely bent, slight overlap\n  *[atomsOverlap] atoms overlap\n}"
-    },
-    "direction": {
-      "value": "{ $direction ->\n  [vertical] { $angle }, vertical\n  [diagonal] { $angle }, diagonal\n  *[horizontal] { $angle }, horizontal\n}"
-    },
-    "oClock": {
-      "value": "{ $hour } o'clock"
     },
     "shapeGeometry": {
       "value": "{ $geometry ->\n  [linear] linear\n  [bent] bent\n  [trigonalPlanar] trigonal planar\n  [trigonalPyramidal] trigonal pyramidal\n  *[tetrahedral] tetrahedral\n}"
