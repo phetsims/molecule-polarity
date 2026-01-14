@@ -19,7 +19,8 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
 type SelfOptions = EmptySelfOptions;
 
-const ONE = 0.9999;
+// A small epsilon to avoid floating point precision issues when checking for horizontal alignment.
+const ONE = 1 - 1e-10;
 
 export type RotationResponseNodeOptions = SelfOptions & NodeOptions;
 
