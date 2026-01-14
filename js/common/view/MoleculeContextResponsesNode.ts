@@ -15,7 +15,7 @@ import Atom from '../model/Atom.js';
 import Bond from '../model/Bond.js';
 import Molecule from '../model/Molecule.js';
 import { SurfaceType } from '../model/SurfaceType.js';
-import { EPProgress } from './DescriptionMaps.js';
+import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
 import { toClock } from './toClock.js';
 
 export default class MoleculeContextResponsesNode extends Node {
@@ -134,10 +134,10 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // If Partial Charges visible
     partialChargesVisible && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.partialChargeContext.format( {
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
-          progress: this.changeInENtoProgress( invertedDeltaEN, changeInEN )
-        } )
+      MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.format( {
+        atom: this.atom.label,
+        magnitude: DescriptionMaps.createPartialChargesStringProperty( this.atom.partialChargeProperty ),
+        sign: this.atom.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
       } )
     );
     bondCharacterVisible && this.contextResponse(
