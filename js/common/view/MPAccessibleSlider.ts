@@ -39,7 +39,7 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
         return roundToInterval( value, providedOptions.shiftKeyboardStep || DEFAULT_STEP );
       },
       createAriaValueText: angle => {
-        const degrees = roundToInterval( toDegrees( normalizeAngle( angle ) ), 30 );
+        const degrees = roundToInterval( toDegrees( normalizeAngle( angle ) ), 5 );
         return MoleculePolarityFluent.a11y.degrees.format( { angle: degrees } );
       },
       startDrag: event => {
