@@ -87,7 +87,29 @@ export default class BondDipoleView extends THREE.Object3D {
 
     const muMag = this.bond.getDipoleMagnitudeDebye();
     const drawLength = Math.max( 0, muMag * this.molecule.getDipoleScale() );
-    const sideOffsetScale = ( this.bond.bondType === 3 ? 1.3 : ( this.bond.bondType === 2 ? 1.1 : 0.9 ) );
+    let sideOffset = BOND_DIPOLE_OFFSET * ( ( this.bond.bondType === 3 ? 1.3 : ( this.bond.bondType === 2 ? 1.1 : 0.9 ) ) );
+
+    // Ensure arrows are far enough from atoms to not overlap
+    {
+      const augmentedAtomRadius = Math.max( this.bond.atomA.getDisplayRadius(), this.bond.atomB.getDisplayRadius() ) + 0.15;
+
+      // If our side offset is bigger than atom radius, would have no potential overlap
+      if ( augmentedAtomRadius > sideOffset ) {
+        const relativeX = Math.max( 0, this.bond.getVisibleLength() / 2 + augmentedAtomRadius - drawLength / 2 );
+
+        // If our vector length doesn't even reach the atom, would have no potential overlap
+        if ( augmentedAtomRadius > relativeX ) {
+
+          // Pythagorean theorem to find minimum side offset to avoid overlap
+          const relativeY = Math.sqrt( augmentedAtomRadius * augmentedAtomRadius - relativeX * relativeX );
+
+          if ( relativeY > sideOffset ) {
+            sideOffset = relativeY;
+          }
+        }
+      }
+    }
+
     const dir = this.bond.getPositiveToNegativeDirection().timesScalar( orientationSign );
 
     const electronegativityDir = this.bond.atomB.position.minus( this.bond.atomA.position ).timesScalar( this.bond.atomB.element.electronegativity! - this.bond.atomA.element.electronegativity! );
@@ -97,7 +119,7 @@ export default class BondDipoleView extends THREE.Object3D {
     }
 
     const tail = center
-      .plus( chosen.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
+      .plus( chosen.timesScalar( sideOffset ) )
       .plus( dir.timesScalar( -drawLength / 2 ) );
 
     // Cross axis perpendicular to camera at arrow location
@@ -112,7 +134,7 @@ export default class BondDipoleView extends THREE.Object3D {
     const minUnscaled = Math.max( 0.2, 0.72 * dist );
     if ( drawLength < minUnscaled ) {
       const tailForM = center
-        .plus( chosen.timesScalar( BOND_DIPOLE_OFFSET * sideOffsetScale ) )
+        .plus( chosen.timesScalar( sideOffset ) )
         .plus( dir.timesScalar( -drawLength / 2 ) );
       this.arrow.setFrom( tailForM, dir, minUnscaled );
       const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
