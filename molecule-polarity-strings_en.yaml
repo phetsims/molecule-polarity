@@ -75,6 +75,8 @@ a11y:
       electrostaticContext: '{ $progress } electrostatic potential.'
       electronDensityContext: '{ $progress } electron density.'
       electricFieldContext: 'Molecule aligned with electric field.'
+      molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
+      molecularDipoleDirection: '{ a11y.common.electronegativitySlider.molecularDipoleContext } Points to { $position } o''clock.'
     bondDipoleCheckbox:
       accessibleName: 'Bond Dipole'
       accessibleNamePlural: 'Bond Dipoles'
@@ -429,7 +431,6 @@ a11y:
       heading: 'Molecule ABC'
       currentState: 'Currently, the molecule is { $polarity }.'
       orientationDescription: 'Molecule is { $shape } with Atom A { $atomAPosition } o''clock, Atom B at center, and Atom C { $atomCPosition } o''clock.'
-      electricFieldAligned: 'Molecule aligned with electric field.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
       molecularDipoleDescription: 'Molecule has { $magnitude } molecular dipole arrow.'
       molecularDipoleDirection: '{ a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription } Molecular dipole points { $direction } o''clock.'
@@ -485,17 +486,6 @@ a11y:
         deg330: '330 degrees'
         deg360: '360 degrees, back to starting position'
       molecularDipoleContext: 'Molecular dipole points to { $position } o''clock.'
-      electricFieldContext: 'Rotating { $direction }, Aligned with electric field.'
-    
-    # Atom B Electronegativity Slider
-    atomBElectronegativitySlider:
-      bondDipoleContext: 'Bond dipole AB { $progressAB }, BC { $progressBC }'
-      bondDipoleABDirectionChange: 'Bond dipole AB now points to Atom { $atom }'
-      bondDipoleBCDirectionChange: 'Bond dipole BC now points to Atom { $atom }'
-      molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
-      molecularDipoleDirection: '{ a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContext } Points to { $position } o''clock.'
-      partialChargeContext: 'Partial charge is { $progress }'
-      electricFieldContext: 'Molecule aligned with electric field.'
 
   # ===================
   # REAL MOLECULES SCREEN

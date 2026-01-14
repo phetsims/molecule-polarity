@@ -115,7 +115,7 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // Molecular dipole null description: Molecular dipole zero.
     molecularDipoleVisible && isDipoleZero && this.contextResponse(
-      MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContext.format( {
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleContext.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: 'zero'
         } )
@@ -124,7 +124,7 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // Molecular dipole description
     molecularDipoleVisible && !isDipoleZero && this.contextResponse(
-      MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirection.format( {
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleDirection.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
         } ),

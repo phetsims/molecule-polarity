@@ -96,6 +96,8 @@ addToMapIfDefined( 'a11y_common_electronegativitySlider_bondCharacterContext', '
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electrostaticContext', 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electronDensityContext', 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electricFieldContext', 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' );
+addToMapIfDefined( 'a11y_common_electronegativitySlider_molecularDipoleContext', 'a11y.common.electronegativitySlider.molecularDipoleContextStringProperty' );
+addToMapIfDefined( 'a11y_common_electronegativitySlider_molecularDipoleDirection', 'a11y.common.electronegativitySlider.molecularDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleName', 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleNamePlural', 'a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleHelpText', 'a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty' );
@@ -243,13 +245,6 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg330'
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg360', 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_electricFieldContext', 'a11y.threeAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleABDirectionChange', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleABDirectionChangeStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleBCDirectionChange', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleBCDirectionChangeStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleDirection', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirectionStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_partialChargeContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.partialChargeContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_atomBElectronegativitySlider_electricFieldContext', 'a11y.threeAtomsScreen.atomBElectronegativitySlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_playArea', 'a11y.realMoleculesScreen.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_controlArea', 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_currentDetails', 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' );
@@ -359,7 +354,9 @@ const MoleculePolarityFluent = {
         bondCharacterContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_bondCharacterContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.bondCharacterContextStringProperty' ), [{"name":"progress"}] ),
         electrostaticContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electrostaticContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' ), [{"name":"progress"}] ),
         electronDensityContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electronDensityContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' ), [{"name":"progress"}] ),
-        electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' ) )
+        electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' ) ),
+        molecularDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.molecularDipoleContextStringProperty' ), [{"name":"progress"}] ),
+        molecularDipoleDirection: new FluentPattern<{ position: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.molecularDipoleDirectionStringProperty' ), [{"name":"position"},{"name":"progress"}] )
       },
       bondDipoleCheckbox: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' ) ),
@@ -613,16 +610,6 @@ const MoleculePolarityFluent = {
         },
         molecularDipoleContext: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' ), [{"name":"position"}] ),
         electricFieldContext: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ), [{"name":"direction"}] )
-      },
-      _comment_8: new FluentComment( {"comment":"Atom B Electronegativity Slider","associatedKey":"atomBElectronegativitySlider"} ),
-      atomBElectronegativitySlider: {
-        bondDipoleContext: new FluentPattern<{ progressAB: FluentVariable, progressBC: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleContextStringProperty' ), [{"name":"progressAB"},{"name":"progressBC"}] ),
-        bondDipoleABDirectionChange: new FluentPattern<{ atom: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleABDirectionChange', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleABDirectionChangeStringProperty' ), [{"name":"atom"}] ),
-        bondDipoleBCDirectionChange: new FluentPattern<{ atom: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_bondDipoleBCDirectionChange', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleBCDirectionChangeStringProperty' ), [{"name":"atom"}] ),
-        molecularDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleContextStringProperty' ), [{"name":"progress"}] ),
-        molecularDipoleDirection: new FluentPattern<{ position: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.molecularDipoleDirectionStringProperty' ), [{"name":"position"},{"name":"progress"}] ),
-        partialChargeContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_partialChargeContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.partialChargeContextStringProperty' ), [{"name":"progress"}] ),
-        electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_atomBElectronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.atomBElectronegativitySlider.electricFieldContextStringProperty' ) )
       }
     },
     _comment_36: new FluentComment( {"comment":"===================","associatedKey":"realMoleculesScreen"} ),

@@ -97,6 +97,8 @@ type StringsType = {
         'electrostaticContextStringProperty': LocalizedStringProperty;
         'electronDensityContextStringProperty': LocalizedStringProperty;
         'electricFieldContextStringProperty': LocalizedStringProperty;
+        'molecularDipoleContextStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
       };
       'bondDipoleCheckbox': {
         'accessibleNameStringProperty': LocalizedStringProperty;
@@ -291,15 +293,6 @@ type StringsType = {
           'deg360StringProperty': LocalizedStringProperty;
         };
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
-        'electricFieldContextStringProperty': LocalizedStringProperty;
-      };
-      'atomBElectronegativitySlider': {
-        'bondDipoleContextStringProperty': LocalizedStringProperty;
-        'bondDipoleABDirectionChangeStringProperty': LocalizedStringProperty;
-        'bondDipoleBCDirectionChangeStringProperty': LocalizedStringProperty;
-        'molecularDipoleContextStringProperty': LocalizedStringProperty;
-        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
-        'partialChargeContextStringProperty': LocalizedStringProperty;
         'electricFieldContextStringProperty': LocalizedStringProperty;
       }
     };

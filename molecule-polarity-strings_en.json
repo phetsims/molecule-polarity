@@ -219,6 +219,12 @@
         },
         "electricFieldContext": {
           "value": "Molecule aligned with electric field."
+        },
+        "molecularDipoleContext": {
+          "value": "Molecular dipole arrow { $progress }."
+        },
+        "molecularDipoleDirection": {
+          "value": "{ a11y_common_electronegativitySlider_molecularDipoleContext } Points to { $position } o'clock."
         }
       },
       "bondDipoleCheckbox": {
@@ -708,29 +714,6 @@
         },
         "electricFieldContext": {
           "value": "Rotating { $direction }, Aligned with electric field."
-        }
-      },
-      "atomBElectronegativitySlider": {
-        "bondDipoleContext": {
-          "value": "Bond dipole AB { $progressAB }, BC { $progressBC }"
-        },
-        "bondDipoleABDirectionChange": {
-          "value": "Bond dipole AB now points to Atom { $atom }"
-        },
-        "bondDipoleBCDirectionChange": {
-          "value": "Bond dipole BC now points to Atom { $atom }"
-        },
-        "molecularDipoleContext": {
-          "value": "Molecular dipole arrow { $progress }."
-        },
-        "molecularDipoleDirection": {
-          "value": "{ a11y_threeAtomsScreen_atomBElectronegativitySlider_molecularDipoleContext } Points to { $position } o'clock."
-        },
-        "partialChargeContext": {
-          "value": "Partial charge is { $progress }"
-        },
-        "electricFieldContext": {
-          "value": "Molecule aligned with electric field."
         }
       }
     },
