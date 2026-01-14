@@ -25,6 +25,7 @@ type BondOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'p
 
 export default class Bond extends PhetioObject {
 
+  public readonly label: string; // Used for accessibility, not translatable
   public readonly atom1: Atom;
   public readonly atom2: Atom;
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>;
@@ -44,6 +45,8 @@ export default class Bond extends PhetioObject {
 
     this.atom1 = atom1;
     this.atom2 = atom2;
+
+    this.label = `${atom1.label}${atom2.label}`; // e.g. 'AB'
 
     this.dipoleProperty = new DerivedProperty( [
         atom1.positionProperty, atom2.positionProperty,

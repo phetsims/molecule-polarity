@@ -67,8 +67,8 @@ a11y:
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
       accessibleHelpText: 'Change how strongly Atom { $atomName } attracts electrons.'
-      dipoleContext: 'Dipole arrow { $progress }.'
-      dipoleDirectionChange: 'Bond dipole arrow now points to Atom { $atom }.'
+      dipoleContext: 'Bond dipole { $bond } arrow { $progress }.'
+      dipoleDirectionChange: 'Bond dipole { $bond } arrow now points to Atom { $atom }.'
       partialChargeContext: 'Partial charge is { $progress }.'
       partialChargeSignChange: 'Partial charge now { $sign }.'
       bondCharacterContext: 'Bond is { $progress }.'

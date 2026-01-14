@@ -184,16 +184,17 @@ export default class MoleculeContextResponsesNode extends Node {
       bondDipolesVisible = this.viewProperties.bondDipolesVisibleProperty.value;
     }
 
-    if ( this.bonds.length === 1 ) {
-      const bond = this.bonds[ 0 ];
+    this.bonds.forEach( ( bond, count ) => {
       const bondDeltaEN = bond.deltaENProperty.value;
-      const bondChanges = this.calculateBondChanges( bondDeltaEN, this.invertMapping );
+      const bondChanges = this.calculateBondChanges( bondDeltaEN,
+        this.invertMapping || count === 1 ); // Only happens for Atom B, which has inverted mapping but second bond is not
       const isBondDeltaENGrowing = bondChanges.isGrowing;
       const didBondChangeDirection = bondChanges.didBondChangeDirection;
 
       // If Bond Dipoles visible, emit bond dipole related context responses
       bondDipolesVisible && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
+          bond: bond.label,
           progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
             progress: isBondDeltaENGrowing ? 'larger' : 'smaller'
           } )
@@ -203,50 +204,11 @@ export default class MoleculeContextResponsesNode extends Node {
       // If bond dipole changes direction
       bondDipolesVisible && didBondChangeDirection && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
+          bond: bond.label,
           atom: bondDeltaEN > 0 ? bond.atom2.label : bond.atom1.label
         } )
       );
-    }
-    else {
-      // This is the case of the Atom B of the second screen, which has two bonds
-      const bondAB = this.bonds[ 0 ]; // DeltaEN = EN_B - EN_A (A is inverted)
-      const bondBC = this.bonds[ 1 ]; // DeltaEN = EN_C - EN_B (B is inverted)
-
-      const bondABDeltaEN = bondAB.deltaENProperty.value;
-      const bondABChanges = this.calculateBondChanges( bondABDeltaEN, false );
-      const isBondABDeltaENGrowing = bondABChanges.isGrowing;
-      const didBondABChangeDirection = bondABChanges.didBondChangeDirection;
-
-      const bondBCDeltaEN = bondBC.deltaENProperty.value;
-      const bondBCChanges = this.calculateBondChanges( bondBCDeltaEN, true );
-      const isBondBCDeltaENGrowing = bondBCChanges.isGrowing;
-      const didBondBCChangeDirection = bondBCChanges.didBondChangeDirection;
-
-      // If Bond Dipoles visible, emit bond dipole related context responses
-      bondDipolesVisible && this.contextResponse(
-        MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleContext.format( {
-          progressAB: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-            progress: isBondABDeltaENGrowing ? 'larger' : 'smaller'
-          } ),
-          progressBC: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-            progress: isBondBCDeltaENGrowing ? 'larger' : 'smaller'
-          } )
-        } )
-      );
-
-      // If bond dipole changes direction
-      bondDipolesVisible && didBondABChangeDirection && this.contextResponse(
-        MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleABDirectionChange.format( {
-          atom: bondABDeltaEN > 0 ? bondAB.atom2.label : bondAB.atom1.label
-        } )
-      );
-
-      bondDipolesVisible && didBondBCChangeDirection && this.contextResponse(
-        MoleculePolarityFluent.a11y.threeAtomsScreen.atomBElectronegativitySlider.bondDipoleBCDirectionChange.format( {
-          atom: bondBCDeltaEN > 0 ? bondBC.atom2.label : bondBC.atom1.label
-        } )
-      );
-    }
+    } );
   }
 
   private calculateBondChanges( bondDeltaEN: number, inverted: boolean ): { isGrowing: boolean; didBondChangeDirection: boolean } {

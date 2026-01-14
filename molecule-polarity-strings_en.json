@@ -197,10 +197,10 @@
           "value": "Change how strongly Atom { $atomName } attracts electrons."
         },
         "dipoleContext": {
-          "value": "Dipole arrow { $progress }."
+          "value": "Bond dipole { $bond } arrow { $progress }."
         },
         "dipoleDirectionChange": {
-          "value": "Bond dipole arrow now points to Atom { $atom }."
+          "value": "Bond dipole { $bond } arrow now points to Atom { $atom }."
         },
         "partialChargeContext": {
           "value": "Partial charge is { $progress }."
