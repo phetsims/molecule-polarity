@@ -18,7 +18,7 @@ import { toClock } from './toClock.js';
 
 export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
-type MolecularDipole = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
+type MolecularDipole = 'no' | 'verySmall' | 'small' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge';
 // type BondDipole = 'no' | 'verySmall' | 'small' | 'medium' | 'fairlyLarge' | 'large';
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
@@ -75,17 +75,14 @@ export default class DescriptionMaps {
 
   private static deltaENtoMolecularDipole( deltaEN: number ): MolecularDipole {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= ZERO ? 'zero' :
-           deltaEN <= 0.4 ? 'tiny' :
-           deltaEN <= 0.8 ? 'verySmall' :
-           deltaEN <= 1.2 ? 'small' :
-           deltaEN <= 1.6 ? 'fairlySmall' :
-           deltaEN <= 2.0 ? 'medium' :
-           deltaEN <= 2.4 ? 'fairlyLarge' :
-           deltaEN <= 2.8 ? 'large' :
+    return deltaEN <= ZERO ? 'no' :
+           deltaEN <= 0.4 ? 'verySmall' :
+           deltaEN <= 0.8 ? 'small' :
+           deltaEN <= 1.2 ? 'medium' :
+           deltaEN <= 1.6 ? 'fairlyLarge' :
+           deltaEN <= 2.4 ? 'large' :
            deltaEN <= 3.2 ? 'veryLarge' :
-           deltaEN <= 3.6 ? 'extremelyLarge' :
-           'huge';
+           'extremelyLarge';
   }
 
   private static deltaENtoBondCharacter( deltaEN: number ): BondCharacter {

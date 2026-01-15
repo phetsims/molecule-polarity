@@ -269,18 +269,15 @@ a11y:
   # MolecularDipole11 - Molecular Dipole magnitude (Screen 2)
   molecularDipole:
     select_magnitude:
-      zero: 'zero'
-      tiny: 'tiny'
+      no: 'no'
       verySmall: 'very small'
       small: 'small'
-      fairlySmall: 'fairly small'
       medium: 'medium'
       fairlyLarge: 'fairly large'
       large: 'large'
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
-      huge: 'huge'
-  
+
   # OrientationAtom - Orientation for any atom (Screen 1)
   orientationAtom:
     select_position:
