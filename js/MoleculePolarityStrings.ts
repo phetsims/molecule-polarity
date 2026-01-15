@@ -184,8 +184,10 @@ type StringsType = {
     'oClockStringProperty': LocalizedStringProperty;
     'orientationMoleculeStringProperty': LocalizedStringProperty;
     'partialChargeSignStringProperty': LocalizedStringProperty;
-    'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
     'polarityStringProperty': LocalizedStringProperty;
+    'partialChargeMagnitudeStringProperty': LocalizedStringProperty;
+    'bondDipoleStringProperty': LocalizedStringProperty;
+    'molecularPolarityStringProperty': LocalizedStringProperty;
     'rotationStringProperty': LocalizedStringProperty;
     'shapeStringProperty': LocalizedStringProperty;
     'shapeGeometryStringProperty': LocalizedStringProperty;

@@ -441,11 +441,17 @@
     "partialChargeSign": {
       "value": "{ $sign ->\n  [positive] positive\n  *[negative] negative\n}"
     },
+    "polarity": {
+      "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [veryWeaklyPolar] very weakly polar\n  [weaklyPolar] weakly polar\n  [polar] polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
+    },
     "partialChargeMagnitude": {
       "value": "{ $magnitude ->\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  *[extremelyLarge] extremely large\n}"
     },
-    "polarity": {
-      "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [veryWeaklyPolar] very weakly polar\n  [weaklyPolar] weakly polar\n  [polar] polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
+    "bondDipole": {
+      "value": "{ $magnitude ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  *[large] large\n}"
+    },
+    "molecularPolarity": {
+      "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [weaklyPolar] weakly polar\n  [polar] polar\n  [moderatelyPolar] moderately polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
     },
     "rotation": {
       "value": "{ $direction ->\n  [clockwise] Rotating clockwise\n  *[counterclockwise] Rotating counterclockwise\n}"

@@ -307,8 +307,18 @@ a11y:
     select_sign:
       positive: 'positive'
       negative: 'negative'
-  
-  # PartialCharge11 - Partial Charge magnitude (Screen 1/2)
+
+  # Polarity6 - Bond Polarity (Screen 1/2)
+  polarity:
+    select_polarity:
+      nonpolar: 'nonpolar'
+      veryWeaklyPolar: 'very weakly polar'
+      weaklyPolar: 'weakly polar'
+      polar: 'polar'
+      stronglyPolar: 'strongly polar'
+      veryStronglyPolar: 'very strongly polar'
+
+  # PartialCharge11 - Partial Charge magnitude (Screen 1)
   partialChargeMagnitude:
     select_magnitude:
       zero: 'zero'
@@ -320,16 +330,25 @@ a11y:
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
 
-  # Polarity6 - Bond Polarity (Screen 1/2)
-  polarity:
+  # bondDipole6 - Bond Dipole magnitude (Screen 1)
+  bondDipole:
+    select_magnitude:
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      fairlyLarge: 'fairly large'
+      large: 'large'
+
+  molecularPolarity:
     select_polarity:
       nonpolar: 'nonpolar'
-      veryWeaklyPolar: 'very weakly polar'
       weaklyPolar: 'weakly polar'
       polar: 'polar'
+      moderatelyPolar: 'moderately polar'
       stronglyPolar: 'strongly polar'
       veryStronglyPolar: 'very strongly polar'
-  
+
   # Rotation2 - Rotation direction (Screen 1/2)
   rotation:
     select_direction:
@@ -439,8 +458,6 @@ a11y:
           positive: 'Atom { $atom } has { $magnitude } positive partial charge.'
           negative: 'Atom { $atom } has { $magnitude } negative partial charge.'
           zero: 'Atom { $atom } has { $magnitude } partial charge.'
-
-    
     # Move Atom A Slider
     moveAtomASlider:
       accessibleName: 'Move Atom A'
