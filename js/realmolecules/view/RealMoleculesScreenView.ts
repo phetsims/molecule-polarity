@@ -18,7 +18,7 @@ import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibilit
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
-import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
+import Pointer from '../../../../scenery/js/input/Pointer.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import TInputListener from '../../../../scenery/js/input/TInputListener.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
@@ -42,6 +42,7 @@ import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesScreenSummaryContentNode from './RealMoleculesScreenSummaryContentNode.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -318,6 +319,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     );
     this.sceneNode.stage.threeScene.add( this.moleculeView );
 
+    let isRotating = false;
+
     if ( this.sceneNode.stage.threeRenderer && MPQueryParameters.focusHighlight3D ) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error - FROM three-r160-addon-outlinepass
@@ -401,7 +404,18 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       this.sceneNode.stage.render = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
 
-        focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || moleculeNode.isInteractiveHighlightActiveProperty.value ) ? [ this.moleculeView ] : [];
+        const hasPointerOver = phet.joist.display._input!.pointers.some( ( pointer: Pointer ) => {
+          const ray = this.sceneNode.getRayFromScreenPoint( pointer.point );
+
+          const raycaster = new THREE.Raycaster( ThreeUtils.vectorToThree( ray.position ), ThreeUtils.vectorToThree( ray.direction ) );
+          const intersections: THREE.Intersection<THREE.Group>[] = [];
+
+          raycaster.intersectObject( this.moleculeView, true, intersections );
+
+          return intersections.length > 0;
+        } );
+
+        focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || ( moleculeNode.isInteractiveHighlightActiveProperty.value && ( isRotating || hasPointerOver ) ) ) ? [ this.moleculeView ] : [];
         blackOutlinePass.selectedObjects = blackStrokedObjects;
 
         if ( target ) {
@@ -416,7 +430,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       };
     }
 
-    let isRotating = false;
     const rotateListener: TInputListener = {
       down: ( event: SceneryEvent ) => {
         if ( !event.canStartPress() ) { return; }
