@@ -431,6 +431,7 @@ a11y:
       heading: 'Molecule ABC'
       currentState: 'Currently, the molecule is { $polarity }.'
       orientationDescription: 'Molecule is { $shape } with Atom A { $atomAPosition } o''clock, Atom B at center, and Atom C { $atomCPosition } o''clock.'
+      electricFieldAligned: 'Molecule aligned with electric field.'
       electronegativityValues: 'Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }.'
       molecularDipoleDescription: 'Molecule has { $magnitude } molecular dipole arrow.'
       molecularDipoleDirection: '{ a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription } Molecular dipole points { $direction } o''clock.'
