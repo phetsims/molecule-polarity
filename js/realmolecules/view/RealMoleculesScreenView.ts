@@ -140,11 +140,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.addChild( rootNode );
 
     const keyboardDragListener = new SoundKeyboardDragListener( {
-      moveOnHoldDelay: 0,
-      moveOnHoldInterval: 20,
+      dragDelta: Math.PI / 16,
+      shiftDragDelta: Math.PI / 32,
+      moveOnHoldInterval: 100,
       drag: ( event, listener ) => {
-        const scale = 0.005;
-        const newQuaternion = new THREE.Quaternion().setFromEuler( new THREE.Euler( listener.modelDelta.y * scale, listener.modelDelta.x * scale, 0 ) );
+        const newQuaternion = new THREE.Quaternion().setFromEuler( new THREE.Euler( listener.modelDelta.y, listener.modelDelta.x, 0 ) );
         newQuaternion.multiply( model.moleculeQuaternionProperty.value );
         model.moleculeQuaternionProperty.value = newQuaternion;
       },
