@@ -15,6 +15,7 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import RealMolecule, { RealBond } from '../model/RealMolecule.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
+import Element from '../../../../nitroglycerin/js/Element.js';
 
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
 
@@ -73,6 +74,11 @@ export default class BondDipoleView extends THREE.Object3D {
             const s = wProj.dot( v );
             // If partner is on +v side, choose +perp (which corresponds to -v); otherwise choose -perp
             chosen = s > 0 ? perpendicular : negatedPerpendicular;
+            if ( this.molecule.symbol === 'CH2F2' && ( this.bond.atomA.element === Element.H || this.bond.atomB.element === Element.H ) ) {
+              // Special case for CH2F2 to match 2D view (hacky)
+              // See https://github.com/phetsims/molecule-polarity/issues/183#issuecomment-3752466085
+              chosen = s > 0 ? negatedPerpendicular : perpendicular;
+            }
           }
         }
       }
