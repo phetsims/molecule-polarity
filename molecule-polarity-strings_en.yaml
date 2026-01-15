@@ -315,16 +315,13 @@ a11y:
   partialChargeMagnitude:
     select_magnitude:
       zero: 'zero'
-      tiny: 'tiny'
       verySmall: 'very small'
       small: 'small'
-      fairlySmall: 'fairly small'
       medium: 'medium'
       fairlyLarge: 'fairly large'
       large: 'large'
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
-      huge: 'huge'
 
   # Polarity6 - Bond Polarity (Screen 1/2)
   polarity:

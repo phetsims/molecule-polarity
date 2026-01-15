@@ -19,6 +19,7 @@ import { toClock } from './toClock.js';
 export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 type Polarity = 'nonpolar' | 'veryWeaklyPolar' | 'weaklyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
 type MolecularDipole = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
+// type BondDipole = 'no' | 'verySmall' | 'small' | 'medium' | 'fairlyLarge' | 'large';
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
 type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
 type ElectrostaticRegions = 'verySlightly' | 'slightly' | 'moderately' | 'highly' | 'veryHighly';
@@ -27,7 +28,7 @@ type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 
 type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
 type Directions = 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12';
 type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap';
-type PartialChargeMagnitude = 'zero' | 'tiny' | 'verySmall' | 'small' | 'fairlySmall' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge' | 'huge';
+type PartialChargeMagnitude = 'zero' | 'verySmall' | 'small' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge';
 type RealPolarity = 'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
 
 // Approximation of zero to avoid issues with floating point precision
@@ -63,16 +64,13 @@ export default class DescriptionMaps {
   private static deltaENtoPartialCharges( deltaEN: number ): PartialChargeMagnitude {
     deltaEN = roundAbs( deltaEN );
     return deltaEN <= ZERO ? 'zero' :
-           deltaEN <= 0.4 ? 'tiny' :
-           deltaEN <= 0.8 ? 'verySmall' :
-           deltaEN <= 1.2 ? 'small' :
-           deltaEN <= 1.6 ? 'fairlySmall' :
-           deltaEN <= 2.0 ? 'medium' :
-           deltaEN <= 2.4 ? 'fairlyLarge' :
-           deltaEN <= 2.8 ? 'large' :
+           deltaEN <= 0.4 ? 'verySmall' :
+           deltaEN <= 0.8 ? 'small' :
+           deltaEN <= 1.2 ? 'medium' :
+           deltaEN <= 1.6 ? 'fairlyLarge' :
+           deltaEN <= 2.4 ? 'large' :
            deltaEN <= 3.2 ? 'veryLarge' :
-           deltaEN <= 3.6 ? 'extremelyLarge' :
-           'huge';
+           'extremelyLarge';
   }
 
   private static deltaENtoMolecularDipole( deltaEN: number ): MolecularDipole {
@@ -218,13 +216,13 @@ export default class DescriptionMaps {
   }
 
   public static createMolecularDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.partialChargeMagnitude.createProperty( {
+    return MoleculePolarityFluent.a11y.molecularDipole.createProperty( {
       magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoMolecularDipole( deltaEN ) )
     } );
   }
 
   public static formatMolecularDipoleString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.partialChargeMagnitude.format( {
+    return MoleculePolarityFluent.a11y.molecularDipole.format( {
       magnitude: DescriptionMaps.deltaENtoMolecularDipole( deltaEN )
     } );
   }

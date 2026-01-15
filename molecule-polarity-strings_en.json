@@ -442,7 +442,7 @@
       "value": "{ $sign ->\n  [positive] positive\n  *[negative] negative\n}"
     },
     "partialChargeMagnitude": {
-      "value": "{ $magnitude ->\n  [zero] zero\n  [tiny] tiny\n  [verySmall] very small\n  [small] small\n  [fairlySmall] fairly small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  [extremelyLarge] extremely large\n  *[huge] huge\n}"
+      "value": "{ $magnitude ->\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  *[extremelyLarge] extremely large\n}"
     },
     "polarity": {
       "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [veryWeaklyPolar] very weakly polar\n  [weaklyPolar] weakly polar\n  [polar] polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
