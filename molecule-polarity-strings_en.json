@@ -586,9 +586,6 @@
         "orientationDescription": {
           "value": "Molecule is { $shape } with Atom A { $atomAPosition } o'clock, Atom B at center, and Atom C { $atomCPosition } o'clock."
         },
-        "electricFieldAligned": {
-          "value": "Molecule aligned with electric field."
-        },
         "electronegativityValues": {
           "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }, for Atom C is { $enC }."
         },
@@ -711,9 +708,6 @@
         },
         "molecularDipoleContext": {
           "value": "Molecular dipole points to { $position } o'clock."
-        },
-        "electricFieldContext": {
-          "value": "Rotating { $direction }, Aligned with electric field."
         }
       }
     },

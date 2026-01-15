@@ -243,7 +243,6 @@ type StringsType = {
         'headingStringProperty': LocalizedStringProperty;
         'currentStateStringProperty': LocalizedStringProperty;
         'orientationDescriptionStringProperty': LocalizedStringProperty;
-        'electricFieldAlignedStringProperty': LocalizedStringProperty;
         'electronegativityValuesStringProperty': LocalizedStringProperty;
         'molecularDipoleDescriptionStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
@@ -293,7 +292,6 @@ type StringsType = {
           'deg360StringProperty': LocalizedStringProperty;
         };
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
-        'electricFieldContextStringProperty': LocalizedStringProperty;
       }
     };
     'realMoleculesScreen': {

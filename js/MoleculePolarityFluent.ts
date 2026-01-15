@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -206,7 +206,6 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_screenSummary_interactionHint', 'a11y.
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_heading', 'a11y.threeAtomsScreen.moleculeABC.headingStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_currentState', 'a11y.threeAtomsScreen.moleculeABC.currentStateStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_orientationDescription', 'a11y.threeAtomsScreen.moleculeABC.orientationDescriptionStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_electricFieldAligned', 'a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_electronegativityValues', 'a11y.threeAtomsScreen.moleculeABC.electronegativityValuesStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDescription', 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDirection', 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirectionStringProperty' );
@@ -244,7 +243,6 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg300'
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg330', 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg330StringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg360', 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_electricFieldContext', 'a11y.threeAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_playArea', 'a11y.realMoleculesScreen.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_controlArea', 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_currentDetails', 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' );
@@ -549,7 +547,6 @@ const MoleculePolarityFluent = {
         headingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_heading', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.headingStringProperty' ) ),
         currentState: new FluentPattern<{ polarity: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_currentState', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.currentStateStringProperty' ), [{"name":"polarity"}] ),
         orientationDescription: new FluentPattern<{ atomAPosition: FluentVariable, atomCPosition: FluentVariable, shape: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_orientationDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.orientationDescriptionStringProperty' ), [{"name":"atomAPosition"},{"name":"atomCPosition"},{"name":"shape"}] ),
-        electricFieldAlignedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_electricFieldAligned', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty' ) ),
         electronegativityValues: new FluentPattern<{ enA: FluentVariable, enB: FluentVariable, enC: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_electronegativityValues', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.electronegativityValuesStringProperty' ), [{"name":"enA"},{"name":"enB"},{"name":"enC"}] ),
         molecularDipoleDescription: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescriptionStringProperty' ), [{"name":"magnitude"}] ),
         molecularDipoleDirection: new FluentPattern<{ direction: FluentVariable, magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirectionStringProperty' ), [{"name":"direction"},{"name":"magnitude"}] ),
@@ -608,8 +605,7 @@ const MoleculePolarityFluent = {
           deg330StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg330', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg330StringProperty' ) ),
           deg360StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg360', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg360StringProperty' ) )
         },
-        molecularDipoleContext: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' ), [{"name":"position"}] ),
-        electricFieldContext: new FluentPattern<{ direction: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty' ), [{"name":"direction"}] )
+        molecularDipoleContext: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.molecularDipoleContextStringProperty' ), [{"name":"position"}] )
       }
     },
     _comment_36: new FluentComment( {"comment":"===================","associatedKey":"realMoleculesScreen"} ),
