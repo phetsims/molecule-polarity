@@ -44,9 +44,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
       // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
-      visiblePropertyOptions: {
-        phetioFeatured: false
-      },
+      phetioVisiblePropertyInstrumented: false,
 
       accessibleName: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleHelpTextStringProperty
