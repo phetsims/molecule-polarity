@@ -457,7 +457,7 @@
       "value": "{ $direction ->\n  [clockwise] Rotating clockwise\n  *[counterclockwise] Rotating counterclockwise\n}"
     },
     "shape": {
-      "value": "{ $shape ->\n  [linear] linear\n  [nearlyLinear] nearly linear\n  [slightlyBent] slightly bent\n  [bent] bent\n  [veryBent] very bent\n  [extremelyBentSlightOverlap] extremely bent, slight overlap\n  *[atomsOverlap] atoms overlap\n}"
+      "value": "{ $shape ->\n  [linear] linear\n  [nearlyLinear] nearly linear\n  [slightlyBent] slightly bent\n  [bent] bent\n  [veryBent] very bent\n  [extremelyBentSlightOverlap] extremely bent, slight overlap\n  *[atomsOverlap] linear, atoms overlap\n}"
     },
     "shapeGeometry": {
       "value": "{ $geometry ->\n  [linear] linear\n  [bent] bent\n  [trigonalPlanar] trigonal planar\n  [trigonalPyramidal] trigonal pyramidal\n  *[tetrahedral] tetrahedral\n}"

@@ -364,7 +364,7 @@ a11y:
       bent: 'bent'
       veryBent: 'very bent'
       extremelyBentSlightOverlap: 'extremely bent, slight overlap'
-      atomsOverlap: 'atoms overlap'
+      atomsOverlap: 'linear, atoms overlap'
 
   shapeGeometry:
     select_geometry:
