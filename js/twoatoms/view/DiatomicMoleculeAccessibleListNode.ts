@@ -43,7 +43,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           viewProperties.bondDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDescription.createProperty( {
-          bondDipoleMagnitude: DescriptionMaps.createMolecularDipoleStringProperty( diatomicMolecule.deltaENProperty )
+          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty )
         } )
       },
 
@@ -54,7 +54,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           viewProperties.bondDipoleVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
-          bondDipoleMagnitude: DescriptionMaps.createMolecularDipoleStringProperty( diatomicMolecule.deltaENProperty ),
+          bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty ),
           atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
         } )
       },

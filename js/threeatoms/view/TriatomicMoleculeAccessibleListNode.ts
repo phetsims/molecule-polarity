@@ -26,7 +26,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
   ) {
     const options = optionize<SelfOptions, EmptySelfOptions, TriatomicMoleculeAccessibleListNodeOptions>()( {
       leadingParagraphStringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
-        polarity: DescriptionMaps.createPolarityStringProperty( triatomicMolecule.deltaENProperty )
+        polarity: DescriptionMaps.createMolecularPolarityStringProperty( triatomicMolecule.deltaENProperty )
       } )
     }, providedOptions );
 
@@ -130,7 +130,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleAB.createProperty( {
-          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+          magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
           )
         } )
@@ -142,7 +142,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescription.createProperty( {
-          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+          magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
           ),
           direction: new DerivedProperty(
@@ -168,7 +168,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBC.createProperty( {
-          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+          magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
           )
         } )
@@ -180,7 +180,7 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
           viewProperties.bondDipolesVisibleProperty
         ] ),
         stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
-          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+          magnitude: DescriptionMaps.createBondDipoleStringProperty(
             triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
           ),
           direction: new DerivedProperty(

@@ -4,6 +4,9 @@
  *
  * Each mapping defines a createStringProperty function as well as a formatString function for convenience.
  *
+ * TODO: Consider rather writing a single string-to-function map to reduce code duplication. https://github.com/phetsims/molecule-polarity/issues/218
+ * TODO: Delete unused functions https://github.com/phetsims/molecule-polarity/issues/218
+ *
  * @author Agustín Vallejo
  */
 
