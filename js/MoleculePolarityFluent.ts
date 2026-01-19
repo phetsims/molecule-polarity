@@ -250,6 +250,7 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_playArea', 'a11y.real
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_controlArea', 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_currentDetails', 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_interactionHint', 'a11y.realMoleculesScreen.screenSummary.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_realMolecule', 'a11y.realMoleculesScreen.realMoleculeStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_accessibleName', 'a11y.realMoleculesScreen.draggableMolecule.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_accessibleHelpText', 'a11y.realMoleculesScreen.draggableMolecule.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_objectResponses', 'a11y.realMoleculesScreen.draggableMolecule.objectResponsesStringProperty' );
@@ -642,6 +643,7 @@ const MoleculePolarityFluent = {
         currentDetails: new FluentPattern<{ moleculeName: FluentVariable, realPolarity: FluentVariable, shapeGeometry: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_currentDetails', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' ), [{"name":"moleculeName"},{"name":"realPolarity"},{"name":"shapeGeometry"}] ),
         interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_interactionHint', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.interactionHintStringProperty' ) )
       },
+      realMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_realMolecule', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.realMoleculeStringProperty' ) ),
       draggableMolecule: {
         accessibleName: new FluentPattern<{ moleculeName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_draggableMolecule_accessibleName', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.draggableMolecule.accessibleNameStringProperty' ), [{"name":"moleculeName"}] ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_draggableMolecule_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.draggableMolecule.accessibleHelpTextStringProperty' ) ),

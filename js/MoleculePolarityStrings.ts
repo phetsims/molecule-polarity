@@ -304,6 +304,7 @@ type StringsType = {
         'currentDetailsStringProperty': LocalizedStringProperty;
         'interactionHintStringProperty': LocalizedStringProperty;
       };
+      'realMoleculeStringProperty': LocalizedStringProperty;
       'draggableMolecule': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;

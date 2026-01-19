@@ -19,7 +19,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { BondDipoleModel } from './BondDipoleModel.js';
 import { FieldModel } from './FieldModel.js';
-import RealMolecule, { MoleculeGeometry } from './RealMolecule.js';
+import RealMolecule, { MoleculeGeometry, MoleculeSymbols } from './RealMolecule.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
@@ -55,7 +55,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
     } );
 
-    const createMolecule = ( symbol: string, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
+    const createMolecule = ( symbol: MoleculeSymbols, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
       return new RealMolecule(
         symbol,
         nameStringProperty,
@@ -164,16 +164,16 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
         0.6719318351528544
       );
     }
-    else if (
-      molecule.symbol === 'CHF3'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.017834718285708984,
-        -0.7400716028848267,
-        0.6715496673518707,
-        0.03157514381184575
-      );
-    }
+    // else if (
+    //   molecule.symbol === 'CHF3'
+    // ) {
+    //   this.moleculeQuaternionProperty.value = new THREE.Quaternion(
+    //     0.017834718285708984,
+    //     -0.7400716028848267,
+    //     0.6715496673518707,
+    //     0.03157514381184575
+    //   );
+    // }
     else if (
       molecule.symbol === 'CF4'
     ) {

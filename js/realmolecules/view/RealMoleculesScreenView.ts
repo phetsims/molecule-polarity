@@ -18,6 +18,7 @@ import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibilit
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import Pointer from '../../../../scenery/js/input/Pointer.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import TInputListener from '../../../../scenery/js/input/TInputListener.js';
@@ -34,15 +35,16 @@ import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
+import RealMoleculeAccessibleListNode from './RealMoleculeAccessibleListNode.js';
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
 import RealMoleculesScreenSummaryContentNode from './RealMoleculesScreenSummaryContentNode.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
-import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -126,6 +128,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
+    // Molecule Description
+
     // Parent for all nodes added to this screen
     const rootNode = new Node( {
       children: [
@@ -152,15 +156,22 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     moleculeNode.addInputListener( keyboardDragListener );
 
-    const temporaryMoleculeParagraphNode = new Node();
-    this.addChild( temporaryMoleculeParagraphNode );
+    const moleculeDescriptionNode = new Node( {
+      accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMoleculeStringProperty
+    } );
+    this.addChild( moleculeDescriptionNode );
 
     model.moleculeProperty.link( molecule => {
-      temporaryMoleculeParagraphNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( molecule.computeBondDipoleVectorSum().magnitude, 2 );
+      moleculeDescriptionNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( molecule.computeBondDipoleVectorSum().magnitude, 2 );
     } );
 
+    // Molecule description
+    moleculeDescriptionNode.addChild(
+      new RealMoleculeAccessibleListNode( model.moleculeProperty, viewProperties )
+    );
+
     this.pdomPlayAreaNode.pdomOrder = [
-      temporaryMoleculeParagraphNode,
+      moleculeDescriptionNode,
       moleculeNode
     ];
 

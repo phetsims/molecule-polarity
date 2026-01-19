@@ -735,6 +735,9 @@
           "value": "Choose a molecule and rotate it to explore how shape and bond polarity determine the molecular dipole."
         }
       },
+      "realMolecule": {
+        "value": "Real Molecule"
+      },
       "draggableMolecule": {
         "accessibleName": {
           "value": "Move { $moleculeName }"

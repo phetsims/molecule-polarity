@@ -16,15 +16,22 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
+import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { BondDipoleModel } from './BondDipoleModel.js';
 import { FieldModel } from './FieldModel.js';
 import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
 import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
 import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
+
+export type MoleculeSymbols = 'H2' | 'N2' | 'O2' | 'F2' | 'HF' | 'H2O' | 'CO2' | 'HCN' | 'O3' | 'NH3' | 'BH3' |
+  'BF3' | 'CH2O' | 'CH4' | 'CH3F' | 'CH2F2' | 'CHCl3' | 'CF4'; // | 'CHF3';
+
+export type MoleculeNames = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' |
+  'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' |
+  'methane' | 'fluoromethane' | 'difluoromethane' | 'tetrafluoromethane' | 'chloroform'; // | 'trifluoromethane';
 
 // Visualization constants for dipoles
 const DEFAULT_DIPOLE_FACTOR = 1.3;
@@ -57,7 +64,7 @@ export default class RealMolecule extends PhetioObject {
    * @param tandem
    */
   public constructor(
-    public symbol: string,
+    public symbol: MoleculeSymbols,
     public fullNameProperty: TReadOnlyProperty<string>,
     public geometry: MoleculeGeometry,
     public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
@@ -446,6 +453,36 @@ export default class RealMolecule extends PhetioObject {
       }
     }
     return Math.sqrt( maxR2 );
+  }
+
+  /**
+   * Returns the accessible name for this molecule based on the symbol.
+   */
+  public getAccessibleName(): MoleculeNames {
+
+    const symbolToNameMap: Record<MoleculeSymbols, MoleculeNames> = {
+      H2: 'hydrogen',
+      N2: 'nitrogen',
+      O2: 'oxygen',
+      F2: 'fluorine',
+      HF: 'hydrogenFluoride',
+      H2O: 'water',
+      CO2: 'carbonDioxide',
+      HCN: 'hydrogenCyanide',
+      O3: 'ozone',
+      NH3: 'ammonia',
+      BH3: 'borane',
+      BF3: 'boronTrifluoride',
+      CH2O: 'formaldehyde',
+      CH4: 'methane',
+      CH3F: 'fluoromethane',
+      CH2F2: 'difluoromethane',
+      CHCl3: 'chloroform',
+      CF4: 'tetrafluoromethane'
+      // CHF3: 'trifluoromethane',
+    };
+
+    return symbolToNameMap[ this.symbol ];
   }
 
   /**
