@@ -109,6 +109,9 @@ export default class MoleculeContextResponsesNode extends Node {
 
     const eFieldEnabled = this.viewProperties.eFieldEnabledProperty.value;
 
+    // Setting here the previous value of the dipole for calculations
+    this.molecule.previousDipoleProperty.value = currentDipole;
+
     /////// CONTEXT RESPONSES ///////
 
     this.bondDipoleContextResponses();

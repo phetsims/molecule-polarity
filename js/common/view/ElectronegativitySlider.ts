@@ -10,7 +10,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -41,7 +40,6 @@ export default class ElectronegativitySlider extends HSlider {
 
     // Values to store state before the drag for context responses
     let previousEN: number;
-    let previousDipole: Vector2;
 
     const options = optionize<ElectronegativitySliderOptions, SelfOptions, HSliderOptions>()( {
 
@@ -85,12 +83,10 @@ export default class ElectronegativitySlider extends HSlider {
       molecule.isDraggingProperty.value = true;
       // Store the current EN value at the start of the drag
       previousEN = atom.electronegativityProperty.value;
-      previousDipole = molecule.dipoleProperty.value;
     };
     options.endDrag = () => {
       // Setting the previous EN property at the END of the drag, to trigger context responses
       atom.previousElectronegativityProperty.value = previousEN;
-      molecule.previousDipoleProperty.value = previousDipole;
 
       // snaps to the closest tick mark
       atom.electronegativityProperty.value = roundToInterval( atom.electronegativityProperty.value, options.tickSpacing );
