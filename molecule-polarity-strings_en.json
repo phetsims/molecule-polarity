@@ -735,6 +735,28 @@
           "value": "Choose a molecule and rotate it to explore how shape and bond polarity determine the molecular dipole."
         }
       },
+      "draggableMolecule": {
+        "accessibleName": {
+          "value": "Move { $moleculeName }"
+        },
+        "accessibleHelpText": {
+          "value": "Move molecule in three dimensions. Use keyboard shortcuts to rotate molecule around vertical and horizontal axes."
+        },
+        "objectResponses": {
+          "value": "{ $direction ->\n  [up] Rotating up, around horizontal axis\n  [down] Rotating down, around horizontal axis\n  [left] Rotating left, around vertical axis\n  *[right] Rotating right, around vertical axis\n}"
+        }
+      },
+      "electronegativitiesTable": {
+        "value": "Atom electronegativities are: hydrogen 2.1, boron 2.0, carbon 2.5, nitrogen 3.0, oxygen 3.5, fluorine 4.0, and chlorine 3.0."
+      },
+      "moleculesComboBox": {
+        "accessibleName": {
+          "value": "Molecule { $moleculeName }"
+        },
+        "accessibleHelpText": {
+          "value": "Choose a different molecule to view"
+        }
+      },
       "molecules": {
         "hydrogen": {
           "description": {
@@ -1101,7 +1123,7 @@
             "value": "Very large electrostatic potential difference across molecule."
           },
           "electronDensity": {
-            "value": "Electron density is very unevenly shared, shifted towards fluorines.\""
+            "value": "Electron density is very unevenly shared, shifted towards fluorines.'"
           }
         },
         "tetrafluoromethane": {
@@ -1124,7 +1146,7 @@
             "value": "Small electrostatic potential difference with even distribution."
           },
           "electronDensity": {
-            "value": "Electron density is unevenly shared, but symmetrically arranged.\""
+            "value": "Electron density is unevenly shared, but symmetrically arranged.'"
           }
         },
         "chloroform": {

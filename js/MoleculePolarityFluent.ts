@@ -250,6 +250,12 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_playArea', 'a11y.real
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_controlArea', 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_currentDetails', 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_interactionHint', 'a11y.realMoleculesScreen.screenSummary.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_accessibleName', 'a11y.realMoleculesScreen.draggableMolecule.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_accessibleHelpText', 'a11y.realMoleculesScreen.draggableMolecule.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_objectResponses', 'a11y.realMoleculesScreen.draggableMolecule.objectResponsesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_electronegativitiesTable', 'a11y.realMoleculesScreen.electronegativitiesTableStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesComboBox_accessibleName', 'a11y.realMoleculesScreen.moleculesComboBox.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesComboBox_accessibleHelpText', 'a11y.realMoleculesScreen.moleculesComboBox.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_description', 'a11y.realMoleculesScreen.molecules.hydrogen.descriptionStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_bondDipole', 'a11y.realMoleculesScreen.molecules.hydrogen.bondDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_molecularDipole', 'a11y.realMoleculesScreen.molecules.hydrogen.molecularDipoleStringProperty' );
@@ -754,6 +760,16 @@ const MoleculePolarityFluent = {
         controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_controlArea', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' ) ),
         currentDetails: new FluentPattern<{ moleculeName: FluentVariable, realPolarity: FluentVariable, shapeGeometry: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_currentDetails', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' ), [{"name":"moleculeName"},{"name":"realPolarity"},{"name":"shapeGeometry"}] ),
         interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_interactionHint', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.interactionHintStringProperty' ) )
+      },
+      draggableMolecule: {
+        accessibleName: new FluentPattern<{ moleculeName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_draggableMolecule_accessibleName', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.draggableMolecule.accessibleNameStringProperty' ), [{"name":"moleculeName"}] ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_draggableMolecule_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.draggableMolecule.accessibleHelpTextStringProperty' ) ),
+        objectResponses: new FluentPattern<{ direction: 'up' | 'down' | 'left' | 'right' | TReadOnlyProperty<'up' | 'down' | 'left' | 'right'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_draggableMolecule_objectResponses', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.draggableMolecule.objectResponsesStringProperty' ), [{"name":"direction","variants":["up","down","left","right"]}] )
+      },
+      electronegativitiesTableStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_electronegativitiesTable', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.electronegativitiesTableStringProperty' ) ),
+      moleculesComboBox: {
+        accessibleName: new FluentPattern<{ moleculeName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesComboBox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesComboBox.accessibleNameStringProperty' ), [{"name":"moleculeName"}] ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesComboBox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesComboBox.accessibleHelpTextStringProperty' ) )
       },
       molecules: {
         hydrogen: {

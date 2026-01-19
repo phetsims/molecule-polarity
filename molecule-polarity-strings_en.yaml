@@ -388,7 +388,7 @@ a11y:
   twoAtomsScreen:
     # Screen Summary
     screenSummary:
-      playArea: "There is an interactive two-atom molecule, A–B. You can rotate the molecule, and change each atom's electronegativity to explore the effect on the bond dipole. Turn on an electric field to see how the molecule responds."
+      playArea: 'There is an interactive two-atom molecule, A–B. You can rotate the molecule, and change each atom''s electronegativity to explore the effect on the bond dipole. Turn on an electric field to see how the molecule responds.'
       controlArea: 'Checkboxes change visibility of the bond dipole and partial charges. A radio button lets you choose to add electrostatic potential or electron density surfaces to the molecule. You can turn on the electric field, or reset the sim to start over.'
       currentDetails: 'Currently, the molecule is { $polarity }. The electric field is { $field }.'
       interactionHint: 'Change atom electronegativities to explore the effect on the bond dipole.'
@@ -434,7 +434,7 @@ a11y:
   threeAtomsScreen:
     # Screen Summary
     screenSummary:
-      playArea: "There is an interactive three-atom molecule, A–B–C. You can change each atom's electronegativity, rotate the molecule around the central atom B, and move atoms A and C to adjust the bond angle. As you make changes, you can explore how shape and bond polarity affect the molecule's overall dipole."
+      playArea: 'There is an interactive three-atom molecule, A–B–C. You can change each atom''s electronegativity, rotate the molecule around the central atom B, and move atoms A and C to adjust the bond angle. As you make changes, you can explore how shape and bond polarity affect the molecule''s overall dipole.'
       controlArea: 'Checkboxes change visibility of bond dipoles, molecular dipole, and partial charges. You can turn on the electric field to see how the molecule responds, or reset the sim to start over.'
       currentDetails: 'Currently, the molecule is { $polarity }, the shape is { $shape }. The electric field is { $field }.'
       interactionHint: 'Move Atom A or C to explore how shape changes the molecular dipole.'
@@ -509,9 +509,22 @@ a11y:
       controlArea: 'You can use checkboxes to show or hide bond dipoles, the molecular dipole, partial charges, atom labels, and atom electronegativities. You can also choose between electrostatic potential or electron density surfaces to see how charge is distributed. Reset the sim to start over.'
       currentDetails: 'Currently, you are viewing { $moleculeName }. The molecule is { $realPolarity }, with { $shapeGeometry } geometry.'
       interactionHint: 'Choose a molecule and rotate it to explore how shape and bond polarity determine the molecular dipole.'
+    draggableMolecule:
+      accessibleName: 'Move { $moleculeName }'
+      accessibleHelpText: 'Move molecule in three dimensions. Use keyboard shortcuts to rotate molecule around vertical and horizontal axes.'
+      objectResponses:
+        select_direction:
+          up: 'Rotating up, around horizontal axis'
+          down: 'Rotating down, around horizontal axis'
+          left: 'Rotating left, around vertical axis'
+          right: 'Rotating right, around vertical axis'
+    electronegativitiesTable: 'Atom electronegativities are: hydrogen 2.1, boron 2.0, carbon 2.5, nitrogen 3.0, oxygen 3.5, fluorine 4.0, and chlorine 3.0.'
+    moleculesComboBox:
+      accessibleName: 'Molecule { $moleculeName }'
+      accessibleHelpText: 'Choose a different molecule to view'
     molecules:
       hydrogen:
-        description: "The molecule H<sub>2</sub> has linear geometry and is nonpolar, with the hydrogen atoms single-bonded. The molecule has:"
+        description: 'The molecule H<sub>2</sub> has linear geometry and is nonpolar, with the hydrogen atoms single-bonded. The molecule has:'
         bondDipole: No bond dipole.
         molecularDipole: No molecular dipole.
         partialCharges: No partial charges.
@@ -519,7 +532,7 @@ a11y:
         electrostaticPotential: No electrostatic potential difference across molecule.
         electronDensity: Electron density is evenly shared between atoms.
       nitrogen:
-        description: "The molecule N<sub>2</sub> has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded. The molecule has:"
+        description: 'The molecule N<sub>2</sub> has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded. The molecule has:'
         bondDipole: No bond dipole.
         molecularDipole: No molecular dipole.
         partialCharges: No partial charges.
@@ -527,7 +540,7 @@ a11y:
         electrostaticPotential: No electrostatic potential difference across molecule.
         electronDensity: Electron density is evenly shared between atoms.
       oxygen:
-        description: "The molecule O<sub>2</sub> has linear geometry and is nonpolar, with the oxygen atoms double-bonded. The molecule has:"
+        description: 'The molecule O<sub>2</sub> has linear geometry and is nonpolar, with the oxygen atoms double-bonded. The molecule has:'
         bondDipole: No bond dipole.
         molecularDipole: No molecular dipole.
         partialCharges: No partial charges.
@@ -535,7 +548,7 @@ a11y:
         electrostaticPotential: No electrostatic potential difference across molecule.
         electronDensity: Electron density is evenly shared between atoms.
       fluorine:
-        description: "The molecule F<sub>2</sub> has linear geometry and is nonpolar, with the fluorine atoms single-bonded. The molecule has:"
+        description: 'The molecule F<sub>2</sub> has linear geometry and is nonpolar, with the fluorine atoms single-bonded. The molecule has:'
         bondDipole: No bond dipole.
         molecularDipole: No molecular dipole.
         partialCharges: No partial charges.
@@ -543,7 +556,7 @@ a11y:
         electrostaticPotential: No electrostatic potential difference across molecule.
         electronDensity: Electron density is evenly shared between atoms.
       hydrogenFluoride:
-        description: "The molecule HF has linear geometry and is strongly polar, with the hydrogen single-bonded to fluorine. The molecule has:"
+        description: 'The molecule HF has linear geometry and is strongly polar, with the hydrogen single-bonded to fluorine. The molecule has:'
         bondDipole: Large bond dipole.
         molecularDipole: Large molecular dipole, pointing towards fluorine.
         partialCharges: Partial charge for hydrogen is +0.38, for fluorine is -0.38.
@@ -551,7 +564,7 @@ a11y:
         electrostaticPotential: Large electrostatic potential difference across molecule.
         electronDensity: Electron density is very unevenly shared, shifted towards fluorine.
       water:
-        description: "The molecule H<sub>2</sub>O has bent geometry and is strongly polar, with the central atom oxygen single-bonded to each hydrogen. The molecule has:"
+        description: 'The molecule H<sub>2</sub>O has bent geometry and is strongly polar, with the central atom oxygen single-bonded to each hydrogen. The molecule has:'
         bondDipole: Large bond dipoles.
         molecularDipole: Large molecular dipole, pointing towards oxygen.
         partialCharges: Partial charge for hydrogen is +0.31, for oxygen is -0.62.
@@ -559,7 +572,7 @@ a11y:
         electrostaticPotential: Large electrostatic potential difference across molecule.
         electronDensity: Electron density is very unevenly shared, shifted towards oxygen.
       carbonDioxide:
-        description: "The molecule CO<sub>2</sub> has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen. The molecule has:"
+        description: 'The molecule CO<sub>2</sub> has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen. The molecule has:'
         bondDipole: Medium bond dipoles.
         molecularDipole: No molecular dipole.
         partialCharges: Partial charge for carbon is +0.63, for oxygen is -0.32.
@@ -567,7 +580,7 @@ a11y:
         electrostaticPotential: Medium electrostatic potential difference with even distribution.
         electronDensity: Electron density is unevenly shared, but symmetrically arranged.
       hydrogenCyanide:
-        description: "The molecule HCN has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen. The molecule has:"
+        description: 'The molecule HCN has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen. The molecule has:'
         bondDipole: Small carbon hydrogen bond dipole, large carbon nitrogen bond dipole.
         molecularDipole: Very large molecular dipole, pointing towards nitrogen.
         partialCharges: Partial charge for hydrogen is +0.23, for carbon is +0.05, and for nitrogen is -0.28.
@@ -575,7 +588,7 @@ a11y:
         electrostaticPotential: Very large electrostatic potential difference across molecule.
         electronDensity: Electron density is very unevenly shared, shifted towards nitrogen.
       ozone:
-        description: "The molecule O<sub>3</sub> has bent geometry and is slightly polar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other. The molecule has:"
+        description: 'The molecule O<sub>3</sub> has bent geometry and is slightly polar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other. The molecule has:'
         bondDipole: Small bond dipoles.
         molecularDipole: Small molecular dipole, pointing towards terminal oxygens.
         partialCharges: Partial charge for central oxygen is +0.15, for each terminal oxygen is -0.07.
@@ -583,7 +596,7 @@ a11y:
         electrostaticPotential: Small electrostatic potential difference across molecule.
         electronDensity: Electron density is slightly unevenly shared, shifted towards terminal oxygens.
       ammonia:
-        description: "The molecule NH<sub>3</sub> has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen. The molecule has:"
+        description: 'The molecule NH<sub>3</sub> has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen. The molecule has:'
         bondDipole: Medium bond dipoles.
         molecularDipole: Large molecular dipole, pointing towards nitrogen.
         partialCharges: Partial charge for hydrogen is +0.27, for nitrogen is -0.82.
@@ -591,7 +604,7 @@ a11y:
         electrostaticPotential: Large electrostatic potential difference across molecule.
         electronDensity: Electron density is very unevenly shared, shifted towards nitrogen.
       borane:
-        description: "The molecule BH<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen. The molecule has:"
+        description: 'The molecule BH<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen. The molecule has:'
         bondDipole: Tiny bond dipoles.
         molecularDipole: No molecular dipole.
         partialCharges: Partial charges for boron and hydrogen are nearly zero.
@@ -599,7 +612,7 @@ a11y:
         electrostaticPotential: No electrostatic potential difference across molecule.
         electronDensity: Electron density is evenly shared between atoms.
       boronTrifluoride:
-        description: "The molecule BF<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine. The molecule has:"
+        description: 'The molecule BF<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine. The molecule has:'
         bondDipole: Large bond dipoles.
         molecularDipole: No molecular dipole.
         partialCharges: Partial charge for boron is +1.02, for fluorine is -0.34
@@ -607,7 +620,7 @@ a11y:
         electrostaticPotential: Large electrostatic potential difference with even distribution.
         electronDensity: Electron density is very unevenly shared, but symmetrically arranged.
       formaldehyde:
-        description: "The molecule CH<sub>2</sub>O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen. The molecule has:"
+        description: 'The molecule CH<sub>2</sub>O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen. The molecule has:'
         bondDipole: Tiny carbon hydrogen bond dipoles, very large carbon oxygen bond dipole.
         molecularDipole: Very large molecular dipole, pointing towards oxygen.
         partialCharges: Partial charge for hydrogen is +0.11, for carbon is +0.09, for oxygen is -0.30.
@@ -615,7 +628,7 @@ a11y:
         electrostaticPotential: Very large electrostatic potential difference across molecule.
         electronDensity: Electron density is very unevenly shared, shifted towards oxygen.
       methane:
-        description: "The molecule CH<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:"
+        description: 'The molecule CH<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:'
         bondDipole: Small bond dipoles.
         molecularDipole: No molecular dipole.
         partialCharges: Partial charge for hydrogen is +0.15, for carbon is -0.58.
@@ -623,7 +636,7 @@ a11y:
         electrostaticPotential: Medium electrostatic potential difference with even distribution.
         electronDensity: Electron density is unevenly shared, but symmetrically arranged.
       fluoromethane:
-        description: "The molecule CH<sub>3</sub>F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:"
+        description: 'The molecule CH<sub>3</sub>F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
         bondDipole: Small carbon hydrogen bond dipoles, large carbon fluorine bond dipole.
         molecularDipole: Large molecular dipole, pointing towards fluorine.
         partialCharges: Partial charge for hydrogen is +0.15, for carbon is -0.05, for fluorine is -0.41.
@@ -631,23 +644,23 @@ a11y:
         electrostaticPotential: Large electrostatic potential difference across molecule.
         electronDensity: Electron density is very unevenly shared, shifted towards fluorine.
       difluoromethane:
-        description: "The molecule CH<sub>2</sub>F<sub>2</sub> has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:"
+        description: 'The molecule CH<sub>2</sub>F<sub>2</sub> has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
         bondDipole: Tiny carbon hydrogen bond dipoles, large carbon fluorine bond dipoles.
         molecularDipole: Large molecular dipole, pointing towards fluorines.
         partialCharges: Partial charge for hydrogen is +0.11, for carbon is +0.10, for fluorine is -0.16.
         electronegativity: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
         electrostaticPotential: Very large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards fluorines."
+        electronDensity: Electron density is very unevenly shared, shifted towards fluorines.'
       tetrafluoromethane:
-        description: "The molecule CF<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:"
+        description: 'The molecule CF<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:'
         bondDipole: Large carbon fluorine bond dipoles.
         molecularDipole: No molecular dipole.
         partialCharges: Partial charge for carbon is +0.74, for fluorine is -0.18.
         electronegativity: Electronegativity for carbon is medium-high at 2.5, for fluorine is very high at 4.0.
         electrostaticPotential: Small electrostatic potential difference with even distribution.
-        electronDensity: Electron density is unevenly shared, but symmetrically arranged."
+        electronDensity: Electron density is unevenly shared, but symmetrically arranged.'
       chloroform:
-        description: "The molecule CHCl<sub>3</sub> has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:"
+        description: 'The molecule CHCl<sub>3</sub> has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:'
         bondDipole: Small carbon hydrogen bond dipole, medium carbon chlorine bond dipoles.
         molecularDipole: Medium molecular dipole, pointing towards chlorines.
         partialCharges: Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.

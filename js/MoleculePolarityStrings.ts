@@ -304,6 +304,16 @@ type StringsType = {
         'currentDetailsStringProperty': LocalizedStringProperty;
         'interactionHintStringProperty': LocalizedStringProperty;
       };
+      'draggableMolecule': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'objectResponsesStringProperty': LocalizedStringProperty;
+      };
+      'electronegativitiesTableStringProperty': LocalizedStringProperty;
+      'moleculesComboBox': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      };
       'molecules': {
         'hydrogen': {
           'descriptionStringProperty': LocalizedStringProperty;
