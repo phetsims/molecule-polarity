@@ -46,6 +46,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
         } )
       },
 
+      // Molecular Dipole
       {
         visibleProperty: viewProperties.molecularDipoleVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.createProperty( {
@@ -53,6 +54,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
         } )
       },
 
+      // Partial Charges
       {
         visibleProperty: viewProperties.partialChargesVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.partialCharges.createProperty( {
@@ -60,6 +62,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
         } )
       },
 
+      // Atom Electronegativities
       {
         visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronegativity.createProperty( {
@@ -67,6 +70,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
         } )
       },
 
+      // Electrostatic Potential Surface
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' ),
         stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential.createProperty( {
@@ -74,6 +78,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
         } )
       },
 
+      // Electron Density Surface
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' ),
         stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity.createProperty( {
