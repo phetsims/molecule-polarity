@@ -172,7 +172,7 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
         stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.orientationDescription.createProperty( {
           orientation: MoleculePolarityFluent.a11y.orientationMolecule.createProperty( {
             orientation: diatomicMolecule.angleProperty.derived( angle => {
-              const absSin = roundToInterval( Math.abs( Math.sin( angle ) ), 0.1 );
+              const absSin = roundToInterval( Math.abs( Math.sin( angle ) ), 0.001 );
               return absSin === 0 ? 'horizontal' : absSin === 1 ? 'vertical' : 'diagonal';
             } )
           } ),
