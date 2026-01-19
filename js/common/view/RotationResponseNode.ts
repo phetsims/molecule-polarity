@@ -74,7 +74,7 @@ export default class RotationResponseNode extends Node {
         }
 
         // If molecule is horizontal and was rotating due to E-field, emit aligned response.
-        if ( Math.cos( dipoleProperty.value.angle ) > ONE && isRotatingDueToEFieldProperty.value ) {
+        if ( Math.cos( dipoleProperty.value.angle ) > ONE && isRotatingDueToEFieldProperty.value && dipoleProperty.value.magnitude !== 0 ) {
 
           // "Molecule aligned with Electric Field" after rotating due to E-field has stopped
           this.addAccessibleContextResponse(
@@ -95,7 +95,7 @@ export default class RotationResponseNode extends Node {
       lastDirection = null;
 
       // If molecule is horizontal, notify that it is aligned with electric field.
-      if ( eFieldEnabled && Math.cos( dipoleProperty.value.angle ) > ONE ) {
+      if ( eFieldEnabled && dipoleProperty.value.magnitude !== 0 && Math.cos( dipoleProperty.value.angle ) > ONE ) {
 
         // "Molecule aligned with Electric Field" when E-field is turned on and molecule is already aligned.
         this.addAccessibleContextResponse(
