@@ -519,6 +519,9 @@ a11y:
           down: 'Rotating down, around horizontal axis'
           left: 'Rotating left, around vertical axis'
           right: 'Rotating right, around vertical axis'
+    comboBox:
+      accessibleName: 'Molecule { $moleculeName }'
+      accessibleHelpText: 'Choose a different molecule to view.'
     electronegativitiesTable: 'Atom electronegativities are: hydrogen 2.1, boron 2.0, carbon 2.5, nitrogen 3.0, oxygen 3.5, fluorine 4.0, and chlorine 3.0.'
     moleculesComboBox:
       accessibleName: 'Molecule { $moleculeName }'

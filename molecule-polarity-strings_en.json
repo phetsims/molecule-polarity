@@ -749,6 +749,14 @@
           "value": "{ $direction ->\n  [up] Rotating up, around horizontal axis\n  [down] Rotating down, around horizontal axis\n  [left] Rotating left, around vertical axis\n  *[right] Rotating right, around vertical axis\n}"
         }
       },
+      "comboBox": {
+        "accessibleName": {
+          "value": "Molecule { $moleculeName }"
+        },
+        "accessibleHelpText": {
+          "value": "Choose a different molecule to view."
+        }
+      },
       "electronegativitiesTable": {
         "value": "Atom electronegativities are: hydrogen 2.1, boron 2.0, carbon 2.5, nitrogen 3.0, oxygen 3.5, fluorine 4.0, and chlorine 3.0."
       },

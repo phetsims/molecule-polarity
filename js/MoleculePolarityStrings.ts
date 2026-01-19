@@ -310,6 +310,10 @@ type StringsType = {
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'objectResponsesStringProperty': LocalizedStringProperty;
       };
+      'comboBox': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      };
       'electronegativitiesTableStringProperty': LocalizedStringProperty;
       'moleculesComboBox': {
         'accessibleNameStringProperty': LocalizedStringProperty;

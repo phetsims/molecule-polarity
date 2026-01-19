@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
@@ -36,6 +37,7 @@ import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import RealMolecule from '../model/RealMolecule.js';
 import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
 import RealMoleculeAccessibleListNode from './RealMoleculeAccessibleListNode.js';
@@ -77,12 +79,21 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     const moleculeNodeTandem = tandem.createTandem( 'moleculeNode' );
 
+    // Using a dynamic property so we can change the name both if the molecule changes and if the language changes
+    const dynamicMoleculeNameProperty = new DynamicProperty<string, unknown, RealMolecule>( model.moleculeProperty, {
+      derive: 'fullNameProperty'
+    } );
+
     // Our "fake" Node for the molecule, for target for drags that don't hit other UI components (and keyboard drag)
     const moleculeNode = new ( InteractiveHighlighting( Rectangle ) )( combineOptions<NodeOptions>( {}, AccessibleDraggableOptions, {
       focusable: true,
       tagName: 'div',
       focusHighlight: 'invisible',
-      tandem: moleculeNodeTandem
+      tandem: moleculeNodeTandem,
+      accessibleName: MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.accessibleName.createProperty( {
+        moleculeName: dynamicMoleculeNameProperty
+      } ),
+      accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.accessibleHelpTextStringProperty
     } ) );
     this.addChild( moleculeNode );
 
@@ -102,13 +113,18 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
 
     const electronegativityTableNode = new ElectronegativityTableNode( model.moleculeProperty, {
-      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
+      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty,
+      accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTableStringProperty
     } );
 
     const comboBoxListParent = new Node();
     const moleculeComboBox = new RealMoleculesControl( model.moleculeProperty, model.molecules, comboBoxListParent, {
       comboBoxOptions: {
-        tandem: tandem.createTandem( 'moleculeComboBox' )
+        tandem: tandem.createTandem( 'moleculeComboBox' ),
+        accessibleName: MoleculePolarityFluent.a11y.realMoleculesScreen.comboBox.accessibleName.createProperty( {
+          moleculeName: dynamicMoleculeNameProperty
+        } ),
+        accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.comboBox.accessibleHelpTextStringProperty
       }
     } );
 
@@ -172,16 +188,16 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
-      moleculeNode
+      moleculeNode,
+      moleculeComboBox,
+      comboBoxListParent,
+      electronegativityTableNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
-      electronegativityTableNode,
-      moleculeComboBox,
       controlPanel,
       colorKeyNode,
-      resetAllButton,
-      comboBoxListParent
+      resetAllButton
     ];
 
     // layout ---------------------------------

@@ -8,9 +8,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
+import Element from '../../../../nitroglycerin/js/Element.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
@@ -22,11 +25,8 @@ import Color from '../../../../scenery/js/util/Color.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule from '../model/RealMolecule.js';
-import Element from '../../../../nitroglycerin/js/Element.js';
 import { elementToColorProperty, elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -36,7 +36,7 @@ const NORMAL_TEXT_COLOR = BACKGROUND_COLOR.darkerColor();
 type SelfOptions = EmptySelfOptions;
 
 type ElectronegativityTableNodeOptions = SelfOptions &
-  PickRequired<NodeOptions, 'visibleProperty'>;
+  WithRequired<NodeOptions, 'visibleProperty'>;
 
 export default class ElectronegativityTableNode extends Node {
 
