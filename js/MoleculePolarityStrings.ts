@@ -303,6 +303,170 @@ type StringsType = {
         'controlAreaStringProperty': LocalizedStringProperty;
         'currentDetailsStringProperty': LocalizedStringProperty;
         'interactionHintStringProperty': LocalizedStringProperty;
+      };
+      'molecules': {
+        'hydrogen': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'nitrogen': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'oxygen': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'fluorine': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'hydrogenFluoride': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'water': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'carbonDioxide': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'hydrogenCyanide': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'ozone': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'ammonia': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'borane': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'boronTrifluoride': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'formaldehyde': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'methane': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'fluoromethane': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'difluoromethane': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'tetrafluoromethane': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        };
+        'chloroform': {
+          'descriptionStringProperty': LocalizedStringProperty;
+          'bondDipoleStringProperty': LocalizedStringProperty;
+          'molecularDipoleStringProperty': LocalizedStringProperty;
+          'partialChargesStringProperty': LocalizedStringProperty;
+          'electronegativityStringProperty': LocalizedStringProperty;
+          'electrostaticPotentialStringProperty': LocalizedStringProperty;
+          'electronDensityStringProperty': LocalizedStringProperty;
+        }
       }
     }
   }

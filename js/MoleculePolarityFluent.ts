@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -250,6 +250,132 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_playArea', 'a11y.real
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_controlArea', 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_currentDetails', 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_screenSummary_interactionHint', 'a11y.realMoleculesScreen.screenSummary.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_description', 'a11y.realMoleculesScreen.molecules.hydrogen.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_bondDipole', 'a11y.realMoleculesScreen.molecules.hydrogen.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_molecularDipole', 'a11y.realMoleculesScreen.molecules.hydrogen.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_partialCharges', 'a11y.realMoleculesScreen.molecules.hydrogen.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_electronegativity', 'a11y.realMoleculesScreen.molecules.hydrogen.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.hydrogen.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogen_electronDensity', 'a11y.realMoleculesScreen.molecules.hydrogen.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_description', 'a11y.realMoleculesScreen.molecules.nitrogen.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_bondDipole', 'a11y.realMoleculesScreen.molecules.nitrogen.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_molecularDipole', 'a11y.realMoleculesScreen.molecules.nitrogen.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_partialCharges', 'a11y.realMoleculesScreen.molecules.nitrogen.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_electronegativity', 'a11y.realMoleculesScreen.molecules.nitrogen.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.nitrogen.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_nitrogen_electronDensity', 'a11y.realMoleculesScreen.molecules.nitrogen.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_description', 'a11y.realMoleculesScreen.molecules.oxygen.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_bondDipole', 'a11y.realMoleculesScreen.molecules.oxygen.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_molecularDipole', 'a11y.realMoleculesScreen.molecules.oxygen.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_partialCharges', 'a11y.realMoleculesScreen.molecules.oxygen.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_electronegativity', 'a11y.realMoleculesScreen.molecules.oxygen.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.oxygen.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_oxygen_electronDensity', 'a11y.realMoleculesScreen.molecules.oxygen.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_description', 'a11y.realMoleculesScreen.molecules.fluorine.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_bondDipole', 'a11y.realMoleculesScreen.molecules.fluorine.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_molecularDipole', 'a11y.realMoleculesScreen.molecules.fluorine.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_partialCharges', 'a11y.realMoleculesScreen.molecules.fluorine.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_electronegativity', 'a11y.realMoleculesScreen.molecules.fluorine.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.fluorine.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluorine_electronDensity', 'a11y.realMoleculesScreen.molecules.fluorine.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_description', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_bondDipole', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_molecularDipole', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_partialCharges', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_electronegativity', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_electronDensity', 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_description', 'a11y.realMoleculesScreen.molecules.water.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_bondDipole', 'a11y.realMoleculesScreen.molecules.water.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_molecularDipole', 'a11y.realMoleculesScreen.molecules.water.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_partialCharges', 'a11y.realMoleculesScreen.molecules.water.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_electronegativity', 'a11y.realMoleculesScreen.molecules.water.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.water.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_water_electronDensity', 'a11y.realMoleculesScreen.molecules.water.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_description', 'a11y.realMoleculesScreen.molecules.carbonDioxide.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_bondDipole', 'a11y.realMoleculesScreen.molecules.carbonDioxide.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_molecularDipole', 'a11y.realMoleculesScreen.molecules.carbonDioxide.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_partialCharges', 'a11y.realMoleculesScreen.molecules.carbonDioxide.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_electronegativity', 'a11y.realMoleculesScreen.molecules.carbonDioxide.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.carbonDioxide.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_carbonDioxide_electronDensity', 'a11y.realMoleculesScreen.molecules.carbonDioxide.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_description', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_bondDipole', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_molecularDipole', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_partialCharges', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_electronegativity', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_electronDensity', 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_description', 'a11y.realMoleculesScreen.molecules.ozone.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_bondDipole', 'a11y.realMoleculesScreen.molecules.ozone.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_molecularDipole', 'a11y.realMoleculesScreen.molecules.ozone.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_partialCharges', 'a11y.realMoleculesScreen.molecules.ozone.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_electronegativity', 'a11y.realMoleculesScreen.molecules.ozone.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.ozone.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ozone_electronDensity', 'a11y.realMoleculesScreen.molecules.ozone.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_description', 'a11y.realMoleculesScreen.molecules.ammonia.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_bondDipole', 'a11y.realMoleculesScreen.molecules.ammonia.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_molecularDipole', 'a11y.realMoleculesScreen.molecules.ammonia.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_partialCharges', 'a11y.realMoleculesScreen.molecules.ammonia.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_electronegativity', 'a11y.realMoleculesScreen.molecules.ammonia.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.ammonia.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_ammonia_electronDensity', 'a11y.realMoleculesScreen.molecules.ammonia.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_description', 'a11y.realMoleculesScreen.molecules.borane.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_bondDipole', 'a11y.realMoleculesScreen.molecules.borane.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_molecularDipole', 'a11y.realMoleculesScreen.molecules.borane.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_partialCharges', 'a11y.realMoleculesScreen.molecules.borane.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_electronegativity', 'a11y.realMoleculesScreen.molecules.borane.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.borane.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_borane_electronDensity', 'a11y.realMoleculesScreen.molecules.borane.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_description', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_bondDipole', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_molecularDipole', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_partialCharges', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_electronegativity', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_boronTrifluoride_electronDensity', 'a11y.realMoleculesScreen.molecules.boronTrifluoride.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_description', 'a11y.realMoleculesScreen.molecules.formaldehyde.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_bondDipole', 'a11y.realMoleculesScreen.molecules.formaldehyde.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_molecularDipole', 'a11y.realMoleculesScreen.molecules.formaldehyde.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_partialCharges', 'a11y.realMoleculesScreen.molecules.formaldehyde.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_electronegativity', 'a11y.realMoleculesScreen.molecules.formaldehyde.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.formaldehyde.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_formaldehyde_electronDensity', 'a11y.realMoleculesScreen.molecules.formaldehyde.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_description', 'a11y.realMoleculesScreen.molecules.methane.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_bondDipole', 'a11y.realMoleculesScreen.molecules.methane.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_molecularDipole', 'a11y.realMoleculesScreen.molecules.methane.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_partialCharges', 'a11y.realMoleculesScreen.molecules.methane.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_electronegativity', 'a11y.realMoleculesScreen.molecules.methane.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.methane.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_methane_electronDensity', 'a11y.realMoleculesScreen.molecules.methane.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_description', 'a11y.realMoleculesScreen.molecules.fluoromethane.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_bondDipole', 'a11y.realMoleculesScreen.molecules.fluoromethane.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_molecularDipole', 'a11y.realMoleculesScreen.molecules.fluoromethane.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_partialCharges', 'a11y.realMoleculesScreen.molecules.fluoromethane.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_electronegativity', 'a11y.realMoleculesScreen.molecules.fluoromethane.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.fluoromethane.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_fluoromethane_electronDensity', 'a11y.realMoleculesScreen.molecules.fluoromethane.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_description', 'a11y.realMoleculesScreen.molecules.difluoromethane.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_bondDipole', 'a11y.realMoleculesScreen.molecules.difluoromethane.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_molecularDipole', 'a11y.realMoleculesScreen.molecules.difluoromethane.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_partialCharges', 'a11y.realMoleculesScreen.molecules.difluoromethane.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_electronegativity', 'a11y.realMoleculesScreen.molecules.difluoromethane.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.difluoromethane.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_difluoromethane_electronDensity', 'a11y.realMoleculesScreen.molecules.difluoromethane.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_description', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_bondDipole', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_molecularDipole', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_partialCharges', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_electronegativity', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_electronDensity', 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.electronDensityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_description', 'a11y.realMoleculesScreen.molecules.chloroform.descriptionStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_bondDipole', 'a11y.realMoleculesScreen.molecules.chloroform.bondDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_molecularDipole', 'a11y.realMoleculesScreen.molecules.chloroform.molecularDipoleStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_partialCharges', 'a11y.realMoleculesScreen.molecules.chloroform.partialChargesStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_electronegativity', 'a11y.realMoleculesScreen.molecules.chloroform.electronegativityStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_electrostaticPotential', 'a11y.realMoleculesScreen.molecules.chloroform.electrostaticPotentialStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_chloroform_electronDensity', 'a11y.realMoleculesScreen.molecules.chloroform.electronDensityStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -628,6 +754,260 @@ const MoleculePolarityFluent = {
         controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_controlArea', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.controlAreaStringProperty' ) ),
         currentDetails: new FluentPattern<{ moleculeName: FluentVariable, realPolarity: FluentVariable, shapeGeometry: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_currentDetails', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.currentDetailsStringProperty' ), [{"name":"moleculeName"},{"name":"realPolarity"},{"name":"shapeGeometry"}] ),
         interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_screenSummary_interactionHint', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.screenSummary.interactionHintStringProperty' ) )
+      },
+      molecules: {
+        hydrogen: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogen_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogen.electronDensityStringProperty' ) )
+        },
+        nitrogen: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_nitrogen_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.nitrogen.electronDensityStringProperty' ) )
+        },
+        oxygen: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_oxygen_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.oxygen.electronDensityStringProperty' ) )
+        },
+        fluorine: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluorine_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluorine.electronDensityStringProperty' ) )
+        },
+        hydrogenFluoride: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenFluoride_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenFluoride.electronDensityStringProperty' ) )
+        },
+        water: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_water_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.water.electronDensityStringProperty' ) )
+        },
+        carbonDioxide: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_carbonDioxide_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.carbonDioxide.electronDensityStringProperty' ) )
+        },
+        hydrogenCyanide: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_hydrogenCyanide_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.hydrogenCyanide.electronDensityStringProperty' ) )
+        },
+        ozone: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ozone_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ozone.electronDensityStringProperty' ) )
+        },
+        ammonia: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_ammonia_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.ammonia.electronDensityStringProperty' ) )
+        },
+        borane: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_borane_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.borane.electronDensityStringProperty' ) )
+        },
+        boronTrifluoride: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_boronTrifluoride_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.boronTrifluoride.electronDensityStringProperty' ) )
+        },
+        formaldehyde: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_formaldehyde_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.formaldehyde.electronDensityStringProperty' ) )
+        },
+        methane: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_methane_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.methane.electronDensityStringProperty' ) )
+        },
+        fluoromethane: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_fluoromethane_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.fluoromethane.electronDensityStringProperty' ) )
+        },
+        difluoromethane: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_difluoromethane_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.difluoromethane.electronDensityStringProperty' ) )
+        },
+        tetrafluoromethane: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_tetrafluoromethane_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.tetrafluoromethane.electronDensityStringProperty' ) )
+        },
+        chloroform: {
+          descriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.descriptionStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
+          bondDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.bondDipoleStringProperty' ) ),
+          _comment_1: new FluentComment( {"comment":"MolecularDipole11 - Molecular Dipole magnitude (Screen 2)","associatedKey":"molecularDipole"} ),
+          molecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_molecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.molecularDipoleStringProperty' ) ),
+          partialChargesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_partialCharges', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.partialChargesStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"EN6 - Electronegativity levels (Screen 1/2)","associatedKey":"electronegativity"} ),
+          electronegativityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_electronegativity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.electronegativityStringProperty' ) ),
+          _comment_3: new FluentComment( {"comment":"ElectroPotential6 - Electrostatic Potential (Screen 1)","associatedKey":"electrostaticPotential"} ),
+          electrostaticPotentialStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_electrostaticPotential', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.electrostaticPotentialStringProperty' ) ),
+          _comment_4: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
+          electronDensityStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_chloroform_electronDensity', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.chloroform.electronDensityStringProperty' ) )
+        }
       }
     }
   }
