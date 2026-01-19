@@ -523,147 +523,143 @@ a11y:
       accessibleName: 'Molecule { $moleculeName }'
       accessibleHelpText: 'Choose a different molecule to view'
     molecules:
-      hydrogen:
-        description: 'The molecule H<sub>2</sub> has linear geometry and is nonpolar, with the hydrogen atoms single-bonded. The molecule has:'
-        bondDipole: No bond dipole.
-        molecularDipole: No molecular dipole.
-        partialCharges: No partial charges.
-        electronegativity: Electronegativity for hydrogen is low at 2.1.
-        electrostaticPotential: No electrostatic potential difference across molecule.
-        electronDensity: Electron density is evenly shared between atoms.
-      nitrogen:
-        description: 'The molecule N<sub>2</sub> has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded. The molecule has:'
-        bondDipole: No bond dipole.
-        molecularDipole: No molecular dipole.
-        partialCharges: No partial charges.
-        electronegativity: Electronegativity for nitrogen is medium-high at 3.0.
-        electrostaticPotential: No electrostatic potential difference across molecule.
-        electronDensity: Electron density is evenly shared between atoms.
-      oxygen:
-        description: 'The molecule O<sub>2</sub> has linear geometry and is nonpolar, with the oxygen atoms double-bonded. The molecule has:'
-        bondDipole: No bond dipole.
-        molecularDipole: No molecular dipole.
-        partialCharges: No partial charges.
-        electronegativity: Electronegativity for oxygen is high at 3.5.
-        electrostaticPotential: No electrostatic potential difference across molecule.
-        electronDensity: Electron density is evenly shared between atoms.
-      fluorine:
-        description: 'The molecule F<sub>2</sub> has linear geometry and is nonpolar, with the fluorine atoms single-bonded. The molecule has:'
-        bondDipole: No bond dipole.
-        molecularDipole: No molecular dipole.
-        partialCharges: No partial charges.
-        electronegativity: Electronegativity for fluorine is very high at 4.0.
-        electrostaticPotential: No electrostatic potential difference across molecule.
-        electronDensity: Electron density is evenly shared between atoms.
-      hydrogenFluoride:
-        description: 'The molecule HF has linear geometry and is strongly polar, with the hydrogen single-bonded to fluorine. The molecule has:'
-        bondDipole: Large bond dipole.
-        molecularDipole: Large molecular dipole, pointing towards fluorine.
-        partialCharges: Partial charge for hydrogen is +0.38, for fluorine is -0.38.
-        electronegativity: Electronegativity for hydrogen is low at 2.1, for fluorine is very high at 4.0.
-        electrostaticPotential: Large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards fluorine.
-      water:
-        description: 'The molecule H<sub>2</sub>O has bent geometry and is strongly polar, with the central atom oxygen single-bonded to each hydrogen. The molecule has:'
-        bondDipole: Large bond dipoles.
-        molecularDipole: Large molecular dipole, pointing towards oxygen.
-        partialCharges: Partial charge for hydrogen is +0.31, for oxygen is -0.62.
-        electronegativity: Electronegativity for hydrogen is very low at 2.1, for oxygen is high at 3.5.
-        electrostaticPotential: Large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards oxygen.
-      carbonDioxide:
-        description: 'The molecule CO<sub>2</sub> has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen. The molecule has:'
-        bondDipole: Medium bond dipoles.
-        molecularDipole: No molecular dipole.
-        partialCharges: Partial charge for carbon is +0.63, for oxygen is -0.32.
-        electronegativity: Electronegativity for carbon is medium-low at 2.5, for oxygen is high at 3.5.
-        electrostaticPotential: Medium electrostatic potential difference with even distribution.
-        electronDensity: Electron density is unevenly shared, but symmetrically arranged.
-      hydrogenCyanide:
-        description: 'The molecule HCN has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen. The molecule has:'
-        bondDipole: Small carbon hydrogen bond dipole, large carbon nitrogen bond dipole.
-        molecularDipole: Very large molecular dipole, pointing towards nitrogen.
-        partialCharges: Partial charge for hydrogen is +0.23, for carbon is +0.05, and for nitrogen is -0.28.
-        electronegativity: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to nitrogen at 3.0.
-        electrostaticPotential: Very large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards nitrogen.
-      ozone:
-        description: 'The molecule O<sub>3</sub> has bent geometry and is slightly polar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other. The molecule has:'
-        bondDipole: Small bond dipoles.
-        molecularDipole: Small molecular dipole, pointing towards terminal oxygens.
-        partialCharges: Partial charge for central oxygen is +0.15, for each terminal oxygen is -0.07.
-        electronegativity: Electronegativity for oxygen is high at 3.5.
-        electrostaticPotential: Small electrostatic potential difference across molecule.
-        electronDensity: Electron density is slightly unevenly shared, shifted towards terminal oxygens.
-      ammonia:
-        description: 'The molecule NH<sub>3</sub> has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen. The molecule has:'
-        bondDipole: Medium bond dipoles.
-        molecularDipole: Large molecular dipole, pointing towards nitrogen.
-        partialCharges: Partial charge for hydrogen is +0.27, for nitrogen is -0.82.
-        electronegativity: Electronegativity for hydrogen is low at 2.1, for nitrogen is medium-high at 3.0.
-        electrostaticPotential: Large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards nitrogen.
-      borane:
-        description: 'The molecule BH<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen. The molecule has:'
-        bondDipole: Tiny bond dipoles.
-        molecularDipole: No molecular dipole.
-        partialCharges: Partial charges for boron and hydrogen are nearly zero.
-        electronegativity: Electronegativity for hydrogen is low at 2.1, for boron is slightly lower at 2.0.
-        electrostaticPotential: No electrostatic potential difference across molecule.
-        electronDensity: Electron density is evenly shared between atoms.
-      boronTrifluoride:
-        description: 'The molecule BF<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine. The molecule has:'
-        bondDipole: Large bond dipoles.
-        molecularDipole: No molecular dipole.
-        partialCharges: Partial charge for boron is +1.02, for fluorine is -0.34
-        electronegativity: Electronegativity for fluorine is very high at 4.0, for boron is very low at 2.0.
-        electrostaticPotential: Large electrostatic potential difference with even distribution.
-        electronDensity: Electron density is very unevenly shared, but symmetrically arranged.
-      formaldehyde:
-        description: 'The molecule CH<sub>2</sub>O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen. The molecule has:'
-        bondDipole: Tiny carbon hydrogen bond dipoles, very large carbon oxygen bond dipole.
-        molecularDipole: Very large molecular dipole, pointing towards oxygen.
-        partialCharges: Partial charge for hydrogen is +0.11, for carbon is +0.09, for oxygen is -0.30.
-        electronegativity: Electronegativity increases from hydrogen 2.1 to carbon 2.5 to oxygen 3.5.
-        electrostaticPotential: Very large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards oxygen.
-      methane:
-        description: 'The molecule CH<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:'
-        bondDipole: Small bond dipoles.
-        molecularDipole: No molecular dipole.
-        partialCharges: Partial charge for hydrogen is +0.15, for carbon is -0.58.
-        electronegativity: Electronegativity for hydrogen is low at 2.1, for carbon is medium-low at 2.5.
-        electrostaticPotential: Medium electrostatic potential difference with even distribution.
-        electronDensity: Electron density is unevenly shared, but symmetrically arranged.
-      fluoromethane:
-        description: 'The molecule CH<sub>3</sub>F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
-        bondDipole: Small carbon hydrogen bond dipoles, large carbon fluorine bond dipole.
-        molecularDipole: Large molecular dipole, pointing towards fluorine.
-        partialCharges: Partial charge for hydrogen is +0.15, for carbon is -0.05, for fluorine is -0.41.
-        electronegativity: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
-        electrostaticPotential: Large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards fluorine.
-      difluoromethane:
-        description: 'The molecule CH<sub>2</sub>F<sub>2</sub> has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
-        bondDipole: Tiny carbon hydrogen bond dipoles, large carbon fluorine bond dipoles.
-        molecularDipole: Large molecular dipole, pointing towards fluorines.
-        partialCharges: Partial charge for hydrogen is +0.11, for carbon is +0.10, for fluorine is -0.16.
-        electronegativity: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
-        electrostaticPotential: Very large electrostatic potential difference across molecule.
-        electronDensity: Electron density is very unevenly shared, shifted towards fluorines.'
-      tetrafluoromethane:
-        description: 'The molecule CF<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:'
-        bondDipole: Large carbon fluorine bond dipoles.
-        molecularDipole: No molecular dipole.
-        partialCharges: Partial charge for carbon is +0.74, for fluorine is -0.18.
-        electronegativity: Electronegativity for carbon is medium-high at 2.5, for fluorine is very high at 4.0.
-        electrostaticPotential: Small electrostatic potential difference with even distribution.
-        electronDensity: Electron density is unevenly shared, but symmetrically arranged.'
-      chloroform:
-        description: 'The molecule CHCl<sub>3</sub> has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:'
-        bondDipole: Small carbon hydrogen bond dipole, medium carbon chlorine bond dipoles.
-        molecularDipole: Medium molecular dipole, pointing towards chlorines.
-        partialCharges: Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.
-        electronegativity: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to chlorine at 3.0.
-        electrostaticPotential: Medium electrostatic potential difference across molecule.
-        electronDensity: Electron density is unevenly shared, shifted towards chlorines.
+      description:
+        select_molecule:
+          hydrogen: 'The molecule H<sub>2</sub> has linear geometry and is nonpolar, with the hydrogen atoms single-bonded. The molecule has:'
+          nitrogen: 'The molecule N<sub>2</sub> has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded. The molecule has:'
+          oxygen: 'The molecule O<sub>2</sub> has linear geometry and is nonpolar, with the oxygen atoms double-bonded. The molecule has:'
+          fluorine: 'The molecule F<sub>2</sub> has linear geometry and is nonpolar, with the fluorine atoms single-bonded. The molecule has:'
+          hydrogenFluoride: 'The molecule HF has linear geometry and is strongly polar, with the hydrogen single-bonded to fluorine. The molecule has:'
+          water: 'The molecule H<sub>2</sub>O has bent geometry and is strongly polar, with the central atom oxygen single-bonded to each hydrogen. The molecule has:'
+          carbonDioxide: 'The molecule CO<sub>2</sub> has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen. The molecule has:'
+          hydrogenCyanide: 'The molecule HCN has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen. The molecule has:'
+          ozone: 'The molecule O<sub>3</sub> has bent geometry and is slightly polar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other. The molecule has:'
+          ammonia: 'The molecule NH<sub>3</sub> has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen. The molecule has:'
+          borane: 'The molecule BH<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen. The molecule has:'
+          boronTrifluoride: 'The molecule BF<sub>3</sub> has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine. The molecule has:'
+          formaldehyde: 'The molecule CH<sub>2</sub>O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen. The molecule has:'
+          methane: 'The molecule CH<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:'
+          fluoromethane: 'The molecule CH<sub>3</sub>F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
+          difluoromethane: 'The molecule CH<sub>2</sub>F<sub>2</sub> has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
+          tetrafluoromethane: 'The molecule CF<sub>4</sub> has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:'
+          chloroform: 'The molecule CHCl<sub>3</sub> has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:'
+      bondDipole:
+        select_molecule:
+          hydrogen: No bond dipole.
+          nitrogen: No bond dipole.
+          oxygen: No bond dipole.
+          fluorine: No bond dipole.
+          hydrogenFluoride: Large bond dipole.
+          water: Large bond dipoles.
+          carbonDioxide: Medium bond dipoles.
+          hydrogenCyanide: Small carbon hydrogen bond dipole, large carbon nitrogen bond dipole.
+          ozone: Small bond dipoles.
+          ammonia: Medium bond dipoles.
+          borane: Tiny bond dipoles.
+          boronTrifluoride: Large bond dipoles.
+          formaldehyde: Tiny carbon hydrogen bond dipoles, very large carbon oxygen bond dipole.
+          methane: Small bond dipoles.
+          fluoromethane: Small carbon hydrogen bond dipoles, large carbon fluorine bond dipole.
+          difluoromethane: Tiny carbon hydrogen bond dipoles, large carbon fluorine bond dipoles.
+          tetrafluoromethane: Large carbon fluorine bond dipoles.
+          chloroform: Small carbon hydrogen bond dipole, medium carbon chlorine bond dipoles.
+      molecularDipole:
+        select_molecule:
+          hydrogen: No molecular dipole.
+          nitrogen: No molecular dipole.
+          oxygen: No molecular dipole.
+          fluorine: No molecular dipole.
+          hydrogenFluoride: Large molecular dipole, pointing towards fluorine.
+          water: Large molecular dipole, pointing towards oxygen.
+          carbonDioxide: No molecular dipole.
+          hydrogenCyanide: Very large molecular dipole, pointing towards nitrogen.
+          ozone: Small molecular dipole, pointing towards terminal oxygens.
+          ammonia: Large molecular dipole, pointing towards nitrogen.
+          borane: No molecular dipole.
+          boronTrifluoride: No molecular dipole.
+          formaldehyde: Very large molecular dipole, pointing towards oxygen.
+          methane: No molecular dipole.
+          fluoromethane: Large molecular dipole, pointing towards fluorine.
+          difluoromethane: Large molecular dipole, pointing towards fluorines.
+          tetrafluoromethane: No molecular dipole.
+          chloroform: Medium molecular dipole, pointing towards chlorines.
+      partialCharges:
+        select_molecule:
+          hydrogen: No partial charges.
+          nitrogen: No partial charges.
+          oxygen: No partial charges.
+          fluorine: No partial charges.
+          hydrogenFluoride: Partial charge for hydrogen is +0.38, for fluorine is -0.38.
+          water: Partial charge for hydrogen is +0.31, for oxygen is -0.62.
+          carbonDioxide: Partial charge for carbon is +0.63, for oxygen is -0.32.
+          hydrogenCyanide: Partial charge for hydrogen is +0.23, for carbon is +0.05, and for nitrogen is -0.28.
+          ozone: Partial charge for central oxygen is +0.15, for each terminal oxygen is -0.07.
+          ammonia: Partial charge for hydrogen is +0.27, for nitrogen is -0.82.
+          borane: Partial charges for boron and hydrogen are nearly zero.
+          boronTrifluoride: Partial charge for boron is +1.02, for fluorine is -0.34
+          formaldehyde: Partial charge for hydrogen is +0.11, for carbon is +0.09, for oxygen is -0.30.
+          methane: Partial charge for hydrogen is +0.15, for carbon is -0.58.
+          fluoromethane: Partial charge for hydrogen is +0.15, for carbon is -0.05, for fluorine is -0.41.
+          difluoromethane: Partial charge for hydrogen is +0.11, for carbon is +0.10, for fluorine is -0.16.
+          tetrafluoromethane: Partial charge for carbon is +0.74, for fluorine is -0.18.
+          chloroform: Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.
+      electronegativity:
+        select_molecule:
+          hydrogen: Electronegativity for hydrogen is low at 2.1.
+          nitrogen: Electronegativity for nitrogen is medium-high at 3.0.
+          oxygen: Electronegativity for oxygen is high at 3.5.
+          fluorine: Electronegativity for fluorine is very high at 4.0.
+          hydrogenFluoride: Electronegativity for hydrogen is low at 2.1, for fluorine is very high at 4.0.
+          water: Electronegativity for hydrogen is very low at 2.1, for oxygen is high at 3.5.
+          carbonDioxide: Electronegativity for carbon is medium-low at 2.5, for oxygen is high at 3.5.
+          hydrogenCyanide: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to nitrogen at 3.0.
+          ozone: Electronegativity for oxygen is high at 3.5.
+          ammonia: Electronegativity for hydrogen is low at 2.1, for nitrogen is medium-high at 3.0.
+          borane: Electronegativity for hydrogen is low at 2.1, for boron is slightly lower at 2.0.
+          boronTrifluoride: Electronegativity for fluorine is very high at 4.0, for boron is very low at 2.0.
+          formaldehyde: Electronegativity increases from hydrogen 2.1 to carbon 2.5 to oxygen 3.5.
+          methane: Electronegativity for hydrogen is low at 2.1, for carbon is medium-low at 2.5.
+          fluoromethane: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
+          difluoromethane: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
+          tetrafluoromethane: Electronegativity for carbon is medium-high at 2.5, for fluorine is very high at 4.0.
+          chloroform: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to chlorine at 3.0.
+      electrostaticPotential:
+        select_molecule:
+          hydrogen: No electrostatic potential difference across molecule.
+          nitrogen: No electrostatic potential difference across molecule.
+          oxygen: No electrostatic potential difference across molecule.
+          fluorine: No electrostatic potential difference across molecule.
+          hydrogenFluoride: Large electrostatic potential difference across molecule.
+          water: Large electrostatic potential difference across molecule.
+          carbonDioxide: Medium electrostatic potential difference with even distribution.
+          hydrogenCyanide: Very large electrostatic potential difference across molecule.
+          ozone: Small electrostatic potential difference across molecule.
+          ammonia: Large electrostatic potential difference across molecule.
+          borane: No electrostatic potential difference across molecule.
+          boronTrifluoride: Large electrostatic potential difference with even distribution.
+          formaldehyde: Very large electrostatic potential difference across molecule.
+          methane: Medium electrostatic potential difference with even distribution.
+          fluoromethane: Large electrostatic potential difference across molecule.
+          difluoromethane: Very large electrostatic potential difference across molecule.
+          tetrafluoromethane: Small electrostatic potential difference with even distribution.
+          chloroform: Medium electrostatic potential difference across molecule.
+      electronDensity:
+        select_molecule:
+          hydrogen: Electron density is evenly shared between atoms.
+          nitrogen: Electron density is evenly shared between atoms.
+          oxygen: Electron density is evenly shared between atoms.
+          fluorine: Electron density is evenly shared between atoms.
+          hydrogenFluoride: Electron density is very unevenly shared, shifted towards fluorine.
+          water: Electron density is very unevenly shared, shifted towards oxygen.
+          carbonDioxide: Electron density is unevenly shared, but symmetrically arranged.
+          hydrogenCyanide: Electron density is very unevenly shared, shifted towards nitrogen.
+          ozone: Electron density is slightly unevenly shared, shifted towards terminal oxygens.
+          ammonia: Electron density is very unevenly shared, shifted towards nitrogen.
+          borane: Electron density is evenly shared between atoms.
+          boronTrifluoride: Electron density is very unevenly shared, but symmetrically arranged.
+          formaldehyde: Electron density is very unevenly shared, shifted towards oxygen.
+          methane: Electron density is unevenly shared, but symmetrically arranged.
+          fluoromethane: Electron density is very unevenly shared, shifted towards fluorine.
+          difluoromethane: Electron density is very unevenly shared, shifted towards fluorines.
+          tetrafluoromethane: Electron density is unevenly shared, but symmetrically arranged.
+          chloroform: Electron density is unevenly shared, shifted towards chlorines.
