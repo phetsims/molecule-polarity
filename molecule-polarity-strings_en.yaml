@@ -204,23 +204,23 @@ a11y:
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotential:
     select_potential:
-      noDifference: 'no'
-      verySmallDifference: 'very small'
-      smallDifference: 'small'
-      mediumDifference: 'medium'
-      largeDifference: 'large'
-      veryLargeDifference: 'very large'
+      no: 'no'
+      verySmall: 'very small'
+      small: 'small'
+      medium: 'medium'
+      fairlyLarge: 'fairly large'
+      large: 'large'
 
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotentialUppercase:
     select_potential:
-      noDifference: 'No'
-      verySmallDifference: 'Very small'
-      smallDifference: 'Small'
-      mediumDifference: 'Medium'
-      largeDifference: 'Large'
-      veryLargeDifference: 'Very large'
-  
+      no: 'No'
+      verySmall: 'Very small'
+      small: 'Small'
+      medium: 'Medium'
+      fairlyLarge: 'Fairly large'
+      large: 'Large'
+
   # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
   # 2-range spectrum: positive-neutral-negative
   electrostaticPotentialProgress:

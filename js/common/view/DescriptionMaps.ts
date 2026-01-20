@@ -32,7 +32,7 @@ type MolecularPolarity = 'nonpolar' | 'weaklyPolar' | 'polar' | 'moderatelyPolar
 type PartialChargeMagnitude = 'zero' | 'verySmall' | 'small' | 'medium' | 'fairlyLarge' | 'large' | 'veryLarge' | 'extremelyLarge';
 
 // Surface properties
-type ElectrostaticPotential = 'noDifference' | 'verySmallDifference' | 'smallDifference' | 'mediumDifference' | 'largeDifference' | 'veryLargeDifference';
+type ElectrostaticPotential = 'no' | 'verySmall' | 'small' | 'medium' | 'fairlyLarge' | 'large';
 type ElectrostaticRegions = 'verySlightly' | 'slightly' | 'moderately' | 'highly' | 'veryHighly';
 type ElectronDensity = 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared';
 type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 'shiftedAlmostCompletely';
@@ -135,12 +135,12 @@ export default class DescriptionMaps {
 
   private static deltaENtoElectrostaticPotential( deltaEN: number ): ElectrostaticPotential {
     deltaEN = roundAbs( deltaEN );
-    return deltaEN <= ZERO ? 'noDifference' :
-           deltaEN <= 0.4 ? 'verySmallDifference' :
-           deltaEN <= 0.8 ? 'smallDifference' :
-           deltaEN <= 1.2 ? 'mediumDifference' :
-           deltaEN <= 1.6 ? 'largeDifference' :
-           'veryLargeDifference';
+    return deltaEN <= ZERO ? 'no' :
+           deltaEN <= 0.4 ? 'verySmall' :
+           deltaEN <= 0.8 ? 'small' :
+           deltaEN <= 1.2 ? 'medium' :
+           deltaEN <= 1.6 ? 'fairlyLarge' :
+           'large';
   }
 
   private static deltaENtoElectrostaticRegions( deltaEN: number ): ElectrostaticRegions {
