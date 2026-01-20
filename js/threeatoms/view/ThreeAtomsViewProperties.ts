@@ -36,12 +36,12 @@ export default class ThreeAtomsViewProperties {
     // E Field is handled by the model but it's useful to keep track of it in here for accessibility purposes
     this.eFieldEnabledProperty = eFieldEnabledProperty;
 
-    this.bondDipolesVisibleProperty = new BooleanProperty( true, {
+    this.bondDipolesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'bondDipolesVisibleProperty' ),
       phetioFeatured: true
     } );
 
-    this.molecularDipoleVisibleProperty = new BooleanProperty( false, {
+    this.molecularDipoleVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'molecularDipoleVisibleProperty' ),
       phetioFeatured: true
     } );
