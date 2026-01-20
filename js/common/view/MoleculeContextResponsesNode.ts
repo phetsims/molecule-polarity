@@ -229,7 +229,7 @@ export default class MoleculeContextResponsesNode extends Node {
     // deltaEN > 0 might mean something different based on which atom is being changed.
     // i.e. high deltaEN means a high electron density for one atom but low for the other.
     const isGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
-    const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0;
+    const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0 || previousBondDeltaEN === 0;
     return { isGrowing: isGrowing, didBondChangeDirection: didBondChangeDirection };
   }
 
