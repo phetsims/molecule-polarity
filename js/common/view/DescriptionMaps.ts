@@ -49,7 +49,7 @@ export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNega
 type RealPolarity = 'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
 
 
-// Approximation of zero to avoid issues with floating point precision
+// Approximation of zero to avoid issues with floating point precision as well as leaving room for manually obtaining zero
 const ZERO = 0.05;
 
 // Rounds the absolute value of a number, used to avoid issues with floating point precision and maintain the absolute value of deltaEN
@@ -199,7 +199,7 @@ export default class DescriptionMaps {
 
   private static angleToShape( angle: number ): Shape {
     const absAngle = Math.abs( angle );
-    return absAngle <= ZERO * Math.PI ? 'atomsOverlap' :
+    return absAngle <= 1e-5 * Math.PI ? 'atomsOverlap' :
            absAngle <= 0.2 * Math.PI ? 'extremelyBentSlightOverlap' :
            absAngle <= 0.4 * Math.PI ? 'veryBent' :
            absAngle <= 0.6 * Math.PI ? 'bent' :
