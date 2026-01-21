@@ -72,9 +72,11 @@ type StringsType = {
   'trifluoromethaneStringProperty': LocalizedStringProperty;
   'waterStringProperty': LocalizedStringProperty;
   'dipoleDirectionStringProperty': LocalizedStringProperty;
+  'dipoleDirectionDescriptionStringProperty': LocalizedStringProperty;
   'deltaPlusStringProperty': LocalizedStringProperty;
   'deltaMinusStringProperty': LocalizedStringProperty;
   'surfaceColorRealMoleculesStringProperty': LocalizedStringProperty;
+  'surfaceColorDescriptionStringProperty': LocalizedStringProperty;
   'underDevelopment': {
     'line1StringProperty': LocalizedStringProperty;
     'line2StringProperty': LocalizedStringProperty;

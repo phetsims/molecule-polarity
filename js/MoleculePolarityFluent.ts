@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -78,9 +78,11 @@ addToMapIfDefined( 'tetrafluoromethane', 'tetrafluoromethaneStringProperty' );
 addToMapIfDefined( 'trifluoromethane', 'trifluoromethaneStringProperty' );
 addToMapIfDefined( 'water', 'waterStringProperty' );
 addToMapIfDefined( 'dipoleDirection', 'dipoleDirectionStringProperty' );
+addToMapIfDefined( 'dipoleDirectionDescription', 'dipoleDirectionDescriptionStringProperty' );
 addToMapIfDefined( 'deltaPlus', 'deltaPlusStringProperty' );
 addToMapIfDefined( 'deltaMinus', 'deltaMinusStringProperty' );
 addToMapIfDefined( 'surfaceColorRealMolecules', 'surfaceColorRealMoleculesStringProperty' );
+addToMapIfDefined( 'surfaceColorDescription', 'surfaceColorDescriptionStringProperty' );
 addToMapIfDefined( 'underDevelopment_line1', 'underDevelopment.line1StringProperty' );
 addToMapIfDefined( 'underDevelopment_line2', 'underDevelopment.line2StringProperty' );
 addToMapIfDefined( 'a11y_common_screenIcons_twoAtoms', 'a11y.common.screenIcons.twoAtomsStringProperty' );
@@ -348,9 +350,11 @@ const MoleculePolarityFluent = {
   trifluoromethaneStringProperty: _.get( MoleculePolarityStrings, 'trifluoromethaneStringProperty' ),
   waterStringProperty: _.get( MoleculePolarityStrings, 'waterStringProperty' ),
   dipoleDirectionStringProperty: _.get( MoleculePolarityStrings, 'dipoleDirectionStringProperty' ),
+  dipoleDirectionDescriptionStringProperty: _.get( MoleculePolarityStrings, 'dipoleDirectionDescriptionStringProperty' ),
   deltaPlusStringProperty: _.get( MoleculePolarityStrings, 'deltaPlusStringProperty' ),
   deltaMinusStringProperty: _.get( MoleculePolarityStrings, 'deltaMinusStringProperty' ),
   surfaceColorRealMoleculesStringProperty: _.get( MoleculePolarityStrings, 'surfaceColorRealMoleculesStringProperty' ),
+  surfaceColorDescriptionStringProperty: _.get( MoleculePolarityStrings, 'surfaceColorDescriptionStringProperty' ),
   underDevelopment: {
     line1StringProperty: _.get( MoleculePolarityStrings, 'underDevelopment.line1StringProperty' ),
     line2StringProperty: _.get( MoleculePolarityStrings, 'underDevelopment.line2StringProperty' )

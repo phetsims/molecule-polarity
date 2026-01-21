@@ -9,48 +9,55 @@
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import PreferencesControl, { PreferencesControlOptions } from '../../../../joist/js/preferences/PreferencesControl.js';
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
-import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
+import HorizontalAquaRadioButtonGroup, { HorizontalAquaRadioButtonGroupOptions } from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { DipoleDirection } from '../model/DipoleDirection.js';
 import MPConstants from '../MPConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type DipoleDirectionControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type DipoleDirectionControlOptions = SelfOptions & WithRequired<PreferencesControlOptions, 'tandem'>;
 
-export default class DipoleDirectionControl extends VBox {
+export default class DipoleDirectionControl extends PreferencesControl {
 
   private readonly disposeDipoleDirectionControl: () => void;
 
   public constructor( dipoleDirectionProperty: StringUnionProperty<DipoleDirection>,
                       providedOptions: DipoleDirectionControlOptions ) {
 
-    const options = optionize<DipoleDirectionControlOptions, SelfOptions, VBoxOptions>()( {
-
-      // VBoxOptions
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
-    }, providedOptions );
-
     // title
-    const dipoleDirectionText = new Text( MoleculePolarityStrings.dipoleDirectionStringProperty, {
+    const dipoleDirectionText = new Text( MoleculePolarityFluent.dipoleDirectionStringProperty, {
       font: PreferencesDialogConstants.CONTENT_FONT,
       maxWidth: 500
     } );
 
+    // description
+    const descriptionText = new RichText( MoleculePolarityFluent.dipoleDirectionDescriptionStringProperty,
+      PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS );
+
     // Radio button group
     const radioButtonGroup = new DipoleDirectionRadioButtonGroup( dipoleDirectionProperty, {
-      tandem: options.tandem.createTandem( 'radioButtonGroup' )
+      tandem: providedOptions.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    options.children = [ dipoleDirectionText, radioButtonGroup ];
+
+    const options = optionize<DipoleDirectionControlOptions, SelfOptions, PreferencesControlOptions>()( {
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      labelNode: dipoleDirectionText,
+      descriptionNode: descriptionText,
+      controlNode: radioButtonGroup,
+      phetioFeatured: true
+    }, providedOptions );
 
     super( options );
 
@@ -72,18 +79,18 @@ export default class DipoleDirectionControl extends VBox {
 
 type DipoleDirectionRadioButtonGroupSelfOptions = EmptySelfOptions;
 
-type DipoleDirectionRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
+type DipoleDirectionRadioButtonGroupOptions = SelfOptions & PickRequired<HorizontalAquaRadioButtonGroupOptions, 'tandem'>;
 
-class DipoleDirectionRadioButtonGroup extends VerticalAquaRadioButtonGroup<DipoleDirection> {
+class DipoleDirectionRadioButtonGroup extends HorizontalAquaRadioButtonGroup<DipoleDirection> {
 
   private readonly disposeDipoleDirectionRadioButtonGroup: () => void;
 
   public constructor( dipoleDirectionProperty: StringUnionProperty<DipoleDirection>,
                       providedOptions: DipoleDirectionRadioButtonGroupOptions ) {
 
-    const options = optionize<DipoleDirectionRadioButtonGroupOptions, DipoleDirectionRadioButtonGroupSelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+    const options = optionize<DipoleDirectionRadioButtonGroupOptions, DipoleDirectionRadioButtonGroupSelfOptions, HorizontalAquaRadioButtonGroupOptions>()( {
 
-      // VerticalAquaRadioButtonGroupOptions
+      // HorizontalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
     }, providedOptions );
