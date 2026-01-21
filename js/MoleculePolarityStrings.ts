@@ -262,27 +262,19 @@ type StringsType = {
         'bondDipoleABDescriptionStringProperty': LocalizedStringProperty;
         'bondDipoleBCStringProperty': LocalizedStringProperty;
         'bondDipoleBCDescriptionStringProperty': LocalizedStringProperty;
+        'overlappingStringProperty': LocalizedStringProperty;
+        'onTopOfStringProperty': LocalizedStringProperty;
         'partialChargesDescriptionStringProperty': LocalizedStringProperty;
       };
       'moveAtomASlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'valueText': {
-          'oclockStringProperty': LocalizedStringProperty;
-          'overlappingCStringProperty': LocalizedStringProperty;
-          'onTopOfCStringProperty': LocalizedStringProperty;
-        };
         'bondDipoleContextStringProperty': LocalizedStringProperty;
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
       };
       'moveAtomCSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'valueText': {
-          'oclockStringProperty': LocalizedStringProperty;
-          'overlappingAStringProperty': LocalizedStringProperty;
-          'onTopOfAStringProperty': LocalizedStringProperty;
-        }
       };
       'rotateMoleculeSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;

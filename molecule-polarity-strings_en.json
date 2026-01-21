@@ -639,6 +639,12 @@
         "bondDipoleBCDescription": {
           "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleBC } BC bond dipole points to Atom { $atom }, { $direction } o'clock."
         },
+        "overlapping": {
+          "value": "Overlapping Atom { $atom }"
+        },
+        "onTopOf": {
+          "value": "On top of Atom { $atom }"
+        },
         "partialChargesDescription": {
           "value": "{ $sign ->\n  [positive] Atom { $atom } has { $magnitude } positive partial charge.\n  [negative] Atom { $atom } has { $magnitude } negative partial charge.\n  *[zero] Atom { $atom } has { $magnitude } partial charge.\n}"
         }
@@ -649,17 +655,6 @@
         },
         "accessibleHelpText": {
           "value": "Move Atom A around center Atom B."
-        },
-        "valueText": {
-          "oclock": {
-            "value": "{ $hour } o'clock"
-          },
-          "overlappingC": {
-            "value": "Overlapping Atom C"
-          },
-          "onTopOfC": {
-            "value": "On top of Atom C"
-          }
         },
         "bondDipoleContext": {
           "value": "Bond dipole points to { $position } o'clock."
@@ -674,17 +669,6 @@
         },
         "accessibleHelpText": {
           "value": "Move Atom C around center Atom B."
-        },
-        "valueText": {
-          "oclock": {
-            "value": "{ $hour } o'clock"
-          },
-          "overlappingA": {
-            "value": "Overlapping Atom A"
-          },
-          "onTopOfA": {
-            "value": "On top of Atom A"
-          }
         }
       },
       "rotateMoleculeSlider": {

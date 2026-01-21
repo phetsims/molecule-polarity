@@ -95,6 +95,41 @@ export default class TriatomicMoleculeNode extends Node {
       molecule.bondAngleBCProperty.notifyListenersStatic();
     } );
 
+    let lastOverlappingMessage: 'overlappingA' | 'overlappingC' | 'overA' | 'overC' | null = null;
+
+    const overlapAccessibleObjectResponse = ( otherAtom: 'A' | 'C' ) => {
+      const angleABC = molecule.bondAngleABCProperty.value;
+      if ( Math.cos( angleABC ) > 1 - 1e-5 ) {
+        if ( lastOverlappingMessage !== `over${otherAtom}` ) {
+          lastOverlappingMessage = `over${otherAtom}`;
+          this.addAccessibleObjectResponse(
+            MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.onTopOf.format( { atom: otherAtom } )
+          );
+        }
+      }
+      else if ( Math.abs( angleABC ) < 0.2 * Math.PI ) {
+        if ( lastOverlappingMessage !== `overlapping${otherAtom}` ) {
+          lastOverlappingMessage = `overlapping${otherAtom}`;
+          this.addAccessibleObjectResponse(
+            MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.overlapping.format( { atom: otherAtom } )
+          );
+        }
+      }
+      else {
+        lastOverlappingMessage = null;
+      }
+    };
+
+    // atom A overlapping feedback
+    molecule.bondAngleABProperty.link( () => {
+      overlapAccessibleObjectResponse( 'C' );
+    } );
+
+    // atom C overlapping feedback
+    molecule.bondAngleBCProperty.link( () => {
+      overlapAccessibleObjectResponse( 'A' );
+    } );
+
     // bonds
     const bondABNode = new BondNode( molecule.bondAB, {
       tandem: options.tandem.createTandem( 'bondABNode' ),

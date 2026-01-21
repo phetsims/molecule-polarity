@@ -223,19 +223,15 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleAB', 'a11y.three
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDescription', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBC', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDescription', 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_overlapping', 'a11y.threeAtomsScreen.moleculeABC.overlappingStringProperty' );
+addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_onTopOf', 'a11y.threeAtomsScreen.moleculeABC.onTopOfStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_partialChargesDescription', 'a11y.threeAtomsScreen.moleculeABC.partialChargesDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_accessibleName', 'a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_accessibleHelpText', 'a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_valueText_oclock', 'a11y.threeAtomsScreen.moveAtomASlider.valueText.oclockStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_valueText_overlappingC', 'a11y.threeAtomsScreen.moveAtomASlider.valueText.overlappingCStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_valueText_onTopOfC', 'a11y.threeAtomsScreen.moveAtomASlider.valueText.onTopOfCStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_bondDipoleContext', 'a11y.threeAtomsScreen.moveAtomASlider.bondDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_molecularDipoleContext', 'a11y.threeAtomsScreen.moveAtomASlider.molecularDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleName', 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleHelpText', 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_valueText_oclock', 'a11y.threeAtomsScreen.moveAtomCSlider.valueText.oclockStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_valueText_overlappingA', 'a11y.threeAtomsScreen.moveAtomCSlider.valueText.overlappingAStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_valueText_onTopOfA', 'a11y.threeAtomsScreen.moveAtomCSlider.valueText.onTopOfAStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_accessibleName', 'a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_accessibleHelpText', 'a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg0', 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg0StringProperty' );
@@ -551,7 +547,6 @@ const MoleculePolarityFluent = {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty' ) ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty' ) ),
         _comment_0: new FluentComment( {"comment":"ARIA valuetext options","associatedKey":"valueText"} ),
-        _comment_1: new FluentComment( {"comment":"ARIA valuetext - clock positions","associatedKey":"valueText"} ),
         valueText: {
           deg0StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg0', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg0StringProperty' ) ),
           deg45StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_twoAtomsScreen_rotateMoleculeSlider_valueText_deg45', _.get( MoleculePolarityStrings, 'a11y.twoAtomsScreen.rotateMoleculeSlider.valueText.deg45StringProperty' ) ),
@@ -593,33 +588,21 @@ const MoleculePolarityFluent = {
         bondDipoleABDescription: new FluentPattern<{ atom: FluentVariable, direction: FluentVariable, magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleABDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescriptionStringProperty' ), [{"name":"atom"},{"name":"direction"},{"name":"magnitude"}] ),
         bondDipoleBC: new FluentPattern<{ magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBC', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCStringProperty' ), [{"name":"magnitude"}] ),
         bondDipoleBCDescription: new FluentPattern<{ atom: FluentVariable, direction: FluentVariable, magnitude: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_bondDipoleBCDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescriptionStringProperty' ), [{"name":"atom"},{"name":"direction"},{"name":"magnitude"}] ),
+        overlapping: new FluentPattern<{ atom: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_overlapping', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.overlappingStringProperty' ), [{"name":"atom"}] ),
+        onTopOf: new FluentPattern<{ atom: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_onTopOf', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.onTopOfStringProperty' ), [{"name":"atom"}] ),
         partialChargesDescription: new FluentPattern<{ atom: FluentVariable, magnitude: FluentVariable, sign: 'positive' | 'negative' | number | 'zero' | TReadOnlyProperty<'positive' | 'negative' | number | 'zero'> }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moleculeABC_partialChargesDescription', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moleculeABC.partialChargesDescriptionStringProperty' ), [{"name":"atom"},{"name":"magnitude"},{"name":"sign","variants":["positive","negative",{"type":"number","value":"zero"}]}] )
       },
       _comment_4: new FluentComment( {"comment":"Move Atom A Slider","associatedKey":"moveAtomASlider"} ),
       moveAtomASlider: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty' ) ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty' ) ),
-        _comment_0: new FluentComment( {"comment":"ARIA valuetext options","associatedKey":"valueText"} ),
-        _comment_1: new FluentComment( {"comment":"ARIA valuetext - clock positions","associatedKey":"valueText"} ),
-        valueText: {
-          oclock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_valueText_oclock', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.valueText.oclockStringProperty' ), [{"name":"hour"}] ),
-          overlappingCStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_valueText_overlappingC', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.valueText.overlappingCStringProperty' ) ),
-          onTopOfCStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_valueText_onTopOfC', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.valueText.onTopOfCStringProperty' ) )
-        },
         bondDipoleContext: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_bondDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.bondDipoleContextStringProperty' ), [{"name":"position"}] ),
         molecularDipoleContext: new FluentPattern<{ magnitude: FluentVariable, position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.molecularDipoleContextStringProperty' ), [{"name":"magnitude"},{"name":"position"}] )
       },
       _comment_5: new FluentComment( {"comment":"Move Atom C Slider","associatedKey":"moveAtomCSlider"} ),
       moveAtomCSlider: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty' ) ),
-        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty' ) ),
-        _comment_0: new FluentComment( {"comment":"ARIA valuetext options","associatedKey":"valueText"} ),
-        _comment_1: new FluentComment( {"comment":"ARIA valuetext - clock positions","associatedKey":"valueText"} ),
-        valueText: {
-          oclock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomCSlider_valueText_oclock', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomCSlider.valueText.oclockStringProperty' ), [{"name":"hour"}] ),
-          overlappingAStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomCSlider_valueText_overlappingA', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomCSlider.valueText.overlappingAStringProperty' ) ),
-          onTopOfAStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomCSlider_valueText_onTopOfA', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomCSlider.valueText.onTopOfAStringProperty' ) )
-        }
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty' ) )
       },
       _comment_6: new FluentComment( {"comment":"Rotate Molecule AB Slider","associatedKey":"rotateMoleculeSlider"} ),
       _comment_7: new FluentComment( {"comment":"Rotate Molecule ABC Slider","associatedKey":"rotateMoleculeSlider"} ),
@@ -627,7 +610,6 @@ const MoleculePolarityFluent = {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty' ) ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty' ) ),
         _comment_0: new FluentComment( {"comment":"ARIA valuetext options","associatedKey":"valueText"} ),
-        _comment_1: new FluentComment( {"comment":"ARIA valuetext - clock positions","associatedKey":"valueText"} ),
         valueText: {
           deg0StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg0', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg0StringProperty' ) ),
           deg30StringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_rotateMoleculeSlider_valueText_deg30', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.rotateMoleculeSlider.valueText.deg30StringProperty' ) ),

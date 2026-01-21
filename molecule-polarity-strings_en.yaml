@@ -460,6 +460,8 @@ a11y:
       bondDipoleABDescription: '{ a11y.threeAtomsScreen.moleculeABC.bondDipoleAB } AB bond dipole points to Atom { $atom }, { $direction } o''clock.'
       bondDipoleBC: 'With { $magnitude } BC bond dipole arrow.'
       bondDipoleBCDescription: '{ a11y.threeAtomsScreen.moleculeABC.bondDipoleBC } BC bond dipole points to Atom { $atom }, { $direction } o''clock.'
+      overlapping: 'Overlapping Atom { $atom }'
+      onTopOf: 'On top of Atom { $atom }'
       partialChargesDescription:
         select_sign:
           positive: 'Atom { $atom } has { $magnitude } positive partial charge.'
@@ -469,11 +471,6 @@ a11y:
     moveAtomASlider:
       accessibleName: 'Move Atom A'
       accessibleHelpText: 'Move Atom A around center Atom B.'
-      # ARIA valuetext - clock positions
-      valueText:
-        oclock: '{ $hour } o''clock'
-        overlappingC: 'Overlapping Atom C'
-        onTopOfC: 'On top of Atom C'
       bondDipoleContext: 'Bond dipole points to { $position } o''clock.'
       molecularDipoleContext: '{ $magnitude } molecular dipole points to { $position } o''clock.'
     
@@ -481,11 +478,7 @@ a11y:
     moveAtomCSlider:
       accessibleName: 'Move Atom C'
       accessibleHelpText: 'Move Atom C around center Atom B.'
-      valueText:
-        oclock: '{ $hour } o''clock'
-        overlappingA: 'Overlapping Atom A'
-        onTopOfA: 'On top of Atom A'
-    
+
     # Rotate Molecule ABC Slider
     rotateMoleculeSlider:
       accessibleName: 'Rotate Molecule ABC'
