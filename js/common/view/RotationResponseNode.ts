@@ -47,7 +47,7 @@ export default class RotationResponseNode extends Node {
 
       // Normal object response for rotations
       this.addAccessibleObjectResponse(
-        MoleculePolarityFluent.a11y.rotation.format( { direction: direction } ), { alertBehavior: 'queue' }
+        MoleculePolarityFluent.a11y.rotation.format( { direction: direction } )
       );
 
       lastDirection = direction;
@@ -78,8 +78,7 @@ export default class RotationResponseNode extends Node {
 
           // "Molecule aligned with Electric Field" after rotating due to E-field has stopped
           this.addAccessibleContextResponse(
-            MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
-            { alertBehavior: 'queue' }
+            MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty
           );
 
           lastDirection = null;
@@ -99,8 +98,7 @@ export default class RotationResponseNode extends Node {
 
         // "Molecule aligned with Electric Field" when E-field is turned on and molecule is already aligned.
         this.addAccessibleContextResponse(
-          MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
-          { alertBehavior: 'queue' }
+          MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty
         );
       }
     } );
