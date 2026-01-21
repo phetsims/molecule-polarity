@@ -36,10 +36,8 @@ export default class DipoleDirectionControl extends PreferencesControl {
                       providedOptions: DipoleDirectionControlOptions ) {
 
     // title
-    const dipoleDirectionText = new Text( MoleculePolarityFluent.dipoleDirectionStringProperty, {
-      font: PreferencesDialogConstants.CONTENT_FONT,
-      maxWidth: 500
-    } );
+    const dipoleDirectionText = new Text( MoleculePolarityFluent.dipoleDirectionStringProperty,
+      PreferencesDialogConstants.CONTROL_LABEL_OPTIONS );
 
     // description
     const descriptionText = new RichText( MoleculePolarityFluent.dipoleDirectionDescriptionStringProperty,

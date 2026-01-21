@@ -8,16 +8,18 @@
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import PreferencesControl, { PreferencesControlOptions } from '../../../../joist/js/preferences/PreferencesControl.js';
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
-import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
+import HorizontalAquaRadioButtonGroup, { HorizontalAquaRadioButtonGroupOptions } from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
 import MPConstants from '../MPConstants.js';
@@ -35,32 +37,35 @@ const COLOR_KEY_OPTIONS = {
 
 type SelfOptions = EmptySelfOptions;
 
-type SurfaceColorControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type SurfaceColorControlOptions = SelfOptions & PickRequired<PreferencesControlOptions, 'tandem'>;
 
-export default class SurfaceColorControl extends VBox {
+export default class SurfaceColorControl extends PreferencesControl {
 
   private readonly disposeSurfaceColorControl: () => void;
 
   public constructor( surfaceColorProperty: StringUnionProperty<SurfaceColor>,
                       providedOptions: SurfaceColorControlOptions ) {
 
-    const options = optionize<SurfaceColorControlOptions, SelfOptions, VBoxOptions>()( {
+    // title
+    const titleText = new Text( MoleculePolarityStrings.surfaceColorRealMoleculesStringProperty,
+      PreferencesDialogConstants.CONTROL_LABEL_OPTIONS );
 
-      // VBoxOptions
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
-    }, providedOptions );
+    // description
+    const descriptionText = new RichText( MoleculePolarityFluent.surfaceColorDescriptionStringProperty,
+      PreferencesDialogConstants.CONTROL_DESCRIPTION_OPTIONS );
 
-    const titleText = new Text( MoleculePolarityStrings.surfaceColorRealMoleculesStringProperty, {
-      font: PreferencesDialogConstants.CONTENT_FONT,
-      maxWidth: 400
-    } );
-
+    // control Node
     const radioButtonGroup = new SurfaceColorRadioButtonGroup( surfaceColorProperty, {
-      tandem: options.tandem.createTandem( 'radioButtonGroup' )
+      tandem: providedOptions.tandem.createTandem( 'radioButtonGroup' )
     } );
 
-    options.children = [ titleText, radioButtonGroup ];
+    const options = optionize<SurfaceColorControlOptions, SelfOptions, PreferencesControlOptions>()( {
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      labelNode: titleText,
+      descriptionNode: descriptionText,
+      controlNode: radioButtonGroup,
+      phetioFeatured: true
+    }, providedOptions );
 
     super( options );
 
@@ -82,16 +87,16 @@ export default class SurfaceColorControl extends VBox {
 
 type SurfaceColorRadioButtonGroupSelfOptions = EmptySelfOptions;
 
-type SurfaceColorRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
+type SurfaceColorRadioButtonGroupOptions = SelfOptions & PickRequired<HorizontalAquaRadioButtonGroupOptions, 'tandem'>;
 
-class SurfaceColorRadioButtonGroup extends VerticalAquaRadioButtonGroup<SurfaceColor> {
+class SurfaceColorRadioButtonGroup extends HorizontalAquaRadioButtonGroup<SurfaceColor> {
 
   public constructor( surfaceColorProperty: StringUnionProperty<SurfaceColor>,
                       providedOptions: SurfaceColorRadioButtonGroupOptions ) {
 
-    const options = optionize<SurfaceColorRadioButtonGroupOptions, SurfaceColorRadioButtonGroupSelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
+    const options = optionize<SurfaceColorRadioButtonGroupOptions, SurfaceColorRadioButtonGroupSelfOptions, HorizontalAquaRadioButtonGroupOptions>()( {
 
-      // VerticalAquaRadioButtonGroupOptions
+      // HorizontalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
     }, providedOptions );
