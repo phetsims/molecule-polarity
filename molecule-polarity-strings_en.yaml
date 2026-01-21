@@ -522,10 +522,10 @@ a11y:
       accessibleHelpText: 'Move molecule in three dimensions. Use keyboard shortcuts to rotate molecule around vertical and horizontal axes.'
       objectResponses:
         select_direction:
-          up: 'Rotating up, around horizontal axis'
-          down: 'Rotating down, around horizontal axis'
-          left: 'Rotating left, around vertical axis'
-          right: 'Rotating right, around vertical axis'
+          up: 'rotating up, around horizontal axis'
+          down: 'rotating down, around horizontal axis'
+          left: 'rotating left, around vertical axis'
+          right: 'rotating right, around vertical axis'
     comboBox:
       accessibleName: 'Molecule { $moleculeName }'
       accessibleHelpText: 'Choose a different molecule to view.'

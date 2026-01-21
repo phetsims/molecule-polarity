@@ -159,18 +159,52 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     this.addChild( rootNode );
 
+    let lastVerticalDirection: 'up' | 'down' | null = null;
+    let lastHorizontalDirection: 'left' | 'right' | null = null;
+
     const keyboardDragListener = new SoundKeyboardDragListener( {
       dragDelta: Math.PI / 16,
       shiftDragDelta: Math.PI / 32,
       moveOnHoldInterval: 100,
       drag: ( event, listener ) => {
-        const newQuaternion = new THREE.Quaternion().setFromEuler( new THREE.Euler( listener.modelDelta.y, listener.modelDelta.x, 0 ) );
+        // Apply rotation
+        const newQuaternion = new THREE.Quaternion().setFromEuler(
+          new THREE.Euler( listener.modelDelta.y, listener.modelDelta.x, 0 )
+        );
         newQuaternion.multiply( model.moleculeQuaternionProperty.value );
         model.moleculeQuaternionProperty.value = newQuaternion;
+
+        // Detect directions
+        const y = listener.modelDelta.y;
+        const x = listener.modelDelta.x;
+
+        const currentVertical: 'up' | 'down' | null = y !== 0 ? ( y > 0 ? 'down' : 'up' ) : null;
+        const currentHorizontal: 'left' | 'right' | null = x !== 0 ? ( x > 0 ? 'right' : 'left' ) : null;
+
+        if ( currentVertical !== null && currentVertical !== lastVerticalDirection ) {
+          lastVerticalDirection = currentVertical;
+          this.addAccessibleObjectResponse(
+            MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
+              {
+                direction: currentVertical
+              }
+            ) );
+        }
+
+        if ( currentHorizontal !== null && currentHorizontal !== lastHorizontalDirection ) {
+          lastHorizontalDirection = currentHorizontal;
+          this.addAccessibleObjectResponse(
+            MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
+              {
+                direction: currentHorizontal
+              }
+            ) );
+        }
       },
       tandem: moleculeNodeTandem.createTandem( 'keyboardDragListener' )
     } );
     moleculeNode.addInputListener( keyboardDragListener );
+
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMoleculeStringProperty

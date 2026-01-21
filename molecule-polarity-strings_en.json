@@ -766,7 +766,7 @@
           "value": "Move molecule in three dimensions. Use keyboard shortcuts to rotate molecule around vertical and horizontal axes."
         },
         "objectResponses": {
-          "value": "{ $direction ->\n  [up] Rotating up, around horizontal axis\n  [down] Rotating down, around horizontal axis\n  [left] Rotating left, around vertical axis\n  *[right] Rotating right, around vertical axis\n}"
+          "value": "{ $direction ->\n  [up] rotating up, around horizontal axis\n  [down] rotating down, around horizontal axis\n  [left] rotating left, around vertical axis\n  *[right] rotating right, around vertical axis\n}"
         }
       },
       "comboBox": {
