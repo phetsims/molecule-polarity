@@ -85,6 +85,10 @@ addToMapIfDefined( 'surfaceColorRealMolecules', 'surfaceColorRealMoleculesString
 addToMapIfDefined( 'surfaceColorDescription', 'surfaceColorDescriptionStringProperty' );
 addToMapIfDefined( 'underDevelopment_line1', 'underDevelopment.line1StringProperty' );
 addToMapIfDefined( 'underDevelopment_line2', 'underDevelopment.line2StringProperty' );
+addToMapIfDefined( 'a11y_common_preferencesDialog_positiveToNegative', 'a11y.common.preferencesDialog.positiveToNegativeStringProperty' );
+addToMapIfDefined( 'a11y_common_preferencesDialog_negativeToPositive', 'a11y.common.preferencesDialog.negativeToPositiveStringProperty' );
+addToMapIfDefined( 'a11y_common_preferencesDialog_blueToRed', 'a11y.common.preferencesDialog.blueToRedStringProperty' );
+addToMapIfDefined( 'a11y_common_preferencesDialog_rainbowBlueToRed', 'a11y.common.preferencesDialog.rainbowBlueToRedStringProperty' );
 addToMapIfDefined( 'a11y_common_screenIcons_twoAtoms', 'a11y.common.screenIcons.twoAtomsStringProperty' );
 addToMapIfDefined( 'a11y_common_screenIcons_threeAtoms', 'a11y.common.screenIcons.threeAtomsStringProperty' );
 addToMapIfDefined( 'a11y_common_screenIcons_realMolecules', 'a11y.common.screenIcons.realMoleculesStringProperty' );
@@ -361,6 +365,12 @@ const MoleculePolarityFluent = {
   },
   a11y: {
     common: {
+      preferencesDialog: {
+        positiveToNegativeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_preferencesDialog_positiveToNegative', _.get( MoleculePolarityStrings, 'a11y.common.preferencesDialog.positiveToNegativeStringProperty' ) ),
+        negativeToPositiveStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_preferencesDialog_negativeToPositive', _.get( MoleculePolarityStrings, 'a11y.common.preferencesDialog.negativeToPositiveStringProperty' ) ),
+        blueToRedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_preferencesDialog_blueToRed', _.get( MoleculePolarityStrings, 'a11y.common.preferencesDialog.blueToRedStringProperty' ) ),
+        rainbowBlueToRedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_preferencesDialog_rainbowBlueToRed', _.get( MoleculePolarityStrings, 'a11y.common.preferencesDialog.rainbowBlueToRedStringProperty' ) )
+      },
       screenIcons: {
         twoAtomsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_screenIcons_twoAtoms', _.get( MoleculePolarityStrings, 'a11y.common.screenIcons.twoAtomsStringProperty' ) ),
         threeAtomsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_screenIcons_threeAtoms', _.get( MoleculePolarityStrings, 'a11y.common.screenIcons.threeAtomsStringProperty' ) ),

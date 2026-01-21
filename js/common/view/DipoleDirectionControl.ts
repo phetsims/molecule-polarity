@@ -8,7 +8,6 @@
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import PreferencesControl, { PreferencesControlOptions } from '../../../../joist/js/preferences/PreferencesControl.js';
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -27,6 +26,11 @@ import MPConstants from '../MPConstants.js';
 type SelfOptions = EmptySelfOptions;
 
 type DipoleDirectionControlOptions = SelfOptions & WithRequired<PreferencesControlOptions, 'tandem'>;
+
+const RADIO_BUTTON_LABEL_OPTIONS = {
+  font: PreferencesDialogConstants.CONTENT_FONT,
+  maxWidth: 200
+};
 
 export default class DipoleDirectionControl extends PreferencesControl {
 
@@ -111,9 +115,23 @@ class DipoleDirectionRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Dip
         tandem: options.tandem.createTandem( 'negativeToPositiveStringProperty' )
       } );
 
-    const radioButtonGroupItems = [
-      createItem( 'positiveToNegative', positiveToNegativeStringProperty, 'positiveToNegativeRadioButton' ),
-      createItem( 'negativeToPositive', negativeToPositiveStringProperty, 'negativeToPositiveRadioButton' )
+    const radioButtonGroupItems: AquaRadioButtonGroupItem<DipoleDirection>[] = [
+      {
+        value: 'positiveToNegative',
+        createNode: () => new Text( positiveToNegativeStringProperty, RADIO_BUTTON_LABEL_OPTIONS ),
+        options: {
+          accessibleName: MoleculePolarityFluent.a11y.common.preferencesDialog.positiveToNegativeStringProperty
+        },
+        tandemName: 'positiveToNegativeRadioButton'
+      },
+      {
+        value: 'negativeToPositive',
+        createNode: () => new Text( negativeToPositiveStringProperty, RADIO_BUTTON_LABEL_OPTIONS ),
+        options: {
+          accessibleName: MoleculePolarityFluent.a11y.common.preferencesDialog.negativeToPositiveStringProperty
+        },
+        tandemName: 'negativeToPositiveRadioButton'
+      }
     ];
 
     super( dipoleDirectionProperty, radioButtonGroupItems, options );
@@ -128,20 +146,6 @@ class DipoleDirectionRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Dip
     this.disposeDipoleDirectionRadioButtonGroup();
     super.dispose();
   }
-}
-
-// Creates an item for this radio-button group.
-function createItem( value: DipoleDirection,
-                     labelStringProperty: TReadOnlyProperty<string>,
-                     tandemName: string ): AquaRadioButtonGroupItem<DipoleDirection> {
-  return {
-    value: value,
-    createNode: () => new Text( labelStringProperty, {
-      font: PreferencesDialogConstants.CONTENT_FONT,
-      maxWidth: 500
-    } ),
-    tandemName: tandemName
-  };
 }
 
 moleculePolarity.register( 'DipoleDirectionControl', DipoleDirectionControl );

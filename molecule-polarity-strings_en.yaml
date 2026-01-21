@@ -62,6 +62,11 @@ underDevelopment.line2: If your device runs Java, you can use the Java version a
 
 a11y:
   common:
+    preferencesDialog:
+      positiveToNegative: 'Partial positive to partial negative'
+      negativeToPositive: 'Partial negative to partial positive'
+      blueToRed: 'Blue to red'
+      rainbowBlueToRed: 'Rainbow, blue to red'
     screenIcons:
       twoAtoms: 'Experiment with electronegativity values to explore bond polarity and character.'
       threeAtoms: 'Explore how bond dipole size and orientation influence molecular polarity.'

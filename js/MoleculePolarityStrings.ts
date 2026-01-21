@@ -83,6 +83,12 @@ type StringsType = {
   };
   'a11y': {
     'common': {
+      'preferencesDialog': {
+        'positiveToNegativeStringProperty': LocalizedStringProperty;
+        'negativeToPositiveStringProperty': LocalizedStringProperty;
+        'blueToRedStringProperty': LocalizedStringProperty;
+        'rainbowBlueToRedStringProperty': LocalizedStringProperty;
+      };
       'screenIcons': {
         'twoAtomsStringProperty': LocalizedStringProperty;
         'threeAtomsStringProperty': LocalizedStringProperty;

@@ -184,6 +184,20 @@
   },
   "a11y": {
     "common": {
+      "preferencesDialog": {
+        "positiveToNegative": {
+          "value": "Partial positive to partial negative"
+        },
+        "negativeToPositive": {
+          "value": "Partial negative to partial positive"
+        },
+        "blueToRed": {
+          "value": "Blue to red"
+        },
+        "rainbowBlueToRed": {
+          "value": "Rainbow, blue to red"
+        }
+      },
       "screenIcons": {
         "twoAtoms": {
           "value": "Experiment with electronegativity values to explore bond polarity and character."

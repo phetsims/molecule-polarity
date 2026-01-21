@@ -105,12 +105,18 @@ class SurfaceColorRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Surfac
       {
         value: 'RWB',
         createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
-        tandemName: 'RWBRadioButton'
+        tandemName: 'RWBRadioButton',
+        options: {
+          accessibleName: MoleculePolarityFluent.a11y.common.preferencesDialog.blueToRedStringProperty
+        }
       },
       {
         value: 'ROYGB',
         createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
-        tandemName: 'ROYGBRadioButton'
+        tandemName: 'ROYGBRadioButton',
+        options: {
+          accessibleName: MoleculePolarityFluent.a11y.common.preferencesDialog.rainbowBlueToRedStringProperty
+        }
       }
     ];
 
