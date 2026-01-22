@@ -653,6 +653,68 @@ function invert3x3(m: number[][]): number[][] {
   ];
 }
 
+/**
+ * Parse partial charges from a Tripos MOL2 file string.
+ *
+ * Assumptions:
+ * - The MOL2 has an @<TRIPOS>ATOM section.
+ * - Each ATOM line ends with a numeric partial charge (Tripos convention).
+ * - Lines may have variable spacing; we parse by whitespace.
+ *
+ * Returns charges in the same order as the ATOM records.
+ */
+export function parseMol2PartialCharges(mol2Text: string): number[] {
+  const lines = mol2Text.split(/\r?\n/);
+
+  let inAtomSection = false;
+  const charges: number[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const line = raw.trim();
+
+    if (!line) continue;
+
+    // Section headers
+    if (line.startsWith("@<TRIPOS>")) {
+      inAtomSection = line === "@<TRIPOS>ATOM";
+      continue;
+    }
+
+    if (!inAtomSection) continue;
+
+    // ATOM section ends when the next section begins; handled above via @<TRIPOS>
+    // Parse ATOM record: atom_id, atom_name, x, y, z, atom_type, [subst_id, subst_name, charge, ...]
+    const parts = line.split(/\s+/);
+
+    // A valid MOL2 ATOM line has at least 9 columns in the common Tripos format.
+    // We’ll treat the LAST token as the charge and validate it is a number.
+    if (parts.length < 6) {
+      throw new Error(
+        `Invalid MOL2 ATOM line (too few columns) at line ${i + 1}: ${raw}`
+      );
+    }
+
+    const chargeToken = parts[parts.length - 1];
+    const charge = Number(chargeToken);
+
+    if (!Number.isFinite(charge)) {
+      throw new Error(
+        `Failed to parse charge from MOL2 ATOM line ${i + 1}: ` +
+          `last token "${chargeToken}" is not numeric. Line: ${raw}`
+      );
+    }
+
+    charges.push(charge);
+  }
+
+  if (charges.length === 0) {
+    throw new Error("No charges found: @<TRIPOS>ATOM section missing or empty.");
+  }
+
+  return charges;
+}
+
 export interface OrcaCharges {
   mulliken: number[];
   loewdin: number[];
@@ -761,6 +823,34 @@ export function parseOrcaCharges( orcaString: string ): OrcaCharges {
     ], process.cwd() );
 
     const initialXYZ = fs.readFileSync( path.join( TEMP_DIR, `${moleculeName}.xyz` ), 'utf8' );
+
+    await execute( 'obabel', [
+      path.join( TEMP_DIR, `${moleculeName}.xyz` ),
+      '-O',
+      path.join( TEMP_DIR, `${moleculeName}-qeq.mol2` ),
+      '--partialcharge',
+      'qeq'
+    ], process.cwd() );
+
+    await execute( 'obabel', [
+      path.join( TEMP_DIR, `${moleculeName}.xyz` ),
+      '-O',
+      path.join( TEMP_DIR, `${moleculeName}-eem.mol2` ),
+      '--partialcharge',
+      'eem'
+    ], process.cwd() );
+
+    await execute( 'obabel', [
+      path.join( TEMP_DIR, `${moleculeName}.xyz` ),
+      '-O',
+      path.join( TEMP_DIR, `${moleculeName}-qtpie.mol2` ),
+      '--partialcharge',
+      'qtpie'
+    ], process.cwd() );
+
+    const qeqCharges = parseMol2PartialCharges( fs.readFileSync( path.join( TEMP_DIR, `${moleculeName}-qeq.mol2` ), 'utf8' ) );
+    const eemCharges = parseMol2PartialCharges( fs.readFileSync( path.join( TEMP_DIR, `${moleculeName}-eem.mol2` ), 'utf8' ) );
+    const qtpieCharges = parseMol2PartialCharges( fs.readFileSync( path.join( TEMP_DIR, `${moleculeName}-qtpie.mol2` ), 'utf8' ) );
 
     fs.writeFileSync( path.join( TEMP_DIR, `psi4-input` ), `
 import json
@@ -937,7 +1027,11 @@ ${xyz.split( os.EOL ).slice( 2 ).join( os.EOL ).trim()}
       // In e/a0^3
       vertexDTs: vertexDTs,
 
-      ...orcaCharges
+      ...orcaCharges,
+
+      qeq: qeqCharges,
+      eem: eemCharges,
+      qtpie: qtpieCharges
     };
 
     fs.writeFileSync( path.join( OUT_DIR, `${moleculeName}.json` ), JSON.stringify( moleculeData, null, 2 ) );

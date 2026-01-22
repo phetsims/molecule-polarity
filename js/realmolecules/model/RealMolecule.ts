@@ -110,6 +110,9 @@ export default class RealMolecule extends PhetioObject {
         moleculeData.hirshfeld[ atomIndex ],
         moleculeData.mbis[ atomIndex ],
         moleculeData.chelpg[ atomIndex ],
+        moleculeData.qeq[ atomIndex ],
+        moleculeData.eem[ atomIndex ],
+        moleculeData.qtpie[ atomIndex ],
         new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset ),
         this.bondDipoleModelProperty
       );
@@ -515,6 +518,9 @@ export class RealAtom {
     public hirshfeldPartialCharge: number,
     public mbisPartialCharge: number,
     public chelpgPartialCharge: number,
+    public qeqPartialCharge: number,
+    public eemPartialCharge: number,
+    public qtpiePartialCharge: number,
     public position: Vector3,
     public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>
   ) {
@@ -543,6 +549,15 @@ export class RealAtom {
     }
     else if ( bondDipoleModel === 'java' ) {
       return this.simplifiedPartialCharge;
+    }
+    else if ( bondDipoleModel === 'qeq' ) {
+      return this.qeqPartialCharge;
+    }
+    else if ( bondDipoleModel === 'eem' ) {
+      return this.eemPartialCharge;
+    }
+    else if ( bondDipoleModel === 'qtpie' ) {
+      return this.qtpiePartialCharge;
     }
     else {
       throw new Error( `Unknown bond dipole model: ${bondDipoleModel}` );

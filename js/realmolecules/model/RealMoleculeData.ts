@@ -35,6 +35,9 @@ export type RealMoleculeDataEntry = {
   hirshfeld: number[]; // ORCA computed
   mbis: number[]; // ORCA computed
   chelpg: number[]; // ORCA computed
+  qeq: number[]; // OpenBabel computed
+  eem: number[]; // OpenBabel computed
+  qtpie: number[]; // OpenBabel computed
 
   vertexPositions: [ number, number, number ][];
   vertexNormals: [ number, number, number ][];
@@ -7713,6 +7716,24 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.291319,
       -0.291363,
       0.874031
+    ],
+    qeq: [
+      4.6469,
+      4.6473,
+      4.6471,
+      -13.9413
+    ],
+    eem: [
+      -0.4129,
+      -0.413,
+      -0.413,
+      1.2389
+    ],
+    qtpie: [
+      -4.3093,
+      -4.3096,
+      -4.3095,
+      12.9284
     ]
   },
   BH3: {
@@ -13909,6 +13930,24 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.134209,
       -0.134205,
       -0.134202
+    ],
+    qeq: [
+      1.4188,
+      -0.4729,
+      -0.473,
+      -0.4729
+    ],
+    eem: [
+      0.5595,
+      -0.1865,
+      -0.1865,
+      -0.1865
+    ],
+    qtpie: [
+      -1.3915,
+      0.4638,
+      0.4639,
+      0.4638
     ]
   },
   CF4: {
@@ -22374,6 +22413,27 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.120873,
       -0.12089,
       0.483537
+    ],
+    qeq: [
+      1.5737,
+      1.5738,
+      1.5737,
+      1.5736,
+      -6.2948
+    ],
+    eem: [
+      -0.2153,
+      -0.2153,
+      -0.2153,
+      -0.2153,
+      0.8613
+    ],
+    qtpie: [
+      -1.296,
+      -1.2961,
+      -1.296,
+      -1.2959,
+      5.184
     ]
   },
   CH2F2: {
@@ -29321,6 +29381,27 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.090609,
       0.11864,
       0.11864
+    ],
+    qeq: [
+      1.1672,
+      1.1672,
+      -3.607,
+      0.6363,
+      0.6363
+    ],
+    eem: [
+      -0.2588,
+      -0.2588,
+      0.1527,
+      0.1825,
+      0.1825
+    ],
+    qtpie: [
+      -0.743,
+      -0.743,
+      2.8931,
+      -0.7035,
+      -0.7035
     ]
   },
   CH2O: {
@@ -36067,6 +36148,24 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.127217,
       0.089555,
       0.089555
+    ],
+    qeq: [
+      0.7122,
+      -0.9156,
+      0.1017,
+      0.1017
+    ],
+    eem: [
+      -0.4185,
+      0.1007,
+      0.1589,
+      0.1589
+    ],
+    qtpie: [
+      -0.4009,
+      0.7292,
+      -0.1642,
+      -0.1642
     ]
   },
   CH3F: {
@@ -43586,6 +43685,27 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.131785,
       0.131786,
       0.131786
+    ],
+    qeq: [
+      0.8076,
+      -1.0804,
+      0.091,
+      0.0909,
+      0.0909
+    ],
+    eem: [
+      -0.2883,
+      -0.2338,
+      0.174,
+      0.174,
+      0.174
+    ],
+    qtpie: [
+      -0.3398,
+      0.6749,
+      -0.1117,
+      -0.1117,
+      -0.1117
     ]
   },
   CH4: {
@@ -49587,6 +49707,27 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.173753,
       0.173749,
       0.173748
+    ],
+    qeq: [
+      3.246,
+      -0.8115,
+      -0.8115,
+      -0.8115,
+      -0.8115
+    ],
+    eem: [
+      -0.6441,
+      0.161,
+      0.161,
+      0.161,
+      0.161
+    ],
+    qtpie: [
+      -3.0887,
+      0.7722,
+      0.7722,
+      0.7722,
+      0.7721
     ]
   },
   CHCl3: {
@@ -61132,6 +61273,27 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.023813,
       -0.314316,
       0.242845
+    ],
+    qeq: [
+      0.4438,
+      0.4438,
+      0.4437,
+      -1.3324,
+      0.0011
+    ],
+    eem: [
+      -0.0133,
+      -0.0133,
+      -0.0133,
+      -0.1189,
+      0.1587
+    ],
+    qtpie: [
+      -0.2752,
+      -0.2752,
+      -0.2751,
+      1.0081,
+      -0.1825
     ]
   },
   CHF3: {
@@ -68915,6 +69077,27 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.134856,
       0.2728,
       0.131796
+    ],
+    qeq: [
+      1.3975,
+      1.3975,
+      1.3975,
+      -5.1996,
+      1.0072
+    ],
+    eem: [
+      -0.2344,
+      -0.2344,
+      -0.2344,
+      0.5168,
+      0.1862
+    ],
+    qtpie: [
+      -1.0407,
+      -1.0407,
+      -1.0407,
+      4.2763,
+      -1.1543
     ]
   },
   CO2: {
@@ -75460,6 +75643,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.304919,
       -0.304919,
       0.609837
+    ],
+    qeq: [
+      1.2324,
+      1.2324,
+      -2.4648
+    ],
+    eem: [
+      -0.4277,
+      -0.4277,
+      0.8554
+    ],
+    qtpie: [
+      -0.9805,
+      -0.9805,
+      1.961
     ]
   },
   F2: {
@@ -79692,6 +79890,18 @@ export const RealMoleculeData: RealMoleculeDataType = {
     chelpg: [
       0,
       0
+    ],
+    qeq: [
+      0,
+      0
+    ],
+    eem: [
+      0,
+      0
+    ],
+    qtpie: [
+      0,
+      0
     ]
   },
   H2: {
@@ -82734,6 +82944,18 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0
     ],
     chelpg: [
+      0,
+      0
+    ],
+    qeq: [
+      0,
+      0
+    ],
+    eem: [
+      0,
+      0
+    ],
+    qtpie: [
       0,
       0
     ]
@@ -87235,6 +87457,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.633838,
       0.316918,
       0.31692
+    ],
+    qeq: [
+      5.7095,
+      -2.8545,
+      -2.855
+    ],
+    eem: [
+      -1.8218,
+      0.9108,
+      0.911
+    ],
+    qtpie: [
+      -5.4333,
+      2.7164,
+      2.7169
     ]
   },
   HCN: {
@@ -92856,6 +93093,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.299997,
       0.047131,
       0.252866
+    ],
+    qeq: [
+      0.418,
+      -0.4409,
+      0.0229
+    ],
+    eem: [
+      -0.28,
+      0.1372,
+      0.1428
+    ],
+    qtpie: [
+      -0.2622,
+      0.356,
+      -0.0938
     ]
   },
   HF: {
@@ -96824,6 +97076,18 @@ export const RealMoleculeData: RealMoleculeDataType = {
     chelpg: [
       -0.409828,
       0.409828
+    ],
+    qeq: [
+      1.0407,
+      -1.0407
+    ],
+    eem: [
+      -0.3001,
+      0.3001
+    ],
+    qtpie: [
+      -0.6504,
+      0.6504
     ]
   },
   N2: {
@@ -101274,6 +101538,18 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0
     ],
     chelpg: [
+      0,
+      0
+    ],
+    qeq: [
+      0,
+      0
+    ],
+    eem: [
+      0,
+      0
+    ],
+    qtpie: [
       0,
       0
     ]
@@ -106064,6 +106340,24 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.245716,
       0.245716,
       0.245716
+    ],
+    qeq: [
+      2.1711,
+      -0.7237,
+      -0.7237,
+      -0.7237
+    ],
+    eem: [
+      -0.93,
+      0.31,
+      0.31,
+      0.31
+    ],
+    qtpie: [
+      -1.9468,
+      0.649,
+      0.6489,
+      0.6489
     ]
   },
   O2: {
@@ -110514,6 +110808,18 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.000001
     ],
     chelpg: [
+      0,
+      0
+    ],
+    qeq: [
+      0,
+      0
+    ],
+    eem: [
+      0,
+      0
+    ],
+    qtpie: [
       0,
       0
     ]
@@ -116951,6 +117257,21 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.176861,
       -0.088582,
       -0.088279
+    ],
+    qeq: [
+      0,
+      0,
+      0
+    ],
+    eem: [
+      0,
+      0,
+      0
+    ],
+    qtpie: [
+      0,
+      0,
+      0
     ]
   }
 };

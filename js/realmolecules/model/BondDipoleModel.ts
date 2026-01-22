@@ -22,6 +22,11 @@ export const BondDipoleModelValues = [
   'loewdin',
   'hirschfeld',
   'mbis',
-  'chelpg'
+  'chelpg',
+
+  // Various empirical models with openbabel
+  'qeq',
+  'eem',
+  'qtpie'
 ] as const;
 export type BondDipoleModel = ( typeof BondDipoleModelValues )[number];

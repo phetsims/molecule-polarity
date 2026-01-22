@@ -270,6 +270,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
       const bondDipoleNode = new HBox( {
         spacing: 20,
+        scale: 0.8,
         children: [
           new Text( 'Bond Dipole Model:', { fontSize: 16 } ),
           new HorizontalAquaRadioButtonGroup( model.bondDipoleModelProperty, [
@@ -280,7 +281,10 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
             createItem( 'hirschfeld', 'Hirschfeld' ),
             createItem( 'mbis', 'MBIS' ),
             createItem( 'psi4', 'Psi4' ),
-            createItem( 'chelpg', 'CHELPG' )
+            createItem( 'chelpg', 'CHELPG' ),
+            createItem( 'qeq', 'QEq' ),
+            createItem( 'eem', 'EEM' ),
+            createItem( 'qtpie', 'QTPIE' )
           ], {
             spacing: 20
           } )
