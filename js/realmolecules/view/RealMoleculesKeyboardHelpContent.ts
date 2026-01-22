@@ -2,6 +2,8 @@
 
 /**
  * RealMoleculesKeyboardHelpContent is the content for the keyboard help dialog in the Real Molecules screen.
+ *
+ * @author Copilot
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';

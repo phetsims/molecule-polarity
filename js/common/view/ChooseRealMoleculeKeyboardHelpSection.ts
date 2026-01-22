@@ -3,6 +3,8 @@
 /**
  * ChooseRealMoleculeKeyboardHelpSection is the keyboard help section for choosing real molecules.
  * This is used in the Real Molecules screen.
+ *
+ * @author Copilot
  */
 
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
@@ -25,9 +27,8 @@ export default class ChooseRealMoleculeKeyboardHelpSection extends KeyboardHelpS
     }, providedOptions );
 
     // Show molecules
-    const showMolecules = KeyboardHelpSectionRow.createLabelledNumberedListRow(
+    const showMolecules = KeyboardHelpSectionRow.labelWithIcon(
       MoleculePolarityFluent.a11y.common.keyboardHelpContent.showMoleculesStringProperty,
-      1,
       KeyboardHelpIconFactory.spaceOrEnter(),
       {
         labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.showMoleculesDescriptionStringProperty
@@ -35,9 +36,8 @@ export default class ChooseRealMoleculeKeyboardHelpSection extends KeyboardHelpS
     );
 
     // Move through molecules
-    const moveThroughMolecules = KeyboardHelpSectionRow.createLabelledNumberedListRow(
+    const moveThroughMolecules = KeyboardHelpSectionRow.labelWithIcon(
       MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveThroughMoleculesStringProperty,
-      2,
       KeyboardHelpIconFactory.upDownArrowKeysRowIcon(),
       {
         labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveThroughMoleculesDescriptionStringProperty
@@ -45,9 +45,8 @@ export default class ChooseRealMoleculeKeyboardHelpSection extends KeyboardHelpS
     );
 
     // Change molecule
-    const changeMolecule = KeyboardHelpSectionRow.createLabelledNumberedListRow(
+    const changeMolecule = KeyboardHelpSectionRow.labelWithIcon(
       MoleculePolarityFluent.a11y.common.keyboardHelpContent.changeMoleculeStringProperty,
-      3,
       TextKeyNode.enter(),
       {
         labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.changeMoleculeDescriptionStringProperty
@@ -55,9 +54,8 @@ export default class ChooseRealMoleculeKeyboardHelpSection extends KeyboardHelpS
     );
 
     // Close without changing
-    const closeWithoutChanging = KeyboardHelpSectionRow.createLabelledNumberedListRow(
+    const closeWithoutChanging = KeyboardHelpSectionRow.labelWithIcon(
       MoleculePolarityFluent.a11y.common.keyboardHelpContent.closeWithoutChangingStringProperty,
-      4,
       TextKeyNode.esc(),
       {
         labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.closeWithoutChangingDescriptionStringProperty

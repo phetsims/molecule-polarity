@@ -3,6 +3,8 @@
 /**
  * MoveMoleculeWASDKeyboardHelpSection is the keyboard help section for rotating molecules using arrow keys or WASD keys.
  * This is used in the Real Molecules screen.
+ *
+ * @author Copilot
  */
 
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';

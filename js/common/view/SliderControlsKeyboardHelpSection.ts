@@ -3,6 +3,8 @@
 /**
  * SliderControlsKeyboardHelpSection is the keyboard help section for slider controls.
  * This is used in all screens.
+ *
+ * @author Copilot
  */
 
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';

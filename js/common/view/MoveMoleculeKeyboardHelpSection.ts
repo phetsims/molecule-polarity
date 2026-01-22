@@ -3,6 +3,8 @@
 /**
  * MoveMoleculeKeyboardHelpSection is the keyboard help section for rotating molecules.
  * This is used in screens 1 and 2.
+ *
+ * @author Copilot
  */
 
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';

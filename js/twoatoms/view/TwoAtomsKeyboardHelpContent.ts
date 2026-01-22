@@ -2,6 +2,8 @@
 
 /**
  * TwoAtomsKeyboardHelpContent is the content for the keyboard help dialog in the Two Atoms screen.
+ *
+ * @author Copilot
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
