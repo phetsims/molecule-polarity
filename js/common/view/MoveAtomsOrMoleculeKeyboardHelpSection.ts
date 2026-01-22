@@ -5,6 +5,7 @@
  * This is used in the Three Atoms screen.
  *
  * @author Copilot
+ * @author Agustín Vallejo
  */
 
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';

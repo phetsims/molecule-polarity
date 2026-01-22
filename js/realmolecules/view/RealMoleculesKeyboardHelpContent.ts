@@ -4,6 +4,7 @@
  * RealMoleculesKeyboardHelpContent is the content for the keyboard help dialog in the Real Molecules screen.
  *
  * @author Copilot
+ * @author Agustín Vallejo
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';

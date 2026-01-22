@@ -4,6 +4,7 @@
  * ThreeAtomsKeyboardHelpContent is the content for the keyboard help dialog in the Three Atoms screen.
  *
  * @author Copilot
+ * @author Agustín Vallejo
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
