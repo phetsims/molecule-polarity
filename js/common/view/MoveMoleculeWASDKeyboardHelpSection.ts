@@ -29,8 +29,8 @@ export default class MoveMoleculeWASDKeyboardHelpSection extends KeyboardHelpSec
     const rotateMolecule = KeyboardHelpSectionRow.labelWithIconList(
       MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty,
       [
-        KeyboardHelpIconFactory.arrowOrWasdKeysRowIcon(),
-        KeyboardHelpIconFactory.upDownOrWSKeysRowIcon()
+        KeyboardHelpIconFactory.arrowKeysRowIcon(),
+        KeyboardHelpIconFactory.wasdRowIcon()
       ],
       {
         labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDDescriptionStringProperty
@@ -41,8 +41,8 @@ export default class MoveMoleculeWASDKeyboardHelpSection extends KeyboardHelpSec
     const rotateInSmallerSteps = KeyboardHelpSectionRow.labelWithIconList(
       MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty,
       [
-        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.arrowOrWasdKeysRowIcon() ),
-        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownOrWSKeysRowIcon() )
+        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.arrowKeysRowIcon() ),
+        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.wasdRowIcon() )
       ],
       {
         labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDDescriptionStringProperty
