@@ -39,8 +39,8 @@ export default class RealMoleculesColorKeyNode extends Node {
 
     Multilink.multilink( [ surfaceTypeProperty, surfaceColorProperty ],
       ( surfaceType, surfaceColor ) => {
-        electrostaticPotentialRWBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'RWB' );
-        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'ROYGB' );
+        electrostaticPotentialRWBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'blueWhiteRed' );
+        electrostaticPotentialROYGBColorKey.visible = ( surfaceType === 'electrostaticPotential' && surfaceColor === 'rainbow' );
         electronDensityColorKey.visible = ( surfaceType === 'electronDensity' );
       } );
   }

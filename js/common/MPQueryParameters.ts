@@ -27,7 +27,7 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   surfaceColor: {
     type: 'string',
     validValues: SurfaceColorValues,
-    defaultValue: 'RWB',
+    defaultValue: 'blueWhiteRed',
     public: true
   },
 

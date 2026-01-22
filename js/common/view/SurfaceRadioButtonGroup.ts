@@ -6,7 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -17,16 +19,14 @@ import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } fro
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
+import { SurfaceColor } from '../model/SurfaceColor.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
-
-// The color mapping used for electrostatic surface, determined by preferences or options
-export type ElectrostaticSurfaceColors = 'blueWhiteRed' | 'realMolecules';
 
 type SelfOptions = {
 
   // Color map used for the electrostatic surface
-  electrosaticSurfaceColors?: ElectrostaticSurfaceColors;
+  electrosaticSurfaceColorsProperty?: TProperty<SurfaceColor>;
 };
 
 type SurfaceRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
@@ -39,7 +39,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
     const options = optionize<SurfaceRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
 
       // Self Options
-      electrosaticSurfaceColors: 'blueWhiteRed',
+      electrosaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
 
       // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -60,7 +60,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
         MoleculePolarityStrings.electrostaticPotentialStringProperty,
         MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticPotentialHelpText
           .createProperty( {
-            colorMap: options.electrosaticSurfaceColors
+            colorMap: options.electrosaticSurfaceColorsProperty
           } ),
         'electrostaticPotentialRadioButton'
       ),

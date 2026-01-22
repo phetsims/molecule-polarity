@@ -103,7 +103,7 @@ class SurfaceColorRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Surfac
 
     const radioButtonGroupItems: AquaRadioButtonGroupItem<SurfaceColor>[] = [
       {
-        value: 'RWB',
+        value: 'blueWhiteRed',
         createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialRWBColorKey( COLOR_KEY_OPTIONS ),
         tandemName: 'RWBRadioButton',
         options: {
@@ -111,7 +111,7 @@ class SurfaceColorRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Surfac
         }
       },
       {
-        value: 'ROYGB',
+        value: 'rainbow',
         createNode: ( tandem: Tandem ) => SurfaceColorKey.createElectrostaticPotentialROYGBColorKey( COLOR_KEY_OPTIONS ),
         tandemName: 'ROYGBRadioButton',
         options: {

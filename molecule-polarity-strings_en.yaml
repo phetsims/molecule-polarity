@@ -124,7 +124,7 @@ a11y:
       electrostaticPotentialHelpText:
         select_colorMap:
           blueWhiteRed: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).'
-          realMolecules: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: TODO).'
+          rainbow: 'Electrostatic potential ranges from positive to neutral to negative (surface colors: rainbow, blue to red).'
       electronDensityHelpText: 'Electron density ranges from less to more (surface colors: white to dark grey).'
       noneSelected: 'No charge surfaces shown.'
       electrostaticSelected: 'Electrostatic Potential surface shown.'

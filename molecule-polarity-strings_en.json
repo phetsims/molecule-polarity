@@ -351,7 +351,7 @@
           "value": "Explore with different charge surfaces shown."
         },
         "electrostaticPotentialHelpText": {
-          "value": "{ $colorMap ->\n  [blueWhiteRed] Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).\n  *[realMolecules] Electrostatic potential ranges from positive to neutral to negative (surface colors: TODO).\n}"
+          "value": "{ $colorMap ->\n  [blueWhiteRed] Electrostatic potential ranges from positive to neutral to negative (surface colors: blue to white to red).\n  *[rainbow] Electrostatic potential ranges from positive to neutral to negative (surface colors: rainbow, blue to red).\n}"
         },
         "electronDensityHelpText": {
           "value": "Electron density ranges from less to more (surface colors: white to dark grey)."

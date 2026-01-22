@@ -6,21 +6,24 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
+import { SurfaceColor } from '../model/SurfaceColor.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import MPConstants from '../MPConstants.js';
-import SurfaceRadioButtonGroup, { ElectrostaticSurfaceColors } from './SurfaceRadioButtonGroup.js';
+import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
 
 type SelfOptions = {
 
   // Color map used for the electrostatic surface, to be passed to SurfaceRadioButtonGroup
-  electrosaticSurfaceColors?: ElectrostaticSurfaceColors;
+  electrosaticSurfaceColorsProperty?: TProperty<SurfaceColor>;
 };
 
 type SurfaceControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
@@ -33,7 +36,7 @@ export default class SurfaceControl extends VBox {
     const options = optionize<SurfaceControlOptions, SelfOptions, VBoxOptions>()( {
 
       // Self otpions
-      electrosaticSurfaceColors: 'blueWhiteRed',
+      electrosaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
 
       // VBoxOptions
       align: 'left',
@@ -50,7 +53,7 @@ export default class SurfaceControl extends VBox {
     // Radio button group
     const radioButtonGroup = new SurfaceRadioButtonGroup( surfaceTypeProperty, {
       tandem: options.tandem.createTandem( 'radioButtonGroup' ),
-      electrosaticSurfaceColors: options.electrosaticSurfaceColors
+      electrosaticSurfaceColorsProperty: options.electrosaticSurfaceColorsProperty
     } );
 
     options.children = [ titleText, radioButtonGroup ];

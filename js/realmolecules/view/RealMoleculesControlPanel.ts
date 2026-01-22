@@ -8,6 +8,7 @@
 
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import MPPreferences from '../../common/model/MPPreferences.js';
 import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
 import SurfaceControl from '../../common/view/SurfaceControl.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -29,7 +30,7 @@ export default class RealMoleculesControlPanel extends MPControlPanel {
         tandem: options.tandem.createTandem( 'viewControls' )
       } ),
       new SurfaceControl( viewProperties.surfaceTypeProperty, {
-        electrosaticSurfaceColors: 'realMolecules',
+        electrosaticSurfaceColorsProperty: MPPreferences.surfaceColorProperty,
         tandem: options.tandem.createTandem( 'surfaceControl' )
       } )
     ];
