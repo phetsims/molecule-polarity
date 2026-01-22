@@ -3,8 +3,6 @@
 /**
  * ChooseRealMoleculeKeyboardHelpSection is the keyboard help section for choosing real molecules.
  * This is used in the Real Molecules screen.
- *
- * @author Copilot
  */
 
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
