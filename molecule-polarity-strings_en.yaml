@@ -140,7 +140,6 @@ a11y:
     keyboardHelpContent:
       moveMolecule: 'Move Molecule'
       rotateMolecule: 'Rotate molecule'
-      rotateMoleculeDescription: 'Rotate molecule with Left and Right arrow keys, or Up and Down arrow keys.'
       rotateInSmallerSteps: 'Rotate in smaller steps'
       rotateInSmallerStepsDescription: 'Rotate in smaller steps with Shift plus Left or Right arrow key, or Shift plus Up or Down arrow key.'
       sliderControls: 'Slider Controls'
@@ -155,7 +154,7 @@ a11y:
       jumpToMaximum: 'Jump to maximum'
       jumpToMaximumDescription: 'Jump to maximum with End key.'
       moveAtomsOrMolecule: 'Move Atoms or Molecule'
-      moveAtomAAndC: 'Move atom A and C'
+      moveAtomAAndC: 'Move atoms A and C'
       moveAtomAAndCDescription: 'Move atom A and C with Left and Right arrow keys, or Up and Down arrow keys.'
       rotateOrMoveInSmallerSteps: 'Rotate or move in smaller steps'
       rotateOrMoveInSmallerStepsDescription: 'Rotate or move in smaller steps with Shift plus Left or Right arrow key, or Shift plus Up or Down arrow key.'

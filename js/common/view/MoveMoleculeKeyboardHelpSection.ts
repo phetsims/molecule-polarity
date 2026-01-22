@@ -8,12 +8,13 @@
  * @author Agustín Vallejo
  */
 
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 import KeyboardHelpSection, { KeyboardHelpSectionOptions } from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
+import HotkeyData from '../../../../scenery/js/input/HotkeyData.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 type MoveMoleculeKeyboardHelpSectionOptions = SelfOptions & KeyboardHelpSectionOptions;
@@ -27,23 +28,29 @@ export default class MoveMoleculeKeyboardHelpSection extends KeyboardHelpSection
     }, providedOptions );
 
     // Rotate molecule
-    const rotateMolecule = KeyboardHelpSectionRow.labelWithIconList(
-      MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeStringProperty,
-      [ KeyboardHelpIconFactory.leftRightArrowKeysRowIcon(), KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ],
+    const rotateMolecule = KeyboardHelpSectionRow.fromHotkeyData(
+      new HotkeyData( {
+        keys: [ 'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown' ],
+        keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeStringProperty,
+        repoName: moleculePolarity.name
+      } ),
       {
-        labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeDescriptionStringProperty
+        icon: KeyboardHelpIconFactory.iconOrIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon(), KeyboardHelpIconFactory.upDownArrowKeysRowIcon() )
       }
     );
 
     // Rotate in smaller steps
-    const rotateInSmallerSteps = KeyboardHelpSectionRow.labelWithIconList(
-      MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty,
-      [
-        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
-        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() )
-      ],
+    // TODO: Try to yAlign: top this icon https://github.com/phetsims/scenery-phet/issues/966
+    const rotateInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
+      new HotkeyData( {
+        keys: [ 'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown' ],
+        keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty,
+        repoName: moleculePolarity.name
+      } ),
       {
-        labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsDescriptionStringProperty
+        icon: KeyboardHelpIconFactory.iconListWithOr(
+          [ KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
+            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ] )
       }
     );
 

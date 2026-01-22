@@ -387,6 +387,107 @@
         "accessibleHelpText": {
           "value": "Turn the molecule with left and right keys, or A and D keys"
         }
+      },
+      "keyboardHelpContent": {
+        "moveMolecule": {
+          "value": "Move Molecule"
+        },
+        "rotateMolecule": {
+          "value": "Rotate molecule"
+        },
+        "rotateInSmallerSteps": {
+          "value": "Rotate in smaller steps"
+        },
+        "rotateInSmallerStepsDescription": {
+          "value": "Rotate in smaller steps with Shift plus Left or Right arrow key, or Shift plus Up or Down arrow key."
+        },
+        "sliderControls": {
+          "value": "Slider Controls"
+        },
+        "adjustSlider": {
+          "value": "Adjust slider"
+        },
+        "adjustSliderDescription": {
+          "value": "Adjust slider with Left and Right arrow keys, or Up and Down arrow keys."
+        },
+        "adjustInSmallerSteps": {
+          "value": "Adjust in smaller steps"
+        },
+        "adjustInSmallerStepsDescription": {
+          "value": "Adjust in smaller steps with Shift plus Left or Right arrow key, or Shift plus Up or Down arrow key."
+        },
+        "adjustInLargerSteps": {
+          "value": "Adjust in larger steps"
+        },
+        "adjustInLargerStepsDescription": {
+          "value": "Adjust in larger steps with Page Up or Page Down keys."
+        },
+        "jumpToMinimum": {
+          "value": "Jump to minimum"
+        },
+        "jumpToMinimumDescription": {
+          "value": "Jump to minimum with Home key."
+        },
+        "jumpToMaximum": {
+          "value": "Jump to maximum"
+        },
+        "jumpToMaximumDescription": {
+          "value": "Jump to maximum with End key."
+        },
+        "moveAtomsOrMolecule": {
+          "value": "Move Atoms or Molecule"
+        },
+        "moveAtomAAndC": {
+          "value": "Move atoms A and C"
+        },
+        "moveAtomAAndCDescription": {
+          "value": "Move atom A and C with Left and Right arrow keys, or Up and Down arrow keys."
+        },
+        "rotateOrMoveInSmallerSteps": {
+          "value": "Rotate or move in smaller steps"
+        },
+        "rotateOrMoveInSmallerStepsDescription": {
+          "value": "Rotate or move in smaller steps with Shift plus Left or Right arrow key, or Shift plus Up or Down arrow key."
+        },
+        "chooseRealMolecule": {
+          "value": "Choose Real Molecule"
+        },
+        "showMolecules": {
+          "value": "1. Show molecules"
+        },
+        "showMoleculesDescription": {
+          "value": "Show molecules with Space or Enter keys."
+        },
+        "moveThroughMolecules": {
+          "value": "2. Move through molecules"
+        },
+        "moveThroughMoleculesDescription": {
+          "value": "Move through molecules with Up and Down arrow keys."
+        },
+        "changeMolecule": {
+          "value": "3. Change molecule"
+        },
+        "changeMoleculeDescription": {
+          "value": "Change molecule with Enter key."
+        },
+        "closeWithoutChanging": {
+          "value": "4. Close without changing"
+        },
+        "closeWithoutChangingDescription": {
+          "value": "Close without changing with Escape key."
+        },
+        "rotateMoleculeWASD": {
+          "value": "Rotate molecule"
+        },
+        "rotateMoleculeWASDDescription": {
+          "value": "Rotate molecule with Up, Left, Down, and Right arrow keys, or W, A, S, and D keys."
+        },
+        "rotateInSmallerStepsWASD": {
+          "value": "Rotate in smaller steps"
+        },
+        "rotateInSmallerStepsWASDDescription": {
+          "value": "Rotate in smaller steps with Shift plus Up, Left, Down, or Right arrow key, or Shift plus W, A, S, or D key."
+        }
       }
     },
     "bondCharacter": {

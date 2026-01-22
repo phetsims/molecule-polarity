@@ -8,10 +8,10 @@
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
+import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoveMoleculeKeyboardHelpSection from '../../common/view/MoveMoleculeKeyboardHelpSection.js';
-import SliderControlsKeyboardHelpSection from '../../common/view/SliderControlsKeyboardHelpSection.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
 export default class TwoAtomsKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 

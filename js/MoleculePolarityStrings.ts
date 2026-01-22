@@ -166,6 +166,41 @@ type StringsType = {
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      };
+      'keyboardHelpContent': {
+        'moveMoleculeStringProperty': LocalizedStringProperty;
+        'rotateMoleculeStringProperty': LocalizedStringProperty;
+        'rotateInSmallerStepsStringProperty': LocalizedStringProperty;
+        'rotateInSmallerStepsDescriptionStringProperty': LocalizedStringProperty;
+        'sliderControlsStringProperty': LocalizedStringProperty;
+        'adjustSliderStringProperty': LocalizedStringProperty;
+        'adjustSliderDescriptionStringProperty': LocalizedStringProperty;
+        'adjustInSmallerStepsStringProperty': LocalizedStringProperty;
+        'adjustInSmallerStepsDescriptionStringProperty': LocalizedStringProperty;
+        'adjustInLargerStepsStringProperty': LocalizedStringProperty;
+        'adjustInLargerStepsDescriptionStringProperty': LocalizedStringProperty;
+        'jumpToMinimumStringProperty': LocalizedStringProperty;
+        'jumpToMinimumDescriptionStringProperty': LocalizedStringProperty;
+        'jumpToMaximumStringProperty': LocalizedStringProperty;
+        'jumpToMaximumDescriptionStringProperty': LocalizedStringProperty;
+        'moveAtomsOrMoleculeStringProperty': LocalizedStringProperty;
+        'moveAtomAAndCStringProperty': LocalizedStringProperty;
+        'moveAtomAAndCDescriptionStringProperty': LocalizedStringProperty;
+        'rotateOrMoveInSmallerStepsStringProperty': LocalizedStringProperty;
+        'rotateOrMoveInSmallerStepsDescriptionStringProperty': LocalizedStringProperty;
+        'chooseRealMoleculeStringProperty': LocalizedStringProperty;
+        'showMoleculesStringProperty': LocalizedStringProperty;
+        'showMoleculesDescriptionStringProperty': LocalizedStringProperty;
+        'moveThroughMoleculesStringProperty': LocalizedStringProperty;
+        'moveThroughMoleculesDescriptionStringProperty': LocalizedStringProperty;
+        'changeMoleculeStringProperty': LocalizedStringProperty;
+        'changeMoleculeDescriptionStringProperty': LocalizedStringProperty;
+        'closeWithoutChangingStringProperty': LocalizedStringProperty;
+        'closeWithoutChangingDescriptionStringProperty': LocalizedStringProperty;
+        'rotateMoleculeWASDStringProperty': LocalizedStringProperty;
+        'rotateMoleculeWASDDescriptionStringProperty': LocalizedStringProperty;
+        'rotateInSmallerStepsWASDStringProperty': LocalizedStringProperty;
+        'rotateInSmallerStepsWASDDescriptionStringProperty': LocalizedStringProperty;
       }
     };
     'bondCharacterStringProperty': LocalizedStringProperty;

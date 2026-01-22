@@ -8,11 +8,11 @@
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
+import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoveMoleculeWASDKeyboardHelpSection from '../../common/view/MoveMoleculeWASDKeyboardHelpSection.js';
-import SliderControlsKeyboardHelpSection from '../../common/view/SliderControlsKeyboardHelpSection.js';
 import ChooseRealMoleculeKeyboardHelpSection from '../../common/view/ChooseRealMoleculeKeyboardHelpSection.js';
+import MoveMoleculeWASDKeyboardHelpSection from '../../common/view/MoveMoleculeWASDKeyboardHelpSection.js';
+import moleculePolarity from '../../moleculePolarity.js';
 
 export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -26,6 +26,7 @@ export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardH
 
     // sections in the right column
     const rightSections = [
+    // TODO: Use ComboBoxKeyboardHelpSection instead of ChooseRealMoleculeKeyboardHelpSection when it is available. https://github.com/phetsims/molecule-polarity/pull/238 https://github.com/phetsims/molecule-polarity/issues/233
       new ChooseRealMoleculeKeyboardHelpSection(),
       new BasicActionsKeyboardHelpSection( {
         withCheckboxContent: true

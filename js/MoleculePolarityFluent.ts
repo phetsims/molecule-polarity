@@ -147,7 +147,6 @@ addToMapIfDefined( 'a11y_common_atom_accessibleName', 'a11y.common.atom.accessib
 addToMapIfDefined( 'a11y_common_atom_accessibleHelpText', 'a11y.common.atom.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_moveMolecule', 'a11y.common.keyboardHelpContent.moveMoleculeStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateMolecule', 'a11y.common.keyboardHelpContent.rotateMoleculeStringProperty' );
-addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateMoleculeDescription', 'a11y.common.keyboardHelpContent.rotateMoleculeDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateInSmallerSteps', 'a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateInSmallerStepsDescription', 'a11y.common.keyboardHelpContent.rotateInSmallerStepsDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_sliderControls', 'a11y.common.keyboardHelpContent.sliderControlsStringProperty' );
@@ -482,7 +481,6 @@ const MoleculePolarityFluent = {
       keyboardHelpContent: {
         moveMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_moveMolecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moveMoleculeStringProperty' ) ),
         rotateMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateMolecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateMoleculeStringProperty' ) ),
-        rotateMoleculeDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateMoleculeDescription', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateMoleculeDescriptionStringProperty' ) ),
         rotateInSmallerStepsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateInSmallerSteps', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty' ) ),
         rotateInSmallerStepsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateInSmallerStepsDescription', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateInSmallerStepsDescriptionStringProperty' ) ),
         sliderControlsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_sliderControls', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.sliderControlsStringProperty' ) ),
