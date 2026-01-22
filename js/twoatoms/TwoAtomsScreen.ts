@@ -21,6 +21,7 @@ import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
+import TwoAtomsKeyboardHelpContent from './view/TwoAtomsKeyboardHelpContent.js';
 
 export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 
@@ -31,6 +32,7 @@ export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreen
       backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       screenButtonsHelpText: MoleculePolarityFluent.a11y.common.screenIcons.twoAtomsStringProperty,
+      createKeyboardHelpNode: () => new TwoAtomsKeyboardHelpContent(),
       tandem: tandem
     };
 

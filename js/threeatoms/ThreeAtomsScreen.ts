@@ -21,6 +21,7 @@ import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
 import ThreeAtomsScreenView from './view/ThreeAtomsScreenView.js';
+import ThreeAtomsKeyboardHelpContent from './view/ThreeAtomsKeyboardHelpContent.js';
 
 export default class ThreeAtomsScreen extends Screen<ThreeAtomsModel, ThreeAtomsScreenView> {
 
@@ -31,6 +32,7 @@ export default class ThreeAtomsScreen extends Screen<ThreeAtomsModel, ThreeAtoms
       backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       screenButtonsHelpText: MoleculePolarityFluent.a11y.common.screenIcons.threeAtomsStringProperty,
+      createKeyboardHelpNode: () => new ThreeAtomsKeyboardHelpContent(),
       tandem: tandem
     };
 
