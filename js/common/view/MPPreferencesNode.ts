@@ -36,11 +36,17 @@ export default class MPPreferencesNode extends VBox {
     }, providedOptions );
 
     const dipoleDirectionControl = new DipoleDirectionControl( MPPreferences.dipoleDirectionProperty, {
-      tandem: options.tandem.createTandem( 'dipoleDirectionControl' )
+      tandem: options.tandem.createTandem( 'dipoleDirectionControl' ),
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const surfaceColorControl = new SurfaceColorControl( MPPreferences.surfaceColorProperty, {
-      tandem: options.tandem.createTandem( 'surfaceColorControl' )
+      tandem: options.tandem.createTandem( 'surfaceColorControl' ),
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     options.children = [

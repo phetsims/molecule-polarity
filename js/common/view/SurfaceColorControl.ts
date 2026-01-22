@@ -12,6 +12,7 @@ import PreferencesControl, { PreferencesControlOptions } from '../../../../joist
 import PreferencesDialogConstants from '../../../../joist/js/preferences/PreferencesDialogConstants.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -37,7 +38,7 @@ const COLOR_KEY_OPTIONS = {
 
 type SelfOptions = EmptySelfOptions;
 
-type SurfaceColorControlOptions = SelfOptions & PickRequired<PreferencesControlOptions, 'tandem'>;
+type SurfaceColorControlOptions = SelfOptions & WithRequired<PreferencesControlOptions, 'tandem'>;
 
 export default class SurfaceColorControl extends PreferencesControl {
 
