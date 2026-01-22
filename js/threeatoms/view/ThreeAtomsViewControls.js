@@ -1,4 +1,4 @@
-// Copyright 2014-2017, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
  * 'View' controls for the 'Three Atoms' screen.
