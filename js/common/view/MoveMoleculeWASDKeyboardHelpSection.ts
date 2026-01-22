@@ -8,7 +8,7 @@
  * @author Agustín Vallejo
  */
 
-import KeyboardHelpIconFactory from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
+import HotkeyData from '../../../../scenery/js/input/HotkeyData.js';
 import KeyboardHelpSection, { KeyboardHelpSectionOptions } from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -26,31 +26,30 @@ export default class MoveMoleculeWASDKeyboardHelpSection extends KeyboardHelpSec
       // no additional options
     }, providedOptions );
 
-    // Rotate molecule
-    const rotateMolecule = KeyboardHelpSectionRow.labelWithIconList(
-      MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty,
-      [
-        KeyboardHelpIconFactory.arrowKeysRowIcon(),
-        KeyboardHelpIconFactory.wasdRowIcon()
+    // Rotate molecule - using HotkeyData for arrow keys and WASD
+    const rotateMoleculeHotkeyData = new HotkeyData( {
+      keyStringProperties: [
+        [ 'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown' ],
+        [ 'w', 'a', 's', 'd' ]
       ],
-      {
-        labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDDescriptionStringProperty
-      }
-    );
+      keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty,
+      keyboardHelpDialogPDOMLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDDescriptionStringProperty
+    } );
 
-    // Rotate in smaller steps
-    const rotateInSmallerSteps = KeyboardHelpSectionRow.labelWithIconList(
-      MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty,
-      [
-        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.arrowKeysRowIcon() ),
-        KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.wasdRowIcon() )
+    // Rotate in smaller steps - using HotkeyData with shift modifier
+    const rotateInSmallerStepsHotkeyData = new HotkeyData( {
+      keyStringProperties: [
+        [ 'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown' ],
+        [ 'shift+w', 'shift+a', 'shift+s', 'shift+d' ]
       ],
-      {
-        labelInnerContent: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDDescriptionStringProperty
-      }
-    );
+      keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty,
+      keyboardHelpDialogPDOMLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDDescriptionStringProperty
+    } );
 
-    const rows = [ rotateMolecule, rotateInSmallerSteps ];
+    const rows = [
+      KeyboardHelpSectionRow.fromHotkeyData( rotateMoleculeHotkeyData ),
+      KeyboardHelpSectionRow.fromHotkeyData( rotateInSmallerStepsHotkeyData )
+    ];
 
     super( MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveMoleculeStringProperty, rows, options );
   }
