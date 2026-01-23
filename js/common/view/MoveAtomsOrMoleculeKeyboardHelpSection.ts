@@ -44,13 +44,17 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
     );
 
     // Rotate or move in smaller steps
-    // TODO: Try to yAlign: top this icon https://github.com/phetsims/scenery-phet/issues/966
     const rotateOrMoveInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
       MPHotkeyData.ROTATE_OR_MOVE_SMALLER_STEPS,
       {
-        icon: KeyboardHelpIconFactory.iconListWithOr(
-          [ KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
-            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ] )
+        iconData: [
+          {
+            alternatives: [
+              KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
+              KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ],
+            layout: 'stacked'
+          }
+        ]
       }
     );
 

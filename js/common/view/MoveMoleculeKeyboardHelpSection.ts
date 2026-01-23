@@ -36,18 +36,17 @@ export default class MoveMoleculeKeyboardHelpSection extends KeyboardHelpSection
     );
 
     // Rotate in smaller steps
-    // TODO: Try to yAlign: top this icon https://github.com/phetsims/scenery-phet/issues/966
     const rotateInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
       MPHotkeyData.ROTATE_MOLECULE_SMALLER_STEPS,
       {
-        labelWithIconOptions: {
-          iconOptions: {
-            yAlign: 'top'
+        iconData: [
+          {
+            alternatives: [
+              KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
+              KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ],
+            layout: 'stacked'
           }
-        },
-        icon: KeyboardHelpIconFactory.iconListWithOr(
-          [ KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
-            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ] )
+        ]
       }
     );
 
