@@ -25,6 +25,9 @@ export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardH
     ];
 
     // sections in the right column
+    // TODO: Use ComboBoxKeyboardHelpSection instead of ChooseRealMoleculeKeyboardHelpSection when it is available.
+    // https://github.com/phetsims/molecule-polarity/pull/238
+    // https://github.com/phetsims/molecule-polarity/issues/233
     const rightSections = [
     // TODO: Use ComboBoxKeyboardHelpSection instead of ChooseRealMoleculeKeyboardHelpSection when it is available. https://github.com/phetsims/molecule-polarity/pull/238 https://github.com/phetsims/molecule-polarity/issues/233
       new ChooseRealMoleculeKeyboardHelpSection(),
