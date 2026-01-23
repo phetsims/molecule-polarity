@@ -83,6 +83,7 @@ type StringsType = {
   };
   'a11y': {
     'common': {
+      'upperStringProperty': LocalizedStringProperty;
       'preferencesDialog': {
         'positiveToNegativeStringProperty': LocalizedStringProperty;
         'negativeToPositiveStringProperty': LocalizedStringProperty;
@@ -323,12 +324,8 @@ type StringsType = {
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'objectResponsesStringProperty': LocalizedStringProperty;
       };
-      'comboBox': {
-        'accessibleNameStringProperty': LocalizedStringProperty;
-        'accessibleHelpTextStringProperty': LocalizedStringProperty;
-      };
       'electronegativitiesTableStringProperty': LocalizedStringProperty;
-      'moleculesComboBox': {
+      'moleculeComboBox': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };

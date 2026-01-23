@@ -76,6 +76,11 @@ function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
     name: molecule.fullNameProperty
   }, { tandem: Tandem.OPT_OUT } );
 
+  const accessibleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
+    symbol: molecule.createSpokenSymbolStringProperty(),
+    name: molecule.fullNameProperty
+  } );
+
   const node = new RichText( stringProperty, {
     maxWidth: 200,
     font: new PhetFont( 18 )
@@ -84,7 +89,8 @@ function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
   return {
     value: molecule,
     createNode: tandem => node,
-    tandemName: `${molecule.tandem.name}Item`
+    tandemName: `${molecule.tandem.name}Item`,
+    accessibleName: accessibleStringProperty
   };
 }
 

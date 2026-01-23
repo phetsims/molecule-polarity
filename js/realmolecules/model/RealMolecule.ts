@@ -7,6 +7,7 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
@@ -18,6 +19,7 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import { BondDipoleModel } from './BondDipoleModel.js';
 import { FieldModel } from './FieldModel.js';
 import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
@@ -487,6 +489,31 @@ export default class RealMolecule extends PhetioObject {
 
     return symbolToNameMap[ this.symbol ];
   }
+
+  /**
+   * Utility function that gets a chemical name and return its spoken symbol string.
+   * For example: "CHCl3" -> "Upper C, Upper H, Upper Cl 3"
+   */
+  public createSpokenSymbolStringProperty(): TReadOnlyProperty<string> {
+    return new DerivedStringProperty( [
+      MoleculePolarityFluent.a11y.common.upperStringProperty
+    ], ( upper: string ) => {
+      const characters = this.symbol.split( '' );
+      let spokenString = '';
+
+      characters.forEach( ( character, index ) => {
+        // If character is uppercase letter or not a number
+        if ( character === character.toUpperCase() && isNaN( Number( character ) ) ) {
+          spokenString += ` ${upper} ${character}`;
+        }
+        else {
+          spokenString += ` ${character}`;
+        }
+      } );
+     return spokenString.trim();
+    } );
+  }
+
 
   /**
    * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at

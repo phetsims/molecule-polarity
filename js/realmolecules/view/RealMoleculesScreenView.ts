@@ -121,10 +121,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     const moleculeComboBox = new RealMoleculesControl( model.moleculeProperty, model.molecules, comboBoxListParent, {
       comboBoxOptions: {
         tandem: tandem.createTandem( 'moleculeComboBox' ),
-        accessibleName: MoleculePolarityFluent.a11y.realMoleculesScreen.comboBox.accessibleName.createProperty( {
-          moleculeName: dynamicMoleculeNameProperty
-        } ),
-        accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.comboBox.accessibleHelpTextStringProperty
+        accessibleName: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculeComboBox.accessibleNameStringProperty,
+        accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculeComboBox.accessibleHelpTextStringProperty
       }
     } );
 
