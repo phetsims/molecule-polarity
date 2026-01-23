@@ -8,12 +8,12 @@
  * @author Agustín Vallejo
  */
 
-import HotkeyData from '../../../../scenery/js/input/HotkeyData.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import KeyboardHelpSection, { KeyboardHelpSectionOptions } from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
+import HotkeyData from '../../../../scenery/js/input/HotkeyData.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 type SelfOptions = EmptySelfOptions;
 type MoveMoleculeWASDKeyboardHelpSectionOptions = SelfOptions & KeyboardHelpSectionOptions;
@@ -28,22 +28,20 @@ export default class MoveMoleculeWASDKeyboardHelpSection extends KeyboardHelpSec
 
     // Rotate molecule - using HotkeyData for arrow keys and WASD
     const rotateMoleculeHotkeyData = new HotkeyData( {
-      keyStringProperties: [
-        [ 'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown' ],
-        [ 'w', 'a', 's', 'd' ]
+      keys: [
+        'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown', 'w', 'a', 's', 'd'
       ],
       keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty,
-      keyboardHelpDialogPDOMLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDDescriptionStringProperty
+      repoName: moleculePolarity.name
     } );
 
     // Rotate in smaller steps - using HotkeyData with shift modifier
     const rotateInSmallerStepsHotkeyData = new HotkeyData( {
-      keyStringProperties: [
-        [ 'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown' ],
-        [ 'shift+w', 'shift+a', 'shift+s', 'shift+d' ]
+      keys: [
+        'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown', 'shift+w', 'shift+a', 'shift+s', 'shift+d'
       ],
       keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty,
-      keyboardHelpDialogPDOMLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDDescriptionStringProperty
+      repoName: moleculePolarity.name
     } );
 
     const rows = [

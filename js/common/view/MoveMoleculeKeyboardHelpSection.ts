@@ -43,11 +43,18 @@ export default class MoveMoleculeKeyboardHelpSection extends KeyboardHelpSection
     // TODO: Try to yAlign: top this icon https://github.com/phetsims/scenery-phet/issues/966
     const rotateInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
       new HotkeyData( {
-        keys: [ 'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown' ],
+        keys: [
+          'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown'
+        ],
         keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty,
         repoName: moleculePolarity.name
       } ),
       {
+        labelWithIconOptions: {
+          iconOptions: {
+            yAlign: 'top'
+          }
+        },
         icon: KeyboardHelpIconFactory.iconListWithOr(
           [ KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
             KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ] )

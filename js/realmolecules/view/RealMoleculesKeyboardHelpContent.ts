@@ -8,11 +8,12 @@
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
+import ComboBoxKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import ChooseRealMoleculeKeyboardHelpSection from '../../common/view/ChooseRealMoleculeKeyboardHelpSection.js';
 import MoveMoleculeWASDKeyboardHelpSection from '../../common/view/MoveMoleculeWASDKeyboardHelpSection.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
 export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -25,12 +26,12 @@ export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardH
     ];
 
     // sections in the right column
-    // TODO: Use ComboBoxKeyboardHelpSection instead of ChooseRealMoleculeKeyboardHelpSection when it is available.
-    // https://github.com/phetsims/molecule-polarity/pull/238
-    // https://github.com/phetsims/molecule-polarity/issues/233
     const rightSections = [
-    // TODO: Use ComboBoxKeyboardHelpSection instead of ChooseRealMoleculeKeyboardHelpSection when it is available. https://github.com/phetsims/molecule-polarity/pull/238 https://github.com/phetsims/molecule-polarity/issues/233
-      new ChooseRealMoleculeKeyboardHelpSection(),
+      new ComboBoxKeyboardHelpSection( {
+        headingString: MoleculePolarityFluent.a11y.common.keyboardHelpContent.chooseRealMoleculeStringProperty,
+        thingAsLowerCaseSingular: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moleculeStringProperty,
+        thingAsLowerCasePlural: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moleculesStringProperty
+      } ),
       new BasicActionsKeyboardHelpSection( {
         withCheckboxContent: true
       } )

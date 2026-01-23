@@ -189,6 +189,8 @@ type StringsType = {
         'rotateOrMoveInSmallerStepsStringProperty': LocalizedStringProperty;
         'rotateOrMoveInSmallerStepsDescriptionStringProperty': LocalizedStringProperty;
         'chooseRealMoleculeStringProperty': LocalizedStringProperty;
+        'moleculeStringProperty': LocalizedStringProperty;
+        'moleculesStringProperty': LocalizedStringProperty;
         'showMoleculesStringProperty': LocalizedStringProperty;
         'showMoleculesDescriptionStringProperty': LocalizedStringProperty;
         'moveThroughMoleculesStringProperty': LocalizedStringProperty;

@@ -55,7 +55,9 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
     // TODO: Try to yAlign: top this icon https://github.com/phetsims/scenery-phet/issues/966
     const rotateOrMoveInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
       new HotkeyData( {
-        keys: [ 'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown' ],
+        keys: [
+          'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown'
+        ],
         keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateOrMoveInSmallerStepsStringProperty,
         repoName: moleculePolarity.name
       } ),

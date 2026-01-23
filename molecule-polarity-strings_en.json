@@ -452,6 +452,12 @@
         "chooseRealMolecule": {
           "value": "Choose Real Molecule"
         },
+        "molecule": {
+          "value": "molecule"
+        },
+        "molecules": {
+          "value": "molecules"
+        },
         "showMolecules": {
           "value": "1. Show molecules"
         },
