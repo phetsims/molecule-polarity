@@ -145,6 +145,17 @@ addToMapIfDefined( 'a11y_common_electricFieldToggle_on', 'a11y.common.electricFi
 addToMapIfDefined( 'a11y_common_electricFieldToggle_off', 'a11y.common.electricFieldToggle.offStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleName', 'a11y.common.atom.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleHelpText', 'a11y.common.atom.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_moveMolecule', 'a11y.common.keyboardHelpContent.moveMoleculeStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateMolecule', 'a11y.common.keyboardHelpContent.rotateMoleculeStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateInSmallerSteps', 'a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_moveAtomsOrMolecule', 'a11y.common.keyboardHelpContent.moveAtomsOrMoleculeStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_moveAtomAAndC', 'a11y.common.keyboardHelpContent.moveAtomAAndCStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateOrMoveInSmallerSteps', 'a11y.common.keyboardHelpContent.rotateOrMoveInSmallerStepsStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_chooseRealMolecule', 'a11y.common.keyboardHelpContent.chooseRealMoleculeStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_molecule', 'a11y.common.keyboardHelpContent.moleculeStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_molecules', 'a11y.common.keyboardHelpContent.moleculesStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateMoleculeWASD', 'a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty' );
+addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateInSmallerStepsWASD', 'a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacter', 'a11y.bondCharacterStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacterProgress', 'a11y.bondCharacterProgressStringProperty' );
 addToMapIfDefined( 'a11y_dipoleProgress', 'a11y.dipoleProgressStringProperty' );
@@ -444,6 +455,19 @@ const MoleculePolarityFluent = {
       atom: {
         accessibleName: new FluentPattern<{ name: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleNameStringProperty' ), [{"name":"name"}] ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleHelpTextStringProperty' ) )
+      },
+      keyboardHelpContent: {
+        moveMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_moveMolecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moveMoleculeStringProperty' ) ),
+        rotateMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateMolecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateMoleculeStringProperty' ) ),
+        rotateInSmallerStepsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateInSmallerSteps', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty' ) ),
+        moveAtomsOrMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_moveAtomsOrMolecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moveAtomsOrMoleculeStringProperty' ) ),
+        moveAtomAAndCStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_moveAtomAAndC', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moveAtomAAndCStringProperty' ) ),
+        rotateOrMoveInSmallerStepsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateOrMoveInSmallerSteps', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateOrMoveInSmallerStepsStringProperty' ) ),
+        chooseRealMoleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_chooseRealMolecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.chooseRealMoleculeStringProperty' ) ),
+        moleculeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_molecule', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moleculeStringProperty' ) ),
+        moleculesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_molecules', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moleculesStringProperty' ) ),
+        rotateMoleculeWASDStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateMoleculeWASD', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty' ) ),
+        rotateInSmallerStepsWASDStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateInSmallerStepsWASD', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty' ) )
       }
     },
     _comment_0: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),

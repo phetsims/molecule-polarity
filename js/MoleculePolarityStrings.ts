@@ -166,6 +166,19 @@ type StringsType = {
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      };
+      'keyboardHelpContent': {
+        'moveMoleculeStringProperty': LocalizedStringProperty;
+        'rotateMoleculeStringProperty': LocalizedStringProperty;
+        'rotateInSmallerStepsStringProperty': LocalizedStringProperty;
+        'moveAtomsOrMoleculeStringProperty': LocalizedStringProperty;
+        'moveAtomAAndCStringProperty': LocalizedStringProperty;
+        'rotateOrMoveInSmallerStepsStringProperty': LocalizedStringProperty;
+        'chooseRealMoleculeStringProperty': LocalizedStringProperty;
+        'moleculeStringProperty': LocalizedStringProperty;
+        'moleculesStringProperty': LocalizedStringProperty;
+        'rotateMoleculeWASDStringProperty': LocalizedStringProperty;
+        'rotateInSmallerStepsWASDStringProperty': LocalizedStringProperty;
       }
     };
     'bondCharacterStringProperty': LocalizedStringProperty;

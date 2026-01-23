@@ -16,6 +16,7 @@ import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
+import RealMoleculesKeyboardHelpContent from './view/RealMoleculesKeyboardHelpContent.js';
 
 export default class RealMoleculesScreen extends Screen<RealMoleculesModel, RealMoleculesScreenView> {
 
@@ -26,6 +27,7 @@ export default class RealMoleculesScreen extends Screen<RealMoleculesModel, Real
       backgroundColorProperty: MPColors.screenBackgroundColorProperty,
       homeScreenIcon: createScreenIcon(),
       screenButtonsHelpText: MoleculePolarityFluent.a11y.common.screenIcons.realMoleculesStringProperty,
+      createKeyboardHelpNode: () => new RealMoleculesKeyboardHelpContent(),
       tandem: tandem
     };
 

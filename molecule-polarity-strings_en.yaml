@@ -137,6 +137,18 @@ a11y:
     atom:
       accessibleName: 'Atom { $name }'
       accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
+    keyboardHelpContent:
+      moveMolecule: 'Move Molecule'
+      rotateMolecule: 'Rotate molecule'
+      rotateInSmallerSteps: 'Rotate in smaller steps'
+      moveAtomsOrMolecule: 'Move Atoms or Molecule'
+      moveAtomAAndC: 'Move atoms A and C'
+      rotateOrMoveInSmallerSteps: 'Rotate or move in smaller steps'
+      chooseRealMolecule: 'Choose Real Molecule'
+      molecule: 'molecule'
+      molecules: 'molecules'
+      rotateMoleculeWASD: 'Rotate molecule'
+      rotateInSmallerStepsWASD: 'Rotate in smaller steps'
 
   # ===================
   # REGIONS / PARAMETERS

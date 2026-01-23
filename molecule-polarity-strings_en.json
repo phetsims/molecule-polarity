@@ -387,6 +387,41 @@
         "accessibleHelpText": {
           "value": "Turn the molecule with left and right keys, or A and D keys"
         }
+      },
+      "keyboardHelpContent": {
+        "moveMolecule": {
+          "value": "Move Molecule"
+        },
+        "rotateMolecule": {
+          "value": "Rotate molecule"
+        },
+        "rotateInSmallerSteps": {
+          "value": "Rotate in smaller steps"
+        },
+        "moveAtomsOrMolecule": {
+          "value": "Move Atoms or Molecule"
+        },
+        "moveAtomAAndC": {
+          "value": "Move atoms A and C"
+        },
+        "rotateOrMoveInSmallerSteps": {
+          "value": "Rotate or move in smaller steps"
+        },
+        "chooseRealMolecule": {
+          "value": "Choose Real Molecule"
+        },
+        "molecule": {
+          "value": "molecule"
+        },
+        "molecules": {
+          "value": "molecules"
+        },
+        "rotateMoleculeWASD": {
+          "value": "Rotate molecule"
+        },
+        "rotateInSmallerStepsWASD": {
+          "value": "Rotate in smaller steps"
+        }
       }
     },
     "bondCharacter": {
