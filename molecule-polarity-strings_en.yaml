@@ -525,7 +525,7 @@ a11y:
       controlArea: 'You can use checkboxes to show or hide bond dipoles, the molecular dipole, partial charges, atom labels, and atom electronegativities. You can also choose between electrostatic potential or electron density surfaces to see how charge is distributed. Reset the sim to start over.'
       currentDetails: 'Currently, you are viewing { $moleculeName }. The molecule is { $realPolarity }, with { $shapeGeometry } geometry.'
       interactionHint: 'Choose a molecule and rotate it to explore how shape and bond polarity determine the molecular dipole.'
-    realMolecule: 'Real Molecule'
+    realMolecule: '{ $moleculeName } Molecule'
     draggableMolecule:
       accessibleName: 'Move { $moleculeName }'
       accessibleHelpText: 'Move molecule in three dimensions. Use keyboard shortcuts to rotate molecule around vertical and horizontal axes.'

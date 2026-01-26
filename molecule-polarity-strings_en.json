@@ -786,7 +786,7 @@
         }
       },
       "realMolecule": {
-        "value": "Real Molecule"
+        "value": "{ $moleculeName } Molecule"
       },
       "draggableMolecule": {
         "accessibleName": {
