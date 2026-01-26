@@ -8,7 +8,7 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Bond from '../../common/model/Bond.js';
-import { toClock } from '../../common/view/toClock.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
@@ -46,7 +46,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
           bond: bond.label,
-          position: toClock( angle )
+          position: DescriptionMaps.formatOrientationString( angle )
         } ), {
           interruptible: true
         }
@@ -64,7 +64,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
 
         // Molecular dipole null description: Molecular dipole zero.
         this.addAccessibleContextResponse(
-          MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleContext.format( {
+          MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
             progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
               progress: 'zero'
             } )
@@ -77,11 +77,11 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
 
         // Molecular dipole description
         this.addAccessibleContextResponse(
-          MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleDirection.format( {
+          MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirection.format( {
             progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
               progress: magnitudeChange > 0 ? 'larger' : 'smaller'
             } ),
-            position: toClock( currentDipole.angle )
+            position: DescriptionMaps.formatOrientationString( currentDipole.angle )
           } ), {
             interruptible: true
           }
@@ -111,8 +111,8 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
     molecule.angleProperty.link( () => {
       if ( molecule.dipoleProperty.value.magnitude > 1e-5 && viewProperties.molecularDipoleVisibleProperty.value ) {
         this.addAccessibleContextResponse(
-          MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleDirectionOnly.format( {
-            position: toClock( molecule.dipoleProperty.value.angle )
+          MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnly.format( {
+            position: DescriptionMaps.formatOrientationString( molecule.dipoleProperty.value.angle )
           } ), {
             interruptible: true
           }

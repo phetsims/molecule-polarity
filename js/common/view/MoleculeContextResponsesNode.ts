@@ -16,7 +16,6 @@ import Bond from '../model/Bond.js';
 import Molecule from '../model/Molecule.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
-import { toClock } from './toClock.js';
 
 export default class MoleculeContextResponsesNode extends Node {
 
@@ -118,7 +117,7 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // Molecular dipole null description: Molecular dipole zero.
     molecularDipoleVisible && isDipoleZero && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleContext.format( {
+      MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: 'zero'
         } )
@@ -127,11 +126,11 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // Molecular dipole description
     molecularDipoleVisible && !isDipoleZero && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.molecularDipoleDirection.format( {
+      MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirection.format( {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
         } ),
-        position: toClock( currentDipole.angle )
+        position: DescriptionMaps.formatOrientationString( currentDipole.angle )
       } )
     );
 

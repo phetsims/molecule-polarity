@@ -83,10 +83,6 @@ a11y:
       electrostaticContext: '{ $progress } electrostatic potential.'
       electronDensityContext: '{ $progress } electron density.'
       electricFieldContext: 'Molecule aligned with electric field.'
-      molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
-      molecularDipoleDirection: '{ a11y.common.electronegativitySlider.molecularDipoleContext } Points to { $position } o''clock.'
-      molecularDipoleDirectionOnly: 'Molecular dipole points to { $position } o''clock.'
-      noMolecularDipole: 'No molecular dipole.'
     bondDipoleCheckbox:
       accessibleName: 'Bond Dipole'
       accessibleNamePlural: 'Bond Dipoles'
@@ -152,7 +148,12 @@ a11y:
       molecules: 'molecules'
       rotateMoleculeWASD: 'Rotate molecule'
       rotateInSmallerStepsWASD: 'Rotate in smaller steps'
-    bondDipoleDirection: 'Bond dipole { $bond } points to { $position } o''clock.'
+    bondDipoleDirection: 'Bond dipole { $bond } points { $position } o''clock.'
+    molecularDipoleResponses:
+      molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
+      molecularDipoleDirection: '{ a11y.common.molecularDipoleResponses.molecularDipoleContext } Points { $position } o''clock.'
+      molecularDipoleDirectionOnly: 'Molecular dipole points { $position } o''clock.'
+      noMolecularDipole: 'No molecular dipole.'
 
   # ===================
   # REGIONS / PARAMETERS
@@ -487,7 +488,7 @@ a11y:
     moveAtomASlider:
       accessibleName: 'Move Atom A'
       accessibleHelpText: 'Move Atom A around center Atom B.'
-      molecularDipoleContext: '{ $magnitude } molecular dipole points to { $position } o''clock.'
+      molecularDipoleContext: '{ $magnitude } molecular dipole points { $position } o''clock.'
     
     # Move Atom C Slider
     moveAtomCSlider:

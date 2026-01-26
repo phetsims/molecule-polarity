@@ -106,10 +106,6 @@ type StringsType = {
         'electrostaticContextStringProperty': LocalizedStringProperty;
         'electronDensityContextStringProperty': LocalizedStringProperty;
         'electricFieldContextStringProperty': LocalizedStringProperty;
-        'molecularDipoleContextStringProperty': LocalizedStringProperty;
-        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
-        'molecularDipoleDirectionOnlyStringProperty': LocalizedStringProperty;
-        'noMolecularDipoleStringProperty': LocalizedStringProperty;
       };
       'bondDipoleCheckbox': {
         'accessibleNameStringProperty': LocalizedStringProperty;
@@ -184,6 +180,12 @@ type StringsType = {
         'rotateInSmallerStepsWASDStringProperty': LocalizedStringProperty;
       };
       'bondDipoleDirectionStringProperty': LocalizedStringProperty;
+      'molecularDipoleResponses': {
+        'molecularDipoleContextStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionOnlyStringProperty': LocalizedStringProperty;
+        'noMolecularDipoleStringProperty': LocalizedStringProperty;
+      }
     };
     'bondCharacterStringProperty': LocalizedStringProperty;
     'bondCharacterProgressStringProperty': LocalizedStringProperty;

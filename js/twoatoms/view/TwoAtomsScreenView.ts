@@ -14,11 +14,11 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
+import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import RotationResponseNode from '../../common/view/RotationResponseNode.js';
-import { toClock } from '../../common/view/toClock.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
@@ -114,7 +114,7 @@ export default class TwoAtomsScreenView extends ScreenView {
       this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
           bond: 'AB',
-          position: toClock( angle )
+          position: DescriptionMaps.formatOrientationString( angle )
         } ), {
           interruptible: true
         }

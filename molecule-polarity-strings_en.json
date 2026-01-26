@@ -242,18 +242,6 @@
         },
         "electricFieldContext": {
           "value": "Molecule aligned with electric field."
-        },
-        "molecularDipoleContext": {
-          "value": "Molecular dipole arrow { $progress }."
-        },
-        "molecularDipoleDirection": {
-          "value": "{ a11y_common_electronegativitySlider_molecularDipoleContext } Points to { $position } o'clock."
-        },
-        "molecularDipoleDirectionOnly": {
-          "value": "Molecular dipole points to { $position } o'clock."
-        },
-        "noMolecularDipole": {
-          "value": "No molecular dipole."
         }
       },
       "bondDipoleCheckbox": {
@@ -433,7 +421,21 @@
         }
       },
       "bondDipoleDirection": {
-        "value": "Bond dipole { $bond } points to { $position } o'clock."
+        "value": "Bond dipole { $bond } points { $position } o'clock."
+      },
+      "molecularDipoleResponses": {
+        "molecularDipoleContext": {
+          "value": "Molecular dipole arrow { $progress }."
+        },
+        "molecularDipoleDirection": {
+          "value": "{ a11y_common_molecularDipoleResponses_molecularDipoleContext } Points { $position } o'clock."
+        },
+        "molecularDipoleDirectionOnly": {
+          "value": "Molecular dipole points { $position } o'clock."
+        },
+        "noMolecularDipole": {
+          "value": "No molecular dipole."
+        }
       }
     },
     "bondCharacter": {
@@ -704,7 +706,7 @@
           "value": "Move Atom A around center Atom B."
         },
         "molecularDipoleContext": {
-          "value": "{ $magnitude } molecular dipole points to { $position } o'clock."
+          "value": "{ $magnitude } molecular dipole points { $position } o'clock."
         }
       },
       "moveAtomCSlider": {
