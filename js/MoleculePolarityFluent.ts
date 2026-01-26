@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -105,6 +105,8 @@ addToMapIfDefined( 'a11y_common_electronegativitySlider_electronDensityContext',
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electricFieldContext', 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_molecularDipoleContext', 'a11y.common.electronegativitySlider.molecularDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_molecularDipoleDirection', 'a11y.common.electronegativitySlider.molecularDipoleDirectionStringProperty' );
+addToMapIfDefined( 'a11y_common_electronegativitySlider_molecularDipoleDirectionOnly', 'a11y.common.electronegativitySlider.molecularDipoleDirectionOnlyStringProperty' );
+addToMapIfDefined( 'a11y_common_electronegativitySlider_noMolecularDipole', 'a11y.common.electronegativitySlider.noMolecularDipoleStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleName', 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleNamePlural', 'a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleHelpText', 'a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty' );
@@ -157,6 +159,7 @@ addToMapIfDefined( 'a11y_common_keyboardHelpContent_molecule', 'a11y.common.keyb
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_molecules', 'a11y.common.keyboardHelpContent.moleculesStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateMoleculeWASD', 'a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty' );
 addToMapIfDefined( 'a11y_common_keyboardHelpContent_rotateInSmallerStepsWASD', 'a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty' );
+addToMapIfDefined( 'a11y_common_bondDipoleDirection', 'a11y.common.bondDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacter', 'a11y.bondCharacterStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacterProgress', 'a11y.bondCharacterProgressStringProperty' );
 addToMapIfDefined( 'a11y_dipoleProgress', 'a11y.dipoleProgressStringProperty' );
@@ -240,7 +243,6 @@ addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_onTopOf', 'a11y.threeAtoms
 addToMapIfDefined( 'a11y_threeAtomsScreen_moleculeABC_partialChargesDescription', 'a11y.threeAtomsScreen.moleculeABC.partialChargesDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_accessibleName', 'a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_accessibleHelpText', 'a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_bondDipoleContext', 'a11y.threeAtomsScreen.moveAtomASlider.bondDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomASlider_molecularDipoleContext', 'a11y.threeAtomsScreen.moveAtomASlider.molecularDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleName', 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_threeAtomsScreen_moveAtomCSlider_accessibleHelpText', 'a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty' );
@@ -395,7 +397,9 @@ const MoleculePolarityFluent = {
         electronDensityContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electronDensityContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' ), [{"name":"progress"}] ),
         electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' ) ),
         molecularDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.molecularDipoleContextStringProperty' ), [{"name":"progress"}] ),
-        molecularDipoleDirection: new FluentPattern<{ position: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.molecularDipoleDirectionStringProperty' ), [{"name":"position"},{"name":"progress"}] )
+        molecularDipoleDirection: new FluentPattern<{ position: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.molecularDipoleDirectionStringProperty' ), [{"name":"position"},{"name":"progress"}] ),
+        molecularDipoleDirectionOnly: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_molecularDipoleDirectionOnly', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.molecularDipoleDirectionOnlyStringProperty' ), [{"name":"position"}] ),
+        noMolecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_noMolecularDipole', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.noMolecularDipoleStringProperty' ) )
       },
       bondDipoleCheckbox: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_bondDipoleCheckbox_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' ) ),
@@ -468,7 +472,8 @@ const MoleculePolarityFluent = {
         moleculesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_molecules', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.moleculesStringProperty' ) ),
         rotateMoleculeWASDStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateMoleculeWASD', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty' ) ),
         rotateInSmallerStepsWASDStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_keyboardHelpContent_rotateInSmallerStepsWASD', _.get( MoleculePolarityStrings, 'a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty' ) )
-      }
+      },
+      bondDipoleDirection: new FluentPattern<{ bond: FluentVariable, position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_bondDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleDirectionStringProperty' ), [{"name":"bond"},{"name":"position"}] )
     },
     _comment_0: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
     _comment_1: new FluentComment( {"comment":"REGIONS / PARAMETERS","associatedKey":"bondCharacter"} ),
@@ -620,7 +625,6 @@ const MoleculePolarityFluent = {
       moveAtomASlider: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty' ) ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty' ) ),
-        bondDipoleContext: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_bondDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.bondDipoleContextStringProperty' ), [{"name":"position"}] ),
         molecularDipoleContext: new FluentPattern<{ magnitude: FluentVariable, position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_threeAtomsScreen_moveAtomASlider_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.threeAtomsScreen.moveAtomASlider.molecularDipoleContextStringProperty' ), [{"name":"magnitude"},{"name":"position"}] )
       },
       _comment_5: new FluentComment( {"comment":"Move Atom C Slider","associatedKey":"moveAtomCSlider"} ),

@@ -248,6 +248,12 @@
         },
         "molecularDipoleDirection": {
           "value": "{ a11y_common_electronegativitySlider_molecularDipoleContext } Points to { $position } o'clock."
+        },
+        "molecularDipoleDirectionOnly": {
+          "value": "Molecular dipole points to { $position } o'clock."
+        },
+        "noMolecularDipole": {
+          "value": "No molecular dipole."
         }
       },
       "bondDipoleCheckbox": {
@@ -425,6 +431,9 @@
         "rotateInSmallerStepsWASD": {
           "value": "Rotate in smaller steps"
         }
+      },
+      "bondDipoleDirection": {
+        "value": "Bond dipole { $bond } points to { $position } o'clock."
       }
     },
     "bondCharacter": {
@@ -693,9 +702,6 @@
         },
         "accessibleHelpText": {
           "value": "Move Atom A around center Atom B."
-        },
-        "bondDipoleContext": {
-          "value": "Bond dipole points to { $position } o'clock."
         },
         "molecularDipoleContext": {
           "value": "{ $magnitude } molecular dipole points to { $position } o'clock."

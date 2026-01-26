@@ -21,6 +21,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
+import ThreeAtomsRotationalContextResponses from './ThreeAtomsRotationalContextResponses.js';
 import ThreeAtomsScreenSummaryContentNode from './ThreeAtomsScreenSummaryContentNode.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeAccessibleListNode from './TriatomicMoleculeAccessibleListNode.js';
@@ -59,6 +60,10 @@ export default class ThreeAtomsScreenView extends ScreenView {
         return 'TEMPORARY: Dipole Magnitude: ' + toFixed( dipole.magnitude, 2 );
       } )
     } ) );
+
+    moleculeDescriptionNode.addChild(
+      new ThreeAtomsRotationalContextResponses( model.triatomicMolecule, viewProperties )
+    );
 
     // Molecule description
     moleculeDescriptionNode.addChild(

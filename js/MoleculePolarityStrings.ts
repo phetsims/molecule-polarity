@@ -108,6 +108,8 @@ type StringsType = {
         'electricFieldContextStringProperty': LocalizedStringProperty;
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
+        'molecularDipoleDirectionOnlyStringProperty': LocalizedStringProperty;
+        'noMolecularDipoleStringProperty': LocalizedStringProperty;
       };
       'bondDipoleCheckbox': {
         'accessibleNameStringProperty': LocalizedStringProperty;
@@ -180,7 +182,8 @@ type StringsType = {
         'moleculesStringProperty': LocalizedStringProperty;
         'rotateMoleculeWASDStringProperty': LocalizedStringProperty;
         'rotateInSmallerStepsWASDStringProperty': LocalizedStringProperty;
-      }
+      };
+      'bondDipoleDirectionStringProperty': LocalizedStringProperty;
     };
     'bondCharacterStringProperty': LocalizedStringProperty;
     'bondCharacterProgressStringProperty': LocalizedStringProperty;
@@ -283,7 +286,6 @@ type StringsType = {
       'moveAtomASlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'bondDipoleContextStringProperty': LocalizedStringProperty;
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
       };
       'moveAtomCSlider': {
