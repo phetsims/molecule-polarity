@@ -13,7 +13,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import DragListener, { DragListenerOptions, PressedDragListener } from '../../../../scenery/js/listeners/DragListener.js';
@@ -22,7 +22,11 @@ import Molecule from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+
+  // Callback that is provided to invoke during drag.
+  draggingCallback?: () => void;
+};
 
 type BondAngleDragListenerOptions = SelfOptions &
   PickRequired<DragListenerOptions<PressedDragListener>, 'tandem'>;
@@ -38,7 +42,12 @@ export default class BondAngleDragListener extends DragListener {
 
       // DragListenerOptions
       allowTouchSnag: true,
-      isDisposable: false
+      isDisposable: false,
+
+      // SelfOptions
+      draggingCallback: () => {
+        // default no-op
+      }
     }, providedOptions );
 
     let previousAngle = 0;
@@ -63,6 +72,7 @@ export default class BondAngleDragListener extends DragListener {
     const bondAngleRange = bondAngleProperty.range;
 
     options.drag = event => {
+      options.draggingCallback();
       const currentAngle = getAngle( event );
       bondAngleProperty.value =
         normalizeAngle( bondAngleProperty.value + currentAngle - previousAngle, bondAngleRange.min );

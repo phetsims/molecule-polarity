@@ -51,49 +51,6 @@ export default class TriatomicMoleculeNode extends Node {
       isDisposable: false
     }, providedOptions );
 
-    // atoms
-    const atomANode = new AtomNode( molecule.atomA, molecule.bondAngleABProperty, {
-      tandem: options.tandem.createTandem( 'atomANode' ),
-      phetioInputEnabledPropertyInstrumented: true,
-
-      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
-      phetioType: IndexedNodeIO,
-      phetioState: true,
-      createAriaValueText: ( value: number ) => {
-        return MoleculePolarityFluent.a11y.oClock.format( {
-          hour: toClock( value + molecule.angleProperty.value )
-        } );
-      },
-      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
-    } );
-    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, {
-      tandem: options.tandem.createTandem( 'atomBNode' ),
-      phetioInputEnabledPropertyInstrumented: true,
-      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
-    } );
-    const atomCNode = new AtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
-      tandem: options.tandem.createTandem( 'atomCNode' ),
-      phetioInputEnabledPropertyInstrumented: true,
-
-      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
-      phetioType: IndexedNodeIO,
-      phetioState: true,
-      createAriaValueText: ( value: number ) => {
-        return MoleculePolarityFluent.a11y.oClock.format( {
-          hour: toClock( value + molecule.angleProperty.value )
-        } );
-      },
-      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty
-    } );
-
-    // For aria value, update bond angles when molecule is rotated
-    molecule.angleProperty.link( () => {
-      molecule.bondAngleABProperty.notifyListenersStatic();
-      molecule.bondAngleBCProperty.notifyListenersStatic();
-    } );
 
     let lastOverlappingMessage: 'overlappingA' | 'overlappingC' | 'overA' | 'overC' | null = null;
 
@@ -120,14 +77,50 @@ export default class TriatomicMoleculeNode extends Node {
       }
     };
 
-    // atom A overlapping feedback
-    molecule.bondAngleABProperty.link( () => {
-      overlapAccessibleObjectResponse( 'C' );
+    // atoms
+    const atomANode = new AtomNode( molecule.atomA, molecule.bondAngleABProperty, {
+      tandem: options.tandem.createTandem( 'atomANode' ),
+      phetioInputEnabledPropertyInstrumented: true,
+
+      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+      phetioType: IndexedNodeIO,
+      phetioState: true,
+      createAriaValueText: ( value: number ) => {
+        return MoleculePolarityFluent.a11y.oClock.format( {
+          hour: toClock( value + molecule.angleProperty.value )
+        } );
+      },
+      drag: () => { overlapAccessibleObjectResponse( 'C' ); },
+      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
+    } );
+    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, {
+      tandem: options.tandem.createTandem( 'atomBNode' ),
+      phetioInputEnabledPropertyInstrumented: true,
+      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
+    } );
+    const atomCNode = new AtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
+      tandem: options.tandem.createTandem( 'atomCNode' ),
+      phetioInputEnabledPropertyInstrumented: true,
+
+      // Make z-ordering stateful, see https://github.com/phetsims/molecule-polarity/issues/157
+      phetioType: IndexedNodeIO,
+      phetioState: true,
+      createAriaValueText: ( value: number ) => {
+        return MoleculePolarityFluent.a11y.oClock.format( {
+          hour: toClock( value + molecule.angleProperty.value )
+        } );
+      },
+      drag: () => { overlapAccessibleObjectResponse( 'A' ); },
+      accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleNameStringProperty,
+      accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomCSlider.accessibleHelpTextStringProperty
     } );
 
-    // atom C overlapping feedback
-    molecule.bondAngleBCProperty.link( () => {
-      overlapAccessibleObjectResponse( 'A' );
+    // For aria value, update bond angles when molecule is rotated
+    molecule.angleProperty.link( () => {
+      molecule.bondAngleABProperty.notifyListenersStatic();
+      molecule.bondAngleBCProperty.notifyListenersStatic();
     } );
 
     // bonds
@@ -218,10 +211,12 @@ export default class TriatomicMoleculeNode extends Node {
 
     // change bond angles by dragging atom A or C
     const atomADragListener = new BondAngleDragListener( molecule, molecule.bondAngleABProperty, atomANode, {
-      tandem: dragListenersTandem.createTandem( 'atomADragListener' )
+      tandem: dragListenersTandem.createTandem( 'atomADragListener' ),
+      draggingCallback: () => { overlapAccessibleObjectResponse( 'C' ); }
     } );
     const atomCDragListener = new BondAngleDragListener( molecule, molecule.bondAngleBCProperty, atomCNode, {
-      tandem: dragListenersTandem.createTandem( 'atomCDragListener' )
+      tandem: dragListenersTandem.createTandem( 'atomCDragListener' ),
+      draggingCallback: () => { overlapAccessibleObjectResponse( 'A' ); }
     } );
     atomANode.addInputListener( atomADragListener );
     atomCNode.addInputListener( atomCDragListener );
