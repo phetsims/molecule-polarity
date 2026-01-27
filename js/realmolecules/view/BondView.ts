@@ -57,7 +57,7 @@ export default class BondView extends THREE.Object3D {
       this.add( basicMesh );
       this.meshes.push( basicMesh );
 
-      const dashCount = 5;
+      const dashCount = 6;
 
       const instancedMesh = new THREE.InstancedMesh( bondGeometry, bondMaterial, dashCount );
       instancedMesh.renderOrder = BOND_RENDER_ORDER;
@@ -66,8 +66,8 @@ export default class BondView extends THREE.Object3D {
 
       for ( let i = 0; i < dashCount; i++ ) {
         const m = new THREE.Matrix4();
-        const y = -0.5 + ( i + 0.5 ) / dashCount;
-        const sy = 0.5 / dashCount;
+        const y = ( -0.5 + ( i + 0.5 ) / dashCount ) * 0.87;
+        const sy = 0.55 / dashCount;
 
         m.set(
           1, 0, 0, 0,
