@@ -1,4 +1,4 @@
-// Copyright 2021-2026, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 
 /**
  * ModelRadioButtonGroup is the radio button group for choosing a model (basic or advanced) for the molecule

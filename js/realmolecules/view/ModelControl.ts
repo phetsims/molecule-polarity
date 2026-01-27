@@ -1,4 +1,4 @@
-// Copyright 2017-2026, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 
 /**
  * Control panel for the molecule's model (basic or advanced)

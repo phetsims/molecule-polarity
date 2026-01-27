@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 /**
  * Updates the accessible context responses related to rotation for a triatomic molecule.
  *
