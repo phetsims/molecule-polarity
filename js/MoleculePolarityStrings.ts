@@ -200,7 +200,6 @@ type StringsType = {
     'electronDensityStringProperty': LocalizedStringProperty;
     'electronDensityShiftStringProperty': LocalizedStringProperty;
     'electronDensityProgressStringProperty': LocalizedStringProperty;
-    'electronDensityProgressUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticPotentialStringProperty': LocalizedStringProperty;
     'electrostaticPotentialUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;

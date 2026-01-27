@@ -477,9 +477,6 @@
     "electronDensityProgress": {
       "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
     },
-    "electronDensityProgressUppercase": {
-      "value": "{ $progress ->\n  [more] More\n  *[less] Less\n}"
-    },
     "electrostaticPotential": {
       "value": "{ $potential ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  *[large] large\n}"
     },
