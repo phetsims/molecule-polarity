@@ -118,6 +118,10 @@ export default class BondView extends THREE.Object3D {
     // Perpendicular to bond direction and camera direction
     const perpendicular = center.minus( end ).normalized().cross( center.minus( localCamera ).normalized() ).normalized();
 
+    if ( this.bond.bondType === 1.5 && perpendicular.dot( this.bond.realMolecularDipole ) < 0 ) {
+      perpendicular.negate();
+    }
+
     const bondSeparation = this.bondRadius * ( 12 / 5 );
     let offsets: Vector3[] = [];
     switch( this.bond.bondType ) {

@@ -117,6 +117,8 @@ export default class RealMolecule extends PhetioObject {
       );
     } );
 
+    this.realMolecularDipole = new Vector3( moleculeData.molecularDipole[ 0 ], moleculeData.molecularDipole[ 1 ], moleculeData.molecularDipole[ 2 ] );
+
     // Bonds later, since they reference atoms
     this.bonds = moleculeData.bonds.map( bondData => {
       const atomA = this.atoms[ bondData.indexA ];
@@ -127,10 +129,15 @@ export default class RealMolecule extends PhetioObject {
         return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
       } )!;
 
-      return new RealBond( atomA, atomB, this.symbol === 'O3' ? 1.5 : bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ), this.isAdvancedProperty );
+      return new RealBond(
+        atomA,
+        atomB,
+        this.symbol === 'O3' ? 1.5 : bondData.bondType,
+        new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ),
+        this.realMolecularDipole,
+        this.isAdvancedProperty
+      );
     } );
-
-    this.realMolecularDipole = new Vector3( moleculeData.molecularDipole[ 0 ], moleculeData.molecularDipole[ 1 ], moleculeData.molecularDipole[ 2 ] );
 
     this.vertices = moleculeData.vertexPositions.map( ( positionData, index ) => {
       const normalData = moleculeData.vertexNormals[ index ];
@@ -565,6 +572,7 @@ export class RealBond {
     public readonly atomB: RealAtom,
     public readonly bondType: 1 | 1.5 | 2 | 3,
     public readonly realBondDipole: Vector3,
+    public readonly realMolecularDipole: Vector3, // needed for positioning 1.5 bond dashes
     public isAdvancedProperty: TReadOnlyProperty<boolean>
   ) {
     atomA.bonds.push( this );
