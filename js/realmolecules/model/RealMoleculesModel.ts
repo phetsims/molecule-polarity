@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -18,7 +19,6 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule, { MoleculeGeometry, MoleculeSymbols } from './RealMolecule.js';
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
@@ -33,7 +33,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   // the rotation of the molecule view
   public readonly moleculeQuaternionProperty: Property<THREE.Quaternion>;
 
-  public readonly isAdvancedProperty = new BooleanProperty( false );
+  public readonly isAdvancedProperty: BooleanProperty;
 
   public readonly dipoleScaleProperty = new Property<number>( 0.25 );
 
@@ -50,6 +50,12 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       tandem: tandem.createTandem( 'moleculeQuaternionProperty' ),
       phetioValueType: ThreeQuaternionIO,
       phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
+    } );
+
+    // TODO: Should this property be featured? Should it have phetioDocumentation? https://github.com/phetsims/molecule-polarity/issues/246
+    this.isAdvancedProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'isAdvancedProperty' ),
+      phetioFeatured: true
     } );
 
     const createMolecule = ( symbol: MoleculeSymbols, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
