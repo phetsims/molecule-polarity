@@ -140,23 +140,38 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       );
     }
     else if (
+      molecule.symbol === 'H2O'
+    ) {
+      this.moleculeQuaternionProperty.value = new THREE.Quaternion( -1, 0, 0, 0 );
+    }
+    else if (
+      molecule.symbol === 'CH4'
+    ) {
+      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
+        0.09754516100806414,
+        0.09754516100806415,
+        -0.009607359798384778,
+        0.9903926402016154
+      );
+    }
+    else if (
       molecule.symbol === 'CH3F'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        -0.47764744580443635,
-        -0.5590383890849989,
-        0.43691780079761233,
-        0.5181040748651952
+        -0.424564362987182,
+        -0.5991718998340826,
+        0.3800185779324334,
+        0.5624268988559403
       );
     }
     else if (
       molecule.symbol === 'CH2F2'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.6172145109411314,
-        -0.24061500346218279,
-        0.33114691075217983,
-        0.6719318351528544
+        -0.27136646893101857,
+        -0.6903203332285108,
+        -0.6223760651398221,
+        0.24993221203410235
       );
     }
     else if (
@@ -183,10 +198,10 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       molecule.symbol === 'CHCl3'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        -0.0176156710659009,
-        -0.7491523440903591,
-        0.6618225407772235,
-        -0.021245658284855574
+        -0.1748081804583777,
+        -0.789947747694425,
+        0.5773331843722288,
+        -0.11005021662823589
       );
     }
     else {
