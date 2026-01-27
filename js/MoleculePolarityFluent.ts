@@ -371,6 +371,8 @@ const MoleculePolarityFluent = {
   dipoleDirectionDescriptionStringProperty: _.get( MoleculePolarityStrings, 'dipoleDirectionDescriptionStringProperty' ),
   deltaPlusStringProperty: _.get( MoleculePolarityStrings, 'deltaPlusStringProperty' ),
   deltaMinusStringProperty: _.get( MoleculePolarityStrings, 'deltaMinusStringProperty' ),
+  deltaNonNegativeValueStringProperty: _.get( MoleculePolarityStrings, 'deltaNonNegativeValueStringProperty' ),
+  deltaNegativeValueStringProperty: _.get( MoleculePolarityStrings, 'deltaNegativeValueStringProperty' ),
   surfaceColorRealMoleculesStringProperty: _.get( MoleculePolarityStrings, 'surfaceColorRealMoleculesStringProperty' ),
   surfaceColorDescriptionStringProperty: _.get( MoleculePolarityStrings, 'surfaceColorDescriptionStringProperty' ),
   underDevelopment: {

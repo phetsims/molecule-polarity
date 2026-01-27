@@ -56,6 +56,8 @@ dipoleDirection: 'Dipole direction:'
 dipoleDirectionDescription: 'The convention used to show direction of bond dipoles'
 deltaPlus: δ+
 deltaMinus: δ−
+deltaNonNegativeValue: 'δ={{partialCharge}}'
+deltaNegativeValue: 'δ=−{{partialCharge}}'
 pattern.dipoleDirection: '{{from}} → {{to}}'
 pattern.deltaEquals: 'δ={{partialCharge}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules only):'

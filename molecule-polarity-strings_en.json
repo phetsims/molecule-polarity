@@ -173,6 +173,12 @@
   "deltaMinus": {
     "value": "δ−"
   },
+  "deltaNonNegativeValue": {
+    "value": "δ={{partialCharge}}"
+  },
+  "deltaNegativeValue": {
+    "value": "δ=−{{partialCharge}}"
+  },
   "pattern.dipoleDirection": {
     "value": "{{from}} → {{to}}"
   },

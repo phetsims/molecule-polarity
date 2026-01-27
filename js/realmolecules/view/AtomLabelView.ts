@@ -20,6 +20,8 @@ import { elementToForegroundColorProperty } from '../model/RealMoleculeColors.js
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -38,6 +40,21 @@ export default class AtomLabelView extends TextureQuad {
 
     const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
     const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
+
+    const deltaStringProperty = partialChargesVisible ? (
+      atom.getPartialCharge() >= 0
+      ? MoleculePolarityFluent.deltaNonNegativeValueStringProperty
+      : MoleculePolarityFluent.deltaNegativeValueStringProperty
+    ) : null;
+
+    const getPartialChargeString = () => {
+      const partialCharge = atom.getPartialCharge();
+
+      return StringUtils.fillIn( deltaStringProperty!.value, {
+        partialCharge: toFixed( Math.abs( partialCharge ), 2 )
+      } );
+    };
+
     const labelNode = new VBox( {
       children: [
         ...( atomLabelsVisible ? [
@@ -47,8 +64,7 @@ export default class AtomLabelView extends TextureQuad {
           } )
         ] : [] ),
         ...( partialChargesVisible ? [
-          // TODO: string for partial charge label, see https://github.com/phetsims/molecule-polarity/issues/32
-          new Text( `δ=${toFixed( atom.getPartialCharge(), 2 )}`, { font: smallFont, fill: labelFillProperty } )
+          new Text( getPartialChargeString(), { font: smallFont, fill: labelFillProperty } )
         ] : [] )
       ],
       center: new Vector2( 256, 128 )
@@ -64,11 +80,19 @@ export default class AtomLabelView extends TextureQuad {
     this.disposeCallbacks.push( () => labelNodeTexture.dispose() );
 
     // We'll need to repaint the texture when the color changes
-    const colorReloadListener = () => {
+    const labelTextureUpdateListener = () => {
       labelNodeTexture.update();
     };
-    labelFillProperty.link( colorReloadListener );
-    this.disposeCallbacks.push( () => labelFillProperty.unlink( colorReloadListener ) );
+    labelFillProperty.link( labelTextureUpdateListener );
+    this.disposeCallbacks.push( () => labelFillProperty.unlink( labelTextureUpdateListener ) );
+
+    // If our translated string for deltas gets a translation update, redraw
+    if ( deltaStringProperty ) {
+      deltaStringProperty.link( labelTextureUpdateListener );
+      this.disposeCallbacks.push( () => {
+        deltaStringProperty.unlink( labelTextureUpdateListener );
+      } );
+    }
 
     ( this as unknown as THREE.Object3D ).renderOrder = ATOM_LABEL_RENDER_ORDER;
 

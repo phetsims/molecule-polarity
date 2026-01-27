@@ -78,6 +78,8 @@ type StringsType = {
   'dipoleDirectionDescriptionStringProperty': LocalizedStringProperty;
   'deltaPlusStringProperty': LocalizedStringProperty;
   'deltaMinusStringProperty': LocalizedStringProperty;
+  'deltaNonNegativeValueStringProperty': LocalizedStringProperty;
+  'deltaNegativeValueStringProperty': LocalizedStringProperty;
   'surfaceColorRealMoleculesStringProperty': LocalizedStringProperty;
   'surfaceColorDescriptionStringProperty': LocalizedStringProperty;
   'underDevelopment': {
