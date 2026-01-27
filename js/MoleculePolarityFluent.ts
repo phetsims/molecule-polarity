@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -401,8 +401,8 @@ const MoleculePolarityFluent = {
         partialChargeContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_partialChargeContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.partialChargeContextStringProperty' ), [{"name":"progress"}] ),
         partialChargeSignChange: new FluentPattern<{ sign: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_partialChargeSignChange', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.partialChargeSignChangeStringProperty' ), [{"name":"sign"}] ),
         bondCharacterContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_bondCharacterContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.bondCharacterContextStringProperty' ), [{"name":"progress"}] ),
-        electrostaticContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electrostaticContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' ), [{"name":"progress"}] ),
-        electronDensityContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electronDensityContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' ), [{"name":"progress"}] ),
+        electrostaticContext: new FluentPattern<{ atom: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electrostaticContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' ), [{"name":"atom"},{"name":"progress"}] ),
+        electronDensityContext: new FluentPattern<{ atom: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electronDensityContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' ), [{"name":"atom"},{"name":"progress"}] ),
         electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' ) )
       },
       bondDipoleCheckbox: {

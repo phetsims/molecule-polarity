@@ -85,8 +85,8 @@ a11y:
       partialChargeContext: 'Partial charge is { $progress }.'
       partialChargeSignChange: 'Partial charge now { $sign }.'
       bondCharacterContext: 'Bond is { $progress }.'
-      electrostaticContext: '{ $progress } electrostatic potential.'
-      electronDensityContext: '{ $progress } electron density.'
+      electrostaticContext: 'Atom { $atom }: { $progress } electrostatic potential.'
+      electronDensityContext: 'Atom { $atom }: { $progress } electron density.'
       electricFieldContext: 'Molecule aligned with electric field.'
     bondDipoleCheckbox:
       accessibleName: 'Bond Dipole'
@@ -224,12 +224,6 @@ a11y:
       more: 'more'
       less: 'less'
 
-  # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
-  electronDensityProgressUppercase:
-    select_progress:
-      more: 'More'
-      less: 'Less'
-  
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotential:
     select_potential:

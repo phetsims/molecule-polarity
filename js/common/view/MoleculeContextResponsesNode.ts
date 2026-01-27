@@ -151,14 +151,16 @@ export default class MoleculeContextResponsesNode extends Node {
     );
     surfaceType === 'electrostaticPotential' && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgressUppercase.format( {
+        atom: this.atom.label,
+        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
           progress: this.changeInENtoProgress( invertedDeltaEN, changeInEN )
         } )
       } )
     );
     surfaceType === 'electronDensity' && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-        progress: MoleculePolarityFluent.a11y.electronDensityProgressUppercase.format( {
+        atom: this.atom.label,
+        progress: MoleculePolarityFluent.a11y.electronDensityProgress.format( {
           progress: changeInEN > 0 ? 'more' : 'less'
         } )
       } )
