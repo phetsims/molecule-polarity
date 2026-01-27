@@ -165,7 +165,7 @@
     "value": "Dipole direction:"
   },
   "dipoleDirectionDescription": {
-    "value": "The convention used to show direction of bond dipoles"
+    "value": "The convention used to show direction of dipoles."
   },
   "deltaPlus": {
     "value": "δ+"
@@ -189,7 +189,7 @@
     "value": "Surface color (Real Molecules only):"
   },
   "surfaceColorDescription": {
-    "value": "Color gradient used to represent positive and negative electrostatic potential"
+    "value": "Color gradient used to represent positive and negative electrostatic potential."
   },
   "underDevelopment.line1": {
     "value": "Real Molecules is not currently available in HTML5."
