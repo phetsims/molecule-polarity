@@ -43,11 +43,43 @@ export default class BondView extends THREE.Object3D {
     MPColors.bondProperty.link( colorListener );
     this.disposeCallbacks.push( () => MPColors.bondProperty.unlink( colorListener ) );
 
-    for ( let i = 0; i < bond.bondType; i++ ) {
-      const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
-      mesh.renderOrder = BOND_RENDER_ORDER;
-      this.add( mesh );
-      this.meshes.push( mesh );
+    if ( bond.bondType !== 1.5 ) {
+      for ( let i = 0; i < bond.bondType; i++ ) {
+        const mesh = new THREE.Mesh( bondGeometry, bondMaterial );
+        mesh.renderOrder = BOND_RENDER_ORDER;
+        this.add( mesh );
+        this.meshes.push( mesh );
+      }
+    }
+    else {
+      const basicMesh = new THREE.Mesh( bondGeometry, bondMaterial );
+      basicMesh.renderOrder = BOND_RENDER_ORDER;
+      this.add( basicMesh );
+      this.meshes.push( basicMesh );
+
+      const dashCount = 5;
+
+      const instancedMesh = new THREE.InstancedMesh( bondGeometry, bondMaterial, dashCount );
+      instancedMesh.renderOrder = BOND_RENDER_ORDER;
+      this.add( instancedMesh );
+      this.meshes.push( instancedMesh );
+
+      for ( let i = 0; i < dashCount; i++ ) {
+        const m = new THREE.Matrix4();
+        const y = -0.5 + ( i + 0.5 ) / dashCount;
+        const sy = 0.5 / dashCount;
+
+        m.set(
+          1, 0, 0, 0,
+          0, sy, 0, y,
+          0, 0, 1, 0,
+          0, 0, 0, 1
+        );
+
+        instancedMesh.setMatrixAt( i, m );
+      }
+
+      instancedMesh.instanceMatrix.needsUpdate = true;
     }
   }
 
@@ -92,6 +124,7 @@ export default class BondView extends THREE.Object3D {
       case 1:
         offsets = [ new Vector3( 0, 0, 0 ) ];
         break;
+      case 1.5:
       case 2:
         offsets = [ perpendicular.timesScalar( bondSeparation / 2 ), perpendicular.timesScalar( -bondSeparation / 2 ) ];
         break;

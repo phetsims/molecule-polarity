@@ -127,7 +127,7 @@ export default class RealMolecule extends PhetioObject {
         return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
       } )!;
 
-      return new RealBond( atomA, atomB, bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ), this.isAdvancedProperty );
+      return new RealBond( atomA, atomB, this.symbol === 'O3' ? 1.5 : bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ), this.isAdvancedProperty );
     } );
 
     this.realMolecularDipole = new Vector3( moleculeData.molecularDipole[ 0 ], moleculeData.molecularDipole[ 1 ], moleculeData.molecularDipole[ 2 ] );
@@ -563,7 +563,7 @@ export class RealBond {
   public constructor(
     public readonly atomA: RealAtom,
     public readonly atomB: RealAtom,
-    public readonly bondType: 1 | 2 | 3,
+    public readonly bondType: 1 | 1.5 | 2 | 3,
     public readonly realBondDipole: Vector3,
     public isAdvancedProperty: TReadOnlyProperty<boolean>
   ) {
