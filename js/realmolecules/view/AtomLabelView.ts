@@ -22,6 +22,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -47,14 +48,6 @@ export default class AtomLabelView extends TextureQuad {
       : MoleculePolarityFluent.deltaNegativeValueStringProperty
     ) : null;
 
-    const getPartialChargeString = () => {
-      const partialCharge = atom.getPartialCharge();
-
-      return StringUtils.fillIn( deltaStringProperty!.value, {
-        partialCharge: toFixed( Math.abs( partialCharge ), 2 )
-      } );
-    };
-
     const labelNode = new VBox( {
       children: [
         ...( atomLabelsVisible ? [
@@ -65,14 +58,23 @@ export default class AtomLabelView extends TextureQuad {
           } )
         ] : [] ),
         ...( partialChargesVisible ? [
-          new Text( getPartialChargeString(), {
+          new Text( new DerivedProperty( [ deltaStringProperty! ], deltaString => {
+            const partialCharge = atom.getPartialCharge();
+
+            return StringUtils.fillIn( deltaString, {
+              partialCharge: toFixed( Math.abs( partialCharge ), 2 )
+            } );
+          } ), {
             font: smallFont,
             fill: labelFillProperty,
             maxWidth: 500
           } )
         ] : [] )
-      ],
-      center: new Vector2( 256, 128 )
+      ]
+    } );
+
+    labelNode.localBoundsProperty.link( () => {
+      labelNode.center = new Vector2( 256, 128 );
     } );
 
     const labelNodeTexture = new NodeTexture( labelNode, {
