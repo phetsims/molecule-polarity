@@ -87,25 +87,26 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           }
         );
       }
-      previousMolecularDipoleMagnitude = currentDipole.magnitude;
     };
 
     molecule.bondAngleABProperty.link( angle => {
       if ( viewProperties.bondDipolesVisibleProperty.value ) {
         bondDipoleChangeContextResponse( angle, molecule.bondAB, false );
       }
-      if ( molecule.dipoleProperty.value.magnitude > 1e-5 && viewProperties.molecularDipoleVisibleProperty.value ) {
+      if ( viewProperties.molecularDipoleVisibleProperty.value ) {
         molecularDipoleChangeContextResponse();
       }
+      previousMolecularDipoleMagnitude = molecule.dipoleProperty.value.magnitude;
     } );
 
     molecule.bondAngleBCProperty.link( angle => {
       if ( viewProperties.bondDipolesVisibleProperty.value ) {
         bondDipoleChangeContextResponse( angle, molecule.bondBC, true );
       }
-      if ( molecule.dipoleProperty.value.magnitude > 1e-5 && viewProperties.molecularDipoleVisibleProperty.value ) {
+      if ( viewProperties.molecularDipoleVisibleProperty.value ) {
         molecularDipoleChangeContextResponse();
       }
+      previousMolecularDipoleMagnitude = molecule.dipoleProperty.value.magnitude;
     } );
 
     molecule.angleProperty.link( () => {
