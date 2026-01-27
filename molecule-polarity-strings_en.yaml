@@ -53,7 +53,7 @@ tetrafluoromethane: tetrafluoromethane
 trifluoromethane: trifluoromethane
 water: water
 dipoleDirection: 'Dipole direction:'
-dipoleDirectionDescription: 'The convention used to show direction of bond dipoles'
+dipoleDirectionDescription: 'The convention used to show direction of dipoles.'
 deltaPlus: δ+
 deltaMinus: δ−
 deltaNonNegativeValue: 'δ={{partialCharge}}'
@@ -61,7 +61,7 @@ deltaNegativeValue: 'δ=−{{partialCharge}}'
 pattern.dipoleDirection: '{{from}} → {{to}}'
 pattern.deltaEquals: 'δ={{partialCharge}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules only):'
-surfaceColorDescription: 'Color gradient used to represent positive and negative electrostatic potential'
+surfaceColorDescription: 'Color gradient used to represent positive and negative electrostatic potential.'
 underDevelopment.line1: Real Molecules is not currently available in HTML5.
 underDevelopment.line2: If your device runs Java, you can use the Java version at
 
