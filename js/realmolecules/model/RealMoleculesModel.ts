@@ -17,9 +17,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import { BondDipoleModel } from './BondDipoleModel.js';
-import { FieldModel } from './FieldModel.js';
 import RealMolecule, { MoleculeGeometry, MoleculeSymbols } from './RealMolecule.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
@@ -34,9 +33,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   // the rotation of the molecule view
   public readonly moleculeQuaternionProperty: Property<THREE.Quaternion>;
 
-  public readonly bondDipoleModelProperty = new Property<BondDipoleModel>( 'mulliken' );
-
-  public readonly fieldModelProperty = new Property<FieldModel>( 'java' );
+  public readonly isAdvancedProperty = new BooleanProperty( false );
 
   public readonly dipoleScaleProperty = new Property<number>( 0.25 );
 
@@ -60,9 +57,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
         symbol,
         nameStringProperty,
         geometry,
-        // CH2F2 override to use the Java model
-        ( symbol === 'CH2F2' ) ? new Property<BondDipoleModel>( 'java' ) : this.bondDipoleModelProperty,
-        this.fieldModelProperty,
+        this.isAdvancedProperty,
         this.dipoleScaleProperty,
         moleculesTandem.createTandem( symbol )
       );
@@ -88,7 +83,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       createMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty, 'tetrahedral' ),
-      // createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty, 'tetrahedral' ),
+      createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty, 'tetrahedral' ),
       createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty, 'tetrahedral' )
     ];
@@ -164,16 +159,16 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
         0.6719318351528544
       );
     }
-    // else if (
-    //   molecule.symbol === 'CHF3'
-    // ) {
-    //   this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-    //     0.017834718285708984,
-    //     -0.7400716028848267,
-    //     0.6715496673518707,
-    //     0.03157514381184575
-    //   );
-    // }
+    else if (
+      molecule.symbol === 'CHF3'
+    ) {
+      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
+        0.017834718285708984,
+        -0.7400716028848267,
+        0.6715496673518707,
+        0.03157514381184575
+      );
+    }
     else if (
       molecule.symbol === 'CF4'
     ) {
@@ -202,8 +197,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   public reset(): void {
     this.moleculeProperty.reset();
     this.moleculeQuaternionProperty.reset();
-    this.bondDipoleModelProperty.reset();
-    this.fieldModelProperty.reset();
+    this.isAdvancedProperty.reset();
     this.dipoleScaleProperty.reset();
     this.updateRotation( this.moleculeProperty.value );
   }

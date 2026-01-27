@@ -20,8 +20,6 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import { BondDipoleModel } from './BondDipoleModel.js';
-import { FieldModel } from './FieldModel.js';
 import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
 import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
 import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
@@ -29,11 +27,11 @@ import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
 export type MoleculeSymbols = 'H2' | 'N2' | 'O2' | 'F2' | 'HF' | 'H2O' | 'CO2' | 'HCN' | 'O3' | 'NH3' | 'BH3' |
-  'BF3' | 'CH2O' | 'CH4' | 'CH3F' | 'CH2F2' | 'CHCl3' | 'CF4'; // | 'CHF3';
+  'BF3' | 'CH2O' | 'CH4' | 'CH3F' | 'CH2F2' | 'CHF3' | 'CHCl3' | 'CF4';
 
 export type MoleculeNames = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' |
   'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' |
-  'methane' | 'fluoromethane' | 'difluoromethane' | 'tetrafluoromethane' | 'chloroform'; // | 'trifluoromethane';
+  'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform';
 
 // Visualization constants for dipoles
 const DEFAULT_DIPOLE_FACTOR = 1.3;
@@ -61,16 +59,15 @@ export default class RealMolecule extends PhetioObject {
    * @param symbol - chemical symbol of the molecule
    * @param fullNameProperty - full name of the molecule
    * @param geometry - geometry of the molecule (linear, bent, tetrahedral, etc.)
-   * @param bondDipoleModelProperty - determines how bond dipoles are calculated
-   * @param fieldModelProperty - determines how fields (ESP, electron density) are calculated
+   * @param isAdvancedProperty - whether to use advanced or basic models
+   * @param dipoleScaleProperty - scale for dipole visualization
    * @param tandem
    */
   public constructor(
     public symbol: MoleculeSymbols,
     public fullNameProperty: TReadOnlyProperty<string>,
     public geometry: MoleculeGeometry,
-    public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
-    public fieldModelProperty: TReadOnlyProperty<FieldModel>,
+    public isAdvancedProperty: TReadOnlyProperty<boolean>,
     public dipoleScaleProperty: TReadOnlyProperty<number>,
     tandem: Tandem
   ) {
@@ -116,7 +113,7 @@ export default class RealMolecule extends PhetioObject {
         moleculeData.eem[ atomIndex ],
         moleculeData.qtpie[ atomIndex ],
         new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset ),
-        this.bondDipoleModelProperty
+        this.isAdvancedProperty
       );
     } );
 
@@ -130,7 +127,7 @@ export default class RealMolecule extends PhetioObject {
         return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
       } )!;
 
-      return new RealBond( atomA, atomB, bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ), this.bondDipoleModelProperty );
+      return new RealBond( atomA, atomB, bondData.bondType, new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ), this.isAdvancedProperty );
     } );
 
     this.realMolecularDipole = new Vector3( moleculeData.molecularDipole[ 0 ], moleculeData.molecularDipole[ 1 ], moleculeData.molecularDipole[ 2 ] );
@@ -189,7 +186,7 @@ export default class RealMolecule extends PhetioObject {
    * Returns the electrostatic potential at the given vertex.
    */
   public getElectrostaticPotential( vertex: SurfaceVertex ): number {
-    if ( this.fieldModelProperty.value === 'psi4' ) {
+    if ( this.isAdvancedProperty.value ) {
       return vertex.espValue;
     }
     else {
@@ -201,7 +198,7 @@ export default class RealMolecule extends PhetioObject {
    * Returns the electron density at the given vertex.
    */
   public getElectronDensity( vertex: SurfaceVertex ): number {
-    if ( this.fieldModelProperty.value === 'psi4' ) {
+    if ( this.isAdvancedProperty.value ) {
       return vertex.dtValue;
     }
     else {
@@ -221,7 +218,7 @@ export default class RealMolecule extends PhetioObject {
     for ( let i = 0; i < this.atoms.length; i++ ) {
       const atom = this.atoms[ i ];
       const distance = point.distance( atom.position );
-      const partialCharge = atom.simplifiedPartialCharge;
+      const partialCharge = atom.simplifiedPartialCharge; // Hardcoded to the old Java model, for consistent appearance
 
       espValue += partialCharge / distance;
     }
@@ -241,44 +238,26 @@ export default class RealMolecule extends PhetioObject {
    * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
    */
   public getDipoleScale(): number {
-    const maxScale = this.dipoleScaleProperty.value;
-    const maxMagnitude = 3;
+    if ( this.isAdvancedProperty.value ) {
+      const maxScale = this.dipoleScaleProperty.value;
+      const maxMagnitude = 3;
 
-    const bondBasedMolecularDipoleMagnitude = this.computeBondDipoleVectorSum().magnitude;
-    if ( bondBasedMolecularDipoleMagnitude <= 1e-5 ) {
-      return maxScale;
+      const bondBasedMolecularDipoleMagnitude = this.computeBondDipoleVectorSum().magnitude;
+      if ( bondBasedMolecularDipoleMagnitude <= 1e-5 ) {
+        return maxScale;
+      }
+
+      const referenceMolecularDipoleMagnitude = this.realMolecularDipole.magnitude;
+
+      // ( reference / bondBased ) * maxMagnitude * maxScale ????
+      if ( MPQueryParameters.debug3DModels ) {
+        console.log( this.symbol, 'reference / bondBased molecular dipole mag', referenceMolecularDipoleMagnitude, '/', bondBasedMolecularDipoleMagnitude, '=', referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude );
+      }
+      return ( referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude ) * maxMagnitude * maxScale;
     }
-
-    const referenceMolecularDipoleMagnitude = this.realMolecularDipole.magnitude;
-
-    // ( reference / bondBased ) * maxMagnitude * maxScale ????
-    if ( MPQueryParameters.debug3DModels ) {
-      console.log( this.symbol, 'reference / bondBased molecular dipole mag', referenceMolecularDipoleMagnitude, '/', bondBasedMolecularDipoleMagnitude, '=', referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude );
+    else {
+      return this.dipoleScaleProperty.value * 3;
     }
-    return ( referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude ) * maxMagnitude * maxScale;
-
-
-    // const constantDipoleScale = this.dipoleScaleProperty.value;
-    // if ( constantDipoleScale !== null ) {
-    //   return constantDipoleScale;
-    // }
-    // let globalScalePerDebye = Number.POSITIVE_INFINITY;
-    // const factor = this.getBondDipoleFactor();
-    // for ( const bond of this.bonds ) {
-    //   const muMag = bond.getDipoleMagnitudeDebye();
-    //   if ( muMag <= 1e-3 ) {
-    //     continue;
-    //   }
-    //
-    //   const cap = factor * bond.getVisibleLength();
-    //   globalScalePerDebye = Math.min( globalScalePerDebye, cap / muMag );
-    // }
-    //
-    // if ( !isFinite( globalScalePerDebye ) || globalScalePerDebye < 0 ) {
-    //   return 0;
-    // }
-    //
-    // return globalScalePerDebye;
   }
 
   /**
@@ -482,6 +461,7 @@ export default class RealMolecule extends PhetioObject {
       CH4: 'methane',
       CH3F: 'fluoromethane',
       CH2F2: 'difluoromethane',
+      CHF3: 'trifluoromethane',
       CHCl3: 'chloroform',
       CF4: 'tetrafluoromethane'
       // CHF3: 'trifluoromethane',
@@ -549,46 +529,14 @@ export class RealAtom {
     public eemPartialCharge: number,
     public qtpiePartialCharge: number,
     public position: Vector3,
-    public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>
+    public isAdvancedProperty: TReadOnlyProperty<boolean>
   ) {
 
   }
 
   public getPartialCharge(): number {
-    const bondDipoleModel = this.bondDipoleModelProperty.value;
-    if ( bondDipoleModel === 'electronegativity' || bondDipoleModel === 'psi4' ) {
-      return this.psi4PartialCharge;
-    }
-    else if ( bondDipoleModel === 'mulliken' ) {
-      return this.mullikenPartialCharge;
-    }
-    else if ( bondDipoleModel === 'loewdin' ) {
-      return this.loewdinPartialCharge;
-    }
-    else if ( bondDipoleModel === 'hirschfeld' ) {
-      return this.hirshfeldPartialCharge;
-    }
-    else if ( bondDipoleModel === 'mbis' ) {
-      return this.mbisPartialCharge;
-    }
-    else if ( bondDipoleModel === 'chelpg' ) {
-      return this.chelpgPartialCharge;
-    }
-    else if ( bondDipoleModel === 'java' ) {
-      return this.simplifiedPartialCharge;
-    }
-    else if ( bondDipoleModel === 'qeq' ) {
-      return this.qeqPartialCharge;
-    }
-    else if ( bondDipoleModel === 'eem' ) {
-      return this.eemPartialCharge;
-    }
-    else if ( bondDipoleModel === 'qtpie' ) {
-      return this.qtpiePartialCharge;
-    }
-    else {
-      throw new Error( `Unknown bond dipole model: ${bondDipoleModel}` );
-    }
+    // NOTE: if isAdvanced is false, we won't be displaying things based on partial charges, so just return hirshfeld
+    return this.hirshfeldPartialCharge;
   }
 
   public getColorProperty(): TReadOnlyProperty<Color> {
@@ -617,7 +565,7 @@ export class RealBond {
     public readonly atomB: RealAtom,
     public readonly bondType: 1 | 2 | 3,
     public readonly realBondDipole: Vector3,
-    public bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>
+    public isAdvancedProperty: TReadOnlyProperty<boolean>
   ) {
     atomA.bonds.push( this );
     atomB.bonds.push( this );
@@ -635,15 +583,17 @@ export class RealBond {
    * Unit direction vector from positive to negative end (Jmol convention), independent of orientation preference.
    */
   public getPositiveToNegativeDirection(): Vector3 {
-    if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
-      const en1 = this.atomA.element.electronegativity!;
-      const en2 = this.atomB.element.electronegativity!;
-      return ( ( en2 - en1 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
-    }
-    else {
+    if ( this.isAdvancedProperty.value ) {
+      // Partial charge based directions
       const c1 = this.atomA.getPartialCharge();
       const c2 = this.atomB.getPartialCharge();
       return ( ( c1 - c2 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
+    }
+    else {
+      // Electronegativity-based directions
+      const en1 = this.atomA.element.electronegativity!;
+      const en2 = this.atomB.element.electronegativity!;
+      return ( ( en2 - en1 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
     }
   }
 
@@ -673,17 +623,18 @@ export class RealBond {
    * Bond dipole magnitude in Debye (Jmol convention) using partial charges and bond distance.
    */
   public getDipoleMagnitudeDebye(): number {
-    if ( this.bondDipoleModelProperty.value === 'electronegativity' ) {
-      // An approximate value, we mainly just need relative magnitudes for visualization
-      return Math.abs( this.atomB.element.electronegativity! - this.atomA.element.electronegativity! );
-    }
-    else {
+    if ( this.isAdvancedProperty.value ) {
       const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
       const c1 = this.atomA.getPartialCharge();
       const c2 = this.atomB.getPartialCharge();
       const dist = this.getDistance();
       const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
       return Math.abs( valueDebye );
+    }
+    else {
+      // Electronegativity-based dipole magnitudes.
+      // An approximate value, we mainly just need relative magnitudes for visualization
+      return Math.abs( this.atomB.element.electronegativity! - this.atomA.element.electronegativity! );
     }
   }
 

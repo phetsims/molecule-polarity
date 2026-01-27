@@ -19,6 +19,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import AtomElectronegativitiesCheckbox from './AtomElectronegativitiesCheckbox.js';
 import AtomLabelsCheckbox from './AtomLabelsCheckbox.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
+import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -26,7 +27,11 @@ type RealMoleculesViewControlsOptions = SelfOptions & PickRequired<VBoxOptions, 
 
 export default class RealMoleculesViewControls extends VBox {
 
-  public constructor( viewProperties: RealMoleculesViewProperties, provideOptions: RealMoleculesViewControlsOptions ) {
+  public constructor(
+    isAdvancedProperty: PhetioProperty<boolean>,
+    viewProperties: RealMoleculesViewProperties,
+    provideOptions: RealMoleculesViewControlsOptions
+  ) {
 
     const options = optionize<RealMoleculesViewControlsOptions, SelfOptions, VBoxOptions>()( {
 
@@ -46,7 +51,8 @@ export default class RealMoleculesViewControls extends VBox {
     } );
 
     const partialChargesCheckbox = new PartialChargesCheckbox( viewProperties.partialChargesVisibleProperty, {
-      tandem: options.tandem.createTandem( 'partialChargesCheckbox' )
+      tandem: options.tandem.createTandem( 'partialChargesCheckbox' ),
+      visibleProperty: isAdvancedProperty
     } );
 
     const atomLabelsCheckbox = new AtomLabelsCheckbox( viewProperties.atomLabelsVisibleProperty, {

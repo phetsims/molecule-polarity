@@ -22,8 +22,6 @@ import SurfaceMesh from './SurfaceMesh.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AtomView from './AtomView.js';
 import BondView from './BondView.js';
-import { BondDipoleModel } from '../model/BondDipoleModel.js';
-import { FieldModel } from '../model/FieldModel.js';
 import MPColors from '../../common/MPColors.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 
@@ -31,8 +29,7 @@ export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
-    bondDipoleModelProperty: TReadOnlyProperty<BondDipoleModel>,
-    fieldModelProperty: TReadOnlyProperty<FieldModel>,
+    isAdvancedProperty: TReadOnlyProperty<boolean>,
     dipoleScaleProperty: TReadOnlyProperty<number>,
     visibleProperty: TReadOnlyProperty<boolean>,
     viewProperties: RealMoleculesViewProperties,
@@ -63,10 +60,9 @@ export default class RealMoleculeView extends THREE.Object3D {
       orientationSignProperty,
       MPPreferences.surfaceColorProperty,
       visibleProperty,
+      isAdvancedProperty,
 
       // Properties that trigger updates that don't need to be accessed here
-      bondDipoleModelProperty,
-      fieldModelProperty,
       dipoleScaleProperty,
       MPColors.moleculeSurfaceBackAlphaProperty,
       MPColors.moleculeSurfaceFrontAlphaProperty
@@ -79,8 +75,14 @@ export default class RealMoleculeView extends THREE.Object3D {
       bondDipolesVisible,
       orientationSign,
       surfaceColor,
-      visible
+      visible,
+      isAdvanced
     ) => {
+
+      // Hide partial charges if not in advanced mode
+      if ( !isAdvanced ) {
+        partialChargesVisible = false;
+      }
 
       // Clear out children
       while ( this.children.length > 0 ) {

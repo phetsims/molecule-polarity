@@ -28,7 +28,7 @@ export default class SurfaceMesh extends THREE.Object3D {
   ) {
     const toColor = surfaceType === 'electrostaticPotential'
       ? ( surfaceColor === 'rainbow' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
-      : ( molecule.fieldModelProperty.value === 'psi4' ? colorizeRealElectronDensity : colorizeJavaElectronDensity );
+      : ( molecule.isAdvancedProperty.value ? colorizeRealElectronDensity : colorizeJavaElectronDensity );
 
     const meshGeometry = new THREE.BufferGeometry();
     meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {

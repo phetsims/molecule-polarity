@@ -35,7 +35,7 @@ export default class SurfaceControl extends VBox {
 
     const options = optionize<SurfaceControlOptions, SelfOptions, VBoxOptions>()( {
 
-      // Self otpions
+      // Self options
       electrosaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
 
       // VBoxOptions

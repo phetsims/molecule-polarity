@@ -45,7 +45,10 @@ type StringsType = {
   'noneStringProperty': LocalizedStringProperty;
   'electrostaticPotentialStringProperty': LocalizedStringProperty;
   'electronDensityStringProperty': LocalizedStringProperty;
+  'basicStringProperty': LocalizedStringProperty;
+  'advancedStringProperty': LocalizedStringProperty;
   'surfaceStringProperty': LocalizedStringProperty;
+  'modelStringProperty': LocalizedStringProperty;
   'viewStringProperty': LocalizedStringProperty;
   'atomLabelsStringProperty': LocalizedStringProperty;
   'moleculeStringProperty': LocalizedStringProperty;

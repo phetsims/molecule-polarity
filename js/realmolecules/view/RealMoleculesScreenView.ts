@@ -131,7 +131,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     const colorKeyNode = new RealMoleculesColorKeyNode( viewProperties.surfaceTypeProperty,
       MPPreferences.surfaceColorProperty, tandem.createTandem( 'colorKeyNode' ) );
 
-    const controlPanel = new RealMoleculesControlPanel( viewProperties, {
+    const controlPanel = new RealMoleculesControlPanel( model.isAdvancedProperty, viewProperties, {
       tandem: tandem.createTandem( 'controlPanel' )
     } );
 
@@ -270,50 +270,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         };
       };
 
-      const bondDipoleNode = new HBox( {
-        spacing: 20,
-        scale: 0.8,
-        children: [
-          new Text( 'Bond Dipole Model:', { fontSize: 16 } ),
-          new HorizontalAquaRadioButtonGroup( model.bondDipoleModelProperty, [
-            createItem( 'electronegativity', 'Electronegativity' ),
-            createItem( 'java', 'Java' ),
-            createItem( 'mulliken', 'Mulliken' ),
-            createItem( 'loewdin', 'Loewdin' ),
-            createItem( 'hirschfeld', 'Hirschfeld' ),
-            createItem( 'mbis', 'MBIS' ),
-            createItem( 'psi4', 'Psi4' ),
-            createItem( 'chelpg', 'CHELPG' ),
-            createItem( 'qeq', 'QEq' ),
-            createItem( 'eem', 'EEM' ),
-            createItem( 'qtpie', 'QTPIE' )
-          ], {
-            spacing: 20
-          } )
-        ]
-      } );
-
-      rootNode.addChild( bondDipoleNode );
-
-      bondDipoleNode.top = 1;
-      bondDipoleNode.left = 1;
-
-      const fieldNode = new HBox( {
-        spacing: 20,
-        children: [
-          new Text( 'Field Model:', { fontSize: 16 } ),
-          new HorizontalAquaRadioButtonGroup( model.fieldModelProperty, [
-            createItem( 'java', 'Java' ),
-            createItem( 'psi4', 'Psi4' )
-          ], { spacing: 20 } )
-        ]
-      } );
-
-      rootNode.addChild( fieldNode );
-
-      fieldNode.top = bondDipoleNode.bottom + 3;
-      fieldNode.left = 1;
-
       const dipoleScaleNode = new HBox( {
         spacing: 20,
         children: [
@@ -336,10 +292,10 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         ]
       } );
 
-      rootNode.addChild( dipoleScaleNode );
-
-      dipoleScaleNode.top = fieldNode.bottom + 3;
+      dipoleScaleNode.top = 1;
       dipoleScaleNode.left = 1;
+
+      rootNode.addChild( dipoleScaleNode );
     }
 
     // Camera settings
@@ -376,8 +332,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.moleculeView = new RealMoleculeView(
       model.moleculeProperty,
       model.moleculeQuaternionProperty,
-      model.bondDipoleModelProperty,
-      model.fieldModelProperty,
+      model.isAdvancedProperty,
       model.dipoleScaleProperty,
       moleculeNode.visibleProperty,
       viewProperties,

@@ -15,10 +15,11 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPCheckbox, { MPCheckboxOptions } from './MPCheckbox.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type PartialChargesCheckboxOptions = SelfOptions & PickRequired<MPCheckboxOptions, 'tandem'>;
+type PartialChargesCheckboxOptions = SelfOptions & PickRequired<MPCheckboxOptions, 'tandem'> & PickOptional<MPCheckboxOptions, 'visibleProperty'>;
 
 export default class PartialChargesCheckbox extends MPCheckbox {
 

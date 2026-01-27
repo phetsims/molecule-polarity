@@ -23,7 +23,10 @@ pattern.symbolName: '{{symbol}} ({{name}})'
 none: None
 electrostaticPotential: Electrostatic Potential
 electronDensity: Electron Density
+basic: Basic
+advanced: Advanced
 surface: Surface
+model: Model
 view: View
 atomLabels: Atom Labels
 molecule: 'Molecule:'
@@ -558,6 +561,7 @@ a11y:
           methane: 'The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:'
           fluoromethane: 'The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
           difluoromethane: 'The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
+          trifluoromethane: 'The molecule upper C upper H upper F3 has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine. The molecule has:'
           tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:'
           chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:'
       bondDipole:
@@ -578,6 +582,7 @@ a11y:
           methane: Small bond dipoles.
           fluoromethane: Small carbon hydrogen bond dipoles, large carbon fluorine bond dipole.
           difluoromethane: Tiny carbon hydrogen bond dipoles, large carbon fluorine bond dipoles.
+          trifluoromethane: Small carbon hydrogen bond dipole, large carbon fluorine bond dipoles.
           tetrafluoromethane: Large carbon fluorine bond dipoles.
           chloroform: Small carbon hydrogen bond dipole, medium carbon chlorine bond dipoles.
       molecularDipole:
@@ -598,6 +603,7 @@ a11y:
           methane: No molecular dipole.
           fluoromethane: Large molecular dipole, pointing towards fluorine.
           difluoromethane: Large molecular dipole, pointing towards fluorines.
+          trifluoromethane: Medium molecular dipole, pointing towards fluorines.
           tetrafluoromethane: No molecular dipole.
           chloroform: Medium molecular dipole, pointing towards chlorines.
       partialCharges:
@@ -618,6 +624,7 @@ a11y:
           methane: Partial charge for hydrogen is +0.15, for carbon is -0.58.
           fluoromethane: Partial charge for hydrogen is +0.15, for carbon is -0.05, for fluorine is -0.41.
           difluoromethane: Partial charge for hydrogen is +0.11, for carbon is +0.10, for fluorine is -0.16.
+          trifluoromethane: Partial charge for hydrogen is +0.07, for carbon is +0.25, for fluorine is -0.11.
           tetrafluoromethane: Partial charge for carbon is +0.74, for fluorine is -0.18.
           chloroform: Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.
       electronegativity:
@@ -638,6 +645,7 @@ a11y:
           methane: Electronegativity for hydrogen is low at 2.1, for carbon is medium-low at 2.5.
           fluoromethane: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
           difluoromethane: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
+          trifluoromethane: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to fluorine at 4.0.
           tetrafluoromethane: Electronegativity for carbon is medium-high at 2.5, for fluorine is very high at 4.0.
           chloroform: Electronegativity increases from hydrogen at 2.1, to carbon at 2.5, to chlorine at 3.0.
       electrostaticPotential:
@@ -658,6 +666,7 @@ a11y:
           methane: Medium electrostatic potential difference with even distribution.
           fluoromethane: Large electrostatic potential difference across molecule.
           difluoromethane: Very large electrostatic potential difference across molecule.
+          trifluoromethane: Large electrostatic potential difference across molecule.
           tetrafluoromethane: Small electrostatic potential difference with even distribution.
           chloroform: Medium electrostatic potential difference across molecule.
       electronDensity:
@@ -678,5 +687,6 @@ a11y:
           methane: Electron density is unevenly shared, but symmetrically arranged.
           fluoromethane: Electron density is very unevenly shared, shifted towards fluorine.
           difluoromethane: Electron density is very unevenly shared, shifted towards fluorines.
+          trifluoromethane: Electron density is unevenly shared, shifted towards fluorines.
           tetrafluoromethane: Electron density is unevenly shared, but symmetrically arranged.
           chloroform: Electron density is unevenly shared, shifted towards chlorines.
