@@ -239,8 +239,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     // layout ---------------------------------
 
     // right of viewer
-    controlPanel.right = this.layoutBounds.right - 25;
-    controlPanel.centerY = this.layoutBounds.centerY;
+    controlPanel.right = this.layoutBounds.right - 40;
+    controlPanel.centerY = this.layoutBounds.centerY - resetAllButton.height;
 
     const layoutCenter = ( controlPanel.left + this.layoutBounds.left ) / 2;
 
