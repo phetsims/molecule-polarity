@@ -60,11 +60,16 @@ export default class AtomLabelView extends TextureQuad {
         ...( atomLabelsVisible ? [
           new Text( showIndex ? `${element.symbol}${atomVisualIndex + 1}` : `${element.symbol}`, {
             font: labelFont,
-            fill: labelFillProperty
+            fill: labelFillProperty,
+            maxWidth: 500
           } )
         ] : [] ),
         ...( partialChargesVisible ? [
-          new Text( getPartialChargeString(), { font: smallFont, fill: labelFillProperty } )
+          new Text( getPartialChargeString(), {
+            font: smallFont,
+            fill: labelFillProperty,
+            maxWidth: 500
+          } )
         ] : [] )
       ],
       center: new Vector2( 256, 128 )
