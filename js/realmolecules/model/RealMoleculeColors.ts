@@ -13,6 +13,7 @@ import Color from '../../../../scenery/js/util/Color.js';
 import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { linear } from '../../../../dot/js/util/linear.js';
 
 export const elementToColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
   switch( element.symbol ) {
@@ -203,7 +204,16 @@ export const colorizeRealElectronDensity = ( densityValue: number ): number[] =>
   const white = MPColors.surfaceBWWhiteProperty.value;
   const black = MPColors.surfaceBWBlackProperty.value;
 
-  const clampedValue = clamp( 1 - densityValue, 0, 1 );
+  const easing = ( n: number, t: number ): number => {
+    if ( t <= 0.5 ) {
+      return 0.5 * Math.pow( 2 * t, n );
+    }
+    else {
+      return 1 - easing( n, 1 - t );
+    }
+  };
+
+  const clampedValue = easing( 3, clamp( linear( 0.1, 0.9, 1, 0, densityValue ), 0, 1 ) );
 
   return [
     ( black.r + ( white.r - black.r ) * clampedValue ) / 255,
