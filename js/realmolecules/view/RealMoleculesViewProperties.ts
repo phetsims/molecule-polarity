@@ -53,7 +53,7 @@ export default class RealMoleculesViewProperties {
       phetioFeatured: true
     } );
 
-    this.atomLabelsVisibleProperty = new BooleanProperty( false, {
+    this.atomLabelsVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'atomLabelsVisibleProperty' ),
       phetioFeatured: true
     } );
