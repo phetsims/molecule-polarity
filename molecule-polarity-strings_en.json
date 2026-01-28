@@ -250,10 +250,10 @@
           "value": "Bond is { $progress }."
         },
         "electrostaticContext": {
-          "value": "Atom { $atom }: { $progress } electrostatic potential."
+          "value": "Atom { $atom } { $progress } electrostatic potential."
         },
         "electronDensityContext": {
-          "value": "Atom { $atom }: { $progress } electron density."
+          "value": "Atom { $atom } { $progress } electron density."
         },
         "electricFieldContext": {
           "value": "Molecule aligned with electric field."
