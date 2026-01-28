@@ -107,6 +107,8 @@ export default class AtomLabelView extends TextureQuad {
 
     this.molecule = molecule;
     this.atom = atom;
+
+    this.layers.set( 1 );
   }
 
   public update( parent: THREE.Object3D ): void {

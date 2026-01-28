@@ -34,7 +34,9 @@ export default class DipoleArrowView extends THREE.Object3D {
 
     const colorProperty = isBondDipole ? MPColors.bondDipoleProperty : MPColors.molecularDipoleProperty;
 
-    const material = new THREE.MeshLambertMaterial();
+    const material = new THREE.MeshLambertMaterial( {
+      depthWrite: false
+    } );
     this.material = material;
     this.disposeCallbacks.push( () => material.dispose() );
 
