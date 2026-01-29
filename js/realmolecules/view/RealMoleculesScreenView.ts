@@ -208,7 +208,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
-        moleculeName: new DerivedProperty( [ dynamicMoleculeNameProperty ], name => StringUtils.capitalize( name ) )
+        moleculeName: new DerivedProperty( [ dynamicMoleculeNameProperty ], name => {
+          const words = name.split( ' ' );
+          const capitalizedWords = words.map( word => StringUtils.capitalize( word ) );
+          return capitalizedWords.join( ' ' );
+        } )
       } )
     } );
     this.addChild( moleculeDescriptionNode );
