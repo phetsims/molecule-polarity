@@ -129,13 +129,23 @@ export default class RealMolecule extends PhetioObject {
         return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
       } )!;
 
+      // Handle specific reversed bonds, see https://github.com/phetsims/molecule-polarity/issues/231
+      let initialBondReversed = false;
+      if (
+        ( symbol === 'CH3F' && bondData.indexA === 0 && bondData.indexB === 1 ) ||
+        ( symbol === 'CHCl3' && bondData.indexA === 3 && bondData.indexB === 4 )
+      ) {
+        initialBondReversed = true;
+      }
+
       return new RealBond(
         atomA,
         atomB,
         this.symbol === 'O3' ? 1.5 : bondData.bondType,
         new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ),
         this.realMolecularDipole,
-        this.isAdvancedProperty
+        this.isAdvancedProperty,
+        initialBondReversed
       );
     } );
 
@@ -573,7 +583,8 @@ export class RealBond {
     public readonly bondType: 1 | 1.5 | 2 | 3,
     public readonly realBondDipole: Vector3,
     public readonly realMolecularDipole: Vector3, // needed for positioning 1.5 bond dashes
-    public isAdvancedProperty: TReadOnlyProperty<boolean>
+    public isAdvancedProperty: TReadOnlyProperty<boolean>,
+    public initialBondReversed: boolean
   ) {
     atomA.bonds.push( this );
     atomB.bonds.push( this );

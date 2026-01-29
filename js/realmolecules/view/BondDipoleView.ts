@@ -89,6 +89,9 @@ export default class BondDipoleView extends THREE.Object3D {
       const d2 = negatedPerpendicular.dot( this.lastOffsetDir );
       chosen = ( d2 > d1 ) ? negatedPerpendicular : perpendicular;
     }
+    else if ( this.bond.initialBondReversed ) {
+      chosen = negatedPerpendicular;
+    }
     this.lastOffsetDir = chosen;
 
     const muMag = this.bond.getDipoleMagnitudeDebye();
