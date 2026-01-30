@@ -13,6 +13,9 @@ import Color from '../../../../scenery/js/util/Color.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { linear } from '../../../../dot/js/util/linear.js';
 
+/**
+ * Returns the color property for the given element (for atom coloring / background color)
+ */
 export const elementToColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
   switch( element.symbol ) {
     case 'B':
@@ -34,6 +37,9 @@ export const elementToColorProperty = ( element: Element ): TReadOnlyProperty<Co
   }
 };
 
+/**
+ * Returns the foreground color property for the given element (for text/icons on top of atom)
+ */
 export const elementToForegroundColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
   switch( element.symbol ) {
     case 'B':
@@ -58,7 +64,7 @@ export const elementToForegroundColorProperty = ( element: Element ): TReadOnlyP
 /**
  * Red-White-Blue bipolar palette for electrostatic potential.
  * Positive -> blue, Negative -> red. Input is the raw ESP value; scaling matches existing view logic.
- * Returns normalized RGB components in [0,1].
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
  */
 export const colorizeElectrostaticPotentialRWB = ( espValue: number ): number[] => {
   const scaled = espValue * 15; // match existing scale
@@ -92,7 +98,7 @@ export const colorizeElectrostaticPotentialRWB = ( espValue: number ): number[] 
 /**
  * Rainbow ROYGB palette for electrostatic potential.
  * We normalize similarly to RWB, then interpolate across [red, orange, yellow, green, blue].
- * Returns normalized RGB components in [0,1].
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
  */
 export const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[] => {
   // Normalize to [0,1] with same scale and center at 0
@@ -112,12 +118,18 @@ export const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[
   ];
 };
 
+/**
+ * Black-White palette for electron density.
+ * Low density -> black, High density -> white. Input is the raw density value; scaling matches existing view logic.
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
+ */
 export const colorizeRealElectronDensity = ( densityValue: number ): number[] => {
   densityValue *= 200;
 
   const white = MPColors.surfaceBWWhiteProperty.value;
   const black = MPColors.surfaceBWBlackProperty.value;
 
+  // We enhance the contrast partly by using polynomial easing
   const easing = ( n: number, t: number ): number => {
     if ( t <= 0.5 ) {
       return 0.5 * Math.pow( 2 * t, n );
@@ -127,6 +139,7 @@ export const colorizeRealElectronDensity = ( densityValue: number ): number[] =>
     }
   };
 
+  // The "linear" function also applies slight contrast enhancement
   const clampedValue = easing( 3, clamp( linear( 0.1, 0.9, 1, 0, densityValue ), 0, 1 ) );
 
   return [
@@ -136,6 +149,12 @@ export const colorizeRealElectronDensity = ( densityValue: number ): number[] =>
   ];
 };
 
+/**
+ * Black-White palette for electron density, matching Java version.
+ * Low density -> black, High density -> white. Input is the raw density value;
+ * scaling matches existing Java view logic.
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
+ */
 export const colorizeJavaElectronDensity = ( densityValue: number ): number[] => {
   const white = MPColors.surfaceBWWhiteProperty.value;
   const black = MPColors.surfaceBWBlackProperty.value;
