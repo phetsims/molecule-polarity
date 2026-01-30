@@ -145,10 +145,10 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       molecule.symbol === 'CH2O'
     ) {
       this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.39532868707908697,
-        0.504571567312339,
-        0.4912800148747718,
-        0.5897174828822169
+        0.3666328007228524,
+        0.4262567778088401,
+        0.5594996323273494,
+        0.6089710257735602
       );
     }
     else if (
