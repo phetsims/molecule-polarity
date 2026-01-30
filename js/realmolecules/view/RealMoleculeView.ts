@@ -7,7 +7,7 @@
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import RealMolecule, { RealAtom, RealBond } from '../model/RealMolecule.js';
+import RealMolecule from '../model/RealMolecule.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
@@ -24,6 +24,8 @@ import AtomView from './AtomView.js';
 import BondView from './BondView.js';
 import MPColors from '../../common/MPColors.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
+import { RealBond } from '../model/RealBond.js';
+import { RealAtom } from '../model/RealAtom.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(

@@ -12,10 +12,11 @@
 
 import moleculePolarity from '../../moleculePolarity.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
-import RealMolecule, { RealBond } from '../model/RealMolecule.js';
+import RealMolecule from '../model/RealMolecule.js';
 import DipoleArrowView from './DipoleArrowView.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
+import { RealBond } from '../model/RealBond.js';
 
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
 
