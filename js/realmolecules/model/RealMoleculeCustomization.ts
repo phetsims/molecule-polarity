@@ -12,8 +12,10 @@ export type RealMoleculeCustomizationEntry = {
   // indices of atoms that should have their bond dipoles switched to the other side on startup
   initialBondDipolesReversed?: [ number, number ][];
 
+  // initial quaternion rotation of the molecule
   initialRotation?: THREE.Quaternion;
 
+  // bond type (to override the default from the data file) - needed for ozone
   bondTypeOverride?: 1 | 1.5 | 2 | 3;
 };
 

@@ -52,7 +52,6 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       phetioDocumentation: 'A quaternion describing the rotation of the molecule view'
     } );
 
-    // TODO: Should this property be featured? Should it have phetioDocumentation? https://github.com/phetsims/molecule-polarity/issues/246
     this.isAdvancedProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isAdvancedProperty' ),
       phetioDocumentation: 'Whether the selected model is advanced (true) or basic (false).',
