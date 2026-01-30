@@ -15,7 +15,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
-import RealMolecule, { RealAtom } from '../model/RealMolecule.js';
+import { RealAtom } from '../model/RealMolecule.js';
 import { elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -27,15 +27,11 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 const LABEL_SIZE = 0.4;
 
 export default class AtomLabelView extends TextureQuad {
-  private readonly molecule: RealMolecule;
   private readonly atom: RealAtom;
   private readonly disposeCallbacks: ( () => void )[] = [];
 
-  public constructor( molecule: RealMolecule, atom: RealAtom, atomLabelsVisible: boolean, partialChargesVisible: boolean ) {
+  public constructor( atom: RealAtom, atomLabelsVisible: boolean, partialChargesVisible: boolean ) {
     const element = atom.element;
-    const sameElementAtoms = molecule.atoms.filter( a => a.element === atom.element );
-    const atomVisualIndex = sameElementAtoms.indexOf( atom );
-    const showIndex = sameElementAtoms.length > 1;
 
     const labelFillProperty = elementToForegroundColorProperty( element );
 
@@ -51,7 +47,7 @@ export default class AtomLabelView extends TextureQuad {
     const labelNode = new VBox( {
       children: [
         ...( atomLabelsVisible ? [
-          new Text( showIndex ? `${element.symbol}${atomVisualIndex + 1}` : `${element.symbol}`, {
+          new Text( element.symbol, {
             font: labelFont,
             fill: labelFillProperty,
             maxWidth: 500
@@ -105,7 +101,6 @@ export default class AtomLabelView extends TextureQuad {
 
     this.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
 
-    this.molecule = molecule;
     this.atom = atom;
 
     this.layers.set( 1 );

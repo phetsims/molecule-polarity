@@ -178,7 +178,7 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Atom labels
       if ( atomLabelsVisible || partialChargesVisible ) {
         for ( const atom of molecule.atoms ) {
-          const label = new AtomLabelView( molecule, atom, atomLabelsVisible, partialChargesVisible );
+          const label = new AtomLabelView( atom, atomLabelsVisible, partialChargesVisible );
           this.add( label );
           atomLabelViews.push( label );
 
