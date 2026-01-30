@@ -123,7 +123,12 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     else if (
       molecule.symbol === 'O3'
     ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion( -1, 0, 0, 0 );
+      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
+        0.9995276220774126,
+        -0.01492863425893462,
+        0.010407093463581261,
+        0.024766125838878564
+      );
     }
     else if (
       molecule.symbol === 'NH3'
