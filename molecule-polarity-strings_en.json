@@ -451,6 +451,23 @@
         "noMolecularDipole": {
           "value": "No molecular dipole."
         }
+      },
+      "electronegativity": {
+        "heading": {
+          "value": "Electronegativity"
+        },
+        "currentValue": {
+          "value": "Current values:"
+        },
+        "description": {
+          "value": "Electronegativity for Atom { $atom } is { $en }"
+        },
+        "symbolDescription": {
+          "value": "{ $symbol } { $en }"
+        },
+        "accessibleHelpText": {
+          "value": "Change how strongly an atom attracts electrons."
+        }
       }
     },
     "bondCharacter": {
@@ -602,9 +619,6 @@
         },
         "orientationDescription": {
           "value": "Molecule is { $orientation } with Atom A { $atomAPosition } o'clock and Atom B { $atomBPosition } o'clock."
-        },
-        "electronegativityValues": {
-          "value": "Electronegativity for Atom A is { $enA }, for Atom B is { $enB }."
         }
       },
       "rotateMoleculeSlider": {

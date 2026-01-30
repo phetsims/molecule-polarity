@@ -27,6 +27,7 @@ import DiatomicMoleculeAccessibleListNode from './DiatomicMoleculeAccessibleList
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
+import TwoAtomsElectronegativityAccessibleListNode from './TwoAtomsElectronegativityAccessibleListNode.js';
 import TwoAtomsScreenSummaryContentNode from './TwoAtomsScreenSummaryContentNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
@@ -140,6 +141,16 @@ export default class TwoAtomsScreenView extends ScreenView {
       false
     ) );
 
+    const electronegativityDescriptionNode = new Node( {
+      accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.electronegativity.accessibleHelpTextStringProperty
+    } );
+    this.addChild( electronegativityDescriptionNode );
+
+    electronegativityDescriptionNode.addChild(
+      new TwoAtomsElectronegativityAccessibleListNode( model.diatomicMolecule )
+    );
+
     const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,
       tandem: tandem.createTandem( 'bondCharacterPanel' )
@@ -186,6 +197,7 @@ export default class TwoAtomsScreenView extends ScreenView {
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
       moleculeNode,
+      electronegativityDescriptionNode,
       panelsVBox
     ];
 

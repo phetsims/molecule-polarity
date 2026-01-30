@@ -190,6 +190,13 @@ type StringsType = {
         'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionOnlyStringProperty': LocalizedStringProperty;
         'noMolecularDipoleStringProperty': LocalizedStringProperty;
+      };
+      'electronegativity': {
+        'headingStringProperty': LocalizedStringProperty;
+        'currentValueStringProperty': LocalizedStringProperty;
+        'descriptionStringProperty': LocalizedStringProperty;
+        'symbolDescriptionStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
       }
     };
     'bondCharacterStringProperty': LocalizedStringProperty;
@@ -246,7 +253,6 @@ type StringsType = {
         };
         'electricFieldAlignedStringProperty': LocalizedStringProperty;
         'orientationDescriptionStringProperty': LocalizedStringProperty;
-        'electronegativityValuesStringProperty': LocalizedStringProperty;
       };
       'rotateMoleculeSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;

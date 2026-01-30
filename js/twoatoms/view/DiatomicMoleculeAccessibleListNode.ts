@@ -181,14 +181,6 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
           ),
           atomBPosition: DescriptionMaps.createOrientationStringProperty( diatomicMolecule.angleProperty )
         } )
-      },
-
-      // Electronegativity Values
-      {
-        stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronegativityValues.createProperty( {
-          enA: DescriptionMaps.createElectronegativityStringProperty( diatomicMolecule.atomA.electronegativityProperty ),
-          enB: DescriptionMaps.createElectronegativityStringProperty( diatomicMolecule.atomB.electronegativityProperty )
-        } )
       }
     ], options );
   }

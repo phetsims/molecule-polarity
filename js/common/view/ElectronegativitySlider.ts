@@ -61,9 +61,6 @@ export default class ElectronegativitySlider extends HSlider {
       accessibleName: MoleculePolarityFluent.a11y.common.electronegativitySlider.accessibleName.createProperty( {
         atomName: atom.labelStringProperty
       } ),
-      accessibleHelpText: MoleculePolarityFluent.a11y.common.electronegativitySlider.accessibleHelpText.createProperty( {
-        atomName: atom.labelStringProperty
-      } ),
 
       createAriaValueText: value => {
         return DescriptionMaps.formatElectronegativityString( value );
