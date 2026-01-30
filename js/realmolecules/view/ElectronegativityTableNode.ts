@@ -88,8 +88,14 @@ export default class ElectronegativityTableNode extends Node {
       this.resetCells();
 
       for ( const atom of molecule.atoms ) {
-        // TODO: This can be renamed and replaced by passing in the atom, https://github.com/phetsims/molecule-polarity/issues/32
-        this.setColor( atom.element, elementToColorProperty( atom.element ), elementToForegroundColorProperty( atom.element ) );
+        for ( const cell of this.cells ) {
+          if ( cell instanceof Cell ) {
+            if ( cell.element === atom.element ) {
+              cell.enable( elementToColorProperty( atom.element ), elementToForegroundColorProperty( atom.element ) );
+              break;
+            }
+          }
+        }
       }
     } );
   }
@@ -100,19 +106,6 @@ export default class ElectronegativityTableNode extends Node {
         cell.disable();
       }
     } );
-  }
-
-  // Sets the {Color} color of a specified {number} element
-  private setColor( element: Element, color: TColor, foregroundColor: TColor ): void {
-    for ( let i = 0; i < this.cells.length; i++ ) {
-      const cell = this.cells[ i ];
-      if ( cell instanceof Cell ) {
-        if ( cell.element === element ) {
-          cell.enable( color, foregroundColor );
-          break;
-        }
-      }
-    }
   }
 }
 
