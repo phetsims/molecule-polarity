@@ -325,17 +325,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     let isRotating = false;
 
     if ( this.sceneNode.stage.threeRenderer && MPQueryParameters.focusHighlight3D ) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-outlinepass
       const EffectComposer = window.ThreeEffectComposer;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-outlinepass
       const OutlinePass = window.ThreeOutlinePass;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-outlinepass
       const RenderPass = window.ThreeRenderPass;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-outlinepass
       const OutputPass = window.ThreeOutputPass;
 
       const composer = new EffectComposer( this.sceneNode.stage.threeRenderer );
@@ -363,25 +355,17 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       );
       composer.addPass( blackOutlinePass );
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-outlinepass
       const laterRenderPass = new ( class LaterRenderPass extends window.ThreePass {
         public constructor( public scene: THREE.Scene, public camera: THREE.Camera ) {
           super();
 
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error - FROM three-r160-addon-outlinepass
           this.needsSwap = false;
         }
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error - FROM three-r160-addon-outlinepass
-        public render( renderer, writeBuffer, readBuffer /*, deltaTime, maskActive */ ): void {
+        public override render( renderer: THREE.WebGLRenderer, writeBuffer: THREE.WebGLRenderTarget, readBuffer: THREE.WebGLRenderTarget ): void {
           const oldAutoClear = renderer.autoClear;
           renderer.autoClear = false;
 
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error - FROM three-r160-addon-outlinepass
           renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
 
           const customCamera = this.camera.clone();
@@ -392,11 +376,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
           renderer.autoClear = oldAutoClear;
         }
 
-        public setSize( width: number, height: number ): void {
+        public override setSize( width: number, height: number ): void {
           // no-op
         }
 
-        public dispose(): void {
+        public override dispose(): void {
           // no-op
         }
       } )( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
@@ -434,8 +418,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
         focusOutlinePass.setSize( width, height );
         blackOutlinePass.setSize( width, height );
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error - FROM three-r160-addon-postprocessing
         backgroundCompositePass.setSize( width, height );
         outputPass.setSize( width, height );
         composer.setSize( width, height );
@@ -536,8 +518,6 @@ moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
  *
  * This is required because we (a) need to apply the outline pass BEFORE compositing over the background.
  */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error - FROM three-r160-addon-postprocessing
 class BackgroundCompositePass extends window.ThreePass {
 
   private uniforms: {
@@ -551,9 +531,8 @@ class BackgroundCompositePass extends window.ThreePass {
   private material: THREE.RawShaderMaterial;
   private copyMaterial: THREE.RawShaderMaterial;
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error - FROM three-r160-addon-postprocessing
-  private fsQuad: typeof window.ThreeFullScreenQuad;
+  private fsQuad: InstanceType<typeof window.ThreeFullScreenQuad>;
+  private fsQuadCopy: InstanceType<typeof window.ThreeFullScreenQuad>;
 
   public constructor( private backgroundColor: THREE.Color ) {
     super();
@@ -604,13 +583,9 @@ class BackgroundCompositePass extends window.ThreePass {
     this.copyMaterial = new THREE.ShaderMaterial( {
       uniforms: this.copyUniforms,
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-postprocessing
       // eslint-disable-next-line no-undef
       vertexShader: ThreeCopyShader.vertexShader,
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-postprocessing
       // eslint-disable-next-line no-undef
       fragmentShader: ThreeCopyShader.fragmentShader,
       blending: THREE.NoBlending,
@@ -618,16 +593,10 @@ class BackgroundCompositePass extends window.ThreePass {
       depthWrite: false
     } );
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error - FROM three-r160-addon-postprocessing
     this.fsQuad = new window.ThreeFullScreenQuad( this.material );
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error - FROM three-r160-addon-postprocessing
     this.fsQuadCopy = new window.ThreeFullScreenQuad( this.copyMaterial );
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error - FROM three-r160-addon-postprocessing
     this.needsSwap = false;
   }
 
@@ -636,9 +605,7 @@ class BackgroundCompositePass extends window.ThreePass {
     this.uniforms.uBg.value.set( color.r, color.g, color.b );
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error - FROM three-r160-addon-postprocessing
-  public render( renderer: THREE.WebGLRenderer, writeBuffer, readBuffer ): void {
+  public override render( renderer: THREE.WebGLRenderer, writeBuffer: THREE.WebGLRenderTarget, readBuffer: THREE.WebGLRenderTarget ): void {
     const oldAutoClear = renderer.autoClear;
     renderer.autoClear = false;
 
@@ -646,12 +613,8 @@ class BackgroundCompositePass extends window.ThreePass {
     {
       this.copyUniforms.tDiffuse.value = readBuffer.texture;
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-postprocessing
       renderer.setRenderTarget( this.renderToScreen ? null : writeBuffer );
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-postprocessing
       this.fsQuadCopy.render( renderer );
     }
 
@@ -659,8 +622,6 @@ class BackgroundCompositePass extends window.ThreePass {
     {
       this.uniforms.tDiffuse.value = writeBuffer.texture;
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error - FROM three-r160-addon-postprocessing
       renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
       this.fsQuad.render( renderer );
     }
@@ -668,7 +629,7 @@ class BackgroundCompositePass extends window.ThreePass {
     renderer.autoClear = oldAutoClear;
   }
 
-  public dispose(): void {
+  public override dispose(): void {
     this.material.dispose();
     this.fsQuad.dispose();
   }
