@@ -130,7 +130,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
-        const mu = molecule.computeBondDipoleVectorSum();
+        const mu = molecule.computeMolecularDipoleFromBondDipoleVectorSum();
         if ( MPQueryParameters.debug3DModels ) {
           console.log( molecule.symbol, 'bond dipole sum', mu.magnitude );
         }

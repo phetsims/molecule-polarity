@@ -23,7 +23,7 @@ export default class MolecularDipoleView extends THREE.Object3D {
   public constructor( molecule: RealMolecule, orientationSign: number ) {
     super();
 
-    const mu = molecule.computeBondDipoleVectorSum();
+    const mu = molecule.computeMolecularDipoleFromBondDipoleVectorSum();
     const muMag = mu.getMagnitude();
 
     // Expect caller to check a threshold for visibility

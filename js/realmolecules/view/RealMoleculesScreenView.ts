@@ -218,7 +218,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.addChild( moleculeDescriptionNode );
 
     model.moleculeProperty.link( molecule => {
-      moleculeDescriptionNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( molecule.computeBondDipoleVectorSum().magnitude, 2 );
+      moleculeDescriptionNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( molecule.computeMolecularDipoleFromBondDipoleVectorSum().magnitude, 2 );
     } );
 
     // Molecule description

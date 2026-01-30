@@ -33,17 +33,6 @@ export type MoleculeNames = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'h
   'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' |
   'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform';
 
-// Visualization constants for dipoles
-const DEFAULT_DIPOLE_FACTOR = 1.3;
-
-// Some dipoles need to be adjusted for molecules (outside of the typical formula for scaling)
-const DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
-  HF: 2,
-  HCN: 1.6,
-  CH2O: 1.6,
-  CHCl3: 1.6
-};
-
 export default class RealMolecule extends PhetioObject {
 
   // Structure of the molecule
@@ -112,8 +101,7 @@ export default class RealMolecule extends PhetioObject {
         moleculeData.qeq[ atomIndex ],
         moleculeData.eem[ atomIndex ],
         moleculeData.qtpie[ atomIndex ],
-        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset ),
-        this.isAdvancedProperty
+        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset )
       );
     } );
 
@@ -246,13 +234,6 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
-   * Returns the bond-dipole cap factor for this molecule. Allows per-molecule overrides.
-   */
-  public getBondDipoleFactor(): number {
-    return DIPOLE_FACTOR_OVERRIDES[ this.symbol ] ?? DEFAULT_DIPOLE_FACTOR;
-  }
-
-  /**
    * Computes the per-Debye scale used to size dipole arrows so that all bond dipoles fit within their
    * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
    */
@@ -261,7 +242,7 @@ export default class RealMolecule extends PhetioObject {
       const maxScale = this.dipoleScaleProperty.value;
       const maxMagnitude = 3;
 
-      const bondBasedMolecularDipoleMagnitude = this.computeBondDipoleVectorSum().magnitude;
+      const bondBasedMolecularDipoleMagnitude = this.computeMolecularDipoleFromBondDipoleVectorSum().magnitude;
       if ( bondBasedMolecularDipoleMagnitude <= 1e-5 ) {
         return maxScale;
       }
@@ -320,7 +301,7 @@ export default class RealMolecule extends PhetioObject {
    * Vector sum of per-bond dipoles (in Debye), each oriented from positive to negative.
    * Useful for visual consistency with bond dipole arrows.
    */
-  public computeBondDipoleVectorSum(): Vector3 {
+  public computeMolecularDipoleFromBondDipoleVectorSum(): Vector3 {
     const sum = new Vector3( 0, 0, 0 );
 
     for ( const bond of this.bonds ) {
@@ -341,7 +322,7 @@ export default class RealMolecule extends PhetioObject {
       return null;
     }
 
-    const mu = this.computeBondDipoleVectorSum();
+    const mu = this.computeMolecularDipoleFromBondDipoleVectorSum();
     const muMag = mu.getMagnitude();
     if ( muMag <= 1e-3 ) {
       return null;
@@ -483,7 +464,6 @@ export default class RealMolecule extends PhetioObject {
       CHF3: 'trifluoromethane',
       CHCl3: 'chloroform',
       CF4: 'tetrafluoromethane'
-      // CHF3: 'trifluoromethane',
     };
 
     return symbolToNameMap[ this.symbol ];
@@ -547,8 +527,7 @@ export class RealAtom {
     public qeqPartialCharge: number,
     public eemPartialCharge: number,
     public qtpiePartialCharge: number,
-    public position: Vector3,
-    public isAdvancedProperty: TReadOnlyProperty<boolean>
+    public position: Vector3
   ) {
 
   }
