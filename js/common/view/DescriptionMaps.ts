@@ -367,15 +367,22 @@ export default class DescriptionMaps {
     );
   }
 
-  public static formatOrientationString( angle: number ): string {
+  public static formatOrientationString( angle: number, atAngleOrTwoAngle: 'atAngle' | 'toAngle' = 'atAngle' ): string {
     const angleDeg = toFixedNumber( toDegrees( angle ), 1 );
     if ( angleDeg % 30 !== 0 ) {
       return toClock( angle );
     }
     else {
-      return MoleculePolarityFluent.a11y.atAngle.format( {
-        angle: toClock( angle )
-      } );
+      if ( atAngleOrTwoAngle === 'atAngle' ) {
+        return MoleculePolarityFluent.a11y.atAngle.format( {
+          angle: toClock( angle )
+        } );
+      }
+      else {
+        return MoleculePolarityFluent.a11y.toAngle.format( {
+          angle: toClock( angle )
+        } );
+      }
     }
   }
 

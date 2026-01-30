@@ -130,7 +130,7 @@ export default class MoleculeContextResponsesNode extends Node {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
         } ),
-        position: DescriptionMaps.formatOrientationString( currentDipole.angle )
+        position: DescriptionMaps.formatOrientationString( currentDipole.angle, 'toAngle' )
       } )
     );
 

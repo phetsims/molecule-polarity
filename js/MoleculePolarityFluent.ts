@@ -186,6 +186,7 @@ addToMapIfDefined( 'a11y_field', 'a11y.fieldStringProperty' );
 addToMapIfDefined( 'a11y_molecularDipole', 'a11y.molecularDipoleStringProperty' );
 addToMapIfDefined( 'a11y_orientationAtom', 'a11y.orientationAtomStringProperty' );
 addToMapIfDefined( 'a11y_atAngle', 'a11y.atAngleStringProperty' );
+addToMapIfDefined( 'a11y_toAngle', 'a11y.toAngleStringProperty' );
 addToMapIfDefined( 'a11y_betweenAngles', 'a11y.betweenAnglesStringProperty' );
 addToMapIfDefined( 'a11y_degrees', 'a11y.degreesStringProperty' );
 addToMapIfDefined( 'a11y_oClock', 'a11y.oClockStringProperty' );
@@ -543,6 +544,7 @@ const MoleculePolarityFluent = {
     _comment_23: new FluentComment( {"comment":"OrientationAtom - Orientation for any atom (Screen 1)","associatedKey":"orientationAtom"} ),
     orientationAtom: new FluentPattern<{ position: 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12' | TReadOnlyProperty<'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12'> }>( fluentSupport.bundleProperty, 'a11y_orientationAtom', _.get( MoleculePolarityStrings, 'a11y.orientationAtomStringProperty' ), [{"name":"position","variants":["between1And2","at3","between4And5","at6","between7And8","at9","between10And11","at12"]}] ),
     atAngle: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_atAngle', _.get( MoleculePolarityStrings, 'a11y.atAngleStringProperty' ), [{"name":"angle"}] ),
+    toAngle: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_toAngle', _.get( MoleculePolarityStrings, 'a11y.toAngleStringProperty' ), [{"name":"angle"}] ),
     betweenAngles: new FluentPattern<{ angle1: FluentVariable, angle2: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_betweenAngles', _.get( MoleculePolarityStrings, 'a11y.betweenAnglesStringProperty' ), [{"name":"angle1"},{"name":"angle2"}] ),
     degrees: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_degrees', _.get( MoleculePolarityStrings, 'a11y.degreesStringProperty' ), [{"name":"angle"}] ),
     oClock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_oClock', _.get( MoleculePolarityStrings, 'a11y.oClockStringProperty' ), [{"name":"hour"}] ),

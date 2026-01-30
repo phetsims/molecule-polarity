@@ -115,7 +115,7 @@ export default class TwoAtomsScreenView extends ScreenView {
       this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
           bond: 'AB',
-          position: DescriptionMaps.formatOrientationString( angle )
+          position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
         } ), {
           interruptible: true
         }

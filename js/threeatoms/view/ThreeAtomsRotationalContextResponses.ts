@@ -46,7 +46,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
           bond: bond.label,
-          position: DescriptionMaps.formatOrientationString( angle )
+          position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
         } ), {
           channel: 'bond-dipole'
         }
@@ -81,7 +81,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
             progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
               progress: magnitudeChange > 0 ? 'larger' : 'smaller'
             } ),
-            position: DescriptionMaps.formatOrientationString( currentDipole.angle )
+            position: DescriptionMaps.formatOrientationString( currentDipole.angle, 'toAngle' )
           } ), {
             channel: 'molecular-dipole'
           }
@@ -113,7 +113,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       if ( molecule.dipoleProperty.value.magnitude > 1e-5 && viewProperties.molecularDipoleVisibleProperty.value ) {
         this.addAccessibleContextResponse(
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnly.format( {
-            position: DescriptionMaps.formatOrientationString( molecule.dipoleProperty.value.angle )
+            position: DescriptionMaps.formatOrientationString( molecule.dipoleProperty.value.angle, 'toAngle' )
           } ), {
             channel: 'molecular-dipole'
           }

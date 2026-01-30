@@ -321,6 +321,7 @@ a11y:
       at12: 'at 12'
 
   atAngle: 'at { $angle }'
+  toAngle: 'to { $angle }'
   betweenAngles: 'between { $angle1 } and { $angle2 }'
   degrees: '{ $angle } degrees'
   oClock: '{ $hour } o''clock'

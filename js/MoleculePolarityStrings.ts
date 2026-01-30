@@ -217,6 +217,7 @@ type StringsType = {
     'molecularDipoleStringProperty': LocalizedStringProperty;
     'orientationAtomStringProperty': LocalizedStringProperty;
     'atAngleStringProperty': LocalizedStringProperty;
+    'toAngleStringProperty': LocalizedStringProperty;
     'betweenAnglesStringProperty': LocalizedStringProperty;
     'degreesStringProperty': LocalizedStringProperty;
     'oClockStringProperty': LocalizedStringProperty;

@@ -524,6 +524,9 @@
     "atAngle": {
       "value": "at { $angle }"
     },
+    "toAngle": {
+      "value": "to { $angle }"
+    },
     "betweenAngles": {
       "value": "between { $angle1 } and { $angle2 }"
     },
