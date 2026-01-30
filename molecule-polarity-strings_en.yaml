@@ -538,6 +538,10 @@ a11y:
     moleculeComboBox:
       accessibleName: 'Molecule'
       accessibleHelpText: 'Choose a different molecule to view'
+    modelRadioButtonGroup:
+      accessibleName: 'Model'
+      basicHelpText: 'Explore bond dipoles based on electronegativity differences.'
+      advancedHelpText: 'Explore bond dipoles based on partial charges.'
     molecules:
       description:
         select_molecule:

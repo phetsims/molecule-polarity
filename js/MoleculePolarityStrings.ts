@@ -337,6 +337,11 @@ type StringsType = {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };
+      'modelRadioButtonGroup': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+        'basicHelpTextStringProperty': LocalizedStringProperty;
+        'advancedHelpTextStringProperty': LocalizedStringProperty;
+      };
       'molecules': {
         'descriptionStringProperty': LocalizedStringProperty;
         'bondDipoleStringProperty': LocalizedStringProperty;
