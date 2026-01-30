@@ -19,6 +19,7 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule, { MoleculeGeometry, MoleculeSymbols } from './RealMolecule.js';
+import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
 
@@ -114,113 +115,16 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     }
   }
 
+  /**
+   * Apply the initial rotation for the specified molecule.
+   */
   public updateRotation( molecule: RealMolecule ): void {
-    if (
-      molecule.symbol === 'HF' ||
-      molecule.symbol === 'HCN'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion( 0, -Math.sqrt( 2 ) / 2, 0, Math.sqrt( 2 ) / 2 );
-    }
-    else if (
-      molecule.symbol === 'O3'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.9995276220774126,
-        -0.01492863425893462,
-        0.010407093463581261,
-        0.024766125838878564
-      );
-    }
-    else if (
-      molecule.symbol === 'NH3'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-      0.7677141944032492,
-      -0.4684697628688284,
-      0.01799052832586886,
-      0.4368378851243859
-      );
-    }
-    else if (
-      molecule.symbol === 'CH2O'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.3666328007228524,
-        0.4262567778088401,
-        0.5594996323273494,
-        0.6089710257735602
-      );
-    }
-    else if (
-      molecule.symbol === 'H2O'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion( -1, 0, 0, 0 );
-    }
-    else if (
-      molecule.symbol === 'CH4'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.09754516100806414,
-        0.09754516100806415,
-        -0.009607359798384778,
-        0.9903926402016154
-      );
-    }
-    else if (
-      molecule.symbol === 'CH3F'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        -0.424564362987182,
-        -0.5991718998340826,
-        0.3800185779324334,
-        0.5624268988559403
-      );
-    }
-    else if (
-      molecule.symbol === 'CH2F2'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        -0.27136646893101857,
-        -0.6903203332285108,
-        -0.6223760651398221,
-        0.24993221203410235
-      );
-    }
-    else if (
-      molecule.symbol === 'CHF3'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        0.017834718285708984,
-        -0.7400716028848267,
-        0.6715496673518707,
-        0.03157514381184575
-      );
-    }
-    else if (
-      molecule.symbol === 'CF4'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        -0.3937806654121543,
-        -0.17485260291214183,
-        -0.9001547262973663,
-        0.0639126241591583
-      );
-    }
-    else if (
-      molecule.symbol === 'CHCl3'
-    ) {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion(
-        -0.1748081804583777,
-        -0.789947747694425,
-        0.5773331843722288,
-        -0.11005021662823589
-      );
-    }
-    else {
-      this.moleculeQuaternionProperty.value = new THREE.Quaternion();
-    }
+    this.moleculeQuaternionProperty.value = RealMoleculeCustomization[ molecule.symbol ].initialRotation ?? new THREE.Quaternion();
   }
 
+  /**
+   * Reset all model state.
+   */
   public reset(): void {
     this.moleculeProperty.reset();
     this.moleculeQuaternionProperty.reset();
