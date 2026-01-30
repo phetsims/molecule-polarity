@@ -26,7 +26,6 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
-import { elementToColorProperty, elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -91,7 +90,7 @@ export default class ElectronegativityTableNode extends Node {
         for ( const cell of this.cells ) {
           if ( cell instanceof Cell ) {
             if ( cell.element === atom.element ) {
-              cell.enable( elementToColorProperty( atom.element ), elementToForegroundColorProperty( atom.element ) );
+              cell.enable( atom.getColorProperty(), atom.getForegroundColorProperty() );
               break;
             }
           }

@@ -12,23 +12,37 @@ import moleculePolarity from '../../moleculePolarity.js';
 import { RealAtom } from './RealAtom.js';
 
 export class RealBond {
+  /**
+   * @param atomA
+   * @param atomB
+   * @param bondType - the order of the bond, with 1.5 representing aromatic bonds (i.e. ozone)
+   * @param realMolecularDipole - needed for positioning 1.5 bond dashes
+   * @param isAdvancedProperty
+   * @param initialBondReversed
+   */
   public constructor(
     public readonly atomA: RealAtom,
     public readonly atomB: RealAtom,
     public readonly bondType: 1 | 1.5 | 2 | 3,
-    public readonly realBondDipole: Vector3,
-    public readonly realMolecularDipole: Vector3, // needed for positioning 1.5 bond dashes
+    public readonly realMolecularDipole: Vector3,
     public isAdvancedProperty: TReadOnlyProperty<boolean>,
     public initialBondReversed: boolean
   ) {
+    // Connect the bond to the atoms
     atomA.bonds.push( this );
     atomB.bonds.push( this );
   }
 
+  /**
+   * Distance between the two atoms (in angstroms).
+   */
   public getDistance(): number {
     return this.atomB.position.distance( this.atomA.position );
   }
 
+  /**
+   * Unit direction vector from atomB to atomA.
+   */
   public getDirection(): Vector3 {
     return this.atomB.position.minus( this.atomA.position ).normalized();
   }
@@ -92,6 +106,9 @@ export class RealBond {
     }
   }
 
+  /**
+   * Bond dipole vector from positive to negative end (Jmol convention).
+   */
   public getDipoleVector(): Vector3 {
     const muMag = this.getDipoleMagnitudeDebye();
 

@@ -72,8 +72,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         // top of the screen.
         viewOffset: new Vector2( -141, 50 ),
 
-        // Convert the background color into linear sRGB so that it will render fully correctly!
-        // backgroundColorProperty: new DerivedProperty( [ MPColors.screenBackgroundColorProperty ], colorToLinear )
         // NOTE: Using TRANSPARENT for now due to needing to apply the background AFTER the outline pass.
         backgroundColorProperty: new Property( Color.TRANSPARENT )
       }

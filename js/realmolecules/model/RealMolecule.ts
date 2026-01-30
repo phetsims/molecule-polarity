@@ -34,6 +34,28 @@ export type MoleculeNames = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'h
   'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' |
   'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform';
 
+const symbolToAccessibleNameMap: Record<MoleculeSymbols, MoleculeNames> = {
+  H2: 'hydrogen',
+  N2: 'nitrogen',
+  O2: 'oxygen',
+  F2: 'fluorine',
+  HF: 'hydrogenFluoride',
+  H2O: 'water',
+  CO2: 'carbonDioxide',
+  HCN: 'hydrogenCyanide',
+  O3: 'ozone',
+  NH3: 'ammonia',
+  BH3: 'borane',
+  BF3: 'boronTrifluoride',
+  CH2O: 'formaldehyde',
+  CH4: 'methane',
+  CH3F: 'fluoromethane',
+  CH2F2: 'difluoromethane',
+  CHF3: 'trifluoromethane',
+  CHCl3: 'chloroform',
+  CF4: 'tetrafluoromethane'
+};
+
 export default class RealMolecule extends PhetioObject {
 
   // Structure of the molecule
@@ -93,15 +115,7 @@ export default class RealMolecule extends PhetioObject {
         atomIndex,
         Element.getElementBySymbol( symbol ),
         simplifiedPartialCharge,
-        moleculeData.charges[ atomIndex ],
-        moleculeData.mulliken[ atomIndex ],
-        moleculeData.loewdin[ atomIndex ],
         moleculeData.hirshfeld[ atomIndex ],
-        moleculeData.mbis[ atomIndex ],
-        moleculeData.chelpg[ atomIndex ],
-        moleculeData.qeq[ atomIndex ],
-        moleculeData.eem[ atomIndex ],
-        moleculeData.qtpie[ atomIndex ],
         new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset )
       );
     } );
@@ -112,11 +126,6 @@ export default class RealMolecule extends PhetioObject {
     this.bonds = moleculeData.bonds.map( bondData => {
       const atomA = this.atoms[ bondData.indexA ];
       const atomB = this.atoms[ bondData.indexB ];
-
-      const bondDipoleData = moleculeData.bondDipoles.find( dipole => {
-        const indices = [ dipole.indexA, dipole.indexB ];
-        return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
-      } )!;
 
       // Handle specific reversed bonds, see https://github.com/phetsims/molecule-polarity/issues/231
       let initialBondReversed = false;
@@ -133,7 +142,6 @@ export default class RealMolecule extends PhetioObject {
         atomA,
         atomB,
         this.symbol === 'O3' ? 1.5 : bondData.bondType,
-        new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ),
         this.realMolecularDipole,
         this.isAdvancedProperty,
         initialBondReversed
@@ -259,43 +267,6 @@ export default class RealMolecule extends PhetioObject {
     else {
       return this.dipoleScaleProperty.value * 3;
     }
-  }
-
-  /**
-   * Computes the molecular dipole using a centroid method (Jmol-style):
-   * find centroids of positive and negative charge distributions and scale by total positive charge.
-   * Returns a Vector3 in model coordinates, or null if it cannot be computed.
-   */
-  public computeMolecularDipole(): Vector3 | null {
-    const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
-    let positiveCharge = 0;
-    let negativeCharge = 0;
-
-    const positive = new Vector3( 0, 0, 0 );
-    const negative = new Vector3( 0, 0, 0 );
-
-    for ( let i = 0; i < this.atoms.length; i++ ) {
-      const atom = this.atoms[ i ];
-      const q = atom.getPartialCharge();
-      if ( q > 0 ) {
-        positiveCharge += q;
-        positive.add( atom.position.timesScalar( q ) );
-      }
-      else if ( q < 0 ) {
-        negativeCharge += q;
-        negative.add( atom.position.timesScalar( q ) );
-      }
-    }
-
-    if ( positiveCharge !== 0 && negativeCharge !== 0 ) {
-      positive.divideScalar( positiveCharge );
-      negative.divideScalar( negativeCharge );
-
-      const sep = positive.minus( negative );
-      const factor = positiveCharge / E_ANG_PER_DEBYE;
-      return sep.timesScalar( factor );
-    }
-    return null;
   }
 
   /**
@@ -444,30 +415,7 @@ export default class RealMolecule extends PhetioObject {
    * Returns the accessible name for this molecule based on the symbol.
    */
   public getAccessibleName(): MoleculeNames {
-
-    const symbolToNameMap: Record<MoleculeSymbols, MoleculeNames> = {
-      H2: 'hydrogen',
-      N2: 'nitrogen',
-      O2: 'oxygen',
-      F2: 'fluorine',
-      HF: 'hydrogenFluoride',
-      H2O: 'water',
-      CO2: 'carbonDioxide',
-      HCN: 'hydrogenCyanide',
-      O3: 'ozone',
-      NH3: 'ammonia',
-      BH3: 'borane',
-      BF3: 'boronTrifluoride',
-      CH2O: 'formaldehyde',
-      CH4: 'methane',
-      CH3F: 'fluoromethane',
-      CH2F2: 'difluoromethane',
-      CHF3: 'trifluoromethane',
-      CHCl3: 'chloroform',
-      CF4: 'tetrafluoromethane'
-    };
-
-    return symbolToNameMap[ this.symbol ];
+    return symbolToAccessibleNameMap[ this.symbol ];
   }
 
   /**

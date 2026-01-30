@@ -1,7 +1,7 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * Data with approximate partial charges, for use in simplified models.
+ * Simplified partial charges from the Java sim input (unidentified source).
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
