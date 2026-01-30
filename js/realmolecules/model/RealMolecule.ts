@@ -24,6 +24,7 @@ import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
 import { SurfaceVertex } from './SurfaceVertex.js';
 import { RealBond } from './RealBond.js';
 import { RealAtom } from './RealAtom.js';
+import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
@@ -129,12 +130,10 @@ export default class RealMolecule extends PhetioObject {
 
       // Handle specific reversed bonds, see https://github.com/phetsims/molecule-polarity/issues/231
       let initialBondReversed = false;
-      if (
-        ( symbol === 'CH3F' && bondData.indexA === 0 && bondData.indexB === 1 ) ||
-        ( symbol === 'CHCl3' && bondData.indexA === 3 && bondData.indexB === 4 ) ||
-        ( symbol === 'CHF3' && bondData.indexA === 3 && bondData.indexB === 4 ) ||
-        ( symbol === 'NH3' && bondData.indexA === 0 && bondData.indexB === 1 )
-      ) {
+      if ( RealMoleculeCustomization[ symbol ].initialBondDipolesReversed?.some( indexPair => {
+        return ( bondData.indexA === indexPair[ 0 ] && bondData.indexB === indexPair[ 1 ] ) ||
+               ( bondData.indexA === indexPair[ 1 ] && bondData.indexB === indexPair[ 0 ] );
+      } ) ) {
         initialBondReversed = true;
       }
 
