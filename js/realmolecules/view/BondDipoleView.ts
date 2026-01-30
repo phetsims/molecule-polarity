@@ -95,7 +95,7 @@ export default class BondDipoleView extends THREE.Object3D {
     this.lastOffsetDir = chosen;
 
     const muMag = this.bond.getDipoleMagnitudeDebye();
-    const drawLength = Math.max( 0, muMag * this.molecule.getDipoleScale() );
+    const drawLength = Math.max( 0, muMag * this.molecule.getDipoleArrowScale() );
     let sideOffset = BOND_DIPOLE_OFFSET * ( ( this.bond.bondType === 3 ? 1.3 : ( this.bond.bondType === 2 ? 1.1 : 0.9 ) ) );
 
     // Ensure arrows are far enough from atoms to not overlap

@@ -34,7 +34,7 @@ export default class MolecularDipoleView extends THREE.Object3D {
 
     const tail = centerAtom.position.plus( this.dir.timesScalar( centerRadius + 0.07 ) );
 
-    const scale = molecule.getDipoleScale();
+    const scale = molecule.getDipoleArrowScale();
     const drawLength = Math.max( 0, muMag * scale );
 
     // Choose minimum unscaled geometry size based on molecule extent

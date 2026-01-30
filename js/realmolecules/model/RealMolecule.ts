@@ -88,9 +88,10 @@ export default class RealMolecule extends PhetioObject {
       tandem: tandem
     } );
 
-    this.fullNameProperty = fullNameProperty;
-
+    // Computed data from ORCA/Psi4/etc.
     const moleculeData = RealMoleculeData[ symbol ];
+
+    // Partial charge data from Java simplified model
     const simplifiedPartialChargeMap = simplifiedPartialChargesMap[ symbol ];
 
     // Compute the origin offset for centering the molecule
@@ -98,6 +99,8 @@ export default class RealMolecule extends PhetioObject {
 
     this.atoms = moleculeData.atoms.map( ( atomData, atomIndex ) => {
       const symbol = atomData.symbol;
+
+      // bonds that include the atom
       const bonds = moleculeData.bonds.filter( b => b.indexA === atomIndex || b.indexB === atomIndex );
 
       // Look up the atom symbol (with bond count fallback) in the simplified partial charge map
@@ -239,27 +242,26 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
-   * Computes the per-Debye scale used to size dipole arrows so that all bond dipoles fit within their
-   * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
+   * Returns the scale factor for bond dipole arrows (length should be the magnitude * scale).
    */
-  public getDipoleScale(): number {
-    const dipoleScale = 0.25;
+  public getDipoleArrowScale(): number {
+    const baseDipoleScale = 0.25;
+    const maxMagnitude = 3;
 
     if ( this.isAdvancedProperty.value ) {
-      const maxScale = dipoleScale;
-      const maxMagnitude = 3;
 
       const bondBasedMolecularDipoleMagnitude = this.computeMolecularDipoleFromBondDipoleVectorSum().magnitude;
       if ( bondBasedMolecularDipoleMagnitude <= 1e-5 ) {
-        return maxScale;
+        // Just the base dipole scale (without the maxMagnitude)
+        return baseDipoleScale;
       }
 
       const referenceMolecularDipoleMagnitude = this.realMolecularDipole.magnitude;
 
-      return ( referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude ) * maxMagnitude * maxScale;
+      return ( referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude ) * maxMagnitude * baseDipoleScale;
     }
     else {
-      return dipoleScale * 3;
+      return baseDipoleScale * maxMagnitude;
     }
   }
 
@@ -395,14 +397,15 @@ export default class RealMolecule extends PhetioObject {
    */
   public getMaximumExtent(): number {
     const centroid = this.getCentroid();
-    let maxR2 = 0;
-    for ( let i = 0; i < this.atoms.length; i++ ) {
-      const d2 = this.atoms[ i ].position.distanceSquared( centroid );
-      if ( d2 > maxR2 ) {
-        maxR2 = d2;
+    let maxRadiusSquared = 0;
+
+    for ( const atom of this.atoms ) {
+      const distanceSquared = atom.position.distanceSquared( centroid );
+      if ( distanceSquared > maxRadiusSquared ) {
+        maxRadiusSquared = distanceSquared;
       }
     }
-    return Math.sqrt( maxR2 );
+    return Math.sqrt( maxRadiusSquared );
   }
 
   /**
