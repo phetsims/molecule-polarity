@@ -34,9 +34,8 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
   // the rotation of the molecule view
   public readonly moleculeQuaternionProperty: Property<THREE.Quaternion>;
 
+  // whether the advanced view is selected (as opposed to the "basic" view)
   public readonly isAdvancedProperty: BooleanProperty;
-
-  public readonly dipoleScaleProperty = new Property<number>( 0.25 );
 
   public constructor( tandem: Tandem ) {
 
@@ -66,7 +65,6 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
         nameStringProperty,
         geometry,
         this.isAdvancedProperty,
-        this.dipoleScaleProperty,
         moleculesTandem.createTandem( symbol )
       );
     };
@@ -129,7 +127,6 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     this.moleculeProperty.reset();
     this.moleculeQuaternionProperty.reset();
     this.isAdvancedProperty.reset();
-    this.dipoleScaleProperty.reset();
     this.updateRotation( this.moleculeProperty.value );
   }
 }

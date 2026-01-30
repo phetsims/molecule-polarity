@@ -23,7 +23,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import AtomView from './AtomView.js';
 import BondView from './BondView.js';
 import MPColors from '../../common/MPColors.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 import { RealBond } from '../model/RealBond.js';
 import { RealAtom } from '../model/RealAtom.js';
 
@@ -32,7 +31,6 @@ export default class RealMoleculeView extends THREE.Object3D {
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     moleculeQuaternionProperty: TReadOnlyProperty<THREE.Quaternion>,
     isAdvancedProperty: TReadOnlyProperty<boolean>,
-    dipoleScaleProperty: TReadOnlyProperty<number>,
     visibleProperty: TReadOnlyProperty<boolean>,
     viewProperties: RealMoleculesViewProperties,
     blackStrokedObjects: THREE.Object3D[],
@@ -65,7 +63,6 @@ export default class RealMoleculeView extends THREE.Object3D {
       isAdvancedProperty,
 
       // Properties that trigger updates that don't need to be accessed here
-      dipoleScaleProperty,
       MPColors.moleculeSurfaceBackAlphaProperty,
       MPColors.moleculeSurfaceFrontAlphaProperty
     ], (
@@ -133,9 +130,6 @@ export default class RealMoleculeView extends THREE.Object3D {
       // Molecular dipole arrow
       if ( molecularDipoleVisible ) {
         const mu = molecule.computeMolecularDipoleFromBondDipoleVectorSum();
-        if ( MPQueryParameters.debug3DModels ) {
-          console.log( molecule.symbol, 'bond dipole sum', mu.magnitude );
-        }
         if ( mu.getMagnitude() > 1e-5 ) {
           const centralAtom = molecule.getCentralAtom()!;
           assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );

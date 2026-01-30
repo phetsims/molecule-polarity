@@ -34,9 +34,6 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   // Logs quaternion rotations to the console for debugging purposes. For internal use only.
   logQuaternionRotation: { type: 'flag' },
 
-  // Enables various 3D model debugging features. For internal use only.
-  debug3DModels: { type: 'flag' },
-
   focusHighlight3D: {
     type: 'boolean',
     defaultValue: true

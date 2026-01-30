@@ -25,13 +25,10 @@ import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicin
 import Pointer from '../../../../scenery/js/input/Pointer.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import TInputListener from '../../../../scenery/js/input/TInputListener.js';
-import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import HorizontalAquaRadioButtonGroup from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPColors from '../../common/MPColors.js';
@@ -275,42 +272,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     resetAllButton.right = this.layoutBounds.right - 40;
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
 
-    if ( MPQueryParameters.debug3DModels ) {
-      const createItem = <T>( value: T, label: string ) => {
-        return {
-          value: value,
-          createNode: () => new Text( label, { fontSize: 16 } )
-        };
-      };
-
-      const dipoleScaleNode = new HBox( {
-        spacing: 20,
-        children: [
-          new Text( 'Dipole Scale:', { fontSize: 16 } ),
-          new HorizontalAquaRadioButtonGroup( model.dipoleScaleProperty, [
-            createItem( 0.1, '0.1' ),
-            createItem( 0.15, '0.15' ),
-            createItem( 0.2, '0.2' ),
-            createItem( 0.25, '0.25' ),
-            createItem( 0.3, '0.3' ),
-            createItem( 0.35, '0.35' ),
-            createItem( 0.4, '0.4' ),
-            createItem( 0.5, '0.5' ),
-            createItem( 0.6, '0.6' ),
-            createItem( 0.7, '0.7' ),
-            createItem( 0.8, '0.8' ),
-            createItem( 0.9, '0.9' ),
-            createItem( 1.0, '1.0' )
-          ], { spacing: 20 } )
-        ]
-      } );
-
-      dipoleScaleNode.top = 1;
-      dipoleScaleNode.left = 1;
-
-      rootNode.addChild( dipoleScaleNode );
-    }
-
     // Camera settings
     this.sceneNode.stage.threeCamera.zoom = 1.7;
     this.sceneNode.stage.threeCamera.updateProjectionMatrix();
@@ -346,7 +307,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       model.moleculeProperty,
       model.moleculeQuaternionProperty,
       model.isAdvancedProperty,
-      model.dipoleScaleProperty,
       moleculeNode.visibleProperty,
       viewProperties,
       blackStrokedObjects,

@@ -14,7 +14,6 @@ import moleculePolarity from '../../moleculePolarity.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import RealMolecule from '../model/RealMolecule.js';
 import DipoleArrowView from './DipoleArrowView.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import { RealBond } from '../model/RealBond.js';
 
@@ -121,12 +120,6 @@ export default class BondDipoleView extends THREE.Object3D {
     }
 
     const dir = this.bond.getPositiveToNegativeDirection().timesScalar( orientationSign );
-
-    const electronegativityDir = this.bond.atomB.position.minus( this.bond.atomA.position ).timesScalar( this.bond.atomB.element.electronegativity! - this.bond.atomA.element.electronegativity! );
-    if ( MPQueryParameters.debug3DModels && electronegativityDir.dot( dir ) < 0 ) {
-      console.log( `${this.molecule.symbol} ${this.bond.atomA.element.symbol}-${this.bond.atomB.element.symbol} reversed` );
-      this.arrow.updateColor( false );
-    }
 
     const tail = center
       .plus( chosen.timesScalar( sideOffset ) )

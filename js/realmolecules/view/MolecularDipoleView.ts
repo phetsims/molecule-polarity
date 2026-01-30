@@ -14,7 +14,6 @@ import moleculePolarity from '../../moleculePolarity.js';
 import RealMolecule from '../model/RealMolecule.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import DipoleArrowView from './DipoleArrowView.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 
 export default class MolecularDipoleView extends THREE.Object3D {
   public readonly dir: Vector3; // normalized, already includes orientationSign
@@ -37,10 +36,6 @@ export default class MolecularDipoleView extends THREE.Object3D {
 
     const scale = molecule.getDipoleScale();
     const drawLength = Math.max( 0, muMag * scale );
-
-    if ( MPQueryParameters.debug3DModels ) {
-      console.log( molecule.symbol, '(from bond) mol dipole mag', muMag, 'actual mol dipole mag', molecule.realMolecularDipole.magnitude, 'scale', scale, 'drawLength', drawLength );
-    }
 
     // Choose minimum unscaled geometry size based on molecule extent
     const span = molecule.getMaximumExtent();

@@ -16,7 +16,6 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
@@ -73,7 +72,6 @@ export default class RealMolecule extends PhetioObject {
    * @param fullNameProperty - full name of the molecule
    * @param geometry - geometry of the molecule (linear, bent, tetrahedral, etc.)
    * @param isAdvancedProperty - whether to use advanced or basic models
-   * @param dipoleScaleProperty - scale for dipole visualization
    * @param tandem
    */
   public constructor(
@@ -81,7 +79,6 @@ export default class RealMolecule extends PhetioObject {
     public fullNameProperty: TReadOnlyProperty<string>,
     public geometry: MoleculeGeometry,
     public isAdvancedProperty: TReadOnlyProperty<boolean>,
-    public dipoleScaleProperty: TReadOnlyProperty<number>,
     tandem: Tandem
   ) {
 
@@ -246,8 +243,10 @@ export default class RealMolecule extends PhetioObject {
    * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
    */
   public getDipoleScale(): number {
+    const dipoleScale = 0.25;
+
     if ( this.isAdvancedProperty.value ) {
-      const maxScale = this.dipoleScaleProperty.value;
+      const maxScale = dipoleScale;
       const maxMagnitude = 3;
 
       const bondBasedMolecularDipoleMagnitude = this.computeMolecularDipoleFromBondDipoleVectorSum().magnitude;
@@ -257,14 +256,10 @@ export default class RealMolecule extends PhetioObject {
 
       const referenceMolecularDipoleMagnitude = this.realMolecularDipole.magnitude;
 
-      // ( reference / bondBased ) * maxMagnitude * maxScale ????
-      if ( MPQueryParameters.debug3DModels ) {
-        console.log( this.symbol, 'reference / bondBased molecular dipole mag', referenceMolecularDipoleMagnitude, '/', bondBasedMolecularDipoleMagnitude, '=', referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude );
-      }
       return ( referenceMolecularDipoleMagnitude / bondBasedMolecularDipoleMagnitude ) * maxMagnitude * maxScale;
     }
     else {
-      return this.dipoleScaleProperty.value * 3;
+      return dipoleScale * 3;
     }
   }
 
