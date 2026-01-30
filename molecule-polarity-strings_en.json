@@ -460,7 +460,7 @@
           "value": "Current values:"
         },
         "description": {
-          "value": "Electronegativity for Atom { $atom } is { $en }"
+          "value": "Electronegativity for Atom { $atom } is { $en }."
         },
         "symbolDescription": {
           "value": "{ $symbol } { $en }"
