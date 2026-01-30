@@ -46,6 +46,7 @@ import RealMoleculeAccessibleListNode from './RealMoleculeAccessibleListNode.js'
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
+import RealMoleculesElectronegativityAccessibleListNode from './RealMoleculesElectronegativityAccessibleListNode.js';
 import RealMoleculesScreenSummaryContentNode from './RealMoleculesScreenSummaryContentNode.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
@@ -113,8 +114,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
 
     const electronegativityTableNode = new ElectronegativityTableNode( model.moleculeProperty, {
-      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty,
-      accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTableStringProperty
+      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
 
     const comboBoxListParent = new Node();
@@ -224,12 +224,23 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       new RealMoleculeAccessibleListNode( model.moleculeProperty, viewProperties )
     );
 
+    const electronegativityDescriptionNode = new Node( {
+      accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
+      accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTableStringProperty,
+      visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
+    } );
+    this.addChild( electronegativityDescriptionNode );
+
+    electronegativityDescriptionNode.addChild(
+      new RealMoleculesElectronegativityAccessibleListNode( model.moleculeProperty )
+    );
+
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
       moleculeNode,
       moleculeComboBox,
       comboBoxListParent,
-      electronegativityTableNode
+      electronegativityDescriptionNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
