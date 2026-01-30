@@ -45,10 +45,6 @@ type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 
 // Progress. i.e. more/less positive/negative.
 export type EPProgress = 'morePositive' | 'lessPositive' | 'neutral' | 'lessNegative' | 'moreNegative';
 
-// Real Molecule
-type RealPolarity = 'nonpolar' | 'slightlyPolar' | 'polar' | 'stronglyPolar' | 'veryStronglyPolar';
-
-
 // Approximation of zero to avoid issues with floating point precision as well as leaving room for manually obtaining zero
 const ZERO = 0.05;
 
@@ -58,15 +54,6 @@ const roundAbs = ( value: number ) => toFixedNumber( Math.abs( value ), 2 );
 export default class DescriptionMaps {
   public constructor() {
     // no-op
-  }
-
-  private static dipoleToRealPolarity( dipole: number ): RealPolarity {
-    dipole = roundAbs( dipole );
-    return dipole < ZERO ? 'nonpolar' :
-           dipole < 1 ? 'slightlyPolar' :
-           dipole < 1.5 ? 'polar' :
-           dipole < 2 ? 'stronglyPolar' :
-           'veryStronglyPolar';
   }
 
   private static deltaENtoBondDipole( deltaEN: number ): BondDipole {
@@ -211,18 +198,6 @@ export default class DescriptionMaps {
   public static createShapeGeometryStringProperty( geometry: TReadOnlyProperty<MoleculeGeometry> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.shapeGeometry.createProperty( {
       geometry: geometry
-    } );
-  }
-
-  public static createRealPolarityStringProperty( dipoleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.realPolarity.createProperty( {
-      polarity: dipoleProperty.derived( dipole => DescriptionMaps.dipoleToRealPolarity( dipole ) )
-    } );
-  }
-
-  public static formatRealPolarityString( dipole: number ): string {
-    return MoleculePolarityFluent.a11y.realPolarity.format( {
-      polarity: DescriptionMaps.dipoleToRealPolarity( dipole )
     } );
   }
 

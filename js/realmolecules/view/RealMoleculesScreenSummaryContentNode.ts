@@ -30,9 +30,6 @@ export default class RealMoleculesScreenSummaryContentNode extends ScreenSummary
     const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculesScreenSummaryContentNodeOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.realMoleculesScreen.screenSummary.currentDetails.createProperty( {
         moleculeName: currentMoleculeNameDynamicProperty,
-        realPolarity: DescriptionMaps.createRealPolarityStringProperty(
-          new DerivedProperty( [ model.moleculeProperty ], molecule => molecule.realMolecularDipole.magnitude )
-        ),
         shapeGeometry: DescriptionMaps.createShapeGeometryStringProperty(
           new DerivedProperty( [ model.moleculeProperty ], molecule => molecule.geometry )
         )
