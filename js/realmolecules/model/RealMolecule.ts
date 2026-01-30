@@ -140,7 +140,7 @@ export default class RealMolecule extends PhetioObject {
       return new RealBond(
         atomA,
         atomB,
-        this.symbol === 'O3' ? 1.5 : bondData.bondType,
+        RealMoleculeCustomization[ this.symbol ].bondTypeOverride ?? bondData.bondType,
         this.realMolecularDipole,
         this.isAdvancedProperty,
         initialBondReversed

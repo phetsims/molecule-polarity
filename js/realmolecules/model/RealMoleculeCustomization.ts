@@ -13,6 +13,8 @@ export type RealMoleculeCustomizationEntry = {
   initialBondDipolesReversed?: [ number, number ][];
 
   initialRotation?: THREE.Quaternion;
+
+  bondTypeOverride?: 1 | 1.5 | 2 | 3;
 };
 
 export const RealMoleculeCustomization: Record<MoleculeSymbols, RealMoleculeCustomizationEntry> = {
@@ -113,6 +115,7 @@ export const RealMoleculeCustomization: Record<MoleculeSymbols, RealMoleculeCust
       -0.01492863425893462,
       0.010407093463581261,
       0.024766125838878564
-    )
+    ),
+    bondTypeOverride: 1.5
   }
 };
