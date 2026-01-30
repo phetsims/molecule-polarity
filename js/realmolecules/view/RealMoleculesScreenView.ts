@@ -40,6 +40,7 @@ import RealMolecule from '../model/RealMolecule.js';
 import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
 import RealMoleculeAccessibleListNode from './RealMoleculeAccessibleListNode.js';
+import RealMoleculeAdvancedAccessibleListNode from './RealMoleculeAdvancedAccessibleListNode.js';
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
@@ -218,7 +219,14 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     // Molecule description
     moleculeDescriptionNode.addChild(
-      new RealMoleculeAccessibleListNode( model.moleculeProperty, viewProperties )
+      new RealMoleculeAccessibleListNode( model.moleculeProperty, viewProperties,
+        { visibleProperty: DerivedProperty.not( model.isAdvancedProperty ) } )
+    );
+
+    // Molecule description (advanced mode)
+    moleculeDescriptionNode.addChild(
+      new RealMoleculeAdvancedAccessibleListNode( model.moleculeProperty, viewProperties,
+        { visibleProperty: model.isAdvancedProperty } )
     );
 
     const electronegativityDescriptionNode = new Node( {

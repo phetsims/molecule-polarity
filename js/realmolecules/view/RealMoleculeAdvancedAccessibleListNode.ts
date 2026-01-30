@@ -1,6 +1,6 @@
 // Copyright 2026, University of Colorado Boulder
 /**
- * Description for real molecules.
+ * Description for real molecules using the advanced model.
  *
  * @author Agustín Vallejo
  */
@@ -17,13 +17,13 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 
-export type RealMoleculeAccessibleListNodeOptions = SelfOptions & AccessibleListNodeOptions;
+export type RealMoleculeAdvancedAccessibleListNodeOptions = SelfOptions & AccessibleListNodeOptions;
 
-export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
+export default class RealMoleculeAdvancedAccessibleListNode extends AccessibleListNode {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     viewProperties: RealMoleculesViewProperties,
-    providedOptions?: RealMoleculeAccessibleListNodeOptions
+    providedOptions?: RealMoleculeAdvancedAccessibleListNodeOptions
   ) {
 
     const moleculeNameProperty = moleculeProperty.derived( molecule => {
@@ -31,7 +31,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
     } );
 
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
-      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.description.createProperty( {
         molecule: moleculeNameProperty
       } )
     }, providedOptions );
@@ -41,7 +41,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       // Bond Dipole
       {
         visibleProperty: viewProperties.bondDipolesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.createProperty( {
+        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.createProperty( {
           molecule: moleculeNameProperty
         } )
       },
@@ -49,7 +49,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       // Molecular Dipole
       {
         visibleProperty: viewProperties.molecularDipoleVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.createProperty( {
+        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.createProperty( {
           molecule: moleculeNameProperty
         } )
       },
@@ -57,7 +57,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       // Partial Charges
       {
         visibleProperty: viewProperties.partialChargesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.partialCharges.createProperty( {
+        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.partialCharges.createProperty( {
           molecule: moleculeNameProperty
         } )
       },
@@ -65,7 +65,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       // Electrostatic Potential Surface
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' ),
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential.createProperty( {
+        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.createProperty( {
           molecule: moleculeNameProperty
         } )
       },
@@ -73,7 +73,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       // Electron Density Surface
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' ),
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity.createProperty( {
+        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.createProperty( {
           molecule: moleculeNameProperty
         } )
       }
@@ -82,4 +82,4 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
   }
 }
 
-moleculePolarity.register( 'RealMoleculeAccessibleListNode', RealMoleculeAccessibleListNode );
+moleculePolarity.register( 'RealMoleculeAdvancedAccessibleListNode', RealMoleculeAdvancedAccessibleListNode );

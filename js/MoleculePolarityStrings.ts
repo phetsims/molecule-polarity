@@ -354,7 +354,14 @@ type StringsType = {
         'bondDipoleStringProperty': LocalizedStringProperty;
         'molecularDipoleStringProperty': LocalizedStringProperty;
         'partialChargesStringProperty': LocalizedStringProperty;
-        'electronegativityStringProperty': LocalizedStringProperty;
+        'electrostaticPotentialStringProperty': LocalizedStringProperty;
+        'electronDensityStringProperty': LocalizedStringProperty;
+      };
+      'moleculesAdvanced': {
+        'descriptionStringProperty': LocalizedStringProperty;
+        'bondDipoleStringProperty': LocalizedStringProperty;
+        'molecularDipoleStringProperty': LocalizedStringProperty;
+        'partialChargesStringProperty': LocalizedStringProperty;
         'electrostaticPotentialStringProperty': LocalizedStringProperty;
         'electronDensityStringProperty': LocalizedStringProperty;
       }
