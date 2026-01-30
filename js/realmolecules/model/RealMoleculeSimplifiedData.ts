@@ -1,12 +1,14 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * Data with approximate partial charges, for use in simplified models.
+ * Simplified partial charges from the Java sim input (unidentified source).
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-export const simplifiedPartialChargesMap: Record<string, Record<string, number>> = {
+import type { MoleculeSymbols } from './RealMolecule.js';
+
+export const simplifiedPartialChargesMap: Record<MoleculeSymbols, Record<string, number>> = {
   BF3: {
     B: 0.842505,
     F: -0.280358

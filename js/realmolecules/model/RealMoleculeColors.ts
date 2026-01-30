@@ -10,11 +10,12 @@ import Element from '../../../../nitroglycerin/js/Element.js';
 import MPColors from '../../common/MPColors.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { linear } from '../../../../dot/js/util/linear.js';
 
+/**
+ * Returns the color property for the given element (for atom coloring / background color)
+ */
 export const elementToColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
   switch( element.symbol ) {
     case 'B':
@@ -36,6 +37,9 @@ export const elementToColorProperty = ( element: Element ): TReadOnlyProperty<Co
   }
 };
 
+/**
+ * Returns the foreground color property for the given element (for text/icons on top of atom)
+ */
 export const elementToForegroundColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
   switch( element.symbol ) {
     case 'B':
@@ -57,94 +61,10 @@ export const elementToForegroundColorProperty = ( element: Element ): TReadOnlyP
   }
 };
 
-export const colorToLinear = ( color: Color ): Color => {
-  const redScaled = color.red / 255;
-  const greenScaled = color.green / 255;
-  const blueScaled = color.blue / 255;
-
-  const rescale = ( n: number ) => {
-    return roundSymmetric( n * 255 );
-  };
-
-  return new Color(
-    rescale( redScaled <= 0.0404482362771082 ? redScaled / 12.92 : Math.pow( ( redScaled + 0.055 ) / 1.055, 2.4 ) ),
-    rescale( greenScaled <= 0.0404482362771082 ? greenScaled / 12.92 : Math.pow( ( greenScaled + 0.055 ) / 1.055, 2.4 ) ),
-    rescale( blueScaled <= 0.0404482362771082 ? blueScaled / 12.92 : Math.pow( ( blueScaled + 0.055 ) / 1.055, 2.4 ) )
-  );
-};
-
-// So we don't have to track disposal, we'll proactively create DerivedProperties for linear colors
-export const boronLinearColorProperty = new DerivedProperty( [ MPColors.boronProperty ], boronColor => colorToLinear( boronColor ) );
-export const carbonLinearColorProperty = new DerivedProperty( [ MPColors.carbonProperty ], carbonColor => colorToLinear( carbonColor ) );
-export const chlorineLinearColorProperty = new DerivedProperty( [ MPColors.chlorineProperty ], chlorineColor => colorToLinear( chlorineColor ) );
-export const fluorineLinearColorProperty = new DerivedProperty( [ MPColors.fluorineProperty ], fluorineColor => colorToLinear( fluorineColor ) );
-export const hydrogenLinearColorProperty = new DerivedProperty( [ MPColors.hydrogenProperty ], hydrogenColor => colorToLinear( hydrogenColor ) );
-export const nitrogenLinearColorProperty = new DerivedProperty( [ MPColors.nitrogenProperty ], nitrogenColor => colorToLinear( nitrogenColor ) );
-export const oxygenLinearColorProperty = new DerivedProperty( [ MPColors.oxygenProperty ], oxygenColor => colorToLinear( oxygenColor ) );
-
-// So we don't have to track disposal, we'll proactively create DerivedProperties for linear colors
-export const boronForegroundLinearColorProperty = new DerivedProperty( [ MPColors.boronForegroundProperty ], boronColor => colorToLinear( boronColor ) );
-export const carbonForegroundLinearColorProperty = new DerivedProperty( [ MPColors.carbonForegroundProperty ], carbonColor => colorToLinear( carbonColor ) );
-export const chlorineForegroundLinearColorProperty = new DerivedProperty( [ MPColors.chlorineForegroundProperty ], chlorineColor => colorToLinear( chlorineColor ) );
-export const fluorineForegroundLinearColorProperty = new DerivedProperty( [ MPColors.fluorineForegroundProperty ], fluorineColor => colorToLinear( fluorineColor ) );
-export const hydrogenForegroundLinearColorProperty = new DerivedProperty( [ MPColors.hydrogenForegroundProperty ], hydrogenColor => colorToLinear( hydrogenColor ) );
-export const nitrogenForegroundLinearColorProperty = new DerivedProperty( [ MPColors.nitrogenForegroundProperty ], nitrogenColor => colorToLinear( nitrogenColor ) );
-export const oxygenForegroundLinearColorProperty = new DerivedProperty( [ MPColors.oxygenForegroundProperty ], oxygenColor => colorToLinear( oxygenColor ) );
-
-export const elementToLinearColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
-  switch( element.symbol ) {
-    case 'B':
-      return boronLinearColorProperty;
-    case 'C':
-      return carbonLinearColorProperty;
-    case 'Cl':
-      return chlorineLinearColorProperty;
-    case 'F':
-      return fluorineLinearColorProperty;
-    case 'H':
-      return hydrogenLinearColorProperty;
-    case 'N':
-      return nitrogenLinearColorProperty;
-    case 'O':
-      return oxygenLinearColorProperty;
-    default:
-      throw new Error( `No color property defined for element: ${element.symbol}` );
-  }
-};
-
-export const elementToForegroundLinearColorProperty = ( element: Element ): TReadOnlyProperty<Color> => {
-  switch( element.symbol ) {
-    case 'B':
-      return boronForegroundLinearColorProperty;
-    case 'C':
-      return carbonForegroundLinearColorProperty;
-    case 'Cl':
-      return chlorineForegroundLinearColorProperty;
-    case 'F':
-      return fluorineForegroundLinearColorProperty;
-    case 'H':
-      return hydrogenForegroundLinearColorProperty;
-    case 'N':
-      return nitrogenForegroundLinearColorProperty;
-    case 'O':
-      return oxygenForegroundLinearColorProperty;
-    default:
-      throw new Error( `No color property defined for element: ${element.symbol}` );
-  }
-};
-
-export const directColorsToLinear = ( color: number[] ): number[] => {
-  return [
-    color[ 0 ] <= 0.0404482362771082 ? color[ 0 ] / 12.92 : Math.pow( ( color[ 0 ] + 0.055 ) / 1.055, 2.4 ),
-    color[ 1 ] <= 0.0404482362771082 ? color[ 1 ] / 12.92 : Math.pow( ( color[ 1 ] + 0.055 ) / 1.055, 2.4 ),
-    color[ 2 ] <= 0.0404482362771082 ? color[ 2 ] / 12.92 : Math.pow( ( color[ 2 ] + 0.055 ) / 1.055, 2.4 )
-  ];
-};
-
 /**
  * Red-White-Blue bipolar palette for electrostatic potential.
  * Positive -> blue, Negative -> red. Input is the raw ESP value; scaling matches existing view logic.
- * Returns normalized RGB components in [0,1].
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
  */
 export const colorizeElectrostaticPotentialRWB = ( espValue: number ): number[] => {
   const scaled = espValue * 15; // match existing scale
@@ -178,7 +98,7 @@ export const colorizeElectrostaticPotentialRWB = ( espValue: number ): number[] 
 /**
  * Rainbow ROYGB palette for electrostatic potential.
  * We normalize similarly to RWB, then interpolate across [red, orange, yellow, green, blue].
- * Returns normalized RGB components in [0,1].
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
  */
 export const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[] => {
   // Normalize to [0,1] with same scale and center at 0
@@ -198,12 +118,18 @@ export const colorizeElectrostaticPotentialROYGB = ( espValue: number ): number[
   ];
 };
 
+/**
+ * Black-White palette for electron density.
+ * Low density -> black, High density -> white. Input is the raw density value; scaling matches existing view logic.
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
+ */
 export const colorizeRealElectronDensity = ( densityValue: number ): number[] => {
   densityValue *= 200;
 
   const white = MPColors.surfaceBWWhiteProperty.value;
   const black = MPColors.surfaceBWBlackProperty.value;
 
+  // We enhance the contrast partly by using polynomial easing
   const easing = ( n: number, t: number ): number => {
     if ( t <= 0.5 ) {
       return 0.5 * Math.pow( 2 * t, n );
@@ -213,6 +139,7 @@ export const colorizeRealElectronDensity = ( densityValue: number ): number[] =>
     }
   };
 
+  // The "linear" function also applies slight contrast enhancement
   const clampedValue = easing( 3, clamp( linear( 0.1, 0.9, 1, 0, densityValue ), 0, 1 ) );
 
   return [
@@ -222,6 +149,12 @@ export const colorizeRealElectronDensity = ( densityValue: number ): number[] =>
   ];
 };
 
+/**
+ * Black-White palette for electron density, matching Java version.
+ * Low density -> black, High density -> white. Input is the raw density value;
+ * scaling matches existing Java view logic.
+ * Returns normalized RGB components in [0,1] (for efficient three.js input)
+ */
 export const colorizeJavaElectronDensity = ( densityValue: number ): number[] => {
   const white = MPColors.surfaceBWWhiteProperty.value;
   const black = MPColors.surfaceBWBlackProperty.value;

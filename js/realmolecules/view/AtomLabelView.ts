@@ -15,14 +15,13 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
-import { RealAtom } from '../model/RealMolecule.js';
-import { elementToForegroundColorProperty } from '../model/RealMoleculeColors.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import { RealAtom } from '../model/RealAtom.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -31,9 +30,7 @@ export default class AtomLabelView extends TextureQuad {
   private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor( atom: RealAtom, atomLabelsVisible: boolean, partialChargesVisible: boolean ) {
-    const element = atom.element;
-
-    const labelFillProperty = elementToForegroundColorProperty( element );
+    const labelFillProperty = atom.getForegroundColorProperty();
 
     const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
     const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
@@ -47,7 +44,7 @@ export default class AtomLabelView extends TextureQuad {
     const labelNode = new VBox( {
       children: [
         ...( atomLabelsVisible ? [
-          new Text( element.symbol, {
+          new Text( atom.element.symbol, {
             font: labelFont,
             fill: labelFillProperty,
             maxWidth: 500

@@ -7,12 +7,12 @@
  */
 
 import Vector3 from '../../../../dot/js/Vector3.js';
-import { RealBond } from '../model/RealMolecule.js';
 import { BOND_RENDER_ORDER } from './RenderOrder.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import MPColors from '../../common/MPColors.js';
+import { RealBond } from '../model/RealBond.js';
 
 const BOND_RADIUS = 0.085;
 

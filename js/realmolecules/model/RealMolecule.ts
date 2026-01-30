@@ -12,7 +12,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
-import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
@@ -20,9 +19,12 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import { elementToColorProperty, elementToLinearColorProperty } from './RealMoleculeColors.js';
 import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
 import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
+import { SurfaceVertex } from './SurfaceVertex.js';
+import { RealBond } from './RealBond.js';
+import { RealAtom } from './RealAtom.js';
+import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
@@ -33,15 +35,26 @@ export type MoleculeNames = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'h
   'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' |
   'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform';
 
-// Visualization constants for dipoles
-const DEFAULT_DIPOLE_FACTOR = 1.3;
-
-// Some dipoles need to be adjusted for molecules (outside of the typical formula for scaling)
-const DIPOLE_FACTOR_OVERRIDES: Record<string, number> = {
-  HF: 2,
-  HCN: 1.6,
-  CH2O: 1.6,
-  CHCl3: 1.6
+const symbolToAccessibleNameMap: Record<MoleculeSymbols, MoleculeNames> = {
+  H2: 'hydrogen',
+  N2: 'nitrogen',
+  O2: 'oxygen',
+  F2: 'fluorine',
+  HF: 'hydrogenFluoride',
+  H2O: 'water',
+  CO2: 'carbonDioxide',
+  HCN: 'hydrogenCyanide',
+  O3: 'ozone',
+  NH3: 'ammonia',
+  BH3: 'borane',
+  BF3: 'boronTrifluoride',
+  CH2O: 'formaldehyde',
+  CH4: 'methane',
+  CH3F: 'fluoromethane',
+  CH2F2: 'difluoromethane',
+  CHF3: 'trifluoromethane',
+  CHCl3: 'chloroform',
+  CF4: 'tetrafluoromethane'
 };
 
 export default class RealMolecule extends PhetioObject {
@@ -103,17 +116,8 @@ export default class RealMolecule extends PhetioObject {
         atomIndex,
         Element.getElementBySymbol( symbol ),
         simplifiedPartialCharge,
-        moleculeData.charges[ atomIndex ],
-        moleculeData.mulliken[ atomIndex ],
-        moleculeData.loewdin[ atomIndex ],
         moleculeData.hirshfeld[ atomIndex ],
-        moleculeData.mbis[ atomIndex ],
-        moleculeData.chelpg[ atomIndex ],
-        moleculeData.qeq[ atomIndex ],
-        moleculeData.eem[ atomIndex ],
-        moleculeData.qtpie[ atomIndex ],
-        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset ),
-        this.isAdvancedProperty
+        new Vector3( atomData.x, atomData.y, atomData.z ).minus( originOffset )
       );
     } );
 
@@ -124,27 +128,19 @@ export default class RealMolecule extends PhetioObject {
       const atomA = this.atoms[ bondData.indexA ];
       const atomB = this.atoms[ bondData.indexB ];
 
-      const bondDipoleData = moleculeData.bondDipoles.find( dipole => {
-        const indices = [ dipole.indexA, dipole.indexB ];
-        return indices.includes( bondData.indexA ) && indices.includes( bondData.indexB );
-      } )!;
-
       // Handle specific reversed bonds, see https://github.com/phetsims/molecule-polarity/issues/231
       let initialBondReversed = false;
-      if (
-        ( symbol === 'CH3F' && bondData.indexA === 0 && bondData.indexB === 1 ) ||
-        ( symbol === 'CHCl3' && bondData.indexA === 3 && bondData.indexB === 4 ) ||
-        ( symbol === 'CHF3' && bondData.indexA === 3 && bondData.indexB === 4 ) ||
-        ( symbol === 'NH3' && bondData.indexA === 0 && bondData.indexB === 1 )
-      ) {
+      if ( RealMoleculeCustomization[ symbol ].initialBondDipolesReversed?.some( indexPair => {
+        return ( bondData.indexA === indexPair[ 0 ] && bondData.indexB === indexPair[ 1 ] ) ||
+               ( bondData.indexA === indexPair[ 1 ] && bondData.indexB === indexPair[ 0 ] );
+      } ) ) {
         initialBondReversed = true;
       }
 
       return new RealBond(
         atomA,
         atomB,
-        this.symbol === 'O3' ? 1.5 : bondData.bondType,
-        new Vector3( bondDipoleData.x, bondDipoleData.y, bondDipoleData.z ),
+        RealMoleculeCustomization[ this.symbol ].bondTypeOverride ?? bondData.bondType,
         this.realMolecularDipole,
         this.isAdvancedProperty,
         initialBondReversed
@@ -246,13 +242,6 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
-   * Returns the bond-dipole cap factor for this molecule. Allows per-molecule overrides.
-   */
-  public getBondDipoleFactor(): number {
-    return DIPOLE_FACTOR_OVERRIDES[ this.symbol ] ?? DEFAULT_DIPOLE_FACTOR;
-  }
-
-  /**
    * Computes the per-Debye scale used to size dipole arrows so that all bond dipoles fit within their
    * visible bond length times the bond-dipole factor. Returns 0 if no bonds contribute.
    */
@@ -261,7 +250,7 @@ export default class RealMolecule extends PhetioObject {
       const maxScale = this.dipoleScaleProperty.value;
       const maxMagnitude = 3;
 
-      const bondBasedMolecularDipoleMagnitude = this.computeBondDipoleVectorSum().magnitude;
+      const bondBasedMolecularDipoleMagnitude = this.computeMolecularDipoleFromBondDipoleVectorSum().magnitude;
       if ( bondBasedMolecularDipoleMagnitude <= 1e-5 ) {
         return maxScale;
       }
@@ -280,47 +269,10 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
-   * Computes the molecular dipole using a centroid method (Jmol-style):
-   * find centroids of positive and negative charge distributions and scale by total positive charge.
-   * Returns a Vector3 in model coordinates, or null if it cannot be computed.
-   */
-  public computeMolecularDipole(): Vector3 | null {
-    const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
-    let positiveCharge = 0;
-    let negativeCharge = 0;
-
-    const positive = new Vector3( 0, 0, 0 );
-    const negative = new Vector3( 0, 0, 0 );
-
-    for ( let i = 0; i < this.atoms.length; i++ ) {
-      const atom = this.atoms[ i ];
-      const q = atom.getPartialCharge();
-      if ( q > 0 ) {
-        positiveCharge += q;
-        positive.add( atom.position.timesScalar( q ) );
-      }
-      else if ( q < 0 ) {
-        negativeCharge += q;
-        negative.add( atom.position.timesScalar( q ) );
-      }
-    }
-
-    if ( positiveCharge !== 0 && negativeCharge !== 0 ) {
-      positive.divideScalar( positiveCharge );
-      negative.divideScalar( negativeCharge );
-
-      const sep = positive.minus( negative );
-      const factor = positiveCharge / E_ANG_PER_DEBYE;
-      return sep.timesScalar( factor );
-    }
-    return null;
-  }
-
-  /**
    * Vector sum of per-bond dipoles (in Debye), each oriented from positive to negative.
    * Useful for visual consistency with bond dipole arrows.
    */
-  public computeBondDipoleVectorSum(): Vector3 {
+  public computeMolecularDipoleFromBondDipoleVectorSum(): Vector3 {
     const sum = new Vector3( 0, 0, 0 );
 
     for ( const bond of this.bonds ) {
@@ -341,7 +293,7 @@ export default class RealMolecule extends PhetioObject {
       return null;
     }
 
-    const mu = this.computeBondDipoleVectorSum();
+    const mu = this.computeMolecularDipoleFromBondDipoleVectorSum();
     const muMag = mu.getMagnitude();
     if ( muMag <= 1e-3 ) {
       return null;
@@ -462,31 +414,7 @@ export default class RealMolecule extends PhetioObject {
    * Returns the accessible name for this molecule based on the symbol.
    */
   public getAccessibleName(): MoleculeNames {
-
-    const symbolToNameMap: Record<MoleculeSymbols, MoleculeNames> = {
-      H2: 'hydrogen',
-      N2: 'nitrogen',
-      O2: 'oxygen',
-      F2: 'fluorine',
-      HF: 'hydrogenFluoride',
-      H2O: 'water',
-      CO2: 'carbonDioxide',
-      HCN: 'hydrogenCyanide',
-      O3: 'ozone',
-      NH3: 'ammonia',
-      BH3: 'borane',
-      BF3: 'boronTrifluoride',
-      CH2O: 'formaldehyde',
-      CH4: 'methane',
-      CH3F: 'fluoromethane',
-      CH2F2: 'difluoromethane',
-      CHF3: 'trifluoromethane',
-      CHCl3: 'chloroform',
-      CF4: 'tetrafluoromethane'
-      // CHF3: 'trifluoromethane',
-    };
-
-    return symbolToNameMap[ this.symbol ];
+    return symbolToAccessibleNameMap[ this.symbol ];
   }
 
   /**
@@ -526,166 +454,3 @@ export default class RealMolecule extends PhetioObject {
 }
 
 moleculePolarity.register( 'RealMolecule', RealMolecule );
-
-/**
- * Represents an atom in a RealMolecule.
- */
-export class RealAtom {
-
-  public readonly bonds: RealBond[] = [];
-
-  public constructor(
-    public readonly index: number,
-    public element: Element,
-    public simplifiedPartialCharge: number,
-    public psi4PartialCharge: number,
-    public mullikenPartialCharge: number,
-    public loewdinPartialCharge: number,
-    public hirshfeldPartialCharge: number,
-    public mbisPartialCharge: number,
-    public chelpgPartialCharge: number,
-    public qeqPartialCharge: number,
-    public eemPartialCharge: number,
-    public qtpiePartialCharge: number,
-    public position: Vector3,
-    public isAdvancedProperty: TReadOnlyProperty<boolean>
-  ) {
-
-  }
-
-  public getPartialCharge(): number {
-    // NOTE: if isAdvanced is false, we won't be displaying things based on partial charges, so just return hirshfeld
-    return this.hirshfeldPartialCharge;
-  }
-
-  public getColorProperty(): TReadOnlyProperty<Color> {
-    return elementToColorProperty( this.element );
-  }
-
-  public getLinearColorProperty(): TReadOnlyProperty<Color> {
-    return elementToLinearColorProperty( this.element );
-  }
-
-  public getDisplayRadius(): number {
-    const angstroms = this.element.vanDerWaalsRadius / 100;
-
-    return 0.25 * angstroms; // scale factor for better visibility
-  }
-}
-
-moleculePolarity.register( 'RealAtom', RealAtom );
-
-/**
- * Represents a bond in a RealMolecule.
- */
-export class RealBond {
-  public constructor(
-    public readonly atomA: RealAtom,
-    public readonly atomB: RealAtom,
-    public readonly bondType: 1 | 1.5 | 2 | 3,
-    public readonly realBondDipole: Vector3,
-    public readonly realMolecularDipole: Vector3, // needed for positioning 1.5 bond dashes
-    public isAdvancedProperty: TReadOnlyProperty<boolean>,
-    public initialBondReversed: boolean
-  ) {
-    atomA.bonds.push( this );
-    atomB.bonds.push( this );
-  }
-
-  public getDistance(): number {
-    return this.atomB.position.distance( this.atomA.position );
-  }
-
-  public getDirection(): Vector3 {
-    return this.atomB.position.minus( this.atomA.position ).normalized();
-  }
-
-  /**
-   * Unit direction vector from positive to negative end (Jmol convention), independent of orientation preference.
-   */
-  public getPositiveToNegativeDirection(): Vector3 {
-    if ( this.isAdvancedProperty.value ) {
-      // Partial charge based directions
-      const c1 = this.atomA.getPartialCharge();
-      const c2 = this.atomB.getPartialCharge();
-      return ( ( c1 - c2 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
-    }
-    else {
-      // Electronegativity-based directions
-      const en1 = this.atomA.element.electronegativity!;
-      const en2 = this.atomB.element.electronegativity!;
-      return ( ( en2 - en1 ) >= 0 ? this.getDirection() : this.getDirection().negated() );
-    }
-  }
-
-  /**
-   * The visible length of the bond is calculated by subtracting the display radii of the two atoms from the total distance
-   * between them.
-   *
-   * (the portion not covered by spheres).
-   */
-  public getVisibleLength(): number {
-    const radiusA = this.atomA.getDisplayRadius();
-    const radiusB = this.atomB.getDisplayRadius();
-    return Math.max( 0, this.getDistance() - ( radiusA + radiusB ) );
-  }
-
-  /**
-   * Visible bond center, midway between the exposed endpoints.
-   */
-  public getVisibleCenter(): Vector3 {
-    const direction = this.getDirection();
-    const positionA = this.atomA.position.plus( direction.timesScalar( this.atomA.getDisplayRadius() ) );
-    const positionB = this.atomB.position.minus( direction.timesScalar( this.atomB.getDisplayRadius() ) );
-    return positionA.average( positionB );
-  }
-
-  /**
-   * Bond dipole magnitude in Debye (Jmol convention) using partial charges and bond distance.
-   */
-  public getDipoleMagnitudeDebye(): number {
-    if ( this.isAdvancedProperty.value ) {
-      const E_ANG_PER_DEBYE = 0.208194; // e*angstroms/debye
-      const c1 = this.atomA.getPartialCharge();
-      const c2 = this.atomB.getPartialCharge();
-      const dist = this.getDistance();
-      const valueDebye = ( ( c1 - c2 ) / 2 ) * ( dist / E_ANG_PER_DEBYE );
-      return Math.abs( valueDebye );
-    }
-    else {
-      // Electronegativity-based dipole magnitudes.
-      // An approximate value, we mainly just need relative magnitudes for visualization
-      return Math.abs( this.atomB.element.electronegativity! - this.atomA.element.electronegativity! );
-    }
-  }
-
-  public getDipoleVector(): Vector3 {
-    const muMag = this.getDipoleMagnitudeDebye();
-
-    return this.getPositiveToNegativeDirection().timesScalar( muMag );
-  }
-}
-
-moleculePolarity.register( 'RealBond', RealBond );
-
-/**
- * Represents a vertex on the molecular surface.
- */
-export class SurfaceVertex {
-  public constructor(
-    public readonly position: Vector3,
-    public readonly normal: Vector3,
-    public readonly espValue: number,
-    public readonly dtValue: number
-  ) {}
-
-  public getPositionArray(): number[] {
-    return [ this.position.x, this.position.y, this.position.z ];
-  }
-
-  public getNormalArray(): number[] {
-    return [ this.normal.x, this.normal.y, this.normal.z ];
-  }
-}
-
-moleculePolarity.register( 'SurfaceVertex', SurfaceVertex );
