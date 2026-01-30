@@ -48,7 +48,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           bond: bond.label,
           position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
         } ), {
-          channel: 'bond-dipole'
+          responseGroup: 'bond-dipole'
         }
       );
     };
@@ -69,7 +69,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
               progress: 'zero'
             } )
           } ), {
-            channel: 'molecular-dipole'
+            responseGroup: 'molecular-dipole'
           }
         );
       }
@@ -83,7 +83,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
             } ),
             position: DescriptionMaps.formatOrientationString( currentDipole.angle, 'toAngle' )
           } ), {
-            channel: 'molecular-dipole'
+            responseGroup: 'molecular-dipole'
           }
         );
       }
@@ -115,7 +115,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnly.format( {
             position: DescriptionMaps.formatOrientationString( molecule.dipoleProperty.value.angle, 'toAngle' )
           } ), {
-            channel: 'molecular-dipole'
+            responseGroup: 'molecular-dipole'
           }
         );
       }
