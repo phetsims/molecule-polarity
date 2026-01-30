@@ -1012,6 +1012,9 @@ ${xyz.split( os.EOL ).slice( 2 ).join( os.EOL ).trim()}
     const atoms = parseAtoms( xyz );
     const bonds = parseSDFBonds( sdf );
 
+    const ROUNDING_SCALE = 1000000;
+    const round = ( v: number ) => Math.round( v * ROUNDING_SCALE ) / ROUNDING_SCALE;
+
     const moleculeData = {
       atoms: atoms,
       bonds: bonds,
@@ -1022,16 +1025,19 @@ ${xyz.split( os.EOL ).slice( 2 ).join( os.EOL ).trim()}
       faceIndices: faceIndices,
 
       // In Eh/e
-      vertexESPs: vertexESPs,
+      vertexESPs: vertexESPs.map( round ),
 
       // In e/a0^3
-      vertexDTs: vertexDTs,
+      vertexDTs: vertexDTs.map( round ),
 
-      ...orcaCharges,
+      // Removing these from the data (for now), since they aren't used in the simulation
+      // ...orcaCharges,
+      hirshfeld: orcaCharges.hirshfeld
 
-      qeq: qeqCharges,
-      eem: eemCharges,
-      qtpie: qtpieCharges
+      // Removing these from the data (for now), since they aren't used in the simulation
+      // qeq: qeqCharges,
+      // eem: eemCharges,
+      // qtpie: qtpieCharges
     };
 
     fs.writeFileSync( path.join( OUT_DIR, `${moleculeName}.json` ), JSON.stringify( moleculeData, null, 2 ) );
