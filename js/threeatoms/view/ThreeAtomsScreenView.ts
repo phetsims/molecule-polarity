@@ -21,6 +21,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
+import ThreeAtomsElectronegativityAccessibleListNode from './ThreeAtomsElectronegativityAccessibleListNode.js';
 import ThreeAtomsRotationalContextResponses from './ThreeAtomsRotationalContextResponses.js';
 import ThreeAtomsScreenSummaryContentNode from './ThreeAtomsScreenSummaryContentNode.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
@@ -82,6 +83,17 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
     // Current polarity description
     this.addChild( moleculeDescriptionNode );
+
+    const electronegativityDescriptionNode = new Node( {
+      accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.electronegativity.accessibleHelpTextStringProperty
+    } );
+    this.addChild( electronegativityDescriptionNode );
+
+    electronegativityDescriptionNode.addChild(
+      new ThreeAtomsElectronegativityAccessibleListNode( model.triatomicMolecule )
+    );
+
 
     const platesNode = new PlatesNode( model.eFieldEnabledProperty, {
       spacing: 600
@@ -175,6 +187,7 @@ export default class ThreeAtomsScreenView extends ScreenView {
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
       moleculeNode,
+      electronegativityDescriptionNode,
       electronegativityPanels
     ];
 
