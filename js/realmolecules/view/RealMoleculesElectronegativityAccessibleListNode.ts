@@ -1,4 +1,4 @@
-// Copyright 2025, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 /**
  * RealMoleculesElectronegativityAccessibleListNode is an accessible list node for the electronegativity information.
  *

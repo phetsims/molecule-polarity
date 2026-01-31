@@ -1,4 +1,4 @@
-// Copyright 2014-2026, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 
 /**
  * The bond of a RealMolecule.
