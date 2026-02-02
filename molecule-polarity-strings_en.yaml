@@ -763,7 +763,7 @@ a11y:
           chloroform: Partial charge for hydrogen is +0.07, for carbon is +0.13, for chlorine is -0.06.
       electrostaticPotential:
         select_molecule:
-          hydrogen: No electrostatic potential difference.
+          hydrogen: Small electrostatic potential difference with even distribution.
           nitrogen: Small electrostatic potential difference with even distribution.
           oxygen: Small electrostatic potential difference with even distribution.
           fluorine: Small electrostatic potential difference with even distribution.
@@ -784,7 +784,7 @@ a11y:
           chloroform: Large electrostatic potential difference.
       electronDensity:
         select_molecule:
-          hydrogen: Electron density is evenly shared between atoms.
+          hydrogen: Electron density is concentrated between atoms.
           nitrogen: Electron density is evenly shared between atoms.
           oxygen: Electron density is concentrated between atoms.
           fluorine: Electron density is evenly shared between atoms.
