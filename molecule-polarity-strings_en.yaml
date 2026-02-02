@@ -163,7 +163,7 @@ a11y:
     electronegativity:
       heading: 'Electronegativity'
       currentValue: 'Current values:'
-      description: 'Electronegativity for Atom { $atom } is { $en }.'
+      description: 'Atom { $atom }, { $en }.'
       symbolDescription: '{ $symbol } { $en }'
       accessibleHelpText: 'Change how strongly an atom attracts electrons.'
 
