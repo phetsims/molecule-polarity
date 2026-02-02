@@ -668,12 +668,12 @@ a11y:
           ozone: Electron density is slightly unevenly shared, shifted towards terminal oxygens.
           ammonia: Electron density is very unevenly shared, shifted towards nitrogen.
           borane: Electron density is evenly shared between atoms.
-          boronTrifluoride: Electron density is very unevenly shared, but symmetrically arranged.
+          boronTrifluoride: Electron density is unevenly shared, but symmetrically arranged.
           formaldehyde: Electron density is very unevenly shared, shifted towards oxygen.
           methane: Electron density is unevenly shared, but symmetrically arranged.
           fluoromethane: Electron density is very unevenly shared, shifted towards fluorine.
           difluoromethane: Electron density is very unevenly shared, shifted towards fluorines.
-          trifluoromethane: Electron density is unevenly shared, shifted towards fluorines.
+          trifluoromethane: Electron density is very unevenly shared, shifted towards fluorines.
           tetrafluoromethane: Electron density is unevenly shared, but symmetrically arranged.
           chloroform: Electron density is unevenly shared, shifted towards chlorines.
     moleculesAdvanced:
