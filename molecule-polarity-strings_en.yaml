@@ -636,25 +636,25 @@ a11y:
           chloroform: Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.
       electrostaticPotential:
         select_molecule:
-          hydrogen: No electrostatic potential difference across molecule.
-          nitrogen: No electrostatic potential difference across molecule.
-          oxygen: No electrostatic potential difference across molecule.
-          fluorine: No electrostatic potential difference across molecule.
-          hydrogenFluoride: Large electrostatic potential difference across molecule.
-          water: Large electrostatic potential difference across molecule.
-          carbonDioxide: Medium electrostatic potential difference with even distribution.
-          hydrogenCyanide: Very large electrostatic potential difference across molecule.
-          ozone: Small electrostatic potential difference across molecule.
-          ammonia: Large electrostatic potential difference across molecule.
-          borane: No electrostatic potential difference across molecule.
+          hydrogen: No electrostatic potential difference.
+          nitrogen: No electrostatic potential difference.
+          oxygen: No electrostatic potential difference.
+          fluorine: No electrostatic potential difference.
+          hydrogenFluoride: Large electrostatic potential difference.
+          water: Large electrostatic potential difference.
+          carbonDioxide: Medium electrostatic potential difference.
+          hydrogenCyanide: Very large electrostatic potential difference.
+          ozone: Small electrostatic potential difference.
+          ammonia: Large electrostatic potential difference.
+          borane: No electrostatic potential difference.
           boronTrifluoride: Large electrostatic potential difference with even distribution.
-          formaldehyde: Very large electrostatic potential difference across molecule.
+          formaldehyde: Very large electrostatic potential difference.
           methane: Medium electrostatic potential difference with even distribution.
-          fluoromethane: Large electrostatic potential difference across molecule.
-          difluoromethane: Very large electrostatic potential difference across molecule.
-          trifluoromethane: Large electrostatic potential difference across molecule.
+          fluoromethane: Large electrostatic potential difference.
+          difluoromethane: Very large electrostatic potential difference.
+          trifluoromethane: Large electrostatic potential difference.
           tetrafluoromethane: Small electrostatic potential difference with even distribution.
-          chloroform: Medium electrostatic potential difference across molecule.
+          chloroform: Medium electrostatic potential difference.
       electronDensity:
         select_molecule:
           hydrogen: Electron density is evenly shared between atoms.
