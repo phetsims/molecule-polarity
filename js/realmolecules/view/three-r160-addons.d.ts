@@ -1,7 +1,7 @@
 // Copyright 2026, University of Colorado Boulder
 
 /**
- * Type definitions for everything in three-r160-addon-outlinepass.js, so we can use it in properly-typed ways in the
+ * Type definitions for everything in three-r160-addons.js, so we can use it in properly-typed ways in the
  * sim code.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
