@@ -601,16 +601,16 @@ a11y:
           hydrogenFluoride: Large molecular dipole, pointing towards fluorine.
           water: Large molecular dipole, pointing towards oxygen.
           carbonDioxide: No molecular dipole.
-          hydrogenCyanide: Very large molecular dipole, pointing towards nitrogen.
-          ozone: Small molecular dipole, pointing towards terminal oxygens.
-          ammonia: Large molecular dipole, pointing towards nitrogen.
+          hydrogenCyanide: Medium molecular dipole, pointing towards nitrogen.
+          ozone: No molecular dipole.
+          ammonia: Fairly large molecular dipole, pointing towards nitrogen.
           borane: No molecular dipole.
           boronTrifluoride: No molecular dipole.
-          formaldehyde: Very large molecular dipole, pointing towards oxygen.
+          formaldehyde: Fairly large molecular dipole, pointing towards oxygen.
           methane: No molecular dipole.
-          fluoromethane: Large molecular dipole, pointing towards fluorine.
+          fluoromethane: Fairly large molecular dipole, pointing towards fluorine.
           difluoromethane: Large molecular dipole, pointing towards fluorines.
-          trifluoromethane: Medium molecular dipole, pointing towards fluorines.
+          trifluoromethane: Large molecular dipole, pointing towards fluorines.
           tetrafluoromethane: No molecular dipole.
           chloroform: Medium molecular dipole, pointing towards chlorines.
       partialCharges:
