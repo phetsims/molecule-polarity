@@ -577,21 +577,21 @@ a11y:
           nitrogen: No bond dipole.
           oxygen: No bond dipole.
           fluorine: No bond dipole.
-          hydrogenFluoride: Large bond dipole.
-          water: Large bond dipoles.
-          carbonDioxide: Medium bond dipoles.
-          hydrogenCyanide: Small carbon hydrogen bond dipole, large carbon nitrogen bond dipole.
-          ozone: Small bond dipoles.
-          ammonia: Medium bond dipoles.
-          borane: Tiny bond dipoles.
-          boronTrifluoride: Large bond dipoles.
-          formaldehyde: Tiny carbon hydrogen bond dipoles, very large carbon oxygen bond dipole.
-          methane: Small bond dipoles.
-          fluoromethane: Small carbon hydrogen bond dipoles, large carbon fluorine bond dipole.
-          difluoromethane: Tiny carbon hydrogen bond dipoles, large carbon fluorine bond dipoles.
-          trifluoromethane: Small carbon hydrogen bond dipole, large carbon fluorine bond dipoles.
-          tetrafluoromethane: Large carbon fluorine bond dipoles.
-          chloroform: Small carbon hydrogen bond dipole, medium carbon chlorine bond dipoles.
+          hydrogenFluoride: Large bond dipole, pointing towards fluorine.
+          water: Large bond dipoles, pointing towards oxygen.
+          carbonDioxide: Medium bond dipoles, pointing towards oxygens.
+          hydrogenCyanide: Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon nitrogen bond dipole, pointing towards nitrogen. 
+          ozone: No bond dipoles.
+          ammonia: Medium bond dipoles, pointing towards nitrogen.
+          borane: Tiny bond dipoles, pointing towards hydrogens.
+          boronTrifluoride: Large bond dipoles, pointing towards fluorines.
+          formaldehyde: Very small carbon hydrogen bond dipoles, pointing towards carbon.
+          methane: Very small bond dipoles, pointing towards carbon.
+          fluoromethane: Very small carbon hydrogen bond dipoles, pointing towards carbon. Large carbon fluorine bond dipole, pointing towards fluorine.
+          difluoromethane: Very small carbon hydrogen bond dipoles, pointing towards carbon. Fairly large carbon fluorine bond dipoles, pointing towards fluorines.
+          trifluoromethane: Very small carbon hydrogen bond dipoles, pointing towards carbon. Fairly large carbon fluorine bond dipoles, pointing towards fluorines.
+          tetrafluoromethane: Fairly large carbon fluorine bond dipoles, pointing towards fluorines.
+          chloroform: Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon chlorine bond dipoles, pointing towards chlorines.
       molecularDipole:
         select_molecule:
           hydrogen: No molecular dipole.
