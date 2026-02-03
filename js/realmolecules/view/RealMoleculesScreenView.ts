@@ -29,6 +29,7 @@ import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedP
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPColors from '../../common/MPColors.js';
@@ -454,6 +455,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       };
     }
 
+    const grabSound = sharedSoundPlayers.get( 'grab' );
+    const releaseSound = sharedSoundPlayers.get( 'release' );
+
     const rotateListener: TInputListener = {
       down: ( event: SceneryEvent ) => {
         if ( !event.canStartPress() ) { return; }
@@ -474,6 +478,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
             isRotating = false;
             pointer.removeInputListener( pointerListener );
             pointer.cursor = null;
+
+            releaseSound.play();
           }
         };
 
@@ -498,6 +504,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
         // attach the listener so that it can be interrupted from pan and zoom operations
         pointer.addInputListener( pointerListener, true );
+
+        grabSound.play();
       }
     };
     moleculeNode.addInputListener( rotateListener );
