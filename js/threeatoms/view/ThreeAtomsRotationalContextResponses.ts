@@ -89,7 +89,11 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       }
     };
 
-    molecule.bondAngleABProperty.link( angle => {
+    molecule.bondAngleABProperty.link( ( angle, previousAngle ) => {
+
+      // When molecule rotates, bond angle is triggered but doesn't actually change. Do nothing
+      if ( !previousAngle ) { return; }
+
       if ( viewProperties.bondDipolesVisibleProperty.value ) {
         bondDipoleChangeContextResponse( angle, molecule.bondAB, false );
       }
@@ -99,7 +103,11 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       previousMolecularDipoleMagnitude = molecule.dipoleProperty.value.magnitude;
     } );
 
-    molecule.bondAngleBCProperty.link( angle => {
+    molecule.bondAngleBCProperty.link( ( angle, previousAngle ) => {
+
+      // When molecule rotates, bond angle is triggered but doesn't actually change. Do nothing
+      if ( !previousAngle ) { return; }
+
       if ( viewProperties.bondDipolesVisibleProperty.value ) {
         bondDipoleChangeContextResponse( angle, molecule.bondBC, true );
       }
