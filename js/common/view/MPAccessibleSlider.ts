@@ -16,6 +16,7 @@ import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/ac
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import normalizeAngle from '../model/normalizeAngle.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -28,6 +29,9 @@ const DEFAULT_STEP = toRadians( 5 );
 
 export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
   public constructor( valueProperty: NumberProperty, providedOptions: MPAccessibleSliderOptions ) {
+
+    const grabSound = sharedSoundPlayers.get( 'grab' );
+    const releaseSound = sharedSoundPlayers.get( 'release' );
 
     const options = optionize<MPAccessibleSliderOptions, SelfOptions, ParentOptions>()( {
       // AccessibleSliderOptions
@@ -44,6 +48,10 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
       },
       startDrag: event => {
         this.moveToFront();
+        grabSound.play();
+      },
+      endDrag: event => {
+        releaseSound.play();
       }
     }, providedOptions );
 
