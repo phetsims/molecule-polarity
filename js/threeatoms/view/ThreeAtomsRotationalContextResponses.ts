@@ -95,7 +95,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       if ( !previousAngle ) { return; }
 
       if ( viewProperties.bondDipolesVisibleProperty.value ) {
-        bondDipoleChangeContextResponse( angle, molecule.bondAB, false );
+        bondDipoleChangeContextResponse( angle + molecule.angleProperty.value, molecule.bondAB, false );
       }
       if ( viewProperties.molecularDipoleVisibleProperty.value ) {
         molecularDipoleChangeContextResponse();
@@ -109,7 +109,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       if ( !previousAngle ) { return; }
 
       if ( viewProperties.bondDipolesVisibleProperty.value ) {
-        bondDipoleChangeContextResponse( angle, molecule.bondBC, true );
+        bondDipoleChangeContextResponse( angle + molecule.angleProperty.value, molecule.bondBC, true );
       }
       if ( viewProperties.molecularDipoleVisibleProperty.value ) {
         molecularDipoleChangeContextResponse();
