@@ -119,7 +119,7 @@ a11y:
       unchecked: 'Atom labels hidden.'
     atomElectronegativitiesCheckbox:
       accessibleName: 'Atom Electronegativities'
-      accessibleHelpText: 'Show or hide electronegativity values for each atom in the molecule.'
+      accessibleHelpText: 'Explore with or without atom electronegativities shown.'
       checked: 'Atom electronegativities shown.'
       unchecked: 'Atom electronegativities hidden.'
     surfaceRadioButtonGroup:
@@ -544,7 +544,7 @@ a11y:
     electronegativitiesTable: 'Atom electronegativities are: hydrogen 2.1, boron 2.0, carbon 2.5, nitrogen 3.0, oxygen 3.5, fluorine 4.0, and chlorine 3.0.'
     moleculeComboBox:
       accessibleName: 'Molecule'
-      accessibleHelpText: 'Choose a different molecule to view'
+      accessibleHelpText: 'Choose a different molecule to view.'
     modelRadioButtonGroup:
       accessibleName: 'Model'
       basicHelpText: 'Explore bond dipoles based on electronegativity differences.'
