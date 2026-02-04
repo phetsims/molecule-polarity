@@ -54,7 +54,7 @@ export default class MoleculeContextResponsesNode extends Node {
 
   // Mini-utility function for emitting context responses without repeating the verbosity
   private contextResponse( message: string ): void {
-    this.addAccessibleContextResponse( message );
+    this.addAccessibleContextResponse( message, { interruptible: false } );
   }
 
   /**
