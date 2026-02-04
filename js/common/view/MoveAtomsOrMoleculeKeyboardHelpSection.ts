@@ -47,12 +47,7 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
     const rotateOrMoveInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
       MPHotkeyData.ROTATE_OR_MOVE_SMALLER_STEPS,
       {
-        iconData: {
-          alternatives: [
-            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
-            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ],
-          layout: 'stacked'
-        }
+        hotkeySetVariant: 'paired'
       }
     );
 

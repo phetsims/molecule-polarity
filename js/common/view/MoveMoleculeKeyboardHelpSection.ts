@@ -39,12 +39,7 @@ export default class MoveMoleculeKeyboardHelpSection extends KeyboardHelpSection
     const rotateInSmallerSteps = KeyboardHelpSectionRow.fromHotkeyData(
       MPHotkeyData.ROTATE_MOLECULE_SMALLER_STEPS,
       {
-        iconData: {
-          alternatives: [
-            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon() ),
-            KeyboardHelpIconFactory.shiftPlusIcon( KeyboardHelpIconFactory.upDownArrowKeysRowIcon() ) ],
-          layout: 'stacked'
-        }
+        hotkeySetVariant: 'paired'
       }
     );
 
