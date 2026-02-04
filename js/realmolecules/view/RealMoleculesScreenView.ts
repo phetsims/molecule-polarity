@@ -10,7 +10,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import MobiusScreenView from '../../../../mobius/js/MobiusScreenView.js';
@@ -212,10 +211,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       } )
     } );
     this.addChild( moleculeDescriptionNode );
-
-    model.moleculeProperty.link( molecule => {
-      moleculeDescriptionNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( molecule.computeMolecularDipoleFromBondDipoleVectorSum().magnitude, 2 );
-    } );
 
     // Molecule description
     moleculeDescriptionNode.addChild(

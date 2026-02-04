@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
@@ -55,12 +54,6 @@ export default class ThreeAtomsScreenView extends ScreenView {
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.headingStringProperty
     } );
-
-    moleculeDescriptionNode.addChild( new Node( {
-      accessibleParagraph: model.triatomicMolecule.dipoleProperty.derived( dipole => {
-        return 'TEMPORARY: Dipole Magnitude: ' + toFixed( dipole.magnitude, 2 );
-      } )
-    } ) );
 
     moleculeDescriptionNode.addChild(
       new ThreeAtomsRotationalContextResponses( model.triatomicMolecule, viewProperties )
