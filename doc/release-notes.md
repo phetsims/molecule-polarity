@@ -28,6 +28,21 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * ⚠️ Use this icon for a change that is breaking, removes a feature, etc. 
 *
 -->
+## 2.0 (In progress)
+
+### New Features
+* Real Molecules screen now in HTML5
+* Real Molecules screen added to PhET-iO
+* Basic/Advanced model option in Real Molecules screen
+* Surface Color preference: see _Preferences > Simulation_
+* Alternative Input
+* Interactive Highlights
+* Interactive Description
+* Basic Sound
+
+### Other Changes
+* Partial Charges and the associated checkbox have been removed from the Basic Model on the Real Molecules screen.
+* Ozone is shown as with 1.5 bonds. The Java version showed single bonds. 
 
 ## 1.3 (2023-06-22)
 
