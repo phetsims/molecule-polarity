@@ -30,17 +30,12 @@ export default class RealMoleculeAdvancedAccessibleListNode extends AccessibleLi
       return molecule.getAccessibleName();
     } );
 
-    const isAnythingVisibleAtAllProperty = DerivedProperty.or( [
-      viewProperties.bondDipolesVisibleProperty,
-      viewProperties.molecularDipoleVisibleProperty,
-      viewProperties.partialChargesVisibleProperty,
-      DerivedProperty.valueNotEqualsConstant( viewProperties.surfaceTypeProperty, 'none' )
-    ] );
-
-
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
-      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.descriptionLeadingParagraphStringProperty,
-      leadingParagraphVisibleProperty: isAnythingVisibleAtAllProperty
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
+        molecule: moleculeProperty.derived( molecule => {
+          return molecule.getAccessibleName();
+        } )
+      } )
     }, providedOptions );
 
     super( [
