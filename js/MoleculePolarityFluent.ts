@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -283,6 +283,7 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_moleculeComboBox_accessibleHelpText
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleName', 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_descriptionLeadingParagraph', 'a11y.realMoleculesScreen.descriptionLeadingParagraphStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_description', 'a11y.realMoleculesScreen.molecules.descriptionStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_bondDipole', 'a11y.realMoleculesScreen.molecules.bondDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_molecularDipole', 'a11y.realMoleculesScreen.molecules.molecularDipoleStringProperty' );
@@ -716,6 +717,8 @@ const MoleculePolarityFluent = {
         basicHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty' ) ),
         advancedHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty' ) )
       },
+      _comment_3: new FluentComment( {"comment":"Since empty strings were not allowed, used a workaround to create spacing in the a11y output.","associatedKey":"descriptionLeadingParagraph"} ),
+      descriptionLeadingParagraphStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_descriptionLeadingParagraph', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.descriptionLeadingParagraphStringProperty' ) ),
       molecules: {
         description: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.descriptionStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] ),
         _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),

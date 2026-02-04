@@ -17,6 +17,7 @@ import MobiusScreenView from '../../../../mobius/js/MobiusScreenView.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import AccessibleListNode from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
@@ -202,7 +203,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     moleculeNode.addInputListener( keyboardDragListener );
 
-
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
         moleculeName: new DerivedProperty( [ dynamicMoleculeNameProperty ], name => {
@@ -217,6 +217,19 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     model.moleculeProperty.link( molecule => {
       moleculeDescriptionNode.accessibleParagraph = 'TEMPORARY: Dipole Magnitude: ' + toFixed( molecule.computeMolecularDipoleFromBondDipoleVectorSum().magnitude, 2 );
     } );
+
+    // Due to a bug in the pdom ordering of AccessibleListNode, to add this paragraph we need to add an enterly new
+    // empty AccessibleListNode. TODO https://github.com/phetsims/molecule-polarity/issues/250
+    moleculeDescriptionNode.addChild(
+      new AccessibleListNode( [], {
+          leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
+            molecule: model.moleculeProperty.derived( molecule => {
+              return molecule.getAccessibleName();
+            } )
+          } )
+        }
+      )
+    );
 
     // Molecule description
     moleculeDescriptionNode.addChild(

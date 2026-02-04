@@ -30,10 +30,15 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       return molecule.getAccessibleName();
     } );
 
+    const isAnythingVisibleAtAllProperty = DerivedProperty.or( [
+      viewProperties.bondDipolesVisibleProperty,
+      viewProperties.molecularDipoleVisibleProperty,
+      DerivedProperty.valueNotEqualsConstant( viewProperties.surfaceTypeProperty, 'none' )
+    ] );
+
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
-      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
-        molecule: moleculeNameProperty
-      } )
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.descriptionLeadingParagraphStringProperty,
+      leadingParagraphVisibleProperty: isAnythingVisibleAtAllProperty
     }, providedOptions );
 
     super( [
@@ -50,14 +55,6 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       {
         visibleProperty: viewProperties.molecularDipoleVisibleProperty,
         stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.createProperty( {
-          molecule: moleculeNameProperty
-        } )
-      },
-
-      // Partial Charges
-      {
-        visibleProperty: viewProperties.partialChargesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.partialCharges.createProperty( {
           molecule: moleculeNameProperty
         } )
       },

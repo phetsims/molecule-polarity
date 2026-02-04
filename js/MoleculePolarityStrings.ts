@@ -349,6 +349,7 @@ type StringsType = {
         'basicHelpTextStringProperty': LocalizedStringProperty;
         'advancedHelpTextStringProperty': LocalizedStringProperty;
       };
+      'descriptionLeadingParagraphStringProperty': LocalizedStringProperty;
       'molecules': {
         'descriptionStringProperty': LocalizedStringProperty;
         'bondDipoleStringProperty': LocalizedStringProperty;

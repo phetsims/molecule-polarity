@@ -549,28 +549,31 @@ a11y:
       accessibleName: 'Model'
       basicHelpText: 'Explore bond dipoles based on electronegativity differences.'
       advancedHelpText: 'Explore bond dipoles based on partial charges.'
+
+    # Since empty strings were not allowed, used a workaround to create spacing in the a11y output.
+    descriptionLeadingParagraph: 'The molecule has:'
     molecules:
       description:
         select_molecule:
-          hydrogen: 'The molecule upper H2 has linear geometry and is nonpolar, with the hydrogen atoms single-bonded. The molecule has:'
-          nitrogen: 'The molecule upper N2 has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded. The molecule has:'
-          oxygen: 'The molecule upper O2 has linear geometry and is nonpolar, with the oxygen atoms double-bonded. The molecule has:'
-          fluorine: 'The molecule upper F2 has linear geometry and is nonpolar, with the fluorine atoms single-bonded. The molecule has:'
-          hydrogenFluoride: 'The molecule upper H upper F has linear geometry and is very strongly polar, with the hydrogen single-bonded to fluorine. The molecule has:'
-          water: 'The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen. The molecule has:'
-          carbonDioxide: 'The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen. The molecule has:'
-          hydrogenCyanide: 'The molecule upper H upper C upper N has linear geometry and is polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen. The molecule has:'
-          ozone: 'The molecule upper O3 has bent geometry and is nonpolar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other. The molecule has:'
-          ammonia: 'The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen. The molecule has:'
-          borane: 'The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen. The molecule has:'
-          boronTrifluoride: 'The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine. The molecule has:'
-          formaldehyde: 'The molecule upper C upper H2 upper O has trigonal planar geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen. The molecule has:'
-          methane: 'The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:'
-          fluoromethane: 'The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
-          difluoromethane: 'The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
-          trifluoromethane: 'The molecule upper C upper H upper F3 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine. The molecule has:'
-          tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:'
-          chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:'
+          hydrogen: 'The molecule upper H2 has linear geometry and is nonpolar, with the hydrogen atoms single-bonded.'
+          nitrogen: 'The molecule upper N2 has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded.'
+          oxygen: 'The molecule upper O2 has linear geometry and is nonpolar, with the oxygen atoms double-bonded.'
+          fluorine: 'The molecule upper F2 has linear geometry and is nonpolar, with the fluorine atoms single-bonded.'
+          hydrogenFluoride: 'The molecule upper H upper F has linear geometry and is very strongly polar, with the hydrogen single-bonded to fluorine.'
+          water: 'The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen.'
+          carbonDioxide: 'The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen.'
+          hydrogenCyanide: 'The molecule upper H upper C upper N has linear geometry and is polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen.'
+          ozone: 'The molecule upper O3 has bent geometry and is nonpolar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other.'
+          ammonia: 'The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen.'
+          borane: 'The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen.'
+          boronTrifluoride: 'The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine.'
+          formaldehyde: 'The molecule upper C upper H2 upper O has trigonal planar geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen.'
+          methane: 'The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen.'
+          fluoromethane: 'The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.'
+          difluoromethane: 'The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.'
+          trifluoromethane: 'The molecule upper C upper H upper F3 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine.'
+          tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine.'
+          chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine.'
       bondDipole:
         select_molecule:
           hydrogen: No bond dipole.
@@ -580,7 +583,7 @@ a11y:
           hydrogenFluoride: Large bond dipole, pointing towards fluorine.
           water: Large bond dipoles, pointing towards oxygen.
           carbonDioxide: Medium bond dipoles, pointing towards oxygens.
-          hydrogenCyanide: Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon nitrogen bond dipole, pointing towards nitrogen. 
+          hydrogenCyanide: Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon nitrogen bond dipole, pointing towards nitrogen.
           ozone: No bond dipoles.
           ammonia: Medium bond dipoles, pointing towards nitrogen.
           borane: Tiny bond dipoles, pointing towards hydrogens.
@@ -679,25 +682,25 @@ a11y:
     moleculesAdvanced:
       description:
         select_molecule:
-          hydrogen: 'The molecule upper H2 has linear geometry and is nonpolar, with the hydrogen atoms single-bonded. The molecule has:'
-          nitrogen: 'The molecule upper N2 has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded. The molecule has:'
-          oxygen: 'The molecule upper O2 has linear geometry and is nonpolar, with the oxygen atoms double-bonded. The molecule has:'
-          fluorine: 'The molecule upper F2 has linear geometry and is nonpolar, with the fluorine atoms single-bonded. The molecule has:'
-          hydrogenFluoride: 'The molecule upper H upper F has linear geometry and is very strongly polar, with the hydrogen single-bonded to fluorine. The molecule has:'
-          water: 'The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen. The molecule has:'
-          carbonDioxide: 'The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen. The molecule has:'
-          hydrogenCyanide: 'The molecule upper H upper C upper N has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen. The molecule has:'
-          ozone: 'The molecule upper O3 has bent geometry and is slightly polar, with 1.5 bonds between oxygen atoms. The molecule has:'
-          ammonia: 'The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen. The molecule has:'
-          borane: 'The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen. The molecule has:'
-          boronTrifluoride: 'The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine. The molecule has:'
-          formaldehyde: 'The molecule upper C upper H2 upper O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen. The molecule has:'
-          methane: 'The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen. The molecule has:'
-          fluoromethane: 'The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
-          difluoromethane: 'The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine. The molecule has:'
-          trifluoromethane: 'The molecule upper C upper H upper F3 has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine. The molecule has:'
-          tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine. The molecule has:'
-          chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine. The molecule has:'
+          hydrogen: 'The molecule upper H2 has linear geometry and is nonpolar, with the hydrogen atoms single-bonded.'
+          nitrogen: 'The molecule upper N2 has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded.'
+          oxygen: 'The molecule upper O2 has linear geometry and is nonpolar, with the oxygen atoms double-bonded.'
+          fluorine: 'The molecule upper F2 has linear geometry and is nonpolar, with the fluorine atoms single-bonded.'
+          hydrogenFluoride: 'The molecule upper H upper F has linear geometry and is very strongly polar, with the hydrogen single-bonded to fluorine.'
+          water: 'The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen.'
+          carbonDioxide: 'The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen.'
+          hydrogenCyanide: 'The molecule upper H upper C upper N has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen.'
+          ozone: 'The molecule upper O3 has bent geometry and is slightly polar, with 1.5 bonds between oxygen atoms.'
+          ammonia: 'The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen.'
+          borane: 'The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen.'
+          boronTrifluoride: 'The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine.'
+          formaldehyde: 'The molecule upper C upper H2 upper O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen.'
+          methane: 'The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen.'
+          fluoromethane: 'The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.'
+          difluoromethane: 'The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.'
+          trifluoromethane: 'The molecule upper C upper H upper F3 has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine.'
+          tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine.'
+          chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine.'
       bondDipole:
         select_molecule:
           hydrogen: No bond dipole.
