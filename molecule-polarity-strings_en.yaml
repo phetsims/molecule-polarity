@@ -3,7 +3,6 @@ screen.twoAtoms: Two Atoms
 screen.threeAtoms: Three Atoms
 screen.realMolecules: Real Molecules
 electricField: Electric Field
-
 bondCharacter: Bond Character
 partialCharges: Partial Charges
 bondDipole: Bond Dipole
@@ -60,7 +59,6 @@ deltaNegativeValue: 'δ=−{{partialCharge}}'
 pattern.dipoleDirection: '{{from}} → {{to}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules only):'
 surfaceColorDescription: 'Color gradient used to represent positive and negative electrostatic potential.'
-
 
 a11y:
   common:
