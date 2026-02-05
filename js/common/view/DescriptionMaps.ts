@@ -4,9 +4,6 @@
  *
  * Each mapping defines a createStringProperty function as well as a formatString function for convenience.
  *
- * TODO: Consider rather writing a single string-to-function map to reduce code duplication. https://github.com/phetsims/molecule-polarity/issues/218
- * TODO: Delete unused functions https://github.com/phetsims/molecule-polarity/issues/218
- *
  * @author Agustín Vallejo
  */
 
@@ -39,7 +36,6 @@ type ElectronDensityShift = 'shiftedSlightly' | 'shifted' | 'shiftedMuchMore' | 
 type Electronegativity = 'veryLow' | 'low' | 'mediumLow' | 'mediumHigh' | 'high' | 'veryHigh';
 
 // Shapes and Directions
-type Directions = 'between1And2' | 'at3' | 'between4And5' | 'at6' | 'between7And8' | 'at9' | 'between10And11' | 'at12';
 type Shape = 'linear' | 'nearlyLinear' | 'slightlyBent' | 'bent' | 'veryBent' | 'extremelyBentSlightOverlap' | 'atomsOverlap';
 
 // Progress. i.e. more/less positive/negative.
@@ -166,24 +162,6 @@ export default class DescriptionMaps {
            'veryHigh';
   }
 
-  private static angleToOrientation( angle: number ): Directions {
-    const sin = toFixedNumber( Math.sin( angle ), 2 );
-    const cos = toFixedNumber( Math.cos( angle ), 2 );
-
-    if ( sin === 0 ) {
-      return cos > 0 ? 'at3' : 'at9';
-    }
-    else if ( cos === 0 ) {
-      return sin < 0 ? 'at12' : 'at6';
-    }
-    else if ( sin < 0 ) {
-      return cos > 0 ? 'between1And2' : 'between10And11';
-    }
-    else {
-      return cos > 0 ? 'between4And5' : 'between7And8';
-    }
-  }
-
   private static angleToShape( angle: number ): Shape {
     const absAngle = Math.abs( angle );
     return absAngle <= 1e-5 * Math.PI ? 'atomsOverlap' :
@@ -193,145 +171,6 @@ export default class DescriptionMaps {
            absAngle <= 0.9 * Math.PI ? 'slightlyBent' :
            absAngle <= 0.95 * Math.PI ? 'nearlyLinear' :
            'linear';
-  }
-
-  public static createShapeGeometryStringProperty( geometry: TReadOnlyProperty<MoleculeGeometry> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.shapeGeometry.createProperty( {
-      geometry: geometry
-    } );
-  }
-
-  public static createPolarityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.polarity.createProperty( {
-      polarity: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoPolarity( deltaEN ) )
-    } );
-  }
-
-  public static formatPolarityString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.polarity.format( {
-      polarity: DescriptionMaps.deltaENtoPolarity( deltaEN )
-    } );
-  }
-
-  public static createBondDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.bondDipole.createProperty( {
-      magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoBondDipole( deltaEN ) )
-    } );
-  }
-
-  public static formatBondDipoleString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.bondDipole.format( {
-      magnitude: DescriptionMaps.deltaENtoBondDipole( deltaEN )
-    } );
-  }
-
-  public static createPartialChargesStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.partialChargeMagnitude.createProperty( {
-      magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoPartialCharges( deltaEN ) )
-    } );
-  }
-
-  public static formatPartialChargesString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.partialChargeMagnitude.format( {
-      magnitude: DescriptionMaps.deltaENtoPartialCharges( deltaEN )
-    } );
-  }
-
-
-  public static createMolecularDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.molecularDipole.createProperty( {
-      magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoMolecularDipole( deltaEN ) )
-    } );
-  }
-
-  public static formatMolecularDipoleString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.molecularDipole.format( {
-      magnitude: DescriptionMaps.deltaENtoMolecularDipole( deltaEN )
-    } );
-  }
-
-  public static createMolecularPolarityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.molecularPolarity.createProperty( {
-      polarity: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoMolecularPolarity( deltaEN ) )
-    } );
-  }
-
-  public static formatMolecularPolarityString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.molecularPolarity.format( {
-      polarity: DescriptionMaps.deltaENtoMolecularPolarity( deltaEN )
-    } );
-  }
-
-  public static createBondCharacterStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.bondCharacter.createProperty( {
-      bondCharacter: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoBondCharacter( deltaEN ) )
-    } );
-  }
-
-  public static formatBondCharacterString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.bondCharacter.format( {
-      bondCharacter: DescriptionMaps.deltaENtoBondCharacter( deltaEN )
-    } );
-  }
-
-  public static createElectrostaticPotentialStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.electrostaticPotentialUppercase.createProperty( {
-      potential: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectrostaticPotential( deltaEN ) )
-    } );
-  }
-
-  public static formatElectrostaticPotentialString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.electrostaticPotentialUppercase.format( {
-      potential: DescriptionMaps.deltaENtoElectrostaticPotential( deltaEN )
-    } );
-  }
-
-  public static createElectrostaticRegionsStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.electrostaticRegions.createProperty( {
-      regions: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectrostaticRegions( deltaEN ) )
-    } );
-  }
-
-  public static formatElectrostaticRegionsString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.electrostaticRegions.format( {
-      regions: DescriptionMaps.deltaENtoElectrostaticRegions( deltaEN )
-    } );
-  }
-
-  public static createElectronDensityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.electronDensity.createProperty( {
-      density: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectronDensity( deltaEN ) )
-    } );
-  }
-
-  public static formatElectronDensityString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.electronDensity.format( {
-      density: DescriptionMaps.deltaENtoElectronDensity( deltaEN )
-    } );
-  }
-
-  public static createElectronDensityShiftStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.electronDensityShift.createProperty( {
-      shift: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectronDensityShift( deltaEN ) )
-    } );
-  }
-
-  public static formatElectronDensityShiftString( deltaEN: number ): string {
-    return MoleculePolarityFluent.a11y.electronDensityShift.format( {
-      shift: DescriptionMaps.deltaENtoElectronDensityShift( deltaEN )
-    } );
-  }
-
-  public static createElectronegativityStringProperty( ENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.electronegativity.createProperty( {
-      level: ENProperty.derived( value => DescriptionMaps.ENtoQualitative( value ) )
-    } );
-  }
-
-  public static formatElectronegativityString( EN: number ): string {
-    return MoleculePolarityFluent.a11y.electronegativity.format( {
-      level: DescriptionMaps.ENtoQualitative( EN )
-    } );
   }
 
   public static createOrientationStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
@@ -361,15 +200,87 @@ export default class DescriptionMaps {
     }
   }
 
-  public static createShapeStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
-    return MoleculePolarityFluent.a11y.shape.createProperty( {
-      shape: angleProperty.derived( angle => DescriptionMaps.angleToShape( angle ) )
+  public static createShapeGeometryStringProperty( geometry: TReadOnlyProperty<MoleculeGeometry> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.shapeGeometry.createProperty( {
+      geometry: geometry
     } );
   }
 
-  public static formatShapeString( angle: number ): string {
-    return MoleculePolarityFluent.a11y.shape.format( {
-      shape: DescriptionMaps.angleToShape( angle )
+  public static createPolarityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.polarity.createProperty( {
+      polarity: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoPolarity( deltaEN ) )
+    } );
+  }
+
+  public static createBondDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.bondDipole.createProperty( {
+      magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoBondDipole( deltaEN ) )
+    } );
+  }
+
+  public static createPartialChargesStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.partialChargeMagnitude.createProperty( {
+      magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoPartialCharges( deltaEN ) )
+    } );
+  }
+
+  public static createMolecularDipoleStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.molecularDipole.createProperty( {
+      magnitude: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoMolecularDipole( deltaEN ) )
+    } );
+  }
+
+  public static createMolecularPolarityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.molecularPolarity.createProperty( {
+      polarity: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoMolecularPolarity( deltaEN ) )
+    } );
+  }
+
+  public static createBondCharacterStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.bondCharacter.createProperty( {
+      bondCharacter: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoBondCharacter( deltaEN ) )
+    } );
+  }
+
+  public static createElectrostaticPotentialStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electrostaticPotentialUppercase.createProperty( {
+      potential: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectrostaticPotential( deltaEN ) )
+    } );
+  }
+
+  public static createElectrostaticRegionsStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electrostaticRegions.createProperty( {
+      regions: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectrostaticRegions( deltaEN ) )
+    } );
+  }
+
+  public static createElectronDensityStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electronDensity.createProperty( {
+      density: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectronDensity( deltaEN ) )
+    } );
+  }
+
+  public static createElectronDensityShiftStringProperty( deltaENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electronDensityShift.createProperty( {
+      shift: deltaENProperty.derived( deltaEN => DescriptionMaps.deltaENtoElectronDensityShift( deltaEN ) )
+    } );
+  }
+
+  public static createElectronegativityStringProperty( ENProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.electronegativity.createProperty( {
+      level: ENProperty.derived( value => DescriptionMaps.ENtoQualitative( value ) )
+    } );
+  }
+
+  public static formatElectronegativityString( EN: number ): string {
+    return MoleculePolarityFluent.a11y.electronegativity.format( {
+      level: DescriptionMaps.ENtoQualitative( EN )
+    } );
+  }
+
+  public static createShapeStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
+    return MoleculePolarityFluent.a11y.shape.createProperty( {
+      shape: angleProperty.derived( angle => DescriptionMaps.angleToShape( angle ) )
     } );
   }
 }
