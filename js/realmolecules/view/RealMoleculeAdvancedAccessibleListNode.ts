@@ -31,7 +31,7 @@ export default class RealMoleculeAdvancedAccessibleListNode extends AccessibleLi
     } );
 
     const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
-      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.description.createProperty( {
         molecule: moleculeProperty.derived( molecule => {
           return molecule.getAccessibleName();
         } )

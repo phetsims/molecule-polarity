@@ -254,20 +254,11 @@
         "accessibleName": {
           "value": "Atom { $atomName } Electronegativity"
         },
-        "accessibleHelpText": {
-          "value": "Change how strongly Atom { $atomName } attracts electrons."
-        },
         "dipoleContext": {
           "value": "Bond dipole { $bond } arrow { $progress }."
         },
         "dipoleDirectionChange": {
           "value": "Bond dipole { $bond } arrow now points to Atom { $atom }."
-        },
-        "partialChargeContext": {
-          "value": "Partial charge is { $progress }."
-        },
-        "partialChargeSignChange": {
-          "value": "Partial charge now { $sign }."
         },
         "bondCharacterContext": {
           "value": "Bond is { $progress }."
@@ -418,9 +409,6 @@
       "atom": {
         "accessibleName": {
           "value": "Atom { $name }"
-        },
-        "accessibleHelpText": {
-          "value": "Turn the molecule with left and right keys, or A and D keys"
         }
       },
       "keyboardHelpContent": {
@@ -470,9 +458,6 @@
         },
         "molecularDipoleDirectionOnly": {
           "value": "Molecular dipole points { $position } o'clock."
-        },
-        "noMolecularDipole": {
-          "value": "No molecular dipole."
         }
       },
       "electronegativity": {
@@ -502,12 +487,6 @@
     "dipoleProgress": {
       "value": "{ $progress ->\n  [zero] zero\n  [smaller] smaller\n  *[larger] larger\n}"
     },
-    "dipoleOrientAB": {
-      "value": "{ $direction ->\n  [B] B\n  *[A] A\n}"
-    },
-    "dipoleOrientBC": {
-      "value": "{ $direction ->\n  [B] B\n  *[C] C\n}"
-    },
     "electronDensity": {
       "value": "{ $density ->\n  [evenlyShared] evenly\n  [nearlyEvenlyShared] nearly evenly\n  [slightlyUnevenlyShared] slightly unevenly\n  [unevenlyShared] unevenly\n  [veryUnevenlyShared] very unevenly\n  *[mostUnevenlyShared] most unevenly\n}"
     },
@@ -517,17 +496,11 @@
     "electronDensityProgress": {
       "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
     },
-    "electrostaticPotential": {
-      "value": "{ $potential ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  *[large] large\n}"
-    },
     "electrostaticPotentialUppercase": {
       "value": "{ $potential ->\n  [no] No\n  [verySmall] Very small\n  [small] Small\n  [medium] Medium\n  [fairlyLarge] Fairly large\n  *[large] Large\n}"
     },
     "electrostaticPotentialProgress": {
       "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"
-    },
-    "electrostaticPotentialProgressUppercase": {
-      "value": "{ $progress ->\n  [morePositive] More positive\n  [lessPositive] Less positive\n  [neutral] Neutral\n  [lessNegative] Less negative\n  *[moreNegative] More negative\n}"
     },
     "electrostaticRegions": {
       "value": "{ $regions ->\n  [verySlightly] Very slightly\n  [slightly] Slightly\n  [moderately] Moderately\n  [highly] Highly\n  *[veryHighly] Very highly\n}"
@@ -540,9 +513,6 @@
     },
     "molecularDipole": {
       "value": "{ $magnitude ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  *[extremelyLarge] extremely large\n}"
-    },
-    "orientationAtom": {
-      "value": "{ $position ->\n  [between1And2] between 1 and 2\n  [at3] at 3\n  [between4And5] between 4 and 5\n  [at6] at 6\n  [between7And8] between 7 and 8\n  [at9] at 9\n  [between10And11] between 10 and 11\n  *[at12] at 12\n}"
     },
     "atAngle": {
       "value": "at { $angle }"
@@ -585,9 +555,6 @@
     },
     "shapeGeometry": {
       "value": "{ $geometry ->\n  [linear] linear\n  [bent] bent\n  [trigonalPlanar] trigonal planar\n  [trigonalPyramidal] trigonal pyramidal\n  *[tetrahedral] tetrahedral\n}"
-    },
-    "realPolarity": {
-      "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [slightlyPolar] slightly polar\n  [polar] polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
     },
     "twoAtomsScreen": {
       "screenSummary": {
@@ -653,35 +620,6 @@
         },
         "accessibleHelpText": {
           "value": "Rotate molecule 360 degrees."
-        },
-        "valueText": {
-          "deg0": {
-            "value": "0 degrees, horizontal"
-          },
-          "deg45": {
-            "value": "45 degrees, diagonal"
-          },
-          "deg90": {
-            "value": "90 degrees, vertical"
-          },
-          "deg135": {
-            "value": "135 degrees, diagonal"
-          },
-          "deg180": {
-            "value": "180 degrees, horizontal"
-          },
-          "deg225": {
-            "value": "225 degrees, diagonal"
-          },
-          "deg270": {
-            "value": "270 degrees, vertical"
-          },
-          "deg315": {
-            "value": "315 degrees, diagonal"
-          },
-          "deg360": {
-            "value": "360 degrees, horizontal, back to start"
-          }
         },
         "electricFieldContext": {
           "value": "Molecule aligned with electric field."
@@ -756,9 +694,6 @@
         },
         "accessibleHelpText": {
           "value": "Move Atom A around center Atom B."
-        },
-        "molecularDipoleContext": {
-          "value": "{ $magnitude } molecular dipole points { $position } o'clock."
         }
       },
       "moveAtomCSlider": {
@@ -775,50 +710,6 @@
         },
         "accessibleHelpText": {
           "value": "Rotate molecule 360 degrees."
-        },
-        "valueText": {
-          "deg0": {
-            "value": "0 degrees, starting position"
-          },
-          "deg30": {
-            "value": "30 degrees"
-          },
-          "deg60": {
-            "value": "60 degrees"
-          },
-          "deg90": {
-            "value": "90 degrees"
-          },
-          "deg120": {
-            "value": "120 degrees"
-          },
-          "deg150": {
-            "value": "150 degrees"
-          },
-          "deg180": {
-            "value": "180 degrees, halfway"
-          },
-          "deg210": {
-            "value": "210 degrees"
-          },
-          "deg240": {
-            "value": "240 degrees"
-          },
-          "deg270": {
-            "value": "270 degrees"
-          },
-          "deg300": {
-            "value": "300 degrees"
-          },
-          "deg330": {
-            "value": "330 degrees"
-          },
-          "deg360": {
-            "value": "360 degrees, back to starting position"
-          }
-        },
-        "molecularDipoleContext": {
-          "value": "Molecular dipole points to { $position } o'clock."
         }
       }
     },
@@ -873,9 +764,6 @@
           "value": "Explore bond dipoles based on partial charges."
         }
       },
-      "descriptionLeadingParagraph": {
-        "value": "The molecule has:"
-      },
       "molecules": {
         "description": {
           "value": "{ $molecule ->\n  [hydrogen] The molecule upper H2 has linear geometry and is nonpolar, with the hydrogen atoms single-bonded.\n  [nitrogen] The molecule upper N2 has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded.\n  [oxygen] The molecule upper O2 has linear geometry and is nonpolar, with the oxygen atoms double-bonded.\n  [fluorine] The molecule upper F2 has linear geometry and is nonpolar, with the fluorine atoms single-bonded.\n  [hydrogenFluoride] The molecule upper H upper F has linear geometry and is very strongly polar, with the hydrogen single-bonded to fluorine.\n  [water] The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen.\n  [carbonDioxide] The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen.\n  [hydrogenCyanide] The molecule upper H upper C upper N has linear geometry and is polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen.\n  [ozone] The molecule upper O3 has bent geometry and is nonpolar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other.\n  [ammonia] The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen.\n  [borane] The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen.\n  [boronTrifluoride] The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine.\n  [formaldehyde] The molecule upper C upper H2 upper O has trigonal planar geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen.\n  [methane] The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen.\n  [fluoromethane] The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.\n  [difluoromethane] The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.\n  [trifluoromethane] The molecule upper C upper H upper F3 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine.\n  [tetrafluoromethane] The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine.\n  *[chloroform] The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine.\n}"
@@ -885,9 +773,6 @@
         },
         "molecularDipole": {
           "value": "{ $molecule ->\n  [hydrogen] No molecular dipole.\n  [nitrogen] No molecular dipole.\n  [oxygen] No molecular dipole.\n  [fluorine] No molecular dipole.\n  [hydrogenFluoride] Large molecular dipole, pointing towards fluorine.\n  [water] Large molecular dipole, pointing towards oxygen.\n  [carbonDioxide] No molecular dipole.\n  [hydrogenCyanide] Medium molecular dipole, pointing towards nitrogen.\n  [ozone] No molecular dipole.\n  [ammonia] Fairly large molecular dipole, pointing towards nitrogen.\n  [borane] No molecular dipole.\n  [boronTrifluoride] No molecular dipole.\n  [formaldehyde] Fairly large molecular dipole, pointing towards oxygen.\n  [methane] No molecular dipole.\n  [fluoromethane] Fairly large molecular dipole, pointing towards fluorine.\n  [difluoromethane] Large molecular dipole, pointing towards fluorines.\n  [trifluoromethane] Large molecular dipole, pointing towards fluorines.\n  [tetrafluoromethane] No molecular dipole.\n  *[chloroform] Medium molecular dipole, pointing towards chlorines.\n}"
-        },
-        "partialCharges": {
-          "value": "{ $molecule ->\n  [hydrogen] No partial charges.\n  [nitrogen] No partial charges.\n  [oxygen] No partial charges.\n  [fluorine] No partial charges.\n  [hydrogenFluoride] Partial charge for hydrogen is +0.38, for fluorine is -0.38.\n  [water] Partial charge for hydrogen is +0.31, for oxygen is -0.62.\n  [carbonDioxide] Partial charge for carbon is +0.63, for oxygen is -0.32.\n  [hydrogenCyanide] Partial charge for hydrogen is +0.23, for carbon is +0.05, and for nitrogen is -0.28.\n  [ozone] Partial charge for central oxygen is +0.15, for each terminal oxygen is -0.07.\n  [ammonia] Partial charge for hydrogen is +0.27, for nitrogen is -0.82.\n  [borane] Partial charges for boron and hydrogen are nearly zero.\n  [boronTrifluoride] Partial charge for boron is +1.02, for fluorine is -0.34\n  [formaldehyde] Partial charge for hydrogen is +0.11, for carbon is +0.09, for oxygen is -0.30.\n  [methane] Partial charge for hydrogen is +0.15, for carbon is -0.58.\n  [fluoromethane] Partial charge for hydrogen is +0.15, for carbon is -0.05, for fluorine is -0.41.\n  [difluoromethane] Partial charge for hydrogen is +0.11, for carbon is +0.10, for fluorine is -0.16.\n  [trifluoromethane] Partial charge for hydrogen is +0.07, for carbon is +0.25, for fluorine is -0.11.\n  [tetrafluoromethane] Partial charge for carbon is +0.74, for fluorine is -0.18.\n  *[chloroform] Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.\n}"
         },
         "electrostaticPotential": {
           "value": "{ $molecule ->\n  [hydrogen] No electrostatic potential difference.\n  [nitrogen] No electrostatic potential difference.\n  [oxygen] No electrostatic potential difference.\n  [fluorine] No electrostatic potential difference.\n  [hydrogenFluoride] Large electrostatic potential difference.\n  [water] Large electrostatic potential difference.\n  [carbonDioxide] Medium electrostatic potential difference.\n  [hydrogenCyanide] Very large electrostatic potential difference.\n  [ozone] Small electrostatic potential difference.\n  [ammonia] Large electrostatic potential difference.\n  [borane] No electrostatic potential difference.\n  [boronTrifluoride] Large electrostatic potential difference with even distribution.\n  [formaldehyde] Very large electrostatic potential difference.\n  [methane] Medium electrostatic potential difference with even distribution.\n  [fluoromethane] Large electrostatic potential difference.\n  [difluoromethane] Very large electrostatic potential difference.\n  [trifluoromethane] Large electrostatic potential difference.\n  [tetrafluoromethane] Small electrostatic potential difference with even distribution.\n  *[chloroform] Medium electrostatic potential difference.\n}"
@@ -906,11 +791,11 @@
         "molecularDipole": {
           "value": "{ $molecule ->\n  [hydrogen] No molecular dipole.\n  [nitrogen] No molecular dipole.\n  [oxygen] No molecular dipole.\n  [fluorine] No molecular dipole.\n  [hydrogenFluoride] Large molecular dipole, pointing towards fluorine.\n  [water] Large molecular dipole, pointing towards oxygen.\n  [carbonDioxide] No molecular dipole.\n  [hydrogenCyanide] Very large molecular dipole, pointing towards nitrogen.\n  [ozone] Small molecular dipole, pointing towards terminal oxygens.\n  [ammonia] Large molecular dipole, pointing towards nitrogen.\n  [borane] No molecular dipole.\n  [boronTrifluoride] No molecular dipole.\n  [formaldehyde] Very large molecular dipole, pointing towards oxygen.\n  [methane] No molecular dipole.\n  [fluoromethane] Large molecular dipole, pointing towards fluorine.\n  [difluoromethane] Large molecular dipole, pointing towards fluorines.\n  [trifluoromethane] Large molecular dipole, pointing towards fluorines.\n  [tetrafluoromethane] No molecular dipole.\n  *[chloroform] Medium molecular dipole, pointing towards chlorines.\n}"
         },
-        "partialCharges": {
-          "value": "{ $molecule ->\n  [hydrogen] No partial charges.\n  [nitrogen] No partial charges.\n  [oxygen] No partial charges.\n  [fluorine] No partial charges.\n  [hydrogenFluoride] Partial charge for hydrogen is +0.22, for fluorine is -0.22.\n  [water] Partial charge for hydrogen is +0.15, for oxygen is -0.30.\n  [carbonDioxide] Partial charge for carbon is +0.33, for oxygen is -0.17.\n  [hydrogenCyanide] Partial charge for hydrogen is +0.13, for carbon is +0.06, and for nitrogen is -0.19.\n  [ozone] Partial charge for central oxygen is +0.19, for each terminal oxygen is -0.10.\n  [ammonia] Partial charge for hydrogen is +0.9, for nitrogen is -0.27.\n  [borane] Partial charge for boron is +0.17, for hydrogen is -0.06.\n  [boronTrifluoride] Partial charge for boron is +0.41, for fluorine is -0.14\n  [formaldehyde] Partial charge for hydrogen is +0.04, for carbon is +0.14, for oxygen is -0.22.\n  [methane] Partial charge for hydrogen is +0.03, for carbon is -0.12.\n  [fluoromethane] Partial charge for hydrogen is +0.04, for carbon is +0.04, for fluorine is -0.17.\n  [difluoromethane] Partial charge for hydrogen is +0.05, for carbon is +0.17, for fluorine is -0.14.\n  [trifluoromethane] Partial charge for hydrogen is +0.07, for carbon is +0.27, for fluorine is -0.11.\n  [tetrafluoromethane] Partial charge for carbon is +0.37, for fluorine is -0.09.\n  *[chloroform] Partial charge for hydrogen is +0.07, for carbon is +0.13, for chlorine is -0.06.\n}"
-        },
         "electrostaticPotential": {
           "value": "{ $molecule ->\n  [hydrogen] Small electrostatic potential difference with even distribution.\n  [nitrogen] Small electrostatic potential difference with even distribution.\n  [oxygen] Small electrostatic potential difference with even distribution.\n  [fluorine] Small electrostatic potential difference with even distribution.\n  [hydrogenFluoride] Large electrostatic potential difference.\n  [water] Large electrostatic potential difference.\n  [carbonDioxide] Large electrostatic potential difference with even distribution.\n  [hydrogenCyanide] Large electrostatic potential difference.\n  [ozone] Small electrostatic potential difference.\n  [ammonia] Large electrostatic potential difference.\n  [borane] Small electrostatic potential difference with even distribution.\n  [boronTrifluoride] Medium electrostatic potential difference with even distribution.\n  [formaldehyde] Large electrostatic potential difference.\n  [methane] Medium electrostatic potential difference with even distribution.\n  [fluoromethane] Large electrostatic potential difference.\n  [difluoromethane] Large electrostatic potential difference.\n  [trifluoromethane] Medium electrostatic potential difference.\n  [tetrafluoromethane] Small electrostatic potential difference with even distribution.\n  *[chloroform] Large electrostatic potential difference.\n}"
+        },
+        "partialCharges": {
+          "value": "{ $molecule ->\n  [hydrogen] No partial charges.\n  [nitrogen] No partial charges.\n  [oxygen] No partial charges.\n  [fluorine] No partial charges.\n  [hydrogenFluoride] Partial charge for hydrogen is +0.22, for fluorine is -0.22.\n  [water] Partial charge for hydrogen is +0.15, for oxygen is -0.30.\n  [carbonDioxide] Partial charge for carbon is +0.33, for oxygen is -0.17.\n  [hydrogenCyanide] Partial charge for hydrogen is +0.13, for carbon is +0.06, and for nitrogen is -0.19.\n  [ozone] Partial charge for central oxygen is +0.19, for each terminal oxygen is -0.10.\n  [ammonia] Partial charge for hydrogen is +0.9, for nitrogen is -0.27.\n  [borane] Partial charge for boron is +0.17, for hydrogen is -0.06.\n  [boronTrifluoride] Partial charge for boron is +0.41, for fluorine is -0.14\n  [formaldehyde] Partial charge for hydrogen is +0.04, for carbon is +0.14, for oxygen is -0.22.\n  [methane] Partial charge for hydrogen is +0.03, for carbon is -0.12.\n  [fluoromethane] Partial charge for hydrogen is +0.04, for carbon is +0.04, for fluorine is -0.17.\n  [difluoromethane] Partial charge for hydrogen is +0.05, for carbon is +0.17, for fluorine is -0.14.\n  [trifluoromethane] Partial charge for hydrogen is +0.07, for carbon is +0.27, for fluorine is -0.11.\n  [tetrafluoromethane] Partial charge for carbon is +0.37, for fluorine is -0.09.\n  *[chloroform] Partial charge for hydrogen is +0.07, for carbon is +0.13, for chlorine is -0.06.\n}"
         },
         "electronDensity": {
           "value": "{ $molecule ->\n  [hydrogen] Electron density is concentrated between atoms.\n  [nitrogen] Electron density is evenly shared between atoms.\n  [oxygen] Electron density is concentrated between atoms.\n  [fluorine] Electron density is evenly shared between atoms.\n  [hydrogenFluoride] Electron density is unevenly shared, shifted towards fluorine.\n  [water] Electron density is very unevenly shared, shifted towards oxygen.\n  [carbonDioxide] Electron density is unevenly shared, but symmetrically arranged.\n  [hydrogenCyanide] Electron density is very unevenly shared, shifted towards nitrogen.\n  [ozone] Electron density is unevenly shared, shifted towards terminal oxygens.\n  [ammonia] Electron density is very unevenly shared, shifted towards nitrogen.\n  [borane] Electron density is slightly evenly shared, shift towards the hydrogens.\n  [boronTrifluoride] Electron density is slightly unevenly shared, shifted towards the fluorines.\n  [formaldehyde] Electron density is unevenly shared, shifted toward the terminal atoms.\n  [methane] Electron density is unevenly shared, but symmetrically arranged.\n  [fluoromethane] Electron density is unevenly shared.\n  [difluoromethane] Electron density is unevenly shared.\n  [trifluoromethane] Electron density is unevenly shared, shifted towards fluorines.\n  [tetrafluoromethane] Electron density is unevenly shared, but symmetrically arranged.\n  *[chloroform] Electron density is very unevenly shared, shifted towards chlorines.\n}"

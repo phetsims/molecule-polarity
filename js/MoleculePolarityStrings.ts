@@ -111,11 +111,8 @@ type StringsType = {
       };
       'electronegativitySlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
-        'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'dipoleContextStringProperty': LocalizedStringProperty;
         'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
-        'partialChargeContextStringProperty': LocalizedStringProperty;
-        'partialChargeSignChangeStringProperty': LocalizedStringProperty;
         'bondCharacterContextStringProperty': LocalizedStringProperty;
         'electrostaticContextStringProperty': LocalizedStringProperty;
         'electronDensityContextStringProperty': LocalizedStringProperty;
@@ -178,7 +175,6 @@ type StringsType = {
       };
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
-        'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };
       'keyboardHelpContent': {
         'moveMoleculeStringProperty': LocalizedStringProperty;
@@ -198,7 +194,6 @@ type StringsType = {
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionOnlyStringProperty': LocalizedStringProperty;
-        'noMolecularDipoleStringProperty': LocalizedStringProperty;
       };
       'electronegativity': {
         'headingStringProperty': LocalizedStringProperty;
@@ -211,20 +206,15 @@ type StringsType = {
     'bondCharacterStringProperty': LocalizedStringProperty;
     'bondCharacterProgressStringProperty': LocalizedStringProperty;
     'dipoleProgressStringProperty': LocalizedStringProperty;
-    'dipoleOrientABStringProperty': LocalizedStringProperty;
-    'dipoleOrientBCStringProperty': LocalizedStringProperty;
     'electronDensityStringProperty': LocalizedStringProperty;
     'electronDensityShiftStringProperty': LocalizedStringProperty;
     'electronDensityProgressStringProperty': LocalizedStringProperty;
-    'electrostaticPotentialStringProperty': LocalizedStringProperty;
     'electrostaticPotentialUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;
-    'electrostaticPotentialProgressUppercaseStringProperty': LocalizedStringProperty;
     'electrostaticRegionsStringProperty': LocalizedStringProperty;
     'electronegativityStringProperty': LocalizedStringProperty;
     'fieldStringProperty': LocalizedStringProperty;
     'molecularDipoleStringProperty': LocalizedStringProperty;
-    'orientationAtomStringProperty': LocalizedStringProperty;
     'atAngleStringProperty': LocalizedStringProperty;
     'toAngleStringProperty': LocalizedStringProperty;
     'betweenAnglesStringProperty': LocalizedStringProperty;
@@ -239,7 +229,6 @@ type StringsType = {
     'rotationStringProperty': LocalizedStringProperty;
     'shapeStringProperty': LocalizedStringProperty;
     'shapeGeometryStringProperty': LocalizedStringProperty;
-    'realPolarityStringProperty': LocalizedStringProperty;
     'twoAtomsScreen': {
       'screenSummary': {
         'playAreaStringProperty': LocalizedStringProperty;
@@ -267,17 +256,6 @@ type StringsType = {
       'rotateMoleculeSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'valueText': {
-          'deg0StringProperty': LocalizedStringProperty;
-          'deg45StringProperty': LocalizedStringProperty;
-          'deg90StringProperty': LocalizedStringProperty;
-          'deg135StringProperty': LocalizedStringProperty;
-          'deg180StringProperty': LocalizedStringProperty;
-          'deg225StringProperty': LocalizedStringProperty;
-          'deg270StringProperty': LocalizedStringProperty;
-          'deg315StringProperty': LocalizedStringProperty;
-          'deg360StringProperty': LocalizedStringProperty;
-        };
         'electricFieldContextStringProperty': LocalizedStringProperty;
       }
     };
@@ -308,7 +286,6 @@ type StringsType = {
       'moveAtomASlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'molecularDipoleContextStringProperty': LocalizedStringProperty;
       };
       'moveAtomCSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
@@ -317,22 +294,6 @@ type StringsType = {
       'rotateMoleculeSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
-        'valueText': {
-          'deg0StringProperty': LocalizedStringProperty;
-          'deg30StringProperty': LocalizedStringProperty;
-          'deg60StringProperty': LocalizedStringProperty;
-          'deg90StringProperty': LocalizedStringProperty;
-          'deg120StringProperty': LocalizedStringProperty;
-          'deg150StringProperty': LocalizedStringProperty;
-          'deg180StringProperty': LocalizedStringProperty;
-          'deg210StringProperty': LocalizedStringProperty;
-          'deg240StringProperty': LocalizedStringProperty;
-          'deg270StringProperty': LocalizedStringProperty;
-          'deg300StringProperty': LocalizedStringProperty;
-          'deg330StringProperty': LocalizedStringProperty;
-          'deg360StringProperty': LocalizedStringProperty;
-        };
-        'molecularDipoleContextStringProperty': LocalizedStringProperty;
       }
     };
     'realMoleculesScreen': {
@@ -358,12 +319,10 @@ type StringsType = {
         'basicHelpTextStringProperty': LocalizedStringProperty;
         'advancedHelpTextStringProperty': LocalizedStringProperty;
       };
-      'descriptionLeadingParagraphStringProperty': LocalizedStringProperty;
       'molecules': {
         'descriptionStringProperty': LocalizedStringProperty;
         'bondDipoleStringProperty': LocalizedStringProperty;
         'molecularDipoleStringProperty': LocalizedStringProperty;
-        'partialChargesStringProperty': LocalizedStringProperty;
         'electrostaticPotentialStringProperty': LocalizedStringProperty;
         'electronDensityStringProperty': LocalizedStringProperty;
       };
@@ -371,8 +330,8 @@ type StringsType = {
         'descriptionStringProperty': LocalizedStringProperty;
         'bondDipoleStringProperty': LocalizedStringProperty;
         'molecularDipoleStringProperty': LocalizedStringProperty;
-        'partialChargesStringProperty': LocalizedStringProperty;
         'electrostaticPotentialStringProperty': LocalizedStringProperty;
+        'partialChargesStringProperty': LocalizedStringProperty;
         'electronDensityStringProperty': LocalizedStringProperty;
       }
     }
