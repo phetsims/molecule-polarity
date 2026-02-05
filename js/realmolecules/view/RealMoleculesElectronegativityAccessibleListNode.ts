@@ -28,56 +28,56 @@ export default class RealMoleculesElectronegativityAccessibleListNode extends Ac
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.H ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'H',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.hydrogenStringProperty,
           en: toFixed( 2.1, 1 )
         } )
       },
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.B ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'B',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.boronStringProperty,
           en: toFixed( 2.0, 1 )
         } )
       },
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.C ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'C',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.carbonStringProperty,
           en: toFixed( 2.5, 1 )
         } )
       },
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.N ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'N',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.nitrogenStringProperty,
           en: toFixed( 3.0, 1 )
         } )
       },
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.O ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'O',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.oxygenStringProperty,
           en: toFixed( 3.5, 1 )
         } )
       },
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.F ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'F',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.fluorineStringProperty,
           en: toFixed( 4.0, 1 )
         } )
       },
       {
         visibleProperty: realMoleculeProperty.derived(
           molecule => molecule.atoms.map( atom => atom.element ).includes( Element.Cl ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.symbolDescription.createProperty( {
-          symbol: 'Cl',
+        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+          element: MoleculePolarityFluent.a11y.common.elements.chlorineStringProperty,
           en: toFixed( 3.0, 1 )
         } )
       }

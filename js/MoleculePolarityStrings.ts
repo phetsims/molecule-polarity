@@ -89,6 +89,15 @@ type StringsType = {
   'a11y': {
     'common': {
       'upperStringProperty': LocalizedStringProperty;
+      'elements': {
+        'hydrogenStringProperty': LocalizedStringProperty;
+        'boronStringProperty': LocalizedStringProperty;
+        'carbonStringProperty': LocalizedStringProperty;
+        'nitrogenStringProperty': LocalizedStringProperty;
+        'oxygenStringProperty': LocalizedStringProperty;
+        'fluorineStringProperty': LocalizedStringProperty;
+        'chlorineStringProperty': LocalizedStringProperty;
+      };
       'preferencesDialog': {
         'positiveToNegativeStringProperty': LocalizedStringProperty;
         'negativeToPositiveStringProperty': LocalizedStringProperty;
@@ -195,7 +204,7 @@ type StringsType = {
         'headingStringProperty': LocalizedStringProperty;
         'currentValueStringProperty': LocalizedStringProperty;
         'descriptionStringProperty': LocalizedStringProperty;
-        'symbolDescriptionStringProperty': LocalizedStringProperty;
+        'elementElectronegativityStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       }
     };

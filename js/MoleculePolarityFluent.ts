@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -89,6 +89,13 @@ addToMapIfDefined( 'surfaceColorDescription', 'surfaceColorDescriptionStringProp
 addToMapIfDefined( 'underDevelopment_line1', 'underDevelopment.line1StringProperty' );
 addToMapIfDefined( 'underDevelopment_line2', 'underDevelopment.line2StringProperty' );
 addToMapIfDefined( 'a11y_common_upper', 'a11y.common.upperStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_hydrogen', 'a11y.common.elements.hydrogenStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_boron', 'a11y.common.elements.boronStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_carbon', 'a11y.common.elements.carbonStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_nitrogen', 'a11y.common.elements.nitrogenStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_oxygen', 'a11y.common.elements.oxygenStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_fluorine', 'a11y.common.elements.fluorineStringProperty' );
+addToMapIfDefined( 'a11y_common_elements_chlorine', 'a11y.common.elements.chlorineStringProperty' );
 addToMapIfDefined( 'a11y_common_preferencesDialog_positiveToNegative', 'a11y.common.preferencesDialog.positiveToNegativeStringProperty' );
 addToMapIfDefined( 'a11y_common_preferencesDialog_negativeToPositive', 'a11y.common.preferencesDialog.negativeToPositiveStringProperty' );
 addToMapIfDefined( 'a11y_common_preferencesDialog_blueToRed', 'a11y.common.preferencesDialog.blueToRedStringProperty' );
@@ -166,7 +173,7 @@ addToMapIfDefined( 'a11y_common_molecularDipoleResponses_noMolecularDipole', 'a1
 addToMapIfDefined( 'a11y_common_electronegativity_heading', 'a11y.common.electronegativity.headingStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_currentValue', 'a11y.common.electronegativity.currentValueStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_description', 'a11y.common.electronegativity.descriptionStringProperty' );
-addToMapIfDefined( 'a11y_common_electronegativity_symbolDescription', 'a11y.common.electronegativity.symbolDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_common_electronegativity_elementElectronegativity', 'a11y.common.electronegativity.elementElectronegativityStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_accessibleHelpText', 'a11y.common.electronegativity.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacter', 'a11y.bondCharacterStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacterProgress', 'a11y.bondCharacterProgressStringProperty' );
@@ -396,6 +403,15 @@ const MoleculePolarityFluent = {
   a11y: {
     common: {
       upperStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_upper', _.get( MoleculePolarityStrings, 'a11y.common.upperStringProperty' ) ),
+      elements: {
+        hydrogenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_hydrogen', _.get( MoleculePolarityStrings, 'a11y.common.elements.hydrogenStringProperty' ) ),
+        boronStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_boron', _.get( MoleculePolarityStrings, 'a11y.common.elements.boronStringProperty' ) ),
+        carbonStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_carbon', _.get( MoleculePolarityStrings, 'a11y.common.elements.carbonStringProperty' ) ),
+        nitrogenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_nitrogen', _.get( MoleculePolarityStrings, 'a11y.common.elements.nitrogenStringProperty' ) ),
+        oxygenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_oxygen', _.get( MoleculePolarityStrings, 'a11y.common.elements.oxygenStringProperty' ) ),
+        fluorineStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_fluorine', _.get( MoleculePolarityStrings, 'a11y.common.elements.fluorineStringProperty' ) ),
+        chlorineStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_chlorine', _.get( MoleculePolarityStrings, 'a11y.common.elements.chlorineStringProperty' ) )
+      },
       preferencesDialog: {
         positiveToNegativeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_preferencesDialog_positiveToNegative', _.get( MoleculePolarityStrings, 'a11y.common.preferencesDialog.positiveToNegativeStringProperty' ) ),
         negativeToPositiveStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_preferencesDialog_negativeToPositive', _.get( MoleculePolarityStrings, 'a11y.common.preferencesDialog.negativeToPositiveStringProperty' ) ),
@@ -504,7 +520,7 @@ const MoleculePolarityFluent = {
         headingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativity_heading', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.headingStringProperty' ) ),
         currentValueStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativity_currentValue', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.currentValueStringProperty' ) ),
         description: new FluentPattern<{ atom: FluentVariable, en: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativity_description', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.descriptionStringProperty' ), [{"name":"atom"},{"name":"en"}] ),
-        symbolDescription: new FluentPattern<{ en: FluentVariable, symbol: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativity_symbolDescription', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.symbolDescriptionStringProperty' ), [{"name":"en"},{"name":"symbol"}] ),
+        elementElectronegativity: new FluentPattern<{ element: FluentVariable, en: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativity_elementElectronegativity', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.elementElectronegativityStringProperty' ), [{"name":"element"},{"name":"en"}] ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativity_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.accessibleHelpTextStringProperty' ) )
       }
     },

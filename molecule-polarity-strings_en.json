@@ -202,6 +202,29 @@
       "upper": {
         "value": "upper"
       },
+      "elements": {
+        "hydrogen": {
+          "value": "Hydrogen"
+        },
+        "boron": {
+          "value": "Boron"
+        },
+        "carbon": {
+          "value": "Carbon"
+        },
+        "nitrogen": {
+          "value": "Nitrogen"
+        },
+        "oxygen": {
+          "value": "Oxygen"
+        },
+        "fluorine": {
+          "value": "Fluorine"
+        },
+        "chlorine": {
+          "value": "Chlorine"
+        }
+      },
       "preferencesDialog": {
         "positiveToNegative": {
           "value": "Partial positive to partial negative"
@@ -462,8 +485,8 @@
         "description": {
           "value": "Atom { $atom }, { $en }."
         },
-        "symbolDescription": {
-          "value": "{ $symbol } { $en }"
+        "elementElectronegativity": {
+          "value": "{ $element } { $en }"
         },
         "accessibleHelpText": {
           "value": "Change how strongly an atom attracts electrons."

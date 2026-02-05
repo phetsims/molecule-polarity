@@ -68,6 +68,14 @@ underDevelopment.line2: If your device runs Java, you can use the Java version a
 a11y:
   common:
     upper: 'upper'
+    elements:
+      hydrogen: 'Hydrogen'
+      boron: 'Boron'
+      carbon: 'Carbon'
+      nitrogen: 'Nitrogen'
+      oxygen: 'Oxygen'
+      fluorine: 'Fluorine'
+      chlorine: 'Chlorine'
     preferencesDialog:
       positiveToNegative: 'Partial positive to partial negative'
       negativeToPositive: 'Partial negative to partial positive'
@@ -164,7 +172,7 @@ a11y:
       heading: 'Electronegativity'
       currentValue: 'Current values:'
       description: 'Atom { $atom }, { $en }.'
-      symbolDescription: '{ $symbol } { $en }'
+      elementElectronegativity: '{ $element } { $en }'
       accessibleHelpText: 'Change how strongly an atom attracts electrons.'
 
   # ===================
