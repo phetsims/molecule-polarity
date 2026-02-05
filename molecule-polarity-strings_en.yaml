@@ -3,8 +3,7 @@ screen.twoAtoms: Two Atoms
 screen.threeAtoms: Three Atoms
 screen.realMolecules: Real Molecules
 electricField: Electric Field
-on: 'on'
-off: 'off'
+
 bondCharacter: Bond Character
 partialCharges: Partial Charges
 bondDipole: Bond Dipole
@@ -59,11 +58,9 @@ deltaMinus: δ−
 deltaNonNegativeValue: 'δ={{partialCharge}}'
 deltaNegativeValue: 'δ=−{{partialCharge}}'
 pattern.dipoleDirection: '{{from}} → {{to}}'
-pattern.deltaEquals: 'δ={{partialCharge}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules only):'
 surfaceColorDescription: 'Color gradient used to represent positive and negative electrostatic potential.'
-underDevelopment.line1: Real Molecules is not currently available in HTML5.
-underDevelopment.line2: If your device runs Java, you can use the Java version at
+
 
 a11y:
   common:
@@ -87,11 +84,8 @@ a11y:
       realMolecules: 'Explore real molecules in three dimensions.'
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
-      accessibleHelpText: 'Change how strongly Atom { $atomName } attracts electrons.'
       dipoleContext: 'Bond dipole { $bond } arrow { $progress }.'
       dipoleDirectionChange: 'Bond dipole { $bond } arrow now points to Atom { $atom }.'
-      partialChargeContext: 'Partial charge is { $progress }.'
-      partialChargeSignChange: 'Partial charge now { $sign }.'
       bondCharacterContext: 'Bond is { $progress }.'
       electrostaticContext: 'Atom { $atom } { $progress } electrostatic potential.'
       electronDensityContext: 'Atom { $atom } { $progress } electron density.'
@@ -148,7 +142,6 @@ a11y:
       off: 'Electric field off.'
     atom:
       accessibleName: 'Atom { $name }'
-      accessibleHelpText: 'Turn the molecule with left and right keys, or A and D keys'
     keyboardHelpContent:
       moveMolecule: 'Move Molecule'
       rotateMolecule: 'Rotate molecule'
@@ -166,7 +159,6 @@ a11y:
       molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
       molecularDipoleDirection: '{ a11y.common.molecularDipoleResponses.molecularDipoleContext } Points { $position } o''clock.'
       molecularDipoleDirectionOnly: 'Molecular dipole points { $position } o''clock.'
-      noMolecularDipole: 'No molecular dipole.'
     # Electronegativity description
     electronegativity:
       heading: 'Electronegativity'
@@ -203,18 +195,6 @@ a11y:
       smaller: 'smaller'
       larger: 'larger'
   
-  # DipoleOrientAB2 - Dipole Orientation AB (Screen 1/2)
-  dipoleOrientAB:
-    select_direction:
-      B: 'B'
-      A: 'A'
-  
-  # DipoleOrientBC2 - Dipole Orientation BC (Screen 2)
-  dipoleOrientBC:
-    select_direction:
-      B: 'B'
-      C: 'C'
-  
   # ElectronDensity6 - Electron Density (Screen 1)
   electronDensity:
     select_density:
@@ -240,16 +220,6 @@ a11y:
       less: 'less'
 
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
-  electrostaticPotential:
-    select_potential:
-      no: 'no'
-      verySmall: 'very small'
-      small: 'small'
-      medium: 'medium'
-      fairlyLarge: 'fairly large'
-      large: 'large'
-
-  # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotentialUppercase:
     select_potential:
       no: 'No'
@@ -268,16 +238,6 @@ a11y:
       neutral: 'neutral'
       lessNegative: 'less negative'
       moreNegative: 'more negative'
-
-  # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
-  # 2-range spectrum: positive-neutral-negative
-  electrostaticPotentialProgressUppercase:
-    select_progress:
-      morePositive: 'More positive'
-      lessPositive: 'Less positive'
-      neutral: 'Neutral'
-      lessNegative: 'Less negative'
-      moreNegative: 'More negative'
 
   # ElectroPotentialRegions5
   electrostaticRegions:
@@ -315,18 +275,6 @@ a11y:
       large: 'large'
       veryLarge: 'very large'
       extremelyLarge: 'extremely large'
-
-  # OrientationAtom - Orientation for any atom (Screen 1)
-  orientationAtom:
-    select_position:
-      between1And2: 'between 1 and 2'
-      at3: 'at 3'
-      between4And5: 'between 4 and 5'
-      at6: 'at 6'
-      between7And8: 'between 7 and 8'
-      at9: 'at 9'
-      between10And11: 'between 10 and 11'
-      at12: 'at 12'
 
   atAngle: 'at { $angle }'
   toAngle: 'to { $angle }'
@@ -413,14 +361,6 @@ a11y:
       trigonalPyramidal: 'trigonal pyramidal'
       tetrahedral: 'tetrahedral'
 
-  realPolarity:
-    select_polarity:
-      nonpolar: 'nonpolar' # 0
-      slightlyPolar: 'slightly polar' # <1
-      polar: 'polar' # <1.5
-      stronglyPolar: 'strongly polar' # <2
-      veryStronglyPolar: 'very strongly polar' # >=2
-
   # ===================
   # TWO ATOMS SCREEN
   # ===================
@@ -453,17 +393,6 @@ a11y:
     rotateMoleculeSlider:
       accessibleName: 'Rotate Molecule AB'
       accessibleHelpText: 'Rotate molecule 360 degrees.'
-      # ARIA valuetext options
-      valueText:
-        deg0: '0 degrees, horizontal'
-        deg45: '45 degrees, diagonal'
-        deg90: '90 degrees, vertical'
-        deg135: '135 degrees, diagonal'
-        deg180: '180 degrees, horizontal'
-        deg225: '225 degrees, diagonal'
-        deg270: '270 degrees, vertical'
-        deg315: '315 degrees, diagonal'
-        deg360: '360 degrees, horizontal, back to start'
       electricFieldContext: 'Molecule aligned with electric field.'
 
   # ===================
@@ -502,7 +431,6 @@ a11y:
     moveAtomASlider:
       accessibleName: 'Move Atom A'
       accessibleHelpText: 'Move Atom A around center Atom B.'
-      molecularDipoleContext: '{ $magnitude } molecular dipole points { $position } o''clock.'
     
     # Move Atom C Slider
     moveAtomCSlider:
@@ -513,21 +441,6 @@ a11y:
     rotateMoleculeSlider:
       accessibleName: 'Rotate Molecule ABC'
       accessibleHelpText: 'Rotate molecule 360 degrees.'
-      valueText:
-        deg0: '0 degrees, starting position'
-        deg30: '30 degrees'
-        deg60: '60 degrees'
-        deg90: '90 degrees'
-        deg120: '120 degrees'
-        deg150: '150 degrees'
-        deg180: '180 degrees, halfway'
-        deg210: '210 degrees'
-        deg240: '240 degrees'
-        deg270: '270 degrees'
-        deg300: '300 degrees'
-        deg330: '330 degrees'
-        deg360: '360 degrees, back to starting position'
-      molecularDipoleContext: 'Molecular dipole points to { $position } o''clock.'
 
   # ===================
   # REAL MOLECULES SCREEN
@@ -558,8 +471,6 @@ a11y:
       basicHelpText: 'Explore bond dipoles based on electronegativity differences.'
       advancedHelpText: 'Explore bond dipoles based on partial charges.'
 
-    # Since empty strings were not allowed, used a workaround to create spacing in the a11y output.
-    descriptionLeadingParagraph: 'The molecule has:'
     molecules:
       description:
         select_molecule:
@@ -624,27 +535,6 @@ a11y:
           trifluoromethane: Large molecular dipole, pointing towards fluorines.
           tetrafluoromethane: No molecular dipole.
           chloroform: Medium molecular dipole, pointing towards chlorines.
-      partialCharges:
-        select_molecule:
-          hydrogen: No partial charges.
-          nitrogen: No partial charges.
-          oxygen: No partial charges.
-          fluorine: No partial charges.
-          hydrogenFluoride: Partial charge for hydrogen is +0.38, for fluorine is -0.38.
-          water: Partial charge for hydrogen is +0.31, for oxygen is -0.62.
-          carbonDioxide: Partial charge for carbon is +0.63, for oxygen is -0.32.
-          hydrogenCyanide: Partial charge for hydrogen is +0.23, for carbon is +0.05, and for nitrogen is -0.28.
-          ozone: Partial charge for central oxygen is +0.15, for each terminal oxygen is -0.07.
-          ammonia: Partial charge for hydrogen is +0.27, for nitrogen is -0.82.
-          borane: Partial charges for boron and hydrogen are nearly zero.
-          boronTrifluoride: Partial charge for boron is +1.02, for fluorine is -0.34
-          formaldehyde: Partial charge for hydrogen is +0.11, for carbon is +0.09, for oxygen is -0.30.
-          methane: Partial charge for hydrogen is +0.15, for carbon is -0.58.
-          fluoromethane: Partial charge for hydrogen is +0.15, for carbon is -0.05, for fluorine is -0.41.
-          difluoromethane: Partial charge for hydrogen is +0.11, for carbon is +0.10, for fluorine is -0.16.
-          trifluoromethane: Partial charge for hydrogen is +0.07, for carbon is +0.25, for fluorine is -0.11.
-          tetrafluoromethane: Partial charge for carbon is +0.74, for fluorine is -0.18.
-          chloroform: Partial charge for hydrogen is +0.11, for carbon is +0.10, for chlorine is -0.16.
       electrostaticPotential:
         select_molecule:
           hydrogen: No electrostatic potential difference.
@@ -688,27 +578,6 @@ a11y:
           tetrafluoromethane: Electron density is unevenly shared, but symmetrically arranged.
           chloroform: Electron density is unevenly shared, shifted towards chlorines.
     moleculesAdvanced:
-      description:
-        select_molecule:
-          hydrogen: 'The molecule upper H2 has linear geometry and is nonpolar, with the hydrogen atoms single-bonded.'
-          nitrogen: 'The molecule upper N2 has linear geometry and is nonpolar, with the nitrogen atoms triple-bonded.'
-          oxygen: 'The molecule upper O2 has linear geometry and is nonpolar, with the oxygen atoms double-bonded.'
-          fluorine: 'The molecule upper F2 has linear geometry and is nonpolar, with the fluorine atoms single-bonded.'
-          hydrogenFluoride: 'The molecule upper H upper F has linear geometry and is very strongly polar, with the hydrogen single-bonded to fluorine.'
-          water: 'The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen.'
-          carbonDioxide: 'The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen.'
-          hydrogenCyanide: 'The molecule upper H upper C upper N has linear geometry and is very strongly polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen.'
-          ozone: 'The molecule upper O3 has bent geometry and is slightly polar, with 1.5 bonds between oxygen atoms.'
-          ammonia: 'The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen.'
-          borane: 'The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen.'
-          boronTrifluoride: 'The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine.'
-          formaldehyde: 'The molecule upper C upper H2 upper O has trigonal planar geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and double-bonded to oxygen.'
-          methane: 'The molecule upper C upper H4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each hydrogen.'
-          fluoromethane: 'The molecule upper C upper H3 upper F has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.'
-          difluoromethane: 'The molecule upper C upper H2 upper F2 has tetrahedral geometry and is very strongly polar, with the central atom carbon single-bonded to each hydrogen and fluorine.'
-          trifluoromethane: 'The molecule upper C upper H upper F3 has tetrahedral geometry and is strongly polar, with the central atom carbon single-bonded to hydrogen and each fluorine.'
-          tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine.'
-          chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine.'
       bondDipole:
         select_molecule:
           hydrogen: No bond dipole.
@@ -751,27 +620,6 @@ a11y:
           trifluoromethane: Large molecular dipole, pointing towards fluorines.
           tetrafluoromethane: No molecular dipole.
           chloroform: Medium molecular dipole, pointing towards chlorines.
-      partialCharges:
-        select_molecule:
-          hydrogen: No partial charges.
-          nitrogen: No partial charges.
-          oxygen: No partial charges.
-          fluorine: No partial charges.
-          hydrogenFluoride: Partial charge for hydrogen is +0.22, for fluorine is -0.22.
-          water: Partial charge for hydrogen is +0.15, for oxygen is -0.30.
-          carbonDioxide: Partial charge for carbon is +0.33, for oxygen is -0.17.
-          hydrogenCyanide: Partial charge for hydrogen is +0.13, for carbon is +0.06, and for nitrogen is -0.19.
-          ozone: Partial charge for central oxygen is +0.19, for each terminal oxygen is -0.10.
-          ammonia: Partial charge for hydrogen is +0.9, for nitrogen is -0.27.
-          borane: Partial charge for boron is +0.17, for hydrogen is -0.06.
-          boronTrifluoride: Partial charge for boron is +0.41, for fluorine is -0.14
-          formaldehyde: Partial charge for hydrogen is +0.04, for carbon is +0.14, for oxygen is -0.22.
-          methane: Partial charge for hydrogen is +0.03, for carbon is -0.12.
-          fluoromethane: Partial charge for hydrogen is +0.04, for carbon is +0.04, for fluorine is -0.17.
-          difluoromethane: Partial charge for hydrogen is +0.05, for carbon is +0.17, for fluorine is -0.14.
-          trifluoromethane: Partial charge for hydrogen is +0.07, for carbon is +0.27, for fluorine is -0.11.
-          tetrafluoromethane: Partial charge for carbon is +0.37, for fluorine is -0.09.
-          chloroform: Partial charge for hydrogen is +0.07, for carbon is +0.13, for chlorine is -0.06.
       electrostaticPotential:
         select_molecule:
           hydrogen: Small electrostatic potential difference with even distribution.
