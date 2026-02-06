@@ -3,6 +3,9 @@
 /**
  * Label for a single atom in the 3D molecule view.
  *
+ * NOTE: These will be rendered in a separate layer by a separate render pass, but will still interact with the depth
+ * buffer.
+ *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
@@ -26,22 +29,36 @@ import { ATOM_LABEL_LAYER } from './AtomLabelRenderPass.js';
 
 const LABEL_SIZE = 0.4;
 
+const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
+const partialChargeFont = new PhetFont( { size: 110, weight: 'bold' } );
+
 export default class AtomLabelView extends TextureQuad {
-  private readonly atom: RealAtom;
   private readonly disposeCallbacks: ( () => void )[] = [];
 
-  public constructor( atom: RealAtom, atomLabelsVisible: boolean, partialChargesVisible: boolean ) {
+  public constructor(
+    private readonly atom: RealAtom,
+    atomLabelsVisible: boolean,
+    partialChargesVisible: boolean
+  ) {
     const labelFillProperty = atom.getForegroundColorProperty();
 
-    const labelFont = new PhetFont( { size: 130, weight: 'bold' } );
-    const smallFont = new PhetFont( { size: 110, weight: 'bold' } );
-
+    // The stringProperty to use
     const deltaStringProperty = partialChargesVisible ? (
       atom.getPartialCharge() >= 0
       ? MoleculePolarityFluent.deltaNonNegativeValueStringProperty
       : MoleculePolarityFluent.deltaNegativeValueStringProperty
     ) : null;
 
+    // After filling in the stringProperty with the partial charge (and stored so we can dispose and not leak memory)
+    const partialChargeStringProperty = deltaStringProperty ? new DerivedProperty( [ deltaStringProperty ], deltaString => {
+      const partialCharge = atom.getPartialCharge();
+
+      return StringUtils.fillIn( deltaString, {
+        partialCharge: toFixed( Math.abs( partialCharge ), 2 )
+      } );
+    } ) : null;
+
+    // The node that will be rendered to a texture for the label.
     const labelNode = new VBox( {
       children: [
         ...( atomLabelsVisible ? [
@@ -51,15 +68,9 @@ export default class AtomLabelView extends TextureQuad {
             maxWidth: 500
           } )
         ] : [] ),
-        ...( partialChargesVisible ? [
-          new Text( new DerivedProperty( [ deltaStringProperty! ], deltaString => {
-            const partialCharge = atom.getPartialCharge();
-
-            return StringUtils.fillIn( deltaString, {
-              partialCharge: toFixed( Math.abs( partialCharge ), 2 )
-            } );
-          } ), {
-            font: smallFont,
+        ...( partialChargeStringProperty ? [
+          new Text( partialChargeStringProperty, {
+            font: partialChargeFont,
             fill: labelFillProperty,
             maxWidth: 500
           } )
@@ -79,6 +90,9 @@ export default class AtomLabelView extends TextureQuad {
     super( labelNodeTexture, 2 * LABEL_SIZE, LABEL_SIZE, { depthTest: true } );
 
     this.disposeCallbacks.push( () => labelNodeTexture.dispose() );
+    if ( partialChargeStringProperty ) {
+      this.disposeCallbacks.push( () => partialChargeStringProperty.dispose() );
+    }
 
     // We'll need to repaint the texture when the color changes
     const labelTextureUpdateListener = () => {
@@ -95,11 +109,7 @@ export default class AtomLabelView extends TextureQuad {
       } );
     }
 
-    ( this as unknown as THREE.Object3D ).renderOrder = ATOM_LABEL_RENDER_ORDER;
-
-    this.position.copy( ThreeUtils.vectorToThree( new Vector3( -2 * LABEL_SIZE * 0.5, -LABEL_SIZE * 0.5, 2 ) ) );
-
-    this.atom = atom;
+    this.renderOrder = ATOM_LABEL_RENDER_ORDER;
 
     this.layers.set( ATOM_LABEL_LAYER );
   }

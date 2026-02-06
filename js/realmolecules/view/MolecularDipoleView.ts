@@ -43,12 +43,12 @@ export default class MolecularDipoleView extends THREE.Object3D {
 
     const arrow = new DipoleArrowView( false );
     if ( drawLength < minUnscaled ) {
-      arrow.setFrom( tail, this.dir, minUnscaled );
+      arrow.setArrowProperties( tail, this.dir, minUnscaled );
       const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
       arrow.scale.setScalar( uniformScale );
     }
     else {
-      arrow.setFrom( tail, this.dir, drawLength );
+      arrow.setArrowProperties( tail, this.dir, drawLength );
       arrow.scale.setScalar( 1 );
     }
     this.add( arrow );

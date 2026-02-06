@@ -18,6 +18,7 @@ export default class MoleculeRotationListener {
   private grabSound = sharedSoundPlayers.get( 'grab' );
   private releaseSound = sharedSoundPlayers.get( 'release' );
 
+  // We'll want the rotation to be readable to determine whether focus highlights are available.
   public isRotatingProperty = new BooleanProperty( false );
 
   public constructor(

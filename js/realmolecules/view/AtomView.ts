@@ -13,7 +13,8 @@ import Color from '../../../../scenery/js/util/Color.js';
 import { RealAtom } from '../model/RealAtom.js';
 
 export default class AtomView extends THREE.Object3D {
-  private readonly mesh: THREE.Mesh;
+  private readonly material: THREE.MeshLambertMaterial;
+
   private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor( atom: RealAtom ) {
@@ -23,10 +24,13 @@ export default class AtomView extends THREE.Object3D {
     this.disposeCallbacks.push( () => sphereGeometry.dispose() );
 
     const atomMaterial = new THREE.MeshLambertMaterial( {
-      side: THREE.FrontSide
+      side: THREE.FrontSide,
+      depthWrite: true
     } );
+    this.material = atomMaterial;
     this.disposeCallbacks.push( () => atomMaterial.dispose() );
 
+    // Update the color when the atom's color property changes
     const atomColorProperty = atom.getColorProperty();
     const colorListener = ( color: Color ) => {
       atomMaterial.color = ThreeUtils.colorToThree( color );
@@ -34,20 +38,20 @@ export default class AtomView extends THREE.Object3D {
     atomColorProperty.link( colorListener );
     this.disposeCallbacks.push( () => atomColorProperty.unlink( colorListener ) );
 
-    atomMaterial.depthWrite = true;
-
-    this.mesh = new THREE.Mesh( sphereGeometry, atomMaterial );
-    this.mesh.renderOrder = ATOM_RENDER_ORDER;
-    this.add( this.mesh );
+    const mesh = new THREE.Mesh( sphereGeometry, atomMaterial );
+    mesh.renderOrder = ATOM_RENDER_ORDER;
+    this.add( mesh );
 
     // Position at the atom's location
     this.position.set( atom.position.x, atom.position.y, atom.position.z );
   }
 
+  /**
+   * Sets the atom to be dimmed (lower opacity) or not, used for when molecular dipoles need to be visible through the atom
+   */
   public setDimmed( dimmed: boolean ): void {
-    const mat = this.mesh.material as THREE.MeshLambertMaterial;
-    mat.transparent = dimmed;
-    mat.opacity = dimmed ? 0.5 : 1.0;
+    this.material.transparent = dimmed;
+    this.material.opacity = dimmed ? 0.5 : 1.0;
   }
 
   public dispose(): void {

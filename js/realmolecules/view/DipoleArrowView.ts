@@ -20,11 +20,18 @@ const crossLength = bodyRadius * 2;
 const crossRadius = headRadius;
 
 export default class DipoleArrowView extends THREE.Object3D {
+  // The main cylinder of the arrow
   private body: THREE.Mesh;
+
+  // The cone-shaped head
   private head: THREE.Mesh;
+
+  // Dipole arrows have a cross near the tail to indicate direction, this is the cylinder for that cross
   private cross: THREE.Mesh;
+
+  // Helps position the cross at a fixed distance from the tail, and rotate it to be perpendicular to the arrow direction
   private crossAnchor: THREE.Object3D;
-  private material: THREE.MeshLambertMaterial;
+
   private readonly disposeCallbacks: ( () => void )[] = [];
 
   public constructor(
@@ -38,7 +45,6 @@ export default class DipoleArrowView extends THREE.Object3D {
       // depthWrite: true for molecular dipole arrows, see https://github.com/phetsims/molecule-polarity/issues/265
       depthWrite: !isBondDipole
     } );
-    this.material = material;
     this.disposeCallbacks.push( () => material.dispose() );
 
     // Color listener
@@ -48,7 +54,7 @@ export default class DipoleArrowView extends THREE.Object3D {
     colorProperty.link( colorListener );
     this.disposeCallbacks.push( () => colorProperty.unlink( colorListener ) );
 
-    // Will be scaled below
+    // Will be scaled below, so we'll use unit dimensions to make things easy.
     const bodyGeometry = new THREE.CylinderGeometry( 1, 1, 1, 24, 1, false );
     this.disposeCallbacks.push( () => bodyGeometry.dispose() );
     const headGeometry = new THREE.ConeGeometry( 1, 1, 24, 1, false );
@@ -80,17 +86,16 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.add( this.crossAnchor );
   }
 
-  public updateColor( matchesElectronegativity: boolean ): void {
-    if ( !matchesElectronegativity ) {
-      this.material.color.set( ThreeUtils.colorToThree( new Color( 'red' ) ) );
-    }
-  }
-
-  public setFrom( origin: Vector3, direction: Vector3, totalLength: number ): void {
+  /**
+   * Set the position and orientation of the arrow based on the provided origin, direction, and total length.
+   */
+  public setArrowProperties( origin: Vector3, direction: Vector3, totalLength: number ): void {
     const originThree = ThreeUtils.vectorToThree( origin );
     const dir = ThreeUtils.vectorToThree( direction ).normalize();
 
     const headLength = this.head.scale.y;
+
+    // Don't allow a zero-length arrow
     const bodyLength = Math.max( 0.0001, totalLength - headLength );
 
     const up = new THREE.Vector3( 0, 1, 0 );
@@ -113,6 +118,8 @@ export default class DipoleArrowView extends THREE.Object3D {
   /**
    * Set the cross orientation so its axis is perpendicular to both arrow direction and camera direction.
    * Provided vector is in the parent (arrow group) space.
+   *
+   * This is done for bond dipoles to make the cross easier to read (since they are shaded pure black)
    */
   public setCrossPerp( perpParentDir: Vector3 ): void {
     const inv = this.quaternion.clone().invert();

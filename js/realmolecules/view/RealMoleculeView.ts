@@ -218,7 +218,7 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       for ( const bond of molecule.bonds ) {
         const bondView = bondViewMap.get( bond );
-        bondView && bondView.update( this, localCameraPosition );
+        bondView && bondView.update( localCameraPosition );
 
         const bondDipoleView = bondDipoleViewMap.get( bond );
         bondDipoleView && bondDipoleView.update( this, localCameraPosition, orientationSignProperty.value );

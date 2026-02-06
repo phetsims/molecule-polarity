@@ -139,12 +139,12 @@ export default class BondDipoleView extends THREE.Object3D {
       const tailForM = center
         .plus( chosen.timesScalar( sideOffset ) )
         .plus( dir.timesScalar( -drawLength / 2 ) );
-      this.arrow.setFrom( tailForM, dir, minUnscaled );
+      this.arrow.setArrowProperties( tailForM, dir, minUnscaled );
       const uniformScale = Math.max( drawLength / Math.max( minUnscaled, 1e-6 ), 0 );
       this.arrow.scale.setScalar( uniformScale );
     }
     else {
-      this.arrow.setFrom( tail, dir, drawLength );
+      this.arrow.setArrowProperties( tail, dir, drawLength );
       this.arrow.scale.setScalar( 1 );
     }
     this.arrow.setCrossPerp( axis );

@@ -40,6 +40,12 @@ The "Real Molecules" screen uses a 3D model.
 
 Initial molecular geometry is pulled from the [PubChem database](https://pubchem.ncbi.nlm.nih.gov/).
 
+NOTE there is a "basic" and "advanced" mode. In general, the "basic" mode uses simplified intuitive calculations based
+on electronegativity differences, while the "advanced" mode uses much more realistic quantum chemistry calculations.
+
+The "basic" mode is intended to be more pedagogical and accessible, while the "advanced" mode is intended to be more
+realistic and informative, but less accessible.
+
 ### Bond Dipoles
 
 For the "basic" mode, bond dipole magnitude is linearly proportional to delta EN, as in the 2D model.

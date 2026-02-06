@@ -18,6 +18,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 
 export default class BackgroundCompositePass extends window.ThreePass {
 
+  // uniforms for the RawShaderMaterials
   private uniforms: {
     tDiffuse: { value: THREE.Texture | null };
     uBg: { value: THREE.Vector3 };
@@ -26,11 +27,14 @@ export default class BackgroundCompositePass extends window.ThreePass {
     tDiffuse: { value: THREE.Texture | null };
     opacity: { value: number };
   };
+
+  // The actual materials
   private material: THREE.RawShaderMaterial;
   private copyMaterial: THREE.RawShaderMaterial;
 
-  private fsQuad: InstanceType<typeof window.ThreeFullScreenQuad>;
-  private fsQuadCopy: InstanceType<typeof window.ThreeFullScreenQuad>;
+  // Quads that will be used to render over the full screen.
+  private fullscreenQuad: InstanceType<typeof window.ThreeFullScreenQuad>;
+  private fullscreenQuadCopy: InstanceType<typeof window.ThreeFullScreenQuad>;
 
   public constructor( private backgroundColor: THREE.Color ) {
     super();
@@ -91,9 +95,8 @@ export default class BackgroundCompositePass extends window.ThreePass {
       depthWrite: false
     } );
 
-    this.fsQuad = new window.ThreeFullScreenQuad( this.material );
-
-    this.fsQuadCopy = new window.ThreeFullScreenQuad( this.copyMaterial );
+    this.fullscreenQuad = new window.ThreeFullScreenQuad( this.material );
+    this.fullscreenQuadCopy = new window.ThreeFullScreenQuad( this.copyMaterial );
 
     this.needsSwap = false;
   }
@@ -113,7 +116,7 @@ export default class BackgroundCompositePass extends window.ThreePass {
 
       renderer.setRenderTarget( this.renderToScreen ? null : writeBuffer );
 
-      this.fsQuadCopy.render( renderer );
+      this.fullscreenQuadCopy.render( renderer );
     }
 
     // Then write into the readBuffer
@@ -121,7 +124,7 @@ export default class BackgroundCompositePass extends window.ThreePass {
       this.uniforms.tDiffuse.value = writeBuffer.texture;
 
       renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
-      this.fsQuad.render( renderer );
+      this.fullscreenQuad.render( renderer );
     }
 
     renderer.autoClear = oldAutoClear;
@@ -129,7 +132,7 @@ export default class BackgroundCompositePass extends window.ThreePass {
 
   public override dispose(): void {
     this.material.dispose();
-    this.fsQuad.dispose();
+    this.fullscreenQuad.dispose();
   }
 }
 
