@@ -3,6 +3,17 @@
 /**
  * Electrostatic potential or electron density surface mesh for a RealMolecule.
  *
+ * The surface is actually rendered with two "meshes": a foreground and a background. This helps make the
+ * "semi-transparent" surface easier to see, while allowing the atom and contents "inside" to be more visible.
+ *
+ * Notably, both the foreground and background meshes effectively render the same thing, which is the FRONT of the
+ * surface ONLY. Both meshes render the front, and the background isn't rendered at all (seems to improve visual
+ * understanding).
+ *
+ * The background is rendered as if it is "behind" everything else (even though in space coordinates it is in front).
+ * This allows the background to essentially have "more" of the surface opacity rendered, WITHOUT covering up the
+ * molecule. Then the foreground adds the "over the molecule" effect with a much lower opacity.
+ *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
@@ -15,7 +26,11 @@ import MPColors from '../../common/MPColors.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import RealMolecule from '../model/RealMolecule.js';
 import { colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB, colorizeJavaElectronDensity, colorizeRealElectronDensity } from '../model/RealMoleculeColors.js';
-import { BACK_SURFACE_MESH_RENDER_ORDER, SURFACE_MESH_RENDER_ORDER } from './RenderOrder.js';
+import { SURFACE_BACKGROUND_RENDER_ORDER, SURFACE_FOREGROUND_RENDER_ORDER } from './RenderOrder.js';
+
+// The number of subdivision steps to perform on the original geometry. Higher numbers will
+// smooth the surface more, but will also increase the number of triangles (and thus reduce performance).
+const SUBDIVIDE_STEPS = 2;
 
 export default class SurfaceMesh extends THREE.Object3D {
 
@@ -52,7 +67,8 @@ export default class SurfaceMesh extends THREE.Object3D {
     };
     meshGeometry.setAttribute( 'color', getColorBufferAttribute() );
 
-    const frontMeshMaterial = new THREE.MeshBasicMaterial( {
+    // Material for rendering "on top of the molecule"
+    const foregroundMeshMaterial = new THREE.MeshBasicMaterial( {
       vertexColors: true,
       transparent: true,
       opacity: surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceFrontAlphaProperty.value.alpha, // SurfaceMesh regenerated when this color changes
@@ -60,20 +76,21 @@ export default class SurfaceMesh extends THREE.Object3D {
       side: THREE.FrontSide
     } );
 
-    const backMeshMaterial = new THREE.MeshBasicMaterial( {
+    // Material for rendering "behind the molecule".
+    const backgroundMeshMaterial = new THREE.MeshBasicMaterial( {
       vertexColors: true,
       depthWrite: false,
       side: THREE.FrontSide
     } );
 
-    // HANDLE custom shader to blend with the background color --- since our backMeshMaterial can't be transparent
+    // HANDLE custom shader to blend with the background color --- since our backgroundMeshMaterial can't be transparent
     // otherwise it renders "in front" of things.
-    backMeshMaterial.userData.uBg = ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value );
+    backgroundMeshMaterial.userData.uBg = ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value );
     // SurfaceMesh regenerated when this color changes
-    backMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlphaProperty.value.alpha;
-    backMeshMaterial.onBeforeCompile = ( shader: THREE.Shader ) => {
-      shader.uniforms.uBg = { value: backMeshMaterial.userData.uBg };
-      shader.uniforms.uAlpha = { value: backMeshMaterial.userData.uAlpha };
+    backgroundMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlphaProperty.value.alpha;
+    backgroundMeshMaterial.onBeforeCompile = ( shader: THREE.Shader ) => {
+      shader.uniforms.uBg = { value: backgroundMeshMaterial.userData.uBg };
+      shader.uniforms.uAlpha = { value: backgroundMeshMaterial.userData.uAlpha };
 
       // Inject uniforms
       shader.fragmentShader =
@@ -94,21 +111,25 @@ export default class SurfaceMesh extends THREE.Object3D {
       );
 
       // Keep a handle so you can update uniforms later
-      backMeshMaterial.userData._shader = shader;
+      backgroundMeshMaterial.userData._shader = shader;
     };
 
+    // The sherpa preload three-subdivide-1.1.3 adds this global behavior which will allow subdividing the mesh and
+    // essentially interpolating its attributes (position, normal, color). This allows us
+    // to get a much smoother surface that is much more visibly appealing, without having to ship a significantly larger
+    // amount of molecular surface data.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error Having to use external lib like this
-    const highResolutionGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, 2 );
+    const highResolutionGeometry: THREE.Geometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
     super();
 
     const updateBackgroundColor = ( backgroundColor: Color ) => {
       const threeColor = ThreeUtils.colorToThree( backgroundColor );
 
-      backMeshMaterial.userData.uBg.copy( threeColor );
-      if ( backMeshMaterial.userData._shader ) {
-        backMeshMaterial.userData._shader.uniforms.uBg.value.copy( threeColor );
+      backgroundMeshMaterial.userData.uBg.copy( threeColor );
+      if ( backgroundMeshMaterial.userData._shader ) {
+        backgroundMeshMaterial.userData._shader.uniforms.uBg.value.copy( threeColor );
       }
     };
     MPColors.screenBackgroundColorProperty.lazyLink( updateBackgroundColor );
@@ -116,11 +137,11 @@ export default class SurfaceMesh extends THREE.Object3D {
       MPColors.screenBackgroundColorProperty.unlink( updateBackgroundColor );
     } );
 
-    const frontMesh = new THREE.Mesh( highResolutionGeometry, frontMeshMaterial );
-    const backMesh = new THREE.Mesh( highResolutionGeometry, backMeshMaterial );
+    const foregroundMesh = new THREE.Mesh( highResolutionGeometry, foregroundMeshMaterial );
+    const backgroundMesh = new THREE.Mesh( highResolutionGeometry, backgroundMeshMaterial );
 
-    frontMesh.renderOrder = SURFACE_MESH_RENDER_ORDER;
-    backMesh.renderOrder = BACK_SURFACE_MESH_RENDER_ORDER;
+    foregroundMesh.renderOrder = SURFACE_FOREGROUND_RENDER_ORDER;
+    backgroundMesh.renderOrder = SURFACE_BACKGROUND_RENDER_ORDER;
 
     // Update colors a bit more dynamically on changes
     const colorMultilink = Multilink.lazyMultilink( [
@@ -133,23 +154,24 @@ export default class SurfaceMesh extends THREE.Object3D {
       // Update color buffer attribute
       meshGeometry.setAttribute( 'color', getColorBufferAttribute() );
 
+      // Re-generate the high-resolution geometry
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error Having to use external lib like this
-      const highResolutionUpdateGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, 2 );
+      const highResolutionUpdateGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
-      frontMesh.geometry.dispose();
-      backMesh.geometry.dispose();
+      foregroundMesh.geometry = highResolutionUpdateGeometry;
+      backgroundMesh.geometry = highResolutionUpdateGeometry;
 
-      frontMesh.geometry = highResolutionUpdateGeometry;
-      backMesh.geometry = highResolutionUpdateGeometry;
+      foregroundMesh.geometry.dispose();
+      backgroundMesh.geometry.dispose();
     } );
     this.disposeCallbacks.push( () => colorMultilink.dispose() );
 
-    this.add( frontMesh );
-    this.add( backMesh );
+    this.add( foregroundMesh );
+    this.add( backgroundMesh );
 
     this.disposeCallbacks.push( () => meshGeometry.dispose() );
-    this.disposeCallbacks.push( () => frontMeshMaterial.dispose() );
+    this.disposeCallbacks.push( () => foregroundMeshMaterial.dispose() );
   }
 
   public dispose(): void {

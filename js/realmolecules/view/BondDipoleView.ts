@@ -34,7 +34,7 @@ export default class BondDipoleView extends THREE.Object3D {
     this.add( this.arrow );
   }
 
-  public update( parent: THREE.Object3D, localCamera: Vector3, orientationSign: number ): void {
+  public update( parent: THREE.Object3D, localCameraPosition: Vector3, orientationSign: number ): void {
     const start = this.bond.atomA.position;
     const end = this.bond.atomB.position;
     const dist = start.distance( end );
@@ -44,7 +44,7 @@ export default class BondDipoleView extends THREE.Object3D {
     const bondDir = end.minus( start ).normalized();
 
     // Perpendicular offset relative to camera
-    const viewDir = center.minus( localCamera ).normalized();
+    const viewDir = center.minus( localCameraPosition ).normalized();
     let perpendicular = bondDir.cross( viewDir ).normalized();
     if ( perpendicular.getMagnitudeSquared() < 1e-6 ) {
       const alt = ( Math.abs( bondDir.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;
@@ -127,7 +127,7 @@ export default class BondDipoleView extends THREE.Object3D {
 
     // Cross axis perpendicular to camera at arrow location
     const arrowPosFrame = tail; // tail in parent space
-    const viewDirFrame = new Vector3( arrowPosFrame.x - localCamera.x, arrowPosFrame.y - localCamera.y, arrowPosFrame.z - localCamera.z ).normalized();
+    const viewDirFrame = new Vector3( arrowPosFrame.x - localCameraPosition.x, arrowPosFrame.y - localCameraPosition.y, arrowPosFrame.z - localCameraPosition.z ).normalized();
     let axis = dir.minus( viewDirFrame.timesScalar( dir.dot( viewDirFrame ) ) ).normalized();
     if ( axis.getMagnitudeSquared() < 1e-6 ) {
       const alt = ( Math.abs( viewDirFrame.dot( Vector3.X_UNIT ) ) > 0.9 ) ? Vector3.Y_UNIT : Vector3.X_UNIT;

@@ -1,7 +1,7 @@
 // Copyright 2025-2026, University of Colorado Boulder
 
 /**
- * 3D view of the molecule.
+ * 3D view of the molecule (as a THREE.js object)
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
@@ -44,13 +44,16 @@ export default class RealMoleculeView extends THREE.Object3D {
     const bondViewMap = new Map<RealBond, BondView>();
     const bondDipoleViewMap = new Map<RealBond, BondDipoleView>();
 
+    // Convert to a numeric sign for use in orientation of dipole arrows
     const orientationSignProperty = new DerivedProperty( [ MPPreferences.dipoleDirectionProperty ], dipoleDirection => {
       return ( dipoleDirection === 'positiveToNegative' ) ? 1 : -1;
     } );
 
     const disposables: { dispose: () => void }[] = [];
 
+    // A large multilink that will update the entire molecule view when any of these properties change.
     Multilink.multilink( [
+      // Directly-referenced properties
       moleculeProperty,
       viewProperties.surfaceTypeProperty,
       viewProperties.atomLabelsVisibleProperty,
@@ -78,32 +81,35 @@ export default class RealMoleculeView extends THREE.Object3D {
       isAdvanced
     ) => {
 
-      // Hide partial charges if not in advanced mode
-      if ( !isAdvanced ) {
-        partialChargesVisible = false;
+      // Clear out the previous view
+      {
+        // Hide partial charges if not in advanced mode
+        if ( !isAdvanced ) {
+          partialChargesVisible = false;
+        }
+
+        // Clear out children
+        while ( this.children.length > 0 ) {
+          this.remove( this.children[ 0 ] );
+        }
+
+        // Clear out stroked objects
+        while ( blackStrokedObjects.length ) {
+          blackStrokedObjects.pop();
+        }
+
+        // Clear out all disposable items
+        while ( disposables.length > 0 ) {
+          const disposable = disposables.pop()!;
+
+          disposable.dispose();
+        }
+
+        atomLabelViews.length = 0;
+        atomViewMap.clear();
+        bondViewMap.clear();
+        bondDipoleViewMap.clear();
       }
-
-      // Clear out children
-      while ( this.children.length > 0 ) {
-        this.remove( this.children[ 0 ] );
-      }
-
-      // Clear out stroked objects
-      while ( blackStrokedObjects.length ) {
-        blackStrokedObjects.pop();
-      }
-
-      // Clear out all disposable items
-      while ( disposables.length > 0 ) {
-        const disposable = disposables.pop()!;
-
-        disposable.dispose();
-      }
-
-      atomLabelViews.length = 0;
-      atomViewMap.clear();
-      bondViewMap.clear();
-      bondDipoleViewMap.clear();
 
       if ( !visible ) {
         return;
@@ -137,16 +143,20 @@ export default class RealMoleculeView extends THREE.Object3D {
           const molecularDipoleView = new MolecularDipoleView( molecule, orientationSign );
           this.add( molecularDipoleView );
 
+          // Adjust global state to include the molecular dipole view in
+          // "things that get stroked in the outline render pass".
           blackStrokedObjects.push( molecularDipoleView );
 
+          // Check to see if we have a molecular dipole aligned with an atom. If this is detected, we'll need to
+          // make the atom AND bond semi-transparent to show the molecular dipole arrow.
           const alignedAtom = molecule.getMoleculeDipoleAlignedAtom( orientationSign );
           if ( alignedAtom ) {
             const atomView = atomViewMap.get( alignedAtom );
             atomView && atomView.setDimmed( true );
 
-            const bond = molecule.bonds.find( bb =>
-              ( bb.atomA === centralAtom && bb.atomB === alignedAtom ) ||
-              ( bb.atomB === centralAtom && bb.atomA === alignedAtom )
+            const bond = molecule.bonds.find( otherBond =>
+              ( otherBond.atomA === centralAtom && otherBond.atomB === alignedAtom ) ||
+              ( otherBond.atomB === centralAtom && otherBond.atomA === alignedAtom )
             );
             const bondView = bond ? bondViewMap.get( bond ) : null;
             bondView && bondView.setDimmed( true );
@@ -158,12 +168,12 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       // Bond dipole arrows
       if ( bondDipolesVisible ) {
-        const localCamera2 = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+        const localCameraPosition = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
         for ( const bond of molecule.bonds ) {
           if ( bond.getDipoleMagnitudeDebye() > 1e-3 ) {
             const view = new BondDipoleView( molecule, bond );
             this.add( view );
-            view.update( this, localCamera2, orientationSign );
+            view.update( this, localCameraPosition, orientationSign );
             bondDipoleViewMap.set( bond, view );
 
             disposables.push( view );
@@ -171,7 +181,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         }
       }
 
-      // Atom labels
+      // Atom labels (NOTE -- these will be rendered in a separate render pass with a separate layer
       if ( atomLabelsVisible || partialChargesVisible ) {
         for ( const atom of molecule.atoms ) {
           const label = new AtomLabelView( atom, atomLabelsVisible, partialChargesVisible );
@@ -189,15 +199,18 @@ export default class RealMoleculeView extends THREE.Object3D {
       disposables.push( surfaceMesh );
     } );
 
+    // Apply the molecule rotation from the model
     moleculeQuaternionProperty.link( quaternion => {
       this.quaternion.copy( quaternion );
       this.updateMatrix();
       this.updateMatrixWorld();
     } );
 
+    // Once-a-frame step updates (we need to adjust labels, bonds and bond dipoles based on the camera position,
+    // and we don't want to do this more than once a frame).
     stepEmitter.addListener( () => {
       const molecule = moleculeProperty.value;
-      const localCamera = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
+      const localCameraPosition = ThreeUtils.threeToVector( this.worldToLocal( ThreeUtils.vectorToThree( REAL_MOLECULES_CAMERA_POSITION ) ) );
 
       for ( const view of atomLabelViews ) {
         view.update( this );
@@ -205,10 +218,10 @@ export default class RealMoleculeView extends THREE.Object3D {
 
       for ( const bond of molecule.bonds ) {
         const bondView = bondViewMap.get( bond );
-        bondView && bondView.update( this, localCamera );
+        bondView && bondView.update( this, localCameraPosition );
 
         const bondDipoleView = bondDipoleViewMap.get( bond );
-        bondDipoleView && bondDipoleView.update( this, localCamera, orientationSignProperty.value );
+        bondDipoleView && bondDipoleView.update( this, localCameraPosition, orientationSignProperty.value );
       }
     } );
   }

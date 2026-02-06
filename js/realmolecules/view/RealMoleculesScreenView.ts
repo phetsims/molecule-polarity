@@ -65,6 +65,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
   private activeScaleProperty = new NumberProperty( 1 );
 
   public constructor( model: RealMoleculesModel, tandem: Tandem ) {
+    // Our stage's main rendering function, defined here so we can pass a reference in the super() call and later
+    // override it if WebGL is enabled.
     let renderOverride: ( ( target: THREE.WebGLRenderTarget | undefined, autoClear?: boolean ) => void ) | null = null;
 
     super( {
@@ -410,7 +412,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
   }
 
   private addLights(): void {
-    // Lights
     const ambientLight = new THREE.AmbientLight();
     this.sceneNode.stage.threeScene.add( ambientLight );
     const sunLight = new THREE.DirectionalLight();

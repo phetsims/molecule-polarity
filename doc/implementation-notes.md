@@ -52,6 +52,35 @@ It uses THREE.js for the 3D view. Additionally, it requires the use of additiona
 packaged with THREE.js, and are instead added as a separate sherpa preload (three-r160-addons). THREE.js types are
 included via @types/three (perennial), and the addon types are manually specified in view/three-r160-addons.d.ts.
 
+It is highly recommended to familiarize yourself with THREE.js and the underlying WebGL concepts before working
+on the 3D view.
+
+### Molecular Data
+
+assets/generate-molecule-data.ts is a script that takes assets/sdf/ as input and writes to assets/generated-data/
+(using a large assortment of computational chemistry libraries and tools). assets/generated-data/all-molecules.json is
+a combination of all of the molecule JSON, and can be essentially copy-pasted into js/realmolecules/model/RealMoleculeData.ts
+for the data section. This molecular data is fairly comprehensive, containing molecular position, structure, surface,
+dipoles, partial charges, and more.
+
+It should support adding more molecules (add a SDF and compute), or should be easy to remove molecules or data.
+The generation code contains more code that can generate much more than what is currently stored/shipped, including many
+more partial charge models if needed in the future.
+
+`RealMolecule` on startup will parse the data into a significantly better API for use in the sim.
+
+### THREE.js Objects
+
+In addition to the 2D Scenery scene graph, we have a 3D THREE.js scene graph. It is generally chosen to suffix these
+types with 'View' instead of 'Node' to distinguish them from the 2D Scenery nodes. For example, `AtomView` is a THREE.js
+object that represents an atom in the 3D view, while `AtomNode` is a Scenery node that represents an atom in the 2D view.
+
+### THREE.js disposal
+
+THREE.js geometries, materials and textures need to be manually disposed when no longer needed, or they will leak memory.
+
+This is NOT needed for meshes, object3ds, or other similar types of objects.
+
 ### Layering
 
 The main 3D view needs to render certain things in specific orders, due to blending constraints, when the depth buffer
@@ -61,9 +90,23 @@ to render in a WebGL-style THREE.js way without specific control over layering.
 The `.renderOrder` attribute of THREE.js objects in the main view is specified to control the rendering in the main
 render pass, and the constants for that are stored in `RenderOrder.ts`.
 
+Additionally, `depthWrite` and `depthTest` are used on materials to control whether the depth buffer is written to or
+tested against for certain objects. A full description of a depth buffer is out of scope for this document, but it is
+highly recommended to read https://en.wikipedia.org/wiki/Z-buffering before working with layering concepts in this sim.
+Essentially, if one material is rendered with `depthWrite:true`, the position of it will be remembered, and anything
+rendered afterward with `depthTest:true` will only be visible if it is closer to the camera than that position.
+
+Notably, the depth buffer is shared ACROSS render passes, so that atom labels are occluded by surfaces, but in front of
+other things for visibility.
+
 ### Passes
 
 A few needs (focus highlights, molecular dipole highlight, text "over" dipole arrows and surfaces but behind atoms)
 require the use of splitting things into separate passes, so THREE.js addons (`EffectComposer` and such) are required.
 
-`EffectComposer` is used with the main renderer to add concrete passes.
+`EffectComposer` is used with the main renderer to add concrete passes. See RealMoleculesScreenView for more.
+
+### GLSL
+
+It is recommended to have a working familiarity with GLSL ES for working with layering or the main surface. Some custom
+shaders needed to be written, and the adapted THREE.js addons also require a bit of understanding of WebGL and GLSL.
