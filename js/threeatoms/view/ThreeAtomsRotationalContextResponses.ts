@@ -48,8 +48,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           bond: bond.label,
           position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
         } ), {
-          responseGroup: 'bond-dipole',
-          interruptible: false
+          responseGroup: 'bond-dipole'
         }
       );
     };
