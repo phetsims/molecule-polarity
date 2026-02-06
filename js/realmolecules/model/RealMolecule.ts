@@ -223,7 +223,8 @@ export default class RealMolecule extends PhetioObject {
   }
 
   /**
-   * Returns the electrostatic potential at the given point using simplified partial charges.
+   * Returns the electrostatic potential at the given point using simplified partial charges. Specifically this
+   * uses the classical point-charge Coulomb electrostatic potential (Coulomb superposition).
    *
    * NOTE: this can't use the psi4 model, because we only have ESP values at surface vertices for that.
    */

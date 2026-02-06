@@ -26,11 +26,14 @@ export default class SurfaceMesh extends THREE.Object3D {
     surfaceType: SurfaceType,
     surfaceColor: SurfaceColor
   ) {
+    // Select the colorization based on surface type and mode.
     const toColor = surfaceType === 'electrostaticPotential'
       ? ( surfaceColor === 'rainbow' ? colorizeElectrostaticPotentialROYGB : colorizeElectrostaticPotentialRWB )
       : ( molecule.isAdvancedProperty.value ? colorizeRealElectronDensity : colorizeJavaElectronDensity );
 
     const meshGeometry = new THREE.BufferGeometry();
+
+    // Read positions and normals directly from the input data
     meshGeometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
       return vertices.flatMap( vertex => vertex.getPositionArray() );
     } ) ), 3 ) );
@@ -38,6 +41,7 @@ export default class SurfaceMesh extends THREE.Object3D {
       return vertices.flatMap( vertex => vertex.getNormalArray() );
     } ) ), 3 ) );
 
+    // Read values from the model, and colorize them. Separate function so colors can be updated (based on color profile)
     const getColorBufferAttribute = () => {
       return new THREE.BufferAttribute( new Float32Array( molecule.faces.flatMap( vertices => {
         return vertices.flatMap( vertex => {
@@ -46,7 +50,6 @@ export default class SurfaceMesh extends THREE.Object3D {
         } );
       } ) ), 3 );
     };
-
     meshGeometry.setAttribute( 'color', getColorBufferAttribute() );
 
     const frontMeshMaterial = new THREE.MeshBasicMaterial( {

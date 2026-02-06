@@ -36,4 +36,53 @@ disabled while the user is rotating the molecule or changing EN values.
 
 ## 3D Model
 
-*TODO: describe 3D model*, see https://github.com/phetsims/molecule-polarity/issues/32
+The "Real Molecules" screen uses a 3D model.
+
+Initial molecular geometry is pulled from the [PubChem database](https://pubchem.ncbi.nlm.nih.gov/).
+
+### Bond Dipoles
+
+For the "basic" mode, bond dipole magnitude is linearly proportional to delta EN, as in the 2D model.
+
+For the "advanced" mode, bond dipole magnitude is calculated based on the Hirschfeld partial charges, computed from the
+quantum chemistry package [ORCA](https://www.faccts.de/orca/). They are then rescaled so that the sum of the bond dipoles
+matches the magnitude of the molecular dipole (see below).
+
+### Molecular Dipoles
+
+For the "basic" mode, the molecular dipole is the vector sum of the bond dipoles, as in the 2D model.
+
+For the "advanced" mode, the molecular dipole is calculated from the electron density using the quantum chemistry package
+[Psi4](https://psicode.org/).
+
+### Surfaces
+
+The surface geometry for both the "basic" and "advanced" modes is generated as a solvent-excluded surface using
+[MSMS](https://ccsb.scripps.edu/msms/) with a probe radius of 1.4 Å.
+
+#### Electrostatic Potential
+
+For the "basic" mode, the electrostatic potential is directly computed from partial charges using the classical 
+point-charge Coulomb electrostatic potential (Coulomb superposition). This uses partial charges computed from the
+original Java simulation, using the [Spartan](https://www.wavefun.com/products/spartan.html) chemical modeling software.
+
+For the "advanced" mode, the electrostatic potential is computed from the electron density using the Poisson equation,
+which is solved numerically using the finite difference method using the quantum chemistry package [Psi4](https://psicode.org/).
+
+The source data of electrostatic potential is colorized by default with white being the neutral (or for the alternative
+color scheme in options, green).
+
+#### Electron Density
+
+For the "basic" mode, the electron density is actually just the "basic" electrostatic potential, but re-colored using
+the black-to-white color scheme (there is no electron density being computed).
+
+For the "advanced" mode, the electron density is computed using the quantum chemistry package [Psi4](https://psicode.org/).
+
+The source data of electron density is colorized by a consistent across-molecule color scheme, with white being
+the lowest density and blue being the highest density.
+
+### Partial Charges
+
+Only shown for the "advanced" mode, this is computed using the quantum chemistry package 
+[ORCA](https://www.faccts.de/orca/) using the Hirschfeld method.
