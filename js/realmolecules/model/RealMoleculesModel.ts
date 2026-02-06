@@ -4,6 +4,7 @@
  * RealMoleculesModel is the model for the 'Real Molecules' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

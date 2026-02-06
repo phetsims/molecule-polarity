@@ -4,6 +4,7 @@
  * View for the 'Real Molecules' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -48,13 +49,19 @@ import AtomLabelRenderPass from './AtomLabelRenderPass.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import MoleculeRotationListener from './MoleculeRotationListener.js';
 import MoleculeKeyboardRotationListener from './MoleculeKeyboardRotationListener.js';
+import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+
+const HORIZONTAL_MARGIN = 40;
+const VERTICAL_MARGIN = 20;
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
   private readonly stepEmitter = new TinyEmitter();
   private readonly moleculeView: RealMoleculeView;
 
-  // Scale applied to interaction that isn't directly tied to screen coordinates (rotation)
+  // Scale applied to interaction that isn't directly tied to screen coordinates (rotation). This helps to "normalize"
+  // interactions across different screen sizes.
   private activeScaleProperty = new NumberProperty( 1 );
 
   public constructor( model: RealMoleculesModel, tandem: Tandem ) {
@@ -76,12 +83,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       }
     } );
 
-    const moleculeNodeTandem = tandem.createTandem( 'moleculeNode' );
-
     // Using a dynamic property so we can change the name both if the molecule changes and if the language changes
     const dynamicMoleculeNameProperty = new DynamicProperty<string, unknown, RealMolecule>( model.moleculeProperty, {
       derive: 'fullNameProperty'
     } );
+
+    const moleculeNodeTandem = tandem.createTandem( 'moleculeNode' );
 
     // Our "fake" Node for the molecule, for target for drags that don't hit other UI components (and keyboard drag)
     const moleculeNode = new ( InteractiveHighlighting( Rectangle ) )( combineOptions<NodeOptions>( {}, AccessibleDraggableOptions, {
@@ -94,8 +101,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       } ),
       accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.accessibleHelpTextStringProperty
     } ) );
-    this.addChild( moleculeNode );
 
+    // Adjust the moleculeNode bounds to cover all of the layout bounds, and adjust activeScale
     this.visibleBoundsProperty.link( visibleBounds => {
       moleculeNode.setRectBounds( visibleBounds );
 
@@ -106,7 +113,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       }
     } );
 
-    // view-specific Properties
     const viewProperties = new RealMoleculesViewProperties( {
       tandem: tandem.createTandem( 'viewProperties' )
     } );
@@ -140,33 +146,24 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    // Molecule Description
-
-    // Parent for all nodes added to this screen
-    const rootNode = new Node( {
-      children: [
-        electronegativityTableNode,
-        moleculeComboBox,
-        controlPanel,
-        colorKeyNode,
-        resetAllButton,
-        comboBoxListParent // last, so that combo box list is on top
-      ]
-    } );
-    this.addChild( rootNode );
-
     const pointerRotationListener = new MoleculeRotationListener(
       model.moleculeQuaternionProperty,
       this.activeScaleProperty
     );
-    moleculeNode.addInputListener( pointerRotationListener );
+    // Don't add listeners if we don't have WebGL - we need the "WebGL warning" to be clickable
+    if ( this.sceneNode.stage.threeRenderer ) {
+      moleculeNode.addInputListener( pointerRotationListener );
+    }
 
     const keyboardDragListener = new MoleculeKeyboardRotationListener(
       model.moleculeQuaternionProperty,
       moleculeNode,
       moleculeNodeTandem.createTandem( 'keyboardDragListener' )
     );
-    moleculeNode.addInputListener( keyboardDragListener );
+    // Don't add listeners if we don't have WebGL - we need the "WebGL warning" to be clickable
+    if ( this.sceneNode.stage.threeRenderer ) {
+      moleculeNode.addInputListener( keyboardDragListener );
+    }
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
@@ -177,7 +174,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         } )
       } )
     } );
-    this.addChild( moleculeDescriptionNode );
 
     // Molecule description
     moleculeDescriptionNode.addChild(
@@ -196,11 +192,12 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTableStringProperty,
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
-    this.addChild( electronegativityDescriptionNode );
 
     electronegativityDescriptionNode.addChild(
       new RealMoleculesElectronegativityAccessibleListNode( model.moleculeProperty )
     );
+
+    // accessible and visual orders ------------------
 
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
@@ -216,60 +213,54 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       resetAllButton
     ];
 
+    // Add main children as a single node so that we don't disturb webgl failure or other warning nodes put into the scene.
+    this.addChild( new Node( {
+      children: [
+        moleculeNode,
+        electronegativityTableNode,
+        moleculeComboBox,
+        controlPanel,
+        colorKeyNode,
+        new AlignBox( resetAllButton, {
+          alignBounds: this.layoutBounds,
+          xAlign: 'right',
+          yAlign: 'bottom',
+          xMargin: HORIZONTAL_MARGIN,
+          yMargin: VERTICAL_MARGIN
+        } ),
+        moleculeDescriptionNode,
+        electronegativityDescriptionNode,
+        comboBoxListParent // last, so that combo box list is on top
+      ]
+    } ) );
+
     // layout ---------------------------------
 
-    // right of viewer
-    controlPanel.right = this.layoutBounds.right - 40;
-    controlPanel.centerY = this.layoutBounds.centerY - resetAllButton.height;
+    ManualConstraint.create( this, [
+      controlPanel, electronegativityTableNode, colorKeyNode, moleculeComboBox
+    ], (
+      controlPanelProxy, electronegativityTableNodeProxy, colorKeyNodeProxy, moleculeComboBoxProxy
+    ) => {
+      // right of viewer
+      controlPanelProxy.right = this.layoutBounds.right - HORIZONTAL_MARGIN;
+      controlPanelProxy.centerY = this.layoutBounds.centerY - resetAllButton.height;
 
-    const layoutCenter = ( controlPanel.left + this.layoutBounds.left ) / 2;
+      const layoutCenterX = ( controlPanelProxy.left + this.layoutBounds.left ) / 2;
 
-    // centered above viewer
-    electronegativityTableNode.centerX = layoutCenter;
-    electronegativityTableNode.top = this.layoutBounds.top + 25;
+      // centered above viewer
+      electronegativityTableNodeProxy.centerX = layoutCenterX;
+      electronegativityTableNodeProxy.top = this.layoutBounds.top + VERTICAL_MARGIN;
 
-    // centered below electronegativity table
-    colorKeyNode.boundsProperty.link( () => {
-      colorKeyNode.centerX = electronegativityTableNode.centerX;
-      colorKeyNode.top = electronegativityTableNode.bottom + 15;
+      colorKeyNodeProxy.centerX = electronegativityTableNodeProxy.centerX;
+      colorKeyNodeProxy.top = electronegativityTableNodeProxy.bottom + VERTICAL_MARGIN;
+
+      // centered below viewer
+      moleculeComboBoxProxy.centerX = layoutCenterX;
+      moleculeComboBoxProxy.bottom = this.layoutBounds.bottom - VERTICAL_MARGIN;
     } );
 
-    // centered below viewer
-    moleculeComboBox.centerX = layoutCenter;
-    moleculeComboBox.bottom = this.layoutBounds.bottom - 15;
-
-    // bottom-right corner of the screen
-    resetAllButton.right = this.layoutBounds.right - 40;
-    resetAllButton.bottom = this.layoutBounds.bottom - 20;
-
-    // Camera settings
-    this.sceneNode.stage.threeCamera.zoom = 1.7;
-    this.sceneNode.stage.threeCamera.updateProjectionMatrix();
-    this.sceneNode.stage.threeCamera.up = new THREE.Vector3( 0, 0, -1 );
-    this.sceneNode.stage.threeCamera.lookAt( ThreeUtils.vectorToThree( Vector3.ZERO ) );
-
-    // Lights
-    const ambientLight = new THREE.AmbientLight();
-    this.sceneNode.stage.threeScene.add( ambientLight );
-    const sunLight = new THREE.DirectionalLight();
-    sunLight.position.set( -1, 1.5, 0.8 );
-    this.sceneNode.stage.threeScene.add( sunLight );
-    const moonLight = new THREE.DirectionalLight();
-    moonLight.position.set( 2.0, -1.0, 1.0 );
-    this.sceneNode.stage.threeScene.add( moonLight );
-
-    MPColors.ambientLightProperty.link( color => {
-      ambientLight.color = ThreeUtils.colorToThree( color );
-      ambientLight.intensity = 2 * Math.PI * color.alpha;
-    } );
-    MPColors.sunLightProperty.link( color => {
-      sunLight.color = ThreeUtils.colorToThree( color );
-      sunLight.intensity = 2 * Math.PI * color.alpha;
-    } );
-    MPColors.moonLightProperty.link( color => {
-      moonLight.color = ThreeUtils.colorToThree( color );
-      moonLight.intensity = 2 * Math.PI * color.alpha;
-    } );
+    this.adjustCamera();
+    this.addLights();
 
     const blackStrokedObjects: THREE.Object3D[] = [];
 
@@ -402,6 +393,38 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         }
       };
     }
+  }
+
+  private adjustCamera(): void {
+    this.sceneNode.stage.threeCamera.zoom = 1.7;
+    this.sceneNode.stage.threeCamera.updateProjectionMatrix();
+    this.sceneNode.stage.threeCamera.up = new THREE.Vector3( 0, 0, -1 );
+    this.sceneNode.stage.threeCamera.lookAt( ThreeUtils.vectorToThree( Vector3.ZERO ) );
+  }
+
+  private addLights(): void {
+    // Lights
+    const ambientLight = new THREE.AmbientLight();
+    this.sceneNode.stage.threeScene.add( ambientLight );
+    const sunLight = new THREE.DirectionalLight();
+    sunLight.position.set( -1, 1.5, 0.8 );
+    this.sceneNode.stage.threeScene.add( sunLight );
+    const moonLight = new THREE.DirectionalLight();
+    moonLight.position.set( 2.0, -1.0, 1.0 );
+    this.sceneNode.stage.threeScene.add( moonLight );
+
+    MPColors.ambientLightProperty.link( color => {
+      ambientLight.color = ThreeUtils.colorToThree( color );
+      ambientLight.intensity = 2 * Math.PI * color.alpha;
+    } );
+    MPColors.sunLightProperty.link( color => {
+      sunLight.color = ThreeUtils.colorToThree( color );
+      sunLight.intensity = 2 * Math.PI * color.alpha;
+    } );
+    MPColors.moonLightProperty.link( color => {
+      moonLight.color = ThreeUtils.colorToThree( color );
+      moonLight.intensity = 2 * Math.PI * color.alpha;
+    } );
   }
 
   public override step( dt: number ): void {
