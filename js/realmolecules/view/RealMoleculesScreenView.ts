@@ -329,9 +329,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         this.sceneNode.stage.threeScene,
         this.sceneNode.stage.threeCamera
       );
-      molecularDipoleOutlinePass.edgeStrength = 3.0;
-      molecularDipoleOutlinePass.edgeGlow = 0.5;
-      molecularDipoleOutlinePass.edgeThickness = 2.0;
+      molecularDipoleOutlinePass.edgeStrength = 2;
+      molecularDipoleOutlinePass.edgeGlow = 0.3;
+      molecularDipoleOutlinePass.edgeThickness = 1.2;
       molecularDipoleOutlinePass.visibleEdgeColor.set( 0 );
       molecularDipoleOutlinePass.hiddenEdgeColor.set( 0x0 );
       composer.addPass( molecularDipoleOutlinePass );
@@ -351,17 +351,13 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       let lastWidth = 0;
       let lastHeight = 0;
       const resize = () => {
-        const width = this.sceneNode.stage.width * 2;
-        const height = this.sceneNode.stage.height * 2;
+        const width = this.sceneNode.stage.width;
+        const height = this.sceneNode.stage.height;
 
         if ( lastWidth === width && lastHeight === height ) {
           return;
         }
 
-        focusOutlinePass.setSize( width, height );
-        molecularDipoleOutlinePass.setSize( width, height );
-        backgroundCompositePass.setSize( width, height );
-        outputPass.setSize( width, height );
         composer.setSize( width, height );
         lastWidth = width;
         lastHeight = height;
