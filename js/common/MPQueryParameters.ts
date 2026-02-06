@@ -34,11 +34,6 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   // Logs quaternion rotations to the console for debugging purposes. For internal use only.
   logQuaternionRotation: { type: 'flag' },
 
-  focusHighlight3D: {
-    type: 'boolean',
-    defaultValue: true
-  },
-
   // Shows the molecule angle by adding an arrow whose tail is at the molecule center, and points
   // outward in the direction of the angle. For internal use only.
   showMoleculeAngle: { type: 'flag' }

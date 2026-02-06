@@ -1,7 +1,8 @@
 // Copyright 2025-2026, University of Colorado Boulder
 
 /**
- * Centralized renderOrder values for 3D views.
+ * Centralized renderOrder values for 3D views. This allows certain objects to be rendered "before" other objects,
+ * which is important for the copious use of transparency in this sim. See implementation-notes for more info.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */

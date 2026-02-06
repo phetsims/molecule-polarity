@@ -46,4 +46,24 @@ undefinable surfaces.
 
 ## Real Molecules screen (3D)
 
-*TODO: describe 3D model*, see https://github.com/phetsims/molecule-polarity/issues/32
+Similar to above, the 3D view coordinates are the same as the model coordinates (in Angstroms).
+
+It uses THREE.js for the 3D view. Additionally, it requires the use of additional THREE.js addons which are not
+packaged with THREE.js, and are instead added as a separate sherpa preload (three-r160-addons). THREE.js types are
+included via @types/three (perennial), and the addon types are manually specified in view/three-r160-addons.d.ts.
+
+### Layering
+
+The main 3D view needs to render certain things in specific orders, due to blending constraints, when the depth buffer
+is written, and the significant use of "transparency over transparency over transparency". This is typically problematic
+to render in a WebGL-style THREE.js way without specific control over layering.
+
+The `.renderOrder` attribute of THREE.js objects in the main view is specified to control the rendering in the main
+render pass, and the constants for that are stored in `RenderOrder.ts`.
+
+### Passes
+
+A few needs (focus highlights, molecular dipole highlight, text "over" dipole arrows and surfaces but behind atoms)
+require the use of splitting things into separate passes, so THREE.js addons (`EffectComposer` and such) are required.
+
+`EffectComposer` is used with the main renderer to add concrete passes.

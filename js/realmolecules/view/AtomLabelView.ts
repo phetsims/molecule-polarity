@@ -22,6 +22,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { RealAtom } from '../model/RealAtom.js';
+import { ATOM_LABEL_LAYER } from './AtomLabelRenderPass.js';
 
 const LABEL_SIZE = 0.4;
 
@@ -100,7 +101,7 @@ export default class AtomLabelView extends TextureQuad {
 
     this.atom = atom;
 
-    this.layers.set( 1 );
+    this.layers.set( ATOM_LABEL_LAYER );
   }
 
   public update( parent: THREE.Object3D ): void {

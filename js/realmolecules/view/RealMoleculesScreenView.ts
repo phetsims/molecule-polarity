@@ -33,7 +33,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import RealMolecule from '../model/RealMolecule.js';
@@ -48,6 +47,8 @@ import RealMoleculesElectronegativityAccessibleListNode from './RealMoleculesEle
 import RealMoleculesScreenSummaryContentNode from './RealMoleculesScreenSummaryContentNode.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
+import BackgroundCompositePass from './BackgroundCompositePass.js';
+import AtomLabelRenderPass from './AtomLabelRenderPass.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -319,7 +320,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     let isRotating = false;
 
-    if ( this.sceneNode.stage.threeRenderer && MPQueryParameters.focusHighlight3D ) {
+    // If we don't have a threeRenderer, WebGL is presumably not available, and we should no-op
+    if ( this.sceneNode.stage.threeRenderer ) {
       const EffectComposer = window.ThreeEffectComposer;
       const OutlinePass = window.ThreeOutlinePass;
       const RenderPass = window.ThreeRenderPass;
@@ -328,81 +330,62 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       const composer = new EffectComposer( this.sceneNode.stage.threeRenderer );
       composer.renderToScreen = true;
 
+      // Pass #1: The main rendering pass (renders most 3D objects, with the exception of the overlay text and strokes)
       const renderPass = new RenderPass( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
       composer.addPass( renderPass );
 
+      // Pass #2: Focus outline pass for the molecule (which has the surface always writing to the depth buffer, so that
+      // the outline doesn't change when the surface is off.
       const focusOutlinePass = new OutlinePass(
         // eslint-disable-next-line phet/bad-sim-text
         new THREE.Vector2( window.innerWidth, window.innerHeight ),
         this.sceneNode.stage.threeScene,
         this.sceneNode.stage.threeCamera
       );
-      composer.addPass( focusOutlinePass );
-
-      const backgroundCompositePass = new BackgroundCompositePass( ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value ) );
-      composer.addPass( backgroundCompositePass );
-
-      const blackOutlinePass = new OutlinePass(
-        // eslint-disable-next-line phet/bad-sim-text
-        new THREE.Vector2( window.innerWidth, window.innerHeight ),
-        this.sceneNode.stage.threeScene,
-        this.sceneNode.stage.threeCamera
-      );
-      composer.addPass( blackOutlinePass );
-
-      const laterRenderPass = new ( class LaterRenderPass extends window.ThreePass {
-        public constructor( public scene: THREE.Scene, public camera: THREE.Camera ) {
-          super();
-
-          this.needsSwap = false;
-        }
-
-        public override render( renderer: THREE.WebGLRenderer, writeBuffer: THREE.WebGLRenderTarget, readBuffer: THREE.WebGLRenderTarget ): void {
-          const oldAutoClear = renderer.autoClear;
-          renderer.autoClear = false;
-
-          renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
-
-          const customCamera = this.camera.clone();
-          customCamera.layers.set( 1 );
-
-          renderer.render( this.scene, customCamera );
-
-          renderer.autoClear = oldAutoClear;
-        }
-
-        public override setSize( width: number, height: number ): void {
-          // no-op
-        }
-
-        public override dispose(): void {
-          // no-op
-        }
-      } )( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
-      composer.addPass( laterRenderPass );
-
-      MPColors.screenBackgroundColorProperty.link( color => {
-        backgroundCompositePass.setBackgroundColor( ThreeUtils.colorToThree( color ) );
-      } );
-
-      const outputPass = new OutputPass();
-      composer.addPass( outputPass );
-
       focusOutlinePass.edgeStrength = 8.0;
       focusOutlinePass.edgeGlow = 1.0;
       focusOutlinePass.edgeThickness = 3.0;
       focusOutlinePass.visibleEdgeColor.set( ThreeUtils.colorToThree( HighlightPath.OUTER_FOCUS_COLOR ) );
       focusOutlinePass.hiddenEdgeColor.set( ThreeUtils.colorToThree( HighlightPath.OUTER_FOCUS_COLOR ) );
+      composer.addPass( focusOutlinePass );
 
-      blackOutlinePass.edgeStrength = 3.0;
-      blackOutlinePass.edgeGlow = 0.5;
-      blackOutlinePass.edgeThickness = 2.0;
-      blackOutlinePass.visibleEdgeColor.set( 0 );
-      blackOutlinePass.hiddenEdgeColor.set( 0x0 );
+      // Pass #3: Composite the background color in, since without this the next outline pass gets wildly incorrect
+      // blending. This will make everything opaque.
+      const backgroundCompositePass = new BackgroundCompositePass( ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value ) );
+      composer.addPass( backgroundCompositePass );
+      // We'll need to update the background color when it changes.
+      MPColors.screenBackgroundColorProperty.link( color => {
+        backgroundCompositePass.setBackgroundColor( ThreeUtils.colorToThree( color ) );
+      } );
 
+      // Pass #4: Stroked outline for the molecular dipole.
+      const molecularDipoleOutlinePass = new OutlinePass(
+        // eslint-disable-next-line phet/bad-sim-text
+        new THREE.Vector2( window.innerWidth, window.innerHeight ),
+        this.sceneNode.stage.threeScene,
+        this.sceneNode.stage.threeCamera
+      );
+      molecularDipoleOutlinePass.edgeStrength = 3.0;
+      molecularDipoleOutlinePass.edgeGlow = 0.5;
+      molecularDipoleOutlinePass.edgeThickness = 2.0;
+      molecularDipoleOutlinePass.visibleEdgeColor.set( 0 );
+      molecularDipoleOutlinePass.hiddenEdgeColor.set( 0x0 );
+      composer.addPass( molecularDipoleOutlinePass );
+
+      // Pass #5: Render the atom labels on top of everything else. NOTE: We EXPLICITLY need the depth buffer from above
+      // to still be active, so that the atom labels will interact with the depth buffer (i.e. atoms in front of atom
+      // labels will occlude them, even though the atom labels are on top of everything else).
+      const laterRenderPass = new AtomLabelRenderPass( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
+      composer.addPass( laterRenderPass );
+
+      // Pass #6: Output pass, which handles color conversions and actually writing to the screen.
+      const outputPass = new OutputPass();
+      composer.addPass( outputPass );
+
+      // Handle pass resizing lazily, if the size changes. This is important to avoid expensive resizing operations
+      // unless the user is resizing the window.
       let lastWidth = 0;
       let lastHeight = 0;
-
       const resize = () => {
         const width = this.sceneNode.stage.width * 2;
         const height = this.sceneNode.stage.height * 2;
@@ -412,7 +395,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         }
 
         focusOutlinePass.setSize( width, height );
-        blackOutlinePass.setSize( width, height );
+        molecularDipoleOutlinePass.setSize( width, height );
         backgroundCompositePass.setSize( width, height );
         outputPass.setSize( width, height );
         composer.setSize( width, height );
@@ -420,9 +403,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         lastHeight = height;
       };
 
+      // Monkeypatching the ThreeStage's render method.
       this.sceneNode.stage.render = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
 
+        // See if any pointer is over the molecule view.
         const hasPointerOver = phet.joist.display._input!.pointers.some( ( pointer: Pointer ) => {
           const ray = this.sceneNode.getRayFromScreenPoint( pointer.point );
 
@@ -434,8 +419,13 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
           return intersections.length > 0;
         } );
 
-        focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || ( moleculeNode.isInteractiveHighlightActiveProperty.value && ( isRotating || hasPointerOver ) ) ) ? [ this.moleculeView ] : [];
-        blackOutlinePass.selectedObjects = blackStrokedObjects;
+        // Whether we should show the highlight due to interactive highlighting (whether it is rotating or has a pointer over it)
+        const isInteractiveHighlighted = moleculeNode.isInteractiveHighlightActiveProperty.value && ( isRotating || hasPointerOver );
+
+        // We'll also show the highlight if it is focused directly.
+        focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || isInteractiveHighlighted ) ? [ this.moleculeView ] : [];
+
+        molecularDipoleOutlinePass.selectedObjects = blackStrokedObjects;
 
         if ( target ) {
           // For now, pretend like we don't have a composer
@@ -460,11 +450,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         if ( isRotating ) {
           return;
         }
-
-        const pointer = event.pointer;
-
         isRotating = true;
 
+        const pointer = event.pointer;
         const lastGlobalPoint = pointer.point.copy();
 
         const onEndDrag = () => {
@@ -513,126 +501,3 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 }
 
 moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );
-
-/**
- * A custom pass that composites the rendered scene over a solid background color,
- * to handle the case where we want to have correct alpha compositing over a non-transparent background.
- *
- * This is required because we (a) need to apply the outline pass BEFORE compositing over the background.
- */
-class BackgroundCompositePass extends window.ThreePass {
-
-  private uniforms: {
-    tDiffuse: { value: THREE.Texture | null };
-    uBg: { value: THREE.Vector3 };
-  };
-  private copyUniforms: {
-    tDiffuse: { value: THREE.Texture | null };
-    opacity: { value: number };
-  };
-  private material: THREE.RawShaderMaterial;
-  private copyMaterial: THREE.RawShaderMaterial;
-
-  private fsQuad: InstanceType<typeof window.ThreeFullScreenQuad>;
-  private fsQuadCopy: InstanceType<typeof window.ThreeFullScreenQuad>;
-
-  public constructor( private backgroundColor: THREE.Color ) {
-    super();
-
-    this.uniforms = {
-      tDiffuse: { value: null },
-      uBg: {
-        value: new THREE.Vector3(
-          this.backgroundColor.r,
-          this.backgroundColor.g,
-          this.backgroundColor.b
-        )
-      }
-    };
-    this.copyUniforms = {
-      tDiffuse: { value: null },
-      opacity: { value: 1.0 }
-    };
-
-    this.material = new THREE.RawShaderMaterial( {
-      uniforms: this.uniforms,
-      vertexShader: `
-        precision highp float;
-        attribute vec3 position;
-        attribute vec2 uv;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        precision highp float;
-        uniform sampler2D tDiffuse;
-        uniform vec3 uBg;
-        varying vec2 vUv;
-
-        void main() {
-          vec4 src = texture2D(tDiffuse, vUv);
-          vec3 rgb = mix(uBg, src.rgb, src.a);
-          gl_FragColor = vec4(rgb, 1.0);
-        }
-      `,
-      depthTest: false,
-      depthWrite: false
-    } );
-
-    this.copyMaterial = new THREE.ShaderMaterial( {
-      uniforms: this.copyUniforms,
-
-      // eslint-disable-next-line no-undef
-      vertexShader: ThreeCopyShader.vertexShader,
-
-      // eslint-disable-next-line no-undef
-      fragmentShader: ThreeCopyShader.fragmentShader,
-      blending: THREE.NoBlending,
-      depthTest: false,
-      depthWrite: false
-    } );
-
-    this.fsQuad = new window.ThreeFullScreenQuad( this.material );
-
-    this.fsQuadCopy = new window.ThreeFullScreenQuad( this.copyMaterial );
-
-    this.needsSwap = false;
-  }
-
-  public setBackgroundColor( color: THREE.Color ): void {
-    this.backgroundColor.copy( color );
-    this.uniforms.uBg.value.set( color.r, color.g, color.b );
-  }
-
-  public override render( renderer: THREE.WebGLRenderer, writeBuffer: THREE.WebGLRenderTarget, readBuffer: THREE.WebGLRenderTarget ): void {
-    const oldAutoClear = renderer.autoClear;
-    renderer.autoClear = false;
-
-    // First copy things over from readBuffer to writeBuffer (just color)
-    {
-      this.copyUniforms.tDiffuse.value = readBuffer.texture;
-
-      renderer.setRenderTarget( this.renderToScreen ? null : writeBuffer );
-
-      this.fsQuadCopy.render( renderer );
-    }
-
-    // Then write into the readBuffer
-    {
-      this.uniforms.tDiffuse.value = writeBuffer.texture;
-
-      renderer.setRenderTarget( this.renderToScreen ? null : readBuffer );
-      this.fsQuad.render( renderer );
-    }
-
-    renderer.autoClear = oldAutoClear;
-  }
-
-  public override dispose(): void {
-    this.material.dispose();
-    this.fsQuad.dispose();
-  }
-}
