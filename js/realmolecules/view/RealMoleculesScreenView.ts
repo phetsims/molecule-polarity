@@ -65,6 +65,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
   private activeScaleProperty = new NumberProperty( 1 );
 
   public constructor( model: RealMoleculesModel, tandem: Tandem ) {
+    let renderOverride: ( ( target: THREE.WebGLRenderTarget | undefined, autoClear?: boolean ) => void ) | null = null;
+
     super( {
       layoutBounds: MPConstants.LAYOUT_BOUNDS,
       tandem: tandem,
@@ -80,7 +82,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
         // NOTE: Using TRANSPARENT for now due to needing to apply the background AFTER the outline pass. We don't want
         // this to be applied "early" in the 3d rendering.
-        backgroundColorProperty: new Property( Color.TRANSPARENT )
+        backgroundColorProperty: new Property( Color.TRANSPARENT ),
+
+        renderOverride: ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => renderOverride?.( target, autoClear )
       }
     } );
 
@@ -357,8 +361,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         lastHeight = height;
       };
 
-      // Monkeypatching the ThreeStage's render method.
-      this.sceneNode.stage.render = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
+      // Set the render override
+      renderOverride = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
 
         // See if any pointer is over the molecule view.
