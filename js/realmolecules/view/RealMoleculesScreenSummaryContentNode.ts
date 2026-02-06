@@ -1,4 +1,5 @@
 // Copyright 2026, University of Colorado Boulder
+
 /**
  * Screen Summary for the Real Molecules screen
  *

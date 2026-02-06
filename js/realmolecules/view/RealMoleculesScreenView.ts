@@ -78,7 +78,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         // top of the screen.
         viewOffset: new Vector2( -141, 50 ),
 
-        // NOTE: Using TRANSPARENT for now due to needing to apply the background AFTER the outline pass.
+        // NOTE: Using TRANSPARENT for now due to needing to apply the background AFTER the outline pass. We don't want
+        // this to be applied "early" in the 3d rendering.
         backgroundColorProperty: new Property( Color.TRANSPARENT )
       }
     } );
@@ -197,45 +198,45 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       new RealMoleculesElectronegativityAccessibleListNode( model.moleculeProperty )
     );
 
-    // accessible and visual orders ------------------
-
-    this.pdomPlayAreaNode.pdomOrder = [
-      moleculeDescriptionNode,
-      moleculeNode,
-      moleculeComboBox,
-      comboBoxListParent,
-      electronegativityDescriptionNode
-    ];
-
-    this.pdomControlAreaNode.pdomOrder = [
-      controlPanel,
-      colorKeyNode,
-      resetAllButton
-    ];
-
-    // Add main children as a single node so that we don't disturb webgl failure or other warning nodes put into the scene.
-    this.addChild( new Node( {
-      children: [
+    // Accessible and Visual order
+    {
+      this.pdomPlayAreaNode.pdomOrder = [
+        moleculeDescriptionNode,
         moleculeNode,
-        electronegativityTableNode,
         moleculeComboBox,
+        comboBoxListParent,
+        electronegativityDescriptionNode
+      ];
+
+      this.pdomControlAreaNode.pdomOrder = [
         controlPanel,
         colorKeyNode,
-        new AlignBox( resetAllButton, {
-          alignBounds: this.layoutBounds,
-          xAlign: 'right',
-          yAlign: 'bottom',
-          xMargin: HORIZONTAL_MARGIN,
-          yMargin: VERTICAL_MARGIN
-        } ),
-        moleculeDescriptionNode,
-        electronegativityDescriptionNode,
-        comboBoxListParent // last, so that combo box list is on top
-      ]
-    } ) );
+        resetAllButton
+      ];
 
-    // layout ---------------------------------
+      // Add main children as a single node so that we don't disturb webgl failure or other warning nodes put into the scene.
+      this.addChild( new Node( {
+        children: [
+          moleculeNode,
+          electronegativityTableNode,
+          moleculeComboBox,
+          controlPanel,
+          colorKeyNode,
+          new AlignBox( resetAllButton, {
+            alignBounds: this.layoutBounds,
+            xAlign: 'right',
+            yAlign: 'bottom',
+            xMargin: HORIZONTAL_MARGIN,
+            yMargin: VERTICAL_MARGIN
+          } ),
+          moleculeDescriptionNode,
+          electronegativityDescriptionNode,
+          comboBoxListParent // last, so that combo box list is on top
+        ]
+      } ) );
+    }
 
+    // Layout
     ManualConstraint.create( this, [
       controlPanel, electronegativityTableNode, colorKeyNode, moleculeComboBox
     ], (
@@ -262,6 +263,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     this.adjustCamera();
     this.addLights();
 
+    // Objects to provide a black stroked outline around (e.g. molecular dipole arrows) - the RealMoleculeView will be
+    // responsible for mutating this.
     const blackStrokedObjects: THREE.Object3D[] = [];
 
     this.moleculeView = new RealMoleculeView(
