@@ -53,8 +53,9 @@ export default class MoleculeContextResponsesNode extends Node {
   }
 
   // Mini-utility function for emitting context responses without repeating the verbosity
-  private contextResponse( message: string ): void {
-    this.addAccessibleContextResponse( message, { interruptible: false } );
+  private contextResponse( message: string, responseGroup?: string ): void {
+    const options = responseGroup ? { responseGroup: responseGroup } : { interruptible: false };
+    this.addAccessibleContextResponse( message, options );
   }
 
   /**
@@ -66,9 +67,6 @@ export default class MoleculeContextResponsesNode extends Node {
    * a given dipole will trigger different responses based on which atom's EN is being changed.
    */
   private emitContextResponse(): void {
-
-    // clear the queue of utterances. This to avoid the ~8 responses to pile up on each slider move.
-    this.forEachUtteranceQueue( utteranceQueue => utteranceQueue.clear() );
 
     const currentEN = this.atom.electronegativityProperty.value;
 
@@ -121,7 +119,7 @@ export default class MoleculeContextResponsesNode extends Node {
         progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
           progress: 'zero'
         } )
-      } )
+      } ), 'molecularDipoleVisible'
     );
 
     // Molecular dipole description
@@ -131,7 +129,7 @@ export default class MoleculeContextResponsesNode extends Node {
           progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
         } ),
         position: DescriptionMaps.formatOrientationString( currentDipole.angle, 'toAngle' )
-      } )
+      } ), 'molecularDipoleVisible'
     );
 
     // If Partial Charges visible
@@ -140,14 +138,14 @@ export default class MoleculeContextResponsesNode extends Node {
         atom: this.atom.label,
         magnitude: DescriptionMaps.createPartialChargesStringProperty( this.atom.partialChargeProperty ),
         sign: this.atom.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
-      } )
+      } ), 'partialChargesVisible'
     );
     bondCharacterVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
         progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
           progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
         } )
-      } )
+      } ), 'bondCharacterVisible'
     );
     surfaceType === 'electrostaticPotential' && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
@@ -155,7 +153,7 @@ export default class MoleculeContextResponsesNode extends Node {
         progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
           progress: this.changeInENtoProgress( invertedDeltaEN, changeInEN )
         } )
-      } )
+      } ), 'surfaceType'
     );
     surfaceType === 'electronDensity' && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
@@ -163,12 +161,12 @@ export default class MoleculeContextResponsesNode extends Node {
         progress: MoleculePolarityFluent.a11y.electronDensityProgress.format( {
           progress: changeInEN > 0 ? 'more' : 'less'
         } )
-      } )
+      } ), 'surfaceType'
     );
 
     // If E Field enabled and the molecule is polar
     eFieldEnabled && !isDipoleZero && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value, 'eFieldEnabled'
     );
   }
 
@@ -202,7 +200,7 @@ export default class MoleculeContextResponsesNode extends Node {
           progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
             progress: bondDeltaEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
           } )
-        } )
+        } ), 'largerSmaller'
       );
 
       // If bond dipole changes direction
@@ -210,7 +208,7 @@ export default class MoleculeContextResponsesNode extends Node {
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
           bond: bond.label,
           atom: bondDeltaEN > 0 ? bond.atom2.label : bond.atom1.label
-        } )
+        } ), 'bondDirectionChange'
       );
     } );
   }
