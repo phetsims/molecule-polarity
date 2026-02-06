@@ -18,17 +18,13 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import Pointer from '../../../../scenery/js/input/Pointer.js';
-import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
-import TInputListener from '../../../../scenery/js/input/TInputListener.js';
 import animatedPanZoomSingleton from '../../../../scenery/js/listeners/animatedPanZoomSingleton.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPColors from '../../common/MPColors.js';
@@ -49,14 +45,17 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './RealMoleculeView.js';
 import BackgroundCompositePass from './BackgroundCompositePass.js';
 import AtomLabelRenderPass from './AtomLabelRenderPass.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import MoleculeRotationListener from './MoleculeRotationListener.js';
+import MoleculeKeyboardRotationListener from './MoleculeKeyboardRotationListener.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
   private readonly stepEmitter = new TinyEmitter();
   private readonly moleculeView: RealMoleculeView;
 
-  // scale applied to interaction that isn't directly tied to screen coordinates (rotation)
-  private activeScale = 1;
+  // Scale applied to interaction that isn't directly tied to screen coordinates (rotation)
+  private activeScaleProperty = new NumberProperty( 1 );
 
   public constructor( model: RealMoleculesModel, tandem: Tandem ) {
     super( {
@@ -103,7 +102,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       const sx = visibleBounds.width / this.layoutBounds.width;
       const sy = visibleBounds.height / this.layoutBounds.height;
       if ( sx !== 0 && sy !== 0 ) {
-        this.activeScale = sy > sx ? sx : sy;
+        this.activeScaleProperty.value = sy > sx ? sx : sy;
       }
     } );
 
@@ -156,50 +155,17 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     } );
     this.addChild( rootNode );
 
-    let lastVerticalDirection: 'up' | 'down' | null = null;
-    let lastHorizontalDirection: 'left' | 'right' | null = null;
+    const pointerRotationListener = new MoleculeRotationListener(
+      model.moleculeQuaternionProperty,
+      this.activeScaleProperty
+    );
+    moleculeNode.addInputListener( pointerRotationListener );
 
-    const keyboardDragListener = new SoundKeyboardDragListener( {
-      dragDelta: Math.PI / 16,
-      shiftDragDelta: Math.PI / 32,
-      moveOnHoldInterval: 100,
-      drag: ( event, listener ) => {
-        // Apply rotation
-        const newQuaternion = new THREE.Quaternion().setFromEuler(
-          new THREE.Euler( listener.modelDelta.y, listener.modelDelta.x, 0 )
-        );
-        newQuaternion.multiply( model.moleculeQuaternionProperty.value );
-        model.moleculeQuaternionProperty.value = newQuaternion;
-
-        // Detect directions
-        const y = listener.modelDelta.y;
-        const x = listener.modelDelta.x;
-
-        const currentVertical: 'up' | 'down' | null = y !== 0 ? ( y > 0 ? 'down' : 'up' ) : null;
-        const currentHorizontal: 'left' | 'right' | null = x !== 0 ? ( x > 0 ? 'right' : 'left' ) : null;
-
-        if ( currentVertical !== null && currentVertical !== lastVerticalDirection ) {
-          lastVerticalDirection = currentVertical;
-          this.addAccessibleObjectResponse(
-            MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
-              {
-                direction: currentVertical
-              }
-            ) );
-        }
-
-        if ( currentHorizontal !== null && currentHorizontal !== lastHorizontalDirection ) {
-          lastHorizontalDirection = currentHorizontal;
-          this.addAccessibleObjectResponse(
-            MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
-              {
-                direction: currentHorizontal
-              }
-            ) );
-        }
-      },
-      tandem: moleculeNodeTandem.createTandem( 'keyboardDragListener' )
-    } );
+    const keyboardDragListener = new MoleculeKeyboardRotationListener(
+      model.moleculeQuaternionProperty,
+      moleculeNode,
+      moleculeNodeTandem.createTandem( 'keyboardDragListener' )
+    );
     moleculeNode.addInputListener( keyboardDragListener );
 
     const moleculeDescriptionNode = new Node( {
@@ -318,8 +284,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     );
     this.sceneNode.stage.threeScene.add( this.moleculeView );
 
-    let isRotating = false;
-
     // If we don't have a threeRenderer, WebGL is presumably not available, and we should no-op
     if ( this.sceneNode.stage.threeRenderer ) {
       const EffectComposer = window.ThreeEffectComposer;
@@ -420,7 +384,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         } );
 
         // Whether we should show the highlight due to interactive highlighting (whether it is rotating or has a pointer over it)
-        const isInteractiveHighlighted = moleculeNode.isInteractiveHighlightActiveProperty.value && ( isRotating || hasPointerOver );
+        const isInteractiveHighlighted = moleculeNode.isInteractiveHighlightActiveProperty.value && (
+          pointerRotationListener.isRotatingProperty.value ||
+          keyboardDragListener.isPressedProperty.value ||
+          hasPointerOver
+        );
 
         // We'll also show the highlight if it is focused directly.
         focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || isInteractiveHighlighted ) ? [ this.moleculeView ] : [];
@@ -438,59 +406,6 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         }
       };
     }
-
-    const grabSound = sharedSoundPlayers.get( 'grab' );
-    const releaseSound = sharedSoundPlayers.get( 'release' );
-
-    const rotateListener: TInputListener = {
-      down: ( event: SceneryEvent ) => {
-        if ( !event.canStartPress() ) { return; }
-
-        // if we are already rotating the entire molecule, no more drags can be handled
-        if ( isRotating ) {
-          return;
-        }
-        isRotating = true;
-
-        const pointer = event.pointer;
-        const lastGlobalPoint = pointer.point.copy();
-
-        const onEndDrag = () => {
-          if ( isRotating ) {
-            isRotating = false;
-            pointer.removeInputListener( pointerListener );
-            pointer.cursor = null;
-
-            releaseSound.play();
-          }
-        };
-
-        const pointerListener = {
-          // end drag on either up or cancel (not supporting full cancel behavior)
-          up: onEndDrag,
-          cancel: onEndDrag,
-          interrupt: onEndDrag,
-
-          move: () => {
-            const delta = pointer.point.minus( lastGlobalPoint );
-            lastGlobalPoint.set( pointer.point );
-
-            const scale = 0.007 / this.activeScale; // tuned constant for acceptable drag motion
-            const newQuaternion = new THREE.Quaternion().setFromEuler( new THREE.Euler( delta.y * scale, delta.x * scale, 0 ) );
-            newQuaternion.multiply( model.moleculeQuaternionProperty.value );
-            model.moleculeQuaternionProperty.value = newQuaternion;
-          }
-        };
-
-        pointer.cursor = 'pointer';
-
-        // attach the listener so that it can be interrupted from pan and zoom operations
-        pointer.addInputListener( pointerListener, true );
-
-        grabSound.play();
-      }
-    };
-    moleculeNode.addInputListener( rotateListener );
   }
 
   public override step( dt: number ): void {
