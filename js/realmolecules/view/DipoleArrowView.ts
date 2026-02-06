@@ -35,7 +35,8 @@ export default class DipoleArrowView extends THREE.Object3D {
     const colorProperty = isBondDipole ? MPColors.bondDipoleProperty : MPColors.molecularDipoleProperty;
 
     const material = new THREE.MeshLambertMaterial( {
-      depthWrite: false
+      // depthWrite: true for molecular dipole arrows, see https://github.com/phetsims/molecule-polarity/issues/265
+      depthWrite: !isBondDipole
     } );
     this.material = material;
     this.disposeCallbacks.push( () => material.dispose() );
