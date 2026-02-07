@@ -10,18 +10,25 @@
  */
 
 export type RealMoleculeDataEntry = {
+  // Atom symbols and positions
   atoms: {
     symbol: string;
     x: number;
     y: number;
     z: number;
   }[];
+  
+  // Bonds (connects atoms[indexA] to atoms[indexB])
   bonds: {
     indexA: number;
     indexB: number;
     bondType: 1 | 2 | 3;
   }[];
+  
+  // Vec3 of psi4 molecular dipole
   molecularDipole: [ number, number, number ];
+  
+  // From partial charges, similar to bonds but with direction and magnitude
   bondDipoles: {
     indexA: number;
     indexB: number;
@@ -35,11 +42,12 @@ export type RealMoleculeDataEntry = {
   charges: number[]; // psi4-computed mulliken?
   hirshfeld: number[]; // ORCA computed
 
+  // Mesh data
   vertexPositions: [ number, number, number ][];
   vertexNormals: [ number, number, number ][];
-  faceIndices: [ number, number, number ][];
-  vertexESPs: number[];
-  vertexDTs: number[];
+  faceIndices: [ number, number, number ][]; // A face is composed of three vertices
+  vertexESPs: number[]; // electrostatic potential per-vertex
+  vertexDTs: number[]; // electron density per-vertex
 };
 export type RealMoleculeDataType = Record<string, RealMoleculeDataEntry>;
 

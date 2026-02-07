@@ -141,6 +141,7 @@ export default class AtomLabelView extends TextureQuad {
 
     this.matrixAutoUpdate = false;
     this.matrix.copy( m );
+    this.matrixWorldNeedsUpdate = true;
   }
 
   public override dispose(): void {

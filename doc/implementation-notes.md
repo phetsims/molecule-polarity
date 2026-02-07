@@ -69,6 +69,11 @@ more partial charge models if needed in the future.
 
 `RealMolecule` on startup will parse the data into a significantly better API for use in the sim.
 
+### RealMolecule
+
+It has associated data stored in RealAtom/RealBond/SurfaceVertex, and is persistent. They all track whether they are in
+"basic" or "advanced" mode, and give updated data accordingly.
+
 ### THREE.js Objects
 
 In addition to the 2D Scenery scene graph, we have a 3D THREE.js scene graph. It is generally chosen to suffix these

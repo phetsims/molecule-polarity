@@ -67,6 +67,9 @@ export class RealAtom {
     return 0.25 * angstroms; // scale factor for better visibility
   }
 
+  /**
+   * A list of all of the elements used in the screen, and in the order that they are shown in the electronegativity table.
+   */
   public static readonly ORDERED_ELEMENTS = [
     Element.H,
     Element.B,
