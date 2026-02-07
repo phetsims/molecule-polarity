@@ -3,6 +3,8 @@
 /**
  * Screen Summary for the Real Molecules screen
  *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
+ *
  * @author Agustín Vallejo
  */
 

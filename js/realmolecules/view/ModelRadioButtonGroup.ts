@@ -1,7 +1,9 @@
 // Copyright 2026, University of Colorado Boulder
 
 /**
- * ModelRadioButtonGroup is the radio button group for choosing a model (basic or advanced) for the molecule
+ * ModelRadioButtonGroup is the radio button group for choosing a model (basic or advanced) for the molecule.
+ *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */

@@ -3,6 +3,8 @@
 /**
  * Combo box for choosing a real molecule.
  *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 

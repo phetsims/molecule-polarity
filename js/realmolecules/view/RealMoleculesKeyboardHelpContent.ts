@@ -3,6 +3,8 @@
 /**
  * RealMoleculesKeyboardHelpContent is the content for the keyboard help dialog in the Real Molecules screen.
  *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
+ *
  * @author Copilot
  * @author Agustín Vallejo
  */

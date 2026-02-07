@@ -1,7 +1,9 @@
 // Copyright 2026, University of Colorado Boulder
 
 /**
- * Control panel for the molecule's model (basic or advanced)
+ * Control panel for the molecule's model (basic or advanced).
+ *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */

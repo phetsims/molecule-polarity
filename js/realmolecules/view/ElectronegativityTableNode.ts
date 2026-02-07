@@ -5,6 +5,8 @@
  * By default, all cells in the table are the same color.
  * Colors for specific cells can be set, so that they match the colors of the atoms displayed by Jmol.
  *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
