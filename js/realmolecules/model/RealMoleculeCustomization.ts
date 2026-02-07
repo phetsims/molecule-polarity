@@ -33,6 +33,8 @@ export const RealMoleculeCustomization: Record<MoleculeSymbols, RealMoleculeCust
     )
   },
   CH2F2: {
+    // See https://github.com/phetsims/molecule-polarity/issues/183#issuecomment-3752466085
+    initialBondDipolesReversed: [ [ 2, 3 ], [ 2, 4 ] ],
     initialRotation: new THREE.Quaternion(
       -0.27136646893101857,
       -0.6903203332285108,

@@ -14,6 +14,7 @@ import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class MoleculeRotationListener {
 
@@ -21,7 +22,9 @@ export default class MoleculeRotationListener {
   private readonly releaseSound = sharedSoundPlayers.get( 'release' );
 
   // We'll want the rotation to be readable to determine whether focus highlights are available.
-  public readonly isRotatingProperty = new BooleanProperty( false );
+  public readonly isRotatingProperty = new BooleanProperty( false, {
+    tandem: Tandem.OPT_OUT
+  } );
 
   public constructor(
     private moleculeQuaternionProperty: TProperty<THREE.Quaternion>,
