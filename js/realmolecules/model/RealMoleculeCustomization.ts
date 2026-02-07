@@ -13,6 +13,8 @@ export type RealMoleculeCustomizationEntry = {
   initialBondDipolesReversed?: [ number, number ][];
 
   // initial quaternion rotation of the molecule
+  // NOTE: many of these have been chosen by rotating the molecule in the sim to the ideal position, and recording the
+  // resulting quaternion.
   initialRotation?: THREE.Quaternion;
 
   // bond type (to override the default from the data file) - needed for ozone
