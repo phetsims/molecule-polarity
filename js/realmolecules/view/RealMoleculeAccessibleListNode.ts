@@ -14,7 +14,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import { DiatomicMoleculeAccessibleListNodeOptions } from '../../twoatoms/view/DiatomicMoleculeAccessibleListNode.js';
 import RealMolecule from '../model/RealMolecule.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
@@ -33,7 +32,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       return molecule.getAccessibleName();
     } );
 
-    const options = optionize<SelfOptions, EmptySelfOptions, DiatomicMoleculeAccessibleListNodeOptions>()( {
+    const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculeAccessibleListNodeOptions>()( {
       leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
         molecule: moleculeProperty.derived( molecule => {
           return molecule.getAccessibleName();
