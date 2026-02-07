@@ -31,6 +31,9 @@ export default class AtomLabelRenderPass extends window.ThreePass {
 
     // Clone the camera, and adjust its layers so that it only renders the atom labels.
     // The atom labels are on a separate layer so that they aren't rendered in the normal RenderPass.
+    // Yes this isn't ideal for performance, but it actually doesn't seem to be bad (and three.js shares a lot of
+    // references for things). It would be a headache to synchronize two cameras, especially with ThreeStage and the
+    // screen view.
     const customCamera = this.camera.clone();
     customCamera.layers.set( ATOM_LABEL_LAYER );
 
