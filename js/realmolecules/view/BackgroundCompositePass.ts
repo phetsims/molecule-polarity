@@ -19,22 +19,22 @@ import moleculePolarity from '../../moleculePolarity.js';
 export default class BackgroundCompositePass extends window.ThreePass {
 
   // uniforms for the RawShaderMaterials
-  private uniforms: {
+  private readonly uniforms: {
     tDiffuse: { value: THREE.Texture | null };
     uBg: { value: THREE.Vector3 };
   };
-  private copyUniforms: {
+  private readonly copyUniforms: {
     tDiffuse: { value: THREE.Texture | null };
     opacity: { value: number };
   };
 
   // The actual materials
-  private material: THREE.RawShaderMaterial;
-  private copyMaterial: THREE.RawShaderMaterial;
+  private readonly material: THREE.RawShaderMaterial;
+  private readonly copyMaterial: THREE.RawShaderMaterial;
 
   // Quads that will be used to render over the full screen.
-  private fullscreenQuad: InstanceType<typeof window.ThreeFullScreenQuad>;
-  private fullscreenQuadCopy: InstanceType<typeof window.ThreeFullScreenQuad>;
+  private readonly fullscreenQuad: InstanceType<typeof window.ThreeFullScreenQuad>;
+  private readonly fullscreenQuadCopy: InstanceType<typeof window.ThreeFullScreenQuad>;
 
   public constructor( private backgroundColor: THREE.Color ) {
     super();

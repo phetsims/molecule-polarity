@@ -64,7 +64,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
   // Scale applied to interaction that isn't directly tied to screen coordinates (rotation). This helps to "normalize"
   // interactions across different screen sizes.
-  private activeScaleProperty = new NumberProperty( 1 );
+  private readonly activeScaleProperty = new NumberProperty( 1 );
 
   public constructor( model: RealMoleculesModel, tandem: Tandem ) {
     // Our stage's main rendering function, defined here so we can pass a reference in the super() call and later

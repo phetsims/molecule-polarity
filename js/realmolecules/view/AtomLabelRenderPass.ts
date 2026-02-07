@@ -13,7 +13,10 @@ import moleculePolarity from '../../moleculePolarity.js';
 export const ATOM_LABEL_LAYER = 1;
 
 export default class AtomLabelRenderPass extends window.ThreePass {
-  public constructor( public scene: THREE.Scene, public camera: THREE.Camera ) {
+  public constructor(
+    private readonly scene: THREE.Scene,
+    private readonly camera: THREE.Camera
+  ) {
     super();
 
     // We write directly into the "read" buffer, so we don't need to swap buffers after this pass.

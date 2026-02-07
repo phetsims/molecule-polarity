@@ -28,10 +28,10 @@ export class RealAtom {
    */
   public constructor(
     public readonly index: number,
-    public element: Element,
-    public simplifiedPartialCharge: number,
-    public hirshfeldPartialCharge: number,
-    public position: Vector3
+    public readonly element: Element,
+    public readonly simplifiedPartialCharge: number,
+    public readonly hirshfeldPartialCharge: number,
+    public readonly position: Vector3
   ) {
 
   }

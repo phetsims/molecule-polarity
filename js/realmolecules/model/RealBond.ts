@@ -25,8 +25,8 @@ export class RealBond {
     public readonly atomB: RealAtom,
     public readonly bondType: 1 | 1.5 | 2 | 3,
     public readonly realMolecularDipole: Vector3,
-    public isAdvancedProperty: TReadOnlyProperty<boolean>,
-    public initialBondReversed: boolean
+    public readonly isAdvancedProperty: TReadOnlyProperty<boolean>,
+    public readonly initialBondReversed: boolean
   ) {
     // Connect the bond to the atoms
     atomA.bonds.push( this );

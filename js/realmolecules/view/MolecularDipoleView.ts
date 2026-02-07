@@ -16,7 +16,9 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import DipoleArrowView from './DipoleArrowView.js';
 
 export default class MolecularDipoleView extends THREE.Object3D {
-  public readonly dir: Vector3; // normalized, already includes orientationSign
+  // normalized, already includes orientationSign
+  private readonly dir: Vector3;
+
   private readonly arrow: DipoleArrowView;
 
   public constructor( molecule: RealMolecule, orientationSign: number ) {

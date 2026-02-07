@@ -75,10 +75,10 @@ export default class RealMolecule extends PhetioObject {
    * @param tandem
    */
   public constructor(
-    public symbol: MoleculeSymbols,
-    public fullNameProperty: TReadOnlyProperty<string>,
-    public geometry: MoleculeGeometry,
-    public isAdvancedProperty: TReadOnlyProperty<boolean>,
+    public readonly symbol: MoleculeSymbols,
+    public readonly fullNameProperty: TReadOnlyProperty<string>,
+    public readonly geometry: MoleculeGeometry,
+    public readonly isAdvancedProperty: TReadOnlyProperty<boolean>,
     tandem: Tandem
   ) {
 

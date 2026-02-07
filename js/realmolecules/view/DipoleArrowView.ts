@@ -21,16 +21,16 @@ const crossRadius = headRadius;
 
 export default class DipoleArrowView extends THREE.Object3D {
   // The main cylinder of the arrow
-  private body: THREE.Mesh;
+  private readonly body: THREE.Mesh;
 
   // The cone-shaped head
-  private head: THREE.Mesh;
+  private readonly head: THREE.Mesh;
 
   // Dipole arrows have a cross near the tail to indicate direction, this is the cylinder for that cross
-  private cross: THREE.Mesh;
+  private readonly cross: THREE.Mesh;
 
   // Helps position the cross at a fixed distance from the tail, and rotate it to be perpendicular to the arrow direction
-  private crossAnchor: THREE.Object3D;
+  private readonly crossAnchor: THREE.Object3D;
 
   private readonly disposeCallbacks: ( () => void )[] = [];
 

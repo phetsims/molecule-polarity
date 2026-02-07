@@ -17,11 +17,11 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 
 export default class MoleculeRotationListener {
 
-  private grabSound = sharedSoundPlayers.get( 'grab' );
-  private releaseSound = sharedSoundPlayers.get( 'release' );
+  private readonly grabSound = sharedSoundPlayers.get( 'grab' );
+  private readonly releaseSound = sharedSoundPlayers.get( 'release' );
 
   // We'll want the rotation to be readable to determine whether focus highlights are available.
-  public isRotatingProperty = new BooleanProperty( false );
+  public readonly isRotatingProperty = new BooleanProperty( false );
 
   public constructor(
     private moleculeQuaternionProperty: TProperty<THREE.Quaternion>,
