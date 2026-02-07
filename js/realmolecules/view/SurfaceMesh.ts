@@ -85,6 +85,8 @@ export default class SurfaceMesh extends THREE.Object3D {
 
     // HANDLE custom shader to blend with the background color --- since our backgroundMeshMaterial can't be transparent
     // otherwise it renders "in front" of things.
+    // NOTE: We intentionally keep the background mesh opaque and fake the blend in the shader so that render order
+    // and depth interactions stay correct. This is sensitive to pass ordering and should not be "simplified".
     backgroundMeshMaterial.userData.uBg = ThreeUtils.colorToThree( MPColors.screenBackgroundColorProperty.value );
     // SurfaceMesh regenerated when this color changes
     backgroundMeshMaterial.userData.uAlpha = surfaceType === 'none' ? 0 : MPColors.moleculeSurfaceBackAlphaProperty.value.alpha;

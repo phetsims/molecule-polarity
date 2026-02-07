@@ -7,9 +7,9 @@
  * This is required because we (a) need to apply the outline pass BEFORE compositing over the background.
  *
  * NOTE: It is incredibly important that we don't muck up the depth buffer, since the passes that come after will
- * need that data. Thus the implementation of this class essentially "copies" things to from the read to write buffer,
+ * need that data. Thus the implementation of this class essentially "copies" things from the read to write buffer,
  * then writes into the read buffer (color), so that the depth buffer data still lives undisturbed in the read buffer
- * for the passes that come after.
+ * for the passes that come after. This order is intentional and should not be rearranged.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
@@ -119,7 +119,7 @@ export default class BackgroundCompositePass extends window.ThreePass {
       this.fullscreenQuadCopy.render( renderer );
     }
 
-    // Then write into the readBuffer
+    // Then write into the readBuffer (preserving depth buffer contents for later passes)
     {
       this.uniforms.tDiffuse.value = writeBuffer.texture;
 

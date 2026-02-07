@@ -52,6 +52,9 @@ export default class BondDipoleView extends THREE.Object3D {
     const negatedPerpendicular = perpendicular.timesScalar( -1 );
 
     // Side selection
+    // Goal: choose a stable, readable offset side for the dipole arrow, while keeping symmetric cases
+    // (e.g. CO2) visually distinct and consistent across frames. This logic is intentionally heuristic,
+    // driven by best visual readability and prior alignment with 2D view conventions.
     let chosen = perpendicular;
     const partner = this.molecule.getSymmetricPartnerBond( this.bond );
     if ( partner ) {
@@ -61,7 +64,9 @@ export default class BondDipoleView extends THREE.Object3D {
         chosen = perpendicular.y > 0 ? perpendicular : negatedPerpendicular;
       }
       else {
-        // Enforce obtuse-side selection relative to the partner bond
+        // Enforce obtuse-side selection relative to the partner bond.
+        // NOTE: This produces stable, symmetric offsets for tetrahedral/trigonal cases and reduces
+        // visual flipping as the camera changes.
         const central = this.molecule.getCentralAtom();
         if ( central ) {
           const other = partner.atomA === central ? partner.atomB : partner.atomB === central ? partner.atomA : null;
