@@ -95,4 +95,13 @@ Only shown for the "advanced" mode, this is computed using the quantum chemistry
 
 ### Electronegativity
 
-The displayed electronegativity values are rounded variants of the actual electronegativities used.
+The displayed electronegativity values are rounded (or explicitly older unrounded) variants of the actual
+electronegativities used. The actual values used are unrounded:
+
+- B: 2.04 (displayed as 2.0)
+- C: 2.55 (displayed as 2.5)
+- Cl: 3.16 (displayed as 3.0)
+- F: 3.98 (displayed as 4.0)
+- H: 2.20 (displayed as 2.1)
+- N: 3.04 (displayed as 3.0)
+- O: 3.44 (displayed as 3.5)
