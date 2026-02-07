@@ -90,7 +90,7 @@ function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
   return {
     value: molecule,
-    createNode: tandem => node,
+    createNode: () => node,
     tandemName: `${molecule.tandem.name}Item`,
     accessibleName: accessibleStringProperty
   };

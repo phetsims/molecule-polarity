@@ -82,56 +82,44 @@ export class RealAtom {
    * in nitroglycern Element values).
    */
   public static getDisplayElectronegativity( element: Element ): number {
-    if ( element.symbol === 'H' ) {
-      return 2.1;
-    }
-    else if ( element.symbol === 'B' ) {
-      return 2.0;
-    }
-    else if ( element.symbol === 'C' ) {
-      return 2.5;
-    }
-    else if ( element.symbol === 'N' ) {
-      return 3.0;
-    }
-    else if ( element.symbol === 'O' ) {
-      return 3.5;
-    }
-    else if ( element.symbol === 'F' ) {
-      return 4.0;
-    }
-    else if ( element.symbol === 'Cl' ) {
-      return 3.0;
-    }
-    else {
-      throw new Error( `Unsupported element for display electronegativity: ${element.symbol}` );
+    switch( element.symbol ) {
+      case 'H':
+        return 2.1;
+      case 'B':
+        return 2.0;
+      case 'C':
+        return 2.5;
+      case 'N':
+        return 3.0;
+      case 'O':
+        return 3.5;
+      case 'F':
+        return 4.0;
+      case 'Cl':
+        return 3.0;
+      default:
+        throw new Error( `Unsupported element for display electronegativity: ${element.symbol}` );
     }
   }
 
   public static getA11yStringProperty( element: Element ): TReadOnlyProperty<string> {
-    if ( element.symbol === 'H' ) {
-      return MoleculePolarityFluent.a11y.common.elements.hydrogenStringProperty;
-    }
-    else if ( element.symbol === 'B' ) {
-      return MoleculePolarityFluent.a11y.common.elements.boronStringProperty;
-    }
-    else if ( element.symbol === 'C' ) {
-      return MoleculePolarityFluent.a11y.common.elements.carbonStringProperty;
-    }
-    else if ( element.symbol === 'N' ) {
-      return MoleculePolarityFluent.a11y.common.elements.nitrogenStringProperty;
-    }
-    else if ( element.symbol === 'O' ) {
-      return MoleculePolarityFluent.a11y.common.elements.oxygenStringProperty;
-    }
-    else if ( element.symbol === 'F' ) {
-      return MoleculePolarityFluent.a11y.common.elements.fluorineStringProperty;
-    }
-    else if ( element.symbol === 'Cl' ) {
-      return MoleculePolarityFluent.a11y.common.elements.chlorineStringProperty;
-    }
-    else {
-      throw new Error( `Unsupported element for a11y string property: ${element.symbol}` );
+    switch( element.symbol ) {
+      case 'H':
+        return MoleculePolarityFluent.a11y.common.elements.hydrogenStringProperty;
+      case 'B':
+        return MoleculePolarityFluent.a11y.common.elements.boronStringProperty;
+      case 'C':
+        return MoleculePolarityFluent.a11y.common.elements.carbonStringProperty;
+      case 'N':
+        return MoleculePolarityFluent.a11y.common.elements.nitrogenStringProperty;
+      case 'O':
+        return MoleculePolarityFluent.a11y.common.elements.oxygenStringProperty;
+      case 'F':
+        return MoleculePolarityFluent.a11y.common.elements.fluorineStringProperty;
+      case 'Cl':
+        return MoleculePolarityFluent.a11y.common.elements.chlorineStringProperty;
+      default:
+        throw new Error( `Unsupported element for a11y string property: ${element.symbol}` );
     }
   }
 }
