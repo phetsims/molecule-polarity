@@ -159,11 +159,11 @@ export default class SurfaceMesh extends THREE.Object3D {
       // @ts-expect-error Having to use external lib like this
       const highResolutionUpdateGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
-      foregroundMesh.geometry = highResolutionUpdateGeometry;
-      backgroundMesh.geometry = highResolutionUpdateGeometry;
-
       foregroundMesh.geometry.dispose();
       backgroundMesh.geometry.dispose();
+
+      foregroundMesh.geometry = highResolutionUpdateGeometry;
+      backgroundMesh.geometry = highResolutionUpdateGeometry;
     } );
     this.disposeCallbacks.push( () => colorMultilink.dispose() );
 
