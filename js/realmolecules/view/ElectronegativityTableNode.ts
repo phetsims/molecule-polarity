@@ -28,6 +28,7 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
+import { RealAtom } from '../model/RealAtom.js';
 
 // constants
 const CELL_SIZE = new Dimension2( 50, 50 );
@@ -54,16 +55,20 @@ export default class ElectronegativityTableNode extends Node {
       maxWidth: 300
     } );
 
+    const elementToCell = ( element: Element ) => {
+      return new Cell( element.symbol, element, RealAtom.getDisplayElectronegativity( element ) );
+    };
+
     const cells = [
-      new Cell( 'H', Element.H, 2.1 ),
+      elementToCell( Element.H ),
       new Line( 0, 0, 12, 0, { stroke: 'rgb( 100, 100, 100 )' } ),
-      new Cell( 'B', Element.B, 2.0 ),
-      new Cell( 'C', Element.C, 2.5 ),
-      new Cell( 'N', Element.N, 3.0 ),
-      new Cell( 'O', Element.O, 3.5 ),
-      new Cell( 'F', Element.F, 4.0 ),
+      elementToCell( Element.B ),
+      elementToCell( Element.C ),
+      elementToCell( Element.N ),
+      elementToCell( Element.O ),
+      elementToCell( Element.F ),
       new Line( 0, 0, 12, 0, { stroke: 'rgb( 100, 100, 100 )' } ),
-      new Cell( 'Cl', Element.Cl, 3.0 )
+      elementToCell( Element.Cl )
     ];
 
     // Horizontal layout of cells, with title centered below the cells

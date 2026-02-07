@@ -92,3 +92,7 @@ the lowest density and blue being the highest density.
 
 Only shown for the "advanced" mode, this is computed using the quantum chemistry package 
 [ORCA](https://www.faccts.de/orca/) using the Hirschfeld method.
+
+### Electronegativity
+
+The displayed electronegativity values are rounded variants of the actual electronegativities used.

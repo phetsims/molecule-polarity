@@ -24,9 +24,7 @@ export default class RealMoleculesColorKeyNode extends Node {
                       tandem: Tandem ) {
 
     const electrostaticPotentialRWBColorKey = SurfaceColorKey.createElectrostaticPotentialRWBColorKey();
-
     const electrostaticPotentialROYGBColorKey = SurfaceColorKey.createElectrostaticPotentialROYGBColorKey();
-
     const electronDensityColorKey = SurfaceColorKey.createElectronDensityColorKey();
 
     super( {
