@@ -6,15 +6,17 @@
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
  * @author Agustín Vallejo
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
+import FluentPattern from '../../../../chipper/js/browser/FluentPattern.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import RealMolecule from '../model/RealMolecule.js';
+import RealMolecule, { MoleculeNames } from '../model/RealMolecule.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -24,6 +26,7 @@ export type RealMoleculeAccessibleListNodeOptions = SelfOptions & AccessibleList
 export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
   public constructor(
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
+    isAdvancedProperty: TReadOnlyProperty<boolean>,
     viewProperties: RealMoleculesViewProperties,
     providedOptions?: RealMoleculeAccessibleListNodeOptions
   ) {
@@ -32,12 +35,23 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       return molecule.getAccessibleName();
     } );
 
+    // Provide a single Property that will switch its source based on basic/advanced.
+    type MoleculeFluentPattern = FluentPattern<{ molecule: MoleculeNames | TReadOnlyProperty<MoleculeNames> }>;
+    const getBasicAdvancedStringProperty = ( basicPattern: MoleculeFluentPattern, advancedPattern: MoleculeFluentPattern ) => {
+      return new DerivedProperty( [
+        basicPattern.createProperty( { molecule: moleculeNameProperty } ),
+        advancedPattern.createProperty( { molecule: moleculeNameProperty } ),
+        isAdvancedProperty
+      ], ( basicValue, advancedValue, isAdvanced ) => {
+        return isAdvanced ? advancedValue : basicValue;
+      } );
+    };
+
     const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculeAccessibleListNodeOptions>()( {
-      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description.createProperty( {
-        molecule: moleculeProperty.derived( molecule => {
-          return molecule.getAccessibleName();
-        } )
-      } )
+      leadingParagraphStringProperty: getBasicAdvancedStringProperty(
+        MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description,
+        MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.description
+      )
     }, providedOptions );
 
     super( [
@@ -45,35 +59,38 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       // Bond Dipole
       {
         visibleProperty: viewProperties.bondDipolesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.createProperty( {
-          molecule: moleculeNameProperty
-        } )
+        stringProperty: getBasicAdvancedStringProperty(
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole
+        )
       },
 
       // Molecular Dipole
       {
         visibleProperty: viewProperties.molecularDipoleVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.createProperty( {
-          molecule: moleculeNameProperty
-        } )
+        stringProperty: getBasicAdvancedStringProperty(
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole
+        )
       },
 
       // Electrostatic Potential Surface
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' ),
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential.createProperty( {
-          molecule: moleculeNameProperty
-        } )
+        stringProperty: getBasicAdvancedStringProperty(
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential
+        )
       },
 
       // Electron Density Surface
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' ),
-        stringProperty: MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity.createProperty( {
-          molecule: moleculeNameProperty
-        } )
+        stringProperty: getBasicAdvancedStringProperty(
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electronDensity
+        )
       }
-
     ], options );
   }
 }
