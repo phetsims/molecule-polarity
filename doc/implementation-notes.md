@@ -69,6 +69,13 @@ more partial charge models if needed in the future.
 
 `RealMolecule` on startup will parse the data into a significantly better API for use in the sim.
 
+### Per-Molecule Overrides
+
+Some molecules require visual or data overrides that are not captured by the generated data. These are centralized in
+`js/realmolecules/model/RealMoleculeCustomization.ts` (e.g. initial rotations, bond type overrides like ozone, and
+initial bond dipole reversals for specific bonds). When adding or updating molecule data, review and update this file
+as needed to keep the 3D view consistent and readable.
+
 ### RealMolecule
 
 It has associated data stored in RealAtom/RealBond/SurfaceVertex, and is persistent. They all track whether they are in
@@ -80,7 +87,7 @@ In addition to the 2D Scenery scene graph, we have a 3D THREE.js scene graph. It
 types with 'View' instead of 'Node' to distinguish them from the 2D Scenery nodes. For example, `AtomView` is a THREE.js
 object that represents an atom in the 3D view, while `AtomNode` is a Scenery node that represents an atom in the 2D view.
 
-### THREE.js disposal
+### THREE.js Disposal
 
 THREE.js geometries, materials and textures need to be manually disposed when no longer needed, or they will leak memory.
 

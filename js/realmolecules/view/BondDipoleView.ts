@@ -7,6 +7,9 @@
  * dipoles share visual scaling. Handles side-offset selection stable across
  * frames and keeps the crossbar perpendicular to camera direction.
  *
+ * Additionally, contains a lot of logic for initial "side selection" of the dipole arrow, with the ability to reverse
+ * the initial side on a per-bond basis (driven by data in RealMoleculeCustomization).
+ *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
@@ -33,7 +36,7 @@ export default class BondDipoleView extends THREE.Object3D {
     this.add( this.arrow );
   }
 
-  public update( parent: THREE.Object3D, localCameraPosition: Vector3, orientationSign: number ): void {
+  public update( localCameraPosition: Vector3, orientationSign: number ): void {
     const start = this.bond.atomA.position;
     const end = this.bond.atomB.position;
     const dist = start.distance( end );

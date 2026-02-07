@@ -175,7 +175,7 @@ export default class RealMoleculeView extends THREE.Object3D {
           if ( bond.getDipoleMagnitudeDebye() > 1e-3 ) {
             const view = new BondDipoleView( molecule, bond );
             this.add( view );
-            view.update( this, localCameraPosition, orientationSign );
+            view.update( localCameraPosition, orientationSign );
             bondDipoleViewMap.set( bond, view );
 
             disposables.push( view );
@@ -223,7 +223,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         bondView && bondView.update( localCameraPosition );
 
         const bondDipoleView = bondDipoleViewMap.get( bond );
-        bondDipoleView && bondDipoleView.update( this, localCameraPosition, orientationSignProperty.value );
+        bondDipoleView && bondDipoleView.update( localCameraPosition, orientationSignProperty.value );
       }
     } );
   }
