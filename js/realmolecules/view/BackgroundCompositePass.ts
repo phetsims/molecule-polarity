@@ -132,7 +132,9 @@ export default class BackgroundCompositePass extends window.ThreePass {
 
   public override dispose(): void {
     this.material.dispose();
+    this.copyMaterial.dispose();
     this.fullscreenQuad.dispose();
+    this.fullscreenQuadCopy.dispose();
   }
 }
 

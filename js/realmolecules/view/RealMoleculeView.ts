@@ -3,6 +3,8 @@
 /**
  * 3D view of the molecule (as a THREE.js object)
  *
+ * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
+ *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 

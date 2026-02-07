@@ -120,7 +120,7 @@ export default class SurfaceMesh extends THREE.Object3D {
     // amount of molecular surface data.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error Having to use external lib like this
-    const highResolutionGeometry: THREE.Geometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
+    let highResolutionGeometry: THREE.Geometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
     super();
 
@@ -154,16 +154,18 @@ export default class SurfaceMesh extends THREE.Object3D {
       // Update color buffer attribute
       meshGeometry.setAttribute( 'color', getColorBufferAttribute() );
 
+      const oldHighResolutionGeometry = highResolutionGeometry;
+
       // Re-generate the high-resolution geometry
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error Having to use external lib like this
-      const highResolutionUpdateGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
+      const newHighResolutionGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
-      foregroundMesh.geometry.dispose();
-      backgroundMesh.geometry.dispose();
+      foregroundMesh.geometry = newHighResolutionGeometry;
+      backgroundMesh.geometry = newHighResolutionGeometry;
+      highResolutionGeometry = newHighResolutionGeometry;
 
-      foregroundMesh.geometry = highResolutionUpdateGeometry;
-      backgroundMesh.geometry = highResolutionUpdateGeometry;
+      oldHighResolutionGeometry.dispose();
     } );
     this.disposeCallbacks.push( () => colorMultilink.dispose() );
 
@@ -171,7 +173,10 @@ export default class SurfaceMesh extends THREE.Object3D {
     this.add( backgroundMesh );
 
     this.disposeCallbacks.push( () => meshGeometry.dispose() );
+    this.disposeCallbacks.push( () => highResolutionGeometry.dispose() );
+
     this.disposeCallbacks.push( () => foregroundMeshMaterial.dispose() );
+    this.disposeCallbacks.push( () => backgroundMeshMaterial.dispose() );
   }
 
   public dispose(): void {
