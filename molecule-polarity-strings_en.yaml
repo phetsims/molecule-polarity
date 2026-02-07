@@ -485,7 +485,7 @@ a11y:
           water: 'The molecule upper H2 upper O has bent geometry and is very strongly polar, with the central atom oxygen single-bonded to each hydrogen.'
           carbonDioxide: 'The molecule upper C upper O2 has linear geometry and is nonpolar, with the central atom carbon double-bonded to each oxygen.'
           hydrogenCyanide: 'The molecule upper H upper C upper N has linear geometry and is polar, with the central atom carbon single-bonded to hydrogen and triple-bonded to nitrogen.'
-          ozone: 'The molecule upper O3 has bent geometry and is nonpolar, with the central atom oxygen double-bonded to one terminal oxygen and single-bonded to the other.'
+          ozone: 'The molecule O3 has bent geometry and is nonpolar, with 1.5 bonds between oxygen atoms.'
           ammonia: 'The molecule upper N upper H3 has trigonal pyramidal geometry and is strongly polar, with the central atom nitrogen single-bonded to each hydrogen.'
           borane: 'The molecule upper B upper H3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each hydrogen.'
           boronTrifluoride: 'The molecule upper B upper F3 has trigonal planar geometry and is nonpolar, with the central atom boron single-bonded to each fluorine.'
