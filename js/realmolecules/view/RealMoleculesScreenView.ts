@@ -360,7 +360,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
           return;
         }
 
-        composer.setSize( width, height );
+        composer.setSize( width, height ); // This sets the size of all passes, so we don't need to do it for each one.
         lastWidth = width;
         lastHeight = height;
       };
@@ -369,24 +369,30 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       renderOverride = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
 
-        // See if any pointer is over the molecule view.
-        const hasPointerOver = phet.joist.display._input!.pointers.some( ( pointer: Pointer ) => {
-          const ray = this.sceneNode.getRayFromScreenPoint( pointer.point );
-
-          const raycaster = new THREE.Raycaster( ThreeUtils.vectorToThree( ray.position ), ThreeUtils.vectorToThree( ray.direction ) );
-          const intersections: THREE.Intersection<THREE.Group>[] = [];
-
-          raycaster.intersectObject( this.moleculeView, true, intersections );
-
-          return intersections.length > 0;
-        } );
-
         // Whether we should show the highlight due to interactive highlighting (whether it is rotating or has a pointer over it)
-        const isInteractiveHighlighted = moleculeNode.isInteractiveHighlightActiveProperty.value && (
-          pointerRotationListener.isRotatingProperty.value ||
-          keyboardDragListener.isPressedProperty.value ||
-          hasPointerOver
-        );
+        let isInteractiveHighlighted = false;
+        if ( moleculeNode.isInteractiveHighlightActiveProperty.value ) {
+          // Avoid this computational work unless we have interactive highlighting enabled
+
+          // See if any pointer is over the molecule view.
+          const pointers = this.getConnectedDisplays().flatMap( display => display.getPointers() );
+          const hasPointerOver = pointers.some( ( pointer: Pointer ) => {
+            const ray = this.sceneNode.getRayFromScreenPoint( pointer.point );
+
+            const raycaster = new THREE.Raycaster( ThreeUtils.vectorToThree( ray.position ), ThreeUtils.vectorToThree( ray.direction ) );
+            const intersections: THREE.Intersection<THREE.Group>[] = [];
+
+            raycaster.intersectObject( this.moleculeView, true, intersections );
+
+            return intersections.length > 0;
+          } );
+
+          isInteractiveHighlighted = moleculeNode.isInteractiveHighlightActiveProperty.value && (
+            pointerRotationListener.isRotatingProperty.value ||
+            keyboardDragListener.isPressedProperty.value ||
+            hasPointerOver
+          );
+        }
 
         // We'll also show the highlight if it is focused directly.
         focusOutlinePass.selectedObjects = ( moleculeNode.isFocused() || isInteractiveHighlighted ) ? [ this.moleculeView ] : [];

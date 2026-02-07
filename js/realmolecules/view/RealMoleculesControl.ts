@@ -90,7 +90,7 @@ function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
 
   return {
     value: molecule,
-    createNode: () => node,
+    createNode: () => node, // We don't instrument the node, so we can ignore the passed in tandem.
     tandemName: `${molecule.tandem.name}Item`,
     accessibleName: accessibleStringProperty
   };

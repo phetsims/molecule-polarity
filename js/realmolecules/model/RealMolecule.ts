@@ -192,6 +192,9 @@ export default class RealMolecule extends PhetioObject {
         }
       }
 
+      // We should be guaranteed to find a central atom, given our current molecule set.
+      assert && assert( centralAtomIndex !== null, 'Expected to find a central atom index' );
+
       const centralAtom = moleculeData.atoms[ centralAtomIndex! ];
       return new Vector3( centralAtom.x, centralAtom.y, centralAtom.z );
     }

@@ -79,7 +79,7 @@ export class RealAtom {
 
   /**
    * Returns the electronegativity value for an element that we will actually display (is different from the electronegativity
-   * in nitroglycern Element values).
+   * in nitroglycerin Element values).
    */
   public static getDisplayElectronegativity( element: Element ): number {
     switch( element.symbol ) {
