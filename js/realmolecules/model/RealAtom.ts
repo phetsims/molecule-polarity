@@ -81,25 +81,26 @@ export class RealAtom {
   ];
 
   /**
-   * Returns the electronegativity value for an element that we will actually display (is different from the electronegativity
-   * in nitroglycerin Element values).
+   * Returns the rounded electronegativity value for an element that we will actually display
+   *
+   * Updated with values from https://github.com/phetsims/molecule-polarity/issues/268#issuecomment-3865420424
    */
   public static getDisplayElectronegativity( element: Element ): number {
     switch( element.symbol ) {
       case 'H':
-        return 2.1;
+        return 2.2;
       case 'B':
         return 2.0;
       case 'C':
-        return 2.5;
+        return 2.6;
       case 'N':
         return 3.0;
       case 'O':
-        return 3.5;
+        return 3.4;
       case 'F':
         return 4.0;
       case 'Cl':
-        return 3.0;
+        return 3.2;
       default:
         throw new Error( `Unsupported element for display electronegativity: ${element.symbol}` );
     }
