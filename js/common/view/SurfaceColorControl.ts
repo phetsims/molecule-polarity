@@ -99,7 +99,8 @@ class SurfaceColorRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Surfac
 
       // HorizontalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
+      touchAreaYDilation: 10
     }, providedOptions );
 
     const radioButtonGroupItems: AquaRadioButtonGroupItem<SurfaceColor>[] = [

@@ -46,7 +46,9 @@ export default class RealMoleculesControl extends HBox {
         listPosition: 'above',
         highlightFill: 'rgb(218,255,255)',
         cornerRadius: 8,
-        maxWidth: 450
+        maxWidth: 450,
+        buttonTouchAreaXDilation: 15,
+        buttonTouchAreaYDilation: 15
       }
     }, provideOptions );
 

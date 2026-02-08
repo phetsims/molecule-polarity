@@ -94,7 +94,8 @@ class DipoleDirectionRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Dip
 
       // HorizontalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS
+      radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
+      touchAreaYDilation: 10
     }, providedOptions );
 
     // d+ -> d-
