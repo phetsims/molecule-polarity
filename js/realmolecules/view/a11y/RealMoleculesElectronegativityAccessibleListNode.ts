@@ -9,14 +9,14 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import RealMolecule from '../model/RealMolecule.js';
-import { RealAtom } from '../model/RealAtom.js';
+import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
+import { toFixed } from '../../../../../dot/js/util/toFixed.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import RealMolecule from '../../model/RealMolecule.js';
+import { RealAtom } from '../../model/RealAtom.js';
 
 type SelfOptions = EmptySelfOptions;
 

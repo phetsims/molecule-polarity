@@ -9,22 +9,22 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import TextureQuad from '../../../../mobius/js/TextureQuad.js';
-import NodeTexture from '../../../../mobius/js/NodeTexture.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
-import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
-import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
-import moleculePolarity from '../../moleculePolarity.js';
+import TextureQuad from '../../../../../mobius/js/TextureQuad.js';
+import NodeTexture from '../../../../../mobius/js/NodeTexture.js';
+import VBox from '../../../../../scenery/js/layout/nodes/VBox.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
+import Vector2 from '../../../../../dot/js/Vector2.js';
+import Vector3 from '../../../../../dot/js/Vector3.js';
+import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
+import { REAL_MOLECULES_CAMERA_POSITION } from '../../model/RealMoleculesModel.js';
+import { toFixed } from '../../../../../dot/js/util/toFixed.js';
+import moleculePolarity from '../../../moleculePolarity.js';
 import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { RealAtom } from '../model/RealAtom.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
+import { RealAtom } from '../../model/RealAtom.js';
 import { ATOM_LABEL_LAYER } from './AtomLabelRenderPass.js';
 
 const LABEL_SIZE = 0.4;

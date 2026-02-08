@@ -6,11 +6,11 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
-import MPColors from '../../common/MPColors.js';
-import Color from '../../../../scenery/js/util/Color.js';
-import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MPColors from '../../../common/MPColors.js';
+import Color from '../../../../../scenery/js/util/Color.js';
+import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
+import Vector3 from '../../../../../dot/js/Vector3.js';
 import { DIPOLE_RENDER_ORDER } from './RenderOrder.js';
 
 const bodyRadius = 0.03;

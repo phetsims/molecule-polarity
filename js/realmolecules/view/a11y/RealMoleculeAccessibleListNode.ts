@@ -9,15 +9,15 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import FluentPattern from '../../../../chipper/js/browser/FluentPattern.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import RealMolecule, { MoleculeNames } from '../model/RealMolecule.js';
-import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
+import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
+import FluentPattern from '../../../../../chipper/js/browser/FluentPattern.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import RealMolecule, { MoleculeNames } from '../../model/RealMolecule.js';
+import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 

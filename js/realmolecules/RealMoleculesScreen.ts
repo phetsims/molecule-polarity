@@ -16,7 +16,7 @@ import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
-import RealMoleculesKeyboardHelpContent from './view/RealMoleculesKeyboardHelpContent.js';
+import RealMoleculesKeyboardHelpContent from './view/a11y/RealMoleculesKeyboardHelpContent.js';
 
 export default class RealMoleculesScreen extends Screen<RealMoleculesModel, RealMoleculesScreenView> {
 

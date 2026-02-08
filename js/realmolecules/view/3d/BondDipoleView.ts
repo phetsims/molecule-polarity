@@ -13,11 +13,11 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
-import RealMolecule from '../model/RealMolecule.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import Vector3 from '../../../../../dot/js/Vector3.js';
+import RealMolecule from '../../model/RealMolecule.js';
 import DipoleArrowView from './DipoleArrowView.js';
-import { RealBond } from '../model/RealBond.js';
+import { RealBond } from '../../model/RealBond.js';
 
 const BOND_DIPOLE_OFFSET = 0.4; // view units offset from bond centerline
 

@@ -8,7 +8,7 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
+import moleculePolarity from '../../../moleculePolarity.js';
 
 export const ATOM_LABEL_LAYER = 1;
 

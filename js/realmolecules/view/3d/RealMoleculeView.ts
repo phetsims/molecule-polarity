@@ -8,25 +8,25 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import RealMolecule from '../model/RealMolecule.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
-import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
-import Multilink from '../../../../axon/js/Multilink.js';
+import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
+import RealMolecule from '../../model/RealMolecule.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
+import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
+import Multilink from '../../../../../axon/js/Multilink.js';
 import AtomLabelView from './AtomLabelView.js';
-import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
-import { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
-import MPPreferences from '../../common/model/MPPreferences.js';
+import TinyEmitter from '../../../../../axon/js/TinyEmitter.js';
+import { REAL_MOLECULES_CAMERA_POSITION } from '../../model/RealMoleculesModel.js';
+import MPPreferences from '../../../common/model/MPPreferences.js';
 import MolecularDipoleView from './MolecularDipoleView.js';
 import BondDipoleView from './BondDipoleView.js';
 import SurfaceMesh from './SurfaceMesh.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import AtomView from './AtomView.js';
 import BondView from './BondView.js';
-import MPColors from '../../common/MPColors.js';
-import { RealBond } from '../model/RealBond.js';
-import { RealAtom } from '../model/RealAtom.js';
+import MPColors from '../../../common/MPColors.js';
+import { RealBond } from '../../model/RealBond.js';
+import { RealAtom } from '../../model/RealAtom.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(

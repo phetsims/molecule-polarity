@@ -17,15 +17,15 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import Multilink from '../../../../axon/js/Multilink.js';
-import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
-import Color from '../../../../scenery/js/util/Color.js';
-import { SurfaceColor } from '../../common/model/SurfaceColor.js';
-import { SurfaceType } from '../../common/model/SurfaceType.js';
-import MPColors from '../../common/MPColors.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import RealMolecule from '../model/RealMolecule.js';
-import { colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB, colorizeJavaElectronDensity, colorizeRealElectronDensity } from '../model/RealMoleculeColors.js';
+import Multilink from '../../../../../axon/js/Multilink.js';
+import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
+import Color from '../../../../../scenery/js/util/Color.js';
+import { SurfaceColor } from '../../../common/model/SurfaceColor.js';
+import { SurfaceType } from '../../../common/model/SurfaceType.js';
+import MPColors from '../../../common/MPColors.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import RealMolecule from '../../model/RealMolecule.js';
+import { colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB, colorizeJavaElectronDensity, colorizeRealElectronDensity } from '../../model/RealMoleculeColors.js';
 import { SURFACE_BACKGROUND_RENDER_ORDER, SURFACE_FOREGROUND_RENDER_ORDER } from './RenderOrder.js';
 
 // The number of subdivision steps to perform on the original geometry. Higher numbers will
