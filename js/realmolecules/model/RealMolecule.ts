@@ -296,7 +296,7 @@ export default class RealMolecule extends PhetioObject {
 
     const mu = this.computeMolecularDipoleFromBondDipoleVectorSum();
     const muMag = mu.getMagnitude();
-    if ( muMag <= 1e-3 ) {
+    if ( muMag <= 2e-3 ) {
       return null;
     }
 
