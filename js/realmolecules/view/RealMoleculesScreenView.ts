@@ -9,7 +9,6 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TinyEmitter from '../../../../axon/js/TinyEmitter.js';
@@ -18,7 +17,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import MobiusScreenView from '../../../../mobius/js/MobiusScreenView.js';
 import ThreeUtils from '../../../../mobius/js/ThreeUtils.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import HighlightPath from '../../../../scenery/js/accessibility/HighlightPath.js';
@@ -175,11 +173,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
-        moleculeName: new DerivedProperty( [ dynamicMoleculeNameProperty ], name => {
-          const words = name.split( ' ' );
-          const capitalizedWords = words.map( word => StringUtils.capitalize( word ) );
-          return capitalizedWords.join( ' ' );
-        } )
+        moleculeName: dynamicMoleculeNameProperty
       } )
     } );
 
