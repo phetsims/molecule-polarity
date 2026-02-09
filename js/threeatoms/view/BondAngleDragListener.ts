@@ -21,6 +21,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Molecule from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 
 type SelfOptions = {
 
@@ -50,6 +51,9 @@ export default class BondAngleDragListener extends DragListener {
       }
     }, providedOptions );
 
+    const grabSound = sharedSoundPlayers.get( 'grab' );
+    const releaseSound = sharedSoundPlayers.get( 'release' );
+
     let previousAngle = 0;
 
     // Finds the angle (in radians) about the molecule's position.
@@ -67,6 +71,7 @@ export default class BondAngleDragListener extends DragListener {
       molecule.isDraggingProperty.value = true;
       targetNode.moveToFront();
       previousAngle = getAngle( event );
+      grabSound.play();
     };
 
     const bondAngleRange = bondAngleProperty.range;
@@ -81,6 +86,7 @@ export default class BondAngleDragListener extends DragListener {
 
     options.end = () => {
       molecule.isDraggingProperty.value = false;
+      releaseSound.play();
     };
 
     super( options );
