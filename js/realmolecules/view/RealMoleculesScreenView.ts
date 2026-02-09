@@ -50,6 +50,9 @@ import MoleculeRotationListener from './MoleculeRotationListener.js';
 import MoleculeKeyboardRotationListener from './MoleculeKeyboardRotationListener.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import { RealAtom } from '../model/RealAtom.js';
+import Element from '../../../../nitroglycerin/js/Element.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 const HORIZONTAL_MARGIN = 40;
 const VERTICAL_MARGIN = 20;
@@ -182,9 +185,20 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       new RealMoleculeAccessibleListNode( model.moleculeProperty, model.isAdvancedProperty, viewProperties )
     );
 
+    const getFixedElecronegativity = ( element: Element ) => {
+      return toFixed( RealAtom.getDisplayElectronegativity( element ), 1 );
+    };
     const electronegativityDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
-      accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTableStringProperty,
+      accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTable.format( {
+        hydrogen: getFixedElecronegativity( Element.H ),
+        boron: getFixedElecronegativity( Element.B ),
+        carbon: getFixedElecronegativity( Element.C ),
+        nitrogen: getFixedElecronegativity( Element.N ),
+        oxygen: getFixedElecronegativity( Element.O ),
+        fluorine: getFixedElecronegativity( Element.F ),
+        chlorine: getFixedElecronegativity( Element.Cl )
+      } ),
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
 

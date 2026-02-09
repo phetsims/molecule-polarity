@@ -465,7 +465,7 @@ a11y:
           down: 'rotating down, around horizontal axis'
           left: 'rotating left, around vertical axis'
           right: 'rotating right, around vertical axis'
-    electronegativitiesTable: 'Atom electronegativities are: hydrogen 2.2, boron 2.0, carbon 2.6, nitrogen 3.0, oxygen 3.4, fluorine 4.0, and chlorine 3.2.'
+    electronegativitiesTable: 'Atom electronegativities are: hydrogen { $hydrogen }, boron { $boron }, carbon { $carbon }, nitrogen { $nitrogen }, oxygen { $oxygen }, fluorine { $fluorine }, and chlorine { $chlorine }.'
     moleculeComboBox:
       accessibleName: 'Molecule'
       accessibleHelpText: 'Choose a different molecule to view.'
