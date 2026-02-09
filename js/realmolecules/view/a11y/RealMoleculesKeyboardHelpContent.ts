@@ -11,7 +11,6 @@
 
 import BasicActionsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import ComboBoxKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
-import SliderControlsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import MoveMoleculeWASDKeyboardHelpSection from '../../../common/view/MoveMoleculeWASDKeyboardHelpSection.js';
 import moleculePolarity from '../../../moleculePolarity.js';
@@ -24,16 +23,15 @@ export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardH
     // sections in the left column
     const leftSections = [
       new MoveMoleculeWASDKeyboardHelpSection(),
-      new SliderControlsKeyboardHelpSection()
-    ];
-
-    // sections in the right column
-    const rightSections = [
       new ComboBoxKeyboardHelpSection( {
         headingString: MoleculePolarityFluent.a11y.common.keyboardHelpContent.chooseRealMoleculeStringProperty,
         thingAsLowerCaseSingular: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moleculeStringProperty,
         thingAsLowerCasePlural: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moleculesStringProperty
-      } ),
+      } )
+    ];
+
+    // sections in the right column
+    const rightSections = [
       new BasicActionsKeyboardHelpSection( {
         withCheckboxContent: true
       } )
