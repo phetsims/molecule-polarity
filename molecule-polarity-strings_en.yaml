@@ -666,26 +666,25 @@ a11y:
           tetrafluoromethane: Small electrostatic potential difference with even distribution.
           chloroform: Large electrostatic potential difference.
       partialCharges:
-        select_molecule:
-          hydrogen: No partial charges.
-          nitrogen: No partial charges.
-          oxygen: No partial charges.
-          fluorine: No partial charges.
-          hydrogenFluoride: Partial charge for hydrogen is +0.22, for fluorine is -0.22.
-          water: Partial charge for hydrogen is +0.15, for oxygen is -0.30.
-          carbonDioxide: Partial charge for carbon is +0.33, for oxygen is -0.17.
-          hydrogenCyanide: Partial charge for hydrogen is +0.13, for carbon is +0.06, and for nitrogen is -0.19.
-          ozone: Partial charge for central oxygen is +0.19, for each terminal oxygen is -0.10.
-          ammonia: Partial charge for hydrogen is +0.9, for nitrogen is -0.27.
-          borane: Partial charge for boron is +0.17, for hydrogen is -0.06.
-          boronTrifluoride: Partial charge for boron is +0.41, for fluorine is -0.14
-          formaldehyde: Partial charge for hydrogen is +0.04, for carbon is +0.14, for oxygen is -0.22.
-          methane: Partial charge for hydrogen is +0.03, for carbon is -0.12.
-          fluoromethane: Partial charge for hydrogen is +0.04, for carbon is +0.04, for fluorine is -0.17.
-          difluoromethane: Partial charge for hydrogen is +0.05, for carbon is +0.17, for fluorine is -0.14.
-          trifluoromethane: Partial charge for hydrogen is +0.07, for carbon is +0.27, for fluorine is -0.11.
-          tetrafluoromethane: Partial charge for carbon is +0.37, for fluorine is -0.09.
-          chloroform: Partial charge for hydrogen is +0.07, for carbon is +0.13, for chlorine is -0.06.
+        hydrogen: No partial charges.
+        nitrogen: No partial charges.
+        oxygen: No partial charges.
+        fluorine: No partial charges.
+        hydrogenFluoride: Partial charge for hydrogen is { $hydrogenCharge }, for fluorine is { $fluorineCharge }.
+        water: Partial charge for hydrogen is { $hydrogenCharge }, for oxygen is { $oxygenCharge }.
+        carbonDioxide: Partial charge for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }.
+        hydrogenCyanide: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, and for nitrogen is { $nitrogenCharge }.
+        ozone: Partial charge for central oxygen is { $centralOxygenCharge }, for each terminal oxygen is { $terminalOxygenCharge }.
+        ammonia: Partial charge for hydrogen is { $hydrogenCharge }, for nitrogen is { $nitrogenCharge }.
+        borane: Partial charge for boron is { $boronCharge }, for hydrogen is { $hydrogenCharge }.
+        boronTrifluoride: Partial charge for boron is { $boronCharge }, for fluorine is { $fluorineCharge }.
+        formaldehyde: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }.
+        methane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }.
+        fluoromethane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
+        difluoromethane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
+        trifluoromethane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
+        tetrafluoromethane: Partial charge for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
+        chloroform: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for chlorine is { $chlorineCharge }.
       electronDensity:
         select_molecule:
           hydrogen: Electron density is concentrated between atoms.

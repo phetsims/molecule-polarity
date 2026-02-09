@@ -27,14 +27,14 @@ import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
-export type MoleculeSymbols = 'H2' | 'N2' | 'O2' | 'F2' | 'HF' | 'H2O' | 'CO2' | 'HCN' | 'O3' | 'NH3' | 'BH3' |
+export type MoleculeSymbol = 'H2' | 'N2' | 'O2' | 'F2' | 'HF' | 'H2O' | 'CO2' | 'HCN' | 'O3' | 'NH3' | 'BH3' |
   'BF3' | 'CH2O' | 'CH4' | 'CH3F' | 'CH2F2' | 'CHF3' | 'CHCl3' | 'CF4';
 
-export type MoleculeNames = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' |
+export type MoleculeName = 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' |
   'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' |
   'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform';
 
-const symbolToAccessibleNameMap: Record<MoleculeSymbols, MoleculeNames> = {
+const symbolToAccessibleNameMap: Record<MoleculeSymbol, MoleculeName> = {
   H2: 'hydrogen',
   N2: 'nitrogen',
   O2: 'oxygen',
@@ -75,7 +75,7 @@ export default class RealMolecule extends PhetioObject {
    * @param tandem
    */
   public constructor(
-    public readonly symbol: MoleculeSymbols,
+    public readonly symbol: MoleculeSymbol,
     public readonly fullNameProperty: TReadOnlyProperty<string>,
     public readonly geometry: MoleculeGeometry,
     public readonly isAdvancedProperty: TReadOnlyProperty<boolean>,
@@ -415,7 +415,7 @@ export default class RealMolecule extends PhetioObject {
   /**
    * Returns the accessible name for this molecule based on the symbol.
    */
-  public getAccessibleName(): MoleculeNames {
+  public getAccessibleName(): MoleculeName {
     return symbolToAccessibleNameMap[ this.symbol ];
   }
 

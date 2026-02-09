@@ -331,7 +331,27 @@ type StringsType = {
         'bondDipoleStringProperty': LocalizedStringProperty;
         'molecularDipoleStringProperty': LocalizedStringProperty;
         'electrostaticPotentialStringProperty': LocalizedStringProperty;
-        'partialChargesStringProperty': LocalizedStringProperty;
+        'partialCharges': {
+          'hydrogenStringProperty': LocalizedStringProperty;
+          'nitrogenStringProperty': LocalizedStringProperty;
+          'oxygenStringProperty': LocalizedStringProperty;
+          'fluorineStringProperty': LocalizedStringProperty;
+          'hydrogenFluorideStringProperty': LocalizedStringProperty;
+          'waterStringProperty': LocalizedStringProperty;
+          'carbonDioxideStringProperty': LocalizedStringProperty;
+          'hydrogenCyanideStringProperty': LocalizedStringProperty;
+          'ozoneStringProperty': LocalizedStringProperty;
+          'ammoniaStringProperty': LocalizedStringProperty;
+          'boraneStringProperty': LocalizedStringProperty;
+          'boronTrifluorideStringProperty': LocalizedStringProperty;
+          'formaldehydeStringProperty': LocalizedStringProperty;
+          'methaneStringProperty': LocalizedStringProperty;
+          'fluoromethaneStringProperty': LocalizedStringProperty;
+          'difluoromethaneStringProperty': LocalizedStringProperty;
+          'trifluoromethaneStringProperty': LocalizedStringProperty;
+          'tetrafluoromethaneStringProperty': LocalizedStringProperty;
+          'chloroformStringProperty': LocalizedStringProperty;
+        };
         'electronDensityStringProperty': LocalizedStringProperty;
       }
     }

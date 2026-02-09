@@ -795,7 +795,63 @@
           "value": "{ $molecule ->\n  [hydrogen] Small electrostatic potential difference with even distribution.\n  [nitrogen] Small electrostatic potential difference with even distribution.\n  [oxygen] Small electrostatic potential difference with even distribution.\n  [fluorine] Small electrostatic potential difference with even distribution.\n  [hydrogenFluoride] Large electrostatic potential difference.\n  [water] Large electrostatic potential difference.\n  [carbonDioxide] Large electrostatic potential difference with even distribution.\n  [hydrogenCyanide] Large electrostatic potential difference.\n  [ozone] Small electrostatic potential difference.\n  [ammonia] Large electrostatic potential difference.\n  [borane] Small electrostatic potential difference with even distribution.\n  [boronTrifluoride] Medium electrostatic potential difference with even distribution.\n  [formaldehyde] Large electrostatic potential difference.\n  [methane] Medium electrostatic potential difference with even distribution.\n  [fluoromethane] Large electrostatic potential difference.\n  [difluoromethane] Large electrostatic potential difference.\n  [trifluoromethane] Medium electrostatic potential difference.\n  [tetrafluoromethane] Small electrostatic potential difference with even distribution.\n  *[chloroform] Large electrostatic potential difference.\n}"
         },
         "partialCharges": {
-          "value": "{ $molecule ->\n  [hydrogen] No partial charges.\n  [nitrogen] No partial charges.\n  [oxygen] No partial charges.\n  [fluorine] No partial charges.\n  [hydrogenFluoride] Partial charge for hydrogen is +0.22, for fluorine is -0.22.\n  [water] Partial charge for hydrogen is +0.15, for oxygen is -0.30.\n  [carbonDioxide] Partial charge for carbon is +0.33, for oxygen is -0.17.\n  [hydrogenCyanide] Partial charge for hydrogen is +0.13, for carbon is +0.06, and for nitrogen is -0.19.\n  [ozone] Partial charge for central oxygen is +0.19, for each terminal oxygen is -0.10.\n  [ammonia] Partial charge for hydrogen is +0.9, for nitrogen is -0.27.\n  [borane] Partial charge for boron is +0.17, for hydrogen is -0.06.\n  [boronTrifluoride] Partial charge for boron is +0.41, for fluorine is -0.14\n  [formaldehyde] Partial charge for hydrogen is +0.04, for carbon is +0.14, for oxygen is -0.22.\n  [methane] Partial charge for hydrogen is +0.03, for carbon is -0.12.\n  [fluoromethane] Partial charge for hydrogen is +0.04, for carbon is +0.04, for fluorine is -0.17.\n  [difluoromethane] Partial charge for hydrogen is +0.05, for carbon is +0.17, for fluorine is -0.14.\n  [trifluoromethane] Partial charge for hydrogen is +0.07, for carbon is +0.27, for fluorine is -0.11.\n  [tetrafluoromethane] Partial charge for carbon is +0.37, for fluorine is -0.09.\n  *[chloroform] Partial charge for hydrogen is +0.07, for carbon is +0.13, for chlorine is -0.06.\n}"
+          "hydrogen": {
+            "value": "No partial charges."
+          },
+          "nitrogen": {
+            "value": "No partial charges."
+          },
+          "oxygen": {
+            "value": "No partial charges."
+          },
+          "fluorine": {
+            "value": "No partial charges."
+          },
+          "hydrogenFluoride": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for fluorine is { $fluorineCharge }."
+          },
+          "water": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for oxygen is { $oxygenCharge }."
+          },
+          "carbonDioxide": {
+            "value": "Partial charge for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }."
+          },
+          "hydrogenCyanide": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, and for nitrogen is { $nitrogenCharge }."
+          },
+          "ozone": {
+            "value": "Partial charge for central oxygen is { $centralOxygenCharge }, for each terminal oxygen is { $terminalOxygenCharge }."
+          },
+          "ammonia": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for nitrogen is { $nitrogenCharge }."
+          },
+          "borane": {
+            "value": "Partial charge for boron is { $boronCharge }, for hydrogen is { $hydrogenCharge }."
+          },
+          "boronTrifluoride": {
+            "value": "Partial charge for boron is { $boronCharge }, for fluorine is { $fluorineCharge }."
+          },
+          "formaldehyde": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }."
+          },
+          "methane": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }."
+          },
+          "fluoromethane": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }."
+          },
+          "difluoromethane": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }."
+          },
+          "trifluoromethane": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }."
+          },
+          "tetrafluoromethane": {
+            "value": "Partial charge for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }."
+          },
+          "chloroform": {
+            "value": "Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for chlorine is { $chlorineCharge }."
+          }
         },
         "electronDensity": {
           "value": "{ $molecule ->\n  [hydrogen] Electron density is concentrated between atoms.\n  [nitrogen] Electron density is evenly shared between atoms.\n  [oxygen] Electron density is concentrated between atoms.\n  [fluorine] Electron density is evenly shared between atoms.\n  [hydrogenFluoride] Electron density is unevenly shared, shifted towards fluorine.\n  [water] Electron density is very unevenly shared, shifted towards oxygen.\n  [carbonDioxide] Electron density is unevenly shared, but symmetrically arranged.\n  [hydrogenCyanide] Electron density is very unevenly shared, shifted towards nitrogen.\n  [ozone] Electron density is unevenly shared, shifted towards terminal oxygens.\n  [ammonia] Electron density is very unevenly shared, shifted towards nitrogen.\n  [borane] Electron density is slightly evenly shared, shift towards the hydrogens.\n  [boronTrifluoride] Electron density is slightly unevenly shared, shifted towards the fluorines.\n  [formaldehyde] Electron density is unevenly shared, shifted toward the terminal atoms.\n  [methane] Electron density is unevenly shared, but symmetrically arranged.\n  [fluoromethane] Electron density is unevenly shared.\n  [difluoromethane] Electron density is unevenly shared.\n  [trifluoromethane] Electron density is unevenly shared, shifted towards fluorines.\n  [tetrafluoromethane] Electron density is unevenly shared, but symmetrically arranged.\n  *[chloroform] Electron density is very unevenly shared, shifted towards chlorines.\n}"

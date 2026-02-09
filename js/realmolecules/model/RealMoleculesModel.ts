@@ -21,7 +21,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import RealMolecule, { MoleculeGeometry, MoleculeSymbols } from './RealMolecule.js';
+import RealMolecule, { MoleculeGeometry, MoleculeSymbol } from './RealMolecule.js';
 import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 
 export const REAL_MOLECULES_CAMERA_POSITION = new Vector3( 0, 1.5, 15 );
@@ -61,7 +61,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       phetioFeatured: true
     } );
 
-    const createMolecule = ( symbol: MoleculeSymbols, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
+    const createMolecule = ( symbol: MoleculeSymbol, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
       return new RealMolecule(
         symbol,
         nameStringProperty,

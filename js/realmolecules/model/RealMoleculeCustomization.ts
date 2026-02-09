@@ -6,7 +6,7 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import type { MoleculeSymbols } from './RealMolecule.js';
+import type { MoleculeSymbol } from './RealMolecule.js';
 
 export type RealMoleculeCustomizationEntry = {
   // indices of atoms that should have their bond dipoles switched to the other side on startup
@@ -21,7 +21,7 @@ export type RealMoleculeCustomizationEntry = {
   bondTypeOverride?: 1 | 1.5 | 2 | 3;
 };
 
-export const RealMoleculeCustomization: Record<MoleculeSymbols, RealMoleculeCustomizationEntry> = {
+export const RealMoleculeCustomization: Record<MoleculeSymbol, RealMoleculeCustomizationEntry> = {
   BF3: {
   },
   BH3: {

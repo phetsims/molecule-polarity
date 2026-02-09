@@ -182,7 +182,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
     // Molecule description
     moleculeDescriptionNode.addChild(
-      new RealMoleculeAccessibleListNode( model.moleculeProperty, model.isAdvancedProperty, viewProperties )
+      new RealMoleculeAccessibleListNode( model.molecules, model.moleculeProperty, model.isAdvancedProperty, viewProperties )
     );
 
     const getFixedElecronegativity = ( element: Element ) => {

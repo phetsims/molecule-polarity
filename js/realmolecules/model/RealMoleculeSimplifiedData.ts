@@ -6,13 +6,13 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import type { MoleculeSymbols } from './RealMolecule.js';
+import type { MoleculeSymbol } from './RealMolecule.js';
 
 /**
  * Either a map from element symbol to partial charge, or `${symbol}${adjacentBondCount}` to partial charge for cases
  * where the partial charge depends on bonding.
  */
-export const simplifiedPartialChargesMap: Record<MoleculeSymbols, Record<string, number>> = {
+export const simplifiedPartialChargesMap: Record<MoleculeSymbol, Record<string, number>> = {
   BF3: {
     B: 0.842505,
     F: -0.280358
