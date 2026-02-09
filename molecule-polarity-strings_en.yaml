@@ -550,7 +550,7 @@ a11y:
           hydrogenCyanide: Very large electrostatic potential difference.
           ozone: Small electrostatic potential difference.
           ammonia: Large electrostatic potential difference.
-          borane: No electrostatic potential difference.
+          borane: Small electrostatic potential difference with even distribution.
           boronTrifluoride: Large electrostatic potential difference with even distribution.
           formaldehyde: Very large electrostatic potential difference.
           methane: Medium electrostatic potential difference with even distribution.
