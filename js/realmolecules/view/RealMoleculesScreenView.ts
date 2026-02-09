@@ -236,7 +236,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       } ) );
     }
 
-    // Layout
+    // Layout (dynamic)
     ManualConstraint.create( this, [
       controlPanel, electronegativityTableNode, colorKeyNode, moleculeComboBox
     ], (
