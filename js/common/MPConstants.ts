@@ -27,6 +27,8 @@ const MPConstants = {
 
   CONTROL_ICON_X_SPACING: 10,  // horizontal space between labels and icons
   CONTROL_PANEL_Y_SPACING: 15, // vertical space between controls
+  CONTROL_PANEL_MOUSE_X_DILATION: 5,
+  CONTROL_PANEL_TOUCH_X_DILATION: 15,
 
   // options for titles in control panels
   CONTROL_PANEL_TITLE_OPTIONS: {

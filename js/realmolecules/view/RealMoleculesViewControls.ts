@@ -124,7 +124,8 @@ export default class RealMoleculesViewControls extends VBox {
         }
       }
     ], {
-      touchAreaXDilation: 15,
+      mouseAreaXDilation: MPConstants.CONTROL_PANEL_MOUSE_X_DILATION,
+      touchAreaXDilation: MPConstants.CONTROL_PANEL_TOUCH_X_DILATION,
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       tandem: options.tandem.createTandem( 'checkboxGroup' ),
       checkboxOptions: {

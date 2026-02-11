@@ -43,6 +43,8 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
 
       // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      mouseAreaXDilation: MPConstants.CONTROL_PANEL_MOUSE_X_DILATION,
+      touchAreaXDilation: MPConstants.CONTROL_PANEL_TOUCH_X_DILATION,
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
       phetioVisiblePropertyInstrumented: false,
 

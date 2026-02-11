@@ -29,6 +29,9 @@ export default class MPCheckbox extends Checkbox {
         stretch: true // for uniform pointer areas, see https://github.com/phetsims/molecule-polarity/issues/161
       },
 
+      mouseAreaXDilation: MPConstants.CONTROL_PANEL_MOUSE_X_DILATION,
+      touchAreaXDilation: MPConstants.CONTROL_PANEL_TOUCH_X_DILATION,
+
       // To emulate VerticalCheckboxGroup behavior
       mouseAreaYDilation: MPConstants.CONTROL_PANEL_Y_SPACING / 2,
       touchAreaYDilation: MPConstants.CONTROL_PANEL_Y_SPACING / 2
