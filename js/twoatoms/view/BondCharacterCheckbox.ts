@@ -32,7 +32,7 @@ export default class BondCharacterCheckbox extends MPCheckbox {
       accessibleHelpText: MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
-    const labelText = new Text( MoleculePolarityStrings.bondCharacterStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
+    const labelText = new Text( MoleculePolarityStrings.bondCharacterStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
 
     super( bondCharacterVisibleProperty, labelText, options );
 

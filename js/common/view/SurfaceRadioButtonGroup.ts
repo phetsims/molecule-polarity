@@ -103,7 +103,7 @@ function createItem(
 ): AquaRadioButtonGroupItem<SurfaceType> {
   return {
     value: value,
-    createNode: () => new Text( labelStringProperty, MPConstants.CONTROL_TEXT_OPTIONS ),
+    createNode: () => new Text( labelStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
     tandemName: tandemName,
     options: {
       accessibleHelpText: accessibleHelpText

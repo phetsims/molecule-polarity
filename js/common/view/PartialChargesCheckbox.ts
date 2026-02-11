@@ -34,7 +34,7 @@ export default class PartialChargesCheckbox extends MPCheckbox {
       accessibleHelpText: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty
     }, providedOptions );
 
-    const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
+    const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
 
     super( partialChargesVisibleProperty, labelText, options );
 

@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -19,7 +19,7 @@ import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 
@@ -48,13 +48,13 @@ export default class RealMoleculesViewControls extends VBox {
       {
         property: viewProperties.bondDipolesVisibleProperty,
         createNode: () => {
-          return new HBox( {
+          return new HBox( combineOptions<HBoxOptions>( {
             children: [
               new Text( MoleculePolarityStrings.bondDipolesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS ),
               BondDipoleNode.createIcon()
             ],
             spacing: MPConstants.CONTROL_ICON_X_SPACING
-          } );
+          }, MPConstants.CONTROL_LABEL_OPTIONS ) );
         },
         tandemName: 'bondDipolesCheckbox',
         options: {
@@ -67,13 +67,13 @@ export default class RealMoleculesViewControls extends VBox {
       {
         property: viewProperties.molecularDipoleVisibleProperty,
         createNode: () => {
-          return new HBox( {
+          return new HBox( combineOptions<HBoxOptions>( {
             children: [
               new Text( MoleculePolarityStrings.molecularDipoleStringProperty, MPConstants.CONTROL_TEXT_OPTIONS ),
               MolecularDipoleNode.createIcon()
             ],
             spacing: MPConstants.CONTROL_ICON_X_SPACING
-          } );
+          }, MPConstants.CONTROL_LABEL_OPTIONS ) );
         },
         tandemName: 'molecularDipoleCheckbox',
         options: {
@@ -86,7 +86,7 @@ export default class RealMoleculesViewControls extends VBox {
       {
         property: viewProperties.partialChargesVisibleProperty,
         createNode: () => {
-          return new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
+          return new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
         },
         tandemName: 'partialChargesCheckbox',
         options: {
@@ -100,7 +100,7 @@ export default class RealMoleculesViewControls extends VBox {
       {
         property: viewProperties.atomElectronegativitiesVisibleProperty,
         createNode: () => {
-          return new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
+          return new Text( MoleculePolarityStrings.atomElectronegativitiesStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
         },
         tandemName: 'atomElectronegativitiesCheckbox',
         options: {
@@ -113,7 +113,7 @@ export default class RealMoleculesViewControls extends VBox {
       {
         property: viewProperties.atomLabelsVisibleProperty,
         createNode: () => {
-          return new Text( MoleculePolarityStrings.atomLabelsStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
+          return new Text( MoleculePolarityStrings.atomLabelsStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
         },
         tandemName: 'atomLabelsCheckbox',
         options: {

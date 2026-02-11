@@ -12,6 +12,9 @@ import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import moleculePolarity from '../moleculePolarity.js';
 
+const CONTROL_FONT = new PhetFont( 18 );
+const CONTROL_LABEL_MAX_WIDTH = 200;
+
 const MPConstants = {
 
   // While these layoutBounds differ from the default, PhET-iO customizations may rely on these bounds.
@@ -36,10 +39,20 @@ const MPConstants = {
     maxWidth: 250 // i18n, determined empirically
   },
 
-  // options for text labels on controls
+  // Provided to text on controls (Checkbox/RadioButton labels)
   CONTROL_TEXT_OPTIONS: {
-    font: new PhetFont( 18 ),
-    maxWidth: 175 // i18n, determined empirically
+    font: CONTROL_FONT
+  },
+
+  // Provided to control labels (usually Text, but sometimes an HBox with Text and an icon)
+  CONTROL_LABEL_OPTIONS: {
+    maxWidth: CONTROL_LABEL_MAX_WIDTH
+  },
+
+  // Provided to control labels that are JUST text (for convenience)
+  CONTROL_TEXT_LABEL_OPTIONS: {
+    font: CONTROL_FONT,
+    maxWidth: CONTROL_LABEL_MAX_WIDTH
   },
 
   AQUA_RADIO_BUTTON_OPTIONS: { radius: 9 },

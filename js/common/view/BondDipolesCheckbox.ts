@@ -7,9 +7,9 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -53,10 +53,10 @@ export default class BondDipolesCheckbox extends MPCheckbox {
 
     const iconNode = BondDipoleNode.createIcon();
 
-    const content = new HBox( {
+    const content = new HBox( combineOptions<HBoxOptions>( {
       children: [ labelText, iconNode ],
       spacing: MPConstants.CONTROL_ICON_X_SPACING
-    } );
+    }, MPConstants.CONTROL_LABEL_OPTIONS ) );
 
     super( bondDipolesVisibleProperty, content, options );
 
