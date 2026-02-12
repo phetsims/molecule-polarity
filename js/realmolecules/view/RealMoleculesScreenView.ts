@@ -365,6 +365,24 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         lastHeight = height;
       };
 
+      // Copy helper for render-to-target (e.g. screenshots). We render the composer to its internal buffer,
+      // then blit the final output to the provided target.
+      const copyMaterial = new THREE.ShaderMaterial( {
+        // eslint-disable-next-line no-undef
+        vertexShader: ThreeCopyShader.vertexShader,
+
+        // eslint-disable-next-line no-undef
+        fragmentShader: ThreeCopyShader.fragmentShader,
+        uniforms: {
+          tDiffuse: { value: null },
+          opacity: { value: 1.0 }
+        },
+        blending: THREE.NoBlending,
+        depthTest: false,
+        depthWrite: false
+      } );
+      const copyQuad = new window.ThreeFullScreenQuad( copyMaterial );
+
       // Set the render override
       renderOverride = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
@@ -399,10 +417,25 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
 
         molecularDipoleOutlinePass.selectedObjects = blackStrokedObjects;
 
+        // I.e. if we are doing a screenshot, workaround for that.
+        // see https://github.com/phetsims/molecule-polarity/issues/266
         if ( target ) {
-          // For now, pretend like we don't have a composer
-          this.sceneNode.stage.threeRenderer!.render( this.sceneNode.stage.threeScene, this.sceneNode.stage.threeCamera );
-          this.sceneNode.stage.threeRenderer!.autoClear = autoClear;
+          resize();
+
+          const renderer = this.sceneNode.stage.threeRenderer!;
+          const oldRenderTarget = renderer.getRenderTarget();
+          const oldAutoClear = renderer.autoClear;
+
+          composer.renderToScreen = false;
+          composer.render();
+
+          copyMaterial.uniforms.tDiffuse.value = composer.readBuffer.texture;
+          renderer.setRenderTarget( target );
+          copyQuad.render( renderer );
+
+          renderer.setRenderTarget( oldRenderTarget );
+          renderer.autoClear = oldAutoClear;
+          renderer.autoClear = autoClear;
         }
         else {
           resize();
