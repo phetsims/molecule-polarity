@@ -9,11 +9,9 @@
  */
 
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
-import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -42,38 +40,28 @@ export default class ModelRadioButtonGroup extends VerticalAquaRadioButtonGroup<
     }, providedOptions );
 
     const radioButtonGroupItems = [
-      createItem( false,
-        MoleculePolarityStrings.basicStringProperty,
-        MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty,
-        'basicRadioButton'
-      ),
-      createItem( true,
-        MoleculePolarityStrings.advancedStringProperty,
-        MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty,
-        'advancedRadioButton'
-      )
+      {
+        value: false,
+        createNode: () => new Text( MoleculePolarityStrings.basicStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
+        tandemName: 'basicRadioButton',
+        options: {
+          accessibleName: MoleculePolarityStrings.basicStringProperty,
+          accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty
+        }
+      },
+      {
+        value: true,
+        createNode: () => new Text( MoleculePolarityStrings.advancedStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
+        tandemName: 'advancedRadioButton',
+        options: {
+          accessibleName: MoleculePolarityStrings.advancedStringProperty,
+          accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty
+        }
+      }
     ];
 
     super( isAdvancedProperty, radioButtonGroupItems, options );
   }
-}
-
-// Creates an item for this radio-button group.
-function createItem(
-  value: boolean,
-  labelStringProperty: TReadOnlyProperty<string>,
-  accessibleHelpText: TReadOnlyProperty<string> | null,
-  tandemName: string
-): AquaRadioButtonGroupItem<boolean> {
-  return {
-    value: value,
-    createNode: () => new Text( labelStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
-    tandemName: tandemName,
-    options: {
-      accessibleName: labelStringProperty,
-      accessibleHelpText: accessibleHelpText
-    }
-  };
 }
 
 moleculePolarity.register( 'ModelRadioButtonGroup', ModelRadioButtonGroup );
