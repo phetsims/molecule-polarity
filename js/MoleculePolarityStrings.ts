@@ -29,9 +29,9 @@ type StringsType = {
   'electronegativityStringProperty': LocalizedStringProperty;
   'lessStringProperty': LocalizedStringProperty;
   'moreStringProperty': LocalizedStringProperty;
-  'atomAStringProperty': LocalizedStringProperty;
-  'atomBStringProperty': LocalizedStringProperty;
-  'atomCStringProperty': LocalizedStringProperty;
+  'AStringProperty': LocalizedStringProperty;
+  'BStringProperty': LocalizedStringProperty;
+  'CStringProperty': LocalizedStringProperty;
   'moreCovalentStringProperty': LocalizedStringProperty;
   'moreIonicStringProperty': LocalizedStringProperty;
   'pattern': {

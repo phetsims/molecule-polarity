@@ -41,9 +41,9 @@ addToMapIfDefined( 'molecularDipole', 'molecularDipoleStringProperty' );
 addToMapIfDefined( 'electronegativity', 'electronegativityStringProperty' );
 addToMapIfDefined( 'less', 'lessStringProperty' );
 addToMapIfDefined( 'more', 'moreStringProperty' );
-addToMapIfDefined( 'atomA', 'atomAStringProperty' );
-addToMapIfDefined( 'atomB', 'atomBStringProperty' );
-addToMapIfDefined( 'atomC', 'atomCStringProperty' );
+addToMapIfDefined( 'A', 'AStringProperty' );
+addToMapIfDefined( 'B', 'BStringProperty' );
+addToMapIfDefined( 'C', 'CStringProperty' );
 addToMapIfDefined( 'moreCovalent', 'moreCovalentStringProperty' );
 addToMapIfDefined( 'moreIonic', 'moreIonicStringProperty' );
 addToMapIfDefined( 'none', 'noneStringProperty' );
@@ -318,9 +318,9 @@ const MoleculePolarityFluent = {
   electronegativityStringProperty: _.get( MoleculePolarityStrings, 'electronegativityStringProperty' ),
   lessStringProperty: _.get( MoleculePolarityStrings, 'lessStringProperty' ),
   moreStringProperty: _.get( MoleculePolarityStrings, 'moreStringProperty' ),
-  atomAStringProperty: _.get( MoleculePolarityStrings, 'atomAStringProperty' ),
-  atomBStringProperty: _.get( MoleculePolarityStrings, 'atomBStringProperty' ),
-  atomCStringProperty: _.get( MoleculePolarityStrings, 'atomCStringProperty' ),
+  AStringProperty: _.get( MoleculePolarityStrings, 'AStringProperty' ),
+  BStringProperty: _.get( MoleculePolarityStrings, 'BStringProperty' ),
+  CStringProperty: _.get( MoleculePolarityStrings, 'CStringProperty' ),
   moreCovalentStringProperty: _.get( MoleculePolarityStrings, 'moreCovalentStringProperty' ),
   moreIonicStringProperty: _.get( MoleculePolarityStrings, 'moreIonicStringProperty' ),
   pattern: {

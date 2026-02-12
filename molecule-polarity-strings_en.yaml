@@ -11,9 +11,9 @@ molecularDipole: Molecular Dipole
 electronegativity: Electronegativity
 less: less
 more: more
-atomA: A
-atomB: B
-atomC: C
+A: A
+B: B
+C: C
 moreCovalent: more covalent
 moreIonic: more ionic
 pattern.atomName: Atom {{name}}

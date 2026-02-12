@@ -95,17 +95,17 @@ function createScreenIcon(): ScreenIcon {
 
   const textMaxWidth = 0.65 * atomDiameter;
 
-  const textA = new Text( MoleculePolarityStrings.atomAStringProperty, {
+  const textA = new Text( MoleculePolarityStrings.AStringProperty, {
     font: font,
     maxWidth: textMaxWidth
   } );
 
-  const textB = new Text( MoleculePolarityStrings.atomBStringProperty, {
+  const textB = new Text( MoleculePolarityStrings.BStringProperty, {
     font: font,
     maxWidth: textMaxWidth
   } );
 
-  const textC = new Text( MoleculePolarityStrings.atomCStringProperty, {
+  const textC = new Text( MoleculePolarityStrings.CStringProperty, {
     font: font,
     maxWidth: textMaxWidth
   } );
