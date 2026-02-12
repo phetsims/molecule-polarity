@@ -15,6 +15,8 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
+const SOUND_NOTIFICATION_PERIOD = 3;
+
 export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragListener {
   public constructor(
     moleculeQuaternionProperty: TProperty<THREE.Quaternion>,
@@ -24,10 +26,21 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
     let lastHorizontalDirection: 'left' | 'right' | null = null;
     let lastVerticalDirection: 'up' | 'down' | null = null;
 
+    // We'll play sounds every SOUND_NOTIFICATION_PERIOD, see https://github.com/phetsims/molecule-polarity/issues/294
+    let horizontalCount = 0;
+    let verticalCount = 0;
+
     super( {
       dragDelta: Math.PI / 16,
       shiftDragDelta: Math.PI / 32,
       moveOnHoldInterval: 100,
+      start: () => {
+        // Reset counts at the start, so the very first interaction will play a sound
+        lastHorizontalDirection = null;
+        lastVerticalDirection = null;
+        horizontalCount = 0;
+        verticalCount = 0;
+      },
       drag: ( event, listener ) => {
         // Apply rotation
         const newQuaternion = new THREE.Quaternion().setFromEuler(
@@ -42,25 +55,37 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
 
         const currentHorizontal: 'left' | 'right' | null = x !== 0 ? ( x > 0 ? 'right' : 'left' ) : null;
         const currentVertical: 'up' | 'down' | null = y !== 0 ? ( y > 0 ? 'down' : 'up' ) : null;
+        const horizontalChanged = currentHorizontal !== lastHorizontalDirection;
+        const verticalChanged = currentVertical !== lastVerticalDirection;
+        const horizontalRepeatedSound = horizontalCount === 0;
+        const verticalRepeatedSound = verticalCount === 0;
 
-        if ( currentHorizontal !== null && currentHorizontal !== lastHorizontalDirection ) {
-          lastHorizontalDirection = currentHorizontal;
-          moleculeNode.addAccessibleObjectResponse(
-            MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
-              {
-                direction: currentHorizontal
-              }
-            ) );
+        if ( currentHorizontal !== null ) {
+          if ( horizontalChanged || horizontalRepeatedSound ) {
+            lastHorizontalDirection = currentHorizontal;
+            moleculeNode.addAccessibleObjectResponse(
+              MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
+                {
+                  direction: currentHorizontal
+                }
+              ) );
+          }
+
+          horizontalCount = ( horizontalCount + 1 ) % SOUND_NOTIFICATION_PERIOD;
         }
 
-        if ( currentVertical !== null && currentVertical !== lastVerticalDirection ) {
-          lastVerticalDirection = currentVertical;
-          moleculeNode.addAccessibleObjectResponse(
-            MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
-              {
-                direction: currentVertical
-              }
-            ) );
+        if ( currentVertical !== null ) {
+          if ( verticalChanged || verticalRepeatedSound ) {
+            lastVerticalDirection = currentVertical;
+            moleculeNode.addAccessibleObjectResponse(
+              MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
+                {
+                  direction: currentVertical
+                }
+              ) );
+          }
+
+          verticalCount = ( verticalCount + 1 ) % SOUND_NOTIFICATION_PERIOD;
         }
       },
       tandem: tandem
