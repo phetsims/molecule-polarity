@@ -3,8 +3,6 @@ screen.twoAtoms: Two Atoms
 screen.threeAtoms: Three Atoms
 screen.realMolecules: Real Molecules
 electricField: Electric Field
-on: 'on'
-off: 'off'
 bondCharacter: Bond Character
 partialCharges: Partial Charges
 bondDipole: Bond Dipole
@@ -59,11 +57,8 @@ deltaMinus: δ−
 deltaNonNegativeValue: 'δ={{partialCharge}}'
 deltaNegativeValue: 'δ=−{{partialCharge}}'
 pattern.dipoleDirection: '{{from}} → {{to}}'
-pattern.deltaEquals: 'δ={{partialCharge}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules only):'
 surfaceColorDescription: 'Color gradient used to represent positive and negative electrostatic potential.'
-underDevelopment.line1: Real Molecules is not currently available in HTML5.
-underDevelopment.line2: If your device runs Java, you can use the Java version at
 
 a11y:
   common:

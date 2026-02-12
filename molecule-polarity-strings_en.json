@@ -14,12 +14,6 @@
   "electricField": {
     "value": "Electric Field"
   },
-  "on": {
-    "value": "on"
-  },
-  "off": {
-    "value": "off"
-  },
   "bondCharacter": {
     "value": "Bond Character"
   },
@@ -182,20 +176,11 @@
   "pattern.dipoleDirection": {
     "value": "{{from}} → {{to}}"
   },
-  "pattern.deltaEquals": {
-    "value": "δ={{partialCharge}}"
-  },
   "surfaceColorRealMolecules": {
     "value": "Surface color (Real Molecules only):"
   },
   "surfaceColorDescription": {
     "value": "Color gradient used to represent positive and negative electrostatic potential."
-  },
-  "underDevelopment.line1": {
-    "value": "Real Molecules is not currently available in HTML5."
-  },
-  "underDevelopment.line2": {
-    "value": "If your device runs Java, you can use the Java version at"
   },
   "a11y": {
     "common": {

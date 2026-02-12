@@ -21,8 +21,6 @@ type StringsType = {
     'realMoleculesStringProperty': LocalizedStringProperty;
   };
   'electricFieldStringProperty': LocalizedStringProperty;
-  'onStringProperty': LocalizedStringProperty;
-  'offStringProperty': LocalizedStringProperty;
   'bondCharacterStringProperty': LocalizedStringProperty;
   'partialChargesStringProperty': LocalizedStringProperty;
   'bondDipoleStringProperty': LocalizedStringProperty;
@@ -40,7 +38,6 @@ type StringsType = {
     'atomNameStringProperty': LocalizedStringProperty;
     'symbolNameStringProperty': LocalizedStringProperty;
     'dipoleDirectionStringProperty': LocalizedStringProperty;
-    'deltaEqualsStringProperty': LocalizedStringProperty;
   };
   'noneStringProperty': LocalizedStringProperty;
   'electrostaticPotentialStringProperty': LocalizedStringProperty;
@@ -82,10 +79,6 @@ type StringsType = {
   'deltaNegativeValueStringProperty': LocalizedStringProperty;
   'surfaceColorRealMoleculesStringProperty': LocalizedStringProperty;
   'surfaceColorDescriptionStringProperty': LocalizedStringProperty;
-  'underDevelopment': {
-    'line1StringProperty': LocalizedStringProperty;
-    'line2StringProperty': LocalizedStringProperty;
-  };
   'a11y': {
     'common': {
       'upperStringProperty': LocalizedStringProperty;

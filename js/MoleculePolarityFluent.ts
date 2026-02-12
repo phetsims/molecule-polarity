@@ -33,8 +33,6 @@ addToMapIfDefined( 'screen_twoAtoms', 'screen.twoAtomsStringProperty' );
 addToMapIfDefined( 'screen_threeAtoms', 'screen.threeAtomsStringProperty' );
 addToMapIfDefined( 'screen_realMolecules', 'screen.realMoleculesStringProperty' );
 addToMapIfDefined( 'electricField', 'electricFieldStringProperty' );
-addToMapIfDefined( 'on', 'onStringProperty' );
-addToMapIfDefined( 'off', 'offStringProperty' );
 addToMapIfDefined( 'bondCharacter', 'bondCharacterStringProperty' );
 addToMapIfDefined( 'partialCharges', 'partialChargesStringProperty' );
 addToMapIfDefined( 'bondDipole', 'bondDipoleStringProperty' );
@@ -86,8 +84,6 @@ addToMapIfDefined( 'deltaPlus', 'deltaPlusStringProperty' );
 addToMapIfDefined( 'deltaMinus', 'deltaMinusStringProperty' );
 addToMapIfDefined( 'surfaceColorRealMolecules', 'surfaceColorRealMoleculesStringProperty' );
 addToMapIfDefined( 'surfaceColorDescription', 'surfaceColorDescriptionStringProperty' );
-addToMapIfDefined( 'underDevelopment_line1', 'underDevelopment.line1StringProperty' );
-addToMapIfDefined( 'underDevelopment_line2', 'underDevelopment.line2StringProperty' );
 addToMapIfDefined( 'a11y_common_upper', 'a11y.common.upperStringProperty' );
 addToMapIfDefined( 'a11y_common_elements_hydrogen', 'a11y.common.elements.hydrogenStringProperty' );
 addToMapIfDefined( 'a11y_common_elements_boron', 'a11y.common.elements.boronStringProperty' );
@@ -306,8 +302,6 @@ const MoleculePolarityFluent = {
     realMoleculesStringProperty: _.get( MoleculePolarityStrings, 'screen.realMoleculesStringProperty' )
   },
   electricFieldStringProperty: _.get( MoleculePolarityStrings, 'electricFieldStringProperty' ),
-  onStringProperty: _.get( MoleculePolarityStrings, 'onStringProperty' ),
-  offStringProperty: _.get( MoleculePolarityStrings, 'offStringProperty' ),
   _comment_0: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
   _comment_1: new FluentComment( {"comment":"REGIONS / PARAMETERS","associatedKey":"bondCharacter"} ),
   _comment_2: new FluentComment( {"comment":"===================","associatedKey":"bondCharacter"} ),
@@ -332,8 +326,7 @@ const MoleculePolarityFluent = {
   pattern: {
     atomNameStringProperty: _.get( MoleculePolarityStrings, 'pattern.atomNameStringProperty' ),
     symbolNameStringProperty: _.get( MoleculePolarityStrings, 'pattern.symbolNameStringProperty' ),
-    dipoleDirectionStringProperty: _.get( MoleculePolarityStrings, 'pattern.dipoleDirectionStringProperty' ),
-    deltaEqualsStringProperty: _.get( MoleculePolarityStrings, 'pattern.deltaEqualsStringProperty' )
+    dipoleDirectionStringProperty: _.get( MoleculePolarityStrings, 'pattern.dipoleDirectionStringProperty' )
   },
   noneStringProperty: _.get( MoleculePolarityStrings, 'noneStringProperty' ),
   electrostaticPotentialStringProperty: _.get( MoleculePolarityStrings, 'electrostaticPotentialStringProperty' ),
@@ -376,10 +369,6 @@ const MoleculePolarityFluent = {
   deltaNegativeValueStringProperty: _.get( MoleculePolarityStrings, 'deltaNegativeValueStringProperty' ),
   surfaceColorRealMoleculesStringProperty: _.get( MoleculePolarityStrings, 'surfaceColorRealMoleculesStringProperty' ),
   surfaceColorDescriptionStringProperty: _.get( MoleculePolarityStrings, 'surfaceColorDescriptionStringProperty' ),
-  underDevelopment: {
-    line1StringProperty: _.get( MoleculePolarityStrings, 'underDevelopment.line1StringProperty' ),
-    line2StringProperty: _.get( MoleculePolarityStrings, 'underDevelopment.line2StringProperty' )
-  },
   a11y: {
     common: {
       upperStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_upper', _.get( MoleculePolarityStrings, 'a11y.common.upperStringProperty' ) ),
