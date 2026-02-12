@@ -78,7 +78,7 @@ export default class TriatomicMoleculeNode extends Node {
     };
 
     // atoms
-    const atomANode = new AtomNode( molecule.atomA, molecule.bondAngleABProperty, {
+    const atomANode = new AtomNode( molecule.atomA, molecule.bondAngleABProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomANode' ),
       phetioInputEnabledPropertyInstrumented: true,
 
@@ -94,13 +94,13 @@ export default class TriatomicMoleculeNode extends Node {
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.moveAtomASlider.accessibleHelpTextStringProperty
     } );
-    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, {
+    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomBNode' ),
       phetioInputEnabledPropertyInstrumented: true,
       accessibleName: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
       accessibleHelpText: MoleculePolarityStrings.a11y.threeAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
     } );
-    const atomCNode = new AtomNode( molecule.atomC, molecule.bondAngleBCProperty, {
+    const atomCNode = new AtomNode( molecule.atomC, molecule.bondAngleBCProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomCNode' ),
       phetioInputEnabledPropertyInstrumented: true,
 

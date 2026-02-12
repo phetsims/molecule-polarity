@@ -51,11 +51,11 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       }, providedOptions );
 
     // atoms
-    const atomANode = new AtomNode( molecule.atomA, molecule.angleProperty, {
+    const atomANode = new AtomNode( molecule.atomA, molecule.angleProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomANode' ),
       focusable: false
     } );
-    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, {
+    const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomBNode' ),
       focusable: false
     } );
@@ -112,7 +112,7 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       partialChargeANode, partialChargeBNode, bondDipoleNode
     ];
 
-    super( molecule.angleProperty, options );
+    super( molecule.angleProperty, molecule.isDraggingProperty, options );
 
     // rotate molecule by dragging anywhere
     const dragListener = new MoleculeAngleDragListener( molecule, this, {

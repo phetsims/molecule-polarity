@@ -17,6 +17,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import normalizeAngle from '../model/normalizeAngle.js';
 import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -28,7 +29,7 @@ export type MPAccessibleSliderOptions = SelfOptions & StrictOmit<ParentOptions,
 const DEFAULT_STEP = toRadians( 5 );
 
 export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
-  public constructor( valueProperty: NumberProperty, providedOptions: MPAccessibleSliderOptions ) {
+  public constructor( valueProperty: NumberProperty, isDraggingProperty: TProperty<boolean>, providedOptions: MPAccessibleSliderOptions ) {
 
     const grabSound = sharedSoundPlayers.get( 'grab' );
     const releaseSound = sharedSoundPlayers.get( 'release' );
@@ -49,9 +50,11 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
       startDrag: event => {
         this.moveToFront();
         grabSound.play();
+        isDraggingProperty.value = true;
       },
       endDrag: event => {
         releaseSound.play();
+        isDraggingProperty.value = false;
       }
     }, providedOptions );
 

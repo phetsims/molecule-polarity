@@ -21,6 +21,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Atom from '../model/Atom.js';
 import MPAccessibleSlider, { MPAccessibleSliderOptions } from './MPAccessibleSlider.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -28,7 +29,7 @@ export type AtomNodeOptions = SelfOptions & MPAccessibleSliderOptions;
 
 export default class AtomNode extends MPAccessibleSlider {
 
-  public constructor( atom: Atom, angleProperty: NumberProperty, providedOptions: AtomNodeOptions ) {
+  public constructor( atom: Atom, angleProperty: NumberProperty, isDraggingProperty: TProperty<boolean>, providedOptions: AtomNodeOptions ) {
 
     const options = optionize<AtomNodeOptions, SelfOptions, MPAccessibleSliderOptions>()(
       {
@@ -58,7 +59,7 @@ export default class AtomNode extends MPAccessibleSlider {
 
     options.children = [ sphereNode, labelText ];
 
-    super( angleProperty, options );
+    super( angleProperty, isDraggingProperty, options );
 
     // sync position with model
     atom.positionProperty.linkAttribute( this, 'translation' );
