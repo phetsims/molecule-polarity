@@ -16,6 +16,7 @@ import Bond from '../model/Bond.js';
 import Molecule from '../model/Molecule.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class MoleculeContextResponsesNode extends Node {
 
@@ -24,6 +25,8 @@ export default class MoleculeContextResponsesNode extends Node {
   private readonly bonds: Bond[];
   private readonly viewProperties: ThreeAtomsViewProperties | TwoAtomsViewProperties;
   private readonly invertMapping: boolean;
+  private readonly partialChargeMagnitudeStringProperty: TReadOnlyProperty<string>;
+  private readonly partialChargeSignStringProperty: TReadOnlyProperty<'positive' | 'negative' | 'zero'>;
 
   /**
    * @param atom - the atom whose electronegativity changes trigger context responses
@@ -50,6 +53,10 @@ export default class MoleculeContextResponsesNode extends Node {
     atom.previousElectronegativityProperty.lazyLink( () => {
       this.emitContextResponse();
     } );
+
+    // Create references here so we don't leak memory below
+    this.partialChargeMagnitudeStringProperty = DescriptionMaps.createPartialChargesStringProperty( this.atom.partialChargeProperty );
+    this.partialChargeSignStringProperty = this.atom.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' );
   }
 
   // Mini-utility function for emitting context responses without repeating the verbosity
@@ -133,13 +140,16 @@ export default class MoleculeContextResponsesNode extends Node {
     );
 
     // If Partial Charges visible
-    partialChargesVisible && this.contextResponse(
-      MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.format( {
-        atom: this.atom.label,
-        magnitude: DescriptionMaps.createPartialChargesStringProperty( this.atom.partialChargeProperty ),
-        sign: this.atom.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
-      } ), 'partialChargesVisible'
-    );
+    {
+
+      partialChargesVisible && this.contextResponse(
+        MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.format( {
+          atom: this.atom.label,
+          magnitude: this.partialChargeMagnitudeStringProperty,
+          sign: this.partialChargeSignStringProperty
+        } ), 'partialChargesVisible'
+      );
+    }
     bondCharacterVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
         progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
