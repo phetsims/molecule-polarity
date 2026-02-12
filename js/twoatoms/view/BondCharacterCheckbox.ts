@@ -29,19 +29,14 @@ export default class BondCharacterCheckbox extends MPCheckbox {
       // MPCheckboxOptions
       isDisposable: false,
       accessibleName: MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.accessibleHelpTextStringProperty
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.accessibleHelpTextStringProperty,
+      accessibleContextResponseChecked: MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.checkedStringProperty.value,
+      accessibleContextResponseUnchecked: MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.uncheckedStringProperty.value
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.bondCharacterStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
 
     super( bondCharacterVisibleProperty, labelText, options );
-
-    bondCharacterVisibleProperty.lazyLink( checked => {
-      const objectResponse = checked ?
-                             MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.checkedStringProperty.value :
-                             MoleculePolarityFluent.a11y.common.bondCharacterCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleContextResponse( objectResponse );
-    } );
   }
 }
 

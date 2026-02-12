@@ -49,19 +49,14 @@ export default class EFieldControl extends VBox {
         tandem: options.tandem.createTandem( 'onOffSwitch' ),
         visiblePropertyOptions: {
           phetioFeatured: false
-        }
+        },
+        accessibleContextResponseLeftValue: MoleculePolarityFluent.a11y.common.electricFieldToggle.offStringProperty,
+        accessibleContextResponseRightValue: MoleculePolarityFluent.a11y.common.electricFieldToggle.onStringProperty
       } );
 
     options.children = [ titleText, onOffSwitch ];
 
     super( options );
-
-    eFieldEnabledProperty.lazyLink( enabled => {
-      const objectResponse = enabled ?
-                             MoleculePolarityFluent.a11y.common.electricFieldToggle.onStringProperty.value :
-                             MoleculePolarityFluent.a11y.common.electricFieldToggle.offStringProperty.value;
-      this.addAccessibleContextResponse( objectResponse );
-    } );
   }
 }
 

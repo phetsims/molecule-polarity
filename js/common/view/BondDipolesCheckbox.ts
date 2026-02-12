@@ -42,7 +42,13 @@ export default class BondDipolesCheckbox extends MPCheckbox {
                       MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty,
       accessibleHelpText: providedOptions.singular ?
                           MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextStringProperty :
-                          MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextPluralStringProperty
+                          MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.accessibleHelpTextPluralStringProperty,
+      accessibleContextResponseChecked: providedOptions.singular ?
+                                        MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedStringProperty.value :
+                                        MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedPluralStringProperty.value,
+      accessibleContextResponseUnchecked: providedOptions.singular ?
+                                          MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedStringProperty.value :
+                                          MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedPluralStringProperty.value
     }, providedOptions );
 
     const stringProperty = options.singular ?
@@ -59,17 +65,6 @@ export default class BondDipolesCheckbox extends MPCheckbox {
     }, MPConstants.CONTROL_LABEL_OPTIONS ) );
 
     super( bondDipolesVisibleProperty, content, options );
-
-    bondDipolesVisibleProperty.lazyLink( checked => {
-      const objectResponse = checked ?
-                             options.singular ?
-                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedStringProperty.value :
-                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.checkedPluralStringProperty.value :
-                             options.singular ?
-                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedStringProperty.value :
-                                MoleculePolarityFluent.a11y.common.bondDipoleCheckbox.uncheckedPluralStringProperty.value;
-      this.addAccessibleContextResponse( objectResponse );
-    } );
   }
 }
 

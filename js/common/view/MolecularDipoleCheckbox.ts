@@ -32,7 +32,9 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
       // MPCheckboxOptions
       isDisposable: false,
       accessibleName: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.accessibleHelpTextStringProperty
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.accessibleHelpTextStringProperty,
+      accessibleContextResponseChecked: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.checkedStringProperty.value,
+      accessibleContextResponseUnchecked: MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.uncheckedStringProperty.value
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.molecularDipoleStringProperty, MPConstants.CONTROL_TEXT_OPTIONS );
@@ -45,13 +47,6 @@ export default class MolecularDipoleCheckbox extends MPCheckbox {
     }, MPConstants.CONTROL_LABEL_OPTIONS ) );
 
     super( molecularDipoleVisibleProperty, content, options );
-
-    molecularDipoleVisibleProperty.lazyLink( checked => {
-      const objectResponse = checked ?
-                             MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.checkedStringProperty.value :
-                             MoleculePolarityFluent.a11y.common.molecularDipoleCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleContextResponse( objectResponse );
-    } );
   }
 }
 

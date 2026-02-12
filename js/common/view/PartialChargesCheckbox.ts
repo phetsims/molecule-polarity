@@ -31,19 +31,14 @@ export default class PartialChargesCheckbox extends MPCheckbox {
       isDisposable: false,
 
       accessibleName: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.accessibleNameStringProperty,
-      accessibleHelpText: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty
+      accessibleHelpText: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.accessibleHelpTextStringProperty,
+      accessibleContextResponseChecked: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.checkedStringProperty.value,
+      accessibleContextResponseUnchecked: MoleculePolarityFluent.a11y.common.partialChargesCheckbox.uncheckedStringProperty.value
     }, providedOptions );
 
     const labelText = new Text( MoleculePolarityStrings.partialChargesStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS );
 
     super( partialChargesVisibleProperty, labelText, options );
-
-    partialChargesVisibleProperty.lazyLink( checked => {
-      const objectResponse = checked ?
-                             MoleculePolarityFluent.a11y.common.partialChargesCheckbox.checkedStringProperty.value :
-                             MoleculePolarityFluent.a11y.common.partialChargesCheckbox.uncheckedStringProperty.value;
-      this.addAccessibleContextResponse( objectResponse );
-    } );
   }
 }
 
