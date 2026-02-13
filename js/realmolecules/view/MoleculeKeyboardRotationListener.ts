@@ -15,7 +15,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-const SOUND_NOTIFICATION_PERIOD = 3;
+const SOUND_NOTIFICATION_PERIOD = 4;
 
 export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragListener {
   public constructor(
@@ -26,7 +26,8 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
     let lastHorizontalDirection: 'left' | 'right' | null = null;
     let lastVerticalDirection: 'up' | 'down' | null = null;
 
-    // We'll play sounds every SOUND_NOTIFICATION_PERIOD, see https://github.com/phetsims/molecule-polarity/issues/294
+    // We'll play sounds every SOUND_NOTIFICATION_PERIOD for fresh keypresses,
+    // see https://github.com/phetsims/molecule-polarity/issues/294
     let horizontalCount = 0;
     let verticalCount = 0;
 
@@ -34,20 +35,7 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
       dragDelta: Math.PI / 16,
       shiftDragDelta: Math.PI / 32,
       moveOnHoldInterval: 100,
-      start: () => {
-        // Reset counts at the start, so the very first interaction will play a sound
-        lastHorizontalDirection = null;
-        lastVerticalDirection = null;
-        horizontalCount = 0;
-        verticalCount = 0;
-      },
-      drag: ( event, listener ) => {
-        // Apply rotation
-        const newQuaternion = new THREE.Quaternion().setFromEuler(
-          new THREE.Euler( listener.modelDelta.y, listener.modelDelta.x, 0 )
-        );
-        newQuaternion.multiply( moleculeQuaternionProperty.value );
-        moleculeQuaternionProperty.value = newQuaternion;
+      start: ( event, listener ) => {
 
         // Detect directions
         const x = listener.modelDelta.x;
@@ -87,6 +75,14 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
 
           verticalCount = ( verticalCount + 1 ) % SOUND_NOTIFICATION_PERIOD;
         }
+      },
+      drag: ( event, listener ) => {
+        // Apply rotation
+        const newQuaternion = new THREE.Quaternion().setFromEuler(
+          new THREE.Euler( listener.modelDelta.y, listener.modelDelta.x, 0 )
+        );
+        newQuaternion.multiply( moleculeQuaternionProperty.value );
+        moleculeQuaternionProperty.value = newQuaternion;
       },
       tandem: tandem
     } );
