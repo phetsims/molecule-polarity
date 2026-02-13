@@ -4,6 +4,7 @@
  * 'View' controls for the 'Three Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -14,52 +15,34 @@ import MPConstants from '../../common/MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
-import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
-import { createBondDipolesCheckboxItem, createMolecularDipoleCheckboxItem, createPartialChargesCheckboxItem } from '../../common/view/ViewControlCheckboxItems.js';
+import ViewControlsCheckboxGroup, { createBondDipolesCheckboxItem, createMolecularDipoleCheckboxItem, createPartialChargesCheckboxItem } from '../../common/view/ViewControlsCheckboxGroup.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ThreeAtomsViewControlsOptions = SelfOptions & PickRequired<VBox, 'tandem'>;
+type ThreeAtomsViewControlsOptions = SelfOptions & PickRequired<StrictOmit<VBoxOptions, 'children'>, 'tandem'>;
 
 export default class ThreeAtomsViewControls extends VBox {
 
   public constructor( viewProperties: ThreeAtomsViewProperties, providedOptions: ThreeAtomsViewControlsOptions ) {
-
-    const options = optionize<ThreeAtomsViewControlsOptions, SelfOptions, VBoxOptions>()( {
-
-      // VBoxOptions
+    super( optionize<ThreeAtomsViewControlsOptions, SelfOptions, VBoxOptions>()( {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       visiblePropertyOptions: {
         phetioFeatured: true
       },
-      isDisposable: false
-    }, providedOptions );
-
-    // title
-    const titleText = new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
-
-    const checkboxGroup = new VerticalCheckboxGroup( [
-      createBondDipolesCheckboxItem( viewProperties.bondDipolesVisibleProperty ),
-      createMolecularDipoleCheckboxItem( viewProperties.molecularDipoleVisibleProperty ),
-      createPartialChargesCheckboxItem( viewProperties.partialChargesVisibleProperty )
-    ], {
-      mouseAreaXDilation: MPConstants.CONTROL_PANEL_MOUSE_X_DILATION,
-      touchAreaXDilation: MPConstants.CONTROL_PANEL_TOUCH_X_DILATION,
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      tandem: options.tandem.createTandem( 'checkboxGroup' ),
-      checkboxOptions: {
-        isDisposable: false
-      },
-      phetioVisiblePropertyInstrumented: false
-    } );
-
-    options.children = [
-      titleText,
-      checkboxGroup
-    ];
-
-    super( options );
+      isDisposable: false,
+      children: [
+        new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ),
+        new ViewControlsCheckboxGroup( [
+          createBondDipolesCheckboxItem( viewProperties.bondDipolesVisibleProperty ),
+          createMolecularDipoleCheckboxItem( viewProperties.molecularDipoleVisibleProperty ),
+          createPartialChargesCheckboxItem( viewProperties.partialChargesVisibleProperty )
+        ], {
+          tandem: providedOptions.tandem.createTandem( 'checkboxGroup' )
+        } )
+      ]
+    }, providedOptions ) );
   }
 }
 

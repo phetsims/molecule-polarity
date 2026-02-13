@@ -6,16 +6,33 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../../common/MPConstants.js';
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
-import { VerticalCheckboxGroupItem } from '../../../../sun/js/VerticalCheckboxGroup.js';
+import VerticalCheckboxGroup, { VerticalCheckboxGroupItem, VerticalCheckboxGroupOptions } from '../../../../sun/js/VerticalCheckboxGroup.js';
 import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import BondDipoleNode from './BondDipoleNode.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
+import moleculePolarity from '../../moleculePolarity.js';
+
+export default class ViewControlsCheckboxGroup extends VerticalCheckboxGroup {
+  public constructor( items: VerticalCheckboxGroupItem[], providedOptions?: VerticalCheckboxGroupOptions ) {
+    super( items, optionize<VerticalCheckboxGroupOptions, EmptySelfOptions, VerticalCheckboxGroupOptions>()( {
+      mouseAreaXDilation: MPConstants.CONTROL_PANEL_MOUSE_X_DILATION,
+      touchAreaXDilation: MPConstants.CONTROL_PANEL_TOUCH_X_DILATION,
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      checkboxOptions: {
+        isDisposable: false
+      },
+      phetioVisiblePropertyInstrumented: false
+    }, providedOptions ) );
+  }
+}
+
+moleculePolarity.register( 'ViewControlsCheckboxGroup', ViewControlsCheckboxGroup );
 
 export const createBondDipoleCheckboxItem = ( bondDipoleVisibleProperty: PhetioProperty<boolean> ): VerticalCheckboxGroupItem => {
   return {
