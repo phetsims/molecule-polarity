@@ -386,6 +386,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       // Set the render override
       renderOverride = ( target: THREE.WebGLRenderTarget | undefined, autoClear = false ) => {
         this.sceneNode.stage.threeRenderer!.setRenderTarget( target || null );
+        const oldRenderToScreen = composer.renderToScreen;
 
         // Whether we should show the highlight due to interactive highlighting (whether it is rotating or has a pointer over it)
         let isInteractiveHighlighted = false;
@@ -439,8 +440,10 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         }
         else {
           resize();
+          composer.renderToScreen = true;
           composer.render();
         }
+        composer.renderToScreen = oldRenderToScreen;
       };
     }
   }
