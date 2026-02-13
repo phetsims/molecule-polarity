@@ -46,7 +46,8 @@ export default class ModelRadioButtonGroup extends VerticalAquaRadioButtonGroup<
         tandemName: 'basicRadioButton',
         options: {
           accessibleName: MoleculePolarityStrings.basicStringProperty,
-          accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty
+          accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty,
+          accessibleContextResponse: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.basicSelectedStringProperty
         }
       },
       {
@@ -55,7 +56,8 @@ export default class ModelRadioButtonGroup extends VerticalAquaRadioButtonGroup<
         tandemName: 'advancedRadioButton',
         options: {
           accessibleName: MoleculePolarityStrings.advancedStringProperty,
-          accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty
+          accessibleHelpText: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty,
+          accessibleContextResponse: MoleculePolarityFluent.a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty
         }
       }
     ];

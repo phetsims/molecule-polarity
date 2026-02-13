@@ -468,7 +468,8 @@ a11y:
       accessibleName: 'Model'
       basicHelpText: 'Explore bond dipoles based on electronegativity differences.'
       advancedHelpText: 'Explore bond dipoles based on partial charges.'
-
+      basicSelected: 'Basic model shown.'
+      advancedSelected: 'Advanced model shown.'
     molecules:
       description:
         select_molecule:

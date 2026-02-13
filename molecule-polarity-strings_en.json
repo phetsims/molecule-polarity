@@ -747,6 +747,12 @@
         },
         "advancedHelpText": {
           "value": "Explore bond dipoles based on partial charges."
+        },
+        "basicSelected": {
+          "value": "Basic model shown."
+        },
+        "advancedSelected": {
+          "value": "Advanced model shown."
         }
       },
       "molecules": {

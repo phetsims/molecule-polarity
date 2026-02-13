@@ -311,6 +311,8 @@ type StringsType = {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'basicHelpTextStringProperty': LocalizedStringProperty;
         'advancedHelpTextStringProperty': LocalizedStringProperty;
+        'basicSelectedStringProperty': LocalizedStringProperty;
+        'advancedSelectedStringProperty': LocalizedStringProperty;
       };
       'molecules': {
         'descriptionStringProperty': LocalizedStringProperty;
