@@ -17,37 +17,29 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
 import MPConstants from '../../common/MPConstants.js';
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ModelControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+type ModelControlOptions = SelfOptions & PickRequired<StrictOmit<VBoxOptions, 'children'>, 'tandem'>;
 
 export default class ModelControl extends VBox {
 
-  public constructor( isAdvancedProperty: PhetioProperty<boolean>,
-                      providedOptions: ModelControlOptions ) {
-
-    const options = optionize<ModelControlOptions, SelfOptions, VBoxOptions>()( {
-      // VBoxOptions
+  public constructor( isAdvancedProperty: PhetioProperty<boolean>, providedOptions: ModelControlOptions ) {
+    super( optionize<ModelControlOptions, SelfOptions, VBoxOptions>()( {
       align: 'left',
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
       visiblePropertyOptions: {
         phetioFeatured: true
       },
-      isDisposable: false
-    }, providedOptions );
-
-    // title
-    const titleText = new Text( MoleculePolarityStrings.modelStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
-
-    // Radio button group
-    const radioButtonGroup = new ModelRadioButtonGroup( isAdvancedProperty, {
-      tandem: options.tandem.createTandem( 'radioButtonGroup' )
-    } );
-
-    options.children = [ titleText, radioButtonGroup ];
-
-    super( options );
+      isDisposable: false,
+      children: [
+        new Text( MoleculePolarityStrings.modelStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ),
+        new ModelRadioButtonGroup( isAdvancedProperty, {
+          tandem: providedOptions.tandem.createTandem( 'radioButtonGroup' )
+        } )
+      ]
+    }, providedOptions ) );
   }
 }
 

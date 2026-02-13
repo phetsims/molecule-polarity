@@ -6,6 +6,7 @@
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -19,7 +20,7 @@ import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import ComboBox, { ComboBoxItem, ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
+import ComboBox, { ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
@@ -33,11 +34,12 @@ type RealMoleculesComboBoxOptions = SelfOptions & StrictOmit<HBoxOptions, 'child
 
 export default class RealMoleculesControl extends HBox {
 
-  public constructor( moleculeProperty: Property<RealMolecule>,
-                      molecules: RealMolecule[],
-                      listParent: Node,
-                      provideOptions: RealMoleculesComboBoxOptions ) {
-
+  public constructor(
+    moleculeProperty: Property<RealMolecule>,
+    molecules: RealMolecule[],
+    listParent: Node,
+    provideOptions: RealMoleculesComboBoxOptions
+  ) {
     const options = optionize<RealMoleculesComboBoxOptions, SelfOptions, HBoxOptions>()( {
       spacing: 10,
 
@@ -51,10 +53,24 @@ export default class RealMoleculesControl extends HBox {
       }
     }, provideOptions );
 
-    // {ComboBoxItem[]}
-    const items = molecules.map( createItem );
-
-    const comboBox = new ComboBox( moleculeProperty, items, listParent, options.comboBoxOptions );
+    const comboBox = new ComboBox( moleculeProperty, molecules.map( molecule => {
+      return {
+        value: molecule,
+        // We don't instrument the node, so we can ignore the passed in tandem.
+        createNode: () => new RichText( new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
+          symbol: ChemUtils.toSubscript( molecule.symbol ),
+          name: molecule.fullNameProperty
+        }, { tandem: Tandem.OPT_OUT } ), {
+          maxWidth: 400,
+          font: new PhetFont( 18 )
+        } ),
+        tandemName: `${molecule.tandem.name}Item`,
+        accessibleName: new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
+          symbol: molecule.createSpokenSymbolStringProperty(),
+          name: molecule.fullNameProperty
+        } )
+      };
+    } ), listParent, options.comboBoxOptions );
 
     options.children = [
       new Text( MoleculePolarityStrings.moleculeStringProperty, {
@@ -67,34 +83,6 @@ export default class RealMoleculesControl extends HBox {
 
     super( options );
   }
-}
-
-/**
- * Creates an item for the combo box.
- */
-function createItem( molecule: RealMolecule ): ComboBoxItem<RealMolecule> {
-
-  const stringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
-    symbol: ChemUtils.toSubscript( molecule.symbol ),
-    name: molecule.fullNameProperty
-  }, { tandem: Tandem.OPT_OUT } );
-
-  const accessibleStringProperty = new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
-    symbol: molecule.createSpokenSymbolStringProperty(),
-    name: molecule.fullNameProperty
-  } );
-
-  const node = new RichText( stringProperty, {
-    maxWidth: 400,
-    font: new PhetFont( 18 )
-  } );
-
-  return {
-    value: molecule,
-    createNode: () => node, // We don't instrument the node, so we can ignore the passed in tandem.
-    tandemName: `${molecule.tandem.name}Item`,
-    accessibleName: accessibleStringProperty
-  };
 }
 
 moleculePolarity.register( 'RealMoleculesControl', RealMoleculesControl );
