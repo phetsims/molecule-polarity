@@ -277,7 +277,11 @@ export default class DescriptionMaps {
       level: DescriptionMaps.ENtoQualitative( EN )
     } );
   }
-
+  public static formatPartialChargesString( deltaEN: number ): string {
+    return MoleculePolarityFluent.a11y.partialChargeMagnitude.format( {
+      magnitude: DescriptionMaps.deltaENtoPartialCharges( deltaEN )
+    } );
+  }
   public static createShapeStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {
     return MoleculePolarityFluent.a11y.shape.createProperty( {
       shape: angleProperty.derived( angle => DescriptionMaps.angleToShape( angle ) )
