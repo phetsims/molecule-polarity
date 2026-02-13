@@ -39,7 +39,10 @@ export default class RealMoleculesViewControls extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, provideOptions );
 
     const titleText = new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
@@ -130,7 +133,8 @@ export default class RealMoleculesViewControls extends VBox {
       tandem: options.tandem.createTandem( 'checkboxGroup' ),
       checkboxOptions: {
         isDisposable: false
-      }
+      },
+      phetioVisiblePropertyInstrumented: false
     } );
 
     options.children = [
