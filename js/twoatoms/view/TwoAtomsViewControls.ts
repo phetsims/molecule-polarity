@@ -11,12 +11,11 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
-import BondDipolesCheckbox from '../../common/view/BondDipolesCheckbox.js';
-import PartialChargesCheckbox from '../../common/view/PartialChargesCheckbox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
-import BondCharacterCheckbox from './BondCharacterCheckbox.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
+import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
+import { createBondCharacterCheckboxItem, createBondDipoleCheckboxItem, createPartialChargesCheckboxItem } from '../../common/view/ViewControlCheckboxItems.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -39,23 +38,24 @@ export default class TwoAtomsViewControls extends VBox {
     // title
     const titleText = new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS );
 
-    // Checkboxes
-    const bondDipoleCheckbox = new BondDipolesCheckbox( viewProperties.bondDipoleVisibleProperty, {
-      singular: true,
-      tandem: options.tandem.createTandem( 'bondDipoleCheckbox' )
-    } );
-    const partialChargesCheckbox = new PartialChargesCheckbox( viewProperties.partialChargesVisibleProperty, {
-      tandem: options.tandem.createTandem( 'partialChargesCheckbox' )
-    } );
-    const bondCharacterCheckbox = new BondCharacterCheckbox( viewProperties.bondCharacterVisibleProperty, {
-      tandem: options.tandem.createTandem( 'bondCharacterCheckbox' )
+    const checkboxGroup = new VerticalCheckboxGroup( [
+      createBondDipoleCheckboxItem( viewProperties.bondDipoleVisibleProperty ),
+      createPartialChargesCheckboxItem( viewProperties.partialChargesVisibleProperty ),
+      createBondCharacterCheckboxItem( viewProperties.bondCharacterVisibleProperty )
+    ], {
+      mouseAreaXDilation: MPConstants.CONTROL_PANEL_MOUSE_X_DILATION,
+      touchAreaXDilation: MPConstants.CONTROL_PANEL_TOUCH_X_DILATION,
+      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
+      tandem: options.tandem.createTandem( 'checkboxGroup' ),
+      checkboxOptions: {
+        isDisposable: false
+      },
+      phetioVisiblePropertyInstrumented: false
     } );
 
     options.children = [
       titleText,
-      bondDipoleCheckbox,
-      partialChargesCheckbox,
-      bondCharacterCheckbox
+      checkboxGroup
     ];
 
     super( options );
