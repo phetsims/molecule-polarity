@@ -10,48 +10,29 @@
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import MPConstants from '../../common/MPConstants.js';
+import { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
-import ViewControlsCheckboxGroup, { createAtomElectronegativitiesCheckboxItem, createAtomLabelsCheckboxItem, createBondDipolesCheckboxItem, createMolecularDipoleCheckboxItem, createPartialChargesCheckboxItem } from '../../common/view/ViewControlsCheckboxGroup.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { createAtomElectronegativitiesCheckboxItem, createAtomLabelsCheckboxItem, createBondDipolesCheckboxItem, createMolecularDipoleCheckboxItem, createPartialChargesCheckboxItem } from '../../common/view/ViewControlsCheckboxGroup.js';
+import ViewControls, { ViewControlsOptions } from '../../common/view/ViewControls.js';
 
-type SelfOptions = EmptySelfOptions;
-
-type RealMoleculesViewControlsOptions = SelfOptions & PickRequired<StrictOmit<VBoxOptions, 'children'>, 'tandem'>;
-
-export default class RealMoleculesViewControls extends VBox {
+export default class RealMoleculesViewControls extends ViewControls {
 
   public constructor(
     isAdvancedProperty: PhetioProperty<boolean>,
     viewProperties: RealMoleculesViewProperties,
-    provideOptions: RealMoleculesViewControlsOptions
+    options: ViewControlsOptions
   ) {
-    super( optionize<RealMoleculesViewControlsOptions, SelfOptions, VBoxOptions>()( {
-      align: 'left',
-      spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      },
-      isDisposable: false,
-      children: [
-        new Text( MoleculePolarityStrings.viewStringProperty, MPConstants.CONTROL_PANEL_TITLE_OPTIONS ),
-        new ViewControlsCheckboxGroup( [
+    super( MoleculePolarityStrings.viewStringProperty, [
           createBondDipolesCheckboxItem( viewProperties.bondDipolesVisibleProperty ),
           createMolecularDipoleCheckboxItem( viewProperties.molecularDipoleVisibleProperty ),
           createPartialChargesCheckboxItem( viewProperties.partialChargesVisibleProperty, isAdvancedProperty ),
           createAtomElectronegativitiesCheckboxItem( viewProperties.atomElectronegativitiesVisibleProperty ),
           createAtomLabelsCheckboxItem( viewProperties.atomLabelsVisibleProperty )
-        ], {
-          tandem: provideOptions.tandem.createTandem( 'checkboxGroup' )
-        } )
-      ]
-    }, provideOptions ) );
+        ], optionize<ViewControlsOptions, EmptySelfOptions, VBoxOptions>()( {
+    }, options ) );
   }
 }
 
