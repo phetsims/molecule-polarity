@@ -47,7 +47,14 @@ export default class RotationResponseNode extends Node {
 
       // Normal object response for rotations
       this.addAccessibleObjectResponse(
-        MoleculePolarityFluent.a11y.rotation.format( { direction: direction } )
+        MoleculePolarityFluent.a11y.rotation.format( { direction: direction } ),
+        {
+
+          // Use a response group to prevent rotation responses from being repeated when rotations
+          // happen rapidly. One group per direction allows for both direction changes to be heard
+          // when that the electric field immediately changes the rotation direction after user input.
+          responseGroup: `rotation-${direction}`
+        }
       );
 
       lastDirection = direction;
@@ -78,7 +85,10 @@ export default class RotationResponseNode extends Node {
 
           // "Molecule aligned with Electric Field" after rotating due to E-field has stopped
           this.addAccessibleContextResponse(
-            MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty
+            MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
+            {
+              responseGroup: 'rotation-alignment'
+            }
           );
 
           lastDirection = null;
