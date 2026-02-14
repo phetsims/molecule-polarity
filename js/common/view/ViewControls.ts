@@ -1,4 +1,4 @@
-// Copyright 2017-2026, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 
 /**
  * Extracts shared behavior for all of the view controls across screens
