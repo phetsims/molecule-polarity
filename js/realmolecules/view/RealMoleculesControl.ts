@@ -66,7 +66,7 @@ export default class RealMoleculesControl extends HBox {
         } ),
         tandemName: `${molecule.tandem.name}Item`,
         accessibleName: new PatternStringProperty( MoleculePolarityStrings.pattern.symbolNameStringProperty, {
-          symbol: molecule.createSpokenSymbolStringProperty(),
+          symbol: molecule.spokenSymbolStringProperty,
           name: molecule.fullNameProperty
         } )
       };

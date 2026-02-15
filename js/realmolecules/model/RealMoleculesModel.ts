@@ -61,10 +61,16 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
       phetioFeatured: true
     } );
 
-    const createMolecule = ( symbol: MoleculeSymbol, nameStringProperty: LocalizedStringProperty, geometry: MoleculeGeometry ) => {
+    const createMolecule = (
+      symbol: MoleculeSymbol,
+      geometry: MoleculeGeometry,
+      nameStringProperty: LocalizedStringProperty,
+      spokenSymbolStringProperty: LocalizedStringProperty
+    ) => {
       return new RealMolecule(
         symbol,
         nameStringProperty,
+        spokenSymbolStringProperty,
         geometry,
         this.isAdvancedProperty,
         moleculesTandem.createTandem( symbol )
@@ -72,28 +78,28 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     };
 
     this.molecules = [
-      createMolecule( 'H2', MoleculePolarityStrings.hydrogenStringProperty, 'linear' ),
-      createMolecule( 'N2', MoleculePolarityStrings.nitrogenStringProperty, 'linear' ),
-      createMolecule( 'O2', MoleculePolarityStrings.oxygenStringProperty, 'linear' ),
-      createMolecule( 'F2', MoleculePolarityStrings.fluorineStringProperty, 'linear' ),
-      createMolecule( 'HF', MoleculePolarityStrings.hydrogenFluorideStringProperty, 'linear' ),
+      createMolecule( 'H2', 'linear', MoleculePolarityStrings.hydrogenStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenStringProperty ),
+      createMolecule( 'N2', 'linear', MoleculePolarityStrings.nitrogenStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.nitrogenStringProperty ),
+      createMolecule( 'O2', 'linear', MoleculePolarityStrings.oxygenStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.oxygenStringProperty ),
+      createMolecule( 'F2', 'linear', MoleculePolarityStrings.fluorineStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.fluorineStringProperty ),
+      createMolecule( 'HF', 'linear', MoleculePolarityStrings.hydrogenFluorideStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenFluorideStringProperty ),
 
-      createMolecule( 'H2O', MoleculePolarityStrings.waterStringProperty, 'bent' ),
-      createMolecule( 'CO2', MoleculePolarityStrings.carbonDioxideStringProperty, 'linear' ),
-      createMolecule( 'HCN', MoleculePolarityStrings.hydrogenCyanideStringProperty, 'linear' ),
-      createMolecule( 'O3', MoleculePolarityStrings.ozoneStringProperty, 'bent' ),
+      createMolecule( 'H2O', 'bent', MoleculePolarityStrings.waterStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.waterStringProperty ),
+      createMolecule( 'CO2', 'linear', MoleculePolarityStrings.carbonDioxideStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.carbonDioxideStringProperty ),
+      createMolecule( 'HCN', 'linear', MoleculePolarityStrings.hydrogenCyanideStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenCyanideStringProperty ),
+      createMolecule( 'O3', 'bent', MoleculePolarityStrings.ozoneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.ozoneStringProperty ),
 
-      createMolecule( 'NH3', MoleculePolarityStrings.ammoniaStringProperty, 'trigonalPyramidal' ),
-      createMolecule( 'BH3', MoleculePolarityStrings.boraneStringProperty, 'trigonalPlanar' ),
-      createMolecule( 'BF3', MoleculePolarityStrings.boronTrifluorideStringProperty, 'trigonalPlanar' ),
-      createMolecule( 'CH2O', MoleculePolarityStrings.formaldehydeStringProperty, 'trigonalPlanar' ),
+      createMolecule( 'NH3', 'trigonalPyramidal', MoleculePolarityStrings.ammoniaStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.ammoniaStringProperty ),
+      createMolecule( 'BH3', 'trigonalPlanar', MoleculePolarityStrings.boraneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.boraneStringProperty ),
+      createMolecule( 'BF3', 'trigonalPlanar', MoleculePolarityStrings.boronTrifluorideStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.boronTrifluorideStringProperty ),
+      createMolecule( 'CH2O', 'trigonalPlanar', MoleculePolarityStrings.formaldehydeStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.formaldehydeStringProperty ),
 
-      createMolecule( 'CH4', MoleculePolarityStrings.methaneStringProperty, 'tetrahedral' ),
-      createMolecule( 'CH3F', MoleculePolarityStrings.fluoromethaneStringProperty, 'tetrahedral' ),
-      createMolecule( 'CH2F2', MoleculePolarityStrings.difluoromethaneStringProperty, 'tetrahedral' ),
-      createMolecule( 'CHF3', MoleculePolarityStrings.trifluoromethaneStringProperty, 'tetrahedral' ),
-      createMolecule( 'CF4', MoleculePolarityStrings.tetrafluoromethaneStringProperty, 'tetrahedral' ),
-      createMolecule( 'CHCl3', MoleculePolarityStrings.chloroformStringProperty, 'tetrahedral' )
+      createMolecule( 'CH4', 'tetrahedral', MoleculePolarityStrings.methaneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.methaneStringProperty ),
+      createMolecule( 'CH3F', 'tetrahedral', MoleculePolarityStrings.fluoromethaneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.fluoromethaneStringProperty ),
+      createMolecule( 'CH2F2', 'tetrahedral', MoleculePolarityStrings.difluoromethaneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.difluoromethaneStringProperty ),
+      createMolecule( 'CHF3', 'tetrahedral', MoleculePolarityStrings.trifluoromethaneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.trifluoromethaneStringProperty ),
+      createMolecule( 'CF4', 'tetrahedral', MoleculePolarityStrings.tetrafluoromethaneStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.tetrafluoromethaneStringProperty ),
+      createMolecule( 'CHCl3', 'tetrahedral', MoleculePolarityStrings.chloroformStringProperty, MoleculePolarityStrings.a11y.realMoleculesScreen.molecules.spokenSymbol.chloroformStringProperty )
     ];
 
     const selectedMolecule = this.molecules.find( molecule => molecule.symbol === 'HF' )!;

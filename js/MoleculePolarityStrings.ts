@@ -315,6 +315,27 @@ type StringsType = {
         'advancedSelectedStringProperty': LocalizedStringProperty;
       };
       'molecules': {
+        'spokenSymbol': {
+          'hydrogenStringProperty': LocalizedStringProperty;
+          'nitrogenStringProperty': LocalizedStringProperty;
+          'oxygenStringProperty': LocalizedStringProperty;
+          'fluorineStringProperty': LocalizedStringProperty;
+          'hydrogenFluorideStringProperty': LocalizedStringProperty;
+          'waterStringProperty': LocalizedStringProperty;
+          'carbonDioxideStringProperty': LocalizedStringProperty;
+          'hydrogenCyanideStringProperty': LocalizedStringProperty;
+          'ozoneStringProperty': LocalizedStringProperty;
+          'ammoniaStringProperty': LocalizedStringProperty;
+          'boraneStringProperty': LocalizedStringProperty;
+          'boronTrifluorideStringProperty': LocalizedStringProperty;
+          'formaldehydeStringProperty': LocalizedStringProperty;
+          'methaneStringProperty': LocalizedStringProperty;
+          'fluoromethaneStringProperty': LocalizedStringProperty;
+          'difluoromethaneStringProperty': LocalizedStringProperty;
+          'trifluoromethaneStringProperty': LocalizedStringProperty;
+          'tetrafluoromethaneStringProperty': LocalizedStringProperty;
+          'chloroformStringProperty': LocalizedStringProperty;
+        };
         'descriptionStringProperty': LocalizedStringProperty;
         'bondDipoleStringProperty': LocalizedStringProperty;
         'molecularDipoleStringProperty': LocalizedStringProperty;

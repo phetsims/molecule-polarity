@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -253,6 +253,25 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicHelpText
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicSelected', 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicSelectedStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedSelected', 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_nitrogen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.nitrogenStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_oxygen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.oxygenStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_fluorine', 'a11y.realMoleculesScreen.molecules.spokenSymbol.fluorineStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogenFluoride', 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenFluorideStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_water', 'a11y.realMoleculesScreen.molecules.spokenSymbol.waterStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_carbonDioxide', 'a11y.realMoleculesScreen.molecules.spokenSymbol.carbonDioxideStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogenCyanide', 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenCyanideStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_ozone', 'a11y.realMoleculesScreen.molecules.spokenSymbol.ozoneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_ammonia', 'a11y.realMoleculesScreen.molecules.spokenSymbol.ammoniaStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_borane', 'a11y.realMoleculesScreen.molecules.spokenSymbol.boraneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_boronTrifluoride', 'a11y.realMoleculesScreen.molecules.spokenSymbol.boronTrifluorideStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_formaldehyde', 'a11y.realMoleculesScreen.molecules.spokenSymbol.formaldehydeStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_methane', 'a11y.realMoleculesScreen.molecules.spokenSymbol.methaneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_fluoromethane', 'a11y.realMoleculesScreen.molecules.spokenSymbol.fluoromethaneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_difluoromethane', 'a11y.realMoleculesScreen.molecules.spokenSymbol.difluoromethaneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_trifluoromethane', 'a11y.realMoleculesScreen.molecules.spokenSymbol.trifluoromethaneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_tetrafluoromethane', 'a11y.realMoleculesScreen.molecules.spokenSymbol.tetrafluoromethaneStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_chloroform', 'a11y.realMoleculesScreen.molecules.spokenSymbol.chloroformStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_description', 'a11y.realMoleculesScreen.molecules.descriptionStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_bondDipole', 'a11y.realMoleculesScreen.molecules.bondDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_molecularDipole', 'a11y.realMoleculesScreen.molecules.molecularDipoleStringProperty' );
@@ -660,6 +679,27 @@ const MoleculePolarityFluent = {
         advancedSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedSelected', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty' ) )
       },
       molecules: {
+        spokenSymbol: {
+          hydrogenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogen', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenStringProperty' ) ),
+          nitrogenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_nitrogen', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.nitrogenStringProperty' ) ),
+          oxygenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_oxygen', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.oxygenStringProperty' ) ),
+          fluorineStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_fluorine', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.fluorineStringProperty' ) ),
+          hydrogenFluorideStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogenFluoride', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenFluorideStringProperty' ) ),
+          waterStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_water', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.waterStringProperty' ) ),
+          carbonDioxideStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_carbonDioxide', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.carbonDioxideStringProperty' ) ),
+          hydrogenCyanideStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogenCyanide', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenCyanideStringProperty' ) ),
+          ozoneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_ozone', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.ozoneStringProperty' ) ),
+          ammoniaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_ammonia', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.ammoniaStringProperty' ) ),
+          boraneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_borane', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.boraneStringProperty' ) ),
+          boronTrifluorideStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_boronTrifluoride', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.boronTrifluorideStringProperty' ) ),
+          formaldehydeStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_formaldehyde', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.formaldehydeStringProperty' ) ),
+          methaneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_methane', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.methaneStringProperty' ) ),
+          fluoromethaneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_fluoromethane', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.fluoromethaneStringProperty' ) ),
+          difluoromethaneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_difluoromethane', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.difluoromethaneStringProperty' ) ),
+          trifluoromethaneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_trifluoromethane', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.trifluoromethaneStringProperty' ) ),
+          tetrafluoromethaneStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_tetrafluoromethane', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.tetrafluoromethaneStringProperty' ) ),
+          chloroformStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_spokenSymbol_chloroform', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.spokenSymbol.chloroformStringProperty' ) )
+        },
         description: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_description', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.descriptionStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] ),
         _comment_0: new FluentComment( {"comment":"bondDipole6 - Bond Dipole magnitude (Screen 1)","associatedKey":"bondDipole"} ),
         bondDipole: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_bondDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.bondDipoleStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] ),

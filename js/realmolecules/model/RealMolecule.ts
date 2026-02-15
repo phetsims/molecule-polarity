@@ -7,7 +7,6 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
@@ -17,13 +16,12 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import { RealAtom } from './RealAtom.js';
+import { RealBond } from './RealBond.js';
+import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 import { RealMoleculeData, RealMoleculeDataEntry } from './RealMoleculeData.js';
 import { simplifiedPartialChargesMap } from './RealMoleculeSimplifiedData.js';
 import { SurfaceVertex } from './SurfaceVertex.js';
-import { RealBond } from './RealBond.js';
-import { RealAtom } from './RealAtom.js';
-import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
 
 export type MoleculeGeometry = 'linear' | 'bent' | 'trigonalPlanar' | 'trigonalPyramidal' | 'tetrahedral';
 
@@ -77,6 +75,7 @@ export default class RealMolecule extends PhetioObject {
   public constructor(
     public readonly symbol: MoleculeSymbol,
     public readonly fullNameProperty: TReadOnlyProperty<string>,
+    public readonly spokenSymbolStringProperty: TReadOnlyProperty<string>,
     public readonly geometry: MoleculeGeometry,
     public readonly isAdvancedProperty: TReadOnlyProperty<boolean>,
     tandem: Tandem
@@ -418,31 +417,6 @@ export default class RealMolecule extends PhetioObject {
   public getAccessibleName(): MoleculeName {
     return symbolToAccessibleNameMap[ this.symbol ];
   }
-
-  /**
-   * Utility function that gets a chemical name and return its spoken symbol string.
-   * For example: "CHCl3" -> "Upper C, Upper H, Upper Cl 3"
-   */
-  public createSpokenSymbolStringProperty(): TReadOnlyProperty<string> {
-    return new DerivedStringProperty( [
-      MoleculePolarityFluent.a11y.common.upperStringProperty
-    ], ( upper: string ) => {
-      const characters = this.symbol.split( '' );
-      let spokenString = '';
-
-      characters.forEach( ( character, index ) => {
-        // If character is uppercase letter or not a number
-        if ( character === character.toUpperCase() && isNaN( Number( character ) ) ) {
-          spokenString += ` ${upper} ${character}`;
-        }
-        else {
-          spokenString += ` ${character}`;
-        }
-      } );
-     return spokenString.trim();
-    } );
-  }
-
 
   /**
    * RealMoleculeIO handles PhET-iO serialization of RealMolecule. Since all RealMolecule are instantiated at
