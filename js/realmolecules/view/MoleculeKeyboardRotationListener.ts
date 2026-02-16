@@ -23,13 +23,11 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
     moleculeNode: Node,
     tandem: Tandem
   ) {
-    let lastHorizontalDirection: 'left' | 'right' | null = null;
-    let lastVerticalDirection: 'up' | 'down' | null = null;
+    let lastDirection: 'left' | 'right' | 'up' | 'down' | null = null;
 
     // We'll play sounds every SOUND_NOTIFICATION_PERIOD for fresh keypresses,
     // see https://github.com/phetsims/molecule-polarity/issues/294
-    let horizontalCount = 0;
-    let verticalCount = 0;
+    let count = 0;
 
     super( {
       dragDelta: Math.PI / 16,
@@ -41,39 +39,27 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
         const x = listener.modelDelta.x;
         const y = listener.modelDelta.y;
 
-        const currentHorizontal: 'left' | 'right' | null = x !== 0 ? ( x > 0 ? 'right' : 'left' ) : null;
-        const currentVertical: 'up' | 'down' | null = y !== 0 ? ( y > 0 ? 'down' : 'up' ) : null;
-        const horizontalChanged = currentHorizontal !== lastHorizontalDirection;
-        const verticalChanged = currentVertical !== lastVerticalDirection;
-        const horizontalRepeatedSound = horizontalCount === 0;
-        const verticalRepeatedSound = verticalCount === 0;
+        // Decision was made to not "worry" about cases where vertical and horizontal is changing at the same time.
+        const currentDirection = ( x !== 0 ? ( x > 0 ? 'right' : 'left' ) : null ) ?? ( y !== 0 ? ( y > 0 ? 'down' : 'up' ) : null );
+        const changed = currentDirection !== lastDirection;
+        const repeatedSound = count === 0;
 
-        if ( currentHorizontal !== null ) {
-          if ( horizontalChanged || horizontalRepeatedSound ) {
-            lastHorizontalDirection = currentHorizontal;
-            moleculeNode.addAccessibleObjectResponse(
-              MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
-                {
-                  direction: currentHorizontal
-                }
-              ) );
-          }
-
-          horizontalCount = ( horizontalCount + 1 ) % SOUND_NOTIFICATION_PERIOD;
+        if ( changed ) {
+          count = 0;
         }
 
-        if ( currentVertical !== null ) {
-          if ( verticalChanged || verticalRepeatedSound ) {
-            lastVerticalDirection = currentVertical;
+        if ( currentDirection !== null ) {
+          if ( changed || repeatedSound ) {
+            lastDirection = currentDirection;
             moleculeNode.addAccessibleObjectResponse(
               MoleculePolarityFluent.a11y.realMoleculesScreen.draggableMolecule.objectResponses.format(
                 {
-                  direction: currentVertical
+                  direction: currentDirection
                 }
               ) );
           }
 
-          verticalCount = ( verticalCount + 1 ) % SOUND_NOTIFICATION_PERIOD;
+          count = ( count + 1 ) % SOUND_NOTIFICATION_PERIOD;
         }
       },
       drag: ( event, listener ) => {
