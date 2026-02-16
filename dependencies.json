@@ -1,11 +1,11 @@
 {
-  "comment": "# molecule-polarity 2.0.0-dev.1 Fri Feb 06 2026 11:31:36 GMT-0500 (Colombia Standard Time)",
+  "comment": "# molecule-polarity 2.0.0-dev.2 Mon Feb 16 2026 15:26:47 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "1a4637cfff70e7e8b0844dc43848a86ae89b4cf5",
     "branch": "main"
   },
   "axon": {
-    "sha": "abaa3500c5e494fe72de09ca3eb90c6883fba3d0",
+    "sha": "cafe03f85ec180e5918d69c8846f8f5973a3d4cc",
     "branch": "main"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "443c05277c8a29c4eb5ee32729e6b656c670428b",
+    "sha": "6d46b1bb9ddd7a030bfb579beed77ed3228de029",
     "branch": "main"
   },
   "kite": {
@@ -29,11 +29,11 @@
     "branch": "main"
   },
   "mobius": {
-    "sha": "05ca073eb0993b0e1c7cdbee21305fe1fd71a987",
+    "sha": "8b81e45ff7583e87ffece53daee0ad5b7463642e",
     "branch": "main"
   },
   "molecule-polarity": {
-    "sha": "517944f27a5b537d537cf32dfae6eee6a0c92b98",
+    "sha": "768d68829407e260667b11216a6e519f0e22c88b",
     "branch": "main"
   },
   "nitroglycerin": {
@@ -41,7 +41,7 @@
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "fccce1e098f7f655390f27671f25887e63d37e33",
+    "sha": "109a3565292c450d083e4251862549508239b542",
     "branch": "main"
   },
   "phet-core": {
@@ -53,7 +53,7 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "efacb54684ea0609ec03bdd19120847017faad31",
+    "sha": "ab6000a9bafe000aeaa1c391a5ca5c9ba7139004",
     "branch": "main"
   },
   "phet-io-wrappers": {
@@ -65,7 +65,7 @@
     "branch": "main"
   },
   "phetmarks": {
-    "sha": "1ea943a9f23a38646e764ed7cb679c7381c2df8b",
+    "sha": "e7683f3b7ea42982c6a0332716bbf6b1476f8227",
     "branch": "main"
   },
   "query-string-machine": {
@@ -73,11 +73,11 @@
     "branch": "main"
   },
   "scenery": {
-    "sha": "b3cc31f118c52e3690ddd0464d3baa2a6b33dbe8",
+    "sha": "fed7a7aa7181b56ac9265de6b19ecc7420852ded",
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "46f9c4da83614b90750167cf714a2c5b60ec91b3",
+    "sha": "096b68e40bc94a1371fd6d65d59bd17261ab2b02",
     "branch": "main"
   },
   "sherpa": {
@@ -89,7 +89,7 @@
     "branch": "main"
   },
   "sun": {
-    "sha": "c8d99daec6526be633b862d7ba12a135d58abee3",
+    "sha": "b311ceb70fd72acd5df4dacfb938dfc112c682f0",
     "branch": "main"
   },
   "tambo": {
