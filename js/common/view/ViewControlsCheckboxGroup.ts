@@ -17,6 +17,7 @@ import BondDipoleNode from './BondDipoleNode.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class ViewControlsCheckboxGroup extends VerticalCheckboxGroup {
   public constructor( items: VerticalCheckboxGroupItem[], providedOptions?: VerticalCheckboxGroupOptions ) {
@@ -116,7 +117,7 @@ export const createMolecularDipoleCheckboxItem = ( molecularDipoleVisiblePropert
   };
 };
 
-export const createPartialChargesCheckboxItem = ( partialChargesVisibleProperty: PhetioProperty<boolean>, visibleProperty?: PhetioProperty<boolean> ): VerticalCheckboxGroupItem => {
+export const createPartialChargesCheckboxItem = ( partialChargesVisibleProperty: PhetioProperty<boolean>, visibleProperty?: TReadOnlyProperty<boolean> ): VerticalCheckboxGroupItem => {
   return {
     property: partialChargesVisibleProperty,
     createNode: () => {
