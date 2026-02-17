@@ -63,11 +63,11 @@ a combination of all of the molecule JSON, and can be essentially copy-pasted in
 for the data section. This molecular data is fairly comprehensive, containing molecular position, structure, surface,
 dipoles, partial charges, and more.
 
-It should support adding more molecules (add a SDF and compute), or should be easy to remove molecules or data.
+It supports adding more molecules (add a SDF and compute), or molecular data or molecules can be easily removed.
 The generation code contains more code that can generate much more than what is currently stored/shipped, including many
 more partial charge models if needed in the future.
 
-`RealMolecule` on startup will parse the data into a significantly better API for use in the sim.
+`RealMolecule` on startup parses the data into a significantly better API for use in the sim.
 
 ### Per-Molecule Overrides
 
