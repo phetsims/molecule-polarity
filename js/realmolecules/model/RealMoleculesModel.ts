@@ -44,7 +44,7 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
 
     super( {
       tandem: tandem,
-      phetioState: false
+      phetioState: false // needed since it is instrumented but with no state of its own, see https://github.com/phetsims/molecule-polarity/issues/304
     } );
 
     const moleculesTandem = tandem.createTandem( 'molecules' );
