@@ -48,7 +48,7 @@ const ZERO = 0.05;
 const roundAbs = ( value: number ) => toFixedNumber( Math.abs( value ), 2 );
 
 export default class DescriptionMaps {
-  public constructor() {
+  private constructor() {
     // no-op
   }
 
