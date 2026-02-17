@@ -10,7 +10,7 @@
  * Additionally, contains a lot of logic for initial "side selection" of the dipole arrow, with the ability to reverse
  * the initial side on a per-bond basis (driven by data in RealMoleculeCustomization).
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import moleculePolarity from '../../../moleculePolarity.js';

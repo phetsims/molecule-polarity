@@ -4,7 +4,7 @@
  * Type definitions for everything in three-r160-addons.js, so we can use it in properly-typed ways in the
  * sim code.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 /* eslint-disable @typescript-eslint/consistent-type-definitions */

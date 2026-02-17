@@ -7,7 +7,7 @@
  * per‑Debye scale as bond dipoles (from the model), oriented according
  * to the preference (positive->negative or reversed).
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import moleculePolarity from '../../../moleculePolarity.js';

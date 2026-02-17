@@ -3,7 +3,7 @@
 /**
  * Atom mesh view wrapper for the 3D molecule view.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';

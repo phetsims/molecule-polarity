@@ -6,7 +6,7 @@
  * The source data is generated with assets/generate-molecule-data.ts, but it is placed in
  * assets/generated-data/all-molecules.json. That JSON can be parsed into the main export, and then cleaned up.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 export type RealMoleculeDataEntry = {

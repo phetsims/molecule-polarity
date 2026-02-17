@@ -5,7 +5,7 @@
  * setting the layers of the atom labels AND this custom duplicate camera to a specific layer, so that it renders
  * nothing else in the scene (and the atom labels aren't rendered in the normal RenderPass).
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import moleculePolarity from '../../../moleculePolarity.js';

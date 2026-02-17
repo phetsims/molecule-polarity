@@ -3,7 +3,7 @@
 /**
  * A dipole arrow in the 3d view
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import moleculePolarity from '../../../moleculePolarity.js';

@@ -5,7 +5,7 @@
  *
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';

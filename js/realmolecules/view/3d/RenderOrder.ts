@@ -4,7 +4,7 @@
  * Centralized renderOrder values for 3D views. This allows certain objects to be rendered "before" other objects,
  * which is important for the copious use of transparency in this sim. See implementation-notes for more info.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 // Lower numbers are rendered first.

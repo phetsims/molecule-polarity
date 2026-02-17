@@ -6,7 +6,7 @@
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';

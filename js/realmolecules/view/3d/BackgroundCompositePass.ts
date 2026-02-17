@@ -11,7 +11,7 @@
  * then writes into the read buffer (color), so that the depth buffer data still lives undisturbed in the read buffer
  * for the passes that come after. This order is intentional and should not be rearranged.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import moleculePolarity from '../../../moleculePolarity.js';

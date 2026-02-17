@@ -3,7 +3,7 @@
 /**
  * Per-molecule customization options applied to real molecules in the 'Real Molecules' screen.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import type { MoleculeSymbol } from './RealMolecule.js';

@@ -3,7 +3,7 @@
 /**
  * Color functions used for real molecules
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Element from '../../../../nitroglycerin/js/Element.js';

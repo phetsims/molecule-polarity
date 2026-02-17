@@ -3,7 +3,7 @@
 /**
  * Represents a vertex on the molecular (van-der-waals) surface.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Vector3 from '../../../../dot/js/Vector3.js';

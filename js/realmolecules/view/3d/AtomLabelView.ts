@@ -6,7 +6,7 @@
  * NOTE: These will be rendered in a separate layer by a separate render pass, but will still interact with the depth
  * buffer.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import TextureQuad from '../../../../../mobius/js/TextureQuad.js';

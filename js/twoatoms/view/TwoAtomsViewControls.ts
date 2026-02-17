@@ -4,7 +4,7 @@
  * TwoAtomsViewControls is the subpanel labeled 'View' in the 'Two Atoms' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import moleculePolarity from '../../moleculePolarity.js';

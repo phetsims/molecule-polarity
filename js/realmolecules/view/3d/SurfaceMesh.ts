@@ -14,7 +14,7 @@
  * This allows the background to essentially have "more" of the surface opacity rendered, WITHOUT covering up the
  * molecule. Then the foreground adds the "over the molecule" effect with a much lower opacity.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';

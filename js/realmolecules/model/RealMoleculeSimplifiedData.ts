@@ -3,7 +3,7 @@
 /**
  * Simplified partial charges from the Java sim input (unidentified source).
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import type { MoleculeSymbol } from './RealMolecule.js';

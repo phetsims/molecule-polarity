@@ -4,7 +4,7 @@
  * Real molecule that is viewable in PhET's 3D molecule viewer.
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
