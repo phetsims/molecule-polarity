@@ -42,7 +42,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 
 ### Other Changes
 * Partial Charges and the associated checkbox have been removed from the Basic Model on the Real Molecules screen.
-* Ozone is shown as with 1.5 bonds. The Java version showed single bonds. 
+* Ozone is shown with aromatic (1.5 order) bonds. The Java version had a single and a double bond. 
 
 ## 1.3 (2023-06-22)
 
