@@ -27,6 +27,7 @@ import BondView from './BondView.js';
 import MPColors from '../../../common/MPColors.js';
 import { RealBond } from '../../model/RealBond.js';
 import { RealAtom } from '../../model/RealAtom.js';
+import affirm from '../../../../../perennial-alias/js/browser-and-node/affirm.js';
 
 export default class RealMoleculeView extends THREE.Object3D {
   public constructor(
@@ -140,7 +141,7 @@ export default class RealMoleculeView extends THREE.Object3D {
         const mu = molecule.computeMolecularDipoleFromBondDipoleVectorSum();
         if ( mu.getMagnitude() > 1e-5 ) {
           const centralAtom = molecule.getCentralAtom()!;
-          assert && assert( centralAtom, 'Expected a central atom when molecular dipole is significant' );
+          affirm( centralAtom, 'Expected a central atom when molecular dipole is significant' );
 
           const molecularDipoleView = new MolecularDipoleView( molecule, orientationSign );
           this.add( molecularDipoleView );

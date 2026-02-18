@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import moleculePolarity from '../../moleculePolarity.js';
 
 // Length of the range
@@ -36,7 +37,7 @@ function normalizeAngle( angle: number, minAngle = 0 ): number {
   // Shift back to the desired range.
   normalizedAngle += minAngle;
 
-  assert && assert( normalizedAngle >= minAngle && normalizedAngle < minAngle + RANGE_LENGTH,
+  affirm( normalizedAngle >= minAngle && normalizedAngle < minAngle + RANGE_LENGTH,
     `unexpected normalizedAngle: ${normalizedAngle} for angle=${angle}` );
   return normalizedAngle;
 }

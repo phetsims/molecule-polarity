@@ -10,6 +10,7 @@
 
 import Range from '../../../../dot/js/Range.js';
 import Shape from '../../../../kite/js/Shape.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
@@ -34,7 +35,7 @@ export default abstract class SurfaceNode extends Node {
   protected readonly path: Path;
 
   protected constructor( molecule: DiatomicMolecule, colors: TColor[], providedOptions: SurfaceNodeOptions ) {
-    assert && assert( molecule.atomA.diameter === molecule.atomB.diameter,
+    affirm( molecule.atomA.diameter === molecule.atomB.diameter,
       'creation of gradient assumes that both atoms have the same diameter' );
 
     const options = optionize<SurfaceNodeOptions, SelfOptions, NodeOptions>()( {

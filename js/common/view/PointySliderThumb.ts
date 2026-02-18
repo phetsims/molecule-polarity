@@ -10,6 +10,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
@@ -68,7 +69,7 @@ export default class PointySliderThumb extends Path {
 
     // Save the coordinates for the point above the left side arc, for use on the other side.
     const sideArcPoint = shape.getLastPoint();
-    assert && assert( sideArcPoint );
+    affirm( sideArcPoint );
 
     shape.lineTo( 0, 0 )
       .lineTo( -sideArcPoint.x, sideArcPoint.y )

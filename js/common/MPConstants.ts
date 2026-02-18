@@ -9,6 +9,7 @@
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
+import affirm from '../../../perennial-alias/js/browser-and-node/affirm.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import moleculePolarity from '../moleculePolarity.js';
 
@@ -63,7 +64,7 @@ const MPConstants = {
   SURFACE_GRADIENT_WIDTH_MULTIPLIER: 5
 };
 
-assert && assert( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );
+affirm( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );
 
 moleculePolarity.register( 'MPConstants', MPConstants );
 export default MPConstants;

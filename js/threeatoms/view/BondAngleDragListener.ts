@@ -22,6 +22,7 @@ import Molecule from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 
 type SelfOptions = {
 
@@ -59,7 +60,7 @@ export default class BondAngleDragListener extends DragListener {
     // Finds the angle (in radians) about the molecule's position.
     const getAngle = ( event: SceneryEvent ) => {
       const parent = targetNode.getParent()!;
-      assert && assert( parent );
+      affirm( parent );
       const point = parent.globalToLocalPoint( event.pointer.point );
 
       // Rounding to nearest 5° to match keyboard dragging increments.

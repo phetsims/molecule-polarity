@@ -11,6 +11,7 @@
 
 import { linear } from '../../../../dot/js/util/linear.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -30,7 +31,7 @@ export default class ElectronDensitySurfaceNode extends SurfaceNode {
    * Updates the surface fill. Width of the gradient expands as the difference in EN approaches zero.
    */
   protected override updateFill(): void {
-    assert && assert( this.colors.length === 2, 'this implementation only works for 2 colors' );
+    affirm( this.colors.length === 2, 'this implementation only works for 2 colors' );
 
     // scale varies from 1 to 0, approaches zero as EN difference approaches zero.
     const deltaEN = this.molecule.getDeltaEN();
