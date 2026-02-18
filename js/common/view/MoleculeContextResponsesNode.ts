@@ -17,6 +17,9 @@ import Molecule from '../model/Molecule.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
 
+// A small epsilon to avoid floating point precision issues when checking for horizontal alignment.
+const ONE = 1 - 1e-10;
+
 export default class MoleculeContextResponsesNode extends Node {
 
   private readonly atom: Atom;
@@ -167,8 +170,9 @@ export default class MoleculeContextResponsesNode extends Node {
       } ), 'surfaceType'
     );
 
-    // If E Field enabled and the molecule is polar
-    eFieldEnabled && !isDipoleZero && this.contextResponse(
+    // If E Field enabled and the molecule is polar and already aligned. If not aligned, this response will be
+    // spoken when the molecule becomes aligned as a result of the angle change in RotationResponseNode.
+    eFieldEnabled && !isDipoleZero && Math.cos( currentDipole.angle ) > ONE && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value, 'eFieldEnabled'
     );
   }
