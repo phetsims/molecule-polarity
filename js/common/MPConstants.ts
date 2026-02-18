@@ -16,55 +16,55 @@ import moleculePolarity from '../moleculePolarity.js';
 const CONTROL_FONT = new PhetFont( 18 );
 const CONTROL_LABEL_MAX_WIDTH = 200;
 
-const MPConstants = {
-
+export default class MPConstants {
   // While these layoutBounds differ from the default, PhET-iO customizations may rely on these bounds.
   // So do not change. See https://github.com/phetsims/molecule-polarity/issues/146
-  LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ),
+  public static readonly LAYOUT_BOUNDS = new Bounds2( 0, 0, 1100, 700 );
 
   // Model
-  ELECTRONEGATIVITY_RANGE: new RangeWithValue( 2, 4, 2 ),
-  ELECTRONEGATIVITY_TICK_SPACING: 0.2,
-  ATOM_DIAMETER: 100,
-  BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
-  ANGLE_RANGE: new Range( -Math.PI, Math.PI ), // see https://github.com/phetsims/molecule-polarity/issues/91
-  ALIGNMENT_COS_THRESHOLD: 1 - 1e-10, // threshold for alignment checks using cos(angle) ~ 1
+  public static readonly ELECTRONEGATIVITY_RANGE = new RangeWithValue( 2, 4, 2 );
+  public static readonly ELECTRONEGATIVITY_TICK_SPACING = 0.2;
+  public static readonly ATOM_DIAMETER = 100;
+  public static readonly BOND_LENGTH = 150; // must be longer than ATOM_DIAMETER
+  public static readonly ANGLE_RANGE = new Range( -Math.PI, Math.PI ); // see https://github.com/phetsims/molecule-polarity/issues/91
+  public static readonly ALIGNMENT_COS_THRESHOLD = 1 - 1e-10; // threshold for alignment checks using cos(angle) ~ 1
 
-  CONTROL_ICON_X_SPACING: 10,  // horizontal space between labels and icons
-  CONTROL_PANEL_Y_SPACING: 15, // vertical space between controls
-  CONTROL_PANEL_MOUSE_X_DILATION: 5,
-  CONTROL_PANEL_TOUCH_X_DILATION: 15,
+  public static readonly CONTROL_ICON_X_SPACING = 10;  // horizontal space between labels and icons
+  public static readonly CONTROL_PANEL_Y_SPACING = 15; // vertical space between controls
+  public static readonly CONTROL_PANEL_MOUSE_X_DILATION = 5;
+  public static readonly CONTROL_PANEL_TOUCH_X_DILATION = 15;
 
   // options for titles in control panels
-  CONTROL_PANEL_TITLE_OPTIONS: {
+  public static readonly CONTROL_PANEL_TITLE_OPTIONS = {
     font: new PhetFont( { size: 20, weight: 'bold' } ),
     maxWidth: 250 // i18n, determined empirically
-  },
+  };
 
   // Provided to text on controls (Checkbox/RadioButton labels)
-  CONTROL_TEXT_OPTIONS: {
+  public static readonly CONTROL_TEXT_OPTIONS = {
     font: CONTROL_FONT
-  },
+  };
 
   // Provided to control labels (usually Text, but sometimes an HBox with Text and an icon)
-  CONTROL_LABEL_OPTIONS: {
+  public static readonly CONTROL_LABEL_OPTIONS = {
     maxWidth: CONTROL_LABEL_MAX_WIDTH
-  },
+  };
 
   // Provided to control labels that are JUST text (for convenience)
-  CONTROL_TEXT_LABEL_OPTIONS: {
+  public static readonly CONTROL_TEXT_LABEL_OPTIONS = {
     font: CONTROL_FONT,
     maxWidth: CONTROL_LABEL_MAX_WIDTH
-  },
+  };
 
-  AQUA_RADIO_BUTTON_OPTIONS: { radius: 9 },
+  public static readonly AQUA_RADIO_BUTTON_OPTIONS = {
+    radius: 9
+  };
 
   // Controls the width of the gradient used to fill the 2D surfaces.
   // Smaller values result in a more noticeable change as the EN sliders are dragged.
-  SURFACE_GRADIENT_WIDTH_MULTIPLIER: 5
-};
+  public static readonly SURFACE_GRADIENT_WIDTH_MULTIPLIER = 5;
+}
 
 affirm( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );
 
 moleculePolarity.register( 'MPConstants', MPConstants );
-export default MPConstants;
