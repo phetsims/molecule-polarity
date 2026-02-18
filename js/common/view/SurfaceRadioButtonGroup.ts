@@ -23,7 +23,7 @@ import MPConstants from '../MPConstants.js';
 type SelfOptions = {
 
   // Color map used for the electrostatic surface
-  electrosaticSurfaceColorsProperty?: TProperty<SurfaceColor>;
+  electrostaticSurfaceColorsProperty?: TProperty<SurfaceColor>;
 };
 
 type SurfaceRadioButtonGroupOptions = SelfOptions & PickRequired<VerticalAquaRadioButtonGroupOptions, 'tandem'>;
@@ -36,7 +36,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
     const options = optionize<SurfaceRadioButtonGroupOptions, SelfOptions, VerticalAquaRadioButtonGroupOptions>()( {
 
       // Self Options
-      electrosaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
+      electrostaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
 
       // VerticalAquaRadioButtonGroupOptions
       spacing: MPConstants.CONTROL_PANEL_Y_SPACING,
@@ -66,7 +66,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
         options: {
           accessibleHelpText: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticPotentialHelpText
             .createProperty( {
-              colorMap: options.electrosaticSurfaceColorsProperty
+              colorMap: options.electrostaticSurfaceColorsProperty
             } ),
           accessibleContextResponse: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty
         }

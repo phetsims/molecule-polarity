@@ -23,7 +23,7 @@ import SurfaceRadioButtonGroup from './SurfaceRadioButtonGroup.js';
 type SelfOptions = {
 
   // Color map used for the electrostatic surface, to be passed to SurfaceRadioButtonGroup
-  electrosaticSurfaceColorsProperty?: TProperty<SurfaceColor>;
+  electrostaticSurfaceColorsProperty?: TProperty<SurfaceColor>;
 };
 
 type SurfaceControlOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
@@ -36,7 +36,7 @@ export default class SurfaceControl extends VBox {
     const options = optionize<SurfaceControlOptions, SelfOptions, VBoxOptions>()( {
 
       // Self options
-      electrosaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
+      electrostaticSurfaceColorsProperty: new Property<SurfaceColor>( 'blueWhiteRed' ),
 
       // VBoxOptions
       align: 'left',
@@ -53,7 +53,7 @@ export default class SurfaceControl extends VBox {
     // Radio button group
     const radioButtonGroup = new SurfaceRadioButtonGroup( surfaceTypeProperty, {
       tandem: options.tandem.createTandem( 'radioButtonGroup' ),
-      electrosaticSurfaceColorsProperty: options.electrosaticSurfaceColorsProperty
+      electrostaticSurfaceColorsProperty: options.electrostaticSurfaceColorsProperty
     } );
 
     options.children = [ titleText, radioButtonGroup ];

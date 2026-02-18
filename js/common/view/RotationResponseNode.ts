@@ -63,11 +63,12 @@ export default class RotationResponseNode extends Node {
     // Storing the dipole to track direction of angle changes
     let lastDirectionVector = Vector2.createPolar( 1, angleProperty.value );
 
+    // TODO: Should this be implemented with (angle, oldAngle) callback? See https://github.com/phetsims/molecule-polarity/issues/252
     angleProperty.lazyLink( angle => {
         const directionVector = Vector2.createPolar( 1, angle );
 
         // Using the cross product of the direction vector
-        // to determine wether the molecule is rotating
+        // to determine whether the molecule is rotating
         // clockwise or counterclockwise.
         if ( directionVector.crossScalar( lastDirectionVector ) < 0 ) {
           if ( lastDirection !== 'clockwise' ) {
