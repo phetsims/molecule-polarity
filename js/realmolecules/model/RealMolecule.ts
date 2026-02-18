@@ -104,6 +104,8 @@ export default class RealMolecule extends PhetioObject {
 
       // Look up the atom symbol (with bond count fallback) in the simplified partial charge map
       let simplifiedPartialCharge = simplifiedPartialChargeMap[ symbol ];
+
+      // TODO: https://github.com/phetsims/molecule-polarity/issues/252 please document why the more specific case (with bonds) would be the fallback instead of the first choice
       if ( simplifiedPartialCharge === undefined ) {
         simplifiedPartialCharge = simplifiedPartialChargeMap[ `${symbol}${bonds.length}` ];
       }
@@ -172,6 +174,7 @@ export default class RealMolecule extends PhetioObject {
         return a.average( b );
       }
       else {
+        // TODO: Perhaps affirm that it's HF? to safeguard in case others add other non-homogeneous diatomic ones later? See https://github.com/phetsims/molecule-polarity/issues/252
         // it's HF, for now we'll center around the F
         const fluorine = moleculeData.atoms.find( atom => atom.symbol === 'F' )!;
         return new Vector3( fluorine.x, fluorine.y, fluorine.z );

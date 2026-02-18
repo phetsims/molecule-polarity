@@ -185,19 +185,19 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       new RealMoleculeAccessibleListNode( model.molecules, model.moleculeProperty, model.isAdvancedProperty, viewProperties )
     );
 
-    const getFixedElecronegativity = ( element: Element ) => {
+    const getFixedElectronegativity = ( element: Element ) => {
       return toFixed( RealAtom.getDisplayElectronegativity( element ), 1 );
     };
     const electronegativityDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
       accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTable.format( {
-        hydrogen: getFixedElecronegativity( Element.H ),
-        boron: getFixedElecronegativity( Element.B ),
-        carbon: getFixedElecronegativity( Element.C ),
-        nitrogen: getFixedElecronegativity( Element.N ),
-        oxygen: getFixedElecronegativity( Element.O ),
-        fluorine: getFixedElecronegativity( Element.F ),
-        chlorine: getFixedElecronegativity( Element.Cl )
+        hydrogen: getFixedElectronegativity( Element.H ),
+        boron: getFixedElectronegativity( Element.B ),
+        carbon: getFixedElectronegativity( Element.C ),
+        nitrogen: getFixedElectronegativity( Element.N ),
+        oxygen: getFixedElectronegativity( Element.O ),
+        fluorine: getFixedElectronegativity( Element.F ),
+        chlorine: getFixedElectronegativity( Element.Cl )
       } ),
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
