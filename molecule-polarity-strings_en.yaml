@@ -82,8 +82,8 @@ a11y:
       realMolecules: 'Explore real molecules in three dimensions.'
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
-      dipoleContext: 'Bond dipole { $bond } arrow { $progress }.'
-      dipoleDirectionChange: 'Bond dipole { $bond } arrow now points to Atom { $atom }.'
+      dipoleContext: 'Dipole { $bond } arrow { $progress }.'
+      dipoleDirectionChange: 'Dipole { $bond } arrow now points to Atom { $atom }.'
       bondCharacterContext: 'Bond is { $progress }.'
       electrostaticContext: 'Atom { $atom } { $progress } electrostatic potential.'
       electronDensityContext: 'Atom { $atom } { $progress } electron density.'
@@ -152,7 +152,7 @@ a11y:
       molecules: 'molecules'
       rotateMoleculeWASD: 'Rotate molecule'
       rotateInSmallerStepsWASD: 'Rotate in smaller steps'
-    bondDipoleDirection: 'Bond dipole { $bond } points { $position } o''clock.'
+    bondDipoleDirection: 'Dipole { $bond } points { $position } o''clock.'
     molecularDipoleResponses:
       molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
       molecularDipoleDirection: '{ a11y.common.molecularDipoleResponses.molecularDipoleContext } Points { $position } o''clock.'
