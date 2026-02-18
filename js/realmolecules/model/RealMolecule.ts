@@ -11,11 +11,10 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import { RealAtom } from './RealAtom.js';
 import { RealBond } from './RealBond.js';
@@ -427,7 +426,7 @@ export default class RealMolecule extends PhetioObject {
    * startup, it implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly RealMoleculeIO = new IOType<IntentionalAny, IntentionalAny>( 'RealMoleculeIO', {
+  public static readonly RealMoleculeIO = new IOType<RealMolecule, ReferenceIOState>( 'RealMoleculeIO', {
     valueType: RealMolecule,
     supertype: ReferenceIO( IOType.ObjectIO )
   } );
