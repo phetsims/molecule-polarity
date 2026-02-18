@@ -83,6 +83,10 @@ a11y:
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
       dipoleContext: 'Dipole { $bond } arrow { $progress }.'
+
+      # The context response for dipole direction change when there are two bonds. The information is combined
+      # into one string to reduce verbosity.
+      dipoleContextTwoBonds: 'Dipole { $bondA } { $progressA }, { $bondB } { $progressB }.'
       dipoleDirectionChange: 'Dipole { $bond } arrow now points to Atom { $atom }.'
       bondCharacterContext: 'Bond is { $progress }.'
       electrostaticContext: 'Atom { $atom } { $progress } electrostatic potential.'

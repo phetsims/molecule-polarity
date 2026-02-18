@@ -105,6 +105,7 @@ type StringsType = {
       'electronegativitySlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
         'dipoleContextStringProperty': LocalizedStringProperty;
+        'dipoleContextTwoBondsStringProperty': LocalizedStringProperty;
         'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
         'bondCharacterContextStringProperty': LocalizedStringProperty;
         'electrostaticContextStringProperty': LocalizedStringProperty;
