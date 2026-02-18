@@ -120,9 +120,7 @@ export default class SurfaceMesh extends THREE.Object3D {
     // essentially interpolating its attributes (position, normal, color). This allows us
     // to get a much smoother surface that is much more visibly appealing, without having to ship a significantly larger
     // amount of molecular surface data.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error Having to use external lib like this
-    let highResolutionGeometry: THREE.Geometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
+    let highResolutionGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
     super();
 
@@ -159,8 +157,6 @@ export default class SurfaceMesh extends THREE.Object3D {
       const oldHighResolutionGeometry = highResolutionGeometry;
 
       // Re-generate the high-resolution geometry
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error Having to use external lib like this
       const newHighResolutionGeometry = window.ThreeLoopSubdivision.modify( meshGeometry, SUBDIVIDE_STEPS );
 
       foregroundMesh.geometry = newHighResolutionGeometry;

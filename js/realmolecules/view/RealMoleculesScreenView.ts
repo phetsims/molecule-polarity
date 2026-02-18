@@ -368,10 +368,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       // Copy helper for render-to-target (e.g. screenshots). We render the composer to its internal buffer,
       // then blit the final output to the provided target.
       const copyMaterial = new THREE.ShaderMaterial( {
-        // eslint-disable-next-line no-undef
         vertexShader: ThreeCopyShader.vertexShader,
-
-        // eslint-disable-next-line no-undef
         fragmentShader: ThreeCopyShader.fragmentShader,
         uniforms: {
           tDiffuse: { value: null },

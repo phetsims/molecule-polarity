@@ -17,7 +17,20 @@ export default [
     languageOptions: {
       globals: {
         p2: 'readonly',
-        THREE: 'readonly'
+        THREE: 'readonly',
+
+        // three-r160-addons
+        ThreePass: 'readonly',
+        ThreeFullScreenQuad: 'readonly',
+        ThreeCopyShader: 'readonly',
+        ThreeOutlinePass: 'readonly',
+        ThreeEffectComposer: 'readonly',
+        ThreeRenderPass: 'readonly',
+        ThreeOutputPass: 'readonly',
+        ThreeSSAARenderPass: 'readonly',
+
+        // three-subdivide
+        ThreeLoopSubdivision: 'readonly'
       }
     }
   }

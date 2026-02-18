@@ -84,11 +84,7 @@ export default class BackgroundCompositePass extends window.ThreePass {
 
     this.copyMaterial = new THREE.ShaderMaterial( {
       uniforms: this.copyUniforms,
-
-      // eslint-disable-next-line no-undef
       vertexShader: ThreeCopyShader.vertexShader,
-
-      // eslint-disable-next-line no-undef
       fragmentShader: ThreeCopyShader.fragmentShader,
       blending: THREE.NoBlending,
       depthTest: false,
