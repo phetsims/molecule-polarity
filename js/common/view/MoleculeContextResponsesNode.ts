@@ -14,11 +14,9 @@ import TwoAtomsViewProperties from '../../twoatoms/view/TwoAtomsViewProperties.j
 import Atom from '../model/Atom.js';
 import Bond from '../model/Bond.js';
 import Molecule from '../model/Molecule.js';
+import MPConstants from '../MPConstants.js';
 import { SurfaceType } from '../model/SurfaceType.js';
 import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
-
-// A small epsilon to avoid floating point precision issues when checking for horizontal alignment.
-const ONE = 1 - 1e-10;
 
 export default class MoleculeContextResponsesNode extends Node {
 
@@ -172,7 +170,8 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // If E Field enabled and the molecule is polar and already aligned. If not aligned, this response will be
     // spoken when the molecule becomes aligned as a result of the angle change in RotationResponseNode.
-    eFieldEnabled && !isDipoleZero && Math.cos( currentDipole.angle ) > ONE && this.contextResponse(
+    eFieldEnabled && !isDipoleZero &&
+    Math.cos( currentDipole.angle ) > MPConstants.ALIGNMENT_COS_THRESHOLD && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value, 'eFieldEnabled'
     );
   }

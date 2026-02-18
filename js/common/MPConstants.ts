@@ -27,6 +27,7 @@ const MPConstants = {
   ATOM_DIAMETER: 100,
   BOND_LENGTH: 150, // must be longer than ATOM_DIAMETER
   ANGLE_RANGE: new Range( -Math.PI, Math.PI ), // see https://github.com/phetsims/molecule-polarity/issues/91
+  ALIGNMENT_COS_THRESHOLD: 1 - 1e-10, // threshold for alignment checks using cos(angle) ~ 1
 
   CONTROL_ICON_X_SPACING: 10,  // horizontal space between labels and icons
   CONTROL_PANEL_Y_SPACING: 15, // vertical space between controls

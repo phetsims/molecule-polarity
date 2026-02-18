@@ -14,14 +14,11 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import MPConstants from '../MPConstants.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
 type SelfOptions = EmptySelfOptions;
-
-// A small epsilon to avoid floating point precision issues when checking for horizontal alignment.
-// TODO: https://github.com/phetsims/molecule-polarity/issues/252 It's confusing to include the epsilon at the site of the ONE declaration, would be clearer at the inequality checks
-const ONE = 1 - 1e-10;
 
 export type RotationResponseNodeOptions = SelfOptions & NodeOptions;
 
@@ -83,7 +80,8 @@ export default class RotationResponseNode extends Node {
         }
 
         // If molecule is horizontal and was rotating due to E-field, emit aligned response.
-        if ( Math.cos( dipoleProperty.value.angle ) > ONE && isRotatingDueToEFieldProperty.value && dipoleProperty.value.magnitude !== 0 ) {
+        if ( Math.cos( dipoleProperty.value.angle ) > MPConstants.ALIGNMENT_COS_THRESHOLD &&
+             isRotatingDueToEFieldProperty.value && dipoleProperty.value.magnitude !== 0 ) {
 
           // "Molecule aligned with Electric Field" after rotating due to E-field has stopped
           this.addAccessibleContextResponse(
@@ -106,7 +104,8 @@ export default class RotationResponseNode extends Node {
       lastDirection = null;
 
       // If molecule is horizontal, notify that it is aligned with electric field.
-      if ( eFieldEnabled && dipoleProperty.value.magnitude !== 0 && Math.cos( dipoleProperty.value.angle ) > ONE ) {
+      if ( eFieldEnabled && dipoleProperty.value.magnitude !== 0 &&
+           Math.cos( dipoleProperty.value.angle ) > MPConstants.ALIGNMENT_COS_THRESHOLD ) {
 
         // "Molecule aligned with Electric Field" when E-field is turned on and molecule is already aligned.
         this.addAccessibleContextResponse(
