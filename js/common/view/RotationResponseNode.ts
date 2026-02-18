@@ -20,6 +20,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 type SelfOptions = EmptySelfOptions;
 
 // A small epsilon to avoid floating point precision issues when checking for horizontal alignment.
+// TODO: https://github.com/phetsims/molecule-polarity/issues/252 It's confusing to include the epsilon at the site of the ONE declaration, would be clearer at the inequality checks
 const ONE = 1 - 1e-10;
 
 export type RotationResponseNodeOptions = SelfOptions & NodeOptions;
