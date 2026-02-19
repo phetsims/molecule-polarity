@@ -54,9 +54,6 @@ import { RealAtom } from '../model/RealAtom.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
-const HORIZONTAL_MARGIN = 40;
-const VERTICAL_MARGIN = 20;
-
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
   private readonly stepEmitter = new TinyEmitter();
@@ -234,8 +231,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
             alignBounds: this.layoutBounds,
             xAlign: 'right',
             yAlign: 'bottom',
-            xMargin: HORIZONTAL_MARGIN,
-            yMargin: VERTICAL_MARGIN
+            xMargin: MPConstants.HORIZONTAL_MARGIN,
+            yMargin: MPConstants.VERTICAL_MARGIN
           } ),
           moleculeDescriptionNode,
           electronegativityDescriptionNode,
@@ -251,21 +248,23 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       controlPanelProxy, electronegativityTableNodeProxy, colorKeyNodeProxy, moleculeComboBoxProxy
     ) => {
       // right of viewer
-      controlPanelProxy.right = this.layoutBounds.right - HORIZONTAL_MARGIN;
-      controlPanelProxy.centerY = this.layoutBounds.centerY - resetAllButton.height;
+      controlPanelProxy.right = this.layoutBounds.right - MPConstants.HORIZONTAL_MARGIN;
+      controlPanelProxy.top = MPConstants.CONTROL_PANEL_TOP;
 
-      const layoutCenterX = ( controlPanelProxy.left + this.layoutBounds.left ) / 2;
+      // Layout fallback without controls present
+      const controlPanelLeft = isFinite( controlPanelProxy.left ) ? controlPanelProxy.left : this.layoutBounds.right;
+      const layoutCenterX = ( controlPanelLeft + this.layoutBounds.left ) / 2;
 
       // centered above viewer
       electronegativityTableNodeProxy.centerX = layoutCenterX;
-      electronegativityTableNodeProxy.top = this.layoutBounds.top + VERTICAL_MARGIN;
+      electronegativityTableNodeProxy.top = this.layoutBounds.top + MPConstants.VERTICAL_MARGIN;
 
       colorKeyNodeProxy.centerX = electronegativityTableNodeProxy.centerX;
-      colorKeyNodeProxy.top = electronegativityTableNodeProxy.bottom + VERTICAL_MARGIN;
+      colorKeyNodeProxy.top = electronegativityTableNodeProxy.bottom + MPConstants.VERTICAL_MARGIN;
 
       // centered below viewer
       moleculeComboBoxProxy.centerX = layoutCenterX;
-      moleculeComboBoxProxy.bottom = this.layoutBounds.bottom - VERTICAL_MARGIN;
+      moleculeComboBoxProxy.bottom = this.layoutBounds.bottom - MPConstants.VERTICAL_MARGIN;
     } );
 
     this.adjustCamera();

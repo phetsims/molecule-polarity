@@ -221,9 +221,11 @@ export default class TwoAtomsScreenView extends ScreenView {
       colorKeyNode.top = 25;
     } );
 
-    // to right of positive plate, top aligned
-    controlPanel.left = platesNode.right + 70;
-    controlPanel.top = platesNode.bottom - platesNode.plateHeight;
+    // to the right side, with a fixed top to match across screens
+    controlPanel.localBoundsProperty.link( () => {
+      controlPanel.right = this.layoutBounds.right - MPConstants.HORIZONTAL_MARGIN;
+      controlPanel.top = MPConstants.CONTROL_PANEL_TOP;
+    } );
 
     // bottom-right corner of the screen
     resetAllButton.right = this.layoutBounds.right - 40;

@@ -33,6 +33,10 @@ export default class MPConstants {
   public static readonly CONTROL_PANEL_Y_SPACING = 15; // vertical space between controls
   public static readonly CONTROL_PANEL_MOUSE_X_DILATION = 5;
   public static readonly CONTROL_PANEL_TOUCH_X_DILATION = 15;
+  public static readonly CONTROL_PANEL_TOP = 65;
+
+  public static readonly HORIZONTAL_MARGIN = 40;
+  public static readonly VERTICAL_MARGIN = 20;
 
   // options for titles in control panels
   public static readonly CONTROL_PANEL_TITLE_OPTIONS = {
