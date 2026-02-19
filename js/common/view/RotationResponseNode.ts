@@ -44,7 +44,7 @@ export default class RotationResponseNode extends Node {
     const emitRotationResponse = ( direction: 'clockwise' | 'counterclockwise' ) => {
 
       // Normal object response for rotations
-      this.addAccessibleObjectResponse(
+      this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.rotation.format( { direction: direction } ),
         {
 
