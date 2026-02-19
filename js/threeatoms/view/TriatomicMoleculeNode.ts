@@ -21,7 +21,7 @@ import BondNode from '../../common/view/BondNode.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
-import { toClock } from '../../common/view/toClock.js';
+import { toClock } from '../../common/view/description/toClock.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';

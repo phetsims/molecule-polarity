@@ -21,7 +21,7 @@ import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
 import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
-import TwoAtomsKeyboardHelpContent from './view/TwoAtomsKeyboardHelpContent.js';
+import TwoAtomsKeyboardHelpContent from './view/description/TwoAtomsKeyboardHelpContent.js';
 
 export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 

@@ -12,7 +12,7 @@
 import BasicActionsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import ComboBoxKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/ComboBoxKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import MoveMoleculeWASDKeyboardHelpSection from '../../../common/view/MoveMoleculeWASDKeyboardHelpSection.js';
+import MoveMoleculeWASDKeyboardHelpSection from '../../../common/view/description/MoveMoleculeWASDKeyboardHelpSection.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 

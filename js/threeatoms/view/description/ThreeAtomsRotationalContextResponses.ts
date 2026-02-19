@@ -8,7 +8,7 @@
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Bond from '../../../common/model/Bond.js';
-import DescriptionMaps from '../../../common/view/DescriptionMaps.js';
+import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../../model/TriatomicMolecule.js';

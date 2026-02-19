@@ -16,7 +16,7 @@ import Bond from '../../model/Bond.js';
 import Molecule from '../../model/Molecule.js';
 import MPConstants from '../../MPConstants.js';
 import { SurfaceType } from '../../model/SurfaceType.js';
-import DescriptionMaps, { EPProgress } from '../DescriptionMaps.js';
+import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
 
 export default class MoleculeContextResponsesNode extends Node {
 

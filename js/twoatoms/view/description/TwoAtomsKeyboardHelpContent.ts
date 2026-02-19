@@ -7,11 +7,11 @@
  * @author Agustín Vallejo
  */
 
-import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
-import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
-import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import MoveMoleculeKeyboardHelpSection from '../../common/view/MoveMoleculeKeyboardHelpSection.js';
-import moleculePolarity from '../../moleculePolarity.js';
+import BasicActionsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
+import SliderControlsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
+import TwoColumnKeyboardHelpContent from '../../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
+import MoveMoleculeKeyboardHelpSection from '../../../common/view/description/MoveMoleculeKeyboardHelpSection.js';
+import moleculePolarity from '../../../moleculePolarity.js';
 
 export default class TwoAtomsKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 

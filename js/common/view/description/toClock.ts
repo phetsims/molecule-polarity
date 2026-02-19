@@ -10,11 +10,11 @@
  * @author Agustín Vallejo
  */
 
-import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
-import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import normalizeAngle from '../model/normalizeAngle.js';
+import { toDegrees } from '../../../../../dot/js/util/toDegrees.js';
+import { toFixedNumber } from '../../../../../dot/js/util/toFixedNumber.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import normalizeAngle from '../../model/normalizeAngle.js';
 
 export const toClock = ( radians: number ): string => {
 

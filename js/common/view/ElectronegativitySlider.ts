@@ -22,7 +22,7 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 import MPConstants from '../MPConstants.js';
-import DescriptionMaps from './DescriptionMaps.js';
+import DescriptionMaps from './description/DescriptionMaps.js';
 import PointySliderThumb from './PointySliderThumb.js';
 
 type SelfOptions = {
