@@ -49,9 +49,9 @@ export default class RotationResponseNode extends Node {
         {
 
           // Use a response group to prevent rotation responses from being repeated when rotations
-          // happen rapidly. One group per direction allows for both direction changes to be heard
-          // when that the electric field immediately changes the rotation direction after user input.
-          responseGroup: `rotation-${direction}`
+          // happen rapidly. We will only read out the latest rotation (ignoring previous directions),
+          // see https://github.com/phetsims/molecule-polarity/issues/323
+          responseGroup: 'rotation'
         }
       );
 
