@@ -7,7 +7,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
-import Bond from '../../../common/model/Bond.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
@@ -29,29 +28,6 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
     }, providedOptions );
 
     super( options );
-
-    const bondDipoleChangeContextResponse = (
-      angle: number,
-      bond: Bond,
-      inverted: boolean // Bond BC is inverted with respect to angle measurement
-    ) => {
-
-      if ( bond.deltaENProperty.value === 0 ) { return; } // No dipole, no context response
-
-      const isDeltaENNegative = bond.deltaENProperty.value < 0;
-
-      // If deltaEN is negative and atom is inverted, we need to add PI. If it's positive and not inverted we dont.
-      angle = inverted !== isDeltaENNegative ? angle : angle + Math.PI;
-
-      this.addAccessibleContextResponse(
-        MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
-          bond: bond.label,
-          position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
-        } ), {
-          responseGroup: 'bondDipole'
-        }
-      );
-    };
 
     let previousMolecularDipoleMagnitude = molecule.dipoleProperty.value.magnitude;
 
@@ -94,9 +70,6 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       // When molecule rotates, bond angle is triggered but doesn't actually change. Do nothing
       if ( !previousAngle ) { return; }
 
-      if ( viewProperties.bondDipolesVisibleProperty.value ) {
-        bondDipoleChangeContextResponse( angle + molecule.angleProperty.value, molecule.bondAB, false );
-      }
       if ( viewProperties.molecularDipoleVisibleProperty.value ) {
         molecularDipoleChangeContextResponse();
       }
@@ -108,9 +81,6 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       // When molecule rotates, bond angle is triggered but doesn't actually change. Do nothing
       if ( !previousAngle ) { return; }
 
-      if ( viewProperties.bondDipolesVisibleProperty.value ) {
-        bondDipoleChangeContextResponse( angle + molecule.angleProperty.value, molecule.bondBC, true );
-      }
       if ( viewProperties.molecularDipoleVisibleProperty.value ) {
         molecularDipoleChangeContextResponse();
       }
