@@ -214,12 +214,6 @@ a11y:
       shiftedMuchMore: 'shifted much more'
       shiftedAlmostCompletely: 'shifted almost completely'
 
-  # ElectronDensityProgress2 - Electron Density Progress (Screen 1)
-  electronDensityProgress:
-    select_progress:
-      more: 'more'
-      less: 'less'
-
   # ElectroPotential6 - Electrostatic Potential (Screen 1)
   electrostaticPotentialUppercase:
     select_potential:
@@ -229,16 +223,6 @@ a11y:
       medium: 'Medium'
       fairlyLarge: 'Fairly large'
       large: 'Large'
-
-  # ElectroPotentialProgress5 - Electrostatic Potential Progress (Screen 1)
-  # 2-range spectrum: positive-neutral-negative
-  electrostaticPotentialProgress:
-    select_progress:
-      morePositive: 'more positive'
-      lessPositive: 'less positive'
-      neutral: 'neutral'
-      lessNegative: 'less negative'
-      moreNegative: 'more negative'
 
   # ElectroPotentialRegions5
   electrostaticRegions:

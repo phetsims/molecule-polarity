@@ -479,14 +479,8 @@
     "electronDensityShift": {
       "value": "{ $shift ->\n  [shiftedSlightly] shifted slightly\n  [shifted] shifted\n  [shiftedMuchMore] shifted much more\n  *[shiftedAlmostCompletely] shifted almost completely\n}"
     },
-    "electronDensityProgress": {
-      "value": "{ $progress ->\n  [more] more\n  *[less] less\n}"
-    },
     "electrostaticPotentialUppercase": {
       "value": "{ $potential ->\n  [no] No\n  [verySmall] Very small\n  [small] Small\n  [medium] Medium\n  [fairlyLarge] Fairly large\n  *[large] Large\n}"
-    },
-    "electrostaticPotentialProgress": {
-      "value": "{ $progress ->\n  [morePositive] more positive\n  [lessPositive] less positive\n  [neutral] neutral\n  [lessNegative] less negative\n  *[moreNegative] more negative\n}"
     },
     "electrostaticRegions": {
       "value": "{ $regions ->\n  [verySlightly] Very slightly\n  [slightly] Slightly\n  [moderately] Moderately\n  [highly] Highly\n  *[veryHighly] Very highly\n}"

@@ -202,9 +202,7 @@ type StringsType = {
     'dipoleProgressStringProperty': LocalizedStringProperty;
     'electronDensityStringProperty': LocalizedStringProperty;
     'electronDensityShiftStringProperty': LocalizedStringProperty;
-    'electronDensityProgressStringProperty': LocalizedStringProperty;
     'electrostaticPotentialUppercaseStringProperty': LocalizedStringProperty;
-    'electrostaticPotentialProgressStringProperty': LocalizedStringProperty;
     'electrostaticRegionsStringProperty': LocalizedStringProperty;
     'electronegativityStringProperty': LocalizedStringProperty;
     'fieldStringProperty': LocalizedStringProperty;

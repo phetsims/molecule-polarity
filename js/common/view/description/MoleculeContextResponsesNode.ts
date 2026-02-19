@@ -15,7 +15,6 @@ import Atom from '../../model/Atom.js';
 import Bond from '../../model/Bond.js';
 import Molecule from '../../model/Molecule.js';
 import MPConstants from '../../MPConstants.js';
-import { SurfaceType } from '../../model/SurfaceType.js';
 import { EPProgress } from './DescriptionMaps.js';
 
 export default class MoleculeContextResponsesNode extends Node {
@@ -76,9 +75,6 @@ export default class MoleculeContextResponsesNode extends Node {
 
     if ( Math.abs( changeInEN ) === 0 ) { return; } // no change, no context response
 
-    // DeltaEN of the molecule, which depending on the atom we might need to change the sign for context responses
-    const invertedDeltaEN = this.invertMapping ? -this.molecule.deltaENProperty.value : this.molecule.deltaENProperty.value;
-
     // Dipole
     const previousDipole = this.molecule.previousDipoleProperty.value;
     const currentDipole = this.molecule.dipoleProperty.value;
@@ -95,11 +91,6 @@ export default class MoleculeContextResponsesNode extends Node {
     let bondCharacterVisible = false;
     if ( this.viewProperties instanceof TwoAtomsViewProperties ) {
       bondCharacterVisible = this.viewProperties.bondCharacterVisibleProperty.value;
-    }
-
-    let surfaceType: SurfaceType = 'none';
-    if ( this.viewProperties instanceof TwoAtomsViewProperties ) {
-      surfaceType = this.viewProperties.surfaceTypeProperty.value;
     }
 
     const eFieldEnabled = this.viewProperties.eFieldEnabledProperty.value;
@@ -135,22 +126,6 @@ export default class MoleculeContextResponsesNode extends Node {
           progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
         } )
       } ), 'bondCharacterVisible'
-    );
-    surfaceType === 'electrostaticPotential' && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electrostaticContext.format( {
-        atom: this.atom.label,
-        progress: MoleculePolarityFluent.a11y.electrostaticPotentialProgress.format( {
-          progress: this.changeInENtoProgress( invertedDeltaEN, changeInEN )
-        } )
-      } ), 'surfaceType'
-    );
-    surfaceType === 'electronDensity' && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electronDensityContext.format( {
-        atom: this.atom.label,
-        progress: MoleculePolarityFluent.a11y.electronDensityProgress.format( {
-          progress: changeInEN > 0 ? 'more' : 'less'
-        } )
-      } ), 'surfaceType'
     );
 
     // If E Field enabled and the molecule is polar and already aligned. If not aligned, this response will be
