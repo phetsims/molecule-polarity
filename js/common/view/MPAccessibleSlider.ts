@@ -6,6 +6,7 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import { toRadians } from '../../../../dot/js/util/toRadians.js';
@@ -13,11 +14,10 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import AccessibleSlider, { AccessibleSliderOptions } from '../../../../sun/js/accessibility/AccessibleSlider.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import normalizeAngle from '../model/normalizeAngle.js';
-import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
-import TProperty from '../../../../axon/js/TProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -44,8 +44,15 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
         return roundToInterval( value, providedOptions.shiftKeyboardStep || DEFAULT_STEP );
       },
       createAriaValueText: angle => {
+        // Provide signposts to explain what specific angles mean for screen reader users.
         const degrees = roundToInterval( toDegrees( normalizeAngle( angle ) ), 5 );
-        return MoleculePolarityFluent.a11y.degrees.format( { angle: degrees } );
+        const signpost = ( degrees === 0 || degrees === 360 ) ? 'start' :
+                         degrees === 180 ? 'halfway' :
+                         'none';
+        return MoleculePolarityFluent.a11y.triatomicDegreesWithSignpost.format( {
+          angle: degrees,
+          signpost: signpost
+        } );
       },
       startDrag: event => {
         this.moveToFront();

@@ -12,6 +12,8 @@ import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
@@ -22,11 +24,13 @@ import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
 import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
+import normalizeAngle from '../../common/model/normalizeAngle.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -47,7 +51,20 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
         phetioInputEnabledPropertyInstrumented: true,
         isDisposable: false,
         accessibleName: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleNameStringProperty,
-        accessibleHelpText: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty
+        accessibleHelpText: MoleculePolarityStrings.a11y.twoAtomsScreen.rotateMoleculeSlider.accessibleHelpTextStringProperty,
+
+        // MPAccessibleSliderOptions
+        createAriaValueText: angle => {
+          // Override the base signposts to include horizontal/vertical orientation for diatomic molecules.
+          const degrees = roundToInterval( toDegrees( normalizeAngle( angle ) ), 5 );
+          const signpost = ( degrees === 0 || degrees === 180 || degrees === 360 ) ? 'horizontal' :
+                           ( degrees === 90 || degrees === 270 ) ? 'vertical' :
+                           'none';
+          return MoleculePolarityFluent.a11y.diatomicDegreesWithSignpost.format( {
+            angle: degrees,
+            signpost: signpost
+          } );
+        }
       }, providedOptions );
 
     // atoms

@@ -281,7 +281,16 @@ a11y:
   atAngle: 'at { $angle }'
   toAngle: 'to { $angle }'
   betweenAngles: 'between { $angle1 } and { $angle2 }'
-  degrees: '{ $angle } degrees'
+  triatomicDegreesWithSignpost:
+    select_signpost:
+      none: '{ $angle } degrees'
+      start: '{ $angle } degrees, starting position'
+      halfway: '{ $angle } degrees, halfway'
+  diatomicDegreesWithSignpost:
+    select_signpost:
+      none: '{ $angle } degrees'
+      horizontal: '{ $angle } degrees, horizontal'
+      vertical: '{ $angle } degrees, vertical'
   oClock: '{ $hour } o''clock'
 
   # OrientationMol3 - Molecule orientation (Screen 1)

@@ -182,7 +182,8 @@ addToMapIfDefined( 'a11y_molecularDipole', 'a11y.molecularDipoleStringProperty' 
 addToMapIfDefined( 'a11y_atAngle', 'a11y.atAngleStringProperty' );
 addToMapIfDefined( 'a11y_toAngle', 'a11y.toAngleStringProperty' );
 addToMapIfDefined( 'a11y_betweenAngles', 'a11y.betweenAnglesStringProperty' );
-addToMapIfDefined( 'a11y_degrees', 'a11y.degreesStringProperty' );
+addToMapIfDefined( 'a11y_triatomicDegreesWithSignpost', 'a11y.triatomicDegreesWithSignpostStringProperty' );
+addToMapIfDefined( 'a11y_diatomicDegreesWithSignpost', 'a11y.diatomicDegreesWithSignpostStringProperty' );
 addToMapIfDefined( 'a11y_oClock', 'a11y.oClockStringProperty' );
 addToMapIfDefined( 'a11y_orientationMolecule', 'a11y.orientationMoleculeStringProperty' );
 addToMapIfDefined( 'a11y_partialChargeSign', 'a11y.partialChargeSignStringProperty' );
@@ -417,6 +418,8 @@ const MoleculePolarityFluent = {
       electronegativitySlider: {
         accessibleName: new FluentPattern<{ atomName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.accessibleNameStringProperty' ), [{"name":"atomName"}] ),
         dipoleContext: new FluentPattern<{ bond: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleContextStringProperty' ), [{"name":"bond"},{"name":"progress"}] ),
+        _comment_0: new FluentComment( {"comment":"The context response for dipole direction change when there are two bonds. The information is combined","associatedKey":"dipoleContextTwoBonds"} ),
+        _comment_1: new FluentComment( {"comment":"into one string to reduce verbosity.","associatedKey":"dipoleContextTwoBonds"} ),
         dipoleContextTwoBonds: new FluentPattern<{ bondA: FluentVariable, bondB: FluentVariable, progressA: FluentVariable, progressB: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleContextTwoBonds', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleContextTwoBondsStringProperty' ), [{"name":"bondA"},{"name":"bondB"},{"name":"progressA"},{"name":"progressB"}] ),
         dipoleDirectionChange: new FluentPattern<{ atom: FluentVariable, bond: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleDirectionChange', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleDirectionChangeStringProperty' ), [{"name":"atom"},{"name":"bond"}] ),
         bondCharacterContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_bondCharacterContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.bondCharacterContextStringProperty' ), [{"name":"progress"}] ),
@@ -544,7 +547,8 @@ const MoleculePolarityFluent = {
     atAngle: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_atAngle', _.get( MoleculePolarityStrings, 'a11y.atAngleStringProperty' ), [{"name":"angle"}] ),
     toAngle: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_toAngle', _.get( MoleculePolarityStrings, 'a11y.toAngleStringProperty' ), [{"name":"angle"}] ),
     betweenAngles: new FluentPattern<{ angle1: FluentVariable, angle2: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_betweenAngles', _.get( MoleculePolarityStrings, 'a11y.betweenAnglesStringProperty' ), [{"name":"angle1"},{"name":"angle2"}] ),
-    degrees: new FluentPattern<{ angle: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_degrees', _.get( MoleculePolarityStrings, 'a11y.degreesStringProperty' ), [{"name":"angle"}] ),
+    triatomicDegreesWithSignpost: new FluentPattern<{ angle: FluentVariable, signpost: 'none' | 'start' | 'halfway' | TReadOnlyProperty<'none' | 'start' | 'halfway'> }>( fluentSupport.bundleProperty, 'a11y_triatomicDegreesWithSignpost', _.get( MoleculePolarityStrings, 'a11y.triatomicDegreesWithSignpostStringProperty' ), [{"name":"angle"},{"name":"signpost","variants":["none","start","halfway"]}] ),
+    diatomicDegreesWithSignpost: new FluentPattern<{ angle: FluentVariable, signpost: 'none' | 'horizontal' | 'vertical' | TReadOnlyProperty<'none' | 'horizontal' | 'vertical'> }>( fluentSupport.bundleProperty, 'a11y_diatomicDegreesWithSignpost', _.get( MoleculePolarityStrings, 'a11y.diatomicDegreesWithSignpostStringProperty' ), [{"name":"angle"},{"name":"signpost","variants":["none","horizontal","vertical"]}] ),
     oClock: new FluentPattern<{ hour: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_oClock', _.get( MoleculePolarityStrings, 'a11y.oClockStringProperty' ), [{"name":"hour"}] ),
     _comment_18: new FluentComment( {"comment":"OrientationMol3 - Molecule orientation (Screen 1)","associatedKey":"orientationMolecule"} ),
     orientationMolecule: new FluentPattern<{ orientation: 'horizontal' | 'diagonal' | 'vertical' | TReadOnlyProperty<'horizontal' | 'diagonal' | 'vertical'> }>( fluentSupport.bundleProperty, 'a11y_orientationMolecule', _.get( MoleculePolarityStrings, 'a11y.orientationMoleculeStringProperty' ), [{"name":"orientation","variants":["horizontal","diagonal","vertical"]}] ),

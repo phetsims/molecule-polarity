@@ -212,7 +212,8 @@ type StringsType = {
     'atAngleStringProperty': LocalizedStringProperty;
     'toAngleStringProperty': LocalizedStringProperty;
     'betweenAnglesStringProperty': LocalizedStringProperty;
-    'degreesStringProperty': LocalizedStringProperty;
+    'triatomicDegreesWithSignpostStringProperty': LocalizedStringProperty;
+    'diatomicDegreesWithSignpostStringProperty': LocalizedStringProperty;
     'oClockStringProperty': LocalizedStringProperty;
     'orientationMoleculeStringProperty': LocalizedStringProperty;
     'partialChargeSignStringProperty': LocalizedStringProperty;

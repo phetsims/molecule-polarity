@@ -511,8 +511,11 @@
     "betweenAngles": {
       "value": "between { $angle1 } and { $angle2 }"
     },
-    "degrees": {
-      "value": "{ $angle } degrees"
+    "triatomicDegreesWithSignpost": {
+      "value": "{ $signpost ->\n  [none] { $angle } degrees\n  [start] { $angle } degrees, starting position\n  *[halfway] { $angle } degrees, halfway\n}"
+    },
+    "diatomicDegreesWithSignpost": {
+      "value": "{ $signpost ->\n  [none] { $angle } degrees\n  [horizontal] { $angle } degrees, horizontal\n  *[vertical] { $angle } degrees, vertical\n}"
     },
     "oClock": {
       "value": "{ $hour } o'clock"
