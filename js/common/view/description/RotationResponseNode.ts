@@ -58,45 +58,44 @@ export default class RotationResponseNode extends Node {
       lastDirection = direction;
     };
 
-    // Storing the dipole to track direction of angle changes
-    let lastDirectionVector = Vector2.createPolar( 1, angleProperty.value );
-
-    // TODO: Should this be implemented with (angle, oldAngle) callback? See https://github.com/phetsims/molecule-polarity/issues/252
-    angleProperty.lazyLink( angle => {
-        const directionVector = Vector2.createPolar( 1, angle );
-
-        // Using the cross product of the direction vector
-        // to determine whether the molecule is rotating
-        // clockwise or counterclockwise.
-        if ( directionVector.crossScalar( lastDirectionVector ) < 0 ) {
-          if ( lastDirection !== 'clockwise' ) {
-            emitRotationResponse( 'clockwise' );
-          }
-        }
-        else {
-          if ( lastDirection !== 'counterclockwise' ) {
-            emitRotationResponse( 'counterclockwise' );
-          }
-        }
-
-        // If molecule is horizontal and was rotating due to E-field, emit aligned response.
-        if ( Math.cos( dipoleProperty.value.angle ) > MPConstants.ALIGNMENT_COS_THRESHOLD &&
-             isRotatingDueToEFieldProperty.value && dipoleProperty.value.magnitude !== 0 ) {
-
-          // "Molecule aligned with Electric Field" after rotating due to E-field has stopped
-          this.addAccessibleContextResponse(
-            MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
-            {
-              responseGroup: 'rotation-alignment'
-            }
-          );
-
-          lastDirection = null;
-        }
-
-        lastDirectionVector = directionVector;
+    angleProperty.lazyLink( ( angle, lastAngle ) => {
+      if ( Math.abs( angle - lastAngle ) < 1e-14 ) {
+        // If the angle change is negligible, do not emit any response or update the direction vector.
+        return;
       }
-    );
+
+      const directionVector = Vector2.createPolar( 1, angle );
+      const lastDirectionVector = Vector2.createPolar( 1, lastAngle );
+
+      // Using the cross product of the direction vector
+      // to determine whether the molecule is rotating
+      // clockwise or counterclockwise.
+      if ( directionVector.crossScalar( lastDirectionVector ) < 0 ) {
+        if ( lastDirection !== 'clockwise' ) {
+          emitRotationResponse( 'clockwise' );
+        }
+      }
+      else {
+        if ( lastDirection !== 'counterclockwise' ) {
+          emitRotationResponse( 'counterclockwise' );
+        }
+      }
+
+      // If molecule is horizontal and was rotating due to E-field, emit aligned response.
+      if ( Math.cos( dipoleProperty.value.angle ) > MPConstants.ALIGNMENT_COS_THRESHOLD &&
+           isRotatingDueToEFieldProperty.value && dipoleProperty.value.magnitude !== 0 ) {
+
+        // "Molecule aligned with Electric Field" after rotating due to E-field has stopped
+        this.addAccessibleContextResponse(
+          MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
+          {
+            responseGroup: 'rotation-alignment'
+          }
+        );
+
+        lastDirection = null;
+      }
+    } );
 
 
     eFieldEnabledProperty.lazyLink( eFieldEnabled => {
