@@ -53,7 +53,7 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
 
     const rows = [ rotateMolecule, moveAtomAAndC, rotateOrMoveInSmallerSteps ];
 
-    super( MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveAtomsOrMoleculeStringProperty, rows, options );
+    super( MoleculePolarityFluent.keyboardHelpContent.moveAtomsOrMoleculeStringProperty, rows, options );
   }
 }
 

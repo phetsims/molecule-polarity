@@ -44,7 +44,7 @@ export default class MoveMoleculeKeyboardHelpSection extends KeyboardHelpSection
 
     const rows = [ rotateMolecule, rotateInSmallerSteps ];
 
-    super( MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveMoleculeStringProperty, rows, options );
+    super( MoleculePolarityFluent.keyboardHelpContent.moveMoleculeStringProperty, rows, options );
   }
 }
 

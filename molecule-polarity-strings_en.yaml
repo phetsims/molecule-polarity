@@ -59,6 +59,17 @@ deltaNegativeValue: 'δ=−{{partialCharge}}'
 pattern.dipoleDirection: '{{from}} → {{to}}'
 surfaceColorRealMolecules: 'Surface color (Real Molecules only):'
 surfaceColorDescription: 'Color gradient used to represent positive and negative electrostatic potential.'
+keyboardHelpContent.moveMolecule: 'Move Molecule'
+keyboardHelpContent.rotateMolecule: 'Rotate molecule'
+keyboardHelpContent.rotateInSmallerSteps: 'Rotate in smaller steps'
+keyboardHelpContent.moveAtomsOrMolecule: 'Move Atoms or Molecule'
+keyboardHelpContent.moveAtomAAndC: 'Move atoms A and C'
+keyboardHelpContent.rotateOrMoveInSmallerSteps: 'Rotate or move in smaller steps'
+keyboardHelpContent.chooseRealMolecule: 'Choose Real Molecule'
+keyboardHelpContent.molecule: 'molecule'
+keyboardHelpContent.molecules: 'molecules'
+keyboardHelpContent.rotateMoleculeWASD: 'Rotate molecule'
+keyboardHelpContent.rotateInSmallerStepsWASD: 'Rotate in smaller steps'
 
 a11y:
   common:
@@ -144,18 +155,6 @@ a11y:
       off: 'Electric field off.'
     atom:
       accessibleName: 'Atom { $name }'
-    keyboardHelpContent:
-      moveMolecule: 'Move Molecule'
-      rotateMolecule: 'Rotate molecule'
-      rotateInSmallerSteps: 'Rotate in smaller steps'
-      moveAtomsOrMolecule: 'Move Atoms or Molecule'
-      moveAtomAAndC: 'Move atoms A and C'
-      rotateOrMoveInSmallerSteps: 'Rotate or move in smaller steps'
-      chooseRealMolecule: 'Choose Real Molecule'
-      molecule: 'molecule'
-      molecules: 'molecules'
-      rotateMoleculeWASD: 'Rotate molecule'
-      rotateInSmallerStepsWASD: 'Rotate in smaller steps'
     bondDipoleDirection: 'Dipole { $bond } points { $position } o''clock.'
     molecularDipoleResponses:
       molecularDipoleContext: 'Molecular dipole arrow { $progress }.'

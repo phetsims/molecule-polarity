@@ -182,6 +182,39 @@
   "surfaceColorDescription": {
     "value": "Color gradient used to represent positive and negative electrostatic potential."
   },
+  "keyboardHelpContent.moveMolecule": {
+    "value": "Move Molecule"
+  },
+  "keyboardHelpContent.rotateMolecule": {
+    "value": "Rotate molecule"
+  },
+  "keyboardHelpContent.rotateInSmallerSteps": {
+    "value": "Rotate in smaller steps"
+  },
+  "keyboardHelpContent.moveAtomsOrMolecule": {
+    "value": "Move Atoms or Molecule"
+  },
+  "keyboardHelpContent.moveAtomAAndC": {
+    "value": "Move atoms A and C"
+  },
+  "keyboardHelpContent.rotateOrMoveInSmallerSteps": {
+    "value": "Rotate or move in smaller steps"
+  },
+  "keyboardHelpContent.chooseRealMolecule": {
+    "value": "Choose Real Molecule"
+  },
+  "keyboardHelpContent.molecule": {
+    "value": "molecule"
+  },
+  "keyboardHelpContent.molecules": {
+    "value": "molecules"
+  },
+  "keyboardHelpContent.rotateMoleculeWASD": {
+    "value": "Rotate molecule"
+  },
+  "keyboardHelpContent.rotateInSmallerStepsWASD": {
+    "value": "Rotate in smaller steps"
+  },
   "a11y": {
     "common": {
       "upper": {
@@ -397,41 +430,6 @@
       "atom": {
         "accessibleName": {
           "value": "Atom { $name }"
-        }
-      },
-      "keyboardHelpContent": {
-        "moveMolecule": {
-          "value": "Move Molecule"
-        },
-        "rotateMolecule": {
-          "value": "Rotate molecule"
-        },
-        "rotateInSmallerSteps": {
-          "value": "Rotate in smaller steps"
-        },
-        "moveAtomsOrMolecule": {
-          "value": "Move Atoms or Molecule"
-        },
-        "moveAtomAAndC": {
-          "value": "Move atoms A and C"
-        },
-        "rotateOrMoveInSmallerSteps": {
-          "value": "Rotate or move in smaller steps"
-        },
-        "chooseRealMolecule": {
-          "value": "Choose Real Molecule"
-        },
-        "molecule": {
-          "value": "molecule"
-        },
-        "molecules": {
-          "value": "molecules"
-        },
-        "rotateMoleculeWASD": {
-          "value": "Rotate molecule"
-        },
-        "rotateInSmallerStepsWASD": {
-          "value": "Rotate in smaller steps"
         }
       },
       "bondDipoleDirection": {

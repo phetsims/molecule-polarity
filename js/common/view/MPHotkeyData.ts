@@ -23,7 +23,7 @@ export default class MPHotkeyData {
    */
   public static readonly ROTATE_MOLECULE = new HotkeyData( {
     keys: [ 'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown' ],
-    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeStringProperty,
+    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.keyboardHelpContent.rotateMoleculeStringProperty,
     repoName: moleculePolarity.name
   } );
 
@@ -34,7 +34,7 @@ export default class MPHotkeyData {
     keys: [
       'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown'
     ],
-    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsStringProperty,
+    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.keyboardHelpContent.rotateInSmallerStepsStringProperty,
     repoName: moleculePolarity.name
   } );
 
@@ -43,7 +43,7 @@ export default class MPHotkeyData {
    */
   public static readonly MOVE_ATOM_A_AND_C = new HotkeyData( {
     keys: [ 'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown' ],
-    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveAtomAAndCStringProperty,
+    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.keyboardHelpContent.moveAtomAAndCStringProperty,
     repoName: moleculePolarity.name
   } );
 
@@ -54,7 +54,7 @@ export default class MPHotkeyData {
     keys: [
       'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown'
     ],
-    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateOrMoveInSmallerStepsStringProperty,
+    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.keyboardHelpContent.rotateOrMoveInSmallerStepsStringProperty,
     repoName: moleculePolarity.name
   } );
 
@@ -65,7 +65,7 @@ export default class MPHotkeyData {
     keys: [
       'arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown', 'w', 'a', 's', 'd'
     ],
-    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateMoleculeWASDStringProperty,
+    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.keyboardHelpContent.rotateMoleculeWASDStringProperty,
     repoName: moleculePolarity.name
   } );
 
@@ -76,7 +76,7 @@ export default class MPHotkeyData {
     keys: [
       'shift+arrowLeft', 'shift+arrowRight', 'shift+arrowUp', 'shift+arrowDown', 'shift+w', 'shift+a', 'shift+s', 'shift+d'
     ],
-    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.a11y.common.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty,
+    keyboardHelpDialogLabelStringProperty: MoleculePolarityFluent.keyboardHelpContent.rotateInSmallerStepsWASDStringProperty,
     repoName: moleculePolarity.name
   } );
 }

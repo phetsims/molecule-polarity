@@ -79,6 +79,19 @@ type StringsType = {
   'deltaNegativeValueStringProperty': LocalizedStringProperty;
   'surfaceColorRealMoleculesStringProperty': LocalizedStringProperty;
   'surfaceColorDescriptionStringProperty': LocalizedStringProperty;
+  'keyboardHelpContent': {
+    'moveMoleculeStringProperty': LocalizedStringProperty;
+    'rotateMoleculeStringProperty': LocalizedStringProperty;
+    'rotateInSmallerStepsStringProperty': LocalizedStringProperty;
+    'moveAtomsOrMoleculeStringProperty': LocalizedStringProperty;
+    'moveAtomAAndCStringProperty': LocalizedStringProperty;
+    'rotateOrMoveInSmallerStepsStringProperty': LocalizedStringProperty;
+    'chooseRealMoleculeStringProperty': LocalizedStringProperty;
+    'moleculeStringProperty': LocalizedStringProperty;
+    'moleculesStringProperty': LocalizedStringProperty;
+    'rotateMoleculeWASDStringProperty': LocalizedStringProperty;
+    'rotateInSmallerStepsWASDStringProperty': LocalizedStringProperty;
+  };
   'a11y': {
     'common': {
       'upperStringProperty': LocalizedStringProperty;
@@ -169,19 +182,6 @@ type StringsType = {
       };
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
-      };
-      'keyboardHelpContent': {
-        'moveMoleculeStringProperty': LocalizedStringProperty;
-        'rotateMoleculeStringProperty': LocalizedStringProperty;
-        'rotateInSmallerStepsStringProperty': LocalizedStringProperty;
-        'moveAtomsOrMoleculeStringProperty': LocalizedStringProperty;
-        'moveAtomAAndCStringProperty': LocalizedStringProperty;
-        'rotateOrMoveInSmallerStepsStringProperty': LocalizedStringProperty;
-        'chooseRealMoleculeStringProperty': LocalizedStringProperty;
-        'moleculeStringProperty': LocalizedStringProperty;
-        'moleculesStringProperty': LocalizedStringProperty;
-        'rotateMoleculeWASDStringProperty': LocalizedStringProperty;
-        'rotateInSmallerStepsWASDStringProperty': LocalizedStringProperty;
       };
       'bondDipoleDirectionStringProperty': LocalizedStringProperty;
       'molecularDipoleResponses': {

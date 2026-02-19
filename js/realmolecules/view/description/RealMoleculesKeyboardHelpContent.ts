@@ -24,9 +24,9 @@ export default class RealMoleculesKeyboardHelpContent extends TwoColumnKeyboardH
     const leftSections = [
       new MoveMoleculeWASDKeyboardHelpSection(),
       new ComboBoxKeyboardHelpSection( {
-        headingString: MoleculePolarityFluent.a11y.common.keyboardHelpContent.chooseRealMoleculeStringProperty,
-        thingAsLowerCaseSingular: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moleculeStringProperty,
-        thingAsLowerCasePlural: MoleculePolarityFluent.a11y.common.keyboardHelpContent.moleculesStringProperty
+        headingString: MoleculePolarityFluent.keyboardHelpContent.chooseRealMoleculeStringProperty,
+        thingAsLowerCaseSingular: MoleculePolarityFluent.keyboardHelpContent.moleculeStringProperty,
+        thingAsLowerCasePlural: MoleculePolarityFluent.keyboardHelpContent.moleculesStringProperty
       } )
     ];
 

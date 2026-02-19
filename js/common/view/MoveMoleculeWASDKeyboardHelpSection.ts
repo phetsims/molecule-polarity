@@ -31,7 +31,7 @@ export default class MoveMoleculeWASDKeyboardHelpSection extends KeyboardHelpSec
       KeyboardHelpSectionRow.fromHotkeyData( MPHotkeyData.ROTATE_MOLECULE_WASD_SMALLER_STEPS )
     ];
 
-    super( MoleculePolarityFluent.a11y.common.keyboardHelpContent.moveMoleculeStringProperty, rows, options );
+    super( MoleculePolarityFluent.keyboardHelpContent.moveMoleculeStringProperty, rows, options );
   }
 }
 
