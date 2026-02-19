@@ -92,9 +92,6 @@ export default class MoleculeContextResponsesNode extends Node {
       molecularDipoleVisible = this.viewProperties.molecularDipoleVisibleProperty.value;
     }
 
-    // Both screens have Partial Charges visibility property
-    const partialChargesVisible = this.viewProperties.partialChargesVisibleProperty.value;
-
     let bondCharacterVisible = false;
     if ( this.viewProperties instanceof TwoAtomsViewProperties ) {
       bondCharacterVisible = this.viewProperties.bondCharacterVisibleProperty.value;
@@ -133,17 +130,6 @@ export default class MoleculeContextResponsesNode extends Node {
       } ), 'molecularDipoleVisible'
     );
 
-    // If Partial Charges visible
-    {
-      const partialCharge = this.atom.partialChargeProperty.value;
-      partialChargesVisible && this.contextResponse(
-        MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.format( {
-          atom: this.atom.label,
-          magnitude: DescriptionMaps.formatPartialChargesString( partialCharge ),
-          sign: partialCharge !== 0 ? partialCharge > 0 ? 'positive' : 'negative' : 'zero'
-        } ), 'partialChargesVisible'
-      );
-    }
     bondCharacterVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
         progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
