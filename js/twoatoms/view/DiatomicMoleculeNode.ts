@@ -20,7 +20,7 @@ import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
-import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view/MPAccessibleSlider.js';
+import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view/description/MPAccessibleSlider.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';

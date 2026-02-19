@@ -13,7 +13,7 @@ import KeyboardHelpSection, { KeyboardHelpSectionOptions } from '../../../../../
 import KeyboardHelpSectionRow from '../../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
-import MPHotkeyData from '../MPHotkeyData.js';
+import MPHotkeyData from './MPHotkeyData.js';
 
 type SelfOptions = EmptySelfOptions;
 type MoveMoleculeKeyboardHelpSectionOptions = SelfOptions & KeyboardHelpSectionOptions;

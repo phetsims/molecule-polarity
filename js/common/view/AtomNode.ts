@@ -20,7 +20,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Atom from '../model/Atom.js';
-import MPAccessibleSlider, { MPAccessibleSliderOptions } from './MPAccessibleSlider.js';
+import MPAccessibleSlider, { MPAccessibleSliderOptions } from './description/MPAccessibleSlider.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 
 type SelfOptions = EmptySelfOptions;

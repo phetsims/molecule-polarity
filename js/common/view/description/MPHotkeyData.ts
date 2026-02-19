@@ -8,9 +8,9 @@
  * @author Agustín Vallejo
  */
 
-import HotkeyData from '../../../../scenery/js/input/HotkeyData.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
+import HotkeyData from '../../../../../scenery/js/input/HotkeyData.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 
 export default class MPHotkeyData {
 
