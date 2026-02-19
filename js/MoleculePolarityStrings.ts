@@ -183,7 +183,6 @@ type StringsType = {
       'atom': {
         'accessibleNameStringProperty': LocalizedStringProperty;
       };
-      'bondDipoleDirectionStringProperty': LocalizedStringProperty;
       'molecularDipoleResponses': {
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionStringProperty': LocalizedStringProperty;

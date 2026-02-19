@@ -432,9 +432,6 @@
           "value": "Atom { $name }"
         }
       },
-      "bondDipoleDirection": {
-        "value": "Dipole { $bond } points { $position } o'clock."
-      },
       "molecularDipoleResponses": {
         "molecularDipoleContext": {
           "value": "Molecular dipole arrow { $progress }."

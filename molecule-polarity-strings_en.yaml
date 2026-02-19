@@ -155,7 +155,6 @@ a11y:
       off: 'Electric field off.'
     atom:
       accessibleName: 'Atom { $name }'
-    bondDipoleDirection: 'Dipole { $bond } points { $position } o''clock.'
     molecularDipoleResponses:
       molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
       molecularDipoleDirection: '{ a11y.common.molecularDipoleResponses.molecularDipoleContext } Points { $position } o''clock.'

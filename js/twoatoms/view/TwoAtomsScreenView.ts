@@ -13,7 +13,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import DescriptionMaps from '../../common/view/description/DescriptionMaps.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import MoleculeContextResponsesNode from '../../common/view/description/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
@@ -96,23 +95,6 @@ export default class TwoAtomsScreenView extends ScreenView {
       visiblePropertyOptions: {
         phetioFeatured: true
       }
-    } );
-
-    model.diatomicMolecule.angleProperty.link( angle => {
-
-      if ( model.diatomicMolecule.deltaENProperty.value === 0 ) { return; } // no dipole, no context response
-
-      // If deltaEN is negative and atom is inverted, we need to add PI. If it's positive and not inverted we dont.
-      angle = model.diatomicMolecule.deltaENProperty.value < 0 ? angle + Math.PI : angle;
-
-      viewProperties.bondDipoleVisibleProperty.value && this.addAccessibleContextResponse(
-        MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
-          bond: 'AB',
-          position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
-        } ), {
-          interruptible: true
-        }
-      );
     } );
 
     // Context responses for electronegativity changes

@@ -158,7 +158,6 @@ addToMapIfDefined( 'a11y_common_electricFieldToggle_accessibleHelpText', 'a11y.c
 addToMapIfDefined( 'a11y_common_electricFieldToggle_on', 'a11y.common.electricFieldToggle.onStringProperty' );
 addToMapIfDefined( 'a11y_common_electricFieldToggle_off', 'a11y.common.electricFieldToggle.offStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleName', 'a11y.common.atom.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_common_bondDipoleDirection', 'a11y.common.bondDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleContext', 'a11y.common.molecularDipoleResponses.molecularDipoleContextStringProperty' );
 addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleDirection', 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleDirectionOnly', 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnlyStringProperty' );
@@ -496,7 +495,6 @@ const MoleculePolarityFluent = {
       atom: {
         accessibleName: new FluentPattern<{ name: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleNameStringProperty' ), [{"name":"name"}] )
       },
-      bondDipoleDirection: new FluentPattern<{ bond: FluentVariable, position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_bondDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.bondDipoleDirectionStringProperty' ), [{"name":"bond"},{"name":"position"}] ),
       molecularDipoleResponses: {
         molecularDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleContextStringProperty' ), [{"name":"progress"}] ),
         molecularDipoleDirection: new FluentPattern<{ position: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionStringProperty' ), [{"name":"position"},{"name":"progress"}] ),
