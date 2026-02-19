@@ -15,19 +15,19 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import DescriptionMaps from '../../common/view/DescriptionMaps.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
-import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
+import MoleculeContextResponsesNode from '../../common/view/description/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
-import DiatomicMoleculeAccessibleListNode from './DiatomicMoleculeAccessibleListNode.js';
+import DiatomicMoleculeAccessibleListNode from './description/DiatomicMoleculeAccessibleListNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
-import TwoAtomsElectronegativityAccessibleListNode from './TwoAtomsElectronegativityAccessibleListNode.js';
-import TwoAtomsScreenSummaryContentNode from './TwoAtomsScreenSummaryContentNode.js';
+import TwoAtomsElectronegativityAccessibleListNode from './description/TwoAtomsElectronegativityAccessibleListNode.js';
+import TwoAtomsScreenSummaryContentNode from './description/TwoAtomsScreenSummaryContentNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 export default class TwoAtomsScreenView extends ScreenView {

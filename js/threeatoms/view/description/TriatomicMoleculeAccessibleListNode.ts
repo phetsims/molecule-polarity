@@ -5,14 +5,14 @@
  * @author Agustín Vallejo
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
-import DescriptionMaps from '../../common/view/DescriptionMaps.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import TriatomicMolecule from '../model/TriatomicMolecule.js';
-import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import DescriptionMaps from '../../../common/view/DescriptionMaps.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import TriatomicMolecule from '../../model/TriatomicMolecule.js';
+import ThreeAtomsViewProperties from '../ThreeAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 

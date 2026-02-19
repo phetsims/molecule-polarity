@@ -5,12 +5,12 @@
  * @author Agustín Vallejo
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
-import DescriptionMaps from '../../common/view/DescriptionMaps.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import TriatomicMolecule from '../model/TriatomicMolecule.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import DescriptionMaps from '../../../common/view/DescriptionMaps.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import TriatomicMolecule from '../../model/TriatomicMolecule.js';
 
 type SelfOptions = EmptySelfOptions;
 

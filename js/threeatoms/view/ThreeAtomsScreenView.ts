@@ -13,18 +13,18 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
-import MoleculeContextResponsesNode from '../../common/view/MoleculeContextResponsesNode.js';
+import MoleculeContextResponsesNode from '../../common/view/description/MoleculeContextResponsesNode.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
 import RotationResponseNode from '../../common/view/RotationResponseNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
-import ThreeAtomsElectronegativityAccessibleListNode from './ThreeAtomsElectronegativityAccessibleListNode.js';
-import ThreeAtomsRotationalContextResponses from './ThreeAtomsRotationalContextResponses.js';
-import ThreeAtomsScreenSummaryContentNode from './ThreeAtomsScreenSummaryContentNode.js';
+import ThreeAtomsElectronegativityAccessibleListNode from './description/ThreeAtomsElectronegativityAccessibleListNode.js';
+import ThreeAtomsRotationalContextResponses from './description/ThreeAtomsRotationalContextResponses.js';
+import ThreeAtomsScreenSummaryContentNode from './description/ThreeAtomsScreenSummaryContentNode.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
-import TriatomicMoleculeAccessibleListNode from './TriatomicMoleculeAccessibleListNode.js';
+import TriatomicMoleculeAccessibleListNode from './description/TriatomicMoleculeAccessibleListNode.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
 export default class ThreeAtomsScreenView extends ScreenView {

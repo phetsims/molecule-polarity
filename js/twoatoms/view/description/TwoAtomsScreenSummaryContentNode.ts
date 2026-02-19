@@ -5,12 +5,12 @@
  * @author Agustín Vallejo
  */
 
-import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../joist/js/ScreenSummaryContent.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import DescriptionMaps from '../../common/view/DescriptionMaps.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import TwoAtomsModel from '../model/TwoAtomsModel.js';
+import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../../joist/js/ScreenSummaryContent.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import DescriptionMaps from '../../../common/view/DescriptionMaps.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import TwoAtomsModel from '../../model/TwoAtomsModel.js';
 
 type SelfOptions = EmptySelfOptions;
 

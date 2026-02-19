@@ -5,15 +5,15 @@
  * @author Agustín Vallejo
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
-import DescriptionMaps from '../../common/view/DescriptionMaps.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import DiatomicMolecule from '../model/DiatomicMolecule.js';
-import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
+import { roundToInterval } from '../../../../../dot/js/util/roundToInterval.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import DescriptionMaps from '../../../common/view/DescriptionMaps.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import DiatomicMolecule from '../../model/DiatomicMolecule.js';
+import TwoAtomsViewProperties from '../TwoAtomsViewProperties.js';
 
 type SelfOptions = EmptySelfOptions;
 

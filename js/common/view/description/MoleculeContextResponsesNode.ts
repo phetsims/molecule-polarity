@@ -6,17 +6,17 @@
  * @author Agustín Vallejo
  */
 
-import Node from '../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../moleculePolarity.js';
-import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
-import ThreeAtomsViewProperties from '../../threeatoms/view/ThreeAtomsViewProperties.js';
-import TwoAtomsViewProperties from '../../twoatoms/view/TwoAtomsViewProperties.js';
-import Atom from '../model/Atom.js';
-import Bond from '../model/Bond.js';
-import Molecule from '../model/Molecule.js';
-import MPConstants from '../MPConstants.js';
-import { SurfaceType } from '../model/SurfaceType.js';
-import DescriptionMaps, { EPProgress } from './DescriptionMaps.js';
+import Node from '../../../../../scenery/js/nodes/Node.js';
+import moleculePolarity from '../../../moleculePolarity.js';
+import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
+import ThreeAtomsViewProperties from '../../../threeatoms/view/ThreeAtomsViewProperties.js';
+import TwoAtomsViewProperties from '../../../twoatoms/view/TwoAtomsViewProperties.js';
+import Atom from '../../model/Atom.js';
+import Bond from '../../model/Bond.js';
+import Molecule from '../../model/Molecule.js';
+import MPConstants from '../../MPConstants.js';
+import { SurfaceType } from '../../model/SurfaceType.js';
+import DescriptionMaps, { EPProgress } from '../DescriptionMaps.js';
 
 export default class MoleculeContextResponsesNode extends Node {
 
