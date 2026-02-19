@@ -105,7 +105,7 @@ export default class TwoAtomsScreenView extends ScreenView {
       // If deltaEN is negative and atom is inverted, we need to add PI. If it's positive and not inverted we dont.
       angle = model.diatomicMolecule.deltaENProperty.value < 0 ? angle + Math.PI : angle;
 
-      this.addAccessibleContextResponse(
+      viewProperties.bondDipoleVisibleProperty.value && this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.common.bondDipoleDirection.format( {
           bond: 'AB',
           position: DescriptionMaps.formatOrientationString( angle, 'toAngle' )
