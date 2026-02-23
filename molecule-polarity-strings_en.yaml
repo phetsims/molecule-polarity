@@ -99,6 +99,10 @@ a11y:
       # into one string to reduce verbosity.
       dipoleContextTwoBonds: 'Dipole { $bondA } { $progressA }, { $bondB } { $progressB }.'
       dipoleDirectionChange: 'Dipole { $bond } arrow now points to Atom { $atom }.'
+
+      # The context response for dipole direction change when there are two bonds. The information is combined
+      # into one string. It does not really reduce verbosity, but still reduces the number of announcements.
+      dipoleDirectionChangeTwoBonds: 'Dipole { $bondA } arrow now points to Atom { $atomA }, { $bondB } arrow now points to Atom { $atomB }.'
       bondCharacterContext: 'Bond is { $progress }.'
       electrostaticContext: 'Atom { $atom } { $progress } electrostatic potential.'
       electronDensityContext: 'Atom { $atom } { $progress } electron density.'

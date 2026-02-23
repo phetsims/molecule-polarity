@@ -281,6 +281,9 @@
         "dipoleDirectionChange": {
           "value": "Dipole { $bond } arrow now points to Atom { $atom }."
         },
+        "dipoleDirectionChangeTwoBonds": {
+          "value": "Dipole { $bondA } arrow now points to Atom { $atomA }, { $bondB } arrow now points to Atom { $atomB }."
+        },
         "bondCharacterContext": {
           "value": "Bond is { $progress }."
         },

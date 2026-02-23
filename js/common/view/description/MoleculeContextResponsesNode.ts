@@ -155,6 +155,7 @@ export default class MoleculeContextResponsesNode extends Node {
     // When Atom B changes on the Three Atoms screen, reduce verbosity by combining the two bond dipole updates
     // into one response instead of emitting two separate announcements.
     const hasTwoBondDipoles = bondDipolesVisible && this.bonds.length === 2;
+    let bothBondDirectionsChanged = false;
     if ( hasTwoBondDipoles ) {
       const bondA = this.bonds[ 0 ];
       const bondB = this.bonds[ 1 ];
@@ -164,6 +165,7 @@ export default class MoleculeContextResponsesNode extends Node {
 
       const bondAChanges = this.calculateBondChanges( bondADeltaEN, this.invertMapping || false );
       const bondBChanges = this.calculateBondChanges( bondBDeltaEN, this.invertMapping || true );
+      bothBondDirectionsChanged = bondAChanges.didBondChangeDirection && bondBChanges.didBondChangeDirection;
 
       this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContextTwoBonds.format( {
@@ -176,6 +178,16 @@ export default class MoleculeContextResponsesNode extends Node {
             progress: bondBDeltaEN === 0 ? 'zero' : bondBChanges.isGrowing ? 'larger' : 'smaller'
           } )
         } ), 'largerSmaller'
+      );
+
+      // When both dipoles change direction, combine into a single announcement.
+      bondDipolesVisible && bothBondDirectionsChanged && this.contextResponse(
+        MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChangeTwoBonds.format( {
+          bondA: bondA.label,
+          atomA: bondADeltaEN > 0 ? bondA.atom2.label : bondA.atom1.label,
+          bondB: bondB.label,
+          atomB: bondBDeltaEN > 0 ? bondB.atom2.label : bondB.atom1.label
+        } ), 'bondDirectionChange'
       );
     }
 
@@ -197,7 +209,7 @@ export default class MoleculeContextResponsesNode extends Node {
       );
 
       // If bond dipole changes direction
-      bondDipolesVisible && didBondChangeDirection && this.contextResponse(
+      bondDipolesVisible && didBondChangeDirection && !bothBondDirectionsChanged && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
           bond: bond.label,
           atom: bondDeltaEN > 0 ? bond.atom2.label : bond.atom1.label

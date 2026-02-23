@@ -120,6 +120,7 @@ type StringsType = {
         'dipoleContextStringProperty': LocalizedStringProperty;
         'dipoleContextTwoBondsStringProperty': LocalizedStringProperty;
         'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
+        'dipoleDirectionChangeTwoBondsStringProperty': LocalizedStringProperty;
         'bondCharacterContextStringProperty': LocalizedStringProperty;
         'electrostaticContextStringProperty': LocalizedStringProperty;
         'electronDensityContextStringProperty': LocalizedStringProperty;
