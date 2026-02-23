@@ -45,7 +45,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
       radioButtonOptions: MPConstants.AQUA_RADIO_BUTTON_OPTIONS,
       phetioVisiblePropertyInstrumented: false,
 
-      accessibleName: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleNameStringProperty,
+      accessibleHeading: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleHeadingStringProperty,
       accessibleHelpText: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.accessibleHelpTextStringProperty
     }, providedOptions );
 
@@ -55,7 +55,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
         createNode: () => new Text( MoleculePolarityStrings.noneStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
         tandemName: 'noneRadioButton',
         options: {
-          accessibleHelpText: null,
+          accessibleName: MoleculePolarityStrings.noneStringProperty,
           accessibleContextResponse: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.noneSelectedStringProperty
         }
       },
@@ -64,10 +64,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
         createNode: () => new Text( MoleculePolarityStrings.electrostaticPotentialStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
         tandemName: 'electrostaticPotentialRadioButton',
         options: {
-          accessibleHelpText: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticPotentialHelpText
-            .createProperty( {
-              colorMap: options.electrostaticSurfaceColorsProperty
-            } ),
+          accessibleName: MoleculePolarityStrings.electrostaticPotentialStringProperty,
           accessibleContextResponse: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electrostaticSelectedStringProperty
         }
       },
@@ -76,7 +73,7 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
         createNode: () => new Text( MoleculePolarityStrings.electronDensityStringProperty, MPConstants.CONTROL_TEXT_LABEL_OPTIONS ),
         tandemName: 'electronDensityRadioButton',
         options: {
-          accessibleHelpText: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electronDensityHelpTextStringProperty,
+          accessibleName: MoleculePolarityStrings.electronDensityStringProperty,
           accessibleContextResponse: MoleculePolarityFluent.a11y.common.surfaceRadioButtonGroup.electronDensitySelectedStringProperty
         }
       }
