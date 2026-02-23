@@ -187,6 +187,10 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     };
     const electronegativityDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
+
+      // The accessible paragraph should come after the accessible list Node in this case. The list content
+      // (child below) changes and should be read first.
+      appendAccessibleParagraph: true,
       accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTable.format( {
         hydrogen: getFixedElectronegativity( Element.H ),
         boron: getFixedElectronegativity( Element.B ),
