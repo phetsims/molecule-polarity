@@ -307,9 +307,8 @@ type StringsType = {
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       };
       'modelRadioButtonGroup': {
-        'accessibleNameStringProperty': LocalizedStringProperty;
-        'basicHelpTextStringProperty': LocalizedStringProperty;
-        'advancedHelpTextStringProperty': LocalizedStringProperty;
+        'accessibleHeadingStringProperty': LocalizedStringProperty;
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'basicSelectedStringProperty': LocalizedStringProperty;
         'advancedSelectedStringProperty': LocalizedStringProperty;
       };

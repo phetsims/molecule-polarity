@@ -460,9 +460,8 @@ a11y:
       accessibleName: 'Molecule'
       accessibleHelpText: 'Choose a different molecule to view.'
     modelRadioButtonGroup:
-      accessibleName: 'Model'
-      basicHelpText: 'Explore bond dipoles based on electronegativity differences.'
-      advancedHelpText: 'Explore bond dipoles based on partial charges.'
+      accessibleHeading: 'Model'
+      accessibleHelpText: 'Choose to explore bond dipoles using the basic model based on electronegativity difference, or the advanced modal based on partial charges.'
       basicSelected: 'Basic model shown.'
       advancedSelected: 'Advanced model shown.'
     molecules:

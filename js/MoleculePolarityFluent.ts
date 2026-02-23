@@ -247,9 +247,8 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_draggableMolecule_objectResponses',
 addToMapIfDefined( 'a11y_realMoleculesScreen_electronegativitiesTable', 'a11y.realMoleculesScreen.electronegativitiesTableStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculeComboBox_accessibleName', 'a11y.realMoleculesScreen.moleculeComboBox.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculeComboBox_accessibleHelpText', 'a11y.realMoleculesScreen.moleculeComboBox.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleName', 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleNameStringProperty' );
-addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHeading', 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleHeadingStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicSelected', 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicSelectedStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedSelected', 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenStringProperty' );
@@ -669,9 +668,8 @@ const MoleculePolarityFluent = {
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculeComboBox_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculeComboBox.accessibleHelpTextStringProperty' ) )
       },
       modelRadioButtonGroup: {
-        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleName', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleNameStringProperty' ) ),
-        basicHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicHelpTextStringProperty' ) ),
-        advancedHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedHelpTextStringProperty' ) ),
+        accessibleHeadingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHeading', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleHeadingStringProperty' ) ),
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleHelpTextStringProperty' ) ),
         basicSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicSelected', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicSelectedStringProperty' ) ),
         advancedSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedSelected', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty' ) )
       },
