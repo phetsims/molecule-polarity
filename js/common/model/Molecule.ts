@@ -87,8 +87,7 @@ export default abstract class Molecule extends PhetioObject {
 
     this.isRotatingDueToEFieldProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isRotatingDueToEFieldProperty' ),
-      phetioReadOnly: true,
-      phetioState: false
+      phetioReadOnly: true
     } );
 
     // update atom positions when molecule is rotated
