@@ -150,8 +150,8 @@ a11y:
     electricFieldToggle:
       accessibleName: 'Electric Field'
       accessibleHelpText: 'Turns the electric field on or off. When on, a negative plate appears on left and a positive plate on right, creating the electric field.'
-      on: 'Electric field on.'
-      off: 'Electric field off.'
+      on: 'Plates added, field on.'
+      off: 'Plates removed, field off.'
     atom:
       accessibleName: 'Atom { $name }'
     molecularDipoleResponses:
