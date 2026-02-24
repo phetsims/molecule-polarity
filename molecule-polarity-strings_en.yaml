@@ -156,7 +156,6 @@ a11y:
       accessibleName: 'Atom { $name }'
     molecularDipoleResponses:
       molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
-      molecularDipoleDirection: '{ a11y.common.molecularDipoleResponses.molecularDipoleContext } Points { $position } o''clock.'
       molecularDipoleDirectionOnly: 'Molecular dipole points { $position } o''clock.'
     # Electronegativity description
     electronegativity:

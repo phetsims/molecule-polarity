@@ -433,9 +433,6 @@
         "molecularDipoleContext": {
           "value": "Molecular dipole arrow { $progress }."
         },
-        "molecularDipoleDirection": {
-          "value": "{ a11y_common_molecularDipoleResponses_molecularDipoleContext } Points { $position } o'clock."
-        },
         "molecularDipoleDirectionOnly": {
           "value": "Molecular dipole points { $position } o'clock."
         }

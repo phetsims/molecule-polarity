@@ -184,7 +184,6 @@ type StringsType = {
       };
       'molecularDipoleResponses': {
         'molecularDipoleContextStringProperty': LocalizedStringProperty;
-        'molecularDipoleDirectionStringProperty': LocalizedStringProperty;
         'molecularDipoleDirectionOnlyStringProperty': LocalizedStringProperty;
       };
       'electronegativity': {

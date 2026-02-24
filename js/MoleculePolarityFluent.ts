@@ -158,7 +158,6 @@ addToMapIfDefined( 'a11y_common_electricFieldToggle_on', 'a11y.common.electricFi
 addToMapIfDefined( 'a11y_common_electricFieldToggle_off', 'a11y.common.electricFieldToggle.offStringProperty' );
 addToMapIfDefined( 'a11y_common_atom_accessibleName', 'a11y.common.atom.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleContext', 'a11y.common.molecularDipoleResponses.molecularDipoleContextStringProperty' );
-addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleDirection', 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionStringProperty' );
 addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleDirectionOnly', 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnlyStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_heading', 'a11y.common.electronegativity.headingStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_currentValue', 'a11y.common.electronegativity.currentValueStringProperty' );
@@ -501,7 +500,6 @@ const MoleculePolarityFluent = {
       },
       molecularDipoleResponses: {
         molecularDipoleContext: new FluentPattern<{ progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleContextStringProperty' ), [{"name":"progress"}] ),
-        molecularDipoleDirection: new FluentPattern<{ position: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleDirection', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionStringProperty' ), [{"name":"position"},{"name":"progress"}] ),
         molecularDipoleDirectionOnly: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleDirectionOnly', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnlyStringProperty' ), [{"name":"position"}] )
       },
       _comment_0: new FluentComment( {"comment":"Electronegativity description","associatedKey":"electronegativity"} ),

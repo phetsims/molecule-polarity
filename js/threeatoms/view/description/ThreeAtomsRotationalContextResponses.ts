@@ -53,11 +53,10 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
 
         // Molecular dipole description
         this.addAccessibleContextResponse(
-          MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirection.format( {
+          MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
             progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
               progress: magnitudeChange > 0 ? 'larger' : 'smaller'
-            } ),
-            position: DescriptionMaps.formatOrientationString( currentDipole.angle, 'toAngle' )
+            } )
           } ), {
             responseGroup: 'molecularDipole'
           }
