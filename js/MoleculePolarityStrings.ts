@@ -311,6 +311,15 @@ type StringsType = {
         'basicSelectedStringProperty': LocalizedStringProperty;
         'advancedSelectedStringProperty': LocalizedStringProperty;
       };
+      'electrostaticPotentialScale': {
+        'accessibleHeadingStringProperty': LocalizedStringProperty;
+        'blueWhiteRedAccessibleParagraphStringProperty': LocalizedStringProperty;
+        'rainbowAccessibleParagraphStringProperty': LocalizedStringProperty;
+      };
+      'electronDensityScale': {
+        'accessibleHeadingStringProperty': LocalizedStringProperty;
+        'accessibleParagraphStringProperty': LocalizedStringProperty;
+      };
       'molecules': {
         'spokenSymbol': {
           'hydrogenStringProperty': LocalizedStringProperty;

@@ -250,6 +250,11 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHea
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHelpText', 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicSelected', 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicSelectedStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedSelected', 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_electrostaticPotentialScale_accessibleHeading', 'a11y.realMoleculesScreen.electrostaticPotentialScale.accessibleHeadingStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_electrostaticPotentialScale_blueWhiteRedAccessibleParagraph', 'a11y.realMoleculesScreen.electrostaticPotentialScale.blueWhiteRedAccessibleParagraphStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_electrostaticPotentialScale_rainbowAccessibleParagraph', 'a11y.realMoleculesScreen.electrostaticPotentialScale.rainbowAccessibleParagraphStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_electronDensityScale_accessibleHeading', 'a11y.realMoleculesScreen.electronDensityScale.accessibleHeadingStringProperty' );
+addToMapIfDefined( 'a11y_realMoleculesScreen_electronDensityScale_accessibleParagraph', 'a11y.realMoleculesScreen.electronDensityScale.accessibleParagraphStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_hydrogen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.hydrogenStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_nitrogen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.nitrogenStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_spokenSymbol_oxygen', 'a11y.realMoleculesScreen.molecules.spokenSymbol.oxygenStringProperty' );
@@ -672,6 +677,15 @@ const MoleculePolarityFluent = {
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.accessibleHelpTextStringProperty' ) ),
         basicSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_basicSelected', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.basicSelectedStringProperty' ) ),
         advancedSelectedStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_modelRadioButtonGroup_advancedSelected', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.modelRadioButtonGroup.advancedSelectedStringProperty' ) )
+      },
+      electrostaticPotentialScale: {
+        accessibleHeadingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_electrostaticPotentialScale_accessibleHeading', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.electrostaticPotentialScale.accessibleHeadingStringProperty' ) ),
+        blueWhiteRedAccessibleParagraphStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_electrostaticPotentialScale_blueWhiteRedAccessibleParagraph', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.electrostaticPotentialScale.blueWhiteRedAccessibleParagraphStringProperty' ) ),
+        rainbowAccessibleParagraphStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_electrostaticPotentialScale_rainbowAccessibleParagraph', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.electrostaticPotentialScale.rainbowAccessibleParagraphStringProperty' ) )
+      },
+      electronDensityScale: {
+        accessibleHeadingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_electronDensityScale_accessibleHeading', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.electronDensityScale.accessibleHeadingStringProperty' ) ),
+        accessibleParagraphStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_electronDensityScale_accessibleParagraph', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.electronDensityScale.accessibleParagraphStringProperty' ) )
       },
       molecules: {
         spokenSymbol: {

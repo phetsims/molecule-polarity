@@ -53,6 +53,7 @@ import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import { RealAtom } from '../model/RealAtom.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
+import SurfaceHeadingNode from './description/SurfaceHeadingNode.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -207,6 +208,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       new RealMoleculesElectronegativityAccessibleListNode( model.moleculeProperty )
     );
 
+    const surfaceHeadingNode = new SurfaceHeadingNode( viewProperties.surfaceTypeProperty );
+
     // Accessible and Visual order
     {
       this.pdomPlayAreaNode.pdomOrder = [
@@ -214,7 +217,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         moleculeNode,
         moleculeComboBox,
         comboBoxListParent,
-        electronegativityDescriptionNode
+        electronegativityDescriptionNode,
+        surfaceHeadingNode
       ];
 
       this.pdomControlAreaNode.pdomOrder = [
@@ -240,6 +244,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
           } ),
           moleculeDescriptionNode,
           electronegativityDescriptionNode,
+          surfaceHeadingNode,
           comboBoxListParent // last, so that combo box list is on top
         ]
       } ) );

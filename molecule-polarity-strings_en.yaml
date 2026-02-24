@@ -463,6 +463,13 @@ a11y:
       accessibleHelpText: 'Choose to explore bond dipoles using the basic model based on electronegativity difference, or the advanced modal based on partial charges.'
       basicSelected: 'Basic model shown.'
       advancedSelected: 'Advanced model shown.'
+    electrostaticPotentialScale:
+      accessibleHeading: 'Electrostatic Potential Scale'
+      blueWhiteRedAccessibleParagraph: 'Electrostatic potential differences are shown with a three-color gradient: dark blue to light blue for positive values, white for neutral, and light red to dark red for negative values.'
+      rainbowAccessibleParagraph: 'Electrostatic potential differences are shown with a rainbow gradient: blue shades for positive values transitioning through green and yellow near neutral, to orange and red shades for negative values.'
+    electronDensityScale:
+      accessibleHeading: 'Electron Density Scale'
+      accessibleParagraph: 'Electron density is shown with a gradient from white (lower density) to dark gray (higher density). Greater contrast indicates a more uneven distribution, while more uniform gray indicates a more even distribution.'
     molecules:
       spokenSymbol:
         hydrogen: 'upper H2'
