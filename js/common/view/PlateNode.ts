@@ -30,7 +30,7 @@ export type PlateNodeOptions = SelfOptions;
 
 export default class PlateNode extends Node {
 
-  public readonly plateHeight: number;
+  public readonly plateHeight: number; // height of the plates, for layout
 
   public constructor( polarity: Polarity, providedOptions?: PlateNodeOptions ) {
 
