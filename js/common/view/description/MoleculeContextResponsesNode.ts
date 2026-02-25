@@ -197,9 +197,7 @@ export default class MoleculeContextResponsesNode extends Node {
       bondDipolesVisible && !hasTwoBondDipoles && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
           bond: bond.label,
-          progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-            progress: bondDeltaEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
-          } )
+          progress: bondDeltaEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
         } ), 'largerSmaller'
       );
 

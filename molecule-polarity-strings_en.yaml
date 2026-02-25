@@ -93,7 +93,7 @@ a11y:
       realMolecules: 'Explore real molecules in three dimensions.'
     electronegativitySlider:
       accessibleName: 'Atom { $atomName } Electronegativity'
-      dipoleContext: 'Dipole { $bond } arrow { $progress }.'
+      dipoleContext: 'Dipole { $bond } arrow { a11y.dipoleProgress }.'
 
       # The context response for dipole direction change when there are two bonds. The information is combined
       # into one string to reduce verbosity.

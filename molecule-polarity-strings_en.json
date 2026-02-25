@@ -273,7 +273,7 @@
           "value": "Atom { $atomName } Electronegativity"
         },
         "dipoleContext": {
-          "value": "Dipole { $bond } arrow { $progress }."
+          "value": "Dipole { $bond } arrow { a11y.dipoleProgress }."
         },
         "dipoleContextTwoBonds": {
           "value": "Dipole { $bondA } { $progressA }, { $bondB } { $progressB }."
