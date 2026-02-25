@@ -41,9 +41,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
         // Molecular dipole null description: Molecular dipole zero.
         this.addAccessibleContextResponse(
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-            progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-              progress: 'zero'
-            } )
+            progress: 'zero'
           } ), {
             responseGroup: 'molecularDipole'
           }
@@ -54,9 +52,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
         // Molecular dipole description
         this.addAccessibleContextResponse(
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-            progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-              progress: magnitudeChange > 0 ? 'larger' : 'smaller'
-            } )
+            progress: magnitudeChange > 0 ? 'larger' : 'smaller'
           } ), {
             responseGroup: 'molecularDipole'
           }

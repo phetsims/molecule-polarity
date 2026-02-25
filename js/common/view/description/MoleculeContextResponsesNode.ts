@@ -105,26 +105,20 @@ export default class MoleculeContextResponsesNode extends Node {
     // Molecular dipole null description: Molecular dipole zero.
     molecularDipoleVisible && isDipoleZero && this.contextResponse(
       MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: 'zero'
-        } )
+        progress: 'zero'
       } ), 'molecularDipoleVisible'
     );
 
     // Molecular dipole description
     molecularDipoleVisible && !isDipoleZero && this.contextResponse(
       MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
-        } )
+        progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
       } ), 'molecularDipoleVisible'
     );
 
     bondCharacterVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-        progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
-          progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
-        } )
+        progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
       } ), 'bondCharacterVisible'
     );
 
@@ -167,6 +161,7 @@ export default class MoleculeContextResponsesNode extends Node {
       const bondBChanges = this.calculateBondChanges( bondBDeltaEN, this.invertMapping || true );
       bothBondDirectionsChanged = bondAChanges.didBondChangeDirection && bondBChanges.didBondChangeDirection;
 
+      // Nested format is preferred here because the two progress are addressed separately
       this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContextTwoBonds.format( {
           bondA: bondA.label,
@@ -202,9 +197,7 @@ export default class MoleculeContextResponsesNode extends Node {
       bondDipolesVisible && !hasTwoBondDipoles && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
           bond: bond.label,
-          progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-            progress: bondDeltaEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
-          } )
+          progress: bondDeltaEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
         } ), 'largerSmaller'
       );
 

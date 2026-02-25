@@ -273,7 +273,7 @@
           "value": "Atom { $atomName } Electronegativity"
         },
         "dipoleContext": {
-          "value": "Dipole { $bond } arrow { $progress }."
+          "value": "Dipole { $bond } arrow { a11y_dipoleProgress }."
         },
         "dipoleContextTwoBonds": {
           "value": "Dipole { $bondA } { $progressA }, { $bondB } { $progressB }."
@@ -285,7 +285,7 @@
           "value": "Dipole { $bondA } arrow now points to Atom { $atomA }, { $bondB } arrow now points to Atom { $atomB }."
         },
         "bondCharacterContext": {
-          "value": "Bond is { $progress }."
+          "value": "Bond is { a11y_bondCharacterProgress }."
         },
         "electrostaticContext": {
           "value": "Atom { $atom } { $progress } electrostatic potential."
@@ -431,7 +431,7 @@
       },
       "molecularDipoleResponses": {
         "molecularDipoleContext": {
-          "value": "Molecular dipole arrow { $progress }."
+          "value": "Molecular dipole arrow { a11y_dipoleProgress }."
         },
         "molecularDipoleDirectionOnly": {
           "value": "Molecular dipole points { $position } o'clock."
