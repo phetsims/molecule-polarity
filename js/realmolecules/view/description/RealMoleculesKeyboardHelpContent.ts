@@ -6,7 +6,7 @@
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
  * @author Copilot
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';

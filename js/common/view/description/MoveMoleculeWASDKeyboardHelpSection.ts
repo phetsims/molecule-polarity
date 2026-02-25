@@ -5,7 +5,7 @@
  * This is used in the Real Molecules screen.
  *
  * @author Copilot
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';

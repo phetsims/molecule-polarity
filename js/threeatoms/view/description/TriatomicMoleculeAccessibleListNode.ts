@@ -2,7 +2,7 @@
 /**
  * Description for triatomic molecule in the form of an accessible list.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';

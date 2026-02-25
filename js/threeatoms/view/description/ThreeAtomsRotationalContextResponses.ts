@@ -2,7 +2,7 @@
 /**
  * Updates the accessible context responses related to rotation for a triatomic molecule.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';

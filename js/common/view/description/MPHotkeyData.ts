@@ -5,7 +5,7 @@
  * This centralizes the hotkey definitions for reuse across keyboard help sections.
  *
  * @author Copilot
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import HotkeyData from '../../../../../scenery/js/input/HotkeyData.js';

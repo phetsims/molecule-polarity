@@ -7,7 +7,7 @@
  *
  * Non exact hours return 'Between X and Y' format.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import { toDegrees } from '../../../../../dot/js/util/toDegrees.js';

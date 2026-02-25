@@ -3,7 +3,7 @@
 /**
  * MoleculeContextResponses handles accessibility context responses when electronegativity changes.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import Node from '../../../../../scenery/js/nodes/Node.js';
