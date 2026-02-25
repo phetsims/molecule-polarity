@@ -4,7 +4,6 @@
  * MoveAtomsOrMoleculeKeyboardHelpSection is the keyboard help section for moving atoms or rotating molecules.
  * This is used in the Three Atoms screen.
  *
- * @author Copilot
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 

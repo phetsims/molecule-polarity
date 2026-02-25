@@ -4,7 +4,6 @@
  * MoveMoleculeWASDKeyboardHelpSection is the keyboard help section for rotating molecules using arrow keys or WASD keys.
  * This is used in the Real Molecules screen.
  *
- * @author Copilot
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 

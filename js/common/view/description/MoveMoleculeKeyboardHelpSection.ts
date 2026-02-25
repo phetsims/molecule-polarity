@@ -4,7 +4,6 @@
  * MoveMoleculeKeyboardHelpSection is the keyboard help section for rotating molecules.
  * This is used in screens 1 and 2.
  *
- * @author Copilot
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 

@@ -3,7 +3,6 @@
 /**
  * ThreeAtomsKeyboardHelpContent is the content for the keyboard help dialog in the Three Atoms screen.
  *
- * @author Copilot
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 

@@ -5,7 +5,6 @@
  *
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
- * @author Copilot
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
