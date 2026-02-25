@@ -2,7 +2,7 @@
 /**
  * Common class for the Accessible Slider that controls angles of particles or molecules
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';

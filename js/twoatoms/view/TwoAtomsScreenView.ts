@@ -13,20 +13,19 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import MoleculeContextResponsesNode from '../../common/view/description/MoleculeContextResponsesNode.js';
-import PlatesNode from '../../common/view/PlatesNode.js';
 import RotationResponseNode from '../../common/view/description/RotationResponseNode.js';
+import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
+import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeAccessibleListNode from './description/DiatomicMoleculeAccessibleListNode.js';
+import TwoAtomsScreenSummaryContentNode from './description/TwoAtomsScreenSummaryContentNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
-import TwoAtomsElectronegativityAccessibleListNode from './description/TwoAtomsElectronegativityAccessibleListNode.js';
-import TwoAtomsScreenSummaryContentNode from './description/TwoAtomsScreenSummaryContentNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
 export default class TwoAtomsScreenView extends ScreenView {
@@ -121,10 +120,6 @@ export default class TwoAtomsScreenView extends ScreenView {
       accessibleHelpText: MoleculePolarityFluent.a11y.common.electronegativity.accessibleHelpTextStringProperty
     } );
     this.addChild( electronegativityDescriptionNode );
-
-    electronegativityDescriptionNode.addChild(
-      new TwoAtomsElectronegativityAccessibleListNode( model.diatomicMolecule )
-    );
 
     const bondCharacterPanel = new BondCharacterPanel( model.diatomicMolecule, {
       visibleProperty: viewProperties.bondCharacterVisibleProperty,

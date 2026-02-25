@@ -2,7 +2,7 @@
 /**
  * ThreeAtomsElectronegativityAccessibleListNode is an accessible list node for the electronegativity information.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';

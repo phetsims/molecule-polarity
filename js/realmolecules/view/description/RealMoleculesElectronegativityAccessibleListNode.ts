@@ -5,7 +5,7 @@
  *
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
@@ -15,8 +15,8 @@ import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optioni
 import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
-import RealMolecule from '../../model/RealMolecule.js';
 import { RealAtom } from '../../model/RealAtom.js';
+import RealMolecule from '../../model/RealMolecule.js';
 
 type SelfOptions = EmptySelfOptions;
 

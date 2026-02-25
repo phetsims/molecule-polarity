@@ -5,7 +5,7 @@
  *
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';

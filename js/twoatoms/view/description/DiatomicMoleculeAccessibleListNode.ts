@@ -2,7 +2,7 @@
 /**
  * Description for diatomic molecule.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
@@ -35,6 +35,14 @@ export default class DiatomicMoleculeAccessibleListNode extends AccessibleListNo
     const isMoleculePolarProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
 
     super( [
+
+      // Electronegativity Values
+      {
+        stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.electronegativityValues.createProperty( {
+          enA: DescriptionMaps.createElectronegativityStringProperty( diatomicMolecule.atomA.electronegativityProperty ),
+          enB: DescriptionMaps.createElectronegativityStringProperty( diatomicMolecule.atomB.electronegativityProperty )
+        } )
+      },
 
       // Bond Dipole Null Description. e.g. Molecule has { no } dipole arrow.
       {

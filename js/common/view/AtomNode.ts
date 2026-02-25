@@ -7,10 +7,11 @@
  * and show as a slider in the PDOM.
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import TProperty from '../../../../axon/js/TProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -21,7 +22,6 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Atom from '../model/Atom.js';
 import MPAccessibleSlider, { MPAccessibleSliderOptions } from './description/MPAccessibleSlider.js';
-import TProperty from '../../../../axon/js/TProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 

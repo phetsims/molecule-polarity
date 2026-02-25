@@ -3,8 +3,7 @@
 /**
  * TwoAtomsKeyboardHelpContent is the content for the keyboard help dialog in the Two Atoms screen.
  *
- * @author Copilot
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';

@@ -4,8 +4,7 @@
  * MoveAtomsOrMoleculeKeyboardHelpSection is the keyboard help section for moving atoms or rotating molecules.
  * This is used in the Three Atoms screen.
  *
- * @author Copilot
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';

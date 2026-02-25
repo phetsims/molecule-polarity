@@ -4,7 +4,7 @@
  *
  * Each mapping defines a createStringProperty function as well as a formatString function for convenience.
  *
- * @author Agustín Vallejo
+ * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
