@@ -37,7 +37,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * Surface Color preference: see _Preferences > Simulation_
 * Alternative Input
 * Interactive Highlights
-* Interactive Description
+* Core Description
 * Basic Sound
 
 ### Other Changes
