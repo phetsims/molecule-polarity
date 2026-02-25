@@ -161,6 +161,7 @@ export default class MoleculeContextResponsesNode extends Node {
       const bondBChanges = this.calculateBondChanges( bondBDeltaEN, this.invertMapping || true );
       bothBondDirectionsChanged = bondAChanges.didBondChangeDirection && bondBChanges.didBondChangeDirection;
 
+      // Nested format is preferred here because the two progress are addressed separately
       this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContextTwoBonds.format( {
           bondA: bondA.label,
