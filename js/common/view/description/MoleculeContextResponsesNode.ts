@@ -105,26 +105,20 @@ export default class MoleculeContextResponsesNode extends Node {
     // Molecular dipole null description: Molecular dipole zero.
     molecularDipoleVisible && isDipoleZero && this.contextResponse(
       MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: 'zero'
-        } )
+        progress: 'zero'
       } ), 'molecularDipoleVisible'
     );
 
     // Molecular dipole description
     molecularDipoleVisible && !isDipoleZero && this.contextResponse(
       MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-        progress: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-          progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
-        } )
+        progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
       } ), 'molecularDipoleVisible'
     );
 
     bondCharacterVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-        progress: MoleculePolarityFluent.a11y.bondCharacterProgress.format( {
-          progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
-        } )
+        progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
       } ), 'bondCharacterVisible'
     );
 

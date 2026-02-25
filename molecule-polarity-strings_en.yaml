@@ -103,7 +103,7 @@ a11y:
       # The context response for dipole direction change when there are two bonds. The information is combined
       # into one string. It does not really reduce verbosity, but still reduces the number of announcements.
       dipoleDirectionChangeTwoBonds: 'Dipole { $bondA } arrow now points to Atom { $atomA }, { $bondB } arrow now points to Atom { $atomB }.'
-      bondCharacterContext: 'Bond is { $progress }.'
+      bondCharacterContext: 'Bond is { a11y.bondCharacterProgress }.'
       electrostaticContext: 'Atom { $atom } { $progress } electrostatic potential.'
       electronDensityContext: 'Atom { $atom } { $progress } electron density.'
       electricFieldContext: 'Molecule aligned with electric field.'
@@ -155,7 +155,7 @@ a11y:
     atom:
       accessibleName: 'Atom { $name }'
     molecularDipoleResponses:
-      molecularDipoleContext: 'Molecular dipole arrow { $progress }.'
+      molecularDipoleContext: 'Molecular dipole arrow { a11y.dipoleProgress }.'
       molecularDipoleDirectionOnly: 'Molecular dipole points { $position } o''clock.'
     # Electronegativity description
     electronegativity:
