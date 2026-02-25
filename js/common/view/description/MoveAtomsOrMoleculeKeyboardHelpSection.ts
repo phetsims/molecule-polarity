@@ -8,7 +8,6 @@
  */
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
-import KeyboardHelpIconFactory from '../../../../../scenery-phet/js/keyboard/help/KeyboardHelpIconFactory.js';
 import KeyboardHelpSection, { KeyboardHelpSectionOptions } from '../../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import moleculePolarity from '../../../moleculePolarity.js';
@@ -30,7 +29,7 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
     const rotateMolecule = KeyboardHelpSectionRow.fromHotkeyData(
       MPHotkeyData.ROTATE_MOLECULE,
       {
-        icon: KeyboardHelpIconFactory.iconOrIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon(), KeyboardHelpIconFactory.upDownArrowKeysRowIcon() )
+        hotkeySetVariant: 'paired'
       }
     );
 
@@ -38,7 +37,7 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
     const moveAtomAAndC = KeyboardHelpSectionRow.fromHotkeyData(
       MPHotkeyData.MOVE_ATOM_A_AND_C,
       {
-        icon: KeyboardHelpIconFactory.iconOrIcon( KeyboardHelpIconFactory.leftRightArrowKeysRowIcon(), KeyboardHelpIconFactory.upDownArrowKeysRowIcon() )
+        hotkeySetVariant: 'paired'
       }
     );
 
