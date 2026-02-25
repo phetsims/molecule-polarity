@@ -29,6 +29,8 @@ export default class DiatomicMolecule extends Molecule {
   public readonly atomB: Atom; // the atom labeled 'B'
   public readonly bond: Bond;
   public readonly getDeltaEN: () => number;
+
+  // Difference in electronegativities atoms in the molecule. Equal in absolute value to dipoleMagnitude.
   public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   public constructor( providedOptions: DiatomicMoleculeOptions ) {

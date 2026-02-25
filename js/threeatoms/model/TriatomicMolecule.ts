@@ -36,6 +36,8 @@ export default class TriatomicMolecule extends Molecule {
   public readonly bondBC: Bond; // the bond between atoms 'B' and 'C'
   public readonly bondAngleABProperty: NumberProperty; // see phetioDocumentation
   public readonly bondAngleBCProperty: NumberProperty; // see phetioDocumentation
+
+  // Difference in electronegativities of the atoms. Calculated as the magnitude of the dipole moment.
   public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   // the angle between bondAB and bondBC

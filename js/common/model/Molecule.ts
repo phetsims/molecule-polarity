@@ -32,14 +32,19 @@ export type MoleculeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 't
 export default abstract class Molecule extends PhetioObject {
 
   public readonly position: Vector2; // the point about which the molecule rotates, in global model coordinate frame
-  public readonly atoms: Atom[];
-  public readonly bonds: Bond[];
-  public readonly angleProperty: NumberProperty;
+  public readonly atoms: Atom[]; // atoms that belong to this molecule
+  public readonly bonds: Bond[]; // bonds between the atoms in this molecule
+  public readonly angleProperty: NumberProperty; // global angle the molecule is pointing to
   public readonly isDraggingProperty: Property<boolean>; // true when the user is dragging the molecule
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>; // the molecular dipole, sum of the bond dipoles
   public readonly previousDipoleProperty: Property<Vector2>; // the molecular dipole before the last EN change
   public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
+
+  // Difference in electronegativities atoms in the molecule. Equal in absolute value to dipoleMagnitude.
+  // DiatomicMolecule and TriatomicMolecule will override this with a more specific calculation.
   public abstract readonly deltaENProperty: TReadOnlyProperty<number>;
+
+  // Whether the rotation is triggered by electric field. Used in a11y to avoid mistakenly describing user rotations.
   public readonly isRotatingDueToEFieldProperty: Property<boolean>;
 
   /**

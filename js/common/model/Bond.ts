@@ -9,6 +9,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
@@ -23,11 +24,19 @@ type BondOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem' | 'p
 
 export default class Bond extends PhetioObject {
 
-  public readonly label: string; // Used for accessibility, not translatable
+  // Label to identify the bond. Used for accessibility, not translatable
+  // Although possible values are only 'AB' and 'BC', type inference thinks it could be any permutation of A,B,C,
+  // so we can't use a string literal type here.
+  public readonly label: string;
   public readonly atom1: Atom;
   public readonly atom2: Atom;
+
+  // Vector that represents the dipole
   public readonly dipoleProperty: TReadOnlyProperty<Vector2>;
   public readonly dipoleMagnitudeProperty: TReadOnlyProperty<number>; // magnitude of the molecular dipole
+
+  // Difference in electronegativities of atom1 and atom2. Equal in absolute value to dipoleMagnitude.
+  // Calculated as (electronegativity of atom2) - (electronegativity of atom1),
   public readonly deltaENProperty: TReadOnlyProperty<number>;
 
   public constructor( atom1: Atom, atom2: Atom, providedOptions: BondOptions ) {
@@ -44,6 +53,7 @@ export default class Bond extends PhetioObject {
     this.atom1 = atom1;
     this.atom2 = atom2;
 
+    affirm( atom1.label !== atom2.label, 'Atoms in a bond must have different labels' );
     this.label = `${atom1.label}${atom2.label}`; // e.g. 'AB'
 
     this.dipoleProperty = new DerivedProperty( [

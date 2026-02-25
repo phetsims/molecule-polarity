@@ -27,10 +27,16 @@ type SelfOptions = {
 
 type AtomOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
+type AtomLabels = 'A' | 'B' | 'C';
+
 export default class Atom extends PhetioObject {
 
-  public readonly label: string; // Used for accessibility, not translatable
+  // Label that identifies the three possible atoms. Used for accessibility, not translatable
+  public readonly label: AtomLabels;
+
+  // Label that is displayed in the sim.
   public readonly labelStringProperty: TReadOnlyProperty<string>;
+
   public readonly diameter: number;
   public readonly color: TColor;
   public readonly positionProperty: TProperty<Vector2>;
@@ -41,7 +47,7 @@ export default class Atom extends PhetioObject {
   public readonly previousElectronegativityProperty: NumberProperty;
   public readonly partialChargeProperty: TProperty<number>;
 
-  public constructor( label: string, labelStringProperty: TReadOnlyProperty<string>, providedOptions: AtomOptions ) {
+  public constructor( label: AtomLabels, labelStringProperty: TReadOnlyProperty<string>, providedOptions: AtomOptions ) {
 
     const options = optionize<AtomOptions, SelfOptions, PhetioObjectOptions>()( {
 
