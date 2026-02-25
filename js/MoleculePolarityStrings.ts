@@ -242,6 +242,7 @@ type StringsType = {
         };
         'electricFieldAlignedStringProperty': LocalizedStringProperty;
         'orientationDescriptionStringProperty': LocalizedStringProperty;
+        'electronegativityValuesStringProperty': LocalizedStringProperty;
       };
       'rotateMoleculeSlider': {
         'accessibleNameStringProperty': LocalizedStringProperty;
