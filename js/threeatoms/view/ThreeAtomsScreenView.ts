@@ -51,16 +51,12 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
 
     const moleculeDescriptionNode = new Node( {
-      accessibleHeading: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.headingStringProperty
+      accessibleHeading: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.headingStringProperty,
+      accessibleTemplate: TriatomicMoleculeAccessibleListNode.createTemplate( model.triatomicMolecule, viewProperties )
     } );
 
     moleculeDescriptionNode.addChild(
       new ThreeAtomsRotationalContextResponses( model.triatomicMolecule, viewProperties )
-    );
-
-    // Molecule description
-    moleculeDescriptionNode.addChild(
-      new TriatomicMoleculeAccessibleListNode( model.triatomicMolecule, viewProperties )
     );
 
     // Adding the node that will emit context responses due to rotations

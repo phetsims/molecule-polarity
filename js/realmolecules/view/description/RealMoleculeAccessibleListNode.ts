@@ -15,25 +15,20 @@ import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import FluentPattern from '../../../../../chipper/js/browser/FluentPattern.js';
 import { toFixed } from '../../../../../dot/js/util/toFixed.js';
 import Element from '../../../../../nitroglycerin/js/Element.js';
-import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
+import { TemplateResult } from '../../../../../sherpa/lib/lit-core-3.3.1.min.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import RealMolecule, { MoleculeName, MoleculeSymbol } from '../../model/RealMolecule.js';
 import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
 
-type SelfOptions = EmptySelfOptions;
-
-export type RealMoleculeAccessibleListNodeOptions = SelfOptions & AccessibleListNodeOptions;
-
-export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
-  public constructor(
+export default class RealMoleculeAccessibleListNode {
+  public static createTemplate(
     molecules: RealMolecule[],
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     isAdvancedProperty: TReadOnlyProperty<boolean>,
-    viewProperties: RealMoleculesViewProperties,
-    providedOptions?: RealMoleculeAccessibleListNodeOptions
-  ) {
+    viewProperties: RealMoleculesViewProperties
+  ): TReadOnlyProperty<TemplateResult> {
 
     // Even though the molecule is changing, the name is a static string for indexing description
     const moleculeNameProperty = moleculeProperty.derived( molecule => {
@@ -52,59 +47,58 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       } );
     };
 
-    const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculeAccessibleListNodeOptions>()( {
+    const partialChargeStringPropertyMap = RealMoleculeAccessibleListNode.getPartialChargeStringPropertyMap( molecules );
+
+    return AccessibleList.createTemplate( {
+      listItems: [
+
+          // Bond Dipole
+          {
+            visibleProperty: viewProperties.bondDipolesVisibleProperty,
+            stringProperty: getBasicAdvancedStringProperty(
+              MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.selectMolecules,
+              MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.selectMolecules
+            )
+          },
+
+          // Molecular Dipole
+          {
+            visibleProperty: viewProperties.molecularDipoleVisibleProperty,
+            stringProperty: getBasicAdvancedStringProperty(
+              MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.selectMolecules,
+              MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMolecules
+            )
+          },
+
+          // Partial Charges
+          {
+            visibleProperty: DerivedProperty.and( [ isAdvancedProperty, viewProperties.partialChargesVisibleProperty ] ),
+            stringProperty: new DynamicProperty( new DerivedProperty( [ moleculeProperty ], molecule => partialChargeStringPropertyMap[ molecule.symbol ] ) )
+          },
+
+          // Electrostatic Potential Surface
+          {
+            visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' ),
+            stringProperty: getBasicAdvancedStringProperty(
+              MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential.selectMolecules,
+              MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.selectMolecules
+            )
+          },
+
+          // Electron Density Surface
+          {
+            visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' ),
+            stringProperty: getBasicAdvancedStringProperty(
+              MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity.selectMolecules,
+              MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.selectMolecules
+            )
+          }
+      ],
       leadingParagraphStringProperty: getBasicAdvancedStringProperty(
         MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.description,
         MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.description
       )
-    }, providedOptions );
-
-    const partialChargeStringPropertyMap = RealMoleculeAccessibleListNode.getPartialChargeStringPropertyMap( molecules );
-
-    super( [
-
-      // Bond Dipole
-      {
-        visibleProperty: viewProperties.bondDipolesVisibleProperty,
-        stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.selectMolecules,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.selectMolecules
-        )
-      },
-
-      // Molecular Dipole
-      {
-        visibleProperty: viewProperties.molecularDipoleVisibleProperty,
-        stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.selectMolecules,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMolecules
-        )
-      },
-
-      // Partial Charges
-      {
-        visibleProperty: DerivedProperty.and( [ isAdvancedProperty, viewProperties.partialChargesVisibleProperty ] ),
-        stringProperty: new DynamicProperty( new DerivedProperty( [ moleculeProperty ], molecule => partialChargeStringPropertyMap[ molecule.symbol ] ) )
-      },
-
-      // Electrostatic Potential Surface
-      {
-        visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' ),
-        stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential.selectMolecules,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.selectMolecules
-        )
-      },
-
-      // Electron Density Surface
-      {
-        visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' ),
-        stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity.selectMolecules,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.selectMolecules
-        )
-      }
-    ], options );
+    } );
   }
 
   /**

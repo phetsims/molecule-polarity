@@ -51,13 +51,9 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
 
     const moleculeDescriptionNode = new Node( {
-      accessibleHeading: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.headingStringProperty
+      accessibleHeading: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.headingStringProperty,
+      accessibleTemplate: DiatomicMoleculeAccessibleListNode.createTemplate( model.diatomicMolecule, viewProperties )
     } );
-
-    // Molecule description
-    moleculeDescriptionNode.addChild(
-      new DiatomicMoleculeAccessibleListNode( model.diatomicMolecule, viewProperties )
-    );
 
     // Adding the node that will emit context responses due to rotations
     this.addChild(

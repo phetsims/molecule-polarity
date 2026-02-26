@@ -6,30 +6,20 @@
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
-import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
+import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
+import { TemplateResult } from '../../../../../sherpa/lib/lit-core-3.3.1.min.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../../model/TriatomicMolecule.js';
 import ThreeAtomsViewProperties from '../ThreeAtomsViewProperties.js';
 
-type SelfOptions = EmptySelfOptions;
-
-export type TriatomicMoleculeAccessibleListNodeOptions = SelfOptions & AccessibleListNodeOptions;
-
-export default class TriatomicMoleculeAccessibleListNode extends AccessibleListNode {
-  public constructor(
+export default class TriatomicMoleculeAccessibleListNode {
+  public static createTemplate(
     triatomicMolecule: TriatomicMolecule,
-    viewProperties: ThreeAtomsViewProperties,
-    providedOptions?: TriatomicMoleculeAccessibleListNodeOptions
-  ) {
-    const options = optionize<SelfOptions, EmptySelfOptions, TriatomicMoleculeAccessibleListNodeOptions>()( {
-      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
-        polarity: DescriptionMaps.createMolecularPolarityStringProperty( triatomicMolecule.deltaENProperty )
-      } )
-    }, providedOptions );
-
+    viewProperties: ThreeAtomsViewProperties
+  ): TReadOnlyProperty<TemplateResult> {
     // Molecule is polar if its dipole magnitude is not zero
     const isMoleculePolarProperty = triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude > 0.05 );
 
@@ -43,7 +33,8 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
       triatomicMolecule.angleProperty
     ], ( bondAngleBC: number, moleculeAngle: number ) => bondAngleBC + moleculeAngle );
 
-    super( [
+    return AccessibleList.createTemplate( {
+      listItems: [
 
       // Orientation
       {
@@ -225,7 +216,11 @@ export default class TriatomicMoleculeAccessibleListNode extends AccessibleListN
         } )
       }
 
-    ], options );
+      ],
+      leadingParagraphStringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
+        polarity: DescriptionMaps.createMolecularPolarityStringProperty( triatomicMolecule.deltaENProperty )
+      } )
+    } );
   }
 }
 

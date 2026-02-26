@@ -175,13 +175,11 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
         moleculeName: dynamicMoleculeNameProperty
-      } )
+      } ),
+      accessibleTemplate: RealMoleculeAccessibleListNode.createTemplate(
+        model.molecules, model.moleculeProperty, model.isAdvancedProperty, viewProperties
+      )
     } );
-
-    // Molecule description
-    moleculeDescriptionNode.addChild(
-      new RealMoleculeAccessibleListNode( model.molecules, model.moleculeProperty, model.isAdvancedProperty, viewProperties )
-    );
 
     const getFixedElectronegativity = ( element: Element ) => {
       return toFixed( RealAtom.getDisplayElectronegativity( element ), 1 );
@@ -189,8 +187,8 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     const electronegativityDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.common.electronegativity.headingStringProperty,
 
-      // The accessible paragraph should come after the accessible list Node in this case. The list content
-      // (child below) changes and should be read first.
+      // The accessible paragraph should come after the accessible list template in this case. The list content
+      // changes and should be read first.
       appendAccessibleParagraph: true,
       accessibleParagraph: MoleculePolarityFluent.a11y.realMoleculesScreen.electronegativitiesTable.format( {
         hydrogen: getFixedElectronegativity( Element.H ),
@@ -201,12 +199,9 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         fluorine: getFixedElectronegativity( Element.F ),
         chlorine: getFixedElectronegativity( Element.Cl )
       } ),
+      accessibleTemplate: RealMoleculesElectronegativityAccessibleListNode.createTemplate( model.moleculeProperty ),
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
-
-    electronegativityDescriptionNode.addChild(
-      new RealMoleculesElectronegativityAccessibleListNode( model.moleculeProperty )
-    );
 
     const surfaceHeadingNode = new RealMoleculesSurfaceHeadingNode( viewProperties.surfaceTypeProperty );
 

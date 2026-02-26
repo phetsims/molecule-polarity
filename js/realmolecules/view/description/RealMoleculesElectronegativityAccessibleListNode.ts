@@ -11,33 +11,28 @@
 
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { toFixed } from '../../../../../dot/js/util/toFixed.js';
-import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
-import AccessibleListNode, { AccessibleListNodeOptions } from '../../../../../scenery-phet/js/accessibility/AccessibleListNode.js';
+import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
+import { TemplateResult } from '../../../../../sherpa/lib/lit-core-3.3.1.min.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import { RealAtom } from '../../model/RealAtom.js';
 import RealMolecule from '../../model/RealMolecule.js';
 
-type SelfOptions = EmptySelfOptions;
-
-export type RealMoleculesElectronegativityAccessibleListNodeOptions = SelfOptions & AccessibleListNodeOptions;
-
-export default class RealMoleculesElectronegativityAccessibleListNode extends AccessibleListNode {
-  public constructor( realMoleculeProperty: TReadOnlyProperty<RealMolecule>, providedOptions?: RealMoleculesElectronegativityAccessibleListNodeOptions ) {
-    const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculesElectronegativityAccessibleListNodeOptions>()( {
+export default class RealMoleculesElectronegativityAccessibleListNode {
+  public static createTemplate( realMoleculeProperty: TReadOnlyProperty<RealMolecule> ): TReadOnlyProperty<TemplateResult> {
+    return AccessibleList.createTemplate( {
+      listItems: RealAtom.ORDERED_ELEMENTS.map( element => {
+        return {
+          visibleProperty: realMoleculeProperty.derived(
+            molecule => molecule.atoms.some( atom => atom.element === element ) ),
+          stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
+            element: RealAtom.getA11yStringProperty( element ),
+            en: toFixed( RealAtom.getDisplayElectronegativity( element ), 1 )
+          } )
+        };
+      } ),
       leadingParagraphStringProperty: MoleculePolarityFluent.a11y.common.electronegativity.currentValueStringProperty
-    }, providedOptions );
-
-    super( RealAtom.ORDERED_ELEMENTS.map( element => {
-      return {
-        visibleProperty: realMoleculeProperty.derived(
-          molecule => molecule.atoms.some( atom => atom.element === element ) ),
-        stringProperty: MoleculePolarityFluent.a11y.common.electronegativity.elementElectronegativity.createProperty( {
-          element: RealAtom.getA11yStringProperty( element ),
-          en: toFixed( RealAtom.getDisplayElectronegativity( element ), 1 )
-        } )
-      };
-    } ), options );
+    } );
   }
 }
 
