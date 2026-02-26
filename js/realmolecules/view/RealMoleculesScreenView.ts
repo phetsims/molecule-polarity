@@ -53,7 +53,7 @@ import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import { RealAtom } from '../model/RealAtom.js';
 import Element from '../../../../nitroglycerin/js/Element.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
-import SurfaceHeadingNode from './description/SurfaceHeadingNode.js';
+import RealMoleculesSurfaceHeadingNode from './description/RealMoleculesSurfaceHeadingNode.js';
 
 export default class RealMoleculesScreenView extends MobiusScreenView {
 
@@ -208,7 +208,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       new RealMoleculesElectronegativityAccessibleListNode( model.moleculeProperty )
     );
 
-    const surfaceHeadingNode = new SurfaceHeadingNode( viewProperties.surfaceTypeProperty );
+    const surfaceHeadingNode = new RealMoleculesSurfaceHeadingNode( viewProperties.surfaceTypeProperty );
 
     // Accessible and Visual order
     {

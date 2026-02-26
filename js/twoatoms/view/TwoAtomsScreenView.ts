@@ -23,6 +23,7 @@ import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
 import DiatomicMoleculeAccessibleListNode from './description/DiatomicMoleculeAccessibleListNode.js';
 import TwoAtomsScreenSummaryContentNode from './description/TwoAtomsScreenSummaryContentNode.js';
+import TwoAtomsSurfaceHeadingNode from './description/TwoAtomsSurfaceHeadingNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
 import TwoAtomsColorKeyNode from './TwoAtomsColorKeyNode.js';
 import TwoAtomsControlPanel from './TwoAtomsControlPanel.js';
@@ -164,11 +165,15 @@ export default class TwoAtomsScreenView extends ScreenView {
     } );
     this.addChild( rootNode );
 
+    const surfaceHeadingNode = new TwoAtomsSurfaceHeadingNode( viewProperties.surfaceTypeProperty );
+    this.addChild( surfaceHeadingNode );
+
     this.pdomPlayAreaNode.pdomOrder = [
       moleculeDescriptionNode,
       moleculeNode,
       electronegativityDescriptionNode,
-      panelsVBox
+      panelsVBox,
+      surfaceHeadingNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [

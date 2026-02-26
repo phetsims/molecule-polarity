@@ -1,7 +1,7 @@
 // Copyright 2026, University of Colorado Boulder
 
 /**
- * Describes the surface scale.
+ * Describes the surface scale for the real molecules screen.
  *
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
@@ -16,7 +16,7 @@ import MPPreferences from '../../../common/model/MPPreferences.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import Multilink from '../../../../../axon/js/Multilink.js';
 
-export default class SurfaceHeadingNode extends Node {
+export default class RealMoleculesSurfaceHeadingNode extends Node {
   public constructor(
     surfaceTypeProperty: StringUnionProperty<SurfaceType>
   ) {
@@ -51,4 +51,4 @@ export default class SurfaceHeadingNode extends Node {
   }
 }
 
-moleculePolarity.register( 'SurfaceHeadingNode', SurfaceHeadingNode );
+moleculePolarity.register( 'RealMoleculesSurfaceHeadingNode', RealMoleculesSurfaceHeadingNode );
