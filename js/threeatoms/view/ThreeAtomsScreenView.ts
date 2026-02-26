@@ -12,19 +12,18 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPConstants from '../../common/MPConstants.js';
-import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import MoleculeContextResponsesNode from '../../common/view/description/MoleculeContextResponsesNode.js';
-import PlatesNode from '../../common/view/PlatesNode.js';
 import RotationResponseNode from '../../common/view/description/RotationResponseNode.js';
+import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
+import PlatesNode from '../../common/view/PlatesNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
-import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
-import ThreeAtomsElectronegativityAccessibleListNode from './description/ThreeAtomsElectronegativityAccessibleListNode.js';
 import ThreeAtomsRotationalContextResponses from './description/ThreeAtomsRotationalContextResponses.js';
 import ThreeAtomsScreenSummaryContentNode from './description/ThreeAtomsScreenSummaryContentNode.js';
-import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeAccessibleListNode from './description/TriatomicMoleculeAccessibleListNode.js';
+import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
+import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
 
 export default class ThreeAtomsScreenView extends ScreenView {
@@ -82,11 +81,6 @@ export default class ThreeAtomsScreenView extends ScreenView {
       accessibleHelpText: MoleculePolarityFluent.a11y.common.electronegativity.accessibleHelpTextStringProperty
     } );
     this.addChild( electronegativityDescriptionNode );
-
-    electronegativityDescriptionNode.addChild(
-      new ThreeAtomsElectronegativityAccessibleListNode( model.triatomicMolecule )
-    );
-
 
     const platesNode = new PlatesNode( model.eFieldEnabledProperty, {
       spacing: 600
