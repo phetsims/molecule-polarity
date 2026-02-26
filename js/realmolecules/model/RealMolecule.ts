@@ -153,10 +153,10 @@ export default class RealMolecule extends PhetioObject {
 
       const position = new Vector3( positionData[ 0 ], positionData[ 1 ], positionData[ 2 ] ).minus( originOffset );
       const normal = new Vector3( normalData[ 0 ], normalData[ 1 ], normalData[ 2 ] );
-      const espValue = moleculeData.vertexESPs[ index ];
-      const dtValue = moleculeData.vertexDTs[ index ];
+      const electrostaticPotentialValue = moleculeData.vertexElectrostaticPotentialValues[ index ];
+      const electronDensityValue = moleculeData.vertexElectronDensityValues[ index ];
 
-      return new SurfaceVertex( position, normal, espValue, dtValue );
+      return new SurfaceVertex( position, normal, electrostaticPotentialValue, electronDensityValue );
     } );
 
     this.faces = moleculeData.faceIndices.map( faceIndices => faceIndices.map( index => this.vertices[ index ] ) );
@@ -207,7 +207,7 @@ export default class RealMolecule extends PhetioObject {
    */
   public getElectrostaticPotential( vertex: SurfaceVertex ): number {
     if ( this.isAdvancedProperty.value ) {
-      return vertex.espValue;
+      return vertex.electrostaticPotentialValue;
     }
     else {
       return this.getSimplifiedElectrostaticPotential( vertex.position );
@@ -219,7 +219,7 @@ export default class RealMolecule extends PhetioObject {
    */
   public getElectronDensity( vertex: SurfaceVertex ): number {
     if ( this.isAdvancedProperty.value ) {
-      return vertex.dtValue;
+      return vertex.electronDensityValue;
     }
     else {
       // NOTE: Yes... the "simplified" model is to just hack the same value for electron density as electrostatic potential.

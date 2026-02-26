@@ -15,10 +15,10 @@ export class SurfaceVertex {
     public readonly normal: Vector3,
 
     // Electrostatic potential value at this vertex
-    public readonly espValue: number,
+    public readonly electrostaticPotentialValue: number,
 
     // Electron density value at this vertex
-    public readonly dtValue: number
+    public readonly electronDensityValue: number
   ) {}
 
   // Convenience getter for three.js attributes

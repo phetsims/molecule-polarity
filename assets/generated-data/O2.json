@@ -4025,7 +4025,7 @@
       35
     ]
   ],
-  "vertexESPs": [
+  "vertexElectrostaticPotentialValues": [
     -0.031297,
     -0.031297,
     -0.036352,
@@ -4227,7 +4227,7 @@
     -0.061966,
     -0.073055
   ],
-  "vertexDTs": [
+  "vertexElectronDensityValues": [
     0.003186,
     0.003186,
     0.003216,

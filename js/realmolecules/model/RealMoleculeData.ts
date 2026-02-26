@@ -5,6 +5,7 @@
  *
  * The source data is generated with assets/generate-molecule-data.ts, but it is placed in
  * assets/generated-data/all-molecules.json. That JSON can be parsed into the main export, and then cleaned up.
+ * See git history for the file if needed.
  *
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
@@ -46,8 +47,8 @@ export type RealMoleculeDataEntry = {
   vertexPositions: [ number, number, number ][];
   vertexNormals: [ number, number, number ][];
   faceIndices: [ number, number, number ][]; // A face is composed of three vertices
-  vertexESPs: number[]; // electrostatic potential per-vertex
-  vertexDTs: number[]; // electron density per-vertex
+  vertexElectrostaticPotentialValues: number[]; // electrostatic potential per-vertex
+  vertexElectronDensityValues: number[]; // electron density per-vertex
 };
 export type RealMoleculeDataType = Record<string, RealMoleculeDataEntry>;
 
@@ -6999,7 +7000,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         108
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.042617,
       -0.026635,
       -0.042688,
@@ -7345,7 +7346,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.034278,
       -0.039191
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002872,
       0.001633,
       0.002864,
@@ -13305,7 +13306,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         67
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.002537,
       -0.012904,
       -0.002486,
@@ -13584,7 +13585,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.008665,
       -0.008665
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002756,
       0.003435,
       0.002757,
@@ -21537,7 +21538,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         23
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       0.03685,
       0.036817,
       0.095844,
@@ -21918,7 +21919,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.006504,
       0.001238
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002935,
       0.002927,
       0.001766,
@@ -28594,7 +28595,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         28
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.010969,
       0.062402,
       -0.010969,
@@ -28906,7 +28907,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.040343,
       -0.031559
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002956,
       0.001815,
       0.002956,
@@ -35333,7 +35334,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         117
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.0117,
       -0.038327,
       -0.08634,
@@ -35637,7 +35638,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.045428,
       0.019231
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003033,
       0.002621,
       0.003584,
@@ -42755,7 +42756,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         123
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       0.014073,
       0.015376,
       -0.055844,
@@ -43093,7 +43094,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.007321,
       0.015684
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002557,
       0.003132,
       0.002985,
@@ -48866,7 +48867,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         127
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.031464,
       -0.020895,
       -0.00658,
@@ -49135,7 +49136,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.001604,
       0.01177
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003648,
       0.003448,
       0.003043,
@@ -59879,7 +59880,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         17
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.019911,
       0.017059,
       -0.019892,
@@ -60400,7 +60401,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.037649,
       -0.046278
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.004333,
       0.002992,
       0.004336,
@@ -67976,7 +67977,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         23
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       0.001146,
       0.001185,
       0.067356,
@@ -68326,7 +68327,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.049497,
       0.04417
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003018,
       0.003005,
       0.001846,
@@ -74611,7 +74612,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         76
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.052396,
       0.01791,
       -0.052396,
@@ -74907,7 +74908,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.061017,
       -0.060979
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003628,
       0.002354,
       0.003628,
@@ -79036,7 +79037,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         169
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.077756,
       -0.077756,
       -0.077708,
@@ -79228,7 +79229,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.06348,
       -0.063486
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002681,
       0.002681,
       0.002683,
@@ -82172,7 +82173,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         29
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.039226,
       -0.039226,
       -0.039282,
@@ -82310,7 +82311,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.020448,
       -0.020444
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.004069,
       0.004069,
       0.004052,
@@ -86520,7 +86521,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         194
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       0.017463,
       -0.007559,
       0.017461,
@@ -86723,7 +86724,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.0667,
       0.087028
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.00284,
       0.003969,
       0.00284,
@@ -92019,7 +92020,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         52
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.082623,
       -0.039172,
       0.022026,
@@ -92273,7 +92274,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.06195,
       0.040704
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.004458,
       0.003981,
       0.002317,
@@ -96120,7 +96121,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         13
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.03314,
       0.008921,
       -0.033046,
@@ -96300,7 +96301,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       0.034881,
       0.034881
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.002913,
       0.001993,
       0.00292,
@@ -100512,7 +100513,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         35
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.046035,
       -0.046035,
       -0.046108,
@@ -100714,7 +100715,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.035567,
       -0.035591
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.004239,
       0.004239,
       0.004228,
@@ -105248,7 +105249,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         72
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.010324,
       -0.001976,
       -0.001946,
@@ -105463,7 +105464,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.026178,
       -0.003025
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003539,
       0.003224,
       0.003235,
@@ -109712,7 +109713,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         35
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.031297,
       -0.031297,
       -0.036352,
@@ -109914,7 +109915,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.061966,
       -0.073055
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003186,
       0.003186,
       0.003216,
@@ -115948,7 +115949,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
         278
       ]
     ],
-    vertexESPs: [
+    vertexElectrostaticPotentialValues: [
       -0.058099,
       -0.060786,
       -0.058153,
@@ -116239,7 +116240,7 @@ export const RealMoleculeData: RealMoleculeDataType = {
       -0.050067,
       -0.051328
     ],
-    vertexDTs: [
+    vertexElectronDensityValues: [
       0.003382,
       0.003451,
       0.003385,

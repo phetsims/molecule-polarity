@@ -55,20 +55,6 @@ included via @types/three (perennial), and the addon types are manually specifie
 It is highly recommended to familiarize yourself with THREE.js and the underlying WebGL concepts before working
 on the 3D view.
 
-### Molecular Data
-
-assets/generate-molecule-data.ts is a script that takes assets/sdf/ as input and writes to assets/generated-data/
-(using a large assortment of computational chemistry libraries and tools). assets/generated-data/all-molecules.json is
-a combination of all of the molecule JSON, and can be essentially copy-pasted into js/realmolecules/model/RealMoleculeData.ts
-for the data section. This molecular data is fairly comprehensive, containing molecular position, structure, surface,
-dipoles, partial charges, and more.
-
-It supports adding more molecules (add a SDF and compute), or molecular data or molecules can be easily removed.
-The generation code contains more code that can generate much more than what is currently stored/shipped, including many
-more partial charge models if needed in the future.
-
-`RealMolecule` on startup parses the data into a significantly better API for use in the sim.
-
 ### Per-Molecule Overrides
 
 Some molecules require visual or data overrides that are not captured by the generated data. These are centralized in
