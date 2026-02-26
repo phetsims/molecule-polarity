@@ -35,6 +35,7 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
     providedOptions?: RealMoleculeAccessibleListNodeOptions
   ) {
 
+    // Even though the molecule is changing, the name is a static string for indexing description
     const moleculeNameProperty = moleculeProperty.derived( molecule => {
       return molecule.getAccessibleName();
     } );
@@ -66,8 +67,8 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       {
         visibleProperty: viewProperties.bondDipolesVisibleProperty,
         stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.selectMolecules,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.selectMolecules
         )
       },
 
@@ -75,8 +76,8 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       {
         visibleProperty: viewProperties.molecularDipoleVisibleProperty,
         stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.selectMolecules,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMolecules
         )
       },
 
@@ -90,8 +91,8 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electrostaticPotential' ),
         stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electrostaticPotential.selectMolecules,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.selectMolecules
         )
       },
 
@@ -99,8 +100,8 @@ export default class RealMoleculeAccessibleListNode extends AccessibleListNode {
       {
         visibleProperty: DerivedProperty.valueEqualsConstant( viewProperties.surfaceTypeProperty, 'electronDensity' ),
         stringProperty: getBasicAdvancedStringProperty(
-          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity,
-          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electronDensity
+          MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.electronDensity.selectMolecules,
+          MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.selectMolecules
         )
       }
     ], options );

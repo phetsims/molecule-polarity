@@ -343,17 +343,53 @@ type StringsType = {
           'chloroformStringProperty': LocalizedStringProperty;
         };
         'descriptionStringProperty': LocalizedStringProperty;
-        'bondDipoleStringProperty': LocalizedStringProperty;
-        'molecularDipoleStringProperty': LocalizedStringProperty;
-        'electrostaticPotentialStringProperty': LocalizedStringProperty;
-        'electronDensityStringProperty': LocalizedStringProperty;
+        'bondDipole': {
+          'noBondDipoleStringProperty': LocalizedStringProperty;
+          'verySmallCarbonHydrogenStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'molecularDipole': {
+          'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
+          'noMolecularDipoleStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'electrostaticPotential': {
+          'noElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
+          'veryLargeElectrostaticPotentialStringProperty': LocalizedStringProperty;
+          'mediumElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
+          'largeElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'electronDensity': {
+          'electronDensityVeryUnevenlyStringProperty': LocalizedStringProperty;
+          'electronDensityVeryUnevenlySharedStringProperty': LocalizedStringProperty;
+          'electronDensityEvenlySharedStringProperty': LocalizedStringProperty;
+          'electronDensityVeryUnevenlySharedShiftedStringProperty': LocalizedStringProperty;
+          'electronDensityVeryUnevenlySharedShiftedFluorinesStringProperty': LocalizedStringProperty;
+          'electronDensityUnevenlySharedStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        }
       };
       'moleculesAdvanced': {
         'descriptionStringProperty': LocalizedStringProperty;
-        'bondDipoleStringProperty': LocalizedStringProperty;
-        'molecularDipoleStringProperty': LocalizedStringProperty;
-        'electrostaticPotentialStringProperty': LocalizedStringProperty;
+        'bondDipole': {
+          'noBondDipoleStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'molecularDipole': {
+          'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
+          'largeMolecularDipolePointingFluorineStringProperty': LocalizedStringProperty;
+          'noMolecularDipoleStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'electrostaticPotential': {
+          'mediumElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
+          'largeElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
+          'smallElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
         'partialCharges': {
+          'noPartialChargesStringProperty': LocalizedStringProperty;
           'hydrogenStringProperty': LocalizedStringProperty;
           'nitrogenStringProperty': LocalizedStringProperty;
           'oxygenStringProperty': LocalizedStringProperty;
@@ -374,7 +410,14 @@ type StringsType = {
           'tetrafluoromethaneStringProperty': LocalizedStringProperty;
           'chloroformStringProperty': LocalizedStringProperty;
         };
-        'electronDensityStringProperty': LocalizedStringProperty;
+        'electronDensity': {
+          'electronDensityConcentratedAtomsStringProperty': LocalizedStringProperty;
+          'electronDensityEvenlySharedStringProperty': LocalizedStringProperty;
+          'electronDensityVeryUnevenlyStringProperty': LocalizedStringProperty;
+          'electronDensityUnevenlySharedStringProperty': LocalizedStringProperty;
+          'electronDensityUnevenlyShared1StringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        }
       }
     }
   }

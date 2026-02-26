@@ -513,89 +513,119 @@ a11y:
           tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine.'
           chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine.'
       bondDipole:
-        select_molecule:
-          hydrogen: No bond dipole.
-          nitrogen: No bond dipole.
-          oxygen: No bond dipole.
-          fluorine: No bond dipole.
-          hydrogenFluoride: Large bond dipole, pointing towards fluorine.
-          water: Fairly large bond dipoles, pointing towards oxygen.
-          carbonDioxide: Medium bond dipoles, pointing towards oxygens.
-          hydrogenCyanide: Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon nitrogen bond dipole, pointing towards nitrogen.
-          ozone: No bond dipoles.
-          ammonia: Medium bond dipoles, pointing towards nitrogen.
-          borane: Tiny bond dipoles, pointing towards hydrogens.
-          boronTrifluoride: Large bond dipoles, pointing towards fluorines.
-          formaldehyde: Very small carbon hydrogen bond dipoles, pointing towards carbon. Medium carbon oxygen bond dipole, pointing towards oxygen.
-          methane: Very small bond dipoles, pointing towards carbon.
-          fluoromethane: Very small carbon hydrogen bond dipoles, pointing towards carbon. Large carbon fluorine bond dipole, pointing towards fluorine.
-          difluoromethane: Very small carbon hydrogen bond dipoles, pointing towards carbon. Fairly large carbon fluorine bond dipoles, pointing towards fluorines.
-          trifluoromethane: Very small carbon hydrogen bond dipoles, pointing towards carbon. Fairly large carbon fluorine bond dipoles, pointing towards fluorines.
-          tetrafluoromethane: Fairly large carbon fluorine bond dipoles, pointing towards fluorines.
-          chloroform: Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon chlorine bond dipoles, pointing towards chlorines.
+        # Generic descriptions
+        noBondDipole: 'No bond dipole.'
+        verySmallCarbonHydrogen: 'Very small carbon hydrogen bond dipoles, pointing towards carbon. Fairly large carbon fluorine bond dipoles, pointing towards fluorines.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.molecules.bondDipole.noBondDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.molecules.bondDipole.noBondDipole}'
+            oxygen: '{a11y.realMoleculesScreen.molecules.bondDipole.noBondDipole}'
+            fluorine: '{a11y.realMoleculesScreen.molecules.bondDipole.noBondDipole}'
+            hydrogenFluoride: 'Large bond dipole, pointing towards fluorine.'
+            water: 'Fairly large bond dipoles, pointing towards oxygen.'
+            carbonDioxide: 'Medium bond dipoles, pointing towards oxygens.'
+            hydrogenCyanide: 'Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon nitrogen bond dipole, pointing towards nitrogen.'
+            ozone: 'No bond dipoles.'
+            ammonia: 'Medium bond dipoles, pointing towards nitrogen.'
+            borane: 'Tiny bond dipoles, pointing towards hydrogens.'
+            boronTrifluoride: 'Large bond dipoles, pointing towards fluorines.'
+            formaldehyde: 'Very small carbon hydrogen bond dipoles, pointing towards carbon. Medium carbon oxygen bond dipole, pointing towards oxygen.'
+            methane: 'Very small bond dipoles, pointing towards carbon.'
+            fluoromethane: 'Very small carbon hydrogen bond dipoles, pointing towards carbon. Large carbon fluorine bond dipole, pointing towards fluorine.'
+            difluoromethane: '{a11y.realMoleculesScreen.molecules.bondDipole.verySmallCarbonHydrogen}'
+            trifluoromethane: '{a11y.realMoleculesScreen.molecules.bondDipole.verySmallCarbonHydrogen}'
+            tetrafluoromethane: 'Fairly large carbon fluorine bond dipoles, pointing towards fluorines.'
+            chloroform: 'Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon chlorine bond dipoles, pointing towards chlorines.'
       molecularDipole:
-        select_molecule:
-          hydrogen: No molecular dipole.
-          nitrogen: No molecular dipole.
-          oxygen: No molecular dipole.
-          fluorine: No molecular dipole.
-          hydrogenFluoride: Large molecular dipole, pointing towards fluorine.
-          water: Large molecular dipole, pointing towards oxygen.
-          carbonDioxide: No molecular dipole.
-          hydrogenCyanide: Medium molecular dipole, pointing towards nitrogen.
-          ozone: No molecular dipole.
-          ammonia: Fairly large molecular dipole, pointing towards nitrogen.
-          borane: No molecular dipole.
-          boronTrifluoride: No molecular dipole.
-          formaldehyde: Fairly large molecular dipole, pointing towards oxygen.
-          methane: No molecular dipole.
-          fluoromethane: Fairly large molecular dipole, pointing towards fluorine.
-          difluoromethane: Large molecular dipole, pointing towards fluorines.
-          trifluoromethane: Large molecular dipole, pointing towards fluorines.
-          tetrafluoromethane: No molecular dipole.
-          chloroform: Medium molecular dipole, pointing towards chlorines.
+        # Generic descriptions
+        largeMolecularDipolePointing: 'Large molecular dipole, pointing towards fluorines.'
+        noMolecularDipole: 'No molecular dipole.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            oxygen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            fluorine: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            hydrogenFluoride: 'Large molecular dipole, pointing towards fluorine.'
+            water: 'Large molecular dipole, pointing towards oxygen.'
+            carbonDioxide: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            hydrogenCyanide: 'Medium molecular dipole, pointing towards nitrogen.'
+            ozone: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            ammonia: 'Fairly large molecular dipole, pointing towards nitrogen.'
+            borane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            boronTrifluoride: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            formaldehyde: 'Fairly large molecular dipole, pointing towards oxygen.'
+            methane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            fluoromethane: 'Fairly large molecular dipole, pointing towards fluorine.'
+            difluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.largeMolecularDipolePointing}'
+            trifluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.largeMolecularDipolePointing}'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            chloroform: 'Medium molecular dipole, pointing towards chlorines.'
       electrostaticPotential:
-        select_molecule:
-          hydrogen: No electrostatic potential difference.
-          nitrogen: No electrostatic potential difference.
-          oxygen: No electrostatic potential difference.
-          fluorine: No electrostatic potential difference.
-          hydrogenFluoride: Large electrostatic potential difference.
-          water: Large electrostatic potential difference.
-          carbonDioxide: Medium electrostatic potential difference with even distribution.
-          hydrogenCyanide: Large electrostatic potential difference.
-          ozone: Small electrostatic potential difference.
-          ammonia: Large electrostatic potential difference.
-          borane: Small electrostatic potential difference with even distribution.
-          boronTrifluoride: Large electrostatic potential difference with even distribution.
-          formaldehyde: Large electrostatic potential difference.
-          methane: Medium electrostatic potential difference with even distribution.
-          fluoromethane: Large electrostatic potential difference.
-          difluoromethane: Very large electrostatic potential difference.
-          trifluoromethane: Very large electrostatic potential difference.
-          tetrafluoromethane: Medium electrostatic potential difference with even distribution.
-          chloroform: Medium electrostatic potential difference.
+        # Generic descriptions
+        noElectrostaticPotentialDifference: 'No electrostatic potential difference.'
+        veryLargeElectrostaticPotential: 'Very large electrostatic potential difference.'
+        mediumElectrostaticPotentialDifference: 'Medium electrostatic potential difference with even distribution.'
+        largeElectrostaticPotentialDifference: 'Large electrostatic potential difference.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.noElectrostaticPotentialDifference}'
+            nitrogen: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.noElectrostaticPotentialDifference}'
+            oxygen: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.noElectrostaticPotentialDifference}'
+            fluorine: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.noElectrostaticPotentialDifference}'
+            hydrogenFluoride: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            water: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            carbonDioxide: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.mediumElectrostaticPotentialDifference}'
+            hydrogenCyanide: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            ozone: 'Small electrostatic potential difference.'
+            ammonia: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            borane: 'Small electrostatic potential difference with even distribution.'
+            boronTrifluoride: 'Large electrostatic potential difference with even distribution.'
+            formaldehyde: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            methane: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.mediumElectrostaticPotentialDifference}'
+            fluoromethane: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            difluoromethane: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.veryLargeElectrostaticPotential}'
+            trifluoromethane: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.veryLargeElectrostaticPotential}'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.molecules.electrostaticPotential.mediumElectrostaticPotentialDifference}'
+            chloroform: 'Medium electrostatic potential difference.'
       electronDensity:
-        select_molecule:
-          hydrogen: Electron density is evenly shared between atoms.
-          nitrogen: Electron density is evenly shared between atoms.
-          oxygen: Electron density is evenly shared between atoms.
-          fluorine: Electron density is evenly shared between atoms.
-          hydrogenFluoride: Electron density is very unevenly shared, shifted towards fluorine.
-          water: Electron density is very unevenly shared, shifted towards oxygen.
-          carbonDioxide: Electron density is unevenly shared, but symmetrically arranged.
-          hydrogenCyanide: Electron density is very unevenly shared, shifted towards nitrogen.
-          ozone: Electron density is slightly unevenly shared, shifted towards terminal oxygens.
-          ammonia: Electron density is very unevenly shared, shifted towards nitrogen.
-          borane: Electron density is evenly shared between atoms.
-          boronTrifluoride: Electron density is unevenly shared, but symmetrically arranged.
-          formaldehyde: Electron density is very unevenly shared, shifted towards oxygen.
-          methane: Electron density is unevenly shared, but symmetrically arranged.
-          fluoromethane: Electron density is very unevenly shared, shifted towards fluorine.
-          difluoromethane: Electron density is very unevenly shared, shifted towards fluorines.
-          trifluoromethane: Electron density is very unevenly shared, shifted towards fluorines.
-          tetrafluoromethane: Electron density is unevenly shared, but symmetrically arranged.
-          chloroform: Electron density is unevenly shared, shifted towards chlorines.
+        # Generic descriptions
+        electronDensityVeryUnevenly: 'Electron density is very unevenly shared, shifted towards oxygen.'
+        electronDensityVeryUnevenlyShared: 'Electron density is very unevenly shared, shifted towards fluorine.'
+        electronDensityEvenlyShared: 'Electron density is evenly shared between atoms.'
+        electronDensityVeryUnevenlySharedShifted: 'Electron density is very unevenly shared, shifted towards nitrogen.'
+        electronDensityVeryUnevenlySharedShiftedFluorines: 'Electron density is very unevenly shared, shifted towards fluorines.'
+        electronDensityUnevenlyShared: 'Electron density is unevenly shared, but symmetrically arranged.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityEvenlyShared}'
+            nitrogen: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityEvenlyShared}'
+            oxygen: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityEvenlyShared}'
+            fluorine: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityEvenlyShared}'
+            hydrogenFluoride: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenlyShared}'
+            water: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenly}'
+            carbonDioxide: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityUnevenlyShared}'
+            hydrogenCyanide: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenlySharedShifted}'
+            ozone: 'Electron density is slightly unevenly shared, shifted towards terminal oxygens.'
+            ammonia: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenlySharedShifted}'
+            borane: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityEvenlyShared}'
+            boronTrifluoride: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityUnevenlyShared}'
+            formaldehyde: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenly}'
+            methane: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityUnevenlyShared}'
+            fluoromethane: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenlyShared}'
+            difluoromethane: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenlySharedShiftedFluorines}'
+            trifluoromethane: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityVeryUnevenlySharedShiftedFluorines}'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.molecules.electronDensity.electronDensityUnevenlyShared}'
+            chloroform: 'Electron density is unevenly shared, shifted towards chlorines.'
     moleculesAdvanced:
       description:
         select_molecule:
@@ -619,106 +649,138 @@ a11y:
           tetrafluoromethane: 'The molecule upper C upper F4 has tetrahedral geometry and is nonpolar, with the central atom carbon single-bonded to each fluorine.'
           chloroform: 'The molecule upper C upper H upper Cl3 has tetrahedral geometry and is polar, with the central atom carbon single-bonded to hydrogen and each chlorine.'
       bondDipole:
-        select_molecule:
-          hydrogen: No bond dipole.
-          nitrogen: No bond dipole.
-          oxygen: No bond dipole.
-          fluorine: No bond dipole.
-          hydrogenFluoride: Large bond dipole, pointing towards fluorine.
-          water: Fairly large bond dipoles, pointing towards oxygen.
-          carbonDioxide: Small bond dipoles, pointing towards oxygens.
-          hydrogenCyanide: Small carbon hydrogen bond dipole, pointing towards carbon. Large carbon nitrogen bond dipole, pointing towards nitrogen.
-          ozone: Small bond dipoles, pointing towards terminal oxygens.
-          ammonia: Fairly large bond dipoles, pointing towards nitrogen.
-          borane: Fairly large bond dipoles, pointing towards hydrogens.
-          boronTrifluoride: Small bond dipoles, pointing towards fluorines.
-          formaldehyde: Medium carbon hydrogen bond dipoles, pointing towards hydrogens. Very large carbon oxygen bond dipole, pointing towards oxygen.
-          methane: Very small bond dipoles, pointing towards carbon.
-          fluoromethane: No carbon hydrogen bond dipoles. Large carbon fluorine bond dipole, pointing towards fluorine.
-          difluoromethane: Small carbon hydrogen bond dipoles, pointing towards hydrogens. Very large carbon fluorine bond dipoles, pointing towards fluorines.
-          trifluoromethane: Medium carbon hydrogen bond dipole, pointing towards hydrogen. Very large carbon fluorine bond dipoles, pointing towards fluorines.
-          tetrafluoromethane: Small carbon fluorine bond dipoles, pointing towards fluorines.
-          chloroform: Very small carbon hydrogen bond dipole, pointing towards hydrogen. Very large carbon chlorine bond dipoles, pointing towards chlorines.
+        # Generic descriptions
+        noBondDipole: 'No bond dipole.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            oxygen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            fluorine: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            hydrogenFluoride: 'Large bond dipole, pointing towards fluorine.'
+            water: 'Fairly large bond dipoles, pointing towards oxygen.'
+            carbonDioxide: 'Small bond dipoles, pointing towards oxygens.'
+            hydrogenCyanide: 'Small carbon hydrogen bond dipole, pointing towards carbon. Large carbon nitrogen bond dipole, pointing towards nitrogen.'
+            ozone: 'Small bond dipoles, pointing towards terminal oxygens.'
+            ammonia: 'Fairly large bond dipoles, pointing towards nitrogen.'
+            borane: 'Fairly large bond dipoles, pointing towards hydrogens.'
+            boronTrifluoride: 'Small bond dipoles, pointing towards fluorines.'
+            formaldehyde: 'Medium carbon hydrogen bond dipoles, pointing towards hydrogens. Very large carbon oxygen bond dipole, pointing towards oxygen.'
+            methane: 'Very small bond dipoles, pointing towards carbon.'
+            fluoromethane: 'No carbon hydrogen bond dipoles. Large carbon fluorine bond dipole, pointing towards fluorine.'
+            difluoromethane: 'Small carbon hydrogen bond dipoles, pointing towards hydrogens. Very large carbon fluorine bond dipoles, pointing towards fluorines.'
+            trifluoromethane: 'Medium carbon hydrogen bond dipole, pointing towards hydrogen. Very large carbon fluorine bond dipoles, pointing towards fluorines.'
+            tetrafluoromethane: 'Small carbon fluorine bond dipoles, pointing towards fluorines.'
+            chloroform: 'Very small carbon hydrogen bond dipole, pointing towards hydrogen. Very large carbon chlorine bond dipoles, pointing towards chlorines.'
       molecularDipole:
-        select_molecule:
-          hydrogen: No molecular dipole.
-          nitrogen: No molecular dipole.
-          oxygen: No molecular dipole.
-          fluorine: No molecular dipole.
-          hydrogenFluoride: Large molecular dipole, pointing towards fluorine.
-          water: Large molecular dipole, pointing towards oxygen.
-          carbonDioxide: No molecular dipole.
-          hydrogenCyanide: Very large molecular dipole, pointing towards nitrogen.
-          ozone: Small molecular dipole, pointing towards terminal oxygens.
-          ammonia: Large molecular dipole, pointing towards nitrogen.
-          borane: No molecular dipole.
-          boronTrifluoride: No molecular dipole.
-          formaldehyde: Very large molecular dipole, pointing towards oxygen.
-          methane: No molecular dipole.
-          fluoromethane: Large molecular dipole, pointing towards fluorine.
-          difluoromethane: Large molecular dipole, pointing towards fluorines.
-          trifluoromethane: Large molecular dipole, pointing towards fluorines.
-          tetrafluoromethane: No molecular dipole.
-          chloroform: Medium molecular dipole, pointing towards chlorines.
+        # Generic descriptions
+        largeMolecularDipolePointing: 'Large molecular dipole, pointing towards fluorines.'
+        largeMolecularDipolePointingFluorine: 'Large molecular dipole, pointing towards fluorine.'
+        noMolecularDipole: 'No molecular dipole.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            oxygen: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            fluorine: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            hydrogenFluoride: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointingFluorine}'
+            water: 'Large molecular dipole, pointing towards oxygen.'
+            carbonDioxide: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            hydrogenCyanide: 'Very large molecular dipole, pointing towards nitrogen.'
+            ozone: 'Small molecular dipole, pointing towards terminal oxygens.'
+            ammonia: 'Large molecular dipole, pointing towards nitrogen.'
+            borane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            boronTrifluoride: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            formaldehyde: 'Very large molecular dipole, pointing towards oxygen.'
+            methane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            fluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointingFluorine}'
+            difluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointing}'
+            trifluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointing}'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
+            chloroform: 'Medium molecular dipole, pointing towards chlorines.'
       electrostaticPotential:
-        select_molecule:
-          hydrogen: Small electrostatic potential difference with even distribution.
-          nitrogen: Small electrostatic potential difference with even distribution.
-          oxygen: Small electrostatic potential difference with even distribution.
-          fluorine: Small electrostatic potential difference with even distribution.
-          hydrogenFluoride: Large electrostatic potential difference.
-          water: Large electrostatic potential difference.
-          carbonDioxide: Large electrostatic potential difference with even distribution.
-          hydrogenCyanide: Large electrostatic potential difference.
-          ozone: Small electrostatic potential difference.
-          ammonia: Large electrostatic potential difference.
-          borane: Small electrostatic potential difference with even distribution.
-          boronTrifluoride: Medium electrostatic potential difference with even distribution.
-          formaldehyde: Large electrostatic potential difference.
-          methane: Medium electrostatic potential difference with even distribution.
-          fluoromethane: Large electrostatic potential difference.
-          difluoromethane: Large electrostatic potential difference.
-          trifluoromethane: Medium electrostatic potential difference.
-          tetrafluoromethane: Small electrostatic potential difference with even distribution.
-          chloroform: Large electrostatic potential difference.
+        # Generic descriptions
+        mediumElectrostaticPotentialDifference: 'Medium electrostatic potential difference with even distribution.'
+        largeElectrostaticPotentialDifference: 'Large electrostatic potential difference.'
+        smallElectrostaticPotentialDifference: 'Small electrostatic potential difference with even distribution.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.smallElectrostaticPotentialDifference}'
+            nitrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.smallElectrostaticPotentialDifference}'
+            oxygen: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.smallElectrostaticPotentialDifference}'
+            fluorine: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.smallElectrostaticPotentialDifference}'
+            hydrogenFluoride: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            water: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            carbonDioxide: 'Large electrostatic potential difference with even distribution.'
+            hydrogenCyanide: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            ozone: 'Small electrostatic potential difference.'
+            ammonia: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            borane: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.smallElectrostaticPotentialDifference}'
+            boronTrifluoride: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.mediumElectrostaticPotentialDifference}'
+            formaldehyde: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            methane: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.mediumElectrostaticPotentialDifference}'
+            fluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            difluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
+            trifluoromethane: 'Medium electrostatic potential difference.'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.smallElectrostaticPotentialDifference}'
+            chloroform: '{a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.largeElectrostaticPotentialDifference}'
       partialCharges:
-        hydrogen: No partial charges.
-        nitrogen: No partial charges.
-        oxygen: No partial charges.
-        fluorine: No partial charges.
-        hydrogenFluoride: Partial charge for hydrogen is { $hydrogenCharge }, for fluorine is { $fluorineCharge }.
-        water: Partial charge for hydrogen is { $hydrogenCharge }, for oxygen is { $oxygenCharge }.
-        carbonDioxide: Partial charge for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }.
-        hydrogenCyanide: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, and for nitrogen is { $nitrogenCharge }.
-        ozone: Partial charge for central oxygen is { $centralOxygenCharge }, for each terminal oxygen is { $terminalOxygenCharge }.
-        ammonia: Partial charge for hydrogen is { $hydrogenCharge }, for nitrogen is { $nitrogenCharge }.
-        borane: Partial charge for boron is { $boronCharge }, for hydrogen is { $hydrogenCharge }.
-        boronTrifluoride: Partial charge for boron is { $boronCharge }, for fluorine is { $fluorineCharge }.
-        formaldehyde: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }.
-        methane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }.
-        fluoromethane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
-        difluoromethane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
-        trifluoromethane: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
-        tetrafluoromethane: Partial charge for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.
-        chloroform: Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for chlorine is { $chlorineCharge }.
+        # Generic descriptions
+        noPartialCharges: 'No partial charges.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        hydrogen: '{ a11y.realMoleculesScreen.moleculesAdvanced.partialCharges.noPartialCharges }'
+        nitrogen: '{ a11y.realMoleculesScreen.moleculesAdvanced.partialCharges.noPartialCharges }'
+        oxygen: '{ a11y.realMoleculesScreen.moleculesAdvanced.partialCharges.noPartialCharges }'
+        fluorine: '{ a11y.realMoleculesScreen.moleculesAdvanced.partialCharges.noPartialCharges }'
+        hydrogenFluoride: 'Partial charge for hydrogen is { $hydrogenCharge }, for fluorine is { $fluorineCharge }.'
+        water: 'Partial charge for hydrogen is { $hydrogenCharge }, for oxygen is { $oxygenCharge }.'
+        carbonDioxide: 'Partial charge for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }.'
+        hydrogenCyanide: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, and for nitrogen is { $nitrogenCharge }.'
+        ozone: 'Partial charge for central oxygen is { $centralOxygenCharge }, for each terminal oxygen is { $terminalOxygenCharge }.'
+        ammonia: 'Partial charge for hydrogen is { $hydrogenCharge }, for nitrogen is { $nitrogenCharge }.'
+        borane: 'Partial charge for boron is { $boronCharge }, for hydrogen is { $hydrogenCharge }.'
+        boronTrifluoride: 'Partial charge for boron is { $boronCharge }, for fluorine is { $fluorineCharge }.'
+        formaldehyde: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for oxygen is { $oxygenCharge }.'
+        methane: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }.'
+        fluoromethane: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.'
+        difluoromethane: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.'
+        trifluoromethane: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.'
+        tetrafluoromethane: 'Partial charge for carbon is { $carbonCharge }, for fluorine is { $fluorineCharge }.'
+        chloroform: 'Partial charge for hydrogen is { $hydrogenCharge }, for carbon is { $carbonCharge }, for chlorine is { $chlorineCharge }.'
       electronDensity:
-        select_molecule:
-          hydrogen: Electron density is concentrated between atoms.
-          nitrogen: Electron density is evenly shared between atoms.
-          oxygen: Electron density is concentrated between atoms.
-          fluorine: Electron density is evenly shared between atoms.
-          hydrogenFluoride: Electron density is unevenly shared, shifted towards fluorine.
-          water: Electron density is very unevenly shared, shifted towards oxygen.
-          carbonDioxide: Electron density is unevenly shared, but symmetrically arranged.
-          hydrogenCyanide: Electron density is very unevenly shared, shifted towards nitrogen.
-          ozone: Electron density is unevenly shared, shifted towards terminal oxygens.
-          ammonia: Electron density is very unevenly shared, shifted towards nitrogen.
-          borane: Electron density is slightly evenly shared, shift towards the hydrogens.
-          boronTrifluoride: Electron density is slightly unevenly shared, shifted towards the fluorines.
-          formaldehyde: Electron density is unevenly shared, shifted toward the terminal atoms.
-          methane: Electron density is unevenly shared, but symmetrically arranged.
-          fluoromethane: Electron density is unevenly shared.
-          difluoromethane: Electron density is unevenly shared.
-          trifluoromethane: Electron density is unevenly shared, shifted towards fluorines.
-          tetrafluoromethane: Electron density is unevenly shared, but symmetrically arranged.
-          chloroform: Electron density is very unevenly shared, shifted towards chlorines.
+        # Generic descriptions
+        electronDensityConcentratedAtoms: 'Electron density is concentrated between atoms.'
+        electronDensityEvenlyShared: 'Electron density is evenly shared between atoms.'
+        electronDensityVeryUnevenly: 'Electron density is very unevenly shared, shifted towards nitrogen.'
+        electronDensityUnevenlyShared: 'Electron density is unevenly shared, but symmetrically arranged.'
+        electronDensityUnevenlyShared1: 'Electron density is unevenly shared.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityConcentratedAtoms}'
+            nitrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityEvenlyShared}'
+            oxygen: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityConcentratedAtoms}'
+            fluorine: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityEvenlyShared}'
+            hydrogenFluoride: 'Electron density is unevenly shared, shifted towards fluorine.'
+            water: 'Electron density is very unevenly shared, shifted towards oxygen.'
+            carbonDioxide: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityUnevenlyShared}'
+            hydrogenCyanide: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityVeryUnevenly}'
+            ozone: 'Electron density is unevenly shared, shifted towards terminal oxygens.'
+            ammonia: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityVeryUnevenly}'
+            borane: 'Electron density is slightly evenly shared, shift towards the hydrogens.'
+            boronTrifluoride: 'Electron density is slightly unevenly shared, shifted towards the fluorines.'
+            formaldehyde: 'Electron density is unevenly shared, shifted toward the terminal atoms.'
+            methane: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityUnevenlyShared}'
+            fluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityUnevenlyShared1}'
+            difluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityUnevenlyShared1}'
+            trifluoromethane: 'Electron density is unevenly shared, shifted towards fluorines.'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.electronDensity.electronDensityUnevenlyShared}'
+            chloroform: 'Electron density is very unevenly shared, shifted towards chlorines.'
