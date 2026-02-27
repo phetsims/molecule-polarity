@@ -8,7 +8,7 @@
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
-import { TemplateResult } from '../../../../../sherpa/lib/lit-core-3.3.1.min.js';
+import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
@@ -19,7 +19,7 @@ export default class TriatomicMoleculeAccessibleListNode {
   public static createTemplate(
     triatomicMolecule: TriatomicMolecule,
     viewProperties: ThreeAtomsViewProperties
-  ): TReadOnlyProperty<TemplateResult> {
+  ): TReadOnlyProperty<AccessibleTemplateValue> {
     // Molecule is polar if its dipole magnitude is not zero
     const isMoleculePolarProperty = triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude > 0.05 );
 

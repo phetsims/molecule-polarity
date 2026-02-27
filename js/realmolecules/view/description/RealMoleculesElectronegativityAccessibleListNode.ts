@@ -12,14 +12,14 @@
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { toFixed } from '../../../../../dot/js/util/toFixed.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
-import { TemplateResult } from '../../../../../sherpa/lib/lit-core-3.3.1.min.js';
+import type { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import { RealAtom } from '../../model/RealAtom.js';
 import RealMolecule from '../../model/RealMolecule.js';
 
 export default class RealMoleculesElectronegativityAccessibleListNode {
-  public static createTemplate( realMoleculeProperty: TReadOnlyProperty<RealMolecule> ): TReadOnlyProperty<TemplateResult> {
+  public static createTemplate( realMoleculeProperty: TReadOnlyProperty<RealMolecule> ): TReadOnlyProperty<AccessibleTemplateValue> {
     return AccessibleList.createTemplate( {
       listItems: RealAtom.ORDERED_ELEMENTS.map( element => {
         return {
