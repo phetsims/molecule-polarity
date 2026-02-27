@@ -9,8 +9,8 @@ import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { roundToInterval } from '../../../../../dot/js/util/roundToInterval.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
+import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import { TemplateResult } from '../../../../../sherpa/lib/lit-core-3.3.1.min.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
@@ -22,7 +22,7 @@ export default class DiatomicMoleculeAccessibleListNode extends Node {
   public static createTemplate(
     diatomicMolecule: DiatomicMolecule,
     viewProperties: TwoAtomsViewProperties
-  ): TReadOnlyProperty<TemplateResult> {
+  ): TReadOnlyProperty<AccessibleTemplateValue> {
     // Wether deltaEN is non-zero
     const isMoleculePolarProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
 
