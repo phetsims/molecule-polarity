@@ -21,7 +21,7 @@ import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
-import DiatomicMoleculeAccessibleListNode from './description/DiatomicMoleculeAccessibleListNode.js';
+import DiatomicMoleculeAccessibleList from './description/DiatomicMoleculeAccessibleList.js';
 import TwoAtomsScreenSummaryContentNode from './description/TwoAtomsScreenSummaryContentNode.js';
 import TwoAtomsSurfaceHeadingNode from './description/TwoAtomsSurfaceHeadingNode.js';
 import DiatomicMoleculeNode from './DiatomicMoleculeNode.js';
@@ -52,7 +52,7 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.headingStringProperty,
-      accessibleTemplate: DiatomicMoleculeAccessibleListNode.createTemplate( model.diatomicMolecule, viewProperties )
+      accessibleTemplate: DiatomicMoleculeAccessibleList.createTemplate( model.diatomicMolecule, viewProperties )
     } );
 
     // Adding the node that will emit context responses due to rotations

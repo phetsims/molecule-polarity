@@ -18,7 +18,7 @@ import DiatomicMolecule from '../../model/DiatomicMolecule.js';
 import TwoAtomsViewProperties from '../TwoAtomsViewProperties.js';
 
 // TODO: This no longer needs to be a Node, see https://github.com/phetsims/scenery-phet/issues/973
-export default class DiatomicMoleculeAccessibleListNode extends Node {
+export default class DiatomicMoleculeAccessibleList extends Node {
   public static createTemplate(
     diatomicMolecule: DiatomicMolecule,
     viewProperties: TwoAtomsViewProperties
@@ -191,4 +191,4 @@ export default class DiatomicMoleculeAccessibleListNode extends Node {
   }
 }
 
-moleculePolarity.register( 'DiatomicMoleculeAccessibleListNode', DiatomicMoleculeAccessibleListNode );
+moleculePolarity.register( 'DiatomicMoleculeAccessibleList', DiatomicMoleculeAccessibleList );
