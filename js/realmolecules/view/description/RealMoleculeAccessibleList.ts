@@ -22,7 +22,11 @@ import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import RealMolecule, { MoleculeName, MoleculeSymbol } from '../../model/RealMolecule.js';
 import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
 
-export default class RealMoleculeAccessibleListNode {
+export default class RealMoleculeAccessibleList {
+  private constructor() {
+    // Not intended to be instantiated, static methods only.
+  }
+  
   public static createTemplate(
     molecules: RealMolecule[],
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
@@ -47,7 +51,7 @@ export default class RealMoleculeAccessibleListNode {
       } );
     };
 
-    const partialChargeStringPropertyMap = RealMoleculeAccessibleListNode.getPartialChargeStringPropertyMap( molecules );
+    const partialChargeStringPropertyMap = RealMoleculeAccessibleList.getPartialChargeStringPropertyMap( molecules );
 
     return AccessibleList.createTemplate( {
       listItems: [
@@ -208,4 +212,4 @@ export default class RealMoleculeAccessibleListNode {
   }
 }
 
-moleculePolarity.register( 'RealMoleculeAccessibleListNode', RealMoleculeAccessibleListNode );
+moleculePolarity.register( 'RealMoleculeAccessibleList', RealMoleculeAccessibleList );

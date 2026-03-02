@@ -35,7 +35,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import RealMolecule from '../model/RealMolecule.js';
 import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
 import ElectronegativityTableNode from './ElectronegativityTableNode.js';
-import RealMoleculeAccessibleListNode from './description/RealMoleculeAccessibleListNode.js';
+import RealMoleculeAccessibleList from './description/RealMoleculeAccessibleList.js';
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
@@ -176,7 +176,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
         moleculeName: dynamicMoleculeNameProperty
       } ),
-      accessibleTemplate: RealMoleculeAccessibleListNode.createTemplate(
+      accessibleTemplate: RealMoleculeAccessibleList.createTemplate(
         model.molecules, model.moleculeProperty, model.isAdvancedProperty, viewProperties
       )
     } );
