@@ -15,7 +15,11 @@ import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../../model/TriatomicMolecule.js';
 import ThreeAtomsViewProperties from '../ThreeAtomsViewProperties.js';
 
-export default class TriatomicMoleculeAccessibleListNode {
+export default class TriatomicMoleculeAccessibleList {
+  private constructor() {
+    // This is a static class, so no instances should be created.
+  }
+
   public static createTemplate(
     triatomicMolecule: TriatomicMolecule,
     viewProperties: ThreeAtomsViewProperties
@@ -36,185 +40,185 @@ export default class TriatomicMoleculeAccessibleListNode {
     return AccessibleList.createTemplate( {
       listItems: [
 
-      // Orientation
-      {
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.orientationDescription.createProperty( {
-          shape: DescriptionMaps.createShapeStringProperty( triatomicMolecule.bondAngleABCProperty ),
-          atomAPosition: DescriptionMaps.createOrientationStringProperty( absoluteBondAngleABProperty ),
-          atomCPosition: DescriptionMaps.createOrientationStringProperty( absoluteBondAngleBCProperty )
-        } )
-      },
+        // Orientation
+        {
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.orientationDescription.createProperty( {
+            shape: DescriptionMaps.createShapeStringProperty( triatomicMolecule.bondAngleABCProperty ),
+            atomAPosition: DescriptionMaps.createOrientationStringProperty( absoluteBondAngleABProperty ),
+            atomCPosition: DescriptionMaps.createOrientationStringProperty( absoluteBondAngleBCProperty )
+          } )
+        },
 
-      // Electric Field
-      {
-        visibleProperty: DerivedProperty.and( [
-          isMoleculePolarProperty,
-          viewProperties.eFieldEnabledProperty,
-          triatomicMolecule.dipoleProperty.derived( dipole => Math.cos( dipole.angle ) > 0.99 )
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty
-      },
+        // Electric Field
+        {
+          visibleProperty: DerivedProperty.and( [
+            isMoleculePolarProperty,
+            viewProperties.eFieldEnabledProperty,
+            triatomicMolecule.dipoleProperty.derived( dipole => Math.cos( dipole.angle ) > 0.99 )
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electricFieldAlignedStringProperty
+        },
 
-      // Electronegativity Values
-      {
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electronegativityValues.createProperty( {
-          enA: DescriptionMaps.createElectronegativityStringProperty( triatomicMolecule.atomA.electronegativityProperty ),
-          enB: DescriptionMaps.createElectronegativityStringProperty( triatomicMolecule.atomB.electronegativityProperty ),
-          enC: DescriptionMaps.createElectronegativityStringProperty( triatomicMolecule.atomC.electronegativityProperty )
-        } )
-      },
+        // Electronegativity Values
+        {
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.electronegativityValues.createProperty( {
+            enA: DescriptionMaps.createElectronegativityStringProperty( triatomicMolecule.atomA.electronegativityProperty ),
+            enB: DescriptionMaps.createElectronegativityStringProperty( triatomicMolecule.atomB.electronegativityProperty ),
+            enC: DescriptionMaps.createElectronegativityStringProperty( triatomicMolecule.atomC.electronegativityProperty )
+          } )
+        },
 
-      // Molecular Dipole Null Description. e.g. Molecule has no molecular dipole arrow.
-      {
-        visibleProperty: DerivedProperty.and( [
-          DerivedProperty.not( isMoleculePolarProperty ),
-          viewProperties.molecularDipoleVisibleProperty
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription.createProperty( {
-          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
-            triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude )
-          )
-        } )
-      },
+        // Molecular Dipole Null Description. e.g. Molecule has no molecular dipole arrow.
+        {
+          visibleProperty: DerivedProperty.and( [
+            DerivedProperty.not( isMoleculePolarProperty ),
+            viewProperties.molecularDipoleVisibleProperty
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDescription.createProperty( {
+            magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+              triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude )
+            )
+          } )
+        },
 
-      // Molecular dipole direction
-      {
-        visibleProperty: DerivedProperty.and( [
-          isMoleculePolarProperty,
-          viewProperties.molecularDipoleVisibleProperty
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirection.createProperty( {
-          magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
-            triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude )
-          ),
-          direction: DescriptionMaps.createOrientationStringProperty(
-            triatomicMolecule.dipoleProperty.derived( dipole => dipole.angle )
-          )
-        } )
-      },
+        // Molecular dipole direction
+        {
+          visibleProperty: DerivedProperty.and( [
+            isMoleculePolarProperty,
+            viewProperties.molecularDipoleVisibleProperty
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleDirection.createProperty( {
+            magnitude: DescriptionMaps.createMolecularDipoleStringProperty(
+              triatomicMolecule.dipoleProperty.derived( dipole => dipole.magnitude )
+            ),
+            direction: DescriptionMaps.createOrientationStringProperty(
+              triatomicMolecule.dipoleProperty.derived( dipole => dipole.angle )
+            )
+          } )
+        },
 
-      // Twice the size Molecular Dipole
-      {
-        visibleProperty: DerivedProperty.and( [
-          isMoleculePolarProperty,
-          viewProperties.molecularDipoleVisibleProperty,
-          new DerivedProperty(
-            [
-              triatomicMolecule.dipoleMagnitudeProperty,
-              triatomicMolecule.bondAB.deltaENProperty,
-              triatomicMolecule.bondBC.deltaENProperty
-            ], ( dipole, deltaEN_AB, deltaEN_BC ) => {
+        // Twice the size Molecular Dipole
+        {
+          visibleProperty: DerivedProperty.and( [
+            isMoleculePolarProperty,
+            viewProperties.molecularDipoleVisibleProperty,
+            new DerivedProperty(
+              [
+                triatomicMolecule.dipoleMagnitudeProperty,
+                triatomicMolecule.bondAB.deltaENProperty,
+                triatomicMolecule.bondBC.deltaENProperty
+              ], ( dipole, deltaEN_AB, deltaEN_BC ) => {
 
-              // When the molecular dipole is twice the size of the bond dipoles
-              return dipole > 1.98 * Math.abs( deltaEN_AB ) &&
-                     dipole > 1.98 * Math.abs( deltaEN_BC );
-            } )
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty
-      },
+                // When the molecular dipole is twice the size of the bond dipoles
+                return dipole > 1.98 * Math.abs( deltaEN_AB ) &&
+                       dipole > 1.98 * Math.abs( deltaEN_BC );
+              } )
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.molecularDipoleTwiceStringProperty
+        },
 
-      // Bond Dipole Descriptions
-      // AB Bond Magnitude
-      {
-        visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
-          viewProperties.bondDipolesVisibleProperty
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleAB.createProperty( {
-          magnitude: DescriptionMaps.createBondDipoleStringProperty(
-            triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
-          )
-        } )
-      },
-      // AB Bond Direction
-      {
-        visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
-          viewProperties.bondDipolesVisibleProperty
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescription.createProperty( {
-          magnitude: DescriptionMaps.createBondDipoleStringProperty(
-            triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
-          ),
-          direction: new DerivedProperty(
-            [
-              absoluteBondAngleABProperty,
-              triatomicMolecule.bondAB.deltaENProperty
-            ], ( bondAngle: number, deltaEN: number ) => {
-              return deltaEN < 0 ?
-                     DescriptionMaps.formatOrientationString( bondAngle ) :
-                     DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
-            }
-          ),
-          atom: new DerivedProperty(
-            [ triatomicMolecule.bondAB.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'A' : 'B'
-          )
-        } )
-      },
+        // Bond Dipole Descriptions
+        // AB Bond Magnitude
+        {
+          visibleProperty: DerivedProperty.and( [
+            DerivedProperty.valueEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
+            viewProperties.bondDipolesVisibleProperty
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleAB.createProperty( {
+            magnitude: DescriptionMaps.createBondDipoleStringProperty(
+              triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
+            )
+          } )
+        },
+        // AB Bond Direction
+        {
+          visibleProperty: DerivedProperty.and( [
+            DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondAB.deltaENProperty, 0 ),
+            viewProperties.bondDipolesVisibleProperty
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleABDescription.createProperty( {
+            magnitude: DescriptionMaps.createBondDipoleStringProperty(
+              triatomicMolecule.bondAB.dipoleProperty.derived( dipole => dipole.magnitude )
+            ),
+            direction: new DerivedProperty(
+              [
+                absoluteBondAngleABProperty,
+                triatomicMolecule.bondAB.deltaENProperty
+              ], ( bondAngle: number, deltaEN: number ) => {
+                return deltaEN < 0 ?
+                       DescriptionMaps.formatOrientationString( bondAngle ) :
+                       DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
+              }
+            ),
+            atom: new DerivedProperty(
+              [ triatomicMolecule.bondAB.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'A' : 'B'
+            )
+          } )
+        },
 
-      // BC Bond Magnitude
-      {
-        visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
-          viewProperties.bondDipolesVisibleProperty
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBC.createProperty( {
-          magnitude: DescriptionMaps.createBondDipoleStringProperty(
-            triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
-          )
-        } )
-      },
-      // BC Bond Direction
-      {
-        visibleProperty: DerivedProperty.and( [
-          DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
-          viewProperties.bondDipolesVisibleProperty
-        ] ),
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
-          magnitude: DescriptionMaps.createBondDipoleStringProperty(
-            triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
-          ),
-          direction: new DerivedProperty(
-            [
-              absoluteBondAngleBCProperty,
-              triatomicMolecule.bondBC.deltaENProperty
-            ], ( bondAngle: number, deltaEN: number ) => {
-              return deltaEN > 0 ?
-                     DescriptionMaps.formatOrientationString( bondAngle ) :
-                     DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
-            }
-          ),
-          atom: new DerivedProperty(
-            [ triatomicMolecule.bondBC.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'B' : 'C'
-          )
-        } )
-      },
+        // BC Bond Magnitude
+        {
+          visibleProperty: DerivedProperty.and( [
+            DerivedProperty.valueEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
+            viewProperties.bondDipolesVisibleProperty
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBC.createProperty( {
+            magnitude: DescriptionMaps.createBondDipoleStringProperty(
+              triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
+            )
+          } )
+        },
+        // BC Bond Direction
+        {
+          visibleProperty: DerivedProperty.and( [
+            DerivedProperty.valueNotEqualsConstant( triatomicMolecule.bondBC.deltaENProperty, 0 ),
+            viewProperties.bondDipolesVisibleProperty
+          ] ),
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.bondDipoleBCDescription.createProperty( {
+            magnitude: DescriptionMaps.createBondDipoleStringProperty(
+              triatomicMolecule.bondBC.dipoleProperty.derived( dipole => dipole.magnitude )
+            ),
+            direction: new DerivedProperty(
+              [
+                absoluteBondAngleBCProperty,
+                triatomicMolecule.bondBC.deltaENProperty
+              ], ( bondAngle: number, deltaEN: number ) => {
+                return deltaEN > 0 ?
+                       DescriptionMaps.formatOrientationString( bondAngle ) :
+                       DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
+              }
+            ),
+            atom: new DerivedProperty(
+              [ triatomicMolecule.bondBC.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'B' : 'C'
+            )
+          } )
+        },
 
-      // Partial Charges Description
-      {
-        visibleProperty: viewProperties.partialChargesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
-          atom: 'A',
-          magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomA.partialChargeProperty ),
-          sign: triatomicMolecule.atomA.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
-        } )
-      },
-      {
-        visibleProperty: viewProperties.partialChargesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
-          atom: 'B',
-          magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomB.partialChargeProperty ),
-          sign: triatomicMolecule.atomB.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
-        } )
-      },
-      {
-        visibleProperty: viewProperties.partialChargesVisibleProperty,
-        stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
-          atom: 'C',
-          magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomC.partialChargeProperty ),
-          sign: triatomicMolecule.atomC.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
-        } )
-      }
+        // Partial Charges Description
+        {
+          visibleProperty: viewProperties.partialChargesVisibleProperty,
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
+            atom: 'A',
+            magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomA.partialChargeProperty ),
+            sign: triatomicMolecule.atomA.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
+          } )
+        },
+        {
+          visibleProperty: viewProperties.partialChargesVisibleProperty,
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
+            atom: 'B',
+            magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomB.partialChargeProperty ),
+            sign: triatomicMolecule.atomB.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
+          } )
+        },
+        {
+          visibleProperty: viewProperties.partialChargesVisibleProperty,
+          stringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.partialChargesDescription.createProperty( {
+            atom: 'C',
+            magnitude: DescriptionMaps.createPartialChargesStringProperty( triatomicMolecule.atomC.partialChargeProperty ),
+            sign: triatomicMolecule.atomC.partialChargeProperty.derived( charge => charge !== 0 ? charge > 0 ? 'positive' : 'negative' : 'zero' )
+          } )
+        }
 
       ],
       leadingParagraphStringProperty: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.currentState.createProperty( {
@@ -224,4 +228,4 @@ export default class TriatomicMoleculeAccessibleListNode {
   }
 }
 
-moleculePolarity.register( 'TriatomicMoleculeAccessibleListNode', TriatomicMoleculeAccessibleListNode );
+moleculePolarity.register( 'TriatomicMoleculeAccessibleList', TriatomicMoleculeAccessibleList );

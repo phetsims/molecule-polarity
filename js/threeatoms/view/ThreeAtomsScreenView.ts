@@ -21,7 +21,7 @@ import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsRotationalContextResponses from './description/ThreeAtomsRotationalContextResponses.js';
 import ThreeAtomsScreenSummaryContentNode from './description/ThreeAtomsScreenSummaryContentNode.js';
-import TriatomicMoleculeAccessibleListNode from './description/TriatomicMoleculeAccessibleListNode.js';
+import TriatomicMoleculeAccessibleList from './description/TriatomicMoleculeAccessibleList.js';
 import ThreeAtomsControlPanel from './ThreeAtomsControlPanel.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 import TriatomicMoleculeNode from './TriatomicMoleculeNode.js';
@@ -52,7 +52,7 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.headingStringProperty,
-      accessibleTemplate: TriatomicMoleculeAccessibleListNode.createTemplate( model.triatomicMolecule, viewProperties )
+      accessibleTemplate: TriatomicMoleculeAccessibleList.createTemplate( model.triatomicMolecule, viewProperties )
     } );
 
     moleculeDescriptionNode.addChild(
