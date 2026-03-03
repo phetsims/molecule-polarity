@@ -10,15 +10,13 @@ import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { roundToInterval } from '../../../../../dot/js/util/roundToInterval.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
-import Node from '../../../../../scenery/js/nodes/Node.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../../model/DiatomicMolecule.js';
 import TwoAtomsViewProperties from '../TwoAtomsViewProperties.js';
 
-// TODO: This no longer needs to be a Node, see https://github.com/phetsims/scenery-phet/issues/973
-export default class DiatomicMoleculeAccessibleList extends Node {
+export default class DiatomicMoleculeAccessibleList {
   public static createTemplate(
     diatomicMolecule: DiatomicMolecule,
     viewProperties: TwoAtomsViewProperties
