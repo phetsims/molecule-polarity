@@ -39,7 +39,7 @@ import RealMoleculeAccessibleList from './description/RealMoleculeAccessibleList
 import RealMoleculesColorKeyNode from './RealMoleculesColorKeyNode.js';
 import RealMoleculesControl from './RealMoleculesControl.js';
 import RealMoleculesControlPanel from './RealMoleculesControlPanel.js';
-import RealMoleculesElectronegativityAccessibleListNode from './description/RealMoleculesElectronegativityAccessibleListNode.js';
+import RealMoleculesElectronegativityDescriber from './description/RealMoleculesElectronegativityDescriber.js';
 import RealMoleculesScreenSummaryContentNode from './description/RealMoleculesScreenSummaryContentNode.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import RealMoleculeView from './3d/RealMoleculeView.js';
@@ -199,7 +199,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         fluorine: getFixedElectronegativity( Element.F ),
         chlorine: getFixedElectronegativity( Element.Cl )
       } ),
-      accessibleTemplate: RealMoleculesElectronegativityAccessibleListNode.createTemplateProperty( model.moleculeProperty ),
+      accessibleTemplate: RealMoleculesElectronegativityDescriber.createTemplateProperty( model.moleculeProperty ),
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
 

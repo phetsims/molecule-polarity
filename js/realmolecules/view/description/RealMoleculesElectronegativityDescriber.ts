@@ -1,7 +1,7 @@
 // Copyright 2026, University of Colorado Boulder
 
 /**
- * RealMoleculesElectronegativityAccessibleListNode is an accessible list node for the electronegativity information.
+ * RealMoleculesElectronegativityDescriber is an accessible list node for the electronegativity information.
  *
  * Lives for the lifetime of the screen, so it won't need to handle disposal for memory leaks.
  *
@@ -18,7 +18,11 @@ import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import { RealAtom } from '../../model/RealAtom.js';
 import RealMolecule from '../../model/RealMolecule.js';
 
-export default class RealMoleculesElectronegativityAccessibleListNode {
+export default class RealMoleculesElectronegativityDescriber {
+  private constructor() {
+    // This is a static class, so it should never be instantiated.
+  }
+
   public static createTemplateProperty( realMoleculeProperty: TReadOnlyProperty<RealMolecule> ): TReadOnlyProperty<AccessibleTemplateValue> {
     return AccessibleList.createTemplateProperty( {
       listItems: RealAtom.ORDERED_ELEMENTS.map( element => {
@@ -36,4 +40,4 @@ export default class RealMoleculesElectronegativityAccessibleListNode {
   }
 }
 
-moleculePolarity.register( 'RealMoleculesElectronegativityAccessibleListNode', RealMoleculesElectronegativityAccessibleListNode );
+moleculePolarity.register( 'RealMoleculesElectronegativityDescriber', RealMoleculesElectronegativityDescriber );
