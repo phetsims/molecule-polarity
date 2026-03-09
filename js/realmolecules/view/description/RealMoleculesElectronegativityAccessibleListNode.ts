@@ -19,8 +19,8 @@ import { RealAtom } from '../../model/RealAtom.js';
 import RealMolecule from '../../model/RealMolecule.js';
 
 export default class RealMoleculesElectronegativityAccessibleListNode {
-  public static createTemplate( realMoleculeProperty: TReadOnlyProperty<RealMolecule> ): TReadOnlyProperty<AccessibleTemplateValue> {
-    return AccessibleList.createTemplate( {
+  public static createTemplateProperty( realMoleculeProperty: TReadOnlyProperty<RealMolecule> ): TReadOnlyProperty<AccessibleTemplateValue> {
+    return AccessibleList.createTemplateProperty( {
       listItems: RealAtom.ORDERED_ELEMENTS.map( element => {
         return {
           visibleProperty: realMoleculeProperty.derived(

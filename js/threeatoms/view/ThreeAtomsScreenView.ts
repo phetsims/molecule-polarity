@@ -52,7 +52,7 @@ export default class ThreeAtomsScreenView extends ScreenView {
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.headingStringProperty,
-      accessibleTemplate: TriatomicMoleculeAccessibleList.createTemplate( model.triatomicMolecule, viewProperties )
+      accessibleTemplate: TriatomicMoleculeAccessibleList.createTemplateProperty( model.triatomicMolecule, viewProperties )
     } );
 
     moleculeDescriptionNode.addChild(

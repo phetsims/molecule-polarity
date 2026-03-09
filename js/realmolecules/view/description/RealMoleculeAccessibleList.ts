@@ -27,7 +27,7 @@ export default class RealMoleculeAccessibleList {
     // Not intended to be instantiated, static methods only.
   }
   
-  public static createTemplate(
+  public static createTemplateProperty(
     molecules: RealMolecule[],
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
     isAdvancedProperty: TReadOnlyProperty<boolean>,
@@ -53,7 +53,7 @@ export default class RealMoleculeAccessibleList {
 
     const partialChargeStringPropertyMap = RealMoleculeAccessibleList.getPartialChargeStringPropertyMap( molecules );
 
-    return AccessibleList.createTemplate( {
+    return AccessibleList.createTemplateProperty( {
       listItems: [
 
         // Bond Dipole

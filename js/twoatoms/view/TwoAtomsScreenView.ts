@@ -52,7 +52,7 @@ export default class TwoAtomsScreenView extends ScreenView {
 
     const moleculeDescriptionNode = new Node( {
       accessibleHeading: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.headingStringProperty,
-      accessibleTemplate: DiatomicMoleculeAccessibleList.createTemplate( model.diatomicMolecule, viewProperties )
+      accessibleTemplate: DiatomicMoleculeAccessibleList.createTemplateProperty( model.diatomicMolecule, viewProperties )
     } );
 
     // Adding the node that will emit context responses due to rotations

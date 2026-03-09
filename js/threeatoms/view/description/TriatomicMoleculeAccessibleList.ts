@@ -20,7 +20,7 @@ export default class TriatomicMoleculeAccessibleList {
     // This is a static class, so no instances should be created.
   }
 
-  public static createTemplate(
+  public static createTemplateProperty(
     triatomicMolecule: TriatomicMolecule,
     viewProperties: ThreeAtomsViewProperties
   ): TReadOnlyProperty<AccessibleTemplateValue> {
@@ -37,7 +37,7 @@ export default class TriatomicMoleculeAccessibleList {
       triatomicMolecule.angleProperty
     ], ( bondAngleBC: number, moleculeAngle: number ) => bondAngleBC + moleculeAngle );
 
-    return AccessibleList.createTemplate( {
+    return AccessibleList.createTemplateProperty( {
       listItems: [
 
         // Orientation

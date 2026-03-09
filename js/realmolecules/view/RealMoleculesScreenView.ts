@@ -176,7 +176,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
       accessibleHeading: MoleculePolarityFluent.a11y.realMoleculesScreen.realMolecule.createProperty( {
         moleculeName: dynamicMoleculeNameProperty
       } ),
-      accessibleTemplate: RealMoleculeAccessibleList.createTemplate(
+      accessibleTemplate: RealMoleculeAccessibleList.createTemplateProperty(
         model.molecules, model.moleculeProperty, model.isAdvancedProperty, viewProperties
       )
     } );
@@ -199,7 +199,7 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
         fluorine: getFixedElectronegativity( Element.F ),
         chlorine: getFixedElectronegativity( Element.Cl )
       } ),
-      accessibleTemplate: RealMoleculesElectronegativityAccessibleListNode.createTemplate( model.moleculeProperty ),
+      accessibleTemplate: RealMoleculesElectronegativityAccessibleListNode.createTemplateProperty( model.moleculeProperty ),
       visibleProperty: viewProperties.atomElectronegativitiesVisibleProperty
     } );
 

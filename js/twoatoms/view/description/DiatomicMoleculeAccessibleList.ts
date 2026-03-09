@@ -17,14 +17,14 @@ import DiatomicMolecule from '../../model/DiatomicMolecule.js';
 import TwoAtomsViewProperties from '../TwoAtomsViewProperties.js';
 
 export default class DiatomicMoleculeAccessibleList {
-  public static createTemplate(
+  public static createTemplateProperty(
     diatomicMolecule: DiatomicMolecule,
     viewProperties: TwoAtomsViewProperties
   ): TReadOnlyProperty<AccessibleTemplateValue> {
     // Wether deltaEN is non-zero
     const isMoleculePolarProperty = diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN !== 0 );
 
-    return AccessibleList.createTemplate( {
+    return AccessibleList.createTemplateProperty( {
       listItems: [
 
         // Electronegativity Values
