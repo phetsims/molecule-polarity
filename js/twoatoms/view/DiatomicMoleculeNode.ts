@@ -70,12 +70,12 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
     // atoms
     const atomANode = new AtomNode( molecule.atomA, molecule.angleProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomANode' ),
-      focusable: false,
+      accessibleVisible: false,
       interactiveHighlightEnabled: false
     } );
     const atomBNode = new AtomNode( molecule.atomB, molecule.angleProperty, molecule.isDraggingProperty, {
       tandem: options.tandem.createTandem( 'atomBNode' ),
-      focusable: false,
+      accessibleVisible: false,
       interactiveHighlightEnabled: false
     } );
 

@@ -34,7 +34,6 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
     const grabSound = sharedSoundPlayers.get( 'grab' );
     const releaseSound = sharedSoundPlayers.get( 'release' );
 
-    // TODO: Why does passing interactiveHighlightEnabled not work correctly here? https://github.com/phetsims/scenery/issues/1781
     const options = optionize<MPAccessibleSliderOptions, SelfOptions, ParentOptions>()( {
       // AccessibleSliderOptions
       enabledRangeProperty: valueProperty.rangeProperty,
