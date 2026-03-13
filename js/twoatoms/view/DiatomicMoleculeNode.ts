@@ -8,19 +8,20 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
-import { toDegrees } from '../../../../dot/js/util/toDegrees.js';
+import normalizeAngle from '../../common/model/normalizeAngle.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
-import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view/description/MPAccessibleSlider.js';
+import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
@@ -30,7 +31,6 @@ import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import ElectronDensitySurfaceNode from './ElectronDensitySurfaceNode.js';
 import ElectrostaticPotentialSurfaceNode from './ElectrostaticPotentialSurfaceNode.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
-import normalizeAngle from '../../common/model/normalizeAngle.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -148,7 +148,7 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
     // Hides the hint arrows if the molecule becomes non-interactive.
     // Set the hint arrows individually, because hintArrowsNode.visibleProperty is for use by PhET-iO.
     const updateHintArrows = () => {
-      hintArrowANode.visible = hintArrowBNode.visible = ( !moleculeHasChanged && this.inputEnabled );
+      hintArrowsNode.visible = ( !moleculeHasChanged && this.inputEnabled );
     };
 
     // When the user drags any atom or bond, hide the hint arrows.
@@ -157,7 +157,7 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       updateHintArrows();
     };
 
-    molecule.angleProperty.link( hideArrows );
+    molecule.angleProperty.lazyLink( hideArrows );
 
     this.inputEnabledProperty.link( () => updateHintArrows() );
 
