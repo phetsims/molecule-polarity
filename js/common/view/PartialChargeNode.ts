@@ -17,9 +17,10 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
+import TriatomicMolecule from '../../threeatoms/model/TriatomicMolecule.js';
 import Atom from '../model/Atom.js';
 import Bond from '../model/Bond.js';
-import Molecule from '../model/Molecule.js';
+import normalizeAngle from '../model/normalizeAngle.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
@@ -119,10 +120,13 @@ export default class PartialChargeNode extends Node {
       /*
        * Avoid the case where pressing Reset All causes the atoms to swap positions, temporarily resulting
        * in a zero-magnitude vector when the first atom has moved but the second atom hasn't moved yet.
-       * This sorts itthis out when both atoms have moved.
+       * This sorts this out when both atoms have moved.
        */
       if ( v.magnitude > 0 ) {
         v = v.normalize();
+      }
+      else {
+        v = new Vector2( 1, 0 ); // default to pointing to the right
       }
       return v;
     }, options );
@@ -131,16 +135,39 @@ export default class PartialChargeNode extends Node {
   /**
    * Partial charge for an atom that participates in more than one bond.
    * Its partial charge is the composite of charges contributed by other atoms in the bonds.
-   * The charge is placed along the axis of the molecular dipole, on the opposite side of the atom from the dipole.
+   * If possible, charge is placed opposite to the molecular dipole.
+   * But some extra logic is needed to avoid overlap with the bonds.
    */
-  public static createCompositePartialChargeNode( atom: Atom, molecule: Molecule, options?: PartialChargeNodeOptions ): Node {
+  public static createCompositePartialChargeNode( atom: Atom, molecule: TriatomicMolecule, options?: PartialChargeNodeOptions ): Node {
     const node = new PartialChargeNode( atom, () => {
       if ( molecule.dipoleProperty.value.magnitude > 0 ) {
-        return molecule.dipoleProperty.value.rotated( Math.PI ).normalize();
+
+        let rotation = Math.PI;
+
+        const bondAngleAB = molecule.bondAngleABProperty.value;
+        const bondAngleBC = molecule.bondAngleBCProperty.value;
+        const dipoleAngle = molecule.dipoleProperty.value.angle;
+
+        // If bond angles are really close, rotate sideways to not land within them
+        if ( Math.abs( normalizeAngle( bondAngleAB ) - normalizeAngle( bondAngleBC ) ) < 0.5 ) {
+          rotation += Math.PI / 2;
+        }
+
+        // If the dipole is pointing opposite to one of the bonds, also correct
+        if ( Math.abs( normalizeAngle( bondAngleAB ) - normalizeAngle( dipoleAngle - Math.PI ) ) < 0.5 ||
+              Math.abs( normalizeAngle( bondAngleBC ) - normalizeAngle( dipoleAngle - Math.PI ) ) < 0.5 ) {
+          rotation += Math.PI / 4;
+        }
+
+        return molecule.dipoleProperty.value.rotated( rotation ).normalize();
       }
       else {
-        // can't normalize a zero-magnitude vector, so create our own with the proper angle
-        return new Vector2( 1, molecule.dipoleProperty.value.angle );
+        // can't normalize a zero-magnitude vector, so average the angles of the bonds instead.
+        let averageBondAngle = 0;
+        averageBondAngle += molecule.bondAngleABProperty.value;
+        averageBondAngle += molecule.bondAngleBCProperty.value;
+        averageBondAngle /= 2;
+        return Vector2.createPolar( 1, averageBondAngle );
       }
     }, options );
     molecule.dipoleProperty.link( node.update.bind( this ) );
