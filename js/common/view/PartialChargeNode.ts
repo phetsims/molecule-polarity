@@ -10,7 +10,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
@@ -20,14 +20,15 @@ import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TriatomicMolecule from '../../threeatoms/model/TriatomicMolecule.js';
 import Atom from '../model/Atom.js';
 import Bond from '../model/Bond.js';
-import normalizeAngle from '../model/normalizeAngle.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
 const REFERENCE_MAGNITUDE = MPConstants.ELECTRONEGATIVITY_RANGE.getLength();
 const REFERENCE_SCALE = 1;
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  labelExtraSpace?: number;
+};
 
 type PartialChargeNodeOptions = SelfOptions & PickOptional<NodeOptions, 'visibleProperty'>;
 
@@ -40,7 +41,10 @@ export default class PartialChargeNode extends Node {
     const options = optionize<PartialChargeNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      isDisposable: false
+      isDisposable: false,
+
+      // SelfOptions
+      labelExtraSpace: 5
     }, providedOptions );
 
     super( options );
@@ -87,7 +91,7 @@ export default class PartialChargeNode extends Node {
         const unitVector = unitVectorFunction();
 
         // Compute the amount to move the partial charge node
-        const multiplier = ( atom.diameter / 2 ) + ( Math.max( this.width, this.height ) / 2 ) + 3;
+        const multiplier = ( atom.diameter / 2 ) + ( Math.max( this.width, this.height ) / 2 ) + options.labelExtraSpace;
         const relativeOffset = unitVector.timesScalar( multiplier );
         this.translation = atom.positionProperty.value.plus( relativeOffset );
       }
@@ -99,11 +103,14 @@ export default class PartialChargeNode extends Node {
 
     // Changing any of these Properties requires an update.
     atom.partialChargeProperty.link( this.update.bind( this ) );
-    atom.positionProperty.link( this.update.bind( this ) );
     labelText.boundsProperty.link( this.update.bind( this ) );
 
     // Update when this Node becomes visible
     this.visibleProperty.link( visible => visible && this.update() );
+  }
+
+  public updateLabelPosition(): void {
+    this.update();
   }
 
   /**
@@ -111,7 +118,7 @@ export default class PartialChargeNode extends Node {
    * It's partial charge is the opposite of the charge of the other atom in the bond.
    * The charge is placed along the axis of the bond, away from the atom.
    */
-  public static createOppositePartialChargeNode( atom: Atom, bond: Bond, options?: PartialChargeNodeOptions ): Node {
+  public static createOppositePartialChargeNode( atom: Atom, bond: Bond, options?: PartialChargeNodeOptions ): PartialChargeNode {
     return new PartialChargeNode( atom, () => {
 
       // along the bond axis, in the direction of the atom
@@ -138,28 +145,10 @@ export default class PartialChargeNode extends Node {
    * If possible, charge is placed opposite to the molecular dipole.
    * But some extra logic is needed to avoid overlap with the bonds.
    */
-  public static createCompositePartialChargeNode( atom: Atom, molecule: TriatomicMolecule, options?: PartialChargeNodeOptions ): Node {
+  public static createCompositePartialChargeNode( atom: Atom, molecule: TriatomicMolecule, options?: PartialChargeNodeOptions ): PartialChargeNode {
     const node = new PartialChargeNode( atom, () => {
       if ( molecule.dipoleProperty.value.magnitude > 0 ) {
-
-        let rotation = Math.PI;
-
-        const bondAngleAB = molecule.bondAngleABProperty.value;
-        const bondAngleBC = molecule.bondAngleBCProperty.value;
-        const dipoleAngle = molecule.dipoleProperty.value.angle;
-
-        // If bond angles are really close, rotate sideways to not land within them
-        if ( Math.abs( normalizeAngle( bondAngleAB ) - normalizeAngle( bondAngleBC ) ) < 0.5 ) {
-          rotation += Math.PI / 2;
-        }
-
-        // If the dipole is pointing opposite to one of the bonds, also correct
-        if ( Math.abs( normalizeAngle( bondAngleAB ) - normalizeAngle( dipoleAngle - Math.PI ) ) < 0.5 ||
-              Math.abs( normalizeAngle( bondAngleBC ) - normalizeAngle( dipoleAngle - Math.PI ) ) < 0.5 ) {
-          rotation += Math.PI / 4;
-        }
-
-        return molecule.dipoleProperty.value.rotated( rotation ).normalize();
+        return molecule.dipoleProperty.value.rotated( Math.PI ).normalize();
       }
       else {
         // can't normalize a zero-magnitude vector, so average the angles of the bonds instead.

@@ -111,6 +111,17 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
       visibleProperty: viewProperties.partialChargesVisibleProperty
     } );
 
+    // Updating label positions due to all the atoms to properly calculate the positions
+    Multilink.multilink(
+      [
+        molecule.atomA.positionProperty,
+        molecule.atomB.positionProperty
+      ], () => {
+        partialChargeANode.updateLabelPosition();
+        partialChargeBNode.updateLabelPosition();
+      }
+    );
+
     // surfaces
     const electrostaticPotentialSurfaceNode = new ElectrostaticPotentialSurfaceNode( molecule, {
       tandem: options.tandem.createTandem( 'electrostaticPotentialSurfaceNode' )

@@ -18,10 +18,10 @@ import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
 import BondNode from '../../common/view/BondNode.js';
+import { toClock } from '../../common/view/description/toClock.js';
 import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
-import { toClock } from '../../common/view/description/toClock.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
 import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
@@ -157,15 +157,32 @@ export default class TriatomicMoleculeNode extends Node {
     const atomsParent = new Node( { children: [ atomANode, atomBNode, atomCNode ] } );
 
     // partial charge
+    const partialChargeLabelSpacing = 15; // Extra spacing for triatomic molecule to not overlap with highlight
     const partialChargeANode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomA, molecule.bondAB, {
-      visibleProperty: partialChargesVisibleProperty
+      visibleProperty: partialChargesVisibleProperty,
+      labelExtraSpace: partialChargeLabelSpacing
     } );
     const partialChargeBNode = PartialChargeNode.createCompositePartialChargeNode( molecule.atomB, molecule, {
-      visibleProperty: partialChargesVisibleProperty
+      visibleProperty: partialChargesVisibleProperty,
+      labelExtraSpace: partialChargeLabelSpacing
     } );
     const partialChargeCNode = PartialChargeNode.createOppositePartialChargeNode( molecule.atomC, molecule.bondBC, {
-      visibleProperty: partialChargesVisibleProperty
+      visibleProperty: partialChargesVisibleProperty,
+      labelExtraSpace: partialChargeLabelSpacing
     } );
+
+    // Updating label positions due to all the atoms to properly calculate the positions
+    Multilink.multilink(
+      [
+        molecule.atomA.positionProperty,
+        molecule.atomB.positionProperty,
+        molecule.atomC.positionProperty
+      ], () => {
+        partialChargeANode.updateLabelPosition();
+        partialChargeBNode.updateLabelPosition();
+        partialChargeCNode.updateLabelPosition();
+      }
+    );
 
     // dipoles
     const bondDipoleABNode = new BondDipoleNode( molecule.bondAB, {
