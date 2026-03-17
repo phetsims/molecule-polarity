@@ -81,7 +81,8 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
 
     // bond
     const bondNode = new BondNode( molecule.bond, {
-      tandem: options.tandem.createTandem( 'bondNode' )
+      tandem: options.tandem.createTandem( 'bondNode' ),
+      interactiveHighlightEnabled: false
     } );
 
     // arrows to provide interaction hints

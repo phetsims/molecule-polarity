@@ -126,7 +126,8 @@ export default class TriatomicMoleculeNode extends Node {
     // bonds
     const bondABNode = new BondNode( molecule.bondAB, {
       tandem: options.tandem.createTandem( 'bondABNode' ),
-      phetioInputEnabledPropertyInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true,
+      invertedHighlightOffset: true
     } );
     const bondBCNode = new BondNode( molecule.bondBC, {
       tandem: options.tandem.createTandem( 'bondBCNode' ),

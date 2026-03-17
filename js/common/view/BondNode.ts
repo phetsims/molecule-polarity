@@ -10,9 +10,11 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import Shape from '../../../../kite/js/Shape.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import InteractiveHighlighting, { InteractiveHighlightingOptions } from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import { LineOptions } from '../../../../scenery/js/nodes/Line.js';
 import { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
@@ -20,13 +22,19 @@ import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+
+  // Because of the way the bonds are drawn in the molecule (AB) then (BC), one of them needs to have
+  // the offset inverted, as in 0.15 * bondLength instead of 0.85 * bondLength.
+  invertedHighlightOffset?: boolean;
+};
 
 type BondNodeOptions = SelfOptions &
   PickRequired<RectangleOptions, 'tandem'> &
-  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'>;
+  PickOptional<NodeOptions, 'phetioInputEnabledPropertyInstrumented'> &
+  PickOptional<InteractiveHighlightingOptions, 'interactiveHighlightEnabled'>;
 
-export default class BondNode extends Rectangle {
+export default class BondNode extends InteractiveHighlighting( Rectangle ) {
 
   public constructor( bond: Bond, providedOptions: BondNodeOptions ) {
 
@@ -36,7 +44,10 @@ export default class BondNode extends Rectangle {
       fill: MPColors.BOND,
       stroke: 'black',
       visiblePropertyOptions: { phetioReadOnly: true },
-      isDisposable: false
+      isDisposable: false,
+
+      // SelfOptions
+      invertedHighlightOffset: false
     }, providedOptions );
 
     const bondLength = bond.atom1.positionProperty.value.distance( bond.atom2.positionProperty.value );
@@ -54,6 +65,10 @@ export default class BondNode extends Rectangle {
         const delta = position2.minus( position1 );
         const angle = delta.angle;
         this.rotation = angle + Math.PI / 2;
+
+        const highlightOffsetRate = options.invertedHighlightOffset ? 0.15 : 0.85;
+        this.interactiveHighlight = new Shape().ellipse(
+          6, highlightOffsetRate * bondLength, 0.4 * bondLength, bondLength / 2, 0 );
 
         // Set center in the middle of the two atoms
         this.centerX = ( position1.x + position2.x ) / 2;
