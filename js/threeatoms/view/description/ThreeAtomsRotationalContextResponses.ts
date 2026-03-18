@@ -7,6 +7,7 @@
 
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
+import MPConstants from '../../../common/MPConstants.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
@@ -43,7 +44,8 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
             progress: 'zero'
           } ), {
-            responseGroup: 'molecularDipole'
+            responseGroup: 'molecularDipole',
+            alertDelay: MPConstants.ALERT_DELAY
           }
         );
       }
@@ -54,7 +56,8 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
             progress: magnitudeChange > 0 ? 'larger' : 'smaller'
           } ), {
-            responseGroup: 'molecularDipole'
+            responseGroup: 'molecularDipole',
+            alertDelay: MPConstants.ALERT_DELAY
           }
         );
       }
@@ -88,7 +91,8 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnly.format( {
             position: DescriptionMaps.formatOrientationString( molecule.dipoleProperty.value.angle, 'toAngle' )
           } ), {
-            responseGroup: 'molecularDipole'
+            responseGroup: 'molecularDipole',
+            alertDelay: MPConstants.ALERT_DELAY
           }
         );
       }

@@ -6,6 +6,7 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
+import type { DescriptionResponseOptions } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
@@ -53,8 +54,9 @@ export default class MoleculeContextResponsesNode extends Node {
   }
 
   // Mini-utility function for emitting context responses without repeating the verbosity
-  private contextResponse( message: string, responseGroup?: string ): void {
-    const options = responseGroup ? { responseGroup: responseGroup } : { interruptible: false };
+  private contextResponse( message: string, responseGroup: string ): void {
+    const options: DescriptionResponseOptions = responseGroup ? { responseGroup: responseGroup } : { interruptible: false };
+    options.alertDelay = MPConstants.ALERT_DELAY;
     this.addAccessibleContextResponse( message, options );
   }
 

@@ -51,7 +51,10 @@ export default class RotationResponseNode extends Node {
           // Use a response group to prevent rotation responses from being repeated when rotations
           // happen rapidly. We will only read out the latest rotation (ignoring previous directions),
           // see https://github.com/phetsims/molecule-polarity/issues/323
-          responseGroup: 'rotation'
+          responseGroup: 'rotation',
+
+          // Allow more time for this response to "stabilize" before speaking this information again.
+          alertDelay: MPConstants.ALERT_DELAY
         }
       );
 
@@ -89,7 +92,8 @@ export default class RotationResponseNode extends Node {
         this.addAccessibleContextResponse(
           MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
           {
-            responseGroup: 'rotation-alignment'
+            responseGroup: 'rotation-alignment',
+            alertDelay: MPConstants.ALERT_DELAY
           }
         );
 

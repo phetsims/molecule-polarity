@@ -67,6 +67,10 @@ export default class MPConstants {
   // Controls the width of the gradient used to fill the 2D surfaces.
   // Smaller values result in a more noticeable change as the EN sliders are dragged.
   public static readonly SURFACE_GRADIENT_WIDTH_MULTIPLIER = 5;
+
+  // Queue delay for a11y responses. The longer delay allows interruptions and
+  // coalesces rapid responses in the same responseGroup, so only the latest is spoken.
+  public static readonly ALERT_DELAY = 1000;
 }
 
 affirm( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );
