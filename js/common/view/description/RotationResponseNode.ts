@@ -43,6 +43,12 @@ export default class RotationResponseNode extends Node {
     // Utility function to emit accessible responses based on rotation direction and context.
     const emitRotationResponse = ( direction: 'clockwise' | 'counterclockwise' ) => {
 
+      // Any rotation invalidates pending alignment responses.
+      this.clearAccessibleResponseGroups( [
+        MPConstants.EFIELD_ENABLED_RESPONSE_GROUP,
+        MPConstants.ROTATION_ALIGNMENT_RESPONSE_GROUP
+      ] );
+
       // Normal object response for rotations
       this.addAccessibleContextResponse(
         MoleculePolarityFluent.a11y.rotation.format( { direction: direction } ),
@@ -92,7 +98,7 @@ export default class RotationResponseNode extends Node {
         this.addAccessibleContextResponse(
           MoleculePolarityFluent.a11y.twoAtomsScreen.rotateMoleculeSlider.electricFieldContextStringProperty,
           {
-            responseGroup: 'rotation-alignment',
+            responseGroup: MPConstants.ROTATION_ALIGNMENT_RESPONSE_GROUP,
             alertDelay: MPConstants.ALERT_DELAY
           }
         );

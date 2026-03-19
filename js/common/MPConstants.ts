@@ -71,6 +71,14 @@ export default class MPConstants {
   // Queue delay for a11y responses. The longer delay allows interruptions and
   // coalesces rapid responses in the same responseGroup, so only the latest is spoken.
   public static readonly ALERT_DELAY = 1000;
+
+  // A11y response group for announcing that the molecule is aligned with the electric field
+  // when the field is enabled and the molecule is already aligned.
+  public static readonly EFIELD_ENABLED_RESPONSE_GROUP = 'eFieldEnabled';
+
+  // A11y response group for announcing alignment after the molecule finishes rotating
+  // due to the electric field.
+  public static readonly ROTATION_ALIGNMENT_RESPONSE_GROUP = 'rotation-alignment';
 }
 
 affirm( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );

@@ -128,7 +128,8 @@ export default class MoleculeContextResponsesNode extends Node {
     // spoken when the molecule becomes aligned as a result of the angle change in RotationResponseNode.
     eFieldEnabled && !isDipoleZero &&
     Math.cos( currentDipole.angle ) > MPConstants.ALIGNMENT_COS_THRESHOLD && this.contextResponse(
-      MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value, 'eFieldEnabled'
+      MoleculePolarityFluent.a11y.common.electronegativitySlider.electricFieldContextStringProperty.value,
+      MPConstants.EFIELD_ENABLED_RESPONSE_GROUP
     );
   }
 
