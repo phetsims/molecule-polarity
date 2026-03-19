@@ -147,16 +147,15 @@ export default class PartialChargeNode extends Node {
    */
   public static createCompositePartialChargeNode( atom: Atom, molecule: TriatomicMolecule, options?: PartialChargeNodeOptions ): PartialChargeNode {
     const node = new PartialChargeNode( atom, () => {
-      if ( molecule.dipoleProperty.value.magnitude > 0 ) {
+
+      // If the dipole is big enough, place the charge opposite to the dipole.
+      if ( molecule.dipoleProperty.value.magnitude > 0.01 ) {
         return molecule.dipoleProperty.value.rotated( Math.PI ).normalize();
       }
       else {
-        // can't normalize a zero-magnitude vector, so average the angles of the bonds instead.
-        let averageBondAngle = 0;
-        averageBondAngle += molecule.bondAngleABProperty.value;
-        averageBondAngle += molecule.bondAngleBCProperty.value;
-        averageBondAngle /= 2;
-        return Vector2.createPolar( 1, averageBondAngle );
+
+        // Otherwise, position it perpendicular to one of the bond axes.
+        return Vector2.createPolar( 1, molecule.bondAngleABProperty.value + molecule.angleProperty.value - Math.PI / 2 );
       }
     }, options );
     molecule.dipoleProperty.link( node.update.bind( this ) );
