@@ -41,6 +41,6 @@ const MPQueryParameters = QueryStringMachine.getAll( {
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.moleculePolarity.MPQueryParameters' );
+phet.log && phet.log( `MPQueryParameters: ${JSON.stringify( MPQueryParameters, null, 2 )}` );
 
 export default MPQueryParameters;
