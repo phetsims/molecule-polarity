@@ -10,7 +10,6 @@
 import Circle, { CircleOptions } from '../../../../scenery/js/nodes/Circle.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import { Polarity } from '../model/Polarity.js';
 
 export default class PolarityIndicator extends Node {
@@ -41,5 +40,3 @@ export default class PolarityIndicator extends Node {
     this.addChild( new Line( 0, radius, 0, 2 * radius, pathOptions ) );
   }
 }
-
-moleculePolarity.register( 'PolarityIndicator', PolarityIndicator );

@@ -15,7 +15,6 @@ import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import AccessibleSlider, { AccessibleSliderOptions } from '../../../../../sun/js/accessibility/AccessibleSlider.js';
 import sharedSoundPlayers from '../../../../../tambo/js/sharedSoundPlayers.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import normalizeAngle from '../../model/normalizeAngle.js';
 
@@ -68,5 +67,3 @@ export default class MPAccessibleSlider extends AccessibleSlider( Node, 0 ) {
     super( options );
   }
 }
-
-moleculePolarity.register( 'MPAccessibleSlider', MPAccessibleSlider );

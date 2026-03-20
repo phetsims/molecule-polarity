@@ -15,7 +15,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowShape from '../../../../scenery-phet/js/ArrowShape.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
 
@@ -64,5 +63,3 @@ export default class TranslateArrowsNode extends Node {
     super( options );
   }
 }
-
-moleculePolarity.register( 'TranslateArrowsNode', TranslateArrowsNode );

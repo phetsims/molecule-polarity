@@ -11,7 +11,6 @@ import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import PlateNode, { PlateNodeOptions } from './PlateNode.js';
 
 type SelfOptions = {
@@ -50,5 +49,3 @@ export default class PlatesNode extends HBox {
     this.plateHeight = negativePlateNode.plateHeight;
   }
 }
-
-moleculePolarity.register( 'PlatesNode', PlatesNode );

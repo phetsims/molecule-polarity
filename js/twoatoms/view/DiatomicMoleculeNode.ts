@@ -23,7 +23,6 @@ import MPAccessibleSlider, { MPAccessibleSliderOptions } from '../../common/view
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
@@ -215,5 +214,3 @@ export default class DiatomicMoleculeNode extends MPAccessibleSlider {
     this.resetDiatomicMoleculeNode();
   }
 }
-
-moleculePolarity.register( 'DiatomicMoleculeNode', DiatomicMoleculeNode );

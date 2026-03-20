@@ -14,8 +14,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import moleculePolarity from '../../../moleculePolarity.js';
-
 export default class BackgroundCompositePass extends window.ThreePass {
 
   // uniforms for the RawShaderMaterials
@@ -133,5 +131,3 @@ export default class BackgroundCompositePass extends window.ThreePass {
     this.fullscreenQuadCopy.dispose();
   }
 }
-
-moleculePolarity.register( 'BackgroundCompositePass', BackgroundCompositePass );

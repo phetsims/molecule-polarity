@@ -12,7 +12,6 @@ import Multilink from '../../../../../axon/js/Multilink.js';
 import StringUnionProperty from '../../../../../axon/js/StringUnionProperty.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import { SurfaceType } from '../../../common/model/SurfaceType.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 
 export default class TwoAtomsSurfaceHeadingNode extends Node {
@@ -44,5 +43,3 @@ export default class TwoAtomsSurfaceHeadingNode extends Node {
     } );
   }
 }
-
-moleculePolarity.register( 'TwoAtomsSurfaceHeadingNode', TwoAtomsSurfaceHeadingNode );

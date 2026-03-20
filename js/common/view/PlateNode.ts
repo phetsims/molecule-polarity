@@ -11,7 +11,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import { Polarity } from '../model/Polarity.js';
 import MPColors from '../MPColors.js';
 import PolarityIndicator from './PolarityIndicator.js';
@@ -93,5 +92,3 @@ export default class PlateNode extends Node {
     this.plateHeight = options.plateHeight;
   }
 }
-
-moleculePolarity.register( 'PlateNode', PlateNode );

@@ -23,7 +23,6 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import { SurfaceColor } from '../../../common/model/SurfaceColor.js';
 import { SurfaceType } from '../../../common/model/SurfaceType.js';
 import MPColors from '../../../common/MPColors.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import RealMolecule from '../../model/RealMolecule.js';
 import { colorizeElectrostaticPotentialROYGB, colorizeElectrostaticPotentialRWB, colorizeJavaElectronDensity, colorizeRealElectronDensity } from '../../model/RealMoleculeColors.js';
 import { SURFACE_BACKGROUND_RENDER_ORDER, SURFACE_FOREGROUND_RENDER_ORDER } from './RenderOrder.js';
@@ -181,5 +180,3 @@ export default class SurfaceMesh extends THREE.Object3D {
     this.disposeCallbacks.forEach( callback => callback() );
   }
 }
-
-moleculePolarity.register( 'SurfaceMesh', SurfaceMesh );

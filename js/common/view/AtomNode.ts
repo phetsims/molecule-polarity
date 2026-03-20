@@ -18,7 +18,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Atom from '../model/Atom.js';
 import MPAccessibleSlider, { MPAccessibleSliderOptions } from './description/MPAccessibleSlider.js';
@@ -75,5 +74,3 @@ export default class AtomNode extends MPAccessibleSlider {
     );
   }
 }
-
-moleculePolarity.register( 'AtomNode', AtomNode );

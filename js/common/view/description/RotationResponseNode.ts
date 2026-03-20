@@ -14,7 +14,6 @@ import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import MPConstants from '../../MPConstants.js';
 
@@ -125,5 +124,3 @@ export default class RotationResponseNode extends Node {
   }
 
 }
-
-moleculePolarity.register( 'RotationResponseNode', RotationResponseNode );

@@ -14,7 +14,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
 import SurfaceControl from '../../common/view/SurfaceControl.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import RealMoleculesViewControls from './RealMoleculesViewControls.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import ModelControl from './ModelControl.js';
@@ -49,5 +48,3 @@ export default class RealMoleculesControlPanel extends MPControlPanel {
     super( subPanels, options );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesControlPanel', RealMoleculesControlPanel );

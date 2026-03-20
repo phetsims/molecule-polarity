@@ -15,7 +15,6 @@ import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import { SurfaceType, SurfaceTypeValues } from '../../common/model/SurfaceType.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -72,5 +71,3 @@ export default class TwoAtomsViewProperties {
     this.surfaceTypeProperty.reset();
   }
 }
-
-moleculePolarity.register( 'TwoAtomsViewProperties', TwoAtomsViewProperties );

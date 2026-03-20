@@ -17,7 +17,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import Atom from './Atom.js';
 import Bond from './Bond.js';
@@ -148,5 +147,3 @@ export default abstract class Molecule extends PhetioObject {
     return Matrix3.translationFromVector( this.position ).timesMatrix( Matrix3.rotation2( this.angleProperty.value ) );
   }
 }
-
-moleculePolarity.register( 'Molecule', Molecule );

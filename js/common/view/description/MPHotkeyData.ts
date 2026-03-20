@@ -79,5 +79,3 @@ export default class MPHotkeyData {
     repoName: moleculePolarity.name
   } );
 }
-
-moleculePolarity.register( 'MPHotkeyData', MPHotkeyData );

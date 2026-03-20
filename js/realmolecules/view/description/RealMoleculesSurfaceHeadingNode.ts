@@ -9,7 +9,6 @@
  */
 
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import { SurfaceType } from '../../../common/model/SurfaceType.js';
 import StringUnionProperty from '../../../../../axon/js/StringUnionProperty.js';
 import MPPreferences from '../../../common/model/MPPreferences.js';
@@ -50,5 +49,3 @@ export default class RealMoleculesSurfaceHeadingNode extends Node {
     } );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesSurfaceHeadingNode', RealMoleculesSurfaceHeadingNode );

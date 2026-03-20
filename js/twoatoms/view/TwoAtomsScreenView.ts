@@ -17,7 +17,6 @@ import MoleculeContextResponsesNode from '../../common/view/description/Molecule
 import RotationResponseNode from '../../common/view/description/RotationResponseNode.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../model/TwoAtomsModel.js';
 import BondCharacterPanel from './BondCharacterPanel.js';
@@ -210,5 +209,3 @@ export default class TwoAtomsScreenView extends ScreenView {
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
   }
 }
-
-moleculePolarity.register( 'TwoAtomsScreenView', TwoAtomsScreenView );

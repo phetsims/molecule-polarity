@@ -10,7 +10,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import moleculePolarity from '../../../moleculePolarity.js';
 import RealMolecule from '../../model/RealMolecule.js';
 import Vector3 from '../../../../../dot/js/Vector3.js';
 import DipoleArrowView from './DipoleArrowView.js';
@@ -65,6 +64,3 @@ export default class MolecularDipoleView extends THREE.Object3D {
     this.arrow.dispose();
   }
 }
-
-moleculePolarity.register( 'MolecularDipoleView', MolecularDipoleView );
-

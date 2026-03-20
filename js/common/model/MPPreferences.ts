@@ -9,7 +9,6 @@
 
 import StringUnionProperty from '../../../../axon/js/StringUnionProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MPQueryParameters from '../MPQueryParameters.js';
 import { DipoleDirection, DipoleDirectionValues } from './DipoleDirection.js';
 import { SurfaceColor, SurfaceColorValues } from './SurfaceColor.js';
@@ -32,5 +31,4 @@ const MPPreferences = {
     } )
 };
 
-moleculePolarity.register( 'MPPreferences', MPPreferences );
 export default MPPreferences;

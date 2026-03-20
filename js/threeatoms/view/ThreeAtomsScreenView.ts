@@ -16,7 +16,6 @@ import MoleculeContextResponsesNode from '../../common/view/description/Molecule
 import RotationResponseNode from '../../common/view/description/RotationResponseNode.js';
 import ElectronegativityPanel from '../../common/view/ElectronegativityPanel.js';
 import PlatesNode from '../../common/view/PlatesNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import ThreeAtomsModel from '../model/ThreeAtomsModel.js';
 import ThreeAtomsRotationalContextResponses from './description/ThreeAtomsRotationalContextResponses.js';
@@ -205,5 +204,3 @@ export default class ThreeAtomsScreenView extends ScreenView {
     resetAllButton.bottom = this.layoutBounds.bottom - 20;
   }
 }
-
-moleculePolarity.register( 'ThreeAtomsScreenView', ThreeAtomsScreenView );

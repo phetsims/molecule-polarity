@@ -10,7 +10,6 @@
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import KeyboardHelpSection, { KeyboardHelpSectionOptions } from '../../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import MPHotkeyData from './MPHotkeyData.js';
 
@@ -54,5 +53,3 @@ export default class MoveAtomsOrMoleculeKeyboardHelpSection extends KeyboardHelp
     super( MoleculePolarityFluent.keyboardHelpContent.moveAtomsOrMoleculeStringProperty, rows, options );
   }
 }
-
-moleculePolarity.register( 'MoveAtomsOrMoleculeKeyboardHelpSection', MoveAtomsOrMoleculeKeyboardHelpSection );

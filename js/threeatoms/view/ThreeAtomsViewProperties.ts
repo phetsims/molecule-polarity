@@ -13,7 +13,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -62,5 +61,3 @@ export default class ThreeAtomsViewProperties {
     this.partialChargesVisibleProperty.reset();
   }
 }
-
-moleculePolarity.register( 'ThreeAtomsViewProperties', ThreeAtomsViewProperties );

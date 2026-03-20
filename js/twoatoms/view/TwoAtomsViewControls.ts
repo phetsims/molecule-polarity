@@ -7,7 +7,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 import { createBondCharacterCheckboxItem, createBondDipoleCheckboxItem, createPartialChargesCheckboxItem } from '../../common/view/ViewControlsCheckboxGroup.js';
@@ -22,5 +21,3 @@ export default class TwoAtomsViewControls extends ViewControls {
     ], options );
   }
 }
-
-moleculePolarity.register( 'TwoAtomsViewControls', TwoAtomsViewControls );

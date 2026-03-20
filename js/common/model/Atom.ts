@@ -15,7 +15,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
 type SelfOptions = {
@@ -106,5 +105,3 @@ export default class Atom extends PhetioObject {
     // Do not reset positionProperty and partialChargeProperty. They will be reset by their parent molecule.
   }
 }
-
-moleculePolarity.register( 'Atom', Atom );

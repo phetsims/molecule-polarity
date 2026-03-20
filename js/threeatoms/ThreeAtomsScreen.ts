@@ -16,7 +16,6 @@ import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import MPColors from '../common/MPColors.js';
-import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import ThreeAtomsModel from './model/ThreeAtomsModel.js';
@@ -129,5 +128,3 @@ function createScreenIcon(): ScreenIcon {
     maxIconHeightProportion: 1
   } );
 }
-
-moleculePolarity.register( 'ThreeAtomsScreen', ThreeAtomsScreen );

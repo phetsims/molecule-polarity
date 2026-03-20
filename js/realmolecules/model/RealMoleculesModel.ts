@@ -19,7 +19,6 @@ import ThreeQuaternionIO from '../../../../mobius/js/ThreeQuaternionIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule, { MoleculeGeometry, MoleculeSymbol } from './RealMolecule.js';
 import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
@@ -138,5 +137,3 @@ export default class RealMoleculesModel extends PhetioObject implements TModel {
     this.updateRotation( this.moleculeProperty.value );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesModel', RealMoleculesModel );

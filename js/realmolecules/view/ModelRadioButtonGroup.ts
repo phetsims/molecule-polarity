@@ -14,7 +14,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
@@ -64,5 +63,3 @@ export default class ModelRadioButtonGroup extends VerticalAquaRadioButtonGroup<
     super( isAdvancedProperty, radioButtonGroupItems, options );
   }
 }
-
-moleculePolarity.register( 'ModelRadioButtonGroup', ModelRadioButtonGroup );

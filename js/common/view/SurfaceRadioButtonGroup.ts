@@ -13,7 +13,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
@@ -84,4 +83,3 @@ export default class SurfaceRadioButtonGroup extends VerticalAquaRadioButtonGrou
 }
 
 // Creates an item for this radio-button group.
-moleculePolarity.register( 'SurfaceRadioButtonGroup', SurfaceRadioButtonGroup );

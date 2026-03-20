@@ -18,7 +18,6 @@ import InteractiveHighlighting, { InteractiveHighlightingOptions } from '../../.
 import { LineOptions } from '../../../../scenery/js/nodes/Line.js';
 import { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import Bond from '../model/Bond.js';
 import MPColors from '../MPColors.js';
 
@@ -77,5 +76,3 @@ export default class BondNode extends InteractiveHighlighting( Rectangle ) {
     );
   }
 }
-
-moleculePolarity.register( 'BondNode', BondNode );

@@ -10,7 +10,6 @@ import BasicActionsKeyboardHelpSection from '../../../../../scenery-phet/js/keyb
 import SliderControlsKeyboardHelpSection from '../../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
 import MoveMoleculeKeyboardHelpSection from '../../../common/view/description/MoveMoleculeKeyboardHelpSection.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 
 export default class TwoAtomsKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
@@ -34,5 +33,3 @@ export default class TwoAtomsKeyboardHelpContent extends TwoColumnKeyboardHelpCo
     } );
   }
 }
-
-moleculePolarity.register( 'TwoAtomsKeyboardHelpContent', TwoAtomsKeyboardHelpContent );

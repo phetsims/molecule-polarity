@@ -13,7 +13,6 @@ import DynamicProperty from '../../../../../axon/js/DynamicProperty.js';
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../../joist/js/ScreenSummaryContent.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../../MoleculePolarityStrings.js';
 import RealMolecule from '../../model/RealMolecule.js';
@@ -45,5 +44,3 @@ export default class RealMoleculesScreenSummaryContentNode extends ScreenSummary
     super( options );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesScreenSummaryContentNode', RealMoleculesScreenSummaryContentNode );

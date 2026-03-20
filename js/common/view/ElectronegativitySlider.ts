@@ -16,7 +16,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider, { HSliderOptions } from '../../../../sun/js/HSlider.js';
 import Slider from '../../../../sun/js/Slider.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
@@ -110,5 +109,3 @@ export default class ElectronegativitySlider extends HSlider {
     }
   }
 }
-
-moleculePolarity.register( 'ElectronegativitySlider', ElectronegativitySlider );

@@ -17,7 +17,6 @@ import { toFixed } from '../../../../../dot/js/util/toFixed.js';
 import Element from '../../../../../nitroglycerin/js/Element.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import type { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import RealMolecule, { MoleculeName, MoleculeSymbol } from '../../model/RealMolecule.js';
 import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
@@ -211,5 +210,3 @@ export default class RealMoleculeAccessibleList {
     };
   }
 }
-
-moleculePolarity.register( 'RealMoleculeAccessibleList', RealMoleculeAccessibleList );

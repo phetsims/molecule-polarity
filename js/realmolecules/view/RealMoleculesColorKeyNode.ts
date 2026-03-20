@@ -15,7 +15,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { SurfaceColor } from '../../common/model/SurfaceColor.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 export default class RealMoleculesColorKeyNode extends Node {
 
@@ -45,5 +44,3 @@ export default class RealMoleculesColorKeyNode extends Node {
       } );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesColorKeyNode', RealMoleculesColorKeyNode );

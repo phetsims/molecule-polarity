@@ -23,7 +23,6 @@ import MolecularDipoleNode from '../../common/view/MolecularDipoleNode.js';
 import MoleculeAngleDragListener from '../../common/view/MoleculeAngleDragListener.js';
 import PartialChargeNode from '../../common/view/PartialChargeNode.js';
 import TranslateArrowsNode from '../../common/view/TranslateArrowsNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import TriatomicMolecule from '../model/TriatomicMolecule.js';
@@ -304,5 +303,3 @@ export default class TriatomicMoleculeNode extends Node {
     this.resetTriatomicMoleculeNode();
   }
 }
-
-moleculePolarity.register( 'TriatomicMoleculeNode', TriatomicMoleculeNode );

@@ -21,7 +21,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Atom from '../../common/model/Atom.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
@@ -136,5 +135,3 @@ class PointerNode extends Node {
     atom2Node.centerY = atom1Node.centerY;
   }
 }
-
-moleculePolarity.register( 'BondCharacterPanel', BondCharacterPanel );

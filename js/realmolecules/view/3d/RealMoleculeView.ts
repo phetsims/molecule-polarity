@@ -10,7 +10,6 @@
 
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import RealMolecule from '../../model/RealMolecule.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
 import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
 import Multilink from '../../../../../axon/js/Multilink.js';
@@ -229,5 +228,3 @@ export default class RealMoleculeView extends THREE.Object3D {
     } );
   }
 }
-
-moleculePolarity.register( 'RealMoleculeView', RealMoleculeView );

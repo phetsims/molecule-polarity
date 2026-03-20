@@ -12,7 +12,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import ModelRadioButtonGroup from './ModelRadioButtonGroup.js';
 import MPConstants from '../../common/MPConstants.js';
@@ -42,5 +41,3 @@ export default class ModelControl extends VBox {
     }, providedOptions ) );
   }
 }
-
-moleculePolarity.register( 'ModelControl', ModelControl );

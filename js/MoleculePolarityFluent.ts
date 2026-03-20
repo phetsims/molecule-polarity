@@ -907,5 +907,3 @@ const MoleculePolarityFluent = {
 };
 
 export default MoleculePolarityFluent;
-
-moleculePolarity.register('MoleculePolarityFluent', MoleculePolarityFluent);

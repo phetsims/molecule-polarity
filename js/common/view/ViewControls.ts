@@ -11,7 +11,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import ViewControlsCheckboxGroup from '../../common/view/ViewControlsCheckboxGroup.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
@@ -43,5 +42,3 @@ export default class ViewControls extends VBox {
     }, provideOptions ) );
   }
 }
-
-moleculePolarity.register( 'ViewControls', ViewControls );

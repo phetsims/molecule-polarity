@@ -11,7 +11,6 @@ import Range from '../../../dot/js/Range.js';
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import affirm from '../../../perennial-alias/js/browser-and-node/affirm.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import moleculePolarity from '../moleculePolarity.js';
 
 const CONTROL_FONT = new PhetFont( 18 );
 const CONTROL_LABEL_MAX_WIDTH = 200;
@@ -82,5 +81,3 @@ export default class MPConstants {
 }
 
 affirm( MPConstants.BOND_LENGTH > MPConstants.ATOM_DIAMETER, 'bond length must be > atom diameter' );
-
-moleculePolarity.register( 'MPConstants', MPConstants );

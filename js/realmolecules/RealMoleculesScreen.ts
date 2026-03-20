@@ -12,7 +12,6 @@ import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import realMoleculesScreenIcon_png from '../../images/realMoleculesScreenIcon_png.js';
 import MPColors from '../common/MPColors.js';
-import moleculePolarity from '../moleculePolarity.js';
 import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import RealMoleculesModel from './model/RealMoleculesModel.js';
 import RealMoleculesScreenView from './view/RealMoleculesScreenView.js';
@@ -48,5 +47,3 @@ function createScreenIcon(): ScreenIcon {
     maxIconHeightProportion: 1
   } );
 }
-
-moleculePolarity.register( 'RealMoleculesScreen', RealMoleculesScreen );

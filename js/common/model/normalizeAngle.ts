@@ -8,7 +8,6 @@
  */
 
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 // Length of the range
 const RANGE_LENGTH = 2 * Math.PI;
@@ -42,5 +41,4 @@ function normalizeAngle( angle: number, minAngle = 0 ): number {
   return normalizedAngle;
 }
 
-moleculePolarity.register( 'normalizeAngle', normalizeAngle );
 export default normalizeAngle;

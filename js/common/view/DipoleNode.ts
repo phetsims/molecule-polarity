@@ -17,7 +17,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 
 // constants
@@ -102,5 +101,3 @@ export default class DipoleNode extends Path {
     return new DipoleNode( new Vector2Property( new Vector2( 0.65, 0 ) ), options );
   }
 }
-
-moleculePolarity.register( 'DipoleNode', DipoleNode );

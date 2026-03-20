@@ -11,7 +11,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMoleculesViewProperties from './RealMoleculesViewProperties.js';
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
@@ -38,5 +37,3 @@ export default class RealMoleculesViewControls extends ViewControls {
     }, options ) );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesViewControls', RealMoleculesViewControls );

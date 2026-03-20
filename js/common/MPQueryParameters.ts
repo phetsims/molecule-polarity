@@ -8,7 +8,6 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
-import moleculePolarity from '../moleculePolarity.js';
 import { DipoleDirectionValues } from './model/DipoleDirection.js';
 import { SurfaceColorValues } from './model/SurfaceColor.js';
 
@@ -38,8 +37,6 @@ const MPQueryParameters = QueryStringMachine.getAll( {
   // outward in the direction of the angle. For internal use only.
   showMoleculeAngle: { type: 'flag' }
 } );
-
-moleculePolarity.register( 'MPQueryParameters', MPQueryParameters );
 
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );

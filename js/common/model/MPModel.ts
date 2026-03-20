@@ -14,7 +14,6 @@ import { linear } from '../../../../dot/js/util/linear.js';
 import TModel from '../../../../joist/js/TModel.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MPConstants from '../MPConstants.js';
 import Molecule from './Molecule.js';
 import MPPreferences from './MPPreferences.js';
@@ -131,5 +130,3 @@ export default abstract class MPModel extends PhetioObject implements TModel {
 
   }
 }
-
-moleculePolarity.register( 'MPModel', MPModel );

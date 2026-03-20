@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
 import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
 import SurfaceControl from '../../common/view/SurfaceControl.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import TwoAtomsViewControls from './TwoAtomsViewControls.js';
 import TwoAtomsViewProperties from './TwoAtomsViewProperties.js';
 
@@ -43,5 +42,3 @@ export default class TwoAtomsControlPanel extends MPControlPanel {
     super( subPanels, options );
   }
 }
-
-moleculePolarity.register( 'TwoAtomsControlPanel', TwoAtomsControlPanel );

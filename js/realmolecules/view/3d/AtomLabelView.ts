@@ -19,7 +19,6 @@ import Vector3 from '../../../../../dot/js/Vector3.js';
 import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
 import { REAL_MOLECULES_CAMERA_POSITION } from '../../model/RealMoleculesModel.js';
 import { toFixed } from '../../../../../dot/js/util/toFixed.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import { ATOM_LABEL_RENDER_ORDER } from './RenderOrder.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
@@ -150,5 +149,3 @@ export default class AtomLabelView extends TextureQuad {
     this.disposeCallbacks.forEach( callback => callback() );
   }
 }
-
-moleculePolarity.register( 'AtomLabelView', AtomLabelView );

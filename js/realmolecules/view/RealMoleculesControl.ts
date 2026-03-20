@@ -22,7 +22,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ComboBox, { ComboBoxOptions } from '../../../../sun/js/ComboBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 
@@ -84,5 +83,3 @@ export default class RealMoleculesControl extends HBox {
     super( options );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesControl', RealMoleculesControl );

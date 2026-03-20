@@ -13,7 +13,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { SurfaceColor } from '../model/SurfaceColor.js';
 import { SurfaceType } from '../model/SurfaceType.js';
@@ -61,5 +60,3 @@ export default class SurfaceControl extends VBox {
     super( options );
   }
 }
-
-moleculePolarity.register( 'SurfaceControl', SurfaceControl );

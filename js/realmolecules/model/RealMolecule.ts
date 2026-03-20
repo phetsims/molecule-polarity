@@ -15,7 +15,6 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import { RealAtom } from './RealAtom.js';
 import { RealBond } from './RealBond.js';
 import { RealMoleculeCustomization } from './RealMoleculeCustomization.js';
@@ -436,5 +435,3 @@ export default class RealMolecule extends PhetioObject {
     supertype: ReferenceIO( IOType.ObjectIO )
   } );
 }
-
-moleculePolarity.register( 'RealMolecule', RealMolecule );

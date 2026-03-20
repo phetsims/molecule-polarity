@@ -8,8 +8,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import moleculePolarity from '../../../moleculePolarity.js';
-
 export const ATOM_LABEL_LAYER = 1;
 
 export default class AtomLabelRenderPass extends window.ThreePass {
@@ -50,5 +48,3 @@ export default class AtomLabelRenderPass extends window.ThreePass {
     // no-op
   }
 }
-
-moleculePolarity.register( 'AtomLabelRenderPass', AtomLabelRenderPass );

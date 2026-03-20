@@ -8,7 +8,6 @@
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../../joist/js/ScreenSummaryContent.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import TwoAtomsModel from '../../model/TwoAtomsModel.js';
 
@@ -33,5 +32,3 @@ export default class TwoAtomsScreenSummaryContentNode extends ScreenSummaryConte
     super( options );
   }
 }
-
-moleculePolarity.register( 'TwoAtomsScreenSummaryContentNode', TwoAtomsScreenSummaryContentNode );

@@ -11,7 +11,6 @@ import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { toDegrees } from '../../../../../dot/js/util/toDegrees.js';
 import { toFixedNumber } from '../../../../../dot/js/util/toFixedNumber.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import { MoleculeGeometry } from '../../../realmolecules/model/RealMolecule.js';
 import { toClock } from './toClock.js';
@@ -284,5 +283,3 @@ export default class DescriptionMaps {
     } );
   }
 }
-
-moleculePolarity.register( 'DescriptionMaps', DescriptionMaps );

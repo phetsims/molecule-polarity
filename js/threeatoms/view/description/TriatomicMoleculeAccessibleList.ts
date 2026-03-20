@@ -10,7 +10,6 @@ import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../../model/TriatomicMolecule.js';
 import ThreeAtomsViewProperties from '../ThreeAtomsViewProperties.js';
@@ -227,5 +226,3 @@ export default class TriatomicMoleculeAccessibleList {
     } );
   }
 }
-
-moleculePolarity.register( 'TriatomicMoleculeAccessibleList', TriatomicMoleculeAccessibleList );

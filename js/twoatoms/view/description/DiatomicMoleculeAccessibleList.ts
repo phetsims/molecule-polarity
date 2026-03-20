@@ -11,7 +11,6 @@ import { roundToInterval } from '../../../../../dot/js/util/roundToInterval.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../../model/DiatomicMolecule.js';
 import TwoAtomsViewProperties from '../TwoAtomsViewProperties.js';
@@ -188,5 +187,3 @@ export default class DiatomicMoleculeAccessibleList {
     } );
   }
 }
-
-moleculePolarity.register( 'DiatomicMoleculeAccessibleList', DiatomicMoleculeAccessibleList );

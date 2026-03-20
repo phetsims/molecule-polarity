@@ -8,7 +8,6 @@
 
 import type { DescriptionResponseOptions } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import ThreeAtomsViewProperties from '../../../threeatoms/view/ThreeAtomsViewProperties.js';
 import TwoAtomsViewProperties from '../../../twoatoms/view/TwoAtomsViewProperties.js';
@@ -239,5 +238,3 @@ export default class MoleculeContextResponsesNode extends Node {
            changeInEN > 0 ? 'moreNegative' : 'lessNegative';
   }
 }
-
-moleculePolarity.register( 'MoleculeContextResponsesNode', MoleculeContextResponsesNode );

@@ -20,7 +20,6 @@ import Molecule, { MoleculeOptions } from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -169,5 +168,3 @@ function updateAtomPosition( atom: Atom, bondAngle: number, position: Vector2, a
   const yA = ( MPConstants.BOND_LENGTH * Math.sin( thetaA ) ) + position.y;
   atom.positionProperty.value = new Vector2( xA, yA );
 }
-
-moleculePolarity.register( 'TriatomicMolecule', TriatomicMolecule );

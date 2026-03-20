@@ -20,7 +20,6 @@ import DragListener, { DragListenerOptions, PressedDragListener } from '../../..
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Molecule from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 
@@ -93,5 +92,3 @@ export default class BondAngleDragListener extends DragListener {
     super( options );
   }
 }
-
-moleculePolarity.register( 'BondAngleDragListener', BondAngleDragListener );

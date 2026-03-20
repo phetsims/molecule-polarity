@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ToggleSwitch from '../../../../sun/js/ToggleSwitch.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPConstants from '../MPConstants.js';
@@ -59,5 +58,3 @@ export default class EFieldControl extends VBox {
     super( options );
   }
 }
-
-moleculePolarity.register( 'EFieldControl', EFieldControl );

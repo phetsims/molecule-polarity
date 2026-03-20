@@ -10,7 +10,6 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import MPColors from '../MPColors.js';
 import DipoleNode, { DipoleNodeOptions } from './DipoleNode.js';
@@ -52,5 +51,3 @@ export default class MolecularDipoleNode extends DipoleNode {
     return DipoleNode.createIcon( { fill: MPColors.molecularDipoleProperty } );
   }
 }
-
-moleculePolarity.register( 'MolecularDipoleNode', MolecularDipoleNode );

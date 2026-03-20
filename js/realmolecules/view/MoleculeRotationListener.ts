@@ -8,7 +8,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import moleculePolarity from '../../moleculePolarity.js';
 import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
@@ -80,5 +79,3 @@ export default class MoleculeRotationListener {
     this.grabSound.play();
   }
 }
-
-moleculePolarity.register( 'MoleculeRotationListener', MoleculeRotationListener );

@@ -9,7 +9,6 @@
  */
 
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import TProperty from '../../../../axon/js/TProperty.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -74,5 +73,3 @@ export default class MoleculeKeyboardRotationListener extends SoundKeyboardDragL
     } );
   }
 }
-
-moleculePolarity.register( 'MoleculeKeyboardRotationListener', MoleculeKeyboardRotationListener );

@@ -6,7 +6,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import moleculePolarity from '../../../moleculePolarity.js';
 import MPColors from '../../../common/MPColors.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
@@ -134,5 +133,3 @@ export default class DipoleArrowView extends THREE.Object3D {
     this.disposeCallbacks.forEach( callback => callback() );
   }
 }
-
-moleculePolarity.register( 'DipoleArrowView', DipoleArrowView );

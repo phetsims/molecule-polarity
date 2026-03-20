@@ -9,7 +9,6 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import MPModel from '../../common/model/MPModel.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from './DiatomicMolecule.js';
 
 export default class TwoAtomsModel extends MPModel {
@@ -33,5 +32,3 @@ export default class TwoAtomsModel extends MPModel {
     super.reset();
   }
 }
-
-moleculePolarity.register( 'TwoAtomsModel', TwoAtomsModel );

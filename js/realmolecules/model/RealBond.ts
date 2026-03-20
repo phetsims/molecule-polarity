@@ -8,7 +8,6 @@
 
 import Vector3 from '../../../../dot/js/Vector3.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import { RealAtom } from './RealAtom.js';
 
 export class RealBond {
@@ -115,5 +114,3 @@ export class RealBond {
     return this.getPositiveToNegativeDirection().timesScalar( muMag );
   }
 }
-
-moleculePolarity.register( 'RealBond', RealBond );

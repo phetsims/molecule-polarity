@@ -30,7 +30,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import MPPreferences from '../../common/model/MPPreferences.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import RealMolecule from '../model/RealMolecule.js';
 import RealMoleculesModel, { REAL_MOLECULES_CAMERA_POSITION } from '../model/RealMoleculesModel.js';
@@ -485,5 +484,3 @@ export default class RealMoleculesScreenView extends MobiusScreenView {
     super.step( dt );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesScreenView', RealMoleculesScreenView );

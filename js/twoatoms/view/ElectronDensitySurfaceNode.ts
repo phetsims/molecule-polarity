@@ -15,7 +15,6 @@ import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 import SurfaceNode, { SurfaceNodeOptions } from './SurfaceNode.js';
 
@@ -66,5 +65,3 @@ export default class ElectronDensitySurfaceNode extends SurfaceNode {
     }
   }
 }
-
-moleculePolarity.register( 'ElectronDensitySurfaceNode', ElectronDensitySurfaceNode );

@@ -11,7 +11,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { SurfaceType } from '../../common/model/SurfaceType.js';
 import SurfaceColorKey from '../../common/view/SurfaceColorKey.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 export default class TwoAtomsColorKeyNode extends Node {
 
@@ -33,5 +32,3 @@ export default class TwoAtomsColorKeyNode extends Node {
     } );
   }
 }
-
-moleculePolarity.register( 'TwoAtomsColorKeyNode', TwoAtomsColorKeyNode );

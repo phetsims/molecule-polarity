@@ -13,7 +13,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import Atom from '../model/Atom.js';
 import Molecule from '../model/Molecule.js';
@@ -87,5 +86,3 @@ export default class ElectronegativityPanel extends Panel {
     super( content, options );
   }
 }
-
-moleculePolarity.register( 'ElectronegativityPanel', ElectronegativityPanel );

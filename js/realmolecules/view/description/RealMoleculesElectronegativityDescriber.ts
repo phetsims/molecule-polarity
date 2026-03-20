@@ -13,7 +13,6 @@ import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { toFixed } from '../../../../../dot/js/util/toFixed.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import type { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import { RealAtom } from '../../model/RealAtom.js';
 import RealMolecule from '../../model/RealMolecule.js';
@@ -39,5 +38,3 @@ export default class RealMoleculesElectronegativityDescriber {
     } );
   }
 }
-
-moleculePolarity.register( 'RealMoleculesElectronegativityDescriber', RealMoleculesElectronegativityDescriber );

@@ -8,7 +8,6 @@
 
 import ThreeUtils from '../../../../../mobius/js/ThreeUtils.js';
 import { ATOM_RENDER_ORDER } from './RenderOrder.js';
-import moleculePolarity from '../../../moleculePolarity.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import { RealAtom } from '../../model/RealAtom.js';
 
@@ -58,5 +57,3 @@ export default class AtomView extends THREE.Object3D {
     this.disposeCallbacks.forEach( callback => callback() );
   }
 }
-
-moleculePolarity.register( 'AtomView', AtomView );

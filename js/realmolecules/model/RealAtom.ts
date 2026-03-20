@@ -12,7 +12,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import { elementToColorProperty, elementToForegroundColorProperty } from './RealMoleculeColors.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 
 export class RealAtom {
@@ -127,5 +126,3 @@ export class RealAtom {
     }
   }
 }
-
-moleculePolarity.register( 'RealAtom', RealAtom );

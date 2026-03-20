@@ -25,7 +25,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import RealMolecule from '../model/RealMolecule.js';
 import { RealAtom } from '../model/RealAtom.js';
@@ -171,5 +170,3 @@ class Cell extends Node {
     this.symbolText.fill = this.electronegativityText.fill = NORMAL_TEXT_COLOR;
   }
 }
-
-moleculePolarity.register( 'ElectronegativityTableNode', ElectronegativityTableNode );

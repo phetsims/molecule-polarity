@@ -18,7 +18,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Font from '../../../../scenery/js/util/Font.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import MPColors from '../MPColors.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -145,5 +144,3 @@ export default class SurfaceColorKey extends Node {
       MoleculePolarityStrings.positiveStringProperty, MoleculePolarityStrings.negativeStringProperty, options );
   }
 }
-
-moleculePolarity.register( 'SurfaceColorKey', SurfaceColorKey );

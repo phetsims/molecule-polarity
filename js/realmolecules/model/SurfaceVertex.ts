@@ -7,7 +7,6 @@
  */
 
 import Vector3 from '../../../../dot/js/Vector3.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 export class SurfaceVertex {
   public constructor(
@@ -31,5 +30,3 @@ export class SurfaceVertex {
     return [ this.normal.x, this.normal.y, this.normal.z ];
   }
 }
-
-moleculePolarity.register( 'SurfaceVertex', SurfaceVertex );

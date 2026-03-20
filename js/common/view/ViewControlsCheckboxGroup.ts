@@ -16,7 +16,6 @@ import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import BondDipoleNode from './BondDipoleNode.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MolecularDipoleNode from './MolecularDipoleNode.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class ViewControlsCheckboxGroup extends VerticalCheckboxGroup {
@@ -32,8 +31,6 @@ export default class ViewControlsCheckboxGroup extends VerticalCheckboxGroup {
     }, providedOptions ) );
   }
 }
-
-moleculePolarity.register( 'ViewControlsCheckboxGroup', ViewControlsCheckboxGroup );
 
 export const createBondDipoleCheckboxItem = ( bondDipoleVisibleProperty: PhetioProperty<boolean> ): VerticalCheckboxGroupItem => {
   return {

@@ -13,7 +13,6 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MPPreferences from '../model/MPPreferences.js';
 import DipoleDirectionControl from './DipoleDirectionControl.js';
 import SurfaceColorControl from './SurfaceColorControl.js';
@@ -67,5 +66,3 @@ export default class MPPreferencesNode extends VBox {
     super.dispose();
   }
 }
-
-moleculePolarity.register( 'MPPreferencesNode', MPPreferencesNode );

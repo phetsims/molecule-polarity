@@ -14,7 +14,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import DragListener, { DragListenerOptions, PressedDragListener } from '../../../../scenery/js/listeners/DragListener.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import Molecule from '../model/Molecule.js';
 import normalizeAngle from '../model/normalizeAngle.js';
 import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
@@ -77,5 +76,3 @@ export default class MoleculeAngleDragListener extends DragListener {
     super( options );
   }
 }
-
-moleculePolarity.register( 'MoleculeAngleDragListener', MoleculeAngleDragListener );

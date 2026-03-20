@@ -17,7 +17,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import HorizontalAquaRadioButtonGroup, { HorizontalAquaRadioButtonGroupOptions } from '../../../../sun/js/HorizontalAquaRadioButtonGroup.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityFluent from '../../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 import { DipoleDirection } from '../model/DipoleDirection.js';
@@ -148,5 +147,3 @@ class DipoleDirectionRadioButtonGroup extends HorizontalAquaRadioButtonGroup<Dip
     super.dispose();
   }
 }
-
-moleculePolarity.register( 'DipoleDirectionControl', DipoleDirectionControl );

@@ -14,7 +14,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import Atom from './Atom.js';
 import MPPreferences from './MPPreferences.js';
 
@@ -131,5 +130,3 @@ export default class Bond extends PhetioObject {
     return this.atom1.positionProperty.value.distance( this.atom2.positionProperty.value );
   }
 }
-
-moleculePolarity.register( 'Bond', Bond );

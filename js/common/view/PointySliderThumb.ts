@@ -16,7 +16,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import moleculePolarity from '../../moleculePolarity.js';
 
 type SelfOptions = {
   size?: Dimension2;
@@ -89,5 +88,3 @@ export default class PointySliderThumb extends Path {
     this.addInputListener( pressListener );
   }
 }
-
-moleculePolarity.register( 'PointySliderThumb', PointySliderThumb );

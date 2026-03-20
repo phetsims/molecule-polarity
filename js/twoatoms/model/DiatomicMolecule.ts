@@ -16,7 +16,6 @@ import Bond from '../../common/model/Bond.js';
 import Molecule, { MoleculeOptions } from '../../common/model/Molecule.js';
 import MPColors from '../../common/MPColors.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import MoleculePolarityStrings from '../../MoleculePolarityStrings.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -100,5 +99,3 @@ export default class DiatomicMolecule extends Molecule {
     );
   }
 }
-
-moleculePolarity.register( 'DiatomicMolecule', DiatomicMolecule );

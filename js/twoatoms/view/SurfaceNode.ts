@@ -17,7 +17,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import MPConstants from '../../common/MPConstants.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import DiatomicMolecule from '../model/DiatomicMolecule.js';
 
 // constants
@@ -94,5 +93,3 @@ export default abstract class SurfaceNode extends Node {
    */
   protected abstract updateFill(): void;
 }
-
-moleculePolarity.register( 'SurfaceNode', SurfaceNode );

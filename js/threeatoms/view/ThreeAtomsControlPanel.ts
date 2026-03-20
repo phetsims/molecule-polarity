@@ -11,7 +11,6 @@ import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import EFieldControl from '../../common/view/EFieldControl.js';
 import MPControlPanel, { MPControlPanelOptions } from '../../common/view/MPControlPanel.js';
-import moleculePolarity from '../../moleculePolarity.js';
 import ThreeAtomsViewControls from './ThreeAtomsViewControls.js';
 import ThreeAtomsViewProperties from './ThreeAtomsViewProperties.js';
 
@@ -39,5 +38,3 @@ export default class ThreeAtomsControlPanel extends MPControlPanel {
     super( subPanels, options );
   }
 }
-
-moleculePolarity.register( 'ThreeAtomsControlPanel', ThreeAtomsControlPanel );
