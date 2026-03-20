@@ -516,7 +516,7 @@
       "value": "{ $magnitude ->\n  [zero] zero\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  [large] large\n  [veryLarge] very large\n  *[extremelyLarge] extremely large\n}"
     },
     "bondDipole": {
-      "value": "{ $magnitude ->\n  [no] no\n  [verySmall] very small\n  [small] small\n  [medium] medium\n  [fairlyLarge] fairly large\n  *[large] large\n}"
+      "value": "{ $magnitude ->\n  [no] No\n  [verySmall] Very small\n  [small] Small\n  [medium] Medium\n  [fairlyLarge] Fairly large\n  *[large] Large\n}"
     },
     "molecularPolarity": {
       "value": "{ $polarity ->\n  [nonpolar] nonpolar\n  [weaklyPolar] weakly polar\n  [polar] polar\n  [moderatelyPolar] moderately polar\n  [stronglyPolar] strongly polar\n  *[veryStronglyPolar] very strongly polar\n}"
@@ -644,13 +644,13 @@
           "value": "Molecular dipole is twice the size of bond dipoles."
         },
         "bondDipoleAB": {
-          "value": "With { $magnitude } AB bond dipole arrow."
+          "value": "{ $magnitude } AB bond dipole arrow."
         },
         "bondDipoleABDescription": {
           "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleAB } AB bond dipole points to Atom { $atom }, { $direction } o'clock."
         },
         "bondDipoleBC": {
-          "value": "With { $magnitude } BC bond dipole arrow."
+          "value": "{ $magnitude } BC bond dipole arrow."
         },
         "bondDipoleBCDescription": {
           "value": "{ a11y_threeAtomsScreen_moleculeABC_bondDipoleBC } BC bond dipole points to Atom { $atom }, { $direction } o'clock."

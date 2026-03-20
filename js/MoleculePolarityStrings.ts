@@ -425,4 +425,6 @@ type StringsType = {
 
 const MoleculePolarityStrings = getStringModule( 'MOLECULE_POLARITY' ) as StringsType;
 
+moleculePolarity.register( 'MoleculePolarityStrings', MoleculePolarityStrings );
+
 export default MoleculePolarityStrings;
