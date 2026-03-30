@@ -42,8 +42,8 @@ simLauncher.launch( () => {
     credits: {
       leadDesign: 'Kelly Lancaster',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.), Jonathan Olson, Agust\u00edn Vallejo',
-      team: 'Julia Chamberlain, Emily B. Moore, Robert Parson, Kathy Perkins, Amy Rouinfar, Nancy Salpepi',
-      qualityAssurance: 'Steele Dalton, Alex Dornan, Jaron Droder, Clifford Hardin, Ethan Johnson, Brooklyn Lash, Emily Miller, Devon Quispe, Nancy Salpepi, Kathryn Woessner'
+      team: 'Julia Chamberlain, Emily B. Moore, Matthew Moore, Robert Parson, Kathy Perkins, Amy Rouinfar, Nancy Salpepi',
+      qualityAssurance: 'Steele Dalton, Alex Dornan, Jaron Droder, Clifford Hardin, Ethan Johnson, Brooklyn Lash, Emily Miller, Valentina P\u00e9rez, Devon Quispe, Kathryn Woessner'
     },
 
     // phet-io options
