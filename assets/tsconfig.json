@@ -2,9 +2,6 @@
   "extends": "../../perennial-alias/tsconfig/tsconfig-node.json",
   "references": [
     {
-      "path": "../../perennial/tsconfig.json"
-    },
-    {
       "path": "../../phet-core/tsconfig-module.json"
     }
   ]
