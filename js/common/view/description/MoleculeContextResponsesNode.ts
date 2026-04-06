@@ -15,7 +15,7 @@ import Atom from '../../model/Atom.js';
 import Bond from '../../model/Bond.js';
 import Molecule from '../../model/Molecule.js';
 import MPConstants from '../../MPConstants.js';
-import DescriptionMaps, { EPProgress, MagnitudeProgress } from './DescriptionMaps.js';
+import { EPProgress } from './DescriptionMaps.js';
 
 export default class MoleculeContextResponsesNode extends Node {
 
@@ -79,7 +79,7 @@ export default class MoleculeContextResponsesNode extends Node {
     // Dipole
     const previousDipole = this.molecule.previousDipoleProperty.value;
     const currentDipole = this.molecule.dipoleProperty.value;
-    const dipoleMagnitudeProgress = currentDipole.magnitude - previousDipole.magnitude;
+    const dipoleMagnitudeChange = currentDipole.magnitude - previousDipole.magnitude;
     const isDipoleZero = currentDipole.magnitude < 0.01;
 
     ///////// VISIBILITY PROPERTIES /////////
@@ -113,13 +113,13 @@ export default class MoleculeContextResponsesNode extends Node {
     // Molecular dipole description
     molecularDipoleVisible && !isDipoleZero && this.contextResponse(
       MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-        progress: DescriptionMaps.getMagnitudeProgress( dipoleMagnitudeProgress )
+        progress: dipoleMagnitudeChange > 0 ? 'larger' : 'smaller'
       } ), 'molecularDipoleVisible'
     );
 
     bondCharacterVisible && this.contextResponse(
       MoleculePolarityFluent.a11y.common.electronegativitySlider.bondCharacterContext.format( {
-        progress: dipoleMagnitudeProgress > 0 ? 'moreIonic' : 'moreCovalent'
+        progress: dipoleMagnitudeChange > 0 ? 'moreIonic' : 'moreCovalent'
       } ), 'bondCharacterVisible'
     );
 
@@ -168,11 +168,11 @@ export default class MoleculeContextResponsesNode extends Node {
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContextTwoBonds.format( {
           bondA: bondA.label,
           progressA: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-            progress: bondAChanges.magnitudeProgress
+            progress: bondADeltaEN === 0 ? 'zero' : bondAChanges.isGrowing ? 'larger' : 'smaller'
           } ),
           bondB: bondB.label,
           progressB: MoleculePolarityFluent.a11y.dipoleProgress.format( {
-            progress: bondBChanges.magnitudeProgress
+            progress: bondBDeltaEN === 0 ? 'zero' : bondBChanges.isGrowing ? 'larger' : 'smaller'
           } )
         } ), 'largerSmaller'
       );
@@ -192,13 +192,14 @@ export default class MoleculeContextResponsesNode extends Node {
       const bondDeltaEN = bond.deltaENProperty.value;
       const bondChanges = this.calculateBondChanges( bondDeltaEN,
         this.invertMapping || count === 1 ); // Only happens for Atom B, which has inverted mapping but second bond is not
+      const isBondDeltaENGrowing = bondChanges.isGrowing;
       const didBondChangeDirection = bondChanges.didBondChangeDirection;
 
       // If Bond Dipoles visible, emit bond dipole related context responses
       bondDipolesVisible && !hasTwoBondDipoles && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleContext.format( {
           bond: bond.label,
-          progress: bondDeltaEN === 0 ? 'zero' : bondChanges.magnitudeProgress
+          progress: bondDeltaEN === 0 ? 'zero' : isBondDeltaENGrowing ? 'larger' : 'smaller'
         } ), 'largerSmaller'
       );
 
@@ -212,7 +213,7 @@ export default class MoleculeContextResponsesNode extends Node {
     } );
   }
 
-  private calculateBondChanges( bondDeltaEN: number, inverted: boolean ): { magnitudeProgress: MagnitudeProgress; didBondChangeDirection: boolean } {
+  private calculateBondChanges( bondDeltaEN: number, inverted: boolean ): { isGrowing: boolean; didBondChangeDirection: boolean } {
     // This is how much the atom's EN is changing because of the slider, not to be confused with deltaEN
     const currentEN = this.atom.electronegativityProperty.value;
     const changeInEN = currentEN - this.atom.previousElectronegativityProperty.value;
@@ -226,10 +227,9 @@ export default class MoleculeContextResponsesNode extends Node {
 
     // deltaEN > 0 might mean something different based on which atom is being changed.
     // i.e. high deltaEN means a high electron density for one atom but low for the other.
-    const magnitudeProgress = DescriptionMaps.getMagnitudeProgress(
-      Math.abs( previousBondDeltaEN ) - Math.abs( bondDeltaEN ) );
+    const isGrowing = Math.abs( previousBondDeltaEN ) < Math.abs( bondDeltaEN );
     const didBondChangeDirection = bondDeltaEN * previousBondDeltaEN < 0 || previousBondDeltaEN === 0;
-    return { magnitudeProgress: magnitudeProgress, didBondChangeDirection: didBondChangeDirection };
+    return { isGrowing: isGrowing, didBondChangeDirection: didBondChangeDirection };
   }
 
   private changeInENtoProgress( deltaEN: number, changeInEN: number ): EPProgress {
