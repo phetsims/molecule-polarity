@@ -462,7 +462,7 @@
       "value": "{ $progress ->\n  [moreIonic] more ionic\n  *[moreCovalent] more covalent\n}"
     },
     "dipoleProgress": {
-      "value": "{ $progress ->\n  [zero] zero\n  [smaller] smaller\n  *[larger] larger\n}"
+      "value": "{ $progress ->\n  [zero] zero\n  [unchanged] unchanged\n  [smaller] smaller\n  *[larger] larger\n}"
     },
     "electronDensity": {
       "value": "{ $density ->\n  [evenlyShared] evenly\n  [nearlyEvenlyShared] nearly evenly\n  [slightlyUnevenlyShared] slightly unevenly\n  [unevenlyShared] unevenly\n  [veryUnevenlyShared] very unevenly\n  *[mostUnevenlyShared] most unevenly\n}"

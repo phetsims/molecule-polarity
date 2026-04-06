@@ -190,6 +190,7 @@ a11y:
   dipoleProgress:
     select_progress:
       zero: 'zero'
+      unchanged: 'unchanged'
       smaller: 'smaller'
       larger: 'larger'
   
