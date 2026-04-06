@@ -5,6 +5,7 @@
  * @author Agustín Vallejo (PhET Interactive Simulations)
  */
 
+import Multilink from '../../../../../axon/js/Multilink.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import MPConstants from '../../../common/MPConstants.js';
@@ -83,6 +84,18 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
       }
       previousMolecularDipoleMagnitude = molecule.dipoleProperty.value.magnitude;
     } );
+
+    // Also updating the previous dipole magnitude when atoms update their electronegativities
+    //  because this sometimes causes a change in direction.
+    Multilink.multilink(
+      [
+        molecule.atomA.previousElectronegativityProperty,
+        molecule.atomB.previousElectronegativityProperty,
+        molecule.atomC.previousElectronegativityProperty
+      ], () => {
+        previousMolecularDipoleMagnitude = molecule.dipoleProperty.value.magnitude;
+      }
+    );
 
     molecule.angleProperty.link( () => {
       if ( molecule.dipoleProperty.value.magnitude > 1e-5 && viewProperties.molecularDipoleVisibleProperty.value ) {
