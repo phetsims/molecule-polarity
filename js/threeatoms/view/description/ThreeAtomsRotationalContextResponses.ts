@@ -53,7 +53,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
         // Molecular dipole description
         this.addAccessibleContextResponse(
           MoleculePolarityFluent.a11y.common.molecularDipoleResponses.molecularDipoleContext.format( {
-            progress: magnitudeChange > 0 ? 'larger' : 'smaller'
+            progress: DescriptionMaps.getMagnitudeProgress( magnitudeChange )
           } ), {
             responseGroup: 'molecularDipole',
             alertDelay: MPConstants.ALERT_DELAY

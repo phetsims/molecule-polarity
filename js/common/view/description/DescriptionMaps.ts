@@ -9,6 +9,7 @@
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
+import { equalsEpsilon } from '../../../../../dot/js/util/equalsEpsilon.js';
 import { toDegrees } from '../../../../../dot/js/util/toDegrees.js';
 import { toFixedNumber } from '../../../../../dot/js/util/toFixedNumber.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
@@ -16,6 +17,8 @@ import { MoleculeGeometry } from '../../../realmolecules/model/RealMolecule.js';
 import { toClock } from './toClock.js';
 
 // DESCRIPTION TYPES //
+// Change (or lack of thereof) in Magnitude
+export type MagnitudeProgress = 'smaller' | 'larger' | 'unchanged';
 
 // Bond
 type BondCharacter = 'nonpolarCovalent' | 'nearlyNonpolarCovalent' | 'slightlyPolarCovalent' | 'polarCovalent' | 'slightlyIonic' | 'mostlyIonic';
@@ -170,6 +173,10 @@ export default class DescriptionMaps {
            absAngle <= 0.9 * Math.PI ? 'slightlyBent' :
            absAngle <= 0.95 * Math.PI ? 'nearlyLinear' :
            'linear';
+  }
+
+  public static getMagnitudeProgress( value: number ): MagnitudeProgress {
+    return equalsEpsilon( value, 0, 0.001 ) ? 'unchanged' : value > 0 ? 'larger' : 'smaller';
   }
 
   public static createOrientationStringProperty( angleProperty: TReadOnlyProperty<number> ): TReadOnlyProperty<string> {

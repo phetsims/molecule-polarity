@@ -5,7 +5,7 @@
 /* eslint-disable */
 /* @formatter:off */
 
-import { TReadOnlyProperty } from '../../axon/js/TReadOnlyProperty.js';
+import {TReadOnlyProperty} from '../../axon/js/TReadOnlyProperty.js';
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
@@ -459,7 +459,7 @@ const MoleculePolarityFluent = {
       },
       electronegativitySlider: {
         accessibleName: new FluentPattern<{ atomName: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.accessibleNameStringProperty' ), [{"name":"atomName"}] ),
-        dipoleContext: new FluentPattern<{ bond: FluentVariable, progress: number | 'zero' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleContextStringProperty' ), [{"name":"bond"},{"name":"progress","variants":[{"type":"number","value":"zero"},"smaller","larger"]}] ),
+        dipoleContext: new FluentPattern<{ bond: FluentVariable, progress: number | 'zero' | 'unchanged' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'unchanged' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleContextStringProperty' ), [{"name":"bond"},{"name":"progress","variants":[{"type":"number","value":"zero"},"unchanged","smaller","larger"]}] ),
         _comment_0: new FluentComment( {"comment":"The context response for dipole direction change when there are two bonds. The information is combined","associatedKey":"dipoleContextTwoBonds"} ),
         _comment_1: new FluentComment( {"comment":"into one string to reduce verbosity.","associatedKey":"dipoleContextTwoBonds"} ),
         dipoleContextTwoBonds: new FluentPattern<{ bondA: FluentVariable, bondB: FluentVariable, progressA: FluentVariable, progressB: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleContextTwoBonds', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleContextTwoBondsStringProperty' ), [{"name":"bondA"},{"name":"bondB"},{"name":"progressA"},{"name":"progressB"}] ),
@@ -529,7 +529,7 @@ const MoleculePolarityFluent = {
         accessibleName: new FluentPattern<{ name: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_atom_accessibleName', _.get( MoleculePolarityStrings, 'a11y.common.atom.accessibleNameStringProperty' ), [{"name":"name"}] )
       },
       molecularDipoleResponses: {
-        molecularDipoleContext: new FluentPattern<{ progress: number | 'zero' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleContextStringProperty' ), [{"name":"progress","variants":[{"type":"number","value":"zero"},"smaller","larger"]}] ),
+        molecularDipoleContext: new FluentPattern<{ progress: number | 'zero' | 'unchanged' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'unchanged' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleContext', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleContextStringProperty' ), [{"name":"progress","variants":[{"type":"number","value":"zero"},"unchanged","smaller","larger"]}] ),
         molecularDipoleDirectionOnly: new FluentPattern<{ position: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_molecularDipoleResponses_molecularDipoleDirectionOnly', _.get( MoleculePolarityStrings, 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnlyStringProperty' ), [{"name":"position"}] )
       },
       _comment_0: new FluentComment( {"comment":"Electronegativity description","associatedKey":"electronegativity"} ),
@@ -551,7 +551,7 @@ const MoleculePolarityFluent = {
     _comment_5: new FluentComment( {"comment":"Implementation: ΔEN > 0 = more ionic; ΔEN < 0 more covalent","associatedKey":"bondCharacterProgress"} ),
     bondCharacterProgress: new FluentPattern<{ progress: 'moreIonic' | 'moreCovalent' | TReadOnlyProperty<'moreIonic' | 'moreCovalent'> }>( fluentSupport.bundleProperty, 'a11y_bondCharacterProgress', _.get( MoleculePolarityStrings, 'a11y.bondCharacterProgressStringProperty' ), [{"name":"progress","variants":["moreIonic","moreCovalent"]}] ),
     _comment_6: new FluentComment( {"comment":"DipoleProgress3 - Dipole Progress (Screen 1)","associatedKey":"dipoleProgress"} ),
-    dipoleProgress: new FluentPattern<{ progress: number | 'zero' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_dipoleProgress', _.get( MoleculePolarityStrings, 'a11y.dipoleProgressStringProperty' ), [{"name":"progress","variants":[{"type":"number","value":"zero"},"smaller","larger"]}] ),
+    dipoleProgress: new FluentPattern<{ progress: number | 'zero' | 'unchanged' | 'smaller' | 'larger' | TReadOnlyProperty<number | 'zero' | 'unchanged' | 'smaller' | 'larger'> }>( fluentSupport.bundleProperty, 'a11y_dipoleProgress', _.get( MoleculePolarityStrings, 'a11y.dipoleProgressStringProperty' ), [{"name":"progress","variants":[{"type":"number","value":"zero"},"unchanged","smaller","larger"]}] ),
     _comment_7: new FluentComment( {"comment":"ElectronDensity6 - Electron Density (Screen 1)","associatedKey":"electronDensity"} ),
     electronDensity: new FluentPattern<{ density: 'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared' | TReadOnlyProperty<'evenlyShared' | 'nearlyEvenlyShared' | 'slightlyUnevenlyShared' | 'unevenlyShared' | 'veryUnevenlyShared' | 'mostUnevenlyShared'> }>( fluentSupport.bundleProperty, 'a11y_electronDensity', _.get( MoleculePolarityStrings, 'a11y.electronDensityStringProperty' ), [{"name":"density","variants":["evenlyShared","nearlyEvenlyShared","slightlyUnevenlyShared","unevenlyShared","veryUnevenlyShared","mostUnevenlyShared"]}] ),
     _comment_8: new FluentComment( {"comment":"ElectronDensityShift6 - Electron Density Shift (Screen 1)","associatedKey":"electronDensityShift"} ),
