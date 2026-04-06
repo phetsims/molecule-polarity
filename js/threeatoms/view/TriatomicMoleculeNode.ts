@@ -14,6 +14,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import IndexedNodeIO from '../../../../scenery/js/nodes/IndexedNodeIO.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import MPConstants from '../../common/MPConstants.js';
 import MPQueryParameters from '../../common/MPQueryParameters.js';
 import AtomNode from '../../common/view/AtomNode.js';
 import BondDipoleNode from '../../common/view/BondDipoleNode.js';
@@ -50,8 +51,11 @@ export default class TriatomicMoleculeNode extends Node {
       isDisposable: false
     }, providedOptions );
 
-
     let lastOverlappingMessage: 'overlappingA' | 'overlappingC' | 'overA' | 'overC' | null = null;
+
+    const overlapResponseOptions = {
+      responseGroup: MPConstants.ROTATION_ALIGNMENT_RESPONSE_GROUP
+    };
 
     const overlapAccessibleObjectResponse = ( otherAtom: 'A' | 'C' ) => {
       const angleABC = molecule.bondAngleABCProperty.value;
@@ -59,7 +63,8 @@ export default class TriatomicMoleculeNode extends Node {
         if ( lastOverlappingMessage !== `over${otherAtom}` ) {
           lastOverlappingMessage = `over${otherAtom}`;
           this.addAccessibleObjectResponse(
-            MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.onTopOf.format( { atom: otherAtom } )
+            MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.onTopOf.format( { atom: otherAtom } ),
+            overlapResponseOptions
           );
         }
       }
@@ -67,14 +72,17 @@ export default class TriatomicMoleculeNode extends Node {
         if ( lastOverlappingMessage !== `overlapping${otherAtom}` ) {
           lastOverlappingMessage = `overlapping${otherAtom}`;
           this.addAccessibleObjectResponse(
-            MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.overlapping.format( { atom: otherAtom } )
+            MoleculePolarityFluent.a11y.threeAtomsScreen.moleculeABC.overlapping.format( { atom: otherAtom } ),
+            overlapResponseOptions
           );
         }
       }
       else {
         lastOverlappingMessage = null;
+        this.clearAccessibleResponseGroups( MPConstants.ROTATION_ALIGNMENT_RESPONSE_GROUP );
       }
     };
+
 
     // atoms
     const atomANode = new AtomNode( molecule.atomA, molecule.bondAngleABProperty, molecule.isDraggingProperty, {
