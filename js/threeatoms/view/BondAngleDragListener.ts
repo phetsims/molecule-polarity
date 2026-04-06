@@ -13,15 +13,15 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { toRadians } from '../../../../dot/js/util/toRadians.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import SceneryEvent from '../../../../scenery/js/input/SceneryEvent.js';
 import DragListener, { DragListenerOptions, PressedDragListener } from '../../../../scenery/js/listeners/DragListener.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
 import Molecule from '../../common/model/Molecule.js';
 import normalizeAngle from '../../common/model/normalizeAngle.js';
-import sharedSoundPlayers from '../../../../tambo/js/sharedSoundPlayers.js';
-import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 
 type SelfOptions = {
 
@@ -77,7 +77,6 @@ export default class BondAngleDragListener extends DragListener {
     const bondAngleRange = bondAngleProperty.range;
 
     options.drag = event => {
-      options.draggingCallback();
       const currentAngle = getAngle( event );
       bondAngleProperty.value =
         normalizeAngle( bondAngleProperty.value + currentAngle - previousAngle, bondAngleRange.min );
@@ -85,6 +84,7 @@ export default class BondAngleDragListener extends DragListener {
     };
 
     options.end = () => {
+      options.draggingCallback();
       molecule.isDraggingProperty.value = false;
       releaseSound.play();
     };
