@@ -30,7 +30,7 @@ export default class RotationResponseNode extends Node {
     providedOptions?: RotationResponseNodeOptions
   ) {
 
-    const options = optionize<SelfOptions, EmptySelfOptions, RotationResponseNodeOptions>()( {
+    const options = optionize<RotationResponseNodeOptions, SelfOptions, NodeOptions>()( {
       // Default options go here
     }, providedOptions );
 
