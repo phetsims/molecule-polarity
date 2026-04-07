@@ -24,7 +24,7 @@ export default class ThreeAtomsRotationalContextResponses extends Node {
     viewProperties: ThreeAtomsViewProperties,
     providedOptions?: RotationalContextResponsesNodeOptions
   ) {
-    const options = optionize<SelfOptions, EmptySelfOptions, RotationalContextResponsesNodeOptions>()( {
+    const options = optionize<RotationalContextResponsesNodeOptions, EmptySelfOptions, NodeOptions>()( {
       // Default options go here
     }, providedOptions );
 

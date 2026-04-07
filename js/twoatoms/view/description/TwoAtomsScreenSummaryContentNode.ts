@@ -17,7 +17,7 @@ export type TwoAtomsScreenSummaryContentNodeOptions = SelfOptions & ScreenSummar
 
 export default class TwoAtomsScreenSummaryContentNode extends ScreenSummaryContent {
   public constructor( model: TwoAtomsModel, providedOptions?: TwoAtomsScreenSummaryContentNodeOptions ) {
-    const options = optionize<SelfOptions, EmptySelfOptions, TwoAtomsScreenSummaryContentNodeOptions>()( {
+    const options = optionize<TwoAtomsScreenSummaryContentNodeOptions, SelfOptions, ScreenSummaryContentOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.twoAtomsScreen.screenSummary.currentDetails.createProperty( {
         polarity: DescriptionMaps.createPolarityStringProperty( model.diatomicMolecule.deltaENProperty ),
         field: MoleculePolarityFluent.a11y.field.createProperty( {
