@@ -29,7 +29,7 @@ export default class RealMoleculesScreenSummaryContentNode extends ScreenSummary
       derive: 'fullNameProperty'
     } );
 
-    const options = optionize<SelfOptions, EmptySelfOptions, RealMoleculesScreenSummaryContentNodeOptions>()( {
+    const options = optionize<RealMoleculesScreenSummaryContentNodeOptions, EmptySelfOptions, ScreenSummaryContentOptions>()( {
       currentDetailsContent: MoleculePolarityFluent.a11y.realMoleculesScreen.screenSummary.currentDetails.createProperty( {
         moleculeName: currentMoleculeNameDynamicProperty,
         shapeGeometry: DescriptionMaps.createShapeGeometryStringProperty(
