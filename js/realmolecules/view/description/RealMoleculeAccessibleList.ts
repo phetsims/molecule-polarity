@@ -17,6 +17,7 @@ import { toFixed } from '../../../../../dot/js/util/toFixed.js';
 import Element from '../../../../../nitroglycerin/js/Element.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import type { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
+import MPPreferences from '../../../common/model/MPPreferences.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import RealMolecule, { MoleculeName, MoleculeSymbol } from '../../model/RealMolecule.js';
 import RealMoleculesViewProperties from '../RealMoleculesViewProperties.js';
@@ -25,7 +26,7 @@ export default class RealMoleculeAccessibleList {
   private constructor() {
     // Not intended to be instantiated, static methods only.
   }
-  
+
   public static createTemplateProperty(
     molecules: RealMolecule[],
     moleculeProperty: TReadOnlyProperty<RealMolecule>,
@@ -58,10 +59,17 @@ export default class RealMoleculeAccessibleList {
         // Bond Dipole
         {
           visibleProperty: viewProperties.bondDipolesVisibleProperty,
-          stringProperty: getBasicAdvancedStringProperty(
-            MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.selectMolecules,
-            MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.selectMolecules
-          )
+          stringProperty: new DynamicProperty( new DerivedProperty( [ MPPreferences.dipoleDirectionProperty ], dipoleDirection => {
+            return dipoleDirection === 'positiveToNegative' ?
+                   getBasicAdvancedStringProperty(
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.bondDipole.selectMolecules,
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.selectMolecules
+                   ) :
+                   getBasicAdvancedStringProperty(
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.invertedBondDipole.selectMolecules,
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.invertedBondDipole.selectMolecules
+                   );
+          } ) )
         },
 
         // Molecular Dipole

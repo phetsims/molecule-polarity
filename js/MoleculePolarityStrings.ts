@@ -348,6 +348,11 @@ type StringsType = {
           'verySmallCarbonHydrogenStringProperty': LocalizedStringProperty;
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
+        'invertedBondDipole': {
+          'noBondDipoleStringProperty': LocalizedStringProperty;
+          'verySmallCarbonHydrogenStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
         'molecularDipole': {
           'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
           'noMolecularDipoleStringProperty': LocalizedStringProperty;
@@ -373,6 +378,10 @@ type StringsType = {
       'moleculesAdvanced': {
         'descriptionStringProperty': LocalizedStringProperty;
         'bondDipole': {
+          'noBondDipoleStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'invertedBondDipole': {
           'noBondDipoleStringProperty': LocalizedStringProperty;
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
