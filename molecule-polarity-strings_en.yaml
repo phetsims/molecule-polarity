@@ -540,6 +540,33 @@ a11y:
             trifluoromethane: '{a11y.realMoleculesScreen.molecules.bondDipole.verySmallCarbonHydrogen}'
             tetrafluoromethane: 'Fairly large carbon fluorine bond dipoles, pointing towards fluorines.'
             chloroform: 'Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon chlorine bond dipoles, pointing towards chlorines.'
+      invertedBondDipole:
+        # Generic descriptions
+        noBondDipole: 'No bond dipole.'
+        verySmallCarbonHydrogen: 'Very small carbon hydrogen bond dipoles, pointing towards hydrogen. Fairly large carbon fluorine bond dipoles, pointing towards carbon.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            oxygen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            fluorine: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            hydrogenFluoride: 'Large bond dipole, pointing towards hydrogen.'
+            water: 'Fairly large bond dipoles, pointing towards hydrogens.'
+            carbonDioxide: 'Medium bond dipoles, pointing towards carbon.'
+            hydrogenCyanide: 'Very small carbon hydrogen bond dipole, pointing towards hydrogen. Small carbon nitrogen bond dipole, pointing towards carbon.'
+            ozone: 'No bond dipoles.'
+            ammonia: 'Medium bond dipoles, pointing towards hydrogens.'
+            borane: 'Tiny bond dipoles, pointing towards boron.'
+            boronTrifluoride: 'Large bond dipoles, pointing towards boron.'
+            formaldehyde: 'Very small carbon hydrogen bond dipoles, pointing towards hydrogens. Medium carbon oxygen bond dipole, pointing towards carbon.'
+            methane: 'Very small bond dipoles, pointing towards hydrogens.'
+            fluoromethane: 'Very small carbon hydrogen bond dipoles, pointing toward hydrogen. Large carbon fluorine bond dipole, pointing towards carbon.'
+            difluoromethane: '{a11y.realMoleculesScreen.molecules.invertedBondDipole.verySmallCarbonHydrogen}'
+            trifluoromethane: '{a11y.realMoleculesScreen.molecules.invertedBondDipole.verySmallCarbonHydrogen}'
+            tetrafluoromethane: 'Fairly large carbon fluorine bond dipoles, pointing towards carbon.'
+            chloroform: 'Very small carbon hydrogen bond dipole, pointing towards hydrogen. Small carbon chlorine bond dipoles, pointing towards carbon.'
       molecularDipole:
         # Generic descriptions
         largeMolecularDipolePointing: 'Large molecular dipole, pointing towards fluorines.'
@@ -675,6 +702,32 @@ a11y:
             trifluoromethane: 'Medium carbon hydrogen bond dipole, pointing towards hydrogen. Very large carbon fluorine bond dipoles, pointing towards fluorines.'
             tetrafluoromethane: 'Small carbon fluorine bond dipoles, pointing towards fluorines.'
             chloroform: 'Very small carbon hydrogen bond dipole, pointing towards hydrogen. Very large carbon chlorine bond dipoles, pointing towards chlorines.'
+      invertedBondDipole:
+        # Generic descriptions
+        noBondDipole: 'No bond dipole.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            oxygen: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            fluorine: '{a11y.realMoleculesScreen.moleculesAdvanced.bondDipole.noBondDipole}'
+            hydrogenFluoride: 'Large bond dipole, pointing towards hydrogen.'
+            water: 'Fairly large bond dipoles, pointing towards hydrogens.'
+            carbonDioxide: 'Small bond dipoles, pointing towards carbon.'
+            hydrogenCyanide: 'Small carbon hydrogen bond dipole, pointing towards hydrogen. Large carbon nitrogen bond dipole, pointing towards carbon.'
+            ozone: 'Small bond dipoles, pointing towards central oxygen.'
+            ammonia: 'Fairly large bond dipoles, pointing towards hydrogens.'
+            borane: 'Fairly large bond dipoles, pointing towards boron.'
+            boronTrifluoride: 'Small bond dipoles, pointing towards boron.'
+            formaldehyde: 'Medium carbon hydrogen bond dipoles, pointing towards carbon. Very large carbon oxygen bond dipole, pointing towards carbon.'
+            methane: 'Very small bond dipoles, pointing towards hydrogens.'
+            fluoromethane: 'No carbon hydrogen bond dipoles. Large carbon fluorine bond dipole, pointing towards carbon.'
+            difluoromethane: 'Small carbon hydrogen bond dipoles, pointing towards carbon. Very large carbon fluorine bond dipoles, pointing towards carbon.'
+            trifluoromethane: 'Medium carbon hydrogen bond dipole, pointing towards carbon. Very large carbon fluorine bond dipoles, pointing towards carbon.'
+            tetrafluoromethane: 'Small carbon fluorine bond dipoles, pointing towards carbon.'
+            chloroform: 'Very small carbon hydrogen bond dipole, pointing towards carbon. Very large carbon chlorine bond dipoles, pointing towards carbon.'
       molecularDipole:
         # Generic descriptions
         largeMolecularDipolePointing: 'Large molecular dipole, pointing towards fluorines.'
