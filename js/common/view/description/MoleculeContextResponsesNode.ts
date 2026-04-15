@@ -14,7 +14,6 @@ import TwoAtomsViewProperties from '../../../twoatoms/view/TwoAtomsViewPropertie
 import Atom from '../../model/Atom.js';
 import Bond from '../../model/Bond.js';
 import Molecule from '../../model/Molecule.js';
-import MPPreferences from '../../model/MPPreferences.js';
 import MPConstants from '../../MPConstants.js';
 import { EPProgress } from './DescriptionMaps.js';
 
@@ -182,11 +181,9 @@ export default class MoleculeContextResponsesNode extends Node {
       bondDipolesVisible && bothBondDirectionsChanged && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChangeTwoBonds.format( {
           bondA: bondA.label,
-          atomA: MPPreferences.dipoleDirectionProperty.value === 'positiveToNegative' ? bondADeltaEN > 0 ? bondA.atom2.label : bondA.atom1.label :
-                 bondADeltaEN < 0 ? bondA.atom2.label : bondA.atom1.label,
+          atomA: bondADeltaEN > 0 ? bondA.atom2.label : bondA.atom1.label,
           bondB: bondB.label,
-          atomB: MPPreferences.dipoleDirectionProperty.value === 'positiveToNegative' ? bondBDeltaEN > 0 ? bondB.atom2.label : bondB.atom1.label :
-                 bondBDeltaEN < 0 ? bondB.atom2.label : bondB.atom1.label
+          atomB: bondBDeltaEN > 0 ? bondB.atom2.label : bondB.atom1.label
         } ), 'bondDirectionChange'
       );
     }
@@ -210,8 +207,7 @@ export default class MoleculeContextResponsesNode extends Node {
       bondDipolesVisible && didBondChangeDirection && !bothBondDirectionsChanged && this.contextResponse(
         MoleculePolarityFluent.a11y.common.electronegativitySlider.dipoleDirectionChange.format( {
           bond: bond.label,
-          atom: MPPreferences.dipoleDirectionProperty.value === 'positiveToNegative' ? bondDeltaEN > 0 ? bond.atom2.label : bond.atom1.label :
-                bondDeltaEN < 0 ? bond.atom2.label : bond.atom1.label
+          atom: bondDeltaEN > 0 ? bond.atom2.label : bond.atom1.label
         } ), `bondDirectionChange-${bond.label}`
       );
     } );

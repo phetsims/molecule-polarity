@@ -42,8 +42,5 @@
       "MOLECULE_POLARITY/screen.threeAtoms",
       "MOLECULE_POLARITY/screen.realMolecules"
     ]
-  },
-  "phet-io": {
-    "compareDesignedAPIChanges": true
   }
 }
