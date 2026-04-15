@@ -358,6 +358,11 @@ type StringsType = {
           'noMolecularDipoleStringProperty': LocalizedStringProperty;
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
+        'invertedMolecularDipole': {
+          'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
+          'noMolecularDipoleStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
         'electrostaticPotential': {
           'noElectrostaticPotentialDifferenceStringProperty': LocalizedStringProperty;
           'veryLargeElectrostaticPotentialStringProperty': LocalizedStringProperty;
@@ -388,6 +393,11 @@ type StringsType = {
         'molecularDipole': {
           'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
           'largeMolecularDipolePointingFluorineStringProperty': LocalizedStringProperty;
+          'noMolecularDipoleStringProperty': LocalizedStringProperty;
+          'selectMoleculesStringProperty': LocalizedStringProperty;
+        };
+        'invertedMolecularDipole': {
+          'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
           'noMolecularDipoleStringProperty': LocalizedStringProperty;
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
