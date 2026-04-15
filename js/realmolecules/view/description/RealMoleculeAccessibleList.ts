@@ -75,10 +75,17 @@ export default class RealMoleculeAccessibleList {
         // Molecular Dipole
         {
           visibleProperty: viewProperties.molecularDipoleVisibleProperty,
-          stringProperty: getBasicAdvancedStringProperty(
-            MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.selectMolecules,
-            MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMolecules
-          )
+          stringProperty: new DynamicProperty( new DerivedProperty( [ MPPreferences.dipoleDirectionProperty ], dipoleDirection => {
+            return dipoleDirection === 'positiveToNegative' ?
+                   getBasicAdvancedStringProperty(
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.molecularDipole.selectMolecules,
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMolecules
+                   ) :
+                   getBasicAdvancedStringProperty(
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.molecules.invertedMolecularDipole.selectMolecules,
+                     MoleculePolarityFluent.a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.selectMolecules
+                   );
+          } ) )
         },
 
         // Partial Charges

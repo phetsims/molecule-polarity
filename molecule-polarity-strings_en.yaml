@@ -594,6 +594,33 @@ a11y:
             trifluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.largeMolecularDipolePointing}'
             tetrafluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
             chloroform: 'Medium molecular dipole, pointing towards chlorines.'
+      invertedMolecularDipole:
+        # Generic descriptions
+        largeMolecularDipolePointing: 'Large molecular dipole, pointing towards hydrogens.'
+        noMolecularDipole: 'No molecular dipole.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            oxygen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            fluorine: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            hydrogenFluoride: 'Large molecular dipole, pointing towards hydrogen.'
+            water: 'Large molecular dipole, pointing towards hydrogens.'
+            carbonDioxide: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            hydrogenCyanide: 'Medium molecular dipole, pointing towards hydrogen.'
+            ozone: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            ammonia: 'Fairly large molecular dipole, pointing towards hydrogens.'
+            borane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            boronTrifluoride: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            formaldehyde: 'Fairly large molecular dipole, pointing towards hydrogens.'
+            methane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            fluoromethane: 'Fairly large molecular dipole, pointing towards hydrogens.'
+            difluoromethane: 'Large molecular dipole, pointing towards hydrogens.'
+            trifluoromethane: 'Large molecular dipole, pointing towards hydrogen.'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            chloroform: 'Medium molecular dipole, pointing towards hydrogen.'
       electrostaticPotential:
         # Generic descriptions
         noElectrostaticPotentialDifference: 'No electrostatic potential difference.'
@@ -756,6 +783,33 @@ a11y:
             trifluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointing}'
             tetrafluoromethane: '{a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipole}'
             chloroform: 'Medium molecular dipole, pointing towards chlorines.'
+      invertedMolecularDipole:
+        # Generic descriptions
+        largeMolecularDipolePointing: 'Large molecular dipole, pointing towards hydrogens.'
+        noMolecularDipole: 'No molecular dipole.'
+
+        # Molecule descriptions. We add another level of nesting so the select_ pattern is an only child
+        selectMolecules:
+          select_molecule:
+            hydrogen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            nitrogen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            oxygen: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            fluorine: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            hydrogenFluoride: 'Large molecular dipole, pointing towards hydrogen.'
+            water: 'Large molecular dipole, pointing towards hydrogens.'
+            carbonDioxide: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            hydrogenCyanide: 'Very large molecular dipole, pointing towards hydrogen.'
+            ozone: 'Small molecular dipole, pointing towards central oxygen.'
+            ammonia: 'Large molecular dipole, pointing towards hydrogens.'
+            borane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            boronTrifluoride: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            formaldehyde: 'Very large molecular dipole, pointing towards hydrogens.'
+            methane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            fluoromethane: 'Large molecular dipole, pointing towards hydrogens.'
+            difluoromethane: 'Large molecular dipole, pointing towards hydrogens.'
+            trifluoromethane: 'Large molecular dipole, pointing towards hydrogen.'
+            tetrafluoromethane: '{a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipole}'
+            chloroform: 'Medium molecular dipole, pointing towards hydrogen.'
       electrostaticPotential:
         # Generic descriptions
         mediumElectrostaticPotentialDifference: 'Medium electrostatic potential difference with even distribution.'
