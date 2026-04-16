@@ -95,7 +95,6 @@ addToMapIfDefined( 'keyboardHelpContent_molecule', 'keyboardHelpContent.molecule
 addToMapIfDefined( 'keyboardHelpContent_molecules', 'keyboardHelpContent.moleculesStringProperty' );
 addToMapIfDefined( 'keyboardHelpContent_rotateMoleculeWASD', 'keyboardHelpContent.rotateMoleculeWASDStringProperty' );
 addToMapIfDefined( 'keyboardHelpContent_rotateInSmallerStepsWASD', 'keyboardHelpContent.rotateInSmallerStepsWASDStringProperty' );
-addToMapIfDefined( 'a11y_common_upper', 'a11y.common.upperStringProperty' );
 addToMapIfDefined( 'a11y_common_elements_hydrogen', 'a11y.common.elements.hydrogenStringProperty' );
 addToMapIfDefined( 'a11y_common_elements_boron', 'a11y.common.elements.boronStringProperty' );
 addToMapIfDefined( 'a11y_common_elements_carbon', 'a11y.common.elements.carbonStringProperty' );
@@ -116,8 +115,6 @@ addToMapIfDefined( 'a11y_common_electronegativitySlider_dipoleContextTwoBonds', 
 addToMapIfDefined( 'a11y_common_electronegativitySlider_dipoleDirectionChange', 'a11y.common.electronegativitySlider.dipoleDirectionChangeStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_dipoleDirectionChangeTwoBonds', 'a11y.common.electronegativitySlider.dipoleDirectionChangeTwoBondsStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_bondCharacterContext', 'a11y.common.electronegativitySlider.bondCharacterContextStringProperty' );
-addToMapIfDefined( 'a11y_common_electronegativitySlider_electrostaticContext', 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' );
-addToMapIfDefined( 'a11y_common_electronegativitySlider_electronDensityContext', 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativitySlider_electricFieldContext', 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleName', 'a11y.common.bondDipoleCheckbox.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_common_bondDipoleCheckbox_accessibleNamePlural', 'a11y.common.bondDipoleCheckbox.accessibleNamePluralStringProperty' );
@@ -161,7 +158,6 @@ addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleContext'
 addToMapIfDefined( 'a11y_common_molecularDipoleResponses_molecularDipoleDirectionOnly', 'a11y.common.molecularDipoleResponses.molecularDipoleDirectionOnlyStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_heading', 'a11y.common.electronegativity.headingStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_currentValue', 'a11y.common.electronegativity.currentValueStringProperty' );
-addToMapIfDefined( 'a11y_common_electronegativity_description', 'a11y.common.electronegativity.descriptionStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_elementElectronegativity', 'a11y.common.electronegativity.elementElectronegativityStringProperty' );
 addToMapIfDefined( 'a11y_common_electronegativity_accessibleHelpText', 'a11y.common.electronegativity.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_bondCharacter', 'a11y.bondCharacterStringProperty' );
@@ -284,7 +280,6 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_invertedBondDipole_select
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_molecularDipole_largeMolecularDipolePointing', 'a11y.realMoleculesScreen.molecules.molecularDipole.largeMolecularDipolePointingStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole', 'a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_molecularDipole_selectMolecules', 'a11y.realMoleculesScreen.molecules.molecularDipole.selectMoleculesStringProperty' );
-addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_invertedMolecularDipole_largeMolecularDipolePointing', 'a11y.realMoleculesScreen.molecules.invertedMolecularDipole.largeMolecularDipolePointingStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole', 'a11y.realMoleculesScreen.molecules.invertedMolecularDipole.noMolecularDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_invertedMolecularDipole_selectMolecules', 'a11y.realMoleculesScreen.molecules.invertedMolecularDipole.selectMoleculesStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_molecules_electrostaticPotential_noElectrostaticPotentialDifference', 'a11y.realMoleculesScreen.molecules.electrostaticPotential.noElectrostaticPotentialDifferenceStringProperty' );
@@ -308,7 +303,6 @@ addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_l
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_largeMolecularDipolePointingFluorine', 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointingFluorineStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_noMolecularDipole', 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_selectMolecules', 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMoleculesStringProperty' );
-addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_largeMolecularDipolePointing', 'a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.largeMolecularDipolePointingStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_noMolecularDipole', 'a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.noMolecularDipoleStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_selectMolecules', 'a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.selectMoleculesStringProperty' );
 addToMapIfDefined( 'a11y_realMoleculesScreen_moleculesAdvanced_electrostaticPotential_mediumElectrostaticPotentialDifference', 'a11y.realMoleculesScreen.moleculesAdvanced.electrostaticPotential.mediumElectrostaticPotentialDifferenceStringProperty' );
@@ -446,7 +440,6 @@ const MoleculePolarityFluent = {
   },
   a11y: {
     common: {
-      upperStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_upper', _.get( MoleculePolarityStrings, 'a11y.common.upperStringProperty' ) ),
       elements: {
         _comment_0: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"hydrogen"} ),
         hydrogenStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_elements_hydrogen', _.get( MoleculePolarityStrings, 'a11y.common.elements.hydrogenStringProperty' ) ),
@@ -479,8 +472,6 @@ const MoleculePolarityFluent = {
         _comment_3: new FluentComment( {"comment":"into one string. It does not really reduce verbosity, but still reduces the number of announcements.","associatedKey":"dipoleDirectionChangeTwoBonds"} ),
         dipoleDirectionChangeTwoBonds: new FluentPattern<{ atomA: FluentVariable, atomB: FluentVariable, bondA: FluentVariable, bondB: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_dipoleDirectionChangeTwoBonds', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.dipoleDirectionChangeTwoBondsStringProperty' ), [{"name":"atomA"},{"name":"atomB"},{"name":"bondA"},{"name":"bondB"}] ),
         bondCharacterContext: new FluentPattern<{ progress: 'moreIonic' | 'moreCovalent' | TReadOnlyProperty<'moreIonic' | 'moreCovalent'> }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_bondCharacterContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.bondCharacterContextStringProperty' ), [{"name":"progress","variants":["moreIonic","moreCovalent"]}] ),
-        electrostaticContext: new FluentPattern<{ atom: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electrostaticContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electrostaticContextStringProperty' ), [{"name":"atom"},{"name":"progress"}] ),
-        electronDensityContext: new FluentPattern<{ atom: FluentVariable, progress: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electronDensityContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electronDensityContextStringProperty' ), [{"name":"atom"},{"name":"progress"}] ),
         electricFieldContextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativitySlider_electricFieldContext', _.get( MoleculePolarityStrings, 'a11y.common.electronegativitySlider.electricFieldContextStringProperty' ) )
       },
       bondDipoleCheckbox: {
@@ -548,7 +539,6 @@ const MoleculePolarityFluent = {
       electronegativity: {
         headingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativity_heading', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.headingStringProperty' ) ),
         currentValueStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativity_currentValue', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.currentValueStringProperty' ) ),
-        description: new FluentPattern<{ atom: FluentVariable, en: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativity_description', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.descriptionStringProperty' ), [{"name":"atom"},{"name":"en"}] ),
         elementElectronegativity: new FluentPattern<{ element: FluentVariable, en: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_common_electronegativity_elementElectronegativity', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.elementElectronegativityStringProperty' ), [{"name":"element"},{"name":"en"}] ),
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_common_electronegativity_accessibleHelpText', _.get( MoleculePolarityStrings, 'a11y.common.electronegativity.accessibleHelpTextStringProperty' ) )
       }
@@ -798,9 +788,9 @@ const MoleculePolarityFluent = {
         molecularDipole: {
           _comment_0: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
           _comment_1: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_2: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_3: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
           largeMolecularDipolePointingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_molecularDipole_largeMolecularDipolePointing', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.molecularDipole.largeMolecularDipolePointingStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
+          _comment_3: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
           noMolecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.molecularDipole.noMolecularDipoleStringProperty' ) ),
           _comment_4: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_5: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
@@ -817,12 +807,11 @@ const MoleculePolarityFluent = {
           selectMolecules: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_molecularDipole_selectMolecules', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.molecularDipole.selectMoleculesStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] )
         },
         invertedMolecularDipole: {
-          _comment_0: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_1: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_2: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_3: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          largeMolecularDipolePointingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_invertedMolecularDipole_largeMolecularDipolePointing', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.invertedMolecularDipole.largeMolecularDipolePointingStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
+          _comment_1: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
           noMolecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.invertedMolecularDipole.noMolecularDipoleStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
+          _comment_3: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_4: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_5: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_6: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
@@ -833,8 +822,6 @@ const MoleculePolarityFluent = {
           _comment_11: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_12: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_13: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
-          _comment_14: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
-          _comment_15: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           selectMolecules: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_molecules_invertedMolecularDipole_selectMolecules', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.molecules.invertedMolecularDipole.selectMoleculesStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] )
         },
         electrostaticPotential: {
@@ -929,10 +916,10 @@ const MoleculePolarityFluent = {
         molecularDipole: {
           _comment_0: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
           _comment_1: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_2: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_3: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
           largeMolecularDipolePointingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_largeMolecularDipolePointing', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointingStringProperty' ) ),
           largeMolecularDipolePointingFluorineStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_largeMolecularDipolePointingFluorine', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.largeMolecularDipolePointingFluorineStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
+          _comment_3: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
           noMolecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_noMolecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.noMolecularDipoleStringProperty' ) ),
           _comment_4: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_5: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
@@ -949,12 +936,11 @@ const MoleculePolarityFluent = {
           selectMolecules: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_selectMolecules', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.molecularDipole.selectMoleculesStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] )
         },
         invertedMolecularDipole: {
-          _comment_0: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_1: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_2: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          _comment_3: new FluentComment( {"comment":"Generic descriptions","associatedKey":"largeMolecularDipolePointing"} ),
-          largeMolecularDipolePointingStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_largeMolecularDipolePointing', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.largeMolecularDipolePointingStringProperty' ) ),
+          _comment_0: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
+          _comment_1: new FluentComment( {"comment":"Generic descriptions","associatedKey":"noMolecularDipole"} ),
           noMolecularDipoleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_noMolecularDipole', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.noMolecularDipoleStringProperty' ) ),
+          _comment_2: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
+          _comment_3: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_4: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_5: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_6: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
@@ -965,8 +951,6 @@ const MoleculePolarityFluent = {
           _comment_11: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_12: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           _comment_13: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
-          _comment_14: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
-          _comment_15: new FluentComment( {"comment":"Molecule descriptions. We add another level of nesting so the select_ pattern is an only child","associatedKey":"selectMolecules"} ),
           selectMolecules: new FluentPattern<{ molecule: 'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform' | TReadOnlyProperty<'hydrogen' | 'nitrogen' | 'oxygen' | 'fluorine' | 'hydrogenFluoride' | 'water' | 'carbonDioxide' | 'hydrogenCyanide' | 'ozone' | 'ammonia' | 'borane' | 'boronTrifluoride' | 'formaldehyde' | 'methane' | 'fluoromethane' | 'difluoromethane' | 'trifluoromethane' | 'tetrafluoromethane' | 'chloroform'> }>( fluentSupport.bundleProperty, 'a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_selectMolecules', _.get( MoleculePolarityStrings, 'a11y.realMoleculesScreen.moleculesAdvanced.invertedMolecularDipole.selectMoleculesStringProperty' ), [{"name":"molecule","variants":["hydrogen","nitrogen","oxygen","fluorine","hydrogenFluoride","water","carbonDioxide","hydrogenCyanide","ozone","ammonia","borane","boronTrifluoride","formaldehyde","methane","fluoromethane","difluoromethane","trifluoromethane","tetrafluoromethane","chloroform"]}] )
         },
         electrostaticPotential: {
