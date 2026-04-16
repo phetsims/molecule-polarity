@@ -217,9 +217,6 @@
   },
   "a11y": {
     "common": {
-      "upper": {
-        "value": "upper"
-      },
       "elements": {
         "hydrogen": {
           "value": "Hydrogen"
@@ -286,12 +283,6 @@
         },
         "bondCharacterContext": {
           "value": "Bond is { a11y_bondCharacterProgress }."
-        },
-        "electrostaticContext": {
-          "value": "Atom { $atom } { $progress } electrostatic potential."
-        },
-        "electronDensityContext": {
-          "value": "Atom { $atom } { $progress } electron density."
         },
         "electricFieldContext": {
           "value": "Molecule aligned with electric field."
@@ -443,9 +434,6 @@
         },
         "currentValue": {
           "value": "Current values:"
-        },
-        "description": {
-          "value": "Atom { $atom }, { $en }."
         },
         "elementElectronegativity": {
           "value": "{ $element } { $en }"
@@ -845,7 +833,7 @@
             "value": "Very small carbon hydrogen bond dipoles, pointing towards hydrogen. Fairly large carbon fluorine bond dipoles, pointing towards carbon."
           },
           "selectMolecules": {
-            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [nitrogen] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [oxygen] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [fluorine] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [hydrogenFluoride] Large bond dipole, pointing towards hydrogen.\n  [water] Fairly large bond dipoles, pointing towards hydrogens.\n  [carbonDioxide] Medium bond dipoles, pointing towards carbon.\n  [hydrogenCyanide] Very small carbon hydrogen bond dipole, pointing towards hydrogen. Small carbon nitrogen bond dipole, pointing towards carbon.\n  [ozone] No bond dipoles.\n  [ammonia] Medium bond dipoles, pointing towards hydrogens.\n  [borane] Tiny bond dipoles, pointing towards boron.\n  [boronTrifluoride] Large bond dipoles, pointing towards boron.\n  [formaldehyde] Very small carbon hydrogen bond dipoles, pointing towards carbon. Medium carbon oxygen bond dipole, pointing towards carbon.\n  [methane] Very small bond dipoles, pointing towards hydrogens.\n  [fluoromethane] Very small carbon hydrogen bond dipoles, pointing toward hydrogen. Large carbon fluorine bond dipole, pointing towards carbon.\n  [difluoromethane] { a11y_realMoleculesScreen_molecules_invertedBondDipole_verySmallCarbonHydrogen }\n  [trifluoromethane] { a11y_realMoleculesScreen_molecules_invertedBondDipole_verySmallCarbonHydrogen }\n  [tetrafluoromethane] Fairly large carbon fluorine bond dipoles, pointing towards carbon.\n  *[chloroform] Very small carbon hydrogen bond dipole, pointing towards carbon. Small carbon chlorine bond dipoles, pointing towards carbon.\n}"
+            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_molecules_invertedBondDipole_noBondDipole }\n  [nitrogen] { a11y_realMoleculesScreen_molecules_invertedBondDipole_noBondDipole }\n  [oxygen] { a11y_realMoleculesScreen_molecules_invertedBondDipole_noBondDipole }\n  [fluorine] { a11y_realMoleculesScreen_molecules_invertedBondDipole_noBondDipole }\n  [hydrogenFluoride] Large bond dipole, pointing towards hydrogen.\n  [water] Fairly large bond dipoles, pointing towards hydrogens.\n  [carbonDioxide] Medium bond dipoles, pointing towards carbon.\n  [hydrogenCyanide] Very small carbon hydrogen bond dipole, pointing towards hydrogen. Small carbon nitrogen bond dipole, pointing towards carbon.\n  [ozone] No bond dipoles.\n  [ammonia] Medium bond dipoles, pointing towards hydrogens.\n  [borane] Tiny bond dipoles, pointing towards boron.\n  [boronTrifluoride] Large bond dipoles, pointing towards boron.\n  [formaldehyde] Very small carbon hydrogen bond dipoles, pointing towards hydrogens. Medium carbon oxygen bond dipole, pointing towards carbon.\n  [methane] Very small bond dipoles, pointing towards hydrogens.\n  [fluoromethane] Very small carbon hydrogen bond dipoles, pointing toward hydrogen. Large carbon fluorine bond dipole, pointing towards carbon.\n  [difluoromethane] { a11y_realMoleculesScreen_molecules_invertedBondDipole_verySmallCarbonHydrogen }\n  [trifluoromethane] { a11y_realMoleculesScreen_molecules_invertedBondDipole_verySmallCarbonHydrogen }\n  [tetrafluoromethane] Fairly large carbon fluorine bond dipoles, pointing towards carbon.\n  *[chloroform] Very small carbon hydrogen bond dipole, pointing towards hydrogen. Small carbon chlorine bond dipoles, pointing towards carbon.\n}"
           }
         },
         "molecularDipole": {
@@ -860,14 +848,11 @@
           }
         },
         "invertedMolecularDipole": {
-          "largeMolecularDipolePointing": {
-            "value": "Large molecular dipole, pointing towards hydrogens."
-          },
           "noMolecularDipole": {
             "value": "No molecular dipole."
           },
           "selectMolecules": {
-            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [nitrogen] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [oxygen] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [fluorine] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [hydrogenFluoride] Large molecular dipole, pointing towards hydrogen.\n  [water] Large molecular dipole, pointing towards hydrogens.\n  [carbonDioxide] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [hydrogenCyanide] Medium molecular dipole, pointing towards hydrogen.\n  [ozone] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [ammonia] Fairly large molecular dipole, pointing towards hydrogens.\n  [borane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [boronTrifluoride] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [formaldehyde] Fairly large molecular dipole, pointing towards hydrogens.\n  [methane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [fluoromethane] Fairly large molecular dipole, pointing towards hydrogens.\n  [difluoromethane] Large molecular dipole, pointing towards hydrogens.\n  [trifluoromethane] Large molecular dipole, pointing towards hydrogen.\n  [tetrafluoromethane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  *[chloroform] Medium molecular dipole, pointing towards hydrogen.\n}"
+            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [nitrogen] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [oxygen] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [fluorine] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [hydrogenFluoride] Large molecular dipole, pointing towards hydrogen.\n  [water] Large molecular dipole, pointing towards hydrogens.\n  [carbonDioxide] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [hydrogenCyanide] Medium molecular dipole, pointing towards hydrogen.\n  [ozone] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [ammonia] Fairly large molecular dipole, pointing towards hydrogens.\n  [borane] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [boronTrifluoride] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [formaldehyde] Fairly large molecular dipole, pointing towards hydrogens.\n  [methane] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  [fluoromethane] Fairly large molecular dipole, pointing towards hydrogens.\n  [difluoromethane] Large molecular dipole, pointing towards hydrogens.\n  [trifluoromethane] Large molecular dipole, pointing towards hydrogen.\n  [tetrafluoromethane] { a11y_realMoleculesScreen_molecules_invertedMolecularDipole_noMolecularDipole }\n  *[chloroform] Medium molecular dipole, pointing towards hydrogen.\n}"
           }
         },
         "electrostaticPotential": {
@@ -928,7 +913,7 @@
             "value": "No bond dipole."
           },
           "selectMolecules": {
-            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [nitrogen] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [oxygen] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [fluorine] { a11y_realMoleculesScreen_moleculesAdvanced_bondDipole_noBondDipole }\n  [hydrogenFluoride] Large bond dipole, pointing towards hydrogen.\n  [water] Fairly large bond dipoles, pointing towards hydrogens.\n  [carbonDioxide] Small bond dipoles, pointing towards carbon.\n  [hydrogenCyanide] Small carbon hydrogen bond dipole, pointing towards hydrogen. Large carbon nitrogen bond dipole, pointing towards carbon.\n  [ozone] Small bond dipoles, pointing towards central oxygen.\n  [ammonia] Fairly large bond dipoles, pointing towards hydrogens.\n  [borane] Fairly large bond dipoles, pointing towards boron.\n  [boronTrifluoride] Small bond dipoles, pointing towards boron.\n  [formaldehyde] Medium carbon hydrogen bond dipoles, pointing towards carbon. Very large carbon oxygen bond dipole, pointing towards carbon.\n  [methane] Very small bond dipoles, pointing towards hydrogens.\n  [fluoromethane] No carbon hydrogen bond dipoles. Large carbon fluorine bond dipole, pointing towards carbon.\n  [difluoromethane] Small carbon hydrogen bond dipoles, pointing towards carbon. Very large carbon fluorine bond dipoles, pointing towards carbon.\n  [trifluoromethane] Medium carbon hydrogen bond dipole, pointing towards carbon. Very large carbon fluorine bond dipoles, pointing towards carbon.\n  [tetrafluoromethane] Small carbon fluorine bond dipoles, pointing towards carbon.\n  *[chloroform] Very small carbon hydrogen bond dipole, pointing towards carbon. Very large carbon chlorine bond dipoles, pointing towards carbon.\n}"
+            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_moleculesAdvanced_invertedBondDipole_noBondDipole }\n  [nitrogen] { a11y_realMoleculesScreen_moleculesAdvanced_invertedBondDipole_noBondDipole }\n  [oxygen] { a11y_realMoleculesScreen_moleculesAdvanced_invertedBondDipole_noBondDipole }\n  [fluorine] { a11y_realMoleculesScreen_moleculesAdvanced_invertedBondDipole_noBondDipole }\n  [hydrogenFluoride] Large bond dipole, pointing towards hydrogen.\n  [water] Fairly large bond dipoles, pointing towards hydrogens.\n  [carbonDioxide] Small bond dipoles, pointing towards carbon.\n  [hydrogenCyanide] Small carbon hydrogen bond dipole, pointing towards hydrogen. Large carbon nitrogen bond dipole, pointing towards carbon.\n  [ozone] Small bond dipoles, pointing towards central oxygen.\n  [ammonia] Fairly large bond dipoles, pointing towards hydrogens.\n  [borane] Fairly large bond dipoles, pointing towards boron.\n  [boronTrifluoride] Small bond dipoles, pointing towards boron.\n  [formaldehyde] Medium carbon hydrogen bond dipoles, pointing towards carbon. Very large carbon oxygen bond dipole, pointing towards carbon.\n  [methane] Very small bond dipoles, pointing towards hydrogens.\n  [fluoromethane] No carbon hydrogen bond dipoles. Large carbon fluorine bond dipole, pointing towards carbon.\n  [difluoromethane] Small carbon hydrogen bond dipoles, pointing towards carbon. Very large carbon fluorine bond dipoles, pointing towards carbon.\n  [trifluoromethane] Medium carbon hydrogen bond dipole, pointing towards carbon. Very large carbon fluorine bond dipoles, pointing towards carbon.\n  [tetrafluoromethane] Small carbon fluorine bond dipoles, pointing towards carbon.\n  *[chloroform] Very small carbon hydrogen bond dipole, pointing towards carbon. Very large carbon chlorine bond dipoles, pointing towards carbon.\n}"
           }
         },
         "molecularDipole": {
@@ -946,14 +931,11 @@
           }
         },
         "invertedMolecularDipole": {
-          "largeMolecularDipolePointing": {
-            "value": "Large molecular dipole, pointing towards hydrogens."
-          },
           "noMolecularDipole": {
             "value": "No molecular dipole."
           },
           "selectMolecules": {
-            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [nitrogen] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [oxygen] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [fluorine] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [hydrogenFluoride] Large molecular dipole, pointing towards hydrogen.\n  [water] Large molecular dipole, pointing towards hydrogens.\n  [carbonDioxide] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [hydrogenCyanide] Very large molecular dipole, pointing towards hydrogen.\n  [ozone] Small molecular dipole, pointing towards central oxygen.\n  [ammonia] Large molecular dipole, pointing towards hydrogens.\n  [borane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [boronTrifluoride] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [formaldehyde] Very large molecular dipole, pointing towards hydrogens.\n  [methane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  [fluoromethane] Large molecular dipole, pointing towards hydrogens.\n  [difluoromethane] Large molecular dipole, pointing towards hydrogens.\n  [trifluoromethane] Large molecular dipole, pointing towards hydrogen.\n  [tetrafluoromethane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  *[chloroform] Medium molecular dipole, pointing towards hydrogen.\n}"
+            "value": "{ $molecule ->\n  [hydrogen] { a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_noMolecularDipole }\n  [nitrogen] { a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_noMolecularDipole }\n  [oxygen] { a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_noMolecularDipole }\n  [fluorine] { a11y_realMoleculesScreen_moleculesAdvanced_invertedMolecularDipole_noMolecularDipole }\n  [hydrogenFluoride] Large molecular dipole, pointing towards hydrogen.\n  [water] Large molecular dipole, pointing towards hydrogens.\n  [carbonDioxide] { a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_noMolecularDipole }\n  [hydrogenCyanide] Very large molecular dipole, pointing towards hydrogen.\n  [ozone] Small molecular dipole, pointing towards central oxygen.\n  [ammonia] Large molecular dipole, pointing towards hydrogens.\n  [borane] { a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_noMolecularDipole }\n  [boronTrifluoride] { a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_noMolecularDipole }\n  [formaldehyde] Very large molecular dipole, pointing towards hydrogens.\n  [methane] { a11y_realMoleculesScreen_moleculesAdvanced_molecularDipole_noMolecularDipole }\n  [fluoromethane] Large molecular dipole, pointing towards hydrogens.\n  [difluoromethane] Large molecular dipole, pointing towards hydrogens.\n  [trifluoromethane] Large molecular dipole, pointing towards hydrogen.\n  [tetrafluoromethane] { a11y_realMoleculesScreen_molecules_molecularDipole_noMolecularDipole }\n  *[chloroform] Medium molecular dipole, pointing towards hydrogen.\n}"
           }
         },
         "electrostaticPotential": {
