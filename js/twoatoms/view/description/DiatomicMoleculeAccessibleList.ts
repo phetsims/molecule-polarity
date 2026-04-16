@@ -10,6 +10,7 @@ import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import { roundToInterval } from '../../../../../dot/js/util/roundToInterval.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
+import MPPreferences from '../../../common/model/MPPreferences.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import DiatomicMolecule from '../../model/DiatomicMolecule.js';
@@ -53,7 +54,13 @@ export default class DiatomicMoleculeAccessibleList {
           ] ),
           stringProperty: MoleculePolarityFluent.a11y.twoAtomsScreen.moleculeAB.bondDipoleDirection.createProperty( {
             bondDipoleMagnitude: DescriptionMaps.createBondDipoleStringProperty( diatomicMolecule.deltaENProperty ),
-            atom: diatomicMolecule.deltaENProperty.derived( deltaEN => deltaEN < 0 ? 'A' : 'B' )
+            atom: new DerivedProperty(
+              [ diatomicMolecule.deltaENProperty, MPPreferences.dipoleDirectionProperty ],
+              ( deltaEN: number, dipoleDirection ) => {
+                return dipoleDirection === 'positiveToNegative' ? deltaEN < 0 ? 'A' : 'B' :
+                       deltaEN > 0 ? 'A' : 'B';
+              }
+            )
           } )
         },
 
