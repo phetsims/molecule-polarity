@@ -9,6 +9,7 @@ import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import AccessibleList from '../../../../../scenery-phet/js/accessibility/AccessibleList.js';
 import { AccessibleTemplateValue } from '../../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
+import MPPreferences from '../../../common/model/MPPreferences.js';
 import DescriptionMaps from '../../../common/view/description/DescriptionMaps.js';
 import MoleculePolarityFluent from '../../../MoleculePolarityFluent.js';
 import TriatomicMolecule from '../../model/TriatomicMolecule.js';
@@ -142,15 +143,21 @@ export default class TriatomicMoleculeAccessibleList {
             direction: new DerivedProperty(
               [
                 absoluteBondAngleABProperty,
-                triatomicMolecule.bondAB.deltaENProperty
-              ], ( bondAngle: number, deltaEN: number ) => {
-                return deltaEN < 0 ?
-                       DescriptionMaps.formatOrientationString( bondAngle ) :
-                       DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
+                triatomicMolecule.bondAB.deltaENProperty, MPPreferences.dipoleDirectionProperty
+              ], ( bondAngle: number, deltaEN: number, dipoleDirection ) => {
+                // Invert the angle IF either we're +->- and negative dipole, or we're -+-> and positive dipole
+                const invertAngle = ( dipoleDirection === 'positiveToNegative' ) === ( deltaEN > 0 );
+                return invertAngle ?
+                       DescriptionMaps.formatOrientationString( bondAngle + Math.PI ) :
+                       DescriptionMaps.formatOrientationString( bondAngle );
               }
             ),
             atom: new DerivedProperty(
-              [ triatomicMolecule.bondAB.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'A' : 'B'
+              [ triatomicMolecule.bondAB.deltaENProperty, MPPreferences.dipoleDirectionProperty ],
+              ( deltaEN: number, dipoleDirection ) => {
+                return dipoleDirection === 'positiveToNegative' ? deltaEN < 0 ? 'A' : 'B' :
+                       deltaEN > 0 ? 'A' : 'B';
+              }
             )
           } )
         },
@@ -180,15 +187,21 @@ export default class TriatomicMoleculeAccessibleList {
             direction: new DerivedProperty(
               [
                 absoluteBondAngleBCProperty,
-                triatomicMolecule.bondBC.deltaENProperty
-              ], ( bondAngle: number, deltaEN: number ) => {
-                return deltaEN > 0 ?
-                       DescriptionMaps.formatOrientationString( bondAngle ) :
-                       DescriptionMaps.formatOrientationString( bondAngle + Math.PI );
+                triatomicMolecule.bondBC.deltaENProperty, MPPreferences.dipoleDirectionProperty
+              ], ( bondAngle: number, deltaEN: number, dipoleDirection ) => {
+                // Invert the angle IF either we're +->- and negative dipole, or we're -+-> and positive dipole
+                const invertAngle = ( dipoleDirection === 'positiveToNegative' ) === ( deltaEN < 0 );
+                return invertAngle ?
+                       DescriptionMaps.formatOrientationString( bondAngle + Math.PI ) :
+                       DescriptionMaps.formatOrientationString( bondAngle );
               }
             ),
             atom: new DerivedProperty(
-              [ triatomicMolecule.bondBC.deltaENProperty ], ( deltaEN: number ) => deltaEN < 0 ? 'B' : 'C'
+              [ triatomicMolecule.bondBC.deltaENProperty, MPPreferences.dipoleDirectionProperty ],
+              ( deltaEN: number, dipoleDirection ) => {
+                return dipoleDirection === 'positiveToNegative' ? deltaEN < 0 ? 'B' : 'C' :
+                       deltaEN > 0 ? 'B' : 'C';
+              }
             )
           } )
         },
