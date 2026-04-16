@@ -94,7 +94,6 @@ type StringsType = {
   };
   'a11y': {
     'common': {
-      'upperStringProperty': LocalizedStringProperty;
       'elements': {
         'hydrogenStringProperty': LocalizedStringProperty;
         'boronStringProperty': LocalizedStringProperty;
@@ -122,8 +121,6 @@ type StringsType = {
         'dipoleDirectionChangeStringProperty': LocalizedStringProperty;
         'dipoleDirectionChangeTwoBondsStringProperty': LocalizedStringProperty;
         'bondCharacterContextStringProperty': LocalizedStringProperty;
-        'electrostaticContextStringProperty': LocalizedStringProperty;
-        'electronDensityContextStringProperty': LocalizedStringProperty;
         'electricFieldContextStringProperty': LocalizedStringProperty;
       };
       'bondDipoleCheckbox': {
@@ -189,7 +186,6 @@ type StringsType = {
       'electronegativity': {
         'headingStringProperty': LocalizedStringProperty;
         'currentValueStringProperty': LocalizedStringProperty;
-        'descriptionStringProperty': LocalizedStringProperty;
         'elementElectronegativityStringProperty': LocalizedStringProperty;
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
       }
@@ -359,7 +355,6 @@ type StringsType = {
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
         'invertedMolecularDipole': {
-          'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
           'noMolecularDipoleStringProperty': LocalizedStringProperty;
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
@@ -397,7 +392,6 @@ type StringsType = {
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
         'invertedMolecularDipole': {
-          'largeMolecularDipolePointingStringProperty': LocalizedStringProperty;
           'noMolecularDipoleStringProperty': LocalizedStringProperty;
           'selectMoleculesStringProperty': LocalizedStringProperty;
         };
