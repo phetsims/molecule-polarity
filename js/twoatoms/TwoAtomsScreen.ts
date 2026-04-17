@@ -10,7 +10,6 @@ import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../scenery-phet/js/ShadedSphereNode.js';
-import Line from '../../../scenery/js/nodes/Line.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../scenery/js/nodes/Text.js';
@@ -19,8 +18,8 @@ import MPColors from '../common/MPColors.js';
 import MoleculePolarityFluent from '../MoleculePolarityFluent.js';
 import MoleculePolarityStrings from '../MoleculePolarityStrings.js';
 import TwoAtomsModel from './model/TwoAtomsModel.js';
-import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 import TwoAtomsKeyboardHelpContent from './view/description/TwoAtomsKeyboardHelpContent.js';
+import TwoAtomsScreenView from './view/TwoAtomsScreenView.js';
 
 export default class TwoAtomsScreen extends Screen<TwoAtomsModel, TwoAtomsScreenView> {
 
@@ -57,22 +56,27 @@ function createScreenIcon(): ScreenIcon {
     Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.width, Screen.MINIMUM_HOME_SCREEN_ICON_SIZE.height,
     { fill: MPColors.screenBackgroundColorProperty } );
 
-  const bond = new Line( 0, 0, bondLength, 0, {
-    stroke: MPColors.BOND,
-    lineWidth: bondWidth,
+  const bond = new Rectangle( 0, 0, bondLength, bondWidth, {
+    fill: MPColors.BOND,
+    stroke: 'black',
+    lineWidth: 2,
     center: background.center
   } );
 
   const atomA = new ShadedSphereNode( atomDiameter, {
     mainColor: MPColors.ATOM_A,
     centerX: bond.left,
-    y: bond.centerY
+    y: bond.centerY,
+    stroke: 'black',
+    lineWidth: 2
   } );
 
   const atomB = new ShadedSphereNode( atomDiameter, {
     mainColor: MPColors.ATOM_B,
     centerX: bond.right,
-    y: bond.centerY
+    y: bond.centerY,
+    stroke: 'black',
+    lineWidth: 2
   } );
 
   const textMaxWidth = 0.65 * atomDiameter;
