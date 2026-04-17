@@ -28,7 +28,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * ⚠️ Use this icon for a change that is breaking, removes a feature, etc. 
 *
 -->
-## 2.0 (In progress)
+## 2.0
 
 ### New Features
 * Real Molecules screen now in HTML5
@@ -42,7 +42,10 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 
 ### Other Changes
 * Partial Charges and the associated checkbox have been removed from the Basic Model on the Real Molecules screen.
-* Ozone is shown with aromatic (1.5 order) bonds. The Java version had a single and a double bond. 
+* Ozone is shown with aromatic (1.5 order) bonds. The Java version had a single and a double bond.
+* The default positions of Atoms A and C changed to facilitate alt-input.
+* 
+  The on/off labels for the electric field were removed
 
 ## 1.3 (2023-06-22)
 
