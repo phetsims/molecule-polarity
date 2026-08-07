@@ -28,7 +28,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * ⚠️ Use this icon for a change that is breaking, removes a feature, etc. 
 *
 -->
-## 2.0
+## 2.0 (2026-04-17)
 
 ### New Features
 * Real Molecules screen now in HTML5
