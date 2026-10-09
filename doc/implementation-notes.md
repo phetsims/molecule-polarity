@@ -4,9 +4,9 @@ This document contains miscellaneous notes related to the implementation of Mole
 internal (source code) documentation, and (hopefully) provides insight into "big picture" implementation issues. The
 audience for this document is software developers who are familiar with JavaScript and PhET simulation development, as
 described
-in [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md).
+in [PhET Development Overview](../../phet-info/doc/phet-development-overview.md).
 
-First, read [model.md](https://github.com/phetsims/molecule-polarity/blob/main/doc/model.md), which provides a
+First, read [model.md](model.md), which provides a
 high-level description of the simulation model.
 
 ## General
@@ -40,7 +40,7 @@ The code in `js/common/model/` is a 2D model, used exclusively by these 2 screen
 Some of the view components (particularly controls and icons) in `js/common/view/` are shared by all 3 screens.
 
 The main difference between the "Two Atoms" and "Three Atoms" screens is the lack of "Surface" controls in the "Three
-Atoms" screen. As noted in [model.md](https://github.com/phetsims/molecule-polarity/blob/main/doc/model.md), surfaces
+Atoms" screen. As noted in [model.md](model.md), surfaces
 are not provided for the Three Atoms screen because the manipulation of bond angles for a triatomic molecule results in
 undefinable surfaces.
 
